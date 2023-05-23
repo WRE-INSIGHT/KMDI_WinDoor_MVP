@@ -1295,63 +1295,103 @@ namespace PresentationLayer.Presenter.UserControls
                     locY = Draw_Arrow_Height(ht.Value, e, locY, dmnsion_font_ht, ctrl_Y);
                 }
 
-                //fold and slide top view
                 int InitialDistance = _flpMain.Location.X,
-                       pnlLeftCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount,
+                        endOfLine = _flpMain.Width - 10,
+                        pnlLeftCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount,
                        pnlRightCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount,
                        line_LtR_Y = _flpMain.Location.Y + (_flpMain.Height - 3) + 70; // 70 bot pad
 
-                if (pnlLeftCounter != 0 || pnlRightCounter != 0)
+                Point dmnsion_w_startP_topview = new Point(_flpMain.Location.X, _flpMain.Location.Y + (_flpMain.Height - 3) + 70);
+                Point dmnsion_w_endP_topview = new Point(_flpMain.Location.X + _flpMain.Width - 3, _flpMain.Location.Y + (_flpMain.Height - 3) + 70);
+
+                if (_windoorModel.WD_TopViewType == "Fold and Slide")
                 {
-                    topViewCheck = true;
-                    _basePlatformImagerUC.GetBasePlatformImagerUC().Padding = new Padding(70, 35, 0, 70);
+                    //fold and slide top view 
 
-                    Point dmnsion_w_startP_topview = new Point(_flpMain.Location.X, _flpMain.Location.Y + (_flpMain.Height - 3) + 70);
-                    Point dmnsion_w_endP_topview = new Point(_flpMain.Location.X + _flpMain.Width - 3, _flpMain.Location.Y + (_flpMain.Height - 3) + 70);
-
-                    if (total_panel != 0)
+                    if (pnlLeftCounter != 0 || pnlRightCounter != 0)
                     {
-                        line_X_Distance = Math.Abs(_flpMain.Width / total_panel);
+                        topViewCheck = true;
+                        if (_basePlatformImagerUC.GetBasePlatformImagerUC().Padding.Bottom == 0)
+                        {
+                            _basePlatformImagerUC.GetBasePlatformImagerUC().Padding = new Padding(70, 35, 0, 70);
+                        }
+
+                        if (total_panel != 0)
+                        {
+                            line_X_Distance = Math.Abs(_flpMain.Width / total_panel);
+                        }
+
+
+                        g.DrawLine(BlackP, dmnsion_w_startP_topview, dmnsion_w_endP_topview); // line
+
+
+                        for (int a = 0; a < pnlLeftCounter; a++)
+                        {
+                            int x1 = InitialDistance,
+                                x2 = InitialDistance + (line_X_Distance / 2);
+
+                            if (a % 2 == 0)
+                            {
+                                g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, line_LtR_Y - 60));
+                            }
+                            else
+                            {
+                                g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, line_LtR_Y - 60));
+                            }
+
+                            InitialDistance = x2;
+                        }
+
+                        InitialDistance = _flpMain.Location.X + _flpMain.Width - 3;
+                        for (int a = 0; a < pnlRightCounter; a++)
+                        {
+                            int x1 = InitialDistance,
+                                x2 = InitialDistance - (line_X_Distance / 2);
+
+                            if (a % 2 == 0)
+                            {
+                                g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, line_LtR_Y - 60));
+                            }
+                            else
+                            {
+                                g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, line_LtR_Y - 60));
+                            }
+
+                            InitialDistance = x2;
+                        }
+                    }
+                }
+                else if (_windoorModel.WD_TopViewType == "Sliding Pivot")
+                {
+                    if (pnlLeftCounter != 0 || pnlRightCounter != 0)
+                    {
+                        topViewCheck = true;
+                        if (_basePlatformImagerUC.GetBasePlatformImagerUC().Padding.Bottom == 0)
+                        {
+                            _basePlatformImagerUC.GetBasePlatformImagerUC().Padding = new Padding(70, 35, 0, 70);
+                        }
+                        g.DrawLine(BlackP, dmnsion_w_startP_topview, dmnsion_w_endP_topview); // line
+
+
+                        for (int a = 0; a < pnlLeftCounter; a++)
+                        {
+                            int x1 = InitialDistance;
+
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y), new Point(x1, line_LtR_Y - 60));
+
+                            InitialDistance += 10;
+                        }
+                        for (int a = 0; a < pnlRightCounter; a++)
+                        {
+                            int x1 = endOfLine;
+
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y), new Point(x1, 10));
+
+                            endOfLine -= 10;
+                        }
                     }
 
 
-                    g.DrawLine(BlackP, dmnsion_w_startP_topview, dmnsion_w_endP_topview); // line
-
-
-                    for (int a = 0; a < pnlLeftCounter; a++)
-                    {
-                        int x1 = InitialDistance,
-                            x2 = InitialDistance + (line_X_Distance / 2);
-
-                        if (a % 2 == 0)
-                        {
-                            g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, line_LtR_Y - 60));
-                        }
-                        else
-                        {
-                            g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, line_LtR_Y - 60));
-                        }
-
-                        InitialDistance = x2;
-                    }
-
-                    InitialDistance = _flpMain.Location.X + _flpMain.Width - 3;
-                    for (int a = 0; a < pnlRightCounter; a++)
-                    {
-                        int x1 = InitialDistance,
-                            x2 = InitialDistance - (line_X_Distance / 2);
-
-                        if (a % 2 == 0)
-                        {
-                            g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, line_LtR_Y - 60));
-                        }
-                        else
-                        {
-                            g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, line_LtR_Y - 60));
-                        }
-
-                        InitialDistance = x2;
-                    }
                 }
                 else
                 {
