@@ -299,7 +299,7 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
             {
-                _frameModel.Frame_TubularVisibility = false; 
+                _frameModel.Frame_TubularVisibility = false;
 
                 if (curr_rbtnText == "Window" || curr_rbtnText == "Concrete")
                 {
@@ -413,6 +413,10 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._6050;
                     }
+                    else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("G58"))
+                    {
+                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._2060;
+                    }
                 }
                 else if (_frameModel.Frame_Type == Frame_Padding.Door)
                 {
@@ -425,6 +429,10 @@ namespace PresentationLayer.Presenter.UserControls
                     else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._6052;
+                    }
+                    else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("G58"))
+                    {
+                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._2060;
                     }
                     _frameModel.Frame_BotFrameVisible = true;
                     _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
