@@ -1,4 +1,4 @@
-﻿using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views;
