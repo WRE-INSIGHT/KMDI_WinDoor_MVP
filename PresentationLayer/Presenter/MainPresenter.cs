@@ -3870,7 +3870,10 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("WD_WindoorNumber:"))
                         {
                             _windoorModel.WD_WindoorNumber = extractedValue_str;
-
+                        }
+                        if (row_str.Contains("WD_TopViewType:"))
+                        {
+                            _windoorModel.WD_TopViewType = extractedValue_str;
                         }
                         #endregion
                     }
@@ -4183,6 +4186,14 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("Frame_TubularWidth:"))
                         {
                             frm_TubularWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_FoldAndSlideTopViewLeftCount:"))
+                        {
+                            frm_FoldAndSlideTopViewLeftCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_FoldAndSlideTopViewRightCount:"))
+                        {
+                            frm_FoldAndSlideTopViewRightCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
 
 
@@ -8912,7 +8923,9 @@ namespace PresentationLayer.Presenter
               frmProp_Height,
               frm_ScreenFrameHeight,
               frm_TubularHeight,
-              frm_TubularWidth;
+              frm_TubularWidth,
+              frm_FoldAndSlideTopViewLeftCount,
+              frm_FoldAndSlideTopViewRightCount;
 
         int[] Arr_padding_norm,
                 Arr_padding_withmpnl;
@@ -9876,6 +9889,8 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_TubularHeightVisibility = frm_TubularHeightVisibility;
                         _frameModel.Frame_TubularHeight = frm_TubularHeight;
                         _frameModel.Frame_TubularWidth = frm_TubularWidth;
+                        _frameModel.Frame_FoldAndSlideTopViewLeftCount = frm_FoldAndSlideTopViewLeftCount;
+                        _frameModel.Frame_FoldAndSlideTopViewRightCount = frm_FoldAndSlideTopViewRightCount;
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
