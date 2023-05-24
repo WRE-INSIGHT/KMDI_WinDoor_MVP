@@ -1342,6 +1342,24 @@ namespace PresentationLayer.Presenter
                 //MessageBox.Show(this, "Please save your progress locally or online to prevent data loss", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void ProjectAddressModifier()
+        {
+            if (_projectAddress.Contains("#"))
+            {
+                string returner, modifiedAdd;
+
+                returner = _projectAddress;
+                modifiedAdd = _projectAddress.Replace("#", "");
+                _projectAddress = returner;
+
+                wndr_content.Add("ProjectAddress: " + modifiedAdd);
+            }
+            else
+            {
+            wndr_content.Add("ProjectAddress: " + _projectAddress);
+            }
+        }
         List<string> wndr_content = new List<string>();
 
         private List<string> Saving_dotwndr()
@@ -1352,7 +1370,8 @@ namespace PresentationLayer.Presenter
             wndr_content.Add("ProjectName: " + _projectName);
             wndr_content.Add("ClientsName: " + inputted_projectName);
             wndr_content.Add("ClientsTitleLastname: " + _titleLastname);
-            wndr_content.Add("ProjectAddress: " + _projectAddress);
+            //wndr_content.Add("ProjectAddress: " + _projectAddress);
+            ProjectAddressModifier();
             wndr_content.Add("CustomerRefNo: " + _custRefNo);
             wndr_content.Add("DateAssigned: " + _dateAssigned);
             wndr_content.Add("AEIC: " + _aeic);
