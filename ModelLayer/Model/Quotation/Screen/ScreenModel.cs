@@ -623,7 +623,11 @@ namespace ModelLayer.Model.Quotation.Screen
          Width_mm_to_meters = 0,
 
          current_deci_index = 0,
-         next_deci_index = 0;
+         next_deci_index = 0,
+         _firstLoopInterpolatePrice = 0,
+         _secondLoopInterpolatePrice = 0,
+         _builtinInterpolationPrice = 0
+         ;
 
         decimal[] deci_getter = new decimal[22] {1.0m, 1.1m, 1.2m, 1.3m, 1.4m, 1.5m, 1.6m, 1.7m, 1.8m, 1.9m, 2.0m,
                                                  2.1m, 2.2m,2.3m, 2.4m, 2.5m, 2.6m,2.7m, 2.8m,2.9m ,3.0m,3.1m };
@@ -631,13 +635,18 @@ namespace ModelLayer.Model.Quotation.Screen
         decimal[] width_Base_Price_List = new decimal[21];
         decimal[] height_Base_Price_List = new decimal[16];
         int[] indices_pos = new int[5] { 2, 6, 11, 16, 20 };
-        int holder = 0;
-        int curr_index_pos = 0;
+        int holder = 0,
+            curr_index_pos = 0,
+            loopCountLimit = 0,
+            _builtInInterpolationNewDimension;
         #endregion
 
         int _plisséSRPerPanelWidth,
-            _screenOriginalWidth,
+            _screenOriginalDimensionWidthOrHeight,
             _screenPreviousWidth;
+
+        bool _builtInWidthIsBelowMinimum,
+             _builInHeigthIsBelowMinimum;   
 
 
         #endregion
@@ -1647,7 +1656,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
         #endregion
 
         List<decimal> ItemList = new List<decimal>();
@@ -1688,6 +1696,384 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
             }
 
+        }
+
+        public void BuiltInPrice_and_PriceInterpolation()
+            {
+            int loopCounter = 1;
+
+            #region Screen Dimension Selector 
+            if (Screen_Width < 1000 || Screen_Height < 1500)
+            {
+                if(Screen_Width < 1000)
+                {
+                    
+                    _builtInInterpolationNewDimension = 3000 - Screen_Width; //  ask a costing engr for final and approved formula
+                    _screen_Width = 1000;  // same as above 
+                    _builtInWidthIsBelowMinimum = true;
+                }
+                else if(Screen_Height < 1500)
+                {
+                    _screenOriginalDimensionWidthOrHeight = _screen_Height;
+                    _builtInInterpolationNewDimension = 3000 - Screen_Height;
+                    _screen_Height = 1500;
+                    _builInHeigthIsBelowMinimum = true;
+                }
+                loopCountLimit = 2;
+            }
+            else
+            {
+                loopCountLimit = 1;
+            }
+            #endregion
+
+            do
+            {
+                #region Change Screen dimension for interpolation
+                if (loopCountLimit == 2)
+                {
+                    if (loopCounter == 2)
+                    {
+                        if(_builtInWidthIsBelowMinimum == true)
+                        {
+                            _screen_Width = _builtInInterpolationNewDimension;
+                        }
+                        else if (_builInHeigthIsBelowMinimum == true)
+                        {
+                            _screen_Height = _builtInInterpolationNewDimension;
+                        }
+                    }
+                }
+                #endregion
+
+                #region Built in SideRoll
+
+                Height_mm_to_meters = Screen_Height / 1000m;
+                Width_mm_to_meters = Screen_Width / 1000m;
+
+                #region Height Price List
+
+                if (Screen_Factor >= 2.2m && Screen_Factor < 2.3m)
+                {
+                    base_Price = 11391.60m;
+
+                    height_Base_Price_Inc = 347.6m;
+                    height_Base_Price_List[0] = base_Price;
+                }
+                else if (Screen_Factor >= 2.3m && Screen_Factor < 2.4m)
+                {
+                    base_Price = 11909.40m;
+                    height_Base_Price_Inc = 363.4m;
+                    height_Base_Price_List[0] = base_Price;
+                }
+                else
+                {
+                    base_Price = 12427.20m;
+                    height_Base_Price_Inc = 379.2m;
+                    height_Base_Price_List[0] = base_Price;
+                }
+
+
+
+
+                for (int i = 1; i < 16m; i++)
+                {
+                    temp = base_Price + height_Base_Price_Inc;
+                    height_Base_Price_List[i] = temp;
+                    base_Price = temp;
+                }
+
+                if (Height_mm_to_meters >= 1.5m && Height_mm_to_meters < 1.6m)
+                {
+                    height_deci = (Height_mm_to_meters - 1.5m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[0] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 1.6m && Height_mm_to_meters < 1.7m)
+                {
+                    height_deci = (Height_mm_to_meters - 1.6m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[1] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 1.7m && Height_mm_to_meters < 1.8m)
+                {
+                    height_deci = (Height_mm_to_meters - 1.7m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[2] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 1.8m && Height_mm_to_meters < 1.9m)
+                {
+                    height_deci = (Height_mm_to_meters - 1.8m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[3] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 1.9m && Height_mm_to_meters < 2.0m)
+                {
+                    height_deci = (Height_mm_to_meters - 1.9m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[4] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 2.0m && Height_mm_to_meters < 2.1m)
+                {
+                    height_deci = (Height_mm_to_meters - 2.0m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[5] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 2.1m && Height_mm_to_meters < 2.2m)
+                {
+                    height_deci = (Height_mm_to_meters - 2.1m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[6] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 2.2m && Height_mm_to_meters < 2.3m)
+                {
+                    height_deci = (Height_mm_to_meters - 2.2m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[7] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 2.3m && Height_mm_to_meters < 2.4m)
+                {
+                    height_deci = (Height_mm_to_meters - 2.3m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[8] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 2.4m && Height_mm_to_meters < 2.5m)
+                {
+                    height_deci = (Height_mm_to_meters - 2.4m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[9] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 2.5m && Height_mm_to_meters < 2.6m)
+                {
+                    height_deci = (Height_mm_to_meters - 2.5m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[10] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 2.6m && Height_mm_to_meters < 2.7m)
+                {
+                    height_deci = (Height_mm_to_meters - 2.6m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[11] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 2.7m && Height_mm_to_meters < 2.8m)
+                {
+                    height_deci = (Height_mm_to_meters - 2.7m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[12] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 2.8m && Height_mm_to_meters < 2.9m)
+                {
+                    height_deci = (Height_mm_to_meters - 2.8m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[13] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 2.9m && Height_mm_to_meters < 3.0m)
+                {
+                    height_deci = (Height_mm_to_meters - 2.9m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[14] + percentage_multiplier;
+                }
+                else if (Height_mm_to_meters >= 3.0m)
+                {
+                    height_deci = (Height_mm_to_meters - 3.0m) / 0.1m;
+                    percentage_multiplier = height_Base_Price_Inc * height_deci;
+                    price_base_on_Height = height_Base_Price_List[15] + percentage_multiplier;
+                }
+
+                #endregion
+
+                #region width price list
+
+                if (Screen_Factor >= 2.2m && Screen_Factor < 2.3m)
+                {
+                    #region 2.2
+                    width_Base_Price_List[0] = price_base_on_Height;
+
+                    for (int i = 1; i <= 20; i++)
+                    {
+                        holder = indices_pos[curr_index_pos];
+
+                        if (i == holder)
+                        {
+                            width_Base_Price_Inc = 132m;
+                            curr_index_pos++;
+                        }
+                        else
+                        {
+                            width_Base_Price_Inc = 134.2m;
+                        }
+                        temp = price_base_on_Height + width_Base_Price_Inc;
+                        width_Base_Price_List[i] = temp;
+                        price_base_on_Height = temp;
+
+                        current_deci_index = deci_getter[i];
+                        next_deci_index = deci_getter[i + 1];
+
+
+                        if (Width_mm_to_meters >= current_deci_index && Width_mm_to_meters < next_deci_index)
+                        {
+                            if (current_deci_index == 1.1m || current_deci_index == 1.5m || current_deci_index == 2.0m || current_deci_index == 2.5m || current_deci_index == 2.9m)
+                            {
+                                width_Base_Price_Inc = 132m;
+                            }
+                            else
+                            {
+                                width_Base_Price_Inc = 134.2m;
+                            }
+
+                            weight_deci = (Width_mm_to_meters - deci_getter[i]) / 0.1m;
+                            percentage_multiplier = width_Base_Price_Inc * weight_deci;
+                            price_base_on_Weight = Math.Round(width_Base_Price_List[i], 2) + percentage_multiplier;
+                            break;
+                        }
+                        else if (Width_mm_to_meters >= 1.0m && Width_mm_to_meters < 1.1m)
+                        {
+                            price_base_on_Weight = width_Base_Price_List[0];
+                            break;
+                        }
+                    }
+                    built_in_SR_tAmount = (price_base_on_Weight / 2.2m);
+                    #endregion
+                }
+                else if (Screen_Factor >= 2.3m && Screen_Factor < 2.4m)
+                {
+                    #region 2.3
+                    width_Base_Price_List[0] = price_base_on_Height;
+
+                    for (int i = 1; i <= 20; i++)
+                    {
+                        holder = indices_pos[curr_index_pos];
+
+                        if (i == holder)
+                        {
+                            width_Base_Price_Inc = 138m;
+                            curr_index_pos++;
+                        }
+                        else
+                        {
+                            width_Base_Price_Inc = 140.3m;
+                        }
+
+                        temp = price_base_on_Height + width_Base_Price_Inc;
+                        width_Base_Price_List[i] = temp;
+                        price_base_on_Height = temp;
+
+                        current_deci_index = deci_getter[i];
+                        next_deci_index = deci_getter[i + 1];
+
+
+                        if (Width_mm_to_meters >= current_deci_index && Width_mm_to_meters < next_deci_index)
+                        {
+                            if (current_deci_index == 1.1m || current_deci_index == 1.5m || current_deci_index == 2.0m || current_deci_index == 2.5m || current_deci_index == 2.9m)
+                            {
+                                width_Base_Price_Inc = 138m;
+                            }
+                            else
+                            {
+                                width_Base_Price_Inc = 140.3m;
+                            }
+
+                            weight_deci = (Width_mm_to_meters - deci_getter[i]) / 0.1m;
+                            percentage_multiplier = width_Base_Price_Inc * weight_deci;
+                            price_base_on_Weight = Math.Round(width_Base_Price_List[i], 2) + percentage_multiplier;
+                            break;
+                        }
+                        else if (Width_mm_to_meters >= 1.0m && Width_mm_to_meters < 1.1m)
+                        {
+                            price_base_on_Weight = width_Base_Price_List[0];
+                            break;
+                        }
+                    }
+                    built_in_SR_tAmount = (price_base_on_Weight / 2.3m);
+                    #endregion
+                }
+                else
+                {
+                    #region 2.4
+                    width_Base_Price_List[0] = price_base_on_Height;
+
+                    for (int i = 1; i <= 20; i++)
+                    {
+                        holder = indices_pos[curr_index_pos];
+
+                        if (i == holder)
+                        {
+                            width_Base_Price_Inc = 144m;
+                            curr_index_pos++;
+                        }
+                        else
+                        {
+                            width_Base_Price_Inc = 146.4m;
+                        }
+
+                        temp = price_base_on_Height + width_Base_Price_Inc;
+                        width_Base_Price_List[i] = temp;
+                        price_base_on_Height = temp;
+
+                        current_deci_index = deci_getter[i];
+                        next_deci_index = deci_getter[i + 1];
+
+
+                        if (Width_mm_to_meters >= current_deci_index && Width_mm_to_meters < next_deci_index)
+                        {
+                            if (current_deci_index == 1.1m || current_deci_index == 1.5m || current_deci_index == 2.0m || current_deci_index == 2.5m || current_deci_index == 2.9m)
+                            {
+                                width_Base_Price_Inc = 144m;
+                            }
+                            else
+                            {
+                                width_Base_Price_Inc = 146.4m;
+                            }
+
+                            weight_deci = (Width_mm_to_meters - deci_getter[i]) / 0.1m;
+                            percentage_multiplier = width_Base_Price_Inc * weight_deci;
+                            price_base_on_Weight = width_Base_Price_List[i] + percentage_multiplier;
+                            break;
+                        }
+                        else if (Width_mm_to_meters >= 1.0m && Width_mm_to_meters < 1.1m)
+                        {
+                            price_base_on_Weight = width_Base_Price_List[0];
+                            break;
+                        }
+                    }
+                    built_in_SR_tAmount = (price_base_on_Weight / 2.4m);
+
+                    #endregion
+                }
+
+                #endregion
+
+                #endregion
+           
+                #region BuiltInPrice Selector
+                if (loopCountLimit == 2)
+                {
+                    if(loopCounter == 1)
+                    {
+                        _firstLoopInterpolatePrice = (Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * 1.2m); // lowest price using lowest dimension possible W or H      
+                        ClearingOperation();        
+                    }
+                    else if(loopCounter == 2)
+                    {
+                        _secondLoopInterpolatePrice = (Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * 1.2m);
+                        _builtinInterpolationPrice = _firstLoopInterpolatePrice + (_firstLoopInterpolatePrice - _secondLoopInterpolatePrice);                       
+                        built_in_SR_tAmount = _builtinInterpolationPrice;
+
+                        _screen_Height = _screenOriginalDimensionWidthOrHeight;
+
+                    }
+                }
+                else if(loopCountLimit == 1)
+                {
+                    built_in_SR_tAmount = (Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * 1.2m);
+                }
+                #endregion
+
+                loopCounter++;
+            } while (loopCounter <= loopCountLimit);
+
+            _builtInWidthIsBelowMinimum = false;
+            _builInHeigthIsBelowMinimum = false;
         }
 
         public void ComputeScreenTotalPrice()
@@ -3010,305 +3396,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 else if (Screen_Types == ScreenType._BuiltInSideroll)
                 {
-                    #region Built in SideRoll
-
-                    Height_mm_to_meters = Screen_Height / 1000m;
-                    Width_mm_to_meters = Screen_Width / 1000m;
-
-
-                    #region Height Price List
-
-                    if (Screen_Factor >= 2.2m && Screen_Factor < 2.3m)
-                    {
-                        base_Price = 11391.60m;
-
-                        height_Base_Price_Inc = 347.6m;
-                        height_Base_Price_List[0] = base_Price;
-                    }
-                    else if (Screen_Factor >= 2.3m && Screen_Factor < 2.4m)
-                    {
-                        base_Price = 11909.40m;
-                        height_Base_Price_Inc = 363.4m;
-                        height_Base_Price_List[0] = base_Price;
-                    }
-                    else
-                    {
-                        base_Price = 12427.20m;
-                        height_Base_Price_Inc = 379.2m;
-                        height_Base_Price_List[0] = base_Price;
-                    }
-
-
-
-
-                    for (int i = 1; i < 16m; i++)
-                    {
-                        temp = base_Price + height_Base_Price_Inc;
-                        height_Base_Price_List[i] = temp;
-                        base_Price = temp;
-                    }
-
-                    if (Height_mm_to_meters >= 1.5m && Height_mm_to_meters < 1.6m)
-                    {
-                        height_deci = (Height_mm_to_meters - 1.5m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[0] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 1.6m && Height_mm_to_meters < 1.7m)
-                    {
-                        height_deci = (Height_mm_to_meters - 1.6m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[1] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 1.7m && Height_mm_to_meters < 1.8m)
-                    {
-                        height_deci = (Height_mm_to_meters - 1.7m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[2] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 1.8m && Height_mm_to_meters < 1.9m)
-                    {
-                        height_deci = (Height_mm_to_meters - 1.8m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[3] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 1.9m && Height_mm_to_meters < 2.0m)
-                    {
-                        height_deci = (Height_mm_to_meters - 1.9m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[4] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 2.0m && Height_mm_to_meters < 2.1m)
-                    {
-                        height_deci = (Height_mm_to_meters - 2.0m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[5] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 2.1m && Height_mm_to_meters < 2.2m)
-                    {
-                        height_deci = (Height_mm_to_meters - 2.1m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[6] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 2.2m && Height_mm_to_meters < 2.3m)
-                    {
-                        height_deci = (Height_mm_to_meters - 2.2m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[7] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 2.3m && Height_mm_to_meters < 2.4m)
-                    {
-                        height_deci = (Height_mm_to_meters - 2.3m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[8] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 2.4m && Height_mm_to_meters < 2.5m)
-                    {
-                        height_deci = (Height_mm_to_meters - 2.4m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[9] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 2.5m && Height_mm_to_meters < 2.6m)
-                    {
-                        height_deci = (Height_mm_to_meters - 2.5m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[10] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 2.6m && Height_mm_to_meters < 2.7m)
-                    {
-                        height_deci = (Height_mm_to_meters - 2.6m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[11] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 2.7m && Height_mm_to_meters < 2.8m)
-                    {
-                        height_deci = (Height_mm_to_meters - 2.7m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[12] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 2.8m && Height_mm_to_meters < 2.9m)
-                    {
-                        height_deci = (Height_mm_to_meters - 2.8m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[13] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 2.9m && Height_mm_to_meters < 3.0m)
-                    {
-                        height_deci = (Height_mm_to_meters - 2.9m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[14] + percentage_multiplier;
-                    }
-                    else if (Height_mm_to_meters >= 3.0m)
-                    {
-                        height_deci = (Height_mm_to_meters - 3.0m) / 0.1m;
-                        percentage_multiplier = height_Base_Price_Inc * height_deci;
-                        price_base_on_Height = height_Base_Price_List[15] + percentage_multiplier;
-                    }
-
-                    #endregion
-
-                    #region width price list
-
-                    if (Screen_Factor >= 2.2m && Screen_Factor < 2.3m)
-                    {
-                        #region 2.2
-                        width_Base_Price_List[0] = price_base_on_Height;
-
-                        for (int i = 1; i <= 20; i++)
-                        {
-                            holder = indices_pos[curr_index_pos];
-
-                            if (i == holder)
-                            {
-                                width_Base_Price_Inc = 132m;
-                                curr_index_pos++;
-                            }
-                            else
-                            {
-                                width_Base_Price_Inc = 134.2m;
-                            }
-                            temp = price_base_on_Height + width_Base_Price_Inc;
-                            width_Base_Price_List[i] = temp;
-                            price_base_on_Height = temp;
-
-                            current_deci_index = deci_getter[i];
-                            next_deci_index = deci_getter[i + 1];
-
-
-                            if (Width_mm_to_meters >= current_deci_index && Width_mm_to_meters < next_deci_index)
-                            {
-                                if (current_deci_index == 1.1m || current_deci_index == 1.5m || current_deci_index == 2.0m || current_deci_index == 2.5m || current_deci_index == 2.9m)
-                                {
-                                    width_Base_Price_Inc = 132m;
-                                }
-                                else
-                                {
-                                    width_Base_Price_Inc = 134.2m;
-                                }
-
-                                weight_deci = (Width_mm_to_meters - deci_getter[i]) / 0.1m;
-                                percentage_multiplier = width_Base_Price_Inc * weight_deci;
-                                price_base_on_Weight = Math.Round(width_Base_Price_List[i], 2) + percentage_multiplier;
-                                break;
-                            }
-                            else if (Width_mm_to_meters >= 1.0m && Width_mm_to_meters < 1.1m)
-                            {
-                                price_base_on_Weight = width_Base_Price_List[0];
-                                break;
-                            }
-                        }
-                        built_in_SR_tAmount = (price_base_on_Weight / 2.2m);
-                        #endregion
-                    }
-                    else if (Screen_Factor >= 2.3m && Screen_Factor < 2.4m)
-                    {
-                        #region 2.3
-                        width_Base_Price_List[0] = price_base_on_Height;
-
-                        for (int i = 1; i <= 20; i++)
-                        {
-                            holder = indices_pos[curr_index_pos];
-
-                            if (i == holder)
-                            {
-                                width_Base_Price_Inc = 138m;
-                                curr_index_pos++;
-                            }
-                            else
-                            {
-                                width_Base_Price_Inc = 140.3m;
-                            }
-
-                            temp = price_base_on_Height + width_Base_Price_Inc;
-                            width_Base_Price_List[i] = temp;
-                            price_base_on_Height = temp;
-
-                            current_deci_index = deci_getter[i];
-                            next_deci_index = deci_getter[i + 1];
-
-
-                            if (Width_mm_to_meters >= current_deci_index && Width_mm_to_meters < next_deci_index)
-                            {
-                                if (current_deci_index == 1.1m || current_deci_index == 1.5m || current_deci_index == 2.0m || current_deci_index == 2.5m || current_deci_index == 2.9m)
-                                {
-                                    width_Base_Price_Inc = 138m;
-                                }
-                                else
-                                {
-                                    width_Base_Price_Inc = 140.3m;
-                                }
-
-                                weight_deci = (Width_mm_to_meters - deci_getter[i]) / 0.1m;
-                                percentage_multiplier = width_Base_Price_Inc * weight_deci;
-                                price_base_on_Weight = Math.Round(width_Base_Price_List[i], 2) + percentage_multiplier;
-                                break;
-                            }
-                            else if (Width_mm_to_meters >= 1.0m && Width_mm_to_meters < 1.1m)
-                            {
-                                price_base_on_Weight = width_Base_Price_List[0];
-                                break;
-                            }
-                        }
-                        built_in_SR_tAmount = (price_base_on_Weight / 2.3m);
-                        #endregion
-                    }
-                    else
-                    {
-                        #region 2.4
-                        width_Base_Price_List[0] = price_base_on_Height;
-
-                        for (int i = 1; i <= 20; i++)
-                        {
-                            holder = indices_pos[curr_index_pos];
-
-                            if (i == holder)
-                            {
-                                width_Base_Price_Inc = 144m;
-                                curr_index_pos++;
-                            }
-                            else
-                            {
-                                width_Base_Price_Inc = 146.4m;
-                            }
-
-                            temp = price_base_on_Height + width_Base_Price_Inc;
-                            width_Base_Price_List[i] = temp;
-                            price_base_on_Height = temp;
-
-                            current_deci_index = deci_getter[i];
-                            next_deci_index = deci_getter[i + 1];
-
-
-                            if (Width_mm_to_meters >= current_deci_index && Width_mm_to_meters < next_deci_index)
-                            {
-                                if (current_deci_index == 1.1m || current_deci_index == 1.5m || current_deci_index == 2.0m || current_deci_index == 2.5m || current_deci_index == 2.9m)
-                                {
-                                    width_Base_Price_Inc = 144m;
-                                }
-                                else
-                                {
-                                    width_Base_Price_Inc = 146.4m;
-                                }
-
-                                weight_deci = (Width_mm_to_meters - deci_getter[i]) / 0.1m;
-                                percentage_multiplier = width_Base_Price_Inc * weight_deci;
-                                price_base_on_Weight = width_Base_Price_List[i] + percentage_multiplier;
-                                break;
-                            }
-                            else if (Width_mm_to_meters >= 1.0m && Width_mm_to_meters < 1.1m)
-                            {
-                                price_base_on_Weight = width_Base_Price_List[0];
-                                break;
-                            }
-                        }
-                        built_in_SR_tAmount = (price_base_on_Weight / 2.4m);
-
-                        #endregion
-                    }
-
-                    #endregion
-
-                    #endregion
+                    BuiltInPrice_and_PriceInterpolation();
                 }
                 else if (Screen_Types == ScreenType._Maxxy)
                 {
@@ -6206,7 +6294,7 @@ namespace ModelLayer.Model.Quotation.Screen
                     #region built in 
                     if (FromCellEndEdit != true)
                     {
-                        Screen_UnitPrice = ((Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * 1.2m ) + milled1385Price + milled6052Price + LatchkitTotal + IntermediatePartTotal) * Screen_Set;
+                        Screen_UnitPrice = (built_in_SR_tAmount + milled1385Price + milled6052Price + LatchkitTotal + IntermediatePartTotal) * Screen_Set;
                     }
                     PriceIncreaseByPercentage();
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;

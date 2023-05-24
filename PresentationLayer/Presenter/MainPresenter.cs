@@ -1039,20 +1039,20 @@ namespace PresentationLayer.Presenter
 
             if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
             {
-                DialogResult dialogResult = MessageBox.Show("Changes in file is not save, Do you wish to continue ? " , "Closing Application",
+                DialogResult dialogResult = MessageBox.Show("Changes in file is not save, Do you wish to continue ? ", "Closing Application",
                                                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                if(dialogResult == DialogResult.No)
+                if (dialogResult == DialogResult.No)
                 {
                     e.Cancel = true;
                 }
-                else if(dialogResult == DialogResult.Yes)
+                else if (dialogResult == DialogResult.Yes)
                 {
                     e.Cancel = false;
                 }
 
             }
-          
+
         }
         #region Events  
         private void OnPanelMainMouseWheelEventRaised(object sender, MouseEventArgs e)
@@ -1258,7 +1258,6 @@ namespace PresentationLayer.Presenter
 
         private void OnSaveToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-
             wndr_content = new List<string>();
             SaveChanges();
         }
@@ -1271,6 +1270,12 @@ namespace PresentationLayer.Presenter
             {
                 wndr_content = new List<string>();
                 SaveAs();
+
+                foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
+                {
+                    wndr_item.IsFromLoad = true;
+                }
+
             }
 
         }
@@ -1331,6 +1336,11 @@ namespace PresentationLayer.Presenter
                                      _windoorModel.WD_name,
                                      _windoorModel.WD_profile,
                                      true);
+
+                    foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
+                    {
+                        wndr_item.IsFromLoad = true;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -3874,6 +3884,10 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("WD_TopViewType:"))
                         {
                             _windoorModel.WD_TopViewType = extractedValue_str;
+                        }
+                        if (row_str.Contains("IsFromLoad:"))
+                        {
+                            _windoorModel.IsFromLoad = Convert.ToBoolean(extractedValue_str);
                         }
                         #endregion
                     }
