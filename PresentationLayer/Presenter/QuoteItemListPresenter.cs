@@ -50,6 +50,7 @@ namespace PresentationLayer.Presenter
         private bool _renderPDFAtBackground;
         private bool _showVatContractSummary;
         private bool _rdlcReportCompilerShowSubTotal;
+        private bool _intInString;
 
 
         int count = 0,
@@ -906,7 +907,19 @@ namespace PresentationLayer.Presenter
                                         curr_GlassLoc = lstQuoteUC.GetiQuoteItemListUC().ItemName;
                                         curr_GlassDesc = pnl.Panel_GlassThicknessDesc;
                                         curr_GlassPrice = Math.Round((pnlGlassArea * pnl.Panel_GlassPricePerSqrMeter) + ((pnlGlassArea * pnl.Panel_GlassPricePerSqrMeter) * _quotationModel.PricingFactor), 2);
-                                        curr_IntDescription = Convert.ToInt32(curr_GlassDesc.Substring(0, 2));
+
+                                        _intInString = curr_GlassDesc.All(char.IsDigit);
+                                        
+                                        if(_intInString == true)
+                                        {
+                                            curr_IntDescription = Convert.ToInt32(curr_GlassDesc.Substring(0, 2));
+                                            _intInString = false;
+                                        }
+                                        else
+                                        {
+                                            curr_IntDescription = 0;
+                                        }
+
 
                                         if (prev_GlassItemNo != 0)
                                         {
@@ -1024,7 +1037,18 @@ namespace PresentationLayer.Presenter
                                 curr_GlassLoc = lstQuoteUC.GetiQuoteItemListUC().ItemName;
                                 curr_GlassDesc = Singlepnl.Panel_GlassThicknessDesc;
                                 curr_GlassPrice = Math.Round((pnlGlassArea * Singlepnl.Panel_GlassPricePerSqrMeter) + ((pnlGlassArea * Singlepnl.Panel_GlassPricePerSqrMeter) * _quotationModel.PricingFactor), 2);
-                                curr_IntDescription = Convert.ToInt32(curr_GlassDesc.Substring(0, 2));
+                                _intInString = curr_GlassDesc.All(char.IsDigit);
+
+                                if (_intInString == true)
+                                {
+                                    curr_IntDescription = Convert.ToInt32(curr_GlassDesc.Substring(0, 2));
+                                    _intInString = false;
+                                }
+                                else
+                                {
+                                    curr_IntDescription = 0;
+                                }
+
                                 if (prev_GlassItemNo != 0)
                                 {
                                     if (prev_GlassItemNo == curr_GlassItemNo)
