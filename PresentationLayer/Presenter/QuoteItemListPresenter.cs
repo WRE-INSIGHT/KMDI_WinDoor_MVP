@@ -1264,7 +1264,7 @@ namespace PresentationLayer.Presenter
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxTopView().Image = wdm.WD_SlidingTopViewImage;
 
-                    if (wdm.WD_price == 0)
+                    if (wdm.WD_price == 0 && wdm.IsFromLoad == true)
                     {
                         _quotationModel.ItemCostingPriceAndPoints();
                         wdm.WD_price = Math.Round(_quotationModel.lstTotalPrice[i], 2);

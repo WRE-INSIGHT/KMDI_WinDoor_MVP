@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualBasic;
 using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
-using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
 using System;
 using System.Collections.Generic;
@@ -145,8 +144,8 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     if (wdm.WD_Selected == true)
                     {
-                        wdrCurrentSelected = wdm; 
-                        wdm.WD_Selected = false; 
+                        wdrCurrentSelected = wdm;
+                        wdm.WD_Selected = false;
                     }
                     string itemNum = _quoteItemListUC.ItemNumber;
                     itemNum = itemNum.Replace("Item ", string.Empty);
@@ -156,13 +155,13 @@ namespace PresentationLayer.Presenter.UserControls
                         if (wdm.WD_id == Convert.ToInt32(itemNum))
                         {
                             _quotationModel.BOMandItemlistStatus = "BOM";
-                            wdm.WD_Selected = true; 
+                            wdm.WD_Selected = true;
                             _quotationModel.ItemCostingPriceAndPoints();
                             //wdm.WD_price = _quotationModel.lstTotalPrice[wdm.WD_id - 1];
                             wdm.WD_price = _quotationModel.lstTotalPrice[0];
                             _nudItemPrice.Value = wdm.WD_price;
                             _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
-                            wdm.WD_Selected = false; 
+                            wdm.WD_Selected = false;
 
                         }
                     }
@@ -266,8 +265,12 @@ namespace PresentationLayer.Presenter.UserControls
                     if (wdm.WD_id == Convert.ToInt32(itemNum))
                     {
                         wdm.WD_price = ((NumericUpDown)sender).Value;
-
                         _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
+
+                        if (wdm.WD_Selected == true)
+                        {
+                            _mainPresenter.GetMainView().GetCurrentPrice().Value = ((NumericUpDown)sender).Value;
+                        }
                     }
                 }
             }
