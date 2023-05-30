@@ -505,6 +505,7 @@
     <Compile Include="Views\IScreenView.cs" />
     <Compile Include="Views\ISetMultipleGlassThicknessView.cs" />
     <Compile Include="Views\ISetTopViewSlidingPanellingView.cs" />
+    <Compile Include="Views\ISlidingScreenView.cs" />
     <Compile Include="Views\ISortItemView.cs" />
     <Compile Include="Views\LoginView.cs">
       <SubType>Form</SubType>
@@ -583,6 +584,12 @@
     </Compile>
     <Compile Include="Views\SetTopViewSlidingPanellingView.Designer.cs">
       <DependentUpon>SetTopViewSlidingPanellingView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SlidingScreenView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SlidingScreenView.Designer.cs">
+      <DependentUpon>SlidingScreenView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\SortItemView.cs">
       <SubType>Form</SubType>
@@ -1367,6 +1374,9 @@
     <EmbeddedResource Include="Views\SetTopViewSlidingPanellingView.resx">
       <DependentUpon>SetTopViewSlidingPanellingView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\SlidingScreenView.resx">
+      <DependentUpon>SlidingScreenView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\SortItemView.resx">
       <DependentUpon>SortItemView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1763,6 +1773,7 @@
     <None Include="Resources\SlidingPanel.png" />
     <None Include="Resources\TiltNTurnPanel.png" />
     <None Include="Resources\Summary_v2.png" />
+    <None Include="Resources\slidingscreenheader.jpg" />
     <Content Include="Resources\Transom.png" />
     <Content Include="Resources\undo_30px.png" />
   </ItemGroup>

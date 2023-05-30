@@ -36,6 +36,7 @@
             this.LeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BothToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenu_sliding.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,14 +44,15 @@
             // 
             this.cmenu_sliding.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
-            this.overlapSashToolStripMenuItem});
+            this.overlapSashToolStripMenuItem,
+            this.addToScreenToolStripMenuItem});
             this.cmenu_sliding.Name = "cmenu_casement";
-            this.cmenu_sliding.Size = new System.Drawing.Size(143, 48);
+            this.cmenu_sliding.Size = new System.Drawing.Size(153, 92);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -62,36 +64,43 @@
             this.BothToolStripMenuItem,
             this.noneToolStripMenuItem});
             this.overlapSashToolStripMenuItem.Name = "overlapSashToolStripMenuItem";
-            this.overlapSashToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.overlapSashToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.overlapSashToolStripMenuItem.Text = "Overlap Sash";
             // 
             // RightToolStripMenuItem
             // 
             this.RightToolStripMenuItem.Name = "RightToolStripMenuItem";
-            this.RightToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.RightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.RightToolStripMenuItem.Text = "Right";
             this.RightToolStripMenuItem.Click += new System.EventHandler(this.RightToolStripMenuItem_Click);
             // 
             // LeftToolStripMenuItem
             // 
             this.LeftToolStripMenuItem.Name = "LeftToolStripMenuItem";
-            this.LeftToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.LeftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.LeftToolStripMenuItem.Text = "Left";
             this.LeftToolStripMenuItem.Click += new System.EventHandler(this.LeftToolStripMenuItem_Click);
             // 
             // BothToolStripMenuItem
             // 
             this.BothToolStripMenuItem.Name = "BothToolStripMenuItem";
-            this.BothToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.BothToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.BothToolStripMenuItem.Text = "Both";
             this.BothToolStripMenuItem.Click += new System.EventHandler(this.BothToolStripMenuItem_Click);
             // 
             // noneToolStripMenuItem
             // 
             this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.noneToolStripMenuItem.Text = "None";
             this.noneToolStripMenuItem.Click += new System.EventHandler(this.noneToolStripMenuItem_Click);
+            // 
+            // addToScreenToolStripMenuItem
+            // 
+            this.addToScreenToolStripMenuItem.Name = "addToScreenToolStripMenuItem";
+            this.addToScreenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addToScreenToolStripMenuItem.Text = "Add to Screen";
+            this.addToScreenToolStripMenuItem.Click += new System.EventHandler(this.addToScreenToolStripMenuItem_Click);
             // 
             // SlidingPanelUC
             // 
@@ -125,5 +134,6 @@
         private System.Windows.Forms.ToolStripMenuItem LeftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BothToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addToScreenToolStripMenuItem;
     }
 }
