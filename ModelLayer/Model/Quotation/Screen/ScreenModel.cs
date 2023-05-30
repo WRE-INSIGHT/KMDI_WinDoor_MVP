@@ -1699,7 +1699,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         public void BuiltInPrice_and_PriceInterpolation()
-            {
+        {
             int loopCounter = 1;
 
             #region Screen Dimension Selector 
@@ -1707,7 +1707,7 @@ namespace ModelLayer.Model.Quotation.Screen
             {
                 if(Screen_Width < 1000)
                 {
-                    
+                    _screenOriginalDimensionWidthOrHeight = _screen_Width;
                     _builtInInterpolationNewDimension = 3000 - Screen_Width; //  ask a costing engr for final and approved formula
                     _screen_Width = 1000;  // same as above 
                     _builtInWidthIsBelowMinimum = true;
@@ -2059,7 +2059,14 @@ namespace ModelLayer.Model.Quotation.Screen
                         _builtinInterpolationPrice = _firstLoopInterpolatePrice + (_firstLoopInterpolatePrice - _secondLoopInterpolatePrice);                       
                         built_in_SR_tAmount = _builtinInterpolationPrice;
 
-                        _screen_Height = _screenOriginalDimensionWidthOrHeight;
+                        if(_builtInWidthIsBelowMinimum == true)
+                        {
+                            _screen_Width = _screenOriginalDimensionWidthOrHeight;
+                        }
+                        else if(_builInHeigthIsBelowMinimum == true)
+                        {
+                            _screen_Height = _screenOriginalDimensionWidthOrHeight;
+                        }
 
                     }
                 }

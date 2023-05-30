@@ -39,8 +39,6 @@ namespace EnumerationTypeLayer
             public static readonly FrameReinf_ArticleNo _TV110 = new FrameReinf_ArticleNo(4, "T-V110");
             public static readonly FrameReinf_ArticleNo _NA120 = new FrameReinf_ArticleNo(5, "NA120");
 
-
-
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -1048,6 +1046,7 @@ namespace EnumerationTypeLayer
             public static readonly ScreenType _Freedom = new ScreenType(10, "Freedom Screen");
             public static readonly ScreenType _NoInsectScreen = new ScreenType(11, "No Insect Screen");
             public static readonly ScreenType _UnnecessaryForInsectScreen = new ScreenType(12, "Unnecessary for Insect Screen");
+            public static readonly ScreenType _SlidingScreen = new ScreenType(13, "Sliding Screen");
 
 
             private ScreenType(int value, string displayName) : base(value, displayName) { }
