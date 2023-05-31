@@ -2039,15 +2039,17 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     if (i + inner_line >= maxHeight + inner_line)
                     {
-                        excessHeightInPlusTen_slash = (i + Ppoint.Y - exceedMaxHeight_slash) - (maxHeight + Ppoint.Y);
+                        excessHeightInPlusTen_slash = (i + Ppoint.Y - exceedMaxHeight_slash) - (maxHeight + Ppoint.Y) + 2;
                     }
 
                     if (i + inner_line >= maxWidth + inner_line)
                     {
-                        excessWidthInPlusTen_slash = (i + Ppoint.X - exceedMaxWidth_slash) - (maxWidth + Ppoint.X);
+                        excessWidthInPlusTen_slash = (i + Ppoint.X - exceedMaxWidth_slash) - (maxWidth + Ppoint.X) - 2;
                     }
 
-                    g.DrawLine(Pens.OrangeRed, new Point(Ppoint.X + exceedMaxHeight_slash + Math.Abs(excessHeightInPlusTen_slash), (i + Ppoint.Y - exceedMaxHeight_slash) - Math.Abs(excessHeightInPlusTen_slash)), new Point((i + Ppoint.X - exceedMaxWidth_slash) - Math.Abs(excessWidthInPlusTen_slash), Ppoint.Y + exceedMaxWidth_slash + Math.Abs(excessWidthInPlusTen_slash)));
+                    g.DrawLine(Pens.OrangeRed,
+                        new Point(Ppoint.X + exceedMaxHeight_slash + Math.Abs(excessHeightInPlusTen_slash + 1), (i + Ppoint.Y - exceedMaxHeight_slash) - Math.Abs(excessHeightInPlusTen_slash) + 1),
+                        new Point((i + Ppoint.X - exceedMaxWidth_slash) - Math.Abs(excessWidthInPlusTen_slash + 1), Ppoint.Y + exceedMaxWidth_slash + Math.Abs(excessWidthInPlusTen_slash) + 1));
 
                     if (i + inner_line >= maxHeight + inner_line)
                     {
@@ -2066,15 +2068,17 @@ namespace PresentationLayer.Presenter.UserControls
 
                     if (i + inner_line >= maxWidth + inner_line)
                     {
-                        excessWidthInPlusTen_backSlash = (maxWidth + Ppoint.X - i + exceedMaxWidth_backSlash) - Ppoint.X;
+                        excessWidthInPlusTen_backSlash = (maxWidth + Ppoint.X - i + exceedMaxWidth_backSlash) - Ppoint.X + 1;
                     }
 
                     if (i + inner_line >= maxHeight + inner_line)
                     {
-                        excessHeightInPlusTen_backSlash = (maxHeight + Ppoint.Y - i + exceedMaxHeight_backSlash) - Ppoint.Y;
+                        excessHeightInPlusTen_backSlash = (maxHeight + Ppoint.Y - i + exceedMaxHeight_backSlash) - Ppoint.Y - 1;
                     }
 
-                    g.DrawLine(Pens.OrangeRed, new Point((maxWidth - i + exceedMaxWidth_backSlash + Ppoint.X) + Math.Abs(excessWidthInPlusTen_backSlash), exceedMaxWidth_backSlash + Ppoint.Y + Math.Abs(excessWidthInPlusTen_backSlash)), new Point(maxWidth - exceedMaxHeight_backSlash + Ppoint.X - Math.Abs(excessHeightInPlusTen_backSlash), i - exceedMaxHeight_backSlash + Ppoint.Y - Math.Abs(excessHeightInPlusTen_backSlash)));
+                    g.DrawLine(Pens.OrangeRed,
+                        new Point((maxWidth - i + exceedMaxWidth_backSlash + Ppoint.X) + Math.Abs(excessWidthInPlusTen_backSlash) + 1, exceedMaxWidth_backSlash + Ppoint.Y + Math.Abs(excessWidthInPlusTen_backSlash) + 1),
+                        new Point(maxWidth - exceedMaxHeight_backSlash + Ppoint.X - Math.Abs(excessHeightInPlusTen_backSlash) - 1, i - exceedMaxHeight_backSlash + Ppoint.Y - Math.Abs(excessHeightInPlusTen_backSlash) - 1));
 
                     if (i + inner_line >= maxWidth + inner_line)
                     {
@@ -2085,10 +2089,10 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         exceedMaxHeight_backSlash += 10;
                     }
-
                 }
             }
             #endregion
+
 
             if (panelModel.Panel_Type != "Louver Panel")
             {
@@ -2185,11 +2189,22 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._None)
                 {
-                    g.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(Ppoint.X + outer_line,
-                                                                     Ppoint.Y + outer_line,
-                                                                     (client_wd - (outer_line * 2)) - w,
-                                                                     (client_ht - (outer_line * 2)) - w));
+                    if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    {
+                        if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                        {
+                            g.DrawRectangle(new Pen(Color.White, 15), new Rectangle(Ppoint.X + 8,
+                                                                 Ppoint.Y + 8,
+                                                                 (client_wd - (outer_line * 2)) + w + 1,
+                                                                 (client_ht - (outer_line * 2)) + w + 1));
+                        }
 
+                        //inner Line
+                        g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
+                                                                      Ppoint.Y + inner_line,
+                                                                      (client_wd - (inner_line * 2)) - w,
+                                                                      (client_ht - (inner_line * 2)) - w));
+                    }
 
                     //outer Line
                     g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
@@ -2197,14 +2212,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                       (client_wd - (outer_line * 2)) - w,
                                                                       (client_ht - (outer_line * 2)) - w));
 
-                    if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
-                    {
-                        //inner Line
-                        g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
-                                                                      Ppoint.Y + inner_line,
-                                                                      (client_wd - (inner_line * 2)) - w,
-                                                                      (client_ht - (inner_line * 2)) - w));
-                    }
+
                 }
             }
 
