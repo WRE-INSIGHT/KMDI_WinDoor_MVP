@@ -52,6 +52,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         bool WD_Selected { get; set; }
         Dictionary<int, decimal> Dictionary_ht_redArrowLines { get; set; }
         Dictionary<int, decimal> Dictionary_wd_redArrowLines { get; set; }
+        bool IsFromLoad { get; set; }
 
         float GetZoom_forRendering();
         void SetImageRenderingZoom();

@@ -36,7 +36,8 @@ namespace ServiceLayer.Services.WindoorServices
                                            List<Control> lst_Objects,
                                            Base_Color wd_basecolor,
                                            Foil_Color wd_insidecolor,
-                                           Foil_Color wd_outisdecolor
+                                           Foil_Color wd_outisdecolor,
+                                           bool isFromLoad
                                            //int wd_costingPoints
                                            )
         {
@@ -58,7 +59,8 @@ namespace ServiceLayer.Services.WindoorServices
                                                   lst_Objects,
                                                   wd_basecolor,
                                                   wd_insidecolor,
-                                                  wd_outisdecolor
+                                                  wd_outisdecolor,
+                                                  isFromLoad
                                                   //wd_costingPoints
                                                   );
 
@@ -86,7 +88,8 @@ namespace ServiceLayer.Services.WindoorServices
                                              List<IFrameModel> lst_frame = null,
                                              List<IConcreteModel> lst_concrete = null,
                                              List<Control> lst_Objects = null,
-                                             int wd_costingPoints = 0)
+                                             int wd_costingPoints = 0,
+                                             bool isFromLoad = false)
         {
             if (WD_name == "")
             {
@@ -127,7 +130,8 @@ namespace ServiceLayer.Services.WindoorServices
                                                         lst_Objects,
                                                         wd_basecolor,
                                                         wd_insidecolor,
-                                                        wd_outisdecolor
+                                                        wd_outisdecolor,
+                                                        isFromLoad
                                                         //wd_costingPoints
                                                         );
 

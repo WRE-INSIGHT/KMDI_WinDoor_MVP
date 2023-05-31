@@ -1039,20 +1039,20 @@ namespace PresentationLayer.Presenter
 
             if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
             {
-                DialogResult dialogResult = MessageBox.Show("Changes in file is not save, Do you wish to continue ? " , "Closing Application",
+                DialogResult dialogResult = MessageBox.Show("Changes in file is not save, Do you wish to continue ? ", "Closing Application",
                                                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                if(dialogResult == DialogResult.No)
+                if (dialogResult == DialogResult.No)
                 {
                     e.Cancel = true;
                 }
-                else if(dialogResult == DialogResult.Yes)
+                else if (dialogResult == DialogResult.Yes)
                 {
                     e.Cancel = false;
                 }
 
             }
-          
+
         }
         #region Events  
         private void OnPanelMainMouseWheelEventRaised(object sender, MouseEventArgs e)
@@ -1258,7 +1258,6 @@ namespace PresentationLayer.Presenter
 
         private void OnSaveToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-
             wndr_content = new List<string>();
             SaveChanges();
         }
@@ -1271,6 +1270,12 @@ namespace PresentationLayer.Presenter
             {
                 wndr_content = new List<string>();
                 SaveAs();
+
+                foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
+                {
+                    wndr_item.IsFromLoad = true;
+                }
+
             }
 
         }
@@ -1331,6 +1336,11 @@ namespace PresentationLayer.Presenter
                                      _windoorModel.WD_name,
                                      _windoorModel.WD_profile,
                                      true);
+
+                    foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
+                    {
+                        wndr_item.IsFromLoad = true;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -3870,7 +3880,14 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("WD_WindoorNumber:"))
                         {
                             _windoorModel.WD_WindoorNumber = extractedValue_str;
-
+                        }
+                        if (row_str.Contains("WD_TopViewType:"))
+                        {
+                            _windoorModel.WD_TopViewType = extractedValue_str;
+                        }
+                        if (row_str.Contains("IsFromLoad:"))
+                        {
+                            _windoorModel.IsFromLoad = Convert.ToBoolean(extractedValue_str);
                         }
                         #endregion
                     }
@@ -4183,6 +4200,14 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("Frame_TubularWidth:"))
                         {
                             frm_TubularWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_FoldAndSlideTopViewLeftCount:"))
+                        {
+                            frm_FoldAndSlideTopViewLeftCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_FoldAndSlideTopViewRightCount:"))
+                        {
+                            frm_FoldAndSlideTopViewRightCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
 
 
@@ -8912,7 +8937,9 @@ namespace PresentationLayer.Presenter
               frmProp_Height,
               frm_ScreenFrameHeight,
               frm_TubularHeight,
-              frm_TubularWidth;
+              frm_TubularWidth,
+              frm_FoldAndSlideTopViewLeftCount,
+              frm_FoldAndSlideTopViewRightCount;
 
         int[] Arr_padding_norm,
                 Arr_padding_withmpnl;
@@ -9876,6 +9903,8 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_TubularHeightVisibility = frm_TubularHeightVisibility;
                         _frameModel.Frame_TubularHeight = frm_TubularHeight;
                         _frameModel.Frame_TubularWidth = frm_TubularWidth;
+                        _frameModel.Frame_FoldAndSlideTopViewLeftCount = frm_FoldAndSlideTopViewLeftCount;
+                        _frameModel.Frame_FoldAndSlideTopViewRightCount = frm_FoldAndSlideTopViewRightCount;
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();

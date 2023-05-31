@@ -30,6 +30,7 @@ namespace ServiceLayer.Services.WindoorServices
                                       List<IFrameModel> lst_frame = null,
                                       List<IConcreteModel> lst_concrete = null,
                                       List<Control> lst_Objects = null,
-                                      int wd_costingPoints = 0);
+                                      int wd_costingPoints = 0,
+                                      bool isFromLoad = false);
     }
 }

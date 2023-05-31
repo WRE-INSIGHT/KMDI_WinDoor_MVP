@@ -101,7 +101,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCenterHinge");
                                     }
                                 }
-                                
+
 
                                 if (_panelModel.Panel_NTCenterHingeVisibility == true)
                                 {
@@ -128,8 +128,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
                                     }
                                 }
-                                
-                                if(_panelModel.Panel_MiddleCloserVisibility == false)
+
+                                if (_panelModel.Panel_MiddleCloserVisibility == false)
                                 {
                                     _panelModel.Panel_MiddleCloserVisibility = true;
                                     _panelModel.AdjustPropertyPanelHeight("addMC");
@@ -150,7 +150,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minus3dHinge");
                                     }
                                 }
-                              
+
                             }
                             else if (curr_sash == SashProfile_ArticleNo._6040 || curr_sash == SashProfile_ArticleNo._6041)
                             {
@@ -235,7 +235,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusNTCenterHinge");
                                         }
                                     }
-                                    
+
                                     if (_panelModel.Panel_2dHingeVisibility_nonMotorized == true)
                                     {
                                         _panelModel.Panel_2dHingeVisibility_nonMotorized = false;
@@ -274,7 +274,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMC");
                                     }
                                 }
-                                
+
 
                                 if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
                                 {
@@ -307,7 +307,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
                                 if (curr_sash != SashProfile_ArticleNo._6040 || curr_sash != SashProfile_ArticleNo._6041)
                                 {
-                                    if(_panelModel.Panel_3dHingePropertyVisibility == false)
+                                    if (_panelModel.Panel_3dHingePropertyVisibility == false)
                                     {
                                         _panelModel.Panel_3dHingePropertyVisibility = true;
                                         _panelModel.AdjustPropertyPanelHeight("add3dHinge");
@@ -344,7 +344,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 if (curr_sash == SashProfile_ArticleNo._7581 || sel_sash == SashProfile_ArticleNo._2067) //
                                 {
 
-                                    if(_panelModel.Panel_HingeOptionsVisibility == true)
+                                    if (_panelModel.Panel_HingeOptionsVisibility == true)
                                     {
                                         _panelModel.Panel_HingeOptionsVisibility = false;
 
@@ -368,7 +368,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                         }
                                     }
 
-                                   
+
 
                                     if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
                                     {
@@ -384,7 +384,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 }
                                 else if (curr_sash == SashProfile_ArticleNo._395)
                                 {
-                                    if(_panelModel.Panel_CenterHingeOptionsVisibility == true)
+                                    if (_panelModel.Panel_CenterHingeOptionsVisibility == true)
                                     {
                                         _panelModel.Panel_CenterHingeOptionsVisibility = false;
                                         _panelModel.AdjustPropertyPanelHeight("minusCenterHinge");
@@ -484,7 +484,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 }
                                 else if (curr_sash == SashProfile_ArticleNo._2067)
                                 {
-                                    if(_panelModel.Panel_HingeOptionsVisibility == true)
+                                    if (_panelModel.Panel_HingeOptionsVisibility == true)
                                     {
                                         _panelModel.Panel_HingeOptionsVisibility = false;
 
@@ -526,7 +526,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
 
 
-                                if(_panelModel.Panel_HingeOptionsVisibility == true)
+                                if (_panelModel.Panel_HingeOptionsVisibility == true)
                                 {
                                     _panelModel.Panel_HingeOptionsVisibility = false;
 
@@ -549,7 +549,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                     }
                                 }
 
-                               
+
 
                                 if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
                                 {
@@ -640,7 +640,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             if (curr_sash == SashProfile_ArticleNo._7581 || sel_sash == SashProfile_ArticleNo._2067)
                             {
 
-                                if(_panelModel.Panel_HingeOptionsVisibility == true)
+                                if (_panelModel.Panel_HingeOptionsVisibility == true)
                                 {
                                     _panelModel.Panel_HingeOptionsVisibility = false;
 
@@ -665,7 +665,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 }
 
 
-                                
+
 
                                 if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
                                 {
@@ -707,7 +707,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 }
 
 
-                                
+
 
                                 if (_panelModel.Panel_NTCenterHingeVisibility == true)
                                 {
@@ -786,7 +786,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             if (curr_sash == SashProfile_ArticleNo._7581 || sel_sash == SashProfile_ArticleNo._2067)
                             {
 
-                                if(_panelModel.Panel_HingeOptionsVisibility == true)
+                                if (_panelModel.Panel_HingeOptionsVisibility == true)
                                 {
                                     _panelModel.Panel_HingeOptionsVisibility = false;
 
@@ -809,7 +809,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusMC");
                                     }
                                 }
-                               
+
 
                                 if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
                                 {
@@ -825,7 +825,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minus2dHingeField");
                                         }
                                     }
-                                   
+
                                 }
                             }
                             else if (curr_sash == SashProfile_ArticleNo._373 || curr_sash == SashProfile_ArticleNo._374)
@@ -967,6 +967,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6041;
                         _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV106;
                     }
+                }
+                else if (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("G58"))
+                {
+                    curr_sash = SashProfile_ArticleNo._2067;
+                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._2067;
+                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._V226;
                 }
             }
             //if (_panelModel.Panel_Type.Contains("Fixed") == false)
