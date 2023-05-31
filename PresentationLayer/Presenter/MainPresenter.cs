@@ -1353,6 +1353,24 @@ namespace PresentationLayer.Presenter
                 //MessageBox.Show(this, "Please save your progress locally or online to prevent data loss", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void ProjectAddressModifier()
+        {
+            if (_projectAddress.Contains("#"))
+            {
+                string returner, modifiedAdd;
+
+                returner = _projectAddress;
+                modifiedAdd = _projectAddress.Replace("#", "");
+                _projectAddress = returner;
+
+                wndr_content.Add("ProjectAddress: " + modifiedAdd);
+            }
+            else
+            {
+            wndr_content.Add("ProjectAddress: " + _projectAddress);
+            }
+        }
         List<string> wndr_content = new List<string>();
 
         private List<string> Saving_dotwndr()
@@ -1363,7 +1381,8 @@ namespace PresentationLayer.Presenter
             wndr_content.Add("ProjectName: " + _projectName);
             wndr_content.Add("ClientsName: " + inputted_projectName);
             wndr_content.Add("ClientsTitleLastname: " + _titleLastname);
-            wndr_content.Add("ProjectAddress: " + _projectAddress);
+            //wndr_content.Add("ProjectAddress: " + _projectAddress);
+            ProjectAddressModifier();
             wndr_content.Add("CustomerRefNo: " + _custRefNo);
             wndr_content.Add("DateAssigned: " + _dateAssigned);
             wndr_content.Add("AEIC: " + _aeic);
@@ -10118,7 +10137,7 @@ namespace PresentationLayer.Presenter
                 }
 
             }
-            GetIntownOutofTown();
+            //GetIntownOutofTown();
         }
 
 
@@ -11800,19 +11819,24 @@ namespace PresentationLayer.Presenter
                                 {
                                     string blades = string.Concat(split1.Where(Char.IsDigit));
                                     blades = blades.Replace("1150", "").Replace("1152", "");
+
+
+                                    //blades
                                     if (Convert.ToInt32(blades) >= 2 && Convert.ToInt32(blades) <= 9)
                                     {
                                         DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "0");
                                     }
-                                    else if (Convert.ToInt32(blades) >= 10)
+                                    else if (Convert.ToInt32(blades) >= 10 && Convert.ToInt32(blades) <= 19)
                                     {
-                                        if (Convert.ToInt32(blades) >= 20 && Convert.ToInt32(blades) <= 29)
-                                        {
-                                            DuplicatePnl = DuplicatePnl.Remove(18, 1).Insert(18, "1");
-                                        }
+                                        //if (Convert.ToInt32(blades) >= 20 && Convert.ToInt32(blades) <= 29)
+                                        //{
+                                        //    DuplicatePnl = DuplicatePnl.Remove(18, 1).Insert(18, "1");
+                                        //} 
+                                        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "1");
                                     }
                                 }
 
+                                //glass height
                                 if (DuplicatePnl.Contains("LVRG") &&
                                     (pnlCount >= 2 && pnlCount <= 9))
                                 {

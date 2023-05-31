@@ -11,9 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
@@ -46,7 +43,7 @@ namespace PresentationLayer.Presenter.UserControls
         private UserControl concreteUC;
         private void _concreteUC_concreteUCMouseClickEventRaised(object sender, MouseEventArgs e)
         {
-           
+
 
 
             try
@@ -279,10 +276,20 @@ namespace PresentationLayer.Presenter.UserControls
 
             int cond = concrete.Width + concrete.Height;
 
+            int maxWidth = concrete.ClientRectangle.Width;
+
             for (int i = 10; i < cond; i += 10)
             {
                 g.DrawLine(Pens.Black, new Point(0, i), new Point(i, 0));
+
             }
+
+            //for (int i = 10; i < cond; i += 10)
+            //{
+            //    g.DrawLine(Pens.Black, new Point(maxWidth - i, 0), new Point(concrete.ClientRectangle.Width, i));
+
+            //}
+
 
             int w = 1;
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,

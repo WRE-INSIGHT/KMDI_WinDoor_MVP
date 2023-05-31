@@ -601,7 +601,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             int font_size = 30,
                 outer_line = 10,
-                inner_line = 15;
+                inner_line = 15,
+                 rectThickness = 1;
 
             int ndx_zoomPercentage = Array.IndexOf(_mainPresenter.windoorModel_MainPresenter.Arr_ZoomPercentage, _frameModel.Frame_Zoom);
 
@@ -614,6 +615,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 font_size = 15;
                 outer_line = 5;
                 inner_line = 8;
+                rectThickness = 2;
             }
             else if (ndx_zoomPercentage == 1)
             {
@@ -627,6 +629,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 outer_line = 3;
                 inner_line = 7;
             }
+
             #region Georgian Bar
             int GBpointResultX, GBpointResultY,
                 penThickness = 0, penThicknessResult = 0,
@@ -696,6 +699,34 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             #endregion
 
+            #region Mesh
+            if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+            {
+                int cond = awning.ClientRectangle.Width + awning.ClientRectangle.Height;
+
+                int maxWidth = awning.ClientRectangle.Width;
+
+                for (int i = 10; i < cond; i += 10)
+                {
+                    g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+
+                }
+
+                for (int i = 10; i < cond; i += 10)
+                {
+                    g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(awning.ClientRectangle.Width, i));
+
+                }
+               
+
+                    g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
+                                                                           8 / rectThickness,
+                                                                           awning.ClientRectangle.Width - 17 / rectThickness,
+                                                                           awning.ClientRectangle.Height - 17 / rectThickness));
+
+                
+            }
+            #endregion
 
             string glassType = "";
             if (_panelModel.Panel_GlassThicknessDesc != null)
