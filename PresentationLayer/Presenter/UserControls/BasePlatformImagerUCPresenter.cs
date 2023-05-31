@@ -1765,7 +1765,8 @@ namespace PresentationLayer.Presenter.UserControls
                 outer_line = 10,
                 inner_line = 15,
                 tenPercentAdditional = 0,
-                sashOverlapValue = 0;
+                sashOverlapValue = 0,
+                thicknessDeduction = 1;
 
             if (_windoorModel.WD_zoom_forImageRenderer == 0.50f)
             {
@@ -1784,6 +1785,8 @@ namespace PresentationLayer.Presenter.UserControls
                 outer_line = 5;
                 inner_line = 8;
                 gfont_size = 45;
+                thicknessDeduction = 2;
+
             }
             else if (_windoorModel.WD_zoom_forImageRenderer == 0.13f)
             {
@@ -2047,9 +2050,9 @@ namespace PresentationLayer.Presenter.UserControls
                         excessWidthInPlusTen_slash = (i + Ppoint.X - exceedMaxWidth_slash) - (maxWidth + Ppoint.X) - 2;
                     }
 
-                    g.DrawLine(Pens.OrangeRed,
-                        new Point(Ppoint.X + exceedMaxHeight_slash + Math.Abs(excessHeightInPlusTen_slash + 1), (i + Ppoint.Y - exceedMaxHeight_slash) - Math.Abs(excessHeightInPlusTen_slash) + 1),
-                        new Point((i + Ppoint.X - exceedMaxWidth_slash) - Math.Abs(excessWidthInPlusTen_slash + 1), Ppoint.Y + exceedMaxWidth_slash + Math.Abs(excessWidthInPlusTen_slash) + 1));
+                    g.DrawLine(Pens.Black,
+                               new Point(Ppoint.X + exceedMaxHeight_slash + Math.Abs(excessHeightInPlusTen_slash + 1), (i + Ppoint.Y - exceedMaxHeight_slash) - Math.Abs(excessHeightInPlusTen_slash) + 1),
+                               new Point((i + Ppoint.X - exceedMaxWidth_slash) - Math.Abs(excessWidthInPlusTen_slash + 1), Ppoint.Y + exceedMaxWidth_slash + Math.Abs(excessWidthInPlusTen_slash) + 1));
 
                     if (i + inner_line >= maxHeight + inner_line)
                     {
@@ -2076,9 +2079,9 @@ namespace PresentationLayer.Presenter.UserControls
                         excessHeightInPlusTen_backSlash = (maxHeight + Ppoint.Y - i + exceedMaxHeight_backSlash) - Ppoint.Y - 1;
                     }
 
-                    g.DrawLine(Pens.OrangeRed,
-                        new Point((maxWidth - i + exceedMaxWidth_backSlash + Ppoint.X) + Math.Abs(excessWidthInPlusTen_backSlash) + 1, exceedMaxWidth_backSlash + Ppoint.Y + Math.Abs(excessWidthInPlusTen_backSlash) + 1),
-                        new Point(maxWidth - exceedMaxHeight_backSlash + Ppoint.X - Math.Abs(excessHeightInPlusTen_backSlash) - 1, i - exceedMaxHeight_backSlash + Ppoint.Y - Math.Abs(excessHeightInPlusTen_backSlash) - 1));
+                    g.DrawLine(Pens.Black,
+                               new Point((maxWidth - i + exceedMaxWidth_backSlash + Ppoint.X) + Math.Abs(excessWidthInPlusTen_backSlash) + 1, exceedMaxWidth_backSlash + Ppoint.Y + Math.Abs(excessWidthInPlusTen_backSlash) + 1),
+                               new Point(maxWidth - exceedMaxHeight_backSlash + Ppoint.X - Math.Abs(excessHeightInPlusTen_backSlash) - 1, i - exceedMaxHeight_backSlash + Ppoint.Y - Math.Abs(excessHeightInPlusTen_backSlash) - 1));
 
                     if (i + inner_line >= maxWidth + inner_line)
                     {
@@ -2100,8 +2103,25 @@ namespace PresentationLayer.Presenter.UserControls
                 //                                                   Ppoint.Y + outer_line,
                 //                                                   (client_wd - (outer_line * 2)) - w,
                 //                                                   (client_ht - (outer_line * 2)) - w));
+
                 if (panelModel.Panel_Overlap_Sash == OverlapSash._Right)
                 {
+                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
+                        panelModel.Panel_Type != "Fixed Panel" ||
+                        (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    {
+                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + (8 / thicknessDeduction));
+                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + (8 / thicknessDeduction));
+                        PointF BGinnerLine3 = new PointF(Ppoint.X + (8 / thicknessDeduction), Ppoint.Y);
+                        PointF BGinnerLine4 = new PointF(Ppoint.X + (8 / thicknessDeduction), Ppoint.Y + (client_ht) - w);
+                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + (8 / thicknessDeduction));
+                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + (8 / thicknessDeduction));
+                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine1, BGinnerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine3, BGinnerLine4);
+                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine5, BGinnerLine6);
+                    }
+
+
                     tenPercentAdditional += 1;
                     //outer Line
                     PointF outerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
@@ -2116,7 +2136,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
-                        //inner Line 
+                        //inner Line  
                         PointF innerLine1 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
                         PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
                         PointF innerLine3 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
@@ -2132,6 +2152,20 @@ namespace PresentationLayer.Presenter.UserControls
 
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._Left)
                 {
+                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
+                        panelModel.Panel_Type != "Fixed Panel" ||
+                        (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    {
+                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + (8 / thicknessDeduction));
+                        PointF BGinnerLine2 = new PointF(Ppoint.X - outerLineDeduction + (client_wd) - w + outerLineDeduction, Ppoint.Y + (8 / thicknessDeduction));
+                        PointF BGinnerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + (8 / thicknessDeduction), Ppoint.Y + inner_line);
+                        PointF BGinnerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + (8 / thicknessDeduction), Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + (8 / thicknessDeduction));
+                        PointF BGinnerLine6 = new PointF(Ppoint.X + (inner_line * 2) - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + (8 / thicknessDeduction));
+                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine1, BGinnerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine3, BGinnerLine4);
+                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine5, BGinnerLine6);
+                    }
                     //outer Line
                     //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
                     PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
@@ -2144,6 +2178,7 @@ namespace PresentationLayer.Presenter.UserControls
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
+
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
                         //inner Line 
@@ -2164,6 +2199,18 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._Both)
                 {
+                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
+                    panelModel.Panel_Type != "Fixed Panel" ||
+                    (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    {
+                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + (8 / thicknessDeduction));
+                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + (8 / thicknessDeduction));
+                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + (8 / thicknessDeduction));
+                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + (8 / thicknessDeduction));
+                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine1, BGinnerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine5, BGinnerLine6);
+                    }
+
                     //outer Line
                     //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
                     PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
@@ -2193,10 +2240,10 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
                         {
-                            g.DrawRectangle(new Pen(Color.White, 15), new Rectangle(Ppoint.X + 8,
-                                                                 Ppoint.Y + 8,
-                                                                 (client_wd - (outer_line * 2)) + w + 1,
-                                                                 (client_ht - (outer_line * 2)) + w + 1));
+                            g.DrawRectangle(new Pen(Color.White, (15 / thicknessDeduction)), new Rectangle(Ppoint.X + (8 / thicknessDeduction),
+                                                                 Ppoint.Y + (8 / thicknessDeduction),
+                                                                 (client_wd - (outer_line * 2)) + w + 1 - thicknessDeduction,
+                                                                 (client_ht - (outer_line * 2)) + w + 1 - thicknessDeduction));
                         }
 
                         //inner Line
