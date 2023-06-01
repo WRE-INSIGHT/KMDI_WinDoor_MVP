@@ -70,28 +70,28 @@
             // RightToolStripMenuItem
             // 
             this.RightToolStripMenuItem.Name = "RightToolStripMenuItem";
-            this.RightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.RightToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.RightToolStripMenuItem.Text = "Right";
             this.RightToolStripMenuItem.Click += new System.EventHandler(this.RightToolStripMenuItem_Click);
             // 
             // LeftToolStripMenuItem
             // 
             this.LeftToolStripMenuItem.Name = "LeftToolStripMenuItem";
-            this.LeftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.LeftToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.LeftToolStripMenuItem.Text = "Left";
             this.LeftToolStripMenuItem.Click += new System.EventHandler(this.LeftToolStripMenuItem_Click);
             // 
             // BothToolStripMenuItem
             // 
             this.BothToolStripMenuItem.Name = "BothToolStripMenuItem";
-            this.BothToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.BothToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.BothToolStripMenuItem.Text = "Both";
             this.BothToolStripMenuItem.Click += new System.EventHandler(this.BothToolStripMenuItem_Click);
             // 
             // noneToolStripMenuItem
             // 
             this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.noneToolStripMenuItem.Text = "None";
             this.noneToolStripMenuItem.Click += new System.EventHandler(this.noneToolStripMenuItem_Click);
             // 
@@ -100,6 +100,7 @@
             this.addToScreenToolStripMenuItem.Name = "addToScreenToolStripMenuItem";
             this.addToScreenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addToScreenToolStripMenuItem.Text = "Add to Screen";
+            this.addToScreenToolStripMenuItem.Visible = false;
             this.addToScreenToolStripMenuItem.Click += new System.EventHandler(this.addToScreenToolStripMenuItem_Click);
             // 
             // SlidingPanelUC
