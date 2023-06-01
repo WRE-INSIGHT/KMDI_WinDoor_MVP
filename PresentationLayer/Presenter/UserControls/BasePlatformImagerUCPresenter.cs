@@ -1764,8 +1764,10 @@ namespace PresentationLayer.Presenter.UserControls
                 inner_line = 15,
                 tenPercentAdditional = 0,
                 sashOverlapValue = 0,
-                thicknessDeduction = 1;
+                thicknessDeduction = 8,
+                rectDeduct = 0;
 
+            float pThickness = 15;
             if (_windoorModel.WD_zoom_forImageRenderer == 0.50f)
             {
                 font_size = 37;
@@ -1783,8 +1785,9 @@ namespace PresentationLayer.Presenter.UserControls
                 outer_line = 5;
                 inner_line = 8;
                 gfont_size = 45;
-                thicknessDeduction = 2;
-
+                thicknessDeduction = 4;
+                pThickness = 7;
+                rectDeduct = 2;
             }
             else if (_windoorModel.WD_zoom_forImageRenderer == 0.13f)
             {
@@ -1792,6 +1795,9 @@ namespace PresentationLayer.Presenter.UserControls
                 outer_line = 3;
                 inner_line = 7;
                 gfont_size = 44;
+                thicknessDeduction = 3;
+                pThickness = 6.5f;
+                rectDeduct = 4;
             }
             else if (_windoorModel.WD_zoom_forImageRenderer == 0.10f)
             {
@@ -1800,6 +1806,10 @@ namespace PresentationLayer.Presenter.UserControls
                 inner_line = 7;
                 tenPercentAdditional = 8;
                 gfont_size = 43;
+                thicknessDeduction = 3;
+                pThickness = 6.5f;
+                rectDeduct = 5;
+
             }
 
 
@@ -2110,15 +2120,15 @@ namespace PresentationLayer.Presenter.UserControls
                         panelModel.Panel_Type != "Fixed Panel" ||
                         (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
-                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + (8 / thicknessDeduction));
-                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + (8 / thicknessDeduction));
-                        PointF BGinnerLine3 = new PointF(Ppoint.X + (8 / thicknessDeduction), Ppoint.Y);
-                        PointF BGinnerLine4 = new PointF(Ppoint.X + (8 / thicknessDeduction), Ppoint.Y + (client_ht) - w);
-                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + (8 / thicknessDeduction));
-                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + (8 / thicknessDeduction));
-                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine1, BGinnerLine2);
-                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine3, BGinnerLine4);
-                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine5, BGinnerLine6);
+                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + thicknessDeduction);
+                        PointF BGinnerLine3 = new PointF(Ppoint.X + thicknessDeduction, Ppoint.Y);
+                        PointF BGinnerLine4 = new PointF(Ppoint.X + thicknessDeduction, Ppoint.Y + (client_ht) - w);
+                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine3, BGinnerLine4);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
                     }
 
 
@@ -2156,15 +2166,15 @@ namespace PresentationLayer.Presenter.UserControls
                         panelModel.Panel_Type != "Fixed Panel" ||
                         (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
-                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + (8 / thicknessDeduction));
-                        PointF BGinnerLine2 = new PointF(Ppoint.X - outerLineDeduction + (client_wd) - w + outerLineDeduction, Ppoint.Y + (8 / thicknessDeduction));
-                        PointF BGinnerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + (8 / thicknessDeduction), Ppoint.Y + inner_line);
-                        PointF BGinnerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + (8 / thicknessDeduction), Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + (8 / thicknessDeduction));
-                        PointF BGinnerLine6 = new PointF(Ppoint.X + (inner_line * 2) - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + (8 / thicknessDeduction));
-                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine1, BGinnerLine2);
-                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine3, BGinnerLine4);
-                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine5, BGinnerLine6);
+                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                        PointF BGinnerLine2 = new PointF(Ppoint.X - outerLineDeduction + (client_wd) - w + outerLineDeduction, Ppoint.Y + thicknessDeduction);
+                        PointF BGinnerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + thicknessDeduction, Ppoint.Y + inner_line);
+                        PointF BGinnerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + thicknessDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                        PointF BGinnerLine6 = new PointF(Ppoint.X + (inner_line * 2) - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine3, BGinnerLine4);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
                     }
                     //outer Line
                     //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
@@ -2203,12 +2213,12 @@ namespace PresentationLayer.Presenter.UserControls
                     panelModel.Panel_Type != "Fixed Panel" ||
                     (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
-                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + (8 / thicknessDeduction));
-                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + (8 / thicknessDeduction));
-                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + (8 / thicknessDeduction));
-                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + (8 / thicknessDeduction));
-                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine1, BGinnerLine2);
-                        e.Graphics.DrawLine(new Pen(Color.White, (15 / thicknessDeduction)), BGinnerLine5, BGinnerLine6);
+                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + thicknessDeduction);
+                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
                     }
 
                     //outer Line
@@ -2240,10 +2250,11 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
                         {
-                            g.DrawRectangle(new Pen(Color.White, (15 / thicknessDeduction)), new Rectangle(Ppoint.X + (8 / thicknessDeduction),
-                                                                 Ppoint.Y + (8 / thicknessDeduction),
-                                                                 (client_wd - (outer_line * 2)) + w + 1 - thicknessDeduction,
-                                                                 (client_ht - (outer_line * 2)) + w + 1 - thicknessDeduction));
+
+                            g.DrawRectangle(new Pen(Color.White, pThickness), new Rectangle(Ppoint.X + thicknessDeduction,
+                                                                 Ppoint.Y + thicknessDeduction,
+                                                                 (client_wd - (outer_line * 2)) + w + 1 - rectDeduct,
+                                                                 (client_ht - (outer_line * 2)) + w + 1 - rectDeduct));
                         }
 
                         //inner Line
