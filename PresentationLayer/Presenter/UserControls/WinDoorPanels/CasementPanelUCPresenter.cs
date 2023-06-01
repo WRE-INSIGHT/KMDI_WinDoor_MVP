@@ -1298,7 +1298,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             int font_size = 30,
                 outer_line = 10,
-                inner_line = 15;
+                inner_line = 15,
+                rectThickness = 1;
 
             int ndx_zoomPercentage = Array.IndexOf(_mainPresenter.windoorModel_MainPresenter.Arr_ZoomPercentage, _frameModel.Frame_Zoom);
 
@@ -1311,6 +1312,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 font_size = 15;
                 outer_line = 5;
                 inner_line = 8;
+                rectThickness = 2;
             }
             else if (ndx_zoomPercentage == 1)
             {
@@ -1424,6 +1426,61 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
             }
 
+            #endregion
+
+            #region Mesh
+            if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+            {
+                int cond = casement.ClientRectangle.Width + casement.ClientRectangle.Height;
+
+                int maxWidth = casement.ClientRectangle.Width;
+
+                for (int i = 10; i < cond; i += 10)
+                {
+                    g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+
+                }
+
+                for (int i = 10; i < cond; i += 10)
+                {
+                    g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(casement.ClientRectangle.Width, i));
+
+                }
+
+
+                
+                    if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
+                                                                               8 / rectThickness,
+                                                                               casement.ClientRectangle.Width - 17 / rectThickness,
+                                                                               casement.ClientRectangle.Height - 17 / rectThickness));
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                            8 / rectThickness,
+                                                                            casement.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                            casement.ClientRectangle.Height - (17 / rectThickness)));
+
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                    {
+
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
+                                                                               8 / rectThickness,
+                                                                               casement.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                               casement.ClientRectangle.Height - (17 / rectThickness)));
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                          8 / rectThickness,
+                                                                          casement.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
+                                                                          casement.ClientRectangle.Height - (17 / rectThickness)));
+                    }
+                
+            }
             #endregion
 
             string glassType = "";

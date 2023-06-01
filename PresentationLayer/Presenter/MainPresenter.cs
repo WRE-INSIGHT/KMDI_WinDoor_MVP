@@ -10242,7 +10242,7 @@ namespace PresentationLayer.Presenter
                 }
 
             }
-            GetIntownOutofTown();
+            //GetIntownOutofTown();
         }
 
 
@@ -11924,19 +11924,24 @@ namespace PresentationLayer.Presenter
                                 {
                                     string blades = string.Concat(split1.Where(Char.IsDigit));
                                     blades = blades.Replace("1150", "").Replace("1152", "");
+
+
+                                    //blades
                                     if (Convert.ToInt32(blades) >= 2 && Convert.ToInt32(blades) <= 9)
                                     {
                                         DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "0");
                                     }
-                                    else if (Convert.ToInt32(blades) >= 10)
+                                    else if (Convert.ToInt32(blades) >= 10 && Convert.ToInt32(blades) <= 19)
                                     {
-                                        if (Convert.ToInt32(blades) >= 20 && Convert.ToInt32(blades) <= 29)
-                                        {
-                                            DuplicatePnl = DuplicatePnl.Remove(18, 1).Insert(18, "1");
-                                        }
+                                        //if (Convert.ToInt32(blades) >= 20 && Convert.ToInt32(blades) <= 29)
+                                        //{
+                                        //    DuplicatePnl = DuplicatePnl.Remove(18, 1).Insert(18, "1");
+                                        //} 
+                                        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "1");
                                     }
                                 }
 
+                                //glass height
                                 if (DuplicatePnl.Contains("LVRG") &&
                                     (pnlCount >= 2 && pnlCount <= 9))
                                 {
