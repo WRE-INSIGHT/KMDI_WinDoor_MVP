@@ -40,7 +40,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         }
 
         private void _pp_glassPropertyUC_chkGlazingAdaptorCheckedChangedEventRaised(object sender, EventArgs e)
-        { 
+        {
             _panelModel.Panel_ChkGlazingAdaptor = ((CheckBox)sender).Checked;
             _mainPresenter.GetCurrentPrice();
         }
@@ -91,6 +91,22 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     _panelModel.Panel_GlassThicknessDesc = "Security Mesh";
                 }
+                else if (_panelModel.Panel_GlassThicknessDesc == "Wire Mesh")
+                {
+                    _panelModel.Panel_GlassThicknessDesc = "Wire Mesh";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc == "Pet Mesh")
+                {
+                    _panelModel.Panel_GlassThicknessDesc = "Pet Mesh";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc == "Tuff Mesh")
+                {
+                    _panelModel.Panel_GlassThicknessDesc = "Tuff Mesh";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc == "Phifer Mesh")
+                {
+                    _panelModel.Panel_GlassThicknessDesc = "Phifer Mesh";
+                }
                 else
                 {
                     _panelModel.Panel_GlassThickness = 6;
@@ -98,7 +114,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_GlassType_Insu_Lami = "NA";
                 }
             }
-
 
             _pp_glassPropertyUC.ThisBinding(CreateBindingDictionary());
             _panelModel.Panel_GlazingAdaptorArtNo = GlazingAdaptor_ArticleNo._6418;
