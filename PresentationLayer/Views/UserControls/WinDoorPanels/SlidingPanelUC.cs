@@ -99,6 +99,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event MouseEventHandler slidingPanelUCMouseDoubleClickedEventRaised;
         public event KeyEventHandler slidingPanelUCKeyDownEventRaised;
 
+        public event EventHandler addToScreenToolStripMenuItemClickEventRaised;
+
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Panel_ID"]);
@@ -211,6 +213,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.Focus();
         }
 
+        private void addToScreenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, addToScreenToolStripMenuItemClickEventRaised, e);
+        }
+
         private void SlidingPanelUC_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             switch (e.KeyCode)
@@ -221,5 +228,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
                     break;
             }
         }
+
+
     }
 }

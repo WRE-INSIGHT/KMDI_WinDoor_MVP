@@ -131,7 +131,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void OnPPGeorgianBarPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             _pp_georgianBarPropertyUC.ThisBinding(CreateBindingDictionary());
-            _pp_georgianBarPropertyUC.enable_num = false;
+            if (_panelModel.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
+            {
+                _pp_georgianBarPropertyUC.enable_num = true;
+            }
+            else
+            {
+                _pp_georgianBarPropertyUC.enable_num = false;
+            }
             _initialLoad = false;
         }
 
