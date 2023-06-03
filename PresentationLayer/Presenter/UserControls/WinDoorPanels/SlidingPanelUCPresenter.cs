@@ -99,7 +99,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _slidingPanelUC.noneToolStripClickedEventRaised += _slidingPanelUC_NoneToolStripClickedEventRaised;
             _slidingPanelUC.slidingPanelUCMouseDoubleClickedEventRaised += _slidingPanelUC_slidingPanelUCMouseDoubleClickedEventRaised;
             _slidingPanelUC.slidingPanelUCKeyDownEventRaised += _slidingPanelUC_slidingPanelUCKeyDownEventRaised;
+            _slidingPanelUC.addToScreenToolStripMenuItemClickEventRaised += _slidingPanelUC_addToScreenToolStripMenuItemClickEventRaised;
             _tmr.Tick += _tmr_Tick;
+        }
+
+        private void _slidingPanelUC_addToScreenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            _mainPresenter.AddSlidingScreentoScreenList();
         }
 
         private void _slidingPanelUC_slidingPanelUCKeyDownEventRaised(object sender, KeyEventArgs e)

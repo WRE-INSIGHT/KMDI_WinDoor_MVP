@@ -29,10 +29,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _slidingTypePropertyUC_cmbSlidingTypeSelectedValueChangedEventRaised(object sender, System.EventArgs e)
         {
-            _mainPresenter.SetChangesMark();
-            ComboBox cmbSlidingType = (ComboBox)sender;
-            _panelModel.Panel_SlidingTypes = (SlidingTypes)cmbSlidingType.SelectedValue;
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            if (_mainPresenter.ItemLoad == false)
+            {
+                _mainPresenter.SetChangesMark();
+                ComboBox cmbSlidingType = (ComboBox)sender;
+                _panelModel.Panel_SlidingTypes = (SlidingTypes)cmbSlidingType.SelectedValue;
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            }
         }
 
         private void _slidingTypePropertyUC_PPSlidingTypePropertyUCLoadEventRaised(object sender, System.EventArgs e)
