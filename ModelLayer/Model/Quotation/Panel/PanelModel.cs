@@ -7410,14 +7410,16 @@ namespace ModelLayer.Model.Quotation.Panel
 
                         string nxt_div_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[Panel_Index_Inside_MPanel + 1].Name;
                         IDividerModel nxt_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == nxt_div_name);
-                        if (nxt_divModel.Div_DMPanel != null)
+                        if (nxt_divModel != null)
                         {
-                            if (nxt_divModel.Div_DMPanel == nxt_pnl)
+                            if (nxt_divModel.Div_DMPanel != null)
                             {
-                                allow_adjStriker = false;
+                                if (nxt_divModel.Div_DMPanel == nxt_pnl)
+                                {
+                                    allow_adjStriker = false;
+                                }
                             }
                         }
-
                         int nxt_div_indx_after_nxtPnl = Panel_Index_Inside_MPanel + 3;
 
                         if (nxt_div_indx_after_nxtPnl < obj_count)
@@ -7443,14 +7445,16 @@ namespace ModelLayer.Model.Quotation.Panel
 
                         string prev_div_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[Panel_Index_Inside_MPanel - 1].Name;
                         IDividerModel prev_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == prev_div_name);
-                        if (prev_divModel.Div_DMPanel != null)
+                        if (prev_divModel != null)
                         {
-                            if (prev_divModel.Div_DMPanel == prev_pnl)
+                            if (prev_divModel.Div_DMPanel != null)
                             {
-                                allow_adjStriker = false;
+                                if (prev_divModel.Div_DMPanel == prev_pnl)
+                                {
+                                    allow_adjStriker = false;
+                                }
                             }
                         }
-
                         int prev_div_indx_before_prevPnl = Panel_Index_Inside_MPanel - 3;
 
                         if (prev_div_indx_before_prevPnl > 0)
