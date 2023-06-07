@@ -2353,6 +2353,114 @@ namespace PresentationLayer.Presenter.UserControls
 
                 //lst_glassThicknessPerItem.Add(glassThick);
             }
+            int fontDeduct = 0;
+            bool nxtToF = false,
+                 minimumOfFandGlass = false;
+            if (_windoorModel.WD_zoom_forImageRenderer == 0.26f)
+            {
+                if (client_ht <= 113)
+                {
+                    fontDeduct = 0;
+                    // 500 in arrow ht 
+                    // 109
+                    // 111
+                    // 113
+                    nxtToF = true;
+
+                    if (client_wd <= 113)
+                    {
+                        // 600 in arrow wd 
+                        // 135
+                        //  
+                        //  
+                        minimumOfFandGlass = true;
+                    }
+
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.17f)
+            {
+                if (client_ht <= 110)
+                {
+                    fontDeduct = 0;
+                    //750 in arrow ht
+                    // 106
+                    // 105
+                    // 110
+                    nxtToF = true;
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.13f)
+            {
+                if (client_ht <= 112)
+                {
+                    fontDeduct = 0;
+                    //1000 in arrow ht
+                    // 109
+                    // 108
+                    // 112
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.10f)
+            {
+                if (client_ht <= 108)
+                {
+                    fontDeduct = 0;
+                    //1250 in arrow ht
+                    // 103
+                    // 102
+                    // 108
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.08f)
+            {
+                if (client_ht <= 103)
+                {
+                    fontDeduct = 0;
+                    //1500 in arrow ht
+                    // 99
+                    // 98
+                    // 103
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.06f)
+            {
+                if (client_ht <= 103)
+                {
+                    fontDeduct = 0;
+                    //2000 in arrow ht
+                    // 99
+                    // 98
+                    // 103
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.05f)
+            {
+                if (client_ht <= 107)
+                {
+                    fontDeduct = 0;
+                    //2500 in arrow ht
+                    // 104
+                    // 103
+                    // 107
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.02f)
+            {
+                if (client_ht <= 104)
+                {
+                    fontDeduct = 0;
+                    //6000 in arrow ht
+                    // 99
+                    // 98
+                    // 104
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.01f)
+            {
+
+            }
+
 
             foreach (KeyValuePair<string, string> entry in GlassNumberList)
             {
@@ -2368,13 +2476,27 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                         else
                         {
-                            LocY = Ppoint.Y + (client_ht / 2) + (int)(client_ht * 0.1) - 15;
-
+                            LocY = Ppoint.Y + (client_ht / 2) + (int)(client_ht * 0.1);// - 15;
                         }
                     }
-                    Font gdrawFont = new Font("Times New Roman", font_size);
-                    RectangleF glassrect = new RectangleF(Ppoint.X + (client_wd / 2) - font_size,
-                                                         LocY,
+
+                    int Ydeduct = 0,
+                        Xdeduct = 0;
+                    if (nxtToF == true)
+                    {
+                        Ydeduct = 38;
+                        Xdeduct = 45;
+                        if (minimumOfFandGlass == true)
+                        {
+                            Xdeduct -= 20;
+                            Ydeduct -= 8;
+                            fontDeduct = 10;
+                        }
+                    }
+
+                    Font gdrawFont = new Font("Times New Roman", font_size - fontDeduct);
+                    RectangleF glassrect = new RectangleF(Ppoint.X + (client_wd / 2) - font_size + Xdeduct,
+                                                         LocY - Ydeduct,
                                                          client_wd + 100,
                                                          font_size + 10);
                     g.DrawString(entry.Key,
@@ -2388,13 +2510,19 @@ namespace PresentationLayer.Presenter.UserControls
             }
             if (panelModel.Panel_Type == "Fixed Panel")
             {
-
-
-                Font drawFont = new Font("Times New Roman", font_size);// * zoom);
+                Rectangle aa = panel_bounds;
+                if (minimumOfFandGlass == true)
+                {
+                    aa.X = aa.X - 20;
+                    fontDeduct = 10;
+                }
+                Font drawFont = new Font("Times New Roman", font_size - fontDeduct);// * zoom);
 
                 drawFormat.Alignment = StringAlignment.Center;
                 drawFormat.LineAlignment = StringAlignment.Center;
-                g.DrawString("F", drawFont, new SolidBrush(Color.Black), panel_bounds, drawFormat);
+
+
+                g.DrawString("F", drawFont, new SolidBrush(Color.Black), aa, drawFormat);
 
 
 
