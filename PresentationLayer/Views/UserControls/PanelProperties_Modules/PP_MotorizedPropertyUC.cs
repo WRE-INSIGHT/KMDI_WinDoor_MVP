@@ -1,13 +1,7 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CommonComponents;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
@@ -22,6 +16,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public event EventHandler PPMotorizedPropertyUCLoadEventRaised;
         public event EventHandler chkMotorizedCheckedChangedEventRaised;
         public event EventHandler cmbMotorizedMechSelectedValueChangedEventRaised;
+        public event EventHandler chkRemoteCheckedChangedEventRaised;
 
         private void PP_MotorizedPropertyUC_Load(object sender, EventArgs e)
         {
@@ -49,6 +44,11 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             EventHelpers.RaiseEvent(sender, cmbMotorizedMechSelectedValueChangedEventRaised, e);
         }
 
+        private void chk_Remote_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkRemoteCheckedChangedEventRaised, e);
+        }
+
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             chk_Motorized.DataBindings.Add(ModelBinding["Panel_MotorizedOptionVisibility"]);
@@ -60,6 +60,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_MotorizedPropertyHeight"]);
             pnl_2dHinge.DataBindings.Add(ModelBinding["Panel_2dHingeVisibility"]);
             pnl_ButtHinge.DataBindings.Add(ModelBinding["Panel_ButtHingeVisibility"]);
+            chk_Remote.DataBindings.Add(ModelBinding["Panel_MotorizedMechRemoteOption"]);
         }
+
+
     }
 }

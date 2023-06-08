@@ -34,6 +34,28 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _pp_motorizedPropertyUC.PPMotorizedPropertyUCLoadEventRaised += _pp_motorizedPropertyUC_PPMotorizedPropertyUCLoadEventRaised;
             _pp_motorizedPropertyUC.chkMotorizedCheckedChangedEventRaised += _pp_motorizedPropertyUC_chkMotorizedCheckedChangedEventRaised;
             _pp_motorizedPropertyUC.cmbMotorizedMechSelectedValueChangedEventRaised += _pp_motorizedPropertyUC_cmbMotorizedMechSelectedValueChangedEventRaised;
+            _pp_motorizedPropertyUC.chkRemoteCheckedChangedEventRaised += _pp_motorizedPropertyUC_chkRemoteCheckedChangedEventRaised;
+        }
+
+        private void _pp_motorizedPropertyUC_chkRemoteCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            CheckBox chk = (CheckBox)sender;
+
+            if (chk.Checked == false)
+            {
+                chk.Text = "No";
+                _panelModel.Panel_MotorizedMechRemoteOption = false;
+                _panelModel.Panel_MotorizedMechArtNo = MotorizedMech_ArticleNo._41555B;
+            }
+            else if (chk.Checked == true)
+            {
+                chk.Text = "Yes";
+                _panelModel.Panel_MotorizedMechRemoteOption = true;
+                _panelModel.Panel_MotorizedMechRemoteArtNo = MotorizedMechRemote_ArticleNo._41729T;
+                _panelModel.Panel_MotorizedMechArtNo = MotorizedMech_ArticleNo._41731V;
+            }
+
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _pp_motorizedPropertyUC_cmbMotorizedMechSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -383,7 +405,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 if (_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("PremiLine") &&
                     _panelModel.Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                     _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
-                { 
+                {
                     _panelModel.Panel_ParentFrameModel.Frame_TrackProfileArtNo = TrackProfile_ArticleNo._L15056140;
                 }
             }
@@ -643,6 +665,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_ButtHingeQty", new Binding("Value", _panelModel, "Panel_ButtHingeQty", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_2dHingeVisibility", new Binding("Visible", _panelModel, "Panel_2dHingeVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ButtHingeVisibility", new Binding("Visible", _panelModel, "Panel_ButtHingeVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_MotorizedMechRemoteOption", new Binding("Checked", _panelModel, "Panel_MotorizedMechRemoteOption", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }
