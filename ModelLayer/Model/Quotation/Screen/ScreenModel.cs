@@ -626,7 +626,8 @@ namespace ModelLayer.Model.Quotation.Screen
          next_deci_index = 0,
          _firstLoopInterpolatePrice = 0,
          _secondLoopInterpolatePrice = 0,
-         _builtinInterpolationPrice = 0
+         _builtinInterpolationPrice = 0,
+         _builtinPowderCoatingMultiplier = 0
          ;
 
         decimal[] deci_getter = new decimal[22] {1.0m, 1.1m, 1.2m, 1.3m, 1.4m, 1.5m, 1.6m, 1.7m, 1.8m, 1.9m, 2.0m,
@@ -638,11 +639,13 @@ namespace ModelLayer.Model.Quotation.Screen
         int holder = 0,
             curr_index_pos = 0,
             loopCountLimit = 0,
-            _builtInInterpolationNewDimension;
+            _width_builtInInterpolationNewDimension,
+            _height_builtInInterpolationNewDimension;
         #endregion
 
         int _plisséSRPerPanelWidth,
-            _screenOriginalDimensionWidthOrHeight,
+            _screenWidthOriginalDimension,
+            _screenHeightOriginalDimension,
             _screenPreviousWidth;
 
         bool _builtInWidthIsBelowMinimum,
@@ -1699,23 +1702,37 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         public void BuiltInPrice_and_PriceInterpolation()
-            {
+        {
             int loopCounter = 1;
 
             #region Screen Dimension Selector 
+
             if (Screen_Width < 1000 || Screen_Height < 1500)
             {
-                if(Screen_Width < 1000)
+                if (Screen_Width < 1000 && Screen_Height < 1500)
+               {
+                    _screenWidthOriginalDimension = _screen_Width;
+                    _screenHeightOriginalDimension = _screen_Height;
+                    _width_builtInInterpolationNewDimension = 3000 - Screen_Width;
+                    _height_builtInInterpolationNewDimension = 3000 - Screen_Height;
+                    _screen_Width = 1000;
+                    _screen_Height = 1500;
+
+                    _builtInWidthIsBelowMinimum = true;
+                    _builInHeigthIsBelowMinimum = true;
+                }
+
+                else if(Screen_Width < 1000)
                 {
-                    
-                    _builtInInterpolationNewDimension = 3000 - Screen_Width; //  ask a costing engr for final and approved formula
-                    _screen_Width = 1000;  // same as above 
+                    _screenWidthOriginalDimension = _screen_Width;
+                    _width_builtInInterpolationNewDimension = 3000 - Screen_Width; 
+                    _screen_Width = 1000; 
                     _builtInWidthIsBelowMinimum = true;
                 }
                 else if(Screen_Height < 1500)
                 {
-                    _screenOriginalDimensionWidthOrHeight = _screen_Height;
-                    _builtInInterpolationNewDimension = 3000 - Screen_Height;
+                    _screenHeightOriginalDimension = _screen_Height;
+                    _height_builtInInterpolationNewDimension = 3000 - Screen_Height;
                     _screen_Height = 1500;
                     _builInHeigthIsBelowMinimum = true;
                 }
@@ -1725,6 +1742,7 @@ namespace ModelLayer.Model.Quotation.Screen
             {
                 loopCountLimit = 1;
             }
+
             #endregion
 
             do
@@ -1734,13 +1752,18 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     if (loopCounter == 2)
                     {
-                        if(_builtInWidthIsBelowMinimum == true)
+                        if (_builtInWidthIsBelowMinimum == true && _builInHeigthIsBelowMinimum == true)
                         {
-                            _screen_Width = _builtInInterpolationNewDimension;
+                            _screen_Width = _width_builtInInterpolationNewDimension;
+                            _screen_Height = _height_builtInInterpolationNewDimension;
+                        }
+                        else if(_builtInWidthIsBelowMinimum == true)
+                        {
+                            _screen_Width = _width_builtInInterpolationNewDimension;
                         }
                         else if (_builInHeigthIsBelowMinimum == true)
                         {
-                            _screen_Height = _builtInInterpolationNewDimension;
+                            _screen_Height = _height_builtInInterpolationNewDimension;
                         }
                     }
                 }
@@ -2043,29 +2066,41 @@ namespace ModelLayer.Model.Quotation.Screen
 
                 #endregion
 
-                #endregion
+                #endregion                          
            
                 #region BuiltInPrice Selector
                 if (loopCountLimit == 2)
                 {
                     if(loopCounter == 1)
                     {
-                        _firstLoopInterpolatePrice = (Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * 1.2m); // lowest price using lowest dimension possible W or H      
+                        _firstLoopInterpolatePrice = (Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m)); // lowest price using lowest dimension possible W or H        
                         ClearingOperation();        
                     }
                     else if(loopCounter == 2)
                     {
-                        _secondLoopInterpolatePrice = (Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * 1.2m);
+                        _secondLoopInterpolatePrice = (Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m));
                         _builtinInterpolationPrice = _firstLoopInterpolatePrice + (_firstLoopInterpolatePrice - _secondLoopInterpolatePrice);                       
-                        built_in_SR_tAmount = _builtinInterpolationPrice;
+                        built_in_SR_tAmount = _builtinInterpolationPrice * _builtinPowderCoatingMultiplier;
 
-                        _screen_Height = _screenOriginalDimensionWidthOrHeight;
+                        if (_builtInWidthIsBelowMinimum == true && _builInHeigthIsBelowMinimum == true)
+                        {
+                            _screen_Width = _screenWidthOriginalDimension;
+                            _screen_Height = _screenHeightOriginalDimension;
+                        }
+                        else if(_builtInWidthIsBelowMinimum == true)
+                        {
+                            _screen_Width = _screenWidthOriginalDimension;
+                        }
+                        else if(_builInHeigthIsBelowMinimum == true)
+                        {
+                            _screen_Height = _screenHeightOriginalDimension;
+                        }
 
                     }
                 }
                 else if(loopCountLimit == 1)
                 {
-                    built_in_SR_tAmount = (Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * 1.2m);
+                      built_in_SR_tAmount = (Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * _builtinPowderCoatingMultiplier);
                 }
                 #endregion
 
@@ -2094,6 +2129,8 @@ namespace ModelLayer.Model.Quotation.Screen
 
                 milled1385profilePricePerLinearMeter = 243;
                 milled6052profilePricePerLinearMeter = 400;
+
+                _builtinPowderCoatingMultiplier = 1.08m;
             }
             else if (Screen_BaseColor == Base_Color._DarkBrown)
             {
@@ -2108,6 +2145,9 @@ namespace ModelLayer.Model.Quotation.Screen
 
                 milled1385profilePricePerLinearMeter = 600;
                 milled6052profilePricePerLinearMeter = 590;
+
+                _builtinPowderCoatingMultiplier = 1.2m;
+
             }
 
             #endregion
@@ -2378,7 +2418,7 @@ namespace ModelLayer.Model.Quotation.Screen
                         WithWasteCost = 0;
                     }
                     #endregion
-
+                                  
                     #region Plisse SR
                     else if (Screen_PlisséType == PlisseType._SR)
                     {
@@ -3142,7 +3182,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 //else if (Screen_Types == ScreenType._Magnum)
                 //{
-
+                    
                 //}
                 else if (Screen_Types == ScreenType._ZeroGravityChainDriven)
                 {
@@ -6317,6 +6357,20 @@ namespace ModelLayer.Model.Quotation.Screen
                     Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
                     #endregion
                 }
+                else if(Screen_Types == ScreenType._SlidingScreen)
+                {
+                    #region Sliding Screen 
+                    if (FromCellEndEdit != true)
+                    {
+                        Screen_UnitPrice = Screen_UnitPrice * Screen_Set;
+                    }
+                    PriceIncreaseByPercentage();
+                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
+
+                    Discount = Screen_UnitPrice * DiscountPercentage;
+                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
+                    #endregion
+                }
                 else if (Screen_Types == ScreenType._NoInsectScreen || Screen_Types == ScreenType._UnnecessaryForInsectScreen)
                 {
                     #region no&Unnecessary
@@ -6627,6 +6681,7 @@ namespace ModelLayer.Model.Quotation.Screen
 
             current_deci_index = 0;
             next_deci_index = 0;
+
             #endregion
             #region Clearing for Maxxy Screen
 
@@ -6693,7 +6748,7 @@ namespace ModelLayer.Model.Quotation.Screen
             LatchkitTotal = 0;
             IntermediatePartTotal = 0;
 
-            AddOnsSpecialFactor = 0;
+            //AddOnsSpecialFactor = 0;
             IncreasePercentage = 0;
             TotalUnitPrice = 0;
 

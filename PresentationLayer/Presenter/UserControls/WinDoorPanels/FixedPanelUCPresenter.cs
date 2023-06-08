@@ -1087,19 +1087,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             int font_size = 30,
                 outer_line = 10,
-                inner_line = 15;
+                inner_line = 15,
+                rectThickness = 1;
 
             int ndx_zoomPercentage = Array.IndexOf(_mainPresenter.windoorModel_MainPresenter.Arr_ZoomPercentage, _frameModel.Frame_Zoom);
+
+
 
             if (ndx_zoomPercentage == 3)
             {
                 font_size = 25;
+
             }
             else if (ndx_zoomPercentage == 2)
             {
                 font_size = 15;
                 outer_line = 5;
                 inner_line = 8;
+                rectThickness = 2;
             }
             else if (ndx_zoomPercentage == 1)
             {
@@ -1113,6 +1118,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 outer_line = 3;
                 inner_line = 7;
             }
+
 
             #region Georgian Bar
 
@@ -1216,6 +1222,68 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             #endregion
 
+            #region Mesh
+            if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+            {
+                int cond = fixedpnl.ClientRectangle.Width + fixedpnl.ClientRectangle.Height;
+
+                int maxWidth = fixedpnl.ClientRectangle.Width;
+
+                for (int i = 10; i < cond; i += 10)
+                {
+                    g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+
+                }
+
+                for (int i = 10; i < cond; i += 10)
+                {
+                    g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(fixedpnl.ClientRectangle.Width, i));
+
+                }
+                if (_panelModel.Panel_Orient == true)
+                {
+                    if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
+                                                                               8 / rectThickness,
+                                                                               fixedpnl.ClientRectangle.Width - 17 / rectThickness,
+                                                                               fixedpnl.ClientRectangle.Height - 17 / rectThickness));
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                            8 / rectThickness,
+                                                                            fixedpnl.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                            fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
+
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                    {
+
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
+                                                                               8 / rectThickness,
+                                                                               fixedpnl.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                               fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                          8 / rectThickness,
+                                                                          fixedpnl.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
+                                                                          fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
+                    }
+                }
+            }
+
+
+
+
+            #endregion
+
+
+
+
+
             string glassType = "";
             if (_panelModel.Panel_GlassThicknessDesc != null)
             {
@@ -1280,6 +1348,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         rect,
                                         drawFormat);
             }
+
+
+
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                             0,
                                                             fixedpnl.ClientRectangle.Width - w,
@@ -1348,6 +1419,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
             {
+
+
+
+
                 if (_panelModel.Panel_ChkText == "dSash")
                 {
                     g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
@@ -1362,6 +1437,56 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           inner_line,
                                                           (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w,
                                                           (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+
+
+
+
+                    #region OldAlgoForMesh 
+                    //int cond = ((fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w) + ((fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w);
+
+                    //int maxWidth = ((fixedpnl.ClientRectangle.Width - (inner_line * 2)) - 6),
+                    //    maxHeight = ((fixedpnl.ClientRectangle.Height - (inner_line * 2)) - 6);
+
+
+                    //int a = 0, b = 0, c = 0, d = 0;
+                    //for (int i = 10; i < cond; i += 10)
+                    //{
+                    //    int aa = ((i + inner_line - a) >= maxHeight + inner_line + 10) ? maxHeight + inner_line : (i + inner_line - a),
+                    //        bb = ((i + inner_line - b) >= maxWidth + inner_line + 10) ? maxWidth + inner_line : (i + inner_line - b);
+
+                    //    g.DrawLine(Pens.OrangeRed, new Point(inner_line + a, aa), new Point(bb, inner_line + b));
+
+                    //    if (i + inner_line >= maxWidth + inner_line)
+                    //    {
+                    //        b += 10;
+                    //    }
+
+                    //    if (i + inner_line >= maxHeight + inner_line)
+                    //    {
+                    //        a += 10;
+                    //    }
+                    //}
+
+                    //for (int i = 10; i < cond; i += 10)
+                    //{
+
+
+                    //    int cc = (i + inner_line >= maxWidth + inner_line) ? inner_line : (maxWidth + inner_line - i + c),
+                    //        dd = ((i + inner_line - d) >= maxWidth + inner_line + 10) ? inner_line : (i + inner_line - d);
+
+                    //    g.DrawLine(Pens.OrangeRed, new Point(cc, inner_line + c), new Point(fixedpnl.ClientRectangle.Width - inner_line - w - d, i + inner_line - d));
+
+                    //    if (i + inner_line >= maxWidth + inner_line)
+                    //    {
+                    //        c += 10;
+                    //    }
+
+                    //    if (i + inner_line >= maxHeight + inner_line)
+                    //    {
+                    //        d += 10;
+                    //    }
+                    //}
+                    #endregion
                 }
             }
             if (_timer_count != 0 && _timer_count < 8) // INSIDE ARROW NA MAY TIMER

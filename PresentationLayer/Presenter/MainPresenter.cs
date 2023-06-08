@@ -983,6 +983,7 @@ namespace PresentationLayer.Presenter
             _mainView.NudCurrentPriceValueChangedEventRaised += new EventHandler(OnNudCurrentPriceValueChangedEventRaised);
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
             _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
+            
 
         }
 
@@ -1055,6 +1056,161 @@ namespace PresentationLayer.Presenter
 
         }
         #region Events  
+
+        bool _allpanelsIsMesh;
+        public void AddSlidingScreentoScreenList()
+        {
+            try
+            {
+                foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
+                {
+                    wndr_item.WD_Selected = false;
+                }
+
+                _windoorModel.WD_Selected = true;
+
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                {
+                    if (wdm.WD_Selected == true)
+                    {
+                        foreach (IFrameModel fr in wdm.lst_frame)
+                        {
+                            #region multipanel
+
+                            if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)
+                            {
+                                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                                {
+                                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                    {
+                                        if (pnl.Panel_SashPropertyVisibility == true)
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.ToLower().Contains("mesh"))
+                                            {
+                                                _allpanelsIsMesh = true;
+                                            }
+                                            else
+                                            {
+                                                _allpanelsIsMesh = false;
+                                                break;
+                                            }
+                                        }
+                                        else if (pnl.Panel_Type.Contains("Fixed"))
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.ToLower().Contains("mesh"))
+                                            {
+                                                _allpanelsIsMesh = true;
+                                            }
+                                            else
+                                            {
+                                                _allpanelsIsMesh = false;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            #endregion
+
+                            #region SnglPanel
+                            else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)
+                            {
+                                IPanelModel Singlepanel = fr.Lst_Panel[0];
+                                if (Singlepanel.Panel_SashPropertyVisibility == true)
+                                {
+                                    if (Singlepanel.Panel_GlassThicknessDesc.ToLower().Contains("mesh"))
+                                    {
+                                        _allpanelsIsMesh = true;
+                                    }
+                                    else
+                                    {
+                                        _allpanelsIsMesh = false;
+                                    }
+                                }
+                                else if (Singlepanel.Panel_Type.Contains("Fixed"))
+                                {
+                                    if (Singlepanel.Panel_GlassThicknessDesc.ToLower().Contains("mesh"))
+                                    {
+                                        _allpanelsIsMesh = true;
+                                    }
+                                    else
+                                    {
+                                        _allpanelsIsMesh = false;
+                                    }
+                                }
+
+                            }
+                            #endregion
+                        }
+                    }
+                }
+
+                if (_allpanelsIsMesh == true)
+                {
+                    //add to screenlist 
+                    //create varialbe and get values needed
+                    string slidingscreen_windoorID = _windoorModel.WD_WindoorNumber + " " + _windoorModel.WD_itemName,
+                           slidingscreen_DisplayedDimension = _windoorModel.WD_width + " x " + _windoorModel.WD_height,
+                           slidingscreen_Description = ScreenType._SlidingScreen.DisplayName;
+                    decimal slidingscreen_NetPrice = Math.Round(_windoorModel.WD_currentPrice * 0.7m, 2),
+                            slidingscreen_TotalAmount = _windoorModel.WD_currentPrice;
+
+                    IScreenModel scr = _screenServices.AddScreenModel(_windoorModel.WD_id,
+                                                                      _windoorModel.WD_width,
+                                                                      _windoorModel.WD_height,
+                                                                       ScreenType._SlidingScreen,//add screenlist to enumlayer
+                                                                       slidingscreen_windoorID,
+                                                                      _windoorModel.WD_currentPrice,
+                                                                       1,
+                                                                       1,
+                                                                       30,
+                                                                       slidingscreen_NetPrice,
+                                                                       slidingscreen_TotalAmount,
+                                                                       slidingscreen_Description,//ask costing for description 
+                                                                       _quotationModel.PricingFactor,
+                                                                       0.0m,
+                                                                       slidingscreen_DisplayedDimension);
+
+
+                    bool _windoorIsPresentInScreenList = false;
+
+                    foreach (var item in Screen_List)
+                    {
+                        if (item.Screen_ItemNumber == _windoorModel.WD_id)
+                        {
+                            _windoorIsPresentInScreenList = true;
+                        }
+                    }
+
+                    if (_windoorIsPresentInScreenList != true)
+                    {
+                        Screen_List.Add(scr);// add to screenList
+                        MessageBox.Show("Successfully added to screen", "Sliding Screen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Item Number is Currently Present in Screen", "Sliding Screen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                }
+                else if (_allpanelsIsMesh == false)
+                {
+                    MessageBox.Show("Some panels are not using  mesh", "Sliding Screen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Problem Adding Sliding Screen to Screenlist" + " " + this + ex.Message);
+            }
+
+            
+
+        }
+
+
         private void OnPanelMainMouseWheelEventRaised(object sender, MouseEventArgs e)
         {
             int numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / 120;
@@ -2852,9 +3008,6 @@ namespace PresentationLayer.Presenter
 
             //Tempered Heat-Soaked Low-e w/ Georgian Bar
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 7500.00m, false, true, false, true, false);
-
-
-
 
 
 
@@ -9513,6 +9666,8 @@ namespace PresentationLayer.Presenter
 
         public void Clearing_Operation()
         {
+
+
             _quotationModel = null;
             _frameModel = null;
             _windoorModel = null;
@@ -9531,7 +9686,7 @@ namespace PresentationLayer.Presenter
             _screenList = new List<IScreenModel>();
             _pnlItems.Controls.Clear();
 
-
+            
             IEnumerable<Control> controls = _pnlMain.Controls.Cast<Control>().OfType<Control>();
             foreach (Control cons in controls)
             {
@@ -9554,7 +9709,15 @@ namespace PresentationLayer.Presenter
             _wndrFileName = string.Empty;
             _mainView.GetToolStripButtonSave().Enabled = false;
             _mainView.CreateNewWindoorBtnEnabled = false;
+
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
+
+
+            #region dispose objects           
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            #endregion
 
         }
 
@@ -9631,7 +9794,7 @@ namespace PresentationLayer.Presenter
                                        int frmDimension_numHt,
                                        string frmDimension_profileType,
                                        string frmDimension_baseColor)
-        {
+          {
             if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
             {
                 if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
@@ -9640,7 +9803,6 @@ namespace PresentationLayer.Presenter
                 }
                 else if (QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
                 {
-
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
@@ -10060,8 +10222,8 @@ namespace PresentationLayer.Presenter
                             _frameModel.Frame_UC = (UserControl)_frameUC;
                             _frameModel.Frame_PropertiesUC = (UserControl)framePropUCP.GetFramePropertiesUC();
                             AddFrameList_WindoorModel(_frameModel);
-                            _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                            _basePlatformPresenter.InvalidateBasePlatform();
+                             _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                             _basePlatformPresenter.InvalidateBasePlatform();
                             SetMainViewTitle(input_qrefno,
                                             _projectName,
                                             _custRefNo,
@@ -10117,7 +10279,7 @@ namespace PresentationLayer.Presenter
                 }
 
             }
-            GetIntownOutofTown();
+            //GetIntownOutofTown();
         }
 
 
@@ -11799,19 +11961,24 @@ namespace PresentationLayer.Presenter
                                 {
                                     string blades = string.Concat(split1.Where(Char.IsDigit));
                                     blades = blades.Replace("1150", "").Replace("1152", "");
+
+
+                                    //blades
                                     if (Convert.ToInt32(blades) >= 2 && Convert.ToInt32(blades) <= 9)
                                     {
                                         DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "0");
                                     }
-                                    else if (Convert.ToInt32(blades) >= 10)
+                                    else if (Convert.ToInt32(blades) >= 10 && Convert.ToInt32(blades) <= 19)
                                     {
-                                        if (Convert.ToInt32(blades) >= 20 && Convert.ToInt32(blades) <= 29)
-                                        {
-                                            DuplicatePnl = DuplicatePnl.Remove(18, 1).Insert(18, "1");
-                                        }
+                                        //if (Convert.ToInt32(blades) >= 20 && Convert.ToInt32(blades) <= 29)
+                                        //{
+                                        //    DuplicatePnl = DuplicatePnl.Remove(18, 1).Insert(18, "1");
+                                        //} 
+                                        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "1");
                                     }
                                 }
 
+                                //glass height
                                 if (DuplicatePnl.Contains("LVRG") &&
                                     (pnlCount >= 2 && pnlCount <= 9))
                                 {

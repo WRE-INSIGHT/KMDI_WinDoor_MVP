@@ -21,6 +21,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event EventHandler bothToolStripClickedEventRaised;
         event EventHandler noneToolStripClickedEventRaised;
         event KeyEventHandler slidingPanelUCKeyDownEventRaised;
+        event EventHandler addToScreenToolStripMenuItemClickEventRaised;
 
         void FocusOnThis();
     }
