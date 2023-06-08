@@ -1,4 +1,4 @@
-﻿using CommonComponents;
+using CommonComponents;
 using Microsoft.VisualBasic;
 using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Concrete;
@@ -983,7 +983,7 @@ namespace PresentationLayer.Presenter
             _mainView.NudCurrentPriceValueChangedEventRaised += new EventHandler(OnNudCurrentPriceValueChangedEventRaised);
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
             _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
-            
+
 
         }
 
@@ -1524,7 +1524,7 @@ namespace PresentationLayer.Presenter
             }
             else
             {
-            wndr_content.Add("ProjectAddress: " + _projectAddress);
+                wndr_content.Add("ProjectAddress: " + _projectAddress);
             }
         }
         List<string> wndr_content = new List<string>();
@@ -2442,23 +2442,42 @@ namespace PresentationLayer.Presenter
 
         private void OnButtonPlusZoomClickEventRaised(object sender, EventArgs e)
         {
-            ZoomIn();
+            if (_quotationModel != null)
+            {
+                if (_quotationModel.Lst_Windoor.Count != 0)
+                {
+                    ZoomIn();
+                }
+            }
         }
 
         private void OnButtonMinusZoomClickEventRaised(object sender, EventArgs e)
         {
-            ZoomOut();
+            if (_quotationModel != null)
+            {
+                if (_quotationModel.Lst_Windoor.Count != 0)
+                {
+                    ZoomOut();
+                }
+            }
+
         }
 
         private void OnLabelSizeClickEventRaised(object sender, EventArgs e)
         {
-            _frmDimensionPresenter.SetPresenters(this);
-            _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.ChangeBasePlatformSize;
-            _frmDimensionPresenter.SetProfileType(_windoorModel.WD_profile);
-            _frmDimensionPresenter.SetBaseColor(_windoorModel.WD_BaseColor.ToString());
-            _frmDimensionPresenter.SetHeight();
-            _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
-            _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+            if (_quotationModel != null)
+            {
+                if (_quotationModel.Lst_Windoor.Count != 0)
+                {
+                    _frmDimensionPresenter.SetPresenters(this);
+                    _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.ChangeBasePlatformSize;
+                    _frmDimensionPresenter.SetProfileType(_windoorModel.WD_profile);
+                    _frmDimensionPresenter.SetBaseColor(_windoorModel.WD_BaseColor.ToString());
+                    _frmDimensionPresenter.SetHeight();
+                    _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
+                    _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+                }
+            }
         }
 
         private void OnCreateNewItemClickEventRaised(object sender, EventArgs e)
@@ -11953,48 +11972,63 @@ namespace PresentationLayer.Presenter
                             {
                                 string split1 = words[a],
                                        split2 = words[a + 1];
-                                string DuplicatePnl = split1.Replace("1", split2.Replace(" ", string.Empty)) + "";
-
-                                int pnlCount = Convert.ToInt32(split2.Replace(" ", string.Empty));
-
-                                if (DuplicatePnl.Contains("LVRG"))
+                                string DuplicatePnl = "";
+                                if (split1.Contains("LVRG"))
                                 {
-                                    string blades = string.Concat(split1.Where(Char.IsDigit));
-                                    blades = blades.Replace("1150", "").Replace("1152", "");
-
-
-                                    //blades
-                                    if (Convert.ToInt32(blades) >= 2 && Convert.ToInt32(blades) <= 9)
-                                    {
-                                        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "0");
-                                    }
-                                    else if (Convert.ToInt32(blades) >= 10 && Convert.ToInt32(blades) <= 19)
-                                    {
-                                        //if (Convert.ToInt32(blades) >= 20 && Convert.ToInt32(blades) <= 29)
-                                        //{
-                                        //    DuplicatePnl = DuplicatePnl.Remove(18, 1).Insert(18, "1");
-                                        //} 
-                                        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "1");
-                                    }
-                                }
-
-                                //glass height
-                                if (DuplicatePnl.Contains("LVRG") &&
-                                    (pnlCount >= 2 && pnlCount <= 9))
-                                {
-                                    string DuplicateLouverPnl = DuplicatePnl.Remove(13, 1).Insert(13, "1");
-                                    lst_DuplicatePnl.Add(DuplicateLouverPnl + "\n");
-                                }
-                                else if (DuplicatePnl.Contains("LVRG") &&
-                                     pnlCount >= 10)
-                                {
-                                    string DuplicateLouverPnl = DuplicatePnl.Remove(14, 1).Insert(14, "1");
-                                    lst_DuplicatePnl.Add(DuplicateLouverPnl);
+                                    string pnlCnt = string.Concat(split2.Where(Char.IsDigit));
+                                    DuplicatePnl = split1.Remove(0, 1).Insert(0, pnlCnt);
                                 }
                                 else
                                 {
-                                    lst_DuplicatePnl.Add(DuplicatePnl + "\n");
+                                    DuplicatePnl = split1.Replace("1", split2.Replace(" ", string.Empty)) + "";
                                 }
+
+                                lst_DuplicatePnl.Add(DuplicatePnl + "\n");
+
+                                #region oldAlgoForLVRG
+
+                                //int pnlCount = Convert.ToInt32(split2.Replace(" ", string.Empty));
+                                //if (DuplicatePnl.Contains("LVRG"))
+                                //{
+                                //    string blades = string.Concat(split1.Where(Char.IsDigit));
+                                //    blades = blades.Replace("1150", "").Replace("1152", "");
+
+
+                                //    //blades
+                                //    if (Convert.ToInt32(blades) >= 2 && Convert.ToInt32(blades) <= 9)
+                                //    {
+                                //        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "0");
+                                //    }
+                                //    else if (Convert.ToInt32(blades) >= 10 && Convert.ToInt32(blades) <= 19)
+                                //    {
+                                //        //if (Convert.ToInt32(blades) >= 20 && Convert.ToInt32(blades) <= 29)
+                                //        //{
+                                //        //    DuplicatePnl = DuplicatePnl.Remove(18, 1).Insert(18, "1");
+                                //        //} 
+                                //        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "1");
+                                //    }
+                                //}
+
+                                ////glass height
+                                //if (DuplicatePnl.Contains("LVRG") &&
+                                //    (pnlCount >= 2 && pnlCount <= 9))
+                                //{
+                                //    string DuplicateLouverPnl = DuplicatePnl.Remove(13, 1).Insert(13, "1");
+                                //    lst_DuplicatePnl.Add(DuplicateLouverPnl + "\n");
+                                //}
+                                //else if (DuplicatePnl.Contains("LVRG") &&
+                                //     pnlCount >= 10)
+                                //{
+                                //    string DuplicateLouverPnl = DuplicatePnl.Remove(14, 1).Insert(14, "1");
+                                //    lst_DuplicatePnl.Add(DuplicateLouverPnl);
+                                //}
+                                //else
+                                //{
+                                //lst_DuplicatePnl.Add(DuplicatePnl + "\n");
+                                //}
+
+                                #endregion
+
                                 a++;
                             }
                         }
@@ -12016,7 +12050,7 @@ namespace PresentationLayer.Presenter
 
                     if (lst_DescriptionDistinct.Count != 0)
                     {
-                        wdm.WD_description = wdm.WD_profile + "\n" + NewNoneDuplicatePnlAndCount;
+                        wdm.WD_description = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n" + wdm.WD_profile + "\n" + NewNoneDuplicatePnlAndCount;
                         for (int i = 0; i < lst_DuplicatePnl.Count; i++)
                         {
                             lst_DescDist = lst_DuplicatePnl[i];
