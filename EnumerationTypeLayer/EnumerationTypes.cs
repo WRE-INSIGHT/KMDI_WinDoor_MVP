@@ -507,8 +507,16 @@ namespace EnumerationTypeLayer
             public static readonly MotorizedMech_ArticleNo _41556C = new MotorizedMech_ArticleNo(0, "41556C");
             public static readonly MotorizedMech_ArticleNo _41555B = new MotorizedMech_ArticleNo(1, "41555B");
             public static readonly MotorizedMech_ArticleNo _409990E = new MotorizedMech_ArticleNo(2, "409990E");
+            public static readonly MotorizedMech_ArticleNo _41731V = new MotorizedMech_ArticleNo(3, "41731V");
 
             private MotorizedMech_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MotorizedMechRemote_ArticleNo : Enumeration<MotorizedMechRemote_ArticleNo, int>
+        {
+            public static readonly MotorizedMechRemote_ArticleNo _41729T = new MotorizedMechRemote_ArticleNo(0, "41729T");
+
+            private MotorizedMechRemote_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class _30x25Cover_ArticleNo : Enumeration<_30x25Cover_ArticleNo, int>
