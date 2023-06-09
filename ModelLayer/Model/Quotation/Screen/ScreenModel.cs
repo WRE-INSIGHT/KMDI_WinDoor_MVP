@@ -6482,11 +6482,9 @@ namespace ModelLayer.Model.Quotation.Screen
                     }
                     else if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._SR)
                     {
-                        Screen_Description = Screen_Description + " - Center Closure ";
-
+                        //Screen_Description = Screen_Description + " - Center Closure ";                     
+                        Screen_Description = Screen_Description + " - Center Closure  ";                     
                         _plisséSRPerPanelWidth = Screen_Width / 2;
-                        //_screenPreviousWidth = Screen_Width;
-                        //_screenOriginalWidth = Screen_Width;
                         Screen_Width = _plisséSRPerPanelWidth;
                     }
                     else
@@ -6751,7 +6749,6 @@ namespace ModelLayer.Model.Quotation.Screen
             //AddOnsSpecialFactor = 0;
             IncreasePercentage = 0;
             TotalUnitPrice = 0;
-
         }
 
         public void ScreenPropAddOnsReset()
