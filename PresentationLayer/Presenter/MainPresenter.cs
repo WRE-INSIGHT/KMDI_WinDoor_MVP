@@ -2768,6 +2768,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear", "NA", 3201.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear", "NA", 3619.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Oversized", "NA", 6000.00m, true, false, false, false, false);//
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Oversized", "NA", 7050.00m, true, false, false, false, false);//6/13/2023
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Bronze", "NA", 1929.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Bronze", "NA", 3872.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Bronze", "NA", 3872.00m, true, false, false, false, false);
