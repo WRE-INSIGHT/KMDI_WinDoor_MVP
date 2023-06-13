@@ -153,7 +153,10 @@ namespace PresentationLayer.Views
         {
             return nud_Factor;
         }
-
+        public NumericUpDown GetNudSets()
+        {
+            return nud_Sets;
+        }
         public NumericUpDown GetNudTotalPrice()
         {
             return nud_TotalPrice;

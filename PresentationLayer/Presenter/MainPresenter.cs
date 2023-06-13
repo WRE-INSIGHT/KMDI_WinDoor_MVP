@@ -1,4 +1,4 @@
-﻿using CommonComponents;
+using CommonComponents;
 using Microsoft.VisualBasic;
 using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Concrete;
