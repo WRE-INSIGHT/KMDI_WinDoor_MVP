@@ -1782,7 +1782,7 @@ namespace ModelLayer.Model.Quotation
 
                         if (pnl.Panel_MotorizedOptionVisibility == true)
                         {
-                            pnl.Insert_MotorizedInfo_MaterialList(Material_List, 0);
+                            pnl.Insert_MotorizedInfo_MaterialList(Material_List, pnl.Panel_MotorizedMechQty);
 
                             int hinge_screws = pnl.Add_Hinges_screws4fab();
                             add_screws_fab_hinges += hinge_screws;
@@ -2452,7 +2452,7 @@ namespace ModelLayer.Model.Quotation
                 Divider_7536_PricePerSqrMeter = 663.32m,
                 Divider_7538_PricePerSqrMeter = 817.34m,
                 Divider_2069_PricePerSqrMeter = 284.12m, // G58
-                DividerRein_7536_PricePerSqrMeter = 406.86m, 
+                DividerRein_7536_PricePerSqrMeter = 406.86m,
                 DividerRein_7538_PricePerSqrMeter = 858.52m,
 
                 claddingPricePerLinearMeter = 907.62m,//profile and reinforcement price
@@ -2713,7 +2713,10 @@ namespace ModelLayer.Model.Quotation
 
                 HDRollerPricePerPiece = 566.06m,
                 GURollerPricePerPiece = 1323.08m,
-
+                MotorizeMechPrice = 15000.00m,
+                MotorizeMechHeavyDutyPrice = 39000.00m,
+                MotorizeMechUsingRemotePrice = 19445.50m,
+                RemoteForMotorizeMechPrice = 4749.00m,
 
                 RestrictorStayPrice,
                 SnapInKeepPrice,
@@ -2752,6 +2755,7 @@ namespace ModelLayer.Model.Quotation
                 RollerBasePrice,
                 MotorizePrice,
                 MotorizeMechPricePerPiece,
+                MotorizeMechRemotePricePerPiece,
         #endregion
         #region Accessories
 
@@ -3620,7 +3624,7 @@ namespace ModelLayer.Model.Quotation
                 MaterialCost = 0;
                 #endregion
             }
-            else if(cus_ref_date >= inc_price_date_3)
+            else if (cus_ref_date >= inc_price_date_3)
             {
                 #region setnewPrice
                 #region FrameAndSashPrice
@@ -4596,15 +4600,18 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                                 else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                                 {
-                                                    if (pnl.Panel_SashHeight >= 800)
+                                                    if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
                                                     {
                                                         FSPrice += FS_26HD_casementPricePerPiece * 2;
                                                         FSBasePrice = FS_26HD_casementPricePerPiece;
                                                     }
-                                                    else
+                                                    else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
+                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
                                                     {
                                                         FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
                                                     }
                                                 }
 
@@ -4776,12 +4783,21 @@ namespace ModelLayer.Model.Quotation
                                             else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                             {
                                                 #region FSPrice
-                                                if (pnl.Panel_SashHeight >= 800)
+                                                if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                                    pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                                                 {
                                                     FSPrice += FS_26HD_casementPricePerPiece * 2;
                                                     FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                                    if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                    {
+                                                        SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                    }
                                                 }
-                                                else
+                                                else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                         pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                         pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                         pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
                                                 {
                                                     FSPrice += FS_16HD_casementPricePerPiece * 2;
                                                     FSBasePrice = FS_16HD_casementPricePerPiece;
@@ -5156,6 +5172,13 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 MotorizeMechPricePerPiece = 39000m;
                                             }
+                                            else if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
+                                            {
+                                                MotorizeMechPricePerPiece = MotorizeMechUsingRemotePrice;
+
+                                                MotorizeMechRemotePricePerPiece += RemoteForMotorizeMechPrice;
+                                            }
+
                                             if (chckPerFrameMotorMech == true)
                                             {
                                                 MotorizePrice += MotorizeMechPricePerPiece * pnl.MotorizeMechQty();
@@ -7649,12 +7672,15 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                         {
-                                            if (Singlepnl.Panel_SashHeight >= 800)
+                                            if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
                                             {
                                                 FSPrice += FS_26HD_casementPricePerPiece * 2;
                                                 FSBasePrice = FS_26HD_casementPricePerPiece;
                                             }
-                                            else
+                                            else if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
+                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
                                             {
                                                 FSPrice += FS_16HD_casementPricePerPiece * 2;
                                                 FSBasePrice = FS_16HD_casementPricePerPiece;
@@ -7811,12 +7837,21 @@ namespace ModelLayer.Model.Quotation
                                     else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                     {
                                         #region FSPrice
-                                        if (Singlepnl.Panel_SashHeight >= 800)
+                                        if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                            Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                                         {
                                             FSPrice += FS_26HD_casementPricePerPiece * 2;
                                             FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                            if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                            {
+                                                SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                            }
                                         }
-                                        else
+                                        else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
                                         {
                                             FSPrice += FS_16HD_casementPricePerPiece * 2;
                                             FSBasePrice = FS_16HD_casementPricePerPiece;
@@ -8156,13 +8191,25 @@ namespace ModelLayer.Model.Quotation
                                     if (Singlepnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
                                                 Singlepnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
                                     {
-                                        MotorizeMechPricePerPiece = 15000m;
+                                        MotorizeMechPricePerPiece = MotorizeMechPrice;
                                     }
                                     else if (Singlepnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
                                     {
-                                        MotorizeMechPricePerPiece = 39000m;
+                                        MotorizeMechPricePerPiece = MotorizeMechHeavyDutyPrice;
                                     }
-                                    MotorizePrice += MotorizeMechPricePerPiece * Singlepnl.Panel_MotorizedMechQty;
+                                    else if (Singlepnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
+                                    {
+                                        MotorizeMechPricePerPiece = MotorizeMechUsingRemotePrice;
+
+                                        MotorizeMechRemotePricePerPiece += RemoteForMotorizeMechPrice;
+                                    }
+
+                                    if (chckPerFrameMotorMech == true)
+                                    {
+                                        MotorizePrice += MotorizeMechPricePerPiece * Singlepnl.Panel_MotorizedMechQty;
+                                        chckPerFrameMotorMech = false;
+                                    }
+
                                 }
                                 #endregion
 
@@ -10536,7 +10583,8 @@ namespace ModelLayer.Model.Quotation
                                              Math.Round(RollerPrice, 2) +
                                              Math.Round(StrikerLRPrice, 2) +
                                              Math.Round(BrushSealPrice, 2) +
-                                             Math.Round(MotorizePrice, 2);
+                                             Math.Round(MotorizePrice, 2) +
+                                             Math.Round(MotorizeMechRemotePricePerPiece, 2);
 
                     AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
                                            Math.Round(GbPrice, 2) +
@@ -11234,6 +11282,13 @@ namespace ModelLayer.Model.Quotation
                                 "",
                                 "Fitting and Supplies");
 
+                        Price_List.Rows.Add("Remote for Motor",
+                               MotorizeMechRemotePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(RemoteForMotorizeMechPrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Fitting and Supplies");
+
                         Price_List.Rows.Add("Total",
                                          "",
                                          Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
@@ -11495,6 +11550,7 @@ namespace ModelLayer.Model.Quotation
             StrikerLRPrice = 0;
             RollerPrice = 0;
             MotorizePrice = 0;
+            MotorizeMechRemotePricePerPiece = 0;
 
             AncillaryProfileCost = 0;
             ThresholdPrice = 0;
@@ -11539,8 +11595,8 @@ namespace ModelLayer.Model.Quotation
             WireMeshPrice = 0;
             PetMeshPrice = 0;
             TuffMeshPrice = 0;
-            PhiferMeshPrice = 0; 
-            AluminumFramePrice = 0; 
+            PhiferMeshPrice = 0;
+            AluminumFramePrice = 0;
         }
     }
 }
