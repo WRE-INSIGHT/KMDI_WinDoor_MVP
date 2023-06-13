@@ -48,6 +48,8 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
                 }
                 MessageBox.Show("Rail must be 2 - 5 only");   
             }
+
+            
           
         }
 

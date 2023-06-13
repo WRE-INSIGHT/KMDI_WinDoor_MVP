@@ -875,5 +875,6 @@ namespace PresentationLayer.CommonMethods
 
             return imgr;
         }
+
     }
 }

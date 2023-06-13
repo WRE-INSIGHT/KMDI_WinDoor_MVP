@@ -320,5 +320,7 @@ namespace PresentationLayer.Presenter
             return _isFrmClosed;
         }
 
+
+        
     }
 }
