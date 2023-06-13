@@ -100,7 +100,6 @@
             this.addToScreenToolStripMenuItem.Name = "addToScreenToolStripMenuItem";
             this.addToScreenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addToScreenToolStripMenuItem.Text = "Add to Screen";
-            this.addToScreenToolStripMenuItem.Visible = false;
             this.addToScreenToolStripMenuItem.Click += new System.EventHandler(this.addToScreenToolStripMenuItem_Click);
             // 
             // SlidingPanelUC

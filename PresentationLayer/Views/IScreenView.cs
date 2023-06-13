@@ -59,7 +59,9 @@ namespace PresentationLayer.Views
         NumericUpDown GetNudHeight();
 
         NumericUpDown GetNudFactor();
-       
+        NumericUpDown GetNudSets();
+
+
 
     }
 }

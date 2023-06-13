@@ -79,8 +79,6 @@ namespace PresentationLayer.Presenter
             SubscribeToEventSetup();
         }
 
-
-
         private void SubscribeToEventSetup()
         {
             _screenView.ScreenViewLoadEventRaised += _screenView_ScreenViewLoadEventRaised;
@@ -688,16 +686,20 @@ namespace PresentationLayer.Presenter
                 {
                     //Screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
                     //NetPriceTotal = NetPriceTotal + Screen_priceXquantiy;
-                    if (item.Screen_Quantity > 1)
+                    if (item.Screen_Quantity > 1 )
                     {
                         for(int i = 1; i <= item.Screen_Quantity; i++)
                         {
                             screenDiscountAverage = screenDiscountAverage + item.Screen_Discount;
                         }
                     }
-                    else
+                    else if (item.Screen_Quantity == 1)
                     {
                         screenDiscountAverage = screenDiscountAverage + item.Screen_Discount;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Zero Quantity Detected");
                     }
 
                     Console.WriteLine(item.Screen_UnitPrice.ToString());

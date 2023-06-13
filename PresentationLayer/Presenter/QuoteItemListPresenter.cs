@@ -307,7 +307,8 @@ namespace PresentationLayer.Presenter
                     }
                     else
                     {
-                        Screen_DimensionFormat = item.Screen_Width + " x " + item.Screen_Height;
+                        //Screen_DimensionFormat = item.Screen_Width + " x " + item.Screen_Height;
+                        Screen_DimensionFormat = item.Screen_DisplayedDimension;
                         Screen_UnitPrice = item.Screen_UnitPrice.ToString("n");
                         Screen_Qty = item.Screen_Quantity.ToString();
                         Screen_Discount = Convert.ToString(item.Screen_Discount) + "%";
