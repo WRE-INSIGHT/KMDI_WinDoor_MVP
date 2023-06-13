@@ -2452,7 +2452,7 @@ namespace ModelLayer.Model.Quotation
                 Divider_7536_PricePerSqrMeter = 663.32m,
                 Divider_7538_PricePerSqrMeter = 817.34m,
                 Divider_2069_PricePerSqrMeter = 284.12m, // G58
-                DividerRein_7536_PricePerSqrMeter = 406.86m, 
+                DividerRein_7536_PricePerSqrMeter = 406.86m,
                 DividerRein_7538_PricePerSqrMeter = 858.52m,
 
                 claddingPricePerLinearMeter = 907.62m,//profile and reinforcement price
@@ -3620,7 +3620,7 @@ namespace ModelLayer.Model.Quotation
                 MaterialCost = 0;
                 #endregion
             }
-            else if(cus_ref_date >= inc_price_date_3)
+            else if (cus_ref_date >= inc_price_date_3)
             {
                 #region setnewPrice
                 #region FrameAndSashPrice
@@ -4596,15 +4596,18 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                                 else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                                 {
-                                                    if (pnl.Panel_SashHeight >= 800)
+                                                    if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
                                                     {
                                                         FSPrice += FS_26HD_casementPricePerPiece * 2;
                                                         FSBasePrice = FS_26HD_casementPricePerPiece;
                                                     }
-                                                    else
+                                                    else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
+                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
                                                     {
                                                         FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
                                                     }
                                                 }
 
@@ -4776,12 +4779,21 @@ namespace ModelLayer.Model.Quotation
                                             else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                             {
                                                 #region FSPrice
-                                                if (pnl.Panel_SashHeight >= 800)
+                                                if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                                    pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                                                 {
                                                     FSPrice += FS_26HD_casementPricePerPiece * 2;
                                                     FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                                    if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                    {
+                                                        SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                    }
                                                 }
-                                                else
+                                                else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                         pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                         pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                         pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
                                                 {
                                                     FSPrice += FS_16HD_casementPricePerPiece * 2;
                                                     FSBasePrice = FS_16HD_casementPricePerPiece;
@@ -7649,12 +7661,15 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                         {
-                                            if (Singlepnl.Panel_SashHeight >= 800)
+                                            if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
                                             {
                                                 FSPrice += FS_26HD_casementPricePerPiece * 2;
                                                 FSBasePrice = FS_26HD_casementPricePerPiece;
                                             }
-                                            else
+                                            else if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
+                                                Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
                                             {
                                                 FSPrice += FS_16HD_casementPricePerPiece * 2;
                                                 FSBasePrice = FS_16HD_casementPricePerPiece;
@@ -7811,12 +7826,21 @@ namespace ModelLayer.Model.Quotation
                                     else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                     {
                                         #region FSPrice
-                                        if (Singlepnl.Panel_SashHeight >= 800)
+                                        if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                            Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                                         {
                                             FSPrice += FS_26HD_casementPricePerPiece * 2;
                                             FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                            if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                            {
+                                                SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                            }
                                         }
-                                        else
+                                        else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
                                         {
                                             FSPrice += FS_16HD_casementPricePerPiece * 2;
                                             FSBasePrice = FS_16HD_casementPricePerPiece;
@@ -11539,8 +11563,8 @@ namespace ModelLayer.Model.Quotation
             WireMeshPrice = 0;
             PetMeshPrice = 0;
             TuffMeshPrice = 0;
-            PhiferMeshPrice = 0; 
-            AluminumFramePrice = 0; 
+            PhiferMeshPrice = 0;
+            AluminumFramePrice = 0;
         }
     }
 }
