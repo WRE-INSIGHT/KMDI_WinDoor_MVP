@@ -2515,6 +2515,7 @@ namespace ModelLayer.Model.Quotation
         Glass_6mmTempClr_HrdCtd_LowE = 2550.00m,
         Glass_8mmTempClr_HrdCtd_LowE = 3800.00m,
         Glass_10mmTempClr_HrdCtd_LowE = 5500.00m,
+        Glass_12mmTempClr_HrdCtd_LowE = 7900.00m,
         Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 3100.00m,
         Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 4450.00m,
         Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 5350.00m,
@@ -3079,6 +3080,7 @@ namespace ModelLayer.Model.Quotation
                 Glass_6mmTempClr_HrdCtd_LowE = 2550.00m;
                 Glass_8mmTempClr_HrdCtd_LowE = 3800.00m;
                 Glass_10mmTempClr_HrdCtd_LowE = 5500.00m;
+                Glass_12mmTempClr_HrdCtd_LowE = 7900.00m;
                 Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 3100.00m;
                 Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 4450.00m;
                 Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 5350.00m;
@@ -3398,6 +3400,7 @@ namespace ModelLayer.Model.Quotation
                 Glass_6mmTempClr_HrdCtd_LowE = 2550.00m;
                 Glass_8mmTempClr_HrdCtd_LowE = 3800.00m;
                 Glass_10mmTempClr_HrdCtd_LowE = 5500.00m;
+                Glass_12mmTempClr_HrdCtd_LowE = 7900.00m;
                 Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 3100.00m;
                 Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 4450.00m;
                 Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 5350.00m;
@@ -3718,6 +3721,7 @@ namespace ModelLayer.Model.Quotation
                 Glass_6mmTempClr_HrdCtd_LowE = 2550.00m;
                 Glass_8mmTempClr_HrdCtd_LowE = 3800.00m;
                 Glass_10mmTempClr_HrdCtd_LowE = 5500.00m;
+                Glass_12mmTempClr_HrdCtd_LowE = 7900.00m;
                 Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 3100.00m;
                 Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 4450.00m;
                 Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 5350.00m;
@@ -5567,6 +5571,11 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempClr_HrdCtd_LowE;
                                                 }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear w/ HardCoated Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempClr_HrdCtd_LowE;
+                                                }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
@@ -6334,6 +6343,11 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempClr_HrdCtd_LowE;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear w/ HardCoated Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempClr_HrdCtd_LowE;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Grey"))
                                                 {
@@ -8600,6 +8614,11 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempClr_HrdCtd_LowE;
                                     }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear w/ HardCoated Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempClr_HrdCtd_LowE;
+                                    }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
@@ -9357,6 +9376,11 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempClr_HrdCtd_LowE;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear w/ HardCoated Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempClr_HrdCtd_LowE;
                                     }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Grey"))
                                     {
