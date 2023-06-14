@@ -640,10 +640,16 @@ namespace PresentationLayer.Presenter
                             screentotaldiscount = screentotaldiscount + item.Screen_Discount;
                         }
                     }
-                    else
+                    else if (item.Screen_Quantity == 1)
                     {
                         screentotaldiscount = screentotaldiscount + item.Screen_Discount;
                     }
+                    else
+                    {
+                        Console.WriteLine("Zero Quantity Detected");
+                    }
+
+
                     ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount,2);
                 }
 
