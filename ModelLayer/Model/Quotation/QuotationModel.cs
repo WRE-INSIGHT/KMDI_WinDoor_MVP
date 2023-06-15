@@ -4280,7 +4280,14 @@ namespace ModelLayer.Model.Quotation
             }
 
         }
-         
+
+        #endregion
+
+        #region changeConditionBaseOnDate 
+
+        DateTime changeAlgoforFS = DateTime.Parse("06-14-2023");
+        DateTime testDate = DateTime.Parse("06-16-2023");
+
         #endregion
 
         #region glassbasedprice variable
@@ -4935,18 +4942,34 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                                 else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                                 {
-                                                    if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                    if (Date_Assigned <= changeAlgoforFS)
                                                     {
-                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        if (pnl.Panel_SashHeight >= 800)
+                                                        {
+                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        }
+                                                        else
+                                                        {
+                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        }
                                                     }
-                                                    else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
-                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
-                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
-                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                    else
                                                     {
-                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                        {
+                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        }
+                                                        else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
+                                                                 pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                                 pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                                 pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                        {
+                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        }
                                                     }
                                                 }
 
@@ -5117,27 +5140,46 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                             {
-                                                #region FSPrice
-                                                if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
-                                                    pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                                if (Date_Assigned <= changeAlgoforFS)
                                                 {
-                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
-
-                                                    if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                    #region FSPrice
+                                                    if (pnl.Panel_SashHeight >= 800)
                                                     {
-                                                        SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
                                                     }
+                                                    else
+                                                    {
+                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                    }
+                                                    #endregion
                                                 }
-                                                else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
-                                                         pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
-                                                         pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
-                                                         pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                                else
                                                 {
-                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                    #region FSPrice
+                                                    if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                                        pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                                    {
+                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                                        if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                        {
+                                                            SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                        }
+                                                    }
+                                                    else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                             pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                             pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                             pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                                    {
+                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                    }
+                                                    #endregion
                                                 }
-                                                #endregion
+
                                             }
 
                                             MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
@@ -8037,18 +8079,34 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                         {
-                                            if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                            if (Date_Assigned <= changeAlgoforFS)
                                             {
-                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                if (Singlepnl.Panel_SashHeight >= 800)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
+                                                else
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                }
                                             }
-                                            else if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
-                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
-                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
-                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                            else
                                             {
-                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
+                                                else if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
+                                                         Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                         Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                         Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                }
                                             }
                                         }
 
@@ -8201,27 +8259,45 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                     {
-                                        #region FSPrice
-                                        if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
-                                            Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                        if (Date_Assigned <= changeAlgoforFS) // Date_Assigned
                                         {
-                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                            FSBasePrice = FS_26HD_casementPricePerPiece;
-
-                                            if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                            #region FSPrice
+                                            if (Singlepnl.Panel_SashHeight >= 800)
                                             {
-                                                SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_26HD_casementPricePerPiece;
                                             }
+                                            else
+                                            {
+                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                            }
+                                            #endregion
                                         }
-                                        else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
-                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
-                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
-                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                        else
                                         {
-                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                            #region FSPrice
+                                            if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                                Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                            {
+                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                                if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                {
+                                                    SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                }
+                                            }
+                                            else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                     Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                     Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                     Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                            {
+                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                            }
+                                            #endregion
                                         }
-                                        #endregion
                                     }
 
 
