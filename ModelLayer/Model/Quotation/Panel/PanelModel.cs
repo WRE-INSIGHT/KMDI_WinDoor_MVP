@@ -10343,7 +10343,9 @@ namespace ModelLayer.Model.Quotation.Panel
                           bool panelSlidingTypeVisibility,
                           SlidingTypes panelSlidingTypes,
                           string glasstype_insu_lumi,
-                          decimal glasspricepersqrmeter
+                          decimal glasspricepersqrmeter,
+                          MotorizedMechRemote_ArticleNo panelMotorizedMechRemoteArtNo,
+                          bool panelMotorizedMechRemoteOption
                           )
         {
             Panel_ID = panelID;
@@ -10426,6 +10428,9 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_HingeOptionsPropertyHeight = constants.panel_property_HingeOptionsheight;
             Panel_GlassType_Insu_Lami = glasstype_insu_lumi;
             Panel_GlassPricePerSqrMeter = glasspricepersqrmeter;
+            Panel_MotorizedMechRemoteArtNo = panelMotorizedMechRemoteArtNo;
+            Panel_MotorizedMechRemoteOption = panelMotorizedMechRemoteOption;
+            
 
         }
     }

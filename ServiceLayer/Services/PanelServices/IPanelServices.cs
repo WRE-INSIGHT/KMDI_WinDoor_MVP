@@ -72,6 +72,8 @@ namespace ServiceLayer.Services.PanelServices
                                   bool panelSlidingTypeVisibility = false,
                                   SlidingTypes panelSlidingTypes = null,
                                   string glasstype_insu_lumi = null,
-                                  decimal glasspricepersqrmeter = 0);
+                                  decimal glasspricepersqrmeter = 0,
+                                  MotorizedMechRemote_ArticleNo panelMotorizedMechRemoteArtNo = null,
+                                  bool panelMotorizedMechRemoteOption = false);
     }
 }

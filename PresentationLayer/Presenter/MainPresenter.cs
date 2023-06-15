@@ -1047,7 +1047,7 @@ namespace PresentationLayer.Presenter
                 {
                     e.Cancel = true;
                 }
-                else if (dialogResult == DialogResult.Yes)
+                else if (dialogResult == DialogResult.Yes)                  
                 {
                     e.Cancel = false;
                 }
@@ -2767,6 +2767,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear", "NA", 3201.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear", "NA", 3201.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear", "NA", 3619.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(15.0f, "15 mm Tempered Clear", "NA", 12000.00m, true, false, false, false, false);//6/15/2023
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Oversized", "NA", 6000.00m, true, false, false, false, false);//
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Oversized", "NA", 7050.00m, true, false, false, false, false);//6/13/2023
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Bronze", "NA", 1929.00m, true, false, false, false, false);
@@ -2791,6 +2792,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear with Georgian Bar", "NA", 3201.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear with Georgian Bar", "NA", 3201.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear with Georgian Bar", "NA", 3619.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(15.0f, "15 mm Tempered Clear with Georgian Bar", "NA", 12000.00m, true, false, false, false, false);//6/15/2023
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Bronze with Georgian Bar", "NA", 1929.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Bronze with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Bronze with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
@@ -2847,7 +2849,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear w/ HardCoated Low-E", "NA", 2550.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear w/ HardCoated Low-E", "NA", 3800.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear w/ HardCoated Low-E", "NA", 5500.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "12 mm Tempered Clear w/ HardCoated Low-E", "NA", 7900.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear w/ HardCoated Low-E", "NA", 7900.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted w/ HardCoated Low-E Bronze", "NA", 3100.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted w/ HardCoated Low-E Bronze", "NA", 4450.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted w/ HardCoated Low-E Bronze", "NA", 5350.00m, true, false, false, false, false);
@@ -2865,7 +2867,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear w/ HardCoated Low-E with Georgian Bar", "NA", 2550.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear w/ HardCoated Low-E with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear w/ HardCoated Low-E with Georgian Bar", "NA", 5500.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "12 mm Tempered Clear w/ HardCoated Low-E with Georgian Bar", "NA", 7900.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear w/ HardCoated Low-E with Georgian Bar", "NA", 7900.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted w/ HardCoated Low-E Bronze with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted w/ HardCoated Low-E Bronze with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted w/ HardCoated Low-E Bronze with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
@@ -6263,6 +6265,10 @@ namespace PresentationLayer.Presenter
                         {
                             panel_PopUpHandleOptionVisibilty = Convert.ToBoolean(extractedValue_str);
                         }
+                        else if (row_str.Contains("Panel_MotorizedMechRemoteOption:"))
+                        {
+                            panel_MotorizedMechRemoteOption = Convert.ToBoolean(extractedValue_str);
+                        }
                         else if (row_str.Contains("Panel_RotoswingForSlidingHandleOptionVisibilty:"))
                         {
                             panel_RotoswingForSlidingHandleOptionVisibilty = Convert.ToBoolean(extractedValue_str);
@@ -6434,11 +6440,18 @@ namespace PresentationLayer.Presenter
                                     panel_AluminumPullHandleArticleNo = aphan;
                                 }
                             }
+                        }
 
+                        else if (row_str.Contains("Panel_MotorizedMechRemoteArtNo:"))
+                        {
 
-
-
-
+                            foreach (MotorizedMechRemote_ArticleNo motoRemArt in MotorizedMechRemote_ArticleNo.GetAll())
+                            {
+                                if (motoRemArt.ToString() == extractedValue_str)
+                                {
+                                    panel_MotorizedMechRemoteArtNo = motoRemArt;
+                                }
+                            }
                         }
                         //List<int> Panel_LstSealForHandleMultiplier
                         else if (row_str.Contains("Panel_LstSealForHandleMultiplier:"))
@@ -8418,6 +8431,8 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_MVDOptionsVisibility = panel_MVDOptionsVisibility;
             pnlModel.Panel_RotaryOptionsVisibility = panel_RotaryOptionsVisibility;
             pnlModel.Panel_GlassType_Insu_Lami = panel_GlassType_Insu_Lami;
+            pnlModel.Panel_MotorizedMechRemoteArtNo = panel_MotorizedMechRemoteArtNo;
+            pnlModel.Panel_MotorizedMechRemoteOption = panel_MotorizedMechRemoteOption;
             #region Explosion
             pnlModel.PanelGlass_ID = panel_GlassID;
             pnlModel.Panel_GlassThicknessDesc = panel_GlassThicknessDesc;
@@ -8669,7 +8684,6 @@ namespace PresentationLayer.Presenter
 
             if (panel_Parent.Parent.Name.Contains("frame"))
             {
-
                 _frameModel.Lst_Panel.Add(pnlModel);
                 pnlModel.Imager_SetDimensionsToBind_FrameParent();
                 _framePropertiesUCPresenter.GetFramePropertiesUC().GetFramePropertiesPNL().Controls.Add(panelPropUC);
@@ -8680,19 +8694,16 @@ namespace PresentationLayer.Presenter
                 {
                     _multiModelParent = _multiPanelModel2ndLvl;
                     _multiPropUC2ndLvl.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
-
                 }
                 else if (panel_Parent.Parent.Parent.Parent.Parent.Name.Contains("Frame"))
                 {
                     _multiModelParent = _multiPanelModel3rdLvl;
                     _multiPropUC3rdLvl.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
-
                 }
                 else
                 {
                     _multiModelParent = _multiPanelModel4thLvl;
                     _multiPropUC4thLvl.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
-
                 }
                 pnlModel.Panel_ParentMultiPanelModel = _multiModelParent;
                 _multiModelParent.MPanelLst_Panel.Add(pnlModel);
@@ -8700,8 +8711,6 @@ namespace PresentationLayer.Presenter
                 pnlModel.SetPanelMargin_using_ZoomPercentage();
                 pnlModel.SetPanelMarginImager_using_ImageZoomPercentage();
                 panelPropUC.BringToFront();
-
-
             }
 
             IMultiPanelMullionUC multiMullionUC;
@@ -9357,7 +9366,8 @@ namespace PresentationLayer.Presenter
              panel_DummyDHandleOptionVisibilty,
              panel_PopUpHandleOptionVisibilty,
              panel_TrackRailArtNoVisibility,
-             panel_RotoswingForSlidingHandleOptionVisibilty;
+             panel_RotoswingForSlidingHandleOptionVisibilty,
+             panel_MotorizedMechRemoteOption;
         int panel_GlassID,
             panel_GlazingBeadWidth,
             panel_GlazingBeadWidthDecimal,
@@ -9520,6 +9530,7 @@ namespace PresentationLayer.Presenter
         SlidingDoorKitGs100_1_ArticleNo panel_SlidingDoorKitGs100_1ArtNo;
         GS100CoverKit_ArticleNo panel_GS100CoverKitArtNo;
         AluminumPullHandle_ArticleNo panel_AluminumPullHandleArticleNo;
+        MotorizedMechRemote_ArticleNo panel_MotorizedMechRemoteArtNo;
         #endregion
         #endregion
         #region Divider Properties
