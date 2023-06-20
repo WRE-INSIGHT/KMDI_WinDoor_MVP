@@ -2723,8 +2723,10 @@ namespace ModelLayer.Model.Quotation
                 GURollerPricePerPiece = 1323.08m,
                 MotorizeMechPrice = 15000.00m,
                 MotorizeMechHeavyDutyPrice = 39000.00m,
-                MotorizeMechUsingRemotePrice = 19445.50m,
-                RemoteForMotorizeMechPrice = 4749.00m,
+                MotorizeMechUsingRemotePrice,
+                MotorizeMechRemotePricePerPiece = 19445.50m,
+
+                RemoteForMotorizeMechPrice,
 
                 RestrictorStayPrice,
                 SnapInKeepPrice,
@@ -2763,7 +2765,6 @@ namespace ModelLayer.Model.Quotation
                 RollerBasePrice,
                 MotorizePrice,
                 MotorizeMechPricePerPiece,
-                MotorizeMechRemotePricePerPiece,
         #endregion
         #region Accessories
 
@@ -4291,8 +4292,8 @@ namespace ModelLayer.Model.Quotation
         #endregion
 
         #region changeConditionBaseOnDate 
-        DateTime changeConditionDivSize_040423 = DateTime.Parse("04-04-2023"); // Div_Width => Div_ExplosionWidth
-        DateTime changeConditionforFS_061423 = DateTime.Parse("06-14-2023"); // friction stay size => art#
+        DateTime changeCondition_040423 = DateTime.Parse("04-04-2023"); // Div_Width => Div_ExplosionWidth , 1pnlFS from 2d hinge => friction stay
+        DateTime changeCondition_061423 = DateTime.Parse("06-14-2023"); // friction stay size => art#
 
 
 
@@ -4835,7 +4836,14 @@ namespace ModelLayer.Model.Quotation
                                                 DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
                                             }
 
-                                            DivPrice += ((div.Div_ExplosionWidth) / 1000m) * DividerPricePerSqrMeter;
+                                            if (Date_Assigned <= changeCondition_040423)
+                                            {
+                                                DivPrice += ((div.Div_Width) / 1000m) * DividerPricePerSqrMeter;
+                                            }
+                                            else
+                                            {
+                                                DivPrice += ((div.Div_ExplosionWidth) / 1000m) * DividerPricePerSqrMeter;
+                                            }
                                             DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerReinPricePerSqrMeter;
                                             MechJointPrice += MechanicalJointPricePerPiece * 2;
                                         }
@@ -4917,7 +4925,15 @@ namespace ModelLayer.Model.Quotation
                                                     DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
                                                 }
 
-                                                DivPrice += ((div.Div_ExplosionHeight) / 1000m) * DividerPricePerSqrMeter;
+                                                if (Date_Assigned <= changeCondition_040423)
+                                                {
+                                                    DivPrice += ((div.Div_Height) / 1000m) * DividerPricePerSqrMeter;
+                                                }
+                                                else
+                                                {
+                                                    DivPrice += ((div.Div_ExplosionHeight) / 1000m) * DividerPricePerSqrMeter;
+                                                }
+
                                                 DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerReinPricePerSqrMeter;
                                                 MechJointPrice += MechanicalJointPricePerPiece * 2;
                                                 #endregion
@@ -4952,7 +4968,7 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                                 else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                                 {
-                                                    if (Date_Assigned <= changeConditionforFS_061423)
+                                                    if (Date_Assigned <= changeCondition_061423)
                                                     {
                                                         if (pnl.Panel_SashHeight >= 800)
                                                         {
@@ -5148,9 +5164,55 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 _2DHingePrice += _2DHingePricePerPiece * pnl.Panel_2DHingeQty_nonMotorized;
                                             }
+                                            else if (Date_Assigned <= changeCondition_040423)
+                                            {
+                                                if (pnl.Panel_HingeOptions == HingeOption._2DHinge)
+                                                {
+                                                    if (Date_Assigned <= changeCondition_061423)
+                                                    {
+                                                        #region FSPrice
+                                                        if (pnl.Panel_SashHeight >= 800)
+                                                        {
+                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        }
+                                                        else
+                                                        {
+                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        }
+                                                        #endregion
+                                                    }
+                                                    else
+                                                    {
+                                                        #region FSPrice
+                                                        if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                                            pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                                        {
+                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                                            if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                            {
+                                                                SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                            }
+                                                        }
+                                                        else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                                 pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                                 pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                                 pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                                        {
+                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        }
+                                                        #endregion
+                                                    }
+
+                                                }
+                                            }
                                             else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                             {
-                                                if (Date_Assigned <= changeConditionforFS_061423)
+                                                if (Date_Assigned <= changeCondition_061423)
                                                 {
                                                     #region FSPrice
                                                     if (pnl.Panel_SashHeight >= 800)
@@ -5563,12 +5625,18 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 MotorizeMechPricePerPiece = MotorizeMechUsingRemotePrice;
 
-                                                MotorizeMechRemotePricePerPiece += RemoteForMotorizeMechPrice;
+
                                             }
 
                                             if (chckPerFrameMotorMech == true)
                                             {
                                                 MotorizePrice += MotorizeMechPricePerPiece * pnl.MotorizeMechQty();
+
+                                                if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
+                                                {
+                                                    RemoteForMotorizeMechPrice += MotorizeMechRemotePricePerPiece;
+                                                }
+
                                                 chckPerFrameMotorMech = false;
                                             }
                                         }
@@ -8089,7 +8157,7 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                         {
-                                            if (Date_Assigned <= changeConditionforFS_061423)
+                                            if (Date_Assigned <= changeCondition_061423)
                                             {
                                                 if (Singlepnl.Panel_SashHeight >= 800)
                                                 {
@@ -8267,9 +8335,54 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         _2DHingePrice += _2DHingePricePerPiece * Singlepnl.Panel_2DHingeQty_nonMotorized;
                                     }
+                                    else if (Date_Assigned <= changeCondition_040423)
+                                    {
+                                        if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge)
+                                        {
+                                            if (Date_Assigned <= changeCondition_061423) // Date_Assigned
+                                            {
+                                                #region FSPrice
+                                                if (Singlepnl.Panel_SashHeight >= 800)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
+                                                else
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                }
+                                                #endregion
+                                            }
+                                            else
+                                            {
+                                                #region FSPrice
+                                                if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                                    Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                                    if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                    {
+                                                        SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                    }
+                                                }
+                                                else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                         Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                         Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                         Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                }
+                                                #endregion
+                                            }
+                                        }
+                                    }
                                     else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                     {
-                                        if (Date_Assigned <= changeConditionforFS_061423) // Date_Assigned
+                                        if (Date_Assigned <= changeCondition_061423) // Date_Assigned
                                         {
                                             #region FSPrice
                                             if (Singlepnl.Panel_SashHeight >= 800)
@@ -8652,12 +8765,18 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         MotorizeMechPricePerPiece = MotorizeMechUsingRemotePrice;
 
-                                        MotorizeMechRemotePricePerPiece += RemoteForMotorizeMechPrice;
+
                                     }
 
                                     if (chckPerFrameMotorMech == true)
                                     {
                                         MotorizePrice += MotorizeMechPricePerPiece * Singlepnl.Panel_MotorizedMechQty;
+                                        if (Singlepnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
+                                        {
+                                            RemoteForMotorizeMechPrice += MotorizeMechRemotePricePerPiece;
+                                        }
+
+
                                         chckPerFrameMotorMech = false;
                                     }
 
@@ -11065,7 +11184,7 @@ namespace ModelLayer.Model.Quotation
                                              Math.Round(StrikerLRPrice, 2) +
                                              Math.Round(BrushSealPrice, 2) +
                                              Math.Round(MotorizePrice, 2) +
-                                             Math.Round(MotorizeMechRemotePricePerPiece, 2);
+                                             Math.Round(RemoteForMotorizeMechPrice, 2);
 
                     AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
                                            Math.Round(GbPrice, 2) +
