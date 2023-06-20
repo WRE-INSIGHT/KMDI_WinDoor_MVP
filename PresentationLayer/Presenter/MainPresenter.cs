@@ -41,6 +41,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Unity;
@@ -52,6 +53,10 @@ namespace PresentationLayer.Presenter
     public class MainPresenter : IMainPresenter
     {
         #region GlobalVar
+
+        [DllImport("User32")]
+        extern public static int GetGuiResources(IntPtr hProcess, int uiFlags); // check user objects
+
         Class.csFunctions csfunc = new Class.csFunctions();
         IMainView _mainView;
 
@@ -984,9 +989,69 @@ namespace PresentationLayer.Presenter
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
             _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
 
-
         }
 
+        private int ForceRestartAndLoadFile()
+        {
+            int _userObjCount = GetGuiResources(Process.GetCurrentProcess().Handle, 1);
+
+            if(_userObjCount >= 1)
+            {
+                MessageBox.Show("Current User Object Count" + _userObjCount + " WD ID" + _windoorModel.WD_id);
+                //wndr_content = new List<string>();
+
+                if(_wndrFilePath == "")
+                {
+                    _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
+                    if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+                    {
+                        wndr_content = new List<string>();
+                        SaveAs();
+
+                        foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
+                        {
+                            wndr_item.IsFromLoad = true;
+                        }
+
+                    }
+                }
+                else
+                {
+                    //SaveChanges();  
+                }
+
+                if (_wndrFileName == "")
+                {
+                    int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
+                    _wndrFileName = _wndrFilePath.Substring(startFileName);
+                }
+
+                string wndrfilePath = _wndrFilePath.Replace(_wndrFileName, string.Empty);
+                string batfilePath = wndrfilePath + "Open.bat";
+                string batformat = "@echo off" + "\n" + "taskkill /IM PresentationLayer.exe /f" + "\n" + "pause" + "\n" + "Start" + " " + _wndrFileName + " \n" + "del %0" + "\n" + "exit";
+
+                File.WriteAllText(batfilePath, batformat);
+                FileInfo f = new FileInfo(batfilePath);
+                f.MoveTo(Path.ChangeExtension(batfilePath, ".bat"));
+
+                Process proc = new Process();
+                proc.StartInfo.WorkingDirectory = wndrfilePath;
+                proc.StartInfo.FileName = "Open.bat";
+                proc.StartInfo.Arguments = string.Format("7");
+                proc.StartInfo.CreateNoWindow = false;
+                proc.Start();
+
+
+
+            }
+            else
+            {
+                Console.WriteLine("Current User Object Count: " + _userObjCount);
+            }
+            return _userObjCount;
+        }
+
+        #region Events  
         private void OnMainViewClosingEventRaised(object sender, FormClosingEventArgs e)
         {
             //if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
@@ -1055,9 +1120,7 @@ namespace PresentationLayer.Presenter
             }
 
         }
-        #region Events  
 
-        bool _allpanelsIsMesh;
         public void AddSlidingScreentoScreenList()
         {
             try
@@ -1206,10 +1269,8 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Problem Adding Sliding Screen to Screenlist" + " " + this + ex.Message);
             }
 
-            
-
         }
-
+    
 
         private void OnPanelMainMouseWheelEventRaised(object sender, MouseEventArgs e)
         {
@@ -1301,7 +1362,7 @@ namespace PresentationLayer.Presenter
                 {
                     updatePriceFromMainViewToItemList();
                     _windoorModel.WD_fileLoad = false;
-                    _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
+                    //_windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
                 }
                 else
                 {
@@ -1363,27 +1424,26 @@ namespace PresentationLayer.Presenter
         private void OnScreenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             // int screenID = _screenModel.Screen_id += 1;
-            _screenModel = _screenServices.AddScreenModel(0.0m,
-                                                          0,
-                                                          0,
-                                                          null,
-                                                          string.Empty,
-                                                          0.0m,
-                                                          0,
-                                                          0,
-                                                          0,
-                                                          0.0m,
-                                                          0.0m,
-                                                          string.Empty,
-                                                          0.0m,
-                                                          0.0m,
-                                                          string.Empty);
+            //_screenModel = _screenServices.AddScreenModel(0.0m,
+            //                                              0,
+            //                                              0,
+            //                                              null,
+            //                                              string.Empty,
+            //                                              0.0m,
+            //                                              0,
+            //                                              0,
+            //                                              0,
+            //                                              0.0m,
+            //                                              0.0m,
+            //                                              string.Empty,
+            //                                              0.0m,
+            //                                              0.0m,
+            //                                              string.Empty);
 
-            _screenModel.Screen_PVCVisibility = false;
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel);//, _screenDT);
-            glassThicknessPresenter.GetScreenView().ShowScreemView();
-
-
+            //_screenModel.Screen_PVCVisibility = false;
+            //IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel);//, _screenDT);
+            //glassThicknessPresenter.GetScreenView().ShowScreemView();
+            ForceRestartAndLoadFile();
         }
 
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
@@ -1399,7 +1459,6 @@ namespace PresentationLayer.Presenter
             ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel, _itemInfoUCPresenter);
             TopView.GetSetTopViewSlidingPanellingView().GetSetTopSlidingPanellingView();
         }
-
 
         private void _mainView_selectProjectToolStripMenuItemClickEventRaised1(object sender, EventArgs e)
         {
@@ -1442,7 +1501,6 @@ namespace PresentationLayer.Presenter
             if (_wndrFilePath != _mainView.GetSaveFileDialog().FileName)
             {
                 _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
-
             }
             else
             {
@@ -2567,6 +2625,7 @@ namespace PresentationLayer.Presenter
                     {
                         if (dialogResult == DialogResult.Yes)
                         {
+                            wndr_content = new List<string>();
                             SaveChanges();
                         }
                         Clearing_Operation();
@@ -3226,6 +3285,7 @@ namespace PresentationLayer.Presenter
 
 
         }
+
         private void OnAddProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             try
@@ -3247,8 +3307,6 @@ namespace PresentationLayer.Presenter
             {
                 if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
                 {
-
-
                     SetChangesMark();
                     add_existing = true;
                     _isOpenProject = false;
@@ -3535,7 +3593,7 @@ namespace PresentationLayer.Presenter
             string extractedValue_str = string.Empty;
             if (!string.IsNullOrWhiteSpace(row_str))
             {
-                extractedValue_str = row_str.Substring(row_str.IndexOf(": ") + 2);
+                extractedValue_str = row_str.Substring(row_str.IndexOf(": ") + 2); 
             }
             if (row_str.Contains("QuoteId:"))
             {
@@ -9096,7 +9154,8 @@ namespace PresentationLayer.Presenter
         #endregion
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen, inside_rdlcDic,
              rdlcDicChangeKey = true,
-             add_existing = false;
+             add_existing = false,
+            _allpanelsIsMesh;
 
         int _EntryCountOfKeyWordUsing,
             _EntryCountOfKeyWordPriceValidity;
@@ -12173,7 +12232,7 @@ namespace PresentationLayer.Presenter
             }
             //GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
             GetMainView().GetCurrentPrice().Value = _windoorModel.WD_currentPrice;
-            SetChangesMark();
+            SetChangesMark();                      
         }
 
         public async void GetIntownOutofTown()

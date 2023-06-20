@@ -2311,7 +2311,7 @@ namespace ModelLayer.Model.Quotation
                             Where = g.Key.Where,
                             Cut = g.Key.Cut
                         };
-
+    
             DataTable dt = new DataTable();
             dt.Columns.Add(CreateColumn("Description", "Description", "System.String"));
             dt.Columns.Add(CreateColumn("Qty", "Qty", "System.String"));
@@ -4278,7 +4278,7 @@ namespace ModelLayer.Model.Quotation
                 MaterialCost = 0;
                 #endregion
             }
-
+            
         }
          
         #endregion
