@@ -1112,7 +1112,7 @@ namespace PresentationLayer.Presenter
                 {
                     e.Cancel = true;
                 }
-                else if (dialogResult == DialogResult.Yes)                  
+                else if (dialogResult == DialogResult.Yes)
                 {
                     e.Cancel = false;
                 }
@@ -1264,7 +1264,7 @@ namespace PresentationLayer.Presenter
 
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Problem Adding Sliding Screen to Screenlist" + " " + this + ex.Message);
             }
@@ -1363,6 +1363,15 @@ namespace PresentationLayer.Presenter
                     updatePriceFromMainViewToItemList();
                     _windoorModel.WD_fileLoad = false;
                     //_windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
+                    if (_lblCurrentPrice.Value == _windoorModel.WD_currentPrice)
+                    {
+                        _quotationModel.TotalPriceHistoryStatus = "System Generated Price";
+                    }
+                    else
+                    {
+                        _quotationModel.TotalPriceHistoryStatus = "Edited Price";
+                    }
+                    Console.WriteLine(_quotationModel.TotalPriceHistoryStatus);
                 }
                 else
                 {
@@ -1485,6 +1494,16 @@ namespace PresentationLayer.Presenter
             {
                 wndr_content = new List<string>();
                 SaveAs();
+
+
+                if (_quotationModel.TotalPriceHistoryStatus == "System Generated Price")
+                {
+                    _quotationModel.lst_TotalPriceHistory.Add(_quotationModel.TotalPriceHistory);
+                }
+                else if (_quotationModel.TotalPriceHistoryStatus == "Edited Price")
+                {
+                    _quotationModel.lst_TotalPriceHistory.Add(_windoorModel.WD_currentPrice.ToString());
+                }
 
                 foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
                 {
@@ -9778,7 +9797,7 @@ namespace PresentationLayer.Presenter
             _screenList = new List<IScreenModel>();
             _pnlItems.Controls.Clear();
 
-            
+
             IEnumerable<Control> controls = _pnlMain.Controls.Cast<Control>().OfType<Control>();
             foreach (Control cons in controls)
             {
@@ -9886,7 +9905,7 @@ namespace PresentationLayer.Presenter
                                        int frmDimension_numHt,
                                        string frmDimension_profileType,
                                        string frmDimension_baseColor)
-          {
+        {
             if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
             {
                 if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
@@ -10314,8 +10333,8 @@ namespace PresentationLayer.Presenter
                             _frameModel.Frame_UC = (UserControl)_frameUC;
                             _frameModel.Frame_PropertiesUC = (UserControl)framePropUCP.GetFramePropertiesUC();
                             AddFrameList_WindoorModel(_frameModel);
-                             _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                             _basePlatformPresenter.InvalidateBasePlatform();
+                            _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                            _basePlatformPresenter.InvalidateBasePlatform();
                             SetMainViewTitle(input_qrefno,
                                             _projectName,
                                             _custRefNo,
@@ -12235,23 +12254,7 @@ namespace PresentationLayer.Presenter
             SetChangesMark();                      
         }
 
-        public async void GetIntownOutofTown()
-        {
 
-            decimal value;
-            string[] province = projectAddress.Split(',');
-            value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-
-            if (value == 1.30m)
-            {
-                ProvinceIntownOutofTown = true;
-            }
-            else if (value == 1.40m)
-            {
-                ProvinceIntownOutofTown = false;
-            }
-
-        }
         public void updatePriceFromMainViewToItemList()
         {
             if (_quotationModel != null)

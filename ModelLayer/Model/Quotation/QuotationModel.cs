@@ -48,6 +48,11 @@ namespace ModelLayer.Model.Quotation
         public string BOMandItemlistStatus { get; set; }
         public bool itemSelectStatus { get; set; }
         public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
+        public string TotalPriceHistory { get; set; }
+        public string TotalPriceHistoryStatus { get; set; }
+        public List<string> lst_TotalPriceHistory { get; set; }
+
+
 
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
@@ -2977,6 +2982,8 @@ namespace ModelLayer.Model.Quotation
                 AccesorriesCost,
                 AncillaryProfileCost,
                 TotaPrice,
+                BaseTotalPrice,
+                BaseTotalPriceWithFactor,
 
                 provinceBaseMultiplier;
         #endregion
@@ -4280,7 +4287,17 @@ namespace ModelLayer.Model.Quotation
             }
             
         }
-         
+
+        #endregion
+
+        #region changeConditionBaseOnDate 
+        DateTime changeConditionDivSize_040423 = DateTime.Parse("04-04-2023"); // Div_Width => Div_ExplosionWidth
+        DateTime changeConditionforFS_061423 = DateTime.Parse("06-14-2023"); // friction stay size => art#
+
+
+
+        DateTime testDate = DateTime.Parse("06-16-2023");
+
         #endregion
 
         #region glassbasedprice variable
@@ -4935,18 +4952,34 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                                 else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                                 {
-                                                    if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                    if (Date_Assigned <= changeConditionforFS_061423)
                                                     {
-                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        if (pnl.Panel_SashHeight >= 800)
+                                                        {
+                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        }
+                                                        else
+                                                        {
+                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        }
                                                     }
-                                                    else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
-                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
-                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
-                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                    else
                                                     {
-                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                        {
+                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        }
+                                                        else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
+                                                                 pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                                 pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                                 pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                        {
+                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        }
                                                     }
                                                 }
 
@@ -5117,27 +5150,46 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                             {
-                                                #region FSPrice
-                                                if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
-                                                    pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                                if (Date_Assigned <= changeConditionforFS_061423)
                                                 {
-                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
-
-                                                    if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                    #region FSPrice
+                                                    if (pnl.Panel_SashHeight >= 800)
                                                     {
-                                                        SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
                                                     }
+                                                    else
+                                                    {
+                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                    }
+                                                    #endregion
                                                 }
-                                                else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
-                                                         pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
-                                                         pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
-                                                         pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                                else
                                                 {
-                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                    #region FSPrice
+                                                    if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                                        pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                                    {
+                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                                        if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                        {
+                                                            SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                        }
+                                                    }
+                                                    else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                             pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                             pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                             pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                                    {
+                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                    }
+                                                    #endregion
                                                 }
-                                                #endregion
+
                                             }
 
                                             MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
@@ -8037,18 +8089,34 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                         {
-                                            if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                            if (Date_Assigned <= changeConditionforFS_061423)
                                             {
-                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                if (Singlepnl.Panel_SashHeight >= 800)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
+                                                else
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                }
                                             }
-                                            else if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
-                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
-                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
-                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                            else
                                             {
-                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
+                                                else if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
+                                                         Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                         Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                         Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                }
                                             }
                                         }
 
@@ -8201,27 +8269,45 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                     {
-                                        #region FSPrice
-                                        if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
-                                            Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                        if (Date_Assigned <= changeConditionforFS_061423) // Date_Assigned
                                         {
-                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                            FSBasePrice = FS_26HD_casementPricePerPiece;
-
-                                            if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                            #region FSPrice
+                                            if (Singlepnl.Panel_SashHeight >= 800)
                                             {
-                                                SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_26HD_casementPricePerPiece;
                                             }
+                                            else
+                                            {
+                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                            }
+                                            #endregion
                                         }
-                                        else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
-                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
-                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
-                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                        else
                                         {
-                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                            #region FSPrice
+                                            if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                                Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                            {
+                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                                if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                {
+                                                    SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                }
+                                            }
+                                            else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                     Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                     Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                     Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                            {
+                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                            }
+                                            #endregion
                                         }
-                                        #endregion
                                     }
 
 
@@ -11062,9 +11148,16 @@ namespace ModelLayer.Model.Quotation
                                 Math.Round(FilmPrice, 2) +
                                 Math.Round(SecurityMeshPrice, 2);
 
+                    BaseTotalPrice = TotaPrice;
+
                     TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
 
+                    BaseTotalPriceWithFactor = TotaPrice;
+
                     TotaPrice = TotaPrice + LouverCost + MeshCost;
+
+
+
 
                     wdm.WD_currentPrice = TotaPrice;
                     lstTotalPrice.Add(TotaPrice);
@@ -11073,6 +11166,161 @@ namespace ModelLayer.Model.Quotation
                     {
                         wdm.WD_price = TotaPrice;
                     }
+
+                    #region MyRegion
+                    TotalPriceHistoryStatus = "System Generated Price";
+                    TotalPriceHistory =
+                        "!!!!!!!!!!!!!! COMPUTATION FOR SAVING !!!!!!!!!!!!!!\n\n" +
+
+
+
+                    "WD_CostingPoints: " + CostingPoints.ToString() + "\n" +
+                    "LaborCost: " + LaborCost.ToString() + " = CostingPoints " + CostingPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n" +
+                    "InstallationCost: " + InstallationCost.ToString() + " = InstallationPoints " + InstallationPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n\n" +
+
+
+                    "FittingAndSuppliesCost: " + FittingAndSuppliesCost.ToString() + " = \n" +
+
+                                             "\t FSPrice: " + Math.Round(FSPrice, 2).ToString() + "+\n" +
+                                             "\t RestrictorStayPrice: " + Math.Round(RestrictorStayPrice, 2).ToString() + "+\n" +
+                                             "\t CornerDrivePrice: " + Math.Round(CornerDrivePrice, 2).ToString() + "+\n" +
+                                             "\t SnapInKeepPrice: " + Math.Round(SnapInKeepPrice, 2).ToString() + "+\n" +
+                                             "\t 35mmBacksetEspagWithCylinderPrice: " + Math.Round(_35mmBacksetEspagWithCylinderPrice, 2).ToString() + "+\n" +
+                                             "\t MiddleCLoserPrice: " + Math.Round(MiddleCLoserPrice, 2).ToString() + "+\n" +
+                                             "\t StayBearingPrice: " + Math.Round(StayBearingPrice, 2).ToString() + "+\n" +
+                                             "\t StayBearingPinPrice: " + Math.Round(StayBearingPinPrice, 2).ToString() + "+\n" +
+                                             "\t CoverStayBearingPrice: " + Math.Round(CoverStayBearingPrice, 2).ToString() + "+\n" +
+                                             "\t CoverCornerHingePrice: " + Math.Round(CoverCornerHingePrice, 2).ToString() + "+\n" +
+                                             "\t CornerPivotRestPrice: " + Math.Round(CornerPivotRestPrice, 2).ToString() + "+\n" +
+                                             "\t TopCornerHingePrice: " + Math.Round(TopCornerHingePrice, 2).ToString() + "+\n" +
+                                             "\t CorverCornerPivotRestPrice: " + Math.Round(CorverCornerPivotRestPrice, 2).ToString() + "+\n" +
+                                             "\t CorverCornerPivotRestVerticalPrice: " + Math.Round(CorverCornerPivotRestVerticalPrice, 2).ToString() + "+\n" +
+                                             "\t HandlePrice: " + Math.Round(HandlePrice, 2).ToString() + "+\n" +
+                                             "\t EspagPrice: " + Math.Round(EspagPrice, 2).ToString() + "+\n" +
+                                             "\t _2DHingePrice: " + Math.Round(_2DHingePrice, 2).ToString() + "+\n" +
+                                             "\t _3DHingePrice: " + Math.Round(_3DHingePrice, 2).ToString() + "+\n" +
+                                             "\t NTCenterHingePrice: " + Math.Round(NTCenterHingePrice, 2).ToString() + "+\n" +
+                                             "\t ShootBoltStrikerPrice: " + Math.Round(ShootBoltStrikerPrice, 2).ToString() + "+\n" +
+                                             "\t ShootBoltReversePrice: " + Math.Round(ShootBoltReversePrice, 2).ToString() + "+\n" +
+                                             "\t ShootBoltNonReversePrice: " + Math.Round(ShootBoltNonReversePrice, 2).ToString() + "+\n" +
+                                             "\t StrikerPrice: " + Math.Round(StrikerPrice, 2).ToString() + "+\n" +
+                                             "\t LatchDeadboltStrikerPrice: " + Math.Round(LatchDeadboltStrikerPrice, 2).ToString() + "+\n" +
+                                             "\t ExtensionPrice: " + Math.Round(ExtensionPrice, 2).ToString() + "+\n" +
+                                             "\t RollerPrice: " + Math.Round(RollerPrice, 2).ToString() + "+\n" +
+                                             "\t StrikerLRPrice: " + Math.Round(StrikerLRPrice, 2).ToString() + "+\n" +
+                                             "\t BrushSealPrice: " + Math.Round(BrushSealPrice, 2).ToString() + "+\n" +
+                                             "\t MotorizePrice: " + Math.Round(MotorizePrice, 2).ToString() + "+\n" +
+                                             "\t MotorizeMechRemotePricePerPiece: " + Math.Round(MotorizeMechRemotePricePerPiece, 2).ToString() + "\n\n" +
+
+                    "AncillaryProfileCost: " + AncillaryProfileCost.ToString() + " = \n" +
+
+                                             "\t ThresholdPrice:" + Math.Round(ThresholdPrice, 2).ToString() + "+\n" +
+                                             "\t GbPrice:" + Math.Round(GbPrice, 2) + "+\n" +
+                                             "\t GeorgianBarCost:" + Math.Round((GeorgianBarCost * provinceBaseMultiplier), 2) + "+\n" +
+                                             "\t CoverProfileCost:" + Math.Round(CoverProfileCost, 2) + "+\n" +
+                                             "\t GlazingGasketPrice:" + Math.Round(GlazingGasketPrice, 2) + "+\n" +
+                                             "\t WeatherBarPrice:" + Math.Round(WeatherBarPrice, 2) + "+\n" +
+                                             "\t WeatherBarFastenerPrice:" + Math.Round(WeatherBarFastenerPrice, 2) + "+\n" +
+                                             "\t WaterSeepagePrice:" + Math.Round(WaterSeepagePrice, 2) + "+\n" +
+                                             "\t GuideTrackPrice:" + Math.Round(GuideTrackPrice, 2) + "+\n" +
+                                             "\t AlumTrackPrice:" + Math.Round(AlumTrackPrice, 2) + "+\n" +
+                                             "\t InterlockPrice:" + Math.Round(InterlockPrice, 2) + "+\n" +
+                                             "\t ExtensionForInterlockPrice:" + Math.Round(ExtensionForInterlockPrice, 2) + "+\n" +
+                                             "\t AluminumPullHandlePrice:" + Math.Round(AluminumPullHandlePrice, 2) + "+\n" +
+                                             "\t GlazingAdaptorPrice:" + Math.Round((GlazingAdaptorPrice * provinceBaseMultiplier), 2) + "\n\n" +
+
+
+                    "AccesorriesCost: " + AccesorriesCost.ToString() + " = \n" +
+                                             "\t EndCapPrice:" + Math.Round(EndCapPrice, 2).ToString() + "+\n" +
+                                             "\t MechJointPrice:" + Math.Round(MechJointPrice, 2).ToString() + "+\n" +
+                                             "\t GBSpacerPrice:" + Math.Round(GBSpacerPrice, 2).ToString() + "+\n" +
+                                             "\t PlasticWedgePrice:" + Math.Round(PlasticWedgePrice, 2).ToString() + "+\n" +
+                                             "\t SealingBlockPrice:" + Math.Round(SealingBlockPrice, 2).ToString() + "\n\n" +
+
+
+
+                    "MaterialCost: " + MaterialCost.ToString() + " = \n" +
+
+                                             "\t FramePrice:" + Math.Round(FramePrice, 2).ToString() + "+\n" +
+                                             "\t FrameReinPrice:" + Math.Round(FrameReinPrice, 2).ToString() + "+\n" +
+                                             "\t SashPrice:" + Math.Round(SashPrice, 2).ToString() + "+\n" +
+                                             "\t SashReinPrice:" + Math.Round(SashReinPrice, 2).ToString() + "+\n" +
+                                             "\t DivPrice:" + Math.Round(DivPrice, 2).ToString() + "+\n" +
+                                             "\t DivReinPrice:" + Math.Round(DivReinPrice, 2).ToString() + "+\n" +
+                                             "\t claddingPrice:" + Math.Round(claddingPrice, 2).ToString() + "+\n" +
+                                             "\t DMPrice:" + Math.Round(DMPrice, 2).ToString() + "+\n" +
+                                             "\t DMReinforcementPrice:" + Math.Round(DMReinforcementPrice, 2).ToString() + "+\n" +
+                                             "\t ExtensionProfile15mmPrice:" + Math.Round(ExtensionProfile15mmPrice, 2).ToString() + "+\n" +
+                                             "\t TubularPrice:" + Math.Round(TubularPrice, 2).ToString() + "+\n" +
+                                             "\t SealantPrice:" + Math.Round(SealantPrice, 2).ToString() + "+\n" +
+                                             "\t PUFoamingPrice:" + Math.Round(PUFoamingPrice, 2).ToString() + "+\n" +
+                                             "\t FittingAndSuppliesCost:" + Math.Round(FittingAndSuppliesCost, 2).ToString() + "+\n" +
+                                             "\t AncillaryProfileCost:" + Math.Round(AncillaryProfileCost, 2).ToString() + "+\n" +
+                                             "\t AccesorriesCost:" + Math.Round(AccesorriesCost, 2).ToString() + "\n\n" +
+
+
+                    "MaterialCostBreakDownBase: " + MaterialCost.ToString() + " \n\n" +
+
+
+                    "LouverCost: " + LouverCost.ToString() + " = \n" +
+
+                                 "\t LouvreFrameWeatherStripHeadPrice:" + Math.Round(LouvreFrameWeatherStripHeadPrice, 2).ToString() + "+\n" +
+                                 "\t LouvreFrameBottomWeatherStripPrice:" + Math.Round(LouvreFrameBottomWeatherStripPrice, 2).ToString() + "+\n" +
+                                 "\t PlantonWeatherStripHeadPrice:" + Math.Round(PlantonWeatherStripHeadPrice, 2).ToString() + "+\n" +
+                                 "\t PlantonWeatherStripSillPrice:" + Math.Round(PlantonWeatherStripSillPrice, 2).ToString() + "+\n" +
+                                 "\t GalleryAdaptorPrice:" + Math.Round(GalleryAdaptorPrice, 2).ToString() + "+\n" +
+                                 "\t BubbleSealPrice:" + Math.Round(BubbleSealPrice, 2).ToString() + "+\n" +
+                                 "\t GlassBladePrice:" + Math.Round(GlassBladePrice, 2).ToString() + "+\n" +
+                                 "\t GalleryPrice:" + Math.Round(GalleryPrice, 2).ToString() + "+\n" +
+                                 "\t PowerKitIncludingWiresPrice:" + Math.Round(PowerKitIncludingWiresPrice, 2).ToString() + "+\n" +
+                                 "\t SecurityKitPrice:" + Math.Round(SecurityKitPrice, 2).ToString() + "+\n" +
+                                 "\t RingpullLeverHandlePrice:" + Math.Round(RingpullLeverHandlePrice, 2).ToString() + "\n\n" +
+
+                   "LouverPrice: " + LouverCost.ToString() + " \n\n" +
+
+                    "LouverCost: " + LouverCost.ToString() + " = LouverCost: " + LouverCost + " * PricingFactor: " + PricingFactor + " * 1.12m\n\n" +
+
+
+
+                    "MeshCost: " + MeshCost.ToString() + " = \n" +
+
+
+                               "\t SecurityMeshPrice:" + Math.Round(SecurityMeshPrice, 2) + "+\n" +
+                               "\t WireMeshPrice:" + Math.Round(WireMeshPrice, 2) + "+\n" +
+                               "\t PetMeshPrice:" + Math.Round(PetMeshPrice, 2) + "+\n" +
+                               "\t TuffMeshPrice:" + Math.Round(TuffMeshPrice, 2) + "+\n" +
+                               "\t PhiferMeshPrice:" + Math.Round(PhiferMeshPrice, 2) + "+\n" +
+                               "\t AluminumFramePrice:" + Math.Round(AluminumFramePrice, 2) + "\n\n" +
+
+
+                    "MeshPrice: " + MeshCost.ToString() + " \n\n" +
+
+
+                    "MeshCost = : MeshCost" + MeshCost.ToString() + " * " + PricingFactor.ToString() + " * 1.10m\n\n" +
+
+                        "MaterialCost: " + MaterialCost.ToString() + " = \n" +
+                                  "\t MaterialCost:" + MaterialCostBreakDownBase.ToString() + "+\n" +
+                                   "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.05m) +\n" +
+                                   "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.10m) +\n" +
+                                   "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.12m) +\n" +
+                                   "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.16m)  \n\n" +
+
+                   "TotaPrice: " + BaseTotalPrice.ToString() + " = \n" +
+
+
+                               "\t LaborCost:" + Math.Round(LaborCost, 2).ToString() + "+\n" +
+                               "\t InstallationCost:" + Math.Round(InstallationCost, 2).ToString() + "+\n" +
+                               "\t MaterialCost " + Math.Round(MaterialCost, 2).ToString() + "+\n" +
+                               "\t GlassPrice:" + Math.Round(GlassPrice, 2).ToString() + "+\n" +
+                               "\t FilmPrice:" + Math.Round(FilmPrice, 2).ToString() + "+\n" +
+                               "\t SecurityMeshPrice:" + Math.Round(SecurityMeshPrice, 2).ToString() + "\n\n" +
+
+
+                   "TotaPrice: " + BaseTotalPriceWithFactor.ToString() + " = (" + BaseTotalPrice.ToString() + " * " + PricingFactor.ToString() + ") + " + BaseTotalPrice.ToString() + ") \n\n" +
+
+                   "TotaPrice: " + TotaPrice.ToString() + " = " + BaseTotalPriceWithFactor.ToString() + " + " + LouverCost.ToString() + " + " + MeshCost.ToString();
+
+                    #endregion
 
 
                     if (BOM_Status == true)
