@@ -80,8 +80,9 @@ namespace ServiceLayer.Services.PanelServices
                                             bool panelSlidingTypeVisibility,
                                             SlidingTypes panelSlidingTypes,
                                             string glasstype_insu_lumi,
-                                            decimal glasspricepersqrmeter
-
+                                            decimal glasspricepersqrmeter,
+                                            MotorizedMechRemote_ArticleNo panelMotorizedMechRemoteArtNo,
+                                            bool panelMotorizedMechRemoteOption
                                             )
         {
             IPanelModel pnl = new PanelModel(panelID,
@@ -147,7 +148,9 @@ namespace ServiceLayer.Services.PanelServices
                                              panelSlidingTypeVisibility,
                                              panelSlidingTypes,
                                              glasstype_insu_lumi,
-                                             glasspricepersqrmeter
+                                             glasspricepersqrmeter,
+                                             panelMotorizedMechRemoteArtNo,
+                                             panelMotorizedMechRemoteOption
                                              );
 
             ValidateModel(pnl);
@@ -222,7 +225,9 @@ namespace ServiceLayer.Services.PanelServices
                                          bool panelSlidingTypeVisibility = false,
                                          SlidingTypes panelSlidingTypes = null, 
                                          string glasstype_insu_lumi = null,
-                                         decimal glasspricepersqrmeter = 0
+                                         decimal glasspricepersqrmeter = 0,
+                                         MotorizedMechRemote_ArticleNo panelMotorizedMechRemoteArtNo = null,
+                                         bool panelMotorizedMechRemoteOption = false
                                          )
         {
             if (panelName == "")
@@ -306,7 +311,9 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelSlidingTypeVisibility,
                                                        panelSlidingTypes, 
                                                        glasstype_insu_lumi,
-                                                       glasspricepersqrmeter);
+                                                       glasspricepersqrmeter,
+                                                       panelMotorizedMechRemoteArtNo,
+                                                       panelMotorizedMechRemoteOption);
 
             return _panelModel;
         }

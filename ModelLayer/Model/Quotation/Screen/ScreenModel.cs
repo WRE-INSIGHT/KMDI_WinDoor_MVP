@@ -20,6 +20,7 @@ namespace ModelLayer.Model.Quotation.Screen
 
         #region Variables
 
+
         decimal
         #region RollUpCostingMaterials
         TotalRollUpCostingMaterials,
@@ -627,26 +628,26 @@ namespace ModelLayer.Model.Quotation.Screen
         _tr_WireCB40051PricePerLinearMeter = 0.3735m / 0.45m,
         _tr_TappingScrew3X30BHPricePerPiece = 0.03m / 0.45m,
         _tr_MagnetPricePerLinearMeter = 0.3825m / 0.45m,
-        _tr_PileForPlissèPricePerLinearMeter = 0.36m * 1.1m,
+        _tr_PileForPlissèPricePerLinearMeter = 0.36m * 1.1m, // not included in AD 
         _tr_LatchForResizablePlissèPricePerPiece = 2.97m * 1.1m,
         _tr_ScrewForLatchPricePerPiece = 0.038m * 1.1m,
-        
+
         // white/ivory
-        _tr_WallBarOxRALStandardPricePerLinearMeter = 7.1969m,
-        _tr_SlideBarOxRALStandardPricePerLinearMeter = 7.2654m,
-        _tr_TopGuideResizablePlissèMillFinishedPricePerLinearMeter = 5.6634m,
-        _tr_UprofileForMagnetMillFinishedPricePerLinearMeter = 3.0586m,
-        _tr_PlisseLProfileFrontalFixingMillFinishedPricePerLinearMeter = 3.4612m,
-        _tr_PlisseCoverLProfileFrontingFixingMillFinishPricePerLinearMeter = 2.2399m,
-        
+        _tr_WallBarOxRALStandardPricePerLinearMeter = 45.8481176470588m * 1.1m,
+        _tr_SlideBarOxRALStandardPricePerLinearMeter = 46.2923823529412m * 1.1m,
+        _tr_TopGuideResizablePlissèMillFinishedPricePerLinearMeter = 40.27m * 1.1m,
+        _tr_UprofileForMagnetMillFinishedPricePerLinearMeter = 17.3559411764706m * 1.1m,
+        _tr_PlisseLProfileFrontalFixingMillFinishedPricePerLinearMeter = 9.23m / 0.45m,
+        _tr_PlisseCoverLProfileFrontingFixingMillFinishPricePerLinearMeter = 4.74m / 0.45m,
+
         //WoodGrain
-        _tr_WallBarWoodFinishedPricePerLinearMeter = 8.2820m,
-        _tr_SlideBarWoodFinishedPricePerLinearMeter = 8.3520m,
-        _tr_TopGuideResizablePlissèWoodFinishedPricePerLinearMeter = 6.9600m,
-        _tr_UprofileForMagnetWoodFinishedPricePerLinearMeter = 4.1630m,
-        _tr_PlisseLProfileFrontalFixingWoodFinishedPerLinearMeter = 4.5090m,
-        _tr_PlisseCoverLProfileFrontingFixingWoodFinishedPricePerLinearMeter = 3.1200m,
-        
+        _tr_WallBarWoodFinishedPricePerLinearMeter = 77.9536470588235m * 1.1m,
+        _tr_SlideBarWoodFinishedPricePerLinearMeter = 78.6940882352941m * 1.1m,
+        _tr_TopGuideResizablePlissèWoodFinishedPricePerLinearMeter = 69 * 1.1m,
+        _tr_UprofileForMagnetWoodFinishedPricePerLinearMeter = 29.5287941176471m * 1.1m,
+        _tr_PlisseLProfileFrontalFixingWoodFinishedPerLinearMeter = 15.129m / 0.45m,
+        _tr_PlisseCoverLProfileFrontingFixingWoodFinishedPricePerLinearMeter = 4.74m / 0.45m,
+
         _tr_TotalPlisseCostingMaterials,
         _tr_PlisseCostingMaterials,
         _tr_PPPleatingNETHPrice,
@@ -669,7 +670,7 @@ namespace ModelLayer.Model.Quotation.Screen
         _tr_PositiveMagnetPrice,
         _tr_NegativeMagnetPrice,
         _tr_PileforPlissePrice,
-        
+
         _tr_LatchForResizablePlissèPrice,
         _tr_ScrewForLatchPrice,
         _tr_SlidingBarEndCapResizablePlissèPrice,
@@ -680,21 +681,33 @@ namespace ModelLayer.Model.Quotation.Screen
         _tr_ScrewForTensionerPrice,
         _tr_HammerNutResizablePlissèPrice,
         _tr_Grub5x20Price,
-        
+
         _tr_WallBarPrice,
         _tr_SlideBarPrice,
         _tr_TopGuideResizablePlissèPrice,
         _tr_UprofileForMagnetPrice,
         _tr_PlisseLProfileFrontalFixingPrice,
         _tr_PlisseCoverLProfileFrontingFixingPrice,
-        
+
         _tr_AluminumBottomGuidePrice,
         _tr_AluminumPlisseHandlePrice,
         _tr_LocalMaterialPrice,
-        
+
         _tr_HandlesPrice = 0,
         _tr_CouplingProfilePrice = 0,
         _tr_PliseeLandCoverPrice = 0,
+
+        _tr_TotalMatCost,
+        _tr_Wastage,
+        _tr_Freight,
+        _tr_DandT,
+        _tr_SShopItems = 100m,
+        _tr_ProdCost = 0.75m * 3000m,
+        _tr_Contigencies,
+        _tr_tAmount,
+        
+
+        
         #endregion
 
         #region BuiltinSideRoll Variables
@@ -3275,7 +3288,6 @@ namespace ModelLayer.Model.Quotation.Screen
                     #region Plisse TR
                     else if (Screen_PlisséType == PlisseType._TR)
                     {
-
                         if (Screen_Height >= 2701 && Screen_Height <= 3200)
                         {
                             _tr_PPPleatingNETHPricePerLinearMeter = 15.47m / 0.45m;
@@ -3295,8 +3307,8 @@ namespace ModelLayer.Model.Quotation.Screen
                         _tr_BottomRail2p5mBarsPrice = _tr_BottomRail2p5mBarsPricePerPiece * _tr_BottomRail2p5mBarsQty;
                         _tr_SettingPlate2p6mbarsPrice = 2 * _tr_SettingPlate2p6mbarsPricePricePerPiece;
                         _tr_FinplateBarsPrice = Screen_Height > 2300 ? (1.935m / 0.45m * 2.47m / 2.3m) : (1.935m / 0.45m);
-                        _tr_ScorpionfishLDPrice = 1.4353m / 0.45m;
-                        _tr_ScorpionfishRDPrice = 1.4353m / 0.45m;
+                        _tr_ScorpionfishLDPrice = 1.4535m / 0.45m;
+                        _tr_ScorpionfishRDPrice = 1.4535m / 0.45m;
                         _tr_AnchorplatePriceQty = Screen_Height > 2550 ? 4 : 3;
                         _tr_AnchorplatePrice = _tr_AnchorplatePricePerPiece * _tr_AnchorplatePriceQty;
                         _tr_Scorpiontail3Qty = Screen_Width * 0.09m / 2;
@@ -3314,7 +3326,7 @@ namespace ModelLayer.Model.Quotation.Screen
                         _tr_MagnetQty = Screen_Height / 1000m;
                         _tr_PositiveMagnetPrice = _tr_MagnetPricePerLinearMeter * _tr_MagnetQty;
                         _tr_NegativeMagnetPrice = _tr_MagnetPricePerLinearMeter * _tr_MagnetQty;
-                        _tr_PileforPlissePrice = (Screen_Height / 1000m) * _tr_PileForPlissèPricePerLinearMeter; // not included in plissë AD
+                        //_tr_PileforPlissePrice = (Screen_Height / 1000m) * _tr_PileForPlissèPricePerLinearMeter; // not included in plissë AD
 
                         _tr_LatchForResizablePlissèPrice = _tr_LatchForResizablePlissèPricePerPiece;
                         _tr_ScrewForLatchPrice = 2 * _tr_ScrewForLatchPricePerPiece;
@@ -3323,7 +3335,7 @@ namespace ModelLayer.Model.Quotation.Screen
                         _tr_TopGuideEndCapResizablePlissèPrice = 2.7m * 1.1m;
                         _tr_CordCurrierResizablePlissèPrice = 2.26m * 1.1m;
                         _tr_TensionerPrice = 0.38m * 1.1m;
-                        _tr_ScrewForTensionerPrice = 0.12m * 1.1m;
+                        _tr_ScrewForTensionerPrice = (0.12m * 1.1m) * 2;
                         _tr_HammerNutResizablePlissèPrice = 2.5m * 1.1m;
                         _tr_Grub5x20Price = 0.305m * 1.1m;
 
@@ -3332,16 +3344,80 @@ namespace ModelLayer.Model.Quotation.Screen
                         if (Screen_BaseColor == Base_Color._White || Screen_BaseColor == Base_Color._Ivory)
                         {
                             //Ox/RAL Standard
-                            
-                        
-
+                            _tr_WallBarPrice = _tr_WaSbarQty * (_tr_WallBarOxRALStandardPricePerLinearMeter / 4.75m);
+                            _tr_SlideBarPrice = _tr_WaSbarQty * (_tr_SlideBarOxRALStandardPricePerLinearMeter / 4.75m);
+                            _tr_TopGuideResizablePlissèPrice = (Screen_Width / 1000m) * (_tr_TopGuideResizablePlissèMillFinishedPricePerLinearMeter / 5 );
+                            _tr_UprofileForMagnetPrice = _tr_WaSbarQty * (_tr_UprofileForMagnetMillFinishedPricePerLinearMeter / 5);
+                            _tr_PlisseLProfileFrontalFixingPrice = (_tr_WaSbarQty * 2) * (_tr_PlisseLProfileFrontalFixingMillFinishedPricePerLinearMeter / 5);
+                            _tr_PlisseCoverLProfileFrontingFixingPrice = (_tr_WaSbarQty * 2) * ( _tr_PlisseCoverLProfileFrontingFixingMillFinishPricePerLinearMeter/ 5);
                         }
                         else if(Screen_BaseColor == Base_Color._DarkBrown)
                         {
+                            //WoodFinish
+                            _tr_WallBarPrice = _tr_WaSbarQty * (_tr_WallBarWoodFinishedPricePerLinearMeter / 4.75m);
+                            _tr_SlideBarPrice = _tr_WaSbarQty * (_tr_SlideBarWoodFinishedPricePerLinearMeter / 4.75m);
+                            _tr_TopGuideResizablePlissèPrice = (Screen_Width / 1000m) * (_tr_TopGuideResizablePlissèWoodFinishedPricePerLinearMeter / 5);
+                            _tr_UprofileForMagnetPrice = _tr_WaSbarQty * (_tr_UprofileForMagnetWoodFinishedPricePerLinearMeter / 5);
+                            _tr_PlisseLProfileFrontalFixingPrice = (_tr_WaSbarQty * 2) * (_tr_PlisseLProfileFrontalFixingWoodFinishedPerLinearMeter / 5);
+                            _tr_PlisseCoverLProfileFrontingFixingPrice = (_tr_WaSbarQty * 2) * (_tr_PlisseCoverLProfileFrontingFixingWoodFinishedPricePerLinearMeter / 5);
+                        }
 
-                        }                                             
-                        
-                        
+                      _tr_PlisseCostingMaterials = _tr_PPPleatingNETHPrice +
+                                                   _tr_BottomRail2p5mBarsPrice +
+                                                   _tr_SettingPlate2p6mbarsPrice+
+                                                   _tr_FinplateBarsPrice +
+                                                   _tr_ScorpionfishLDPrice +
+                                                   _tr_ScorpionfishRDPrice +
+                                                   _tr_AnchorplatePrice +
+                                                   _tr_Scorpiontail3Price +
+                                                   _tr_WireEndtailYellowPrice +
+                                                   _tr_AjustEightTailPrice+
+                                                   _tr_TailEndPrice +
+                                                   _tr_TailReversalPrice +
+                                                   _tr_WireGuideCenterPrice +
+                                                   _tr_WireGuideRPrice +
+                                                   _tr_WireGuideLPrice +
+                                                   _tr_WireCB40051Price +
+                                                   _tr_TappingScrew3X30BHPrice +
+                                                   _tr_PositiveMagnetPrice +
+                                                   _tr_NegativeMagnetPrice +
+                                                   _tr_LatchForResizablePlissèPrice +
+                                                   _tr_ScrewForLatchPrice +
+                                                   _tr_SlidingBarEndCapResizablePlissèPrice +
+                                                   _tr_WallProfileEndCapResizablePlissèPrice+
+                                                   _tr_TopGuideEndCapResizablePlissèPrice +
+                                                   _tr_CordCurrierResizablePlissèPrice +
+                                                   _tr_TensionerPrice +
+                                                   _tr_ScrewForTensionerPrice +
+                                                   _tr_HammerNutResizablePlissèPrice +
+                                                   _tr_Grub5x20Price +
+                                                   _tr_WallBarPrice +
+                                                   _tr_SlideBarPrice +
+                                                   _tr_TopGuideResizablePlissèPrice+
+                                                   _tr_UprofileForMagnetPrice +
+                                                   _tr_PlisseLProfileFrontalFixingPrice +
+                                                   _tr_PlisseCoverLProfileFrontingFixingPrice;
+
+                        _tr_HandlesPrice = (0.468m / 0.45m) * 2;
+                        _tr_TotalMatCost = (_tr_PlisseCostingMaterials + _tr_HandlesPrice) * (Screen_ExchangeRate + 6);
+                        _tr_Wastage = _tr_TotalMatCost * 0.1m;
+                        _tr_Freight = _tr_TotalMatCost * 0.05m;
+                        _tr_DandT = (_tr_TotalMatCost + _tr_Freight) * 0.12m;
+                        _tr_Contigencies = ( _tr_TotalMatCost + _tr_Wastage + _tr_Freight + _tr_DandT + _tr_SShopItems + _tr_ProdCost) * 0.05m;
+
+
+                        _tr_tAmount = Math.Round(_tr_TotalMatCost, 2) +
+                                      Math.Round(_tr_Wastage, 2) +
+                                      Math.Round(_tr_Freight, 2) +
+                                      Math.Round(_tr_DandT, 2) +
+                                      Math.Round(_tr_SShopItems, 2) +
+                                      Math.Round(_tr_ProdCost, 2) +
+                                      Math.Round(_tr_Contigencies, 2) + 
+                                      0.5m;
+
+
+
+
                     }
                     #endregion
                 }
@@ -6416,7 +6492,8 @@ namespace ModelLayer.Model.Quotation.Screen
                               milledprofile6040Price +
                               LatchkitTotal +
                               IntermediatePartTotal +
-                              landCoverPrice ;
+                              landCoverPrice +
+                              milled6052Price;
 
                 TotalPrice = TotalRollUpCostingMaterials +
                              TotalPlisseCostingMaterials +
@@ -6491,6 +6568,22 @@ namespace ModelLayer.Model.Quotation.Screen
 
                         Discount = Screen_UnitPrice * DiscountPercentage;
                         Screen_NetPrice = Math.Round((Screen_UnitPrice - Discount) * Screen_Quantity, 2);                                            
+                        #endregion
+                    }
+                    else if (Screen_PlisséType == PlisseType._TR)
+                    {
+                        #region Plisse TR
+
+                        if (FromCellEndEdit != true)
+                        {
+                            Screen_UnitPrice = ((Math.Ceiling(_tr_tAmount) * Screen_Factor) + AddOnsPrice) * Screen_Set;
+                        }
+                        PriceIncreaseByPercentage();
+                        Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
+
+                        Discount = Screen_UnitPrice * DiscountPercentage;
+                        Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
+
                         #endregion
                     }
                 }
@@ -6582,6 +6675,10 @@ namespace ModelLayer.Model.Quotation.Screen
                     {
                         Screen_Description = "Plissé SR Slim Line Insect Screen";
                     }
+                }
+                else if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._TR)
+                {
+                    Screen_Description = "Plissé TR Insect Screen";
                 }
                 else if (Screen_Types == ScreenType._Freedom)
                 {
@@ -6900,6 +6997,77 @@ namespace ModelLayer.Model.Quotation.Screen
             Freedom_tAmount = 0;
 
             #endregion
+
+            #region Trail Screen Variables
+            _tr_PPPleatingNETHQty = 0;
+            _tr_BottomRail2p5mBarsQty = 0;
+            _tr_AnchorplatePriceQty = 0;
+            _tr_Scorpiontail3Qty = 0;
+            _tr_WireCB40051PriceQty = 0;
+            _tr_MagnetQty = 0;
+            _tr_WaSbarQty = 0;
+
+            _tr_PPPleatingNETHPricePerLinearMeter = 0;
+
+            _tr_TotalPlisseCostingMaterials = 0;
+            _tr_PlisseCostingMaterials = 0;
+            _tr_PPPleatingNETHPrice = 0;
+            _tr_BottomRail2p5mBarsPrice = 0;
+            _tr_SettingPlate2p6mbarsPrice = 0;
+            _tr_FinplateBarsPrice = 0;
+            _tr_ScorpionfishLDPrice = 0;
+            _tr_ScorpionfishRDPrice = 0;
+            _tr_AnchorplatePrice = 0;
+            _tr_Scorpiontail3Price = 0;
+            _tr_WireEndtailYellowPrice = 0;
+            _tr_AjustEightTailPrice = 0;
+            _tr_TailEndPrice = 0;
+            _tr_TailReversalPrice = 0;
+            _tr_WireGuideCenterPrice = 0;
+            _tr_WireGuideRPrice = 0;
+            _tr_WireGuideLPrice = 0;
+            _tr_WireCB40051Price = 0;
+            _tr_TappingScrew3X30BHPrice = 0;
+            _tr_PositiveMagnetPrice = 0;
+            _tr_NegativeMagnetPrice = 0;
+            _tr_PileforPlissePrice = 0;
+
+            _tr_LatchForResizablePlissèPrice = 0;
+            _tr_ScrewForLatchPrice = 0;
+            _tr_SlidingBarEndCapResizablePlissèPrice = 0;
+            _tr_WallProfileEndCapResizablePlissèPrice = 0;
+            _tr_TopGuideEndCapResizablePlissèPrice = 0;
+            _tr_CordCurrierResizablePlissèPrice = 0;
+            _tr_TensionerPrice = 0;
+            _tr_ScrewForTensionerPrice = 0;
+            _tr_HammerNutResizablePlissèPrice = 0;
+            _tr_Grub5x20Price = 0;
+
+            _tr_WallBarPrice = 0;
+            _tr_SlideBarPrice = 0;
+            _tr_TopGuideResizablePlissèPrice = 0;
+            _tr_UprofileForMagnetPrice = 0;
+            _tr_PlisseLProfileFrontalFixingPrice = 0;
+            _tr_PlisseCoverLProfileFrontingFixingPrice = 0;
+
+            _tr_AluminumBottomGuidePrice = 0;
+            _tr_AluminumPlisseHandlePrice = 0;
+            _tr_LocalMaterialPrice = 0;
+
+            _tr_HandlesPrice = 0;
+            _tr_CouplingProfilePrice = 0;
+            _tr_PliseeLandCoverPrice = 0;
+
+            _tr_TotalMatCost = 0;
+            _tr_Wastage = 0;
+            _tr_Freight = 0;
+            _tr_DandT = 0;
+            _tr_Contigencies = 0;
+            _tr_tAmount = 0;
+        
+
+        
+        #endregion
 
             pvc1067withreinPrice = 0;
             milledprofile6040Price = 0;
