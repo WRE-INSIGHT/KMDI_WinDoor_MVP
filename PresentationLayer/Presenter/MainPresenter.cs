@@ -1424,26 +1424,26 @@ namespace PresentationLayer.Presenter
         private void OnScreenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             // int screenID = _screenModel.Screen_id += 1;
-            //_screenModel = _screenServices.AddScreenModel(0.0m,
-            //                                              0,
-            //                                              0,
-            //                                              null,
-            //                                              string.Empty,
-            //                                              0.0m,
-            //                                              0,
-            //                                              0,
-            //                                              0,
-            //                                              0.0m,
-            //                                              0.0m,
-            //                                              string.Empty,
-            //                                              0.0m,
-            //                                              0.0m,
-            //                                              string.Empty);
+            _screenModel = _screenServices.AddScreenModel(0.0m,
+                                                          0,
+                                                          0,
+                                                          null,
+                                                          string.Empty,
+                                                          0.0m,
+                                                          0,
+                                                          0,
+                                                          0,
+                                                          0.0m,
+                                                          0.0m,
+                                                          string.Empty,
+                                                          0.0m,
+                                                          0.0m,
+                                                          string.Empty);
 
-            //_screenModel.Screen_PVCVisibility = false;
-            //IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel);//, _screenDT);
-            //glassThicknessPresenter.GetScreenView().ShowScreemView();
-            ForceRestartAndLoadFile();
+            _screenModel.Screen_PVCVisibility = false;
+            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel);//, _screenDT);
+            glassThicknessPresenter.GetScreenView().ShowScreemView();
+            //ForceRestartAndLoadFile();
         }
 
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
