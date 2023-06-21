@@ -1509,17 +1509,7 @@ namespace PresentationLayer.Presenter
             if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
             {
                 wndr_content = new List<string>();
-
-                _quotationModel.lst_TotalPriceHistory = new List<string>();
-                if (_quotationModel.TotalPriceHistoryStatus == "System Generated Price")
-                {
-                    _quotationModel.lst_TotalPriceHistory.Add(_quotationModel.TotalPriceHistory);
-                }
-                else if (_quotationModel.TotalPriceHistoryStatus == "Edited Price")
-                {
-                    _quotationModel.lst_TotalPriceHistory.Add(_windoorModel.WD_currentPrice.ToString());
-                }
-
+              
                 foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
                 {
                     wndr_item.IsFromLoad = true;
@@ -1533,6 +1523,16 @@ namespace PresentationLayer.Presenter
 
         public void SaveAs()
         {
+            _quotationModel.lst_TotalPriceHistory = new List<string>();
+            if (_quotationModel.TotalPriceHistoryStatus == "System Generated Price")
+            {
+                _quotationModel.lst_TotalPriceHistory.Add(_quotationModel.TotalPriceHistory);
+            }
+            else if (_quotationModel.TotalPriceHistoryStatus == "Edited Price")
+            {
+                _quotationModel.lst_TotalPriceHistory.Add(_windoorModel.WD_currentPrice.ToString());
+            }
+
             _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
             if (_wndrFilePath != _mainView.GetSaveFileDialog().FileName)
             {
@@ -10276,7 +10276,7 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.Duplicate)
                     {
-                        ForceRestartAndLoadFile();//checkuserobjects
+                        ForceRestartAndLoadFile();//checkuserobject
                         wndr_content = new List<string>();
                         SaveWindoorModel(_windoorModel);
                         wndr_content.Add("EndofFile");
@@ -10295,7 +10295,7 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
-                        ForceRestartAndLoadFile();//check user objects
+                        ForceRestartAndLoadFile();//checkuserobject
                         Windoor_Save_UserControl();
                         Windoor_Save_PropertiesUC();
 
@@ -10350,7 +10350,7 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
-                        ForceRestartAndLoadFile();//checkuserobjects
+                        ForceRestartAndLoadFile();//checkuserobject
                         bool NewFrameSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
                                                                                        frmDimension_numHt);
                         BottomFrameTypes frameBotFrameType = null;
@@ -10430,7 +10430,7 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
-                        ForceRestartAndLoadFile();//checkuserobjects
+                        ForceRestartAndLoadFile();//checkuserobject
                         bool NewConcreteSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
                                                                                           frmDimension_numHt);
                         if (NewConcreteSizeFit)
