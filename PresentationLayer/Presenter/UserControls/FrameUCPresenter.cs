@@ -148,6 +148,7 @@ namespace PresentationLayer.Presenter.UserControls
         
         private void _frameUC_frameDragDropEventRaised(object sender, DragEventArgs e)
         {
+            _mainPresenter.ForceRestartAndLoadFile();
             UserControl frame = (UserControl)sender; //Control na babagsakan
             List<object> lst_data = e.Data.GetData(e.Data.GetFormats()[0]) as List<object>;
 

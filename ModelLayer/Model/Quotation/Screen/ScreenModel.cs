@@ -20,6 +20,7 @@ namespace ModelLayer.Model.Quotation.Screen
 
         #region Variables
 
+
         decimal
         #region RollUpCostingMaterials
         TotalRollUpCostingMaterials,
@@ -6996,6 +6997,77 @@ namespace ModelLayer.Model.Quotation.Screen
             Freedom_tAmount = 0;
 
             #endregion
+
+            #region Trail Screen Variables
+            _tr_PPPleatingNETHQty = 0;
+            _tr_BottomRail2p5mBarsQty = 0;
+            _tr_AnchorplatePriceQty = 0;
+            _tr_Scorpiontail3Qty = 0;
+            _tr_WireCB40051PriceQty = 0;
+            _tr_MagnetQty = 0;
+            _tr_WaSbarQty = 0;
+
+            _tr_PPPleatingNETHPricePerLinearMeter = 0;
+
+            _tr_TotalPlisseCostingMaterials = 0;
+            _tr_PlisseCostingMaterials = 0;
+            _tr_PPPleatingNETHPrice = 0;
+            _tr_BottomRail2p5mBarsPrice = 0;
+            _tr_SettingPlate2p6mbarsPrice = 0;
+            _tr_FinplateBarsPrice = 0;
+            _tr_ScorpionfishLDPrice = 0;
+            _tr_ScorpionfishRDPrice = 0;
+            _tr_AnchorplatePrice = 0;
+            _tr_Scorpiontail3Price = 0;
+            _tr_WireEndtailYellowPrice = 0;
+            _tr_AjustEightTailPrice = 0;
+            _tr_TailEndPrice = 0;
+            _tr_TailReversalPrice = 0;
+            _tr_WireGuideCenterPrice = 0;
+            _tr_WireGuideRPrice = 0;
+            _tr_WireGuideLPrice = 0;
+            _tr_WireCB40051Price = 0;
+            _tr_TappingScrew3X30BHPrice = 0;
+            _tr_PositiveMagnetPrice = 0;
+            _tr_NegativeMagnetPrice = 0;
+            _tr_PileforPlissePrice = 0;
+
+            _tr_LatchForResizablePlissèPrice = 0;
+            _tr_ScrewForLatchPrice = 0;
+            _tr_SlidingBarEndCapResizablePlissèPrice = 0;
+            _tr_WallProfileEndCapResizablePlissèPrice = 0;
+            _tr_TopGuideEndCapResizablePlissèPrice = 0;
+            _tr_CordCurrierResizablePlissèPrice = 0;
+            _tr_TensionerPrice = 0;
+            _tr_ScrewForTensionerPrice = 0;
+            _tr_HammerNutResizablePlissèPrice = 0;
+            _tr_Grub5x20Price = 0;
+
+            _tr_WallBarPrice = 0;
+            _tr_SlideBarPrice = 0;
+            _tr_TopGuideResizablePlissèPrice = 0;
+            _tr_UprofileForMagnetPrice = 0;
+            _tr_PlisseLProfileFrontalFixingPrice = 0;
+            _tr_PlisseCoverLProfileFrontingFixingPrice = 0;
+
+            _tr_AluminumBottomGuidePrice = 0;
+            _tr_AluminumPlisseHandlePrice = 0;
+            _tr_LocalMaterialPrice = 0;
+
+            _tr_HandlesPrice = 0;
+            _tr_CouplingProfilePrice = 0;
+            _tr_PliseeLandCoverPrice = 0;
+
+            _tr_TotalMatCost = 0;
+            _tr_Wastage = 0;
+            _tr_Freight = 0;
+            _tr_DandT = 0;
+            _tr_Contigencies = 0;
+            _tr_tAmount = 0;
+        
+
+        
+        #endregion
 
             pvc1067withreinPrice = 0;
             milledprofile6040Price = 0;

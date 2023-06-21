@@ -1064,8 +1064,7 @@ namespace PresentationLayer.Presenter
                 _Screen_PricingDimension = _screenModel.Screen_Width + " x " + _screenModel.Screen_Height;
                 _Screen_addOnsSpecialFactor = _screenModel.Screen_AddOnsSpecialFactor;
             }
-
-
+            
             newRow["Item No."] = _screenModel.Screen_ItemNumber;
             newRow["Type of Insect Screen"] = _screenModel.Screen_Description  + _setDesc + centerClosureDesc;
             newRow["Dimension (mm) \n per panel"] = _Screen_DimensionFormat;
