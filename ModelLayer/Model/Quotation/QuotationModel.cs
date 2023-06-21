@@ -2958,7 +2958,7 @@ namespace ModelLayer.Model.Quotation
         #endregion
 
 
-        BrushSealPricePerLinearMeter = 15.80m,
+                BrushSealPricePerLinearMeter = 15.80m,
                 SealantPricePerCan_BrownBlack = 430m,
                 SealantPricePerCan_Clear = 170m,
                 PUFoamingPricePerCan = 210m,
@@ -2967,9 +2967,7 @@ namespace ModelLayer.Model.Quotation
                 SealantPricePerCan,
                 SealantPrice,
                 PUFoamingPrice,
-
-
-
+                              
                 MaterialCostBreakDownBase,
 
                 ProfileColorPoints = 0,
@@ -11168,9 +11166,12 @@ namespace ModelLayer.Model.Quotation
                     }
 
                     #region MyRegion
+                    
                     TotalPriceHistoryStatus = "System Generated Price";
                     TotalPriceHistory =
-                        "!!!!!!!!!!!!!! COMPUTATION FOR SAVING !!!!!!!!!!!!!!\n\n" +
+
+
+                        "` COMPUTATION FOR SAVING `\n\n" +
 
 
 
@@ -11318,8 +11319,9 @@ namespace ModelLayer.Model.Quotation
 
                    "TotaPrice: " + BaseTotalPriceWithFactor.ToString() + " = (" + BaseTotalPrice.ToString() + " * " + PricingFactor.ToString() + ") + " + BaseTotalPrice.ToString() + ") \n\n" +
 
-                   "TotaPrice: " + TotaPrice.ToString() + " = " + BaseTotalPriceWithFactor.ToString() + " + " + LouverCost.ToString() + " + " + MeshCost.ToString();
+                   "TotaPrice: " + TotaPrice.ToString() + " = " + BaseTotalPriceWithFactor.ToString() + " + " + LouverCost.ToString() + " + " + MeshCost.ToString() + "\n\n" +
 
+                    "` END OF COMPUTATION FOR SAVING `\n\n";
                     #endregion
 
 

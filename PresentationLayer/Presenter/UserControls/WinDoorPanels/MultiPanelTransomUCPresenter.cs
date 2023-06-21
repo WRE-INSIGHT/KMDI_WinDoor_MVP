@@ -490,6 +490,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             try
             {
+                _mainPresenter.ForceRestartAndLoadFile();
                 FlowLayoutPanel fpnl = (FlowLayoutPanel)sender; //Control na babagsakan
                 int totalCount_objs_to_accomodate = 0;
                 if (_multiPanelModel.MPanel_DividerEnabled)
