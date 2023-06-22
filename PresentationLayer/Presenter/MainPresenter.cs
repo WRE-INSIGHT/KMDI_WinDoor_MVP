@@ -996,65 +996,99 @@ namespace PresentationLayer.Presenter
             int _userObjCount = GetGuiResources(Process.GetCurrentProcess().Handle, 1);
             try
             {
-
-                if (_userObjCount >= 8000)
+                if (_userModel.Username.ToLower() == "jb")//specific user with 20/10k user objects 
                 {
-                    MessageBox.Show("User Objects Limit Reach:" + " " + _userObjCount + "\n" + "It is Recommended to" +"\n"+ "save the file", "Limit Reach", MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    bool runbatfile = false;
-                    wndr_content = new List<string>();
-
-                    if (_wndrFilePath == "")
+                    if (_userObjCount >= 8000)//userobject limit
                     {
-                        _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
-                        if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+                        MessageBox.Show("User Objects Limit Reach:" + " " + _userObjCount + "\n" + "It is Recommended to" + "\n" + "save the file", "Limit Reach", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        bool runbatfile = false;
+                        wndr_content = new List<string>();
+
+                        if (_wndrFilePath == "")
                         {
-
-                            SaveAs();
-
-                            foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
+                            _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
+                            if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
                             {
-                                wndr_item.IsFromLoad = true;
+
+                                SaveAs();
+
+                                foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
+                                {
+                                    wndr_item.IsFromLoad = true;
+                                }
+
+                                runbatfile = true;
+
                             }
-
-                            runbatfile = true;
-
                         }
+                        else
+                        {
+                            SaveChanges();
+                            runbatfile = true;
+                        }
+
+                        if (_wndrFileName == "")
+                        {
+                            int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
+                            _wndrFileName = _wndrFilePath.Substring(startFileName);
+                        }
+
+                        if (runbatfile == true)
+                        {
+                            string wndrfilePath = _wndrFilePath.Replace(_wndrFileName, string.Empty);
+                            string batfilePath = Path.Combine(wndrfilePath, "Open.txt");
+                            string vbsfilePath = Path.Combine(wndrfilePath, "Auto.txt");
+                            string batformat = "@echo off" + "\n" +
+                                               "Title AutoLoad File" + _wndrFileName + "\n" +
+                                               "taskkill /IM PresentationLayer.exe /f" + "\n" +
+                                               "@echo Load File: " + _wndrFileName + "\n" +
+                                               "pause" + "\n" +
+                                               "Start" + " " + _wndrFileName + " \n" +
+                                               "del %0" + "\n" +
+                                               "pause";
+                            string batformatv2 = "@echo off" + "\n" +
+                                                 "Title Auto Load " + _wndrFileName + "\n" +
+                                                 "@echo Opening file" + _wndrFileName + "\n" +
+                                                 "@echo Press any key one time only." + "\n" + 
+                                                 "pause" + "\n" +
+                                                 "echo off & start " + @"""""" + "/b " + _wndrFileName + "\n" +
+                                                 "cscript //NoLogo //B Auto.vbs" + "\n" +
+                                                 "del %0" + "\n" +
+                                                 "exit";
+                            string vbsformat = "Set " + "objShell=WScript.CreateObject(" + @"""WScript.Shell"")" + "\n" +
+                                                "Set " + "objFSO = CreateObject(" + @"""Scripting.FileSystemObject"")" + "\n" +
+                                                "objShell.AppActivate " + @"""" + _wndrFileName + @"""" + " " + ": WScript.Sleep 2000" + "\n\n" +
+                                                "For x = 1 To 2" + "\n" +
+                                                "   WScript.Sleep 200 : objShell.SendKeys " + @"""{TAB}""" + "\n" +
+                                                "Next" + "\n" +
+                                                "WScript.Sleep 2000 : objShell.SendKeys " + @"""~""" + "\n\n" +
+                                                "strScript = Wscript.ScriptFullName" + "\n" +
+                                                "objFSO.DeleteFile(strScript)"
+                                                  ;
+                            File.WriteAllText(batfilePath, batformatv2);
+                            File.WriteAllText(vbsfilePath, vbsformat);
+
+                            FileInfo bat = new FileInfo(batfilePath);
+                            bat.IsReadOnly = false;
+                            bat.MoveTo(Path.ChangeExtension(batfilePath, ".bat"));
+
+                            FileInfo vbs = new FileInfo(vbsfilePath);
+                            vbs.IsReadOnly = false;
+                            vbs.MoveTo(Path.ChangeExtension(vbsfilePath, ".vbs"));
+
+                            Process proc = new Process();
+                            proc.StartInfo.WorkingDirectory = wndrfilePath;
+                            proc.StartInfo.FileName = "Open.bat";
+                            proc.StartInfo.Arguments = string.Format("8");
+                            proc.StartInfo.CreateNoWindow = false;
+                            proc.Start();
+                        }
+
                     }
                     else
                     {
-                        SaveChanges();
-                        runbatfile = true;
+                        Console.WriteLine("Current User Object Count: " + _userObjCount);
                     }
-
-                    if (_wndrFileName == "")
-                    {
-                        int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
-                        _wndrFileName = _wndrFilePath.Substring(startFileName);
-                    }
-
-                    if (runbatfile == true)
-                    {
-                        string wndrfilePath = _wndrFilePath.Replace(_wndrFileName, string.Empty);
-                        string batfilePath =  Path.Combine(wndrfilePath,"Open.txt");
-                        string batformat = "@echo off" +"\n"+ "Title AutoLoad File"+ _wndrFileName + "\n" + "@echo Load File: " +_wndrFileName +"\n"+ "taskkill /IM PresentationLayer.exe /f" + "\n" + "pause" + "\n" + "Start" + " " + _wndrFileName + " \n" + "del %0" + "\n" + "pause";
-
-                        File.WriteAllText(batfilePath, batformat);
-                        FileInfo f = new FileInfo(batfilePath);
-                        f.IsReadOnly = false;
-                        f.MoveTo(Path.ChangeExtension(batfilePath, ".bat"));                 
-
-                        Process proc = new Process();
-                        proc.StartInfo.WorkingDirectory = wndrfilePath;
-                        proc.StartInfo.FileName = "Open.bat";
-                        proc.StartInfo.Arguments = string.Format("8");
-                        proc.StartInfo.CreateNoWindow = false;
-                        proc.Start();
-                    }
-
-                }
-                else
-                {
-                    Console.WriteLine("Current User Object Count: " + _userObjCount);
                 }
             }
             catch(Exception ex)
