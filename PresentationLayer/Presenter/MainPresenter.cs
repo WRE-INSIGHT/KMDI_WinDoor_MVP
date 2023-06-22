@@ -1413,7 +1413,7 @@ namespace PresentationLayer.Presenter
                 {
                     updatePriceFromMainViewToItemList();
                     _windoorModel.WD_fileLoad = false;
-                    //_windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
+                    _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
                     if (_lblCurrentPrice.Value == _windoorModel.WD_currentPrice)
                     {
                         _quotationModel.TotalPriceHistoryStatus = "System Generated Price";
