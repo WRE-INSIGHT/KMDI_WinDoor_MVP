@@ -144,5 +144,6 @@ namespace PresentationLayer.Presenter
         int ItemScroll { get; set; }
         bool ItemLoad { get; set; }
         void AddSlidingScreentoScreenList();
+        int ForceRestartAndLoadFile();
     }
 }

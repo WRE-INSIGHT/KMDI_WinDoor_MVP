@@ -97,6 +97,7 @@ namespace PresentationLayer.Presenter.UserControls
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
 
         private void OnItemInfoUCLoadEventRaised(object sender, EventArgs e)
