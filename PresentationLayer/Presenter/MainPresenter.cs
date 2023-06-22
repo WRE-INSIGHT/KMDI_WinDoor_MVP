@@ -991,64 +991,113 @@ namespace PresentationLayer.Presenter
 
         }
 
-        private int ForceRestartAndLoadFile()
+        public int ForceRestartAndLoadFile()
         {
             int _userObjCount = GetGuiResources(Process.GetCurrentProcess().Handle, 1);
-
-            if(_userObjCount >= 1)
+            try
             {
-                MessageBox.Show("Current User Object Count" + _userObjCount + " WD ID" + _windoorModel.WD_id);
-                //wndr_content = new List<string>();
-
-                if(_wndrFilePath == "")
+                if (_userModel.Username.ToLower() == "jb")//specific user with 20/10k user objects 
                 {
-                    _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
-                    if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+                    if (_userObjCount >= 8000)//userobject limit
                     {
+                        MessageBox.Show("User Objects Limit Reach:" + " " + _userObjCount + "\n" + "It is Recommended to" + "\n" + "save the file", "Limit Reach", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        bool runbatfile = false;
                         wndr_content = new List<string>();
-                        SaveAs();
 
-                        foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
+                        if (_wndrFilePath == "")
                         {
-                            wndr_item.IsFromLoad = true;
+                            _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
+                            if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+                            {
+
+                                SaveAs();
+
+                                foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
+                                {
+                                    wndr_item.IsFromLoad = true;
+                                }
+
+                                runbatfile = true;
+
+                            }
+                        }
+                        else
+                        {
+                            SaveChanges();
+                            runbatfile = true;
+                        }
+
+                        if (_wndrFileName == "")
+                        {
+                            int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
+                            _wndrFileName = _wndrFilePath.Substring(startFileName);
+                        }
+
+                        if (runbatfile == true)
+                        {
+                            string wndrfilePath = _wndrFilePath.Replace(_wndrFileName, string.Empty);
+                            string batfilePath = Path.Combine(wndrfilePath, "Open.txt");
+                            string vbsfilePath = Path.Combine(wndrfilePath, "Auto.txt");
+                            string batformat = "@echo off" + "\n" +
+                                               "Title AutoLoad File" + _wndrFileName + "\n" +
+                                               "taskkill /IM PresentationLayer.exe /f" + "\n" +
+                                               "@echo Load File: " + _wndrFileName + "\n" +
+                                               "pause" + "\n" +
+                                               "Start" + " " + _wndrFileName + " \n" +
+                                               "del %0" + "\n" +
+                                               "pause";
+                            string batformatv2 = "@echo off" + "\n" +
+                                                 "Title Auto Load " + _wndrFileName + "\n" +
+                                                 "@echo Opening file" + _wndrFileName + "\n" +
+                                                 "@echo Press any key one time only." + "\n" + 
+                                                 "pause" + "\n" +
+                                                 "echo off & start " + @"""""" + "/b " + _wndrFileName + "\n" +
+                                                 "cscript //NoLogo //B Auto.vbs" + "\n" +
+                                                 "del %0" + "\n" +
+                                                 "exit";
+                            string vbsformat = "Set " + "objShell=WScript.CreateObject(" + @"""WScript.Shell"")" + "\n" +
+                                                "Set " + "objFSO = CreateObject(" + @"""Scripting.FileSystemObject"")" + "\n" +
+                                                "objShell.AppActivate " + @"""" + _wndrFileName + @"""" + " " + ": WScript.Sleep 2000" + "\n\n" +
+                                                "For x = 1 To 2" + "\n" +
+                                                "   WScript.Sleep 200 : objShell.SendKeys " + @"""{TAB}""" + "\n" +
+                                                "Next" + "\n" +
+                                                "WScript.Sleep 2000 : objShell.SendKeys " + @"""~""" + "\n\n" +
+                                                "strScript = Wscript.ScriptFullName" + "\n" +
+                                                "objFSO.DeleteFile(strScript)"
+                                                  ;
+                            File.WriteAllText(batfilePath, batformatv2);
+                            File.WriteAllText(vbsfilePath, vbsformat);
+
+                            FileInfo bat = new FileInfo(batfilePath);
+                            bat.IsReadOnly = false;
+                            bat.MoveTo(Path.ChangeExtension(batfilePath, ".bat"));
+
+                            FileInfo vbs = new FileInfo(vbsfilePath);
+                            vbs.IsReadOnly = false;
+                            vbs.MoveTo(Path.ChangeExtension(vbsfilePath, ".vbs"));
+
+                            Process proc = new Process();
+                            proc.StartInfo.WorkingDirectory = wndrfilePath;
+                            proc.StartInfo.FileName = "Open.bat";
+                            proc.StartInfo.Arguments = string.Format("8");
+                            proc.StartInfo.CreateNoWindow = false;
+                            proc.Start();
                         }
 
                     }
+                    else
+                    {
+                        Console.WriteLine("Current User Object Count: " + _userObjCount);
+                    }
                 }
-                else
-                {
-                    //SaveChanges();  
-                }
-
-                if (_wndrFileName == "")
-                {
-                    int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
-                    _wndrFileName = _wndrFilePath.Substring(startFileName);
-                }
-
-                string wndrfilePath = _wndrFilePath.Replace(_wndrFileName, string.Empty);
-                string batfilePath = wndrfilePath + "Open.bat";
-                string batformat = "@echo off" + "\n" + "taskkill /IM PresentationLayer.exe /f" + "\n" + "pause" + "\n" + "Start" + " " + _wndrFileName + " \n" + "del %0" + "\n" + "exit";
-
-                File.WriteAllText(batfilePath, batformat);
-                FileInfo f = new FileInfo(batfilePath);
-                f.MoveTo(Path.ChangeExtension(batfilePath, ".bat"));
-
-                Process proc = new Process();
-                proc.StartInfo.WorkingDirectory = wndrfilePath;
-                proc.StartInfo.FileName = "Open.bat";
-                proc.StartInfo.Arguments = string.Format("7");
-                proc.StartInfo.CreateNoWindow = false;
-                proc.Start();
-
-
-
             }
-            else
+            catch(Exception ex)
             {
-                Console.WriteLine("Current User Object Count: " + _userObjCount);
+                Console.WriteLine(this + " error" + ex.Message );
+                _loginView.CloseLoginView();
             }
             return _userObjCount;
+
         }
 
         #region Events  
@@ -1269,6 +1318,8 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Problem Adding Sliding Screen to Screenlist" + " " + this + ex.Message);
             }
 
+
+
         }
     
 
@@ -1452,7 +1503,6 @@ namespace PresentationLayer.Presenter
             _screenModel.Screen_PVCVisibility = false;
             IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
-            //ForceRestartAndLoadFile();
         }
 
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
@@ -1493,22 +1543,13 @@ namespace PresentationLayer.Presenter
             if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
             {
                 wndr_content = new List<string>();
-                SaveAs();
-
-
-                if (_quotationModel.TotalPriceHistoryStatus == "System Generated Price")
-                {
-                    _quotationModel.lst_TotalPriceHistory.Add(_quotationModel.TotalPriceHistory);
-                }
-                else if (_quotationModel.TotalPriceHistoryStatus == "Edited Price")
-                {
-                    _quotationModel.lst_TotalPriceHistory.Add(_windoorModel.WD_currentPrice.ToString());
-                }
-
+              
                 foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
                 {
                     wndr_item.IsFromLoad = true;
                 }
+
+                SaveAs();
 
             }
 
@@ -1516,6 +1557,16 @@ namespace PresentationLayer.Presenter
 
         public void SaveAs()
         {
+            _quotationModel.lst_TotalPriceHistory = new List<string>();
+            if (_quotationModel.TotalPriceHistoryStatus == "System Generated Price")
+            {
+                _quotationModel.lst_TotalPriceHistory.Add(_quotationModel.TotalPriceHistory);
+            }
+            else if (_quotationModel.TotalPriceHistoryStatus == "Edited Price")
+            {
+                _quotationModel.lst_TotalPriceHistory.Add(_windoorModel.WD_currentPrice.ToString());
+            }
+
             _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
             if (_wndrFilePath != _mainView.GetSaveFileDialog().FileName)
             {
@@ -1624,7 +1675,10 @@ namespace PresentationLayer.Presenter
 
             foreach (var prop in _quotationModel.GetType().GetProperties())
             {
-                wndr_content.Add(prop.Name + ": " + prop.GetValue(_quotationModel, null));
+                if (prop.Name != "TotalPriceHistory")
+                {
+                    wndr_content.Add(prop.Name + ": " + prop.GetValue(_quotationModel, null));
+                }
             }
             foreach (WindoorModel wdm in _quotationModel.Lst_Windoor)
             {
@@ -1648,6 +1702,12 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add(".");
                 wndr_content.Add(dic.Key + "^ " + dic.Value);
                 wndr_content.Add(".");
+            }
+            foreach (var history in _quotationModel.lst_TotalPriceHistory)
+            {
+                wndr_content.Add("8==D");
+                wndr_content.Add(history);
+                wndr_content.Add("8==D");
             }
 
             wndr_content.Add("EndofFile");
@@ -3754,6 +3814,19 @@ namespace PresentationLayer.Presenter
                     inside_rdlcDic = true;
                 }
             }
+            else if (row_str == "8==D")
+            {
+                if (inside_quoteHistory)
+                {
+                    Load_QuoteHistory();
+                    inside_quoteHistory = false;
+                }
+                else
+                {
+                    inside_quoteHistory = true;
+                }
+            }
+
             if (row_str == "EndofFile")
             {
                 add_existing = false;
@@ -3903,7 +3976,16 @@ namespace PresentationLayer.Presenter
                     else if (row_str.Contains("BOM_Status:"))
                     {
                         _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
+                        //inside_quotation = false;
+                    }
+                    else if (row_str.Contains("lst_TotalPriceHistory:"))
+                    {
+                        _quotationModel.lst_TotalPriceHistory = new List<string>();
                         inside_quotation = false;
+                    }
+                    else if (row_str.Contains("TotalPriceHistoryStatus:"))
+                    {
+                        _quotationModel.TotalPriceHistoryStatus = extractedValue_str;
                     }
                     break;
                 #endregion
@@ -8272,6 +8354,20 @@ namespace PresentationLayer.Presenter
                         }
                         #endregion
                     }
+                    else if (inside_quoteHistory)
+                    {
+                        if(row_str != "8==D")
+                        {
+                            if (row_str.Contains("` COMPUTATION FOR SAVING `"))
+                            {
+                                _quoteHistory = row_str + "\n";
+                            }
+                            else
+                            {
+                                _quoteHistory = _quoteHistory + row_str + "\n";
+                            }
+                        }
+                    }
                     break;
             }
 
@@ -9169,9 +9265,14 @@ namespace PresentationLayer.Presenter
             }
             inside_panel = false;
         }
+        private void Load_QuoteHistory()
+        {
+            _quotationModel.lst_TotalPriceHistory.Add(_quoteHistory);
+            _quoteHistory = null;
+        }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen, inside_rdlcDic,
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen, inside_rdlcDic,inside_quoteHistory,
              rdlcDicChangeKey = true,
              add_existing = false,
             _allpanelsIsMesh;
@@ -9771,6 +9872,9 @@ namespace PresentationLayer.Presenter
         string RDLCDictionary_key,
                RDLCDictionary_value;
         #endregion
+        #region Quotation History Properties
+        string _quoteHistory;
+        #endregion
         string mpnllvl = "";
 
         #region ViewUpdate(Controls)
@@ -10206,6 +10310,7 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.Duplicate)
                     {
+                        ForceRestartAndLoadFile();//checkuserobject
                         wndr_content = new List<string>();
                         SaveWindoorModel(_windoorModel);
                         wndr_content.Add("EndofFile");
@@ -10224,6 +10329,7 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
+                        ForceRestartAndLoadFile();//checkuserobject
                         Windoor_Save_UserControl();
                         Windoor_Save_PropertiesUC();
 
@@ -10278,6 +10384,7 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
+                        ForceRestartAndLoadFile();//checkuserobject
                         bool NewFrameSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
                                                                                        frmDimension_numHt);
                         BottomFrameTypes frameBotFrameType = null;
@@ -10357,7 +10464,7 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
-
+                        ForceRestartAndLoadFile();//checkuserobject
                         bool NewConcreteSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
                                                                                           frmDimension_numHt);
                         if (NewConcreteSizeFit)
