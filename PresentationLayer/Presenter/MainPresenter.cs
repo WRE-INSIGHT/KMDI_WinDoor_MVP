@@ -996,10 +996,11 @@ namespace PresentationLayer.Presenter
             int _userObjCount = GetGuiResources(Process.GetCurrentProcess().Handle, 1);
             try
             {
-                if (_userModel.Username.ToLower() == "jb")//specific user with 20/10k user objects 
+                if (_userModel.Username.ToLower() == "edna")//specific user with 20/10k user objects 
                 {
-                    if (_userObjCount >= 8000)//userobject limit
+                    if (_userObjCount >= 3000)//userobject limit
                     {
+                        
                         MessageBox.Show("User Objects Limit Reach:" + " " + _userObjCount + "\n" + "It is Recommended to" + "\n" + "save the file", "Limit Reach", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         bool runbatfile = false;
                         wndr_content = new List<string>();
@@ -1035,9 +1036,11 @@ namespace PresentationLayer.Presenter
 
                         if (runbatfile == true)
                         {
+                            string BasePath = Properties.Settings.Default.WndrDir;
                             string wndrfilePath = _wndrFilePath.Replace(_wndrFileName, string.Empty);
-                            string batfilePath = Path.Combine(wndrfilePath, "Open.txt");
-                            string vbsfilePath = Path.Combine(wndrfilePath, "Auto.txt");
+                            string batfilePath = Path.Combine(BasePath, "Open.txt");
+                            string vbsfilePath = Path.Combine(BasePath, "Auto.txt");
+
                             string batformat = "@echo off" + "\n" +
                                                "Title AutoLoad File" + _wndrFileName + "\n" +
                                                "taskkill /IM PresentationLayer.exe /f" + "\n" +
@@ -1051,20 +1054,20 @@ namespace PresentationLayer.Presenter
                                                  "@echo Opening file" + _wndrFileName + "\n" +
                                                  "@echo Press any key one time only." + "\n" + 
                                                  "pause" + "\n" +
-                                                 "echo off & start " + @"""""" + "/b " + _wndrFileName + "\n" +
+                                                 "echo off & start " + @"""""" + "/b " +@""""+ _wndrFilePath +@"""" + "\n" +
                                                  "cscript //NoLogo //B Auto.vbs" + "\n" +
                                                  "del %0" + "\n" +
                                                  "exit";
                             string vbsformat = "Set " + "objShell=WScript.CreateObject(" + @"""WScript.Shell"")" + "\n" +
                                                 "Set " + "objFSO = CreateObject(" + @"""Scripting.FileSystemObject"")" + "\n" +
-                                                "objShell.AppActivate " + @"""" + _wndrFileName + @"""" + " " + ": WScript.Sleep 2000" + "\n\n" +
+                                                "objShell.AppActivate " + @"""" + _wndrFilePath + @"""" + " " + ": WScript.Sleep 2000" + "\n\n" +
                                                 "For x = 1 To 2" + "\n" +
                                                 "   WScript.Sleep 200 : objShell.SendKeys " + @"""{TAB}""" + "\n" +
                                                 "Next" + "\n" +
                                                 "WScript.Sleep 2000 : objShell.SendKeys " + @"""~""" + "\n\n" +
                                                 "strScript = Wscript.ScriptFullName" + "\n" +
-                                                "objFSO.DeleteFile(strScript)"
-                                                  ;
+                                                "objFSO.DeleteFile(strScript)"                                                    
+                                                ;
                             File.WriteAllText(batfilePath, batformatv2);
                             File.WriteAllText(vbsfilePath, vbsformat);
 
@@ -1077,7 +1080,7 @@ namespace PresentationLayer.Presenter
                             vbs.MoveTo(Path.ChangeExtension(vbsfilePath, ".vbs"));
 
                             Process proc = new Process();
-                            proc.StartInfo.WorkingDirectory = wndrfilePath;
+                            proc.StartInfo.WorkingDirectory = BasePath;
                             proc.StartInfo.FileName = "Open.bat";
                             proc.StartInfo.Arguments = string.Format("8");
                             proc.StartInfo.CreateNoWindow = false;
@@ -11708,6 +11711,15 @@ namespace PresentationLayer.Presenter
             _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
             if (_wndrFilePath != "")
             {
+                _quotationModel.lst_TotalPriceHistory = new List<string>();
+                if (_quotationModel.TotalPriceHistoryStatus == "System Generated Price")
+                {
+                    _quotationModel.lst_TotalPriceHistory.Add(_quotationModel.TotalPriceHistory);
+                }
+                else if (_quotationModel.TotalPriceHistoryStatus == "Edited Price")
+                {
+                    _quotationModel.lst_TotalPriceHistory.Add(_windoorModel.WD_currentPrice.ToString());
+                }
 
                 string txtfile = _wndrFilePath.Replace(".wndr", ".txt");
                 File.WriteAllLines(txtfile, Saving_dotwndr());
