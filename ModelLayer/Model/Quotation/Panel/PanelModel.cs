@@ -1957,6 +1957,11 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelGeorgianBarOptionVisibility = value;
+                if (value == false)
+                {
+                    Panel_GeorgianBar_VerticalQty = 0;
+                    Panel_GeorgianBar_HorizontalQty = 0;
+                }
                 NotifyPropertyChanged();
             }
         }
