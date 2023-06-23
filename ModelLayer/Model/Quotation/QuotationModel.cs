@@ -2316,7 +2316,7 @@ namespace ModelLayer.Model.Quotation
                             Where = g.Key.Where,
                             Cut = g.Key.Cut
                         };
-    
+
             DataTable dt = new DataTable();
             dt.Columns.Add(CreateColumn("Description", "Description", "System.String"));
             dt.Columns.Add(CreateColumn("Qty", "Qty", "System.String"));
@@ -2970,7 +2970,7 @@ namespace ModelLayer.Model.Quotation
                 SealantPricePerCan,
                 SealantPrice,
                 PUFoamingPrice,
-                              
+
                 MaterialCostBreakDownBase,
 
                 ProfileColorPoints = 0,
@@ -3963,7 +3963,6 @@ namespace ModelLayer.Model.Quotation
                     MaterialCost = 0;
                     #endregion
                 }
-
             }
             else
             {
@@ -5617,7 +5616,7 @@ namespace ModelLayer.Model.Quotation
                             }
                         }
                         #endregion
-                        
+
                         #region ExtensionProfile
                         if ((fr.Frame_ArtNo == FrameProfile_ArticleNo._6050 || fr.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
                             fr.Frame_Width > 6000)
@@ -6196,7 +6195,7 @@ namespace ModelLayer.Model.Quotation
                                                         FSPrice += FS_16HD_casementPricePerPiece * 2;
                                                         FSBasePrice = FS_16HD_casementPricePerPiece;
                                                     }
-                                                    #endregion
+                                                    #endregion 
                                                 }
                                                 else
                                                 {
@@ -12298,13 +12297,13 @@ namespace ModelLayer.Model.Quotation
                         wdm.WD_price = TotaPrice;
                     }
 
-                    #region MyRegion
-                    
+                    #region Price History
+
                     TotalPriceHistoryStatus = "System Generated Price";
                     TotalPriceHistory =
 
 
-                        "` COMPUTATION FOR SAVING `\n\n" +
+                        "\t\n` COMPUTATION FOR SAVING `\n\n" +
 
 
 

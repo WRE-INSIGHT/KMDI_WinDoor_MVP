@@ -39,6 +39,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -1094,9 +1095,9 @@ namespace PresentationLayer.Presenter
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(this + " error" + ex.Message );
+                Console.WriteLine(this + " error" + ex.Message);
                 _loginView.CloseLoginView();
             }
             return _userObjCount;
@@ -1324,7 +1325,7 @@ namespace PresentationLayer.Presenter
 
 
         }
-    
+
 
         private void OnPanelMainMouseWheelEventRaised(object sender, MouseEventArgs e)
         {
@@ -1546,7 +1547,7 @@ namespace PresentationLayer.Presenter
             if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
             {
                 wndr_content = new List<string>();
-              
+
                 foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
                 {
                     wndr_item.IsFromLoad = true;
@@ -3484,6 +3485,12 @@ namespace PresentationLayer.Presenter
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
             }
+
+            foreach (string item in _quotationModel.lst_TotalPriceHistory)
+            {
+                MessageBox.Show(item);
+            }
+
         }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -3669,7 +3676,7 @@ namespace PresentationLayer.Presenter
             string extractedValue_str = string.Empty;
             if (!string.IsNullOrWhiteSpace(row_str))
             {
-                extractedValue_str = row_str.Substring(row_str.IndexOf(": ") + 2); 
+                extractedValue_str = row_str.Substring(row_str.IndexOf(": ") + 2);
             }
             if (row_str.Contains("QuoteId:"))
             {
@@ -8353,7 +8360,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (inside_quoteHistory)
                     {
-                        if(row_str != "8==D")
+                        if (row_str != "8==D")
                         {
                             if (row_str.Contains("` COMPUTATION FOR SAVING `"))
                             {
@@ -9269,7 +9276,7 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen, inside_rdlcDic,inside_quoteHistory,
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory,
              rdlcDicChangeKey = true,
              add_existing = false,
             _allpanelsIsMesh;
@@ -12376,7 +12383,7 @@ namespace PresentationLayer.Presenter
             }
             //GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
             GetMainView().GetCurrentPrice().Value = _windoorModel.WD_currentPrice;
-            SetChangesMark();                      
+            SetChangesMark();
         }
 
 
