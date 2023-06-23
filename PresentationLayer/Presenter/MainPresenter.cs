@@ -996,7 +996,7 @@ namespace PresentationLayer.Presenter
             int _userObjCount = GetGuiResources(Process.GetCurrentProcess().Handle, 1);
             try
             {
-                if (_userModel.Username.ToLower() == "edna")//specific user with 20/10k user objects 
+                if (_userModel.Username.ToLower() == "jb")//specific user with 20/10k user objects 
                 {
                     if (_userObjCount >= 3000)//userobject limit
                     {
@@ -1560,15 +1560,7 @@ namespace PresentationLayer.Presenter
 
         public void SaveAs()
         {
-            _quotationModel.lst_TotalPriceHistory = new List<string>();
-            if (_quotationModel.TotalPriceHistoryStatus == "System Generated Price")
-            {
-                _quotationModel.lst_TotalPriceHistory.Add(_quotationModel.TotalPriceHistory);
-            }
-            else if (_quotationModel.TotalPriceHistoryStatus == "Edited Price")
-            {
-                _quotationModel.lst_TotalPriceHistory.Add(_windoorModel.WD_currentPrice.ToString());
-            }
+            QuotationPriceHistory();//saving price history
 
             _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
             if (_wndrFilePath != _mainView.GetSaveFileDialog().FileName)
@@ -11706,21 +11698,33 @@ namespace PresentationLayer.Presenter
                              false);
         }
 
-        public void SaveChanges()
+        private void QuotationPriceHistory()
         {
-            _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
-            if (_wndrFilePath != "")
+            try
             {
                 _quotationModel.lst_TotalPriceHistory = new List<string>();
                 if (_quotationModel.TotalPriceHistoryStatus == "System Generated Price")
                 {
-                    _quotationModel.lst_TotalPriceHistory.Add(_quotationModel.TotalPriceHistory);
+                    _quotationModel.lst_TotalPriceHistory.Add(_quotationModel.TotalPriceHistory);                   
                 }
                 else if (_quotationModel.TotalPriceHistoryStatus == "Edited Price")
                 {
                     _quotationModel.lst_TotalPriceHistory.Add(_windoorModel.WD_currentPrice.ToString());
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this + " error " + " saving price history " +"\n" + ex.Message );
+            }
+        }
 
+        public void SaveChanges()
+        {
+            _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
+            if (_wndrFilePath != "")
+            {
+                QuotationPriceHistory();//save price history
+                                        
                 string txtfile = _wndrFilePath.Replace(".wndr", ".txt");
                 File.WriteAllLines(txtfile, Saving_dotwndr());
                 File.Delete(_wndrFilePath);
