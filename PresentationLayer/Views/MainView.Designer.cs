@@ -774,6 +774,7 @@
             this.PriceHistorytoolStripButton.Name = "PriceHistorytoolStripButton";
             this.PriceHistorytoolStripButton.Size = new System.Drawing.Size(24, 29);
             this.PriceHistorytoolStripButton.Text = "Price History";
+            this.PriceHistorytoolStripButton.Visible = false;
             // 
             // pnlRight
             // 
