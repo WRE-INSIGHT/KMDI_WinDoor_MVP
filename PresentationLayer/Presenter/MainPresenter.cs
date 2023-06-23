@@ -39,6 +39,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -999,7 +1000,7 @@ namespace PresentationLayer.Presenter
 
                 if (_userObjCount >= 8000)
                 {
-                    MessageBox.Show("User Objects Limit Reach:" + " " + _userObjCount + "\n" + "It is Recommended to" +"\n"+ "save the file", "Limit Reach", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show("User Objects Limit Reach:" + " " + _userObjCount + "\n" + "It is Recommended to" + "\n" + "save the file", "Limit Reach", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     bool runbatfile = false;
                     wndr_content = new List<string>();
 
@@ -1035,13 +1036,13 @@ namespace PresentationLayer.Presenter
                     if (runbatfile == true)
                     {
                         string wndrfilePath = _wndrFilePath.Replace(_wndrFileName, string.Empty);
-                        string batfilePath =  Path.Combine(wndrfilePath,"Open.txt");
-                        string batformat = "@echo off" +"\n"+ "Title AutoLoad File"+ _wndrFileName + "\n" + "@echo Load File: " +_wndrFileName +"\n"+ "taskkill /IM PresentationLayer.exe /f" + "\n" + "pause" + "\n" + "Start" + " " + _wndrFileName + " \n" + "del %0" + "\n" + "pause";
+                        string batfilePath = Path.Combine(wndrfilePath, "Open.txt");
+                        string batformat = "@echo off" + "\n" + "Title AutoLoad File" + _wndrFileName + "\n" + "@echo Load File: " + _wndrFileName + "\n" + "taskkill /IM PresentationLayer.exe /f" + "\n" + "pause" + "\n" + "Start" + " " + _wndrFileName + " \n" + "del %0" + "\n" + "pause";
 
                         File.WriteAllText(batfilePath, batformat);
                         FileInfo f = new FileInfo(batfilePath);
                         f.IsReadOnly = false;
-                        f.MoveTo(Path.ChangeExtension(batfilePath, ".bat"));                 
+                        f.MoveTo(Path.ChangeExtension(batfilePath, ".bat"));
 
                         Process proc = new Process();
                         proc.StartInfo.WorkingDirectory = wndrfilePath;
@@ -1057,9 +1058,9 @@ namespace PresentationLayer.Presenter
                     Console.WriteLine("Current User Object Count: " + _userObjCount);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(this + " error" + ex.Message );
+                Console.WriteLine(this + " error" + ex.Message);
                 _loginView.CloseLoginView();
             }
             return _userObjCount;
@@ -1287,7 +1288,7 @@ namespace PresentationLayer.Presenter
 
 
         }
-    
+
 
         private void OnPanelMainMouseWheelEventRaised(object sender, MouseEventArgs e)
         {
@@ -1509,7 +1510,7 @@ namespace PresentationLayer.Presenter
             if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
             {
                 wndr_content = new List<string>();
-              
+
                 foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
                 {
                     wndr_item.IsFromLoad = true;
@@ -1524,13 +1525,15 @@ namespace PresentationLayer.Presenter
         public void SaveAs()
         {
             _quotationModel.lst_TotalPriceHistory = new List<string>();
+
+            DateTime thisDay = DateTime.Now;
             if (_quotationModel.TotalPriceHistoryStatus == "System Generated Price")
             {
-                _quotationModel.lst_TotalPriceHistory.Add(_quotationModel.TotalPriceHistory);
+                _quotationModel.lst_TotalPriceHistory.Add(thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + _quotationModel.TotalPriceHistory);
             }
             else if (_quotationModel.TotalPriceHistoryStatus == "Edited Price")
             {
-                _quotationModel.lst_TotalPriceHistory.Add(_windoorModel.WD_currentPrice.ToString());
+                _quotationModel.lst_TotalPriceHistory.Add(thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + _windoorModel.WD_currentPrice.ToString());
             }
 
             _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
@@ -3453,6 +3456,12 @@ namespace PresentationLayer.Presenter
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
             }
+
+            foreach (string item in _quotationModel.lst_TotalPriceHistory)
+            {
+                MessageBox.Show(item);
+            }
+
         }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -3638,7 +3647,7 @@ namespace PresentationLayer.Presenter
             string extractedValue_str = string.Empty;
             if (!string.IsNullOrWhiteSpace(row_str))
             {
-                extractedValue_str = row_str.Substring(row_str.IndexOf(": ") + 2); 
+                extractedValue_str = row_str.Substring(row_str.IndexOf(": ") + 2);
             }
             if (row_str.Contains("QuoteId:"))
             {
@@ -8322,7 +8331,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (inside_quoteHistory)
                     {
-                        if(row_str != "8==D")
+                        if (row_str != "8==D")
                         {
                             if (row_str.Contains("` COMPUTATION FOR SAVING `"))
                             {
@@ -9238,7 +9247,7 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen, inside_rdlcDic,inside_quoteHistory,
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory,
              rdlcDicChangeKey = true,
              add_existing = false,
             _allpanelsIsMesh;
@@ -12324,7 +12333,7 @@ namespace PresentationLayer.Presenter
             }
             //GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
             GetMainView().GetCurrentPrice().Value = _windoorModel.WD_currentPrice;
-            SetChangesMark();                      
+            SetChangesMark();
         }
 
 
