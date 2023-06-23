@@ -531,6 +531,12 @@
     <Compile Include="Views\PDFWaitFormView.Designer.cs">
       <DependentUpon>PDFWaitFormView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\PriceHistoryView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PriceHistoryView.Designer.cs">
+      <DependentUpon>PriceHistoryView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\PricingView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1347,6 +1353,9 @@
     <EmbeddedResource Include="Views\PDFWaitFormView.resx">
       <DependentUpon>PDFWaitFormView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\PriceHistoryView.resx">
+      <DependentUpon>PriceHistoryView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\PricingView.resx">
       <DependentUpon>PricingView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1744,6 +1753,7 @@
     <None Include="Resources\glass %281%29.png" />
     <None Include="Resources\glass.png" />
     <None Include="Resources\folder.png" />
+    <None Include="Resources\icons8-history-64.png" />
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <None Include="Resources\icons8_front_sorting_96px.png" />
