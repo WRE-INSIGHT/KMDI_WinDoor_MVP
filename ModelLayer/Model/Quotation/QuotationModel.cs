@@ -3961,7 +3961,6 @@ namespace ModelLayer.Model.Quotation
                     MaterialCost = 0;
                     #endregion
                 }
-
             }
             else
             {
@@ -5615,7 +5614,7 @@ namespace ModelLayer.Model.Quotation
                             }
                         }
                         #endregion
-                        
+
                         #region ExtensionProfile
                         if ((fr.Frame_ArtNo == FrameProfile_ArticleNo._6050 || fr.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
                             fr.Frame_Width > 6000)
