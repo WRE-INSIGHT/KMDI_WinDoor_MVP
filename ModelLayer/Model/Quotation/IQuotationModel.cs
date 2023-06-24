@@ -35,6 +35,7 @@ namespace ModelLayer.Model.Quotation
         List<IWindoorModel> Lst_Windoor { get; set; }
         List<decimal> lstTotalPrice { get; set; }
         bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
+        decimal Quote_TotalPrice { get; set; }
         string TotalPriceHistory { get; set; }
         string TotalPriceHistoryStatus { get; set; }
         List<string> lst_TotalPriceHistory { get; set; }

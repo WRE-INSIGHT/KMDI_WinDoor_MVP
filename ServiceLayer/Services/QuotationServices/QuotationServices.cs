@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ModelLayer.Model.Quotation;
+﻿using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
 using ServiceLayer.CommonServices;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ServiceLayer.Services.QuotationServices
 {
@@ -23,11 +21,13 @@ namespace ServiceLayer.Services.QuotationServices
         private IQuotationModel CreateQuotationModel(int quote_id,
                                                     string quotation_ref_no,
                                                     DateTime quote_date,
-                                                    List<IWindoorModel> lst_wndr)
+                                                    List<IWindoorModel> lst_wndr,
+                                                    List<string> TotalPriceHistory)
         {
-            QuotationModel qModel = new QuotationModel(quotation_ref_no, lst_wndr);
+            QuotationModel qModel = new QuotationModel(quotation_ref_no, lst_wndr, TotalPriceHistory);
             qModel.Quotation_Id = quote_id;
             qModel.Quotation_Date = quote_date;
+            qModel.lst_TotalPriceHistory = TotalPriceHistory;
 
             ValidateModel(qModel);
             return qModel;
@@ -36,14 +36,15 @@ namespace ServiceLayer.Services.QuotationServices
         public IQuotationModel AddQuotationModel(string quotation_ref_no,
                                                  DateTime quote_date,
                                                  int quote_id = 0,
-                                                 List<IWindoorModel> lst_wndr = null)
+                                                 List<IWindoorModel> lst_wndr = null,
+                                                 List<string> TotalPriceHistory = null)
         {
             if (lst_wndr == null)
             {
                 lst_wndr = new List<IWindoorModel>();
             }
 
-            IQuotationModel _quotationModel = CreateQuotationModel(quote_id, quotation_ref_no, quote_date, lst_wndr);
+            IQuotationModel _quotationModel = CreateQuotationModel(quote_id, quotation_ref_no, quote_date, lst_wndr, TotalPriceHistory);
 
             return _quotationModel;
         }

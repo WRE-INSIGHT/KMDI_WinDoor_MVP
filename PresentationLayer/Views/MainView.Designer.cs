@@ -87,14 +87,14 @@
             this.tsb_Undo = new System.Windows.Forms.ToolStripButton();
             this.newfactorBtn = new System.Windows.Forms.ToolStripButton();
             this.SetGlassToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
+            this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.ScreentoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tsb_Redo = new System.Windows.Forms.ToolStripButton();
             this.tsprogress_Loading = new System.Windows.Forms.ToolStripProgressBar();
             this.deleteItemToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.tsp_Sync = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
-            this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.ScreentoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.PriceHistorytoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -533,14 +533,14 @@
             this.tsb_Undo,
             this.newfactorBtn,
             this.SetGlassToolStripMenuItem,
+            this.ViewImagerToolStripButton1,
+            this.ScreentoolStripButton,
             this.tsb_Redo,
             this.tsprogress_Loading,
             this.deleteItemToolStripButton1,
             this.tsp_Sync,
             this.tsLbl_Loading,
             this.tsLbl_Status,
-            this.ViewImagerToolStripButton1,
-            this.ScreentoolStripButton,
             this.PriceHistorytoolStripButton});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
@@ -682,6 +682,28 @@
             this.SetGlassToolStripMenuItem.ToolTipText = "Set Glass";
             this.SetGlassToolStripMenuItem.Click += new System.EventHandler(this.SetGlassToolStripMenuItem_Click);
             // 
+            // ViewImagerToolStripButton1
+            // 
+            this.ViewImagerToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ViewImagerToolStripButton1.Enabled = false;
+            this.ViewImagerToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("ViewImagerToolStripButton1.Image")));
+            this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";
+            this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
+            this.ViewImagerToolStripButton1.Text = "View Imager";
+            this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
+            // 
+            // ScreentoolStripButton
+            // 
+            this.ScreentoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ScreentoolStripButton.Enabled = false;
+            this.ScreentoolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ScreentoolStripButton.Image")));
+            this.ScreentoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ScreentoolStripButton.Name = "ScreentoolStripButton";
+            this.ScreentoolStripButton.Size = new System.Drawing.Size(24, 29);
+            this.ScreentoolStripButton.Text = "Screen";
+            this.ScreentoolStripButton.Click += new System.EventHandler(this.ScreentoolStripButton_Click);
+            // 
             // tsb_Redo
             // 
             this.tsb_Redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -744,28 +766,6 @@
             this.tsLbl_Status.Text = "TransomUC_1 Selected";
             this.tsLbl_Status.Visible = false;
             // 
-            // ViewImagerToolStripButton1
-            // 
-            this.ViewImagerToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ViewImagerToolStripButton1.Enabled = false;
-            this.ViewImagerToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("ViewImagerToolStripButton1.Image")));
-            this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";
-            this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
-            this.ViewImagerToolStripButton1.Text = "View Imager";
-            this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
-            // 
-            // ScreentoolStripButton
-            // 
-            this.ScreentoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ScreentoolStripButton.Enabled = false;
-            this.ScreentoolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ScreentoolStripButton.Image")));
-            this.ScreentoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ScreentoolStripButton.Name = "ScreentoolStripButton";
-            this.ScreentoolStripButton.Size = new System.Drawing.Size(24, 29);
-            this.ScreentoolStripButton.Text = "Screen";
-            this.ScreentoolStripButton.Click += new System.EventHandler(this.ScreentoolStripButton_Click);
-            // 
             // PriceHistorytoolStripButton
             // 
             this.PriceHistorytoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -775,6 +775,7 @@
             this.PriceHistorytoolStripButton.Size = new System.Drawing.Size(24, 29);
             this.PriceHistorytoolStripButton.Text = "Price History";
             this.PriceHistorytoolStripButton.Visible = false;
+            this.PriceHistorytoolStripButton.Click += new System.EventHandler(this.PriceHistorytoolStripButton_Click);
             // 
             // pnlRight
             // 

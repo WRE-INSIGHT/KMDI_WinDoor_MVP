@@ -464,6 +464,9 @@ namespace PresentationLayer
                  .RegisterType<IFP_TubularPropertyUCPresenter, FP_TubularPropertyUCPresenter>(new ContainerControlledLifetimeManager())
                  .RegisterType<IFP_TubularPropertyUC, FP_TubularPropertyUC>(new ContainerControlledLifetimeManager())
 
+                 .RegisterType<IPriceHistoryPresenter, PriceHistoryPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPriceHistoryView, PriceHistoryView>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

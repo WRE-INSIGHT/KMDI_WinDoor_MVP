@@ -48,6 +48,7 @@ namespace ModelLayer.Model.Quotation
         public string BOMandItemlistStatus { get; set; }
         public bool itemSelectStatus { get; set; }
         public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
+        public decimal Quote_TotalPrice { get; set; }
         public string TotalPriceHistory { get; set; }
         public string TotalPriceHistoryStatus { get; set; }
         public List<string> lst_TotalPriceHistory { get; set; }
@@ -2361,10 +2362,12 @@ namespace ModelLayer.Model.Quotation
         }
 
         public QuotationModel(string quotation_ref_no,
-                              List<IWindoorModel> lst_Windoor)
+                              List<IWindoorModel> lst_Windoor,
+                              List<string> TotalPriceHistory)
         {
             Quotation_ref_no = quotation_ref_no;
             Lst_Windoor = lst_Windoor;
+            lst_TotalPriceHistory = TotalPriceHistory;
         }
 
         #region VariablesForPricing
@@ -5291,6 +5294,7 @@ namespace ModelLayer.Model.Quotation
         public DataTable ItemCostingPriceAndPoints()
         {
             lstTotalPrice = new List<decimal>();
+            lst_TotalPriceHistory = new List<string>();
 
             DataTable Price_List = new DataTable();
             Price_List.Columns.Add(CreateColumn("Description", "Description", "System.String"));
@@ -7130,7 +7134,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_6mm_PricepPerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_6mm_PricepPerSqrMeter;
                                                 }
-                                                
+
                                                 else
                                                 {
                                                     GlassPrice += 0;
@@ -12286,7 +12290,7 @@ namespace ModelLayer.Model.Quotation
 
                     TotaPrice = TotaPrice + LouverCost + MeshCost;
 
-
+                    Quote_TotalPrice = TotaPrice;
 
 
                     wdm.WD_currentPrice = TotaPrice;
@@ -12299,15 +12303,14 @@ namespace ModelLayer.Model.Quotation
 
                     #region Price History
 
+
+                    DateTime thisDay = DateTime.Now;
                     TotalPriceHistoryStatus = "System Generated Price";
-                    TotalPriceHistory =
+                    TotalPriceHistory = "` COMPUTATION FOR SAVING `\n" +
 
+                    thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
 
-                        "\t\n` COMPUTATION FOR SAVING `\n\n" +
-
-
-
-                    "WD_CostingPoints: " + CostingPoints.ToString() + "\n" +
+                    "\nWD_CostingPoints: " + CostingPoints.ToString() + "\n" +
                     "LaborCost: " + LaborCost.ToString() + " = CostingPoints " + CostingPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n" +
                     "InstallationCost: " + InstallationCost.ToString() + " = InstallationPoints " + InstallationPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n\n" +
 

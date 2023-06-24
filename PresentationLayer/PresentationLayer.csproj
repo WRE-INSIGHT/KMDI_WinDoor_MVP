@@ -175,6 +175,7 @@
     <Compile Include="Presenter\IMainPresenter.cs" />
     <Compile Include="Presenter\IPDFCompilerPresenter.cs" />
     <Compile Include="Presenter\IPDFWaitFormPresenter.cs" />
+    <Compile Include="Presenter\IPriceHistoryPresenter.cs" />
     <Compile Include="Presenter\IPricingPresenter.cs" />
     <Compile Include="Presenter\IPrintGlassSummaryPresenter.cs" />
     <Compile Include="Presenter\IPrintQuotePresenter.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Presenter\PDFCompilerPresenter.cs" />
     <Compile Include="Presenter\PDFWaitFormPresenter.cs" />
+    <Compile Include="Presenter\PriceHistoryPresenter.cs" />
     <Compile Include="Presenter\PricingPresenter.cs" />
     <Compile Include="Presenter\PrintGlassSummaryPresenter.cs" />
     <Compile Include="Presenter\PrintQuotePresenter.cs" />
@@ -496,6 +498,7 @@
     <Compile Include="Views\IMainView.cs" />
     <Compile Include="Views\IPDFCompilerView.cs" />
     <Compile Include="Views\IPDFWaitFormView.cs" />
+    <Compile Include="Views\IPriceHistoryView.cs" />
     <Compile Include="Views\IPricingView.cs" />
     <Compile Include="Views\IPrintGlassSummaryView.cs" />
     <Compile Include="Views\IPrintQuoteView.cs" />
