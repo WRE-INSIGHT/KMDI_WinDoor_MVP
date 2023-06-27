@@ -3543,12 +3543,6 @@ namespace PresentationLayer.Presenter
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
             }
-
-            foreach (string item in _quotationModel.lst_TotalPriceHistory)
-            {
-                MessageBox.Show(item);
-            }
-
         }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {

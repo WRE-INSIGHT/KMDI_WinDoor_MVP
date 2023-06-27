@@ -481,6 +481,12 @@
     <Compile Include="Views\GlassThicknessListView.Designer.cs">
       <DependentUpon>GlassThicknessListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\GlassUpgradeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\GlassUpgradeView.Designer.cs">
+      <DependentUpon>GlassUpgradeView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\IChangeItemColorView.cs" />
     <Compile Include="Views\ICostEngrLandingView.cs" />
     <Compile Include="Views\ICreateNewGlassColorView.cs" />
@@ -505,7 +511,6 @@
     <Compile Include="Views\IScreenView.cs" />
     <Compile Include="Views\ISetMultipleGlassThicknessView.cs" />
     <Compile Include="Views\ISetTopViewSlidingPanellingView.cs" />
-    <Compile Include="Views\ISlidingScreenView.cs" />
     <Compile Include="Views\ISortItemView.cs" />
     <Compile Include="Views\LoginView.cs">
       <SubType>Form</SubType>
@@ -1340,6 +1345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\GlassThicknessListView.resx">
       <DependentUpon>GlassThicknessListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\GlassUpgradeView.resx">
+      <DependentUpon>GlassUpgradeView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
