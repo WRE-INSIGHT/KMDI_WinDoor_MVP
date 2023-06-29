@@ -1745,8 +1745,7 @@ namespace PresentationLayer.Presenter
             }
             foreach (WindoorModel wdm in _quotationModel.Lst_Windoor)
             {
-                SaveWindoorModel(wdm);
-
+                    SaveWindoorModel(wdm);
             }
             foreach (ScreenModel scm in Screen_List)
             {
@@ -1766,12 +1765,7 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add(dic.Key + "^ " + dic.Value);
                 wndr_content.Add(".");
             }
-            foreach (var history in _windoorModel.lst_TotalPriceHistory)
-            {
-                wndr_content.Add("*_*");
-                wndr_content.Add(history);
-                wndr_content.Add("*_*");
-            }
+
 
             wndr_content.Add("EndofFile");
             #endregion
@@ -1784,38 +1778,41 @@ namespace PresentationLayer.Presenter
             wndr_content.Add("(");
             foreach (var prop in wdm.GetType().GetProperties())
             {
-                if (prop.Name == "Dictionary_ht_redArrowLines" && wdm.Dictionary_ht_redArrowLines != null)
+                if (prop.Name != "TotalPriceHistory")
                 {
-
-                    string Dictionary_ht_redArrowLinesArray = "";
-                    foreach (KeyValuePair<int, Decimal> ht_redArrowLines in wdm.Dictionary_ht_redArrowLines)
+                    if (prop.Name == "Dictionary_ht_redArrowLines" && wdm.Dictionary_ht_redArrowLines != null)
                     {
-                        Dictionary_ht_redArrowLinesArray += "<" + ht_redArrowLines.Key + "," + ht_redArrowLines.Value + ">; ";
+
+                        string Dictionary_ht_redArrowLinesArray = "";
+                        foreach (KeyValuePair<int, Decimal> ht_redArrowLines in wdm.Dictionary_ht_redArrowLines)
+                        {
+                            Dictionary_ht_redArrowLinesArray += "<" + ht_redArrowLines.Key + "," + ht_redArrowLines.Value + ">; ";
+                        }
+
+                        wndr_content.Add(prop.Name + ": " + Dictionary_ht_redArrowLinesArray);
+                    }
+                    else if (prop.Name == "Dictionary_wd_redArrowLines" && wdm.Dictionary_wd_redArrowLines != null)
+                    {
+
+                        string Dictionary_wd_redArrowLinesArray = "";
+                        foreach (KeyValuePair<int, Decimal> wd_redArrowLines in wdm.Dictionary_wd_redArrowLines)
+                        {
+                            Dictionary_wd_redArrowLinesArray += "<" + wd_redArrowLines.Key + "," + wd_redArrowLines.Value + ">; ";
+                        }
+
+                        wndr_content.Add(prop.Name + ": " + Dictionary_wd_redArrowLinesArray);
                     }
 
-                    wndr_content.Add(prop.Name + ": " + Dictionary_ht_redArrowLinesArray);
-                }
-                else if (prop.Name == "Dictionary_wd_redArrowLines" && wdm.Dictionary_wd_redArrowLines != null)
-                {
-
-                    string Dictionary_wd_redArrowLinesArray = "";
-                    foreach (KeyValuePair<int, Decimal> wd_redArrowLines in wdm.Dictionary_wd_redArrowLines)
+                    else if (prop.Name == "WD_description")
                     {
-                        Dictionary_wd_redArrowLinesArray += "<" + wd_redArrowLines.Key + "," + wd_redArrowLines.Value + ">; ";
+                        string Wd_desu = prop.GetValue(wdm, null).ToString().Replace("\n", @"\m/");
+                        wndr_content.Add(prop.Name + ": " + Wd_desu);
                     }
+                    else
+                    {
+                        wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
 
-                    wndr_content.Add(prop.Name + ": " + Dictionary_wd_redArrowLinesArray);
-                }
-
-                else if (prop.Name == "WD_description")
-                {
-                    string Wd_desu = prop.GetValue(wdm, null).ToString().Replace("\n", @"\m/");
-                    wndr_content.Add(prop.Name + ": " + Wd_desu);
-                }
-                else
-                {
-                    wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
-
+                    }
                 }
             }
             foreach (Control wndrObject in wdm.lst_objects)
@@ -2236,7 +2233,13 @@ namespace PresentationLayer.Presenter
                         }
                     }
                     #endregion
-                }
+                }            
+            }
+            foreach (var history in wdm.lst_TotalPriceHistory)
+            {
+                wndr_content.Add("*_*");
+                wndr_content.Add(history);
+                wndr_content.Add("*_*");
             }
             wndr_content.Add(")");
         }
@@ -3865,6 +3868,18 @@ namespace PresentationLayer.Presenter
                 frmDimension_baseColor = "";
 
             }
+            else if (row_str == "*_*")
+            {
+                if (inside_quoteHistory)
+                {
+                    Load_QuoteHistory();
+                    inside_quoteHistory = false;
+                }
+                else
+                {
+                    inside_quoteHistory = true;
+                }
+            }
             else if (row_str == ")")
             {
                 _basePlatformPresenter.InvalidateBasePlatform();
@@ -3896,18 +3911,7 @@ namespace PresentationLayer.Presenter
                     inside_rdlcDic = true;
                 }
             }
-            else if (row_str == "*_*")
-            {
-                if (inside_quoteHistory)
-                {
-                    Load_QuoteHistory();
-                    inside_quoteHistory = false;
-                }
-                else
-                {
-                    inside_quoteHistory = true;
-                }
-            }
+            
 
             if (row_str == "EndofFile")
             {
