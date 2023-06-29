@@ -999,17 +999,27 @@ namespace PresentationLayer.Presenter
             priceHistory.GetPriceHistoryView().ShowPriceHistory();
         }
 
-        public int ForceRestartAndLoadFile()
+        public int ForceRestartAndLoadFile()                 
         {
             int _userObjCount = GetGuiResources(Process.GetCurrentProcess().Handle, 1);
             try
             {
                 if (_userModel.Username.ToLower() == "jb")//specific user with 20/10k user objects 
                 {
-                    if (_userObjCount >= 17000)//userobject limit
+                    if (_userObjCount >= 17000)//userobject limit 
                     {
+                        //MessageBox.Show("User Objects Limit Reach:" + " " + _userObjCount + "\n" + "It is Recommended to" + "\n" + "save the file", "Limit Reach", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (Properties.Settings.Default.UserObjectWarning == false)
+                        {
+                            bool _objectLimitWarningRememberMe = LimitReachDialogBox(_userObjCount.ToString(), "Limit Reach"); //limit Reach dialog warning 
 
-                        MessageBox.Show("User Objects Limit Reach:" + " " + _userObjCount + "\n" + "It is Recommended to" + "\n" + "save the file", "Limit Reach", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            if (_objectLimitWarningRememberMe == true)
+                            {
+                                Properties.Settings.Default.UserObjectWarning = true;
+                                Properties.Settings.Default.Save();
+                            }                          
+                        }
+
                         bool runbatfile = false;
                         wndr_content = new List<string>();
 
@@ -1059,8 +1069,9 @@ namespace PresentationLayer.Presenter
                                                "pause";
                             string batformatv2 = "@echo off" + "\n" +
                                                  "Title Auto Load " + _wndrFileName + "\n" +
-                                                 "@echo Opening file" + _wndrFileName + "\n" +
-                                                 "@echo Press any key one time only." + "\n" +
+                                                 "taskkill /IM PresentationLayer.exe /f" + "\n" +
+                                                 "@echo Opening file " + _wndrFileName + "\n" +
+                                                 "@echo Press any key one time only." + "\n" + 
                                                  "pause" + "\n" +
                                                  "echo off & start " + @"""""" + "/b " + @"""" + _wndrFilePath + @"""" + "\n" +
                                                  "cscript //NoLogo //B Auto.vbs" + "\n" +
@@ -1076,9 +1087,17 @@ namespace PresentationLayer.Presenter
                                                 "strScript = Wscript.ScriptFullName" + "\n" +
                                                 "objFSO.DeleteFile(strScript)"
                                                 ;
+                            //Prevent Duplicate of txt file
+                            File.Delete(batfilePath);
+                            File.Delete(vbsfilePath);
+                            File.Delete(Path.Combine(BasePath,"Open.bat"));
+                            File.Delete(Path.Combine(BasePath,"Auto.vbs"));
+
+                            //write Batch and Script in Text Format
                             File.WriteAllText(batfilePath, batformatv2);
                             File.WriteAllText(vbsfilePath, vbsformat);
 
+                            //Change Batch and Script Extension 
                             FileInfo bat = new FileInfo(batfilePath);
                             bat.IsReadOnly = false;
                             bat.MoveTo(Path.ChangeExtension(batfilePath, ".bat"));
@@ -1087,10 +1106,11 @@ namespace PresentationLayer.Presenter
                             vbs.IsReadOnly = false;
                             vbs.MoveTo(Path.ChangeExtension(vbsfilePath, ".vbs"));
 
+                            //Initiate Batch File 
                             Process proc = new Process();
                             proc.StartInfo.WorkingDirectory = BasePath;
                             proc.StartInfo.FileName = "Open.bat";
-                            proc.StartInfo.Arguments = string.Format("8");
+                            proc.StartInfo.Arguments = string.Format("10");
                             proc.StartInfo.CreateNoWindow = false;
                             proc.Start();
                         }
@@ -1101,13 +1121,50 @@ namespace PresentationLayer.Presenter
                         Console.WriteLine("Current User Object Count: " + _userObjCount);
                     }
                 }
+                else if (_userModel.Username.ToLower() == "jb")
+                {
+                    //return to show dialog box 
+                    Properties.Settings.Default.UserObjectWarning = false;
+                    Properties.Settings.Default.Save();
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(this + " error" + ex.Message);
-                _loginView.CloseLoginView();
+                //_loginView.CloseLoginView();
             }
             return _userObjCount;
+
+        }
+
+        public bool LimitReachDialogBox(string _maximumUserObject,string FormTitle)
+        {
+           Form frm = new Form();
+           frm.Width = 250;
+           frm.Height = 140;
+           frm.Text = FormTitle;
+           frm.ShowIcon = false;
+           frm.MaximumSize = new Size(250, 140);
+           frm.MaximumSize = new Size(250, 140);
+           frm.StartPosition = FormStartPosition.CenterScreen;
+           FlowLayoutPanel pnl = new FlowLayoutPanel();
+           CheckBox chk = new CheckBox() { Text = "Do not Show This Again", AutoSize = true };
+           Button ok = new Button() { Text = "Ok" };
+           Label lbl = new Label();
+           lbl.Font = new Font("Segoe UI", 8, FontStyle.Regular);
+           Label dummylabel = new Label();
+           dummylabel.Text = " ";
+           lbl.Text = "User Objects Limit Reach:" + " " + _maximumUserObject + "\n" + "It is Recommended to save the file! ";
+           ok.Click += (sender, e) => { frm.Close(); };
+           lbl.AutoSize = true;
+           pnl.Controls.Add(lbl);
+           pnl.Controls.Add(dummylabel);
+           pnl.Controls.Add(chk);
+           pnl.Controls.Add(ok);
+           frm.Controls.Add(pnl);
+           frm.ShowDialog();
+           
+           return chk.Checked;
 
         }
 
@@ -1516,7 +1573,7 @@ namespace PresentationLayer.Presenter
 
             _screenModel.Screen_PVCVisibility = false;
             IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel);//, _screenDT);
-            glassThicknessPresenter.GetScreenView().ShowScreemView();
+            glassThicknessPresenter.GetScreenView().ShowScreemView();         
         }
 
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
