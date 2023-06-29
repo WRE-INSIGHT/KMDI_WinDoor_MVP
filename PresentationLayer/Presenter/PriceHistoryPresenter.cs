@@ -38,11 +38,13 @@ namespace PresentationLayer.Presenter
                 {
                     if (wdr.lst_TotalPriceHistory.Count != 0)
                     {
+                        _priceHistoryView.PriceHistory.Text = "";
+
                         foreach (string item in wdr.lst_TotalPriceHistory)
                         {
                             if (item.Contains(_cmbPriceHistory.SelectedValue.ToString()))
                             {
-                                _priceHistoryView.PriceHistory.Text = item;
+                                _priceHistoryView.PriceHistory.Text += item;
                             }
                         }
                     }
@@ -89,7 +91,7 @@ namespace PresentationLayer.Presenter
             foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
             {
                 if (wdr.WD_Selected == true)
-                { 
+                {
                     if (wdr.lst_TotalPriceHistory.Count != 0 && _cmbPriceHistory.Items.Count != 0)
                     {
                         foreach (string item in wdr.lst_TotalPriceHistory)

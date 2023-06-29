@@ -11804,7 +11804,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (wdr.TotalPriceHistoryStatus == "Edited Price")
                     {
-                        wdr.lst_TotalPriceHistory.Add(thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "`````\nEdited Price: " + wdr.WD_currentPrice.ToString() + "\n");
+                        wdr.lst_TotalPriceHistory.Add(thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "`````\nEdited Price: " + wdr.WD_price.ToString() + "\n");
                     }
                 }
 
