@@ -127,6 +127,7 @@ namespace PresentationLayer.Presenter
         private IScreenPresenter _screenPresenter;
         private IPricingPresenter _pricingPresenter;
         private ISetMultipleGlassThicknessPresenter _setMultipleGlassThicknessPresenter;
+        private IPriceHistoryPresenter _priceHistoryPresenter;
 
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
@@ -812,8 +813,8 @@ namespace PresentationLayer.Presenter
                              IMullionImagerUCPresenter mullionImagerUCP,
                              ITransomImagerUCPresenter transomImagerUCP,
                              IPricingPresenter pricingPresenter,
-                             ISetMultipleGlassThicknessPresenter setMultipleGlassThicknessPresenter
-
+                             ISetMultipleGlassThicknessPresenter setMultipleGlassThicknessPresenter,
+                             IPriceHistoryPresenter priceHistoryPresenter
                              )
         {
             _mainView = mainView;
@@ -877,7 +878,7 @@ namespace PresentationLayer.Presenter
             _pricingPresenter = pricingPresenter;
             _setMultipleGlassThicknessPresenter = setMultipleGlassThicknessPresenter;
             _lblCurrentPrice = _mainView.GetCurrentPrice();
-
+            _priceHistoryPresenter = priceHistoryPresenter;
 
 
             SubscribeToEventsSetup();
@@ -989,7 +990,13 @@ namespace PresentationLayer.Presenter
             _mainView.NudCurrentPriceValueChangedEventRaised += new EventHandler(OnNudCurrentPriceValueChangedEventRaised);
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
             _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
+            _mainView.PriceHistorytoolStripButtonClickEventRaised += _mainView_PriceHistorytoolStripButtonClickEventRaised;
+        }
 
+        private void _mainView_PriceHistorytoolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            IPriceHistoryPresenter priceHistory = _priceHistoryPresenter.CreateNewInstance(_unityC, this, _quotationModel);
+            priceHistory.GetPriceHistoryView().ShowPriceHistory();
         }
 
         public int ForceRestartAndLoadFile()                 
@@ -1066,7 +1073,7 @@ namespace PresentationLayer.Presenter
                                                  "@echo Opening file " + _wndrFileName + "\n" +
                                                  "@echo Press any key one time only." + "\n" + 
                                                  "pause" + "\n" +
-                                                 "echo off & start " + @"""""" + "/b " +@""""+ _wndrFilePath +@"""" + "\n" +
+                                                 "echo off & start " + @"""""" + "/b " + @"""" + _wndrFilePath + @"""" + "\n" +
                                                  "cscript //NoLogo //B Auto.vbs" + "\n" +
                                                  "del %0" + "\n" +
                                                  "exit";
@@ -1078,7 +1085,7 @@ namespace PresentationLayer.Presenter
                                                 "Next" + "\n" +
                                                 "WScript.Sleep 2000 : objShell.SendKeys " + @"""~""" + "\n\n" +
                                                 "strScript = Wscript.ScriptFullName" + "\n" +
-                                                "objFSO.DeleteFile(strScript)"                                                    
+                                                "objFSO.DeleteFile(strScript)"
                                                 ;
                             //Prevent Duplicate of txt file
                             File.Delete(batfilePath);
@@ -1472,18 +1479,21 @@ namespace PresentationLayer.Presenter
             {
                 if (_quotationModel != null)
                 {
-                    updatePriceFromMainViewToItemList();
-                    _windoorModel.WD_fileLoad = false;
-                    _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
-                    if (_lblCurrentPrice.Value == _windoorModel.WD_currentPrice)
+                    if (_lblCurrentPrice.Value == _windoorModel.SystemSuggestedPrice && _windoorModel.SystemSuggestedPrice != 0)
                     {
-                        _quotationModel.TotalPriceHistoryStatus = "System Generated Price";
+                        _windoorModel.TotalPriceHistoryStatus = "System Generated Price";
                     }
                     else
                     {
-                        _quotationModel.TotalPriceHistoryStatus = "Edited Price";
+                        _windoorModel.TotalPriceHistoryStatus = "Edited Price";
                     }
-                    Console.WriteLine(_quotationModel.TotalPriceHistoryStatus);
+
+                    updatePriceFromMainViewToItemList();
+                    _windoorModel.WD_fileLoad = false;
+                    _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
+
+                    Console.WriteLine(_windoorModel.TotalPriceHistoryStatus);
+
                 }
                 else
                 {
@@ -2606,6 +2616,7 @@ namespace PresentationLayer.Presenter
 
                 }
             }
+
             if (_quotationModel.Lst_Windoor.Count == 0)
             {
                 Clearing_Operation();
@@ -2614,6 +2625,7 @@ namespace PresentationLayer.Presenter
             {
                 _mainView.CreateNewWindoorBtnEnabled = true;
             }
+
             if (_quotationModel != null)
             {
                 if (_quotationModel.Lst_Windoor.Count != 0)
@@ -2625,6 +2637,7 @@ namespace PresentationLayer.Presenter
             {
                 _lblCurrentPrice.Value = 0;
             }
+
             PropertiesScroll = propertiesScroll;
             //wndr_content = new List<string>();
             //Saving_dotwndr();
@@ -3404,6 +3417,18 @@ namespace PresentationLayer.Presenter
             _colorDT.Rows.Add("Euro Grey");
 
 
+            if (_userModel.AccountType == "User Level 1")
+            {
+                _mainView.PriceHistorytoolStripButtonVisible = true;
+            }
+            else
+            {
+                _mainView.PriceHistorytoolStripButtonVisible = false;
+            }
+
+
+
+
             _mainView.GetCurrentPrice().Maximum = decimal.MaxValue;
             _mainView.GetCurrentPrice().DecimalPlaces = 2;
             bgw.WorkerReportsProgress = true;
@@ -4034,15 +4059,15 @@ namespace PresentationLayer.Presenter
                         _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
                         //inside_quotation = false;
                     }
-                    else if (row_str.Contains("lst_TotalPriceHistory:"))
-                    {
-                        _quotationModel.lst_TotalPriceHistory = new List<string>();
-                        inside_quotation = false;
-                    }
-                    else if (row_str.Contains("TotalPriceHistoryStatus:"))
-                    {
-                        _quotationModel.TotalPriceHistoryStatus = extractedValue_str;
-                    }
+                    //else if (row_str.Contains("lst_TotalPriceHistory:"))
+                    //{
+                    //    _quotationModel.lst_TotalPriceHistory = new List<string>();
+                    //    inside_quotation = false;
+                    //}
+                    //else if (row_str.Contains("TotalPriceHistoryStatus:"))
+                    //{
+                    //    _quotationModel.TotalPriceHistoryStatus = extractedValue_str;
+                    //}
                     break;
                 #endregion
                 case false:
@@ -9323,7 +9348,7 @@ namespace PresentationLayer.Presenter
         }
         private void Load_QuoteHistory()
         {
-            _quotationModel.lst_TotalPriceHistory.Add(_quoteHistory);
+            //_quotationModel.lst_TotalPriceHistory.Add(_quoteHistory);
             _quoteHistory = null;
         }
 
@@ -10097,7 +10122,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
-                    _mainView.GetCurrentPrice().Value = 0;
+                    //    _mainView.GetCurrentPrice().Value = 0;
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
@@ -10434,6 +10459,8 @@ namespace PresentationLayer.Presenter
                         _pnlItems.PerformLayout();
 
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+
+                        _mainView.GetCurrentPrice().Value = 0;
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //add frame
@@ -11763,19 +11790,25 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                _quotationModel.lst_TotalPriceHistory = new List<string>();
-                if (_quotationModel.TotalPriceHistoryStatus == "System Generated Price")
+                foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
                 {
-                    _quotationModel.lst_TotalPriceHistory.Add(_quotationModel.TotalPriceHistory);                   
+                    DateTime thisDay = DateTime.Now;
+                    //_quotationModel.lst_TotalPriceHistory = new List<string>();
+
+                    if (wdr.TotalPriceHistoryStatus == "System Generated Price")
+                    {
+                        wdr.lst_TotalPriceHistory.Add(thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "````` Save Time\n" + wdr.TotalPriceHistory);
+                    }
+                    else if (wdr.TotalPriceHistoryStatus == "Edited Price")
+                    {
+                        wdr.lst_TotalPriceHistory.Add(thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "`````\nEdited Price: " + wdr.WD_currentPrice.ToString() + "\n");
+                    }
                 }
-                else if (_quotationModel.TotalPriceHistoryStatus == "Edited Price")
-                {
-                    _quotationModel.lst_TotalPriceHistory.Add(_windoorModel.WD_currentPrice.ToString());
-                }
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this + " error " + " saving price history " +"\n" + ex.Message );
+                MessageBox.Show(this + " error " + " saving price history " + "\n" + ex.Message);
             }
         }
 
@@ -11785,7 +11818,7 @@ namespace PresentationLayer.Presenter
             if (_wndrFilePath != "")
             {
                 QuotationPriceHistory();//save price history
-                                        
+
                 string txtfile = _wndrFilePath.Replace(".wndr", ".txt");
                 File.WriteAllLines(txtfile, Saving_dotwndr());
                 File.Delete(_wndrFilePath);

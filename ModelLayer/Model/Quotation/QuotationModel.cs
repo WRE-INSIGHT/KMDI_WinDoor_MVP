@@ -48,9 +48,7 @@ namespace ModelLayer.Model.Quotation
         public string BOMandItemlistStatus { get; set; }
         public bool itemSelectStatus { get; set; }
         public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
-        public string TotalPriceHistory { get; set; }
-        public string TotalPriceHistoryStatus { get; set; }
-        public List<string> lst_TotalPriceHistory { get; set; }
+
 
 
 
@@ -2360,12 +2358,7 @@ namespace ModelLayer.Model.Quotation
             item.WD_Selected = true;
         }
 
-        public QuotationModel(string quotation_ref_no,
-                              List<IWindoorModel> lst_Windoor)
-        {
-            Quotation_ref_no = quotation_ref_no;
-            Lst_Windoor = lst_Windoor;
-        }
+
 
         #region VariablesForPricing
 
@@ -5291,6 +5284,7 @@ namespace ModelLayer.Model.Quotation
         public DataTable ItemCostingPriceAndPoints()
         {
             lstTotalPrice = new List<decimal>();
+            //lst_TotalPriceHistory = new List<string>();
 
             DataTable Price_List = new DataTable();
             Price_List.Columns.Add(CreateColumn("Description", "Description", "System.String"));
@@ -7130,7 +7124,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_6mm_PricepPerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_6mm_PricepPerSqrMeter;
                                                 }
-                                                
+
                                                 else
                                                 {
                                                     GlassPrice += 0;
@@ -12286,10 +12280,10 @@ namespace ModelLayer.Model.Quotation
 
                     TotaPrice = TotaPrice + LouverCost + MeshCost;
 
-
-
+                    wdm.SystemSuggestedPrice = TotaPrice;
 
                     wdm.WD_currentPrice = TotaPrice;
+
                     lstTotalPrice.Add(TotaPrice);
 
                     if (wdm.WD_price == 0)
@@ -12299,15 +12293,14 @@ namespace ModelLayer.Model.Quotation
 
                     #region Price History
 
-                    TotalPriceHistoryStatus = "System Generated Price";
-                    TotalPriceHistory =
 
+                    DateTime thisDay = DateTime.Now;
+                    //wdm.TotalPriceHistoryStatus = "System Generated Price";
+                    wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
 
-                        "\t\n` COMPUTATION FOR SAVING `\n\n" +
+                   "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
 
-
-
-                    "WD_CostingPoints: " + CostingPoints.ToString() + "\n" +
+                    "`````\n\nWD_CostingPoints: " + CostingPoints.ToString() + "\n" +
                     "LaborCost: " + LaborCost.ToString() + " = CostingPoints " + CostingPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n" +
                     "InstallationCost: " + InstallationCost.ToString() + " = InstallationPoints " + InstallationPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n\n" +
 
@@ -13374,6 +13367,13 @@ namespace ModelLayer.Model.Quotation
             TuffMeshPrice = 0;
             PhiferMeshPrice = 0;
             AluminumFramePrice = 0;
+        }
+
+        public QuotationModel(string quotation_ref_no,
+                            List<IWindoorModel> lst_Windoor)
+        {
+            Quotation_ref_no = quotation_ref_no;
+            Lst_Windoor = lst_Windoor;
         }
     }
 }

@@ -76,6 +76,7 @@ namespace PresentationLayer.Presenter.UserControls
         {
             try
             {
+                Console.WriteLine("item info:" + _windoorModel.TotalPriceHistoryStatus);
                 _mainPresenter.ItemLoad = true;
                 int itemscroll = _mainPresenter.ItemScroll;
                 _mainPresenter.Load_Windoor_Item(_windoorModel);
@@ -87,7 +88,15 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else
                 {
-                    _mainPresenter.LblCurrentPrice.Value = _windoorModel.WD_currentPrice;
+
+                    if (_windoorModel.TotalPriceHistoryStatus == "System Generated Price")
+                    {
+                        _mainPresenter.LblCurrentPrice.Value = _windoorModel.WD_currentPrice;
+                    }
+                    else if (_windoorModel.TotalPriceHistoryStatus == "Edited Price")
+                    {
+                        _mainPresenter.LblCurrentPrice.Value = _windoorModel.WD_price;
+                    }
                 }
                 _mainPresenter.ItemScroll = itemscroll;
                 _mainPresenter.ItemLoad = false;
