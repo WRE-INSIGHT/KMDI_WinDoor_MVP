@@ -10065,7 +10065,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
-                    _mainView.GetCurrentPrice().Value = 0;
+                    //    _mainView.GetCurrentPrice().Value = 0;
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
@@ -10402,6 +10402,8 @@ namespace PresentationLayer.Presenter
                         _pnlItems.PerformLayout();
 
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+
+                        _mainView.GetCurrentPrice().Value = 0;
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //add frame
@@ -11738,7 +11740,7 @@ namespace PresentationLayer.Presenter
 
                     if (wdr.TotalPriceHistoryStatus == "System Generated Price")
                     {
-                        wdr.lst_TotalPriceHistory.Add(wdr.TotalPriceHistory);
+                        wdr.lst_TotalPriceHistory.Add(thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "````` Save Time\n" + wdr.TotalPriceHistory);
                     }
                     else if (wdr.TotalPriceHistoryStatus == "Edited Price")
                     {

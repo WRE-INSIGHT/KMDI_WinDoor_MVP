@@ -12295,10 +12295,10 @@ namespace ModelLayer.Model.Quotation
 
 
                     DateTime thisDay = DateTime.Now;
-                    wdm.TotalPriceHistoryStatus = "System Generated Price";
+                    //wdm.TotalPriceHistoryStatus = "System Generated Price";
                     wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
 
-                    thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
+                   "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
 
                     "`````\n\nWD_CostingPoints: " + CostingPoints.ToString() + "\n" +
                     "LaborCost: " + LaborCost.ToString() + " = CostingPoints " + CostingPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n" +
