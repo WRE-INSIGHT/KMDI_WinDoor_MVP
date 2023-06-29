@@ -18,10 +18,22 @@ namespace PresentationLayer.Views
             }
             set
             {
-                value = lbl_priceHistory;
+                 lbl_priceHistory = value;
             }
         }
 
+        public ComboBox cmbPriceHistory
+        {
+            get
+            {
+                return cmb_PriceHistory;
+            }
+
+            set
+            {
+                 cmb_PriceHistory = value;
+            }
+        }
 
         public event EventHandler PriceHistoryViewLoadEventRaised;
         public event EventHandler cmb_PriceHistorySelectedValueChangedEventRaised;

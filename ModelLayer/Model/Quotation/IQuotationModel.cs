@@ -8,6 +8,7 @@ namespace ModelLayer.Model.Quotation
 {
     public interface IQuotationModel
     {
+        int Quotation_Id { get; set; }
         string Quotation_ref_no { get; set; }
         DateTime Quotation_Date { get; set; }
 
@@ -35,10 +36,7 @@ namespace ModelLayer.Model.Quotation
         List<IWindoorModel> Lst_Windoor { get; set; }
         List<decimal> lstTotalPrice { get; set; }
         bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
-        decimal Quote_TotalPrice { get; set; }
-        string TotalPriceHistory { get; set; }
-        string TotalPriceHistoryStatus { get; set; }
-        List<string> lst_TotalPriceHistory { get; set; }
+
         DataTable GetListOfMaterials(IWindoorModel item);
         void Select_Current_Windoor(IWindoorModel item);
         DataTable ItemCostingPriceAndPoints();

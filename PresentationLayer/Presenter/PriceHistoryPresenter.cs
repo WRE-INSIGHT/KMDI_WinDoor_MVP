@@ -1,8 +1,8 @@
 ﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views;
 using System;
-using System.Globalization;
-using System.Text.RegularExpressions;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
 
@@ -15,12 +15,12 @@ namespace PresentationLayer.Presenter
         private IUnityContainer _unityC;
         private IQuotationModel _quotationModel;
 
-
+        private ComboBox _cmbPriceHistory;
 
         public PriceHistoryPresenter(IPriceHistoryView priceHistoryView)
         {
             _priceHistoryView = priceHistoryView;
-
+            _cmbPriceHistory = _priceHistoryView.cmbPriceHistory;
             SubcribeToEventSetup();
         }
 
@@ -32,39 +32,78 @@ namespace PresentationLayer.Presenter
 
         private void _priceHistoryView_cmb_PriceHistorySelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-
-        }
-
-        private void _priceHistoryView_PriceHistoryViewLoadEventRaised(object sender, EventArgs e)
-        {
-            if (_quotationModel.lst_TotalPriceHistory.Count != 0)
+            foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
             {
-                foreach (string item in _quotationModel.lst_TotalPriceHistory)
+                if (wdr.WD_Selected == true)
                 {
-                    if (item.Contains("` COMPUTATION FOR SAVING `\n"))
+                    if (wdr.lst_TotalPriceHistory.Count != 0)
                     {
-
+                        foreach (string item in wdr.lst_TotalPriceHistory)
+                        {
+                            if (item.Contains(_cmbPriceHistory.SelectedValue.ToString()))
+                            {
+                                _priceHistoryView.PriceHistory.Text = item;
+                            }
+                        }
                     }
-
-                    GetFirstDateFromString(item);
-                    _priceHistoryView.PriceHistory.Text += item;
                 }
             }
         }
 
-        static DateTime? GetFirstDateFromString(string inputText)
+        private void _priceHistoryView_PriceHistoryViewLoadEventRaised(object sender, EventArgs e)
         {
-            var regex = new Regex(@"\b\d{2}\.\d{2}.\d{4}\b");
-            foreach (Match m in regex.Matches(inputText))
+            List<string> priceHistory = new List<string>();
+
+            foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
             {
-                DateTime dt;
-                if (DateTime.TryParseExact(m.Value, "MM.dd.yyyy\tHH:mm:ss", null, DateTimeStyles.RoundtripKind, out dt))
-                    return dt;
+                if (wdr.WD_Selected == true)
+                {
+                    if (wdr.lst_TotalPriceHistory.Count != 0)
+                    {
+                        foreach (string item in wdr.lst_TotalPriceHistory)
+                        {
+                            if (item != null)
+                            {
+                                if (item.Contains("` COMPUTATION FOR SAVING `"))
+                                {
+                                    string computationHistory = item.Replace("` COMPUTATION FOR SAVING `\n", string.Empty);
+                                    string deyt = computationHistory.Substring(0, 20).Replace(@"`", string.Empty);
+                                    priceHistory.Add(deyt);
+                                }
+                                else if (item.Contains("Edited Price: "))
+                                {
+                                    string deyt = item.Substring(0, 20).Replace(@"`", string.Empty);
 
-                MessageBox.Show(m.ToString());
-
+                                    priceHistory.Add(deyt);
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            return null;
+
+            priceHistory.Reverse();
+
+            _cmbPriceHistory.DataSource = priceHistory;
+
+            foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
+            {
+                if (wdr.WD_Selected == true)
+                { 
+                    if (wdr.lst_TotalPriceHistory.Count != 0 && _cmbPriceHistory.Items.Count != 0)
+                    {
+                        foreach (string item in wdr.lst_TotalPriceHistory)
+                        {
+                            if (item.Contains(_cmbPriceHistory.SelectedValue.ToString()))
+                            {
+                                _priceHistoryView.PriceHistory.Text = item;
+                            }
+                        }
+                    }
+                }
+            }
+
+
         }
 
 

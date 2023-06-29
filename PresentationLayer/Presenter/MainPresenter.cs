@@ -1422,19 +1422,21 @@ namespace PresentationLayer.Presenter
             {
                 if (_quotationModel != null)
                 {
-                    updatePriceFromMainViewToItemList();
-                    _windoorModel.WD_fileLoad = false;
-                    if (_lblCurrentPrice.Value == _windoorModel.WD_currentPrice)
+                    if (_lblCurrentPrice.Value == _windoorModel.SystemSuggestedPrice && _windoorModel.SystemSuggestedPrice != 0)
                     {
-                        _quotationModel.TotalPriceHistoryStatus = "System Generated Price";
+                        _windoorModel.TotalPriceHistoryStatus = "System Generated Price";
                     }
                     else
                     {
-                        _quotationModel.TotalPriceHistoryStatus = "Edited Price";
+                        _windoorModel.TotalPriceHistoryStatus = "Edited Price";
                     }
-                    Console.WriteLine(_quotationModel.TotalPriceHistoryStatus);
 
+                    updatePriceFromMainViewToItemList();
+                    _windoorModel.WD_fileLoad = false;
                     _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
+
+                    Console.WriteLine(_windoorModel.TotalPriceHistoryStatus);
+
                 }
                 else
                 {
@@ -1707,12 +1709,12 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add(dic.Key + "^ " + dic.Value);
                 wndr_content.Add(".");
             }
-            foreach (var history in _quotationModel.lst_TotalPriceHistory)
-            {
-                wndr_content.Add("8==D");
-                wndr_content.Add(history);
-                wndr_content.Add("8==D");
-            }
+            //foreach (var history in _quotationModel.lst_TotalPriceHistory)
+            //{
+            //    wndr_content.Add("8==D");
+            //    wndr_content.Add(history);
+            //    wndr_content.Add("8==D");
+            //}
 
             wndr_content.Add("EndofFile");
             #endregion
@@ -4000,15 +4002,15 @@ namespace PresentationLayer.Presenter
                         _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
                         //inside_quotation = false;
                     }
-                    else if (row_str.Contains("lst_TotalPriceHistory:"))
-                    {
-                        _quotationModel.lst_TotalPriceHistory = new List<string>();
-                        inside_quotation = false;
-                    }
-                    else if (row_str.Contains("TotalPriceHistoryStatus:"))
-                    {
-                        _quotationModel.TotalPriceHistoryStatus = extractedValue_str;
-                    }
+                    //else if (row_str.Contains("lst_TotalPriceHistory:"))
+                    //{
+                    //    _quotationModel.lst_TotalPriceHistory = new List<string>();
+                    //    inside_quotation = false;
+                    //}
+                    //else if (row_str.Contains("TotalPriceHistoryStatus:"))
+                    //{
+                    //    _quotationModel.TotalPriceHistoryStatus = extractedValue_str;
+                    //}
                     break;
                 #endregion
                 case false:
@@ -9289,7 +9291,7 @@ namespace PresentationLayer.Presenter
         }
         private void Load_QuoteHistory()
         {
-            _quotationModel.lst_TotalPriceHistory.Add(_quoteHistory);
+            //_quotationModel.lst_TotalPriceHistory.Add(_quoteHistory);
             _quoteHistory = null;
         }
 
@@ -11729,20 +11731,21 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                DateTime thisDay = DateTime.Now;
-                //_quotationModel.lst_TotalPriceHistory = new List<string>();
-
-                if (_quotationModel.TotalPriceHistoryStatus == "System Generated Price")
+                foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
                 {
-                    _quotationModel.lst_TotalPriceHistory.Add(_quotationModel.TotalPriceHistory);
-                }
-                else if (_quotationModel.TotalPriceHistoryStatus == "Edited Price")
-                {
+                    DateTime thisDay = DateTime.Now;
+                    //_quotationModel.lst_TotalPriceHistory = new List<string>();
 
-                    _quotationModel.lst_TotalPriceHistory.Add(thisDay.ToString("MM.dd.yyyy\tHH:mm:ss") + "\nEdited Price: " + _windoorModel.WD_currentPrice.ToString() + "\n");
-
-                    //_quotationModel.lst_TotalPriceHistory.Add(thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "\nEdited Price: " + _windoorModel.WD_currentPrice.ToString() + "\n");
+                    if (wdr.TotalPriceHistoryStatus == "System Generated Price")
+                    {
+                        wdr.lst_TotalPriceHistory.Add(wdr.TotalPriceHistory);
+                    }
+                    else if (wdr.TotalPriceHistoryStatus == "Edited Price")
+                    {
+                        wdr.lst_TotalPriceHistory.Add(thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "`````\nEdited Price: " + wdr.WD_currentPrice.ToString() + "\n");
+                    }
                 }
+
             }
             catch (Exception ex)
             {
