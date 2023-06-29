@@ -28,52 +28,319 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GlassUpgradeView));
             this.panel_Header = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.num_discount = new System.Windows.Forms.NumericUpDown();
+            this.lbl_discount = new System.Windows.Forms.Label();
+            this._glassUpgToolStrip = new System.Windows.Forms.ToolStrip();
+            this._printBtn = new System.Windows.Forms.ToolStripButton();
+            this._date = new System.Windows.Forms.Label();
+            this.lbl_Date = new System.Windows.Forms.Label();
+            this._quoteNum = new System.Windows.Forms.Label();
+            this.lbl_quoteNum = new System.Windows.Forms.Label();
+            this._clientAdd = new System.Windows.Forms.Label();
+            this._clientName = new System.Windows.Forms.Label();
+            this._namepos = new System.Windows.Forms.Label();
+            this.cmb_glassType = new System.Windows.Forms.ComboBox();
+            this.lbl_Address = new System.Windows.Forms.Label();
+            this.lbl_ClientName = new System.Windows.Forms.Label();
+            this.lbl_AE = new System.Windows.Forms.Label();
+            this.lbl_glass = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.glassUpgradDGV = new System.Windows.Forms.DataGridView();
+            this.glassUpgradeDGV = new System.Windows.Forms.DataGridView();
+            this.num_glassAmount = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.num_wdwsAndDoors = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel_Header.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_discount)).BeginInit();
+            this._glassUpgToolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.glassUpgradDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.glassUpgradeDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_glassAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_wdwsAndDoors)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Header
             // 
+            this.panel_Header.BackColor = System.Drawing.SystemColors.Window;
+            this.panel_Header.Controls.Add(this.panel2);
+            this.panel_Header.Controls.Add(this._glassUpgToolStrip);
+            this.panel_Header.Controls.Add(this._date);
+            this.panel_Header.Controls.Add(this.lbl_Date);
+            this.panel_Header.Controls.Add(this._quoteNum);
+            this.panel_Header.Controls.Add(this.lbl_quoteNum);
+            this.panel_Header.Controls.Add(this._clientAdd);
+            this.panel_Header.Controls.Add(this._clientName);
+            this.panel_Header.Controls.Add(this._namepos);
+            this.panel_Header.Controls.Add(this.cmb_glassType);
+            this.panel_Header.Controls.Add(this.lbl_Address);
+            this.panel_Header.Controls.Add(this.lbl_ClientName);
+            this.panel_Header.Controls.Add(this.lbl_AE);
+            this.panel_Header.Controls.Add(this.lbl_glass);
             this.panel_Header.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_Header.Location = new System.Drawing.Point(0, 0);
             this.panel_Header.Name = "panel_Header";
-            this.panel_Header.Size = new System.Drawing.Size(809, 114);
+            this.panel_Header.Size = new System.Drawing.Size(804, 164);
             this.panel_Header.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.panel2.Controls.Add(this.num_discount);
+            this.panel2.Controls.Add(this.lbl_discount);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 136);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(804, 28);
+            this.panel2.TabIndex = 15;
+            // 
+            // num_discount
+            // 
+            this.num_discount.Location = new System.Drawing.Point(729, 4);
+            this.num_discount.Name = "num_discount";
+            this.num_discount.Size = new System.Drawing.Size(68, 20);
+            this.num_discount.TabIndex = 14;
+            // 
+            // lbl_discount
+            // 
+            this.lbl_discount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl_discount.AutoSize = true;
+            this.lbl_discount.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_discount.Location = new System.Drawing.Point(669, 6);
+            this.lbl_discount.Name = "lbl_discount";
+            this.lbl_discount.Size = new System.Drawing.Size(59, 13);
+            this.lbl_discount.TabIndex = 13;
+            this.lbl_discount.Text = "Discount: ";
+            // 
+            // _glassUpgToolStrip
+            // 
+            this._glassUpgToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this._glassUpgToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this._printBtn});
+            this._glassUpgToolStrip.Location = new System.Drawing.Point(0, 0);
+            this._glassUpgToolStrip.Name = "_glassUpgToolStrip";
+            this._glassUpgToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this._glassUpgToolStrip.Size = new System.Drawing.Size(804, 25);
+            this._glassUpgToolStrip.TabIndex = 12;
+            this._glassUpgToolStrip.Text = "_glassUpgToolStrip";
+            // 
+            // _printBtn
+            // 
+            this._printBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._printBtn.Image = ((System.Drawing.Image)(resources.GetObject("_printBtn.Image")));
+            this._printBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._printBtn.Name = "_printBtn";
+            this._printBtn.Size = new System.Drawing.Size(23, 22);
+            this._printBtn.Text = "toolStripButton1";
+            // 
+            // _date
+            // 
+            this._date.AutoSize = true;
+            this._date.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._date.Location = new System.Drawing.Point(702, 60);
+            this._date.Name = "_date";
+            this._date.Size = new System.Drawing.Size(35, 13);
+            this._date.TabIndex = 11;
+            this._date.Text = "_date";
+            // 
+            // lbl_Date
+            // 
+            this.lbl_Date.AutoSize = true;
+            this.lbl_Date.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Date.Location = new System.Drawing.Point(636, 60);
+            this.lbl_Date.Name = "lbl_Date";
+            this.lbl_Date.Size = new System.Drawing.Size(37, 13);
+            this.lbl_Date.TabIndex = 10;
+            this.lbl_Date.Text = "Date: ";
+            // 
+            // _quoteNum
+            // 
+            this._quoteNum.AutoSize = true;
+            this._quoteNum.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._quoteNum.Location = new System.Drawing.Point(699, 35);
+            this._quoteNum.Name = "_quoteNum";
+            this._quoteNum.Size = new System.Drawing.Size(67, 13);
+            this._quoteNum.TabIndex = 9;
+            this._quoteNum.Text = "_quoteNum";
+            // 
+            // lbl_quoteNum
+            // 
+            this.lbl_quoteNum.AutoSize = true;
+            this.lbl_quoteNum.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_quoteNum.Location = new System.Drawing.Point(636, 35);
+            this.lbl_quoteNum.Name = "lbl_quoteNum";
+            this.lbl_quoteNum.Size = new System.Drawing.Size(57, 13);
+            this.lbl_quoteNum.TabIndex = 8;
+            this.lbl_quoteNum.Text = "QuoteNo:";
+            // 
+            // _clientAdd
+            // 
+            this._clientAdd.AutoSize = true;
+            this._clientAdd.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._clientAdd.Location = new System.Drawing.Point(90, 107);
+            this._clientAdd.Name = "_clientAdd";
+            this._clientAdd.Size = new System.Drawing.Size(61, 13);
+            this._clientAdd.TabIndex = 7;
+            this._clientAdd.Text = "_clientAdd";
+            // 
+            // _clientName
+            // 
+            this._clientName.AutoSize = true;
+            this._clientName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._clientName.Location = new System.Drawing.Point(90, 84);
+            this._clientName.Name = "_clientName";
+            this._clientName.Size = new System.Drawing.Size(69, 13);
+            this._clientName.TabIndex = 6;
+            this._clientName.Text = "_clientName";
+            // 
+            // _namepos
+            // 
+            this._namepos.AutoSize = true;
+            this._namepos.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._namepos.Location = new System.Drawing.Point(90, 60);
+            this._namepos.Name = "_namepos";
+            this._namepos.Size = new System.Drawing.Size(68, 13);
+            this._namepos.TabIndex = 5;
+            this._namepos.Text = "_name&&pos";
+            // 
+            // cmb_glassType
+            // 
+            this.cmb_glassType.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cmb_glassType.FormattingEnabled = true;
+            this.cmb_glassType.Location = new System.Drawing.Point(90, 32);
+            this.cmb_glassType.Name = "cmb_glassType";
+            this.cmb_glassType.Size = new System.Drawing.Size(200, 21);
+            this.cmb_glassType.TabIndex = 4;
+            // 
+            // lbl_Address
+            // 
+            this.lbl_Address.AutoSize = true;
+            this.lbl_Address.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Address.Location = new System.Drawing.Point(13, 107);
+            this.lbl_Address.Name = "lbl_Address";
+            this.lbl_Address.Size = new System.Drawing.Size(54, 13);
+            this.lbl_Address.TabIndex = 3;
+            this.lbl_Address.Text = "Address: ";
+            // 
+            // lbl_ClientName
+            // 
+            this.lbl_ClientName.AutoSize = true;
+            this.lbl_ClientName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ClientName.Location = new System.Drawing.Point(13, 84);
+            this.lbl_ClientName.Name = "lbl_ClientName";
+            this.lbl_ClientName.Size = new System.Drawing.Size(72, 13);
+            this.lbl_ClientName.TabIndex = 2;
+            this.lbl_ClientName.Text = "Client Name:";
+            // 
+            // lbl_AE
+            // 
+            this.lbl_AE.AutoSize = true;
+            this.lbl_AE.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_AE.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_AE.Location = new System.Drawing.Point(13, 60);
+            this.lbl_AE.Name = "lbl_AE";
+            this.lbl_AE.Size = new System.Drawing.Size(26, 13);
+            this.lbl_AE.TabIndex = 1;
+            this.lbl_AE.Text = "AE: ";
+            // 
+            // lbl_glass
+            // 
+            this.lbl_glass.AutoSize = true;
+            this.lbl_glass.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_glass.Location = new System.Drawing.Point(13, 37);
+            this.lbl_glass.Name = "lbl_glass";
+            this.lbl_glass.Size = new System.Drawing.Size(40, 13);
+            this.lbl_glass.TabIndex = 0;
+            this.lbl_glass.Text = "Glass: ";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.glassUpgradDGV);
+            this.panel1.Controls.Add(this.glassUpgradeDGV);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 114);
+            this.panel1.Location = new System.Drawing.Point(0, 164);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(809, 200);
+            this.panel1.Size = new System.Drawing.Size(804, 239);
             this.panel1.TabIndex = 1;
             // 
-            // glassUpgradDGV
+            // glassUpgradeDGV
             // 
-            this.glassUpgradDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.glassUpgradDGV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.glassUpgradDGV.Location = new System.Drawing.Point(0, 0);
-            this.glassUpgradDGV.Name = "glassUpgradDGV";
-            this.glassUpgradDGV.Size = new System.Drawing.Size(809, 200);
-            this.glassUpgradDGV.TabIndex = 0;
+            this.glassUpgradeDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.glassUpgradeDGV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.glassUpgradeDGV.Location = new System.Drawing.Point(0, 0);
+            this.glassUpgradeDGV.Name = "glassUpgradeDGV";
+            this.glassUpgradeDGV.Size = new System.Drawing.Size(804, 239);
+            this.glassUpgradeDGV.TabIndex = 0;
+            // 
+            // num_glassAmount
+            // 
+            this.num_glassAmount.Location = new System.Drawing.Point(728, 409);
+            this.num_glassAmount.Name = "num_glassAmount";
+            this.num_glassAmount.Size = new System.Drawing.Size(68, 20);
+            this.num_glassAmount.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(640, 411);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Glass Amount: ";
+            // 
+            // num_wdwsAndDoors
+            // 
+            this.num_wdwsAndDoors.Location = new System.Drawing.Point(728, 434);
+            this.num_wdwsAndDoors.Name = "num_wdwsAndDoors";
+            this.num_wdwsAndDoors.Size = new System.Drawing.Size(68, 20);
+            this.num_wdwsAndDoors.TabIndex = 18;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(621, 436);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(103, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Windows / Doors: ";
             // 
             // GlassUpgradeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(809, 361);
+            this.ClientSize = new System.Drawing.Size(804, 462);
+            this.Controls.Add(this.num_wdwsAndDoors);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.num_glassAmount);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel_Header);
             this.Name = "GlassUpgradeView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Glass Upgrade";
+            this.Load += new System.EventHandler(this.GlassUpgradeView_Load);
+            this.panel_Header.ResumeLayout(false);
+            this.panel_Header.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_discount)).EndInit();
+            this._glassUpgToolStrip.ResumeLayout(false);
+            this._glassUpgToolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.glassUpgradDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.glassUpgradeDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_glassAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_wdwsAndDoors)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -81,6 +348,27 @@
 
         private System.Windows.Forms.Panel panel_Header;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView glassUpgradDGV;
+        private System.Windows.Forms.DataGridView glassUpgradeDGV;
+        private System.Windows.Forms.Label _quoteNum;
+        private System.Windows.Forms.Label lbl_quoteNum;
+        private System.Windows.Forms.Label _clientAdd;
+        private System.Windows.Forms.Label _clientName;
+        private System.Windows.Forms.Label _namepos;
+        private System.Windows.Forms.ComboBox cmb_glassType;
+        private System.Windows.Forms.Label lbl_Address;
+        private System.Windows.Forms.Label lbl_ClientName;
+        private System.Windows.Forms.Label lbl_AE;
+        private System.Windows.Forms.Label lbl_glass;
+        private System.Windows.Forms.Label _date;
+        private System.Windows.Forms.Label lbl_Date;
+        private System.Windows.Forms.ToolStrip _glassUpgToolStrip;
+        private System.Windows.Forms.ToolStripButton _printBtn;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.NumericUpDown num_discount;
+        private System.Windows.Forms.Label lbl_discount;
+        private System.Windows.Forms.NumericUpDown num_glassAmount;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown num_wdwsAndDoors;
+        private System.Windows.Forms.Label label2;
     }
 }

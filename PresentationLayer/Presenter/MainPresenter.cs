@@ -1085,7 +1085,7 @@ namespace PresentationLayer.Presenter
                             File.Delete(vbsfilePath);
                             File.Delete(Path.Combine(BasePath,"Open.bat"));
                             File.Delete(Path.Combine(BasePath,"Auto.vbs"));
-
+                            
                             //write Batch and Script in Text Format
                             File.WriteAllText(batfilePath, batformatv2);
                             File.WriteAllText(vbsfilePath, vbsformat);
@@ -1117,7 +1117,7 @@ namespace PresentationLayer.Presenter
                 else if (_userModel.Username.ToLower() == "jb")
                 {
                     //return to show dialog box 
-                    Properties.Settings.Default.UserObjectWarning = false;
+                    Properties.Settings.Default.UserObjectWarning = false; 
                     Properties.Settings.Default.Save();
                 }
             }
@@ -1758,9 +1758,9 @@ namespace PresentationLayer.Presenter
             }
             foreach (var history in _quotationModel.lst_TotalPriceHistory)
             {
-                wndr_content.Add("8==D");
+                wndr_content.Add("*_*");
                 wndr_content.Add(history);
-                wndr_content.Add("8==D");
+                wndr_content.Add("*_*");
             }
 
             wndr_content.Add("EndofFile");
@@ -3870,7 +3870,7 @@ namespace PresentationLayer.Presenter
                     inside_rdlcDic = true;
                 }
             }
-            else if (row_str == "8==D")
+            else if (row_str == "*_*")
             {
                 if (inside_quoteHistory)
                 {
@@ -8412,7 +8412,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (inside_quoteHistory)
                     {
-                        if (row_str != "8==D")
+                        if (row_str != "*_*")
                         {
                             if (row_str.Contains("` COMPUTATION FOR SAVING `"))
                             {

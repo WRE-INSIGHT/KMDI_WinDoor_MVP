@@ -160,6 +160,7 @@
     <Compile Include="Presenter\ExplosionPresenter.cs" />
     <Compile Include="Presenter\frmDimensionPresenter.cs" />
     <Compile Include="Presenter\GlassThicknessListPresenter.cs" />
+    <Compile Include="Presenter\GlassUpgradePresenter.cs" />
     <Compile Include="Presenter\IChangeItemColorPresenter.cs" />
     <Compile Include="Presenter\ICostEngrLandingPresenter.cs" />
     <Compile Include="Presenter\ICreateNewGlassColorPresenter.cs" />
@@ -498,6 +499,7 @@
     <Compile Include="Views\IExplosionView.cs" />
     <Compile Include="Views\IfrmDimensionView.cs" />
     <Compile Include="Views\IGlassThicknessListView.cs" />
+    <Compile Include="Views\IGlassUpgradeView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
     <Compile Include="Views\IPDFCompilerView.cs" />
