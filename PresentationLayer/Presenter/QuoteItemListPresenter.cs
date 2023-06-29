@@ -67,7 +67,7 @@ namespace PresentationLayer.Presenter
             }
             set
             {
-                _callFrmRDLCCompiler = value;               
+                _callFrmRDLCCompiler = value;
             }
         }
         public bool ShowVatContactSummary
@@ -136,7 +136,7 @@ namespace PresentationLayer.Presenter
                 _renderPDFAtBackground = value;
             }
         }
-        
+
         public List<IQuoteItemListUCPresenter> LstQuoteItemUC
         {
             get { return _lstQuoteItemUC; }
@@ -164,7 +164,7 @@ namespace PresentationLayer.Presenter
             {
                 return outOfTownCharges;
             }
-            
+
         }
 
 
@@ -247,14 +247,14 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.chkboxSelectallCheckedChangeEventRaised += new EventHandler(OnchkboxSelectallCheckedChangeEventRaised);
             _quoteItemListView.TSbtnPDFCompilerClickEventRaised += new EventHandler(OnTSbtnPDFCompilerClickEventRaised);
         }
-        
+
         public void PrintScreenRDLC()
         {
             DSQuotation _dsq = new DSQuotation();
             try
             {
 
-                 screenUnitPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                screenUnitPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
                 foreach (var item in _mainPresenter.Screen_List)
                 {
                     //screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
@@ -297,13 +297,13 @@ namespace PresentationLayer.Presenter
                     }
 
 
-                    if(item.Screen_Types == ScreenType._NoInsectScreen || item.Screen_Types == ScreenType._UnnecessaryForInsectScreen)
+                    if (item.Screen_Types == ScreenType._NoInsectScreen || item.Screen_Types == ScreenType._UnnecessaryForInsectScreen)
                     {
                         Screen_DimensionFormat = " - ";
                         Screen_UnitPrice = "0";
                         Screen_Qty = null;
                         Screen_Discount = " - ";
-                        Screen_NetPrice = " - "; 
+                        Screen_NetPrice = " - ";
                     }
                     else
                     {
@@ -314,12 +314,12 @@ namespace PresentationLayer.Presenter
                         Screen_NetPrice = item.Screen_NetPrice.ToString("n");
                     }
 
-                    _dsq.dtScreen.Rows.Add( item.Screen_Description + setDesc,
+                    _dsq.dtScreen.Rows.Add(item.Screen_Description + setDesc,
                                             Screen_DimensionFormat, // Screen widht x height
                                             item.Screen_WindoorID,
                                             Screen_UnitPrice, //screen unitprice
                                             Screen_Qty, //screen quantity
-                                            screenUnitPriceTotal, 
+                                            screenUnitPriceTotal,
                                             Convert.ToString(item.Screen_ItemNumber),
                                             Screen_NetPrice, // screen Netprice
                                             1,
@@ -344,7 +344,7 @@ namespace PresentationLayer.Presenter
             printQuote.PrintRDLCReport();
 
         }
-        
+
         public void PrintWindoorRDLC()
         {
 
@@ -364,59 +364,66 @@ namespace PresentationLayer.Presenter
             {
                 for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
                 {
-                    #region ScalingItemSizePicture
-                    //int max = this._lstItemArea[0],
-                    //    ItemNewWidth,
-                    //    ItemNewHeight,
-                    //    maxHeight = 190,
-                    //    maxWidth = 190,
-                    //    wdAndHtDiff;
-                    //decimal itemSizePercentage;
-
-                    //int currentItem = this._lstItemArea[i],
-                    //    itemWidth = _quotationModel.Lst_Windoor[i].WD_width,
-                    //    itemHeight = _quotationModel.Lst_Windoor[i].WD_height;
-
-                    //decimal ProportionItemSizePercentage;
-
-                    //for (int ii = 1; ii < this._lstItemArea.Count; ii++)
-                    //{
-                    //    max = Math.Max(max, this._lstItemArea[ii]);
-                    //}
-
-                    //itemSizePercentage = (decimal)currentItem / (decimal)max;
-                    ////ItemScalingSize = (currentItem / max) * itemSizePercentage;
-                    //ItemNewWidth = (int)((decimal)itemSizePercentage * maxWidth);
-                    //ItemNewHeight = (int)((decimal)itemSizePercentage * maxHeight);
-
-
-                    //if (itemWidth > itemHeight)
-                    //{
-                    //    ProportionItemSizePercentage = ((decimal)itemHeight / (decimal)itemWidth) ;
-                    //    ItemNewHeight = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewHeight);
-                    //}
-                    //else if (itemWidth < itemHeight)
-                    //{
-                    //    ProportionItemSizePercentage = ((decimal)itemWidth / (decimal)itemHeight);
-                    //    ItemNewWidth = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewWidth);
-                    //}
-                    //else
-                    //{
-
-                    //}
-
-                    //var resizedImg = ResizeImage(img, ItemNewWidth, ItemNewHeight);
-
-
-                    //resizedImg.Save(mstream, ImageFormat.Png);
-                    #endregion
 
                     MemoryStream mstream = new MemoryStream();
                     MemoryStream mstream2 = new MemoryStream();
                     Image itemImage = _quotationModel.Lst_Windoor[i].WD_image,
                           topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
 
-                    itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                    #region ScalingItemSizePicture
+                    int max = this._lstItemArea[0],
+                        ItemNewWidth,
+                        ItemNewHeight,
+                        maxHeight = 210,
+                        maxWidth = 210,
+                        wdAndHtDiff;
+                    decimal itemSizePercentage;
+
+                    int currentItem = this._lstItemArea[i],
+                        itemWidth = _quotationModel.Lst_Windoor[i].WD_width,
+                        itemHeight = _quotationModel.Lst_Windoor[i].WD_height;
+
+                    decimal ProportionItemSizePercentage;
+
+                    for (int ii = 1; ii < this._lstItemArea.Count; ii++)
+                    {
+                        max = Math.Max(max, this._lstItemArea[ii]);
+                    }
+
+                    itemSizePercentage = (decimal)currentItem / (decimal)max;
+                    //ItemScalingSize = (currentItem / max) * itemSizePercentage;
+                    ItemNewWidth = (int)((decimal)itemSizePercentage * maxWidth);
+                    ItemNewHeight = (int)((decimal)itemSizePercentage * maxHeight);
+
+
+                    //if (itemWidth > itemHeight)
+                    //{
+                    ProportionItemSizePercentage = ((decimal)itemHeight / (decimal)itemWidth);
+                    ItemNewHeight = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewHeight);
+                    //}
+                    //else if (itemWidth < itemHeight)
+                    //{
+                    ProportionItemSizePercentage = ((decimal)itemWidth / (decimal)itemHeight);
+                    ItemNewWidth = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewWidth);
+                    //}
+                    //else
+                    //{
+
+                    //}
+                    if (ItemNewWidth >= 210)
+                    {
+                        ItemNewWidth = 210;
+                    }
+                     
+                    var resizedImg = ResizeImage(itemImage, ItemNewWidth, ItemNewHeight);
+
+
+                    resizedImg.Save(mstream, ImageFormat.Png);
+                    #endregion
+
+
+
+                    //itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
 
                     if (topView != null)
                     {
@@ -479,15 +486,15 @@ namespace PresentationLayer.Presenter
                     }
 
                     #region separate Item description
-                    for (int j = 0; j< lstQuoteUC.GetiQuoteItemListUC().itemDesc.Length;j++)
+                    for (int j = 0; j < lstQuoteUC.GetiQuoteItemListUC().itemDesc.Length; j++)
                     {
-                       if(lstQuoteUC.GetiQuoteItemListUC().itemDesc[j] == '\n')
+                        if (lstQuoteUC.GetiQuoteItemListUC().itemDesc[j] == '\n')
                         {
                             count++;
                         }
 
                     }
-                    if(count >= 5)
+                    if (count >= 5)
                     {
                         change_desc_format = true;
                         string[] splitted_string = lstQuoteUC.GetiQuoteItemListUC().itemDesc.Split('\n');
@@ -511,12 +518,12 @@ namespace PresentationLayer.Presenter
                     else
                     {
                         change_desc_format = false;
-                        count = 0; 
+                        count = 0;
                     }
-                    
-                    if(change_desc_format == true)
+
+                    if (change_desc_format == true)
                     {
-                        for(int x = 0; x < description_string_list.Count; x++)
+                        for (int x = 0; x < description_string_list.Count; x++)
                         {
                             newlinecount++;
                             if (newlinecount == 3)
@@ -526,7 +533,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                separete_descFormat = separete_descFormat + "  " + description_string_list[x];   
+                                separete_descFormat = separete_descFormat + "  " + description_string_list[x];
                             }
                         }
                         Console.WriteLine(separete_descFormat.TrimEnd().Replace(" +", ""));
@@ -537,7 +544,7 @@ namespace PresentationLayer.Presenter
                         count = 0;
                     }
 
-                    if(separete_descFormat == null)
+                    if (separete_descFormat == null)
                     {
                         separete_descFormat = lstQuoteUC.GetiQuoteItemListUC().itemDesc;
                     }
@@ -643,7 +650,7 @@ namespace PresentationLayer.Presenter
                     {
                         screentotaldiscount = screentotaldiscount + item.Screen_Discount;
                     }
-                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount,2);
+                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount, 2);
                 }
 
                 ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;
@@ -654,11 +661,11 @@ namespace PresentationLayer.Presenter
                 divisor = 1;
             }
 
-             screen_Windoor_DiscountAverage = (windoorDiscountAverage + ScreenDiscountAverage) / divisor;
-             province = _mainPresenter.projectAddress.Split(',');
-             archi = province[province.Length - 1].Trim();
+            screen_Windoor_DiscountAverage = (windoorDiscountAverage + ScreenDiscountAverage) / divisor;
+            province = _mainPresenter.projectAddress.Split(',');
+            archi = province[province.Length - 1].Trim();
 
-            if(archi == "Luzon")
+            if (archi == "Luzon")
             {
                 outOfTownChargesMultiplier = 0.025m;
             }
@@ -671,14 +678,14 @@ namespace PresentationLayer.Presenter
                 outOfTownChargesMultiplier = 0.05m;
             }
 
-            outOfTownCharges = Math.Round(((windoorTotalListPrice + ScreenTotalListPrice) * outOfTownChargesMultiplier),2);
-            if(outOfTownCharges <= 50000) { outOfTownCharges = 50000; }
-            total_DiscountedPrice_wo_VAT = Math.Round((windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage),2);
+            outOfTownCharges = Math.Round(((windoorTotalListPrice + ScreenTotalListPrice) * outOfTownChargesMultiplier), 2);
+            if (outOfTownCharges <= 50000) { outOfTownCharges = 50000; }
+            total_DiscountedPrice_wo_VAT = Math.Round((windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage), 2);
 
             //Console.WriteLine(archi + " " + outOfTownCharges.ToString());
-            Console.WriteLine(archi + " "  + OutOfTownCharges.ToString());
-            Console.WriteLine("This is total DiscountedPrice w/o Vat " + Math.Round((total_DiscountedPrice_wo_VAT),2));
-            Console.WriteLine("2 decimal places: " + Math.Truncate(total_DiscountedPrice_wo_VAT * 100) / 100);         
+            Console.WriteLine(archi + " " + OutOfTownCharges.ToString());
+            Console.WriteLine("This is total DiscountedPrice w/o Vat " + Math.Round((total_DiscountedPrice_wo_VAT), 2));
+            Console.WriteLine("2 decimal places: " + Math.Truncate(total_DiscountedPrice_wo_VAT * 100) / 100);
             //Console.WriteLine(" total windoor discount from forloop" + windoortotaldiscount);
             //Console.WriteLine("Windoor DiscountTotal: " +  _quotationModel.Lst_Windoor.Sum(x => x.WD_discount));
             //Console.WriteLine("Windoor Average Discount.: " + windoorDiscountAverage);
@@ -699,7 +706,7 @@ namespace PresentationLayer.Presenter
                                                 ScreenTotalListPrice,
                                                 screen_Windoor_DiscountAverage
                                                 );
-          
+
             _mainPresenter.printStatus = "ContractSummary";
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
@@ -808,7 +815,7 @@ namespace PresentationLayer.Presenter
             outOfTownCharges = Math.Round(((windoorTotalListPrice + ScreenTotalListPrice) * outOfTownChargesMultiplier), 2);
             if (outOfTownCharges <= 50000) { outOfTownCharges = 50000; }
             total_DiscountedPrice_wo_VAT = Math.Round((windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage), 2);
-     
+
             clearingOperation();
         }
         private void clearingOperation()
@@ -825,12 +832,12 @@ namespace PresentationLayer.Presenter
             screen_priceXquantiy = 0;
             screenUnitPriceTotal = 0;
             //outOfTownCharges = 0;
-             
+
             Screen_DimensionFormat = null;
-            Screen_UnitPrice = null;        
-            Screen_Qty = null;                                            
-            Screen_Discount = null;      
-            Screen_NetPrice = null;      
+            Screen_UnitPrice = null;
+            Screen_Qty = null;
+            Screen_Discount = null;
+            Screen_NetPrice = null;
 
         }
 
@@ -861,11 +868,11 @@ namespace PresentationLayer.Presenter
             {
                 Console.WriteLine("Error In FormClose " + this + ex.Message);
             }
-            
+
         }
 
         private void _quoteItemListView_TSbtnGlassSummaryClickEventRaised(object sender, EventArgs e)
-        {          
+        {
             DSQuotation _dsq = new DSQuotation();
             /*
             dtItemNo
@@ -909,8 +916,8 @@ namespace PresentationLayer.Presenter
                                         curr_GlassPrice = Math.Round((pnlGlassArea * pnl.Panel_GlassPricePerSqrMeter) + ((pnlGlassArea * pnl.Panel_GlassPricePerSqrMeter) * _quotationModel.PricingFactor), 2);
 
                                         _intInString = curr_GlassDesc.All(char.IsDigit);
-                                        
-                                        if(_intInString == true)
+
+                                        if (_intInString == true)
                                         {
                                             curr_IntDescription = Convert.ToInt32(curr_GlassDesc.Substring(0, 2));
                                             _intInString = false;
