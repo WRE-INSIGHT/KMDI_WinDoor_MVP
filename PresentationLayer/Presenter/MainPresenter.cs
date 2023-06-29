@@ -1766,7 +1766,7 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add(dic.Key + "^ " + dic.Value);
                 wndr_content.Add(".");
             }
-            foreach (var history in _quotationModel.lst_TotalPriceHistory)
+            foreach (var history in _windoorModel.lst_TotalPriceHistory)
             {
                 wndr_content.Add("*_*");
                 wndr_content.Add(history);
@@ -3568,6 +3568,7 @@ namespace PresentationLayer.Presenter
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
             }
+
         }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -4057,17 +4058,8 @@ namespace PresentationLayer.Presenter
                     else if (row_str.Contains("BOM_Status:"))
                     {
                         _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
-                        //inside_quotation = false;
-                    }
-                    //else if (row_str.Contains("lst_TotalPriceHistory:"))
-                    //{
-                    //    _quotationModel.lst_TotalPriceHistory = new List<string>();
-                    //    inside_quotation = false;
-                    //}
-                    //else if (row_str.Contains("TotalPriceHistoryStatus:"))
-                    //{
-                    //    _quotationModel.TotalPriceHistoryStatus = extractedValue_str;
-                    //}
+                        inside_quotation = false;
+                    }                   
                     break;
                 #endregion
                 case false:
@@ -4320,6 +4312,14 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("IsFromLoad:"))
                         {
                             _windoorModel.IsFromLoad = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("lst_TotalPriceHistory:"))
+                        {
+                            _windoorModel.lst_TotalPriceHistory = new List<string>();
+                        }
+                        else if (row_str.Contains("TotalPriceHistoryStatus:"))
+                        {
+                            _windoorModel.TotalPriceHistoryStatus = extractedValue_str;
                         }
                         #endregion
                     }
@@ -8437,17 +8437,20 @@ namespace PresentationLayer.Presenter
                     }
                     else if (inside_quoteHistory)
                     {
+                        #region Load for QuoteHistory
                         if (row_str != "*_*")
                         {
-                            if (row_str.Contains("` COMPUTATION FOR SAVING `"))
-                            {
-                                _quoteHistory = row_str + "\n";
-                            }
-                            else
-                            {
-                                _quoteHistory = _quoteHistory + row_str + "\n";
-                            }
+                            //if (row_str.Contains("` COMPUTATION FOR SAVING `"))
+                            //{
+                            //    _quoteHistory = row_str + "\n";
+                            //}
+                            //else
+                            //{
+                            //    _quoteHistory = _quoteHistory + row_str + "\n";
+                            //}
+                            _quoteHistory = _quoteHistory + row_str + "\n";
                         }
+                        #endregion
                     }
                     break;
             }
@@ -9348,7 +9351,7 @@ namespace PresentationLayer.Presenter
         }
         private void Load_QuoteHistory()
         {
-            //_quotationModel.lst_TotalPriceHistory.Add(_quoteHistory);
+            _windoorModel.lst_TotalPriceHistory.Add(_quoteHistory);
             _quoteHistory = null;
         }
 
