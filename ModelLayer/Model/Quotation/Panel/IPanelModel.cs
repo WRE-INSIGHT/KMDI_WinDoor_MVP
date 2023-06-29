@@ -184,6 +184,8 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_MiddleCloserPairQty { get; set; }
         bool Panel_MotorizedOptionVisibility { get; set; }
         MotorizedMech_ArticleNo Panel_MotorizedMechArtNo { get; set; }
+        MotorizedMechRemote_ArticleNo Panel_MotorizedMechRemoteArtNo { get; set; }
+        bool Panel_MotorizedMechRemoteOption { get; set; }
         int Panel_MotorizedPropertyHeight { get; set; }
         int Panel_MotorizedMechQty { get; set; }
         int Panel_MultiFrmMotorizedMechQty { get; set; }
@@ -472,6 +474,6 @@ namespace ModelLayer.Model.Quotation.Panel
         #endregion
 
         int MotorizeMechQty();
-
+        int MotorizeMechForFrameParent();
     }
 }

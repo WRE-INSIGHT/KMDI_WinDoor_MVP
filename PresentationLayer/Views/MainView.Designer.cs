@@ -95,6 +95,7 @@
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
             this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.ScreentoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.PriceHistorytoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.SortItemtoolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -539,7 +540,8 @@
             this.tsLbl_Loading,
             this.tsLbl_Status,
             this.ViewImagerToolStripButton1,
-            this.ScreentoolStripButton});
+            this.ScreentoolStripButton,
+            this.PriceHistorytoolStripButton});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -763,6 +765,16 @@
             this.ScreentoolStripButton.Size = new System.Drawing.Size(24, 29);
             this.ScreentoolStripButton.Text = "Screen";
             this.ScreentoolStripButton.Click += new System.EventHandler(this.ScreentoolStripButton_Click);
+            // 
+            // PriceHistorytoolStripButton
+            // 
+            this.PriceHistorytoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.PriceHistorytoolStripButton.Image = global::PresentationLayer.Properties.Resources.icons8_history_64;
+            this.PriceHistorytoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.PriceHistorytoolStripButton.Name = "PriceHistorytoolStripButton";
+            this.PriceHistorytoolStripButton.Size = new System.Drawing.Size(24, 29);
+            this.PriceHistorytoolStripButton.Text = "Price History";
+            this.PriceHistorytoolStripButton.Visible = false;
             // 
             // pnlRight
             // 
@@ -1171,5 +1183,6 @@
         private System.Windows.Forms.ToolStripButton newfactorBtn;
         private System.Windows.Forms.ToolStripButton ScreentoolStripButton;
         private System.Windows.Forms.ToolStripMenuItem changeItemDimensionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton PriceHistorytoolStripButton;
     }
 }

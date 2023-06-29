@@ -110,13 +110,13 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.deleteCmenuEventRaised += new EventHandler(OnDeleteCmenuEventRaised);
             _frameUC.outerFramePaintEventRaised += new PaintEventHandler(OnOuterFramePaintEventRaised);
             _frameUC.frameMouseClickEventRaised += new MouseEventHandler(OnFrameMouseClickEventRaised);
-            _frameUC.frameMouseEnterEventRaised += new EventHandler(OnFrameMouseEnterEventRaised);
+            _frameUC.frameMouseEnterEventRaised += new EventHandler(OnFrameMouseEnterEventRaised);      
             _frameUC.frameMouseLeaveEventRaised += new EventHandler(OnFrameMouseLeaveEventRaised);
             _frameUC.frameDragDropEventRaised += _frameUC_frameDragDropEventRaised;
             _frameUC.frameControlAddedEventRaised += _frameUC_frameControlAddedEventRaised;
-            _frameUC.frameControlRemovedEventRaised += _frameUC_frameControlRemovedEventRaised;
+            _frameUC.frameControlRemovedEventRaised += _frameUC_frameControlRemovedEventRaised;                                   
         }
-
+   
         private void _frameUC_frameControlRemovedEventRaised(object sender, ControlEventArgs e)
         {
             _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
@@ -139,16 +139,16 @@ namespace PresentationLayer.Presenter.UserControls
 
             }
 
-
             //}
             //else if (pfr.Controls[0] is IPanelUC)
             //{
             //    _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
             //}
         }
-
+        
         private void _frameUC_frameDragDropEventRaised(object sender, DragEventArgs e)
         {
+            _mainPresenter.ForceRestartAndLoadFile();//chksrobj
             UserControl frame = (UserControl)sender; //Control na babagsakan
             List<object> lst_data = e.Data.GetData(e.Data.GetFormats()[0]) as List<object>;
 
@@ -583,12 +583,6 @@ namespace PresentationLayer.Presenter.UserControls
             else
             {
 
-
-
-
-
-
-
                 try
                 {
                     frameUC = (UserControl)sender;
@@ -933,11 +927,14 @@ namespace PresentationLayer.Presenter.UserControls
                 _mainPresenter.windoorModel_MainPresenter.frameIDCounter = 0;
 
             }
+
         }
 
         public void ViewDeleteControl(UserControl control)
         {
             _frameUC.DeleteControl(control);
         }
+
     }
+
 }

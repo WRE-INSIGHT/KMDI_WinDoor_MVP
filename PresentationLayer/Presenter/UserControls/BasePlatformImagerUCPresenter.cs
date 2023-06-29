@@ -1261,11 +1261,11 @@ namespace PresentationLayer.Presenter.UserControls
                 dmnsion_font_wd = new Font("Segoe UI", 12, FontStyle.Bold);
                 dmnsion_font_ht = new Font("Segoe UI", 12, FontStyle.Bold);
             }
-            else
-            {
-                dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
-                dmnsion_font_ht = new Font("Segoe UI", 22, FontStyle.Bold);
-            }
+            //els //remove condition 6/29/23
+            //{
+            //    dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
+            //    dmnsion_font_ht = new Font("Segoe UI", 22, FontStyle.Bold);
+            //}
 
 
             int total_frame = _windoorModel.lst_frame.Count();

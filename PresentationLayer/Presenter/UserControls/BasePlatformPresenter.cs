@@ -1575,5 +1575,6 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _basePlatfomrUC.RemoveBindingThis();
         }
+
     }
 }

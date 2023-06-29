@@ -307,7 +307,8 @@ namespace PresentationLayer.Presenter
                     }
                     else
                     {
-                        Screen_DimensionFormat = item.Screen_Width + " x " + item.Screen_Height;
+                        //Screen_DimensionFormat = item.Screen_Width + " x " + item.Screen_Height;
+                        Screen_DimensionFormat = item.Screen_DisplayedDimension;
                         Screen_UnitPrice = item.Screen_UnitPrice.ToString("n");
                         Screen_Qty = item.Screen_Quantity.ToString();
                         Screen_Discount = Convert.ToString(item.Screen_Discount) + "%";
@@ -646,11 +647,17 @@ namespace PresentationLayer.Presenter
                             screentotaldiscount = screentotaldiscount + item.Screen_Discount;
                         }
                     }
-                    else
+                    else if (item.Screen_Quantity == 1)
                     {
                         screentotaldiscount = screentotaldiscount + item.Screen_Discount;
+                    } 
+                    else
+                    {
+                        Console.WriteLine("Zero Quantity Detected");
                     }
-                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount, 2);
+                   
+
+                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount,2);
                 }
 
                 ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;
