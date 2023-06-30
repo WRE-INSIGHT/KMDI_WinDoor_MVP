@@ -87,8 +87,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _mainPresenter.updatePriceOfMainView();
                 }
                 else
-                {
-
+                { 
                     if (_windoorModel.TotalPriceHistoryStatus == "System Generated Price")
                     {
                         _mainPresenter.LblCurrentPrice.Value = _windoorModel.WD_currentPrice;

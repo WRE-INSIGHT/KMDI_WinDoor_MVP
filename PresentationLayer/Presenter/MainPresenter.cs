@@ -1477,7 +1477,7 @@ namespace PresentationLayer.Presenter
             }
             else
             {
-                if (_quotationModel != null)
+                if (_windoorModel != null)
                 {
                     if (_lblCurrentPrice.Value == _windoorModel.SystemSuggestedPrice && _windoorModel.SystemSuggestedPrice != 0)
                     {
@@ -1745,7 +1745,7 @@ namespace PresentationLayer.Presenter
             }
             foreach (WindoorModel wdm in _quotationModel.Lst_Windoor)
             {
-                    SaveWindoorModel(wdm);
+                SaveWindoorModel(wdm);
             }
             foreach (ScreenModel scm in Screen_List)
             {
@@ -2233,7 +2233,7 @@ namespace PresentationLayer.Presenter
                         }
                     }
                     #endregion
-                }            
+                }
             }
             foreach (var history in wdm.lst_TotalPriceHistory)
             {
@@ -3911,7 +3911,7 @@ namespace PresentationLayer.Presenter
                     inside_rdlcDic = true;
                 }
             }
-            
+
 
             if (row_str == "EndofFile")
             {
@@ -11820,7 +11820,7 @@ namespace PresentationLayer.Presenter
                         if (PrevSave != EditedPriceToSave)
                         {
                             wdr.lst_TotalPriceHistory.Add(EditedPriceToSave);
-                        } 
+                        }
                     }
                 }
 
