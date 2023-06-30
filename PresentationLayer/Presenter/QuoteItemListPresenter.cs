@@ -372,59 +372,59 @@ namespace PresentationLayer.Presenter
                           topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
 
                     #region ScalingItemSizePicture
-                    int max = this._lstItemArea[0],
-                        ItemNewWidth,
-                        ItemNewHeight,
-                        maxHeight = 210,
-                        maxWidth = 210,
-                        wdAndHtDiff;
-                    decimal itemSizePercentage;
+                    //int max = this._lstItemArea[0],
+                    //    ItemNewWidth,
+                    //    ItemNewHeight,
+                    //    maxHeight = 210,
+                    //    maxWidth = 210,
+                    //    wdAndHtDiff;
+                    //decimal itemSizePercentage;
 
-                    int currentItem = this._lstItemArea[i],
-                        itemWidth = _quotationModel.Lst_Windoor[i].WD_width,
-                        itemHeight = _quotationModel.Lst_Windoor[i].WD_height;
+                    //int currentItem = this._lstItemArea[i],
+                    //    itemWidth = _quotationModel.Lst_Windoor[i].WD_width,
+                    //    itemHeight = _quotationModel.Lst_Windoor[i].WD_height;
 
-                    decimal ProportionItemSizePercentage;
+                    //decimal ProportionItemSizePercentage;
 
-                    for (int ii = 1; ii < this._lstItemArea.Count; ii++)
-                    {
-                        max = Math.Max(max, this._lstItemArea[ii]);
-                    }
-
-                    itemSizePercentage = (decimal)currentItem / (decimal)max;
-                    //ItemScalingSize = (currentItem / max) * itemSizePercentage;
-                    ItemNewWidth = (int)((decimal)itemSizePercentage * maxWidth);
-                    ItemNewHeight = (int)((decimal)itemSizePercentage * maxHeight);
-
-
-                    //if (itemWidth > itemHeight)
+                    //for (int ii = 1; ii < this._lstItemArea.Count; ii++)
                     //{
-                    ProportionItemSizePercentage = ((decimal)itemHeight / (decimal)itemWidth);
-                    ItemNewHeight = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewHeight);
+                    //    max = Math.Max(max, this._lstItemArea[ii]);
                     //}
-                    //else if (itemWidth < itemHeight)
+
+                    //itemSizePercentage = (decimal)currentItem / (decimal)max;
+                    ////ItemScalingSize = (currentItem / max) * itemSizePercentage;
+                    //ItemNewWidth = (int)((decimal)itemSizePercentage * maxWidth);
+                    //ItemNewHeight = (int)((decimal)itemSizePercentage * maxHeight);
+
+
+                    ////if (itemWidth > itemHeight)
+                    ////{
+                    //ProportionItemSizePercentage = ((decimal)itemHeight / (decimal)itemWidth);
+                    //ItemNewHeight = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewHeight);
+                    ////}
+                    ////else if (itemWidth < itemHeight)
+                    ////{
+                    //ProportionItemSizePercentage = ((decimal)itemWidth / (decimal)itemHeight);
+                    //ItemNewWidth = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewWidth);
+                    ////}
+                    ////else
+                    ////{
+
+                    ////}
+                    //if (ItemNewWidth >= 210)
                     //{
-                    ProportionItemSizePercentage = ((decimal)itemWidth / (decimal)itemHeight);
-                    ItemNewWidth = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewWidth);
+                    //    ItemNewWidth = 210;
                     //}
-                    //else
-                    //{
 
-                    //}
-                    if (ItemNewWidth >= 210)
-                    {
-                        ItemNewWidth = 210;
-                    }
-
-                    var resizedImg = ResizeImage(itemImage, ItemNewWidth, ItemNewHeight);
+                    //var resizedImg = ResizeImage(itemImage, ItemNewWidth, ItemNewHeight);
 
 
-                    resizedImg.Save(mstream, ImageFormat.Png);
+                    //resizedImg.Save(mstream, ImageFormat.Png);
                     #endregion
 
 
 
-                    //itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                    itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
 
                     if (topView != null)
                     {
@@ -650,14 +650,14 @@ namespace PresentationLayer.Presenter
                     else if (item.Screen_Quantity == 1)
                     {
                         screentotaldiscount = screentotaldiscount + item.Screen_Discount;
-                    } 
+                    }
                     else
                     {
                         Console.WriteLine("Zero Quantity Detected");
                     }
-                   
 
-                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount,2);
+
+                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount, 2);
                 }
 
                 ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;
