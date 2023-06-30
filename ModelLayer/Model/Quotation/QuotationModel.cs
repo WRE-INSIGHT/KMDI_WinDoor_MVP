@@ -12446,7 +12446,7 @@ namespace ModelLayer.Model.Quotation
 
                    "TotaPrice: " + TotaPrice.ToString() + " = " + BaseTotalPriceWithFactor.ToString() + " + " + LouverCost.ToString() + " + " + MeshCost.ToString() + "\n\n" +
 
-                    "` END OF COMPUTATION FOR SAVING `\n\n";
+                    "` END OF COMPUTATION FOR SAVING `\n\n\n";
                     #endregion
 
 
