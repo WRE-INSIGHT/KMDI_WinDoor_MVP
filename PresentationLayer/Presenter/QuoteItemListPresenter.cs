@@ -415,7 +415,7 @@ namespace PresentationLayer.Presenter
                     {
                         ItemNewWidth = 210;
                     }
-                     
+
                     var resizedImg = ResizeImage(itemImage, ItemNewWidth, ItemNewHeight);
 
 

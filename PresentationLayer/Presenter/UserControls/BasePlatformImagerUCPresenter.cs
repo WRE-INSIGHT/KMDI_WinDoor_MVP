@@ -1256,15 +1256,15 @@ namespace PresentationLayer.Presenter.UserControls
 
             redP.Width = 3.5f;
 
-            if (_windoorModel.WD_width >= 10000)
-            {
-                dmnsion_font_wd = new Font("Segoe UI", 12, FontStyle.Bold);
-                dmnsion_font_ht = new Font("Segoe UI", 12, FontStyle.Bold);
-            }
+            //if (_windoorModel.WD_width >= 10000)
+            //{
+            //    dmnsion_font_wd = new Font("Segoe UI", 12, FontStyle.Bold);
+            //    dmnsion_font_ht = new Font("Segoe UI", 12, FontStyle.Bold);
+            //}
             //els //remove condition 6/29/23
             //{
-            //    dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
-            //    dmnsion_font_ht = new Font("Segoe UI", 22, FontStyle.Bold);
+            dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
+            dmnsion_font_ht = new Font("Segoe UI", 22, FontStyle.Bold);
             //}
 
 
