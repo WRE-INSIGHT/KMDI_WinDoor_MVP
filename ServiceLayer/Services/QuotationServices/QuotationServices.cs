@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ModelLayer.Model.Quotation;
+﻿using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
 using ServiceLayer.CommonServices;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ServiceLayer.Services.QuotationServices
 {
@@ -44,6 +42,7 @@ namespace ServiceLayer.Services.QuotationServices
             }
 
             IQuotationModel _quotationModel = CreateQuotationModel(quote_id, quotation_ref_no, quote_date, lst_wndr);
+
 
             return _quotationModel;
         }

@@ -1497,6 +1497,10 @@ namespace ModelLayer.Model.Quotation.Frame
             }
             else if (Frame_ArtNo == FrameProfile_ArticleNo._6052)
             {
+                if (Frame_Type == Frame_Padding.Door)
+                {
+                    Frame_ConnectingProfile_ArticleNo = ConnectingProfile_ArticleNo._0373;
+                }
                 if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                 {
                     if (Frame_If_InwardMotorizedSliding == true)

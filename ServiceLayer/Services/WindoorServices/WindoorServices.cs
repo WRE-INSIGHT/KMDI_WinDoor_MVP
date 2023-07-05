@@ -37,7 +37,10 @@ namespace ServiceLayer.Services.WindoorServices
                                            Base_Color wd_basecolor,
                                            Foil_Color wd_insidecolor,
                                            Foil_Color wd_outisdecolor,
-                                           bool isFromLoad
+                                           bool isFromLoad,
+                                           List<string> lst_TotalPriceHistory,
+                                           decimal SystemSuggestedPrice
+
                                            //int wd_costingPoints
                                            )
         {
@@ -60,7 +63,9 @@ namespace ServiceLayer.Services.WindoorServices
                                                   wd_basecolor,
                                                   wd_insidecolor,
                                                   wd_outisdecolor,
-                                                  isFromLoad
+                                                  isFromLoad,
+                                                  lst_TotalPriceHistory,
+                                                  SystemSuggestedPrice
                                                   //wd_costingPoints
                                                   );
 
@@ -89,7 +94,9 @@ namespace ServiceLayer.Services.WindoorServices
                                              List<IConcreteModel> lst_concrete = null,
                                              List<Control> lst_Objects = null,
                                              int wd_costingPoints = 0,
-                                             bool isFromLoad = false)
+                                             bool isFromLoad = false,
+                                             List<string> lst_TotalPriceHistory = null,
+                                             decimal SystemSuggestedPrice = 0)
         {
             if (WD_name == "")
             {
@@ -111,6 +118,10 @@ namespace ServiceLayer.Services.WindoorServices
             {
                 lst_Objects = new List<Control>();
             }
+            if (lst_TotalPriceHistory == null)
+            {
+                lst_TotalPriceHistory = new List<string>();
+            }
             IWindoorModel _windoorModel = CreateWindoor(WD_ID,
                                                         WD_name,
                                                         WD_description,
@@ -131,7 +142,9 @@ namespace ServiceLayer.Services.WindoorServices
                                                         wd_basecolor,
                                                         wd_insidecolor,
                                                         wd_outisdecolor,
-                                                        isFromLoad
+                                                        isFromLoad,
+                                                        lst_TotalPriceHistory,
+                                                        SystemSuggestedPrice
                                                         //wd_costingPoints
                                                         );
 

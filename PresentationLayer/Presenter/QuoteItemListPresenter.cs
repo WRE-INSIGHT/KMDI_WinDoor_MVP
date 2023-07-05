@@ -1273,8 +1273,8 @@ namespace PresentationLayer.Presenter
 
                     if (wdm.WD_price == 0 && wdm.IsFromLoad == true)
                     {
-                        _quotationModel.ItemCostingPriceAndPoints();
-                        wdm.WD_price = Math.Round(_quotationModel.lstTotalPrice[i], 2);
+                        //_quotationModel.ItemCostingPriceAndPoints();
+                        //wdm.WD_price = Math.Round(_quotationModel.lstTotalPrice[i], 2);
                     }
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = Math.Round(wdm.WD_price, 2);  //TotaPrice;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = Math.Round(wdm.WD_price, 2).ToString();  //TotaPrice.ToString();
