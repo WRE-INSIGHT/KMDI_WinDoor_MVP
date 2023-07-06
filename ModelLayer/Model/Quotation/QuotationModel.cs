@@ -2384,15 +2384,20 @@ namespace ModelLayer.Model.Quotation
 
                 FramePricePerLinearMeter_7502_WoodGrain = 465.13m,
                 FramePricePerLinearMeter_7502_White = 332.57m,
+                FramePricePerLinearMeter_7502_White_1sideFoil = 398.85m,
                 FramePricePerLinearMeter_7507_WoodGrain = 507.99m,
                 FramePricePerLinearMeter_7507_White = 354.28m,
+                FramePricePerLinearMeter_7507_White_1sideFoil = 431.14m,
                 FramePricePerLinearMeter_2060_White = 271.35m,//G58
                 FramePricePerLinearMeter_6050_WoodGrain = 483.36m,
                 FramePricePerLinearMeter_6050_White = 378.19m,
+                FramePricePerLinearMeter_6050_White_1sideFoil = 430.77m,
                 FramePricePerLinearMeter_6052_WoodGrain = 725.02m,//704.60m, 2/22/23
                 FramePricePerLinearMeter_6052_White = 567.15m,//563.48m, 2/22/23
+                FramePricePerLinearMeter_6052_White_1sideFoil = 634.04m,
                 FramePricePerLinearMeter_6052Milled_WoodGrain = 590m,
-                FramePricePerLinearMeter_6052Milled_White = 400m,
+                FramePricePerLinearMeter_6052Milled_White = 567.15m,
+                FramePricePerLinearMeter_6052Milled_White_1sideFoil = 634.04m,
                 FramePricePerLinearMeter_6055_WoodGrain = 310.04m,
                 FramePricePerLinearMeter_6055_White = 254.74m,
                 FrameReinPricePerLinearMeter_7502 = 123.55m,
@@ -2405,17 +2410,23 @@ namespace ModelLayer.Model.Quotation
 
                 SashPricePerLinearMeter_7581_WoodGrain = 550.13m,
                 SashPricePerLinearMeter_7581_White = 375.30m,
+                SashPricePerLinearMeter_7581_White_1sideFoil = 462.72m,
                 SashPricePerLinearMeter_373_WoodGrain = 712.66m,
                 SashPricePerLinearMeter_373_White = 511.72m,
+                SashPricePerLinearMeter_373_White_1sideFoil = 612.19m,
                 SashPricePerLinearMeter_374_WoodGrain = 801.83m,
                 SashPricePerLinearMeter_374_White = 511.72m,
+                SashPricePerLinearMeter_374_White_1sideFoil = 676.74m,
                 SashPricePerLinearMeter_395_WoodGrain = 556.57m,
                 SashPricePerLinearMeter_395_White = 412.47m,
+                SashPricePerLinearMeter_395_White_1sideFoil = 489.52m,
                 SashPricePerLinearMeter_2067_White = 303.50m,
-                SashPricePerLinearMeter_6040_WoodGrain = 500,// 550.13m,
-                SashPricePerLinearMeter_6040_White = 325, //373.94m,
+                SashPricePerLinearMeter_6040_WoodGrain = 500.00m,// 550.13m,
+                SashPricePerLinearMeter_6040_White = 325.00m, //373.94m,
+                SashPricePerLinearMeter_6040_White_1sideFoil = 460.61m,
                 SashPricePerLinearMeter_6041_WoodGrain = 683.91m,
                 SashPricePerLinearMeter_6041_White = 483.13m,
+                SashPricePerLinearMeter_6041_White_1sideFoil = 583.52m,
                 SashReinPricePerLinearMeter_7581 = 89.86m,
                 SashReinPricePerLinearMeter_373And374 = 835.18m,
                 SashReinPricePerLinearMeter_395 = 305.14m,
@@ -5479,6 +5490,11 @@ namespace ModelLayer.Model.Quotation
                             if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                             {
                                 FramePricePerLinearMeter = FramePricePerLinearMeter_7502_White;
+                                if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                    (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                {
+                                    FramePricePerLinearMeter = FramePricePerLinearMeter_7502_White_1sideFoil;
+                                }
                             }
                             else
                             {
@@ -5491,6 +5507,11 @@ namespace ModelLayer.Model.Quotation
                             if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                             {
                                 FramePricePerLinearMeter = FramePricePerLinearMeter_7507_White;
+                                if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                    (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                {
+                                    FramePricePerLinearMeter = FramePricePerLinearMeter_7507_White_1sideFoil;
+                                }
                             }
                             else
                             {
@@ -5510,6 +5531,11 @@ namespace ModelLayer.Model.Quotation
                             if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                             {
                                 FramePricePerLinearMeter = FramePricePerLinearMeter_6050_White;
+                                if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                    (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                {
+                                    FramePricePerLinearMeter = FramePricePerLinearMeter_6050_White_1sideFoil;
+                                }
                             }
                             else
                             {
@@ -5522,6 +5548,11 @@ namespace ModelLayer.Model.Quotation
                             if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                             {
                                 FramePricePerLinearMeter = FramePricePerLinearMeter_6052_White;
+                                if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                    (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                {
+                                    FramePricePerLinearMeter = FramePricePerLinearMeter_6052_White_1sideFoil;
+                                }
                             }
                             else
                             {
@@ -6346,6 +6377,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                       (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -6359,6 +6395,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                       (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_374_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -6372,6 +6413,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                       (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_373_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -6385,6 +6431,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                       (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_395_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -6405,6 +6456,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -6418,6 +6474,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -6465,6 +6526,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -6478,6 +6544,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_374_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -6491,6 +6562,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_373_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -6504,6 +6580,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_395_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -6524,6 +6605,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -6537,6 +6623,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -9536,6 +9627,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -9549,6 +9645,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_374_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -9562,6 +9663,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_373_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -9575,6 +9681,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_395_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -9595,6 +9706,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -9608,6 +9724,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -9637,6 +9758,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -9650,6 +9776,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_374_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -9663,6 +9794,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_373_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -9676,6 +9812,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_395_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -9695,6 +9836,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -9708,6 +9854,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
