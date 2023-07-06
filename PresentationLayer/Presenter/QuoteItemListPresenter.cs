@@ -372,57 +372,107 @@ namespace PresentationLayer.Presenter
                           topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
 
                     #region ScalingItemSizePicture
-                    int max = this._lstItemArea[0],
+                    //ratio by area
+
+                    //int max = this._lstItemArea[0],
+                    //    ItemNewWidth,
+                    //    ItemNewHeight,
+                    //    maxHeight = 210,
+                    //    maxWidth = 210,
+                    //    wdAndHtDiff;
+                    //decimal itemSizePercentage;
+
+                    //int currentItem = _lstItemArea[i],
+                    //    itemWidth = _quotationModel.Lst_Windoor[i].WD_width,
+                    //    itemHeight = _quotationModel.Lst_Windoor[i].WD_height;
+
+                    //decimal ProportionItemSizePercentage;
+
+                    //for (int ii = 1; ii < _lstItemArea.Count; ii++)
+                    //{
+                    //    max = Math.Max(max, _lstItemArea[ii]);
+                    //}
+
+                    //itemSizePercentage = (decimal)currentItem / (decimal)max;
+                    ////ItemScalingSize = (currentItem / max) * itemSizePercentage;
+                    //ItemNewWidth = (int)((decimal)itemSizePercentage * maxWidth);
+                    //ItemNewHeight = (int)((decimal)itemSizePercentage * maxHeight);
+
+
+                    ////if (itemWidth > itemHeight)
+                    ////{
+                    //ProportionItemSizePercentage = ((decimal)itemHeight / (decimal)itemWidth);
+                    //ItemNewHeight = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewHeight);
+                    ////}
+                    ////else if (itemWidth < itemHeight)
+                    ////{
+                    //ProportionItemSizePercentage = ((decimal)itemWidth / (decimal)itemHeight);
+                    //ItemNewWidth = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewWidth);
+                    ////}
+                    ////else
+                    ////{
+
+                    ////}
+                    //if (ItemNewWidth >= 210)
+                    //{
+                    //    ItemNewWidth = 210;
+                    //}
+
+                    //var resizedImg = ResizeImage(itemImage, ItemNewWidth, ItemNewHeight);
+
+
+                    //resizedImg.Save(mstream, ImageFormat.Png);
+                    #endregion
+
+                    #region ScalingItemSizePictureByWdAndHT
+                    //ratio by wd and ht
+
+                    int ItemMaxHeight = 0,
+                        ItemMaxWidth = 0,
                         ItemNewWidth,
                         ItemNewHeight,
-                        maxHeight = 210,
-                        maxWidth = 210,
-                        wdAndHtDiff;
-                    decimal itemSizePercentage;
+                        maxHeight = 140,
+                        maxWidth = 210;
+                    decimal itemSizePercentage_Width,
+                            itemSizePercentage_Height,
+                            ProportionItemSizePercentage;
 
-                    int currentItem = this._lstItemArea[i],
+                    int currentItem = _lstItemArea[i],
                         itemWidth = _quotationModel.Lst_Windoor[i].WD_width,
                         itemHeight = _quotationModel.Lst_Windoor[i].WD_height;
 
-                    decimal ProportionItemSizePercentage;
 
-                    for (int ii = 1; ii < this._lstItemArea.Count; ii++)
+                    for (int ii = 0; ii < _lstItemArea.Count; ii++)
                     {
-                        max = Math.Max(max, this._lstItemArea[ii]);
+                        ItemMaxHeight = Math.Max(ItemMaxHeight, _quotationModel.Lst_Windoor[ii].WD_height);
+                        ItemMaxWidth = Math.Max(ItemMaxWidth, _quotationModel.Lst_Windoor[ii].WD_width);
                     }
 
-                    itemSizePercentage = (decimal)currentItem / (decimal)max;
-                    //ItemScalingSize = (currentItem / max) * itemSizePercentage;
-                    ItemNewWidth = (int)((decimal)itemSizePercentage * maxWidth);
-                    ItemNewHeight = (int)((decimal)itemSizePercentage * maxHeight);
+                    itemSizePercentage_Width = (decimal)itemWidth / (decimal)ItemMaxWidth;
+                    ItemNewWidth = (int)((decimal)itemSizePercentage_Width * maxWidth);
 
 
-                    //if (itemWidth > itemHeight)
-                    //{
-                    ProportionItemSizePercentage = ((decimal)itemHeight / (decimal)itemWidth);
-                    ItemNewHeight = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewHeight);
-                    //}
-                    //else if (itemWidth < itemHeight)
-                    //{
-                    ProportionItemSizePercentage = ((decimal)itemWidth / (decimal)itemHeight);
-                    ItemNewWidth = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewWidth);
-                    //}
-                    //else
-                    //{
+                    itemSizePercentage_Height = (decimal)itemHeight / (decimal)ItemMaxHeight;
+                    ItemNewHeight = (int)((decimal)itemSizePercentage_Height * maxHeight);
 
-                    //}
+
+
+                    //ProportionItemSizePercentage = ((decimal)itemHeight / (decimal)itemWidth);
+                    //ItemNewHeight = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewHeight);
+
+                    //ProportionItemSizePercentage = ((decimal)itemWidth / (decimal)itemHeight);
+                    //ItemNewWidth = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewWidth);
+
                     if (ItemNewWidth >= 210)
                     {
                         ItemNewWidth = 210;
                     }
 
-                    var resizedImg = ResizeImage(itemImage, ItemNewWidth, ItemNewHeight);
+                    Image resizedImg = ResizeImage(itemImage, ItemNewWidth, ItemNewHeight);
 
 
                     resizedImg.Save(mstream, ImageFormat.Png);
                     #endregion
-
-
 
                     //itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
 
@@ -437,14 +487,14 @@ namespace PresentationLayer.Presenter
                     string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
                     string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
 
-                    IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
+                    IQuoteItemListUCPresenter lstQuoteUC = _lstQuoteItemUC[i];
                     if (RenderPDFAtBackGround != true)
                     {
                         bool chkbox_checkstate = Convert.ToBoolean(lstQuoteUC.GetiQuoteItemListUC().GetChkboxItemImage().CheckState);
 
                         if (chkbox_checkstate == true)
                         {
-                            this._quoteItemListView.GetItemListUC_CheckBoxState = true;
+                            _quoteItemListView.GetItemListUC_CheckBoxState = true;
                             showImage = true;
                             ShowItemImage_CheckList.Add(new ShowItemImage
                             {
@@ -650,14 +700,14 @@ namespace PresentationLayer.Presenter
                     else if (item.Screen_Quantity == 1)
                     {
                         screentotaldiscount = screentotaldiscount + item.Screen_Discount;
-                    } 
+                    }
                     else
                     {
                         Console.WriteLine("Zero Quantity Detected");
                     }
-                   
 
-                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount,2);
+
+                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount, 2);
                 }
 
                 ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;
@@ -1292,9 +1342,9 @@ namespace PresentationLayer.Presenter
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDiscount.Value = wdm.WD_discount;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblDiscount().Text = wdm.WD_discount.ToString() + "%";
 
-                    this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
+                    _lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                     TotalItemArea = wdm.WD_width * wdm.WD_height;
-                    this._lstItemArea.Add(TotalItemArea);
+                    _lstItemArea.Add(TotalItemArea);
 
                 }
             }
@@ -1312,7 +1362,7 @@ namespace PresentationLayer.Presenter
 
             for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
             {
-                IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
+                IQuoteItemListUCPresenter lstQuoteUC = _lstQuoteItemUC[i];
 
                 if (chkbox_checkstate_frmQuoteItemList == true)
                 {
