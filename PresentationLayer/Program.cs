@@ -467,6 +467,9 @@ namespace PresentationLayer
                  .RegisterType<IPriceHistoryPresenter, PriceHistoryPresenter>(new ContainerControlledLifetimeManager())
                  .RegisterType<IPriceHistoryView, PriceHistoryView>(new ContainerControlledLifetimeManager())
 
+                 .RegisterType<IGlassUpgradePresenter, GlassUpgradePresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IGlassUpgradeView, GlassUpgradeView>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

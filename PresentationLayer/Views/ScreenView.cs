@@ -161,37 +161,30 @@ namespace PresentationLayer.Views
         {
             return nud_TotalPrice;
         }
-
         public Panel GetPnlAddOns()
         {
             return pnl_addOns;
         }
-
         public Label getLblPlisse()
         {
             return lbl_Plissé;
         }
-
         public ComboBox getCmbPlisse()
         {
             return cmb_PlisséType;
         }
-
         public DataGridView GetDatagrid()
         {
             return dgv_Screen;
         }
-
         public NumericUpDown getNudPlisseRd()
         {
             return nud_plissedRd;
         }
-
         public Label getLblPlisseRd()
         {
             return lbl_plissedRd;
         }
-
         public ComboBox getCmbFreedom()
         {
             return cmb_freedomSize;
@@ -200,7 +193,7 @@ namespace PresentationLayer.Views
         {
             return txt_ItemNum;
         }
-
+ 
         private void ScreenView_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;

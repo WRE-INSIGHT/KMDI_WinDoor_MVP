@@ -128,6 +128,7 @@ namespace PresentationLayer.Presenter
         private IPricingPresenter _pricingPresenter;
         private ISetMultipleGlassThicknessPresenter _setMultipleGlassThicknessPresenter;
         private IPriceHistoryPresenter _priceHistoryPresenter;
+        private IGlassUpgradePresenter _glassUpgradePresenter;
 
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
@@ -814,7 +815,8 @@ namespace PresentationLayer.Presenter
                              ITransomImagerUCPresenter transomImagerUCP,
                              IPricingPresenter pricingPresenter,
                              ISetMultipleGlassThicknessPresenter setMultipleGlassThicknessPresenter,
-                             IPriceHistoryPresenter priceHistoryPresenter
+                             IPriceHistoryPresenter priceHistoryPresenter,
+                             IGlassUpgradePresenter glassupgradePresenter
                              )
         {
             _mainView = mainView;
@@ -879,7 +881,7 @@ namespace PresentationLayer.Presenter
             _setMultipleGlassThicknessPresenter = setMultipleGlassThicknessPresenter;
             _lblCurrentPrice = _mainView.GetCurrentPrice();
             _priceHistoryPresenter = priceHistoryPresenter;
-
+            _glassUpgradePresenter = glassupgradePresenter;
 
             SubscribeToEventsSetup();
         }
@@ -3562,15 +3564,18 @@ namespace PresentationLayer.Presenter
         }
         private void OnViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-            toggle = !toggle;
-            if (toggle == true)
-            {
-                _basePlatformImagerUCPresenter.BringToFront_baseImager();
-            }
-            else if (toggle == false)
-            {
-                _basePlatformImagerUCPresenter.SendToBack_baseImager();
-            }
+            //toggle = !toggle;
+            //if (toggle == true)
+            //{
+            //    _basePlatformImagerUCPresenter.BringToFront_baseImager();
+            //}
+            //else if (toggle == false)
+            //{
+            //    _basePlatformImagerUCPresenter.SendToBack_baseImager();
+            //}
+
+            //IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel,this,_quotationModel,_unityC);
+            //glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
 
         }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
