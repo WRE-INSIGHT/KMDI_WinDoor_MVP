@@ -674,6 +674,10 @@ namespace PresentationLayer.Views
                 {
                     CreateNewItem_Clicked(G58ToolStripMenuItem, e);
                 }
+                else if (e.Control == true && e.KeyCode == Keys.B)
+                {
+                    billOfMaterialToolStripMenuItem_Click(sender, e);
+                }
             }
             if (e.Control == true && e.KeyCode == Keys.O)
             {

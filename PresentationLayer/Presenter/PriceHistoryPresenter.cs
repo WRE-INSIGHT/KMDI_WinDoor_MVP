@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Unity;
 
@@ -32,17 +33,19 @@ namespace PresentationLayer.Presenter
 
         private void _priceHistoryView_cmb_PriceHistorySelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
+            if (_quotationModel != null)
             {
-                if (wdr.WD_Selected == true)
+                foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
                 {
-                    if (wdr.lst_TotalPriceHistory.Count != 0)
+                    if (wdr.WD_Selected == true && wdr.lst_TotalPriceHistory.Count != 0)
                     {
+                        _priceHistoryView.PriceHistory.Text = "";
+
                         foreach (string item in wdr.lst_TotalPriceHistory)
                         {
                             if (item.Contains(_cmbPriceHistory.SelectedValue.ToString()))
                             {
-                                _priceHistoryView.PriceHistory.Text = item;
+                                _priceHistoryView.PriceHistory.Text += item;
                             }
                         }
                     }
@@ -53,12 +56,11 @@ namespace PresentationLayer.Presenter
         private void _priceHistoryView_PriceHistoryViewLoadEventRaised(object sender, EventArgs e)
         {
             List<string> priceHistory = new List<string>();
-
-            foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
+            if (_quotationModel != null)
             {
-                if (wdr.WD_Selected == true)
+                foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
                 {
-                    if (wdr.lst_TotalPriceHistory.Count != 0)
+                    if (wdr.WD_Selected == true && wdr.lst_TotalPriceHistory.Count != 0)
                     {
                         foreach (string item in wdr.lst_TotalPriceHistory)
                         {
@@ -80,29 +82,29 @@ namespace PresentationLayer.Presenter
                         }
                     }
                 }
-            }
+                priceHistory.Reverse();
+                List<string> priceHistoryDistinct = priceHistory.Distinct().ToList();
 
-            priceHistory.Reverse();
+                _cmbPriceHistory.DataSource = priceHistoryDistinct;
 
-            _cmbPriceHistory.DataSource = priceHistory;
-
-            foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
-            {
-                if (wdr.WD_Selected == true)
-                { 
-                    if (wdr.lst_TotalPriceHistory.Count != 0 && _cmbPriceHistory.Items.Count != 0)
+                foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
+                {
+                    if (wdr.WD_Selected == true)
                     {
-                        foreach (string item in wdr.lst_TotalPriceHistory)
+                        if (wdr.lst_TotalPriceHistory.Count != 0 && _cmbPriceHistory.Items.Count != 0)
                         {
-                            if (item.Contains(_cmbPriceHistory.SelectedValue.ToString()))
+                            _priceHistoryView.PriceHistory.Text = "";
+                            foreach (string item in wdr.lst_TotalPriceHistory)
                             {
-                                _priceHistoryView.PriceHistory.Text = item;
+                                if (item.Contains(_cmbPriceHistory.SelectedValue.ToString()))
+                                {
+                                    _priceHistoryView.PriceHistory.Text += item;
+                                }
                             }
                         }
                     }
                 }
             }
-
 
         }
 

@@ -1001,7 +1001,7 @@ namespace PresentationLayer.Presenter
             priceHistory.GetPriceHistoryView().ShowPriceHistory();
         }
 
-        public int ForceRestartAndLoadFile()                 
+        public int ForceRestartAndLoadFile()
         {
             int _userObjCount = GetGuiResources(Process.GetCurrentProcess().Handle, 1);
             try
@@ -1019,7 +1019,7 @@ namespace PresentationLayer.Presenter
                             {
                                 Properties.Settings.Default.UserObjectWarning = true;
                                 Properties.Settings.Default.Save();
-                            }                          
+                            }
                         }
 
                         bool runbatfile = false;
@@ -1073,7 +1073,7 @@ namespace PresentationLayer.Presenter
                                                  "Title Auto Load " + _wndrFileName + "\n" +
                                                  "taskkill /IM PresentationLayer.exe /f" + "\n" +
                                                  "@echo Opening file " + _wndrFileName + "\n" +
-                                                 "@echo Press any key one time only." + "\n" + 
+                                                 "@echo Press any key one time only." + "\n" +
                                                  "pause" + "\n" +
                                                  "echo off & start " + @"""""" + "/b " + @"""" + _wndrFilePath + @"""" + "\n" +
                                                  "cscript //NoLogo //B Auto.vbs" + "\n" +
@@ -1092,9 +1092,9 @@ namespace PresentationLayer.Presenter
                             //Prevent Duplicate of txt file
                             File.Delete(batfilePath);
                             File.Delete(vbsfilePath);
-                            File.Delete(Path.Combine(BasePath,"Open.bat"));
-                            File.Delete(Path.Combine(BasePath,"Auto.vbs"));
-                            
+                            File.Delete(Path.Combine(BasePath, "Open.bat"));
+                            File.Delete(Path.Combine(BasePath, "Auto.vbs"));
+
                             //write Batch and Script in Text Format
                             File.WriteAllText(batfilePath, batformatv2);
                             File.WriteAllText(vbsfilePath, vbsformat);
@@ -1126,7 +1126,7 @@ namespace PresentationLayer.Presenter
                 else if (_userModel.Username.ToLower() == "jb")
                 {
                     //return to show dialog box 
-                    Properties.Settings.Default.UserObjectWarning = false; 
+                    Properties.Settings.Default.UserObjectWarning = false;
                     Properties.Settings.Default.Save();
                 }
             }
@@ -1139,34 +1139,34 @@ namespace PresentationLayer.Presenter
 
         }
 
-        public bool LimitReachDialogBox(string _maximumUserObject,string FormTitle)
+        public bool LimitReachDialogBox(string _maximumUserObject, string FormTitle)
         {
-           Form frm = new Form();
-           frm.Width = 250;
-           frm.Height = 140;
-           frm.Text = FormTitle;
-           frm.ShowIcon = false;
-           frm.MaximumSize = new Size(250, 140);
-           frm.MaximumSize = new Size(250, 140);
-           frm.StartPosition = FormStartPosition.CenterScreen;
-           FlowLayoutPanel pnl = new FlowLayoutPanel();
-           CheckBox chk = new CheckBox() { Text = "Do not Show This Again", AutoSize = true };
-           Button ok = new Button() { Text = "Ok" };
-           Label lbl = new Label();
-           lbl.Font = new Font("Segoe UI", 8, FontStyle.Regular);
-           Label dummylabel = new Label();
-           dummylabel.Text = " ";
-           lbl.Text = "User Objects Limit Reach:" + " " + _maximumUserObject + "\n" + "It is Recommended to save the file! ";
-           ok.Click += (sender, e) => { frm.Close(); };
-           lbl.AutoSize = true;
-           pnl.Controls.Add(lbl);
-           pnl.Controls.Add(dummylabel);
-           pnl.Controls.Add(chk);
-           pnl.Controls.Add(ok);
-           frm.Controls.Add(pnl);
-           frm.ShowDialog();
-           
-           return chk.Checked;
+            Form frm = new Form();
+            frm.Width = 250;
+            frm.Height = 140;
+            frm.Text = FormTitle;
+            frm.ShowIcon = false;
+            frm.MaximumSize = new Size(250, 140);
+            frm.MaximumSize = new Size(250, 140);
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            FlowLayoutPanel pnl = new FlowLayoutPanel();
+            CheckBox chk = new CheckBox() { Text = "Do not Show This Again", AutoSize = true };
+            Button ok = new Button() { Text = "Ok" };
+            Label lbl = new Label();
+            lbl.Font = new Font("Segoe UI", 8, FontStyle.Regular);
+            Label dummylabel = new Label();
+            dummylabel.Text = " ";
+            lbl.Text = "User Objects Limit Reach:" + " " + _maximumUserObject + "\n" + "It is Recommended to save the file! ";
+            ok.Click += (sender, e) => { frm.Close(); };
+            lbl.AutoSize = true;
+            pnl.Controls.Add(lbl);
+            pnl.Controls.Add(dummylabel);
+            pnl.Controls.Add(chk);
+            pnl.Controls.Add(ok);
+            frm.Controls.Add(pnl);
+            frm.ShowDialog();
+
+            return chk.Checked;
 
         }
 
@@ -1479,7 +1479,7 @@ namespace PresentationLayer.Presenter
             }
             else
             {
-                if (_quotationModel != null)
+                if (_windoorModel != null)
                 {
                     if (_lblCurrentPrice.Value == _windoorModel.SystemSuggestedPrice && _windoorModel.SystemSuggestedPrice != 0)
                     {
@@ -1575,7 +1575,7 @@ namespace PresentationLayer.Presenter
 
             _screenModel.Screen_PVCVisibility = false;
             IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel);//, _screenDT);
-            glassThicknessPresenter.GetScreenView().ShowScreemView();         
+            glassThicknessPresenter.GetScreenView().ShowScreemView();
         }
 
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
@@ -1747,7 +1747,7 @@ namespace PresentationLayer.Presenter
             }
             foreach (WindoorModel wdm in _quotationModel.Lst_Windoor)
             {
-                    SaveWindoorModel(wdm);
+                SaveWindoorModel(wdm);
             }
             foreach (ScreenModel scm in Screen_List)
             {
@@ -2235,7 +2235,7 @@ namespace PresentationLayer.Presenter
                         }
                     }
                     #endregion
-                }            
+                }
             }
             foreach (var history in wdm.lst_TotalPriceHistory)
             {
@@ -3916,7 +3916,7 @@ namespace PresentationLayer.Presenter
                     inside_rdlcDic = true;
                 }
             }
-            
+
 
             if (row_str == "EndofFile")
             {
@@ -4068,7 +4068,7 @@ namespace PresentationLayer.Presenter
                     {
                         _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
                         inside_quotation = false;
-                    }                   
+                    }
                     break;
                 #endregion
                 case false:
@@ -11805,15 +11805,27 @@ namespace PresentationLayer.Presenter
                 foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
                 {
                     DateTime thisDay = DateTime.Now;
+                    string PrevSave = "";
                     //_quotationModel.lst_TotalPriceHistory = new List<string>();
-
+                    if (wdr.lst_TotalPriceHistory.Count != 0)
+                    {
+                        PrevSave = wdr.lst_TotalPriceHistory.Last();
+                    }
                     if (wdr.TotalPriceHistoryStatus == "System Generated Price")
                     {
-                        wdr.lst_TotalPriceHistory.Add(thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "````` Save Time\n" + wdr.TotalPriceHistory);
+                        string SystemGeneratedPriceToSave = thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "````` Save Time\n" + wdr.TotalPriceHistory;
+                        if (PrevSave != SystemGeneratedPriceToSave)
+                        {
+                            wdr.lst_TotalPriceHistory.Add(SystemGeneratedPriceToSave);
+                        }
                     }
                     else if (wdr.TotalPriceHistoryStatus == "Edited Price")
                     {
-                        wdr.lst_TotalPriceHistory.Add(thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "`````\nEdited Price: " + wdr.WD_currentPrice.ToString() + "\n");
+                        string EditedPriceToSave = thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "`````\nEdited Price: " + wdr.WD_price.ToString() + "\n\n\n";
+                        if (PrevSave != EditedPriceToSave)
+                        {
+                            wdr.lst_TotalPriceHistory.Add(EditedPriceToSave);
+                        }
                     }
                 }
 
