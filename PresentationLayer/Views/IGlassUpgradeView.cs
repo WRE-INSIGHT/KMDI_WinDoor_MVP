@@ -22,6 +22,8 @@ namespace PresentationLayer.Views
         event EventHandler GlassUpgradeView_SizeChangedEventRaised;
         event EventHandler btn_add_ClickEventRaised;
         event EventHandler deleteToolStripMenuItem_ClickEventRaised;
+        event DataGridViewCellMouseEventHandler glassUpgradeDGV_ColumnHeaderMouseClickEventRaised;
+        event EventHandler glassUpgradeDGV_CellEndEditEventRaised;
 
         void CloseGlassUpgradeView();
         ComboBox GlassTypeCmb();

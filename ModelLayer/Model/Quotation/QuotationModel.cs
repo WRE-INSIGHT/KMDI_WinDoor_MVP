@@ -2952,13 +2952,13 @@ namespace ModelLayer.Model.Quotation
         MeshPrice,
         MeshCost,
         #endregion
-
-
+                
+                            
                 BrushSealPricePerLinearMeter = 15.80m,
                 SealantPricePerCan_BrownBlack = 430m,
                 SealantPricePerCan_Clear = 170m,
                 PUFoamingPricePerCan = 210m,
-
+       
                 BrushSealPrice,
                 SealantPricePerCan,
                 SealantPrice,

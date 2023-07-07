@@ -56,12 +56,12 @@
             this.lbl_glass = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.glassUpgradeDGV = new System.Windows.Forms.DataGridView();
+            this.cmsGlassUpgrade = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.num_glassAmount = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.num_wdwsAndDoors = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmsGlassUpgrade = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_Header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_discount)).BeginInit();
             this.pnl_desc.SuspendLayout();
@@ -69,9 +69,9 @@
             this._glassUpgToolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.glassUpgradeDGV)).BeginInit();
+            this.cmsGlassUpgrade.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_glassAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_wdwsAndDoors)).BeginInit();
-            this.cmsGlassUpgrade.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_Header
@@ -368,6 +368,22 @@
             this.glassUpgradeDGV.Name = "glassUpgradeDGV";
             this.glassUpgradeDGV.Size = new System.Drawing.Size(932, 257);
             this.glassUpgradeDGV.TabIndex = 0;
+            this.glassUpgradeDGV.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.glassUpgradeDGV_CellEndEdit);
+            this.glassUpgradeDGV.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.glassUpgradeDGV_ColumnHeaderMouseClick);
+            // 
+            // cmsGlassUpgrade
+            // 
+            this.cmsGlassUpgrade.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.cmsGlassUpgrade.Name = "cmsGlassUpgrade";
+            this.cmsGlassUpgrade.Size = new System.Drawing.Size(108, 26);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // num_glassAmount
             // 
@@ -407,20 +423,6 @@
             this.label2.TabIndex = 17;
             this.label2.Text = "Windows / Doors: ";
             // 
-            // cmsGlassUpgrade
-            // 
-            this.cmsGlassUpgrade.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem});
-            this.cmsGlassUpgrade.Name = "cmsGlassUpgrade";
-            this.cmsGlassUpgrade.Size = new System.Drawing.Size(153, 48);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
             // GlassUpgradeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -448,9 +450,9 @@
             this._glassUpgToolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.glassUpgradeDGV)).EndInit();
+            this.cmsGlassUpgrade.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.num_glassAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_wdwsAndDoors)).EndInit();
-            this.cmsGlassUpgrade.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

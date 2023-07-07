@@ -3574,7 +3574,7 @@ namespace PresentationLayer.Presenter
             //    _basePlatformImagerUCPresenter.SendToBack_baseImager();
             //}
 
-            //IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel,this,_quotationModel,_unityC);
+            //IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
             //glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
 
         }
