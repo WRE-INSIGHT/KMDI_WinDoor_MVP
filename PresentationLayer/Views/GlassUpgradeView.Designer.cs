@@ -287,12 +287,15 @@
             // 
             this.cmb_glassType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmb_glassType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_glassType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_glassType.BackColor = System.Drawing.Color.WhiteSmoke;
             this.cmb_glassType.FormattingEnabled = true;
             this.cmb_glassType.Location = new System.Drawing.Point(90, 32);
             this.cmb_glassType.Name = "cmb_glassType";
             this.cmb_glassType.Size = new System.Drawing.Size(200, 21);
             this.cmb_glassType.TabIndex = 4;
+            this.cmb_glassType.SelectedValueChanged += new System.EventHandler(this.cmb_glassType_SelectedValueChanged);
             // 
             // lbl_Address
             // 
@@ -388,9 +391,9 @@
             // num_glassAmount
             // 
             this.num_glassAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.num_glassAmount.Location = new System.Drawing.Point(856, 457);
+            this.num_glassAmount.Location = new System.Drawing.Point(815, 457);
             this.num_glassAmount.Name = "num_glassAmount";
-            this.num_glassAmount.Size = new System.Drawing.Size(68, 20);
+            this.num_glassAmount.Size = new System.Drawing.Size(113, 20);
             this.num_glassAmount.TabIndex = 16;
             // 
             // label1
@@ -398,7 +401,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(768, 459);
+            this.label1.Location = new System.Drawing.Point(727, 459);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 13);
             this.label1.TabIndex = 15;
@@ -407,9 +410,9 @@
             // num_wdwsAndDoors
             // 
             this.num_wdwsAndDoors.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.num_wdwsAndDoors.Location = new System.Drawing.Point(856, 482);
+            this.num_wdwsAndDoors.Location = new System.Drawing.Point(815, 482);
             this.num_wdwsAndDoors.Name = "num_wdwsAndDoors";
-            this.num_wdwsAndDoors.Size = new System.Drawing.Size(68, 20);
+            this.num_wdwsAndDoors.Size = new System.Drawing.Size(113, 20);
             this.num_wdwsAndDoors.TabIndex = 18;
             // 
             // label2
@@ -417,7 +420,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(749, 484);
+            this.label2.Location = new System.Drawing.Point(708, 484);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 13);
             this.label2.TabIndex = 17;

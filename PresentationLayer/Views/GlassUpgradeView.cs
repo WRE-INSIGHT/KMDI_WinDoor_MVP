@@ -187,6 +187,7 @@ namespace PresentationLayer.Views
         public event EventHandler deleteToolStripMenuItem_ClickEventRaised;
         public event DataGridViewCellMouseEventHandler glassUpgradeDGV_ColumnHeaderMouseClickEventRaised;
         public event EventHandler glassUpgradeDGV_CellEndEditEventRaised;
+        public event EventHandler cmb_glassType_SelectedValueChangedEventRaised;
         #endregion
 
         private void GlassUpgradeView_Load(object sender, EventArgs e)
@@ -222,6 +223,11 @@ namespace PresentationLayer.Views
         private void glassUpgradeDGV_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             EventHelpers.RaiseEvent(sender, glassUpgradeDGV_CellEndEditEventRaised, e);
+        }
+
+        private void cmb_glassType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmb_glassType_SelectedValueChangedEventRaised, e);
         }
     }
 }

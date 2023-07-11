@@ -66,7 +66,7 @@ namespace PresentationLayer
         /// </summary>
         [STAThread]
         static void Main(string[] args)
-        {
+         {
             if (args != null && args.Length > 0)
             {
                 string filePath = args[0];
