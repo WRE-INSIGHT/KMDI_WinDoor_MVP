@@ -2372,7 +2372,8 @@ namespace ModelLayer.Model.Quotation
              ChckPlasticWedge = false,
              chckAlumPullHandle = false,
              check1stFrame = false,
-            chckPerFrameMotorMech = false;
+            chckPerFrameMotorMech = false,
+            OneSideFoil = false;
 
         string BOM_divDesc,
                HandleDesc,
@@ -2965,13 +2966,13 @@ namespace ModelLayer.Model.Quotation
         MeshPrice,
         MeshCost,
         #endregion
-                
-                            
+
+
                 BrushSealPricePerLinearMeter = 15.80m,
                 SealantPricePerCan_BrownBlack = 430m,
                 SealantPricePerCan_Clear = 170m,
                 PUFoamingPricePerCan = 210m,
-       
+
                 BrushSealPrice,
                 SealantPricePerCan,
                 SealantPrice,
@@ -5278,8 +5279,9 @@ namespace ModelLayer.Model.Quotation
         #region changeConditionBaseOnDate 
         DateTime changeCondition_040423 = DateTime.Parse("04-04-2023"); // Div_Width => Div_ExplosionWidth , 1pnlFS from 2d hinge => friction stay
         DateTime changeCondition_061423 = DateTime.Parse("06-14-2023"); // friction stay size => art#
-
-
+        // BAGUHIN BEFORE I PATCH -- color points
+        // 2d hinge for other sash art#
+        DateTime changeCondition_111111 = DateTime.Parse("11-11-1111");
 
         DateTime testDate = DateTime.Parse("06-16-2023");
 
@@ -5330,7 +5332,13 @@ namespace ModelLayer.Model.Quotation
 
                     foreach (IFrameModel fr in wdm.lst_frame)
                     {
-                        #region baseOnDimensionAndColorPointsif
+                        #region baseOnDimensionAndColorPointsif 
+                        if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                    (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                        {
+                            OneSideFoil = true;
+                        }
+
                         if (fr.Frame_ArtNo != FrameProfile_ArticleNo._6050 &&
                             fr.Frame_ArtNo != FrameProfile_ArticleNo._6052 &&
                             fr.Frame_ArtNo != FrameProfile_ArticleNo._2060)
@@ -5356,6 +5364,33 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 18;
                                 }
 
+                                if (cus_ref_date <= changeCondition_111111)
+                                {
+                                    if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
+                                    {
+                                        ProfileColorPoints = 18;
+                                    }
+                                    else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
+                                    {
+                                        ProfileColorPoints = 16;
+                                    }
+                                }
+
+                                if (OneSideFoil == true &&
+                                    cus_ref_date <= changeCondition_111111)
+                                {
+                                    ProfileColorPoints = 13.5m;
+
+                                    if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
+                                    {
+                                        ProfileColorPoints = 19;
+                                    }
+                                    else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
+                                    {
+                                        ProfileColorPoints = 17;
+                                    }
+                                }
+
                                 //CostingPoints += ProfileColorPoints * 4;
                                 //InstallationPoints += (ProfileColorPoints / 3) * 4;
                             }
@@ -5378,6 +5413,18 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     ProfileColorPoints = 19;
                                 }
+
+                                if (cus_ref_date <= changeCondition_111111)
+                                {
+                                    if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
+                                    {
+                                        ProfileColorPoints = 19;
+                                    }
+                                    else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
+                                    {
+                                        ProfileColorPoints = 18;
+                                    }
+                                }
                             }
                         }
                         else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
@@ -5386,11 +5433,7 @@ namespace ModelLayer.Model.Quotation
                             {
                                 ProfileColorPoints = 16;
 
-                                if (fr.Frame_Width >= 5000)
-                                {
-                                    ProfileColorPoints = 19;
-                                }
-                                else if (fr.Frame_Height >= 5000)
+                                if (fr.Frame_Width >= 5000 || fr.Frame_Height >= 5000)
                                 {
                                     ProfileColorPoints = 19;
                                 }
@@ -5399,11 +5442,7 @@ namespace ModelLayer.Model.Quotation
                             {
                                 ProfileColorPoints = 18;
 
-                                if (fr.Frame_Width >= 5000)
-                                {
-                                    ProfileColorPoints = 21;
-                                }
-                                else if (fr.Frame_Height >= 5000)
+                                if (fr.Frame_Width >= 5000 || fr.Frame_Height >= 5000)
                                 {
                                     ProfileColorPoints = 21;
                                 }
@@ -5416,11 +5455,7 @@ namespace ModelLayer.Model.Quotation
                                 //ProfileColorPoints = 49;
                                 ProfileColorPoints = 34;
 
-                                if (fr.Frame_Width >= 5000)
-                                {
-                                    ProfileColorPoints = 37;
-                                }
-                                else if (fr.Frame_Height >= 5000)
+                                if (fr.Frame_Width >= 5000 || fr.Frame_Height >= 5000)
                                 {
                                     ProfileColorPoints = 37;
                                 }
@@ -5430,11 +5465,7 @@ namespace ModelLayer.Model.Quotation
                                 //ProfileColorPoints = 51;
                                 ProfileColorPoints = 37;
 
-                                if (fr.Frame_Width >= 5000)
-                                {
-                                    ProfileColorPoints = 40;
-                                }
-                                else if (fr.Frame_Height >= 5000)
+                                if (fr.Frame_Width >= 5000 || fr.Frame_Height >= 5000)
                                 {
                                     ProfileColorPoints = 40;
                                 }
@@ -5463,6 +5494,17 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 16;
                                 }
 
+                                if (cus_ref_date <= changeCondition_111111)
+                                {
+                                    if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
+                                    {
+                                        ProfileColorPoints = 16;
+                                    }
+                                    else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
+                                    {
+                                        ProfileColorPoints = 14;
+                                    }
+                                }
                                 //CostingPoints += ProfileColorPoints * 4;
                                 //InstallationPoints += (ProfileColorPoints / 3) * 4;
                             }
@@ -5484,6 +5526,18 @@ namespace ModelLayer.Model.Quotation
                                 else if (fr.Frame_Height >= 3000)
                                 {
                                     ProfileColorPoints = 17;
+                                }
+
+                                if (cus_ref_date <= changeCondition_111111)
+                                {
+                                    if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
+                                    {
+                                        ProfileColorPoints = 17;
+                                    }
+                                    else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
+                                    {
+                                        ProfileColorPoints = 16;
+                                    }
                                 }
                             }
                         }
