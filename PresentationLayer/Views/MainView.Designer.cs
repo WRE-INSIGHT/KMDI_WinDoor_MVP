@@ -92,10 +92,11 @@
             this.tsb_Redo = new System.Windows.Forms.ToolStripButton();
             this.tsprogress_Loading = new System.Windows.Forms.ToolStripProgressBar();
             this.deleteItemToolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.PriceHistorytoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tsp_Sync = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
-            this.PriceHistorytoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.DateAssignedtoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.SortItemtoolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -538,10 +539,11 @@
             this.tsb_Redo,
             this.tsprogress_Loading,
             this.deleteItemToolStripButton1,
+            this.PriceHistorytoolStripButton,
             this.tsp_Sync,
             this.tsLbl_Loading,
             this.tsLbl_Status,
-            this.PriceHistorytoolStripButton});
+            this.DateAssignedtoolStripButton});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -733,6 +735,17 @@
             this.deleteItemToolStripButton1.ToolTipText = "Delete item";
             this.deleteItemToolStripButton1.Click += new System.EventHandler(this.deleteItemToolStripButton1_Click);
             // 
+            // PriceHistorytoolStripButton
+            // 
+            this.PriceHistorytoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.PriceHistorytoolStripButton.Enabled = false;
+            this.PriceHistorytoolStripButton.Image = global::PresentationLayer.Properties.Resources.icons8_history_64;
+            this.PriceHistorytoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.PriceHistorytoolStripButton.Name = "PriceHistorytoolStripButton";
+            this.PriceHistorytoolStripButton.Size = new System.Drawing.Size(24, 29);
+            this.PriceHistorytoolStripButton.Text = "Price History";
+            this.PriceHistorytoolStripButton.Click += new System.EventHandler(this.PriceHistorytoolStripButton_Click);
+            // 
             // tsp_Sync
             // 
             this.tsp_Sync.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -766,16 +779,16 @@
             this.tsLbl_Status.Text = "TransomUC_1 Selected";
             this.tsLbl_Status.Visible = false;
             // 
-            // PriceHistorytoolStripButton
+            // DateAssignedtoolStripButton
             // 
-            this.PriceHistorytoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.PriceHistorytoolStripButton.Image = global::PresentationLayer.Properties.Resources.icons8_history_64;
-            this.PriceHistorytoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.PriceHistorytoolStripButton.Name = "PriceHistorytoolStripButton";
-            this.PriceHistorytoolStripButton.Size = new System.Drawing.Size(24, 29);
-            this.PriceHistorytoolStripButton.Text = "Price History";
-            this.PriceHistorytoolStripButton.Visible = false;
-            this.PriceHistorytoolStripButton.Click += new System.EventHandler(this.PriceHistorytoolStripButton_Click);
+            this.DateAssignedtoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DateAssignedtoolStripButton.Enabled = false;
+            this.DateAssignedtoolStripButton.Image = global::PresentationLayer.Properties.Resources.calendar_icon_hand_circles_date_calendar_logo_template_deadline_concept_illustration_168129_210__1_;
+            this.DateAssignedtoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DateAssignedtoolStripButton.Name = "DateAssignedtoolStripButton";
+            this.DateAssignedtoolStripButton.Size = new System.Drawing.Size(24, 29);
+            this.DateAssignedtoolStripButton.Text = "Date Assigned";
+            this.DateAssignedtoolStripButton.Click += new System.EventHandler(this.DateAssignedtoolStripButton_Click);
             // 
             // pnlRight
             // 
@@ -1185,5 +1198,6 @@
         private System.Windows.Forms.ToolStripButton ScreentoolStripButton;
         private System.Windows.Forms.ToolStripMenuItem changeItemDimensionToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton PriceHistorytoolStripButton;
+        private System.Windows.Forms.ToolStripButton DateAssignedtoolStripButton;
     }
 }

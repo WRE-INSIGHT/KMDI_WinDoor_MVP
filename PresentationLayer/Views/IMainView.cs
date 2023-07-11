@@ -47,11 +47,13 @@ namespace PresentationLayer.Views
         event MouseEventHandler PanelMainMouseWheelRaiseEvent;
         event EventHandler MainViewClosedEventRaised;
         event EventHandler PriceHistorytoolStripButtonClickEventRaised;
+        event EventHandler DateAssignedtoolStripButtonClickEventRaised;
 
         string mainview_title { get; set; }
         float Zoom { get; set; }
         bool ItemToolStripEnabled { get; set; }
         bool PriceHistorytoolStripButtonVisible { get; set; }
+        bool DateAssignedtoolStripButtonVisible { get; set; }
         bool CreateNewWindoorBtnEnabled { get; set; }
         int PropertiesScroll { get; set; }
         int ItemScroll { get; set; }

@@ -42,6 +42,8 @@ namespace ModelLayer.Model.Quotation
         public int Plastic_CoverQty_Total { get; set; }
         public decimal PricingFactor { get; set; }
         public DateTime Date_Assigned { get; set; }
+        public DateTime Date_Assigned_Mainpresenter { get; set; }
+
         public string Customer_Ref_Number { get; set; }
         public BillOfMaterialsFilter BOM_Filter { get; set; }
         public bool BOM_Status { get; set; }
@@ -2994,10 +2996,18 @@ namespace ModelLayer.Model.Quotation
         #endregion
 
         #region changePriceBasedOnDate
-
+        DateTime cus_ref_date;
         public void changePriceBasedonDate()
         {
-            var cus_ref_date = Date_Assigned;
+            cus_ref_date = Date_Assigned;
+
+            if (Date_Assigned != Date_Assigned_Mainpresenter)
+            {
+                cus_ref_date = Date_Assigned_Mainpresenter;
+            }
+
+            Console.WriteLine(Date_Assigned);
+            Console.WriteLine(Date_Assigned_Mainpresenter);
 
             DateTime _junedateoldago = DateTime.Parse("06-04-2023");
 
@@ -5831,7 +5841,7 @@ namespace ModelLayer.Model.Quotation
                                                 DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
                                             }
 
-                                            if (Date_Assigned <= changeCondition_040423)
+                                            if (cus_ref_date <= changeCondition_040423)
                                             {
                                                 DivPrice += ((div.Div_Width) / 1000m) * DividerPricePerSqrMeter;
                                             }
@@ -5963,7 +5973,7 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                                 else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                                 {
-                                                    if (Date_Assigned <= changeCondition_061423)
+                                                    if (cus_ref_date <= changeCondition_061423)
                                                     {
                                                         if (pnl.Panel_SashHeight >= 800)
                                                         {
@@ -6159,11 +6169,11 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 _2DHingePrice += _2DHingePricePerPiece * pnl.Panel_2DHingeQty_nonMotorized;
                                             }
-                                            else if (Date_Assigned <= changeCondition_040423)
+                                            else if (cus_ref_date <= changeCondition_040423)
                                             {
                                                 if (pnl.Panel_HingeOptions == HingeOption._2DHinge)
                                                 {
-                                                    if (Date_Assigned <= changeCondition_061423)
+                                                    if (cus_ref_date <= changeCondition_061423)
                                                     {
                                                         #region FSPrice
                                                         if (pnl.Panel_SashHeight >= 800)
@@ -6207,7 +6217,7 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                             {
-                                                if (Date_Assigned <= changeCondition_061423)
+                                                if (cus_ref_date <= changeCondition_061423)
                                                 {
                                                     #region FSPrice
                                                     if (pnl.Panel_SashHeight >= 800)
@@ -9233,7 +9243,7 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                         {
-                                            if (Date_Assigned <= changeCondition_061423)
+                                            if (cus_ref_date <= changeCondition_061423)
                                             {
                                                 if (Singlepnl.Panel_SashHeight >= 800)
                                                 {
@@ -9411,11 +9421,11 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         _2DHingePrice += _2DHingePricePerPiece * Singlepnl.Panel_2DHingeQty_nonMotorized;
                                     }
-                                    else if (Date_Assigned <= changeCondition_040423)
+                                    else if (cus_ref_date <= changeCondition_040423)
                                     {
                                         if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge)
                                         {
-                                            if (Date_Assigned <= changeCondition_061423) // Date_Assigned
+                                            if (cus_ref_date <= changeCondition_061423) // Date_Assigned
                                             {
                                                 #region FSPrice
                                                 if (Singlepnl.Panel_SashHeight >= 800)
@@ -9458,7 +9468,7 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                     {
-                                        if (Date_Assigned <= changeCondition_061423) // Date_Assigned
+                                        if (cus_ref_date <= changeCondition_061423) // Date_Assigned
                                         {
                                             #region FSPrice
                                             if (Singlepnl.Panel_SashHeight >= 800)

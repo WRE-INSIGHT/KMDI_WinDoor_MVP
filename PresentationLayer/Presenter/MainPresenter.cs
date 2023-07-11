@@ -993,6 +993,39 @@ namespace PresentationLayer.Presenter
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
             _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
             _mainView.PriceHistorytoolStripButtonClickEventRaised += _mainView_PriceHistorytoolStripButtonClickEventRaised;
+            _mainView.DateAssignedtoolStripButtonClickEventRaised += _mainView_DateAssignedtoolStripButtonClickEventRaised;
+        }
+
+        private void _mainView_DateAssignedtoolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                string input = Interaction.InputBox("Set new date \n\n MM/DD/YYYY", "Date Assign", dateAssigned.Date.ToString().Replace(" 12:00:00 AM", string.Empty));
+
+                DateTime myDate = DateTime.Parse(input);
+
+                _quotationModel.Date_Assigned_Mainpresenter = myDate;
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == -2146233033)
+                {
+                    MessageBox.Show("Please input a correct date format.");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, ex.HResult.ToString());
+                }
+            }
+
+
+            //DateTime myDate;
+            //if (!DateTime.TryParse("03/16/23", out myDate))
+            //{
+            //    // handle parse failure
+            //    Console.WriteLine("mali ka");
+            //}
+
         }
 
         private void _mainView_PriceHistorytoolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -3425,14 +3458,13 @@ namespace PresentationLayer.Presenter
             if (_userModel.AccountType == "User Level 1")
             {
                 _mainView.PriceHistorytoolStripButtonVisible = true;
+                _mainView.DateAssignedtoolStripButtonVisible = true;
             }
             else
             {
                 _mainView.PriceHistorytoolStripButtonVisible = false;
+                _mainView.DateAssignedtoolStripButtonVisible = false;
             }
-
-
-
 
             _mainView.GetCurrentPrice().Maximum = decimal.MaxValue;
             _mainView.GetCurrentPrice().DecimalPlaces = 2;
@@ -10203,6 +10235,8 @@ namespace PresentationLayer.Presenter
                         _quotationModel = _quotationServices.AddQuotationModel(input_qrefno, _quotationDate, _quoteId);
                         _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                         _quotationModel.Date_Assigned = dateAssigned;
+                        _quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
+
                         SetPricingFactor();
 
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
