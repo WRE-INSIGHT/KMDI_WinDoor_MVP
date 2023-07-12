@@ -50,7 +50,7 @@ namespace ModelLayer.Model.Quotation
         public string BOMandItemlistStatus { get; set; }
         public bool itemSelectStatus { get; set; }
         public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
-        
+
 
 
 
@@ -3692,7 +3692,7 @@ namespace ModelLayer.Model.Quotation
                     DividerRein_7536_PricePerSqrMeter = 406.86m;
 
                 }
-                else if(cus_ref_date >= inc_price_date_6)
+                else if (cus_ref_date >= inc_price_date_6)
                 {
                     FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
                     FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
@@ -3812,20 +3812,20 @@ namespace ModelLayer.Model.Quotation
                                     }
                                 }
 
-                                if (OneSideFoil == true &&
-                                    cus_ref_date <= changeCondition_111111)
-                                {
-                                    ProfileColorPoints = 13.5m;
+                                //if (OneSideFoil == true &&
+                                //    cus_ref_date <= changeCondition_111111)
+                                //{
+                                //    ProfileColorPoints = 13.5m;
 
-                                    if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
-                                    {
-                                        ProfileColorPoints = 19;
-                                    }
-                                    else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
-                                    {
-                                        ProfileColorPoints = 17;
-                                    }
-                                }
+                                //    if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
+                                //    {
+                                //        ProfileColorPoints = 19;
+                                //    }
+                                //    else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
+                                //    {
+                                //        ProfileColorPoints = 17;
+                                //    }
+                                //}
 
                                 //CostingPoints += ProfileColorPoints * 4;
                                 //InstallationPoints += (ProfileColorPoints / 3) * 4;
