@@ -1002,9 +1002,17 @@ namespace PresentationLayer.Presenter
             {
                 string input = Interaction.InputBox("Set new date \n\n MM/DD/YYYY", "Date Assign", dateAssigned.Date.ToString().Replace(" 12:00:00 AM", string.Empty));
 
-                DateTime myDate = DateTime.Parse(input);
+                if (input == "")
+                {
 
-                _quotationModel.Date_Assigned_Mainpresenter = myDate;
+                }
+                else
+                {
+                    DateTime myDate = DateTime.Parse(input);
+
+                    _quotationModel.Date_Assigned_Mainpresenter = myDate;
+                }
+                
             }
             catch (Exception ex)
             {

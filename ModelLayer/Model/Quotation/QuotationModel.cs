@@ -3007,9 +3007,6 @@ namespace ModelLayer.Model.Quotation
                 cus_ref_date = Date_Assigned_Mainpresenter;
             }
 
-            Console.WriteLine(Date_Assigned);
-            Console.WriteLine(Date_Assigned_Mainpresenter);
-
             DateTime _junedateoldago = DateTime.Parse("06-04-2023");
 
             DateTime inc_price_date = DateTime.Parse("10-15-2022");
@@ -3017,7 +3014,7 @@ namespace ModelLayer.Model.Quotation
             DateTime inc_price_date_3 = DateTime.Parse("05-11-2023");// waterseepage
             DateTime inc_price_date_4 = DateTime.Parse("05-26-2023");//Double //Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe 
             DateTime inc_price_date_5 = DateTime.Parse("06-22-2023");//6052 white and woodgrain frame,  DividerRein_7536_PricePerSqrMeter
-            DateTime inc_price_date_6 = DateTime.Parse("11-11-1111");//change, patch date
+            DateTime inc_price_date_6 = DateTime.Parse("07-18-2023");//change, patch date
 
 
             if (cus_ref_date >= inc_price_date && cus_ref_date <= _junedateoldago)
@@ -3716,11 +3713,10 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_033023 = DateTime.Parse("03-30-2023"); // for 2d hinge to FS 1pnl
         DateTime changeCondition_040423 = DateTime.Parse("04-04-2023"); // Div_Width => Div_ExplosionWidth , 1pnlFS from 2d hinge => friction stay
         DateTime changeCondition_061423 = DateTime.Parse("06-14-2023"); // friction stay size => art#
-        // BAGUHIN BEFORE I PATCH -- color points
-        // 2d hinge for other sash art#
-        DateTime changeCondition_111111 = DateTime.Parse("11-11-1111");
 
-        DateTime testDate = DateTime.Parse("06-16-2023");
+        DateTime changeCondition_071823 = DateTime.Parse("07-18-2023");
+
+        DateTime testDate = DateTime.Parse("07-11-2023");
 
         #endregion
 
@@ -3801,7 +3797,7 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 18;
                                 }
 
-                                if (cus_ref_date <= changeCondition_111111)
+                                if (cus_ref_date >= changeCondition_071823)
                                 {
                                     if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
                                     {
@@ -3851,7 +3847,7 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 19;
                                 }
 
-                                if (cus_ref_date <= changeCondition_111111)
+                                if (cus_ref_date >= changeCondition_071823)
                                 {
                                     if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
                                     {
@@ -3931,7 +3927,7 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 16;
                                 }
 
-                                if (cus_ref_date <= changeCondition_111111)
+                                if (cus_ref_date >= changeCondition_071823)
                                 {
                                     if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
                                     {
@@ -3965,7 +3961,7 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 17;
                                 }
 
-                                if (cus_ref_date <= changeCondition_111111)
+                                if (cus_ref_date >= changeCondition_071823)
                                 {
                                     if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
                                     {
@@ -4675,7 +4671,7 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                                 #endregion
                                             }
-                                            else if (cus_ref_date > changeCondition_033023 && 
+                                            else if (cus_ref_date > changeCondition_033023 &&
                                                      cus_ref_date <= changeCondition_040423)
                                             {
                                                 if (pnl.Panel_HingeOptions == HingeOption._2DHinge)
@@ -7962,9 +7958,9 @@ namespace ModelLayer.Model.Quotation
                                                     FSBasePrice = FS_16HD_casementPricePerPiece;
                                                 }
                                                 #endregion
-                                            } 
+                                            }
                                         }
-                                    } 
+                                    }
                                     else if (Date_Assigned >= changeCondition_040423 && Date_Assigned < changeCondition_061423)
                                     {
                                         if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
