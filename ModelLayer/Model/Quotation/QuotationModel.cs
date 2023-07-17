@@ -4421,7 +4421,7 @@ namespace ModelLayer.Model.Quotation
                                                     DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
                                                 }
 
-                                                if (Date_Assigned <= changeCondition_040423)
+                                                if (cus_ref_date <= changeCondition_040423)
                                                 {
                                                     DivPrice += ((div.Div_Height) / 1000m) * DividerPricePerSqrMeter;
                                                 }
@@ -4660,7 +4660,23 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 _2DHingePrice += _2DHingePricePerPiece * pnl.Panel_2DHingeQty_nonMotorized;
                                             }
-                                            else if (cus_ref_date <= changeCondition_040423)
+                                            else if (cus_ref_date < changeCondition_033023)
+                                            {
+                                                #region FSPrice
+                                                if (pnl.Panel_SashHeight >= 800)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
+                                                else
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                }
+                                                #endregion
+                                            }
+                                            else if (cus_ref_date > changeCondition_033023 && 
+                                                     cus_ref_date <= changeCondition_040423)
                                             {
                                                 if (pnl.Panel_HingeOptions == HingeOption._2DHinge)
                                                 {
@@ -7912,7 +7928,23 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         _2DHingePrice += _2DHingePricePerPiece * Singlepnl.Panel_2DHingeQty_nonMotorized;
                                     }
-                                    else if (cus_ref_date <= changeCondition_040423)
+                                    else if (cus_ref_date < changeCondition_033023)
+                                    {
+                                        #region FSPrice
+                                        if (Singlepnl.Panel_SashHeight >= 800)
+                                        {
+                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                        }
+                                        else
+                                        {
+                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                        }
+                                        #endregion
+                                    }
+                                    else if (cus_ref_date >= changeCondition_033023 &&
+                                             cus_ref_date <= changeCondition_040423)
                                     {
                                         if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge)
                                         {
@@ -7930,69 +7962,9 @@ namespace ModelLayer.Model.Quotation
                                                     FSBasePrice = FS_16HD_casementPricePerPiece;
                                                 }
                                                 #endregion
-                                            }
-                                            else
-                                            {
-                                                #region FSPrice
-                                                if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
-                                                    Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
-                                                {
-                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
-
-                                                    if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
-                                                    {
-                                                        SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
-                                                    }
-                                                }
-                                                else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
-                                                         Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
-                                                         Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
-                                                         Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
-                                                {
-                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
-                                                }
-                                                #endregion
-                                            }
+                                            } 
                                         }
-                                    }
-                                    else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
-                                    {
-                                        if (cus_ref_date <= changeCondition_061423) // Date_Assigned
-                                        {
-                                            #region FSPrice
-                                            if (Singlepnl.Panel_SashHeight >= 800)
-                                            {
-                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_26HD_casementPricePerPiece;
-                                            }
-                                            else
-                                            {
-                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_16HD_casementPricePerPiece;
-                                            }
-                                            #endregion
-                                        }
-                                    }
-                                    else if (Date_Assigned >= changeCondition_033023 && Date_Assigned < changeCondition_040423)
-                                    {
-                                        if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge)
-                                        {
-                                            #region FSPrice
-                                            if (Singlepnl.Panel_SashHeight >= 800)
-                                            {
-                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_26HD_casementPricePerPiece;
-                                            }
-                                            else
-                                            {
-                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_16HD_casementPricePerPiece;
-                                            }
-                                            #endregion
-                                        }
-                                    }
+                                    } 
                                     else if (Date_Assigned >= changeCondition_040423 && Date_Assigned < changeCondition_061423)
                                     {
                                         if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)

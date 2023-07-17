@@ -4039,7 +4039,7 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
                         _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                         _quotationModel.Date_Assigned = dateAssigned;
-
+                        _quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
                     }
                     else if (row_str.Contains("Frame_PUFoamingQty_Total"))
                     {
