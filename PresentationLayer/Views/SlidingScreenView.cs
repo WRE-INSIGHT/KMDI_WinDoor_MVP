@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views
 {
-    public partial class SlidingScreenView : Form, ISlidingScreenView
+    public partial class SlidingScreenView : Form
     {
         public SlidingScreenView()
         {

@@ -84,6 +84,19 @@ namespace PresentationLayer.Views
             }
         }
 
+        public bool PriceHistorytoolStripButtonVisible
+        {
+            get
+            {
+                return PriceHistorytoolStripButton.Visible;
+            }
+
+            set
+            {
+                PriceHistorytoolStripButton.Visible = value;
+            }
+        }
+
         private float _zoom;
         public float Zoom
         {
@@ -256,6 +269,7 @@ namespace PresentationLayer.Views
         public event EventHandler setNewFactorEventRaised;
         public event MouseEventHandler PanelMainMouseWheelRaiseEvent;
         public event EventHandler MainViewClosedEventRaised;
+        public event EventHandler PriceHistorytoolStripButtonClickEventRaised;
         public MainView()
         {
             InitializeComponent();
@@ -660,6 +674,10 @@ namespace PresentationLayer.Views
                 {
                     CreateNewItem_Clicked(G58ToolStripMenuItem, e);
                 }
+                else if (e.Control == true && e.KeyCode == Keys.B)
+                {
+                    billOfMaterialToolStripMenuItem_Click(sender, e);
+                }
             }
             if (e.Control == true && e.KeyCode == Keys.O)
             {
@@ -677,6 +695,9 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseFormClosingEvent(sender, MainViewClosingEventRaised, e);
         }
 
-
+        private void PriceHistorytoolStripButton_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, PriceHistorytoolStripButtonClickEventRaised, e);
+        }
     }
 }

@@ -757,7 +757,6 @@
             this.Controls.Add(this.pnl_footer);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SlidingScreenView";
-            this.Text = "  ";
             this.Load += new System.EventHandler(this.SlidingScreenView_Load);
             this.pnl_header.ResumeLayout(false);
             this.pnl_windoor.ResumeLayout(false);
