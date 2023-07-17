@@ -113,6 +113,17 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap calendar_icon_hand_circles_date_calendar_logo_template_deadline_concept_illustration_168129_210__1_ {
+            get {
+                object obj = ResourceManager.GetObject("calendar-icon-hand-circles-date-calendar-logo-template-deadline-concept-illustrat" +
+                        "ion_168129-210 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cancel_30px {
             get {
                 object obj = ResourceManager.GetObject("cancel_30px", resourceCulture);
