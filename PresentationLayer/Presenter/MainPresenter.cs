@@ -3608,8 +3608,8 @@ namespace PresentationLayer.Presenter
             //    _basePlatformImagerUCPresenter.SendToBack_baseImager();
             //}
 
-            IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
-            glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
+            //IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
+            //glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
 
         }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -4012,6 +4012,10 @@ namespace PresentationLayer.Presenter
                     {
                         _dateAssigned = Convert.ToDateTime(extractedValue_str);
                     }
+                    else if (row_str.Contains("Date_Assigned_Mainpresenter:"))
+                    {
+                        _quotationModel.Date_Assigned_Mainpresenter = Convert.ToDateTime(extractedValue_str);
+                    }
                     else if (row_str.Contains("AEIC:"))
                     {
                         _aeic = extractedValue_str;
@@ -4039,7 +4043,7 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
                         _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                         _quotationModel.Date_Assigned = dateAssigned;
-                        _quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
+                        //_quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
                     }
                     else if (row_str.Contains("Frame_PUFoamingQty_Total"))
                     {
