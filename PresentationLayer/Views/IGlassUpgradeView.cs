@@ -25,6 +25,10 @@ namespace PresentationLayer.Views
         event DataGridViewCellMouseEventHandler glassUpgradeDGV_ColumnHeaderMouseClickEventRaised;
         event EventHandler glassUpgradeDGV_CellEndEditEventRaised;
         event EventHandler cmb_glassType_SelectedValueChangedEventRaised;
+        event DataGridViewCellMouseEventHandler glassUpgradeDGV_CellMouseClickEventRaised;
+        event EventHandler chkbx_selectall_CheckedChangedEventRaised;
+
+
 
         void CloseGlassUpgradeView();
         ComboBox GlassTypeCmb();
@@ -33,6 +37,7 @@ namespace PresentationLayer.Views
         Form GlassUpgraedViewForm();
 
         Panel ItemDescriptionPnl();
+        CheckBox SelectAllItems();
         void ShowGlassUpgradeView();
     }
 }

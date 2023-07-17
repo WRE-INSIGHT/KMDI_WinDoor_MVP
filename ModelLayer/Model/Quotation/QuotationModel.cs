@@ -3005,7 +3005,7 @@ namespace ModelLayer.Model.Quotation
             //DateTime inc_price_date_2 = DateTime.Parse("05-04-2023");//waterseepage 
             DateTime inc_price_date_3 = DateTime.Parse("05-11-2023");// waterseepage
             DateTime inc_price_date_4 = DateTime.Parse("05-26-2023");//Double //Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe 
-            DateTime inc_price_date_5 = DateTime.Parse("06-22-2023");//6052 white and woodgrain frame 
+            DateTime inc_price_date_5 = DateTime.Parse("06-22-2023");//6052 white and woodgrain frame,  DividerRein_7536_PricePerSqrMeter
             DateTime inc_price_date_6 = DateTime.Parse("11-11-1111");//change, patch date
 
 

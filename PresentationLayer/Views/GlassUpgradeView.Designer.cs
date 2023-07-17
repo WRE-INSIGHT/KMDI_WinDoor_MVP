@@ -62,6 +62,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.num_wdwsAndDoors = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
+            this.chkbx_selectall = new System.Windows.Forms.CheckBox();
             this.panel_Header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_discount)).BeginInit();
             this.pnl_desc.SuspendLayout();
@@ -77,6 +78,7 @@
             // panel_Header
             // 
             this.panel_Header.BackColor = System.Drawing.SystemColors.Window;
+            this.panel_Header.Controls.Add(this.chkbx_selectall);
             this.panel_Header.Controls.Add(this.btn_add);
             this.panel_Header.Controls.Add(this.lbl_discount);
             this.panel_Header.Controls.Add(this.num_discount);
@@ -108,9 +110,9 @@
             this.btn_add.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_add.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btn_add.Location = new System.Drawing.Point(834, 107);
+            this.btn_add.Location = new System.Drawing.Point(831, 130);
             this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(96, 23);
+            this.btn_add.Size = new System.Drawing.Size(98, 23);
             this.btn_add.TabIndex = 20;
             this.btn_add.Text = "Add To List";
             this.btn_add.UseVisualStyleBackColor = true;
@@ -132,6 +134,7 @@
             this.num_discount.Name = "num_discount";
             this.num_discount.Size = new System.Drawing.Size(68, 20);
             this.num_discount.TabIndex = 14;
+            this.num_discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // pnl_desc
             // 
@@ -176,9 +179,9 @@
             // 
             this.chkbx_ItemList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkbx_ItemList.FormattingEnabled = true;
-            this.chkbx_ItemList.Location = new System.Drawing.Point(834, 26);
+            this.chkbx_ItemList.Location = new System.Drawing.Point(831, 49);
             this.chkbx_ItemList.Name = "chkbx_ItemList";
-            this.chkbx_ItemList.Size = new System.Drawing.Size(96, 79);
+            this.chkbx_ItemList.Size = new System.Drawing.Size(98, 79);
             this.chkbx_ItemList.TabIndex = 16;
             this.chkbx_ItemList.SelectedValueChanged += new System.EventHandler(this.chkbx_ItemList_SelectedValueChanged);
             // 
@@ -287,14 +290,14 @@
             // 
             this.cmb_glassType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmb_glassType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_glassType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_glassType.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cmb_glassType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_glassType.FormattingEnabled = true;
             this.cmb_glassType.Location = new System.Drawing.Point(90, 32);
             this.cmb_glassType.Name = "cmb_glassType";
             this.cmb_glassType.Size = new System.Drawing.Size(200, 21);
-            this.cmb_glassType.TabIndex = 4;
+            this.cmb_glassType.TabIndex = 10;
             this.cmb_glassType.SelectedValueChanged += new System.EventHandler(this.cmb_glassType_SelectedValueChanged);
             // 
             // lbl_Address
@@ -372,6 +375,7 @@
             this.glassUpgradeDGV.Size = new System.Drawing.Size(932, 257);
             this.glassUpgradeDGV.TabIndex = 0;
             this.glassUpgradeDGV.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.glassUpgradeDGV_CellEndEdit);
+            this.glassUpgradeDGV.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.glassUpgradeDGV_CellMouseClick);
             this.glassUpgradeDGV.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.glassUpgradeDGV_ColumnHeaderMouseClick);
             // 
             // cmsGlassUpgrade
@@ -395,6 +399,7 @@
             this.num_glassAmount.Name = "num_glassAmount";
             this.num_glassAmount.Size = new System.Drawing.Size(113, 20);
             this.num_glassAmount.TabIndex = 16;
+            this.num_glassAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
             // 
@@ -414,6 +419,7 @@
             this.num_wdwsAndDoors.Name = "num_wdwsAndDoors";
             this.num_wdwsAndDoors.Size = new System.Drawing.Size(113, 20);
             this.num_wdwsAndDoors.TabIndex = 18;
+            this.num_wdwsAndDoors.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2
             // 
@@ -425,6 +431,18 @@
             this.label2.Size = new System.Drawing.Size(103, 13);
             this.label2.TabIndex = 17;
             this.label2.Text = "Windows / Doors: ";
+            // 
+            // chkbx_selectall
+            // 
+            this.chkbx_selectall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkbx_selectall.AutoSize = true;
+            this.chkbx_selectall.Location = new System.Drawing.Point(834, 29);
+            this.chkbx_selectall.Name = "chkbx_selectall";
+            this.chkbx_selectall.Size = new System.Drawing.Size(70, 17);
+            this.chkbx_selectall.TabIndex = 21;
+            this.chkbx_selectall.Text = "Select All";
+            this.chkbx_selectall.UseVisualStyleBackColor = true;
+            this.chkbx_selectall.CheckedChanged += new System.EventHandler(this.chkbx_selectall_CheckedChanged);
             // 
             // GlassUpgradeView
             // 
@@ -494,5 +512,6 @@
         private System.Windows.Forms.Button btn_add;
         private System.Windows.Forms.ContextMenuStrip cmsGlassUpgrade;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.CheckBox chkbx_selectall;
     }
 }

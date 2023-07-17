@@ -51,6 +51,10 @@ namespace PresentationLayer.Views
         {
             return pnl_desc;
         }
+        public CheckBox SelectAllItems()
+        {
+            return chkbx_selectall;
+        }
 
         public Label AENameAndPosLbl
         {
@@ -188,6 +192,10 @@ namespace PresentationLayer.Views
         public event DataGridViewCellMouseEventHandler glassUpgradeDGV_ColumnHeaderMouseClickEventRaised;
         public event EventHandler glassUpgradeDGV_CellEndEditEventRaised;
         public event EventHandler cmb_glassType_SelectedValueChangedEventRaised;
+        public event DataGridViewCellMouseEventHandler glassUpgradeDGV_CellMouseClickEventRaised;
+        public event EventHandler chkbx_selectall_CheckedChangedEventRaised;
+
+
         #endregion
 
         private void GlassUpgradeView_Load(object sender, EventArgs e)
@@ -228,6 +236,16 @@ namespace PresentationLayer.Views
         private void cmb_glassType_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmb_glassType_SelectedValueChangedEventRaised, e);
+        }
+
+        private void glassUpgradeDGV_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            EventHelpers.RaiseDatagridviewCellMouseEvent(sender, glassUpgradeDGV_CellMouseClickEventRaised, e);
+        }
+
+        private void chkbx_selectall_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbx_selectall_CheckedChangedEventRaised, e);
         }
     }
 }
