@@ -30,8 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GlassUpgradeView));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel_Header = new System.Windows.Forms.Panel();
+            this.chkbx_selectall = new System.Windows.Forms.CheckBox();
             this.btn_add = new System.Windows.Forms.Button();
             this.lbl_discount = new System.Windows.Forms.Label();
             this.num_discount = new System.Windows.Forms.NumericUpDown();
@@ -62,7 +63,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.num_wdwsAndDoors = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.chkbx_selectall = new System.Windows.Forms.CheckBox();
             this.panel_Header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_discount)).BeginInit();
             this.pnl_desc.SuspendLayout();
@@ -104,6 +104,18 @@
             this.panel_Header.Name = "panel_Header";
             this.panel_Header.Size = new System.Drawing.Size(932, 192);
             this.panel_Header.TabIndex = 0;
+            // 
+            // chkbx_selectall
+            // 
+            this.chkbx_selectall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkbx_selectall.AutoSize = true;
+            this.chkbx_selectall.Location = new System.Drawing.Point(834, 29);
+            this.chkbx_selectall.Name = "chkbx_selectall";
+            this.chkbx_selectall.Size = new System.Drawing.Size(70, 17);
+            this.chkbx_selectall.TabIndex = 21;
+            this.chkbx_selectall.Text = "Select All";
+            this.chkbx_selectall.UseVisualStyleBackColor = true;
+            this.chkbx_selectall.CheckedChanged += new System.EventHandler(this.chkbx_selectall_CheckedChanged);
             // 
             // btn_add
             // 
@@ -365,8 +377,8 @@
             this.glassUpgradeDGV.AllowUserToAddRows = false;
             this.glassUpgradeDGV.AllowUserToResizeColumns = false;
             this.glassUpgradeDGV.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.glassUpgradeDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.glassUpgradeDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.glassUpgradeDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.glassUpgradeDGV.ContextMenuStrip = this.cmsGlassUpgrade;
             this.glassUpgradeDGV.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -431,18 +443,6 @@
             this.label2.Size = new System.Drawing.Size(103, 13);
             this.label2.TabIndex = 17;
             this.label2.Text = "Windows / Doors: ";
-            // 
-            // chkbx_selectall
-            // 
-            this.chkbx_selectall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkbx_selectall.AutoSize = true;
-            this.chkbx_selectall.Location = new System.Drawing.Point(834, 29);
-            this.chkbx_selectall.Name = "chkbx_selectall";
-            this.chkbx_selectall.Size = new System.Drawing.Size(70, 17);
-            this.chkbx_selectall.TabIndex = 21;
-            this.chkbx_selectall.Text = "Select All";
-            this.chkbx_selectall.UseVisualStyleBackColor = true;
-            this.chkbx_selectall.CheckedChanged += new System.EventHandler(this.chkbx_selectall_CheckedChanged);
             // 
             // GlassUpgradeView
             // 
