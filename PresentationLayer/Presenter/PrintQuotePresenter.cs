@@ -589,7 +589,6 @@ namespace PresentationLayer.Presenter
         }
         private void _printQuoteView_btnRefreshClickEventRaised(object sender, System.EventArgs e)
         {
-
             PrintRDLCReport();
 
             _printQuoteView.GetReportViewer().SetDisplayMode(DisplayMode.PrintLayout);

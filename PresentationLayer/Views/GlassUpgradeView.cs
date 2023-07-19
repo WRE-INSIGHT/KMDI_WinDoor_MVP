@@ -15,7 +15,7 @@ namespace PresentationLayer.Views
     {
         public GlassUpgradeView()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
         #region Properties
@@ -28,14 +28,32 @@ namespace PresentationLayer.Views
             this.Close();
         }
 
+        public Form GlassUpgraedViewForm()
+        {
+            return this;
+        }
+
         public ComboBox GlassTypeCmb()
         {
             return cmb_glassType;
         }
 
+        public CheckedListBox ItemListChkBx()
+        {
+            return chkbx_ItemList;
+        }
+
         public DataGridView GlassUpgradeDGView()
         {
             return glassUpgradeDGV;
+        }
+        public Panel ItemDescriptionPnl()
+        {
+            return pnl_desc;
+        }
+        public CheckBox SelectAllItems()
+        {
+            return chkbx_selectall;
         }
 
         public Label AENameAndPosLbl
@@ -94,6 +112,18 @@ namespace PresentationLayer.Views
                 _date = value;
             }
         }
+        public Label ItemDescriptionLbl
+        {
+            get
+            {
+                return lbl_desc;
+            }
+            set
+            {
+                lbl_desc = value;
+            }
+        }
+
         public NumericUpDown DiscountNum
         {
             get
@@ -127,18 +157,95 @@ namespace PresentationLayer.Views
                 num_wdwsAndDoors.Value = Convert.ToDecimal(value);
             }
         }
+        public TextBox ItemDescriptionTxt
+        {
+            get
+            {
+                return txt_itemDesc;
+            }
+            set
+            {
+                txt_itemDesc = value;
+            }
+        }
+        public PictureBox ItemImage
+        {
+            get
+            {
+                return pbox_itemImage;
+            }
+            set
+            {
+                pbox_itemImage = value;
+            }
+        }
 
         #endregion
 
         #region EventHandler
 
         public event EventHandler GlassUpgradeView_LoadEventRaised;
+        public event EventHandler chkbx_ItemList_SelectedValueChangedEventRaised;
+        public event EventHandler GlassUpgradeView_SizeChangedEventRaised;
+        public event EventHandler btn_add_ClickEventRaised;
+        public event EventHandler deleteToolStripMenuItem_ClickEventRaised;
+        public event DataGridViewCellMouseEventHandler glassUpgradeDGV_ColumnHeaderMouseClickEventRaised;
+        public event EventHandler glassUpgradeDGV_CellEndEditEventRaised;
+        public event EventHandler cmb_glassType_SelectedValueChangedEventRaised;
+        public event DataGridViewCellMouseEventHandler glassUpgradeDGV_CellMouseClickEventRaised;
+        public event EventHandler chkbx_selectall_CheckedChangedEventRaised;
+
 
         #endregion
 
         private void GlassUpgradeView_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, GlassUpgradeView_LoadEventRaised, e);
+        }
+
+        private void chkbx_ItemList_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbx_ItemList_SelectedValueChangedEventRaised, e);           
+        }
+
+        private void GlassUpgradeView_SizeChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, GlassUpgradeView_SizeChangedEventRaised,e);
+        }
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btn_add_ClickEventRaised,e);
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, deleteToolStripMenuItem_ClickEventRaised,e );
+        }
+
+        private void glassUpgradeDGV_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            EventHelpers.RaiseDatagridviewCellMouseEvent(sender, glassUpgradeDGV_ColumnHeaderMouseClickEventRaised, e);
+        }
+
+        private void glassUpgradeDGV_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, glassUpgradeDGV_CellEndEditEventRaised, e);
+        }
+
+        private void cmb_glassType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmb_glassType_SelectedValueChangedEventRaised, e);
+        }
+
+        private void glassUpgradeDGV_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            EventHelpers.RaiseDatagridviewCellMouseEvent(sender, glassUpgradeDGV_CellMouseClickEventRaised, e);
+        }
+
+        private void chkbx_selectall_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbx_selectall_CheckedChangedEventRaised, e);
         }
     }
 }

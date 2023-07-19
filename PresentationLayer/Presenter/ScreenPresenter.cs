@@ -184,7 +184,6 @@ namespace PresentationLayer.Presenter
 
         #region Events
         private void _screenView_CellEndEditEventRaised(object sender, EventArgs e)
-
         {
             var currCellVal = _dgv_Screen.CurrentCell.Value;
             var currCell_col = _dgv_Screen.CurrentCell.ColumnIndex;
@@ -326,8 +325,7 @@ namespace PresentationLayer.Presenter
                     _screenModel.DiscountPercentage = 0;
                 }
             }
-
-            
+                        
             _mainPresenter.SetChangesMark();
          
         }
@@ -371,7 +369,7 @@ namespace PresentationLayer.Presenter
                 var dgv_indices = r.Cells[0].RowIndex;
                 decimal _delScreenRow = Convert.ToDecimal(dgv_value);
                 int i = 0;
-
+                                 
 
                 foreach (DataRow row in _screenDT.Rows)
                 {
@@ -963,7 +961,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                _screenView.screenViewWindoorID = "";
+                _screenView.screenViewWindoorID = ""; 
                 foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
                     if (screenInitialLoad != true)

@@ -172,6 +172,7 @@
     <Compile Include="Presenter\IExplosionPresenter.cs" />
     <Compile Include="Presenter\IfrmDimensionPresenter.cs" />
     <Compile Include="Presenter\IGlassThicknessListPresenter.cs" />
+    <Compile Include="Presenter\IGlassUpgradePresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
     <Compile Include="Presenter\IPDFCompilerPresenter.cs" />
@@ -1730,6 +1731,7 @@
     <None Include="Resources\AwningPanel.png" />
     <None Include="Resources\back_arrow_104px.png" />
     <Content Include="Resources\box_important_40px.png" />
+    <None Include="Resources\calendar-icon-hand-circles-date-calendar-logo-template-deadline-concept-illustration_168129-210 %281%29.png" />
     <Content Include="Resources\cancel_30px.png" />
     <Content Include="Resources\cancel_40px.png" />
     <None Include="Resources\CasementPanel.png" />

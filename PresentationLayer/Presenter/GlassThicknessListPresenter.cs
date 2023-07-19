@@ -61,8 +61,7 @@ namespace PresentationLayer.Presenter
         private void DataGridViewDisplayFormat()
         {
             try
-            {
-                
+            {               
                 _glassThicknessListView.Get_DgvGlassThicknessList().Columns["TotalThickness"].Visible = false;
                 _glassThicknessListView.Get_DgvGlassThicknessList().Columns["Description"].SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
                 _glassThicknessListView.Get_DgvGlassThicknessList().Columns["Description"].Width = 500;

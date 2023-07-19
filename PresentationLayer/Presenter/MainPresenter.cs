@@ -128,6 +128,7 @@ namespace PresentationLayer.Presenter
         private IPricingPresenter _pricingPresenter;
         private ISetMultipleGlassThicknessPresenter _setMultipleGlassThicknessPresenter;
         private IPriceHistoryPresenter _priceHistoryPresenter;
+        private IGlassUpgradePresenter _glassUpgradePresenter;
 
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
@@ -814,7 +815,8 @@ namespace PresentationLayer.Presenter
                              ITransomImagerUCPresenter transomImagerUCP,
                              IPricingPresenter pricingPresenter,
                              ISetMultipleGlassThicknessPresenter setMultipleGlassThicknessPresenter,
-                             IPriceHistoryPresenter priceHistoryPresenter
+                             IPriceHistoryPresenter priceHistoryPresenter,
+                             IGlassUpgradePresenter glassupgradePresenter
                              )
         {
             _mainView = mainView;
@@ -879,7 +881,7 @@ namespace PresentationLayer.Presenter
             _setMultipleGlassThicknessPresenter = setMultipleGlassThicknessPresenter;
             _lblCurrentPrice = _mainView.GetCurrentPrice();
             _priceHistoryPresenter = priceHistoryPresenter;
-
+            _glassUpgradePresenter = glassupgradePresenter;
 
             SubscribeToEventsSetup();
         }
@@ -991,6 +993,47 @@ namespace PresentationLayer.Presenter
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
             _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
             _mainView.PriceHistorytoolStripButtonClickEventRaised += _mainView_PriceHistorytoolStripButtonClickEventRaised;
+            _mainView.DateAssignedtoolStripButtonClickEventRaised += _mainView_DateAssignedtoolStripButtonClickEventRaised;
+        }
+
+        private void _mainView_DateAssignedtoolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                string input = Interaction.InputBox("Set new date \n\n MM/DD/YYYY", "Date Assign", dateAssigned.Date.ToString().Replace(" 12:00:00 AM", string.Empty));
+
+                if (input == "")
+                {
+
+                }
+                else
+                {
+                    DateTime myDate = DateTime.Parse(input);
+
+                    _quotationModel.Date_Assigned_Mainpresenter = myDate;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == -2146233033)
+                {
+                    MessageBox.Show("Please input a correct date format.");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, ex.HResult.ToString());
+                }
+            }
+
+
+            //DateTime myDate;
+            //if (!DateTime.TryParse("03/16/23", out myDate))
+            //{
+            //    // handle parse failure
+            //    Console.WriteLine("mali ka");
+            //}
+
         }
 
         private void _mainView_PriceHistorytoolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -3224,7 +3267,9 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 5000.00m, false, true, false, true, false);
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
             _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 5700.00m, false, true, false, true, false);
+
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 5900.00m, false, true, false, true, false);
+
             _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 6600.00m, false, true, false, true, false);
 
@@ -3369,7 +3414,7 @@ namespace PresentationLayer.Presenter
 
             #endregion
 
-            #endregion
+            #endregion                                                              
 
             #region Triple
 
@@ -3423,14 +3468,13 @@ namespace PresentationLayer.Presenter
             if (_userModel.AccountType == "User Level 1")
             {
                 _mainView.PriceHistorytoolStripButtonVisible = true;
+                _mainView.DateAssignedtoolStripButtonVisible = true;
             }
             else
             {
                 _mainView.PriceHistorytoolStripButtonVisible = false;
+                _mainView.DateAssignedtoolStripButtonVisible = false;
             }
-
-
-
 
             _mainView.GetCurrentPrice().Maximum = decimal.MaxValue;
             _mainView.GetCurrentPrice().DecimalPlaces = 2;
@@ -3562,15 +3606,18 @@ namespace PresentationLayer.Presenter
         }
         private void OnViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-            toggle = !toggle;
-            if (toggle == true)
-            {
-                _basePlatformImagerUCPresenter.BringToFront_baseImager();
-            }
-            else if (toggle == false)
-            {
-                _basePlatformImagerUCPresenter.SendToBack_baseImager();
-            }
+            //toggle = !toggle;
+            //if (toggle == true)
+            //{
+            //    _basePlatformImagerUCPresenter.BringToFront_baseImager();
+            //}
+            //else if (toggle == false)
+            //{
+            //    _basePlatformImagerUCPresenter.SendToBack_baseImager();
+            //}
+
+            //IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
+            //glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
 
         }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -3973,6 +4020,10 @@ namespace PresentationLayer.Presenter
                     {
                         _dateAssigned = Convert.ToDateTime(extractedValue_str);
                     }
+                    else if (row_str.Contains("Date_Assigned_Mainpresenter:"))
+                    {
+                        _quotationModel.Date_Assigned_Mainpresenter = Convert.ToDateTime(extractedValue_str);
+                    }
                     else if (row_str.Contains("AEIC:"))
                     {
                         _aeic = extractedValue_str;
@@ -4000,7 +4051,7 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
                         _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                         _quotationModel.Date_Assigned = dateAssigned;
-
+                        //_quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
                     }
                     else if (row_str.Contains("Frame_PUFoamingQty_Total"))
                     {
@@ -10216,6 +10267,8 @@ namespace PresentationLayer.Presenter
                         _quotationModel = _quotationServices.AddQuotationModel(input_qrefno, _quotationDate, _quoteId);
                         _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                         _quotationModel.Date_Assigned = dateAssigned;
+                        _quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
+
                         SetPricingFactor();
 
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
