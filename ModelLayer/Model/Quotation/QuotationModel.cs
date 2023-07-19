@@ -3014,7 +3014,7 @@ namespace ModelLayer.Model.Quotation
             DateTime inc_price_date_3 = DateTime.Parse("05-11-2023");// waterseepage
             DateTime inc_price_date_4 = DateTime.Parse("05-26-2023");//Double //Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe 
             DateTime inc_price_date_5 = DateTime.Parse("06-22-2023");//6052 white and woodgrain frame,  DividerRein_7536_PricePerSqrMeter
-            DateTime inc_price_date_6 = DateTime.Parse("07-18-2023");//change, patch date
+            DateTime inc_price_date_6 = DateTime.Parse("07-20-2023");//change, patch date
 
 
             if (cus_ref_date >= inc_price_date && cus_ref_date <= _junedateoldago)
@@ -3714,7 +3714,7 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_040423 = DateTime.Parse("04-04-2023"); // Div_Width => Div_ExplosionWidth , 1pnlFS from 2d hinge => friction stay
         DateTime changeCondition_061423 = DateTime.Parse("06-14-2023"); // friction stay size => art#
 
-        DateTime changeCondition_071823 = DateTime.Parse("07-18-2023");
+        DateTime changeCondition_071823 = DateTime.Parse("07-20-2023");
 
         DateTime testDate = DateTime.Parse("07-11-2023");
 
