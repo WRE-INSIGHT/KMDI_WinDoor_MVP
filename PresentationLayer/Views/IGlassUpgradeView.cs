@@ -27,6 +27,7 @@ namespace PresentationLayer.Views
         event EventHandler cmb_glassType_SelectedValueChangedEventRaised;
         event DataGridViewCellMouseEventHandler glassUpgradeDGV_CellMouseClickEventRaised;
         event EventHandler chkbx_selectall_CheckedChangedEventRaised;
+        event FormClosingEventHandler GlassUpgradeView_FormClosingEventRaised;
 
 
 
@@ -35,6 +36,7 @@ namespace PresentationLayer.Views
         CheckedListBox ItemListChkBx();
         DataGridView GlassUpgradeDGView();
         Form GlassUpgraedViewForm();
+        Label WindoorLbl();
 
         Panel ItemDescriptionPnl();
         CheckBox SelectAllItems();

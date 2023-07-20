@@ -196,7 +196,6 @@ namespace PresentationLayer.Presenter
 
         #region GetSet
         private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
-
         public IDictionary<string, string> RDLCHeader
         {
             get { return _rdlcHeaders; }
@@ -207,6 +206,18 @@ namespace PresentationLayer.Presenter
         {
             get { return _screenList; }
             set { _screenList = value; }
+        }
+        private List<DataRow> _nonUnglazed = new List<DataRow>();
+        public List<DataRow> NonUnglazed
+        {
+            get { return _nonUnglazed; }
+            set { _nonUnglazed = value; }
+        }
+        private List<DataRow> _unglazed = new List<DataRow>();
+        public List<DataRow> Unglazed
+        {
+            get { return _unglazed; }
+            set { _unglazed = value; }
         }
 
         public bool ProvinceIntownOutofTown
@@ -1799,6 +1810,47 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add(".");
                 wndr_content.Add(dic.Key + "^ " + dic.Value);
                 wndr_content.Add(".");
+            }
+
+            foreach(var item in _nonUnglazed)
+            {
+                wndr_content.Add("</NU>");
+                wndr_content.Add("Item No: " + item[0].ToString());
+                wndr_content.Add("Window/Door I.D.: " + item[1].ToString());
+                wndr_content.Add("Qty: " + item[2].ToString());
+                wndr_content.Add("Width: " + item[3].ToString());
+                wndr_content.Add("Height: " + item[4].ToString());
+                wndr_content.Add("Original Glass Used: " + item[5].ToString());
+                wndr_content.Add("GlassPrice: " + item[6].ToString());
+                wndr_content.Add("Upgraded To: " + item[7].ToString());
+                wndr_content.Add("Glass Upgrade Price: " + item[8].ToString());
+                wndr_content.Add("Upgrade Value: " + item[9].ToString());
+                wndr_content.Add("Amount Per Unit: " + item[10].ToString());
+                wndr_content.Add("Total Net Prices: " + item[11].ToString());
+                wndr_content.Add("Primary Key: " + item[12].ToString());
+                wndr_content.Add("<\\>");
+
+            }
+
+            foreach(var item in _unglazed)
+            {
+                wndr_content.Add("<\\U>");
+                wndr_content.Add("Item No: " + item[0].ToString());
+                wndr_content.Add("Window/Door I.D.: " + item[1].ToString());
+                wndr_content.Add("Unit Price: " + item[2].ToString());
+                wndr_content.Add("Net Price: " + item[3].ToString());
+                wndr_content.Add("Qty: " + item[4].ToString());
+                wndr_content.Add("Width: " + item[5].ToString());
+                wndr_content.Add("Height: " + item[6].ToString());
+                wndr_content.Add("Original Glass Used: " + item[7].ToString());
+                wndr_content.Add("GlassPrice: " + item[8].ToString());
+                wndr_content.Add("New GlassPrice: " + item[9].ToString());
+                wndr_content.Add("Net Unit Price: " + item[10].ToString());
+                wndr_content.Add("List Unit Price: " + item[11].ToString());
+                wndr_content.Add("Total Amount(Glass): " + item[12].ToString());
+                wndr_content.Add("Total Amount(Unglazed-Window/Door): " + item[13].ToString());
+                wndr_content.Add("Primary Key: " + item[14].ToString());
+                wndr_content.Add("<//>");
             }
 
 

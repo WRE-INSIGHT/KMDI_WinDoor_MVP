@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GlassUpgradeView));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel_Header = new System.Windows.Forms.Panel();
             this.chkbx_selectall = new System.Windows.Forms.CheckBox();
             this.btn_add = new System.Windows.Forms.Button();
@@ -62,7 +62,7 @@
             this.num_glassAmount = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.num_wdwsAndDoors = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
+            this._lblWindoor = new System.Windows.Forms.Label();
             this.panel_Header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_discount)).BeginInit();
             this.pnl_desc.SuspendLayout();
@@ -112,7 +112,7 @@
             this.chkbx_selectall.Location = new System.Drawing.Point(834, 29);
             this.chkbx_selectall.Name = "chkbx_selectall";
             this.chkbx_selectall.Size = new System.Drawing.Size(70, 17);
-            this.chkbx_selectall.TabIndex = 21;
+            this.chkbx_selectall.TabIndex = 3;
             this.chkbx_selectall.Text = "Select All";
             this.chkbx_selectall.UseVisualStyleBackColor = true;
             this.chkbx_selectall.CheckedChanged += new System.EventHandler(this.chkbx_selectall_CheckedChanged);
@@ -125,7 +125,7 @@
             this.btn_add.Location = new System.Drawing.Point(831, 130);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(98, 23);
-            this.btn_add.TabIndex = 20;
+            this.btn_add.TabIndex = 5;
             this.btn_add.Text = "Add To List";
             this.btn_add.UseVisualStyleBackColor = true;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
@@ -145,7 +145,7 @@
             this.num_discount.Location = new System.Drawing.Point(362, 33);
             this.num_discount.Name = "num_discount";
             this.num_discount.Size = new System.Drawing.Size(68, 20);
-            this.num_discount.TabIndex = 14;
+            this.num_discount.TabIndex = 2;
             this.num_discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // pnl_desc
@@ -194,7 +194,7 @@
             this.chkbx_ItemList.Location = new System.Drawing.Point(831, 49);
             this.chkbx_ItemList.Name = "chkbx_ItemList";
             this.chkbx_ItemList.Size = new System.Drawing.Size(98, 79);
-            this.chkbx_ItemList.TabIndex = 16;
+            this.chkbx_ItemList.TabIndex = 4;
             this.chkbx_ItemList.SelectedValueChanged += new System.EventHandler(this.chkbx_ItemList_SelectedValueChanged);
             // 
             // _glassUpgToolStrip
@@ -309,7 +309,7 @@
             this.cmb_glassType.Location = new System.Drawing.Point(90, 32);
             this.cmb_glassType.Name = "cmb_glassType";
             this.cmb_glassType.Size = new System.Drawing.Size(200, 21);
-            this.cmb_glassType.TabIndex = 10;
+            this.cmb_glassType.TabIndex = 1;
             this.cmb_glassType.SelectedValueChanged += new System.EventHandler(this.cmb_glassType_SelectedValueChanged);
             // 
             // lbl_Address
@@ -377,15 +377,15 @@
             this.glassUpgradeDGV.AllowUserToAddRows = false;
             this.glassUpgradeDGV.AllowUserToResizeColumns = false;
             this.glassUpgradeDGV.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.glassUpgradeDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.glassUpgradeDGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.glassUpgradeDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.glassUpgradeDGV.ContextMenuStrip = this.cmsGlassUpgrade;
             this.glassUpgradeDGV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.glassUpgradeDGV.Location = new System.Drawing.Point(0, 0);
             this.glassUpgradeDGV.Name = "glassUpgradeDGV";
             this.glassUpgradeDGV.Size = new System.Drawing.Size(932, 257);
-            this.glassUpgradeDGV.TabIndex = 0;
+            this.glassUpgradeDGV.TabIndex = 20;
             this.glassUpgradeDGV.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.glassUpgradeDGV_CellEndEdit);
             this.glassUpgradeDGV.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.glassUpgradeDGV_CellMouseClick);
             this.glassUpgradeDGV.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.glassUpgradeDGV_ColumnHeaderMouseClick);
@@ -409,6 +409,7 @@
             this.num_glassAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.num_glassAmount.Location = new System.Drawing.Point(815, 457);
             this.num_glassAmount.Name = "num_glassAmount";
+            this.num_glassAmount.ReadOnly = true;
             this.num_glassAmount.Size = new System.Drawing.Size(113, 20);
             this.num_glassAmount.TabIndex = 16;
             this.num_glassAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -429,20 +430,21 @@
             this.num_wdwsAndDoors.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.num_wdwsAndDoors.Location = new System.Drawing.Point(815, 482);
             this.num_wdwsAndDoors.Name = "num_wdwsAndDoors";
+            this.num_wdwsAndDoors.ReadOnly = true;
             this.num_wdwsAndDoors.Size = new System.Drawing.Size(113, 20);
             this.num_wdwsAndDoors.TabIndex = 18;
             this.num_wdwsAndDoors.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label2
+            // _lblWindoor
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(708, 484);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 13);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Windows / Doors: ";
+            this._lblWindoor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this._lblWindoor.AutoSize = true;
+            this._lblWindoor.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._lblWindoor.Location = new System.Drawing.Point(708, 484);
+            this._lblWindoor.Name = "_lblWindoor";
+            this._lblWindoor.Size = new System.Drawing.Size(103, 13);
+            this._lblWindoor.TabIndex = 17;
+            this._lblWindoor.Text = "Windows / Doors: ";
             // 
             // GlassUpgradeView
             // 
@@ -450,7 +452,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(932, 510);
             this.Controls.Add(this.num_wdwsAndDoors);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this._lblWindoor);
             this.Controls.Add(this.num_glassAmount);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
@@ -459,6 +461,7 @@
             this.Name = "GlassUpgradeView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Glass Upgrade";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GlassUpgradeView_FormClosing);
             this.Load += new System.EventHandler(this.GlassUpgradeView_Load);
             this.SizeChanged += new System.EventHandler(this.GlassUpgradeView_SizeChanged);
             this.panel_Header.ResumeLayout(false);
@@ -503,7 +506,7 @@
         private System.Windows.Forms.NumericUpDown num_glassAmount;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown num_wdwsAndDoors;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label _lblWindoor;
         private System.Windows.Forms.CheckedListBox chkbx_ItemList;
         private System.Windows.Forms.TextBox txt_itemDesc;
         private System.Windows.Forms.PictureBox pbox_itemImage;

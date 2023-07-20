@@ -123,7 +123,10 @@ namespace PresentationLayer.Views
                 lbl_desc = value;
             }
         }
-
+        public Label WindoorLbl()
+        {
+            return _lblWindoor;
+        }
         public NumericUpDown DiscountNum
         {
             get
@@ -194,6 +197,7 @@ namespace PresentationLayer.Views
         public event EventHandler cmb_glassType_SelectedValueChangedEventRaised;
         public event DataGridViewCellMouseEventHandler glassUpgradeDGV_CellMouseClickEventRaised;
         public event EventHandler chkbx_selectall_CheckedChangedEventRaised;
+        public event FormClosingEventHandler GlassUpgradeView_FormClosingEventRaised;
 
 
         #endregion
@@ -246,6 +250,11 @@ namespace PresentationLayer.Views
         private void chkbx_selectall_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, chkbx_selectall_CheckedChangedEventRaised, e);
+        }
+
+        private void GlassUpgradeView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            EventHelpers.RaiseFormClosingEvent(sender, GlassUpgradeView_FormClosingEventRaised, e);
         }
     }
 }
