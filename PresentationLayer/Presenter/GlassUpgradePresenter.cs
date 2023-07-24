@@ -92,7 +92,13 @@ namespace PresentationLayer.Presenter
             _glassUpgradeView.glassUpgradeDGV_CellMouseClickEventRaised += _glassUpgradeView_glassUpgradeDGV_CellMouseClickEventRaised;
             _glassUpgradeView.chkbx_selectall_CheckedChangedEventRaised += _glassUpgradeView_chkbx_selectall_CheckedChangedEventRaised;
             _glassUpgradeView.GlassUpgradeView_FormClosingEventRaised += _glassUpgradeView_GlassUpgradeView_FormClosingEventRaised;
+            _glassUpgradeView._printBtn_ClickEventRaised += _glassUpgradeView__printBtn_ClickEventRaised;
             
+        }
+
+        private void _glassUpgradeView__printBtn_ClickEventRaised(object sender, EventArgs e)
+        {
+            MessageBox.Show("Print Available Soon");
         }
 
         private DataColumn CreateColumn(string columnName, string caption, string type)

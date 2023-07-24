@@ -202,6 +202,7 @@ namespace PresentationLayer.Views
         public event DataGridViewCellMouseEventHandler glassUpgradeDGV_CellMouseClickEventRaised;
         public event EventHandler chkbx_selectall_CheckedChangedEventRaised;
         public event FormClosingEventHandler GlassUpgradeView_FormClosingEventRaised;
+        public event EventHandler _printBtn_ClickEventRaised;
 
 
         #endregion
@@ -259,6 +260,11 @@ namespace PresentationLayer.Views
         private void GlassUpgradeView_FormClosing(object sender, FormClosingEventArgs e)
         {
             EventHelpers.RaiseFormClosingEvent(sender, GlassUpgradeView_FormClosingEventRaised, e);
+        }
+
+        private void _printBtn_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, _printBtn_ClickEventRaised, e);
         }
     }
 }

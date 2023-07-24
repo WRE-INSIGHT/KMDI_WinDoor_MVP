@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GlassUpgradeView));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel_Header = new System.Windows.Forms.Panel();
             this.chkbx_Duplicate = new System.Windows.Forms.CheckBox();
@@ -226,11 +225,12 @@
             // _printBtn
             // 
             this._printBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._printBtn.Image = ((System.Drawing.Image)(resources.GetObject("_printBtn.Image")));
+            this._printBtn.Image = global::PresentationLayer.Properties.Resources.print;
             this._printBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._printBtn.Name = "_printBtn";
             this._printBtn.Size = new System.Drawing.Size(23, 22);
             this._printBtn.Text = "toolStripButton1";
+            this._printBtn.Click += new System.EventHandler(this._printBtn_Click);
             // 
             // _date
             // 

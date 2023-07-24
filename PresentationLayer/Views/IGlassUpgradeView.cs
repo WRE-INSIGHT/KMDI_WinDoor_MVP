@@ -28,6 +28,7 @@ namespace PresentationLayer.Views
         event DataGridViewCellMouseEventHandler glassUpgradeDGV_CellMouseClickEventRaised;
         event EventHandler chkbx_selectall_CheckedChangedEventRaised;
         event FormClosingEventHandler GlassUpgradeView_FormClosingEventRaised;
+        event EventHandler _printBtn_ClickEventRaised;
 
 
 
