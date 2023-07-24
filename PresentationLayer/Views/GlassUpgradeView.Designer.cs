@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GlassUpgradeView));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel_Header = new System.Windows.Forms.Panel();
+            this.chkbx_Duplicate = new System.Windows.Forms.CheckBox();
             this.chkbx_selectall = new System.Windows.Forms.CheckBox();
             this.btn_add = new System.Windows.Forms.Button();
             this.lbl_discount = new System.Windows.Forms.Label();
@@ -78,6 +79,7 @@
             // panel_Header
             // 
             this.panel_Header.BackColor = System.Drawing.SystemColors.Window;
+            this.panel_Header.Controls.Add(this.chkbx_Duplicate);
             this.panel_Header.Controls.Add(this.chkbx_selectall);
             this.panel_Header.Controls.Add(this.btn_add);
             this.panel_Header.Controls.Add(this.lbl_discount);
@@ -104,6 +106,18 @@
             this.panel_Header.Name = "panel_Header";
             this.panel_Header.Size = new System.Drawing.Size(932, 192);
             this.panel_Header.TabIndex = 0;
+            // 
+            // chkbx_Duplicate
+            // 
+            this.chkbx_Duplicate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkbx_Duplicate.AutoSize = true;
+            this.chkbx_Duplicate.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chkbx_Duplicate.Location = new System.Drawing.Point(834, 4);
+            this.chkbx_Duplicate.Name = "chkbx_Duplicate";
+            this.chkbx_Duplicate.Size = new System.Drawing.Size(99, 17);
+            this.chkbx_Duplicate.TabIndex = 20;
+            this.chkbx_Duplicate.Text = "Allow Duplicate";
+            this.chkbx_Duplicate.UseVisualStyleBackColor = false;
             // 
             // chkbx_selectall
             // 
@@ -516,5 +530,6 @@
         private System.Windows.Forms.ContextMenuStrip cmsGlassUpgrade;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.CheckBox chkbx_selectall;
+        private System.Windows.Forms.CheckBox chkbx_Duplicate;
     }
 }

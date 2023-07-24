@@ -32,6 +32,7 @@ namespace PresentationLayer.Presenter
         private NumericUpDown num_glassDiscount, num_glassAmount, num_wndwsDoors;
         private ComboBox _cmbGlassType;
         private CheckBox _chkboxSelectAll;
+        private CheckBox _allowDuplicate;
         private Label _lblWindoor;
 
         #region Variable
@@ -56,7 +57,8 @@ namespace PresentationLayer.Presenter
 
         bool sortAscending = true,
              changeGlassType = false,
-            _isUnglazed;
+            _isUnglazed,
+            _addItem;
 
 
         #endregion
@@ -72,6 +74,7 @@ namespace PresentationLayer.Presenter
             _cmbGlassType = _glassUpgradeView.GlassTypeCmb();
             _chkboxSelectAll = _glassUpgradeView.SelectAllItems();
             _lblWindoor = _glassUpgradeView.WindoorLbl();
+            _allowDuplicate = _glassUpgradeView.AllodDuplicate();
 
             SubscribeToEventSetup();
         }
@@ -222,12 +225,13 @@ namespace PresentationLayer.Presenter
             _glassUpgradeDT.Columns.Add(CreateColumn("Height", "Height", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Original Glass Used", "Original Glass Used", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("GlassPrice", "GlassPrice", "System.String"));
-                                                                                         
+                                                                                          
             _glassUpgradeDT.Columns.Add(CreateColumn("Upgraded To", "Glass Upgraded To", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Glass Upgrade Price", "Glass Upgrade Price", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Upgrade Value", "Upgrade Value", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Amount Per Unit", "Amount Per Unit", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Total Net Prices", "Total Net Prices", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("GlassType", "GlassType", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Primary Key", "Primary Key", "System.Decimal"));
 
             LoadDataGridViewSettings();
@@ -341,7 +345,8 @@ namespace PresentationLayer.Presenter
                                          item[9].ToString(),
                                          item[10].ToString(),
                                          item[11].ToString(),
-                                         item[12].ToString());
+                                         item[12].ToString(),
+                                         item[13].ToString());
                                 
             }
             _dgv_GlassUpgrade.DataSource = PopulateDgvGlassUpgrade();
@@ -587,6 +592,7 @@ namespace PresentationLayer.Presenter
             dt.Columns.Add("Upgrade Value", Type.GetType("System.String"));
             dt.Columns.Add("Amount Per Unit", Type.GetType("System.String"));
             dt.Columns.Add("Total Net Prices", Type.GetType("System.String"));
+            dt.Columns.Add("GlassType", Type.GetType("System.String"));
             dt.Columns.Add("Primary Key", Type.GetType("System.String"));
 
             foreach (DataRow glassupgradeDTRow in _glassUpgradeDT.Rows)
@@ -613,6 +619,7 @@ namespace PresentationLayer.Presenter
                             glassupgradeDTRow["Upgrade Value"],
                             glassupgradeDTRow["Amount Per Unit"],
                             glassupgradeDTRow["Total Net Prices"],
+                            glassupgradeDTRow["GlassType"],
                             glassupgradeDTRow["Primary Key"]);
 
             }
@@ -631,6 +638,7 @@ namespace PresentationLayer.Presenter
             _dgv_GlassUpgrade.Columns[7].Visible = false;
             _dgv_GlassUpgrade.Columns[8].Width = 130;
             _dgv_GlassUpgrade.Columns[12].Visible = false;
+            _dgv_GlassUpgrade.Columns[13].Visible = false;
 
             num_wndwsDoors.Visible = false;
             _lblWindoor.Visible = false;
@@ -836,6 +844,7 @@ namespace PresentationLayer.Presenter
                                     _glassUpgradeDT.Rows[currCell_row][10] = _amountPerUnit.ToString("n");
                                     _glassUpgradeDT.Rows[currCell_row][11] = _totalNetPrice.ToString("n");
                                 }
+                                _glassUpgradeDT.Rows[currCell_row][12] = _cmbGlassType.SelectedItem.ToString();
                                 break;
                             }
                         }
@@ -1032,14 +1041,15 @@ namespace PresentationLayer.Presenter
                                 {
                                     foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                                     {
+
                                       bool _addItem =   ItemNumberRepeatCheck(wdm.WD_id, Limiter);
                                        
-                                        if(_addItem == true)
+                                        if(_addItem == true || _allowDuplicate.Checked)
                                         {
                                           string _primaryKeyFormat = wdm.WD_id.ToString() + "." + _primaryKey.ToString();
                                             bool _isPrimaryKeyPresent = PrimaryKeyChecker(_primaryKeyFormat);
 
-                                            if(_isPrimaryKeyPresent == false)
+                                            if(_isPrimaryKeyPresent == false || _allowDuplicate.Checked)
                                             {
                                                 if (_cmbGlassType.SelectedItem != null)
                                                 {
@@ -1057,9 +1067,10 @@ namespace PresentationLayer.Presenter
                                                                              "",
                                                                              "",
                                                                              "",
+                                                                             "",
                                                                              _primaryKeyFormat
                                                                              );
-                                                        
+                                                     
                                                     }
                                                     else
                                                     {
@@ -1102,12 +1113,12 @@ namespace PresentationLayer.Presenter
 
                                 bool _addItem = ItemNumberRepeatCheck(wdm.WD_id, Limiter);
 
-                                if (_addItem == true)
+                                if (_addItem == true || _allowDuplicate.Checked)
                                 {
                                     string _primaryKeyFormat = wdm.WD_id.ToString() + "." + _primaryKey.ToString();
                                     bool _isPrimaryKeyPresent = PrimaryKeyChecker(_primaryKeyFormat);
                                     
-                                    if(_isPrimaryKeyPresent == false)
+                                    if(_isPrimaryKeyPresent == false || _allowDuplicate.Checked)
                                     {
                                         if ((_cmbGlassType.SelectedItem != null))
                                         {
@@ -1120,6 +1131,7 @@ namespace PresentationLayer.Presenter
                                                                Singlepnl.Panel_GlassHeight,
                                                                Singlepnl.Panel_GlassThicknessDesc,
                                                                Singlepnl.Panel_GlassPricePerSqrMeter.ToString("n"),
+                                                               "",
                                                                "",
                                                                "",
                                                                "",
@@ -1265,7 +1277,7 @@ namespace PresentationLayer.Presenter
             {
                 foreach (DataRow row in _glassUpgradeDT.Rows)
                 {
-                    if (row[12].ToString() == _primaryKey)
+                    if (row[13].ToString() == _primaryKey)
                     {
                         _isPrimaryKeyPresent = true;
                     }

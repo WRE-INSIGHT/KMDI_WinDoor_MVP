@@ -55,6 +55,10 @@ namespace PresentationLayer.Views
         {
             return chkbx_selectall;
         }
+        public CheckBox AllodDuplicate()
+        {
+            return chkbx_Duplicate;
+        }
 
         public Label AENameAndPosLbl
         {

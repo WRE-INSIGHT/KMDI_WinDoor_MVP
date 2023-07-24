@@ -34,6 +34,7 @@ namespace PresentationLayer.Views
         void CloseGlassUpgradeView();
         ComboBox GlassTypeCmb();
         CheckedListBox ItemListChkBx();
+        CheckBox AllodDuplicate();
         DataGridView GlassUpgradeDGView();
         Form GlassUpgraedViewForm();
         Label WindoorLbl();
