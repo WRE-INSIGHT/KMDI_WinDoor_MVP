@@ -2373,7 +2373,7 @@ namespace ModelLayer.Model.Quotation
              chckAlumPullHandle = false,
              check1stFrame = false,
             chckPerFrameMotorMech = false,
-            OneSideFoil = false;
+            OneSideFoil_whiteBase = false;
 
         string BOM_divDesc,
                HandleDesc,
@@ -3002,6 +3002,11 @@ namespace ModelLayer.Model.Quotation
         {
             cus_ref_date = Date_Assigned;
 
+            if (Date_Assigned_Mainpresenter == DateTime.Parse("01-01-0001"))
+            {
+                Date_Assigned_Mainpresenter = Date_Assigned;
+            }
+
             if (Date_Assigned != Date_Assigned_Mainpresenter)
             {
                 cus_ref_date = Date_Assigned_Mainpresenter;
@@ -3011,10 +3016,10 @@ namespace ModelLayer.Model.Quotation
 
             DateTime inc_price_date = DateTime.Parse("10-15-2022");
             //DateTime inc_price_date_2 = DateTime.Parse("05-04-2023");//waterseepage 
-            DateTime inc_price_date_3 = DateTime.Parse("05-11-2023");// waterseepage
-            DateTime inc_price_date_4 = DateTime.Parse("05-26-2023");//Double //Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe 
-            DateTime inc_price_date_5 = DateTime.Parse("06-22-2023");//6052 white and woodgrain frame,  DividerRein_7536_PricePerSqrMeter
-            DateTime inc_price_date_6 = DateTime.Parse("07-20-2023");//change, patch date
+            DateTime inc_price_date_3 = DateTime.Parse("05-11-2023");  // waterseepage
+            DateTime inc_price_date_4 = DateTime.Parse("05-26-2023");  //Double //Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe 
+            DateTime inc_price_date_5 = DateTime.Parse("06-22-2023");  //6052 white and woodgrain frame,  DividerRein_7536_PricePerSqrMeter
+            DateTime inc_price_date_6 = DateTime.Parse("07-20-2023");  //change, patch date
 
 
             if (cus_ref_date >= inc_price_date && cus_ref_date <= _junedateoldago)
@@ -3713,10 +3718,13 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_033023 = DateTime.Parse("03-30-2023"); // for 2d hinge to FS 1pnl
         DateTime changeCondition_040423 = DateTime.Parse("04-04-2023"); // Div_Width => Div_ExplosionWidth , 1pnlFS from 2d hinge => friction stay
         DateTime changeCondition_061423 = DateTime.Parse("06-14-2023"); // friction stay size => art#
+        DateTime changeCondition_072023 = DateTime.Parse("07-20-2023"); // points
+        DateTime changeCondition_072723 = DateTime.Parse("07-27-2023"); // gb for sliding , gbar multiplier // remove mesh in total price // 1 side foil labor price and approve by costing // need baguhin yung date
+        DateTime changeCondition_022323 = DateTime.Parse("02-23-2023"); // single pnl glass ht & wd
+        DateTime changeCondition_020323 = DateTime.Parse("02-03-2023"); // georgian bar 
 
-        DateTime changeCondition_071823 = DateTime.Parse("07-20-2023");
 
-        DateTime testDate = DateTime.Parse("07-11-2023");
+        DateTime testDate = DateTime.Parse("12-17-2022");
 
         #endregion
 
@@ -3766,10 +3774,11 @@ namespace ModelLayer.Model.Quotation
                     foreach (IFrameModel fr in wdm.lst_frame)
                     {
                         #region baseOnDimensionAndColorPointsif 
-                        if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
-                                    (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                        if (((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                           (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None)) &&
+                           wdm.WD_BaseColor == Base_Color._White)
                         {
-                            OneSideFoil = true;
+                            OneSideFoil_whiteBase = true;
                         }
 
                         if (fr.Frame_ArtNo != FrameProfile_ArticleNo._6050 &&
@@ -3797,7 +3806,7 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 18;
                                 }
 
-                                if (cus_ref_date >= changeCondition_071823)
+                                if (cus_ref_date >= changeCondition_072023)
                                 {
                                     if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
                                     {
@@ -3809,20 +3818,10 @@ namespace ModelLayer.Model.Quotation
                                     }
                                 }
 
-                                //if (OneSideFoil == true &&
-                                //    cus_ref_date <= changeCondition_111111)
-                                //{
-                                //    ProfileColorPoints = 13.5m;
-
-                                //    if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
-                                //    {
-                                //        ProfileColorPoints = 19;
-                                //    }
-                                //    else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
-                                //    {
-                                //        ProfileColorPoints = 17;
-                                //    }
-                                //}
+                                if (OneSideFoil_whiteBase == true)
+                                {
+                                    ProfileColorPoints += 1;
+                                }
 
                                 //CostingPoints += ProfileColorPoints * 4;
                                 //InstallationPoints += (ProfileColorPoints / 3) * 4;
@@ -3847,7 +3846,7 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 19;
                                 }
 
-                                if (cus_ref_date >= changeCondition_071823)
+                                if (cus_ref_date >= changeCondition_072023)
                                 {
                                     if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
                                     {
@@ -3862,7 +3861,7 @@ namespace ModelLayer.Model.Quotation
                         }
                         else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                         {
-                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                             {
                                 ProfileColorPoints = 16;
 
@@ -3871,7 +3870,7 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 19;
                                 }
                             }
-                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                             {
                                 ProfileColorPoints = 18;
 
@@ -3883,7 +3882,7 @@ namespace ModelLayer.Model.Quotation
                         }
                         else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                         {
-                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                             {
                                 //ProfileColorPoints = 49;
                                 ProfileColorPoints = 34;
@@ -3893,7 +3892,7 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 37;
                                 }
                             }
-                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                             {
                                 //ProfileColorPoints = 51;
                                 ProfileColorPoints = 37;
@@ -3927,7 +3926,7 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 16;
                                 }
 
-                                if (cus_ref_date >= changeCondition_071823)
+                                if (cus_ref_date >= changeCondition_072023)
                                 {
                                     if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
                                     {
@@ -3938,6 +3937,12 @@ namespace ModelLayer.Model.Quotation
                                         ProfileColorPoints = 14;
                                     }
                                 }
+
+                                if (OneSideFoil_whiteBase == true)
+                                {
+                                    ProfileColorPoints += 1;
+                                }
+
                                 //CostingPoints += ProfileColorPoints * 4;
                                 //InstallationPoints += (ProfileColorPoints / 3) * 4;
                             }
@@ -3961,7 +3966,7 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 17;
                                 }
 
-                                if (cus_ref_date >= changeCondition_071823)
+                                if (cus_ref_date >= changeCondition_072023)
                                 {
                                     if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
                                     {
@@ -4025,14 +4030,9 @@ namespace ModelLayer.Model.Quotation
                         }
                         else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                         {
-                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                             {
                                 FramePricePerLinearMeter = FramePricePerLinearMeter_6050_White;
-                                if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
-                                    (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
-                                {
-                                    FramePricePerLinearMeter = FramePricePerLinearMeter_6050_White_1sideFoil;
-                                }
                             }
                             else
                             {
@@ -4042,14 +4042,9 @@ namespace ModelLayer.Model.Quotation
                         }
                         else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                         {
-                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                             {
                                 FramePricePerLinearMeter = FramePricePerLinearMeter_6052_White;
-                                if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
-                                    (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
-                                {
-                                    FramePricePerLinearMeter = FramePricePerLinearMeter_6052_White_1sideFoil;
-                                }
                             }
                             else
                             {
@@ -4069,7 +4064,7 @@ namespace ModelLayer.Model.Quotation
                             {
                                 if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                     {
                                         FramePricePerLinearMeter = FramePricePerLinearMeter_6055_White;
                                     }
@@ -4081,7 +4076,7 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                     {
                                         FramePricePerLinearMeter = FramePricePerLinearMeter_6052Milled_White;
                                     }
@@ -4103,7 +4098,7 @@ namespace ModelLayer.Model.Quotation
                         {
                             if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                             {
-                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                 {
                                     FramePricePerLinearMeter = FramePricePerLinearMeter_6055_White;
                                 }
@@ -4115,7 +4110,7 @@ namespace ModelLayer.Model.Quotation
                             }
                             else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                             {
-                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                 {
                                     FramePricePerLinearMeter = FramePricePerLinearMeter_6052Milled_White;
                                 }
@@ -4143,7 +4138,7 @@ namespace ModelLayer.Model.Quotation
                         if ((fr.Frame_ArtNo == FrameProfile_ArticleNo._6050 || fr.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
                             fr.Frame_Width > 6000)
                         {
-                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                             {
                                 ExtensionProfile15mmPricePerLinearMeter = ExtensionProfile15mmPricePerLinearMeter_White;
                             }
@@ -4166,11 +4161,11 @@ namespace ModelLayer.Model.Quotation
                         #region SealantPrice 
                         Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)((fr.Frame_Width * 2) + (fr.Frame_Height * 2)) / 3570);
 
-                        if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                        if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                         {
                             SealantPricePerCan = SealantPricePerCan_Clear;
                         }
-                        else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                        else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                         {
                             SealantPricePerCan = SealantPricePerCan_BrownBlack;
                         }
@@ -4207,6 +4202,12 @@ namespace ModelLayer.Model.Quotation
                                     if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                     {
                                         FramePricePerLinearMeter = FramePricePerLinearMeter_7502_White;
+
+                                        if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                            (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                        {
+                                            FramePricePerLinearMeter = FramePricePerLinearMeter_7502_White_1sideFoil;
+                                        }
                                     }
                                     else
                                     {
@@ -4219,6 +4220,11 @@ namespace ModelLayer.Model.Quotation
                                     if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                     {
                                         FramePricePerLinearMeter = FramePricePerLinearMeter_7507_White;
+                                        if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                            (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                        {
+                                            FramePricePerLinearMeter = FramePricePerLinearMeter_7507_White_1sideFoil;
+                                        }
                                     }
                                     else
                                     {
@@ -4228,7 +4234,7 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                     {
                                         FramePricePerLinearMeter = FramePricePerLinearMeter_6050_White;
                                     }
@@ -4240,7 +4246,7 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                     {
                                         FramePricePerLinearMeter = FramePricePerLinearMeter_6052_White;
                                     }
@@ -4966,14 +4972,9 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                                             {
-                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
-                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
-                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
-                                                    {
-                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White_1sideFoil;
-                                                    }
                                                 }
                                                 else
                                                 {
@@ -4984,14 +4985,9 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                             {
-                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
-                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
-                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
-                                                    {
-                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White_1sideFoil;
-                                                    }
                                                 }
                                                 else
                                                 {
@@ -5115,14 +5111,9 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                                             {
-                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
-                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
-                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
-                                                    {
-                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White_1sideFoil;
-                                                    }
                                                 }
                                                 else
                                                 {
@@ -5133,14 +5124,9 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                             {
-                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
-                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
-                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
-                                                    {
-                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White_1sideFoil;
-                                                    }
                                                 }
                                                 else
                                                 {
@@ -5153,15 +5139,19 @@ namespace ModelLayer.Model.Quotation
 
                                             SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
                                             SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
+                                            if (cus_ref_date >= changeCondition_072723)
+                                            {
+                                                if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                                {
+                                                    GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
+                                                }
+                                                else
+                                                {
+                                                    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                                }
+                                            }
 
-                                            //if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                                            //{
-                                            //    GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
-                                            //}
-                                            //else
-                                            //{
-                                            //    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
-                                            //}
+
 
                                             #endregion
                                         }
@@ -5391,8 +5381,20 @@ namespace ModelLayer.Model.Quotation
                                         #region GeorgianBar
                                         if (pnl.Panel_GeorgianBarOptionVisibility == true)
                                         {
-                                            GeorgianBarHorizontalQty = pnl.Panel_GeorgianBar_HorizontalQty * 2;
-                                            GeorgianBarVerticalQty = pnl.Panel_GeorgianBar_VerticalQty * 2;
+                                            int GBmultiplier = 1, multiplier = 1;
+
+                                            if (cus_ref_date >= changeCondition_020323)
+                                            {
+                                                GBmultiplier = 2;
+                                            }
+
+                                            if (cus_ref_date >= changeCondition_072723)
+                                            {
+                                                multiplier = 2;
+                                            }
+
+                                            GeorgianBarHorizontalQty = pnl.Panel_GeorgianBar_HorizontalQty * GBmultiplier;
+                                            GeorgianBarVerticalQty = pnl.Panel_GeorgianBar_VerticalQty * GBmultiplier;
 
                                             if (wdm.WD_BaseColor == Base_Color._Ivory ||
                                                 wdm.WD_BaseColor == Base_Color._White)
@@ -5401,7 +5403,7 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
                                                     {
-                                                        GeorgianBarCost += (((pnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * 2;
+                                                        GeorgianBarCost += (((pnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * multiplier;
                                                     }
                                                     if (pnl.Panel_GeorgianBar_VerticalQty != 0)
                                                     {
@@ -6180,11 +6182,11 @@ namespace ModelLayer.Model.Quotation
                                         if (pnl.Panel_GlassThickness != 0.0f)
                                         {
 
-                                            if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                            if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                             {
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                                             }
-                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                             {
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                             }
@@ -6968,11 +6970,11 @@ namespace ModelLayer.Model.Quotation
                                         if (pnl.Panel_GlassThickness != 0.0f)
                                         {
 
-                                            if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                            if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                             {
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                                             }
-                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                             {
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                             }
@@ -6982,8 +6984,20 @@ namespace ModelLayer.Model.Quotation
                                         #region GeorgianBar
                                         if (pnl.Panel_GeorgianBarOptionVisibility == true)
                                         {
-                                            GeorgianBarHorizontalQty = pnl.Panel_GeorgianBar_HorizontalQty * 2;
-                                            GeorgianBarVerticalQty = pnl.Panel_GeorgianBar_VerticalQty * 2;
+                                            int GBmultiplier = 1, multiplier = 1;
+
+                                            if (cus_ref_date >= changeCondition_020323)
+                                            {
+                                                GBmultiplier = 2;
+                                            }
+
+                                            if (cus_ref_date >= changeCondition_072723)
+                                            {
+                                                multiplier = 2;
+                                            }
+
+                                            GeorgianBarHorizontalQty = pnl.Panel_GeorgianBar_HorizontalQty * GBmultiplier;
+                                            GeorgianBarVerticalQty = pnl.Panel_GeorgianBar_VerticalQty * GBmultiplier;
 
                                             if (wdm.WD_BaseColor == Base_Color._Ivory ||
                                                 wdm.WD_BaseColor == Base_Color._White)
@@ -6992,7 +7006,7 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
                                                     {
-                                                        GeorgianBarCost += (((pnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * 2;
+                                                        GeorgianBarCost += (((pnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * multiplier;
                                                     }
                                                     if (pnl.Panel_GeorgianBar_VerticalQty != 0)
                                                     {
@@ -7527,11 +7541,11 @@ namespace ModelLayer.Model.Quotation
 
                                         if (pnl.Panel_GlassThickness != 0.0f)
                                         {
-                                            if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                            if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                             {
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                                             }
-                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                             {
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                             }
@@ -8301,14 +8315,9 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                                     {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
-                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
-                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White_1sideFoil;
-                                            }
                                         }
                                         else
                                         {
@@ -8319,7 +8328,7 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                     {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
                                             if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
@@ -8431,14 +8440,9 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                                     {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
-                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
-                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White_1sideFoil;
-                                            }
                                         }
                                         else
                                         {
@@ -8449,14 +8453,9 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                     {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
-                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
-                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White_1sideFoil;
-                                            }
                                         }
                                         else
                                         {
@@ -8698,8 +8697,20 @@ namespace ModelLayer.Model.Quotation
                                 #region GeorgianBar
                                 if (Singlepnl.Panel_GeorgianBarOptionVisibility == true)
                                 {
-                                    GeorgianBarHorizontalQty = Singlepnl.Panel_GeorgianBar_HorizontalQty * 2;
-                                    GeorgianBarVerticalQty = Singlepnl.Panel_GeorgianBar_VerticalQty * 2;
+                                    int GBmultiplier = 1, multiplier = 1;
+
+                                    if (cus_ref_date >= changeCondition_020323)
+                                    {
+                                        GBmultiplier = 2;
+                                    }
+
+                                    if (cus_ref_date >= changeCondition_072723)
+                                    {
+                                        multiplier = 2;
+                                    }
+
+                                    GeorgianBarHorizontalQty = Singlepnl.Panel_GeorgianBar_HorizontalQty * GBmultiplier;
+                                    GeorgianBarVerticalQty = Singlepnl.Panel_GeorgianBar_VerticalQty * GBmultiplier;
 
                                     if (wdm.WD_BaseColor == Base_Color._Ivory ||
                                         wdm.WD_BaseColor == Base_Color._White)
@@ -8708,7 +8719,7 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
                                             {
-                                                GeorgianBarCost += (((Singlepnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * 2;
+                                                GeorgianBarCost += (((Singlepnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * multiplier;
                                             }
                                             if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
                                             {
@@ -8787,6 +8798,15 @@ namespace ModelLayer.Model.Quotation
                                     }
                                 }
 
+                                //if (testDate <= changeCondition_022323)
+                                //{
+                                //    Singlepnl.Panel_GlassWidth = Singlepnl.Panel_DisplayWidth - (33 * 2) - 6;
+                                //    Singlepnl.Panel_GlassHeight = Singlepnl.Panel_DisplayHeight - (33 * 2) - 6;
+                                //}
+                                //Console.WriteLine(Singlepnl.Panel_GlassWidth = Singlepnl.Panel_DisplayWidth - (33 * 2) - 6);
+                                //Console.WriteLine(Singlepnl.Panel_GlassHeight = Singlepnl.Panel_DisplayHeight - (33 * 2) - 6);
+
+
                                 if ((Singlepnl.Panel_GlassType_Insu_Lami == "NA") || Singlepnl.Panel_GlassType_Insu_Lami == "")
                                 {
                                     #region Single 
@@ -9477,11 +9497,11 @@ namespace ModelLayer.Model.Quotation
                                 if (Singlepnl.Panel_GlassThickness != 0.0f)
                                 {
 
-                                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                    if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                                     }
-                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                     }
@@ -9555,6 +9575,11 @@ namespace ModelLayer.Model.Quotation
                                 InstallationPoints += (ProfileColorPoints / 3) * 2;
 
                                 #region Glass 
+                                if (cus_ref_date >= changeCondition_022323)
+                                {
+                                    Singlepnl.Panel_GlassWidth = Singlepnl.Panel_DisplayWidth - (33 * 2) - 6;
+                                    Singlepnl.Panel_GlassHeight = Singlepnl.Panel_DisplayHeight - (33 * 2) - 6;
+                                }
 
                                 var GlassThcknessDesc_Holder = Singlepnl.Panel_GlassThicknessDesc;
                                 if (GlassThcknessDesc_Holder != null)
@@ -10255,11 +10280,11 @@ namespace ModelLayer.Model.Quotation
                                 if (Singlepnl.Panel_GlassThickness != 0.0f)
                                 {
 
-                                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                    if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                                     }
-                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                     }
@@ -10269,8 +10294,20 @@ namespace ModelLayer.Model.Quotation
                                 #region GeorgianBar
                                 if (Singlepnl.Panel_GeorgianBarOptionVisibility == true)
                                 {
-                                    GeorgianBarHorizontalQty = Singlepnl.Panel_GeorgianBar_HorizontalQty * 2;
-                                    GeorgianBarVerticalQty = Singlepnl.Panel_GeorgianBar_VerticalQty * 2;
+                                    int GBmultiplier = 1, multiplier = 1;
+
+                                    if (cus_ref_date >= changeCondition_020323)
+                                    {
+                                        GBmultiplier = 2;
+                                    }
+
+                                    if (cus_ref_date >= changeCondition_072723)
+                                    {
+                                        multiplier = 2;
+                                    }
+
+                                    GeorgianBarHorizontalQty = Singlepnl.Panel_GeorgianBar_HorizontalQty * GBmultiplier;
+                                    GeorgianBarVerticalQty = Singlepnl.Panel_GeorgianBar_VerticalQty * GBmultiplier;
 
                                     if (wdm.WD_BaseColor == Base_Color._Ivory ||
                                         wdm.WD_BaseColor == Base_Color._White)
@@ -10279,7 +10316,7 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
                                             {
-                                                GeorgianBarCost += (((Singlepnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * 2;
+                                                GeorgianBarCost += (((Singlepnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * multiplier;
                                             }
                                             if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
                                             {
@@ -10862,11 +10899,11 @@ namespace ModelLayer.Model.Quotation
 
                                 if (Singlepnl.Panel_GlassThickness != 0.0f)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                    if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                                     }
-                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                     }
@@ -10905,6 +10942,13 @@ namespace ModelLayer.Model.Quotation
 
                     wdm.WD_CostingPoints = CostingPoints;
                     LaborCost = CostingPoints * CostPerPoints;
+
+                    if (OneSideFoil_whiteBase == true &&
+                        wdm.WD_profile != "PremiLine Profile")
+                    {
+                        LaborCost = LaborCost * 1.03m;
+                    }
+
                     InstallationCost = InstallationPoints * CostPerPoints;
 
                     // Math.Round( , 2) +
@@ -11020,6 +11064,11 @@ namespace ModelLayer.Model.Quotation
                                 Math.Round(GlassPrice, 2) +
                                 Math.Round(FilmPrice, 2) +
                                 Math.Round(SecurityMeshPrice, 2);
+
+                    if (cus_ref_date >= changeCondition_072723)
+                    {
+                        TotaPrice = TotaPrice - Math.Round(SecurityMeshPrice, 2);
+                    }
 
                     BaseTotalPrice = TotaPrice;
 
@@ -12014,6 +12063,8 @@ namespace ModelLayer.Model.Quotation
 
         public void ClearingOperation()
         {
+            OneSideFoil_whiteBase = false;
+
             CostingPoints = 0;
             InstallationPoints = 0;
             TotaPrice = 0;
