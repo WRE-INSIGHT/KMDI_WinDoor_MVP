@@ -72,6 +72,7 @@ namespace PresentationLayer.Views
                 refreshToolStripButton.Enabled = value;
                 ViewImagerToolStripButton1.Enabled = value;
                 deleteItemToolStripButton1.Enabled = value;
+                glassUpgradeToolStrip.Enabled = value;
             }
         }
 
@@ -289,6 +290,7 @@ namespace PresentationLayer.Views
         public event EventHandler MainViewClosedEventRaised;
         public event EventHandler PriceHistorytoolStripButtonClickEventRaised;
         public event EventHandler DateAssignedtoolStripButtonClickEventRaised;
+        public event EventHandler glassUpgradeToolStripButtonClickEventRaised;
         public MainView()
         {
             InitializeComponent();
@@ -722,6 +724,11 @@ namespace PresentationLayer.Views
         private void DateAssignedtoolStripButton_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, DateAssignedtoolStripButtonClickEventRaised, e);
+        }
+
+        private void glassUpgradeToolStrip_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, glassUpgradeToolStripButtonClickEventRaised, e);
         }
     }
 }

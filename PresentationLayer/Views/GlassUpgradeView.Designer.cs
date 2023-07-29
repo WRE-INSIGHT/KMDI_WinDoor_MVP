@@ -30,7 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GlassUpgradeView));
             this.panel_Header = new System.Windows.Forms.Panel();
+            this.cmb_multipleGlassUpgrade = new System.Windows.Forms.ComboBox();
+            this.lbl_multipleGlassUpgrade = new System.Windows.Forms.Label();
             this.chkbx_Duplicate = new System.Windows.Forms.CheckBox();
             this.chkbx_selectall = new System.Windows.Forms.CheckBox();
             this.btn_add = new System.Windows.Forms.Button();
@@ -59,6 +62,7 @@
             this.glassUpgradeDGV = new System.Windows.Forms.DataGridView();
             this.cmsGlassUpgrade = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.upgradeToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.num_glassAmount = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.num_wdwsAndDoors = new System.Windows.Forms.NumericUpDown();
@@ -78,6 +82,8 @@
             // panel_Header
             // 
             this.panel_Header.BackColor = System.Drawing.SystemColors.Window;
+            this.panel_Header.Controls.Add(this.cmb_multipleGlassUpgrade);
+            this.panel_Header.Controls.Add(this.lbl_multipleGlassUpgrade);
             this.panel_Header.Controls.Add(this.chkbx_Duplicate);
             this.panel_Header.Controls.Add(this.chkbx_selectall);
             this.panel_Header.Controls.Add(this.btn_add);
@@ -105,6 +111,28 @@
             this.panel_Header.Name = "panel_Header";
             this.panel_Header.Size = new System.Drawing.Size(932, 192);
             this.panel_Header.TabIndex = 0;
+            // 
+            // cmb_multipleGlassUpgrade
+            // 
+            this.cmb_multipleGlassUpgrade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmb_multipleGlassUpgrade.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmb_multipleGlassUpgrade.FormattingEnabled = true;
+            this.cmb_multipleGlassUpgrade.Location = new System.Drawing.Point(23, 168);
+            this.cmb_multipleGlassUpgrade.Name = "cmb_multipleGlassUpgrade";
+            this.cmb_multipleGlassUpgrade.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cmb_multipleGlassUpgrade.Size = new System.Drawing.Size(266, 21);
+            this.cmb_multipleGlassUpgrade.TabIndex = 22;
+            // 
+            // lbl_multipleGlassUpgrade
+            // 
+            this.lbl_multipleGlassUpgrade.AutoSize = true;
+            this.lbl_multipleGlassUpgrade.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_multipleGlassUpgrade.ForeColor = System.Drawing.Color.Red;
+            this.lbl_multipleGlassUpgrade.Location = new System.Drawing.Point(13, 152);
+            this.lbl_multipleGlassUpgrade.Name = "lbl_multipleGlassUpgrade";
+            this.lbl_multipleGlassUpgrade.Size = new System.Drawing.Size(203, 15);
+            this.lbl_multipleGlassUpgrade.TabIndex = 21;
+            this.lbl_multipleGlassUpgrade.Text = "* Use only for multiple glass upgrade.";
             // 
             // chkbx_Duplicate
             // 
@@ -193,7 +221,7 @@
             // txt_itemDesc
             // 
             this.txt_itemDesc.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txt_itemDesc.Location = new System.Drawing.Point(3, 163);
+            this.txt_itemDesc.Location = new System.Drawing.Point(165, 105);
             this.txt_itemDesc.Multiline = true;
             this.txt_itemDesc.Name = "txt_itemDesc";
             this.txt_itemDesc.Size = new System.Drawing.Size(23, 25);
@@ -407,16 +435,24 @@
             // cmsGlassUpgrade
             // 
             this.cmsGlassUpgrade.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.upgradeToToolStripMenuItem});
             this.cmsGlassUpgrade.Name = "cmsGlassUpgrade";
-            this.cmsGlassUpgrade.Size = new System.Drawing.Size(108, 26);
+            this.cmsGlassUpgrade.Size = new System.Drawing.Size(153, 70);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // upgradeToToolStripMenuItem
+            // 
+            this.upgradeToToolStripMenuItem.Name = "upgradeToToolStripMenuItem";
+            this.upgradeToToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.upgradeToToolStripMenuItem.Text = "Upgrade To";
+            this.upgradeToToolStripMenuItem.Click += new System.EventHandler(this.upgradeToToolStripMenuItem_Click);
             // 
             // num_glassAmount
             // 
@@ -471,6 +507,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel_Header);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(948, 549);
             this.Name = "GlassUpgradeView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -531,5 +568,8 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.CheckBox chkbx_selectall;
         private System.Windows.Forms.CheckBox chkbx_Duplicate;
+        private System.Windows.Forms.ToolStripMenuItem upgradeToToolStripMenuItem;
+        private System.Windows.Forms.Label lbl_multipleGlassUpgrade;
+        private System.Windows.Forms.ComboBox cmb_multipleGlassUpgrade;
     }
 }

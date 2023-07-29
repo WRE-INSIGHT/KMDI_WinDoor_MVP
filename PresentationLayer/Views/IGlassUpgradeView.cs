@@ -29,8 +29,8 @@ namespace PresentationLayer.Views
         event EventHandler chkbx_selectall_CheckedChangedEventRaised;
         event FormClosingEventHandler GlassUpgradeView_FormClosingEventRaised;
         event EventHandler _printBtn_ClickEventRaised;
-
-
+        event EventHandler upgradeToToolStripMenuItemClickEventRaised;
+        
 
         void CloseGlassUpgradeView();
         ComboBox GlassTypeCmb();
@@ -42,6 +42,7 @@ namespace PresentationLayer.Views
 
         Panel ItemDescriptionPnl();
         CheckBox SelectAllItems();
+        ComboBox MultipleGlassUpgrade();
         void ShowGlassUpgradeView();
     }
 }

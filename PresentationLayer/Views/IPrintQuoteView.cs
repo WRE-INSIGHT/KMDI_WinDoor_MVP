@@ -6,6 +6,7 @@ namespace PresentationLayer.Views
 {
     public interface IPrintQuoteView
     {
+        string GlassType { get; set; }
         string QuotationAddress { get; set; }
         string QuotationSalutation { get; set; }
         string QuotationBody { get; set; }
@@ -25,15 +26,16 @@ namespace PresentationLayer.Views
         CheckedListBox GetChkLstBox();
         CheckBox GetShowPageNum();
         CheckBox GetSubTotalCheckBox();
-   
+        ComboBox GetReviewedByCmb();
+        ComboBox GetNotedByCmb();
+
         void ShowPrintQuoteView();
-
-
+        
         event EventHandler btnRefreshClickEventRaised;
         event EventHandler PrintQuoteViewLoadEventRaised;
         event EventHandler SelectedIndexChangeEventRaised;
         event EventHandler txtoftexpensesKeyPressEventRaised;
-        event EventHandler chkboxLnMCheckedChangedEventRaised;
+        event EventHandler chkboxLnMCheckedChangedEventRaised;  
         event EventHandler chkboxFCCheckedChangedEventRaised;
         event EventHandler chkboxVATCheckedChangedEventRaised;
         event EventHandler chkboxLessDCheckedChangedEventRaised;

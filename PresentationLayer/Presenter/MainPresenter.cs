@@ -1006,6 +1006,13 @@ namespace PresentationLayer.Presenter
             _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
             _mainView.PriceHistorytoolStripButtonClickEventRaised += _mainView_PriceHistorytoolStripButtonClickEventRaised;
             _mainView.DateAssignedtoolStripButtonClickEventRaised += _mainView_DateAssignedtoolStripButtonClickEventRaised;
+            _mainView.glassUpgradeToolStripButtonClickEventRaised += _mainView_glassUpgradeToolStripButtonClickEventRaised;
+        }
+
+        private void _mainView_glassUpgradeToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
+            glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
         }
 
         private void _mainView_DateAssignedtoolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -3652,18 +3659,16 @@ namespace PresentationLayer.Presenter
         }
         private void OnViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-            //toggle = !toggle;
-            //if (toggle == true)
-            //{
-            //    _basePlatformImagerUCPresenter.BringToFront_baseImager();
-            //}
-            //else if (toggle == false)
-            //{
-            //    _basePlatformImagerUCPresenter.SendToBack_baseImager();
-            //}
+            toggle = !toggle;
+            if (toggle == true)
+            {
+                _basePlatformImagerUCPresenter.BringToFront_baseImager();
+            }
+            else if (toggle == false)
+            {
+                _basePlatformImagerUCPresenter.SendToBack_baseImager();
+            }
 
-            IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
-            glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
 
         }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)

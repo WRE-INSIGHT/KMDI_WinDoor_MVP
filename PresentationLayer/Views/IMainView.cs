@@ -48,6 +48,7 @@ namespace PresentationLayer.Views
         event EventHandler MainViewClosedEventRaised;
         event EventHandler PriceHistorytoolStripButtonClickEventRaised;
         event EventHandler DateAssignedtoolStripButtonClickEventRaised;
+        event EventHandler glassUpgradeToolStripButtonClickEventRaised;
 
         string mainview_title { get; set; }
         float Zoom { get; set; }

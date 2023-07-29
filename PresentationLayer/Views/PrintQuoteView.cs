@@ -15,6 +15,18 @@ namespace PresentationLayer.Views
         {
             InitializeComponent();
         }
+        string glassType;
+        public string GlassType
+        {
+            get
+            {
+                return glassType;
+            }
+            set
+            {
+                glassType = value;
+            }
+        }
         public string QuotationAddress
         {
             get
@@ -226,6 +238,15 @@ namespace PresentationLayer.Views
         public CheckBox GetSubTotalCheckBox()
         {
             return chkbox_subtotal;
+        }
+
+        public ComboBox GetReviewedByCmb()
+        {
+            return cmb_ReviewedBy;
+        }
+        public ComboBox GetNotedByCmb()
+        {
+            return cmb_NotedBy;
         }
 
         public event EventHandler btnRefreshClickEventRaised;
