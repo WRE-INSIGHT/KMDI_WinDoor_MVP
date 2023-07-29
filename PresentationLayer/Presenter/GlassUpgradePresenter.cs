@@ -63,8 +63,7 @@ namespace PresentationLayer.Presenter
              changeGlassType = false,
             _isUnglazed,
             _addItem,
-            _glassTypeWithPriKeyExist,
-            _isfromMultipleGlassUpgrade = false;
+            _glassTypeWithPriKeyExist;
 
 
         #endregion
@@ -107,12 +106,127 @@ namespace PresentationLayer.Presenter
 
         private void _glassUpgradeView_upgradeToToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
+            List<int> indx = new List<int>();
+
             foreach(DataGridViewRow dgvRow in _dgv_GlassUpgrade.SelectedRows)
             {
-                _isfromMultipleGlassUpgrade = true;
+                indx.Add(Convert.ToInt32(dgvRow.Cells[0].RowIndex));
             }
 
-            _isfromMultipleGlassUpgrade = false;
+            foreach(var rows in indx.ToList())
+            {
+                MultipleGlassUpgrade(rows,7,_cmbMultipleGlassUpgrade.SelectedItem.ToString());
+            }
+        }
+        private void MultipleGlassUpgrade(int currCell_row, int currCell_col, string currCell_value)
+        {
+            bool _isNegative = false;
+
+            /*
+             row[2] = Qty
+             row[3] = widht
+             row[4] = height
+             row[5] = original glass
+             row[6] = orignal glass price
+             row[7] = selected glass
+             row[8] = selected glass price
+             row[9] = Upgrade Value
+             row[10] = amount per unit
+             row[11] = total net price
+             */
+
+            try
+            {
+                if (currCell_col != 0 && currCell_col != 1)
+                {
+                    if (!_isUnglazed)
+                    {
+                        #region non-unglazed
+
+                        if (currCell_col == 7)
+                        {
+                            _glassTypeWithPriKeyExist = PrimaryAndGlassTypeChecker(currCell_row, currCell_value);
+                            if (!_glassTypeWithPriKeyExist)
+                            {
+                                _glassUpgradeDT.Rows[currCell_row][currCell_col] = currCell_value;
+                            }
+                        }
+                        else
+                        {
+                            _glassUpgradeDT.Rows[currCell_row][currCell_col] = currCell_value;
+                            _glassTypeWithPriKeyExist = false;
+                        }
+
+                        if (!_glassTypeWithPriKeyExist)
+                        {
+                            foreach (DataRow dtrow in _mainPresenter.GlassThicknessDT.Rows)
+                            {
+                                string _selectedGlass = _glassUpgradeDT.Rows[currCell_row][7].ToString();
+
+                                if (dtrow[1].ToString() == _selectedGlass)
+                                {
+                                    _glassUpgradeDT.Rows[currCell_row][8] = dtrow[3].ToString(); // assign selected glass price
+                                    string _prevGlassPrice = _glassUpgradeDT.Rows[currCell_row][6].ToString(); // original glass price 
+                                    string _selectedGlassPrice = _glassUpgradeDT.Rows[currCell_row][8].ToString();// selected glass price
+
+                                    decimal _convePrevGlassPrice = Convert.ToDecimal(_prevGlassPrice);
+                                    decimal _conveSelectedGlassPrice = Convert.ToDecimal(_selectedGlassPrice);
+                                    decimal _upgradeValue;
+
+                                    if (_conveSelectedGlassPrice > _convePrevGlassPrice)
+                                    {
+                                        _upgradeValue = _conveSelectedGlassPrice - _convePrevGlassPrice;// glass Upgrade Value
+                                        _glassUpgradeDT.Rows[currCell_row][9] = _upgradeValue.ToString("n");
+                                    }
+                                    else
+                                    {
+                                        _upgradeValue = _convePrevGlassPrice - _conveSelectedGlassPrice;// glass Upgrade Value
+                                        _glassUpgradeDT.Rows[currCell_row][9] = "(" + _upgradeValue.ToString("n") + ")";
+                                        _isNegative = true;
+                                    }
+
+                                    decimal _glassQty = Convert.ToDecimal(_glassUpgradeDT.Rows[currCell_row][2]);
+                                    decimal _glassWidth = Convert.ToDecimal(_glassUpgradeDT.Rows[currCell_row][3]);
+                                    decimal _glassHeight = Convert.ToDecimal(_glassUpgradeDT.Rows[currCell_row][4]);
+
+                                    decimal _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.1m) / 1000000m, 2);// glass amount per unit
+                                    decimal _totalNetPrice = Math.Round(_amountPerUnit * _glassQty, 2);// glass total net price
+
+
+                                    if (_isNegative)
+                                    {
+                                        _glassUpgradeDT.Rows[currCell_row][10] = "(" + _amountPerUnit.ToString("n") + ")";
+                                        _glassUpgradeDT.Rows[currCell_row][11] = "(" + _totalNetPrice.ToString("n") + ")";
+                                    }
+                                    else
+                                    {
+                                        _glassUpgradeDT.Rows[currCell_row][10] = _amountPerUnit.ToString("n");
+                                        _glassUpgradeDT.Rows[currCell_row][11] = _totalNetPrice.ToString("n");
+                                    }
+                                    _glassUpgradeDT.Rows[currCell_row][12] = _cmbGlassType.SelectedItem.ToString();
+                                    break;
+                                }
+                            }
+                            _dgv_GlassUpgrade.DataSource = PopulateDgvGlassUpgrade();
+                            TotalGlassAndWindoorsAmount();
+                            #endregion
+                        }
+                        else
+                        {
+                            if (currCell_value != "")
+                            {
+                                MessageBox.Show("Some Panel Have Same GlassType");
+                                _dgv_GlassUpgrade.DataSource = PopulateDgvGlassUpgrade();
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch
+            {
+                //MessageBox.Show("Error in Loading GlassList");
+            }
         }
 
         private DataColumn CreateColumn(string columnName, string caption, string type)
