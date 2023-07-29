@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintQuoteView));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtbox_rowlimit = new System.Windows.Forms.TextBox();
             this.chkbox_subtotal = new System.Windows.Forms.CheckBox();
             this.chkbox_LessD = new System.Windows.Forms.CheckBox();
             this.txtbox_LessD = new System.Windows.Forms.TextBox();
@@ -58,13 +59,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.BSQuotation = new System.Windows.Forms.BindingSource(this.components);
-            this.txtbox_rowlimit = new System.Windows.Forms.TextBox();
+            this.cmb_NotedBy = new System.Windows.Forms.ComboBox();
+            this.cmb_ReviewedBy = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BSQuotation)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cmb_ReviewedBy);
+            this.panel1.Controls.Add(this.cmb_NotedBy);
             this.panel1.Controls.Add(this.txtbox_rowlimit);
             this.panel1.Controls.Add(this.chkbox_subtotal);
             this.panel1.Controls.Add(this.chkbox_LessD);
@@ -97,6 +101,14 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1008, 144);
             this.panel1.TabIndex = 2;
+            // 
+            // txtbox_rowlimit
+            // 
+            this.txtbox_rowlimit.Location = new System.Drawing.Point(503, 0);
+            this.txtbox_rowlimit.Name = "txtbox_rowlimit";
+            this.txtbox_rowlimit.Size = new System.Drawing.Size(94, 25);
+            this.txtbox_rowlimit.TabIndex = 31;
+            this.txtbox_rowlimit.Visible = false;
             // 
             // chkbox_subtotal
             // 
@@ -363,13 +375,23 @@
             // 
             this.BSQuotation.CurrentChanged += new System.EventHandler(this.BSQuotation_CurrentChanged);
             // 
-            // txtbox_rowlimit
+            // cmb_NotedBy
             // 
-            this.txtbox_rowlimit.Location = new System.Drawing.Point(503, 0);
-            this.txtbox_rowlimit.Name = "txtbox_rowlimit";
-            this.txtbox_rowlimit.Size = new System.Drawing.Size(94, 25);
-            this.txtbox_rowlimit.TabIndex = 31;
-            this.txtbox_rowlimit.Visible = false;
+            this.cmb_NotedBy.FormattingEnabled = true;
+            this.cmb_NotedBy.Location = new System.Drawing.Point(838, 1);
+            this.cmb_NotedBy.Name = "cmb_NotedBy";
+            this.cmb_NotedBy.Size = new System.Drawing.Size(46, 25);
+            this.cmb_NotedBy.TabIndex = 32;
+            this.cmb_NotedBy.Visible = false;
+            // 
+            // cmb_ReviewedBy
+            // 
+            this.cmb_ReviewedBy.FormattingEnabled = true;
+            this.cmb_ReviewedBy.Location = new System.Drawing.Point(890, 1);
+            this.cmb_ReviewedBy.Name = "cmb_ReviewedBy";
+            this.cmb_ReviewedBy.Size = new System.Drawing.Size(46, 25);
+            this.cmb_ReviewedBy.TabIndex = 33;
+            this.cmb_ReviewedBy.Visible = false;
             // 
             // PrintQuoteView
             // 
@@ -425,5 +447,7 @@
         private System.Windows.Forms.CheckBox chkbox_LessD;
         private System.Windows.Forms.CheckBox chkbox_subtotal;
         private System.Windows.Forms.TextBox txtbox_rowlimit;
+        private System.Windows.Forms.ComboBox cmb_ReviewedBy;
+        private System.Windows.Forms.ComboBox cmb_NotedBy;
     }
 }

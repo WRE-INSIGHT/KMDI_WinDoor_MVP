@@ -165,6 +165,7 @@ namespace PresentationLayer.Presenter
 
         private DataTable _glassThicknessDT = new DataTable();
         private DataTable _glassTypeDT = new DataTable();
+        private DataTable _guHolderDT = new DataTable();
         private DataTable _spacerDT = new DataTable();
         private DataTable _colorDT = new DataTable();
 
@@ -196,7 +197,6 @@ namespace PresentationLayer.Presenter
 
         #region GetSet
         private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
-
         public IDictionary<string, string> RDLCHeader
         {
             get { return _rdlcHeaders; }
@@ -207,6 +207,18 @@ namespace PresentationLayer.Presenter
         {
             get { return _screenList; }
             set { _screenList = value; }
+        }
+        private List<DataRow> _nonUnglazed = new List<DataRow>();
+        public List<DataRow> NonUnglazed
+        {
+            get { return _nonUnglazed; }
+            set { _nonUnglazed = value; }
+        }
+        private List<DataRow> _unglazed = new List<DataRow>();
+        public List<DataRow> Unglazed
+        {
+            get { return _unglazed; }
+            set { _unglazed = value; }
         }
 
         public bool ProvinceIntownOutofTown
@@ -994,6 +1006,13 @@ namespace PresentationLayer.Presenter
             _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
             _mainView.PriceHistorytoolStripButtonClickEventRaised += _mainView_PriceHistorytoolStripButtonClickEventRaised;
             _mainView.DateAssignedtoolStripButtonClickEventRaised += _mainView_DateAssignedtoolStripButtonClickEventRaised;
+            _mainView.glassUpgradeToolStripButtonClickEventRaised += _mainView_glassUpgradeToolStripButtonClickEventRaised;
+        }
+
+        private void _mainView_glassUpgradeToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
+            glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
         }
 
         private void _mainView_DateAssignedtoolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -1801,6 +1820,48 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add(".");
             }
 
+            foreach(var item in _nonUnglazed)
+            {
+                wndr_content.Add("</NU>");
+                wndr_content.Add("Item No: " + item[0].ToString());
+                wndr_content.Add("Window/Door I.D.: " + item[1].ToString());
+                wndr_content.Add("Qty: " + item[2].ToString());
+                wndr_content.Add("Width: " + item[3].ToString());
+                wndr_content.Add("Height: " + item[4].ToString());
+                wndr_content.Add("Original Glass Used: " + item[5].ToString());
+                wndr_content.Add("GlassPrice: " + item[6].ToString());
+                wndr_content.Add("Upgraded To: " + item[7].ToString());
+                wndr_content.Add("Glass Upgrade Price: " + item[8].ToString());
+                wndr_content.Add("Upgrade Value: " + item[9].ToString());
+                wndr_content.Add("Amount Per Unit: " + item[10].ToString());
+                wndr_content.Add("Total Net Prices: " + item[11].ToString());
+                wndr_content.Add("GlassType: " + item[12].ToString());
+                wndr_content.Add("Primary Key: " + item[13].ToString());
+                wndr_content.Add("</NU>");
+            }
+
+            #region load unglazed GU 
+            //foreach(var item in _unglazed)
+            //{
+            //    wndr_content.Add("<\\U>");
+            //    wndr_content.Add("Item No: " + item[0].ToString());
+            //    wndr_content.Add("Window/Door I.D.: " + item[1].ToString());
+            //    wndr_content.Add("Unit Price: " + item[2].ToString());
+            //    wndr_content.Add("Net Price: " + item[3].ToString());
+            //    wndr_content.Add("Qty: " + item[4].ToString());
+            //    wndr_content.Add("Width: " + item[5].ToString());
+            //    wndr_content.Add("Height: " + item[6].ToString());
+            //    wndr_content.Add("Original Glass Used: " + item[7].ToString());
+            //    wndr_content.Add("GlassPrice: " + item[8].ToString());
+            //    wndr_content.Add("New GlassPrice: " + item[9].ToString());
+            //    wndr_content.Add("Net Unit Price: " + item[10].ToString());
+            //    wndr_content.Add("List Unit Price: " + item[11].ToString());
+            //    wndr_content.Add("Total Amount(Glass): " + item[12].ToString());
+            //    wndr_content.Add("Total Amount(Unglazed-Window/Door): " + item[13].ToString());
+            //    wndr_content.Add("Primary Key: " + item[14].ToString());
+            //    wndr_content.Add("<//>");
+            //}
+            #endregion
 
             wndr_content.Add("EndofFile");
             #endregion
@@ -3598,18 +3659,16 @@ namespace PresentationLayer.Presenter
         }
         private void OnViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-            //toggle = !toggle;
-            //if (toggle == true)
-            //{
-            //    _basePlatformImagerUCPresenter.BringToFront_baseImager();
-            //}
-            //else if (toggle == false)
-            //{
-            //    _basePlatformImagerUCPresenter.SendToBack_baseImager();
-            //}
+            toggle = !toggle;
+            if (toggle == true)
+            {
+                _basePlatformImagerUCPresenter.BringToFront_baseImager();
+            }
+            else if (toggle == false)
+            {
+                _basePlatformImagerUCPresenter.SendToBack_baseImager();
+            }
 
-            IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
-            glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
 
         }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -3631,7 +3690,7 @@ namespace PresentationLayer.Presenter
                         {
                             _mainView.GetToolStripLabelLoading().Text = "Initializing";
                         }
-
+                     
                         break;
                     default:
                         break;
@@ -3950,6 +4009,18 @@ namespace PresentationLayer.Presenter
                     inside_rdlcDic = true;
                 }
             }
+            else if(row_str == "</NU>")
+            {
+                if (inside_GlassUpgrade)
+                {
+                    Load_GlassUpgrade();
+                    inside_GlassUpgrade = false;
+                }
+                 else
+                {
+                    inside_GlassUpgrade = true;
+                }
+            }
 
 
             if (row_str == "EndofFile")
@@ -4012,6 +4083,10 @@ namespace PresentationLayer.Presenter
                     {
                         _dateAssigned = Convert.ToDateTime(extractedValue_str);
                     }
+                    else if (row_str.Contains("Date_Assigned_Mainpresenter:"))
+                    {
+                        _quotationModel.Date_Assigned_Mainpresenter = Convert.ToDateTime(extractedValue_str);
+                    }
                     else if (row_str.Contains("AEIC:"))
                     {
                         _aeic = extractedValue_str;
@@ -4039,7 +4114,7 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
                         _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                         _quotationModel.Date_Assigned = dateAssigned;
-                        _quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
+                        //_quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
                     }
                     else if (row_str.Contains("Frame_PUFoamingQty_Total"))
                     {
@@ -8495,6 +8570,67 @@ namespace PresentationLayer.Presenter
                         }
                         #endregion
                     }
+                    else if (inside_GlassUpgrade)
+                    {
+                        #region Load for GlassUpgrade
+                        if (row_str.Contains("Item No:"))
+                        {
+                            _guItemNo = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Window/Door I.D.:"))
+                        {
+                            _guWindoorID = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Qty:"))
+                        {
+                            _guQty = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Width:"))
+                        {
+                            _guWidth = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Height:"))
+                        {
+                            _guHeight = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Original Glass Used:"))
+                        {
+                            _guOrigGlass = extractedValue_str;
+                        }
+                        else if (row_str.Contains("GlassPrice:"))
+                        {
+                            _guGlassPrice = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Upgraded To:"))
+                        {
+                           _guUpgradeTo = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Glass Upgrade Price:"))
+                        {
+                           _guGlassUpgradePrice = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Upgrade Value:"))
+                        {
+                            _guUpgradeValue = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Amount Per Unit:"))
+                        {
+                            _guAmountPerUnit = extractedValue_str;
+                        }
+                        else if(row_str.Contains("Total Net Prices:"))
+                        {
+                           _guTotalNetPrice = extractedValue_str;
+                        }
+                        else if (row_str.Contains("GlassType:"))
+                        {
+                            _guGlassType = extractedValue_str;
+                        }
+                        else if(row_str.Contains("Primary Key:"))
+                        {
+                            _guPrimaryKey = extractedValue_str;
+                        }
+                        #endregion
+                    }
                     break;
             }
 
@@ -9397,9 +9533,48 @@ namespace PresentationLayer.Presenter
             _windoorModel.lst_TotalPriceHistory.Add(_quoteHistory);
             _quoteHistory = null;
         }
+        private void Load_GlassUpgrade()
+        {
+         
+            if (!_guHolderDT.Columns.Contains("Item No."))
+            {
+                _guHolderDT.Columns.Add("Item No.", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Window/Door I.D.", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Qty", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Width", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Height", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Original Glass Used", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("GlassPrice", Type.GetType("System.String"));
+
+                _guHolderDT.Columns.Add("Upgraded To", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Glass Upgrade Price", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Upgrade Value", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Amount Per Unit", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Total Net Prices", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("GlassType", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Primary Key", Type.GetType("System.String"));
+            }               
+                _guHolderDT.Rows.Add(_guItemNo,
+                            _guWindoorID,
+                            _guQty,
+                            _guWidth,
+                            _guHeight,
+                            _guOrigGlass,
+                            _guGlassPrice,
+                            _guUpgradeTo,
+                            _guGlassUpgradePrice,
+                            _guUpgradeValue,
+                            _guAmountPerUnit,
+                            _guTotalNetPrice,
+                            _guGlassType,
+                            _guPrimaryKey);
+
+            _nonUnglazed = _guHolderDT.AsEnumerable().ToList();
+        }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory,
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, 
+             inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory,inside_GlassUpgrade,
              rdlcDicChangeKey = true,
              add_existing = false,
             _allpanelsIsMesh;
@@ -10002,13 +10177,29 @@ namespace PresentationLayer.Presenter
         #region Quotation History Properties
         string _quoteHistory;
         #endregion
+        #region GlassUpgrade Properties
+        string _guItemNo,
+               _guWindoorID,
+               _guQty,
+               _guWidth,
+               _guHeight,
+               _guOrigGlass,
+               _guGlassPrice,
+               _guUpgradeTo,
+               _guGlassUpgradePrice,
+               _guUpgradeValue,
+               _guAmountPerUnit,
+               _guTotalNetPrice,
+               _guGlassType,
+               _guPrimaryKey;
+                           
+        #endregion
         string mpnllvl = "";
 
         #region ViewUpdate(Controls)
 
         public void Clearing_Operation()
         {
-
 
             _quotationModel = null;
             _frameModel = null;
@@ -10026,6 +10217,8 @@ namespace PresentationLayer.Presenter
             _multiModelParent = null;
             mpnllvl = string.Empty;
             _screenList = new List<IScreenModel>();
+            _nonUnglazed = new List<DataRow>();
+            _guHolderDT.Clear();
             _pnlItems.Controls.Clear();
 
 
@@ -10139,7 +10332,7 @@ namespace PresentationLayer.Presenter
         {
             if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
             {
-                if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
+                 if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     Clearing_Operation();
                 }

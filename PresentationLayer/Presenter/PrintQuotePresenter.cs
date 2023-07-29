@@ -43,10 +43,14 @@ namespace PresentationLayer.Presenter
                baseColor,
                Less_Discount_key;
 
+        string[] _officialsName = { "KENNETH G. LAO","GENALYN C. GARCIA","STEPHANIE DE LOS SANTOS","KEVIN CHARLES S. LAO"};
+        string[] _officialsPosition = {"President,KMDI","VP-Sales & Operations","VP-Marketing & Finance","Head, Sales & Operations" };
 
-
-
-
+        int count = 0,
+            newlinecount = 0;
+        bool change_desc_format = false;
+        string separete_descFormat = null;
+        List<string> description_string_list = new List<string>();
 
         public PrintQuotePresenter(IPrintQuoteView printQuoteView)
         {
@@ -126,6 +130,11 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetVatTxtbox().Location = new System.Drawing.Point(Vat_X_Loc, 90);
                     _printQuoteView.GetVatTxtbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
                 }
+                else if (_mainPresenter.printStatus == "GlassUpgrade")
+                {
+                    _printQuoteView.GetVatTxtbox().Visible = true;
+                    _printQuoteView.GetVatTxtbox().Location = new System.Drawing.Point(330, 26);
+                }
             }
             else
             {
@@ -152,10 +161,17 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetFreightChargeTxtBox().Location = new System.Drawing.Point(FreightC_X_Loc, 59);
                     _printQuoteView.GetFreightChargeTxtBox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
                 }
+                else if (_mainPresenter.printStatus == "GlassUpgrade")
+                {
+                    _printQuoteView.GetNotedByCmb().Visible = true;
+                    _printQuoteView.GetNotedByCmb().Location = new System.Drawing.Point(226, 113);
+                }
             }
             else
             {
                 _printQuoteView.GetFreightChargeTxtBox().Visible = false;
+                _printQuoteView.GetNotedByCmb().Visible = false;
+
             }
         }
 
@@ -179,10 +195,17 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetLabor_N_MobiTxtBox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
                     
                 }
+                else if (_mainPresenter.printStatus == "GlassUpgrade")
+                {
+                    _printQuoteView.GetReviewedByCmb().Visible = true;
+                    _printQuoteView.GetReviewedByCmb().Location = new System.Drawing.Point(226, 70);
+                }
             }
             else
             {
                 _printQuoteView.GetLabor_N_MobiTxtBox().Visible = false;
+                _printQuoteView.GetReviewedByCmb().Visible = false;
+
             }
         }
 
@@ -203,44 +226,46 @@ namespace PresentationLayer.Presenter
             {
                 Less_Discount_key = _mainPresenter.printStatus + "_" + "Less_Discount";
             }
-            
 
-            if (_rdlcHeaderIsPresent == true)
+            if (_mainPresenter.printStatus != "GlassUpgrade")
             {
-                //_mainPresenter.RDLCHeader[GlassThickness_key] = GlassThickness;
-                //_mainPresenter.RDLCHeader[basecolor_key] = baseColor;
-                _mainPresenter.RDLCHeader[QuotationBody_key] = _printQuoteView.QuotationBody;
-                _mainPresenter.RDLCHeader[QuotationSalutation_key] = _printQuoteView.QuotationSalutation;
-                _mainPresenter.RDLCHeader[QuotationAddress_key] = _printQuoteView.QuotationAddress;
-                _mainPresenter.RDLCHeader[VatPercentage_key] = _printQuoteView.VatPercentage;
-                _mainPresenter.RDLCHeader[QuotationOuofTownExpenses_key] = _printQuoteView.QuotationOuofTownExpenses;
-                _mainPresenter.RDLCHeader[LaborandMobilization_key] = _printQuoteView.LaborandMobilization;
-                _mainPresenter.RDLCHeader[FreightCharge_key] = _printQuoteView.FreightCharge;
-
-                //specific for contract summarry
-                if (_mainPresenter.printStatus == "ContractSummary")
+                if (_rdlcHeaderIsPresent == true)
                 {
-                    _mainPresenter.RDLCHeader[Less_Discount_key] = _printQuoteView.LessDiscount;
-                }
-            }
-            else
-            {            
-                //_mainPresenter.RDLCHeader.Add(GlassThickness_key,GlassThickness);
-                //_mainPresenter.RDLCHeader.Add(basecolor_key,baseColor);
-                _mainPresenter.RDLCHeader.Add(QuotationBody_key, _printQuoteView.QuotationBody);
-                _mainPresenter.RDLCHeader.Add(QuotationSalutation_key, _printQuoteView.QuotationSalutation);
-                _mainPresenter.RDLCHeader.Add(QuotationAddress_key, _printQuoteView.QuotationAddress);
-                _mainPresenter.RDLCHeader.Add(VatPercentage_key, _printQuoteView.VatPercentage);
-                _mainPresenter.RDLCHeader.Add(QuotationOuofTownExpenses_key,_printQuoteView.QuotationOuofTownExpenses);
-                _mainPresenter.RDLCHeader.Add(LaborandMobilization_key, _printQuoteView.LaborandMobilization);
-                _mainPresenter.RDLCHeader.Add(FreightCharge_key, _printQuoteView.FreightCharge);
-                
-                //specific for contract summarry 
-                if (_mainPresenter.printStatus == "ContractSummary")
-                {
-                    _mainPresenter.RDLCHeader.Add(Less_Discount_key, _printQuoteView.LessDiscount);
-                }
+                    //_mainPresenter.RDLCHeader[GlassThickness_key] = GlassThickness;
+                    //_mainPresenter.RDLCHeader[basecolor_key] = baseColor;
+                    _mainPresenter.RDLCHeader[QuotationBody_key] = _printQuoteView.QuotationBody;
+                    _mainPresenter.RDLCHeader[QuotationSalutation_key] = _printQuoteView.QuotationSalutation;
+                    _mainPresenter.RDLCHeader[QuotationAddress_key] = _printQuoteView.QuotationAddress;
+                    _mainPresenter.RDLCHeader[VatPercentage_key] = _printQuoteView.VatPercentage;
+                    _mainPresenter.RDLCHeader[QuotationOuofTownExpenses_key] = _printQuoteView.QuotationOuofTownExpenses;
+                    _mainPresenter.RDLCHeader[LaborandMobilization_key] = _printQuoteView.LaborandMobilization;
+                    _mainPresenter.RDLCHeader[FreightCharge_key] = _printQuoteView.FreightCharge;
 
+                    //specific for contract summarry
+                    if (_mainPresenter.printStatus == "ContractSummary")
+                    {
+                        _mainPresenter.RDLCHeader[Less_Discount_key] = _printQuoteView.LessDiscount;
+                    }
+                }
+                else
+                {
+                    //_mainPresenter.RDLCHeader.Add(GlassThickness_key,GlassThickness);
+                    //_mainPresenter.RDLCHeader.Add(basecolor_key,baseColor);
+                    _mainPresenter.RDLCHeader.Add(QuotationBody_key, _printQuoteView.QuotationBody);
+                    _mainPresenter.RDLCHeader.Add(QuotationSalutation_key, _printQuoteView.QuotationSalutation);
+                    _mainPresenter.RDLCHeader.Add(QuotationAddress_key, _printQuoteView.QuotationAddress);
+                    _mainPresenter.RDLCHeader.Add(VatPercentage_key, _printQuoteView.VatPercentage);
+                    _mainPresenter.RDLCHeader.Add(QuotationOuofTownExpenses_key, _printQuoteView.QuotationOuofTownExpenses);
+                    _mainPresenter.RDLCHeader.Add(LaborandMobilization_key, _printQuoteView.LaborandMobilization);
+                    _mainPresenter.RDLCHeader.Add(FreightCharge_key, _printQuoteView.FreightCharge);
+
+                    //specific for contract summarry 
+                    if (_mainPresenter.printStatus == "ContractSummary")
+                    {
+                        _mainPresenter.RDLCHeader.Add(Less_Discount_key, _printQuoteView.LessDiscount);
+                    }
+
+                }
             }
         }
         public void EventLoad()
@@ -384,6 +409,41 @@ namespace PresentationLayer.Presenter
                 if (_mainPresenter.printStatus == "ScreenItem")
                 {
                     _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for the Insect Screens corresponding to our world-class PVC-u windows and doors from Germany for your requirements on your residence.";
+
+                    _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
+                                                    + _mainPresenter.titleLastname
+                                                    + ",";
+                    _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
+
+                    _printQuoteView.QuotationOuofTownExpenses = "0";
+                    _printQuoteView.VatPercentage = "12";
+                    _printQuoteView.LaborandMobilization = "0";
+                    _printQuoteView.FreightCharge = "0";
+                    _printQuoteView.LessDiscount = "30";
+                }
+                else if (_mainPresenter.printStatus == "GlassUpgrade")
+                {
+                    #region new Saluation,Body And Address for glass upgrade
+
+                    _printQuoteView.QuotationSalutation = "Dear " + _mainPresenter.titleLastname;
+                    _printQuoteView.QuotationAddress = _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
+                    _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for the "
+                                                      + _printQuoteView.GlassType + " corresponding to our world-class PVC-u windows and doors from"
+                                                      + " Germany for your requirements on your residence.";
+                    #endregion
+                    #region default value for checkbox and textbox
+                    _printQuoteView.GetLabor_N_MobiChkbox().CheckState = CheckState.Checked;
+                    _printQuoteView.GetFreightChargesChkbox().CheckState = CheckState.Checked;
+
+                    _printQuoteView.GetReviewedByCmb().Width = 200;
+                    _printQuoteView.GetNotedByCmb().Width = 200;
+                    _printQuoteView.VatPercentage = "12";
+
+                    #endregion
+
+                    AddItemsInReviewedAndNotedBy();
+                    _printQuoteView.GetReviewedByCmb().SelectedIndex = 3;
+                    _printQuoteView.GetNotedByCmb().SelectedIndex = 1;
                 }
                 else
                 {
@@ -395,20 +455,33 @@ namespace PresentationLayer.Presenter
                                                               + GlassThickness.ToUpper()
                                                               + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
                                                               + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION";
-                }
-
-                _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
+                    _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
                                                     + _mainPresenter.titleLastname
                                                     + ",";
-                _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
-                _printQuoteView.QuotationOuofTownExpenses = "0";
-                _printQuoteView.VatPercentage = "12";
-                _printQuoteView.LaborandMobilization = "0";
-                _printQuoteView.FreightCharge = "0";
-                _printQuoteView.LessDiscount = "30";
+                    _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
+
+
+                    _printQuoteView.QuotationOuofTownExpenses = "0";
+                    _printQuoteView.VatPercentage = "12";
+                    _printQuoteView.LaborandMobilization = "0";
+                    _printQuoteView.FreightCharge = "0";
+                    _printQuoteView.LessDiscount = "30";
+                    
+                }
+                                
             }
+
             _printQuoteView.GetDTPDate().Value = DateTime.Now;
             _printQuoteView.RowLimit = "22";
+        }
+
+        private void AddItemsInReviewedAndNotedBy()
+        {
+            foreach (var item in _officialsName)
+            {
+                _printQuoteView.GetReviewedByCmb().Items.Add(item);
+                _printQuoteView.GetNotedByCmb().Items.Add(item);
+            }
         }
         private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
         {
@@ -424,11 +497,7 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Location: " + this + "\n\n" + ex.Message);
             }
         }
-        int count = 0,
-            newlinecount = 0;
-        bool change_desc_format = false;
-        string separete_descFormat = null;
-        List<string> description_string_list = new List<string>();
+
         private void ShowItemImage()
         {
             foreach (var item in _printQuoteView.GetChkLstBox().CheckedIndices)
@@ -640,6 +709,10 @@ namespace PresentationLayer.Presenter
                 {
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.SummaryOfContract.rdlc";
                     //_printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Annex.rdlc";
+                }
+                else if(_mainPresenter.printStatus == "GlassUpgrade")
+                {
+                    _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.GlassUpgrade.rdlc";
                 }
 
                 if (_mainPresenter.printStatus == "ScreenItem")
@@ -1036,6 +1109,99 @@ namespace PresentationLayer.Presenter
                     #endregion
 
                     #endregion
+                }
+                else if (_mainPresenter.printStatus == "GlassUpgrade")
+                {
+                    _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+                    _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
+                    _printQuoteView.GetOutofTownExpenses().Visible = false;
+                    _printQuoteView.GetChkLstBox().Visible = false;
+                    _printQuoteView.ShowLastPage().Visible = false;
+                    _printQuoteView.GetUniversalLabel().Visible = false;
+                    _printQuoteView.GetOutofTownExpenses().Visible = false;
+
+                    #region label,TextBox & Rtextbox  new loc         
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(845, 26);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(639, 26);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(433, 26);
+
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(845, 3);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(639, 3);
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(433, 3);
+
+                    _printQuoteView.GetQuotationBody().Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(620, 118);
+                    _printQuoteView.GetQuotationBody().Width = _printQuoteView.GetQuotationBody().Width - 120;
+
+
+
+
+                    #endregion
+
+                    #region Visibility Additional info
+                    _printQuoteView.GetVatChkbox().Visible = true;
+                    _printQuoteView.GetLabor_N_MobiChkbox().Visible = true; // use labor&Mobi chkbox for showing "Reviewed By"
+                    _printQuoteView.GetFreightChargesChkbox().Visible = true; // use FreightCharge chkbox for showing "Noted By"
+
+                    _printQuoteView.GetLabor_N_MobiChkbox().Text = "Show Reviewed by";
+                    _printQuoteView.GetFreightChargesChkbox().Text = "Show Noted by";
+                    
+                    _printQuoteView.GetVatChkbox().Location = new System.Drawing.Point(205, 26);
+                    _printQuoteView.GetLabor_N_MobiChkbox().Location = new System.Drawing.Point(205, 51);
+                    _printQuoteView.GetFreightChargesChkbox().Location = new System.Drawing.Point(205, 93);
+
+                    #endregion
+
+
+                    ReportParameter[] RParam = new ReportParameter[15];
+                    RParam[0] = new ReportParameter("clientName", _printQuoteView.QuotationSalutation);
+                    RParam[1] = new ReportParameter("date", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
+                    RParam[2] = new ReportParameter("quoteNo", _mainPresenter.inputted_quotationRefNo);
+                    RParam[3] = new ReportParameter("vat", _printQuoteView.VatPercentage);
+                    RParam[4] = new ReportParameter("aeic", Convert.ToString(_mainPresenter.aeic).ToUpper());
+                    RParam[5] = new ReportParameter("aeic_pos", _mainPresenter.position);
+                    RParam[6] = new ReportParameter("clientAddress", _printQuoteView.QuotationAddress);
+                    RParam[8] = new ReportParameter("quoteBody", _printQuoteView.QuotationBody);
+
+                    if (_printQuoteView.GetVatChkbox().Checked)
+                    {
+                        RParam[7] = new ReportParameter("showVat", "True");
+                    }
+                    else
+                    {
+                        RParam[7] = new ReportParameter("showVat", "False");
+                    }
+
+                    if (_printQuoteView.GetLabor_N_MobiChkbox().Checked)
+                    {
+                        RParam[9] = new ReportParameter("showReviewedBy", "True");
+                    }
+                    else
+                    {
+                        RParam[9] = new ReportParameter("showReviewedBy", "False");
+                    }
+
+                    if (_printQuoteView.GetFreightChargesChkbox().Checked)
+                    {
+                        RParam[10] = new ReportParameter("showNotedBy", "True");
+                    }
+                    else
+                    {
+                        RParam[10] = new ReportParameter("showNotedBy", "False");
+                    }
+
+                    RParam[11] = new ReportParameter("reviewedByOfficial", _printQuoteView.GetReviewedByCmb().SelectedItem.ToString());
+                    int _indxOfReviewedOfficial = _printQuoteView.GetReviewedByCmb().SelectedIndex;
+                    RParam[12] = new ReportParameter("reviewedOfficialPos", _officialsPosition[_indxOfReviewedOfficial]);
+
+                    RParam[13] = new ReportParameter("notedByOfficial",_printQuoteView.GetNotedByCmb().SelectedItem.ToString());
+                    int _indxOfNotedOfficial = _printQuoteView.GetNotedByCmb().SelectedIndex;
+                    RParam[14] = new ReportParameter("notedOfficialPos", _officialsPosition[_indxOfNotedOfficial]);
+
+
+
+                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+
                 }
 
             }

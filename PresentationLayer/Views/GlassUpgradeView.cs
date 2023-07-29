@@ -55,7 +55,14 @@ namespace PresentationLayer.Views
         {
             return chkbx_selectall;
         }
-
+        public CheckBox AllodDuplicate()
+        {
+            return chkbx_Duplicate;
+        }
+        public ComboBox MultipleGlassUpgrade()
+        {
+            return cmb_multipleGlassUpgrade;
+        }
         public Label AENameAndPosLbl
         {
             get
@@ -123,7 +130,10 @@ namespace PresentationLayer.Views
                 lbl_desc = value;
             }
         }
-
+        public Label WindoorLbl()
+        {
+            return _lblWindoor;
+        }
         public NumericUpDown DiscountNum
         {
             get
@@ -194,6 +204,9 @@ namespace PresentationLayer.Views
         public event EventHandler cmb_glassType_SelectedValueChangedEventRaised;
         public event DataGridViewCellMouseEventHandler glassUpgradeDGV_CellMouseClickEventRaised;
         public event EventHandler chkbx_selectall_CheckedChangedEventRaised;
+        public event FormClosingEventHandler GlassUpgradeView_FormClosingEventRaised;
+        public event EventHandler _printBtn_ClickEventRaised;
+        public event EventHandler upgradeToToolStripMenuItemClickEventRaised;
 
 
         #endregion
@@ -246,6 +259,21 @@ namespace PresentationLayer.Views
         private void chkbx_selectall_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, chkbx_selectall_CheckedChangedEventRaised, e);
+        }
+
+        private void GlassUpgradeView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            EventHelpers.RaiseFormClosingEvent(sender, GlassUpgradeView_FormClosingEventRaised, e);
+        }
+
+        private void _printBtn_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, _printBtn_ClickEventRaised, e);
+        }
+
+        private void upgradeToToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, upgradeToToolStripMenuItemClickEventRaised,e);
         }
     }
 }

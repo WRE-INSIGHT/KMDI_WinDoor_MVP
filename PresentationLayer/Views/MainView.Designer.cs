@@ -97,6 +97,7 @@
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
             this.DateAssignedtoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.glassUpgradeToolStrip = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.SortItemtoolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -543,7 +544,8 @@
             this.tsp_Sync,
             this.tsLbl_Loading,
             this.tsLbl_Status,
-            this.DateAssignedtoolStripButton});
+            this.DateAssignedtoolStripButton,
+            this.glassUpgradeToolStrip});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -789,6 +791,17 @@
             this.DateAssignedtoolStripButton.Size = new System.Drawing.Size(24, 29);
             this.DateAssignedtoolStripButton.Text = "Date Assigned";
             this.DateAssignedtoolStripButton.Click += new System.EventHandler(this.DateAssignedtoolStripButton_Click);
+            // 
+            // glassUpgradeToolStrip
+            // 
+            this.glassUpgradeToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.glassUpgradeToolStrip.Enabled = false;
+            this.glassUpgradeToolStrip.Image = ((System.Drawing.Image)(resources.GetObject("glassUpgradeToolStrip.Image")));
+            this.glassUpgradeToolStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.glassUpgradeToolStrip.Name = "glassUpgradeToolStrip";
+            this.glassUpgradeToolStrip.Size = new System.Drawing.Size(24, 29);
+            this.glassUpgradeToolStrip.Text = "Glass Upgrade";
+            this.glassUpgradeToolStrip.Click += new System.EventHandler(this.glassUpgradeToolStrip_Click);
             // 
             // pnlRight
             // 
@@ -1199,5 +1212,6 @@
         private System.Windows.Forms.ToolStripMenuItem changeItemDimensionToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton PriceHistorytoolStripButton;
         private System.Windows.Forms.ToolStripButton DateAssignedtoolStripButton;
+        private System.Windows.Forms.ToolStripButton glassUpgradeToolStrip;
     }
 }

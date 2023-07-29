@@ -1298,6 +1298,7 @@
     </Compile>
     <EmbeddedResource Include="Reports\Annex.rdlc" />
     <EmbeddedResource Include="Reports\GlassSummary.rdlc" />
+    <EmbeddedResource Include="Reports\GlassUpgrade.rdlc" />
     <EmbeddedResource Include="Reports\Quotation.rdlc" />
     <EmbeddedResource Include="Reports\Screen.rdlc" />
     <EmbeddedResource Include="Reports\SummaryOfContract.rdlc" />
