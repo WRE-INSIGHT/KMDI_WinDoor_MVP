@@ -860,7 +860,6 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <KeepTogether>true</KeepTogether>
         <DataSetName>DataSet1</DataSetName>
         <Top>2.605in</Top>
         <Left>0.18833in</Left>

@@ -10201,7 +10201,6 @@ namespace PresentationLayer.Presenter
         public void Clearing_Operation()
         {
 
-
             _quotationModel = null;
             _frameModel = null;
             _windoorModel = null;
@@ -10218,6 +10217,8 @@ namespace PresentationLayer.Presenter
             _multiModelParent = null;
             mpnllvl = string.Empty;
             _screenList = new List<IScreenModel>();
+            _nonUnglazed = new List<DataRow>();
+            _guHolderDT.Clear();
             _pnlItems.Controls.Clear();
 
 

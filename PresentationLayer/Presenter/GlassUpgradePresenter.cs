@@ -115,7 +115,16 @@ namespace PresentationLayer.Presenter
 
             foreach(var rows in indx.ToList())
             {
-                MultipleGlassUpgrade(rows,7,_cmbMultipleGlassUpgrade.SelectedItem.ToString());
+                // 7 col number for glasstype selection
+                try
+                {
+                    MultipleGlassUpgrade(rows, 7, _cmbMultipleGlassUpgrade.SelectedItem.ToString());
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Missing GlassType and/or Selected Rows");
+                    break;
+                }
             }
         }
         private void MultipleGlassUpgrade(int currCell_row, int currCell_col, string currCell_value)
@@ -949,7 +958,7 @@ namespace PresentationLayer.Presenter
             var currCell_col = _dgv_GlassUpgrade.CurrentCell.ColumnIndex;
             var currCell_row = _dgv_GlassUpgrade.CurrentCell.RowIndex;
             var currCell_value = _dgv_GlassUpgrade.CurrentCell.Value.ToString();
-    
+            
             bool _isNegative = false;
 
             /*
@@ -998,7 +1007,7 @@ namespace PresentationLayer.Presenter
                                     _glassUpgradeDT.Rows[currCell_row][8] = dtrow[3].ToString(); // assign selected glass price
                                     string _prevGlassPrice = _glassUpgradeDT.Rows[currCell_row][6].ToString(); // original glass price 
                                     string _selectedGlassPrice = _glassUpgradeDT.Rows[currCell_row][8].ToString();// selected glass price
-                                     
+                                    
                                     decimal _convePrevGlassPrice = Convert.ToDecimal(_prevGlassPrice);
                                     decimal _conveSelectedGlassPrice = Convert.ToDecimal(_selectedGlassPrice);
                                     decimal _upgradeValue;
@@ -1661,7 +1670,6 @@ namespace PresentationLayer.Presenter
             return _itemWxHIsSame;
         }
       
-
         public IGlassUpgradeView GetGlassUpgradeView()
         {
             return _glassUpgradeView;
