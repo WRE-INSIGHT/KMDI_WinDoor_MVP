@@ -1112,6 +1112,7 @@ namespace PresentationLayer.Presenter
                 }
                 else if (_mainPresenter.printStatus == "GlassUpgrade")
                 {
+                    #region GlassUpgrade
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
                     _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
@@ -1163,45 +1164,118 @@ namespace PresentationLayer.Presenter
                     RParam[6] = new ReportParameter("clientAddress", _printQuoteView.QuotationAddress);
                     RParam[8] = new ReportParameter("quoteBody", _printQuoteView.QuotationBody);
 
-                    if (_printQuoteView.GetVatChkbox().Checked)
+                    if (_quoteItemListPresenter == null)
                     {
-                        RParam[7] = new ReportParameter("showVat", "True");
+                        if (_printQuoteView.GetVatChkbox().Checked)
+                        {
+                            RParam[7] = new ReportParameter("showVat", "True");
+                        }
+                        else
+                        {
+                            RParam[7] = new ReportParameter("showVat", "False");
+                        }
+
+                        if (_printQuoteView.GetLabor_N_MobiChkbox().Checked)
+                        {
+                            RParam[9] = new ReportParameter("showReviewedBy", "True");
+                        }
+                        else
+                        {
+                            RParam[9] = new ReportParameter("showReviewedBy", "False");
+                        }
+
+                        if (_printQuoteView.GetFreightChargesChkbox().Checked)
+                        {
+                            RParam[10] = new ReportParameter("showNotedBy", "True");
+                        }
+                        else
+                        {
+                            RParam[10] = new ReportParameter("showNotedBy", "False");
+                        }
+
+                        RParam[11] = new ReportParameter("reviewedByOfficial", _printQuoteView.GetReviewedByCmb().SelectedItem.ToString());
+                        int _indxOfReviewedOfficial = _printQuoteView.GetReviewedByCmb().SelectedIndex;
+                        RParam[12] = new ReportParameter("reviewedOfficialPos", _officialsPosition[_indxOfReviewedOfficial]);
+
+                        RParam[13] = new ReportParameter("notedByOfficial", _printQuoteView.GetNotedByCmb().SelectedItem.ToString());
+                        int _indxOfNotedOfficial = _printQuoteView.GetNotedByCmb().SelectedIndex;
+                        RParam[14] = new ReportParameter("notedOfficialPos", _officialsPosition[_indxOfNotedOfficial]);
                     }
                     else
                     {
-                        RParam[7] = new ReportParameter("showVat", "False");
+                        if (_quoteItemListPresenter.RDLCGUShowVat == true)
+                        {
+                            RParam[7] = new ReportParameter("showVat", "True");
+                        }
+                        else
+                        {
+                            RParam[7] = new ReportParameter("showVat", "False");
+                        }
+
+                        if (_quoteItemListPresenter.RDLCGUShowReviewedBy == true)
+                        {
+                            RParam[9] = new ReportParameter("showReviewedBy", "True");
+                        }
+                        else
+                        {
+                            RParam[9] = new ReportParameter("showReviewedBy", "False");
+                        }
+
+                        if (_quoteItemListPresenter.RDLCGUShowNotedBy == true)
+                        {
+                            RParam[10] = new ReportParameter("showNotedBy", "True");
+                        }
+                        else
+                        {
+                            RParam[10] = new ReportParameter("showNotedBy", "False");
+                        }
+
+                        RParam[11] = new ReportParameter("reviewedByOfficial",_quoteItemListPresenter.RDLCGUReviewedByOfficial);
+                        int _indxOfReviewedOfficial = _quoteItemListPresenter.RDLCGUReviewedByOfficialPos;
+                        RParam[12] = new ReportParameter("reviewedOfficialPos", _officialsPosition[_indxOfReviewedOfficial]);
+
+                        RParam[13] = new ReportParameter("notedByOfficial", _quoteItemListPresenter.RDLCGUNotedByOfficial);
+                        int _indxOfNotedOfficial = _quoteItemListPresenter.RDLCGUNotedByOfficialPos;
+                        RParam[14] = new ReportParameter("notedOfficialPos", _officialsPosition[_indxOfNotedOfficial]);
+
                     }
-
-                    if (_printQuoteView.GetLabor_N_MobiChkbox().Checked)
-                    {
-                        RParam[9] = new ReportParameter("showReviewedBy", "True");
-                    }
-                    else
-                    {
-                        RParam[9] = new ReportParameter("showReviewedBy", "False");
-                    }
-
-                    if (_printQuoteView.GetFreightChargesChkbox().Checked)
-                    {
-                        RParam[10] = new ReportParameter("showNotedBy", "True");
-                    }
-                    else
-                    {
-                        RParam[10] = new ReportParameter("showNotedBy", "False");
-                    }
-
-                    RParam[11] = new ReportParameter("reviewedByOfficial", _printQuoteView.GetReviewedByCmb().SelectedItem.ToString());
-                    int _indxOfReviewedOfficial = _printQuoteView.GetReviewedByCmb().SelectedIndex;
-                    RParam[12] = new ReportParameter("reviewedOfficialPos", _officialsPosition[_indxOfReviewedOfficial]);
-
-                    RParam[13] = new ReportParameter("notedByOfficial",_printQuoteView.GetNotedByCmb().SelectedItem.ToString());
-                    int _indxOfNotedOfficial = _printQuoteView.GetNotedByCmb().SelectedIndex;
-                    RParam[14] = new ReportParameter("notedOfficialPos", _officialsPosition[_indxOfNotedOfficial]);
-
-
-
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
 
+
+                    try
+                    {
+                        #region RenderPDFAtBackground
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                        {
+                            Warning[] warnings;
+                            string[] streamIds;
+                            string mimeType = string.Empty;
+                            string encoding = string.Empty;
+                            string extension = string.Empty;
+
+                            byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                               ("PDF",
+                               null,
+                               out mimeType,
+                               out encoding,
+                               out extension,
+                               out streamIds,
+                               out warnings
+                               );
+
+                            string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\w.PDF";
+                            using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                            {
+                                fs.Write(bytes, 0, bytes.Length);
+                            }
+                        }
+                        #endregion
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("quoteitemlistpresenter is not used" + ex);
+                    }
+                    #endregion
                 }
 
             }
@@ -1210,8 +1284,7 @@ namespace PresentationLayer.Presenter
                 //MessageBox.Show(ex.Message);
                 Console.WriteLine(this + " error in  print" + ex.Message);
             }
-        }
-        
+        }       
         public void printAnnexRDLC()
         {
             _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Annex.rdlc";

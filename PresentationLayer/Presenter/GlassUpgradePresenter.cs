@@ -58,7 +58,7 @@ namespace PresentationLayer.Presenter
         decimal _totalGlassAmount,
                 _totalWindoorsAmount,
                 _totalNetPriceforPrint;
-
+        
         bool sortAscending = true,
              changeGlassType = false,
             _isUnglazed,
@@ -88,6 +88,7 @@ namespace PresentationLayer.Presenter
 
         private void SubscribeToEventSetup()
         {
+
             _glassUpgradeView.GlassUpgradeView_LoadEventRaised += new EventHandler(OnGlassUpgradeViewLoadEventRaised);
             _glassUpgradeView.chkbx_ItemList_SelectedValueChangedEventRaised += new EventHandler(Onchkbx_ItemList_SelectedValueChangedEventRaised);
             _glassUpgradeView.GlassUpgradeView_SizeChangedEventRaised += _glassUpgradeView_GlassUpgradeView_SizeChangedEventRaised;
@@ -101,14 +102,14 @@ namespace PresentationLayer.Presenter
             _glassUpgradeView.GlassUpgradeView_FormClosingEventRaised += _glassUpgradeView_GlassUpgradeView_FormClosingEventRaised;
             _glassUpgradeView._printBtn_ClickEventRaised += _glassUpgradeView_printBtn_ClickEventRaised;
             _glassUpgradeView.upgradeToToolStripMenuItemClickEventRaised += _glassUpgradeView_upgradeToToolStripMenuItemClickEventRaised;
-            
+               
         }
 
         private void _glassUpgradeView_upgradeToToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             List<int> indx = new List<int>();
 
-            foreach(DataGridViewRow dgvRow in _dgv_GlassUpgrade.SelectedRows)
+            foreach (DataGridViewRow dgvRow in _dgv_GlassUpgrade.SelectedRows)
             {
                 indx.Add(Convert.ToInt32(dgvRow.Cells[0].RowIndex));
             }
@@ -368,7 +369,7 @@ namespace PresentationLayer.Presenter
             _glassUpgradeDT.Columns.Add(CreateColumn("Height", "Height", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Original Glass Used", "Original Glass Used", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("GlassPrice", "GlassPrice", "System.String"));
-                                                                                          
+                                                     
             _glassUpgradeDT.Columns.Add(CreateColumn("Upgraded To", "Glass Upgraded To", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Glass Upgrade Price", "Glass Upgrade Price", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Upgrade Value", "Upgrade Value", "System.String"));
@@ -429,7 +430,7 @@ namespace PresentationLayer.Presenter
             _itemDescPanelWidth = _glassUpgradeView.ItemDescriptionPnl().Width;
 
         }
-
+        
         private void _glassUpgradeView_GlassUpgradeView_FormClosingEventRaised(object sender, FormClosingEventArgs e)
         {
             try
@@ -1422,18 +1423,18 @@ namespace PresentationLayer.Presenter
                     if (dtrow["GlassType"].ToString() == _cmbGlassType.SelectedItem.ToString())
                     {
                         decimal TotalNetPrice =   DsqValueTotalNetPricePrint(_cmbGlassType.SelectedItem.ToString());
-
+                         
                         if (dtrow["Primary Key"].ToString().Contains(".0"))
                         {
                             _itemNumHolder = dtrow["Item No."].ToString();
                         }
-                        else
+                        else 
                         {
                             _itemNumHolder = " ";
                         }
 
                         _dimension = dtrow["Width"].ToString() + " x " + dtrow["Height"].ToString();
-
+                    
                         _dsq.dtGlassUpgrade.Rows.Add(_itemNumHolder,
                                                      dtrow["Window/Door I.D."],
                                                      dtrow["Original Glass Used"],

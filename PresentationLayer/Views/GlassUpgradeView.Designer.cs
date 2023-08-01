@@ -130,9 +130,9 @@
             this.lbl_multipleGlassUpgrade.ForeColor = System.Drawing.Color.Red;
             this.lbl_multipleGlassUpgrade.Location = new System.Drawing.Point(13, 152);
             this.lbl_multipleGlassUpgrade.Name = "lbl_multipleGlassUpgrade";
-            this.lbl_multipleGlassUpgrade.Size = new System.Drawing.Size(203, 15);
+            this.lbl_multipleGlassUpgrade.Size = new System.Drawing.Size(178, 15);
             this.lbl_multipleGlassUpgrade.TabIndex = 21;
-            this.lbl_multipleGlassUpgrade.Text = "* Use only for multiple glass upgrade.";
+            this.lbl_multipleGlassUpgrade.Text = "* Use for multiple glass upgrade.";
             // 
             // chkbx_Duplicate
             // 
@@ -175,19 +175,21 @@
             // 
             this.lbl_discount.AutoSize = true;
             this.lbl_discount.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_discount.Location = new System.Drawing.Point(297, 35);
+            this.lbl_discount.Location = new System.Drawing.Point(297, 82);
             this.lbl_discount.Name = "lbl_discount";
             this.lbl_discount.Size = new System.Drawing.Size(59, 13);
             this.lbl_discount.TabIndex = 13;
             this.lbl_discount.Text = "Discount: ";
+            this.lbl_discount.Visible = false;
             // 
             // num_discount
             // 
-            this.num_discount.Location = new System.Drawing.Point(362, 33);
+            this.num_discount.Location = new System.Drawing.Point(362, 80);
             this.num_discount.Name = "num_discount";
             this.num_discount.Size = new System.Drawing.Size(68, 20);
             this.num_discount.TabIndex = 2;
             this.num_discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.num_discount.Visible = false;
             // 
             // pnl_desc
             // 
@@ -265,7 +267,7 @@
             this._date.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this._date.AutoSize = true;
             this._date.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._date.Location = new System.Drawing.Point(359, 78);
+            this._date.Location = new System.Drawing.Point(359, 51);
             this._date.Name = "_date";
             this._date.Size = new System.Drawing.Size(35, 13);
             this._date.TabIndex = 11;
@@ -276,7 +278,7 @@
             this.lbl_Date.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_Date.AutoSize = true;
             this.lbl_Date.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Date.Location = new System.Drawing.Point(294, 78);
+            this.lbl_Date.Location = new System.Drawing.Point(294, 51);
             this.lbl_Date.Name = "lbl_Date";
             this.lbl_Date.Size = new System.Drawing.Size(37, 13);
             this.lbl_Date.TabIndex = 10;
@@ -287,7 +289,7 @@
             this._quoteNum.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this._quoteNum.AutoSize = true;
             this._quoteNum.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._quoteNum.Location = new System.Drawing.Point(357, 62);
+            this._quoteNum.Location = new System.Drawing.Point(357, 35);
             this._quoteNum.Name = "_quoteNum";
             this._quoteNum.Size = new System.Drawing.Size(67, 13);
             this._quoteNum.TabIndex = 9;
@@ -298,7 +300,7 @@
             this.lbl_quoteNum.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbl_quoteNum.AutoSize = true;
             this.lbl_quoteNum.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_quoteNum.Location = new System.Drawing.Point(294, 62);
+            this.lbl_quoteNum.Location = new System.Drawing.Point(294, 35);
             this.lbl_quoteNum.Name = "lbl_quoteNum";
             this.lbl_quoteNum.Size = new System.Drawing.Size(57, 13);
             this.lbl_quoteNum.TabIndex = 8;
@@ -438,19 +440,19 @@
             this.deleteToolStripMenuItem,
             this.upgradeToToolStripMenuItem});
             this.cmsGlassUpgrade.Name = "cmsGlassUpgrade";
-            this.cmsGlassUpgrade.Size = new System.Drawing.Size(153, 70);
+            this.cmsGlassUpgrade.Size = new System.Drawing.Size(135, 48);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // upgradeToToolStripMenuItem
             // 
             this.upgradeToToolStripMenuItem.Name = "upgradeToToolStripMenuItem";
-            this.upgradeToToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.upgradeToToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.upgradeToToolStripMenuItem.Text = "Upgrade To";
             this.upgradeToToolStripMenuItem.Click += new System.EventHandler(this.upgradeToToolStripMenuItem_Click);
             // 

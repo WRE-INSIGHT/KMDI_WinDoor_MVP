@@ -275,5 +275,6 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, upgradeToToolStripMenuItemClickEventRaised,e);
         }
+
     }
 }
