@@ -2732,7 +2732,7 @@ namespace ModelLayer.Model.Quotation
                 GURollerPricePerPiece = 1323.08m,
                 MotorizeMechPrice = 15000.00m,
                 MotorizeMechHeavyDutyPrice = 39000.00m,
-                MotorizeMechUsingRemotePrice,
+                MotorizeMechUsingRemotePrice = 37250.00m,
                 MotorizeMechRemotePricePerPiece = 19445.50m,
 
                 RemoteForMotorizeMechPrice,
@@ -3715,13 +3715,14 @@ namespace ModelLayer.Model.Quotation
         #endregion
 
         #region changeConditionBaseOnDate 
+        DateTime changeCondition_020323 = DateTime.Parse("02-03-2023"); // georgian bar 
+        DateTime changeCondition_022323 = DateTime.Parse("02-23-2023"); // single pnl glass ht & wd
         DateTime changeCondition_033023 = DateTime.Parse("03-30-2023"); // for 2d hinge to FS 1pnl
         DateTime changeCondition_040423 = DateTime.Parse("04-04-2023"); // Div_Width => Div_ExplosionWidth , 1pnlFS from 2d hinge => friction stay
         DateTime changeCondition_061423 = DateTime.Parse("06-14-2023"); // friction stay size => art#
         DateTime changeCondition_072023 = DateTime.Parse("07-20-2023"); // points
-        DateTime changeCondition_072723 = DateTime.Parse("07-27-2023"); // gb for sliding , gbar multiplier // remove mesh in total price // 1 side foil labor price and approve by costing // need baguhin yung date
-        DateTime changeCondition_022323 = DateTime.Parse("02-23-2023"); // single pnl glass ht & wd
-        DateTime changeCondition_020323 = DateTime.Parse("02-03-2023"); // georgian bar 
+        DateTime changeCondition_072723 = DateTime.Parse("07-27-2023"); // gb for sliding , gbar multiplier // remove mesh in total price // 1 side foil labor price and approve by costing  
+        DateTime changeCondition_111111 = DateTime.Parse("01-01-2029"); // need baguhin yung date
 
 
         DateTime testDate = DateTime.Parse("12-17-2022");
@@ -5182,8 +5183,6 @@ namespace ModelLayer.Model.Quotation
                                             else if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
                                             {
                                                 MotorizeMechPricePerPiece = MotorizeMechUsingRemotePrice;
-
-
                                             }
 
                                             if (chckPerFrameMotorMech == true)
@@ -5204,7 +5203,12 @@ namespace ModelLayer.Model.Quotation
 
                                         if (pnl.Panel_EspagnoletteOptionsVisibility == true)
                                         {
-                                            if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
+                                            if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._None &&
+                                                 cus_ref_date >= changeCondition_111111)
+                                            {
+
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
                                             {
                                                 EspagPrice += TiltAndTurnEspag_N110A00006PricePerPiece;
                                                 EspagBasePrice = TiltAndTurnEspag_N110A00006PricePerPiece;
@@ -8520,7 +8524,12 @@ namespace ModelLayer.Model.Quotation
 
                                 if (Singlepnl.Panel_EspagnoletteOptionsVisibility == true && Singlepnl.Panel_ChkText != "dSash")
                                 {
-                                    if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
+                                    if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._None &&
+                                        cus_ref_date >= changeCondition_111111)
+                                    {
+
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
                                     {
                                         EspagPrice += TiltAndTurnEspag_N110A00006PricePerPiece;
                                         EspagBasePrice = TiltAndTurnEspag_N110A00006PricePerPiece;
