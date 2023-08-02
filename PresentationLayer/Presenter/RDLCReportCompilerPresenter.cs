@@ -42,6 +42,17 @@ namespace PresentationLayer.Presenter
                targetpath,
                filename;
         Thread _loadingThread;
+        private ComboBox _gucmbGlassType,
+                         _guCmbReviewedBy,
+                         _guCmbNotedBy;
+        private TextBox _guTxtBxVat;
+        private CheckBox _guShowReviewedBy,
+                         _guShowNotedBy,
+                         _guShowVat;
+        
+
+        string[] _officialsName = { "KENNETH G. LAO", "GENALYN C. GARCIA", "STEPHANIE DE LOS SANTOS", "KEVIN CHARLES S. LAO" };
+        string[] _officialsPosition = { "President,KMDI", "VP-Sales & Operations", "VP-Marketing & Finance", "Head, Sales & Operations" };
         #endregion
 
         public RDLCReportCompilerPresenter(IRDLCReportCompilerView rdlcReportCompilerView,
@@ -51,6 +62,14 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView = rdlcReportCompilerView;
             _printQuotePresenter = printQuotePresenter;
             _pdfWaitFormPresenter = pdfWaitFormPresenter;
+
+            _gucmbGlassType = _rdlcReportCompilerView.GUGlassType();
+            _guCmbReviewedBy = _rdlcReportCompilerView.GUReviewedBy();
+            _guCmbNotedBy = _rdlcReportCompilerView.GUNotedBy();
+            _guTxtBxVat = _rdlcReportCompilerView.GUVat();
+            _guShowReviewedBy = _rdlcReportCompilerView.GUShowReviewedBy();
+            _guShowNotedBy = _rdlcReportCompilerView.GUShowNotedBy();
+            _guShowVat = _rdlcReportCompilerView.GUShowVat();
 
             SubScribeToEventSetup();
         }
@@ -66,15 +85,15 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.chkselectallCheckedChangedEventRaised += new EventHandler(OnchkselectallCheckedChangedEventRaised);
             _rdlcReportCompilerView.chkboxshowVatCheckedChangedEventRaised += new EventHandler(OnchkboxshowVatCheckedChangedEventRaised);
             _rdlcReportCompilerView.chkboxsubtotalCheckedChangedEventRaised += new EventHandler(OnchkboxsubtotalCheckedChangedEventRaised);
-
+            _rdlcReportCompilerView.chkbxguShowReviewedByCheckedChangedEventRaised += new EventHandler(OnchkbxguShowReviewedByCheckedChangedEventRaised);
+            _rdlcReportCompilerView.chkbxguShowNotedByCheckedChanged += new EventHandler(OnchkbxguShowNotedByCheckedChanged);
+            _rdlcReportCompilerView.chkbxguShowVatCheckedChanged += new EventHandler(OnchkbxguShowVatCheckedChanged);
+            
             //bgw.WorkerReportsProgress = true;
             //bgw.WorkerSupportsCancellation = true;
             //bgw.DoWork += Bgw_DoWork;
-            //bgw.ProgressChanged += Bgw_ProgressChanged;
-         
+            //bgw.ProgressChanged += Bgw_ProgressChanged; 
         }
-
-
 
         //private delegate void DELEGATE();
         //private void Bgw_DoWork(object sender, DoWorkEventArgs e)
@@ -89,6 +108,46 @@ namespace PresentationLayer.Presenter
         //{
 
         //}
+
+        private void OnchkbxguShowReviewedByCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_guShowReviewedBy.Checked)
+            {
+                _guCmbReviewedBy.Visible = true;
+                _quoteItemListPresenter.RDLCGUShowReviewedBy = true;
+            }
+            else
+            {
+                _guCmbReviewedBy.Visible = false;
+                _quoteItemListPresenter.RDLCGUShowReviewedBy = false;
+            }
+        }
+        private void OnchkbxguShowNotedByCheckedChanged(object sender, EventArgs e)
+        {
+            if (_guShowNotedBy.Checked)
+            {
+                _guCmbNotedBy.Visible = true;
+                _quoteItemListPresenter.RDLCGUShowNotedBy = true;
+            }
+            else
+            {
+                _guCmbNotedBy.Visible = false;
+                _quoteItemListPresenter.RDLCGUShowNotedBy = false;
+            }
+        }
+        private void OnchkbxguShowVatCheckedChanged(object sender, EventArgs e)
+        {
+            if (_guShowVat.Checked)
+            {
+                _guTxtBxVat.Visible = true;
+                _quoteItemListPresenter.RDLCGUShowVat = true;
+            }
+            else
+            {
+                _guTxtBxVat.Visible = false;
+                _quoteItemListPresenter.RDLCGUShowVat = false;
+            }
+        }
         private void OnchkboxsubtotalCheckedChangedEventRaised(object sender, EventArgs e)
         {
             if (_rdlcReportCompilerView.GetSubTotalCheckBox().Checked)
@@ -145,8 +204,33 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;
             _rdlcReportCompilerView.TxtBxContractSummaryVat = "12";
             _rdlcReportCompilerView.TxtBxRowlimit = "21";
-            
 
+            LoadSettingsForGlassUpgrade();
+
+        }
+
+        private void LoadSettingsForGlassUpgrade()
+        {
+            _gucmbGlassType.Items.Add("");
+            _gucmbGlassType.Items.Add("Tempered Glass");
+            _gucmbGlassType.Items.Add("Insulated Glass Unit (IGU)");
+            _gucmbGlassType.Items.Add("Laminated Glass");
+            _gucmbGlassType.Items.Add("Tinted Glass");
+            _gucmbGlassType.Items.Add("Unglazed");
+
+            foreach (var item in _officialsName)
+            {
+                _guCmbReviewedBy.Items.Add(item);
+                _guCmbNotedBy.Items.Add(item);
+            }
+
+            _guCmbReviewedBy.SelectedIndex = 3;
+            _guCmbNotedBy.SelectedIndex = 1;
+            _guTxtBxVat.Text = "12";
+
+            _guShowReviewedBy.CheckState = CheckState.Checked;
+            _guShowNotedBy.CheckState = CheckState.Checked;
+            _guTxtBxVat.Visible = false;
         }
 
         public void Bgw_CompilePDF()
@@ -193,12 +277,12 @@ namespace PresentationLayer.Presenter
                                 _quoteItemListPresenter.RenderPDFAtBackGround = true;
                                 CompileRDLC = true;
                             }
-
+                            
                             if (CompileRDLC == true)
                             {
                                _loadingThread.Start();
                                 #region Windoor RDLC
-                                foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
+                        foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
                                 {
                                     var selectedindex = Convert.ToInt32(item);
                                     _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Add(selectedindex);
@@ -216,10 +300,28 @@ namespace PresentationLayer.Presenter
                                     _quoteItemListPresenter.RDLCReportCompilerRowLimit = _rdlcReportCompilerView.TxtBxRowlimit;
                                     _quoteItemListPresenter.PrintScreenRDLC();
                                 }
-                                #endregion
+                        #endregion
+                                #region Glass Upgrade
+
+                        if (_gucmbGlassType.SelectedItem != null)
+                        {
+                            if (_gucmbGlassType.SelectedItem.ToString() != "")
+                            {
+                                _quoteItemListPresenter.RDLCGUGlassType = _gucmbGlassType.SelectedItem.ToString();
+                                _quoteItemListPresenter.RDLCGUReviewedByOfficial = _guCmbReviewedBy.SelectedItem.ToString();
+                                int reviewedOfficialPosIndex = _guCmbReviewedBy.SelectedIndex; // indx pos
+                                _quoteItemListPresenter.RDLCGUReviewedByOfficialPos = reviewedOfficialPosIndex;
+                                _quoteItemListPresenter.RDLCGUNotedByOfficial = _guCmbNotedBy.SelectedItem.ToString();
+                                int notedOfficialPosIndex = _guCmbNotedBy.SelectedIndex; // indx pos
+                                _quoteItemListPresenter.RDLCGUNotedByOfficialPos = notedOfficialPosIndex;
+                                _quoteItemListPresenter.RDLCGUVatPercentage = _guTxtBxVat.Text;
+                                _quoteItemListPresenter.PrintGlassUpgrade();
+                            }
+                        }
+                                 #endregion
                                 #region PDF Compiler
 
-                                string[] files = GetFiles();
+                        string[] files = GetFiles();
 
                                 PdfDocument outputDocument = new PdfDocument();
 
@@ -283,6 +385,7 @@ namespace PresentationLayer.Presenter
                                     Process.Start(fullname);
                                 }
                                 #endregion
+                                
                                _loadingThread.Abort();                            
                             }                           
                             SetVariablesToDefault();

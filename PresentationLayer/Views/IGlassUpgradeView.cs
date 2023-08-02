@@ -27,17 +27,22 @@ namespace PresentationLayer.Views
         event EventHandler cmb_glassType_SelectedValueChangedEventRaised;
         event DataGridViewCellMouseEventHandler glassUpgradeDGV_CellMouseClickEventRaised;
         event EventHandler chkbx_selectall_CheckedChangedEventRaised;
-
-
+        event FormClosingEventHandler GlassUpgradeView_FormClosingEventRaised;
+        event EventHandler _printBtn_ClickEventRaised;
+        event EventHandler upgradeToToolStripMenuItemClickEventRaised;
+        
 
         void CloseGlassUpgradeView();
         ComboBox GlassTypeCmb();
         CheckedListBox ItemListChkBx();
+        CheckBox AllodDuplicate();
         DataGridView GlassUpgradeDGView();
         Form GlassUpgraedViewForm();
+        Label WindoorLbl();
 
         Panel ItemDescriptionPnl();
         CheckBox SelectAllItems();
+        ComboBox MultipleGlassUpgrade();
         void ShowGlassUpgradeView();
     }
 }
