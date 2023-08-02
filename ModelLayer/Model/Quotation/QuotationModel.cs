@@ -3722,7 +3722,7 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_061423 = DateTime.Parse("06-14-2023"); // friction stay size => art#
         DateTime changeCondition_072023 = DateTime.Parse("07-20-2023"); // points
         DateTime changeCondition_072723 = DateTime.Parse("07-27-2023"); // gb for sliding , gbar multiplier // remove mesh in total price // 1 side foil labor price and approve by costing  
-        DateTime changeCondition_111111 = DateTime.Parse("01-01-2029"); // need baguhin yung date
+        DateTime changeCondition_080323 = DateTime.Parse("08-03-2023"); // need baguhin yung date
 
 
         DateTime testDate = DateTime.Parse("12-17-2022");
@@ -5204,7 +5204,7 @@ namespace ModelLayer.Model.Quotation
                                         if (pnl.Panel_EspagnoletteOptionsVisibility == true)
                                         {
                                             if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._None &&
-                                                 cus_ref_date >= changeCondition_111111)
+                                                 cus_ref_date >= changeCondition_080323)
                                             {
 
                                             }
@@ -8525,7 +8525,7 @@ namespace ModelLayer.Model.Quotation
                                 if (Singlepnl.Panel_EspagnoletteOptionsVisibility == true && Singlepnl.Panel_ChkText != "dSash")
                                 {
                                     if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._None &&
-                                        cus_ref_date >= changeCondition_111111)
+                                        cus_ref_date >= changeCondition_080323)
                                     {
 
                                     }
