@@ -8,5 +8,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         event EventHandler chkMotorizedCheckedChangedEventRaised;
         event EventHandler PPMotorizedPropertyUCLoadEventRaised;
         event EventHandler cmbMotorizedMechSelectedValueChangedEventRaised;
+        event EventHandler chkRemoteCheckedChangedEventRaised;
     }
 }

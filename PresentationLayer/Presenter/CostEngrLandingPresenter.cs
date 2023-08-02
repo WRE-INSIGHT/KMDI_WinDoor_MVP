@@ -410,5 +410,24 @@ namespace PresentationLayer.Presenter
 
             return presenter;
         }
+
+        ~CostEngrLandingPresenter()
+        {
+
+            _dgvAssignedProj.Dispose();
+            _dgvCustRefNo.Dispose();
+            _dgvQuoteNo.Dispose();
+
+            _CELandingView.CostEngrLandingViewLoadEventRaised -= _CELandingView_CostEngrLandingViewLoadEventRaised;
+            _CELandingView.dgvAssignedProjectsCellMouseDoubleClickEventRaised -= _CELandingView_dgvAssignedProjectsCellMouseDoubleClickEventRaised;
+            _CELandingView.btnforwardNavClick -= _CELandingView_btnforwardNavClick;
+            _CELandingView.btnbackNavClickEventRaised -= _CELandingView_btnbackNavClickEventRaised;
+            _CELandingView.dgvCustRefNoCellMouseDoubleClickEventRaised -= _CELandingView_dgvCustRefNoCellMouseDoubleClickEventRaised;
+            _CELandingView.btnAddNewQuoteClickEventRaised -= _CELandingView_btnAddNewQuoteClickEventRaised;
+            _CELandingView.dgvQuoteNoCellMouseDoubleClickEventRaised -= _CELandingView_dgvQuoteNoCellMouseDoubleClickEventRaised;
+            _CELandingView.btnSearchProjClickClickEventRaised -= _CELandingView_btnSearchProjClickClickEventRaised;
+
+            GC.Collect();
+        }
     }
 }

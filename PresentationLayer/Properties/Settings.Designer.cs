@@ -104,5 +104,17 @@ namespace PresentationLayer.Properties {
                 this["FilePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UserObjectWarning {
+            get {
+                return ((bool)(this["UserObjectWarning"]));
+            }
+            set {
+                this["UserObjectWarning"] = value;
+            }
+        }
     }
 }

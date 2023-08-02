@@ -6,6 +6,7 @@ namespace PresentationLayer.Views
 {
     public interface IPrintQuoteView
     {
+        string GlassType { get; set; }
         string QuotationAddress { get; set; }
         string QuotationSalutation { get; set; }
         string QuotationBody { get; set; }
@@ -14,6 +15,8 @@ namespace PresentationLayer.Views
         string LaborandMobilization { get; set; }
         string FreightCharge { get; set; }
         string LessDiscount { get; set; }
+        string RowLimit { get; set; }
+        TextBox GetRowLimitTxtBox();
         TextBox GetLessDiscountTxtBox();
         CheckBox GetLessDiscountchkbox();
         CheckBox ShowLastPage();
@@ -22,17 +25,21 @@ namespace PresentationLayer.Views
         TextBox GetOutofTownExpenses();
         CheckedListBox GetChkLstBox();
         CheckBox GetShowPageNum();
+        CheckBox GetSubTotalCheckBox();
+        ComboBox GetReviewedByCmb();
+        ComboBox GetNotedByCmb();
+
         void ShowPrintQuoteView();
-
-
+        
         event EventHandler btnRefreshClickEventRaised;
         event EventHandler PrintQuoteViewLoadEventRaised;
         event EventHandler SelectedIndexChangeEventRaised;
         event EventHandler txtoftexpensesKeyPressEventRaised;
-        event EventHandler chkboxLnMCheckedChangedEventRaised;
+        event EventHandler chkboxLnMCheckedChangedEventRaised;  
         event EventHandler chkboxFCCheckedChangedEventRaised;
         event EventHandler chkboxVATCheckedChangedEventRaised;
         event EventHandler chkboxLessDCheckedChangedEventRaised;
+        event EventHandler chkboxsubtotalCheckedChangedEventRaised;
         event FormClosingEventHandler PrintQuoteViewFormClosingEventRaised;
 
         ReportViewer GetReportViewer();

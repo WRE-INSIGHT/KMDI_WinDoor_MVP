@@ -39,8 +39,6 @@ namespace EnumerationTypeLayer
             public static readonly FrameReinf_ArticleNo _TV110 = new FrameReinf_ArticleNo(4, "T-V110");
             public static readonly FrameReinf_ArticleNo _NA120 = new FrameReinf_ArticleNo(5, "NA120");
 
-
-
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -509,8 +507,16 @@ namespace EnumerationTypeLayer
             public static readonly MotorizedMech_ArticleNo _41556C = new MotorizedMech_ArticleNo(0, "41556C");
             public static readonly MotorizedMech_ArticleNo _41555B = new MotorizedMech_ArticleNo(1, "41555B");
             public static readonly MotorizedMech_ArticleNo _409990E = new MotorizedMech_ArticleNo(2, "409990E");
+            public static readonly MotorizedMech_ArticleNo _41731V = new MotorizedMech_ArticleNo(3, "41731V");
 
             private MotorizedMech_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MotorizedMechRemote_ArticleNo : Enumeration<MotorizedMechRemote_ArticleNo, int>
+        {
+            public static readonly MotorizedMechRemote_ArticleNo _41729T = new MotorizedMechRemote_ArticleNo(0, "41729T");
+
+            private MotorizedMechRemote_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class _30x25Cover_ArticleNo : Enumeration<_30x25Cover_ArticleNo, int>
@@ -1048,6 +1054,7 @@ namespace EnumerationTypeLayer
             public static readonly ScreenType _Freedom = new ScreenType(10, "Freedom Screen");
             public static readonly ScreenType _NoInsectScreen = new ScreenType(11, "No Insect Screen");
             public static readonly ScreenType _UnnecessaryForInsectScreen = new ScreenType(12, "Unnecessary for Insect Screen");
+            public static readonly ScreenType _SlidingScreen = new ScreenType(13, "Sliding Screen");
 
 
             private ScreenType(int value, string displayName) : base(value, displayName) { }
@@ -1229,6 +1236,8 @@ namespace EnumerationTypeLayer
             public static readonly BillOfMaterialsFilter _AncillaryProfileCost = new BillOfMaterialsFilter(3, "Ancillary Profile");
             public static readonly BillOfMaterialsFilter _FittingAndSuppliesCost = new BillOfMaterialsFilter(4, "Fitting and Supplies");
             public static readonly BillOfMaterialsFilter _LouverCost = new BillOfMaterialsFilter(5, "Louver Material Cost");
+            public static readonly BillOfMaterialsFilter _MeshCost = new BillOfMaterialsFilter(6, "Mesh Cost");
+
 
             private BillOfMaterialsFilter(int value, string displayName) : base(value, displayName) { }
         }
@@ -1376,13 +1385,12 @@ namespace EnumerationTypeLayer
             private LouverColor_Option(int value, string displayName) : base(value, displayName) { }
         }
 
-        //public class Frame_MechJointArticleNo : Enumeration<Frame_MechJointArticleNo, int>
-        //{
-        //    public static readonly Frame_MechJointArticleNo _9C52 = new Frame_MechJointArticleNo(0, "9C52");
+        public class TopViewType : Enumeration<TopViewType, int>
+        {
+            public static readonly TopViewType _FoldAndSlide = new TopViewType(0, "Fold and Slide");
+            public static readonly TopViewType _SlidingPivot = new TopViewType(1, "Sliding Pivot");
 
-        //    private Frame_MechJointArticleNo(int value, string displayName) : base(value, displayName) { }
-
-
-        //}
+            private TopViewType(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

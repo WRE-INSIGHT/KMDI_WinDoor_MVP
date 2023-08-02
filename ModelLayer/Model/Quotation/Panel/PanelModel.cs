@@ -1864,6 +1864,38 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+
+
+        private MotorizedMechRemote_ArticleNo _panelMotorizedMechRemoteArtNo;
+        public MotorizedMechRemote_ArticleNo Panel_MotorizedMechRemoteArtNo
+        {
+            get
+            {
+                return _panelMotorizedMechRemoteArtNo;
+            }
+            set
+            {
+                _panelMotorizedMechRemoteArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private bool _panelMotorizedMechRemoteOption;
+        public bool Panel_MotorizedMechRemoteOption
+        {
+            get
+            {
+                return _panelMotorizedMechRemoteOption;
+            }
+            set
+            {
+                _panelMotorizedMechRemoteOption = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         private int _panelMotorizedPropertyHeight;
         public int Panel_MotorizedPropertyHeight
         {
@@ -1925,6 +1957,11 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelGeorgianBarOptionVisibility = value;
+                if (value == false)
+                {
+                    Panel_GeorgianBar_VerticalQty = 0;
+                    Panel_GeorgianBar_HorizontalQty = 0;
+                }
                 NotifyPropertyChanged();
             }
         }
@@ -5879,7 +5916,8 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_MotorizedMechQty += 1;
                     }
                     else if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
-                             Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
+                             Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C ||
+                             Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
                     {
                         if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1099)
                         {
@@ -7410,14 +7448,16 @@ namespace ModelLayer.Model.Quotation.Panel
 
                         string nxt_div_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[Panel_Index_Inside_MPanel + 1].Name;
                         IDividerModel nxt_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == nxt_div_name);
-                        if (nxt_divModel.Div_DMPanel != null)
+                        if (nxt_divModel != null)
                         {
-                            if (nxt_divModel.Div_DMPanel == nxt_pnl)
+                            if (nxt_divModel.Div_DMPanel != null)
                             {
-                                allow_adjStriker = false;
+                                if (nxt_divModel.Div_DMPanel == nxt_pnl)
+                                {
+                                    allow_adjStriker = false;
+                                }
                             }
                         }
-
                         int nxt_div_indx_after_nxtPnl = Panel_Index_Inside_MPanel + 3;
 
                         if (nxt_div_indx_after_nxtPnl < obj_count)
@@ -7443,14 +7483,16 @@ namespace ModelLayer.Model.Quotation.Panel
 
                         string prev_div_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[Panel_Index_Inside_MPanel - 1].Name;
                         IDividerModel prev_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == prev_div_name);
-                        if (prev_divModel.Div_DMPanel != null)
+                        if (prev_divModel != null)
                         {
-                            if (prev_divModel.Div_DMPanel == prev_pnl)
+                            if (prev_divModel.Div_DMPanel != null)
                             {
-                                allow_adjStriker = false;
+                                if (prev_divModel.Div_DMPanel == prev_pnl)
+                                {
+                                    allow_adjStriker = false;
+                                }
                             }
                         }
-
                         int prev_div_indx_before_prevPnl = Panel_Index_Inside_MPanel - 3;
 
                         if (prev_div_indx_before_prevPnl > 0)
@@ -8607,7 +8649,8 @@ namespace ModelLayer.Model.Quotation.Panel
                             motor += 1;
                         }
                         else if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
-                                 pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
+                                 pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C ||
+                                 pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
                         {
                             if (pnl.Panel_DisplayWidth > 0 && pnl.Panel_DisplayWidth <= 1099)
                             {
@@ -8628,6 +8671,29 @@ namespace ModelLayer.Model.Quotation.Panel
             return motor;
         }
 
+
+        public int MotorizeMechForFrameParent()
+        {
+            int motor = 0;
+            if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
+            {
+                motor += 1;
+            }
+            else if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
+                      Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C ||
+                      Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
+            {
+                if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1099)
+                {
+                    motor += 1;
+                }
+                else if (Panel_DisplayWidth >= 1100)
+                {
+                    motor += 2;
+                }
+            }
+            return motor;
+        }
         #region Material_List
 
         public void Insert_SashInfo_MaterialList(DataTable tbl_explosion)
@@ -8748,17 +8814,30 @@ namespace ModelLayer.Model.Quotation.Panel
                                        @"");
             }
 
+
+
             tbl_explosion.Rows.Add("Motorized Mechanism " + Panel_MotorizedMechArtNo.DisplayName,
                                    motorCount, "pc(s)",
                                    "",
                                    "Sash",
                                    @"");
 
-            tbl_explosion.Rows.Add("Push Button Switch " + Panel_PushButtonSwitchArtNo.ToString(),
-                                   Panel_MotorizedMechSetQty, "pc(s)",
-                                   "",
-                                   "Concrete",
-                                   @"");
+            if (Panel_MotorizedMechRemoteOption == true)
+            {
+                tbl_explosion.Rows.Add("Remote For 41731V" + Panel_MotorizedMechRemoteArtNo.ToString(),
+                                          Panel_MotorizedMechSetQty, "pc(s)",
+                                          "",
+                                          "Motorized Mechanism",
+                                          @"");
+            }
+            else
+            {
+                tbl_explosion.Rows.Add("Push Button Switch " + Panel_PushButtonSwitchArtNo.ToString(),
+                                                Panel_MotorizedMechSetQty, "pc(s)",
+                                                "",
+                                                "Concrete",
+                                                @"");
+            }
 
             tbl_explosion.Rows.Add("False pole " + Panel_FalsePoleArtNo.ToString(),
                                    Panel_MotorizedMechSetQty * 2, "pc(s)",
@@ -10272,7 +10351,9 @@ namespace ModelLayer.Model.Quotation.Panel
                           bool panelSlidingTypeVisibility,
                           SlidingTypes panelSlidingTypes,
                           string glasstype_insu_lumi,
-                          decimal glasspricepersqrmeter
+                          decimal glasspricepersqrmeter,
+                          MotorizedMechRemote_ArticleNo panelMotorizedMechRemoteArtNo,
+                          bool panelMotorizedMechRemoteOption
                           )
         {
             Panel_ID = panelID;
@@ -10355,6 +10436,9 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_HingeOptionsPropertyHeight = constants.panel_property_HingeOptionsheight;
             Panel_GlassType_Insu_Lami = glasstype_insu_lumi;
             Panel_GlassPricePerSqrMeter = glasspricepersqrmeter;
+            Panel_MotorizedMechRemoteArtNo = panelMotorizedMechRemoteArtNo;
+            Panel_MotorizedMechRemoteOption = panelMotorizedMechRemoteOption;
+            
 
         }
     }

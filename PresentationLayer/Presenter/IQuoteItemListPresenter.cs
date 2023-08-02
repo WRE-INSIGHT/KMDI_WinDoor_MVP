@@ -22,6 +22,7 @@ namespace PresentationLayer.Presenter
         void PrintContractSummaryRDLC();
         void PrintScreenRDLC();
         void QuoteItemList_PrintAnnexRDLC();
+        void PrintGlassUpgrade();
         List<IQuoteItemListUCPresenter> LstQuoteItemUC { get; set; }
         List<ShowItemImage> ShowItemImage_CheckList { get; set; }
         List<int> RDLCReportCompilerItemIndexes { get; set; }
@@ -30,8 +31,21 @@ namespace PresentationLayer.Presenter
         bool CallFrmRDLCCompiler { get; set; }
         decimal OutOfTownCharges { get; }
         string RDLCReportCompilerVatContractSummery { get; set; }
+        bool RDLCReportCompilerShowSubTotal { get; set; }
         void ContractSummaryComputation();
         bool ShowVatContactSummary { get; set; }
+        string RDLCReportCompilerRowLimit { get; set; }
+        string RDLCGUGlassType { get; set; }
+        string RDLCGUReviewedByOfficial { get; set; }
+        int RDLCGUReviewedByOfficialPos { get; set; }
+        string RDLCGUNotedByOfficial { get; set; }    
+        int RDLCGUNotedByOfficialPos { get; set; }
+        string  RDLCGUVatPercentage { get; set; }
+        bool RDLCGUShowReviewedBy { get; set; }
+        bool RDLCGUShowNotedBy { get; set; }
+        bool RDLCGUShowVat { get; set; }
+
+
 
         //List<IQuoteItemListUCPresenter> _lstQuoteItemUC { get; set; }
     }

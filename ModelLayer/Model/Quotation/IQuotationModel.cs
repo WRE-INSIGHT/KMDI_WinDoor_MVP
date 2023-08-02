@@ -8,6 +8,7 @@ namespace ModelLayer.Model.Quotation
 {
     public interface IQuotationModel
     {
+        int Quotation_Id { get; set; }
         string Quotation_ref_no { get; set; }
         DateTime Quotation_Date { get; set; }
 
@@ -27,6 +28,7 @@ namespace ModelLayer.Model.Quotation
         int Plastic_CoverQty_Total { get; set; }
         decimal PricingFactor { get; set; }
         DateTime Date_Assigned { get; set; }
+        DateTime Date_Assigned_Mainpresenter { get; set; }
         string Customer_Ref_Number { get; set; }
         BillOfMaterialsFilter BOM_Filter { get; set; }
         bool BOM_Status { get; set; }

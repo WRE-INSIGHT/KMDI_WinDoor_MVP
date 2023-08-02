@@ -8,6 +8,7 @@ using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -41,13 +42,27 @@ namespace PresentationLayer.Presenter
         private List<GlassRDLC> _lstGlassSummary = new List<GlassRDLC>();
         private List<int> _rdlcReportCompilerItemIndexes = new List<int>();
         private List<int> _lstItemArea = new List<int>();
-        private string _rdlcReportCompilerOutofTownExpenses;
-        private string _rdlcReportCompilerVatContractSummary;
+
+        private string _rdlcReportCompilerOutofTownExpenses,
+                       _rdlcReportCompilerVatContractSummary,
+                       _rdlcReportCompilerRowLimit,
+                       archi;
         private string[] province;
-        private string archi;
-        private bool _callFrmRDLCCompiler;
-        private bool _renderPDFAtBackground;
-        private bool _showVatContractSummary;
+        private bool _callFrmRDLCCompiler,
+                     _renderPDFAtBackground,
+                     _showVatContractSummary,
+                     _rdlcReportCompilerShowSubTotal,
+                     _intInString,
+                     _guShowReviewedBy,
+                     _guShowNotedBy,
+                     _guShowVat;
+
+        private string _guGlassType,
+                       _guReviewedByOfficial,
+                       _guNotedByOfficial,
+                       _guVatPercentage;
+        private int   _guReviewedOfficialPos,
+                      _guNotedByOfficialPos;
 
         int count = 0,
             newlinecount = 0;
@@ -99,6 +114,28 @@ namespace PresentationLayer.Presenter
                 _rdlcReportCompilerOutofTownExpenses = value;
             }
         }
+        public string RDLCReportCompilerRowLimit
+        {
+            get
+            {
+                return _rdlcReportCompilerRowLimit;
+            }
+            set
+            {
+                _rdlcReportCompilerRowLimit = value;
+            }
+        }
+        public bool RDLCReportCompilerShowSubTotal
+        {
+            get
+            {
+                return _rdlcReportCompilerShowSubTotal;
+            }
+            set
+            {
+                _rdlcReportCompilerShowSubTotal = value;
+            }
+        }
         public bool RenderPDFAtBackGround
         {
             get
@@ -110,7 +147,107 @@ namespace PresentationLayer.Presenter
                 _renderPDFAtBackground = value;
             }
         }
-   
+
+        public string RDLCGUGlassType
+        {
+            get
+            {
+                return _guGlassType;
+            }
+            set
+            {
+                _guGlassType = value;
+            }
+        }
+        public string RDLCGUReviewedByOfficial
+        {
+            get
+            {
+                return _guReviewedByOfficial;
+            }
+            set
+            {
+                _guReviewedByOfficial = value;
+            }
+        }
+        public int RDLCGUReviewedByOfficialPos
+        {
+            get
+            {
+                return _guReviewedOfficialPos;
+            }
+            set
+            {
+                _guReviewedOfficialPos = value;
+            }
+        }
+        public string RDLCGUNotedByOfficial
+        {
+            get
+            {
+                return _guNotedByOfficial;
+            }
+            set
+            {
+                _guNotedByOfficial = value;
+            }
+        }
+        public int RDLCGUNotedByOfficialPos
+        {
+            get
+            {
+                return _guNotedByOfficialPos;
+            }
+            set
+            {
+                _guNotedByOfficialPos = value;
+            }
+        }
+        public string RDLCGUVatPercentage
+        {
+            get
+            {
+                return _guVatPercentage;
+            }
+            set
+            {
+                _guVatPercentage = value;
+            }
+        }
+        public bool RDLCGUShowReviewedBy
+        {
+            get
+            {
+                return _guShowReviewedBy;
+            }
+            set
+            {
+                _guShowReviewedBy = value;
+            }
+        }
+        public bool RDLCGUShowNotedBy
+        {
+            get
+            {
+                return _guShowNotedBy;
+            }
+            set
+            {
+                _guShowNotedBy = value;
+            }
+        }
+        public bool RDLCGUShowVat
+        {
+            get
+            {
+                return _guShowVat;
+            }
+            set
+            {
+                _guShowVat = value;
+            }
+        }
+
         public List<IQuoteItemListUCPresenter> LstQuoteItemUC
         {
             get { return _lstQuoteItemUC; }
@@ -154,7 +291,7 @@ namespace PresentationLayer.Presenter
             ScreenTotalListCount = 0,
             divisor = 2;
 
-        String prev_GlassSize,
+        string prev_GlassSize,
                prev_GlassRef,
                prev_GlassLoc, prev_GlassDesc,
                curr_GlassSize,
@@ -192,7 +329,12 @@ namespace PresentationLayer.Presenter
         decimal windoorpricecheck;//check price in rdlc report 
         decimal olddiscount, updateddiscount;
         int countfortick;
+
         #endregion
+
+        private DataTable _glassUpgradeDT = new DataTable();
+        decimal _totalNetPriceforPrint;
+
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
                                       IPrintQuotePresenter printQuotePresenter,
@@ -255,24 +397,33 @@ namespace PresentationLayer.Presenter
 
                     if (item.Screen_Set > 1)
                     {
-                        setDesc = " (Sets of " + item.Screen_Set.ToString() + ")";
+                        if (item.Screen_Description.Contains("(Sets of"))
+                        {
+                            setDesc = " ";
+                        }
+                        else
+                        {
+                            setDesc = " (Sets of " + item.Screen_Set.ToString() + ")";
+                        }
                     }
                     else
                     {
                         setDesc = " ";
                     }
 
+
                     if(item.Screen_Types == ScreenType._NoInsectScreen || item.Screen_Types == ScreenType._UnnecessaryForInsectScreen)
                     {
                         Screen_DimensionFormat = " - ";
-                        Screen_UnitPrice = " - ";
+                        Screen_UnitPrice = "0";
                         Screen_Qty = null;
                         Screen_Discount = " - ";
                         Screen_NetPrice = " - "; 
                     }
                     else
                     {
-                        Screen_DimensionFormat = item.Screen_Width + " x " + item.Screen_Height;
+                        //Screen_DimensionFormat = item.Screen_Width + " x " + item.Screen_Height;
+                        Screen_DimensionFormat = item.Screen_DisplayedDimension;
                         Screen_UnitPrice = item.Screen_UnitPrice.ToString("n");
                         Screen_Qty = item.Screen_Quantity.ToString();
                         Screen_Discount = Convert.ToString(item.Screen_Discount) + "%";
@@ -305,10 +456,10 @@ namespace PresentationLayer.Presenter
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreen.DefaultView;
             printQuote.EventLoad();
+            printQuote.GetPrintQuoteView().RowLimit = _rdlcReportCompilerRowLimit;
             printQuote.PrintRDLCReport();
 
         }
-        
         public void PrintWindoorRDLC()
         {
 
@@ -553,7 +704,6 @@ namespace PresentationLayer.Presenter
             }
 
         }
-
         public void PrintContractSummaryRDLC()
         {
 
@@ -589,7 +739,7 @@ namespace PresentationLayer.Presenter
 
             try
             {
-                ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                //ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
                 ScreenTotalListCount = _mainPresenter.Screen_List.Sum(x => x.Screen_Quantity);
 
                 foreach (var item in _mainPresenter.Screen_List)
@@ -603,10 +753,17 @@ namespace PresentationLayer.Presenter
                             screentotaldiscount = screentotaldiscount + item.Screen_Discount;
                         }
                     }
-                    else
+                    else if (item.Screen_Quantity == 1)
                     {
                         screentotaldiscount = screentotaldiscount + item.Screen_Discount;
                     }
+                    else
+                    {
+                        Console.WriteLine("Zero Quantity Detected");
+                    }
+
+
+                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount,2);
                 }
 
                 ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;
@@ -683,12 +840,10 @@ namespace PresentationLayer.Presenter
             }
             clearingOperation();
         }
-
         public void QuoteItemList_PrintAnnexRDLC()
         {
             _printQuotePresenter.printAnnexRDLC();
         }
-
         public void ContractSummaryComputation()
         {
             DSQuotation _dtqoute = new DSQuotation();
@@ -796,7 +951,7 @@ namespace PresentationLayer.Presenter
             Screen_NetPrice = null;      
 
         }
-
+                
         private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)
         {
             PrintWindoorRDLC();
@@ -870,7 +1025,19 @@ namespace PresentationLayer.Presenter
                                         curr_GlassLoc = lstQuoteUC.GetiQuoteItemListUC().ItemName;
                                         curr_GlassDesc = pnl.Panel_GlassThicknessDesc;
                                         curr_GlassPrice = Math.Round((pnlGlassArea * pnl.Panel_GlassPricePerSqrMeter) + ((pnlGlassArea * pnl.Panel_GlassPricePerSqrMeter) * _quotationModel.PricingFactor), 2);
-                                        curr_IntDescription = Convert.ToInt32(curr_GlassDesc.Substring(0, 2));
+
+                                        _intInString = curr_GlassDesc.All(char.IsDigit);
+                                        
+                                        if(_intInString == true)
+                                        {
+                                            curr_IntDescription = Convert.ToInt32(curr_GlassDesc.Substring(0, 2));
+                                            _intInString = false;
+                                        }
+                                        else
+                                        {
+                                            curr_IntDescription = 0;
+                                        }
+
 
                                         if (prev_GlassItemNo != 0)
                                         {
@@ -988,7 +1155,18 @@ namespace PresentationLayer.Presenter
                                 curr_GlassLoc = lstQuoteUC.GetiQuoteItemListUC().ItemName;
                                 curr_GlassDesc = Singlepnl.Panel_GlassThicknessDesc;
                                 curr_GlassPrice = Math.Round((pnlGlassArea * Singlepnl.Panel_GlassPricePerSqrMeter) + ((pnlGlassArea * Singlepnl.Panel_GlassPricePerSqrMeter) * _quotationModel.PricingFactor), 2);
-                                curr_IntDescription = Convert.ToInt32(curr_GlassDesc.Substring(0, 2));
+                                _intInString = curr_GlassDesc.All(char.IsDigit);
+
+                                if (_intInString == true)
+                                {
+                                    curr_IntDescription = Convert.ToInt32(curr_GlassDesc.Substring(0, 2));
+                                    _intInString = false;
+                                }
+                                else
+                                {
+                                    curr_IntDescription = 0;
+                                }
+
                                 if (prev_GlassItemNo != 0)
                                 {
                                     if (prev_GlassItemNo == curr_GlassItemNo)
@@ -1193,7 +1371,6 @@ namespace PresentationLayer.Presenter
                         DimensionDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n";
                     }
 
-
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemNumber = "Item " + (i + 1);
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_itemName;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = wdm.WD_WindoorNumber; //location
@@ -1204,10 +1381,10 @@ namespace PresentationLayer.Presenter
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxTopView().Image = wdm.WD_SlidingTopViewImage;
 
-                    if (wdm.WD_price == 0)
+                    if (wdm.WD_price == 0 && wdm.IsFromLoad == true)
                     {
-                        _quotationModel.ItemCostingPriceAndPoints();
-                        wdm.WD_price = Math.Round(_quotationModel.lstTotalPrice[i], 2);
+                        //_quotationModel.ItemCostingPriceAndPoints();
+                        //wdm.WD_price = Math.Round(_quotationModel.lstTotalPrice[i], 2);
                     }
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = Math.Round(wdm.WD_price, 2);  //TotaPrice;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = Math.Round(wdm.WD_price, 2).ToString();  //TotaPrice.ToString();
@@ -1221,16 +1398,169 @@ namespace PresentationLayer.Presenter
                     this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                     TotalItemArea = wdm.WD_width * wdm.WD_height;
                     this._lstItemArea.Add(TotalItemArea);
-
                 }
+                LoadGlassUpgradeDt();
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
 
         }
+
+        #region Glassupgrade Load 
+        private DataColumn CreateColumn(string columnName, string caption, string type)
+        {
+            DataColumn col = new DataColumn();
+            col.DataType = Type.GetType(type);
+            col.ColumnName = columnName;
+            col.Caption = caption;
+
+            return col;
+        }
+        private void LoadGlassUpgradeDt()
+        {
+            _glassUpgradeDT.Columns.Add(CreateColumn("Item No.", "Item No", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("Window/Door I.D.", "Window/Door I.D.", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("Qty", "Qty", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("Width", "Width", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("Height", "Height", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("Original Glass Used", "Original Glass Used", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("GlassPrice", "GlassPrice", "System.String"));
+
+            _glassUpgradeDT.Columns.Add(CreateColumn("Upgraded To", "Glass Upgraded To", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("Glass Upgrade Price", "Glass Upgrade Price", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("Upgrade Value", "Upgrade Value", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("Amount Per Unit", "Amount Per Unit", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("Total Net Prices", "Total Net Prices", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("GlassType", "GlassType", "System.String"));
+            _glassUpgradeDT.Columns.Add(CreateColumn("Primary Key", "Primary Key", "System.Decimal"));
+
+
+            foreach (var item in _mainPresenter.NonUnglazed)
+            {
+                _glassUpgradeDT.Rows.Add(item[0].ToString(),
+                                         item[1].ToString(),
+                                         item[2].ToString(),
+                                         item[3].ToString(),
+                                         item[4].ToString(),
+                                         item[5].ToString(),
+                                         item[6].ToString(),
+                                         item[7].ToString(),
+                                         item[8].ToString(),
+                                         item[9].ToString(),
+                                         item[10].ToString(),
+                                         item[11].ToString(),
+                                         item[12].ToString(),
+                                         item[13].ToString());
+            }
+        }
+        private decimal DsqValueTotalNetPricePrint(string glassType)
+        {
+            var charToRemove = new string[] { "(", ")" };
+            string _strRmvChr;
+            decimal _convTotalNetPrice;
+
+            foreach (DataRow row in _glassUpgradeDT.Rows)
+            {
+                if (row["GlassType"].ToString() == glassType)
+                {
+                    if (!row["Total Net Prices"].ToString().Contains("("))
+                    {
+                        _convTotalNetPrice = Convert.ToDecimal(row["Total Net Prices"]);
+                        _totalNetPriceforPrint = _totalNetPriceforPrint + _convTotalNetPrice;
+                    }
+                    else
+                    {
+                        _strRmvChr = row["Total Net Prices"].ToString();
+                        foreach (var item in charToRemove)
+                        {
+                            _strRmvChr = _strRmvChr.Replace(item, string.Empty);
+                        }
+                        _convTotalNetPrice = Convert.ToDecimal(_strRmvChr);
+                        _totalNetPriceforPrint = _totalNetPriceforPrint - _convTotalNetPrice;
+                    }
+
+
+                }
+            }
+
+            return _totalNetPriceforPrint;
+
+        }
+        public void PrintGlassUpgrade()
+        {
+            DSQuotation _dsq = new DSQuotation();
+            string _itemNumHolder,
+                   _dimension;
+
+            /*row0 itemNo.
+             *row1 Window/Door I.D.
+             *row2 Qty
+             *row3 Width
+             *row4 Height
+             *row5 Original Glass Used
+             *row6 GlassPrice
+             *row7 Upgraded To
+             *row8 Glass Upgrade Price
+             *row9 Upgrade Value
+             *row10 Amount Per Unit
+             *row11 Total Net Prices
+             *row12 GlassType
+             *row13 Primary Key
+             */
+            try
+            {
+                foreach (DataRow dtrow in _glassUpgradeDT.Rows)
+                {
+
+                    if (dtrow["GlassType"].ToString() == _guGlassType)
+                    {
+                        decimal TotalNetPrice = DsqValueTotalNetPricePrint(_guGlassType);
+
+                        if (dtrow["Primary Key"].ToString().Contains(".0"))
+                        {
+                            _itemNumHolder = dtrow["Item No."].ToString();
+                        }
+                        else
+                        {
+                            _itemNumHolder = " ";
+                        }
+
+                        _dimension = dtrow["Width"].ToString() + " x " + dtrow["Height"].ToString();
+
+                        _dsq.dtGlassUpgrade.Rows.Add(_itemNumHolder,
+                                                     dtrow["Window/Door I.D."],
+                                                     dtrow["Original Glass Used"],
+                                                     dtrow["Upgraded To"],
+                                                     _dimension,
+                                                     dtrow["Amount Per Unit"],
+                                                     dtrow["Qty"],
+                                                     dtrow["Total Net Prices"],
+                                                     TotalNetPrice,
+                                                     dtrow["GlassType"]);
+
+                    }
+                }
+                //change this to render backgroundS
+                _mainPresenter.printStatus = "GlassUpgrade";
+                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
+                printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtGlassUpgrade.DefaultView;
+                printQuote.EventLoad();
+                printQuote.GetPrintQuoteView().GlassType = _guGlassType;
+                printQuote.GetPrintQuoteView().VatPercentage = _guVatPercentage;
+                printQuote.PrintRDLCReport();
+
+                //reset print variables 
+                _totalNetPriceforPrint = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problem in GU Print: " + ex.Message);
+            }
+        }
+
+        #endregion
 
         private void OnchkboxSelectallCheckedChangeEventRaised(object sender, EventArgs e)
         {

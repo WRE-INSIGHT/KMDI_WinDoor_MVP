@@ -633,7 +633,35 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         public string setDiscount { get; set; }
 
-      
+        private string _wd_TopViewType;
+        public string WD_TopViewType
+        {
+            get
+            {
+                return _wd_TopViewType;
+            }
+            set
+            {
+                _wd_TopViewType = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _isFromLoad;
+        public bool IsFromLoad
+        {
+            get
+            {
+                return _isFromLoad;
+            }
+            set
+            {
+                _isFromLoad = value;
+            }
+        }
+        public string TotalPriceHistory { get; set; }
+        public string TotalPriceHistoryStatus { get; set; }
+        public List<string> lst_TotalPriceHistory { get; set; }
+        public decimal SystemSuggestedPrice { get; set; }
 
         #region Methods
 
@@ -677,7 +705,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
             else if (area > 16000000) // more than (4000w x 4001h / 4001w x 4000h)
             {
-                zm = _arr_zoomPercentage[0];            
+                zm = _arr_zoomPercentage[0];
             }
 
             return zm;
@@ -890,7 +918,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                                     i++;
                                 }
                             }
-                           
+
                         }
                         else if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion"))
                         {
@@ -1111,7 +1139,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
 
             int diff_BasePlatform_VS_MyCtrlsWidth = objectWidth - (WD_width_4basePlatform - 70);
-            if(diff_BasePlatform_VS_MyCtrlsWidth > 0)
+            if (diff_BasePlatform_VS_MyCtrlsWidth > 0)
                 WD_width_4basePlatform += diff_BasePlatform_VS_MyCtrlsWidth;
         }
 
@@ -1287,7 +1315,10 @@ namespace ModelLayer.Model.Quotation.WinDoor
                             List<Control> wdlstobjects,
                             Base_Color wd_basecolor,
                             Foil_Color wd_insidecolor,
-                            Foil_Color wd_outisdecolor
+                            Foil_Color wd_outisdecolor,
+                            bool isFromLoad,
+                            List<string> lst_totalPriceHistory,
+                            decimal systemSuggestedPrice
                             //int wd_costingPoints
                             )
         {
@@ -1317,7 +1348,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
             WD_fileLoad = false;
             Dictionary_wd_redArrowLines = new Dictionary<int, decimal>();
             Dictionary_ht_redArrowLines = new Dictionary<int, decimal>();
-
+            IsFromLoad = isFromLoad;
+            lst_TotalPriceHistory = lst_totalPriceHistory;
+            SystemSuggestedPrice = systemSuggestedPrice;
         }
     }
 }

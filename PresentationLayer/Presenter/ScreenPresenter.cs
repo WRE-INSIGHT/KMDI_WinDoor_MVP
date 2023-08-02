@@ -79,8 +79,6 @@ namespace PresentationLayer.Presenter
             SubscribeToEventSetup();
         }
 
-
-
         private void SubscribeToEventSetup()
         {
             _screenView.ScreenViewLoadEventRaised += _screenView_ScreenViewLoadEventRaised;
@@ -186,7 +184,6 @@ namespace PresentationLayer.Presenter
 
         #region Events
         private void _screenView_CellEndEditEventRaised(object sender, EventArgs e)
-
         {
             var currCellVal = _dgv_Screen.CurrentCell.Value;
             var currCell_col = _dgv_Screen.CurrentCell.ColumnIndex;
@@ -328,8 +325,7 @@ namespace PresentationLayer.Presenter
                     _screenModel.DiscountPercentage = 0;
                 }
             }
-
-            
+                        
             _mainPresenter.SetChangesMark();
          
         }
@@ -373,7 +369,7 @@ namespace PresentationLayer.Presenter
                 var dgv_indices = r.Cells[0].RowIndex;
                 decimal _delScreenRow = Convert.ToDecimal(dgv_value);
                 int i = 0;
-
+                                 
 
                 foreach (DataRow row in _screenDT.Rows)
                 {
@@ -689,16 +685,20 @@ namespace PresentationLayer.Presenter
                 {
                     //Screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
                     //NetPriceTotal = NetPriceTotal + Screen_priceXquantiy;
-                    if (item.Screen_Quantity > 1)
+                    if (item.Screen_Quantity > 1 )
                     {
                         for(int i = 1; i <= item.Screen_Quantity; i++)
                         {
                             screenDiscountAverage = screenDiscountAverage + item.Screen_Discount;
                         }
                     }
-                    else
+                    else if (item.Screen_Quantity == 1)
                     {
                         screenDiscountAverage = screenDiscountAverage + item.Screen_Discount;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Zero Quantity Detected");
                     }
 
                     Console.WriteLine(item.Screen_UnitPrice.ToString());
@@ -762,6 +762,8 @@ namespace PresentationLayer.Presenter
 
         public void GetCurrentAmount()
         {
+            _screenModel.Screen_Height = Convert.ToInt32(_screenView.screen_height.Value);
+            _screenModel.Screen_Width = Convert.ToInt32(_screenView.screen_width.Value);
             _screenModel.FromCellEndEdit = false;
             _screenModel.ComputeScreenTotalPrice();
             _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
@@ -854,7 +856,7 @@ namespace PresentationLayer.Presenter
             _screenModel.Screen_ExchangeRateAUD = 40;
             _screenModel.PlissedRd_Panels = 1;
             _screenModel.DiscountPercentage = 0.3m;
-            WindoorIDGetter();
+            WindoorIDGetter(); 
         
             _dgv_Screen.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.Programmatic);
 
@@ -960,7 +962,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                _screenView.screenViewWindoorID = "";
+                _screenView.screenViewWindoorID = ""; 
                 foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
                     if (screenInitialLoad != true)
@@ -1060,8 +1062,7 @@ namespace PresentationLayer.Presenter
                 _Screen_PricingDimension = _screenModel.Screen_Width + " x " + _screenModel.Screen_Height;
                 _Screen_addOnsSpecialFactor = _screenModel.Screen_AddOnsSpecialFactor;
             }
-
-
+            
             newRow["Item No."] = _screenModel.Screen_ItemNumber;
             newRow["Type of Insect Screen"] = _screenModel.Screen_Description  + _setDesc + centerClosureDesc;
             newRow["Dimension (mm) \n per panel"] = _Screen_DimensionFormat;

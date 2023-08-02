@@ -73,6 +73,7 @@
             this.glassBalancingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customArrowHeadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.slidingTopViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeItemDimensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.tsBtnNwin = new System.Windows.Forms.ToolStripButton();
             this.tsBtnNdoor = new System.Windows.Forms.ToolStripButton();
@@ -86,14 +87,17 @@
             this.tsb_Undo = new System.Windows.Forms.ToolStripButton();
             this.newfactorBtn = new System.Windows.Forms.ToolStripButton();
             this.SetGlassToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
+            this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.ScreentoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tsb_Redo = new System.Windows.Forms.ToolStripButton();
             this.tsprogress_Loading = new System.Windows.Forms.ToolStripProgressBar();
             this.deleteItemToolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.PriceHistorytoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tsp_Sync = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
-            this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.ScreentoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.DateAssignedtoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.glassUpgradeToolStrip = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.SortItemtoolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -428,7 +432,8 @@
             this.changeItemColorToolStripMenuItem,
             this.glassBalancingToolStripMenuItem,
             this.customArrowHeadToolStripMenuItem,
-            this.slidingTopViewToolStripMenuItem});
+            this.slidingTopViewToolStripMenuItem,
+            this.changeItemDimensionToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -436,14 +441,14 @@
             // changeSyncDirectoryToolStripMenuItem
             // 
             this.changeSyncDirectoryToolStripMenuItem.Name = "changeSyncDirectoryToolStripMenuItem";
-            this.changeSyncDirectoryToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.changeSyncDirectoryToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.changeSyncDirectoryToolStripMenuItem.Text = "Change sync directory";
             this.changeSyncDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeSyncDirectoryToolStripMenuItem_Click);
             // 
             // syncLocalToCloudToolStripMenuItem
             // 
             this.syncLocalToCloudToolStripMenuItem.Name = "syncLocalToCloudToolStripMenuItem";
-            this.syncLocalToCloudToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.syncLocalToCloudToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.syncLocalToCloudToolStripMenuItem.Text = "Sync local to cloud";
             this.syncLocalToCloudToolStripMenuItem.Visible = false;
             // 
@@ -452,7 +457,7 @@
             this.editorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.invertOrientationToolStripMenuItem});
             this.editorToolStripMenuItem.Name = "editorToolStripMenuItem";
-            this.editorToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.editorToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.editorToolStripMenuItem.Text = "Editor";
             // 
             // invertOrientationToolStripMenuItem
@@ -466,7 +471,7 @@
             // 
             this.listOfMaterialsToolStripMenuItem.Enabled = false;
             this.listOfMaterialsToolStripMenuItem.Name = "listOfMaterialsToolStripMenuItem";
-            this.listOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.listOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.listOfMaterialsToolStripMenuItem.Text = "List of Materials";
             this.listOfMaterialsToolStripMenuItem.Click += new System.EventHandler(this.listOfMaterialsToolStripMenuItem_Click);
             // 
@@ -474,7 +479,7 @@
             // 
             this.changeItemColorToolStripMenuItem.Enabled = false;
             this.changeItemColorToolStripMenuItem.Name = "changeItemColorToolStripMenuItem";
-            this.changeItemColorToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.changeItemColorToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.changeItemColorToolStripMenuItem.Text = "Change Item Color";
             this.changeItemColorToolStripMenuItem.Click += new System.EventHandler(this.changeItemColorToolStripMenuItem_Click);
             // 
@@ -483,7 +488,7 @@
             this.glassBalancingToolStripMenuItem.CheckOnClick = true;
             this.glassBalancingToolStripMenuItem.Enabled = false;
             this.glassBalancingToolStripMenuItem.Name = "glassBalancingToolStripMenuItem";
-            this.glassBalancingToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.glassBalancingToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.glassBalancingToolStripMenuItem.Text = "Glass Balancing";
             this.glassBalancingToolStripMenuItem.Visible = false;
             this.glassBalancingToolStripMenuItem.Click += new System.EventHandler(this.glassBalancingToolStripMenuItem_Click);
@@ -492,7 +497,7 @@
             // 
             this.customArrowHeadToolStripMenuItem.Enabled = false;
             this.customArrowHeadToolStripMenuItem.Name = "customArrowHeadToolStripMenuItem";
-            this.customArrowHeadToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.customArrowHeadToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.customArrowHeadToolStripMenuItem.Text = "Custom Arrow Head";
             this.customArrowHeadToolStripMenuItem.Click += new System.EventHandler(this.customArrowHeadToolStripMenuItem_Click);
             // 
@@ -500,9 +505,17 @@
             // 
             this.slidingTopViewToolStripMenuItem.Enabled = false;
             this.slidingTopViewToolStripMenuItem.Name = "slidingTopViewToolStripMenuItem";
-            this.slidingTopViewToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.slidingTopViewToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.slidingTopViewToolStripMenuItem.Text = "Sliding Top View";
             this.slidingTopViewToolStripMenuItem.Click += new System.EventHandler(this.slidingTopViewToolStripMenuItem_Click);
+            // 
+            // changeItemDimensionToolStripMenuItem
+            // 
+            this.changeItemDimensionToolStripMenuItem.Enabled = false;
+            this.changeItemDimensionToolStripMenuItem.Name = "changeItemDimensionToolStripMenuItem";
+            this.changeItemDimensionToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.changeItemDimensionToolStripMenuItem.Text = "Change Item Dimension";
+            this.changeItemDimensionToolStripMenuItem.Click += new System.EventHandler(this.lblSize_Click);
             // 
             // tsMain
             // 
@@ -522,14 +535,17 @@
             this.tsb_Undo,
             this.newfactorBtn,
             this.SetGlassToolStripMenuItem,
+            this.ViewImagerToolStripButton1,
+            this.ScreentoolStripButton,
             this.tsb_Redo,
             this.tsprogress_Loading,
             this.deleteItemToolStripButton1,
+            this.PriceHistorytoolStripButton,
             this.tsp_Sync,
             this.tsLbl_Loading,
             this.tsLbl_Status,
-            this.ViewImagerToolStripButton1,
-            this.ScreentoolStripButton});
+            this.DateAssignedtoolStripButton,
+            this.glassUpgradeToolStrip});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -670,6 +686,28 @@
             this.SetGlassToolStripMenuItem.ToolTipText = "Set Glass";
             this.SetGlassToolStripMenuItem.Click += new System.EventHandler(this.SetGlassToolStripMenuItem_Click);
             // 
+            // ViewImagerToolStripButton1
+            // 
+            this.ViewImagerToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ViewImagerToolStripButton1.Enabled = false;
+            this.ViewImagerToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("ViewImagerToolStripButton1.Image")));
+            this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";
+            this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
+            this.ViewImagerToolStripButton1.Text = "View Imager";
+            this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
+            // 
+            // ScreentoolStripButton
+            // 
+            this.ScreentoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ScreentoolStripButton.Enabled = false;
+            this.ScreentoolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ScreentoolStripButton.Image")));
+            this.ScreentoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ScreentoolStripButton.Name = "ScreentoolStripButton";
+            this.ScreentoolStripButton.Size = new System.Drawing.Size(24, 29);
+            this.ScreentoolStripButton.Text = "Screen";
+            this.ScreentoolStripButton.Click += new System.EventHandler(this.ScreentoolStripButton_Click);
+            // 
             // tsb_Redo
             // 
             this.tsb_Redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -698,6 +736,17 @@
             this.deleteItemToolStripButton1.Text = "Delete item";
             this.deleteItemToolStripButton1.ToolTipText = "Delete item";
             this.deleteItemToolStripButton1.Click += new System.EventHandler(this.deleteItemToolStripButton1_Click);
+            // 
+            // PriceHistorytoolStripButton
+            // 
+            this.PriceHistorytoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.PriceHistorytoolStripButton.Enabled = false;
+            this.PriceHistorytoolStripButton.Image = global::PresentationLayer.Properties.Resources.icons8_history_64;
+            this.PriceHistorytoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.PriceHistorytoolStripButton.Name = "PriceHistorytoolStripButton";
+            this.PriceHistorytoolStripButton.Size = new System.Drawing.Size(24, 29);
+            this.PriceHistorytoolStripButton.Text = "Price History";
+            this.PriceHistorytoolStripButton.Click += new System.EventHandler(this.PriceHistorytoolStripButton_Click);
             // 
             // tsp_Sync
             // 
@@ -732,27 +781,27 @@
             this.tsLbl_Status.Text = "TransomUC_1 Selected";
             this.tsLbl_Status.Visible = false;
             // 
-            // ViewImagerToolStripButton1
+            // DateAssignedtoolStripButton
             // 
-            this.ViewImagerToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ViewImagerToolStripButton1.Enabled = false;
-            this.ViewImagerToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("ViewImagerToolStripButton1.Image")));
-            this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";
-            this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
-            this.ViewImagerToolStripButton1.Text = "View Imager";
-            this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
+            this.DateAssignedtoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DateAssignedtoolStripButton.Enabled = false;
+            this.DateAssignedtoolStripButton.Image = global::PresentationLayer.Properties.Resources.calendar_icon_hand_circles_date_calendar_logo_template_deadline_concept_illustration_168129_210__1_;
+            this.DateAssignedtoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DateAssignedtoolStripButton.Name = "DateAssignedtoolStripButton";
+            this.DateAssignedtoolStripButton.Size = new System.Drawing.Size(24, 29);
+            this.DateAssignedtoolStripButton.Text = "Date Assigned";
+            this.DateAssignedtoolStripButton.Click += new System.EventHandler(this.DateAssignedtoolStripButton_Click);
             // 
-            // ScreentoolStripButton
+            // glassUpgradeToolStrip
             // 
-            this.ScreentoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ScreentoolStripButton.Enabled = false;
-            this.ScreentoolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ScreentoolStripButton.Image")));
-            this.ScreentoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ScreentoolStripButton.Name = "ScreentoolStripButton";
-            this.ScreentoolStripButton.Size = new System.Drawing.Size(24, 29);
-            this.ScreentoolStripButton.Text = "Screen";
-            this.ScreentoolStripButton.Click += new System.EventHandler(this.ScreentoolStripButton_Click);
+            this.glassUpgradeToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.glassUpgradeToolStrip.Enabled = false;
+            this.glassUpgradeToolStrip.Image = ((System.Drawing.Image)(resources.GetObject("glassUpgradeToolStrip.Image")));
+            this.glassUpgradeToolStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.glassUpgradeToolStrip.Name = "glassUpgradeToolStrip";
+            this.glassUpgradeToolStrip.Size = new System.Drawing.Size(24, 29);
+            this.glassUpgradeToolStrip.Text = "Glass Upgrade";
+            this.glassUpgradeToolStrip.Click += new System.EventHandler(this.glassUpgradeToolStrip_Click);
             // 
             // pnlRight
             // 
@@ -1160,5 +1209,9 @@
         private System.Windows.Forms.NumericUpDown Nud_CurrentPrice;
         private System.Windows.Forms.ToolStripButton newfactorBtn;
         private System.Windows.Forms.ToolStripButton ScreentoolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem changeItemDimensionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton PriceHistorytoolStripButton;
+        private System.Windows.Forms.ToolStripButton DateAssignedtoolStripButton;
+        private System.Windows.Forms.ToolStripButton glassUpgradeToolStrip;
     }
 }

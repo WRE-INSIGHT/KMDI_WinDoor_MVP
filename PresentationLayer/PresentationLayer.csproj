@@ -160,6 +160,7 @@
     <Compile Include="Presenter\ExplosionPresenter.cs" />
     <Compile Include="Presenter\frmDimensionPresenter.cs" />
     <Compile Include="Presenter\GlassThicknessListPresenter.cs" />
+    <Compile Include="Presenter\GlassUpgradePresenter.cs" />
     <Compile Include="Presenter\IChangeItemColorPresenter.cs" />
     <Compile Include="Presenter\ICostEngrLandingPresenter.cs" />
     <Compile Include="Presenter\ICreateNewGlassColorPresenter.cs" />
@@ -171,10 +172,12 @@
     <Compile Include="Presenter\IExplosionPresenter.cs" />
     <Compile Include="Presenter\IfrmDimensionPresenter.cs" />
     <Compile Include="Presenter\IGlassThicknessListPresenter.cs" />
+    <Compile Include="Presenter\IGlassUpgradePresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
     <Compile Include="Presenter\IPDFCompilerPresenter.cs" />
     <Compile Include="Presenter\IPDFWaitFormPresenter.cs" />
+    <Compile Include="Presenter\IPriceHistoryPresenter.cs" />
     <Compile Include="Presenter\IPricingPresenter.cs" />
     <Compile Include="Presenter\IPrintGlassSummaryPresenter.cs" />
     <Compile Include="Presenter\IPrintQuotePresenter.cs" />
@@ -189,6 +192,7 @@
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Presenter\PDFCompilerPresenter.cs" />
     <Compile Include="Presenter\PDFWaitFormPresenter.cs" />
+    <Compile Include="Presenter\PriceHistoryPresenter.cs" />
     <Compile Include="Presenter\PricingPresenter.cs" />
     <Compile Include="Presenter\PrintGlassSummaryPresenter.cs" />
     <Compile Include="Presenter\PrintQuotePresenter.cs" />
@@ -481,6 +485,12 @@
     <Compile Include="Views\GlassThicknessListView.Designer.cs">
       <DependentUpon>GlassThicknessListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\GlassUpgradeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\GlassUpgradeView.Designer.cs">
+      <DependentUpon>GlassUpgradeView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\IChangeItemColorView.cs" />
     <Compile Include="Views\ICostEngrLandingView.cs" />
     <Compile Include="Views\ICreateNewGlassColorView.cs" />
@@ -492,10 +502,12 @@
     <Compile Include="Views\IExplosionView.cs" />
     <Compile Include="Views\IfrmDimensionView.cs" />
     <Compile Include="Views\IGlassThicknessListView.cs" />
+    <Compile Include="Views\IGlassUpgradeView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
     <Compile Include="Views\IPDFCompilerView.cs" />
     <Compile Include="Views\IPDFWaitFormView.cs" />
+    <Compile Include="Views\IPriceHistoryView.cs" />
     <Compile Include="Views\IPricingView.cs" />
     <Compile Include="Views\IPrintGlassSummaryView.cs" />
     <Compile Include="Views\IPrintQuoteView.cs" />
@@ -529,6 +541,12 @@
     </Compile>
     <Compile Include="Views\PDFWaitFormView.Designer.cs">
       <DependentUpon>PDFWaitFormView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PriceHistoryView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PriceHistoryView.Designer.cs">
+      <DependentUpon>PriceHistoryView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\PricingView.cs">
       <SubType>Form</SubType>
@@ -583,6 +601,12 @@
     </Compile>
     <Compile Include="Views\SetTopViewSlidingPanellingView.Designer.cs">
       <DependentUpon>SetTopViewSlidingPanellingView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SlidingScreenView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SlidingScreenView.Designer.cs">
+      <DependentUpon>SlidingScreenView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\SortItemView.cs">
       <SubType>Form</SubType>
@@ -1274,6 +1298,7 @@
     </Compile>
     <EmbeddedResource Include="Reports\Annex.rdlc" />
     <EmbeddedResource Include="Reports\GlassSummary.rdlc" />
+    <EmbeddedResource Include="Reports\GlassUpgrade.rdlc" />
     <EmbeddedResource Include="Reports\Quotation.rdlc" />
     <EmbeddedResource Include="Reports\Screen.rdlc" />
     <EmbeddedResource Include="Reports\SummaryOfContract.rdlc" />
@@ -1328,6 +1353,9 @@
     <EmbeddedResource Include="Views\GlassThicknessListView.resx">
       <DependentUpon>GlassThicknessListView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\GlassUpgradeView.resx">
+      <DependentUpon>GlassUpgradeView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1339,6 +1367,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PDFWaitFormView.resx">
       <DependentUpon>PDFWaitFormView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PriceHistoryView.resx">
+      <DependentUpon>PriceHistoryView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PricingView.resx">
       <DependentUpon>PricingView.cs</DependentUpon>
@@ -1366,6 +1397,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SetTopViewSlidingPanellingView.resx">
       <DependentUpon>SetTopViewSlidingPanellingView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SlidingScreenView.resx">
+      <DependentUpon>SlidingScreenView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SortItemView.resx">
       <DependentUpon>SortItemView.cs</DependentUpon>
@@ -1698,6 +1732,7 @@
     <None Include="Resources\AwningPanel.png" />
     <None Include="Resources\back_arrow_104px.png" />
     <Content Include="Resources\box_important_40px.png" />
+    <None Include="Resources\calendar-icon-hand-circles-date-calendar-logo-template-deadline-concept-illustration_168129-210 %281%29.png" />
     <Content Include="Resources\cancel_30px.png" />
     <Content Include="Resources\cancel_40px.png" />
     <None Include="Resources\CasementPanel.png" />
@@ -1734,6 +1769,7 @@
     <None Include="Resources\glass %281%29.png" />
     <None Include="Resources\glass.png" />
     <None Include="Resources\folder.png" />
+    <None Include="Resources\icons8-history-64.png" />
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <None Include="Resources\icons8_front_sorting_96px.png" />
@@ -1763,6 +1799,7 @@
     <None Include="Resources\SlidingPanel.png" />
     <None Include="Resources\TiltNTurnPanel.png" />
     <None Include="Resources\Summary_v2.png" />
+    <None Include="Resources\slidingscreenheader.jpg" />
     <Content Include="Resources\Transom.png" />
     <Content Include="Resources\undo_30px.png" />
   </ItemGroup>

@@ -330,7 +330,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             int font_size = 30,
                 outer_line = 10,
-                inner_line = 15;
+                inner_line = 15,
+                rectThickness = 1;
+
 
             int ndx_zoomPercentage = Array.IndexOf(_mainPresenter.windoorModel_MainPresenter.Arr_ZoomPercentage, _frameModel.Frame_Zoom);
 
@@ -343,6 +345,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 font_size = 15;
                 outer_line = 5;
                 inner_line = 8;
+                rectThickness = 2;
+
             }
             else if (ndx_zoomPercentage == 1)
             {
@@ -436,6 +440,33 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             #endregion
 
+            #region Mesh
+            if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+            {
+                int cond = tiltNTurn.ClientRectangle.Width + tiltNTurn.ClientRectangle.Height;
+
+                int maxWidth = tiltNTurn.ClientRectangle.Width;
+
+                for (int i = 10; i < cond; i += 10)
+                {
+                    g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+
+                }
+
+                for (int i = 10; i < cond; i += 10)
+                {
+                    g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(tiltNTurn.ClientRectangle.Width, i));
+
+                }
+               
+                    g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
+                                                                           8 / rectThickness,
+                                                                           tiltNTurn.ClientRectangle.Width - 17 / rectThickness,
+                                                                           tiltNTurn.ClientRectangle.Height - 17 / rectThickness));
+
+                
+            }
+            #endregion
 
             string glassType = "";
             if (_panelModel.Panel_GlassThicknessDesc != null)
@@ -451,6 +482,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else if (_panelModel.Panel_GlassThicknessDesc.Contains("Security Mesh"))
                 {
                     glassType = "Security Mesh";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Wire Mesh"))
+                {
+                    glassType = "Wire Mesh";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Pet Mesh"))
+                {
+                    glassType = "Pet Mesh";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Tuff Mesh"))
+                {
+                    glassType = "Tuff Mesh";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Phifer Mesh"))
+                {
+                    glassType = "Phifer Mesh";
                 }
                 else
                 {
@@ -469,7 +516,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             10);
 
             if (glassType == "Unglazed" ||
-                glassType == "Security Mesh")
+                glassType.Contains("Mesh"))
             {
                 g.DrawString("P" + _panelModel.PanelGlass_ID + "- " + glassType,
                                       new Font("Segoe UI", 8.0f, FontStyle.Bold),

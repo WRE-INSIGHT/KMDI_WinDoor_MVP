@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintQuoteView));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtbox_rowlimit = new System.Windows.Forms.TextBox();
+            this.chkbox_subtotal = new System.Windows.Forms.CheckBox();
+            this.chkbox_LessD = new System.Windows.Forms.CheckBox();
+            this.txtbox_LessD = new System.Windows.Forms.TextBox();
             this.txtbox_VAT = new System.Windows.Forms.TextBox();
             this.txtbox_FC = new System.Windows.Forms.TextBox();
             this.txtbox_LnM = new System.Windows.Forms.TextBox();
@@ -55,14 +59,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.BSQuotation = new System.Windows.Forms.BindingSource(this.components);
-            this.txtbox_LessD = new System.Windows.Forms.TextBox();
-            this.chkbox_LessD = new System.Windows.Forms.CheckBox();
+            this.cmb_NotedBy = new System.Windows.Forms.ComboBox();
+            this.cmb_ReviewedBy = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BSQuotation)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cmb_ReviewedBy);
+            this.panel1.Controls.Add(this.cmb_NotedBy);
+            this.panel1.Controls.Add(this.txtbox_rowlimit);
+            this.panel1.Controls.Add(this.chkbox_subtotal);
             this.panel1.Controls.Add(this.chkbox_LessD);
             this.panel1.Controls.Add(this.txtbox_LessD);
             this.panel1.Controls.Add(this.txtbox_VAT);
@@ -93,6 +101,46 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1008, 144);
             this.panel1.TabIndex = 2;
+            // 
+            // txtbox_rowlimit
+            // 
+            this.txtbox_rowlimit.Location = new System.Drawing.Point(503, 0);
+            this.txtbox_rowlimit.Name = "txtbox_rowlimit";
+            this.txtbox_rowlimit.Size = new System.Drawing.Size(94, 25);
+            this.txtbox_rowlimit.TabIndex = 31;
+            this.txtbox_rowlimit.Visible = false;
+            // 
+            // chkbox_subtotal
+            // 
+            this.chkbox_subtotal.AutoSize = true;
+            this.chkbox_subtotal.Location = new System.Drawing.Point(278, 2);
+            this.chkbox_subtotal.Name = "chkbox_subtotal";
+            this.chkbox_subtotal.Size = new System.Drawing.Size(121, 23);
+            this.chkbox_subtotal.TabIndex = 4;
+            this.chkbox_subtotal.Text = "Show Sub Total";
+            this.chkbox_subtotal.UseVisualStyleBackColor = true;
+            this.chkbox_subtotal.Visible = false;
+            this.chkbox_subtotal.CheckedChanged += new System.EventHandler(this.chkbox_subtotal_CheckedChanged);
+            // 
+            // chkbox_LessD
+            // 
+            this.chkbox_LessD.AutoSize = true;
+            this.chkbox_LessD.Location = new System.Drawing.Point(673, 118);
+            this.chkbox_LessD.Name = "chkbox_LessD";
+            this.chkbox_LessD.Size = new System.Drawing.Size(112, 23);
+            this.chkbox_LessD.TabIndex = 30;
+            this.chkbox_LessD.Text = "Less Discount";
+            this.chkbox_LessD.UseVisualStyleBackColor = true;
+            this.chkbox_LessD.Visible = false;
+            this.chkbox_LessD.CheckedChanged += new System.EventHandler(this.chkbox_LessD_CheckedChanged);
+            // 
+            // txtbox_LessD
+            // 
+            this.txtbox_LessD.Location = new System.Drawing.Point(802, 117);
+            this.txtbox_LessD.Name = "txtbox_LessD";
+            this.txtbox_LessD.Size = new System.Drawing.Size(94, 25);
+            this.txtbox_LessD.TabIndex = 29;
+            this.txtbox_LessD.Visible = false;
             // 
             // txtbox_VAT
             // 
@@ -327,25 +375,23 @@
             // 
             this.BSQuotation.CurrentChanged += new System.EventHandler(this.BSQuotation_CurrentChanged);
             // 
-            // txtbox_LessD
+            // cmb_NotedBy
             // 
-            this.txtbox_LessD.Location = new System.Drawing.Point(802, 117);
-            this.txtbox_LessD.Name = "txtbox_LessD";
-            this.txtbox_LessD.Size = new System.Drawing.Size(94, 25);
-            this.txtbox_LessD.TabIndex = 29;
-            this.txtbox_LessD.Visible = false;
+            this.cmb_NotedBy.FormattingEnabled = true;
+            this.cmb_NotedBy.Location = new System.Drawing.Point(838, 1);
+            this.cmb_NotedBy.Name = "cmb_NotedBy";
+            this.cmb_NotedBy.Size = new System.Drawing.Size(46, 25);
+            this.cmb_NotedBy.TabIndex = 32;
+            this.cmb_NotedBy.Visible = false;
             // 
-            // chkbox_LessD
+            // cmb_ReviewedBy
             // 
-            this.chkbox_LessD.AutoSize = true;
-            this.chkbox_LessD.Location = new System.Drawing.Point(673, 118);
-            this.chkbox_LessD.Name = "chkbox_LessD";
-            this.chkbox_LessD.Size = new System.Drawing.Size(112, 23);
-            this.chkbox_LessD.TabIndex = 30;
-            this.chkbox_LessD.Text = "Less Discount";
-            this.chkbox_LessD.UseVisualStyleBackColor = true;
-            this.chkbox_LessD.Visible = false;
-            this.chkbox_LessD.CheckedChanged += new System.EventHandler(this.chkbox_LessD_CheckedChanged);
+            this.cmb_ReviewedBy.FormattingEnabled = true;
+            this.cmb_ReviewedBy.Location = new System.Drawing.Point(890, 1);
+            this.cmb_ReviewedBy.Name = "cmb_ReviewedBy";
+            this.cmb_ReviewedBy.Size = new System.Drawing.Size(46, 25);
+            this.cmb_ReviewedBy.TabIndex = 33;
+            this.cmb_ReviewedBy.Visible = false;
             // 
             // PrintQuoteView
             // 
@@ -399,5 +445,9 @@
         private System.Windows.Forms.TextBox txtbox_LnM;
         private System.Windows.Forms.TextBox txtbox_LessD;
         private System.Windows.Forms.CheckBox chkbox_LessD;
+        private System.Windows.Forms.CheckBox chkbox_subtotal;
+        private System.Windows.Forms.TextBox txtbox_rowlimit;
+        private System.Windows.Forms.ComboBox cmb_ReviewedBy;
+        private System.Windows.Forms.ComboBox cmb_NotedBy;
     }
 }

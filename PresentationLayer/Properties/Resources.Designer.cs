@@ -113,6 +113,17 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap calendar_icon_hand_circles_date_calendar_logo_template_deadline_concept_illustration_168129_210__1_ {
+            get {
+                object obj = ResourceManager.GetObject("calendar-icon-hand-circles-date-calendar-logo-template-deadline-concept-illustrat" +
+                        "ion_168129-210 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cancel_30px {
             get {
                 object obj = ResourceManager.GetObject("cancel_30px", resourceCulture);
@@ -423,6 +434,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_history_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-history-64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap K_M_logo_official_2018_1 {
             get {
                 object obj = ResourceManager.GetObject("K_M_logo_official_2018_1", resourceCulture);
@@ -586,6 +607,16 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap SlidingPanel {
             get {
                 object obj = ResourceManager.GetObject("SlidingPanel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap slidingscreenheader {
+            get {
+                object obj = ResourceManager.GetObject("slidingscreenheader", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

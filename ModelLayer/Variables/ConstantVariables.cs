@@ -29,9 +29,9 @@
         public int panel_property_glassOptionsHeight = 153;
         public int panel_property_rotoswingOptionsheight_default = 28;
         public int panel_property_rotaryOptionsheight_default = 56;
-        public int panel_property_motorizedOptionsheight = 114;
+        public int panel_property_motorizedOptionsheight = 134;//114;
         public int panel_property_motorizedChkOptionsheight = 31;
-        public int panel_property_motorizedCmbOptionsheight = 83; // 89
+        public int panel_property_motorizedCmbOptionsheight = 103; // 89
         public int panel_property_cornerDriveOptionsheight_default = 30;
         public int panel_property_extensionOptionsheight = 81;
         public int panel_property_extensionFieldsheight = 31;

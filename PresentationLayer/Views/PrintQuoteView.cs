@@ -15,6 +15,18 @@ namespace PresentationLayer.Views
         {
             InitializeComponent();
         }
+        string glassType;
+        public string GlassType
+        {
+            get
+            {
+                return glassType;
+            }
+            set
+            {
+                glassType = value;
+            }
+        }
         public string QuotationAddress
         {
             get
@@ -106,6 +118,23 @@ namespace PresentationLayer.Views
                 txtbox_LessD.Text = value;
             }
         }
+        public string RowLimit
+        {
+            get
+            {
+                return txtbox_rowlimit.Text;
+            }
+            set
+            {
+                txtbox_rowlimit.Text = value;
+            }
+        }
+
+        public TextBox GetRowLimitTxtBox()
+        {
+            return txtbox_rowlimit;
+        }
+
         public CheckBox GetLessDiscountchkbox()
         {
             return chkbox_LessD;
@@ -206,6 +235,19 @@ namespace PresentationLayer.Views
         {
             return txtbox_VAT;
         }
+        public CheckBox GetSubTotalCheckBox()
+        {
+            return chkbox_subtotal;
+        }
+
+        public ComboBox GetReviewedByCmb()
+        {
+            return cmb_ReviewedBy;
+        }
+        public ComboBox GetNotedByCmb()
+        {
+            return cmb_NotedBy;
+        }
 
         public event EventHandler btnRefreshClickEventRaised;
         public event EventHandler PrintQuoteViewLoadEventRaised;
@@ -215,7 +257,9 @@ namespace PresentationLayer.Views
         public event EventHandler chkboxFCCheckedChangedEventRaised;
         public event EventHandler chkboxVATCheckedChangedEventRaised;
         public event EventHandler chkboxLessDCheckedChangedEventRaised;
+        public event EventHandler chkboxsubtotalCheckedChangedEventRaised;
         public event FormClosingEventHandler PrintQuoteViewFormClosingEventRaised;
+        
 
         private void PrintQuoteView_Load(object sender, EventArgs e)
         {
@@ -281,6 +325,11 @@ namespace PresentationLayer.Views
         private void chkbox_LessD_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, chkboxLessDCheckedChangedEventRaised, e);
+        }
+
+        private void chkbox_subtotal_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkboxsubtotalCheckedChangedEventRaised, e);
         }
     }
 }
