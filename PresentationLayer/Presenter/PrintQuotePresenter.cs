@@ -205,7 +205,6 @@ namespace PresentationLayer.Presenter
             {
                 _printQuoteView.GetLabor_N_MobiTxtBox().Visible = false;
                 _printQuoteView.GetReviewedByCmb().Visible = false;
-
             }
         }
 

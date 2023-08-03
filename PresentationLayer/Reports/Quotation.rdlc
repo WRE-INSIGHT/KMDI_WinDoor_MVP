@@ -95,7 +95,7 @@
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>0.43542in</Top>
+        <Top>0.06042in</Top>
         <Left>5.97236in</Left>
         <Height>0.23107in</Height>
         <Width>1.89583in</Width>
@@ -107,7 +107,6 @@
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
@@ -133,7 +132,7 @@
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>0.6244in</Top>
+        <Top>0.2494in</Top>
         <Left>5.97236in</Left>
         <Height>0.23107in</Height>
         <Width>1.89583in</Width>
@@ -145,7 +144,6 @@
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
@@ -171,7 +169,7 @@
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>0.81201in</Top>
+        <Top>0.43701in</Top>
         <Left>5.97236in</Left>
         <Height>0.23107in</Height>
         <Width>1.89583in</Width>
@@ -183,7 +181,6 @@
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
@@ -244,7 +241,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.04688in</Height>
+              <Height>0.30139in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -950,7 +947,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.96454in</Top>
         <Left>0.24486in</Left>
-        <Height>1.30944in</Height>
+        <Height>1.56395in</Height>
         <Width>7.65489in</Width>
         <ZIndex>5</ZIndex>
         <Style>
