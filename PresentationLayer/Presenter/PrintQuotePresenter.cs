@@ -205,7 +205,6 @@ namespace PresentationLayer.Presenter
             {
                 _printQuoteView.GetLabor_N_MobiTxtBox().Visible = false;
                 _printQuoteView.GetReviewedByCmb().Visible = false;
-
             }
         }
 
@@ -890,7 +889,17 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(620, 118);
                     #endregion
 
-                    _printQuoteView.ShowLastPage().Visible = false;
+                    #region Show TableHeaderV2
+                    _printQuoteView.ShowLastPage().Visible = true; // showlastpage() is used for showing tableheaderV2 "Reuse of Control"
+                    _printQuoteView.ShowLastPage().Text = "Net of Discount Prices";
+
+                    if (_printQuoteView.QuotationBody.ToLower().Contains("prices are net of discount"))
+                    {
+                        _printQuoteView.ShowLastPage().CheckState = CheckState.Checked;
+                    }
+                    #endregion
+
+
                     _printQuoteView.GetUniversalLabel().Visible = false;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
 
@@ -900,7 +909,7 @@ namespace PresentationLayer.Presenter
                     }
                     _quoteItemListPresenter.ShowItemImage_CheckList.Clear();
 
-                    ReportParameter[] RParam = new ReportParameter[8];
+                    ReportParameter[] RParam = new ReportParameter[9];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
                     RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
@@ -952,6 +961,31 @@ namespace PresentationLayer.Presenter
                     else
                     {
                         RParam[7] = new ReportParameter("ShowPageNum", "False");
+                    }
+
+                    if (_printQuoteView.ShowLastPage().Checked)
+                    {
+                        RParam[8] = new ReportParameter("ShowTableHeaderV2", "True");// Table Header V2
+
+                        if(!_printQuoteView.QuotationBody.ToLower().Contains("prices are net of discounts"))
+                        {
+                            _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
+                                                             + "USING "
+                                                             + baseColor.ToUpper()
+                                                             + " PROFILES\n"
+                                                             + "USING "
+                                                             + GlassThickness.ToUpper()
+                                                             + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+                                                             + "PRICES ARE NET OF DISCOUNTS\n\n"
+                                                             + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION";
+                             
+                            RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
+                        }                    
+                    }
+                    else
+                    {
+                        RParam[8] = new ReportParameter("ShowTableHeaderV2", "False");// Table Header V2
+            
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
@@ -1278,7 +1312,7 @@ namespace PresentationLayer.Presenter
                     }
                     #endregion
                 }
-
+                   
             }
             catch (Exception ex)
             {
