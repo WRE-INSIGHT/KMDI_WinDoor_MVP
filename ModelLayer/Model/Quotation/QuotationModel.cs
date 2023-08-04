@@ -2732,8 +2732,8 @@ namespace ModelLayer.Model.Quotation
                 GURollerPricePerPiece = 1323.08m,
                 MotorizeMechPrice = 15000.00m,
                 MotorizeMechHeavyDutyPrice = 39000.00m,
-                MotorizeMechUsingRemotePrice = 37250.00m,
-                MotorizeMechRemotePricePerPiece = 19445.50m,
+                MotorizeMechUsingRemotePrice = 19500.00m,
+                MotorizeMechRemotePricePerPiece = 4500.00m,
 
                 RemoteForMotorizeMechPrice,
 
@@ -5224,7 +5224,7 @@ namespace ModelLayer.Model.Quotation
 
                                                 if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
                                                 {
-                                                    RemoteForMotorizeMechPrice += MotorizeMechRemotePricePerPiece;
+                                                    RemoteForMotorizeMechPrice = MotorizeMechRemotePricePerPiece;
                                                 }
 
                                                 chckPerFrameMotorMech = false;
@@ -8543,7 +8543,7 @@ namespace ModelLayer.Model.Quotation
                                         MotorizePrice += MotorizeMechPricePerPiece * Singlepnl.Panel_MotorizedMechQty;
                                         if (Singlepnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
                                         {
-                                            RemoteForMotorizeMechPrice += MotorizeMechRemotePricePerPiece;
+                                            RemoteForMotorizeMechPrice = MotorizeMechRemotePricePerPiece;
                                         }
 
 
@@ -12162,7 +12162,7 @@ namespace ModelLayer.Model.Quotation
             StrikerLRPrice = 0;
             RollerPrice = 0;
             MotorizePrice = 0;
-            MotorizeMechRemotePricePerPiece = 0;
+            RemoteForMotorizeMechPrice = 0;
 
             AncillaryProfileCost = 0;
             ThresholdPrice = 0;
