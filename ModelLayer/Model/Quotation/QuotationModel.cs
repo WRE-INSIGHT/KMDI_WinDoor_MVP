@@ -3730,7 +3730,7 @@ namespace ModelLayer.Model.Quotation
             }
 
             #region motorized 1 day diff
-            if (cus_ref_date > DateTime.Parse("08-02-2023"))
+            if (cus_ref_date < DateTime.Parse("08-02-2023"))
             {
                 MotorizeMechUsingRemotePrice = 0;
             }
