@@ -3725,7 +3725,7 @@ namespace ModelLayer.Model.Quotation
                     DividerRein_7536_PricePerSqrMeter = 406.86m;
 
                     MotorizeMechRemotePricePerPiece = 4500.00m;// 19445.50m 
-
+                    
                 }
             }
 
