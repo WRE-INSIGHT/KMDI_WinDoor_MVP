@@ -3628,6 +3628,7 @@ namespace ModelLayer.Model.Quotation
 
                 HDRollerPricePerPiece = 566.06m;
                 GURollerPricePerPiece = 1323.08m;
+                MotorizeMechRemotePricePerPiece = 19445.50m;
 
                 #endregion
                 #region Accessories
@@ -3732,7 +3733,7 @@ namespace ModelLayer.Model.Quotation
             #region motorized 1 day diff
             if (cus_ref_date < DateTime.Parse("08-02-2023"))
             {
-                MotorizeMechUsingRemotePrice = 0;
+                MotorizeMechUsingRemotePrice = 19500.00m;
             }
             else if(cus_ref_date >= DateTime.Parse("08-02-2023") && cus_ref_date < inc_price_date_7)
             {
