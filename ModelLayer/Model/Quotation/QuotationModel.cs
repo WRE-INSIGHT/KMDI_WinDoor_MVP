@@ -3023,6 +3023,7 @@ namespace ModelLayer.Model.Quotation
             DateTime inc_price_date_7 = DateTime.Parse("08-04-2023"); // MotorizeMechRemotePricePerPiece 
 
 
+
             if (cus_ref_date >= inc_price_date && cus_ref_date <= _junedateoldago)
             {
                 #region setnewPrice

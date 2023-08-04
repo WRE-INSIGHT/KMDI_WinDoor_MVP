@@ -8453,7 +8453,7 @@ namespace PresentationLayer.Presenter
 
                             #region algo 2 
                             if (RDLCDictionary_key.Contains("QuotationBody"))
-                            {
+                             {
                                 #region QuoteBody
                                 //Check RDLCDic Contains
 
@@ -8473,6 +8473,10 @@ namespace PresentationLayer.Presenter
                                 {
                                     _EntrytoKeyWordUsing = false;
                                     _EntrytoKeyWordPriceValidity = false;
+                                }
+                                else if(value.ToLower().Contains("prices are net of discounts"))
+                                {
+                                    value = "\n" + "\n" + value;
                                 }
 
                                 //Add new line
