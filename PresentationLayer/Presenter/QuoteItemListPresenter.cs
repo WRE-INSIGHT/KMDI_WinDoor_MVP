@@ -331,7 +331,17 @@ namespace PresentationLayer.Presenter
         int countfortick;
 
         #endregion
-
+        public DataTable GlassUpgradeDT
+        {
+            get
+            {
+                return _glassUpgradeDT;
+            }
+            set
+            {
+                _glassUpgradeDT = value;
+            }
+        }
         private DataTable _glassUpgradeDT = new DataTable();
         decimal _totalNetPriceforPrint;
 

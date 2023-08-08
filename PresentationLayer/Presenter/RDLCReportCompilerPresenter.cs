@@ -9,6 +9,7 @@ using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -49,11 +50,13 @@ namespace PresentationLayer.Presenter
         private CheckBox _guShowReviewedBy,
                          _guShowNotedBy,
                          _guShowVat;
-        
+        private CheckedListBox _guGlassListChkLst;
 
         string[] _officialsName = { "KENNETH G. LAO", "GENALYN C. GARCIA", "STEPHANIE DE LOS SANTOS", "KEVIN CHARLES S. LAO" };
         string[] _officialsPosition = { "President,KMDI", "VP-Sales & Operations", "VP-Marketing & Finance", "Head, Sales & Operations" };
         #endregion
+
+        bool _glassTypeExist = false;
 
         public RDLCReportCompilerPresenter(IRDLCReportCompilerView rdlcReportCompilerView,
                                            IPrintQuotePresenter printQuotePresenter,
@@ -70,6 +73,7 @@ namespace PresentationLayer.Presenter
             _guShowReviewedBy = _rdlcReportCompilerView.GUShowReviewedBy();
             _guShowNotedBy = _rdlcReportCompilerView.GUShowNotedBy();
             _guShowVat = _rdlcReportCompilerView.GUShowVat();
+            _guGlassListChkLst = _rdlcReportCompilerView.GUGlassListChkLst();
 
             SubScribeToEventSetup();
         }
@@ -231,6 +235,25 @@ namespace PresentationLayer.Presenter
             _guShowReviewedBy.CheckState = CheckState.Checked;
             _guShowNotedBy.CheckState = CheckState.Checked;
             _guTxtBxVat.Visible = false;
+
+            foreach(DataRow dtrow in _quoteItemListPresenter.GlassUpgradeDT.Rows)
+            {
+                foreach(var item in _guGlassListChkLst.Items)
+                {
+                    if(dtrow["GlassType"].ToString() == item.ToString())
+                    {
+                        _glassTypeExist = true;
+                    }
+                }
+
+                if (!_glassTypeExist)
+                {
+                    _guGlassListChkLst.Items.Add(dtrow["GlassType"].ToString());
+                }
+
+                _glassTypeExist = false; // reset boolean to false 
+            }
+          
         }
 
         public void Bgw_CompilePDF()
@@ -254,34 +277,33 @@ namespace PresentationLayer.Presenter
             {
                 if (!string.IsNullOrWhiteSpace(_rdlcReportCompilerView.TxtBxOutofTownExpenses))
                 {
+                               
+                    _loadingThread = new Thread(Bgw_CompilePDF);
                     
-                        
-                            _loadingThread = new Thread(Bgw_CompilePDF);
-                            
-                            projname = _mainPresenter.inputted_projectName;
+                    projname = _mainPresenter.inputted_projectName;
 
-                            _rdlcReportCompilerView.GetSaveFileDialog().FileName = projname;
-                            _rdlcReportCompilerView.GetSaveFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
-                            if (_rdlcReportCompilerView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
-                            {
-                                targetpath = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder";
-                                DirectoryInfo dirInfo = Directory.CreateDirectory(targetpath);
-                                dirInfo.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+                    _rdlcReportCompilerView.GetSaveFileDialog().FileName = projname;
+                    _rdlcReportCompilerView.GetSaveFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
+                    if (_rdlcReportCompilerView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+                    {
+                        targetpath = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder";
+                        DirectoryInfo dirInfo = Directory.CreateDirectory(targetpath);
+                        dirInfo.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
 
-                                foreach(FileInfo file in dirInfo.EnumerateFiles())
-                                {
-                                    file.Delete();
-                                }
-                             
-                                fullname = _rdlcReportCompilerView.GetSaveFileDialog().FileName;
-                                _quoteItemListPresenter.RenderPDFAtBackGround = true;
-                                CompileRDLC = true;
-                            }
-                            
-                            if (CompileRDLC == true)
-                            {
-                               _loadingThread.Start();
-                                #region Windoor RDLC
+                        foreach(FileInfo file in dirInfo.EnumerateFiles())
+                        {
+                            file.Delete();
+                        }
+                     
+                        fullname = _rdlcReportCompilerView.GetSaveFileDialog().FileName;
+                        _quoteItemListPresenter.RenderPDFAtBackGround = true;
+                        CompileRDLC = true;
+                    }
+                    
+                    if (CompileRDLC == true)
+                    {
+                       _loadingThread.Start();
+                        #region Windoor RDLC
                         foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
                                 {
                                     var selectedindex = Convert.ToInt32(item);
@@ -289,19 +311,19 @@ namespace PresentationLayer.Presenter
                                 }
                                 _quoteItemListPresenter.PrintWindoorRDLC();
                                 #endregion
-                                #region Summary Of Contract
+                        #region Summary Of Contract
                                 _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
                                 _quoteItemListPresenter.RDLCReportCompilerVatContractSummery = _rdlcReportCompilerView.TxtBxContractSummaryVat;
                                _quoteItemListPresenter.PrintContractSummaryRDLC();
                                 #endregion
-                                #region Screen
+                        #region Screen
                                 if (_mainPresenter.Screen_List.Count != 0)
                                 {
                                     _quoteItemListPresenter.RDLCReportCompilerRowLimit = _rdlcReportCompilerView.TxtBxRowlimit;
                                     _quoteItemListPresenter.PrintScreenRDLC();
                                 }
                         #endregion
-                                #region Glass Upgrade
+                        #region Glass Upgrade
 
                         if (_gucmbGlassType.SelectedItem != null)
                         {
@@ -319,7 +341,7 @@ namespace PresentationLayer.Presenter
                             }
                         }
                                  #endregion
-                                #region PDF Compiler
+                        #region PDF Compiler
 
                         string[] files = GetFiles();
 
@@ -385,12 +407,11 @@ namespace PresentationLayer.Presenter
                                     Process.Start(fullname);
                                 }
                                 #endregion
-                                
-                               _loadingThread.Abort();                            
-                            }                           
-                            SetVariablesToDefault();
-                       
-                   
+                        
+                       _loadingThread.Abort();                            
+                    }                           
+                    SetVariablesToDefault();
+                                 
                 }
                 else
                 {
