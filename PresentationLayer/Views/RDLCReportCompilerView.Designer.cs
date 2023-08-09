@@ -83,7 +83,7 @@
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(455, 0);
+            this.label7.Location = new System.Drawing.Point(554, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(179, 34);
             this.label7.TabIndex = 3;
@@ -141,22 +141,21 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 36);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(805, 182);
+            this.panel2.Size = new System.Drawing.Size(805, 145);
             this.panel2.TabIndex = 1;
             // 
             // chklst_glassType
             // 
-            this.chklst_glassType.Dock = System.Windows.Forms.DockStyle.Right;
             this.chklst_glassType.FormattingEnabled = true;
             this.chklst_glassType.Location = new System.Drawing.Point(633, 20);
             this.chklst_glassType.Name = "chklst_glassType";
             this.chklst_glassType.ScrollAlwaysVisible = true;
-            this.chklst_glassType.Size = new System.Drawing.Size(170, 160);
+            this.chklst_glassType.Size = new System.Drawing.Size(170, 124);
             this.chklst_glassType.TabIndex = 14;
             // 
             // txt_guVat
             // 
-            this.txt_guVat.Location = new System.Drawing.Point(547, 145);
+            this.txt_guVat.Location = new System.Drawing.Point(547, 119);
             this.txt_guVat.Name = "txt_guVat";
             this.txt_guVat.Size = new System.Drawing.Size(76, 20);
             this.txt_guVat.TabIndex = 13;
@@ -164,7 +163,7 @@
             // chkbx_guShowVat
             // 
             this.chkbx_guShowVat.AutoSize = true;
-            this.chkbx_guShowVat.Location = new System.Drawing.Point(472, 147);
+            this.chkbx_guShowVat.Location = new System.Drawing.Point(472, 121);
             this.chkbx_guShowVat.Name = "chkbx_guShowVat";
             this.chkbx_guShowVat.Size = new System.Drawing.Size(80, 17);
             this.chkbx_guShowVat.TabIndex = 12;
@@ -175,7 +174,7 @@
             // cmb_guNotedBy
             // 
             this.cmb_guNotedBy.FormattingEnabled = true;
-            this.cmb_guNotedBy.Location = new System.Drawing.Point(472, 117);
+            this.cmb_guNotedBy.Location = new System.Drawing.Point(472, 91);
             this.cmb_guNotedBy.Name = "cmb_guNotedBy";
             this.cmb_guNotedBy.Size = new System.Drawing.Size(151, 21);
             this.cmb_guNotedBy.TabIndex = 11;
@@ -183,7 +182,7 @@
             // chkbx_guShowNotedBy
             // 
             this.chkbx_guShowNotedBy.AutoSize = true;
-            this.chkbx_guShowNotedBy.Location = new System.Drawing.Point(472, 99);
+            this.chkbx_guShowNotedBy.Location = new System.Drawing.Point(472, 73);
             this.chkbx_guShowNotedBy.Name = "chkbx_guShowNotedBy";
             this.chkbx_guShowNotedBy.Size = new System.Drawing.Size(100, 17);
             this.chkbx_guShowNotedBy.TabIndex = 10;
@@ -194,7 +193,7 @@
             // cmb_guReviewedBy
             // 
             this.cmb_guReviewedBy.FormattingEnabled = true;
-            this.cmb_guReviewedBy.Location = new System.Drawing.Point(472, 72);
+            this.cmb_guReviewedBy.Location = new System.Drawing.Point(472, 46);
             this.cmb_guReviewedBy.Name = "cmb_guReviewedBy";
             this.cmb_guReviewedBy.Size = new System.Drawing.Size(151, 21);
             this.cmb_guReviewedBy.TabIndex = 9;
@@ -202,7 +201,7 @@
             // chkbx_guShowReviewedBy
             // 
             this.chkbx_guShowReviewedBy.AutoSize = true;
-            this.chkbx_guShowReviewedBy.Location = new System.Drawing.Point(472, 53);
+            this.chkbx_guShowReviewedBy.Location = new System.Drawing.Point(472, 27);
             this.chkbx_guShowReviewedBy.Name = "chkbx_guShowReviewedBy";
             this.chkbx_guShowReviewedBy.Size = new System.Drawing.Size(119, 17);
             this.chkbx_guShowReviewedBy.TabIndex = 8;
@@ -213,10 +212,11 @@
             // cmb_GlassType
             // 
             this.cmb_GlassType.FormattingEnabled = true;
-            this.cmb_GlassType.Location = new System.Drawing.Point(472, 26);
+            this.cmb_GlassType.Location = new System.Drawing.Point(145, 95);
             this.cmb_GlassType.Name = "cmb_GlassType";
-            this.cmb_GlassType.Size = new System.Drawing.Size(151, 21);
+            this.cmb_GlassType.Size = new System.Drawing.Size(50, 21);
             this.cmb_GlassType.TabIndex = 6;
+            this.cmb_GlassType.Visible = false;
             // 
             // label6
             // 
@@ -263,7 +263,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(167, 152);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(167, 122);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // txt_oftexpenses
@@ -272,12 +272,12 @@
             this.txt_oftexpenses.Location = new System.Drawing.Point(3, 3);
             this.txt_oftexpenses.Multiline = true;
             this.txt_oftexpenses.Name = "txt_oftexpenses";
-            this.txt_oftexpenses.Size = new System.Drawing.Size(161, 53);
+            this.txt_oftexpenses.Size = new System.Drawing.Size(161, 23);
             this.txt_oftexpenses.TabIndex = 0;
             // 
             // txt_SummaryVat
             // 
-            this.txt_SummaryVat.Location = new System.Drawing.Point(3, 85);
+            this.txt_SummaryVat.Location = new System.Drawing.Point(3, 55);
             this.txt_SummaryVat.Multiline = true;
             this.txt_SummaryVat.Name = "txt_SummaryVat";
             this.txt_SummaryVat.Size = new System.Drawing.Size(78, 24);
@@ -287,7 +287,7 @@
             // 
             this.chkbox_showVat.AutoSize = true;
             this.chkbox_showVat.ForeColor = System.Drawing.Color.Red;
-            this.chkbox_showVat.Location = new System.Drawing.Point(3, 62);
+            this.chkbox_showVat.Location = new System.Drawing.Point(3, 32);
             this.chkbox_showVat.Name = "chkbox_showVat";
             this.chkbox_showVat.Size = new System.Drawing.Size(46, 17);
             this.chkbox_showVat.TabIndex = 7;
@@ -299,7 +299,7 @@
             // 
             this.btnCompileReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCompileReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCompileReport.Location = new System.Drawing.Point(3, 126);
+            this.btnCompileReport.Location = new System.Drawing.Point(3, 96);
             this.btnCompileReport.Name = "btnCompileReport";
             this.btnCompileReport.Size = new System.Drawing.Size(161, 23);
             this.btnCompileReport.TabIndex = 1;
@@ -310,7 +310,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.Black;
-            this.panel5.Location = new System.Drawing.Point(3, 116);
+            this.panel5.Location = new System.Drawing.Point(3, 86);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(161, 4);
             this.panel5.TabIndex = 8;
@@ -321,7 +321,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 20);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(139, 160);
+            this.panel4.Size = new System.Drawing.Size(139, 123);
             this.panel4.TabIndex = 1;
             // 
             // chk_showimagelist
@@ -333,7 +333,7 @@
             this.chk_showimagelist.Location = new System.Drawing.Point(0, 0);
             this.chk_showimagelist.Name = "chk_showimagelist";
             this.chk_showimagelist.ScrollAlwaysVisible = true;
-            this.chk_showimagelist.Size = new System.Drawing.Size(139, 160);
+            this.chk_showimagelist.Size = new System.Drawing.Size(139, 123);
             this.chk_showimagelist.TabIndex = 0;
             // 
             // panel3
@@ -375,7 +375,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(518, 3);
+            this.label8.Location = new System.Drawing.Point(684, 3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(60, 13);
             this.label8.TabIndex = 7;
@@ -400,7 +400,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(805, 218);
+            this.ClientSize = new System.Drawing.Size(805, 181);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

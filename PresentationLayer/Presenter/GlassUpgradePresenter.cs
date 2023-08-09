@@ -1492,8 +1492,6 @@ namespace PresentationLayer.Presenter
                 }
             }
 
-
-
             return _totalNetPriceforPrint;
            
         }
@@ -1502,8 +1500,7 @@ namespace PresentationLayer.Presenter
         {
             bool _isPresent = false;
             int _indx = 0;
-            
-            
+             
             foreach(DataRow dtrow in _glassUpgradeDT.Rows)
             {
                 if(_indx == currcellrow)

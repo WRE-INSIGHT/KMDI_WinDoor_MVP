@@ -60,7 +60,8 @@ namespace PresentationLayer.Presenter
         private string _guGlassType,
                        _guReviewedByOfficial,
                        _guNotedByOfficial,
-                       _guVatPercentage;
+                       _guVatPercentage,
+                       _guFileName;
         private int   _guReviewedOfficialPos,
                       _guNotedByOfficialPos;
 
@@ -245,6 +246,17 @@ namespace PresentationLayer.Presenter
             set
             {
                 _guShowVat = value;
+            }
+        }
+        public string RDLCGUFileName
+        {
+            get
+            {
+               return _guFileName;
+            }
+            set
+            {
+                _guFileName = value;
             }
         }
 

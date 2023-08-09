@@ -57,6 +57,7 @@ namespace PresentationLayer.Presenter
         #endregion
 
         bool _glassTypeExist = false;
+        int _loopCounter = 1;
 
         public RDLCReportCompilerPresenter(IRDLCReportCompilerView rdlcReportCompilerView,
                                            IPrintQuotePresenter printQuotePresenter,
@@ -245,7 +246,7 @@ namespace PresentationLayer.Presenter
                         _glassTypeExist = true;
                     }
                 }
-
+                
                 if (!_glassTypeExist)
                 {
                     _guGlassListChkLst.Items.Add(dtrow["GlassType"].ToString());
@@ -302,8 +303,8 @@ namespace PresentationLayer.Presenter
                     
                     if (CompileRDLC == true)
                     {
-                       _loadingThread.Start();
-                        #region Windoor RDLC
+                      _loadingThread.Start();
+                       #region Windoor RDLC
                         foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
                                 {
                                     var selectedindex = Convert.ToInt32(item);
@@ -311,107 +312,129 @@ namespace PresentationLayer.Presenter
                                 }
                                 _quoteItemListPresenter.PrintWindoorRDLC();
                                 #endregion
-                        #region Summary Of Contract
+                       #region Summary Of Contract
                                 _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
                                 _quoteItemListPresenter.RDLCReportCompilerVatContractSummery = _rdlcReportCompilerView.TxtBxContractSummaryVat;
                                _quoteItemListPresenter.PrintContractSummaryRDLC();
                                 #endregion
-                        #region Screen
+                       #region Screen
                                 if (_mainPresenter.Screen_List.Count != 0)
                                 {
                                     _quoteItemListPresenter.RDLCReportCompilerRowLimit = _rdlcReportCompilerView.TxtBxRowlimit;
                                     _quoteItemListPresenter.PrintScreenRDLC();
                                 }
                         #endregion
-                        #region Glass Upgrade
+                       #region Glass Upgrade
 
-                        if (_gucmbGlassType.SelectedItem != null)
+                        #region algo ver.1
+                        //if (_gucmbGlassType.SelectedItem != null)
+                        //{
+                        //    if (_gucmbGlassType.SelectedItem.ToString() != "")
+                        //    {
+                        //        _quoteItemListPresenter.RDLCGUGlassType = _gucmbGlassType.SelectedItem.ToString();
+                        //        _quoteItemListPresenter.RDLCGUReviewedByOfficial = _guCmbReviewedBy.SelectedItem.ToString();
+                        //        int reviewedOfficialPosIndex = _guCmbReviewedBy.SelectedIndex; // indx pos
+                        //        _quoteItemListPresenter.RDLCGUReviewedByOfficialPos = reviewedOfficialPosIndex;
+                        //        _quoteItemListPresenter.RDLCGUNotedByOfficial = _guCmbNotedBy.SelectedItem.ToString();
+                        //        int notedOfficialPosIndex = _guCmbNotedBy.SelectedIndex; // indx pos
+                        //        _quoteItemListPresenter.RDLCGUNotedByOfficialPos = notedOfficialPosIndex;
+                        //        _quoteItemListPresenter.RDLCGUVatPercentage = _guTxtBxVat.Text;
+                        //        _quoteItemListPresenter.PrintGlassUpgrade();
+                        //    }
+                        //}
+                        #endregion 
+                        
+                        #region algo ver.2       
+                        foreach (var item in _guGlassListChkLst.CheckedItems)
                         {
-                            if (_gucmbGlassType.SelectedItem.ToString() != "")
-                            {
-                                _quoteItemListPresenter.RDLCGUGlassType = _gucmbGlassType.SelectedItem.ToString();
-                                _quoteItemListPresenter.RDLCGUReviewedByOfficial = _guCmbReviewedBy.SelectedItem.ToString();
-                                int reviewedOfficialPosIndex = _guCmbReviewedBy.SelectedIndex; // indx pos
-                                _quoteItemListPresenter.RDLCGUReviewedByOfficialPos = reviewedOfficialPosIndex;
-                                _quoteItemListPresenter.RDLCGUNotedByOfficial = _guCmbNotedBy.SelectedItem.ToString();
-                                int notedOfficialPosIndex = _guCmbNotedBy.SelectedIndex; // indx pos
-                                _quoteItemListPresenter.RDLCGUNotedByOfficialPos = notedOfficialPosIndex;
-                                _quoteItemListPresenter.RDLCGUVatPercentage = _guTxtBxVat.Text;
-                                _quoteItemListPresenter.PrintGlassUpgrade();
-                            }
+                            _quoteItemListPresenter.RDLCGUFileName = _loopCounter.ToString();
+                            _quoteItemListPresenter.RDLCGUGlassType = item.ToString();
+                            _quoteItemListPresenter.RDLCGUReviewedByOfficial = _guCmbReviewedBy.SelectedItem.ToString();
+                            int reviewedOfficialPosIndex = _guCmbReviewedBy.SelectedIndex; // indx pos
+                            _quoteItemListPresenter.RDLCGUReviewedByOfficialPos = reviewedOfficialPosIndex;
+                            _quoteItemListPresenter.RDLCGUNotedByOfficial = _guCmbNotedBy.SelectedItem.ToString();
+                            int notedOfficialPosIndex = _guCmbNotedBy.SelectedIndex; // indx pos
+                            _quoteItemListPresenter.RDLCGUNotedByOfficialPos = notedOfficialPosIndex;
+                            _quoteItemListPresenter.RDLCGUVatPercentage = _guTxtBxVat.Text;                          
+                            _quoteItemListPresenter.PrintGlassUpgrade();
+
+                            _loopCounter++;
                         }
-                                 #endregion
-                        #region PDF Compiler
+                        #endregion    
+
+                        #endregion
+                    
+                       #region PDF Compiler
 
                         string[] files = GetFiles();
 
-                                PdfDocument outputDocument = new PdfDocument();
+                         PdfDocument outputDocument = new PdfDocument();
 
-                                XFont font = new XFont("Segoe UI", 10);
-                                XBrush brush = XBrushes.Black;
+                         XFont font = new XFont("Segoe UI", 10);
+                         XBrush brush = XBrushes.Black;
 
 
-                                foreach (string file in files)
-                                {
+                         foreach (string file in files)
+                         {
 
-                                    PdfDocument inputDocument = PdfReader.Open(file, PdfDocumentOpenMode.Import);
+                             PdfDocument inputDocument = PdfReader.Open(file, PdfDocumentOpenMode.Import);
 
-                                    int count = inputDocument.PageCount;
-                                    for (int idx = 0; idx < count; idx++)
-                                    {
-                                        PdfPage page = inputDocument.Pages[idx];
-                                        outputDocument.AddPage(page);
-                                    }
+                             int count = inputDocument.PageCount;
+                             for (int idx = 0; idx < count; idx++)
+                             {
+                                 PdfPage page = inputDocument.Pages[idx];
+                                 outputDocument.AddPage(page);
+                             }
 
-                                }
+                         }
 
-                                #region page counter
-                                string noPages = outputDocument.Pages.Count.ToString();
-                                for (int i = 0; i < outputDocument.Pages.Count; ++i)
-                                {
-                                    PdfPage page = outputDocument.Pages[i];
+                         #region page counter
+                         string noPages = outputDocument.Pages.Count.ToString();
+                         for (int i = 0; i < outputDocument.Pages.Count; ++i)
+                         {
+                             PdfPage page = outputDocument.Pages[i];
 
-                                    // Make a layout rectangle.
-                                    XRect layoutRectangle = new XRect(0/*X*/, page.Height - 25/*Y*/, page.Width/*Width*/, font.Height/*Height*/);
+                             // Make a layout rectangle.
+                             XRect layoutRectangle = new XRect(0/*X*/, page.Height - 25/*Y*/, page.Width/*Width*/, font.Height/*Height*/);
 
-                                    using (XGraphics gfx = XGraphics.FromPdfPage(page))
-                                    {
-                                        gfx.DrawString(
-                                            "Page " + (i + 1).ToString() + " of " + noPages,
-                                            font,
-                                            brush,
-                                            layoutRectangle,
-                                            XStringFormats.Center);
-                                    }
+                             using (XGraphics gfx = XGraphics.FromPdfPage(page))
+                             {
+                                 gfx.DrawString(
+                                     "Page " + (i + 1).ToString() + " of " + noPages,
+                                     font,
+                                     brush,
+                                     layoutRectangle,
+                                     XStringFormats.Center);
+                             }
 
-                                }
-                                #endregion
-                                //await Task.Delay(1000);
-                                outputDocument.Save(fullname);
+                         }
+                         #endregion
+                         //await Task.Delay(1000);
+                         outputDocument.Save(fullname);
 
-                                if (Directory.Exists(targetpath))
-                                {
-                                    try
-                                    {
-                                        Directory.Delete(targetpath, true);
-                                    }
-                                    catch (IOException ex)
-                                    {
-                                        MessageBox.Show(ex.Message);
-                                    }
-                                }
-                                filename = Path.GetFileName(fullname);
-                                DialogResult dialogresult = MessageBox.Show(new Form { TopMost = true }, "Open " + filename + " File ?", "Report Compilation Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                                if (dialogresult == DialogResult.Yes)
-                                {
-                                    Process.Start(fullname);
-                                }
-                                #endregion
-                        
-                       _loadingThread.Abort();                            
+                         if (Directory.Exists(targetpath))
+                         {
+                             try
+                             {
+                                 Directory.Delete(targetpath, true);
+                             }
+                             catch (IOException ex)
+                             {
+                                 MessageBox.Show(ex.Message);
+                             }
+                         }
+                         filename = Path.GetFileName(fullname);
+                         DialogResult dialogresult = MessageBox.Show(new Form { TopMost = true }, "Open " + filename + " File ?", "Report Compilation Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                         if (dialogresult == DialogResult.Yes)
+                         {
+                             Process.Start(fullname);
+                         }
+                         #endregion      
+                    
+                      _loadingThread.Abort();                            
                     }                           
                     SetVariablesToDefault();
-                                 
+
                 }
                 else
                 {
@@ -431,7 +454,7 @@ namespace PresentationLayer.Presenter
             string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder";
             DirectoryInfo di = new DirectoryInfo(defDir);
             FileInfo[] files = di.GetFiles("*.pdf");
-
+            
             int i = 0;
             string[] names = new string[files.Length];
 
@@ -449,6 +472,7 @@ namespace PresentationLayer.Presenter
             _quoteItemListPresenter.RenderPDFAtBackGround = false;
             _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Clear();
             CompileRDLC = false;
+            _loopCounter = 1;
         }
 
         public IRDLCReportCompilerPresenter GetNewIntance(IUnityContainer unityC,

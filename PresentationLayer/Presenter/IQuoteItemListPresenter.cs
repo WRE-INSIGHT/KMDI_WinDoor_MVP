@@ -45,6 +45,7 @@ namespace PresentationLayer.Presenter
         bool RDLCGUShowReviewedBy { get; set; }
         bool RDLCGUShowNotedBy { get; set; }
         bool RDLCGUShowVat { get; set; }
+        string RDLCGUFileName { get; set; }
         DataTable GlassUpgradeDT { get; set; }
 
 
