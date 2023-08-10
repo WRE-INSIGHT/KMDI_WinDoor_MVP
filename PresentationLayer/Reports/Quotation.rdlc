@@ -972,6 +972,7 @@
                           <Source>Database</Source>
                           <Value>=Fields!dtImage.Value</Value>
                           <MIMEType>image/png</MIMEType>
+                          <Sizing>FitProportional</Sizing>
                           <Height>1.24172in</Height>
                           <Width>2.44403in</Width>
                           <Style>

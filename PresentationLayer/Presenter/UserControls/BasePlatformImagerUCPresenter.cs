@@ -2578,8 +2578,6 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             fontDeduct += 15;
                         }
-
-
                     }
                 }
                 else if (client_wd <= 80 && panelModel.Panel_Type != "Sliding Panel")
@@ -2606,7 +2604,7 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
             }
-            else if (_windoorModel.WD_zoom_forImageRenderer == 0.10f)
+            else if (_windoorModel.WD_zoom_forImageRenderer <= 0.10f)
             {
                 if (panelModel.Panel_Type == "Sliding Panel")
                 {
