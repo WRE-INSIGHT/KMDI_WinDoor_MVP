@@ -1028,7 +1028,6 @@ namespace PresentationLayer.Presenter
                 else
                 {
                     DateTime myDate = DateTime.Parse(input);
-
                     _quotationModel.Date_Assigned_Mainpresenter = myDate;
                 }
                 
@@ -10655,7 +10654,6 @@ namespace PresentationLayer.Presenter
                         _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
                         StartWorker("Duplicate_Item");
-
 
                     }
                 }
