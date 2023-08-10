@@ -2354,6 +2354,414 @@ namespace PresentationLayer.Presenter.UserControls
                 //lst_glassThicknessPerItem.Add(glassThick);
             }
 
+            int fontDeduct = 0,
+                Ydeduct = 0,
+                Xdeduct = 0,
+                fxdeduct = 0;
+
+            bool nxtToF = false,
+                 nxtToF_lvl2 = false,
+                 nxtToF_MinHT = false,
+                 nxtToArrow = false,
+                 minimumOfFandGlass = false,
+                 minimumOfArrowAndGlass = false,
+                 minimumOfArrowAndGlass_HT = false;
+
+
+            if (_windoorModel.WD_zoom_forImageRenderer == 0.26f)
+            {
+                if (panelModel.Panel_Type == "Sliding Panel")
+                {
+                    if (client_wd <= 182)
+                    {
+                        fontDeduct = 5;
+                        minimumOfArrowAndGlass = true;
+                    }
+
+                    if (client_ht <= 165)
+                    {
+                        nxtToArrow = true;
+                        fontDeduct = 5;
+                        if (client_ht <= 87)
+                        {
+                            minimumOfArrowAndGlass = true;
+                            fontDeduct = 15;
+                        }
+                    }
+                }
+
+                if (client_ht <= 113 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    fontDeduct = 0;
+                    // 500 in arrow ht 
+                    // 109
+                    // 111
+                    // 113
+                    nxtToF = true;
+                    if (client_wd <= 113)
+                    {
+                        // 600 in arrow wd 
+                        // 135
+                        //  
+                        //  
+                        minimumOfFandGlass = true;
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            fontDeduct = 10;
+                        }
+                        if (panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            fxdeduct = 20;
+                            fontDeduct = 15;
+                        }
+                    }
+                }
+                else if (client_wd <= 113 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    minimumOfFandGlass = true;
+                    fontDeduct = 15;
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.17f)
+            {
+                if (panelModel.Panel_Type == "Sliding Panel")
+                {
+                    if (client_wd <= 142)
+                    {
+                        fontDeduct = 5;
+                        Ydeduct = 15;
+                        minimumOfArrowAndGlass = true;
+                    }
+
+                    if (client_ht <= 145)
+                    {
+                        nxtToArrow = true;
+                        fontDeduct = 5;
+                        if (client_ht <= 40)
+                        {
+                            minimumOfArrowAndGlass = true;
+                            fontDeduct = 15;
+                        }
+                    }
+                }
+
+                if (client_ht <= 111 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    fontDeduct = 0;
+                    //750 in arrow ht
+                    // 106
+                    // 105
+                    // 110  
+                    nxtToF = true;
+                    if (client_wd <= 147)
+                    {
+                        // 600 in arrow wd 
+                        // 135
+                        //  
+                        //  
+                        minimumOfFandGlass = true;
+
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            fontDeduct = 5;
+                            if (client_wd <= 80)
+                            {
+                                fontDeduct += 10;
+                            }
+                        }
+                        if (panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            fontDeduct = 15;
+                            fxdeduct = 15;
+                            if (client_wd <= 55)
+                            {
+                                nxtToF_lvl2 = true;
+                                fontDeduct += 5;
+                            }
+                        }
+                    }
+                }
+                else if (client_wd <= 80 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    minimumOfFandGlass = true;
+                    Ydeduct = 15;
+                    fontDeduct = 15;
+                    if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                    {
+                        fontDeduct -= 15;
+                        if (client_wd <= 80)
+                        {
+                            fontDeduct += 15;
+                        }
+                    }
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.13f)
+            {
+                if (panelModel.Panel_Type == "Sliding Panel")
+                {
+                    if (client_wd <= 142)
+                    {
+                        fontDeduct += 5;
+                        Ydeduct += 15;
+                        minimumOfArrowAndGlass = true;
+                    }
+
+                    if (client_ht <= 145)
+                    {
+                        nxtToArrow = true;
+                        fontDeduct += 5;
+                        if (client_ht <= 47)
+                        {
+                            minimumOfArrowAndGlass_HT = true;
+                            if (minimumOfArrowAndGlass == true)
+                            {
+                                fontDeduct += 15;
+
+                            }
+                            else
+                            {
+                                fontDeduct += 18;
+                            }
+
+                            Xdeduct += 30;
+                        }
+                    }
+                }
+
+                if (client_ht <= 112 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    fontDeduct = 0;
+                    //1000 in arrow ht
+                    // 109
+                    // 108
+                    // 112
+                    nxtToF = true;
+                    if (client_wd <= 147)
+                    {
+                        // 600 in arrow wd 
+                        // 135
+                        //  
+                        //  
+                        minimumOfFandGlass = true;
+
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            fontDeduct = 5;
+                            if (client_wd <= 80)
+                            {
+                                fontDeduct += 10;
+                            }
+                        }
+                        if (panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            fontDeduct = 15;
+                            fxdeduct = 15;
+                            if (client_wd <= 55)
+                            {
+                                nxtToF_lvl2 = true;
+                                fontDeduct += 8;
+                                Ydeduct -= 3;
+                            }
+                        }
+                    }
+                    else if (client_ht <= 57)
+                    {
+                        if (panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            nxtToF_MinHT = true;
+                            fontDeduct += 10;
+                            Xdeduct += 15;
+                        }
+
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            fontDeduct += 15;
+                        }
+                    }
+                }
+                else if (client_wd <= 80 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    minimumOfFandGlass = true;
+                    Ydeduct = 15;
+                    fontDeduct = 15;
+                    if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                    {
+                        fontDeduct -= 15;
+                        if (client_wd <= 80)
+                        {
+                            fontDeduct += 15;
+                        }
+                    }
+                    if (panelModel.Panel_Type == "Fixed Panel")
+                    {
+                        fontDeduct += 3;
+                        if (client_wd <= 30)
+                        {
+                            Ydeduct -= 15;
+
+                        }
+                    }
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer <= 0.10f)
+            {
+                if (panelModel.Panel_Type == "Sliding Panel")
+                {
+                    if (client_wd <= 142)
+                    {
+                        fontDeduct += 5;
+                        Ydeduct += 15;
+                        minimumOfArrowAndGlass = true;
+                    }
+
+                    if (client_ht <= 145)
+                    {
+                        nxtToArrow = true;
+                        fontDeduct += 5;
+                        if (client_ht <= 47)
+                        {
+                            minimumOfArrowAndGlass_HT = true;
+                            if (minimumOfArrowAndGlass == true)
+                            {
+                                fontDeduct += 15;
+
+                            }
+                            else
+                            {
+                                fontDeduct += 18;
+                            }
+
+                            Xdeduct += 30;
+                        }
+                    }
+                }
+
+                if (client_ht <= 108 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    fontDeduct = 0;
+                    //1250 in arrow ht
+                    // 103
+                    // 102
+                    // 108
+                    nxtToF = true;
+                    if (client_wd <= 147)
+                    {
+                        minimumOfFandGlass = true;
+
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            fontDeduct = 5;
+                            if (client_wd <= 80)
+                            {
+                                fontDeduct += 10;
+                            }
+                        }
+                        if (panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            fontDeduct = 15;
+                            fxdeduct = 15;
+                            if (client_wd <= 55)
+                            {
+                                nxtToF_lvl2 = true;
+                                fontDeduct += 8;
+                                Ydeduct -= 3;
+                            }
+                        }
+                    }
+                    else if (client_ht <= 57)
+                    {
+                        if (panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            nxtToF_MinHT = true;
+                            fontDeduct += 12;
+                            Xdeduct += 17;
+                        }
+
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            fontDeduct += 15;
+                            if (client_ht <= 22)
+                            {
+                                fontDeduct += 5;
+                            }
+                        }
+                    }
+                }
+                else if (client_wd <= 80 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    minimumOfFandGlass = true;
+                    Ydeduct = 15;
+                    fontDeduct = 15;
+                    if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                    {
+                        fontDeduct -= 15;
+                        if (client_wd <= 80)
+                        {
+                            fontDeduct += 15;
+                        }
+                    }
+                    if (panelModel.Panel_Type == "Fixed Panel")
+                    {
+                        fontDeduct += 3;
+                        if (client_wd <= 30)
+                        {
+                            Ydeduct -= 15;
+
+                        }
+                    }
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.08f)
+            {
+                if (client_ht <= 103)
+                {
+                    fontDeduct = 0;
+                    //1500 in arrow ht
+                    // 99
+                    // 98
+                    // 103
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.06f)
+            {
+                if (client_ht <= 103)
+                {
+                    fontDeduct = 0;
+                    //2000 in arrow ht
+                    // 99
+                    // 98
+                    // 103
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.05f)
+            {
+                if (client_ht <= 107)
+                {
+                    fontDeduct = 0;
+                    //2500 in arrow ht
+                    // 104
+                    // 103
+                    // 107
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.02f)
+            {
+                if (client_ht <= 104)
+                {
+                    fontDeduct = 0;
+                    //6000 in arrow ht
+                    // 99
+                    // 98
+                    // 104
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.01f)
+            {
+
+            }
+
+
             foreach (KeyValuePair<string, string> entry in GlassNumberList)
             {
                 if (pnl_ThicknessDesc == entry.Value)
@@ -2368,41 +2776,107 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                         else
                         {
-                            LocY = Ppoint.Y + (client_ht / 2) + (int)(client_ht * 0.1) - 15;
-
+                            LocY = Ppoint.Y + (client_ht / 2) + (int)(client_ht * 0.1);// - 15;
                         }
                     }
-                    Font gdrawFont = new Font("Times New Roman", font_size);
-                    RectangleF glassrect = new RectangleF(Ppoint.X + (client_wd / 2) - font_size,
-                                                         LocY,
-                                                         client_wd + 100,
-                                                         font_size + 10);
+
+
+
+
+                    Rectangle pnlBound = panel_bounds;
+                    if (panelModel.Panel_Type == "Fixed Panel" || panelModel.Panel_Type == "Sliding Panel")
+                    {
+                        if (nxtToF == true ||
+                            nxtToArrow == true)
+                        {
+                            pnlBound.X += 45;
+
+
+                            if (minimumOfFandGlass == true ||
+                                minimumOfArrowAndGlass == true)
+                            {
+                                pnlBound.X -= 35;
+                                //fontDeduct = 15;
+                                if (panelModel.Panel_Type == "Sliding Panel")
+                                {
+                                    pnlBound.X -= 10;
+                                }
+                                if (nxtToF_lvl2 == true)
+                                {
+                                    fxdeduct = 0;
+
+                                    pnlBound.Y += (15 + Ydeduct);
+                                    pnlBound.X -= 10;
+                                    //fontDeduct += 5;
+                                }
+                            }
+                            else if (nxtToF_MinHT == true)
+                            {
+                                pnlBound.X -= Xdeduct;
+                            }
+                            else if (minimumOfArrowAndGlass_HT == true)
+                            {
+                                pnlBound.X -= Xdeduct;
+                            }
+                        }
+                        else if (nxtToF == false &&
+                                 panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            pnlBound.Y += 40;
+                            pnlBound.Y -= Ydeduct;
+                        }
+                        else if (nxtToArrow == false &&
+                            panelModel.Panel_Type == "Sliding Panel")
+                        {
+                            pnlBound.Y += 40;
+                            pnlBound.Y -= Ydeduct;
+                        }
+                    }
+                    else if (panelModel.Panel_Type == "Casement Panel")
+                    {
+                        pnlBound.X += 4;
+                    }
+
+                    Font gdrawFont = new Font("Times New Roman", font_size - fontDeduct);
+
+                    drawFormat.Alignment = StringAlignment.Center;
+                    drawFormat.LineAlignment = StringAlignment.Center;
+
                     g.DrawString(entry.Key,
                                  gdrawFont,
                                  the_brush,
-                                 glassrect,
+                                 pnlBound,
                                  drawFormat);
+
+
+
+
                     break;
 
                 }
             }
             if (panelModel.Panel_Type == "Fixed Panel")
             {
+                Rectangle pnl = panel_bounds;
+                if (GlassNumberList.Count >= 2 && minimumOfFandGlass == true)
+                {
+                    pnl.X = pnl.X - fxdeduct;
+                    //fontDeduct = 15;
+                }
 
-
-                Font drawFont = new Font("Times New Roman", font_size);// * zoom);
+                Font drawFont = new Font("Times New Roman", font_size - fontDeduct);// * zoom);
 
                 drawFormat.Alignment = StringAlignment.Center;
                 drawFormat.LineAlignment = StringAlignment.Center;
-                g.DrawString("F", drawFont, new SolidBrush(Color.Black), panel_bounds, drawFormat);
+
+
+                g.DrawString("F", drawFont, new SolidBrush(Color.Black), pnl, drawFormat);
 
 
 
             }
             else if (panelModel.Panel_Type == "Casement Panel")
             {
-
-
                 Point sashPoint = new Point(Ppoint.X, Ppoint.Y);
 
                 //Pen dgrayPen = new Pen(Color.DimGray);
