@@ -27,6 +27,7 @@ namespace PresentationLayer.Presenter.UserControls
         private ISP_1385MilledProfilePropertyUCPresenter _sp_1385MilledProfilePropertyUCPresenter;
         private ISP_6052MilledProfilePropertyUCPresenter _sp_6052MilledProfilePropertyUCPresenter;
         private ISP_PriceIncreaseByPercentageUCPresenter _sp_PriceIncreaseByPercentageUCPresenter;
+        private ISP_FreedomTotalChangerPresenter _sp_FreedomTotalChangerPresenter;
 
 
         Panel _pnlAddOns;
@@ -43,7 +44,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                 ISP_373or374MilledProfilePropertyUCPresenter sp_373or374MilledProfilePropertyUCPresenter,
                                                 ISP_1385MilledProfilePropertyUCPresenter sp_1385MilledProfilePropertyUCPresenter,
                                                 ISP_6052MilledProfilePropertyUCPresenter sp_6052MilledProfilePropertyUCPresenter,
-                                                ISP_PriceIncreaseByPercentageUCPresenter sp_PriceIncreaseByPercentageUCPresenter
+                                                ISP_PriceIncreaseByPercentageUCPresenter sp_PriceIncreaseByPercentageUCPresenter,
+                                                ISP_FreedomTotalChangerPresenter sp_FreedomTotalChangerPresenter
                                                 )
         {
             _screenAddOnPropertiesUC = sp_screenAddOnPropertiesUC;
@@ -58,6 +60,7 @@ namespace PresentationLayer.Presenter.UserControls
             _sp_1385MilledProfilePropertyUCPresenter = sp_1385MilledProfilePropertyUCPresenter;
             _sp_6052MilledProfilePropertyUCPresenter = sp_6052MilledProfilePropertyUCPresenter;
             _sp_PriceIncreaseByPercentageUCPresenter = sp_PriceIncreaseByPercentageUCPresenter;
+            _sp_FreedomTotalChangerPresenter = sp_FreedomTotalChangerPresenter;
             _pnlAddOns = _screenAddOnPropertiesUC.GetPanelAddOns();
             SubcribeToEventSetUp();
         }
@@ -130,7 +133,13 @@ namespace PresentationLayer.Presenter.UserControls
             _pnlAddOns.Controls.Add(pvcBoxProp);
             pvcBoxProp.Dock = DockStyle.Top;
             pvcBoxProp.BringToFront();
-          
+
+
+            ISP_FreedomTotalChangerPresenter freedomTotalChanger = _sp_FreedomTotalChangerPresenter.CreateNewIntance(_unityC,_mainPresenter,_screenModel,_screenPresenter);
+            UserControl freedomTotal = (UserControl)freedomTotalChanger.GetISP_FreedomTotalChangerUC();
+            _pnlAddOns.Controls.Add(freedomTotal);
+            freedomTotal.Dock = DockStyle.Top;
+            freedomTotal.BringToFront();
 
             _screenModel.Screen_PriceIncreaseVisibility = true;
             ISP_PriceIncreaseByPercentageUCPresenter priceIncreaseUCP = _sp_PriceIncreaseByPercentageUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel, _screenPresenter);

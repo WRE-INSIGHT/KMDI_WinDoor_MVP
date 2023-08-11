@@ -75,7 +75,7 @@ namespace PresentationLayer.Presenter
                 DirectoryInfo dirInfo = Directory.CreateDirectory(MergePath);
                 dirInfo.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
 
-                _quoteItemListPresenter.QuoteItemList_PrintAnnexRDLC();//add annex rdlc 
+                _quoteItemListPresenter.QuoteItemList_PrintAnnexRDLC();//add annex rdlc
 
                 foreach (string file in _pdfCompilerView.GetFileDialog().FileNames)
                 {

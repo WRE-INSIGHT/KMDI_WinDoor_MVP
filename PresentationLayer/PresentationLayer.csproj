@@ -234,6 +234,7 @@
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_6040MilledProfileWithReinforcementPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_6052MilledProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_CenterClosurePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_FreedomTotalChangerPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_LandCoverPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_MagnumScreenTypeUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PriceIncreaseByPercentageUCPresenter.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_6040MilledProfileWithReinforcementPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_6052MilledProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_CenterClosurePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_FreedomTotalChangerPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_LandCoverPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_MagnumScreenTypeUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PriceIncreaseByPercentageUCPresenter.cs" />
@@ -1040,6 +1042,7 @@
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_6040MilledProfileWithReinforcementPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_6052MilledProfilePropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_CenterClosurePropertyUC.cs" />
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_FreedomTotalChangerUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_LandCoverPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_MagnumScreenTypeUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PriceIncreaseByPercentageUC.cs" />
@@ -1075,6 +1078,12 @@
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_CenterClosurePropertyUC.Designer.cs">
       <DependentUpon>SP_CenterClosurePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_FreedomTotalChangerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_FreedomTotalChangerUC.Designer.cs">
+      <DependentUpon>SP_FreedomTotalChangerUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_LandCoverPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -1598,6 +1607,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_CenterClosurePropertyUC.resx">
       <DependentUpon>SP_CenterClosurePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_FreedomTotalChangerUC.resx">
+      <DependentUpon>SP_FreedomTotalChangerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_LandCoverPropertyUC.resx">
       <DependentUpon>SP_LandCoverPropertyUC.cs</DependentUpon>

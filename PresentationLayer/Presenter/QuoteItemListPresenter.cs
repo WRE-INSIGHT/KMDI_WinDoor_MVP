@@ -60,7 +60,8 @@ namespace PresentationLayer.Presenter
         private string _guGlassType,
                        _guReviewedByOfficial,
                        _guNotedByOfficial,
-                       _guVatPercentage;
+                       _guVatPercentage,
+                       _guFileName;
         private int   _guReviewedOfficialPos,
                       _guNotedByOfficialPos;
 
@@ -246,6 +247,18 @@ namespace PresentationLayer.Presenter
                 _guShowVat = value;
             }
         }
+        public string RDLCGUFileName
+        {
+            get
+            {
+               return _guFileName;
+            }
+            set
+            {
+                _guFileName = value;
+            }
+        }
+
         public List<IQuoteItemListUCPresenter> LstQuoteItemUC
         {
             get { return _lstQuoteItemUC; }
@@ -329,7 +342,17 @@ namespace PresentationLayer.Presenter
         int countfortick;
 
         #endregion
-
+        public DataTable GlassUpgradeDT
+        {
+            get
+            {
+                return _glassUpgradeDT;
+            }
+            set
+            {
+                _glassUpgradeDT = value;
+            }
+        }
         private DataTable _glassUpgradeDT = new DataTable();
         decimal _totalNetPriceforPrint;
 
@@ -1542,8 +1565,8 @@ namespace PresentationLayer.Presenter
                 _mainPresenter.printStatus = "GlassUpgrade";
                 IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
                 printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtGlassUpgrade.DefaultView;
-                printQuote.EventLoad();
                 printQuote.GetPrintQuoteView().GlassType = _guGlassType;
+                printQuote.EventLoad();
                 printQuote.GetPrintQuoteView().VatPercentage = _guVatPercentage;
                 printQuote.PrintRDLCReport();
 

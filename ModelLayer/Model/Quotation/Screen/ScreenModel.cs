@@ -754,8 +754,9 @@ namespace ModelLayer.Model.Quotation.Screen
             _screenPreviousWidth;
 
         bool _builtInWidthIsBelowMinimum,
-             _builInHeigthIsBelowMinimum;   
+             _builInHeigthIsBelowMinimum;
 
+        DateTime cus_ref_date;
 
         #endregion
 
@@ -1764,6 +1765,43 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
+
+        private bool _screenFreedomTotalChangerVisibility;
+        public bool Screen_FreedomTotalChangerVisibility
+        {
+            get
+            {
+                return _screenFreedomTotalChangerVisibility;
+            }
+            set
+            {
+                _screenFreedomTotalChangerVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _screenFreedomTotalChangerIsChecked;
+        public bool Screen_FreedomTotalChangerIsChecked
+        {
+            get
+            {
+                return _screenFreedomTotalChangerIsChecked;
+            }
+            set
+            {
+                _screenFreedomTotalChangerIsChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public DateTime Date_Assigned { get; set; }
+
+
+        #region changeConditionBasedonPrice
+
+        DateTime condition_1 = DateTime.Parse("08-11-2023"); // freedom total price 
+
+        #endregion
+
         #endregion
 
         List<decimal> ItemList = new List<decimal>();
@@ -2218,6 +2256,8 @@ namespace ModelLayer.Model.Quotation.Screen
 
         public void ComputeScreenTotalPrice()
         {
+            cus_ref_date = Date_Assigned;
+
             #region priceBaseOnColor
 
             if (Screen_BaseColor == Base_Color._White ||
@@ -6339,7 +6379,7 @@ namespace ModelLayer.Model.Quotation.Screen
                     Freedom_Foiling_PullBar = (1049m * (Screen_Height + 30m)) / 1000m;
 
                     Freedom_Foiling_Total = Freedom_Foiling_Cassette +
-                                            Freedom_Foiling_TopRail +
+                                            Freedom_Foiling_TopRail + 
                                             Freedom_Foiling_SideRail +
                                             Freedom_Foiling_PullBar;
 
@@ -6352,9 +6392,27 @@ namespace ModelLayer.Model.Quotation.Screen
                                         Freedom_OverHead_Cost +
                                         Freedom_Accessories) * Screen_Factor;
 
-                    Freedom_tAmount = (Freedom_tCost_SF * 0.55m) + Freedom_Fr_Shipping_Cost;
+                   //Freedom_tAmount = Freedom_tCost_SF + Freedom_Fr_Shipping_Cost;
 
-                    #endregion                               
+                    #region based on cus ref_date
+                    if (cus_ref_date >= condition_1)
+                    {
+                        Freedom_tAmount = Freedom_tCost_SF + Freedom_Fr_Shipping_Cost;
+                    }
+                    else
+                    {
+                        if (!_screenFreedomTotalChangerIsChecked)
+                        {
+                            Freedom_tAmount = Freedom_tCost_SF + Freedom_Fr_Shipping_Cost;
+                        }
+                        else
+                        {
+                            Freedom_tAmount = (Freedom_tCost_SF * 0.55m) + Freedom_Fr_Shipping_Cost;
+                        }
+                    }
+                    #endregion
+
+                    #endregion
                 }
 
 

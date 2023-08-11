@@ -579,6 +579,8 @@ namespace PresentationLayer.Presenter
                     _screenView.getLblPlisseRd().Text = "Size";
                     _screenView.getCmbFreedom().Visible = true;
                     _screenView.getLblPlisseRd().Visible = true;
+
+                    _screenModel.Screen_FreedomTotalChangerVisibility = true;
                     #endregion
                    
                 }
@@ -596,10 +598,12 @@ namespace PresentationLayer.Presenter
                 _screenModel.Screen_6052MilledProfileVisibility = false;        
                 _screenModel.Screen_1067PVCboxVisibility = false;
                 _screenModel.Screen_LandCoverVisibility = false;
+                _screenModel.Screen_FreedomTotalChangerVisibility = false;
+
 
             }
 
-            if(screenType == ScreenType._BuiltInSideroll)
+            if (screenType == ScreenType._BuiltInSideroll)
             {
                 _screenModel.Screen_6052MilledProfileVisibility = true;
                 _screenModel.Screen_1385MilledProfileVisibility = true;
@@ -855,6 +859,7 @@ namespace PresentationLayer.Presenter
             _screenModel.Screen_ExchangeRateAUD = 40;
             _screenModel.PlissedRd_Panels = 1;
             _screenModel.DiscountPercentage = 0.3m;
+            _screenModel.Date_Assigned = _mainPresenter.dateAssigned;
             WindoorIDGetter(); 
         
             _dgv_Screen.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.Programmatic);
