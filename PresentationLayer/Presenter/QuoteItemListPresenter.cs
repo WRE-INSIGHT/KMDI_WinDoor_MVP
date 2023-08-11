@@ -1569,8 +1569,8 @@ namespace PresentationLayer.Presenter
                 IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
                 printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtGlassUpgrade.DefaultView;
                 printQuote.GetPrintQuoteView().GlassType = _guGlassType;
-                printQuote.GetPrintQuoteView().VatPercentage = _guVatPercentage;
                 printQuote.EventLoad();
+                printQuote.GetPrintQuoteView().VatPercentage = _guVatPercentage;
                 printQuote.PrintRDLCReport();
 
                 //reset print variables 
