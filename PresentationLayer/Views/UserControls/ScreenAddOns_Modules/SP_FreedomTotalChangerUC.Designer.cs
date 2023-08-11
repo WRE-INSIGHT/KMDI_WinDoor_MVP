@@ -37,9 +37,9 @@
             this.chkbox_totalChanger.AutoSize = true;
             this.chkbox_totalChanger.Location = new System.Drawing.Point(3, 23);
             this.chkbox_totalChanger.Name = "chkbox_totalChanger";
-            this.chkbox_totalChanger.Size = new System.Drawing.Size(170, 17);
+            this.chkbox_totalChanger.Size = new System.Drawing.Size(153, 17);
             this.chkbox_totalChanger.TabIndex = 0;
-            this.chkbox_totalChanger.Text = "Use OLD Computation in Total";
+            this.chkbox_totalChanger.Text = "Use @Net 45 Computation";
             this.chkbox_totalChanger.UseVisualStyleBackColor = true;
             this.chkbox_totalChanger.CheckedChanged += new System.EventHandler(this.chkbox_totalChanger_CheckedChanged);
             // 
@@ -53,6 +53,7 @@
             this.label1.Size = new System.Drawing.Size(122, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "* Applicable in Revisions";
+            this.label1.Visible = false;
             // 
             // SP_FreedomTotalChangerUC
             // 

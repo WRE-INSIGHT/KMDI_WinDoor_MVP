@@ -1798,7 +1798,7 @@ namespace ModelLayer.Model.Quotation.Screen
 
         #region changeConditionBasedonPrice
 
-        DateTime condition_1 = DateTime.Parse("08-10-2023"); // freedom total price 
+        DateTime condition_1 = DateTime.Parse("08-11-2023"); // freedom total price 
 
         #endregion
 
