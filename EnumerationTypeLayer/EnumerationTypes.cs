@@ -232,6 +232,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly CoverProfile_ArticleNo _0914 = new CoverProfile_ArticleNo(0, "0914");
             public static readonly CoverProfile_ArticleNo _1640 = new CoverProfile_ArticleNo(1, "1640");
+            public static readonly CoverProfile_ArticleNo _1182Milled = new CoverProfile_ArticleNo(2, "1182-milled");
 
             private CoverProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -805,7 +806,9 @@ namespace EnumerationTypeLayer
         {
             //public static readonly GBSpacer_ArticleNo _GBSpacer = new GBSpacer_ArticleNo(0, "GB SPACER");
             public static readonly GBSpacer_ArticleNo _KBC70 = new GBSpacer_ArticleNo(0, "KBC70");
-            public static readonly GBSpacer_ArticleNo _9C54 = new GBSpacer_ArticleNo(0, "9C54");
+            public static readonly GBSpacer_ArticleNo _9C54 = new GBSpacer_ArticleNo(1, "9C54");
+            public static readonly GBSpacer_ArticleNo _0373Milled = new GBSpacer_ArticleNo(2, "0373-Milled");
+
 
             private GBSpacer_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -957,6 +960,8 @@ namespace EnumerationTypeLayer
         public class CenterProfile_ArticleNo : Enumeration<CenterProfile_ArticleNo, int>
         {
             public static readonly CenterProfile_ArticleNo _A000 = new CenterProfile_ArticleNo(0, "A000");
+            public static readonly CenterProfile_ArticleNo _6067 = new CenterProfile_ArticleNo(1, "1667");
+
 
             private CenterProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -1035,6 +1040,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly FrameConnectionType _Weldable = new FrameConnectionType(0, "Weldable");
             public static readonly FrameConnectionType _MechanicalJoint = new FrameConnectionType(1, "Mechanical Joint");
+            public static readonly FrameConnectionType _None = new FrameConnectionType(2, "None");
 
             private FrameConnectionType(int value, string displayName) : base(value, displayName) { }
         }
@@ -1171,6 +1177,17 @@ namespace EnumerationTypeLayer
 
             private TrackRail_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class GUPremilineTopTrackRail_ArticleNo : Enumeration<GUPremilineTopTrackRail_ArticleNo, int>
+        {
+            public static readonly GUPremilineTopTrackRail_ArticleNo _L15015006 = new GUPremilineTopTrackRail_ArticleNo(0, "L-15015-006");
+            public static readonly GUPremilineTopTrackRail_ArticleNo _L15015007 = new GUPremilineTopTrackRail_ArticleNo(1, "L-15015-007");
+            public static readonly GUPremilineTopTrackRail_ArticleNo _L15015008 = new GUPremilineTopTrackRail_ArticleNo(2, "L-15015-008");
+
+            private GUPremilineTopTrackRail_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+
 
         public class MicrocellOneSafetySensor_ArticleNo : Enumeration<MicrocellOneSafetySensor_ArticleNo, int>
         {
@@ -1392,5 +1409,48 @@ namespace EnumerationTypeLayer
 
             private TopViewType(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class PVCSettingPlate_ArticleNo : Enumeration<PVCSettingPlate_ArticleNo, int>
+        {
+            public static readonly PVCSettingPlate_ArticleNo _050009005 = new PVCSettingPlate_ArticleNo(0, "05-00090-0-5");
+
+            private PVCSettingPlate_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class FinPlate_ArticleNo : Enumeration<FinPlate_ArticleNo, int>
+        {
+            public static readonly FinPlate_ArticleNo _050006005 = new FinPlate_ArticleNo(0, "05-00060-05");
+
+            private FinPlate_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CoverTrim_ArticleNo : Enumeration<CoverTrim_ArticleNo, int>
+        {
+            public static readonly CoverTrim_ArticleNo _050006005 = new CoverTrim_ArticleNo(0, "05-00060-05");
+
+            private CoverTrim_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SlidingAccessoriesRoller_ArticleNo : Enumeration<SlidingAccessoriesRoller_ArticleNo, int>
+        {
+            public static readonly SlidingAccessoriesRoller_ArticleNo _L15015009 = new SlidingAccessoriesRoller_ArticleNo(0, "Sliding Accessories, Roller, 125kg");
+
+            private SlidingAccessoriesRoller_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class BottomGuide : Enumeration<BottomGuide, int>
+        {
+            public static readonly BottomGuide _BottomGuide = new BottomGuide(0, "Bottom Guide");
+
+            private BottomGuide(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Coupling_ArticleNo : Enumeration<Coupling_ArticleNo, int>
+        {
+            public static readonly Coupling_ArticleNo _BottomGuide = new Coupling_ArticleNo(0, "Bottom Guide");
+
+            private Coupling_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
     }
 }

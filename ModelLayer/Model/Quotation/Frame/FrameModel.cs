@@ -1229,6 +1229,9 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        public bool Frame_If_SlidingTypeTopHung { get; set; }
+
+
         public void SetExplosionValues_Frame()
         {
             if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel
@@ -1237,6 +1240,11 @@ namespace ModelLayer.Model.Quotation.Frame
                     Lst_Panel[0].Panel_MotorizedOptionVisibility == true)
                 {
                     Frame_If_InwardMotorizedCasement = true;
+                }
+
+                if (Lst_Panel[0].Panel_SlidingTypes == SlidingTypes._TopHung)
+                {
+                    Frame_If_SlidingTypeTopHung = true;
                 }
             }
             else if (Lst_Panel.Count == 0 && Lst_MultiPanel.Count >= 1) //multipanel
@@ -1255,6 +1263,11 @@ namespace ModelLayer.Model.Quotation.Frame
                             pnl.Panel_MotorizedOptionVisibility == true)
                         {
                             Frame_If_InwardMotorizedSliding = true;
+                        }
+
+                        if (pnl.Panel_SlidingTypes == SlidingTypes._TopHung)
+                        {
+                            Frame_If_SlidingTypeTopHung = true;
                         }
                     }
                 }
@@ -1330,6 +1343,11 @@ namespace ModelLayer.Model.Quotation.Frame
                         Frame_ReinfHeight = _frameHeight - reinf_size - botFrameDiff + submerged - 10;
                     }
                 }
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._None &&
+                         Frame_If_SlidingTypeTopHung == true)
+                {
+                    Frame_ReinfHeight = _frameHeight - 5 - 10;
+                }
             }
             else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                      Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
@@ -1375,6 +1393,11 @@ namespace ModelLayer.Model.Quotation.Frame
                     {
                         Frame_ReinfWidth = _frameWidth - (reinf_size * 2) - 10;
                     }
+                }
+                else if (Frame_ConnectionType == FrameConnectionType._None &&
+                         Frame_If_SlidingTypeTopHung == true)
+                {
+                    Frame_ReinfWidth = _frameWidth - (38 * 2) - 10;
                 }
             }
             else
@@ -1437,6 +1460,12 @@ namespace ModelLayer.Model.Quotation.Frame
                         Frame_ExplosionHeight = _frameHeight - botFrameDiff + submerged + 3;
                     }
                 }
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._None &&
+                         Frame_ConnectionType == FrameConnectionType._None &&
+                         Frame_If_SlidingTypeTopHung == true)
+                {
+                    Frame_ExplosionHeight = _frameHeight - 5;
+                }
             }
             else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                      Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
@@ -1490,7 +1519,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     {
                         Frame_ExplosionWidth = (_frameWidth / MaxCutofRein);
                     }
-
+                    
                 }
                 else if (Frame_ConnectionType == FrameConnectionType._Weldable)
                 {
@@ -1500,8 +1529,14 @@ namespace ModelLayer.Model.Quotation.Frame
                        Frame_BotFrameArtNo == BottomFrameTypes._A166)
                     {
                         Frame_ExplosionWidth = (_frameWidth / MaxCutofRein) + 5;
-                    }
+                    } 
                 }
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._None &&
+                        Frame_If_SlidingTypeTopHung == true)
+                {
+                    Frame_ExplosionWidth = (_frameWidth / MaxCutofRein) - (38 * 2);
+                }
+
             }
             else
             {
@@ -2187,6 +2222,12 @@ namespace ModelLayer.Model.Quotation.Frame
                     if (Frame_If_InwardMotorizedSliding == true)
                     {
                         cutTypeHt = @"[  ]";
+                        widthArtNo = "-milled";
+                    }
+
+                    if (Frame_If_SlidingTypeTopHung == true)
+                    {
+                        cutTypeHt = @"|  |";
                         widthArtNo = "-milled";
                     }
                 }

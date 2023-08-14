@@ -34,7 +34,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _mainPresenter.SetChangesMark();
                 ComboBox cmbSlidingType = (ComboBox)sender;
                 _panelModel.Panel_SlidingTypes = (SlidingTypes)cmbSlidingType.SelectedValue;
+                if ((SlidingTypes)cmbSlidingType.SelectedValue == SlidingTypes._TopHung)
+                {
+                    _panelModel.Panel_ParentFrameModel.Frame_ConnectionType = FrameConnectionType._None;
+                }
+
                 _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+
             }
         }
 
