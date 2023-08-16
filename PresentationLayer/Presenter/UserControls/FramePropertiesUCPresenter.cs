@@ -79,7 +79,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
                     _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
-                    _frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
+                    _frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine")) 
                 {
                     //  if (RailsAdditionalHt == true)
 
