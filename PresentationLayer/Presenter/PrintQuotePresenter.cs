@@ -401,7 +401,7 @@ namespace PresentationLayer.Presenter
             else
             {
 
-                if (GlassThickness != "Unglazed" && GlassThickness != "" && GlassThickness != "Security Mesh")
+                if (GlassThickness != "Unglazed" && GlassThickness != "" && GlassThickness != "Security Mesh" && GlassThickness != "Wire Mesh")
                 {
                     GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
                 }

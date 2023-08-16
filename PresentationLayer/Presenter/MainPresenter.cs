@@ -10361,7 +10361,8 @@ namespace PresentationLayer.Presenter
         {
             if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
             {
-                 if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
+                #region 0wd 0Ht
+                if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     Clearing_Operation();
                 }
@@ -10435,11 +10436,14 @@ namespace PresentationLayer.Presenter
                     //_frmDimensionPresenter.mainPresenter_OpenWindoorFile_ClickedOK = true;
 
                 }
+                #endregion
             }
             else if (frmDimension_numWd != 0 && frmDimension_numHt != 0) //from frmDimension to here
             {
+                #region !0wd !0Ht
                 if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
+                    #region new item 
                     _wndrFilePath = string.Empty;
                     _wndrFileName = string.Empty;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
@@ -10500,11 +10504,13 @@ namespace PresentationLayer.Presenter
                         _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
+                    #endregion
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile && !Duplicate) // Open File
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
+                        #region create new item
                         _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
                         if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
                               _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
@@ -10551,9 +10557,11 @@ namespace PresentationLayer.Presenter
                         _pnlItems.PerformLayout();
 
                         //_frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                        #endregion
                     }
                     else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
+                        #region create new concrete
                         int concreteID = _windoorModel.concreteIDCounter += 1;
                         _concreteModel = _concreteServices.AddConcreteModel(frmDimension_numWd,
                                                                             frmDimension_numHt,
@@ -10571,9 +10579,11 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                         _windoorModel.Fit_MyControls_ToBindDimensions();
                         _windoorModel.Fit_MyControls_ImagersToBindDimensions();
+                        #endregion
                     }
                     else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
+                        #region create new frame
                         _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
                                                                    frmDimension_numHt,
                                                                    frameType,
@@ -10601,7 +10611,7 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_ReinfWidth = frm_ReinfWidth;
                         _frameModel.Frame_ReinfHeight = frm_ReinfHeight;
                         _frameModel.Frame_ExplosionHeight = frm_ExplosionHeight;
-                        //_frameModel.FrameProp_Height = frmProp_Height;
+                        _frameModel.FrameProp_Height = frmProp_Height;
                         _frameModel.Frame_BotFrameEnable = frm_BotfrmEnable;
                         _frameModel.Frame_SlidingRailsQtyVisibility = false;
                         _frameModel.Frame_ConnectionTypeVisibility = false;
@@ -10616,11 +10626,11 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_MilledArtNo = frm_MilledArtNo;
                         _frameModel.Frame_MilledReinfArtNo = frm_MilledReinfArtNo;
                         _frameModel.Frame_MechanicalJointConnector_Artno = frm_MechJointArticleNo;
-                        _frameModel.Frame_TrackProfileArtNoVisibility = frm_TrackProfileArtNoVisibility;
+                        _frameModel.Frame_TrackProfileArtNoVisibility = false;
                         _frameModel.Frame_TrackProfileArtNo = frm_TrackProfile_ArticleNo;
                         _frameModel.Frame_ConnectingProfile_ArticleNo = frm_ConnectingProfile_ArticleNo;
                         _frameModel.Frame_MeshType = frm_MeshType;
-                        _frameModel.Frame_ScreenVisibility = frm_ScreenVisibility;
+                        _frameModel.Frame_ScreenVisibility = false;
                         _frameModel.Frame_ScreenOption = frm_ScreenOption;
                         _frameModel.Frame_ScreenHeightOption = frm_ScreenHeightOption;
                         _frameModel.Frame_ScreenHeightVisibility = frm_ScreenHeightVisibility;
@@ -10637,8 +10647,10 @@ namespace PresentationLayer.Presenter
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
+
                         _framePropertiesUCPresenter = _framePropertiesUCPresenter.GetNewInstance(_frameModel, _unityC, this);
                         AddFrameUC(_frameModel, _framePropertiesUCPresenter);
+
                         _frameModel.Frame_UC = (UserControl)_frameUC;
                         _frameModel.Frame_PropertiesUC = (UserControl)_framePropertiesUCPresenter.GetFramePropertiesUC();
                         AddFrameList_WindoorModel(_frameModel);
@@ -10656,13 +10668,15 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                         _windoorModel.Fit_MyControls_ToBindDimensions();
                         _windoorModel.Fit_MyControls_ImagersToBindDimensions();
-
+                        #endregion
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && Duplicate) // Open File
-                {
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && Duplicate) // open file
+                {          
                     if (purpose == frmDimensionPresenter.Show_Purpose.Duplicate)
                     {
+                        #region duplicate
+
                         ForceRestartAndLoadFile();//checkuserobject
                         wndr_content = new List<string>();
                         SaveWindoorModel(_windoorModel);
@@ -10675,12 +10689,14 @@ namespace PresentationLayer.Presenter
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
                         StartWorker("Duplicate_Item");
 
+                        #endregion
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //Add new Item
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
+                        #region add item
                         ForceRestartAndLoadFile();//checkuserobject
                         Windoor_Save_UserControl();
                         Windoor_Save_PropertiesUC();
@@ -10732,12 +10748,14 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
 
                         _mainView.GetCurrentPrice().Value = 0;
+                        #endregion
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //add frame
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
+                        #region add frame
                         ForceRestartAndLoadFile();//checkuserobject
                         bool NewFrameSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
                                                                                        frmDimension_numHt);
@@ -10812,12 +10830,14 @@ namespace PresentationLayer.Presenter
                         {
                             MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Frame Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
+                        #endregion
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile && !Duplicate) //add concrete
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
+                        #region add concrete
                         ForceRestartAndLoadFile();//checkuserobject
                         bool NewConcreteSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
                                                                                           frmDimension_numHt);
@@ -10847,9 +10867,10 @@ namespace PresentationLayer.Presenter
                         {
                             MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Concrete Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
+                        #endregion
                     }
                 }
-
+                #endregion
             }
             //GetIntownOutofTown();
         }
