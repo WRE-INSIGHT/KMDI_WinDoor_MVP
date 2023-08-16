@@ -74,7 +74,6 @@ namespace PresentationLayer.Presenter.UserControls
         {
             if (initialized == true)
             {
-
                 _frameModel.Frame_ArtNo = (FrameProfile_ArticleNo)((ComboBox)sender).SelectedValue;
 
                 if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
@@ -109,6 +108,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                     if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                     {
+                        #region premi 6050
                         if (_frameModel.Frame_ConnectionTypeVisibility == true)
                         {
                             _frameModel.Frame_ConnectionTypeVisibility = false;
@@ -139,9 +139,11 @@ namespace PresentationLayer.Presenter.UserControls
                         //        _framePropertiesUC.AddHT_PanelBody(-constants.frame_ScreenHeightProperty_PanelHeight);
                         //    }
                         //}
+                        #endregion
                     }
                     else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                     {
+                        #region premi 6052
                         if (_frameModel.Frame_ConnectionTypeVisibility == false)
                         {
                             _frameModel.Frame_ConnectionTypeVisibility = true;
@@ -156,7 +158,9 @@ namespace PresentationLayer.Presenter.UserControls
                             _frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
                             _framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
                         }
+                        #endregion
                     }
+
                     #region old algo 
                     //if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 && _frameModel.Frame_ConnectionTypeVisibility == false)
                     //{
@@ -181,6 +185,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                     //RailsDeductHt = true;
                     #endregion
+
                 }
                 else if (!(_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
                            _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052))
@@ -398,7 +403,7 @@ namespace PresentationLayer.Presenter.UserControls
         bool initialized = false;
         private void OnFramePropertiesLoadEventRaised(object sender, EventArgs e)
         {
-
+            
             _framePropertiesUC.ThisBinding(CreateBindingDictionary());
 
             if (_mainPresenter.ItemLoad == false)

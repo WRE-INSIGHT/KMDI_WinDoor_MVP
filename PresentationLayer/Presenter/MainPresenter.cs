@@ -10593,7 +10593,7 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_ReinfWidth = frm_ReinfWidth;
                         _frameModel.Frame_ReinfHeight = frm_ReinfHeight;
                         _frameModel.Frame_ExplosionHeight = frm_ExplosionHeight;
-                       // _frameModel.FrameProp_Height = frmProp_Height;
+                        _frameModel.FrameProp_Height = frmProp_Height;
                         _frameModel.Frame_BotFrameEnable = frm_BotfrmEnable;
                         _frameModel.Frame_SlidingRailsQtyVisibility = false;
                         _frameModel.Frame_ConnectionTypeVisibility = false;
@@ -10608,11 +10608,11 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_MilledArtNo = frm_MilledArtNo;
                         _frameModel.Frame_MilledReinfArtNo = frm_MilledReinfArtNo;
                         _frameModel.Frame_MechanicalJointConnector_Artno = frm_MechJointArticleNo;
-                        _frameModel.Frame_TrackProfileArtNoVisibility = frm_TrackProfileArtNoVisibility;
+                        _frameModel.Frame_TrackProfileArtNoVisibility = false;
                         _frameModel.Frame_TrackProfileArtNo = frm_TrackProfile_ArticleNo;
                         _frameModel.Frame_ConnectingProfile_ArticleNo = frm_ConnectingProfile_ArticleNo;
                         _frameModel.Frame_MeshType = frm_MeshType;
-                        _frameModel.Frame_ScreenVisibility = frm_ScreenVisibility;
+                        _frameModel.Frame_ScreenVisibility = false;
                         _frameModel.Frame_ScreenOption = frm_ScreenOption;
                         _frameModel.Frame_ScreenHeightOption = frm_ScreenHeightOption;
                         _frameModel.Frame_ScreenHeightVisibility = frm_ScreenHeightVisibility;
