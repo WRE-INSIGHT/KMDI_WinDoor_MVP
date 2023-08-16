@@ -57,7 +57,8 @@ namespace PresentationLayer.Presenter
 
         decimal _totalGlassAmount,
                 _totalWindoorsAmount,
-                _totalNetPriceforPrint;
+                _totalNetPriceforPrint,
+                _amountPerUnit;
         
         bool sortAscending = true,
              changeGlassType = false,
@@ -1029,9 +1030,22 @@ namespace PresentationLayer.Presenter
                                     decimal _glassWidth = Convert.ToDecimal(_glassUpgradeDT.Rows[currCell_row][3]);
                                     decimal _glassHeight = Convert.ToDecimal(_glassUpgradeDT.Rows[currCell_row][4]);
 
-                                    decimal _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.1m) / 1000000m, 2);// glass amount per unit
-                                    decimal _totalNetPrice = Math.Round(_amountPerUnit * _glassQty, 2);// glass total net price
+                                     //_amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.1m) / 1000000m, 2);// glass amount per unit
 
+                                    if (_cmbGlassType.SelectedItem.ToString() == "Tempered Glass" || _cmbGlassType.SelectedItem.ToString() == "Tinted Glass")
+                                    {
+                                        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.5m) / 1000000m, 2);
+                                    }
+                                    else if (_cmbGlassType.SelectedItem.ToString() == "Insulated Glass Unit (IGU)")
+                                    {
+                                        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue) / 1000000m, 2);
+                                    }
+                                    else if (_cmbGlassType.SelectedItem.ToString() == "Laminated Glass")
+                                    {
+                                        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.3m) / 1000000m, 2);
+                                    }
+
+                                    decimal _totalNetPrice = Math.Round(_amountPerUnit * _glassQty, 2);// glass total net price
 
                                     if (_isNegative)
                                     {
@@ -1049,6 +1063,8 @@ namespace PresentationLayer.Presenter
                             }
                             _dgv_GlassUpgrade.DataSource = PopulateDgvGlassUpgrade();
                             TotalGlassAndWindoorsAmount();
+
+                            _amountPerUnit = 0; // reset variable
                             #endregion
                         }
                         else
