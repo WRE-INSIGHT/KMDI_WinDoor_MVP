@@ -408,8 +408,8 @@ namespace PresentationLayer.Presenter.UserControls
             
             _framePropertiesUC.ThisBinding(CreateBindingDictionary());
 
-            //if (_mainPresenter.ItemLoad == false)
-            //{
+            if (_mainPresenter.ItemLoad == false)
+            {
                 if (_frameModel.Frame_Type == Frame_Padding.Window)
                 {
                     if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
@@ -441,11 +441,16 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._2060;
                     }
-                    _frameModel.Frame_BotFrameVisible = true;
-                    _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
-                    _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
+                   
                 }
-            //}
+            }
+
+            if(_frameModel.Frame_Type == Frame_Padding.Door)
+            {
+                _frameModel.Frame_BotFrameVisible = true;
+                _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
+                _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
+            }
 
 
             curr_rbtnText = _frameModel.Frame_Type.ToString();
