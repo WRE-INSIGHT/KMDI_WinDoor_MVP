@@ -94,17 +94,19 @@ namespace PresentationLayer.Presenter.UserControls
                     if (_frameModel.Frame_ScreenVisibility == false)
                     {
                         _frameModel.Frame_ScreenVisibility = true;
-                        if (_frameModel.Frame_ScreenOption == true)
-                        {
-                            _frameModel.FrameProp_Height += constants.frame_ScreenProperty_PanelHeight;
-                            _framePropertiesUC.AddHT_PanelBody(constants.frame_ScreenProperty_PanelHeight);
-                        }
-                        else if (_frameModel.Frame_ScreenOption == false)
-                        {
-                            _frameModel.FrameProp_Height += constants.frame_ScreenHeightProperty_PanelHeight;
-                            _framePropertiesUC.AddHT_PanelBody(constants.frame_ScreenHeightProperty_PanelHeight);
-                        }
+
+                        //if (_frameModel.Frame_ScreenOption == true)
+                        //{
+                        //    _frameModel.FrameProp_Height += constants.frame_ScreenProperty_PanelHeight;
+                        //    _framePropertiesUC.AddHT_PanelBody(constants.frame_ScreenProperty_PanelHeight);
+                        //}
+                        //else if (_frameModel.Frame_ScreenOption == false)
+                        //{
+                        _frameModel.FrameProp_Height += constants.frame_ScreenHeightProperty_PanelHeight;
+                        _framePropertiesUC.AddHT_PanelBody(constants.frame_ScreenHeightProperty_PanelHeight);
+                        //}
                     }
+
 
                     if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                     {
@@ -406,8 +408,8 @@ namespace PresentationLayer.Presenter.UserControls
             
             _framePropertiesUC.ThisBinding(CreateBindingDictionary());
 
-            if (_mainPresenter.ItemLoad == false)
-            {
+            //if (_mainPresenter.ItemLoad == false)
+            //{
                 if (_frameModel.Frame_Type == Frame_Padding.Window)
                 {
                     if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
@@ -443,7 +445,8 @@ namespace PresentationLayer.Presenter.UserControls
                     _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
                     _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
                 }
-            }
+            //}
+
 
             curr_rbtnText = _frameModel.Frame_Type.ToString();
             prev_frameArtNo = _frameModel.Frame_ArtNo.ToString();
