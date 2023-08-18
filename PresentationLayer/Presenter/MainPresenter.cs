@@ -10721,8 +10721,8 @@ namespace PresentationLayer.Presenter
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
                         ForceRestartAndLoadFile();//checkuserobject
-                        bool NewFrameSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
-                                                                                       frmDimension_numHt);
+                        //bool NewFrameSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
+                        //                                                               frmDimension_numHt);
                         BottomFrameTypes frameBotFrameType = null;
                         if (_windoorModel.WD_profile == "C70 Profile")
                         {
@@ -10746,8 +10746,8 @@ namespace PresentationLayer.Presenter
                                 frameBotFrameType = BottomFrameTypes._6050;
                             }
                         }
-                        if (NewFrameSizeFit)
-                        {
+                        //if (NewFrameSizeFit)
+                        //{
                             int frameID = _windoorModel.frameIDCounter += 1;
                             _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
                                                                        frmDimension_numHt,
@@ -10789,11 +10789,11 @@ namespace PresentationLayer.Presenter
                             _windoorModel.Fit_MyControls_ToBindDimensions();
                             _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                             GetCurrentPrice();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Frame Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
+                        //}
+                        //else
+                        //{
+                        //    MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Frame Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        //}
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile && !Duplicate) //add concrete

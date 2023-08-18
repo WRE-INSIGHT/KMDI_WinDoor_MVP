@@ -218,11 +218,13 @@
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TubularPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ISortItemUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_CenterProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverBladesPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverGalleryPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverGallerySetOptionPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverGallerySetPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_TrackRailPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_CenterProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverBladesPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGalleryPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGallerySetOptionPropertyUCPresenter.cs" />
@@ -809,6 +811,7 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_3dHingePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_AliminumTrackPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CenterHingePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CenterProfilePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CornerDrivePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_DHandlePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_DHandle_IOLockingPropertyUC.cs" />
@@ -860,6 +863,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.Designer.cs">
       <DependentUpon>PP_CenterHingePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CenterProfilePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CenterProfilePropertyUC.Designer.cs">
+      <DependentUpon>PP_CenterProfilePropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -1496,6 +1505,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.resx">
       <DependentUpon>PP_CenterHingePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CenterProfilePropertyUC.resx">
+      <DependentUpon>PP_CenterProfilePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.resx">
       <DependentUpon>PP_CornerDrivePropertyUC.cs</DependentUpon>

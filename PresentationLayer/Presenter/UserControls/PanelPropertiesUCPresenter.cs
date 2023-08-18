@@ -35,6 +35,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_LouverBladesPropertyUCPresenter _pp_louverBladesPropertyUCPresenter;
         private IPP_LouverGalleryPropertyUCPresenter _pp_louverGalleryPropertyUCPresenter;
         private IPP_LouverGallerySetPropertyUCPresenter _pp_louverGallerySetPropertyUCPresenter;
+        private IPP_CenterProfilePropertyUCPresenter _pp_CenterProfilePropertyUCPresenter;
 
         private IUnityContainer _unityC;
 
@@ -59,7 +60,8 @@ namespace PresentationLayer.Presenter.UserControls
                                           IPP_AliminumTrackPropertyUCPresenter pp_AliminumTrackPropertyUCPresenter,
                                           IPP_LouverBladesPropertyUCPresenter pp_louverBladesPropertyUCPresenter,
                                           IPP_LouverGalleryPropertyUCPresenter pp_louverGalleryPropertyUCPresenter,
-                                          IPP_LouverGallerySetPropertyUCPresenter pp_louverGallerySetPropertyUCPresenter)
+                                          IPP_LouverGallerySetPropertyUCPresenter pp_louverGallerySetPropertyUCPresenter,
+                                          IPP_CenterProfilePropertyUCPresenter pp_CenterProfilePropertyUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
@@ -82,6 +84,7 @@ namespace PresentationLayer.Presenter.UserControls
             _pp_louverBladesPropertyUCPresenter = pp_louverBladesPropertyUCPresenter;
             _pp_louverGalleryPropertyUCPresenter = pp_louverGalleryPropertyUCPresenter;
             _pp_louverGallerySetPropertyUCPresenter = pp_louverGallerySetPropertyUCPresenter;
+            _pp_CenterProfilePropertyUCPresenter = pp_CenterProfilePropertyUCPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -673,6 +676,27 @@ namespace PresentationLayer.Presenter.UserControls
                     _pnlPanelSpecs.Controls.Add(GallerySetProp);
                     GallerySetProp.Dock = DockStyle.Top;
                     GallerySetProp.BringToFront();
+                }
+
+                if (_panelModel.Panel_Type.Contains("Fixed") ||
+                    _panelModel.Panel_Type.Contains("Sliding"))
+                {
+                    _panelModel.Panel_CenterProfileVisibility = true;
+
+                    _panelModel.AdjustPropertyPanelHeight("addCenterProfile");
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCenterProfile");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCenterProfile");
+                    }
+
+                    IPP_CenterProfilePropertyUCPresenter centerProfile = _pp_CenterProfilePropertyUCPresenter.CreateNewInstance(_mainPresenter, _unityC, _panelModel);
+                    UserControl centerProfileProp = (UserControl)centerProfile.GetCenterProfilePropertyUC();
+                    _pnlPanelSpecs.Controls.Add(centerProfileProp);
+                    centerProfileProp.Dock = DockStyle.Top;
+                    centerProfileProp.BringToFront();
                 }
 
                 IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);

@@ -946,21 +946,32 @@ namespace EnumerationTypeLayer
         public class Interlock_ArticleNo : Enumeration<Interlock_ArticleNo, int>
         {
             public static readonly Interlock_ArticleNo _6061_Milled = new Interlock_ArticleNo(0, "6061 - Milled");
+            public static readonly Interlock_ArticleNo _6061 = new Interlock_ArticleNo(1, "6061");
 
             private Interlock_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class InterlockForTophung_ArticleNo : Enumeration<InterlockForTophung_ArticleNo, int>
+        {
+            public static readonly InterlockForTophung_ArticleNo _6061_Milled = new InterlockForTophung_ArticleNo(0, "6061 - Milled");
+
+            private InterlockForTophung_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+
         public class ExtensionForInterlock_ArticleNo : Enumeration<ExtensionForInterlock_ArticleNo, int>
         {
             public static readonly ExtensionForInterlock_ArticleNo _9C61_Milled = new ExtensionForInterlock_ArticleNo(0, "9C61 - Milled");
+            public static readonly ExtensionForInterlock_ArticleNo _9C61 = new ExtensionForInterlock_ArticleNo(1, "9C61");
 
             private ExtensionForInterlock_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class CenterProfile_ArticleNo : Enumeration<CenterProfile_ArticleNo, int>
         {
-            public static readonly CenterProfile_ArticleNo _A000 = new CenterProfile_ArticleNo(0, "A000");
-            public static readonly CenterProfile_ArticleNo _6067 = new CenterProfile_ArticleNo(1, "1667");
+            public static readonly CenterProfile_ArticleNo _none = new CenterProfile_ArticleNo(0, "None");
+            public static readonly CenterProfile_ArticleNo _A000 = new CenterProfile_ArticleNo(1, "A000");
+            public static readonly CenterProfile_ArticleNo _6067 = new CenterProfile_ArticleNo(2, "6067");
 
 
             private CenterProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
@@ -1178,13 +1189,13 @@ namespace EnumerationTypeLayer
             private TrackRail_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class GUPremilineTopTrackRail_ArticleNo : Enumeration<GUPremilineTopTrackRail_ArticleNo, int>
+        public class GUPremilineTopTrack_ArticleNo : Enumeration<GUPremilineTopTrack_ArticleNo, int>
         {
-            public static readonly GUPremilineTopTrackRail_ArticleNo _L15015006 = new GUPremilineTopTrackRail_ArticleNo(0, "L-15015-006");
-            public static readonly GUPremilineTopTrackRail_ArticleNo _L15015007 = new GUPremilineTopTrackRail_ArticleNo(1, "L-15015-007");
-            public static readonly GUPremilineTopTrackRail_ArticleNo _L15015008 = new GUPremilineTopTrackRail_ArticleNo(2, "L-15015-008");
+            public static readonly GUPremilineTopTrack_ArticleNo _L15015006 = new GUPremilineTopTrack_ArticleNo(0, "L-15015-006");
+            public static readonly GUPremilineTopTrack_ArticleNo _L15015007 = new GUPremilineTopTrack_ArticleNo(1, "L-15015-007");
+            public static readonly GUPremilineTopTrack_ArticleNo _L15015008 = new GUPremilineTopTrack_ArticleNo(2, "L-15015-008");
 
-            private GUPremilineTopTrackRail_ArticleNo(int value, string displayName) : base(value, displayName) { }
+            private GUPremilineTopTrack_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
 
@@ -1433,7 +1444,7 @@ namespace EnumerationTypeLayer
 
         public class SlidingAccessoriesRoller_ArticleNo : Enumeration<SlidingAccessoriesRoller_ArticleNo, int>
         {
-            public static readonly SlidingAccessoriesRoller_ArticleNo _L15015009 = new SlidingAccessoriesRoller_ArticleNo(0, "Sliding Accessories, Roller, 125kg");
+            public static readonly SlidingAccessoriesRoller_ArticleNo _L15015009 = new SlidingAccessoriesRoller_ArticleNo(0, "L-15015-9");
 
             private SlidingAccessoriesRoller_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }

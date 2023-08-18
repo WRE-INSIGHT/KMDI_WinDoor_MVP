@@ -1231,6 +1231,19 @@ namespace ModelLayer.Model.Quotation.Frame
 
         public bool Frame_If_SlidingTypeTopHung { get; set; }
 
+        private GUPremilineTopTrack_ArticleNo _frameGUPremilineTopTrackArtNo;
+        public GUPremilineTopTrack_ArticleNo Frame_GUPremilineTopTrackArtNo
+        {
+            get
+            {
+                return _frameGUPremilineTopTrackArtNo;
+            }
+            set
+            {
+                _frameGUPremilineTopTrackArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public void SetExplosionValues_Frame()
         {
@@ -1519,7 +1532,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     {
                         Frame_ExplosionWidth = (_frameWidth / MaxCutofRein);
                     }
-                    
+
                 }
                 else if (Frame_ConnectionType == FrameConnectionType._Weldable)
                 {
@@ -1529,7 +1542,7 @@ namespace ModelLayer.Model.Quotation.Frame
                        Frame_BotFrameArtNo == BottomFrameTypes._A166)
                     {
                         Frame_ExplosionWidth = (_frameWidth / MaxCutofRein) + 5;
-                    } 
+                    }
                 }
                 else if (Frame_BotFrameArtNo == BottomFrameTypes._None &&
                         Frame_If_SlidingTypeTopHung == true)
@@ -2103,6 +2116,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (mode == "minusTrackProfile")
                 {
                     FrameProp_Height -= constants.frame_TrackProfileproperty_PanelHeight;
+                }
+                else if (mode == "addCenterProfile")
+                {
+                    FrameProp_Height += constants.panel_property_CenterProfileOptionsheight;
+                }
+                else if (mode == "minusCenterProfile")
+                {
+                    FrameProp_Height -= constants.panel_property_CenterProfileOptionsheight;
                 }
             }
             else if (objtype == "Div")
