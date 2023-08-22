@@ -1,4 +1,5 @@
-﻿using static EnumerationTypeLayer.EnumerationTypes;
+﻿using System;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.Screen
 {
@@ -78,5 +79,9 @@ namespace ModelLayer.Model.Quotation.Screen
         bool Screen_PriceIncreaseVisibilityOption { get; set; }
         bool Screen_PriceIncreaseVisibility { get; set; }
         void ScreenPropAddOnsReset();
-    }
+
+        bool Screen_FreedomTotalChangerVisibility { get; set; }
+        bool Screen_FreedomTotalChangerIsChecked { get; set; }
+        DateTime Date_Assigned { get; set; }
+}
 }

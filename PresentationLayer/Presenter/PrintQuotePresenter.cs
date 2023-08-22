@@ -400,7 +400,7 @@ namespace PresentationLayer.Presenter
             else
             {
 
-                if (GlassThickness != "Unglazed" && GlassThickness != "" && GlassThickness != "Security Mesh")
+                if (GlassThickness != "Unglazed" && GlassThickness != "" && GlassThickness != "Security Mesh" && GlassThickness != "Wire Mesh")
                 {
                     GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
                 }
@@ -1297,7 +1297,7 @@ namespace PresentationLayer.Presenter
                                out warnings
                                );
 
-                            string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\w.PDF";
+                            string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\w"+_quoteItemListPresenter.RDLCGUFileName+".PDF";
                             using (FileStream fs = new FileStream(defDir, FileMode.Create))
                             {
                                 fs.Write(bytes, 0, bytes.Length);
@@ -1310,8 +1310,7 @@ namespace PresentationLayer.Presenter
                         Console.WriteLine("quoteitemlistpresenter is not used" + ex);
                     }
                     #endregion
-                }
-                   
+                }                  
             }
             catch (Exception ex)
             {

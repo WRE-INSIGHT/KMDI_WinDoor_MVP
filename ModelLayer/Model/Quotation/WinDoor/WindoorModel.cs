@@ -417,7 +417,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             {
                 return _panelIDCounter;
             }
-            set
+            set 
             {
                 _panelIDCounter = value;
             }

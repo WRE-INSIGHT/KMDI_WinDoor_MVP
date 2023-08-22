@@ -31,13 +31,20 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
 
         private void _TrackProfilePropertyUC_TrackProfileSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _frameModel.Frame_TrackProfileArtNo = (TrackProfile_ArticleNo)((ComboBox)sender).SelectedValue;
+            if (!_mainPresenter.ItemLoad)
+            {
+                _frameModel.Frame_TrackProfileArtNo = (TrackProfile_ArticleNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _TrackProfilePropertyUC_TrackProfilePropertyUCLoadEventRaised(object sender, EventArgs e)
         {
-            _frameModel.Frame_TrackProfileArtNo = TrackProfile_ArticleNo._none;
+            if (!_mainPresenter.ItemLoad)
+            {
+                _frameModel.Frame_TrackProfileArtNo = TrackProfile_ArticleNo._none;
+            }
             _TrackProfilePropertyUC.ThisBinding(CreateBindingDictionary());
+
         }
 
         public IFP_TrackProfilePropertyUC GetTrackProfilePropertyUC()

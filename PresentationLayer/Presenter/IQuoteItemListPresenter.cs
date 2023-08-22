@@ -4,6 +4,7 @@ using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using Unity;
 
 namespace PresentationLayer.Presenter
@@ -44,7 +45,8 @@ namespace PresentationLayer.Presenter
         bool RDLCGUShowReviewedBy { get; set; }
         bool RDLCGUShowNotedBy { get; set; }
         bool RDLCGUShowVat { get; set; }
-
+        string RDLCGUFileName { get; set; }
+        DataTable GlassUpgradeDT { get; set; }
 
 
         //List<IQuoteItemListUCPresenter> _lstQuoteItemUC { get; set; }

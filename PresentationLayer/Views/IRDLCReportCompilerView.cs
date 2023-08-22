@@ -34,6 +34,7 @@ namespace PresentationLayer.Views
         CheckBox GUShowReviewedBy();
         CheckBox GUShowNotedBy();
         CheckBox GUShowVat();
+        CheckedListBox GUGlassListChkLst();
 
 
     }

@@ -106,6 +106,12 @@ namespace PresentationLayer.Views
         {
             return chkbx_guShowVat;
         }
+
+        public CheckedListBox GUGlassListChkLst()
+        {
+            return chklst_glassType;
+        }
+
         public  SaveFileDialog GetSaveFileDialog()
         {
             return saveFileDialog;
