@@ -114,6 +114,7 @@
             // 
             // cmb_multipleGlassUpgrade
             // 
+            this.cmb_multipleGlassUpgrade.DropDownWidth = 550;
             this.cmb_multipleGlassUpgrade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmb_multipleGlassUpgrade.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_multipleGlassUpgrade.FormattingEnabled = true;

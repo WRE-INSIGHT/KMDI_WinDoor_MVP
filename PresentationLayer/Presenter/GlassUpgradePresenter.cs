@@ -255,7 +255,8 @@ namespace PresentationLayer.Presenter
 
             string GlassType = glassType;
             dgvCmb.HeaderText = "Upgraded To";
-            dgvCmb.Name = "cmbGlassUpg";                      
+            dgvCmb.Name = "cmbGlassUpg";
+            dgvCmb.DropDownWidth = 550;
 
             foreach (DataRow row in _mainPresenter.GlassThicknessDT.Rows)
             {
@@ -315,6 +316,7 @@ namespace PresentationLayer.Presenter
             ((DataGridViewComboBoxCell)_dgv_GlassUpgrade.Rows[0].Cells[7]).Value = null;
             DataGridViewComboBoxCell dgvcell = (DataGridViewComboBoxCell)_dgv_GlassUpgrade.Rows[_row].Cells[7];
             dgvcell.Items.Clear();
+            dgvcell.DropDownWidth = 550;
 
             foreach (DataRow row in _mainPresenter.GlassThicknessDT.Rows)
             {
@@ -359,7 +361,6 @@ namespace PresentationLayer.Presenter
                 }
             }
 
-            dgvcell.DropDownWidth = 550;
             return dgvcell;
         }
         private void OnGlassUpgradeViewLoadEventRaised(object sender, EventArgs e)
