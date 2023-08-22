@@ -304,7 +304,7 @@ namespace PresentationLayer.Presenter
                 _dgv_GlassUpgrade.Columns["cmbGlassUpg"].DisplayIndex = 7;
                 _dgv_GlassUpgrade.Columns["cmbGlassUpg"].Width = 220;
                 dgvCmb.DataPropertyName = "Upgraded To";
-                            
+
             return dgvCmb;
         }   
         private DataGridViewComboBoxCell DgvCell(int r,string glasstype)
@@ -358,7 +358,8 @@ namespace PresentationLayer.Presenter
                     }
                 }
             }
-            
+
+            dgvcell.DropDownWidth = 550;
             return dgvcell;
         }
         private void OnGlassUpgradeViewLoadEventRaised(object sender, EventArgs e)
