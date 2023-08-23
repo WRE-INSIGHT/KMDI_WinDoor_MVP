@@ -114,8 +114,9 @@
             // 
             // cmb_multipleGlassUpgrade
             // 
+            this.cmb_multipleGlassUpgrade.DropDownWidth = 580;
             this.cmb_multipleGlassUpgrade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmb_multipleGlassUpgrade.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmb_multipleGlassUpgrade.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.cmb_multipleGlassUpgrade.FormattingEnabled = true;
             this.cmb_multipleGlassUpgrade.Location = new System.Drawing.Point(23, 168);
             this.cmb_multipleGlassUpgrade.Name = "cmb_multipleGlassUpgrade";

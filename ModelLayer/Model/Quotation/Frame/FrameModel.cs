@@ -873,7 +873,7 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             get
             {
-                return _frameTrackProfileArtNo;
+                 return _frameTrackProfileArtNo;
             }
 
             set
