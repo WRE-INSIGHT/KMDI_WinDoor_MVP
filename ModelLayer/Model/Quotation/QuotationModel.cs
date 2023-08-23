@@ -5772,6 +5772,7 @@ namespace ModelLayer.Model.Quotation
                                                 else
                                                 {
                                                     GlassPrice += 0;
+                                                    pnl.Panel_GlassPricePerSqrMeter = 0;
                                                 }
 
                                                 #endregion 
@@ -6560,6 +6561,7 @@ namespace ModelLayer.Model.Quotation
                                                 else
                                                 {
                                                     GlassPrice += 0;
+                                                    pnl.Panel_GlassPricePerSqrMeter = 0;
                                                 }
                                                 #endregion
                                             }
@@ -9098,6 +9100,7 @@ namespace ModelLayer.Model.Quotation
                                     else
                                     {
                                         GlassPrice += 0;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = 0;
                                     }
 
                                     #endregion
@@ -9881,6 +9884,7 @@ namespace ModelLayer.Model.Quotation
                                     else
                                     {
                                         GlassPrice += 0;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = 0;
                                     }
 
                                     #endregion
