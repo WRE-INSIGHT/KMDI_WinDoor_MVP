@@ -1486,7 +1486,6 @@ namespace PresentationLayer.Presenter.UserControls
         private float Draw_Arrow_Width(decimal wd, PaintEventArgs e, float locX, Font dmnsion_font_wd, int ctrl_Y)
         {
             Graphics g = e.Graphics;
-
             string dmnsion_w = wd.ToString();
 
             if (dmnsion_w.Contains(".0"))
@@ -1507,16 +1506,29 @@ namespace PresentationLayer.Presenter.UserControls
             //arrow for WIDTH
             PointF[] arrwhd_pnts_W1 =
             {
-                            new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
+                            
+                            new PointF(dmnsion_w_startP.X ,dmnsion_w_startP.Y - 10),
                             dmnsion_w_startP,
-                            new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
+                            new PointF(dmnsion_w_startP.X ,dmnsion_w_startP.Y + 10)
                     };
 
             PointF[] arrwhd_pnts_W2 =
             {
-                            new PointF(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
+                            new PointF(dmnsion_w_endP.X , dmnsion_w_endP.Y - 10),
                             dmnsion_w_endP,
-                            new PointF(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
+                            new PointF(dmnsion_w_endP.X , dmnsion_w_endP.Y + 10)
+                        };
+
+            PointF[] arr_bg_colorT =
+          {
+                             new PointF(dmnsion_w_startP.X -3.8f , dmnsion_w_startP.Y - 11),
+                             new PointF(dmnsion_w_startP.X -3.8f  , dmnsion_w_startP.Y - 1.9f)
+                        };
+
+            PointF[] arr_bg_colorB =
+           {
+                             new PointF(dmnsion_w_startP.X -3.7f , dmnsion_w_startP.Y + 11),
+                             new PointF(dmnsion_w_startP.X -3.7f  , dmnsion_w_startP.Y + 1.6f)
                         };
 
             if (_windoorModel.lst_frame.Count() > 0)
@@ -1524,6 +1536,8 @@ namespace PresentationLayer.Presenter.UserControls
                 g.DrawLines(new Pen(Color.Red, 3.5f), arrwhd_pnts_W1);
                 g.DrawLine(new Pen(Color.Red, 3.5f), dmnsion_w_startP, dmnsion_w_endP);
                 g.DrawLines(new Pen(Color.Red, 3.5f), arrwhd_pnts_W2);
+                g.DrawLines(new Pen(Color.White, 3.5f), arr_bg_colorT);
+                g.DrawLines(new Pen(Color.White, 3.5f), arr_bg_colorB);
                 TextRenderer.DrawText(g,
                                       dmnsion_w,
                                       dmnsion_font_wd,
@@ -1570,23 +1584,40 @@ namespace PresentationLayer.Presenter.UserControls
 
             PointF[] arrwhd_pnts_H1 =
             {
-                        new PointF(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
+                        
+                        new PointF(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y ),
                         dmnsion_h_startP,
-                        new PointF(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
+                        new PointF(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y )
                     };
 
             PointF[] arrwhd_pnts_H2 =
             {
-                        new PointF(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
+                        
+                        new PointF(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y ),
                         dmnsion_h_endP,
-                        new PointF(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
+                        new PointF(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y )
                     };
+
+            PointF[] arr_hbg_colorT =
+           {
+                             new PointF(dmnsion_h_startP.X - 11 , dmnsion_h_startP.Y -3.7f),
+                             new PointF(dmnsion_h_startP.X - 1.95f  , dmnsion_h_startP.Y -3.7f)
+                        };
+
+            PointF[] arr_hbg_colorB =
+           {
+                             new PointF(dmnsion_h_startP.X + 11 , dmnsion_h_startP.Y -3.7f),
+                             new PointF(dmnsion_h_startP.X + 1.85f  , dmnsion_h_startP.Y -3.7f)
+                        };
 
             if (_windoorModel.lst_frame.Count() > 0)
             {
                 g.DrawLines(new Pen(Color.Red, 3.5f), arrwhd_pnts_H1);
                 g.DrawLine(new Pen(Color.Red, 3.5f), dmnsion_h_startP, dmnsion_h_endP);
                 g.DrawLines(new Pen(Color.Red, 3.5f), arrwhd_pnts_H2);
+
+                g.DrawLines(new Pen(Color.White, 3.5f), arr_hbg_colorT);
+                g.DrawLines(new Pen(Color.White, 3.5f), arr_hbg_colorB);
                 TextRenderer.DrawText(g,
                                       dmnsion_h,
                                       dmnsion_font_ht,
