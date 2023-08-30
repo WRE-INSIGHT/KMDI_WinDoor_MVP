@@ -3021,7 +3021,7 @@ namespace ModelLayer.Model.Quotation
             DateTime inc_price_date_5 = DateTime.Parse("06-22-2023");  //6052 white and woodgrain frame,  DividerRein_7536_PricePerSqrMeter
             DateTime inc_price_date_6 = DateTime.Parse("07-20-2023");  //change, patch date
             DateTime inc_price_date_7 = DateTime.Parse("08-04-2023"); // MotorizeMechRemotePricePerPiece 
-
+            DateTime inc_price_date_8 = DateTime.Parse("08-30-2023"); // 6 mm Tempered Clear w/ HardCoated Low-E remove desc hardcoated 
 
 
             if (cus_ref_date >= inc_price_date && cus_ref_date <= _junedateoldago)
@@ -3711,7 +3711,23 @@ namespace ModelLayer.Model.Quotation
                     FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
                     DividerRein_7536_PricePerSqrMeter = 406.86m;
                 }
-                else if(cus_ref_date >= inc_price_date_7)
+                else if(cus_ref_date >= inc_price_date_7 && cus_ref_date <  inc_price_date_8)
+                {
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    FramePricePerLinearMeter_6052_White_1sideFoil = 634.04m;
+                    FramePricePerLinearMeter_6052Milled_WoodGrain = 725.02m;
+                    FramePricePerLinearMeter_6052Milled_White = 567.15m;
+                    FramePricePerLinearMeter_6052Milled_White_1sideFoil = 634.04m;
+                    WaterSeepagePricePerLinearMeter = 378.47m;
+                    Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    DividerRein_7536_PricePerSqrMeter = 406.86m;
+
+                    MotorizeMechRemotePricePerPiece = 4500.00m;// 19445.50m                    
+                }
+                else if (cus_ref_date >= inc_price_date_8)
                 {
                     FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
                     FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
@@ -3726,7 +3742,7 @@ namespace ModelLayer.Model.Quotation
                     DividerRein_7536_PricePerSqrMeter = 406.86m;
 
                     MotorizeMechRemotePricePerPiece = 4500.00m;// 19445.50m 
-                    
+                    Glass_6mmTempClr_HrdCtd_LowE = 2600.00m;//2550.00m
                 }
             }
 
