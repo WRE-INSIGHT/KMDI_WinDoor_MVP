@@ -5597,70 +5597,86 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm  Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm  Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
+                                                }
+
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear"))
                                                 {
@@ -5672,21 +5688,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                }
+                                               
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealed_ReflectiveClr;
@@ -5722,7 +5724,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
@@ -6386,70 +6388,87 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm  Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm  Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
+                                                }
+
+
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear"))
                                                 {
@@ -6461,21 +6480,8 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                }
+                                                
+
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealed_ReflectiveClr;
@@ -6511,7 +6517,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
@@ -8924,70 +8930,87 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
+                                    }
+
+
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
                                     }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear"))
                                     {
@@ -8999,21 +9022,9 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                    }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                    }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                    }
+                                   
+
+
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealed_ReflectiveClr;
@@ -9049,7 +9060,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
@@ -9707,70 +9718,87 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
+                                    }
+
+
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
                                     }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear"))
                                     {
@@ -9782,21 +9810,8 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                    }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                    }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                    }
+                                    
+
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealed_ReflectiveClr;
@@ -9832,7 +9847,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
