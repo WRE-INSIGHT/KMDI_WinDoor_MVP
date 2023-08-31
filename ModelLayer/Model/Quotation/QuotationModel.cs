@@ -163,6 +163,14 @@ namespace ModelLayer.Model.Quotation
                     total_screws_fabrication += frame.Add_MilledFrameWidth_screws4fab();
                 }
 
+                if (frame.Frame_If_SlidingTypeTopHung == true &&
+                    frame.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                    frame.Frame_BotFrameArtNo == BottomFrameTypes._None &&
+                    frame.Frame_CladdingQty != 0)
+                {
+                    frame.Insert_CladdingProfile_MaterialList(Material_List);
+                }
+
                 if (frame.Lst_MultiPanel.Count() >= 1 && frame.Lst_Panel.Count() == 0)
                 {
                     #region MultiPanel Parent
@@ -1473,7 +1481,9 @@ namespace ModelLayer.Model.Quotation
 
                                 if (pnl_curCtrl != null)
                                 {
-                                    if (item.WD_profile == "PremiLine Profile" && pnl_curCtrl.Panel_Type.Contains("Fixed"))
+                                    if (item.WD_profile == "PremiLine Profile" &&
+                                        pnl_curCtrl.Panel_Type.Contains("Fixed") &&
+                                        frame.Frame_If_SlidingTypeTopHung == false)
                                     {
                                         pnl_curCtrl.Insert_CoverProfileForPremiInfo_MaterialList(Material_List);
                                     }
@@ -1538,12 +1548,10 @@ namespace ModelLayer.Model.Quotation
                                         if (frame.Frame_If_SlidingTypeTopHung == true &&
                                             frame.Frame_ConnectionType == FrameConnectionType._None)
                                         {
-                                            pnl_curCtrl.Insert_FinPlate_MaterialList(Material_List);
-                                            pnl_curCtrl.Insert_SlidingAccessoriesRoller_MaterialList(Material_List);
                                             if (TopHungPerFrame == true)
                                             {
+                                                pnl_curCtrl.Insert_CoverProfileForTopHungInfo_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_BrushSealForTopHung_MaterialList(Material_List, perimeterBrushSeal);
-                                                pnl_curCtrl.Insert_SlidingSashBottomGuide_MaterialList(Material_List, pnl_curCtrl.Panel_OverLappingPanelQty);
                                                 TopHungPerFrame = false;
                                             }
                                         }
@@ -1556,9 +1564,13 @@ namespace ModelLayer.Model.Quotation
                                                 if (frame.Frame_If_SlidingTypeTopHung == true &&
                                                     frame.Frame_ConnectionType == FrameConnectionType._None)
                                                 {
+                                                    pnl_curCtrl.Insert_SlidingAccessoriesRoller_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_Interlock_Tophung_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_ExternsionForInterlock_Tophung_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_GUPremilineTopTrack_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_FinPlate_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_SlidingSashBottomGuide_MaterialList(Material_List, pnl_curCtrl.Panel_OverLappingPanelQty);
+
                                                 }
 
                                                 if (frame.Frame_SlidingRailsQty == 3)

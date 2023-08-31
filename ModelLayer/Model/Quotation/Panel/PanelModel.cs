@@ -7480,6 +7480,13 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 || Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                 {
                     Panel_SashWidth = ((((Panel_ParentFrameModel.Frame_Width - deduction_for_sashWD + SashOverlap_additional) - dm_deduct) - inward_motorized_deduction) / TotalNumberOfPanel) + 5;
+
+                    if (Panel_Type.Contains("Fixed") &&
+                                          (Panel_Overlap_Sash == OverlapSash._Left ||
+                                           Panel_Overlap_Sash == OverlapSash._Right))
+                    {
+                        Panel_SashWidth += 5;
+                    }
                 }
                 else
                 {
@@ -8891,6 +8898,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                              @"|  |");
         }
 
+        public void Insert_CoverProfileForTopHungInfo_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Cover Profile " + Panel_CoverProfileArtNo.DisplayName,
+                                             1, "pc(s)",
+                                             Panel_ParentFrameModel.Frame_Width.ToString(),
+                                             "Frame",
+                                             @"|  |");
+        }
+
+
         public void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion, int motorCount)
         {
             if (Panel_Type == "Awning Panel")
@@ -9724,7 +9741,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                                   2 * bothOverlapQtyMultiplier, "pc(s)",
                                                   Panel_SashHeight - 30,
                                                   "Sash",
-                                                  @"|  |");
+                                                  @"");
             }
         }
 
@@ -9735,7 +9752,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 tbl_explosion.Rows.Add("Interlock for Sliding " + Panel_InterlockArtNo.DisplayName,
                                        1, "pc(s)",
                                        Panel_SashHeight - 5,
-                                       "Sash",
+                                       "Interlock",
                                        @"|  |");
             }
         }
@@ -9748,7 +9765,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 tbl_explosion.Rows.Add("Interlock for Fixed " + Panel_InterlockArtNo.DisplayName,
                                        1, "pc(s)",
                                        Panel_SashHeight + 10,
-                                       "Sash",
+                                       "Interlock",
                                        @"|  |");
             }
         }
@@ -9760,7 +9777,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 tbl_explosion.Rows.Add("Extension for Interlock " + Panel_ExtensionForInterlockArtNo.DisplayName,
                                                   1, "pc(s)",
                                                   Panel_SashHeight - 30,
-                                                  "Sash",
+                                                  "Ancillary",
                                                   @"|  |");
             }
         }
@@ -10140,8 +10157,8 @@ namespace ModelLayer.Model.Quotation.Panel
                 tbl_explosion.Rows.Add("Connecting Profile " + Panel_ParentFrameModel.Frame_ConnectingProfile_ArticleNo.DisplayName,
                                                        1, "pc(s)",
                                                        Panel_SashWidth - 5,
-                                                       "Sash",
-                                                       @"\  /");
+                                                       "Ancillary",
+                                                       @"");
             }
         }
 

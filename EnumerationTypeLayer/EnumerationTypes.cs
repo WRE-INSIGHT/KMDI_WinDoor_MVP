@@ -163,6 +163,19 @@ namespace EnumerationTypeLayer
 
             private CladdingReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+        public class CladdingProfileForFrame_ArticleNo : Enumeration<CladdingProfileForFrame_ArticleNo, int>
+        {
+            public static readonly CladdingProfileForFrame_ArticleNo _1338milled = new CladdingProfileForFrame_ArticleNo(0, "1338-milled");
+
+            private CladdingProfileForFrame_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class CladdingReinfForFrame_ArticleNo : Enumeration<CladdingReinfForFrame_ArticleNo, int>
+        {
+            public static readonly CladdingReinfForFrame_ArticleNo _9198 = new CladdingReinfForFrame_ArticleNo(0, "9198");
+
+            private CladdingReinfForFrame_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
         public class CoverForCladdingProfile_ArticleNo : Enumeration<CoverForCladdingProfile_ArticleNo, int>
         {
             public static readonly CoverForCladdingProfile_ArticleNo _NK5 = new CoverForCladdingProfile_ArticleNo(0, "NK5");
@@ -1063,7 +1076,7 @@ namespace EnumerationTypeLayer
             //public static readonly ScreenType _Fixed = new ScreenType(5, "Fixed Screen"); // using mesh 
             //public static readonly ScreenType _Magnum = new ScreenType(8, "Magnum Screen");
             public static readonly ScreenType _Maxxy = new ScreenType(9, "Maxxy Insect Screen ");
-            //public static readonly ScreenType _Piconet = new ScreenType(4, "Piconet Insect Screen");
+            //public static readonly ScreenType _Piet = new ScreenType(4, "Piconet Insect Screen");
             public static readonly ScreenType _Plisse = new ScreenType(1, "Plissé Insect Screen");
             public static readonly ScreenType _RollUp = new ScreenType(0, "Roll-up Insect Screen");
             //public static readonly ScreenType _Sliding = new ScreenType(2, "Sliding Insect Screen"); // using mesh

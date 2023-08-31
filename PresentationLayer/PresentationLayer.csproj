@@ -206,11 +206,13 @@
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ConcretePropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_CladdingQtyPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_FrameConnectionTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_ScreenPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_TrackProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_TubularPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_CladdingQtyPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_FrameConnectionTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_ScreenPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
@@ -727,6 +729,12 @@
     <Compile Include="Views\UserControls\FrameProperties_Modules\FP_BottomFramePropertyUC.Designer.cs">
       <DependentUpon>FP_BottomFramePropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_CladdingPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_CladdingPropertyUC.Designer.cs">
+      <DependentUpon>FP_CladdingPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\FrameProperties_Modules\FP_FrameConnectionTypePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -764,6 +772,7 @@
       <DependentUpon>FP_TubularPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_BottomFramePropertyUC.cs" />
+    <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_CladdingQtyPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_FrameConnectionTypePropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_ScreenPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_SlidingRailsPropertyUC.cs" />
@@ -1472,6 +1481,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_BottomFramePropertyUC.resx">
       <DependentUpon>FP_BottomFramePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_CladdingPropertyUC.resx">
+      <DependentUpon>FP_CladdingPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_FrameConnectionTypePropertyUC.resx">
       <DependentUpon>FP_FrameConnectionTypePropertyUC.cs</DependentUpon>

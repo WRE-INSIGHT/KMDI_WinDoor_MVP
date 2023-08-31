@@ -23,6 +23,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IFP_TrackProfilePropertyUCPresenter _fp_TrackProfilePropertyUCPresenter;
         private IFP_ScreenPropertyUCPresenter _fp_ScreenPropertyUCPresenter;
         private IFP_TubularPropertyUCPresenter _fp_TubularPropertyUCPresenter;
+        private IFP_CladdingQtyPropertyUCPresenter _fp_CladdingQtyPropertyUCPresenter;
 
         private IMainPresenter _mainPresenter;
         private IFrameModel _frameModel;
@@ -39,7 +40,8 @@ namespace PresentationLayer.Presenter.UserControls
                                           IFP_FrameConnectionTypePropertyUCPresenter fp_frameConnectionTypePropertyUCPresenter,
                                           IFP_TrackProfilePropertyUCPresenter fp_TrackProfilePropertyUCPresenter,
                                           IFP_ScreenPropertyUCPresenter fp_ScreenPropertyUCPresenter,
-                                          IFP_TubularPropertyUCPresenter fp_TubularPropertyUCPresenter)
+                                          IFP_TubularPropertyUCPresenter fp_TubularPropertyUCPresenter,
+                                          IFP_CladdingQtyPropertyUCPresenter fp_CladdingQtyPropertyUCPresenter)
         {
             _framePropertiesUC = framePropertiesUC;
             _frameServices = frameServices;
@@ -49,6 +51,7 @@ namespace PresentationLayer.Presenter.UserControls
             _fp_TrackProfilePropertyUCPresenter = fp_TrackProfilePropertyUCPresenter;
             _fp_ScreenPropertyUCPresenter = fp_ScreenPropertyUCPresenter;
             _fp_TubularPropertyUCPresenter = fp_TubularPropertyUCPresenter;
+            _fp_CladdingQtyPropertyUCPresenter = fp_CladdingQtyPropertyUCPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -78,7 +81,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
                     _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
-                    _frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine")) 
+                    _frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                 {
                     //  if (RailsAdditionalHt == true)
 
@@ -160,6 +163,16 @@ namespace PresentationLayer.Presenter.UserControls
                             _frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
                             _framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
                         }
+
+                        if (_frameModel.Frame_CladdingVisibility == false &&
+                            _frameModel.Frame_Type == Frame_Padding.Door)
+                        {
+                            _frameModel.Frame_CladdingVisibility = true;
+                            _frameModel.FrameProp_Height += constants.frame_CladdingProperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(constants.frame_CladdingProperty_PanelHeight); 
+                        }
+
+                        
                         #endregion
                     }
 
@@ -405,7 +418,7 @@ namespace PresentationLayer.Presenter.UserControls
         bool initialized = false;
         private void OnFramePropertiesLoadEventRaised(object sender, EventArgs e)
         {
-            
+
             _framePropertiesUC.ThisBinding(CreateBindingDictionary());
 
             if (_mainPresenter.ItemLoad == false)
@@ -441,11 +454,11 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._2060;
                     }
-                   
+
                 }
             }
 
-            if(_frameModel.Frame_Type == Frame_Padding.Door)
+            if (_frameModel.Frame_Type == Frame_Padding.Door)
             {
                 _frameModel.Frame_BotFrameVisible = true;
                 _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
@@ -468,6 +481,12 @@ namespace PresentationLayer.Presenter.UserControls
             RailsPropUC.Dock = DockStyle.Top;
             RailsPropUC.BringToFront();
 
+            IFP_CladdingQtyPropertyUCPresenter cladding = _fp_CladdingQtyPropertyUCPresenter.GetNewInstance(_unityC, _mainPresenter, _frameModel);
+            UserControl CladdingUC = (UserControl)cladding.GetCladdingQtyPropertyUC();
+            _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(CladdingUC);
+            CladdingUC.Dock = DockStyle.Top;
+            CladdingUC.BringToFront();
+
             IFP_FrameConnectionTypePropertyUCPresenter connectorUCP = _fp_frameConnectionTypePropertyUCPresenter.GetNewInstance(_unityC, _frameModel, _mainPresenter);
             UserControl connectorPropUC = (UserControl)connectorUCP.GetFrameConnectionTypePropertyUC();
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(connectorPropUC);
@@ -486,12 +505,13 @@ namespace PresentationLayer.Presenter.UserControls
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(ScreenPropUC);
             ScreenPropUC.Dock = DockStyle.Top;
             ScreenPropUC.BringToFront();
-
+             
             IFP_TubularPropertyUCPresenter tubular = _fp_TubularPropertyUCPresenter.GetNewInstance(_unityC, _frameModel, _mainPresenter, this);
             UserControl TubePropUC = (UserControl)tubular.GetTubularPropertyUC();
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(TubePropUC);
             TubePropUC.Dock = DockStyle.Top;
             TubePropUC.BringToFront();
+
 
             if (_frameModel.Frame_ScreenOption)
             {

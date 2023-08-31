@@ -873,7 +873,7 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             get
             {
-                 return _frameTrackProfileArtNo;
+                return _frameTrackProfileArtNo;
             }
 
             set
@@ -1245,6 +1245,61 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private int _frameCladdingQty;
+        public int Frame_CladdingQty
+        {
+            get
+            {
+                return _frameCladdingQty;
+            }
+            set
+            {
+                _frameCladdingQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _frameCladdingVisibility;
+        public bool Frame_CladdingVisibility
+        {
+            get
+            {
+                return _frameCladdingVisibility;
+            }
+            set
+            {
+                _frameCladdingVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private CladdingProfileForFrame_ArticleNo _frameCladdingArtNo;
+        public CladdingProfileForFrame_ArticleNo Frame_CladdingArtNo
+        {
+            get
+            {
+                return _frameCladdingArtNo;
+            }
+            set
+            {
+                _frameCladdingArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private CladdingReinfForFrame_ArticleNo _frameCladdingReinArtNo;
+        public CladdingReinfForFrame_ArticleNo Frame_CladdingReinArtNo
+        {
+            get
+            {
+                return _frameCladdingReinArtNo;
+            }
+            set
+            {
+                _frameCladdingReinArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
         public void SetExplosionValues_Frame()
         {
             if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel
@@ -1281,6 +1336,8 @@ namespace ModelLayer.Model.Quotation.Frame
                         if (pnl.Panel_SlidingTypes == SlidingTypes._TopHung)
                         {
                             Frame_If_SlidingTypeTopHung = true;
+                            Frame_CladdingArtNo = CladdingProfileForFrame_ArticleNo._1338milled;
+                            Frame_CladdingReinArtNo = CladdingReinfForFrame_ArticleNo._9198;
                         }
                     }
                 }
@@ -2245,17 +2302,20 @@ namespace ModelLayer.Model.Quotation.Frame
                         cutTypeHt = @"[  ]";
                         widthArtNo = "-milled";
                     }
-
-                    if (Frame_If_SlidingTypeTopHung == true)
-                    {
-                        cutTypeHt = @"|  |";
-                        widthArtNo = "-milled";
-                    }
                 }
                 else if (Frame_ConnectionType == FrameConnectionType._Weldable)
                 {
                     cutTypeWd = @"\  /";
                     cutTypeHt = @"\  /";
+                }
+                else if (Frame_ConnectionType == FrameConnectionType._None)
+                {
+                    if (Frame_If_SlidingTypeTopHung == true)
+                    {
+                        cutTypeHt = @"|  |";
+                        cutTypeWd = @"|  |";
+                        widthArtNo = "-milled";
+                    }
                 }
             }
             else
@@ -2299,6 +2359,10 @@ namespace ModelLayer.Model.Quotation.Frame
             else if ((Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
                      Frame_BotFrameArtNo == BottomFrameTypes._7502) &&
                      Frame_BotFrameVisible == true)
+            {
+                reinfQty = 1;
+            }
+            else if (Frame_If_SlidingTypeTopHung == true)
             {
                 reinfQty = 1;
             }
@@ -2559,8 +2623,8 @@ namespace ModelLayer.Model.Quotation.Frame
             tbl_explosion.Rows.Add("Connecting Profile " + Frame_ConnectingProfile_ArticleNo.DisplayName,
                                                    1, "pc(s)",
                                                    Frame_Width,
-                                                   "Sash",
-                                                   @"\  /");
+                                                   "Ancillary",
+                                                   @"");
 
         }
 
@@ -2587,6 +2651,21 @@ namespace ModelLayer.Model.Quotation.Frame
                                                    "");
             }
         }
+
+        public void Insert_CladdingProfile_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Cladding Profile " + Frame_CladdingArtNo.DisplayName,
+                                                   Frame_CladdingQty, "pc(s)",
+                                                   Frame_Width - (61 * 2),
+                                                   "Ancillary",
+                                                   @"");
+
+        }
+
+
+
+
+
         public int Add_framePerimeter_screws4fab()
         {
             return (Frame_Width * 2) + (Frame_Height * 2);

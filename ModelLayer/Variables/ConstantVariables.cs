@@ -13,6 +13,8 @@
         public int frame_ScreenHeightProperty_PanelHeight = 26;
         public int frame_TubularOption = 27;
         public int frame_TubularHeightAndWidth = 52;
+        public int frame_CladdingProperty_PanelHeight = 28;
+
 
 
 
