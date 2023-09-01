@@ -9952,7 +9952,7 @@ namespace ModelLayer.Model.Quotation
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedClr_AirSS_AnnealedClrHrCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedClr_Argon_AnnealedClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedClr_Argon_AnnealedClrHrdCtdLowe;
