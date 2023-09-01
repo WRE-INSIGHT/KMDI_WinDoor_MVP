@@ -2658,7 +2658,13 @@ namespace ModelLayer.Model.Quotation.Frame
                                                    Frame_CladdingQty, "pc(s)",
                                                    Frame_Width - (61 * 2),
                                                    "Ancillary",
-                                                   @"");
+                                                   @"|  |");
+
+            tbl_explosion.Rows.Add("Cladding Profile Reinforcement " + Frame_CladdingReinArtNo.DisplayName,
+                                                Frame_CladdingQty, "pc(s)",
+                                                Frame_Width - (61 * 2),
+                                                "Ancillary",
+                                                @"|  |");
 
         }
 
