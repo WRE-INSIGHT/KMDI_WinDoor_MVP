@@ -3272,21 +3272,23 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                     Point[] LvrSideBlade =
                      {
-                        new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location),
+                        new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                        //new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location),
                         new Point((pInnerX - 7) + pInnerWd + 4, (int)Total_Lvr_GlassHt + pInnerY),
 
                         new Point(pInnerX-2, Lvr_NewLocation-(int)Lvr_GlassHt),
                         new Point(pInnerX+4, (int)Total_Lvr_GlassHt + pInnerY),
 
+                        //new Point(pInnerX-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
                         new Point(pInnerX-4, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location-1),
-                        new Point(pInnerX-4, Lvr_NewLocation+(int)Lvr_GlassHt+1 + pInnerY )
+                        new Point(pInnerX-4, Lvr_NewLocation+(int)Lvr_GlassHt+1 + pInnerY - 58)
                      };
                     Point[] blade =
                     {
                         new Point(pInnerX, Lvr_NewLocation - (int)Lvr_GlassHt),
                         new Point((int)client_wd + pInnerX - 7, Lvr_NewLocation - (int)Lvr_GlassHt),
                         new Point((int)client_wd + pInnerX, (int)Total_Lvr_GlassHt+ pInnerY), // - 26 para mag slant yung blade
-                        new Point(pInnerX , (int)Total_Lvr_GlassHt + pInnerY)
+                        new Point(pInnerX , (int)Total_Lvr_GlassHt + pInnerY),
                     };
                     lvrBlade.Add(LvrSideBlade, blade);
                 }
