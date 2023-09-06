@@ -333,6 +333,7 @@ namespace ModelLayer.Model.Quotation.Panel
         FinPlate_ArticleNo Panel_FinPlateArtNo { get; set; }
         SlidingAccessoriesRoller_ArticleNo Panel_SlidingAccessoriesRollerArtNo { get; set; }
         int TopHungbrushSealPerimeter { get; set; }
+        Brush_ArticleNo Panel_BrushArtNo { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
@@ -487,6 +488,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_FinPlate_MaterialList(DataTable tbl_explosion);
         void Insert_SlidingAccessoriesRoller_MaterialList(DataTable tbl_explosion);
         void Insert_SlidingSashBottomGuide_MaterialList(DataTable tbl_explosion, int overlap);
+        void Insert_BrushForSliding_MaterialList(DataTable tbl_explosion, int FinPlatePerimeter);
 
         #endregion
 

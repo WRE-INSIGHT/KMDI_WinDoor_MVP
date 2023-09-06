@@ -3525,9 +3525,15 @@ namespace PresentationLayer.Presenter
             _colorDT.Rows.Add("Euro Grey");
 
 
-            if (_userModel.AccountType == "User Level 1")
+            if (_userModel.AccountType == "User Level 1" ||
+                _userModel.AccountType == "User Level 2" ||
+                _userModel.AccountType == "User Level 3")
             {
-                _mainView.PriceHistorytoolStripButtonVisible = true;
+                _mainView.PriceHistorytoolStripButtonVisible = false; 
+                if (_userModel.AccountType == "User Level 1")
+                {
+                    _mainView.PriceHistorytoolStripButtonVisible = true;
+                }
                 _mainView.DateAssignedtoolStripButtonVisible = true;
             }
             else

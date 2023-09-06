@@ -3177,6 +3177,21 @@ namespace ModelLayer.Model.Quotation.Panel
         public int TopHungbrushSealPerimeter { get; set; }
 
 
+        private Brush_ArticleNo _panelBrushArtNo;
+        public Brush_ArticleNo Panel_BrushArtNo
+        {
+            get
+            {
+                return _panelBrushArtNo;
+            }
+            set
+            {
+                _panelBrushArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         #endregion
 
         #region Methods
@@ -5811,6 +5826,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_ParentFrameModel.Frame_GUPremilineTopTrackArtNo = GUPremilineTopTrack_ArticleNo._L15015007;
                         Panel_PVCSettingPlateArtNo = PVCSettingPlate_ArticleNo._050009005;
                         Panel_FinPlateArtNo = FinPlate_ArticleNo._050006005;
+                        Panel_BrushArtNo = Brush_ArticleNo._SP02;
                         Panel_SlidingAccessoriesRollerArtNo = SlidingAccessoriesRoller_ArticleNo._L15015009;
 
                     }
@@ -5840,6 +5856,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_ParentFrameModel.Frame_GUPremilineTopTrackArtNo = GUPremilineTopTrack_ArticleNo._L15015007;
                         Panel_PVCSettingPlateArtNo = PVCSettingPlate_ArticleNo._050009005;
                         Panel_FinPlateArtNo = FinPlate_ArticleNo._050006005;
+                        Panel_BrushArtNo = Brush_ArticleNo._SP02;
                         Panel_SlidingAccessoriesRollerArtNo = SlidingAccessoriesRoller_ArticleNo._L15015009;
                     }
                 }
@@ -7821,6 +7838,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_ParentFrameModel.Frame_GUPremilineTopTrackArtNo = GUPremilineTopTrack_ArticleNo._L15015007;
                         Panel_PVCSettingPlateArtNo = PVCSettingPlate_ArticleNo._050009005;
                         Panel_FinPlateArtNo = FinPlate_ArticleNo._050006005;
+                        Panel_BrushArtNo = Brush_ArticleNo._SP02;
                         Panel_SlidingAccessoriesRollerArtNo = SlidingAccessoriesRoller_ArticleNo._L15015009;
                     }
                 }
@@ -7853,6 +7871,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_ParentFrameModel.Frame_GUPremilineTopTrackArtNo = GUPremilineTopTrack_ArticleNo._L15015007;
                         Panel_PVCSettingPlateArtNo = PVCSettingPlate_ArticleNo._050009005;
                         Panel_FinPlateArtNo = FinPlate_ArticleNo._050006005;
+                        Panel_BrushArtNo = Brush_ArticleNo._SP02;
                         Panel_SlidingAccessoriesRollerArtNo = SlidingAccessoriesRoller_ArticleNo._L15015009;
                     }
 
@@ -10187,6 +10206,17 @@ namespace ModelLayer.Model.Quotation.Panel
             tbl_explosion.Rows.Add("Fin Plate, 2.3m " + Panel_FinPlateArtNo.DisplayName,
                                                    1, "pc(s)",
                                                    Panel_SashWidth - 5,
+                                                   "Hardware & Accessories",
+                                                   @"");
+
+        }
+
+
+        public void Insert_BrushForSliding_MaterialList(DataTable tbl_explosion, int FinPlatePerimeter)
+        {
+            tbl_explosion.Rows.Add("Brush Seal For Sliding " + Panel_BrushArtNo.DisplayName,
+                                                   1, "pc(s)",
+                                                   FinPlatePerimeter,
                                                    "Hardware & Accessories",
                                                    @"");
 

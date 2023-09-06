@@ -1386,7 +1386,10 @@ namespace ModelLayer.Model.Quotation
                                 //Console.WriteLine("no div bottom frame:" + boundedByBottomFrame);
 
 
-                                int OverLappingPanel_Qty = 0, perimeterBrushSeal = 0; ;
+                                int OverLappingPanel_Qty = 0,
+                                    perimeterBrushSeal = 0,
+                                    perimeterFinPlate = 0;
+
                                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                                 {
                                     if (pnl.Panel_Overlap_Sash == OverlapSash._Left ||
@@ -1404,6 +1407,10 @@ namespace ModelLayer.Model.Quotation
                                     if (pnl.Panel_Type.Contains("Sliding"))
                                     {
                                         perimeterBrushSeal += pnl.Panel_SashHeight - 5;
+                                        if (frame.Frame_If_SlidingTypeTopHung == true)
+                                        {
+                                            perimeterFinPlate += pnl.Panel_SashWidth - 5;
+                                        }
                                     }
                                     else if (pnl.Panel_Type.Contains("Fixed"))
                                     {
@@ -1552,6 +1559,9 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 pnl_curCtrl.Insert_CoverProfileForTopHungInfo_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_BrushSealForTopHung_MaterialList(Material_List, perimeterBrushSeal);
+                                                pnl_curCtrl.Insert_SlidingSashBottomGuide_MaterialList(Material_List, OverLappingPanel_Qty);
+                                                pnl_curCtrl.Insert_BrushForSliding_MaterialList(Material_List, 0);
+
                                                 TopHungPerFrame = false;
                                             }
                                         }
@@ -1569,7 +1579,6 @@ namespace ModelLayer.Model.Quotation
                                                     pnl_curCtrl.Insert_ExternsionForInterlock_Tophung_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_GUPremilineTopTrack_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_FinPlate_MaterialList(Material_List);
-                                                    pnl_curCtrl.Insert_SlidingSashBottomGuide_MaterialList(Material_List, pnl_curCtrl.Panel_OverLappingPanelQty);
 
                                                 }
 
@@ -1598,6 +1607,7 @@ namespace ModelLayer.Model.Quotation
                                                     pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
+
                                                     perFrame = false;
                                                 }
 
