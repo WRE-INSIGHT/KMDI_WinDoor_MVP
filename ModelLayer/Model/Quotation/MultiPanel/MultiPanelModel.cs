@@ -1589,12 +1589,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 || 
+                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             ht_deduct = 10;
                         }
-                        else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502 || 
+                        else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
                                  MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                         {
                             ht_deduct = 15;
@@ -3708,6 +3708,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 else if (mode == "minusTrackProfile")
                 {
                     MPanelProp_Height -= constants.frame_TrackProfileproperty_PanelHeight;
+                }
+                else if (mode == "addCenterProfile")
+                {
+                    MPanelProp_Height += constants.panel_property_CenterProfileOptionsheight;
+                }
+                else if (mode == "minusCenterProfile")
+                {
+                    MPanelProp_Height -= constants.panel_property_CenterProfileOptionsheight;
                 }
             }
             else if (objtype == "Div")

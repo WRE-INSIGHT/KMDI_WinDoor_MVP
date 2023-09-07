@@ -1030,7 +1030,7 @@ namespace PresentationLayer.Presenter
                     DateTime myDate = DateTime.Parse(input);
                     _quotationModel.Date_Assigned_Mainpresenter = myDate;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -1827,7 +1827,7 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add(".");
             }
 
-            foreach(var item in _nonUnglazed)
+            foreach (var item in _nonUnglazed)
             {
                 wndr_content.Add("</NU>");
                 wndr_content.Add("Item No: " + item[0].ToString());
@@ -3525,9 +3525,15 @@ namespace PresentationLayer.Presenter
             _colorDT.Rows.Add("Euro Grey");
 
 
-            if (_userModel.AccountType == "User Level 1")
+            if (_userModel.AccountType == "User Level 1" ||
+                _userModel.AccountType == "User Level 2" ||
+                _userModel.AccountType == "User Level 3")
             {
-                _mainView.PriceHistorytoolStripButtonVisible = true;
+                _mainView.PriceHistorytoolStripButtonVisible = false; 
+                if (_userModel.AccountType == "User Level 1")
+                {
+                    _mainView.PriceHistorytoolStripButtonVisible = true;
+                }
                 _mainView.DateAssignedtoolStripButtonVisible = true;
             }
             else
@@ -3697,7 +3703,7 @@ namespace PresentationLayer.Presenter
                         {
                             _mainView.GetToolStripLabelLoading().Text = "Initializing";
                         }
-                     
+
                         break;
                     default:
                         break;
@@ -4016,14 +4022,14 @@ namespace PresentationLayer.Presenter
                     inside_rdlcDic = true;
                 }
             }
-            else if(row_str == "</NU>")
+            else if (row_str == "</NU>")
             {
                 if (inside_GlassUpgrade)
                 {
                     Load_GlassUpgrade();
                     inside_GlassUpgrade = false;
                 }
-                 else
+                else
                 {
                     inside_GlassUpgrade = true;
                 }
@@ -8452,7 +8458,7 @@ namespace PresentationLayer.Presenter
 
                             #region algo 2 
                             if (RDLCDictionary_key.Contains("QuotationBody"))
-                             {
+                            {
                                 #region QuoteBody
                                 //Check RDLCDic Contains
 
@@ -8473,7 +8479,7 @@ namespace PresentationLayer.Presenter
                                     _EntrytoKeyWordUsing = false;
                                     _EntrytoKeyWordPriceValidity = false;
                                 }
-                                else if(value.ToLower().Contains("prices are net of discounts"))
+                                else if (value.ToLower().Contains("prices are net of discounts"))
                                 {
                                     value = "\n" + "\n" + value;
                                 }
@@ -8614,11 +8620,11 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Upgraded To:"))
                         {
-                           _guUpgradeTo = extractedValue_str;
+                            _guUpgradeTo = extractedValue_str;
                         }
                         else if (row_str.Contains("Glass Upgrade Price:"))
                         {
-                           _guGlassUpgradePrice = extractedValue_str;
+                            _guGlassUpgradePrice = extractedValue_str;
                         }
                         else if (row_str.Contains("Upgrade Value:"))
                         {
@@ -8628,15 +8634,15 @@ namespace PresentationLayer.Presenter
                         {
                             _guAmountPerUnit = extractedValue_str;
                         }
-                        else if(row_str.Contains("Total Net Prices:"))
+                        else if (row_str.Contains("Total Net Prices:"))
                         {
-                           _guTotalNetPrice = extractedValue_str;
+                            _guTotalNetPrice = extractedValue_str;
                         }
                         else if (row_str.Contains("GlassType:"))
                         {
                             _guGlassType = extractedValue_str;
                         }
-                        else if(row_str.Contains("Primary Key:"))
+                        else if (row_str.Contains("Primary Key:"))
                         {
                             _guPrimaryKey = extractedValue_str;
                         }
@@ -9546,7 +9552,7 @@ namespace PresentationLayer.Presenter
         }
         private void Load_GlassUpgrade()
         {
-         
+
             if (!_guHolderDT.Columns.Contains("Item No."))
             {
                 _guHolderDT.Columns.Add("Item No.", Type.GetType("System.String"));
@@ -9564,28 +9570,28 @@ namespace PresentationLayer.Presenter
                 _guHolderDT.Columns.Add("Total Net Prices", Type.GetType("System.String"));
                 _guHolderDT.Columns.Add("GlassType", Type.GetType("System.String"));
                 _guHolderDT.Columns.Add("Primary Key", Type.GetType("System.String"));
-            }               
-                _guHolderDT.Rows.Add(_guItemNo,
-                            _guWindoorID,
-                            _guQty,
-                            _guWidth,
-                            _guHeight,
-                            _guOrigGlass,
-                            _guGlassPrice,
-                            _guUpgradeTo,
-                            _guGlassUpgradePrice,
-                            _guUpgradeValue,
-                            _guAmountPerUnit,
-                            _guTotalNetPrice,
-                            _guGlassType,
-                            _guPrimaryKey);
+            }
+            _guHolderDT.Rows.Add(_guItemNo,
+                        _guWindoorID,
+                        _guQty,
+                        _guWidth,
+                        _guHeight,
+                        _guOrigGlass,
+                        _guGlassPrice,
+                        _guUpgradeTo,
+                        _guGlassUpgradePrice,
+                        _guUpgradeValue,
+                        _guAmountPerUnit,
+                        _guTotalNetPrice,
+                        _guGlassType,
+                        _guPrimaryKey);
 
             _nonUnglazed = _guHolderDT.AsEnumerable().ToList();
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, 
-             inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory,inside_GlassUpgrade,
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi,
+             inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory, inside_GlassUpgrade,
              rdlcDicChangeKey = true,
              add_existing = false,
             _allpanelsIsMesh;
@@ -10203,7 +10209,7 @@ namespace PresentationLayer.Presenter
                _guTotalNetPrice,
                _guGlassType,
                _guPrimaryKey;
-                           
+
         #endregion
         string mpnllvl = "";
 
@@ -10652,7 +10658,7 @@ namespace PresentationLayer.Presenter
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && Duplicate) // open file
-                {          
+                {
                     if (purpose == frmDimensionPresenter.Show_Purpose.Duplicate)
                     {
                         #region duplicate
@@ -10810,7 +10816,6 @@ namespace PresentationLayer.Presenter
                         {
                             MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Frame Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-                        #endregion
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile && !Duplicate) //add concrete
@@ -10881,7 +10886,7 @@ namespace PresentationLayer.Presenter
             //Load_Windoor_Item(_windoorModel);
         }
         #endregion
-
+        #endregion
         #region Functions
 
         public void Set_User_View()

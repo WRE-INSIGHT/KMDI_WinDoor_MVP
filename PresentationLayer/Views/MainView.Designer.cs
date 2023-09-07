@@ -557,7 +557,7 @@
             // 
             this.tsBtnNwin.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsBtnNwin.Enabled = false;
-            this.tsBtnNwin.Image = global::PresentationLayer.Properties.Resources.AddNew_Window;
+            this.tsBtnNwin.Image = global::PresentationLayer.Properties.Resources.window1;
             this.tsBtnNwin.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnNwin.Name = "tsBtnNwin";
             this.tsBtnNwin.Size = new System.Drawing.Size(24, 29);
@@ -568,7 +568,7 @@
             // 
             this.tsBtnNdoor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsBtnNdoor.Enabled = false;
-            this.tsBtnNdoor.Image = global::PresentationLayer.Properties.Resources.AddNew_Door;
+            this.tsBtnNdoor.Image = global::PresentationLayer.Properties.Resources.door_4;
             this.tsBtnNdoor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnNdoor.Margin = new System.Windows.Forms.Padding(0);
             this.tsBtnNdoor.Name = "tsBtnNdoor";
@@ -580,7 +580,7 @@
             // 
             this.tsBtnNConcrete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsBtnNConcrete.Enabled = false;
-            this.tsBtnNConcrete.Image = global::PresentationLayer.Properties.Resources.AddNew_Concrete;
+            this.tsBtnNConcrete.Image = global::PresentationLayer.Properties.Resources.concrete2;
             this.tsBtnNConcrete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnNConcrete.Name = "tsBtnNConcrete";
             this.tsBtnNConcrete.Size = new System.Drawing.Size(24, 29);
@@ -590,7 +590,7 @@
             // openToolStripButton
             // 
             this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
+            this.openToolStripButton.Image = global::PresentationLayer.Properties.Resources.folder1;
             this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(24, 29);
@@ -611,7 +611,7 @@
             // 
             this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.saveToolStripButton.Enabled = false;
-            this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
+            this.saveToolStripButton.Image = global::PresentationLayer.Properties.Resources.save;
             this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(24, 29);
@@ -622,7 +622,7 @@
             // 
             this.duplicateItemToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.duplicateItemToolStripButton1.Enabled = false;
-            this.duplicateItemToolStripButton1.Image = global::PresentationLayer.Properties.Resources.duplicate;
+            this.duplicateItemToolStripButton1.Image = global::PresentationLayer.Properties.Resources.duplicate2;
             this.duplicateItemToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.duplicateItemToolStripButton1.Name = "duplicateItemToolStripButton1";
             this.duplicateItemToolStripButton1.Size = new System.Drawing.Size(24, 29);
@@ -634,7 +634,7 @@
             // 
             this.refreshToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.refreshToolStripButton.Enabled = false;
-            this.refreshToolStripButton.Image = global::PresentationLayer.Properties.Resources.refresh_30px;
+            this.refreshToolStripButton.Image = global::PresentationLayer.Properties.Resources.refresh2;
             this.refreshToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshToolStripButton.Name = "refreshToolStripButton";
             this.refreshToolStripButton.Size = new System.Drawing.Size(24, 29);
@@ -667,7 +667,7 @@
             this.newfactorBtn.BackColor = System.Drawing.Color.Transparent;
             this.newfactorBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.newfactorBtn.Enabled = false;
-            this.newfactorBtn.Image = global::PresentationLayer.Properties.Resources.icons8_banknotes_48;
+            this.newfactorBtn.Image = global::PresentationLayer.Properties.Resources.dollar;
             this.newfactorBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newfactorBtn.Name = "newfactorBtn";
             this.newfactorBtn.Size = new System.Drawing.Size(24, 29);
@@ -678,7 +678,7 @@
             // 
             this.SetGlassToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.SetGlassToolStripMenuItem.Enabled = false;
-            this.SetGlassToolStripMenuItem.Image = global::PresentationLayer.Properties.Resources.external_glass_interior_homedecor_vol4_microdots_premium_microdot_graphic;
+            this.SetGlassToolStripMenuItem.Image = global::PresentationLayer.Properties.Resources.glass2;
             this.SetGlassToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SetGlassToolStripMenuItem.Name = "SetGlassToolStripMenuItem";
             this.SetGlassToolStripMenuItem.Size = new System.Drawing.Size(24, 29);
@@ -690,7 +690,7 @@
             // 
             this.ViewImagerToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ViewImagerToolStripButton1.Enabled = false;
-            this.ViewImagerToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("ViewImagerToolStripButton1.Image")));
+            this.ViewImagerToolStripButton1.Image = global::PresentationLayer.Properties.Resources.image2;
             this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";
             this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
@@ -701,7 +701,7 @@
             // 
             this.ScreentoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ScreentoolStripButton.Enabled = false;
-            this.ScreentoolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ScreentoolStripButton.Image")));
+            this.ScreentoolStripButton.Image = global::PresentationLayer.Properties.Resources.screen;
             this.ScreentoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ScreentoolStripButton.Name = "ScreentoolStripButton";
             this.ScreentoolStripButton.Size = new System.Drawing.Size(24, 29);
@@ -729,7 +729,7 @@
             // 
             this.deleteItemToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.deleteItemToolStripButton1.Enabled = false;
-            this.deleteItemToolStripButton1.Image = global::PresentationLayer.Properties.Resources.delete_file_30px;
+            this.deleteItemToolStripButton1.Image = global::PresentationLayer.Properties.Resources.delete;
             this.deleteItemToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.deleteItemToolStripButton1.Name = "deleteItemToolStripButton1";
             this.deleteItemToolStripButton1.Size = new System.Drawing.Size(24, 29);
@@ -741,7 +741,7 @@
             // 
             this.PriceHistorytoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.PriceHistorytoolStripButton.Enabled = false;
-            this.PriceHistorytoolStripButton.Image = global::PresentationLayer.Properties.Resources.icons8_history_64;
+            this.PriceHistorytoolStripButton.Image = global::PresentationLayer.Properties.Resources.time_management;
             this.PriceHistorytoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.PriceHistorytoolStripButton.Name = "PriceHistorytoolStripButton";
             this.PriceHistorytoolStripButton.Size = new System.Drawing.Size(24, 29);
@@ -785,7 +785,7 @@
             // 
             this.DateAssignedtoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.DateAssignedtoolStripButton.Enabled = false;
-            this.DateAssignedtoolStripButton.Image = global::PresentationLayer.Properties.Resources.calendar_icon_hand_circles_date_calendar_logo_template_deadline_concept_illustration_168129_210__1_;
+            this.DateAssignedtoolStripButton.Image = global::PresentationLayer.Properties.Resources.calendar;
             this.DateAssignedtoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.DateAssignedtoolStripButton.Name = "DateAssignedtoolStripButton";
             this.DateAssignedtoolStripButton.Size = new System.Drawing.Size(24, 29);
@@ -796,7 +796,7 @@
             // 
             this.glassUpgradeToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.glassUpgradeToolStrip.Enabled = false;
-            this.glassUpgradeToolStrip.Image = ((System.Drawing.Image)(resources.GetObject("glassUpgradeToolStrip.Image")));
+            this.glassUpgradeToolStrip.Image = global::PresentationLayer.Properties.Resources.glass_upgrade;
             this.glassUpgradeToolStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.glassUpgradeToolStrip.Name = "glassUpgradeToolStrip";
             this.glassUpgradeToolStrip.Size = new System.Drawing.Size(24, 29);

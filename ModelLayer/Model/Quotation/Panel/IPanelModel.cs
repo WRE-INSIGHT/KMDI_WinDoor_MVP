@@ -327,6 +327,13 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_LouverMotorizeCheck { get; set; }
         bool Panel_LouverSecurityGrillCheck { get; set; }
         bool Panel_LouverRPLeverHandleCheck { get; set; }
+        bool Panel_CenterProfileVisibility { get; set; }
+        CenterProfile_ArticleNo Panel_CenterProfileArtNo { get; set; }
+        PVCSettingPlate_ArticleNo Panel_PVCSettingPlateArtNo { get; set; }
+        FinPlate_ArticleNo Panel_FinPlateArtNo { get; set; }
+        SlidingAccessoriesRoller_ArticleNo Panel_SlidingAccessoriesRollerArtNo { get; set; }
+        int TopHungbrushSealPerimeter { get; set; }
+        Brush_ArticleNo Panel_BrushArtNo { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
@@ -366,6 +373,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         void Insert_SashInfo_MaterialList(DataTable tbl_explosion);
         void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion);
+        void Insert_CoverProfileForTopHungInfo_MaterialList(DataTable tbl_explosion);
         void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion, int motorCount);
         void Insert_FrictionStay_MaterialList(DataTable tbl_explosion);
         void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion);
@@ -424,8 +432,12 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_WaterSeepage_MaterialList(DataTable tbl_explosion);
         void Insert_Interlock_MaterialList(DataTable tbl_explosion, int Insert_Interlock_MaterialList);
         void Insert_ExternsionForInterlock_MaterialList(DataTable tbl_explosion, int Insert_Interlock_MaterialList);
+        void Insert_Interlock_Tophung_MaterialList(DataTable tbl_explosion);
+        void Insert_Interlock_Tophung_ForFixed_MaterialList(DataTable tbl_explosion);
+        void Insert_ExternsionForInterlock_Tophung_MaterialList(DataTable tbl_explosion);
         void Insert_WeatherBarFastener_MaterialList(DataTable tbl_explosion);
         void Insert_BrushSeal_MaterialList(DataTable tbl_explosion);
+        void Insert_BrushSealForTopHung_MaterialList(DataTable tbl_explosion, int perimeterBrushSeal);
         void Insert_Rollers_MaterialList(DataTable tbl_explosion);
         void Insert_GlazingRebateBlock_MaterialList(DataTable tbl_explosion);
         void Insert_AntiLiftDevice_MaterialList(DataTable tbl_explosion);
@@ -470,6 +482,13 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_CasementSeal_MaterialList(DataTable tbl_explosion);
         void Insert_SealForHandle_MaterialList(DataTable tbl_explosion);
         void Insert_LouvreGallerySet_MaterialList(DataTable tbl_explosion);
+        void Insert_ConnectingProfile_MaterialList(DataTable tbl_explosion);
+        void Insert_GUPremilineTopTrack_MaterialList(DataTable tbl_explosion);
+        void Insert_PVCSettingPlate_MaterialList(DataTable tbl_explosion);
+        void Insert_FinPlate_MaterialList(DataTable tbl_explosion);
+        void Insert_SlidingAccessoriesRoller_MaterialList(DataTable tbl_explosion);
+        void Insert_SlidingSashBottomGuide_MaterialList(DataTable tbl_explosion, int overlap);
+        void Insert_BrushForSliding_MaterialList(DataTable tbl_explosion, int FinPlatePerimeter);
 
         #endregion
 
