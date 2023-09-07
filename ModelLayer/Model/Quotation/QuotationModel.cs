@@ -1242,7 +1242,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         where = "Frame";
                                     }
-                                    if (pnl_curCtrl.Panel_Type.Contains("Louver"))
+                                    if (!pnl_curCtrl.Panel_Type.Contains("Louver"))
                                     {
                                         pnl_curCtrl.Insert_GlazingBead_MaterialList(Material_List, where);
                                     }
@@ -1560,7 +1560,7 @@ namespace ModelLayer.Model.Quotation
                                                 pnl_curCtrl.Insert_CoverProfileForTopHungInfo_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_BrushSealForTopHung_MaterialList(Material_List, perimeterBrushSeal);
                                                 pnl_curCtrl.Insert_SlidingSashBottomGuide_MaterialList(Material_List, OverLappingPanel_Qty);
-                                                pnl_curCtrl.Insert_BrushForSliding_MaterialList(Material_List, 0);
+                                                pnl_curCtrl.Insert_BrushForSliding_MaterialList(Material_List, perimeterFinPlate);
 
                                                 TopHungPerFrame = false;
                                             }

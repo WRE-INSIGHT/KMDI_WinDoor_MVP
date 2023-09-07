@@ -3030,6 +3030,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear", "NA", 1662.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", "NA", 1662.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Clear", "NA", 1941.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(13.0f, "13 mm Clear", "NA", 2000.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", 0m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Clear", "NA", 0m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Euro Grey", "NA", 0m, true, false, false, false, false);
@@ -3529,7 +3530,7 @@ namespace PresentationLayer.Presenter
                 _userModel.AccountType == "User Level 2" ||
                 _userModel.AccountType == "User Level 3")
             {
-                _mainView.PriceHistorytoolStripButtonVisible = false; 
+                _mainView.PriceHistorytoolStripButtonVisible = false;
                 if (_userModel.AccountType == "User Level 1")
                 {
                     _mainView.PriceHistorytoolStripButtonVisible = true;
