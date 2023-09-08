@@ -473,6 +473,12 @@ namespace PresentationLayer
                  .RegisterType<IGlassUpgradePresenter, GlassUpgradePresenter>(new ContainerControlledLifetimeManager())
                  .RegisterType<IGlassUpgradeView, GlassUpgradeView>(new ContainerControlledLifetimeManager())
 
+                 .RegisterType<IPartialAdjustmentViewPresenter,PartialAdjustmentViewPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentView,PartialAdjustmentView>(new ContainerControlledLifetimeManager())
+
+                 .RegisterType<IPartialAdjustmentUC,PartialAdjustmentUC>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentUCPresenter,PartialAdjustmentUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

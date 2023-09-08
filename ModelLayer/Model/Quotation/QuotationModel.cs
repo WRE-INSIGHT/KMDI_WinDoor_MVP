@@ -4323,7 +4323,6 @@ namespace ModelLayer.Model.Quotation
                         {
                             ChckPlasticWedge = false;
                         }
-
                         chckPerFrameMotorMech = true;
 
                         PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
