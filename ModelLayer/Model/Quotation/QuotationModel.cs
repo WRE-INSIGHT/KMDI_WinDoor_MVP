@@ -4766,7 +4766,6 @@ namespace ModelLayer.Model.Quotation
                         {
                             ChckPlasticWedge = false;
                         }
-
                         chckPerFrameMotorMech = true;
 
 

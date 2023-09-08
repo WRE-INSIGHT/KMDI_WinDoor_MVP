@@ -481,6 +481,11 @@ namespace PresentationLayer
 
                  .RegisterType<IFP_InversionClipPropertyUCPresenter, FP_InversionClipPropertyUCPresenter>(new ContainerControlledLifetimeManager())
                  .RegisterType<IFP_InversionClipPropertyUC, FP_InversionClipPropertyUC>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentViewPresenter,PartialAdjustmentViewPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentView,PartialAdjustmentView>(new ContainerControlledLifetimeManager())
+
+                 .RegisterType<IPartialAdjustmentUC,PartialAdjustmentUC>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentUCPresenter,PartialAdjustmentUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())

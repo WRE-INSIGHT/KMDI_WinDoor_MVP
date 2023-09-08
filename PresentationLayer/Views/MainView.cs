@@ -73,6 +73,7 @@ namespace PresentationLayer.Views
                 ViewImagerToolStripButton1.Enabled = value;
                 deleteItemToolStripButton1.Enabled = value;
                 glassUpgradeToolStrip.Enabled = value;
+                partialAdjustmentToolstrip.Enabled = value;
             }
         }
 
@@ -291,6 +292,7 @@ namespace PresentationLayer.Views
         public event EventHandler PriceHistorytoolStripButtonClickEventRaised;
         public event EventHandler DateAssignedtoolStripButtonClickEventRaised;
         public event EventHandler glassUpgradeToolStripButtonClickEventRaised;
+        public event EventHandler partialAdjusmentToolstripClickClickEventRaised;
         public MainView()
         {
             InitializeComponent();
@@ -735,6 +737,9 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, glassUpgradeToolStripButtonClickEventRaised, e);
         }
 
-        
+        private void partialAdjusmentToolstrip_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, partialAdjusmentToolstripClickClickEventRaised, e);
+        }
     }
 }

@@ -129,6 +129,8 @@ namespace PresentationLayer.Presenter
         private ISetMultipleGlassThicknessPresenter _setMultipleGlassThicknessPresenter;
         private IPriceHistoryPresenter _priceHistoryPresenter;
         private IGlassUpgradePresenter _glassUpgradePresenter;
+        private IPartialAdjustmentViewPresenter _partialAdjustmentViewPresenter;
+        private IPartialAdjustmentUCPresenter _partialAdjustmentUCPresenter;
 
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
@@ -845,7 +847,9 @@ namespace PresentationLayer.Presenter
                              IPricingPresenter pricingPresenter,
                              ISetMultipleGlassThicknessPresenter setMultipleGlassThicknessPresenter,
                              IPriceHistoryPresenter priceHistoryPresenter,
-                             IGlassUpgradePresenter glassupgradePresenter
+                             IGlassUpgradePresenter glassupgradePresenter,
+                             IPartialAdjustmentViewPresenter partialAdjustmentViewPresenter,
+                             IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter
                              )
         {
             _mainView = mainView;
@@ -911,6 +915,8 @@ namespace PresentationLayer.Presenter
             _lblCurrentPrice = _mainView.GetCurrentPrice();
             _priceHistoryPresenter = priceHistoryPresenter;
             _glassUpgradePresenter = glassupgradePresenter;
+            _partialAdjustmentViewPresenter = partialAdjustmentViewPresenter;
+            _partialAdjustmentUCPresenter = partialAdjustmentUCPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -1024,6 +1030,14 @@ namespace PresentationLayer.Presenter
             _mainView.PriceHistorytoolStripButtonClickEventRaised += _mainView_PriceHistorytoolStripButtonClickEventRaised;
             _mainView.DateAssignedtoolStripButtonClickEventRaised += _mainView_DateAssignedtoolStripButtonClickEventRaised;
             _mainView.glassUpgradeToolStripButtonClickEventRaised += _mainView_glassUpgradeToolStripButtonClickEventRaised;
+            _mainView.partialAdjusmentToolstripClickClickEventRaised += _mainView_partialAdjusmentToolstripClickClickEventRaised;
+           
+        }
+
+        private void _mainView_partialAdjusmentToolstripClickClickEventRaised(object sender, EventArgs e)
+        {
+            IPartialAdjustmentViewPresenter partialAdjustment = _partialAdjustmentViewPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, this,_partialAdjustmentUCPresenter);
+            partialAdjustment.GetPartialAdjustmentView().ShowPartialAdjusmentView();
         }
 
         private void _mainView_glassUpgradeToolStripButtonClickEventRaised(object sender, EventArgs e)

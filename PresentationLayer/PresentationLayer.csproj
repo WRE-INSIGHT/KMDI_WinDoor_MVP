@@ -175,6 +175,7 @@
     <Compile Include="Presenter\IGlassUpgradePresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
+    <Compile Include="Presenter\IPartialAdjustmentViewPresenter.cs" />
     <Compile Include="Presenter\IPDFCompilerPresenter.cs" />
     <Compile Include="Presenter\IPDFWaitFormPresenter.cs" />
     <Compile Include="Presenter\IPriceHistoryPresenter.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Presenter\ISortItemPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
+    <Compile Include="Presenter\PartialAdjustmentViewPresenter.cs" />
     <Compile Include="Presenter\PDFCompilerPresenter.cs" />
     <Compile Include="Presenter\PDFWaitFormPresenter.cs" />
     <Compile Include="Presenter\PriceHistoryPresenter.cs" />
@@ -220,6 +222,7 @@
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TrackProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TubularPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IPartialAdjustmentUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ISortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_CenterProfilePropertyUCPresenter.cs" />
@@ -234,6 +237,7 @@
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGallerySetOptionPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGallerySetPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_TrackRailPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PartialAdjustmentUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_1385MilledProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_373or374MilledProfilePropertyUCPresenter.cs" />
@@ -513,6 +517,7 @@
     <Compile Include="Views\IGlassUpgradeView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IPartialAdjustmentView.cs" />
     <Compile Include="Views\IPDFCompilerView.cs" />
     <Compile Include="Views\IPDFWaitFormView.cs" />
     <Compile Include="Views\IPriceHistoryView.cs" />
@@ -537,6 +542,12 @@
     </Compile>
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PartialAdjustmentView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PartialAdjustmentView.Designer.cs">
+      <DependentUpon>PartialAdjustmentView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\PDFCompilerView.cs">
       <SubType>Form</SubType>
@@ -806,6 +817,7 @@
     <Compile Include="Views\UserControls\IItemInfoUC.cs" />
     <Compile Include="Views\UserControls\IMultiPanelPropertiesUC.cs" />
     <Compile Include="Views\UserControls\IPanelPropertiesUC.cs" />
+    <Compile Include="Views\UserControls\IPartialAdjustmentUC.cs" />
     <Compile Include="Views\UserControls\IQuoteItemListUC.cs" />
     <Compile Include="Views\UserControls\IScreenAddOnPropertiesUC.cs" />
     <Compile Include="Views\UserControls\ISortItemUC.cs" />
@@ -1057,6 +1069,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.Designer.cs">
       <DependentUpon>PP_TrackRailPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmentUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmentUC.Designer.cs">
+      <DependentUpon>PartialAdjustmentUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOnPropertiesUC.cs">
       <SubType>UserControl</SubType>
@@ -1398,6 +1416,9 @@
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\PartialAdjustmentView.resx">
+      <DependentUpon>PartialAdjustmentView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\PDFCompilerView.resx">
       <DependentUpon>PDFCompilerView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1625,6 +1646,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.resx">
       <DependentUpon>PP_TrackRailPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PartialAdjustmentUC.resx">
+      <DependentUpon>PartialAdjustmentUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ScreenAddOnPropertiesUC.resx">
       <DependentUpon>ScreenAddOnPropertiesUC.cs</DependentUpon>
