@@ -206,11 +206,13 @@
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ConcretePropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_CladdingQtyPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_FrameConnectionTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_ScreenPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_TrackProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_TubularPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_CladdingQtyPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_FrameConnectionTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_ScreenPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
@@ -218,11 +220,13 @@
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TubularPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ISortItemUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_CenterProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverBladesPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverGalleryPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverGallerySetOptionPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverGallerySetPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_TrackRailPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_CenterProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverBladesPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGalleryPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGallerySetOptionPropertyUCPresenter.cs" />
@@ -725,6 +729,12 @@
     <Compile Include="Views\UserControls\FrameProperties_Modules\FP_BottomFramePropertyUC.Designer.cs">
       <DependentUpon>FP_BottomFramePropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_CladdingPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_CladdingPropertyUC.Designer.cs">
+      <DependentUpon>FP_CladdingPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\FrameProperties_Modules\FP_FrameConnectionTypePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -762,6 +772,7 @@
       <DependentUpon>FP_TubularPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_BottomFramePropertyUC.cs" />
+    <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_CladdingQtyPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_FrameConnectionTypePropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_ScreenPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_SlidingRailsPropertyUC.cs" />
@@ -811,6 +822,7 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_3dHingePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_AliminumTrackPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CenterHingePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CenterProfilePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CornerDrivePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_DHandlePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_DHandle_IOLockingPropertyUC.cs" />
@@ -862,6 +874,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.Designer.cs">
       <DependentUpon>PP_CenterHingePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CenterProfilePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CenterProfilePropertyUC.Designer.cs">
+      <DependentUpon>PP_CenterProfilePropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -1464,6 +1482,9 @@
     <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_BottomFramePropertyUC.resx">
       <DependentUpon>FP_BottomFramePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_CladdingPropertyUC.resx">
+      <DependentUpon>FP_CladdingPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_FrameConnectionTypePropertyUC.resx">
       <DependentUpon>FP_FrameConnectionTypePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -1505,6 +1526,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.resx">
       <DependentUpon>PP_CenterHingePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CenterProfilePropertyUC.resx">
+      <DependentUpon>PP_CenterProfilePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.resx">
       <DependentUpon>PP_CornerDrivePropertyUC.cs</DependentUpon>
@@ -1734,6 +1758,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\window1.png" />
+    <None Include="Resources\window3.png" />
     <None Include="Resources\view.png" />
     <None Include="Resources\AddNew_Concrete.png" />
     <None Include="Resources\43.png" />
@@ -1745,6 +1771,7 @@
     <None Include="Resources\back_arrow_104px.png" />
     <Content Include="Resources\box_important_40px.png" />
     <None Include="Resources\calendar-icon-hand-circles-date-calendar-logo-template-deadline-concept-illustration_168129-210 %281%29.png" />
+    <None Include="Resources\calendar.png" />
     <Content Include="Resources\cancel_30px.png" />
     <Content Include="Resources\cancel_40px.png" />
     <None Include="Resources\CasementPanel.png" />
@@ -1754,6 +1781,8 @@
     <Content Include="Resources\cloud_storage_30px.png" />
     <Content Include="Resources\cloud_storage_40px.png" />
     <Content Include="Resources\cloud_sync_40px.png" />
+    <None Include="Resources\concrete2.png" />
+    <None Include="Resources\delete.png" />
     <Content Include="Resources\delete_file_30px.png" />
     <None Include="Resources\ExtensionTop.png" />
     <None Include="Resources\ExtensionBot.png" />
@@ -1771,6 +1800,9 @@
     <None Include="Resources\fade90v2.gif" />
     <None Include="Resources\fade901.gif" />
     <None Include="Resources\ExtensionBot11.png" />
+    <None Include="Resources\door 4.png" />
+    <None Include="Resources\duplicate2.png" />
+    <None Include="Resources\dollar.png" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />
@@ -1782,11 +1814,16 @@
     <None Include="Resources\glass.png" />
     <None Include="Resources\folder.png" />
     <None Include="Resources\icons8-history-64.png" />
+    <None Include="Resources\folder1.png" />
+    <None Include="Resources\glass2.png" />
+    <None Include="Resources\glass_upgrade.png" />
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <None Include="Resources\icons8_front_sorting_96px.png" />
     <None Include="Resources\icons8_duplicate_60px.png" />
     <None Include="Resources\icons8_duplicate_60px_1.png" />
+    <None Include="Resources\image.png" />
+    <None Include="Resources\image2.png" />
     <Content Include="Resources\K&amp;M_logo_official_2018-1.png" />
     <Content Include="Resources\loading2.gif" />
     <Content Include="Resources\loading_trans.gif" />
@@ -1804,14 +1841,18 @@
     <None Include="Resources\plus_math_96px.png" />
     <None Include="Resources\print.png" />
     <Content Include="Resources\redo_30px.png" />
+    <None Include="Resources\refresh2.png" />
     <Content Include="Resources\refresh_30px.png" />
     <None Include="Resources\search_filled_100px.png" />
     <None Include="Resources\report.png" />
+    <None Include="Resources\save.png" />
+    <None Include="Resources\screen.png" />
     <Content Include="Resources\SinglePanel.png" />
     <None Include="Resources\SlidingPanel.png" />
     <None Include="Resources\TiltNTurnPanel.png" />
     <None Include="Resources\Summary_v2.png" />
     <None Include="Resources\slidingscreenheader.jpg" />
+    <None Include="Resources\time-management.png" />
     <Content Include="Resources\Transom.png" />
     <Content Include="Resources\undo_30px.png" />
   </ItemGroup>

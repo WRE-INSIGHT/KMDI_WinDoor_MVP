@@ -873,7 +873,7 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             get
             {
-                 return _frameTrackProfileArtNo;
+                return _frameTrackProfileArtNo;
             }
 
             set
@@ -1256,6 +1256,77 @@ namespace ModelLayer.Model.Quotation.Frame
         }
 
 
+        public bool Frame_If_SlidingTypeTopHung { get; set; }
+
+        private GUPremilineTopTrack_ArticleNo _frameGUPremilineTopTrackArtNo;
+        public GUPremilineTopTrack_ArticleNo Frame_GUPremilineTopTrackArtNo
+        {
+            get
+            {
+                return _frameGUPremilineTopTrackArtNo;
+            }
+            set
+            {
+                _frameGUPremilineTopTrackArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _frameCladdingQty;
+        public int Frame_CladdingQty
+        {
+            get
+            {
+                return _frameCladdingQty;
+            }
+            set
+            {
+                _frameCladdingQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _frameCladdingVisibility;
+        public bool Frame_CladdingVisibility
+        {
+            get
+            {
+                return _frameCladdingVisibility;
+            }
+            set
+            {
+                _frameCladdingVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private CladdingProfileForFrame_ArticleNo _frameCladdingArtNo;
+        public CladdingProfileForFrame_ArticleNo Frame_CladdingArtNo
+        {
+            get
+            {
+                return _frameCladdingArtNo;
+            }
+            set
+            {
+                _frameCladdingArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private CladdingReinfForFrame_ArticleNo _frameCladdingReinArtNo;
+        public CladdingReinfForFrame_ArticleNo Frame_CladdingReinArtNo
+        {
+            get
+            {
+                return _frameCladdingReinArtNo;
+            }
+            set
+            {
+                _frameCladdingReinArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
         public void SetExplosionValues_Frame()
         {
             if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel
@@ -1264,6 +1335,11 @@ namespace ModelLayer.Model.Quotation.Frame
                     Lst_Panel[0].Panel_MotorizedOptionVisibility == true)
                 {
                     Frame_If_InwardMotorizedCasement = true;
+                }
+
+                if (Lst_Panel[0].Panel_SlidingTypes == SlidingTypes._TopHung)
+                {
+                    Frame_If_SlidingTypeTopHung = true;
                 }
             }
             else if (Lst_Panel.Count == 0 && Lst_MultiPanel.Count >= 1) //multipanel
@@ -1282,6 +1358,13 @@ namespace ModelLayer.Model.Quotation.Frame
                             pnl.Panel_MotorizedOptionVisibility == true)
                         {
                             Frame_If_InwardMotorizedSliding = true;
+                        }
+
+                        if (pnl.Panel_SlidingTypes == SlidingTypes._TopHung)
+                        {
+                            Frame_If_SlidingTypeTopHung = true;
+                            Frame_CladdingArtNo = CladdingProfileForFrame_ArticleNo._1338milled;
+                            Frame_CladdingReinArtNo = CladdingReinfForFrame_ArticleNo._9198;
                         }
                     }
                 }
@@ -1357,6 +1440,11 @@ namespace ModelLayer.Model.Quotation.Frame
                         Frame_ReinfHeight = _frameHeight - reinf_size - botFrameDiff + submerged - 10;
                     }
                 }
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._None &&
+                         Frame_If_SlidingTypeTopHung == true)
+                {
+                    Frame_ReinfHeight = _frameHeight - 5 - 10;
+                }
             }
             else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                      Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
@@ -1402,6 +1490,11 @@ namespace ModelLayer.Model.Quotation.Frame
                     {
                         Frame_ReinfWidth = _frameWidth - (reinf_size * 2) - 10;
                     }
+                }
+                else if (Frame_ConnectionType == FrameConnectionType._None &&
+                         Frame_If_SlidingTypeTopHung == true)
+                {
+                    Frame_ReinfWidth = _frameWidth - (38 * 2) - 10;
                 }
             }
             else
@@ -1463,6 +1556,12 @@ namespace ModelLayer.Model.Quotation.Frame
                     {
                         Frame_ExplosionHeight = _frameHeight - botFrameDiff + submerged + 3;
                     }
+                }
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._None &&
+                         Frame_ConnectionType == FrameConnectionType._None &&
+                         Frame_If_SlidingTypeTopHung == true)
+                {
+                    Frame_ExplosionHeight = _frameHeight - 5;
                 }
             }
             else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
@@ -1529,6 +1628,12 @@ namespace ModelLayer.Model.Quotation.Frame
                         Frame_ExplosionWidth = (_frameWidth / MaxCutofRein) + 5;
                     }
                 }
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._None &&
+                        Frame_If_SlidingTypeTopHung == true)
+                {
+                    Frame_ExplosionWidth = (_frameWidth / MaxCutofRein) - (38 * 2);
+                }
+
             }
             else
             {
@@ -2096,6 +2201,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.frame_TrackProfileproperty_PanelHeight;
                 }
+                else if (mode == "addCenterProfile")
+                {
+                    FrameProp_Height += constants.panel_property_CenterProfileOptionsheight;
+                }
+                else if (mode == "minusCenterProfile")
+                {
+                    FrameProp_Height -= constants.panel_property_CenterProfileOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {
@@ -2222,6 +2335,15 @@ namespace ModelLayer.Model.Quotation.Frame
                     cutTypeWd = @"\  /";
                     cutTypeHt = @"\  /";
                 }
+                else if (Frame_ConnectionType == FrameConnectionType._None)
+                {
+                    if (Frame_If_SlidingTypeTopHung == true)
+                    {
+                        cutTypeHt = @"|  |";
+                        cutTypeWd = @"|  |";
+                        widthArtNo = "-milled";
+                    }
+                }
             }
             else
             {
@@ -2264,6 +2386,10 @@ namespace ModelLayer.Model.Quotation.Frame
             else if ((Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
                      Frame_BotFrameArtNo == BottomFrameTypes._7502) &&
                      Frame_BotFrameVisible == true)
+            {
+                reinfQty = 1;
+            }
+            else if (Frame_If_SlidingTypeTopHung == true)
             {
                 reinfQty = 1;
             }
@@ -2524,8 +2650,8 @@ namespace ModelLayer.Model.Quotation.Frame
             tbl_explosion.Rows.Add("Connecting Profile " + Frame_ConnectingProfile_ArticleNo.DisplayName,
                                                    1, "pc(s)",
                                                    Frame_Width,
-                                                   "Sash",
-                                                   @"\  /");
+                                                   "Ancillary",
+                                                   @"");
 
         }
 
@@ -2552,6 +2678,27 @@ namespace ModelLayer.Model.Quotation.Frame
                                                    "");
             }
         }
+
+        public void Insert_CladdingProfile_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Cladding Profile " + Frame_CladdingArtNo.DisplayName,
+                                                   Frame_CladdingQty, "pc(s)",
+                                                   Frame_Width - (61 * 2),
+                                                   "Ancillary",
+                                                   @"|  |");
+
+            tbl_explosion.Rows.Add("Cladding Profile Reinforcement " + Frame_CladdingReinArtNo.DisplayName,
+                                                Frame_CladdingQty, "pc(s)",
+                                                Frame_Width - (61 * 2),
+                                                "Ancillary",
+                                                @"|  |");
+
+        }
+
+
+
+
+
         public int Add_framePerimeter_screws4fab()
         {
             return (Frame_Width * 2) + (Frame_Height * 2);
