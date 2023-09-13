@@ -44,21 +44,20 @@ namespace PresentationLayer.Presenter
 
             for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
             {
-
+              
                 IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
-
+              
                 _partialAdjustmentUCPresenter = _partialAdjustmentUCPresenter.GetNewInstance(_unityC, _quotationModel, wdm, _mainPresenter, this);
                 UserControl partialadjustmentItems = (UserControl)_partialAdjustmentUCPresenter.GetPartialAdjustmentUC();
                 _partialAdjustmentView.GetPanelBody().Controls.Add(partialadjustmentItems);
                 partialadjustmentItems.Dock = DockStyle.Top;
                 partialadjustmentItems.BringToFront();
                 _partialAdjustmentView.GetPanelBody().AutoScroll = true;
-
-
+              
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetPAItemNo().Text = "Item No." + (i + 1).ToString();
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = wdm.WD_image;
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = wdm.WD_description;
-
+              
 
             }
         }

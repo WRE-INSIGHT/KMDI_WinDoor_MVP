@@ -45,7 +45,10 @@ namespace PresentationLayer.Views
             this.Close();
         }
 
-
+        public Form GetThis()
+        {
+            return this;
+        }
         public event EventHandler _printToolStripBtnClickEventRaised;  
         public event EventHandler _partialAdjustmentViewLoadEventRaised;
 

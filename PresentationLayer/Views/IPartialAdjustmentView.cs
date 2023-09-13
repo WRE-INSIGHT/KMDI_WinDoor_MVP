@@ -14,5 +14,6 @@ namespace PresentationLayer.Views
         Label GetPrevItemLbl();
         Label GetCurrItemLbl();
         void ShowPartialAdjusmentView();
+        Form GetThis();
     }
 }

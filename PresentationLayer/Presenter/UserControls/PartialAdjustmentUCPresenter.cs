@@ -20,14 +20,18 @@ namespace PresentationLayer.Presenter.UserControls
         private IMainPresenter _mainPresenter;
         private IPartialAdjustmentUC _partialAdjustmenUC;
         private IPartialAdjustmentViewPresenter _partialAdjustmentViewPresenter;
+        private IPartialAdjustmentItemDisabledUCPresenter _paAdjustmentItemDisabledUCPresenter;
 
         Panel PanelBody;
         PictureBox OldItemPB, CurrentItemPB;
         RichTextBox OLDItemDesc, CurrentItemDesc;
 
-        public PartialAdjustmentUCPresenter(IPartialAdjustmentUC partialAdjustmentUC)
+        private string BGColor = "#2596be";
+
+        public PartialAdjustmentUCPresenter(IPartialAdjustmentUC partialAdjustmentUC, IPartialAdjustmentItemDisabledUCPresenter paAdjustmentItemDisabledUCPresenter)
         {
             _partialAdjustmenUC = partialAdjustmentUC;
+            _paAdjustmentItemDisabledUCPresenter = paAdjustmentItemDisabledUCPresenter;
             PanelBody = _partialAdjustmenUC.GetCurrentItemMainPanel();
             OldItemPB = _partialAdjustmenUC.GetOldItemDesignImage();
             CurrentItemPB = _partialAdjustmenUC.GetCurrentItemDesignImage();
@@ -48,15 +52,21 @@ namespace PresentationLayer.Presenter.UserControls
         private void _partialAdjustmenUC_btn_UsePartialAdjustment_ClickEventRaised(object sender, EventArgs e)
         {
 
-            //_mainPresenter.Load_Windoor_Item(_windoorModel);
+            _mainPresenter.Load_Windoor_Item(_windoorModel);
 
-            //_mainPresenter.GetMainView().GetMNSMainMenu().Enabled = false;
-            //_mainPresenter.GetMainView().GetTSMain().Enabled = false;
-            //_mainPresenter.GetMainView().GetPanelItems().Enabled = false;
+            _mainPresenter.GetMainView().GetMNSMainMenu().Enabled = false;
+            _mainPresenter.GetMainView().GetTSMain().Enabled = false;
+            _mainPresenter.GetMainView().GetPanelItems().Enabled = false;
 
-            //_mainPresenter.GetMainView().GetMNSMainMenu().BackColor = System.Drawing.ColorTranslator.FromHtml("#2596be");
-            //_mainPresenter.GetMainView().GetTSMain().BackColor = System.Drawing.ColorTranslator.FromHtml("#2596be");
+            _mainPresenter.GetMainView().GetMNSMainMenu().BackColor = System.Drawing.ColorTranslator.FromHtml(BGColor);
+            _mainPresenter.GetMainView().GetTSMain().BackColor = System.Drawing.ColorTranslator.FromHtml(BGColor);
 
+            _paAdjustmentItemDisabledUCPresenter = _paAdjustmentItemDisabledUCPresenter.GetNewInstance(_unityC, _mainPresenter, _windoorModel, _quotationModel);
+            UserControl paUC = (UserControl)_paAdjustmentItemDisabledUCPresenter.GetPartialAdjustmentItemDisablepdUC();
+            _paAdjustmentItemDisabledUCPresenter.UserControlBackground = BGColor;
+            _mainPresenter.GetMainView().GetThis().Controls.Add(paUC);
+
+            _partialAdjustmentViewPresenter.GetPartialAdjustmentView().ClosePartialAdjustmentView();
 
         }
 
@@ -95,6 +105,7 @@ namespace PresentationLayer.Presenter.UserControls
         private void _partialAdjustmenUC_artialAdjustmentUC_LoadEventRaised(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
+            PanelBody.Visible = false;
             _partialAdjustmenUC.GetAdjustmentUCForm().Size = new System.Drawing.Size(732, 29);
         }
 

@@ -198,6 +198,8 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region GetSet
+
+        #region List 
         private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
         public IDictionary<string, string> RDLCHeader
         {
@@ -222,6 +224,8 @@ namespace PresentationLayer.Presenter
             get { return _unglazed; }
             set { _unglazed = value; }
         }
+        
+        #endregion
 
         public bool ProvinceIntownOutofTown
         {
@@ -3689,8 +3693,6 @@ namespace PresentationLayer.Presenter
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
             }
-
-
         }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
