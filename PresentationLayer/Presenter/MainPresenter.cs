@@ -1475,50 +1475,113 @@ namespace PresentationLayer.Presenter
             decimal value;
             try
             {
-                string[] province = projectAddress.Split(',');
-                value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-                //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
-                //value = await _quotationServices.GetFactorByProvince(province);
-                string factorTypes = "Province: "
-                                   + (province[province.Length - 2]).Trim()
-                                   + "\nCurrent/File Factor: "
-                                   + _quotationModel.PricingFactor
-                                   + "\nFactor in database: "
-                                   + value;
-                string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
-                if (input != "" && input != "0")
+                if (!_isFromAddExisting)
                 {
-                    try
+                    #region Suggested & Current
+                    string[] province = projectAddress.Split(',');
+                    value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                    //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+                    //value = await _quotationServices.GetFactorByProvince(province);
+                    string factorTypes = "Province: "
+                                       + (province[province.Length - 2]).Trim()
+                                       + "\nCurrent/File Factor: "
+                                       + _quotationModel.PricingFactor
+                                       + "\nFactor in database: "
+                                       + value;
+
+                    string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
+                    if (input != "" && input != "0")
                     {
-                        decimal deci_input = Convert.ToDecimal(String.Format("{0:0.00}", Convert.ToDecimal(input)));
-                        if (deci_input > 0)
+                        try
                         {
-                            if (deci_input != _quotationModel.PricingFactor)
+                            decimal deci_input = Convert.ToDecimal(String.Format("{0:0.00}", Convert.ToDecimal(input)));
+                            if (deci_input > 0)
                             {
-                                _quotationModel.PricingFactor = deci_input;
-                                MessageBox.Show("New Factor Set Sucessfully");
-                                GetCurrentPrice();
+                                if (deci_input != _quotationModel.PricingFactor)
+                                {
+                                    _quotationModel.PricingFactor = deci_input;
+                                    MessageBox.Show("New Factor Set Sucessfully");
+                                    GetCurrentPrice();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                            }
+                            else if (deci_input < 0)
+                            {
+                                MessageBox.Show("Invalid number");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            if (ex.HResult == -2146233033)
+                            {
+                                MessageBox.Show("Please input a number.");
                             }
                             else
                             {
-                                MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                MessageBox.Show(ex.Message, ex.HResult.ToString());
                             }
                         }
-                        else if (deci_input < 0)
-                        {
-                            MessageBox.Show("Invalid number");
-                        }
                     }
-                    catch (Exception ex)
+
+
+                    #endregion
+                }
+                else
+                {
+                    if(_factorFromAddExisting != _quotationModel.PricingFactor)
                     {
-                        if (ex.HResult == -2146233033)
+                        #region FromAddExisiting
+                        string[] province = projectAddress.Split(',');
+                        //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+                        //value = await _quotationServices.GetFactorByProvince(province);
+                        string factorTypes = "Province: "
+                                           + (province[province.Length - 2]).Trim()
+                                           + "\nCurrent/File Factor: "
+                                           + _quotationModel.PricingFactor
+                                           + "\nFactor From AddExisting : "
+                                           + _factorFromAddExisting;
+
+                        string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
+                        if (input != "" && input != "0")
                         {
-                            MessageBox.Show("Please input a number.");
+                            try
+                            {
+                                decimal deci_input = Convert.ToDecimal(String.Format("{0:0.00}", Convert.ToDecimal(input)));
+                                if (deci_input > 0)
+                                {
+                                    if (deci_input != _quotationModel.PricingFactor)
+                                    {
+                                        _quotationModel.PricingFactor = deci_input;
+                                        MessageBox.Show("New Factor Set Sucessfully");
+                                        GetCurrentPrice();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                }
+                                else if (deci_input < 0)
+                                {
+                                    MessageBox.Show("Invalid number");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                if (ex.HResult == -2146233033)
+                                {
+                                    MessageBox.Show("Please input a number.");
+                                }
+                                else
+                                {
+                                    MessageBox.Show(ex.Message, ex.HResult.ToString());
+                                }
+                            }
                         }
-                        else
-                        {
-                            MessageBox.Show(ex.Message, ex.HResult.ToString());
-                        }
+
+                        #endregion
                     }
                 }
             }
@@ -1526,6 +1589,7 @@ namespace PresentationLayer.Presenter
             {
                 MessageBox.Show(ex.Message);
             }
+     
         }
         #endregion
 
@@ -3595,6 +3659,7 @@ namespace PresentationLayer.Presenter
                     file_lines = File.ReadAllLines(outFile);
                     f.MoveTo(Path.ChangeExtension(addExistingwndrfile, ".wndr"));
                     onload = true;
+                    _isFromAddExisting = true; // selecting new factor 
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
 
@@ -3605,6 +3670,7 @@ namespace PresentationLayer.Presenter
                     ////        MessageBox.Show(strline);
                     ////    }
                     ////}
+
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     StartWorker("Add_Existing_Items");
@@ -3813,6 +3879,7 @@ namespace PresentationLayer.Presenter
                             _mainView.GetToolStripLabelLoading().Visible = true;
                             //autoDescription = true;
                             onload = false;
+                            _isFromAddExisting = false;
                             break;
 
                         case "GetCloudFiles":
@@ -3874,7 +3941,7 @@ namespace PresentationLayer.Presenter
             {
                 inside_screen = false;
                 _itemLoad = true;
-                if (_isOpenProject && !isNewProject)
+                if (_isOpenProject && !isNewProject || _isFromAddExisting)
                 {
                     inside_quotation = true;
                 }
@@ -4066,133 +4133,147 @@ namespace PresentationLayer.Presenter
             switch (inside_quotation)
             {
                 case true:
-                    #region Load for Quotation Model
-                    if (row_str.Contains("QuoteId"))
+                    if (!_isFromAddExisting)
                     {
-                        _quoteId = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("ProjectName"))
-                    {
-                        _projectName = extractedValue_str;
-                    }
-                    else if (row_str.Contains("ClientsName:"))
-                    {
-                        inputted_projectName = extractedValue_str;
-                    }
-                    else if (row_str.Contains("ClientsTitleLastname:"))
-                    {
-                        _titleLastname = extractedValue_str;
-                    }
-                    else if (row_str.Contains("ProjectAddress:"))
-                    {
-                        _projectAddress = extractedValue_str;
-                    }
-                    else if (row_str.Contains("CustomerRefNo"))
-                    {
-                        _custRefNo = extractedValue_str;
-                        inputted_custRefNo = extractedValue_str;
-                    }
-                    else if (row_str.Contains("DateAssigned"))
-                    {
-                        _dateAssigned = Convert.ToDateTime(extractedValue_str);
-                    }
-                    else if (row_str.Contains("Date_Assigned_Mainpresenter:"))
-                    {
-                        _quotationModel.Date_Assigned_Mainpresenter = Convert.ToDateTime(extractedValue_str);
-                    }
-                    else if (row_str.Contains("AEIC:"))
-                    {
-                        _aeic = extractedValue_str;
-                    }
-                    else if (row_str.Contains("AEIC_POS:"))
-                    {
-                        _position = extractedValue_str;
-                    }
-                    else if (row_str.Contains("ProvinceIntownOutofTown:"))
-                    {
-                        _provinceIntownOutofTown = Convert.ToBoolean(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("PricingFactor"))
-                    {
-                        _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : (String.Format("{0:0.00}", Convert.ToDecimal(extractedValue_str))));
-                    }
-                    else if (row_str.Contains("Quotation_ref_no"))
-                    {
-                        inputted_quotationRefNo = extractedValue_str;
-                    }
-                    else if (row_str.Contains("Quotation_Date"))
-                    {
-                        inputted_quoteDate = Convert.ToDateTime(extractedValue_str);
-                        Scenario_Quotation(false, false, false, false, true, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
-                        _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
-                        _quotationModel.Customer_Ref_Number = inputted_custRefNo;
-                        _quotationModel.Date_Assigned = dateAssigned;
-                        //_quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
-                    }
-                    else if (row_str.Contains("Frame_PUFoamingQty_Total"))
-                    {
-                        _quotationModel.Frame_PUFoamingQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Frame_SealantWHQty_Total"))
-                    {
-                        _quotationModel.Frame_SealantWHQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Glass_SealantWHQty_Total"))
-                    {
-                        _quotationModel.Glass_SealantWHQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("GlazingSpacer_TotalQty"))
-                    {
-                        _quotationModel.GlazingSpacer_TotalQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("GlazingSeal_TotalQty"))
-                    {
-                        _quotationModel.GlazingSeal_TotalQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Screws_for_Fabrication"))
-                    {
-                        _quotationModel.Screws_for_Fabrication = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Expansion_BoltQty_Total"))
-                    {
-                        _quotationModel.Expansion_BoltQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        #region Load for Quotation Model
 
-                    }
-                    else if (row_str.Contains("Screws_for_Installation"))
-                    {
-                        _quotationModel.Screws_for_Installation = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-
-                    }
-                    else if (row_str.Contains("Screws_for_Cladding"))
-                    {
-                        _quotationModel.Screws_for_Cladding = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Rebate_Qty"))
-                    {
-                        _quotationModel.Rebate_Qty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Plastic_CoverQty_Total"))
-                    {
-                        _quotationModel.Plastic_CoverQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-
-                    else if (row_str.Contains("BOM_Filter:"))
-                    {
-                        foreach (BillOfMaterialsFilter bomf in BillOfMaterialsFilter.GetAll())
+                        if (row_str.Contains("QuoteId"))
                         {
-                            if (bomf.ToString() == extractedValue_str)
+                            _quoteId = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("ProjectName"))
+                        {
+                            _projectName = extractedValue_str;
+                        }
+                        else if (row_str.Contains("ClientsName:"))
+                        {
+                            inputted_projectName = extractedValue_str;
+                        }
+                        else if (row_str.Contains("ClientsTitleLastname:"))
+                        {
+                            _titleLastname = extractedValue_str;
+                        }
+                        else if (row_str.Contains("ProjectAddress:"))
+                        {
+                            _projectAddress = extractedValue_str;
+                        }
+                        else if (row_str.Contains("CustomerRefNo"))
+                        {
+                            _custRefNo = extractedValue_str;
+                            inputted_custRefNo = extractedValue_str;
+                        }
+                        else if (row_str.Contains("DateAssigned"))
+                        {
+                            _dateAssigned = Convert.ToDateTime(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Date_Assigned_Mainpresenter:"))
+                        {
+                            _quotationModel.Date_Assigned_Mainpresenter = Convert.ToDateTime(extractedValue_str);
+                        }
+                        else if (row_str.Contains("AEIC:"))
+                        {
+                            _aeic = extractedValue_str;
+                        }
+                        else if (row_str.Contains("AEIC_POS:"))
+                        {
+                            _position = extractedValue_str;
+                        }
+                        else if (row_str.Contains("ProvinceIntownOutofTown:"))
+                        {
+                            _provinceIntownOutofTown = Convert.ToBoolean(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("PricingFactor"))
+                        {
+                            _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : (String.Format("{0:0.00}", Convert.ToDecimal(extractedValue_str))));
+                        }
+                        else if (row_str.Contains("Quotation_ref_no"))
+                        {
+                            inputted_quotationRefNo = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Quotation_Date"))
+                        {
+                            inputted_quoteDate = Convert.ToDateTime(extractedValue_str);
+                            Scenario_Quotation(false, false, false, false, true, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                            _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
+                            _quotationModel.Customer_Ref_Number = inputted_custRefNo;
+                            _quotationModel.Date_Assigned = dateAssigned;
+                            //_quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
+                        }
+                        else if (row_str.Contains("Frame_PUFoamingQty_Total"))
+                        {
+                            _quotationModel.Frame_PUFoamingQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Frame_SealantWHQty_Total"))
+                        {
+                            _quotationModel.Frame_SealantWHQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Glass_SealantWHQty_Total"))
+                        {
+                            _quotationModel.Glass_SealantWHQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("GlazingSpacer_TotalQty"))
+                        {
+                            _quotationModel.GlazingSpacer_TotalQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("GlazingSeal_TotalQty"))
+                        {
+                            _quotationModel.GlazingSeal_TotalQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screws_for_Fabrication"))
+                        {
+                            _quotationModel.Screws_for_Fabrication = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Expansion_BoltQty_Total"))
+                        {
+                            _quotationModel.Expansion_BoltQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screws_for_Installation"))
+                        {
+                            _quotationModel.Screws_for_Installation = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screws_for_Cladding"))
+                        {
+                            _quotationModel.Screws_for_Cladding = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Rebate_Qty"))
+                        {
+                            _quotationModel.Rebate_Qty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Plastic_CoverQty_Total"))
+                        {
+                            _quotationModel.Plastic_CoverQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+
+                        else if (row_str.Contains("BOM_Filter:"))
+                        {
+                            foreach (BillOfMaterialsFilter bomf in BillOfMaterialsFilter.GetAll())
                             {
-                                _quotationModel.BOM_Filter = bomf;
+                                if (bomf.ToString() == extractedValue_str)
+                                {
+                                    _quotationModel.BOM_Filter = bomf;
+                                }
                             }
                         }
+                        else if (row_str.Contains("BOM_Status:"))
+                        {
+                            _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
+                            inside_quotation = false;
+                        }
+
+                        #endregion
                     }
-                    else if (row_str.Contains("BOM_Status:"))
+                    else
                     {
-                        _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
-                        inside_quotation = false;
+                        if (row_str.Contains("PricingFactor"))
+                        {
+                            _factorFromAddExisting = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : (String.Format("{0:0.00}", Convert.ToDecimal(extractedValue_str))));
+                            setNewFactor();   
+                        }
                     }
                     break;
-                #endregion
+
                 case false:
                     if (inside_item)
                     {
@@ -9594,12 +9675,13 @@ namespace PresentationLayer.Presenter
              inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory, inside_GlassUpgrade,
              rdlcDicChangeKey = true,
              add_existing = false,
+            _isFromAddExisting = false,
             _allpanelsIsMesh;
-
         int _EntryCountOfKeyWordUsing,
             _EntryCountOfKeyWordPriceValidity;
         bool _EntrytoKeyWordUsing = false,
              _EntrytoKeyWordPriceValidity = false;
+        decimal _factorFromAddExisting;
 
         #region Frame Properties
 
