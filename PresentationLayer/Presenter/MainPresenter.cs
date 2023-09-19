@@ -1469,7 +1469,7 @@ namespace PresentationLayer.Presenter
         {
             setNewFactor();
         }
-
+        string factorTypes;
         public async void setNewFactor()
         {
             decimal value;
@@ -1482,14 +1482,28 @@ namespace PresentationLayer.Presenter
                     value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
                     //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
                     //value = await _quotationServices.GetFactorByProvince(province);
-                    string factorTypes = "Province: "
-                                       + (province[province.Length - 2]).Trim()
-                                       + "\nCurrent/File Factor: "
-                                       + _quotationModel.PricingFactor
-                                       + "\nFactor in database: "
-                                       + value;
-
+                    if (_factorFromAddExisting <= 0)
+                    {
+                        factorTypes = "Province: "
+                                    + (province[province.Length - 2]).Trim()
+                                    + "\nCurrent/File Factor: "
+                                    + _quotationModel.PricingFactor
+                                    + "\nFactor in database: "
+                                    + value;
+                    }
+                    else
+                    {
+                        factorTypes = "Province: "
+                                    + (province[province.Length - 2]).Trim()
+                                    + "\nCurrent/File Factor: "
+                                    + _quotationModel.PricingFactor
+                                    + "\nFactor in database: "
+                                    + value
+                                    +"\nFactor From Add Existing"
+                                    +_factorFromAddExisting;
+                    }
                     string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
+                 
                     if (input != "" && input != "0")
                     {
                         try
@@ -1501,9 +1515,23 @@ namespace PresentationLayer.Presenter
                                 {
                                     _quotationModel.PricingFactor = deci_input;
                                     MessageBox.Show("New Factor Set Sucessfully");
+
+
+                                    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-19-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-19-2023"))
+                                    {
+                                        foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                                        {
+                                            //getnewwdmprice
+                                            wdm.WD_fileLoad = false;
+                                            _quotationModel.BOMandItemlistStatus = "PriceItemList";
+                                            _quotationModel.ItemCostingPriceAndPoints();
+                                            wdm.TotalPriceHistoryStatus = "System Generated Price";
+                                            wdm.WD_price = wdm.WD_currentPrice;
+                                        }
+                                    }
                                     GetCurrentPrice();
                                 }
-                                else
+                                else 
                                 {
                                     MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 }
@@ -1532,12 +1560,12 @@ namespace PresentationLayer.Presenter
                 else
                 {
                     if(_factorFromAddExisting != _quotationModel.PricingFactor)
-                    {
+                    {              
                         #region FromAddExisiting
                         string[] province = projectAddress.Split(',');
                         //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
                         //value = await _quotationServices.GetFactorByProvince(province);
-                        string factorTypes = "Province: "
+                               factorTypes = "Province: "
                                            + (province[province.Length - 2]).Trim()
                                            + "\nCurrent/File Factor: "
                                            + _quotationModel.PricingFactor
@@ -1556,6 +1584,19 @@ namespace PresentationLayer.Presenter
                                     {
                                         _quotationModel.PricingFactor = deci_input;
                                         MessageBox.Show("New Factor Set Sucessfully");
+
+                                        if (_quotationModel.Date_Assigned >= DateTime.Parse("09-19-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-19-2023"))
+                                        {
+                                            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                                            {
+                                                //getnewwdmprice
+                                                wdm.WD_fileLoad = false;
+                                                _quotationModel.BOMandItemlistStatus = "PriceItemList";
+                                                _quotationModel.ItemCostingPriceAndPoints();
+                                                wdm.TotalPriceHistoryStatus = "System Generated Price";
+                                                wdm.WD_price = wdm.WD_currentPrice;
+                                            }
+                                        }
                                         GetCurrentPrice();
                                     }
                                     else
@@ -1604,7 +1645,8 @@ namespace PresentationLayer.Presenter
             {
                 if (_windoorModel != null)
                 {
-                    if (_lblCurrentPrice.Value == _windoorModel.SystemSuggestedPrice && _windoorModel.SystemSuggestedPrice != 0)
+                    if (_lblCurrentPrice.Value == _windoorModel.SystemSuggestedPrice &&
+                        _windoorModel.SystemSuggestedPrice != 0)
                     {
                         _windoorModel.TotalPriceHistoryStatus = "System Generated Price";
                     }
@@ -1617,8 +1659,7 @@ namespace PresentationLayer.Presenter
                     _windoorModel.WD_fileLoad = false;
                     _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
 
-                    Console.WriteLine(_windoorModel.TotalPriceHistoryStatus);
-
+                    Console.WriteLine("MainPresenter: " + _windoorModel.TotalPriceHistoryStatus);
                 }
                 else
                 {
@@ -2965,13 +3006,14 @@ namespace PresentationLayer.Presenter
             int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
             wndrFileName = _wndrFilePath.Substring(startFileName);
             FileInfo f = new FileInfo(_wndrFilePath);
-            f.MoveTo(Path.ChangeExtension(_wndrFilePath, ".txt"));
+            f.MoveTo(Path.ChangeExtension(_wndrFilePath, ".txt")); 
             string outFile = _wndrFilePath.Substring(0, startFileName) +
                              _wndrFilePath.Substring(startFileName, _wndrFilePath.LastIndexOf(".") - startFileName) + ".txt";
 
             file_lines = File.ReadAllLines(outFile);
             f.MoveTo(Path.ChangeExtension(outFile, ".wndr"));
             onload = true;
+            _factorFromAddExisting = 0;//reset when opening new file
             _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
             _basePlatformImagerUCPresenter.SendToBack_baseImager();
             StartWorker("Open_WndrFiles");
@@ -3873,6 +3915,11 @@ namespace PresentationLayer.Presenter
                                              _windoorModel.WD_profile,
                                              true);
 
+                            if(_factorFromAddExisting > 0)
+                            {
+                                setNewFactor();
+                            }
+
                             _mainView.GetToolStripLabelLoading().Text = "Finished";
 
                             ToggleMode(false, true);
@@ -3880,6 +3927,7 @@ namespace PresentationLayer.Presenter
                             //autoDescription = true;
                             onload = false;
                             _isFromAddExisting = false;
+
                             break;
 
                         case "GetCloudFiles":
@@ -4269,7 +4317,7 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("PricingFactor"))
                         {
                             _factorFromAddExisting = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : (String.Format("{0:0.00}", Convert.ToDecimal(extractedValue_str))));
-                            setNewFactor();   
+                            //setNewFactor();   
                         }
                     }
                     break;
@@ -4532,6 +4580,10 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("TotalPriceHistoryStatus:"))
                         {
                             _windoorModel.TotalPriceHistoryStatus = extractedValue_str;
+                        } 
+                        else if (row_str.Contains("SystemSuggestedPrice:"))
+                        {
+                            _windoorModel.SystemSuggestedPrice = decimal.Parse(extractedValue_str);
                         }
                         #endregion
                     }
@@ -10501,7 +10553,7 @@ namespace PresentationLayer.Presenter
 
                     //_frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
                     //_frmDimensionPresenter.mainPresenter_newItem_ClickedOK = false;
-                    //_frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
+                    //_frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;    
                     //_frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
                     //_frmDimensionPresenter.mainPresenter_OpenWindoorFile_ClickedOK = true;
 
@@ -10898,6 +10950,7 @@ namespace PresentationLayer.Presenter
                         {
                             MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Frame Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
+                        #endregion
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile && !Duplicate) //add concrete
@@ -10968,7 +11021,7 @@ namespace PresentationLayer.Presenter
             //Load_Windoor_Item(_windoorModel);
         }
         #endregion
-        #endregion
+
         #region Functions
 
         public void Set_User_View()
@@ -12908,7 +12961,7 @@ namespace PresentationLayer.Presenter
                             availableHeight -= Maxheight;
                             Maxheight = 0;
                         }
-                        else
+                        else 
                         {
                             if (availableHeight > frmDimension_numHt &&
                               (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd &&
@@ -12987,8 +13040,6 @@ namespace PresentationLayer.Presenter
             }
             return isDimensionFit;
         }
-
-
 
         #endregion
 
