@@ -1517,7 +1517,7 @@ namespace PresentationLayer.Presenter
                                     MessageBox.Show("New Factor Set Sucessfully");
 
 
-                                    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-19-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-19-2023"))
+                                    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-20-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-20-2023"))
                                     {
                                         foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                                         {
@@ -1585,7 +1585,7 @@ namespace PresentationLayer.Presenter
                                         _quotationModel.PricingFactor = deci_input;
                                         MessageBox.Show("New Factor Set Sucessfully");
 
-                                        if (_quotationModel.Date_Assigned >= DateTime.Parse("09-19-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-19-2023"))
+                                        if (_quotationModel.Date_Assigned >= DateTime.Parse("09-20-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-20-2023"))
                                         {
                                             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                                             {
