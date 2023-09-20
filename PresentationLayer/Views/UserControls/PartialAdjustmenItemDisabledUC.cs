@@ -28,6 +28,11 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler btn_Cancel_ClickEventRaised;
         public event EventHandler PartialAdjustmenItemDisabledUC_ResizeEventRaised;
 
+        public void DisposeThis()
+        {
+            this.Dispose();
+        }
+
         public void ItemInfoDisabledBringToFront()
         {
              this.BringToFront();
@@ -66,7 +71,7 @@ namespace PresentationLayer.Views.UserControls
 
         private void PartialAdjustmenItemDisabledUC_Resize(object sender, EventArgs e)
         {
-
+            EventHelpers.RaiseEvent(sender, PartialAdjustmenItemDisabledUC_ResizeEventRaised, e);
         }
     }
 }

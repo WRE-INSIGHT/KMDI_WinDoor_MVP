@@ -58,6 +58,7 @@ namespace PresentationLayer.Presenter
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = wdm.WD_image;
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = wdm.WD_description;
               
+                
 
             }
         }
