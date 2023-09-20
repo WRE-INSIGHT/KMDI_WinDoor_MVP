@@ -28,6 +28,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private string BGColor = "#2596be";
 
+        
         public PartialAdjustmentUCPresenter(IPartialAdjustmentUC partialAdjustmentUC, IPartialAdjustmentItemDisabledUCPresenter paAdjustmentItemDisabledUCPresenter)
         {
             _partialAdjustmenUC = partialAdjustmentUC;
@@ -62,7 +63,7 @@ namespace PresentationLayer.Presenter.UserControls
             _mainPresenter.GetMainView().GetTSMain().BackColor = System.Drawing.ColorTranslator.FromHtml(BGColor);
 
             _paAdjustmentItemDisabledUCPresenter = _paAdjustmentItemDisabledUCPresenter.GetNewInstance(_unityC, _mainPresenter, _windoorModel, _quotationModel);
-            UserControl paUC = (UserControl)_paAdjustmentItemDisabledUCPresenter.GetPartialAdjustmentItemDisablepdUC();
+             UserControl paUC = (UserControl)_paAdjustmentItemDisabledUCPresenter.GetPartialAdjustmentItemDisablepdUC();
             _paAdjustmentItemDisabledUCPresenter.UserControlBackground = BGColor;
             _mainPresenter.GetMainView().GetThis().Controls.Add(paUC);
 

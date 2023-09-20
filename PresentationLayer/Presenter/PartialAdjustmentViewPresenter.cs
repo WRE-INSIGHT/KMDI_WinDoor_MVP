@@ -57,8 +57,12 @@ namespace PresentationLayer.Presenter
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetPAItemNo().Text = "Item No." + (i + 1).ToString();
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = wdm.WD_image;
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = wdm.WD_description;
-              
-                
+
+                if (wdm.WD_IsPartialADPreviousExist)
+                {
+                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemDesignImage().Image = wdm.WD_PAPreviousImage;
+                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemDescription().Text = wdm.WD_PAPreviousDescription;
+                }
 
             }
         }

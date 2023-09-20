@@ -87,6 +87,10 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int pnlCount { get; set; }
         DateTime Date_Assigned { get; set; }
         DateTime Date_Assigned_Mainpresenter { get; set; }
+        bool WD_IsPartialADPreviousExist { get; set; }
+        Image WD_PAPreviousImage { get; set; }
+        string WD_PAPreviousDescription { get; set; }
+        decimal WD_PAPreviousPrice { get; set; }
         void Fit_MyControls_ToBindDimensions();
         void SetfrmDimentionZoom();
         void Fit_MyControls_ImagersToBindDimensions();
