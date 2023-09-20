@@ -35,6 +35,9 @@ namespace PresentationLayer.Presenter.UserControls
             }
         }
 
+        private Image PaCurrentDesignImgHolder { get; set; }
+        private string PaCurrentDesignDescHolder { get; set; }
+        private decimal PACurrentDesignPrice { get; set; }
 
         public PartialAdjustmentItemDisabledUCPresenter(IPartialAdjustmenItemDisabledUC pAItemDisabledUC)
         {
@@ -77,10 +80,21 @@ namespace PresentationLayer.Presenter.UserControls
         {
             ResizeAndRePosition();
             paItemDisableUCPresenter_Invalidatethis();
+
+            PaCurrentDesignImgHolder = _windoorModel.WD_image;
+            PaCurrentDesignDescHolder = _windoorModel.WD_description;
+            PACurrentDesignPrice = _windoorModel.WD_price;
+
         }
 
         private void _pAItemDisabledUC_btn_Yes_ClickEventRaised(object sender, EventArgs e)
         {
+
+            _windoorModel.WD_IsPartialADPreviousExist = true;
+            _windoorModel.WD_PAPreviousImage = PaCurrentDesignImgHolder;
+            _windoorModel.WD_PAPreviousDescription = PaCurrentDesignDescHolder;
+            _windoorModel.WD_PAPreviousPrice = PACurrentDesignPrice;
+
             MainPresenterPanelsEnabled();
         }
 

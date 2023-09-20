@@ -663,6 +663,11 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public List<string> lst_TotalPriceHistory { get; set; }
         public decimal SystemSuggestedPrice { get; set; }
 
+        public bool WD_IsPartialADPreviousExist { get; set; }
+        public Image WD_PAPreviousImage { get; set; }
+        public string WD_PAPreviousDescription { get; set; }
+        public decimal WD_PAPreviousPrice { get; set; }
+        
         #region Methods
 
         public void SetDimensions_basePlatform()
