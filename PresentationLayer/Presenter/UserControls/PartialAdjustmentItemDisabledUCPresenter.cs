@@ -62,18 +62,21 @@ namespace PresentationLayer.Presenter.UserControls
             _paUCView.Width = mainViewPnlItemWidth;
             _paUCView.Location = new System.Drawing.Point((mainViewWidth - mainViewPnlItemWidth) - 18, _mainPresenter.pnlItems_MainPresenter.Location.Y + 28);
             _paUCView.Height = _mainPresenter.pnlItems_MainPresenter.Height + 30;
-       
+
+            _paUCView.Dock = DockStyle.Right;
+
         }
         private void _pAItemDisabledUC_PartialAdjustmenItemDisabledUC_ResizeEventRaised(object sender, EventArgs e)
         {
+            ResizeAndRePosition();
             _pAItemDisabledUC.InvalidateItemDisabled();
+            paItemDisableUCPresenter_BringToFront();
         }
 
         private void _pAItemDisabledUC_PartialAdjustmenItemDisabledUC_LoadEventRaised(object sender, EventArgs e)
         {
             ResizeAndRePosition();
             paItemDisableUCPresenter_Invalidatethis();
-            paItemDisableUCPresenter_BringToFront();
         }
 
         private void _pAItemDisabledUC_btn_Yes_ClickEventRaised(object sender, EventArgs e)
@@ -88,16 +91,17 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void MainPresenterPanelsEnabled()
         {
-            _mainPresenter.GetMainView().GetMNSMainMenu().Enabled = true;
-            _mainPresenter.GetMainView().GetTSMain().Enabled = true;
-            _mainPresenter.GetMainView().GetPanelItems().Enabled = true;
+          
+          _mainPresenter.GetMainView().GetMNSMainMenu().Enabled = true;
+          _mainPresenter.GetMainView().GetTSMain().Enabled = true;
+          _mainPresenter.GetMainView().GetPanelItems().Enabled = true;
+         
+          _mainPresenter.GetMainView().GetMNSMainMenu().BackColor = System.Drawing.SystemColors.Control;
+          _mainPresenter.GetMainView().GetTSMain().BackColor = System.Drawing.SystemColors.Control;
+          _mainPresenter.GetMainView().GetPanelItems().BackColor = System.Drawing.SystemColors.Control;
 
-            _mainPresenter.GetMainView().GetMNSMainMenu().BackColor = System.Drawing.SystemColors.Control;
-            _mainPresenter.GetMainView().GetTSMain().BackColor = System.Drawing.SystemColors.Control;
-            _mainPresenter.GetMainView().GetPanelItems().BackColor = System.Drawing.SystemColors.Control;
-
-            paItemDisableUCPresenter_SendToBack();
-
+          _pAItemDisabledUC.DisposeThis();
+         
         }
 
 

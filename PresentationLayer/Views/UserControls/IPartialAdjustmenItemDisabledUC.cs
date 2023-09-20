@@ -14,6 +14,7 @@ namespace PresentationLayer.Views.UserControls
         UserControl GetPartialAdjustmentItemDisableUC();
         void ItemInfoDisabledBringToFront();
         void ItemInfoDisabledSendToBack();
+        void DisposeThis();
         void InvalidateItemDisabled();
     }
 }
