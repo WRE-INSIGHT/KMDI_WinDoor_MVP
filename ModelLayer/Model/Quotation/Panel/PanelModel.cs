@@ -5491,6 +5491,12 @@ namespace ModelLayer.Model.Quotation.Panel
                     botFrameDeduction = 33;
                     ChckBotFrame = true;
                 }
+                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                {
+                    botFrameDeduction = 5;
+                    ChckBotFrame = true;
+                    Panel_BrushArtNo = Brush_ArticleNo._SP02;
+                }
             }
             if (Panel_SashPropertyVisibility == true)
             {
@@ -7562,6 +7568,13 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_CoverProfileArtNo = CoverProfile_ArticleNo._1182Milled;
                 }
 
+                if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None &&
+                    Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                {
+                    Panel_BrushArtNo = Brush_ArticleNo._SP02;
+                }
+
+
                 if (Panel_HingeOptions == HingeOption._2DHinge)
                 {
                     Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
@@ -8926,6 +8939,27 @@ namespace ModelLayer.Model.Quotation.Panel
                                              @"|  |");
         }
 
+        public void Insert_FillerProfileForNoBotFrameInfo_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Filler Profile " + FillerProfile_ArticleNo._0914_milled.ToString(),
+                                             1, "pc(s)",
+                                             Panel_SashWidth.ToString(),
+                                             "Ancillary Profile",
+                                             @"|  |");
+
+            tbl_explosion.Rows.Add("Filler Profile " + FillerProfile_ArticleNo._0505_milled.ToString(),
+                                             1, "pc(s)",
+                                             Panel_SashWidth.ToString(),
+                                             "Ancillary Profile",
+                                             @"|  |");
+
+            tbl_explosion.Rows.Add("Filler Profile " + FillerProfile_ArticleNo._6052_milled.ToString(),
+                                             1, "pc(s)",
+                                             Panel_SashWidth.ToString(),
+                                             "Ancillary Profile",
+                                             @"|  |");
+        }
+
 
         public void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion, int motorCount)
         {
@@ -9820,12 +9854,24 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "");
         }
 
+        public void Insert_BrushSealForNoBotFrame_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_BrushArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Brush Seal " + Panel_BrushArtNo.DisplayName,
+                                       1, "pc(s)",
+                                       Panel_SashWidth,
+                                       "Hardware & Accessories",
+                                       "");
+            }
+        }
+
         public void Insert_BrushSealForTopHung_MaterialList(DataTable tbl_explosion, int perimeterBrushSeal)
         {
             tbl_explosion.Rows.Add("Brush Seal " + Panel_BrushSealArtNo.DisplayName,
                                    1, "pc(s)",
                                    perimeterBrushSeal,
-                                   "Hardware & Acc",
+                                   "Hardware & Accessories",
                                    "");
         }
 

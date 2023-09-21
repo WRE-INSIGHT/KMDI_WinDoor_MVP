@@ -1418,6 +1418,10 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ReinfHeight = _frameHeight - 5 - 10;
                 }
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._None)
+                {
+                    Frame_ReinfHeight = _frameHeight - reinf_size - 10;
+                }
             }
             else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                      Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
@@ -2600,13 +2604,13 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 additionalRailingsMechJoint = ((Frame_SlidingRailsQty - 2) * 4);
             }
+
             totalMechJointQty = Frame_MechanicalJointConnectorQty + additionalRailingsMechJoint + MechJointConnectorQty;
             tbl_explosion.Rows.Add("Mechanical Joint Connector " + Frame_MechanicalJointConnector_Artno.DisplayName,
                                                   totalMechJointQty, "pc(s)",
                                                    "",
                                                    "Frame",
                                                    @"");
-
         }
 
         public void Insert_SealingElement_MaterialList(DataTable tbl_explosion)

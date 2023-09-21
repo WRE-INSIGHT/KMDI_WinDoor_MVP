@@ -374,6 +374,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_SashInfo_MaterialList(DataTable tbl_explosion);
         void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion);
         void Insert_CoverProfileForTopHungInfo_MaterialList(DataTable tbl_explosion);
+        void Insert_FillerProfileForNoBotFrameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion, int motorCount);
         void Insert_FrictionStay_MaterialList(DataTable tbl_explosion);
         void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion);
@@ -437,6 +438,8 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_ExternsionForInterlock_Tophung_MaterialList(DataTable tbl_explosion);
         void Insert_WeatherBarFastener_MaterialList(DataTable tbl_explosion);
         void Insert_BrushSeal_MaterialList(DataTable tbl_explosion);
+        void Insert_BrushSealForNoBotFrame_MaterialList(DataTable tbl_explosion);
+
         void Insert_BrushSealForTopHung_MaterialList(DataTable tbl_explosion, int perimeterBrushSeal);
         void Insert_Rollers_MaterialList(DataTable tbl_explosion);
         void Insert_GlazingRebateBlock_MaterialList(DataTable tbl_explosion);
