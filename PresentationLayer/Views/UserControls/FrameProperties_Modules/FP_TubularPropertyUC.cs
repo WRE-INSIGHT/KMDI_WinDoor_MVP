@@ -49,5 +49,13 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
             nud_TubularHeight.DataBindings.Add(ModelBinding["Frame_TubularHeight"]);
             nud_TubularWidth.DataBindings.Add(ModelBinding["Frame_TubularWidth"]);
         }
+        private void nud_TubularHeight_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+        private void nud_TubularWidth_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
     }
 }

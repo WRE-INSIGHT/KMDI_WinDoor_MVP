@@ -65,6 +65,8 @@
             this.cmb_botFrameProfile.Size = new System.Drawing.Size(91, 21);
             this.cmb_botFrameProfile.TabIndex = 15;
             this.cmb_botFrameProfile.SelectedValueChanged += new System.EventHandler(this.cmb_botFrameProfile_SelectedValueChanged);
+            this.cmb_botFrameProfile.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_botFrameProfile_KeyPress);
+            this.cmb_botFrameProfile.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_botFrameProfile_Mousewheel);
             // 
             // FP_BottomFramePropertyUC
             // 

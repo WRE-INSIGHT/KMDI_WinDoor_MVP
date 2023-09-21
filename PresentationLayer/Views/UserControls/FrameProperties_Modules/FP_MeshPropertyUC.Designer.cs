@@ -54,6 +54,8 @@
             this.cmb_MeshType.Size = new System.Drawing.Size(83, 21);
             this.cmb_MeshType.TabIndex = 21;
             this.cmb_MeshType.SelectedValueChanged += new System.EventHandler(this.cmb_MeshType_SelectedValueChanged);
+            this.cmb_MeshType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_MeshType_KeyPress);
+            this.cmb_MeshType.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_MeshType_MouseWheel);
             // 
             // FP_MeshPropertyUC
             // 
