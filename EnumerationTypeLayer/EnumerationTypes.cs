@@ -842,7 +842,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly FillerProfile_ArticleNo _0914_milled = new FillerProfile_ArticleNo(0, "0914-milled");
             public static readonly FillerProfile_ArticleNo _0505_milled = new FillerProfile_ArticleNo(1, "0505-milled");
-            public static readonly FillerProfile_ArticleNo _6052_milled = new FillerProfile_ArticleNo(2, "6052-milled");
+            public static readonly FillerProfile_ArticleNo _6052_milled = new FillerProfile_ArticleNo(2, "6052-milled (25x17)");
             private FillerProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
         public class Brush_ArticleNo : Enumeration<Brush_ArticleNo, int>

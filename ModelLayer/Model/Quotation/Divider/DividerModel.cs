@@ -418,7 +418,7 @@ namespace ModelLayer.Model.Quotation.Divider
                 ht = Div_MPanelParent.MPanelImageRenderer_Height,
                 div_overlap = (int)(10 * Div_MPanelParent.MPanelImageRenderer_Zoom),
                 divsize = 13;
-            
+
             if (Div_Type == DividerType.Mullion)
             {
                 if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
@@ -826,11 +826,23 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         if (Div_ArtNo == Divider_ArticleNo._7536 || Div_ArtNo == Divider_ArticleNo._2069)
                         {
-                            Div_ExplosionHeight = (Div_DisplayHeight - (frame_deduction * 2)) + 3; //3 = (1.5 * 2)
+                            Div_ExplosionHeight = (Div_DisplayHeight - (frame_deduction * 2)) + 3; //3 = (1.5 * 2)\
+
+                            if (Div_FrameParent.Frame_BotFrameArtNo == BottomFrameTypes._7502 &&
+                                Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                            {
+                                Div_ExplosionHeight = (Div_DisplayHeight - frame_deduction - 33) + 8; // 33 = 7502 thicness
+                            }
                         }
                         else if (Div_ArtNo == Divider_ArticleNo._7538)
                         {
                             Div_ExplosionHeight = (Div_DisplayHeight - (frame_deduction * 2)) + (4 * 2);
+
+                            if (Div_FrameParent.Frame_BotFrameArtNo == BottomFrameTypes._7502 &&
+                                Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                            {
+                                Div_ExplosionHeight = (Div_DisplayHeight - frame_deduction - 33) + 8; // 33 = 7502 thicness
+                            }
                         }
 
                         if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677 || Div_ReinfArtNo == DividerReinf_ArticleNo._V226)
@@ -906,7 +918,7 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
 
                         }
-                       
+
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Somewhere in Between")
                     {
@@ -941,7 +953,7 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
 
                         }
-                      
+
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Last")
                     {
@@ -1026,7 +1038,7 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
 
                         }
-                      
+
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Somewhere in Between")
                     {
@@ -1059,8 +1071,8 @@ namespace ModelLayer.Model.Quotation.Divider
                         }
                         catch (Exception)
                         {
-                        }    
-                    
+                        }
+
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Last")
                     {
@@ -1084,7 +1096,7 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
 
                         }
-               
+
                     }
 
                     if (Div_Type == DividerType.Transom)
@@ -1214,7 +1226,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void Insert_CladdingProfile_MaterialList(DataTable tbl_explosion)
         {
-            if(Div_CladdingSizeList != null)
+            if (Div_CladdingSizeList != null)
             {
                 foreach (int cladding_size in Div_CladdingSizeList.Values)
                 {
@@ -1232,7 +1244,7 @@ namespace ModelLayer.Model.Quotation.Divider
                                            @"|  |");
                 }
             }
-           
+
         }
 
         public void Insert_CladdingBracket4Concrete_MaterialList(DataTable tbl_explosion)
@@ -1290,7 +1302,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void Insert_FixedCam_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Fixed cam " + Div_FixedCamDM.DisplayName,
+            tbl_explosion.Rows.Add("Fixed Cam " + Div_FixedCamDM.DisplayName,
                                    2, "pc(s)",
                                    "",
                                    "Sash");
