@@ -36,17 +36,20 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_3DHingePropertyUC_PP3dHingeLoadEventRaised(object sender, EventArgs e)
         {
-            if (_panelModel.Panel_SashHeight < 2400)
+            if (!_mainPresenter.ItemLoad)
             {
-                _panelModel.Panel_3dHingeQty = 3;
-            }
-            else if (_panelModel.Panel_SashHeight > 2399 && _panelModel.Panel_SashHeight < 2700)
-            {
-                _panelModel.Panel_3dHingeQty = 4;
-            }
-            else if (_panelModel.Panel_SashHeight > 2699 && _panelModel.Panel_SashHeight < 3200)
-            {
-                _panelModel.Panel_3dHingeQty = 5;
+                if (_panelModel.Panel_SashHeight < 2400)
+                {
+                    _panelModel.Panel_3dHingeQty = 3;
+                }
+                else if (_panelModel.Panel_SashHeight > 2399 && _panelModel.Panel_SashHeight < 2700)
+                {
+                    _panelModel.Panel_3dHingeQty = 4;
+                }
+                else if (_panelModel.Panel_SashHeight > 2699 && _panelModel.Panel_SashHeight < 3200)
+                {
+                    _panelModel.Panel_3dHingeQty = 5;
+                }
             }
 
             _pp_3DHingePropertyUC.ThisBinding(CreateBindingDictionary());
