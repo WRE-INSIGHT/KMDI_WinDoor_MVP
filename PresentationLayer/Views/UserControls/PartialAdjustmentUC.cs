@@ -51,6 +51,14 @@ namespace PresentationLayer.Views.UserControls
         {
             return lbl_ItemNo;
         }
+        public Label GetOldItemPrice()
+        {
+            return lbl_PrevPrice;
+        }
+        public Label GetCurrentItemPrice()
+        {
+            return lbl_CurrPrice;
+        }
 
         
         public event EventHandler partialAdjustmentUC_LoadEventRaised;
