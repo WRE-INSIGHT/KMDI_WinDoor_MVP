@@ -59,6 +59,7 @@ namespace PresentationLayer.Views
         bool CreateNewWindoorBtnEnabled { get; set; }
         int PropertiesScroll { get; set; }
         int ItemScroll { get; set; }
+        bool SpecificToolStripEnable { get; set; }
         void ShowMainView();
         void ThisBinding(Dictionary<string, Binding> binding);
         void RemoveBinding();

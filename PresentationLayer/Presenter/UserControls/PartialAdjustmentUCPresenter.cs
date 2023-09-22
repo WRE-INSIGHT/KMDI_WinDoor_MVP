@@ -25,6 +25,7 @@ namespace PresentationLayer.Presenter.UserControls
         Panel PanelBody;
         PictureBox OldItemPB, CurrentItemPB;
         RichTextBox OLDItemDesc, CurrentItemDesc;
+        Label OldItemPrice, CurrentItemPrice;
 
         private string BGColor = "#2596be";
 
@@ -38,6 +39,8 @@ namespace PresentationLayer.Presenter.UserControls
             CurrentItemPB = _partialAdjustmenUC.GetCurrentItemDesignImage();
             OLDItemDesc = _partialAdjustmenUC.GetOldItemDescription();
             CurrentItemDesc = _partialAdjustmenUC.GetCurrentItemDescription();
+            OldItemPrice = _partialAdjustmenUC.GetOldItemPrice();
+            CurrentItemPrice = _partialAdjustmenUC.GetCurrentItemPrice();
             SubscribeToEventSetup();
         }
 
@@ -56,7 +59,8 @@ namespace PresentationLayer.Presenter.UserControls
             _mainPresenter.Load_Windoor_Item(_windoorModel);
 
             _mainPresenter.GetMainView().GetMNSMainMenu().Enabled = false;
-            _mainPresenter.GetMainView().GetTSMain().Enabled = false;
+            //_mainPresenter.GetMainView().GetTSMain().Enabled = false;
+            _mainPresenter.GetMainView().SpecificToolStripEnable = false;
             _mainPresenter.GetMainView().GetPanelItems().Enabled = false;
 
             _mainPresenter.GetMainView().GetMNSMainMenu().BackColor = System.Drawing.ColorTranslator.FromHtml(BGColor);
@@ -81,7 +85,7 @@ namespace PresentationLayer.Presenter.UserControls
             else
             {
                 PanelBody.Visible = true;
-                _partialAdjustmenUC.GetAdjustmentUCForm().Size = new System.Drawing.Size(732, 176);
+                _partialAdjustmenUC.GetAdjustmentUCForm().Size = new System.Drawing.Size(732, 200);
             }
         }
 
@@ -93,13 +97,15 @@ namespace PresentationLayer.Presenter.UserControls
             
             OldItemPB.Width = _pBAndDescWidthSize;
             OLDItemDesc.Location = new System.Drawing.Point(_pBAndDescWidthSize);
+            OldItemPrice.Location = new System.Drawing.Point(_pBAndDescWidthSize, 178);
             CurrentItemPB.Location = new System.Drawing.Point(_pBAndDescWidthSize + OLDItemDesc.Width);
             CurrentItemPB.Width = _pBAndDescWidthSize;
             CurrentItemDesc.Location = new System.Drawing.Point(_pBAndDescWidthSize * 2 + OLDItemDesc.Width);
-
-
+            CurrentItemPrice.Location = new System.Drawing.Point(_pBAndDescWidthSize * 2 + OLDItemDesc.Width, 178);
+                      
+            
             _partialAdjustmentViewPresenter.GetPartialAdjustmentView().GetPrevItemLbl().Location = new System.Drawing.Point(_PrevAndCurrLabelPos - 50);
-            _partialAdjustmentViewPresenter.GetPartialAdjustmentView().GetCurrItemLbl().Location = new System.Drawing.Point((_PrevAndCurrLabelPos * 3) - 50);
+            _partialAdjustmentViewPresenter.GetPartialAdjustmentView().GetCurrItemLbl().Location = new System.Drawing.Point((_PrevAndCurrLabelPos * 3) - 50); 
         }
 
 

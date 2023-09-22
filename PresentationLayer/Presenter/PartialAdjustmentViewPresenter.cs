@@ -46,24 +46,25 @@ namespace PresentationLayer.Presenter
             {
               
                 IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
-              
-                _partialAdjustmentUCPresenter = _partialAdjustmentUCPresenter.GetNewInstance(_unityC, _quotationModel, wdm, _mainPresenter, this);
-                UserControl partialadjustmentItems = (UserControl)_partialAdjustmentUCPresenter.GetPartialAdjustmentUC();
-                _partialAdjustmentView.GetPanelBody().Controls.Add(partialadjustmentItems);
-                partialadjustmentItems.Dock = DockStyle.Top;
-                partialadjustmentItems.BringToFront();
-                _partialAdjustmentView.GetPanelBody().AutoScroll = true;
-              
-                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetPAItemNo().Text = "Item No." + (i + 1).ToString();
-                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = wdm.WD_image;
-                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = wdm.WD_description;
 
-                if (wdm.WD_IsPartialADPreviousExist)
-                {
-                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemDesignImage().Image = wdm.WD_PAPreviousImage;
-                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemDescription().Text = wdm.WD_PAPreviousDescription;
-                }
+                   _partialAdjustmentUCPresenter = _partialAdjustmentUCPresenter.GetNewInstance(_unityC, _quotationModel, wdm, _mainPresenter, this);
+                    UserControl partialadjustmentItems = (UserControl)_partialAdjustmentUCPresenter.GetPartialAdjustmentUC();
+                    _partialAdjustmentView.GetPanelBody().Controls.Add(partialadjustmentItems);
+                    partialadjustmentItems.Dock = DockStyle.Top;
+                    partialadjustmentItems.BringToFront();
+                    _partialAdjustmentView.GetPanelBody().AutoScroll = true;
 
+                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetPAItemNo().Text = "Item No." + (i + 1).ToString();
+                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = wdm.WD_image;
+                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = wdm.WD_description;
+                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = Math.Round(wdm.WD_price, 2).ToString("N");
+
+                    if (wdm.WD_IsPartialADPreviousExist)
+                    {
+                        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemDesignImage().Image = wdm.WD_PAPreviousImage;
+                        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemDescription().Text = wdm.WD_PAPreviousDescription;
+                        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemPrice().Text = Math.Round(wdm.WD_PAPreviousPrice, 2).ToString("N");
+                    }            
             }
         }
 

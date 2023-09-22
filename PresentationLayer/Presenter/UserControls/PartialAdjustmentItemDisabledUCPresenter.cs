@@ -107,9 +107,11 @@ namespace PresentationLayer.Presenter.UserControls
         {
           
           _mainPresenter.GetMainView().GetMNSMainMenu().Enabled = true;
-          _mainPresenter.GetMainView().GetTSMain().Enabled = true;
+          //_mainPresenter.GetMainView().GetTSMain().Enabled = true;
+          _mainPresenter.GetMainView().SpecificToolStripEnable = true;
           _mainPresenter.GetMainView().GetPanelItems().Enabled = true;
-         
+
+
           _mainPresenter.GetMainView().GetMNSMainMenu().BackColor = System.Drawing.SystemColors.Control;
           _mainPresenter.GetMainView().GetTSMain().BackColor = System.Drawing.SystemColors.Control;
           _mainPresenter.GetMainView().GetPanelItems().BackColor = System.Drawing.SystemColors.Control;

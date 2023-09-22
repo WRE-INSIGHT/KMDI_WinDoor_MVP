@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PartialAdjustmentUC));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_UsePartialAdjustment = new System.Windows.Forms.Button();
             this.lbl_ItemNo = new System.Windows.Forms.Label();
             this.btn_HideAndShow = new System.Windows.Forms.Button();
             this._paOldDescRTextBox = new System.Windows.Forms.RichTextBox();
@@ -37,7 +38,8 @@
             this._paPnlAfter = new System.Windows.Forms.Panel();
             this._paCurrentDescRTextBox = new System.Windows.Forms.RichTextBox();
             this._paCurrectDesPictureBox = new System.Windows.Forms.PictureBox();
-            this.btn_UsePartialAdjustment = new System.Windows.Forms.Button();
+            this.lbl_PrevPrice = new System.Windows.Forms.Label();
+            this.lbl_CurrPrice = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._paOldDesPictureBox)).BeginInit();
             this._paPnlAfter.SuspendLayout();
@@ -56,6 +58,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(732, 29);
             this.panel1.TabIndex = 0;
+            // 
+            // btn_UsePartialAdjustment
+            // 
+            this.btn_UsePartialAdjustment.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_UsePartialAdjustment.BackgroundImage")));
+            this.btn_UsePartialAdjustment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_UsePartialAdjustment.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btn_UsePartialAdjustment.Location = new System.Drawing.Point(671, 0);
+            this.btn_UsePartialAdjustment.Name = "btn_UsePartialAdjustment";
+            this.btn_UsePartialAdjustment.Size = new System.Drawing.Size(30, 27);
+            this.btn_UsePartialAdjustment.TabIndex = 5;
+            this.btn_UsePartialAdjustment.UseVisualStyleBackColor = true;
+            this.btn_UsePartialAdjustment.Click += new System.EventHandler(this.btn_UsePartialAdjustment_Click);
             // 
             // lbl_ItemNo
             // 
@@ -129,26 +143,36 @@
             this._paCurrectDesPictureBox.TabIndex = 0;
             this._paCurrectDesPictureBox.TabStop = false;
             // 
-            // btn_UsePartialAdjustment
+            // lbl_PrevPrice
             // 
-            this.btn_UsePartialAdjustment.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_UsePartialAdjustment.BackgroundImage")));
-            this.btn_UsePartialAdjustment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_UsePartialAdjustment.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btn_UsePartialAdjustment.Location = new System.Drawing.Point(671, 0);
-            this.btn_UsePartialAdjustment.Name = "btn_UsePartialAdjustment";
-            this.btn_UsePartialAdjustment.Size = new System.Drawing.Size(30, 27);
-            this.btn_UsePartialAdjustment.TabIndex = 5;
-            this.btn_UsePartialAdjustment.UseVisualStyleBackColor = true;
-            this.btn_UsePartialAdjustment.Click += new System.EventHandler(this.btn_UsePartialAdjustment_Click);
+            this.lbl_PrevPrice.AutoSize = true;
+            this.lbl_PrevPrice.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_PrevPrice.Location = new System.Drawing.Point(178, 178);
+            this.lbl_PrevPrice.Name = "lbl_PrevPrice";
+            this.lbl_PrevPrice.Size = new System.Drawing.Size(20, 17);
+            this.lbl_PrevPrice.TabIndex = 6;
+            this.lbl_PrevPrice.Text = "...";
+            // 
+            // lbl_CurrPrice
+            // 
+            this.lbl_CurrPrice.AutoSize = true;
+            this.lbl_CurrPrice.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_CurrPrice.Location = new System.Drawing.Point(552, 178);
+            this.lbl_CurrPrice.Name = "lbl_CurrPrice";
+            this.lbl_CurrPrice.Size = new System.Drawing.Size(20, 17);
+            this.lbl_CurrPrice.TabIndex = 7;
+            this.lbl_CurrPrice.Text = "...";
             // 
             // PartialAdjustmentUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lbl_CurrPrice);
+            this.Controls.Add(this.lbl_PrevPrice);
             this.Controls.Add(this._paPnlAfter);
             this.Controls.Add(this.panel1);
             this.Name = "PartialAdjustmentUC";
-            this.Size = new System.Drawing.Size(732, 176);
+            this.Size = new System.Drawing.Size(732, 200);
             this.Load += new System.EventHandler(this.PartialAdjustmentUC_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -156,6 +180,7 @@
             this._paPnlAfter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._paCurrectDesPictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -170,5 +195,7 @@
         private System.Windows.Forms.Button btn_HideAndShow;
         private System.Windows.Forms.Label lbl_ItemNo;
         private System.Windows.Forms.Button btn_UsePartialAdjustment;
+        private System.Windows.Forms.Label lbl_PrevPrice;
+        private System.Windows.Forms.Label lbl_CurrPrice;
     }
 }

@@ -83,7 +83,6 @@ namespace PresentationLayer.Views
             {
                 return ItemToolStripMenuItem.Enabled;
             }
-
             set
             {
                 ItemToolStripMenuItem.Enabled = value;
@@ -239,12 +238,32 @@ namespace PresentationLayer.Views
             {
                 return _itemScroll;
             }
-
             set
             {
                 _itemScroll = value;
                 pnlItems.VerticalScroll.Value = value;
                 pnlItems.ScrollControlIntoView(pnlItems);
+            }
+        }
+        public bool SpecificToolStripEnable
+        {
+            get
+            {
+                return SpecificToolStripEnable;
+            }
+            set
+            {
+                openToolStripButton.Enabled = value;
+                saveToolStripButton.Enabled = value;
+                ScreentoolStripButton.Enabled = value;
+                duplicateItemToolStripButton1.Enabled = value;
+                refreshToolStripButton.Enabled = value;
+                ViewImagerToolStripButton1.Enabled = value;
+                deleteItemToolStripButton1.Enabled = value;
+                glassUpgradeToolStrip.Enabled = value;
+                partialAdjustmentToolstrip.Enabled = value;
+                PriceHistorytoolStripButton.Enabled = value;
+                DateAssignedtoolStripButton.Enabled = value;
             }
         }
 
