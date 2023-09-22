@@ -54,6 +54,8 @@
             this.cmb_ConnectionType.Size = new System.Drawing.Size(77, 21);
             this.cmb_ConnectionType.TabIndex = 17;
             this.cmb_ConnectionType.SelectedValueChanged += new System.EventHandler(this.cmb_ConnectionType_SelectedValueChanged);
+            this.cmb_ConnectionType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_ConnectionType_KeyPress);
+            this.cmb_ConnectionType.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmbcmb_ConnectionType_MouseWheel);
             // 
             // FP_FrameConnectionTypePropertyUC
             // 

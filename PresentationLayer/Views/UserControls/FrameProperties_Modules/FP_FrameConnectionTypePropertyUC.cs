@@ -37,5 +37,14 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, cmbConnectionTypeSelectedValueChangedEventRaised, e);
         }
+        private void cmbcmb_ConnectionType_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_ConnectionType_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

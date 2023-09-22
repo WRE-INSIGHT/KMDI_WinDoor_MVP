@@ -26,5 +26,14 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         {
 
         }
+        private void cmb_MeshType_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_MeshType_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

@@ -54,6 +54,8 @@
             this.cmb_TrackProfile.Size = new System.Drawing.Size(86, 21);
             this.cmb_TrackProfile.TabIndex = 21;
             this.cmb_TrackProfile.SelectedValueChanged += new System.EventHandler(this.cmb_TrackProfile_SelectedValueChanged);
+            this.cmb_TrackProfile.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_TrackProfile_KeyPress);
+            this.cmb_TrackProfile.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_TrackProfile_MouseWheel);
             // 
             // FP_TrackProfilePropertyUC
             // 

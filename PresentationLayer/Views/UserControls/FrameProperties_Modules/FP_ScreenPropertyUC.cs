@@ -43,5 +43,10 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, nudScreenHeightValueChangedEventRaised, e);
         }
+
+        private void nud_screenHeight_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
     }
 }

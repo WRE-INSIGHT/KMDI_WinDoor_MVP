@@ -24,6 +24,10 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
             nud_CladdingQty.DataBindings.Add(ModelBinding["Frame_CladdingQty"]);
             this.DataBindings.Add(ModelBinding["Frame_CladdingVisibility"]);
         }
+        private void nud_CladdingQty_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
 
     }
 }

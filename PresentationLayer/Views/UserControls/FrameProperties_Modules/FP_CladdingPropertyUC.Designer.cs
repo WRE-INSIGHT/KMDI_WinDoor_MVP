@@ -39,6 +39,7 @@
             this.nud_CladdingQty.Name = "nud_CladdingQty";
             this.nud_CladdingQty.Size = new System.Drawing.Size(65, 20);
             this.nud_CladdingQty.TabIndex = 45;
+            this.nud_CladdingQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nud_CladdingQty_MouseWheel);
             // 
             // lbl_Cladding
             // 
