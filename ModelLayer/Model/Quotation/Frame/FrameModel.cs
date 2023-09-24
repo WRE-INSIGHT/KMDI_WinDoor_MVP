@@ -2565,7 +2565,7 @@ namespace ModelLayer.Model.Quotation.Frame
             }
             else if (Frame_BotFrameArtNo == BottomFrameTypes._7789)
             {
-                tbl_explosion.Rows.Add("Bottom Frame Width " + Frame_BotFrameArtNo.ToString(),
+                tbl_explosion.Rows.Add("Aluminum Threshold " + Frame_BotFrameArtNo.ToString(),
                                  1, "pc(s)",
                                  Frame_Width.ToString(),
                                  "Frame",
@@ -2588,7 +2588,7 @@ namespace ModelLayer.Model.Quotation.Frame
             else if (Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                      Frame_BotFrameArtNo == BottomFrameTypes._A166)
             {
-                tbl_explosion.Rows.Add("Bottom Frame Width " + Frame_BotFrameArtNo.ToString(),
+                tbl_explosion.Rows.Add("Aluminum Threshold " + Frame_BotFrameArtNo.ToString(),
                                    1, "pc(s)",
                                    Frame_Width,
                                    "Frame",

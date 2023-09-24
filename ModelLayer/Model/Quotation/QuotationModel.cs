@@ -1639,7 +1639,8 @@ namespace ModelLayer.Model.Quotation
 
                                                 pnl_curCtrl.Insert_Rollers_MaterialList(Material_List);
 
-                                                if (pnl_curCtrl.Panel_EspagnoletteArtNo != Espagnolette_ArticleNo._None)
+                                                if (pnl_curCtrl.Panel_EspagnoletteArtNo != Espagnolette_ArticleNo._None &&
+                                                    pnl_curCtrl.Panel_Overlap_Sash != OverlapSash._None)
                                                 {
                                                     pnl_curCtrl.Insert_StrikerForSliding_MaterialList(Material_List);
                                                 }

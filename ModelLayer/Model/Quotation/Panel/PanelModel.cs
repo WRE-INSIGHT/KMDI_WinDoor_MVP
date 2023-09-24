@@ -7473,7 +7473,11 @@ namespace ModelLayer.Model.Quotation.Panel
                     TotalNumberOfPanel = 1;
                 }
 
-                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                //if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                //{
+                //    deduction_for_sashHT -= 2;
+                //}
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                 {
                     deduction_for_sashHT -= 2;
                 }
