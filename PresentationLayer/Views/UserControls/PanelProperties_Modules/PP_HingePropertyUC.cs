@@ -38,5 +38,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_HingeOptionsVisibility"]);
             this.DataBindings.Add(ModelBinding["Panel_HingeOptionsPropertyHeight"]);
         }
+        private void cmb_Hinge_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_Hinge_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

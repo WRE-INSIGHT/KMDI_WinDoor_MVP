@@ -35,5 +35,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_TrackRailArtNoVisibility"]);
             cmb_TrackRailArtNo.DataBindings.Add(ModelBinding["Panel_TrackRailArtNo"]);
         }
+        private void cmb_TrackRailArtNo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_TrackRailArtNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

@@ -54,5 +54,10 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             return pnl_RotoswingOptions;
         }
+
+        private void cmb_RotoswingNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

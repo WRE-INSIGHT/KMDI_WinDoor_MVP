@@ -55,6 +55,8 @@
             this.cmb_CornerDrive.Size = new System.Drawing.Size(82, 21);
             this.cmb_CornerDrive.TabIndex = 33;
             this.cmb_CornerDrive.SelectedValueChanged += new System.EventHandler(this.cmb_CornerDrive_SelectedValueChanged);
+            this.cmb_CornerDrive.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_CornerDrive_KeyPress);
+            this.cmb_CornerDrive.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_CornerDrive_MouseWheel);
             // 
             // PP_CornerDrivePropertyUC
             // 

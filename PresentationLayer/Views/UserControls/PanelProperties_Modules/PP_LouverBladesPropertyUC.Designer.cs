@@ -44,6 +44,7 @@
             this.nud_LouverBlades.Name = "nud_LouverBlades";
             this.nud_LouverBlades.Size = new System.Drawing.Size(72, 20);
             this.nud_LouverBlades.TabIndex = 41;
+            this.nud_LouverBlades.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nud_LouverBlades_MouseWheel);
             // 
             // lbl_LouverBlades
             // 

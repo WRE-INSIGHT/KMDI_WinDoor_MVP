@@ -48,6 +48,8 @@
             this.cmb_MiddleCLoser.Size = new System.Drawing.Size(75, 21);
             this.cmb_MiddleCLoser.TabIndex = 39;
             this.cmb_MiddleCLoser.SelectedValueChanged += new System.EventHandler(this.cmb_MiddleCLoser_SelectedValueChanged);
+            this.cmb_MiddleCLoser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_MiddleCLoser_KeyPress);
+            this.cmb_MiddleCLoser.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_MiddleCLoser_MouseWheel);
             // 
             // label1
             // 
@@ -80,6 +82,7 @@
             this.num_MCPairQty.Size = new System.Drawing.Size(75, 22);
             this.num_MCPairQty.TabIndex = 41;
             this.num_MCPairQty.ValueChanged += new System.EventHandler(this.num_MCPairQty_ValueChanged);
+            this.num_MCPairQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_MCPairQty_MouseWheel);
             // 
             // PP_MiddleCloserPropertyUC
             // 

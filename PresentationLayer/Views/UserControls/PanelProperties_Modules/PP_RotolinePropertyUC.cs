@@ -48,5 +48,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_RotolineArtNo.DataBindings.Add(ModelBinding["Panel_RotolineArtNo"]);
             this.DataBindings.Add(ModelBinding["Panel_RotolineOptionsVisibility"]);
         }
+        private void cmb_RotolineArtNo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_RotolineArtNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

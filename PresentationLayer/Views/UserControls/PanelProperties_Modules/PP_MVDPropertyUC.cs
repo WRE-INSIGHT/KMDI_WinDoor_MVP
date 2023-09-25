@@ -44,5 +44,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_MVDArtNo.DataBindings.Add(ModelBinding["Panel_MVDArtNo"]);
             this.DataBindings.Add(ModelBinding["Panel_MVDOptionsVisibility"]);
         }
+        private void cmb_MVDArtNo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_MVDArtNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

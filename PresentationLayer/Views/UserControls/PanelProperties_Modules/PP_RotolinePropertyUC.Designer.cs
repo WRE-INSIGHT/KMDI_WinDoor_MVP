@@ -53,6 +53,8 @@
             this.cmb_RotolineArtNo.Size = new System.Drawing.Size(88, 21);
             this.cmb_RotolineArtNo.TabIndex = 34;
             this.cmb_RotolineArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_RotolineArtNo_SelectedValueChanged);
+            this.cmb_RotolineArtNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_RotolineArtNo_KeyPress);
+            this.cmb_RotolineArtNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_RotolineArtNo_MouseWheel);
             // 
             // PP_RotolinePropertyUC
             // 

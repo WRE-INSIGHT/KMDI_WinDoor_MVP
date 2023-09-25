@@ -55,6 +55,8 @@
             this.cmb_RotaryArtNo.Size = new System.Drawing.Size(88, 21);
             this.cmb_RotaryArtNo.TabIndex = 30;
             this.cmb_RotaryArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_RotaryArtNo_SelectedValueChanged);
+            this.cmb_RotaryArtNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_RotaryArtNo_KeyPress);
+            this.cmb_RotaryArtNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_RotaryArtNo_MouseWheel);
             // 
             // label11
             // 
@@ -78,6 +80,8 @@
             this.cmb_LockingKit.Size = new System.Drawing.Size(88, 21);
             this.cmb_LockingKit.TabIndex = 28;
             this.cmb_LockingKit.SelectedValueChanged += new System.EventHandler(this.cmb_LockingKit_SelectedValueChanged);
+            this.cmb_LockingKit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_LockingKit_KeyPress);
+            this.cmb_LockingKit.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_LockingKit_MouseWheel);
             // 
             // PP_RotaryPropertyUC
             // 

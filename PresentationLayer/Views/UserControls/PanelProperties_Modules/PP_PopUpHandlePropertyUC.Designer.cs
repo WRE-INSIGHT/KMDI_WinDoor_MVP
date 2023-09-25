@@ -44,6 +44,8 @@
             this.cmb_PopUpArtNo.Size = new System.Drawing.Size(95, 21);
             this.cmb_PopUpArtNo.TabIndex = 38;
             this.cmb_PopUpArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_PopUpArtNo_SelectedValueChanged);
+            this.cmb_PopUpArtNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_PopUpArtNo_KeyPress);
+            this.cmb_PopUpArtNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_PopUpArtNo_MouseWheel);
             // 
             // label12
             // 

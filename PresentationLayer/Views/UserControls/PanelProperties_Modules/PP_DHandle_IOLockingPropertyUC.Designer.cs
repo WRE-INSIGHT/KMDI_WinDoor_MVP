@@ -44,6 +44,8 @@
             this.cmb_D_IOLockingArtNo.Size = new System.Drawing.Size(95, 21);
             this.cmb_D_IOLockingArtNo.TabIndex = 36;
             this.cmb_D_IOLockingArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_D_IOLockingArtNo_SelectedValueChanged);
+            this.cmb_D_IOLockingArtNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_D_IOLockingArtNo_KeyPress);
+            this.cmb_D_IOLockingArtNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_D_IOLockingArtNo_MouseWheel);
             // 
             // label12
             // 
