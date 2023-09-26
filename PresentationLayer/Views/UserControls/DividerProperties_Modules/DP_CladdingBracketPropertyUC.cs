@@ -28,5 +28,13 @@ namespace PresentationLayer.Views.UserControls.DividerProperties_Modules
             nudBracketForConcrete.DataBindings.Add(ModelBinding["Div_CladdingBracketForConcreteQTY"]);
             nudBracketForUPVC.DataBindings.Add(ModelBinding["Div_CladdingBracketForUPVCQTY"]);
         }
+        private void nudBracketForUPVC_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+        private void nudBracketForConcrete_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
     }
 }

@@ -44,6 +44,8 @@
             this.cmb_DArtNo.Size = new System.Drawing.Size(95, 21);
             this.cmb_DArtNo.TabIndex = 36;
             this.cmb_DArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_DArtNo_SelectedValueChanged);
+            this.cmb_DArtNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_DArtNo_KeyPress);
+            this.cmb_DArtNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_DArtNo_MouseWheel);
             // 
             // label12
             // 

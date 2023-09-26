@@ -63,5 +63,22 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_LockingKit.DataBindings.Add(ModelBinding["Panel_LockingKitArtNo"]);
             cmb_RotaryArtNo.DataBindings.Add(ModelBinding["Panel_RotaryArtNo"]);
         }
+        private void cmb_RotaryArtNo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+        private void cmb_RotaryArtNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void cmb_LockingKit_MouseWheel(object sender,MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_LockingKit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

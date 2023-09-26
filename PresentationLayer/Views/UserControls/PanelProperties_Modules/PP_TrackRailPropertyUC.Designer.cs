@@ -44,6 +44,8 @@
             this.cmb_TrackRailArtNo.Size = new System.Drawing.Size(87, 21);
             this.cmb_TrackRailArtNo.TabIndex = 38;
             this.cmb_TrackRailArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_TrackRailArtNo_SelectedValueChanged);
+            this.cmb_TrackRailArtNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_TrackRailArtNo_KeyPress);
+            this.cmb_TrackRailArtNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_TrackRailArtNo_MouseWheel);
             // 
             // label12
             // 

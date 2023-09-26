@@ -57,6 +57,7 @@
             this.nudHorizontal.Size = new System.Drawing.Size(85, 22);
             this.nudHorizontal.TabIndex = 17;
             this.nudHorizontal.ValueChanged += new System.EventHandler(this.nudHorizontal_ValueChanged);
+            this.nudHorizontal.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nudHorizontal_MouseWheel);
             // 
             // nudVertical
             // 
@@ -67,6 +68,7 @@
             this.nudVertical.Size = new System.Drawing.Size(85, 22);
             this.nudVertical.TabIndex = 16;
             this.nudVertical.ValueChanged += new System.EventHandler(this.nudVertical_ValueChanged);
+            this.nudVertical.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nudVertical_MouseWheel);
             // 
             // label2
             // 
@@ -107,6 +109,8 @@
             this.cmbGBArtNum.Size = new System.Drawing.Size(85, 21);
             this.cmbGBArtNum.TabIndex = 31;
             this.cmbGBArtNum.SelectedValueChanged += new System.EventHandler(this.cmbGBArtNum_SelectedValueChanged);
+            this.cmbGBArtNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbGBArtNum_KeyPress);
+            this.cmbGBArtNum.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmbGBArtNum_MouseWheel);
             // 
             // PP_GeorgianBarPropertyUC
             // 

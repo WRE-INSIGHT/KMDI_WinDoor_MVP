@@ -38,5 +38,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_CenterProfileVisibility"]);
             cmb_CenterProfileArtNo.DataBindings.Add(ModelBinding["Panel_CenterProfileArtNo"]);
         }
+        private void cmb_CenterProfileArtNo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+        private void cmb_CenterProfileArtNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

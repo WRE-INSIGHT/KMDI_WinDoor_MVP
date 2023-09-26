@@ -147,6 +147,8 @@
             this.cmb_divReinf.Name = "cmb_divReinf";
             this.cmb_divReinf.Size = new System.Drawing.Size(87, 21);
             this.cmb_divReinf.TabIndex = 11;
+            this.cmb_divReinf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_divReinf_KeyPress);
+            this.cmb_divReinf.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_divReinf_MouseWheel);
             // 
             // lbl_divReinf
             // 
@@ -168,6 +170,8 @@
             this.cmb_divArtNo.Size = new System.Drawing.Size(87, 21);
             this.cmb_divArtNo.TabIndex = 9;
             this.cmb_divArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_divArtNo_SelectedValueChanged);
+            this.cmb_divArtNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_divArtNo_KeyPress);
+            this.cmb_divArtNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_divArtNo_MouseWheel);
             // 
             // lbl_divArtNo
             // 
@@ -231,6 +235,8 @@
             this.cmb_CladdingArtNo.Size = new System.Drawing.Size(87, 21);
             this.cmb_CladdingArtNo.TabIndex = 13;
             this.cmb_CladdingArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_CladdingArtNo_SelectedValueChanged);
+            this.cmb_CladdingArtNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_CladdingArtNo_KeyPress);
+            this.cmb_CladdingArtNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_CladdingArtNo_MouseWheel);
             // 
             // pnl_AddCladding
             // 

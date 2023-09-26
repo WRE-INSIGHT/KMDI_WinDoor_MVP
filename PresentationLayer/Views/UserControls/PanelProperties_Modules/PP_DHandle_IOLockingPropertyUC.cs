@@ -42,5 +42,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_DHandleIOLockingOptionVisibilty"]);
             cmb_D_IOLockingArtNo.DataBindings.Add(ModelBinding["Panel_DHandleIOLockingOutsideArtNo"]);
         }
+        private void cmb_D_IOLockingArtNo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_D_IOLockingArtNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

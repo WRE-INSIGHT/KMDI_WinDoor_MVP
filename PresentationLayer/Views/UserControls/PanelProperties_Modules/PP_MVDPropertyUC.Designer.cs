@@ -53,6 +53,8 @@
             this.cmb_MVDArtNo.Size = new System.Drawing.Size(88, 21);
             this.cmb_MVDArtNo.TabIndex = 36;
             this.cmb_MVDArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_MVDArtNo_SelectedValueChanged);
+            this.cmb_MVDArtNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_MVDArtNo_KeyPress);
+            this.cmb_MVDArtNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_MVDArtNo_MouseWheel);
             // 
             // PP_MVDPropertyUC
             // 

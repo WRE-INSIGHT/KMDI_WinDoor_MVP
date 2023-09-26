@@ -28,5 +28,10 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_LouverBladesVisibility"]);
             nud_LouverBlades.DataBindings.Add(ModelBinding["Panel_LouverBladesCount"]);
         }
+        private void nud_LouverBlades_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+
+        }
     }
 }

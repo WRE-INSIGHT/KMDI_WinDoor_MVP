@@ -39,5 +39,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_RotoswingForSlidingHandleOptionVisibilty"]);
             cmb_RotoswingForSlidingNo.DataBindings.Add(ModelBinding["Panel_RotoswingForSlidingHandleArtNo"]);
         }
+        private void cmb_RotoswingForSlidingNo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_RotoswingForSlidingNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

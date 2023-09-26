@@ -45,7 +45,19 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_MiddleCLoser.DataBindings.Add(ModelBinding["Panel_MiddleCloserArtNo"]);
             num_MCPairQty.DataBindings.Add(ModelBinding["Panel_MiddleCloserPairQty"]);
         }
+        private void cmb_MiddleCLoser_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
 
+        }
 
+        private void cmb_MiddleCLoser_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void num_MCPairQty_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
     }
 }
