@@ -164,7 +164,8 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 bot_deduct = 26 - 10;
             }
-            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || 
+                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166)
             {
                 bot_deduct = 0;
             }
