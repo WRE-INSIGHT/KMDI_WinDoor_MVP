@@ -1447,8 +1447,6 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Problem Adding Sliding Screen to Screenlist" + " " + this + ex.Message);
             }
 
-
-
         }
 
 
@@ -4602,6 +4600,18 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("SystemSuggestedPrice:"))
                         {
                             _windoorModel.SystemSuggestedPrice = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("pnlLeftCounter:"))
+                        {
+                            _windoorModel.pnlLeftCounter = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("pnlRightCounter:"))
+                        {
+                            _windoorModel.pnlRightCounter = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("pnlCount:"))
+                        {
+                            _windoorModel.pnlCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         #endregion
                     }
