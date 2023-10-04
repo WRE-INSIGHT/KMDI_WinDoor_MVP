@@ -417,7 +417,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             {
                 return _panelIDCounter;
             }
-            set 
+            set
             {
                 _panelIDCounter = value;
             }
@@ -663,6 +663,47 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public List<string> lst_TotalPriceHistory { get; set; }
         public decimal SystemSuggestedPrice { get; set; }
 
+
+        private int _pnlLeftCounter;
+        public int pnlLeftCounter
+        {
+            get
+            {
+                return _pnlLeftCounter;
+            }
+            set
+            {
+                _pnlLeftCounter = value;
+            }
+        }
+
+
+        private int _pnlRightCounter;
+        public int pnlRightCounter
+        {
+            get
+            {
+                return _pnlRightCounter;
+            }
+            set
+            {
+                _pnlRightCounter = value;
+            }
+        }
+
+
+        private int _pnlCount;
+        public int pnlCount
+        {
+            get
+            {
+                return _pnlCount;
+            }
+            set
+            {
+                _pnlCount = value;
+            }
+        }
         #region Methods
 
         public void SetDimensions_basePlatform()

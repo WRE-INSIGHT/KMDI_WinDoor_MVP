@@ -983,8 +983,8 @@ namespace EnumerationTypeLayer
         public class CenterProfile_ArticleNo : Enumeration<CenterProfile_ArticleNo, int>
         {
             public static readonly CenterProfile_ArticleNo _none = new CenterProfile_ArticleNo(0, "None");
-            public static readonly CenterProfile_ArticleNo _A000 = new CenterProfile_ArticleNo(1, "A000");
-            public static readonly CenterProfile_ArticleNo _6067 = new CenterProfile_ArticleNo(2, "6067");
+            public static readonly CenterProfile_ArticleNo _A000 = new CenterProfile_ArticleNo(1, "A000"); // aluminum
+            public static readonly CenterProfile_ArticleNo _6067 = new CenterProfile_ArticleNo(2, "6067"); // pvc
 
 
             private CenterProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }

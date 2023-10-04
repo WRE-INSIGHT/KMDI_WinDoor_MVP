@@ -5651,6 +5651,12 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_GlazingBeadHeight = Panel_GlassHeight + 200;
                 Panel_GlazingBeadHeightDecimal = Panel_GlassHeightDecimal;
 
+
+                if (Panel_Type.Contains("Awning") &&
+                    Panel_ParentFrameModel.Frame_Height <= 1800)
+                {
+                    Panel_SashReinfHeight = Panel_SashHeight - 5 - (35 * 2) - 10;
+                }
                 //Panel_GlazingBeadWidth = Panel_SashWidth;
                 //Panel_GlazingBeadWidthDecimal = Panel_SashWidthDecimal;
                 //Panel_GlazingBeadHeight = Panel_SashHeight;
@@ -8885,6 +8891,12 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_SashInfo_MaterialList(DataTable tbl_explosion)
         {
+            string ReinCutAngle = @"|  |";
+            if (Panel_Type.Contains("Awning") &&
+                Panel_ParentFrameModel.Frame_Height <= 1800)
+            {
+                ReinCutAngle = @"\  /";
+            }
             tbl_explosion.Rows.Add("Sash Width " + Panel_SashProfileArtNo.DisplayName,
                                    2, "pc(s)",
                                    Panel_SashWidth.ToString(),
@@ -8907,7 +8919,9 @@ namespace ModelLayer.Model.Quotation.Panel
                                    2, "pc(s)",
                                    Panel_SashReinfHeight.ToString(),
                                    "Sash",
-                                   @"|  |");
+                                   ReinCutAngle);
+
+
         }
 
         public void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion)
@@ -9102,6 +9116,13 @@ namespace ModelLayer.Model.Quotation.Panel
             int SnapInKeepQty = (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
                                  Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) ? 1 : 2;
+
+
+            if (Panel_Type.Contains("Awning") &&
+                                Panel_ParentFrameModel.Frame_Height >= 2100)
+            {
+                SnapInKeepQty = 0;
+            }
 
             tbl_explosion.Rows.Add("Snap-in Keep " + Panel_SnapInKeepArtNo.DisplayName,
                                    SnapInKeepQty, "pc(s)",
@@ -9605,7 +9626,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public void Insert_GBSpacer_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("GB SPACER FOR 6mm GLASS " + Panel_GBSpacerArtNo.DisplayName,
-                                   4, "pc(s)",
+                                   5, "pc(s)",
                                    "",
                                    "Sash",
                                    "");
