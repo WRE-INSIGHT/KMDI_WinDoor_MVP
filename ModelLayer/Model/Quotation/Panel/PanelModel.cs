@@ -5491,6 +5491,12 @@ namespace ModelLayer.Model.Quotation.Panel
                     botFrameDeduction = 33;
                     ChckBotFrame = true;
                 }
+                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                {
+                    botFrameDeduction = 5;
+                    ChckBotFrame = true;
+                    Panel_BrushArtNo = Brush_ArticleNo._SP02;
+                }
             }
             if (Panel_SashPropertyVisibility == true)
             {
@@ -5645,6 +5651,12 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_GlazingBeadHeight = Panel_GlassHeight + 200;
                 Panel_GlazingBeadHeightDecimal = Panel_GlassHeightDecimal;
 
+
+                if (Panel_Type.Contains("Awning") &&
+                    Panel_ParentFrameModel.Frame_Height <= 1800)
+                {
+                    Panel_SashReinfHeight = Panel_SashHeight - 5 - (35 * 2) - 10;
+                }
                 //Panel_GlazingBeadWidth = Panel_SashWidth;
                 //Panel_GlazingBeadWidthDecimal = Panel_SashWidthDecimal;
                 //Panel_GlazingBeadHeight = Panel_SashHeight;
@@ -7467,7 +7479,11 @@ namespace ModelLayer.Model.Quotation.Panel
                     TotalNumberOfPanel = 1;
                 }
 
-                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                //if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                //{
+                //    deduction_for_sashHT -= 2;
+                //}
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                 {
                     deduction_for_sashHT -= 2;
                 }
@@ -7561,6 +7577,13 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_CoverProfileArtNo = CoverProfile_ArticleNo._1182Milled;
                 }
+
+                if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None &&
+                    Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                {
+                    Panel_BrushArtNo = Brush_ArticleNo._SP02;
+                }
+
 
                 if (Panel_HingeOptions == HingeOption._2DHinge)
                 {
@@ -8868,6 +8891,12 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_SashInfo_MaterialList(DataTable tbl_explosion)
         {
+            string ReinCutAngle = @"|  |";
+            if (Panel_Type.Contains("Awning") &&
+                Panel_ParentFrameModel.Frame_Height <= 1800)
+            {
+                ReinCutAngle = @"\  /";
+            }
             tbl_explosion.Rows.Add("Sash Width " + Panel_SashProfileArtNo.DisplayName,
                                    2, "pc(s)",
                                    Panel_SashWidth.ToString(),
@@ -8890,7 +8919,9 @@ namespace ModelLayer.Model.Quotation.Panel
                                    2, "pc(s)",
                                    Panel_SashReinfHeight.ToString(),
                                    "Sash",
-                                   @"|  |");
+                                   ReinCutAngle);
+
+
         }
 
         public void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion)
@@ -8923,6 +8954,27 @@ namespace ModelLayer.Model.Quotation.Panel
                                              1, "pc(s)",
                                              Panel_ParentFrameModel.Frame_Width.ToString(),
                                              "Frame",
+                                             @"|  |");
+        }
+
+        public void Insert_FillerProfileForNoBotFrameInfo_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Filler Profile " + FillerProfile_ArticleNo._0914_milled.ToString(),
+                                             1, "pc(s)",
+                                             Panel_SashWidth.ToString(),
+                                             "Ancillary Profile",
+                                             @"|  |");
+
+            tbl_explosion.Rows.Add("Filler Profile " + FillerProfile_ArticleNo._0505_milled.ToString(),
+                                             1, "pc(s)",
+                                             Panel_SashWidth.ToString(),
+                                             "Ancillary Profile",
+                                             @"|  |");
+
+            tbl_explosion.Rows.Add("Filler Profile " + FillerProfile_ArticleNo._6052_milled.ToString(),
+                                             1, "pc(s)",
+                                             Panel_SashWidth.ToString(),
+                                             "Ancillary Profile",
                                              @"|  |");
         }
 
@@ -9064,6 +9116,13 @@ namespace ModelLayer.Model.Quotation.Panel
             int SnapInKeepQty = (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
                                  Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) ? 1 : 2;
+
+
+            if (Panel_Type.Contains("Awning") &&
+                                Panel_ParentFrameModel.Frame_Height >= 2100)
+            {
+                SnapInKeepQty = 0;
+            }
 
             tbl_explosion.Rows.Add("Snap-in Keep " + Panel_SnapInKeepArtNo.DisplayName,
                                    SnapInKeepQty, "pc(s)",
@@ -9567,7 +9626,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public void Insert_GBSpacer_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("GB SPACER FOR 6mm GLASS " + Panel_GBSpacerArtNo.DisplayName,
-                                   4, "pc(s)",
+                                   5, "pc(s)",
                                    "",
                                    "Sash",
                                    "");
@@ -9820,12 +9879,24 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "");
         }
 
+        public void Insert_BrushSealForNoBotFrame_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_BrushArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Brush Seal " + Panel_BrushArtNo.DisplayName,
+                                       1, "pc(s)",
+                                       Panel_SashWidth,
+                                       "Hardware & Accessories",
+                                       "");
+            }
+        }
+
         public void Insert_BrushSealForTopHung_MaterialList(DataTable tbl_explosion, int perimeterBrushSeal)
         {
             tbl_explosion.Rows.Add("Brush Seal " + Panel_BrushSealArtNo.DisplayName,
                                    1, "pc(s)",
                                    perimeterBrushSeal,
-                                   "Hardware & Acc",
+                                   "Hardware & Accessories",
                                    "");
         }
 

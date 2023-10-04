@@ -36,7 +36,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SqlClient;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -1019,7 +1019,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                string input = Interaction.InputBox("Set new date \n\n MM/DD/YYYY", "Date Assign", dateAssigned.Date.ToString().Replace(" 12:00:00 AM", string.Empty));
+                string input = Interaction.InputBox("Set new date \n\n MM/DD/YYYY \n\n Initial Date Assign:" + dateAssigned.ToString().Replace("12:00:00 AM", string.Empty) + "\n\n Current Date Assigned:" + _quotationModel.Date_Assigned_Mainpresenter.ToString().Replace("12:00:00 AM", string.Empty), "Date Assign", dateAssigned.Date.ToString().Replace(" 12:00:00 AM", string.Empty));
 
                 if (input == "")
                 {
@@ -1527,6 +1527,17 @@ namespace PresentationLayer.Presenter
                                             _quotationModel.ItemCostingPriceAndPoints();
                                             wdm.TotalPriceHistoryStatus = "System Generated Price";
                                             wdm.WD_price = wdm.WD_currentPrice;
+                                              #region change factor algo ni sam
+                                //foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                                //{
+                                //    wdm.TotalPriceHistoryStatus = "Change Factor";
+                                //    _quotationModel.FactorChange = true;
+                                //    GetCurrentPrice();
+
+                                //    wdm.WD_price = wdm.WD_currentPrice;
+                                //}
+                                //_quotationModel.FactorChange = false;
+                                #endregion
                                         }
                                     }
                                     GetCurrentPrice();
@@ -3063,6 +3074,10 @@ namespace PresentationLayer.Presenter
 
         private void OnMainViewLoadEventRaised(object sender, EventArgs e)
         {
+            _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
+            _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
+
+
             if (Properties.Settings.Default.FirstTym == true)
             {
                 string defDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Windoor Maker files";
@@ -3136,6 +3151,9 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear", "NA", 1662.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", "NA", 1662.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Clear", "NA", 1941.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(13.0f, "13 mm Clear", "NA", 2000.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(14.0f, "14 mm Clear", "NA", 2100.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(24.0f, "24 mm Clear", "NA", 3882.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", 0m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Clear", "NA", 0m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Euro Grey", "NA", 0m, true, false, false, false, false);
@@ -3635,7 +3653,7 @@ namespace PresentationLayer.Presenter
                 _userModel.AccountType == "User Level 2" ||
                 _userModel.AccountType == "User Level 3")
             {
-                _mainView.PriceHistorytoolStripButtonVisible = false; 
+                _mainView.PriceHistorytoolStripButtonVisible = false;
                 if (_userModel.AccountType == "User Level 1")
                 {
                     _mainView.PriceHistorytoolStripButtonVisible = true;
@@ -11178,6 +11196,8 @@ namespace PresentationLayer.Presenter
 
         public void Set_pnlPropertiesBody_ScrollView(int scroll_value)
         {
+            _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
+            _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
             _pnlPropertiesBody.VerticalScroll.Value += scroll_value;
             _pnlPropertiesBody.PerformLayout();
         }
@@ -12892,6 +12912,7 @@ namespace PresentationLayer.Presenter
             }
             //GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
             GetMainView().GetCurrentPrice().Value = _windoorModel.WD_currentPrice;
+            Console.WriteLine(GetMainView().GetCurrentPrice().Value);
             SetChangesMark();
         }
 

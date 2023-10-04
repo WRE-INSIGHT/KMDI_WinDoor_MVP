@@ -24,17 +24,21 @@ namespace PresentationLayer.Presenter
         PictureBox _pboxFrame;
         Panel _pnlPanelling;
 
-        int pnlLeftCounter = 0,
-            pnlRightCounter = 0,
-            line_X_Distance,
-            pnlCount;
+        //int pnlLeftCounter = 0,
+        //    pnlRightCounter = 0,
+        //    line_X_Distance,
+        //    pnlCount;
+
+        int pnlLeftCounter, pnlRightCounter, pnlCount, line_X_Distance = 0;
+
         string lineLocation;
         public SetTopViewSlidingPanellingPresenter(ISetTopViewSlidingPanellingView setTopViewSlidingPanelling)
         {
             _setTopViewSlidingPanelling = setTopViewSlidingPanelling;
 
             _pboxFrame = _setTopViewSlidingPanelling.GetPbox();
-            _pnlPanelling = _setTopViewSlidingPanelling.GetPnlPannelling();
+            _pnlPanelling = _setTopViewSlidingPanelling.GetPnlPannelling(); 
+
             SubscribeToEventSetUp();
         }
 
@@ -51,11 +55,11 @@ namespace PresentationLayer.Presenter
 
         private void _setTopViewSlidingPanelling_btnMinusRightLineClickEventRaised(object sender, EventArgs e)
         {
-            if (pnlRightCounter != 0)
+            if (_windoorModel.pnlRightCounter != 0)
             {
-                pnlRightCounter -= 1;
+                _windoorModel.pnlRightCounter -= 1;
                 _pnlPanelling.Invalidate();
-                Console.WriteLine(pnlRightCounter);
+                //Console.WriteLine(pnlRightCounter);
             }
         }
 
@@ -68,16 +72,16 @@ namespace PresentationLayer.Presenter
                 {
                     if (mpnl.MPanel_DividerEnabled == false)
                     {
-                        pnlCount = mpnl.MPanelLst_Panel.Count;
+                        _windoorModel.pnlCount = mpnl.MPanelLst_Panel.Count;
                     }
 
                 }
             }
-            if (pnlCount > (pnlLeftCounter + pnlRightCounter))
+            if (_windoorModel.pnlCount > (_windoorModel.pnlLeftCounter + _windoorModel.pnlRightCounter))
             {
-                pnlRightCounter += 1;
+                _windoorModel.pnlRightCounter += 1;
                 _pnlPanelling.Invalidate();
-                Console.WriteLine(pnlRightCounter);
+                //Console.WriteLine(pnlRightCounter);
             }
         }
 
@@ -96,13 +100,13 @@ namespace PresentationLayer.Presenter
             //Console.WriteLine(_windoorModel.WD_SlidingTopViewVisibility);
             // SetImagerHeight();
 
-            if (pnlLeftCounter != 0)
+            if (_windoorModel.pnlLeftCounter != 0)
             {
-                pnlLeftCounter -= 1;
+                _windoorModel.pnlLeftCounter -= 1;
                 _mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
 
                 _pnlPanelling.Invalidate();
-                Console.WriteLine(pnlLeftCounter);
+                //Console.WriteLine(pnlLeftCounter);
 
             }
 
@@ -117,7 +121,7 @@ namespace PresentationLayer.Presenter
                 {
                     if (mpnl.MPanel_DividerEnabled == false)
                     {
-                        pnlCount = mpnl.MPanelLst_Panel.Count;
+                        _windoorModel.pnlCount = mpnl.MPanelLst_Panel.Count;
                     }
 
                 }
@@ -136,13 +140,13 @@ namespace PresentationLayer.Presenter
             //Console.WriteLine(_windoorModel.WD_SlidingTopViewVisibility);
             //SetImagerHeight();
 
-            if (pnlCount > (pnlLeftCounter + pnlRightCounter))
+            if (_windoorModel.pnlCount > (_windoorModel.pnlLeftCounter + _windoorModel.pnlRightCounter))
             {
-                pnlLeftCounter += 1;
+                _windoorModel.pnlLeftCounter += 1;
                 _pnlPanelling.Invalidate();
                 _mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
 
-                Console.WriteLine(pnlLeftCounter);
+                //Console.WriteLine(pnlLeftCounter);
             }
 
         }
@@ -157,9 +161,9 @@ namespace PresentationLayer.Presenter
             if (lineLocation != null)
             {
                 int line_LtR_Y = _pnlPanelling.Height - 10;
-                if (pnlCount != 0)
+                if (_windoorModel.pnlCount != 0)
                 {
-                    line_X_Distance = _pnlPanelling.Width / pnlCount;
+                    line_X_Distance = _pnlPanelling.Width / _windoorModel.pnlCount;
                 }
                 int InitialDistance = 25,
                     endOfLine = _pnlPanelling.Width - 10;
@@ -168,7 +172,7 @@ namespace PresentationLayer.Presenter
 
                 if (_windoorModel.WD_TopViewType == "Fold and Slide")
                 {
-                    for (int a = 0; a < pnlLeftCounter; a++)
+                    for (int a = 0; a < _windoorModel.pnlLeftCounter; a++)
                     {
                         int x1 = InitialDistance,
                             x2 = InitialDistance + (line_X_Distance / 2);
@@ -185,12 +189,12 @@ namespace PresentationLayer.Presenter
                         //Console.WriteLine(x1 + "\n" + x2 + "\n\n");
                         InitialDistance = x2;
                     }
-                    if (pnlCount != 0)
+                    if (_windoorModel.pnlCount != 0)
                     {
-                        line_X_Distance = -System.Math.Abs(_pnlPanelling.Width / pnlCount);
+                        line_X_Distance = -System.Math.Abs(_pnlPanelling.Width / _windoorModel.pnlCount);
                     }
                     InitialDistance = _pnlPanelling.Width - 20;
-                    for (int a = 0; a < pnlRightCounter; a++)
+                    for (int a = 0; a < _windoorModel.pnlRightCounter; a++)
                     {
 
 
@@ -212,7 +216,7 @@ namespace PresentationLayer.Presenter
                 }
                 else if (_windoorModel.WD_TopViewType == "Sliding Pivot")
                 {
-                    for (int a = 0; a < pnlLeftCounter; a++)
+                    for (int a = 0; a < _windoorModel.pnlLeftCounter; a++)
                     {
                         int x1 = InitialDistance;
 
@@ -220,7 +224,7 @@ namespace PresentationLayer.Presenter
 
                         InitialDistance += 10;
                     }
-                    for (int a = 0; a < pnlRightCounter; a++)
+                    for (int a = 0; a < _windoorModel.pnlRightCounter; a++)
                     {
                         int x1 = endOfLine;
 
@@ -232,7 +236,7 @@ namespace PresentationLayer.Presenter
 
 
             }
-            if ((pnlLeftCounter + pnlRightCounter) != 0)
+            if ((_windoorModel.pnlLeftCounter + _windoorModel.pnlRightCounter) != 0)
             {
                 Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
                 basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
@@ -516,7 +520,7 @@ namespace PresentationLayer.Presenter
 
         private void SetImagerHeight()
         {
-            if ((pnlLeftCounter + pnlRightCounter) > 0)
+            if ((_windoorModel.pnlLeftCounter + _windoorModel.pnlRightCounter) > 0)
             {
                 _windoorModel.WD_SlidingTopViewVisibility = true;
                 _windoorModel.WD_pboxImagerHeight = 180;
@@ -529,8 +533,8 @@ namespace PresentationLayer.Presenter
 
                 //_itemInfoUCP.GetItemInfoUC().PboxItemImagerHeight = 240;
             }
-            Console.WriteLine(_windoorModel.WD_SlidingTopViewVisibility);
-            Console.WriteLine(_itemInfoUCP.GetItemInfoUC().PboxItemImagerHeight);
+            //Console.WriteLine(_windoorModel.WD_SlidingTopViewVisibility);
+            //Console.WriteLine(_itemInfoUCP.GetItemInfoUC().PboxItemImagerHeight);
 
         }
         public ISetTopViewSlidingPanellingView GetSetTopViewSlidingPanellingView()

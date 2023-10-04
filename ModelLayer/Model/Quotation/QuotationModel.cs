@@ -50,7 +50,7 @@ namespace ModelLayer.Model.Quotation
         public string BOMandItemlistStatus { get; set; }
         public bool itemSelectStatus { get; set; }
         public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
-
+        public bool FactorChange { get; set; }
 
 
 
@@ -767,13 +767,16 @@ namespace ModelLayer.Model.Quotation
 
                                                 if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
                                                 {
-                                                    div_nxtCtrl.Insert_FixedCam_MaterialList(Material_List);
-                                                    add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
+                                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Window)
+                                                    {
+                                                        div_nxtCtrl.Insert_FixedCam_MaterialList(Material_List);
+                                                        add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
 
-                                                    div_nxtCtrl.Insert_SnapNKeep_MaterialList(Material_List);
+                                                        div_nxtCtrl.Insert_SnapNKeep_MaterialList(Material_List);
 
-                                                    int snapNkeep_screws = div_nxtCtrl.Add_SnapNKeep_screws4fab();
-                                                    add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                        int snapNkeep_screws = div_nxtCtrl.Add_SnapNKeep_screws4fab();
+                                                        add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                    }
 
                                                     if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
                                                     {
@@ -895,14 +898,17 @@ namespace ModelLayer.Model.Quotation
 
                                                 if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
                                                 {
-                                                    div_prevCtrl.Insert_FixedCam_MaterialList(Material_List);
+                                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Window)
+                                                    {
+                                                        div_prevCtrl.Insert_FixedCam_MaterialList(Material_List);
 
-                                                    add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
+                                                        add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
 
-                                                    div_prevCtrl.Insert_SnapNKeep_MaterialList(Material_List);
+                                                        div_prevCtrl.Insert_SnapNKeep_MaterialList(Material_List);
 
-                                                    int snapNkeep_screws = div_prevCtrl.Add_SnapNKeep_screws4fab();
-                                                    add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                        int snapNkeep_screws = div_prevCtrl.Add_SnapNKeep_screws4fab();
+                                                        add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                    }
 
                                                     if (div_prevCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
                                                     {
@@ -1105,6 +1111,26 @@ namespace ModelLayer.Model.Quotation
                                                         pnl_curCtrl.Insert_CoverForCornerPivotRest_MaterialList(Material_List, basecol);
                                                         add_screws_fab_pivotRest += 1;
                                                     }
+
+
+                                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Door)
+                                                    {
+                                                        //if (frame.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                                        //{
+                                                        //    pnl.Insert_FillerProfileForNoBotFrameInfo_MaterialList(Material_List);
+                                                        //    pnl.Insert_BrushSealForNoBotFrame_MaterialList(Material_List);
+                                                        //}
+
+                                                        pnl_curCtrl.Insert_SnapNKeep_MaterialList(Material_List);
+
+                                                        pnl_curCtrl.Insert_FixedCam_MaterialList(Material_List);
+
+
+                                                        int FixedCamAndSnapInKeepQty = (frame.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                                                         frame.Frame_BotFrameArtNo == BottomFrameTypes._None) ? 1 : 2;
+                                                        add_screws_fab_snapInKeep += FixedCamAndSnapInKeepQty * 2;
+                                                        add_screws_fab_fxdcam += FixedCamAndSnapInKeepQty * 2;
+                                                    }
                                                 }
                                             }
 
@@ -1242,7 +1268,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         where = "Frame";
                                     }
-                                    if (pnl_curCtrl.Panel_Type.Contains("Louver"))
+                                    if (!pnl_curCtrl.Panel_Type.Contains("Louver"))
                                     {
                                         pnl_curCtrl.Insert_GlazingBead_MaterialList(Material_List, where);
                                     }
@@ -1560,7 +1586,7 @@ namespace ModelLayer.Model.Quotation
                                                 pnl_curCtrl.Insert_CoverProfileForTopHungInfo_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_BrushSealForTopHung_MaterialList(Material_List, perimeterBrushSeal);
                                                 pnl_curCtrl.Insert_SlidingSashBottomGuide_MaterialList(Material_List, OverLappingPanel_Qty);
-                                                pnl_curCtrl.Insert_BrushForSliding_MaterialList(Material_List, 0);
+                                                pnl_curCtrl.Insert_BrushForSliding_MaterialList(Material_List, perimeterFinPlate);
 
                                                 TopHungPerFrame = false;
                                             }
@@ -1613,7 +1639,8 @@ namespace ModelLayer.Model.Quotation
 
                                                 pnl_curCtrl.Insert_Rollers_MaterialList(Material_List);
 
-                                                if (pnl_curCtrl.Panel_EspagnoletteArtNo != Espagnolette_ArticleNo._None)
+                                                if (pnl_curCtrl.Panel_EspagnoletteArtNo != Espagnolette_ArticleNo._None &&
+                                                    pnl_curCtrl.Panel_Overlap_Sash != OverlapSash._None)
                                                 {
                                                     pnl_curCtrl.Insert_StrikerForSliding_MaterialList(Material_List);
                                                 }
@@ -1979,6 +2006,12 @@ namespace ModelLayer.Model.Quotation
 
                                     if (frame.Frame_Type == FrameModel.Frame_Padding.Door)
                                     {
+                                        if (frame.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            pnl.Insert_FillerProfileForNoBotFrameInfo_MaterialList(Material_List);
+                                            pnl.Insert_BrushSealForNoBotFrame_MaterialList(Material_List);
+                                        }
+
                                         pnl.Insert_SnapNKeep_MaterialList(Material_List);
 
                                         pnl.Insert_FixedCam_MaterialList(Material_List);
@@ -3780,7 +3813,7 @@ namespace ModelLayer.Model.Quotation
                     FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
                     DividerRein_7536_PricePerSqrMeter = 406.86m;
                 }
-                else if(cus_ref_date >= inc_price_date_7 && cus_ref_date <  inc_price_date_8)
+                else if (cus_ref_date >= inc_price_date_7 && cus_ref_date < inc_price_date_8)
                 {
                     FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
                     FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
@@ -3888,7 +3921,7 @@ namespace ModelLayer.Model.Quotation
                 //    wdm.WD_Selected = true;
                 //}
 
-                if (wdm.WD_Selected == true || BOMandItemlistStatus == "PriceItemList")
+                if (wdm.WD_Selected == true || BOMandItemlistStatus == "PriceItemList") //|| FactorChange == true
                 {
 
                     foreach (IFrameModel fr in wdm.lst_frame)
@@ -5757,7 +5790,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                                 }
-                                               
+
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealed_ReflectiveClr;
@@ -6255,7 +6288,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                                 }
-                                                
+
 
                                                 #endregion
                                             }
@@ -6552,7 +6585,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                                 }
-                                                
+
 
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                                 {
@@ -7049,7 +7082,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                                 }
-                                                
+
 
                                                 #endregion
                                             }
@@ -9096,7 +9129,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                     }
-                                   
+
 
 
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
@@ -9590,7 +9623,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                     }
-                                    
+
 
                                     #endregion
                                 }
@@ -9885,7 +9918,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                     }
-                                    
+
 
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                     {
@@ -10378,7 +10411,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                     }
-                                    
+
 
                                     #endregion
                                 }

@@ -842,7 +842,7 @@ namespace EnumerationTypeLayer
         {
             public static readonly FillerProfile_ArticleNo _0914_milled = new FillerProfile_ArticleNo(0, "0914-milled");
             public static readonly FillerProfile_ArticleNo _0505_milled = new FillerProfile_ArticleNo(1, "0505-milled");
-            public static readonly FillerProfile_ArticleNo _6052_milled = new FillerProfile_ArticleNo(2, "6052-milled");
+            public static readonly FillerProfile_ArticleNo _6052_milled = new FillerProfile_ArticleNo(2, "6052-milled (25x17)");
             private FillerProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
         public class Brush_ArticleNo : Enumeration<Brush_ArticleNo, int>
@@ -983,8 +983,8 @@ namespace EnumerationTypeLayer
         public class CenterProfile_ArticleNo : Enumeration<CenterProfile_ArticleNo, int>
         {
             public static readonly CenterProfile_ArticleNo _none = new CenterProfile_ArticleNo(0, "None");
-            public static readonly CenterProfile_ArticleNo _A000 = new CenterProfile_ArticleNo(1, "A000");
-            public static readonly CenterProfile_ArticleNo _6067 = new CenterProfile_ArticleNo(2, "6067");
+            public static readonly CenterProfile_ArticleNo _A000 = new CenterProfile_ArticleNo(1, "A000"); // aluminum
+            public static readonly CenterProfile_ArticleNo _6067 = new CenterProfile_ArticleNo(2, "6067"); // pvc
 
 
             private CenterProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
