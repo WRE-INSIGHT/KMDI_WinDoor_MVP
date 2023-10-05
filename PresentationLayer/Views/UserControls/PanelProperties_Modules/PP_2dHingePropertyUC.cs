@@ -37,5 +37,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, num2dHingeQtyNonMotorizedValueChangedEventRaised, e);
         }
+        private void num_2dHingeQtyNonMotorized_Mousewheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
     }
 }

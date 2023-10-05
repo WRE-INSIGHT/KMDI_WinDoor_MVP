@@ -39,5 +39,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_PopUpHandleOptionVisibilty"]);
             cmb_PopUpArtNo.DataBindings.Add(ModelBinding["Panel_PopUpHandleArtNo"]);
         }
+        private void cmb_PopUpArtNo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_PopUpArtNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

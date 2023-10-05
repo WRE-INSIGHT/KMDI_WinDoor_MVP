@@ -41,7 +41,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_DummyDHandleOptionVisibilty"]);
             cmb_DummyDArtNo.DataBindings.Add(ModelBinding["Panel_DummyDHandleOutsideArtNo"]);
         }
+        private void cmb_DummyDArtNo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
 
-
+        private void cmb_DummyDArtNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

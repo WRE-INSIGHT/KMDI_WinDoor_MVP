@@ -62,6 +62,8 @@
             this.cmb_RioArtNo.Size = new System.Drawing.Size(95, 21);
             this.cmb_RioArtNo.TabIndex = 34;
             this.cmb_RioArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_RioArtNo_SelectedValueChanged);
+            this.cmb_RioArtNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_RioArtNo_KeyPress);
+            this.cmb_RioArtNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_RioArtNo_MouseWheel);
             // 
             // label12
             // 
@@ -96,6 +98,8 @@
             this.cmb_RioArtNo2.Size = new System.Drawing.Size(95, 21);
             this.cmb_RioArtNo2.TabIndex = 34;
             this.cmb_RioArtNo2.SelectedValueChanged += new System.EventHandler(this.cmb_RioArtNo2_SelectedValueChanged);
+            this.cmb_RioArtNo2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_RioArtNo2_KeyPress);
+            this.cmb_RioArtNo2.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_RioArtNo2_MouseWheel);
             // 
             // label1
             // 

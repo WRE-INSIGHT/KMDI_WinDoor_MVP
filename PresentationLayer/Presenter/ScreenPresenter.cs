@@ -923,6 +923,7 @@ namespace PresentationLayer.Presenter
                     if(item.Screen_DisplayedDimension == null || item.Screen_DisplayedDimension == " " || item.Screen_DisplayedDimension == "")//new project doesnt need this,you can remove this after weeks or months 
                     {
                         _Screen_DimensionFormat = item.Screen_Width + " x " + item.Screen_Height;
+                        item.Screen_DisplayedDimension = _Screen_DimensionFormat; // populate properties use in compiler
                     }
                     else
                     {

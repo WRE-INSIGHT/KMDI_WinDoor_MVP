@@ -38,5 +38,14 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, TrackProfileSelectedValueChangedEventRaised, e);
         }
+        private void cmb_TrackProfile_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_TrackProfile_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

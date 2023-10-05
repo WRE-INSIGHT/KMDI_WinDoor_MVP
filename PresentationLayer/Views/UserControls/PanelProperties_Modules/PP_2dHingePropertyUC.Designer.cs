@@ -42,6 +42,7 @@
             this.num_2dHingeQtyNonMotorized.Size = new System.Drawing.Size(75, 20);
             this.num_2dHingeQtyNonMotorized.TabIndex = 39;
             this.num_2dHingeQtyNonMotorized.ValueChanged += new System.EventHandler(this.num_2dHingeQtyNonMotorized_ValueChanged);
+            this.num_2dHingeQtyNonMotorized.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_2dHingeQtyNonMotorized_Mousewheel);
             // 
             // label2
             // 

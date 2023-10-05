@@ -216,5 +216,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             }
 
         }
+        private void cmb_Espagnolette_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_Espagnolette_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

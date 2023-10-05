@@ -66,6 +66,8 @@
             this.cmb_BladeType.Size = new System.Drawing.Size(72, 21);
             this.cmb_BladeType.TabIndex = 5;
             this.cmb_BladeType.SelectedValueChanged += new System.EventHandler(this.cmb_BladeType_SelectedValueChanged);
+            this.cmb_BladeType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_BladeType_KeyPress);
+            this.cmb_BladeType.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_BladeType_MouseWheel);
             // 
             // label1
             // 

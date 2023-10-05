@@ -104,6 +104,7 @@
             this.num_TopExtQty.Size = new System.Drawing.Size(30, 23);
             this.num_TopExtQty.TabIndex = 28;
             this.num_TopExtQty.ThousandsSeparator = true;
+            this.num_TopExtQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_TopExtQty_MouseWheel);
             // 
             // cmb_TopExt
             // 
@@ -116,6 +117,8 @@
             this.cmb_TopExt.TabIndex = 30;
             this.cmb_TopExt.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_TopExt.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            this.cmb_TopExt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_TopExt_KeyPress);
+            this.cmb_TopExt.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_TopExt_MouseWheel);
             // 
             // chk_ToAdd_TopExt2
             // 
@@ -165,6 +168,7 @@
             this.num_TopExtQty2.Size = new System.Drawing.Size(30, 23);
             this.num_TopExtQty2.TabIndex = 28;
             this.num_TopExtQty2.ThousandsSeparator = true;
+            this.num_TopExtQty2.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_TopExtQty2_MouseWheel);
             // 
             // cmb_TopExt2
             // 
@@ -177,6 +181,8 @@
             this.cmb_TopExt2.TabIndex = 30;
             this.cmb_TopExt2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_TopExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            this.cmb_TopExt2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_TopExt2_KeyPress);
+            this.cmb_TopExt2.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_TopExt2_MouseWheel);
             // 
             // chk_ToAdd_TopExt3
             // 
@@ -217,6 +223,7 @@
             this.num_BotExtQty.Size = new System.Drawing.Size(30, 23);
             this.num_BotExtQty.TabIndex = 28;
             this.num_BotExtQty.ThousandsSeparator = true;
+            this.num_BotExtQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_BotExtQty_MouseWheel);
             // 
             // cmb_BotExt
             // 
@@ -229,6 +236,8 @@
             this.cmb_BotExt.TabIndex = 30;
             this.cmb_BotExt.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_BotExt.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            this.cmb_BotExt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_BotExt_KeyPress);
+            this.cmb_BotExt.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_BotExt_MouseWheel);
             // 
             // chk_ToAdd_BotExt2
             // 
@@ -269,6 +278,7 @@
             this.num_BotExtQty2.Size = new System.Drawing.Size(30, 23);
             this.num_BotExtQty2.TabIndex = 28;
             this.num_BotExtQty2.ThousandsSeparator = true;
+            this.num_BotExtQty2.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_BotExtQty2_MouseWheel);
             // 
             // cmb_BotExt2
             // 
@@ -281,6 +291,8 @@
             this.cmb_BotExt2.TabIndex = 30;
             this.cmb_BotExt2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_BotExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            this.cmb_BotExt2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_BotExt2_KeyPress);
+            this.cmb_BotExt2.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_BotExt2_MouseWheel);
             // 
             // pnl_BotExtField2
             // 
@@ -323,6 +335,8 @@
             this.cmb_LeftExt2.TabIndex = 30;
             this.cmb_LeftExt2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_LeftExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            this.cmb_LeftExt2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_LeftExt2_KeyPress);
+            this.cmb_LeftExt2.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_LeftExt2_MouseWheel);
             // 
             // pnl_LeftExtField2
             // 
@@ -353,6 +367,7 @@
             this.num_LeftExtQty.Size = new System.Drawing.Size(30, 23);
             this.num_LeftExtQty.TabIndex = 28;
             this.num_LeftExtQty.ThousandsSeparator = true;
+            this.num_LeftExtQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_LeftExtQty_MouseWheel);
             // 
             // cmb_LeftExt
             // 
@@ -365,6 +380,8 @@
             this.cmb_LeftExt.TabIndex = 30;
             this.cmb_LeftExt.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_LeftExt.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            this.cmb_LeftExt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_LeftExt_KeyPress);
+            this.cmb_LeftExt.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_LeftExt_MouseWheel);
             // 
             // chk_ToAdd_LeftExt2
             // 
@@ -405,6 +422,7 @@
             this.num_RightExtQty2.Size = new System.Drawing.Size(30, 23);
             this.num_RightExtQty2.TabIndex = 28;
             this.num_RightExtQty2.ThousandsSeparator = true;
+            this.num_RightExtQty2.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_RightExtQty2_MouseWheel);
             // 
             // cmb_RightExt2
             // 
@@ -417,6 +435,8 @@
             this.cmb_RightExt2.TabIndex = 30;
             this.cmb_RightExt2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_RightExt2.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            this.cmb_RightExt2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_RightExt2_KeyPress);
+            this.cmb_RightExt2.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_RightExt2_MouseWheel);
             // 
             // pnl_RightExtField2
             // 
@@ -447,6 +467,7 @@
             this.num_RightExtQty.Size = new System.Drawing.Size(30, 23);
             this.num_RightExtQty.TabIndex = 28;
             this.num_RightExtQty.ThousandsSeparator = true;
+            this.num_RightExtQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_RightExtQty_MouseWheel);
             // 
             // cmb_RightExt
             // 
@@ -459,6 +480,8 @@
             this.cmb_RightExt.TabIndex = 30;
             this.cmb_RightExt.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_RightExt.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            this.cmb_RightExt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_RightExt_KeyPress);
+            this.cmb_RightExt.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_RightExt_MouseWheel);
             // 
             // chk_ToAdd_RightExt2
             // 
@@ -499,6 +522,7 @@
             this.num_TopExtQty3.Size = new System.Drawing.Size(30, 23);
             this.num_TopExtQty3.TabIndex = 28;
             this.num_TopExtQty3.ThousandsSeparator = true;
+            this.num_TopExtQty3.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_TopExtQty3_MouseWheel);
             // 
             // cmb_TopExt3
             // 
@@ -511,6 +535,8 @@
             this.cmb_TopExt3.TabIndex = 30;
             this.cmb_TopExt3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_DrawItem);
             this.cmb_TopExt3.SelectedValueChanged += new System.EventHandler(this.cmbExtension_SelectedValueChanged);
+            this.cmb_TopExt3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_TopExt3_KeyPress);
+            this.cmb_TopExt3.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_TopExt3_MouseWheel);
             // 
             // pnl_TopExtField3
             // 

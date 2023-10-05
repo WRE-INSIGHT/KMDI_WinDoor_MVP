@@ -56,6 +56,7 @@
             this.cmb_RotoswingNo.Size = new System.Drawing.Size(82, 21);
             this.cmb_RotoswingNo.TabIndex = 33;
             this.cmb_RotoswingNo.SelectedValueChanged += new System.EventHandler(this.cmb_RotoswingNo_SelectedValueChanged);
+            this.cmb_RotoswingNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_RotoswingNo_KeyPress);
             // 
             // pnl_RotoswingDefaultOptions
             // 

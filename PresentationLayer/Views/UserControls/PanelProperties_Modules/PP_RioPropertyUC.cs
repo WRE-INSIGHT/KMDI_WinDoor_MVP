@@ -64,5 +64,23 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             pnl_RioArtNo2.DataBindings.Add(ModelBinding["Panel_RioOptionsVisibility2"]);
 
         }
+        private void cmb_RioArtNo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+        private void cmb_RioArtNo2_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_RioArtNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cmb_RioArtNo2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

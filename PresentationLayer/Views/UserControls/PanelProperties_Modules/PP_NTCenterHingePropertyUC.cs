@@ -37,5 +37,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_NTCenterHingeVisibility"]);
             cmb_NTCenterHinge.DataBindings.Add(ModelBinding["Panel_NTCenterHingeArticleNo"]);
         }
+        private void cmb_NTCenterHinge_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_NTCenterHinge_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

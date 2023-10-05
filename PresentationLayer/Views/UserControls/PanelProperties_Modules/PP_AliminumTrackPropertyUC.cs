@@ -39,5 +39,10 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_AluminumTrackQtyVisibility"]);
         }
 
+        private void nud_AluminumTrackQty_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
     }
 }

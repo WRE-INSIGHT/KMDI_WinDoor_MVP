@@ -86,5 +86,9 @@ namespace PresentationLayer.Views.UserControls.DividerProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, btnDeleteCladdingClickedEventRaised, e);
         }
+        private void num_CladdingSize_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
     }
 }

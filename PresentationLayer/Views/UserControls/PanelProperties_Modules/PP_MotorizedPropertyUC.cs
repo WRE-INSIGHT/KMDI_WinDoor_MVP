@@ -62,7 +62,26 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             pnl_ButtHinge.DataBindings.Add(ModelBinding["Panel_ButtHingeVisibility"]);
             chk_Remote.DataBindings.Add(ModelBinding["Panel_MotorizedMechRemoteOption"]);
         }
+        private void cmb_MotorizedMechanism_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
 
-
+        private void cmb_MotorizedMechanism_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void num_SetQty_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+        private void num_2dHingeQty_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+        private void num_ButtHingeQty_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
     }
 }

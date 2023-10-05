@@ -44,6 +44,8 @@
             this.cmb_CenterProfileArtNo.Size = new System.Drawing.Size(85, 21);
             this.cmb_CenterProfileArtNo.TabIndex = 40;
             this.cmb_CenterProfileArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_CenterProfileArtNo_SelectedValueChanged);
+            this.cmb_CenterProfileArtNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_CenterProfileArtNo_KeyPress);
+            this.cmb_CenterProfileArtNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_CenterProfileArtNo_MouseWheel);
             // 
             // lbl_centerProfile
             // 

@@ -45,6 +45,8 @@
             this.cmb_Roller.Size = new System.Drawing.Size(75, 21);
             this.cmb_Roller.TabIndex = 37;
             this.cmb_Roller.SelectedValueChanged += new System.EventHandler(this.cmb_Roller_SelectedValueChanged);
+            this.cmb_Roller.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_Roller_KeyPress);
+            this.cmb_Roller.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_Roller_MouseWheel);
             // 
             // lbl_Roller
             // 

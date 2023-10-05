@@ -31,6 +31,10 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             num_3dHingeQty.DataBindings.Add(ModelBinding["Panel_3dHingeQty"]);
             this.DataBindings.Add(ModelBinding["Panel_3dHingePropertyVisibility"]);
         }
+        private void num_3dHingeQty_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
 
 
     }
