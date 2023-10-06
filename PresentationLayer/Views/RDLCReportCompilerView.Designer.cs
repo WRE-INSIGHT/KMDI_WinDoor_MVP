@@ -34,6 +34,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chkbx_SummaryLessD = new System.Windows.Forms.CheckBox();
+            this.btnCompileReport = new System.Windows.Forms.Button();
+            this.txt_SummaryVat = new System.Windows.Forms.TextBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.txt_oftexpenses = new System.Windows.Forms.TextBox();
+            this.chkbox_showVat = new System.Windows.Forms.CheckBox();
             this.chklst_glassType = new System.Windows.Forms.CheckedListBox();
             this.txt_guVat = new System.Windows.Forms.TextBox();
             this.chkbx_guShowVat = new System.Windows.Forms.CheckBox();
@@ -45,12 +51,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtbox_rowlimit = new System.Windows.Forms.TextBox();
             this.chkbox_subtotal = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.txt_oftexpenses = new System.Windows.Forms.TextBox();
-            this.txt_SummaryVat = new System.Windows.Forms.TextBox();
-            this.chkbox_showVat = new System.Windows.Forms.CheckBox();
-            this.btnCompileReport = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.chk_showimagelist = new System.Windows.Forms.CheckedListBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -59,9 +59,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.txtbx_SummaryLessD = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -124,6 +124,13 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.txtbx_SummaryLessD);
+            this.panel2.Controls.Add(this.chkbx_SummaryLessD);
+            this.panel2.Controls.Add(this.btnCompileReport);
+            this.panel2.Controls.Add(this.txt_SummaryVat);
+            this.panel2.Controls.Add(this.panel5);
+            this.panel2.Controls.Add(this.txt_oftexpenses);
+            this.panel2.Controls.Add(this.chkbox_showVat);
             this.panel2.Controls.Add(this.chklst_glassType);
             this.panel2.Controls.Add(this.txt_guVat);
             this.panel2.Controls.Add(this.chkbx_guShowVat);
@@ -135,7 +142,6 @@
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.txtbox_rowlimit);
             this.panel2.Controls.Add(this.chkbox_subtotal);
-            this.panel2.Controls.Add(this.tableLayoutPanel1);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -143,6 +149,65 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(805, 145);
             this.panel2.TabIndex = 1;
+            // 
+            // chkbx_SummaryLessD
+            // 
+            this.chkbx_SummaryLessD.AutoSize = true;
+            this.chkbx_SummaryLessD.ForeColor = System.Drawing.Color.Red;
+            this.chkbx_SummaryLessD.Location = new System.Drawing.Point(375, 49);
+            this.chkbx_SummaryLessD.Name = "chkbx_SummaryLessD";
+            this.chkbx_SummaryLessD.Size = new System.Drawing.Size(94, 17);
+            this.chkbx_SummaryLessD.TabIndex = 15;
+            this.chkbx_SummaryLessD.Text = "*LessDiscount";
+            this.chkbx_SummaryLessD.UseVisualStyleBackColor = true;
+            this.chkbx_SummaryLessD.CheckedChanged += new System.EventHandler(this.chkbx_SummaryLessD_CheckedChanged);
+            // 
+            // btnCompileReport
+            // 
+            this.btnCompileReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCompileReport.Location = new System.Drawing.Point(296, 101);
+            this.btnCompileReport.Name = "btnCompileReport";
+            this.btnCompileReport.Size = new System.Drawing.Size(161, 37);
+            this.btnCompileReport.TabIndex = 1;
+            this.btnCompileReport.Text = "Compile Report";
+            this.btnCompileReport.UseVisualStyleBackColor = true;
+            this.btnCompileReport.Click += new System.EventHandler(this.btnCompileReport_Click);
+            // 
+            // txt_SummaryVat
+            // 
+            this.txt_SummaryVat.Location = new System.Drawing.Point(296, 66);
+            this.txt_SummaryVat.Multiline = true;
+            this.txt_SummaryVat.Name = "txt_SummaryVat";
+            this.txt_SummaryVat.Size = new System.Drawing.Size(78, 24);
+            this.txt_SummaryVat.TabIndex = 6;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.Black;
+            this.panel5.Location = new System.Drawing.Point(296, 93);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(161, 4);
+            this.panel5.TabIndex = 8;
+            // 
+            // txt_oftexpenses
+            // 
+            this.txt_oftexpenses.Location = new System.Drawing.Point(296, 21);
+            this.txt_oftexpenses.Multiline = true;
+            this.txt_oftexpenses.Name = "txt_oftexpenses";
+            this.txt_oftexpenses.Size = new System.Drawing.Size(161, 23);
+            this.txt_oftexpenses.TabIndex = 0;
+            // 
+            // chkbox_showVat
+            // 
+            this.chkbox_showVat.AutoSize = true;
+            this.chkbox_showVat.ForeColor = System.Drawing.Color.Red;
+            this.chkbox_showVat.Location = new System.Drawing.Point(296, 49);
+            this.chkbox_showVat.Name = "chkbox_showVat";
+            this.chkbox_showVat.Size = new System.Drawing.Size(46, 17);
+            this.chkbox_showVat.TabIndex = 7;
+            this.chkbox_showVat.Text = "*Vat";
+            this.chkbox_showVat.UseVisualStyleBackColor = true;
+            this.chkbox_showVat.CheckedChanged += new System.EventHandler(this.chkbox_showVat_CheckedChanged);
             // 
             // chklst_glassType
             // 
@@ -246,75 +311,6 @@
             this.chkbox_subtotal.UseVisualStyleBackColor = true;
             this.chkbox_subtotal.CheckedChanged += new System.EventHandler(this.chkbox_subtotal_CheckedChanged);
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.txt_oftexpenses, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txt_SummaryVat, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.chkbox_showVat, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnCompileReport, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.panel5, 0, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(293, 20);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(167, 122);
-            this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // txt_oftexpenses
-            // 
-            this.txt_oftexpenses.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txt_oftexpenses.Location = new System.Drawing.Point(3, 3);
-            this.txt_oftexpenses.Multiline = true;
-            this.txt_oftexpenses.Name = "txt_oftexpenses";
-            this.txt_oftexpenses.Size = new System.Drawing.Size(161, 23);
-            this.txt_oftexpenses.TabIndex = 0;
-            // 
-            // txt_SummaryVat
-            // 
-            this.txt_SummaryVat.Location = new System.Drawing.Point(3, 55);
-            this.txt_SummaryVat.Multiline = true;
-            this.txt_SummaryVat.Name = "txt_SummaryVat";
-            this.txt_SummaryVat.Size = new System.Drawing.Size(78, 24);
-            this.txt_SummaryVat.TabIndex = 6;
-            // 
-            // chkbox_showVat
-            // 
-            this.chkbox_showVat.AutoSize = true;
-            this.chkbox_showVat.ForeColor = System.Drawing.Color.Red;
-            this.chkbox_showVat.Location = new System.Drawing.Point(3, 32);
-            this.chkbox_showVat.Name = "chkbox_showVat";
-            this.chkbox_showVat.Size = new System.Drawing.Size(46, 17);
-            this.chkbox_showVat.TabIndex = 7;
-            this.chkbox_showVat.Text = "*Vat";
-            this.chkbox_showVat.UseVisualStyleBackColor = true;
-            this.chkbox_showVat.CheckedChanged += new System.EventHandler(this.chkbox_showVat_CheckedChanged);
-            // 
-            // btnCompileReport
-            // 
-            this.btnCompileReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCompileReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCompileReport.Location = new System.Drawing.Point(3, 96);
-            this.btnCompileReport.Name = "btnCompileReport";
-            this.btnCompileReport.Size = new System.Drawing.Size(161, 23);
-            this.btnCompileReport.TabIndex = 1;
-            this.btnCompileReport.Text = "Compile Report";
-            this.btnCompileReport.UseVisualStyleBackColor = true;
-            this.btnCompileReport.Click += new System.EventHandler(this.btnCompileReport_Click);
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.Black;
-            this.panel5.Location = new System.Drawing.Point(3, 86);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(161, 4);
-            this.panel5.TabIndex = 8;
-            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.chk_showimagelist);
@@ -396,6 +392,14 @@
             this.saveFileDialog.Filter = "Pdf Files|*.pdf";
             this.saveFileDialog.Title = "Save ";
             // 
+            // txtbx_SummaryLessD
+            // 
+            this.txtbx_SummaryLessD.Location = new System.Drawing.Point(375, 66);
+            this.txtbx_SummaryLessD.Multiline = true;
+            this.txtbx_SummaryLessD.Name = "txtbx_SummaryLessD";
+            this.txtbx_SummaryLessD.Size = new System.Drawing.Size(78, 24);
+            this.txtbx_SummaryLessD.TabIndex = 16;
+            // 
             // RDLCReportCompilerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,8 +416,6 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -436,7 +438,6 @@
         private System.Windows.Forms.CheckBox chk_selectall;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Button btnCompileReport;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox txt_oftexpenses;
         private System.Windows.Forms.TextBox txt_SummaryVat;
         private System.Windows.Forms.CheckBox chkbox_showVat;
@@ -454,5 +455,7 @@
         private System.Windows.Forms.CheckBox chkbx_guShowVat;
         private System.Windows.Forms.TextBox txt_guVat;
         private System.Windows.Forms.CheckedListBox chklst_glassType;
+        private System.Windows.Forms.CheckBox chkbx_SummaryLessD;
+        private System.Windows.Forms.TextBox txtbx_SummaryLessD;
     }
 }

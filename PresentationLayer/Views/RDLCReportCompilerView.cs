@@ -46,6 +46,17 @@ namespace PresentationLayer.Views
                 txtbox_rowlimit.Text = value;
             }
         }
+        public string TxtContractSummaryLessDiscount
+        {
+            get
+            {
+                return txtbx_SummaryLessD.Text;
+            }
+            set
+            {
+                txtbx_SummaryLessD.Text = value;
+            }
+        }
         public CheckBox GetSubTotalCheckBox()
         {
             return chkbox_subtotal;
@@ -121,6 +132,15 @@ namespace PresentationLayer.Views
             return this;
         }
 
+        public CheckBox GetContractSummaryLessDiscountChkBx()
+        {
+            return chkbx_SummaryLessD;
+        }
+        public TextBox GetContractSummaryLessDiscountTxtBx()
+        {
+            return txtbx_SummaryLessD;
+        }
+
         public event EventHandler chkboxsubtotalCheckedChangedEventRaised;
         public event EventHandler BtnCompileReportClickEventRaised;
         public event EventHandler RDLCReportCompilerViewLoadEventRaised;
@@ -129,6 +149,7 @@ namespace PresentationLayer.Views
         public event EventHandler chkbxguShowReviewedByCheckedChangedEventRaised;
         public event EventHandler chkbxguShowNotedByCheckedChanged;
         public event EventHandler chkbxguShowVatCheckedChanged;
+        public event EventHandler chkbx_SummaryLessD_CheckedChangedEventRaised;
 
         public RDLCReportCompilerView()
         {
@@ -173,6 +194,11 @@ namespace PresentationLayer.Views
         private void chkbx_guVat_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, chkbxguShowVatCheckedChanged, e);
+        }
+
+        private void chkbx_SummaryLessD_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbx_SummaryLessD_CheckedChangedEventRaised, e);
         }
     }
 }
