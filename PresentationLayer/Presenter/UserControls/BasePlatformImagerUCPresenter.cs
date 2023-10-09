@@ -1296,10 +1296,12 @@ namespace PresentationLayer.Presenter.UserControls
                 }
 
                 int InitialDistance = _flpMain.Location.X,
-                        endOfLine = _flpMain.Width - 10,
-                        pnlLeftCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount,
-                       pnlRightCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount,
-                       line_LtR_Y = _flpMain.Location.Y + (_flpMain.Height - 3) + 70; // 70 bot pad
+                    endOfLine = _flpMain.Width - 10,
+                    //pnlLeftCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount,
+                    // pnlRightCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount,
+                    pnlLeftCounter = _windoorModel.pnlLeftCounter,
+                    pnlRightCounter = _windoorModel.pnlRightCounter,
+                    line_LtR_Y = _flpMain.Location.Y + (_flpMain.Height - 3) + 70; // 70 bot pad
 
                 Point dmnsion_w_startP_topview = new Point(_flpMain.Location.X, _flpMain.Location.Y + (_flpMain.Height - 3) + 70);
                 Point dmnsion_w_endP_topview = new Point(_flpMain.Location.X + _flpMain.Width - 3, _flpMain.Location.Y + (_flpMain.Height - 3) + 70);
