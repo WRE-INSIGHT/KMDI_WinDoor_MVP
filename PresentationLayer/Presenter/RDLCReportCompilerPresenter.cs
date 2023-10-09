@@ -9,6 +9,7 @@ using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -42,7 +43,21 @@ namespace PresentationLayer.Presenter
                targetpath,
                filename;
         Thread _loadingThread;
+        private ComboBox _gucmbGlassType,
+                         _guCmbReviewedBy,
+                         _guCmbNotedBy;
+        private TextBox _guTxtBxVat;
+        private CheckBox _guShowReviewedBy,
+                         _guShowNotedBy,
+                         _guShowVat;
+        private CheckedListBox _guGlassListChkLst;
+
+        string[] _officialsName = { "KENNETH G. LAO", "GENALYN C. GARCIA", "STEPHANIE DE LOS SANTOS", "KEVIN CHARLES S. LAO" };
+        string[] _officialsPosition = { "President,KMDI", "VP-Sales & Operations", "VP-Marketing & Finance", "Head, Sales & Operations" };
         #endregion
+
+        bool _glassTypeExist = false;
+        int _loopCounter = 1;
 
         public RDLCReportCompilerPresenter(IRDLCReportCompilerView rdlcReportCompilerView,
                                            IPrintQuotePresenter printQuotePresenter,
@@ -51,6 +66,15 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView = rdlcReportCompilerView;
             _printQuotePresenter = printQuotePresenter;
             _pdfWaitFormPresenter = pdfWaitFormPresenter;
+
+            _gucmbGlassType = _rdlcReportCompilerView.GUGlassType();
+            _guCmbReviewedBy = _rdlcReportCompilerView.GUReviewedBy();
+            _guCmbNotedBy = _rdlcReportCompilerView.GUNotedBy();
+            _guTxtBxVat = _rdlcReportCompilerView.GUVat();
+            _guShowReviewedBy = _rdlcReportCompilerView.GUShowReviewedBy();
+            _guShowNotedBy = _rdlcReportCompilerView.GUShowNotedBy();
+            _guShowVat = _rdlcReportCompilerView.GUShowVat();
+            _guGlassListChkLst = _rdlcReportCompilerView.GUGlassListChkLst();
 
             SubScribeToEventSetup();
         }
@@ -66,15 +90,15 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.chkselectallCheckedChangedEventRaised += new EventHandler(OnchkselectallCheckedChangedEventRaised);
             _rdlcReportCompilerView.chkboxshowVatCheckedChangedEventRaised += new EventHandler(OnchkboxshowVatCheckedChangedEventRaised);
             _rdlcReportCompilerView.chkboxsubtotalCheckedChangedEventRaised += new EventHandler(OnchkboxsubtotalCheckedChangedEventRaised);
-
+            _rdlcReportCompilerView.chkbxguShowReviewedByCheckedChangedEventRaised += new EventHandler(OnchkbxguShowReviewedByCheckedChangedEventRaised);
+            _rdlcReportCompilerView.chkbxguShowNotedByCheckedChanged += new EventHandler(OnchkbxguShowNotedByCheckedChanged);
+            _rdlcReportCompilerView.chkbxguShowVatCheckedChanged += new EventHandler(OnchkbxguShowVatCheckedChanged);
+            
             //bgw.WorkerReportsProgress = true;
             //bgw.WorkerSupportsCancellation = true;
             //bgw.DoWork += Bgw_DoWork;
-            //bgw.ProgressChanged += Bgw_ProgressChanged;
-         
+            //bgw.ProgressChanged += Bgw_ProgressChanged; 
         }
-
-
 
         //private delegate void DELEGATE();
         //private void Bgw_DoWork(object sender, DoWorkEventArgs e)
@@ -89,6 +113,46 @@ namespace PresentationLayer.Presenter
         //{
 
         //}
+
+        private void OnchkbxguShowReviewedByCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_guShowReviewedBy.Checked)
+            {
+                _guCmbReviewedBy.Visible = true;
+                _quoteItemListPresenter.RDLCGUShowReviewedBy = true;
+            }
+            else
+            {
+                _guCmbReviewedBy.Visible = false;
+                _quoteItemListPresenter.RDLCGUShowReviewedBy = false;
+            }
+        }
+        private void OnchkbxguShowNotedByCheckedChanged(object sender, EventArgs e)
+        {
+            if (_guShowNotedBy.Checked)
+            {
+                _guCmbNotedBy.Visible = true;
+                _quoteItemListPresenter.RDLCGUShowNotedBy = true;
+            }
+            else
+            {
+                _guCmbNotedBy.Visible = false;
+                _quoteItemListPresenter.RDLCGUShowNotedBy = false;
+            }
+        }
+        private void OnchkbxguShowVatCheckedChanged(object sender, EventArgs e)
+        {
+            if (_guShowVat.Checked)
+            {
+                _guTxtBxVat.Visible = true;
+                _quoteItemListPresenter.RDLCGUShowVat = true;
+            }
+            else
+            {
+                _guTxtBxVat.Visible = false;
+                _quoteItemListPresenter.RDLCGUShowVat = false;
+            }
+        }
         private void OnchkboxsubtotalCheckedChangedEventRaised(object sender, EventArgs e)
         {
             if (_rdlcReportCompilerView.GetSubTotalCheckBox().Checked)
@@ -145,8 +209,52 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;
             _rdlcReportCompilerView.TxtBxContractSummaryVat = "12";
             _rdlcReportCompilerView.TxtBxRowlimit = "21";
-            
 
+            LoadSettingsForGlassUpgrade();
+
+        }
+
+        private void LoadSettingsForGlassUpgrade()
+        {
+            _gucmbGlassType.Items.Add("");
+            _gucmbGlassType.Items.Add("Tempered Glass");
+            _gucmbGlassType.Items.Add("Insulated Glass Unit (IGU)");
+            _gucmbGlassType.Items.Add("Laminated Glass");
+            _gucmbGlassType.Items.Add("Tinted Glass");
+            _gucmbGlassType.Items.Add("Unglazed");
+
+            foreach (var item in _officialsName)
+            {
+                _guCmbReviewedBy.Items.Add(item);
+                _guCmbNotedBy.Items.Add(item);
+            }
+
+            _guCmbReviewedBy.SelectedIndex = 3;
+            _guCmbNotedBy.SelectedIndex = 1;
+            _guTxtBxVat.Text = "12";
+
+            _guShowReviewedBy.CheckState = CheckState.Checked;
+            _guShowNotedBy.CheckState = CheckState.Checked;
+            _guTxtBxVat.Visible = false;
+
+            foreach(DataRow dtrow in _quoteItemListPresenter.GlassUpgradeDT.Rows)
+            {
+                foreach(var item in _guGlassListChkLst.Items)
+                {
+                    if(dtrow["GlassType"].ToString() == item.ToString())
+                    {
+                        _glassTypeExist = true;
+                    }
+                }
+                
+                if (!_glassTypeExist)
+                {
+                    _guGlassListChkLst.Items.Add(dtrow["GlassType"].ToString());
+                }
+
+                _glassTypeExist = false; // reset boolean to false 
+            }
+          
         }
 
         public void Bgw_CompilePDF()
@@ -170,124 +278,163 @@ namespace PresentationLayer.Presenter
             {
                 if (!string.IsNullOrWhiteSpace(_rdlcReportCompilerView.TxtBxOutofTownExpenses))
                 {
+                               
+                    _loadingThread = new Thread(Bgw_CompilePDF);
                     
-                        
-                            _loadingThread = new Thread(Bgw_CompilePDF);
-                            
-                            projname = _mainPresenter.inputted_projectName;
+                    projname = _mainPresenter.inputted_projectName;
 
-                            _rdlcReportCompilerView.GetSaveFileDialog().FileName = projname;
-                            _rdlcReportCompilerView.GetSaveFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
-                            if (_rdlcReportCompilerView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
-                            {
-                                targetpath = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder";
-                                DirectoryInfo dirInfo = Directory.CreateDirectory(targetpath);
-                                dirInfo.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+                    _rdlcReportCompilerView.GetSaveFileDialog().FileName = projname;
+                    _rdlcReportCompilerView.GetSaveFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
+                    if (_rdlcReportCompilerView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+                    {
+                        targetpath = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder";
+                        DirectoryInfo dirInfo = Directory.CreateDirectory(targetpath);
+                        dirInfo.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
 
-                                foreach(FileInfo file in dirInfo.EnumerateFiles())
-                                {
-                                    file.Delete();
-                                }
-                             
-                                fullname = _rdlcReportCompilerView.GetSaveFileDialog().FileName;
-                                _quoteItemListPresenter.RenderPDFAtBackGround = true;
-                                CompileRDLC = true;
-                            }
-
-                            if (CompileRDLC == true)
-                            {
-                               _loadingThread.Start();
-                                #region Windoor RDLC
-                                foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
+                        foreach(FileInfo file in dirInfo.EnumerateFiles())
+                        {
+                            file.Delete();
+                        }
+                     
+                        fullname = _rdlcReportCompilerView.GetSaveFileDialog().FileName;
+                        _quoteItemListPresenter.RenderPDFAtBackGround = true;
+                        CompileRDLC = true;
+                    }
+                    
+                    if (CompileRDLC == true)
+                    {
+                      _loadingThread.Start();
+                       #region Windoor RDLC
+                        foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
                                 {
                                     var selectedindex = Convert.ToInt32(item);
                                     _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Add(selectedindex);
                                 }
                                 _quoteItemListPresenter.PrintWindoorRDLC();
                                 #endregion
-                                #region Summary Of Contract
+                       #region Summary Of Contract
                                 _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
                                 _quoteItemListPresenter.RDLCReportCompilerVatContractSummery = _rdlcReportCompilerView.TxtBxContractSummaryVat;
                                _quoteItemListPresenter.PrintContractSummaryRDLC();
                                 #endregion
-                                #region Screen
+                       #region Screen
                                 if (_mainPresenter.Screen_List.Count != 0)
                                 {
                                     _quoteItemListPresenter.RDLCReportCompilerRowLimit = _rdlcReportCompilerView.TxtBxRowlimit;
                                     _quoteItemListPresenter.PrintScreenRDLC();
                                 }
-                                #endregion
-                                #region PDF Compiler
+                        #endregion
+                       #region Glass Upgrade
 
-                                string[] files = GetFiles();
+                        #region algo ver.1
+                        //if (_gucmbGlassType.SelectedItem != null)
+                        //{
+                        //    if (_gucmbGlassType.SelectedItem.ToString() != "")
+                        //    {
+                        //        _quoteItemListPresenter.RDLCGUGlassType = _gucmbGlassType.SelectedItem.ToString();
+                        //        _quoteItemListPresenter.RDLCGUReviewedByOfficial = _guCmbReviewedBy.SelectedItem.ToString();
+                        //        int reviewedOfficialPosIndex = _guCmbReviewedBy.SelectedIndex; // indx pos
+                        //        _quoteItemListPresenter.RDLCGUReviewedByOfficialPos = reviewedOfficialPosIndex;
+                        //        _quoteItemListPresenter.RDLCGUNotedByOfficial = _guCmbNotedBy.SelectedItem.ToString();
+                        //        int notedOfficialPosIndex = _guCmbNotedBy.SelectedIndex; // indx pos
+                        //        _quoteItemListPresenter.RDLCGUNotedByOfficialPos = notedOfficialPosIndex;
+                        //        _quoteItemListPresenter.RDLCGUVatPercentage = _guTxtBxVat.Text;
+                        //        _quoteItemListPresenter.PrintGlassUpgrade();
+                        //    }
+                        //}
+                        #endregion 
+                        
+                        #region algo ver.2       
+                        foreach (var item in _guGlassListChkLst.CheckedItems)
+                        {
+                            _quoteItemListPresenter.RDLCGUFileName = _loopCounter.ToString();
+                            _quoteItemListPresenter.RDLCGUGlassType = item.ToString();
+                            _quoteItemListPresenter.RDLCGUReviewedByOfficial = _guCmbReviewedBy.SelectedItem.ToString();
+                            int reviewedOfficialPosIndex = _guCmbReviewedBy.SelectedIndex; // indx pos
+                            _quoteItemListPresenter.RDLCGUReviewedByOfficialPos = reviewedOfficialPosIndex;
+                            _quoteItemListPresenter.RDLCGUNotedByOfficial = _guCmbNotedBy.SelectedItem.ToString();
+                            int notedOfficialPosIndex = _guCmbNotedBy.SelectedIndex; // indx pos
+                            _quoteItemListPresenter.RDLCGUNotedByOfficialPos = notedOfficialPosIndex;
+                            _quoteItemListPresenter.RDLCGUVatPercentage = _guTxtBxVat.Text;                          
+                            _quoteItemListPresenter.PrintGlassUpgrade();
 
-                                PdfDocument outputDocument = new PdfDocument();
+                            _loopCounter++;
+                        }
+                        #endregion    
 
-                                XFont font = new XFont("Segoe UI", 10);
-                                XBrush brush = XBrushes.Black;
+                        #endregion
+                    
+                       #region PDF Compiler
+
+                        string[] files = GetFiles();
+
+                         PdfDocument outputDocument = new PdfDocument();
+
+                         XFont font = new XFont("Segoe UI", 10);
+                         XBrush brush = XBrushes.Black;
 
 
-                                foreach (string file in files)
-                                {
+                         foreach (string file in files)
+                         {
 
-                                    PdfDocument inputDocument = PdfReader.Open(file, PdfDocumentOpenMode.Import);
+                             PdfDocument inputDocument = PdfReader.Open(file, PdfDocumentOpenMode.Import);
 
-                                    int count = inputDocument.PageCount;
-                                    for (int idx = 0; idx < count; idx++)
-                                    {
-                                        PdfPage page = inputDocument.Pages[idx];
-                                        outputDocument.AddPage(page);
-                                    }
+                             int count = inputDocument.PageCount;
+                             for (int idx = 0; idx < count; idx++)
+                             {
+                                 PdfPage page = inputDocument.Pages[idx];
+                                 outputDocument.AddPage(page);
+                             }
 
-                                }
+                         }
 
-                                #region page counter
-                                string noPages = outputDocument.Pages.Count.ToString();
-                                for (int i = 0; i < outputDocument.Pages.Count; ++i)
-                                {
-                                    PdfPage page = outputDocument.Pages[i];
+                         #region page counter
+                         string noPages = outputDocument.Pages.Count.ToString();
+                         for (int i = 0; i < outputDocument.Pages.Count; ++i)
+                         {
+                             PdfPage page = outputDocument.Pages[i];
 
-                                    // Make a layout rectangle.
-                                    XRect layoutRectangle = new XRect(0/*X*/, page.Height - 25/*Y*/, page.Width/*Width*/, font.Height/*Height*/);
+                             // Make a layout rectangle.
+                             XRect layoutRectangle = new XRect(0/*X*/, page.Height - 25/*Y*/, page.Width/*Width*/, font.Height/*Height*/);
 
-                                    using (XGraphics gfx = XGraphics.FromPdfPage(page))
-                                    {
-                                        gfx.DrawString(
-                                            "Page " + (i + 1).ToString() + " of " + noPages,
-                                            font,
-                                            brush,
-                                            layoutRectangle,
-                                            XStringFormats.Center);
-                                    }
+                             using (XGraphics gfx = XGraphics.FromPdfPage(page))
+                             {
+                                 gfx.DrawString(
+                                     "Page " + (i + 1).ToString() + " of " + noPages,
+                                     font,
+                                     brush,
+                                     layoutRectangle,
+                                     XStringFormats.Center);
+                             }
 
-                                }
-                                #endregion
-                                //await Task.Delay(1000);
-                                outputDocument.Save(fullname);
+                         }
+                         #endregion
+                         //await Task.Delay(1000);
+                         outputDocument.Save(fullname);
 
-                                if (Directory.Exists(targetpath))
-                                {
-                                    try
-                                    {
-                                        Directory.Delete(targetpath, true);
-                                    }
-                                    catch (IOException ex)
-                                    {
-                                        MessageBox.Show(ex.Message);
-                                    }
-                                }
-                                filename = Path.GetFileName(fullname);
-                                DialogResult dialogresult = MessageBox.Show(new Form { TopMost = true }, "Open " + filename + " File ?", "Report Compilation Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                                if (dialogresult == DialogResult.Yes)
-                                {
-                                    Process.Start(fullname);
-                                }
-                                #endregion
-                               _loadingThread.Abort();                            
-                            }                           
-                            SetVariablesToDefault();
-                       
-                   
+                         if (Directory.Exists(targetpath))
+                         {
+                             try
+                             {
+                                 Directory.Delete(targetpath, true);
+                             }
+                             catch (IOException ex)
+                             {
+                                 MessageBox.Show(ex.Message);
+                             }
+                         }
+                         filename = Path.GetFileName(fullname);
+                         DialogResult dialogresult = MessageBox.Show(new Form { TopMost = true }, "Open " + filename + " File ?", "Report Compilation Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                         if (dialogresult == DialogResult.Yes)
+                         {
+                             Process.Start(fullname);
+                         }
+                         #endregion      
+                    
+                      _loadingThread.Abort();                            
+                    }                           
+                    SetVariablesToDefault();
+
                 }
                 else
                 {
@@ -307,7 +454,7 @@ namespace PresentationLayer.Presenter
             string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder";
             DirectoryInfo di = new DirectoryInfo(defDir);
             FileInfo[] files = di.GetFiles("*.pdf");
-
+            
             int i = 0;
             string[] names = new string[files.Length];
 
@@ -325,6 +472,7 @@ namespace PresentationLayer.Presenter
             _quoteItemListPresenter.RenderPDFAtBackGround = false;
             _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Clear();
             CompileRDLC = false;
+            _loopCounter = 1;
         }
 
         public IRDLCReportCompilerPresenter GetNewIntance(IUnityContainer unityC,

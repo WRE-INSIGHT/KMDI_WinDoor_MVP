@@ -112,6 +112,7 @@
             this.nud_TubularHeight.Size = new System.Drawing.Size(77, 20);
             this.nud_TubularHeight.TabIndex = 31;
             this.nud_TubularHeight.ValueChanged += new System.EventHandler(this.nud_TubularHeight_ValueChanged);
+            this.nud_TubularHeight.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nud_TubularHeight_MouseWheel);     
             // 
             // pnl_TubularHeightPic
             // 
@@ -150,6 +151,7 @@
             this.nud_TubularWidth.Size = new System.Drawing.Size(77, 20);
             this.nud_TubularWidth.TabIndex = 31;
             this.nud_TubularWidth.ValueChanged += new System.EventHandler(this.nud_TubularWidth_ValueChanged);
+            this.nud_TubularWidth.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nud_TubularWidth_MouseWheel);
             // 
             // pnl_TubularWidthPic
             // 

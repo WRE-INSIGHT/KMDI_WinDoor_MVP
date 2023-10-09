@@ -47,6 +47,7 @@
             this.num_CladdingSize.Size = new System.Drawing.Size(64, 23);
             this.num_CladdingSize.TabIndex = 18;
             this.num_CladdingSize.ValueChanged += new System.EventHandler(this.num_CladdingSize_ValueChanged);
+            this.num_CladdingSize.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_CladdingSize_MouseWheel);
             // 
             // lbl_CladdingSize
             // 

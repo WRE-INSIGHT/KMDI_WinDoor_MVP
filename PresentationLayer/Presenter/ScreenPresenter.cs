@@ -79,8 +79,6 @@ namespace PresentationLayer.Presenter
             SubscribeToEventSetup();
         }
 
-
-
         private void SubscribeToEventSetup()
         {
             _screenView.ScreenViewLoadEventRaised += _screenView_ScreenViewLoadEventRaised;
@@ -186,7 +184,6 @@ namespace PresentationLayer.Presenter
 
         #region Events
         private void _screenView_CellEndEditEventRaised(object sender, EventArgs e)
-
         {
             var currCellVal = _dgv_Screen.CurrentCell.Value;
             var currCell_col = _dgv_Screen.CurrentCell.ColumnIndex;
@@ -328,8 +325,7 @@ namespace PresentationLayer.Presenter
                     _screenModel.DiscountPercentage = 0;
                 }
             }
-
-            
+                        
             _mainPresenter.SetChangesMark();
          
         }
@@ -373,7 +369,7 @@ namespace PresentationLayer.Presenter
                 var dgv_indices = r.Cells[0].RowIndex;
                 decimal _delScreenRow = Convert.ToDecimal(dgv_value);
                 int i = 0;
-
+                                 
 
                 foreach (DataRow row in _screenDT.Rows)
                 {
@@ -583,6 +579,8 @@ namespace PresentationLayer.Presenter
                     _screenView.getLblPlisseRd().Text = "Size";
                     _screenView.getCmbFreedom().Visible = true;
                     _screenView.getLblPlisseRd().Visible = true;
+
+                    _screenModel.Screen_FreedomTotalChangerVisibility = true;
                     #endregion
                    
                 }
@@ -600,10 +598,12 @@ namespace PresentationLayer.Presenter
                 _screenModel.Screen_6052MilledProfileVisibility = false;        
                 _screenModel.Screen_1067PVCboxVisibility = false;
                 _screenModel.Screen_LandCoverVisibility = false;
+                _screenModel.Screen_FreedomTotalChangerVisibility = false;
+
 
             }
 
-            if(screenType == ScreenType._BuiltInSideroll)
+            if (screenType == ScreenType._BuiltInSideroll)
             {
                 _screenModel.Screen_6052MilledProfileVisibility = true;
                 _screenModel.Screen_1385MilledProfileVisibility = true;
@@ -688,16 +688,20 @@ namespace PresentationLayer.Presenter
                 {
                     //Screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
                     //NetPriceTotal = NetPriceTotal + Screen_priceXquantiy;
-                    if (item.Screen_Quantity > 1)
+                    if (item.Screen_Quantity > 1 )
                     {
                         for(int i = 1; i <= item.Screen_Quantity; i++)
                         {
                             screenDiscountAverage = screenDiscountAverage + item.Screen_Discount;
                         }
                     }
-                    else
+                    else if (item.Screen_Quantity == 1)
                     {
                         screenDiscountAverage = screenDiscountAverage + item.Screen_Discount;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Zero Quantity Detected");
                     }
 
                     Console.WriteLine(item.Screen_UnitPrice.ToString());
@@ -855,7 +859,8 @@ namespace PresentationLayer.Presenter
             _screenModel.Screen_ExchangeRateAUD = 40;
             _screenModel.PlissedRd_Panels = 1;
             _screenModel.DiscountPercentage = 0.3m;
-            WindoorIDGetter();
+            _screenModel.Date_Assigned = _mainPresenter.dateAssigned;
+            WindoorIDGetter(); 
         
             _dgv_Screen.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.Programmatic);
 
@@ -918,6 +923,7 @@ namespace PresentationLayer.Presenter
                     if(item.Screen_DisplayedDimension == null || item.Screen_DisplayedDimension == " " || item.Screen_DisplayedDimension == "")//new project doesnt need this,you can remove this after weeks or months 
                     {
                         _Screen_DimensionFormat = item.Screen_Width + " x " + item.Screen_Height;
+                        item.Screen_DisplayedDimension = _Screen_DimensionFormat; // populate properties use in compiler
                     }
                     else
                     {
@@ -961,7 +967,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                _screenView.screenViewWindoorID = "";
+                _screenView.screenViewWindoorID = ""; 
                 foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
                     if (screenInitialLoad != true)
@@ -1061,8 +1067,7 @@ namespace PresentationLayer.Presenter
                 _Screen_PricingDimension = _screenModel.Screen_Width + " x " + _screenModel.Screen_Height;
                 _Screen_addOnsSpecialFactor = _screenModel.Screen_AddOnsSpecialFactor;
             }
-
-
+            
             newRow["Item No."] = _screenModel.Screen_ItemNumber;
             newRow["Type of Insect Screen"] = _screenModel.Screen_Description  + _setDesc + centerClosureDesc;
             newRow["Dimension (mm) \n per panel"] = _Screen_DimensionFormat;

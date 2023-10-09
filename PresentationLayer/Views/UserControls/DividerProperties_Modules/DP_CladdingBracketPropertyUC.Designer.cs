@@ -55,6 +55,7 @@
             this.nudBracketForConcrete.Name = "nudBracketForConcrete";
             this.nudBracketForConcrete.Size = new System.Drawing.Size(83, 22);
             this.nudBracketForConcrete.TabIndex = 29;
+            this.nudBracketForConcrete.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nudBracketForConcrete_MouseWheel);
             // 
             // nudBracketForUPVC
             // 
@@ -64,6 +65,7 @@
             this.nudBracketForUPVC.Name = "nudBracketForUPVC";
             this.nudBracketForUPVC.Size = new System.Drawing.Size(83, 22);
             this.nudBracketForUPVC.TabIndex = 28;
+            this.nudBracketForUPVC.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nudBracketForUPVC_MouseWheel);
             // 
             // label2
             // 

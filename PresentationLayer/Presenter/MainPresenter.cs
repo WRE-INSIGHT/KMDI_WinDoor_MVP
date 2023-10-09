@@ -1,4 +1,4 @@
-﻿using CommonComponents;
+using CommonComponents;
 using Microsoft.VisualBasic;
 using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Concrete;
@@ -36,11 +36,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SqlClient;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Unity;
@@ -52,6 +54,10 @@ namespace PresentationLayer.Presenter
     public class MainPresenter : IMainPresenter
     {
         #region GlobalVar
+
+        [DllImport("User32")]
+        extern public static int GetGuiResources(IntPtr hProcess, int uiFlags); // check user objects
+
         Class.csFunctions csfunc = new Class.csFunctions();
         IMainView _mainView;
 
@@ -121,6 +127,8 @@ namespace PresentationLayer.Presenter
         private IScreenPresenter _screenPresenter;
         private IPricingPresenter _pricingPresenter;
         private ISetMultipleGlassThicknessPresenter _setMultipleGlassThicknessPresenter;
+        private IPriceHistoryPresenter _priceHistoryPresenter;
+        private IGlassUpgradePresenter _glassUpgradePresenter;
 
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
@@ -157,6 +165,7 @@ namespace PresentationLayer.Presenter
 
         private DataTable _glassThicknessDT = new DataTable();
         private DataTable _glassTypeDT = new DataTable();
+        private DataTable _guHolderDT = new DataTable();
         private DataTable _spacerDT = new DataTable();
         private DataTable _colorDT = new DataTable();
 
@@ -188,7 +197,6 @@ namespace PresentationLayer.Presenter
 
         #region GetSet
         private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
-
         public IDictionary<string, string> RDLCHeader
         {
             get { return _rdlcHeaders; }
@@ -199,6 +207,18 @@ namespace PresentationLayer.Presenter
         {
             get { return _screenList; }
             set { _screenList = value; }
+        }
+        private List<DataRow> _nonUnglazed = new List<DataRow>();
+        public List<DataRow> NonUnglazed
+        {
+            get { return _nonUnglazed; }
+            set { _nonUnglazed = value; }
+        }
+        private List<DataRow> _unglazed = new List<DataRow>();
+        public List<DataRow> Unglazed
+        {
+            get { return _unglazed; }
+            set { _unglazed = value; }
         }
 
         public bool ProvinceIntownOutofTown
@@ -806,8 +826,9 @@ namespace PresentationLayer.Presenter
                              IMullionImagerUCPresenter mullionImagerUCP,
                              ITransomImagerUCPresenter transomImagerUCP,
                              IPricingPresenter pricingPresenter,
-                             ISetMultipleGlassThicknessPresenter setMultipleGlassThicknessPresenter
-
+                             ISetMultipleGlassThicknessPresenter setMultipleGlassThicknessPresenter,
+                             IPriceHistoryPresenter priceHistoryPresenter,
+                             IGlassUpgradePresenter glassupgradePresenter
                              )
         {
             _mainView = mainView;
@@ -871,8 +892,8 @@ namespace PresentationLayer.Presenter
             _pricingPresenter = pricingPresenter;
             _setMultipleGlassThicknessPresenter = setMultipleGlassThicknessPresenter;
             _lblCurrentPrice = _mainView.GetCurrentPrice();
-
-
+            _priceHistoryPresenter = priceHistoryPresenter;
+            _glassUpgradePresenter = glassupgradePresenter;
 
             SubscribeToEventsSetup();
         }
@@ -983,10 +1004,232 @@ namespace PresentationLayer.Presenter
             _mainView.NudCurrentPriceValueChangedEventRaised += new EventHandler(OnNudCurrentPriceValueChangedEventRaised);
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
             _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
+            _mainView.PriceHistorytoolStripButtonClickEventRaised += _mainView_PriceHistorytoolStripButtonClickEventRaised;
+            _mainView.DateAssignedtoolStripButtonClickEventRaised += _mainView_DateAssignedtoolStripButtonClickEventRaised;
+            _mainView.glassUpgradeToolStripButtonClickEventRaised += _mainView_glassUpgradeToolStripButtonClickEventRaised;
+        }
 
+        private void _mainView_glassUpgradeToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
+            glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
+        }
+
+        private void _mainView_DateAssignedtoolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                string input = Interaction.InputBox("Set new date \n\n MM/DD/YYYY \n\n Initial Date Assign:" + dateAssigned.ToString().Replace("12:00:00 AM", string.Empty) + "\n\n Current Date Assigned:" + _quotationModel.Date_Assigned_Mainpresenter.ToString().Replace("12:00:00 AM", string.Empty), "Date Assign", dateAssigned.Date.ToString().Replace(" 12:00:00 AM", string.Empty));
+
+                if (input == "")
+                {
+
+                }
+                else
+                {
+                    DateTime myDate = DateTime.Parse(input);
+                    _quotationModel.Date_Assigned_Mainpresenter = myDate;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == -2146233033)
+                {
+                    MessageBox.Show("Please input a correct date format.");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, ex.HResult.ToString());
+                }
+            }
+
+
+            //DateTime myDate;
+            //if (!DateTime.TryParse("03/16/23", out myDate))
+            //{
+            //    // handle parse failure
+            //    Console.WriteLine("mali ka");
+            //}
 
         }
 
+        private void _mainView_PriceHistorytoolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            IPriceHistoryPresenter priceHistory = _priceHistoryPresenter.CreateNewInstance(_unityC, this, _quotationModel);
+            priceHistory.GetPriceHistoryView().ShowPriceHistory();
+        }
+
+        public int ForceRestartAndLoadFile()
+        {
+            int _userObjCount = GetGuiResources(Process.GetCurrentProcess().Handle, 1);
+            try
+            {
+                if (_userModel.Username.ToLower() == "jb")//specific user with 20/10k user objects 
+                {
+                    if (_userObjCount >= 17000)//userobject limit 
+                    {
+                        //MessageBox.Show("User Objects Limit Reach:" + " " + _userObjCount + "\n" + "It is Recommended to" + "\n" + "save the file", "Limit Reach", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (Properties.Settings.Default.UserObjectWarning == false)
+                        {
+                            bool _objectLimitWarningRememberMe = LimitReachDialogBox(_userObjCount.ToString(), "Limit Reach"); //limit Reach dialog warning 
+
+                            if (_objectLimitWarningRememberMe == true)
+                            {
+                                Properties.Settings.Default.UserObjectWarning = true;
+                                Properties.Settings.Default.Save();
+                            }
+                        }
+
+                        bool runbatfile = false;
+                        wndr_content = new List<string>();
+
+                        if (_wndrFilePath == "")
+                        {
+                            _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
+                            if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+                            {
+
+                                SaveAs();
+
+                                foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
+                                {
+                                    wndr_item.IsFromLoad = true;
+                                }
+
+                                runbatfile = true;
+
+                            }
+                        }
+                        else
+                        {
+                            SaveChanges();
+                            runbatfile = true;
+                        }
+
+                        if (_wndrFileName == "")
+                        {
+                            int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
+                            _wndrFileName = _wndrFilePath.Substring(startFileName);
+                        }
+
+                        if (runbatfile == true)
+                        {
+                            string BasePath = Properties.Settings.Default.WndrDir;
+                            string wndrfilePath = _wndrFilePath.Replace(_wndrFileName, string.Empty);
+                            string batfilePath = Path.Combine(BasePath, "Open.txt");
+                            string vbsfilePath = Path.Combine(BasePath, "Auto.txt");
+
+                            string batformat = "@echo off" + "\n" +
+                                               "Title AutoLoad File" + _wndrFileName + "\n" +
+                                               "taskkill /IM PresentationLayer.exe /f" + "\n" +
+                                               "@echo Load File: " + _wndrFileName + "\n" +
+                                               "pause" + "\n" +
+                                               "Start" + " " + _wndrFileName + " \n" +
+                                               "del %0" + "\n" +
+                                               "pause";
+                            string batformatv2 = "@echo off" + "\n" +
+                                                 "Title Auto Load " + _wndrFileName + "\n" +
+                                                 "taskkill /IM PresentationLayer.exe /f" + "\n" +
+                                                 "@echo Opening file " + _wndrFileName + "\n" +
+                                                 "@echo Press any key one time only." + "\n" +
+                                                 "pause" + "\n" +
+                                                 "echo off & start " + @"""""" + "/b " + @"""" + _wndrFilePath + @"""" + "\n" +
+                                                 "cscript //NoLogo //B Auto.vbs" + "\n" +
+                                                 "del %0" + "\n" +
+                                                 "exit";
+                            string vbsformat = "Set " + "objShell=WScript.CreateObject(" + @"""WScript.Shell"")" + "\n" +
+                                                "Set " + "objFSO = CreateObject(" + @"""Scripting.FileSystemObject"")" + "\n" +
+                                                "objShell.AppActivate " + @"""" + _wndrFilePath + @"""" + " " + ": WScript.Sleep 2000" + "\n\n" +
+                                                "For x = 1 To 2" + "\n" +
+                                                "   WScript.Sleep 200 : objShell.SendKeys " + @"""{TAB}""" + "\n" +
+                                                "Next" + "\n" +
+                                                "WScript.Sleep 2000 : objShell.SendKeys " + @"""~""" + "\n\n" +
+                                                "strScript = Wscript.ScriptFullName" + "\n" +
+                                                "objFSO.DeleteFile(strScript)"
+                                                ;
+                            //Prevent Duplicate of txt file
+                            File.Delete(batfilePath);
+                            File.Delete(vbsfilePath);
+                            File.Delete(Path.Combine(BasePath, "Open.bat"));
+                            File.Delete(Path.Combine(BasePath, "Auto.vbs"));
+
+                            //write Batch and Script in Text Format
+                            File.WriteAllText(batfilePath, batformatv2);
+                            File.WriteAllText(vbsfilePath, vbsformat);
+
+                            //Change Batch and Script Extension 
+                            FileInfo bat = new FileInfo(batfilePath);
+                            bat.IsReadOnly = false;
+                            bat.MoveTo(Path.ChangeExtension(batfilePath, ".bat"));
+
+                            FileInfo vbs = new FileInfo(vbsfilePath);
+                            vbs.IsReadOnly = false;
+                            vbs.MoveTo(Path.ChangeExtension(vbsfilePath, ".vbs"));
+
+                            //Initiate Batch File 
+                            Process proc = new Process();
+                            proc.StartInfo.WorkingDirectory = BasePath;
+                            proc.StartInfo.FileName = "Open.bat";
+                            proc.StartInfo.Arguments = string.Format("10");
+                            proc.StartInfo.CreateNoWindow = false;
+                            proc.Start();
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Current User Object Count: " + _userObjCount);
+                    }
+                }
+                else if (_userModel.Username.ToLower() == "jb")
+                {
+                    //return to show dialog box 
+                    Properties.Settings.Default.UserObjectWarning = false;
+                    Properties.Settings.Default.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(this + " error" + ex.Message);
+                //_loginView.CloseLoginView();
+            }
+            return _userObjCount;
+
+        }
+
+        public bool LimitReachDialogBox(string _maximumUserObject, string FormTitle)
+        {
+            Form frm = new Form();
+            frm.Width = 250;
+            frm.Height = 140;
+            frm.Text = FormTitle;
+            frm.ShowIcon = false;
+            frm.MaximumSize = new Size(250, 140);
+            frm.MaximumSize = new Size(250, 140);
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            FlowLayoutPanel pnl = new FlowLayoutPanel();
+            CheckBox chk = new CheckBox() { Text = "Do not Show This Again", AutoSize = true };
+            Button ok = new Button() { Text = "Ok" };
+            Label lbl = new Label();
+            lbl.Font = new Font("Segoe UI", 8, FontStyle.Regular);
+            Label dummylabel = new Label();
+            dummylabel.Text = " ";
+            lbl.Text = "User Objects Limit Reach:" + " " + _maximumUserObject + "\n" + "It is Recommended to save the file! ";
+            ok.Click += (sender, e) => { frm.Close(); };
+            lbl.AutoSize = true;
+            pnl.Controls.Add(lbl);
+            pnl.Controls.Add(dummylabel);
+            pnl.Controls.Add(chk);
+            pnl.Controls.Add(ok);
+            frm.Controls.Add(pnl);
+            frm.ShowDialog();
+
+            return chk.Checked;
+
+        }
+
+        #region Events  
         private void OnMainViewClosingEventRaised(object sender, FormClosingEventArgs e)
         {
             //if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
@@ -1055,129 +1298,153 @@ namespace PresentationLayer.Presenter
             }
 
         }
-        #region Events  
-        bool _allpanelsIsMesh;
+
         public void AddSlidingScreentoScreenList()
         {
-            foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
+            try
             {
-                wndr_item.WD_Selected = false;
-            }
-
-            _windoorModel.WD_Selected = true;
-
-
-            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-            {
-                if (wdm.WD_Selected == true)
+                foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
                 {
-                    foreach (IFrameModel fr in wdm.lst_frame)
+                    wndr_item.WD_Selected = false;
+                }
+
+                _windoorModel.WD_Selected = true;
+
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                {
+                    if (wdm.WD_Selected == true)
                     {
-                        #region multipanel
-
-                        if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)
+                        foreach (IFrameModel fr in wdm.lst_frame)
                         {
-                            foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                            #region multipanel
+
+                            if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)
                             {
-                                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                                 {
-                                    if (pnl.Panel_SashPropertyVisibility == true)
+                                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                                     {
-                                        if (pnl.Panel_GlassThicknessDesc.ToLower().Contains("mesh"))
+                                        if (pnl.Panel_SashPropertyVisibility == true)
                                         {
-                                            _allpanelsIsMesh = true;
+                                            if (pnl.Panel_GlassThicknessDesc.ToLower().Contains("mesh"))
+                                            {
+                                                _allpanelsIsMesh = true;
+                                            }
+                                            else
+                                            {
+                                                _allpanelsIsMesh = false;
+                                                break;
+                                            }
                                         }
-                                        else
+                                        else if (pnl.Panel_Type.Contains("Fixed"))
                                         {
-                                            _allpanelsIsMesh = false;
-                                            break;
+                                            if (pnl.Panel_GlassThicknessDesc.ToLower().Contains("mesh"))
+                                            {
+                                                _allpanelsIsMesh = true;
+                                            }
+                                            else
+                                            {
+                                                _allpanelsIsMesh = false;
+                                                break;
+                                            }
                                         }
                                     }
-                                    else if (pnl.Panel_Type.Contains("Fixed"))
+                                }
+                            }
+
+                            #endregion
+
+                            #region SnglPanel
+                            else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)
+                            {
+                                IPanelModel Singlepanel = fr.Lst_Panel[0];
+                                if (Singlepanel.Panel_SashPropertyVisibility == true)
+                                {
+                                    if (Singlepanel.Panel_GlassThicknessDesc.ToLower().Contains("mesh"))
                                     {
-                                        if (pnl.Panel_GlassThicknessDesc.ToLower().Contains("mesh"))
-                                        {
-                                            _allpanelsIsMesh = true;
-                                        }
-                                        else
-                                        {
-                                            _allpanelsIsMesh = false;
-                                            break;
-                                        }
+                                        _allpanelsIsMesh = true;
+                                    }
+                                    else
+                                    {
+                                        _allpanelsIsMesh = false;
                                     }
                                 }
+                                else if (Singlepanel.Panel_Type.Contains("Fixed"))
+                                {
+                                    if (Singlepanel.Panel_GlassThicknessDesc.ToLower().Contains("mesh"))
+                                    {
+                                        _allpanelsIsMesh = true;
+                                    }
+                                    else
+                                    {
+                                        _allpanelsIsMesh = false;
+                                    }
+                                }
+
                             }
+                            #endregion
                         }
-
-                        #endregion
-
-                        #region SnglPanel
-                        else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)
-                        {
-                            IPanelModel Singlepanel = fr.Lst_Panel[0];
-                            if (Singlepanel.Panel_SashPropertyVisibility == true)
-                            {
-                                if (Singlepanel.Panel_GlassThicknessDesc.ToLower().Contains("mesh"))
-                                {
-                                    _allpanelsIsMesh = true;
-                                }
-                                else
-                                {
-                                    _allpanelsIsMesh = false;
-                                }
-                            }
-                            else if (Singlepanel.Panel_Type.Contains("Fixed"))
-                            {
-                                if (Singlepanel.Panel_GlassThicknessDesc.ToLower().Contains("mesh"))
-                                {
-                                    _allpanelsIsMesh = true;
-                                }
-                                else
-                                {
-                                    _allpanelsIsMesh = false;
-                                }
-                            }
-
-                        }
-                        #endregion
                     }
                 }
+
+                if (_allpanelsIsMesh == true)
+                {
+                    //add to screenlist 
+                    //create varialbe and get values needed
+                    string slidingscreen_windoorID = _windoorModel.WD_WindoorNumber + " " + _windoorModel.WD_itemName,
+                           slidingscreen_DisplayedDimension = _windoorModel.WD_width + " x " + _windoorModel.WD_height,
+                           slidingscreen_Description = ScreenType._SlidingScreen.DisplayName;
+                    decimal slidingscreen_NetPrice = Math.Round(_windoorModel.WD_currentPrice * 0.7m, 2),
+                            slidingscreen_TotalAmount = _windoorModel.WD_currentPrice;
+
+                    IScreenModel scr = _screenServices.AddScreenModel(_windoorModel.WD_id,
+                                                                      _windoorModel.WD_width,
+                                                                      _windoorModel.WD_height,
+                                                                       ScreenType._SlidingScreen,//add screenlist to enumlayer
+                                                                       slidingscreen_windoorID,
+                                                                      _windoorModel.WD_currentPrice,
+                                                                       1,
+                                                                       1,
+                                                                       30,
+                                                                       slidingscreen_NetPrice,
+                                                                       slidingscreen_TotalAmount,
+                                                                       slidingscreen_Description,//ask costing for description 
+                                                                       _quotationModel.PricingFactor,
+                                                                       0.0m,
+                                                                       slidingscreen_DisplayedDimension);
+
+
+                    bool _windoorIsPresentInScreenList = false;
+
+                    foreach (var item in Screen_List)
+                    {
+                        if (item.Screen_ItemNumber == _windoorModel.WD_id)
+                        {
+                            _windoorIsPresentInScreenList = true;
+                        }
+                    }
+
+                    if (_windoorIsPresentInScreenList != true)
+                    {
+                        Screen_List.Add(scr);// add to screenList
+                        MessageBox.Show("Successfully added to screen", "Sliding Screen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Item Number is Currently Present in Screen", "Sliding Screen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                }
+                else if (_allpanelsIsMesh == false)
+                {
+                    MessageBox.Show("Some panels are not using  mesh", "Sliding Screen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+
             }
-
-            if (_allpanelsIsMesh == true)
+            catch (Exception ex)
             {
-                //add to screenlist 
-                //create varialbe and get values needed
-                //modal for screen add ons 
-                string slidingscreen_windoorID = _windoorModel.WD_WindoorNumber + " " + _windoorModel.WD_itemName,
-                       slidingscreen_DisplayedDimension = _windoorModel.WD_width + " x " + _windoorModel.WD_height,
-                       slidingscreen_Description = ScreenType._SlidingScreen.DisplayName;
-                decimal slidingscreen_NetPrice = Math.Round(_windoorModel.WD_currentPrice * 0.7m, 2),
-                        slidingscreen_TotalAmount = _windoorModel.WD_currentPrice;
-
-                IScreenModel scr = _screenServices.AddScreenModel(_windoorModel.WD_id,
-                                                                  _windoorModel.WD_width,
-                                                                  _windoorModel.WD_height,
-                                                                   ScreenType._SlidingScreen, // add screenlist to enumlayer
-                                                                   slidingscreen_windoorID,
-                                                                  _windoorModel.WD_currentPrice,
-                                                                   1,
-                                                                   1,
-                                                                   30,
-                                                                   slidingscreen_NetPrice,
-                                                                   slidingscreen_TotalAmount,
-                                                                   slidingscreen_Description,//ask costing for description 
-                                                                   _quotationModel.PricingFactor,
-                                                                   0.0m,
-                                                                   slidingscreen_DisplayedDimension);
-
-                Screen_List.Add(scr);
-
-
-            }
-            else if (_allpanelsIsMesh == false)
-            {
-                MessageBox.Show("Some Panels Are not using a Mesh");
+                MessageBox.Show("Problem Adding Sliding Screen to Screenlist" + " " + this + ex.Message);
             }
 
         }
@@ -1200,56 +1467,171 @@ namespace PresentationLayer.Presenter
         {
             setNewFactor();
         }
-
+        string factorTypes;
         public async void setNewFactor()
         {
             decimal value;
             try
             {
-                string[] province = projectAddress.Split(',');
-                value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-                //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
-                //value = await _quotationServices.GetFactorByProvince(province);
-                string factorTypes = "Province: "
-                                   + (province[province.Length - 2]).Trim()
-                                   + "\nCurrent/File Factor: "
-                                   + _quotationModel.PricingFactor
-                                   + "\nFactor in database: "
-                                   + value;
-                string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
-                if (input != "" && input != "0")
+                if (!_isFromAddExisting)
                 {
-                    try
+                    #region Suggested & Current
+                    string[] province = projectAddress.Split(',');
+                    value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                    //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+                    //value = await _quotationServices.GetFactorByProvince(province);
+                    if (_factorFromAddExisting <= 0)
                     {
-                        decimal deci_input = Convert.ToDecimal(String.Format("{0:0.00}", Convert.ToDecimal(input)));
-                        if (deci_input > 0)
+                        factorTypes = "Province: "
+                                    + (province[province.Length - 2]).Trim()
+                                    + "\nCurrent/File Factor: "
+                                    + _quotationModel.PricingFactor
+                                    + "\nFactor in database: "
+                                    + value;
+                    }
+                    else
+                    {
+                        factorTypes = "Province: "
+                                    + (province[province.Length - 2]).Trim()
+                                    + "\nCurrent/File Factor: "
+                                    + _quotationModel.PricingFactor
+                                    + "\nFactor in database: "
+                                    + value
+                                    +"\nFactor From Add Existing"
+                                    +_factorFromAddExisting;
+                    }
+                    string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
+                 
+                    if (input != "" && input != "0")
+                    {
+                        try
                         {
-                            if (deci_input != _quotationModel.PricingFactor)
+                            decimal deci_input = Convert.ToDecimal(String.Format("{0:0.00}", Convert.ToDecimal(input)));
+                            if (deci_input > 0)
                             {
-                                _quotationModel.PricingFactor = deci_input;
-                                MessageBox.Show("New Factor Set Sucessfully");
-                                GetCurrentPrice();
+                                if (deci_input != _quotationModel.PricingFactor)
+                                {
+                                    _quotationModel.PricingFactor = deci_input;
+                                    MessageBox.Show("New Factor Set Sucessfully");
+
+
+                                    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
+                                    {
+                                        foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                                        {
+                                            //getnewwdmprice
+                                            wdm.WD_fileLoad = false;
+                                            _quotationModel.BOMandItemlistStatus = "PriceItemList";
+                                            _quotationModel.ItemCostingPriceAndPoints();
+                                            wdm.TotalPriceHistoryStatus = "System Generated Price";
+                                            wdm.WD_price = wdm.WD_currentPrice;
+                                              #region change factor algo ni sam
+                                //foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                                //{
+                                //    wdm.TotalPriceHistoryStatus = "Change Factor";
+                                //    _quotationModel.FactorChange = true;
+                                //    GetCurrentPrice();
+
+                                //    wdm.WD_price = wdm.WD_currentPrice;
+                                //}
+                                //_quotationModel.FactorChange = false;
+                                #endregion
+                                        }
+                                    }
+                                    GetCurrentPrice();
+                                }
+                                else 
+                                {
+                                    MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                            }
+                            else if (deci_input < 0)
+                            {
+                                MessageBox.Show("Invalid number");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            if (ex.HResult == -2146233033)
+                            {
+                                MessageBox.Show("Please input a number.");
                             }
                             else
                             {
-                                MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                MessageBox.Show(ex.Message, ex.HResult.ToString());
                             }
                         }
-                        else if (deci_input < 0)
-                        {
-                            MessageBox.Show("Invalid number");
-                        }
                     }
-                    catch (Exception ex)
-                    {
-                        if (ex.HResult == -2146233033)
+
+
+                    #endregion
+                }
+                else
+                {
+                    if(_factorFromAddExisting != _quotationModel.PricingFactor)
+                    {              
+                        #region FromAddExisiting
+                        string[] province = projectAddress.Split(',');
+                        //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+                        //value = await _quotationServices.GetFactorByProvince(province);
+                               factorTypes = "Province: "
+                                           + (province[province.Length - 2]).Trim()
+                                           + "\nCurrent/File Factor: "
+                                           + _quotationModel.PricingFactor
+                                           + "\nFactor From AddExisting : "
+                                           + _factorFromAddExisting;
+
+                        string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
+                        if (input != "" && input != "0")
                         {
-                            MessageBox.Show("Please input a number.");
+                            try
+                            {
+                                decimal deci_input = Convert.ToDecimal(String.Format("{0:0.00}", Convert.ToDecimal(input)));
+                                if (deci_input > 0)
+                                {
+                                    if (deci_input != _quotationModel.PricingFactor)
+                                    {
+                                        _quotationModel.PricingFactor = deci_input;
+                                        MessageBox.Show("New Factor Set Sucessfully");
+
+                                        if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
+                                        {
+                                            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                                            {
+                                                //getnewwdmprice
+                                                wdm.WD_fileLoad = false;
+                                                _quotationModel.BOMandItemlistStatus = "PriceItemList";
+                                                _quotationModel.ItemCostingPriceAndPoints();
+                                                wdm.TotalPriceHistoryStatus = "System Generated Price";
+                                                wdm.WD_price = wdm.WD_currentPrice;
+                                            }
+                                        }
+                                        GetCurrentPrice();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                }
+                                else if (deci_input < 0)
+                                {
+                                    MessageBox.Show("Invalid number");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                if (ex.HResult == -2146233033)
+                                {
+                                    MessageBox.Show("Please input a number.");
+                                }
+                                else
+                                {
+                                    MessageBox.Show(ex.Message, ex.HResult.ToString());
+                                }
+                            }
                         }
-                        else
-                        {
-                            MessageBox.Show(ex.Message, ex.HResult.ToString());
-                        }
+
+                        #endregion
                     }
                 }
             }
@@ -1257,6 +1639,7 @@ namespace PresentationLayer.Presenter
             {
                 MessageBox.Show(ex.Message);
             }
+     
         }
         #endregion
 
@@ -1269,11 +1652,23 @@ namespace PresentationLayer.Presenter
             }
             else
             {
-                if (_quotationModel != null)
+                if (_windoorModel != null)
                 {
+                    if (_lblCurrentPrice.Value == _windoorModel.SystemSuggestedPrice &&
+                        _windoorModel.SystemSuggestedPrice != 0)
+                    {
+                        _windoorModel.TotalPriceHistoryStatus = "System Generated Price";
+                    }
+                    else
+                    {
+                        _windoorModel.TotalPriceHistoryStatus = "Edited Price";
+                    }
+
                     updatePriceFromMainViewToItemList();
                     _windoorModel.WD_fileLoad = false;
                     _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
+
+                    Console.WriteLine("MainPresenter: " + _windoorModel.TotalPriceHistoryStatus);
                 }
                 else
                 {
@@ -1354,8 +1749,6 @@ namespace PresentationLayer.Presenter
             _screenModel.Screen_PVCVisibility = false;
             IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
-
-
         }
 
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
@@ -1371,7 +1764,6 @@ namespace PresentationLayer.Presenter
             ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel);
             TopView.GetSetTopViewSlidingPanellingView().GetSetTopSlidingPanellingView();
         }
-
 
         private void _mainView_selectProjectToolStripMenuItemClickEventRaised1(object sender, EventArgs e)
         {
@@ -1397,12 +1789,13 @@ namespace PresentationLayer.Presenter
             if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
             {
                 wndr_content = new List<string>();
-                SaveAs();
 
                 foreach (IWindoorModel wndr_item in _quotationModel.Lst_Windoor)
                 {
                     wndr_item.IsFromLoad = true;
                 }
+
+                SaveAs();
 
             }
 
@@ -1410,11 +1803,12 @@ namespace PresentationLayer.Presenter
 
         public void SaveAs()
         {
+            QuotationPriceHistory();//saving price history
+
             _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
             if (_wndrFilePath != _mainView.GetSaveFileDialog().FileName)
             {
                 _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
-
             }
             else
             {
@@ -1519,12 +1913,14 @@ namespace PresentationLayer.Presenter
 
             foreach (var prop in _quotationModel.GetType().GetProperties())
             {
-                wndr_content.Add(prop.Name + ": " + prop.GetValue(_quotationModel, null));
+                if (prop.Name != "TotalPriceHistory")
+                {
+                    wndr_content.Add(prop.Name + ": " + prop.GetValue(_quotationModel, null));
+                }
             }
             foreach (WindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 SaveWindoorModel(wdm);
-
             }
             foreach (ScreenModel scm in Screen_List)
             {
@@ -1545,6 +1941,49 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add(".");
             }
 
+            foreach (var item in _nonUnglazed)
+            {
+                wndr_content.Add("</NU>");
+                wndr_content.Add("Item No: " + item[0].ToString());
+                wndr_content.Add("Window/Door I.D.: " + item[1].ToString());
+                wndr_content.Add("Qty: " + item[2].ToString());
+                wndr_content.Add("Width: " + item[3].ToString());
+                wndr_content.Add("Height: " + item[4].ToString());
+                wndr_content.Add("Original Glass Used: " + item[5].ToString());
+                wndr_content.Add("GlassPrice: " + item[6].ToString());
+                wndr_content.Add("Upgraded To: " + item[7].ToString());
+                wndr_content.Add("Glass Upgrade Price: " + item[8].ToString());
+                wndr_content.Add("Upgrade Value: " + item[9].ToString());
+                wndr_content.Add("Amount Per Unit: " + item[10].ToString());
+                wndr_content.Add("Total Net Prices: " + item[11].ToString());
+                wndr_content.Add("GlassType: " + item[12].ToString());
+                wndr_content.Add("Primary Key: " + item[13].ToString());
+                wndr_content.Add("</NU>");
+            }
+
+            #region load unglazed GU 
+            //foreach(var item in _unglazed)
+            //{
+            //    wndr_content.Add("<\\U>");
+            //    wndr_content.Add("Item No: " + item[0].ToString());
+            //    wndr_content.Add("Window/Door I.D.: " + item[1].ToString());
+            //    wndr_content.Add("Unit Price: " + item[2].ToString());
+            //    wndr_content.Add("Net Price: " + item[3].ToString());
+            //    wndr_content.Add("Qty: " + item[4].ToString());
+            //    wndr_content.Add("Width: " + item[5].ToString());
+            //    wndr_content.Add("Height: " + item[6].ToString());
+            //    wndr_content.Add("Original Glass Used: " + item[7].ToString());
+            //    wndr_content.Add("GlassPrice: " + item[8].ToString());
+            //    wndr_content.Add("New GlassPrice: " + item[9].ToString());
+            //    wndr_content.Add("Net Unit Price: " + item[10].ToString());
+            //    wndr_content.Add("List Unit Price: " + item[11].ToString());
+            //    wndr_content.Add("Total Amount(Glass): " + item[12].ToString());
+            //    wndr_content.Add("Total Amount(Unglazed-Window/Door): " + item[13].ToString());
+            //    wndr_content.Add("Primary Key: " + item[14].ToString());
+            //    wndr_content.Add("<//>");
+            //}
+            #endregion
+
             wndr_content.Add("EndofFile");
             #endregion
 
@@ -1556,38 +1995,41 @@ namespace PresentationLayer.Presenter
             wndr_content.Add("(");
             foreach (var prop in wdm.GetType().GetProperties())
             {
-                if (prop.Name == "Dictionary_ht_redArrowLines" && wdm.Dictionary_ht_redArrowLines != null)
+                if (prop.Name != "TotalPriceHistory")
                 {
-
-                    string Dictionary_ht_redArrowLinesArray = "";
-                    foreach (KeyValuePair<int, Decimal> ht_redArrowLines in wdm.Dictionary_ht_redArrowLines)
+                    if (prop.Name == "Dictionary_ht_redArrowLines" && wdm.Dictionary_ht_redArrowLines != null)
                     {
-                        Dictionary_ht_redArrowLinesArray += "<" + ht_redArrowLines.Key + "," + ht_redArrowLines.Value + ">; ";
+
+                        string Dictionary_ht_redArrowLinesArray = "";
+                        foreach (KeyValuePair<int, Decimal> ht_redArrowLines in wdm.Dictionary_ht_redArrowLines)
+                        {
+                            Dictionary_ht_redArrowLinesArray += "<" + ht_redArrowLines.Key + "," + ht_redArrowLines.Value + ">; ";
+                        }
+
+                        wndr_content.Add(prop.Name + ": " + Dictionary_ht_redArrowLinesArray);
+                    }
+                    else if (prop.Name == "Dictionary_wd_redArrowLines" && wdm.Dictionary_wd_redArrowLines != null)
+                    {
+
+                        string Dictionary_wd_redArrowLinesArray = "";
+                        foreach (KeyValuePair<int, Decimal> wd_redArrowLines in wdm.Dictionary_wd_redArrowLines)
+                        {
+                            Dictionary_wd_redArrowLinesArray += "<" + wd_redArrowLines.Key + "," + wd_redArrowLines.Value + ">; ";
+                        }
+
+                        wndr_content.Add(prop.Name + ": " + Dictionary_wd_redArrowLinesArray);
                     }
 
-                    wndr_content.Add(prop.Name + ": " + Dictionary_ht_redArrowLinesArray);
-                }
-                else if (prop.Name == "Dictionary_wd_redArrowLines" && wdm.Dictionary_wd_redArrowLines != null)
-                {
-
-                    string Dictionary_wd_redArrowLinesArray = "";
-                    foreach (KeyValuePair<int, Decimal> wd_redArrowLines in wdm.Dictionary_wd_redArrowLines)
+                    else if (prop.Name == "WD_description")
                     {
-                        Dictionary_wd_redArrowLinesArray += "<" + wd_redArrowLines.Key + "," + wd_redArrowLines.Value + ">; ";
+                        string Wd_desu = prop.GetValue(wdm, null).ToString().Replace("\n", @"\m/");
+                        wndr_content.Add(prop.Name + ": " + Wd_desu);
                     }
+                    else
+                    {
+                        wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
 
-                    wndr_content.Add(prop.Name + ": " + Dictionary_wd_redArrowLinesArray);
-                }
-
-                else if (prop.Name == "WD_description")
-                {
-                    string Wd_desu = prop.GetValue(wdm, null).ToString().Replace("\n", @"\m/");
-                    wndr_content.Add(prop.Name + ": " + Wd_desu);
-                }
-                else
-                {
-                    wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
-
+                    }
                 }
             }
             foreach (Control wndrObject in wdm.lst_objects)
@@ -2010,6 +2452,12 @@ namespace PresentationLayer.Presenter
                     #endregion
                 }
             }
+            foreach (var history in wdm.lst_TotalPriceHistory)
+            {
+                wndr_content.Add("*_*");
+                wndr_content.Add(history);
+                wndr_content.Add("*_*");
+            }
             wndr_content.Add(")");
         }
 
@@ -2388,6 +2836,7 @@ namespace PresentationLayer.Presenter
 
                 }
             }
+
             if (_quotationModel.Lst_Windoor.Count == 0)
             {
                 Clearing_Operation();
@@ -2396,6 +2845,7 @@ namespace PresentationLayer.Presenter
             {
                 _mainView.CreateNewWindoorBtnEnabled = true;
             }
+
             if (_quotationModel != null)
             {
                 if (_quotationModel.Lst_Windoor.Count != 0)
@@ -2407,6 +2857,7 @@ namespace PresentationLayer.Presenter
             {
                 _lblCurrentPrice.Value = 0;
             }
+
             PropertiesScroll = propertiesScroll;
             //wndr_content = new List<string>();
             //Saving_dotwndr();
@@ -2539,6 +2990,7 @@ namespace PresentationLayer.Presenter
                     {
                         if (dialogResult == DialogResult.Yes)
                         {
+                            wndr_content = new List<string>();
                             SaveChanges();
                         }
                         Clearing_Operation();
@@ -2563,13 +3015,14 @@ namespace PresentationLayer.Presenter
             int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
             wndrFileName = _wndrFilePath.Substring(startFileName);
             FileInfo f = new FileInfo(_wndrFilePath);
-            f.MoveTo(Path.ChangeExtension(_wndrFilePath, ".txt"));
+            f.MoveTo(Path.ChangeExtension(_wndrFilePath, ".txt")); 
             string outFile = _wndrFilePath.Substring(0, startFileName) +
                              _wndrFilePath.Substring(startFileName, _wndrFilePath.LastIndexOf(".") - startFileName) + ".txt";
 
             file_lines = File.ReadAllLines(outFile);
             f.MoveTo(Path.ChangeExtension(outFile, ".wndr"));
             onload = true;
+            _factorFromAddExisting = 0;//reset when opening new file
             _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
             _basePlatformImagerUCPresenter.SendToBack_baseImager();
             StartWorker("Open_WndrFiles");
@@ -2619,6 +3072,10 @@ namespace PresentationLayer.Presenter
 
         private void OnMainViewLoadEventRaised(object sender, EventArgs e)
         {
+            _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
+            _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
+
+
             if (Properties.Settings.Default.FirstTym == true)
             {
                 string defDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Windoor Maker files";
@@ -2685,11 +3142,16 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(0.0f, "Pet Mesh", "NA", 650.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(0.0f, "Tuff Mesh", "NA", 401.70m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(0.0f, "Phifer Mesh", "NA", 132.72m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm PVC Sheet Wood", "NA", 3700.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm PVC Sheet Wood(6-B2B)", "NA", 7400.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear", "NA", 670.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear", "NA", 670.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear", "NA", 1662.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", "NA", 1662.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Clear", "NA", 1941.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(13.0f, "13 mm Clear", "NA", 2000.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(14.0f, "14 mm Clear", "NA", 2100.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(24.0f, "24 mm Clear", "NA", 3882.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", 0m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Clear", "NA", 0m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Euro Grey", "NA", 0m, true, false, false, false, false);
@@ -2711,7 +3173,8 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Grey", "NA", 2709.00m, true, false, false, false, false);
 
             //single Annealed w/ Georgian Bar 
-
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm PVC Sheet Wood with Georgian Bar", "NA", 3700.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm PVC Sheet Wood(6-B2B) with Georgian Bar", "NA", 7400.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear with Georgian Bar", "NA", 670.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear with Georgian Bar", "NA", 670.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear with Georgian Bar", "NA", 1662.00m, true, false, false, false, false);
@@ -2739,7 +3202,9 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear", "NA", 3201.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear", "NA", 3201.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear", "NA", 3619.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(15.0f, "15 mm Tempered Clear", "NA", 12000.00m, true, false, false, false, false);//6/15/2023
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Oversized", "NA", 6000.00m, true, false, false, false, false);//
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Oversized", "NA", 7050.00m, true, false, false, false, false);//6/13/2023
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Bronze", "NA", 1929.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Bronze", "NA", 3872.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Bronze", "NA", 3872.00m, true, false, false, false, false);
@@ -2762,6 +3227,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear with Georgian Bar", "NA", 3201.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear with Georgian Bar", "NA", 3201.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear with Georgian Bar", "NA", 3619.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(15.0f, "15 mm Tempered Clear with Georgian Bar", "NA", 12000.00m, true, false, false, false, false);//6/15/2023
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Bronze with Georgian Bar", "NA", 1929.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Bronze with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Bronze with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
@@ -2780,73 +3246,75 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Grey with Georgian Bar", "NA", 4387.00m, true, false, false, false, false);
 
             //Single Annealed With Low-E
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Clear w/ HardCoated Low-E", "NA", 2000.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Clear w/ HardCoated Low-E", "NA", 3200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Clear w/ HardCoated Low-E", "NA", 4900.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted w/ HardCoated Low-E Bronze", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted w/ HardCoated Low-E Bronze", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted w/ HardCoated Low-E Bronze", "NA", 4200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted w/ HardCoated Low-E Blue", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted w/ HardCoated Low-E Blue", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted w/ HardCoated Low-E Blue", "NA", 4200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted w/ HardCoated Low-E Green", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted w/ HardCoated Low-E Green", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted w/ HardCoated Low-E Green", "NA", 4200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted w/ HardCoated Low-E Grey", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted w/ HardCoated Low-E Grey", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted w/ HardCoated Low-E Grey", "NA", 4200.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear Low-E", "NA", 2000.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear Low-E", "NA", 3200.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear Low-E", "NA", 4900.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Bronze", "NA", 2300.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Bronze", "NA", 3850.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Bronze", "NA", 4200.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Blue", "NA", 2300.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Blue", "NA", 3850.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Blue", "NA", 4200.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Green", "NA", 2300.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Green", "NA", 3850.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Green", "NA", 4200.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Grey", "NA", 2300.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Grey", "NA", 3850.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Grey", "NA", 4200.00m, true, false, false, false, false);
 
             //Single Annealed With Low-E w / Georgian Bar 
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Clear w/ HardCoated Low-E with Georgian Bar", "NA", 2000.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Clear w/ HardCoated Low-E with Georgian Bar", "NA", 3200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Clear w/ HardCoated Low-E with Georgian Bar", "NA", 4900.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted w/ HardCoated Low-E Bronze with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted w/ HardCoated Low-E Bronze with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted w/ HardCoated Low-E Bronze with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted w/ HardCoated Low-E Blue with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted w/ HardCoated Low-E Blue with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted w/ HardCoated Low-E Blue with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted w/ HardCoated Low-E Green with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted w/ HardCoated Low-E Green with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted w/ HardCoated Low-E Green with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted w/ HardCoated Low-E Grey with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted w/ HardCoated Low-E Grey with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted w/ HardCoated Low-E Grey with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear Low-E with Georgian Bar", "NA", 2000.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear Low-E with Georgian Bar", "NA", 3200.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear Low-E with Georgian Bar", "NA", 4900.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Bronze with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Bronze with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Bronze with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Blue with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Blue with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Blue with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Green with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Green with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Green with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Grey with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Grey with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Grey with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
 
 
             //Single Tempered With Low-E
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear w/ HardCoated Low-E", "NA", 2550.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear w/ HardCoated Low-E", "NA", 3800.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear w/ HardCoated Low-E", "NA", 5500.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted w/ HardCoated Low-E Bronze", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted w/ HardCoated Low-E Bronze", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted w/ HardCoated Low-E Bronze", "NA", 5350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted w/ HardCoated Low-E Blue", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted w/ HardCoated Low-E Blue", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted w/ HardCoated Low-E Blue", "NA", 5350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted w/ HardCoated Low-E Green", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted w/ HardCoated Low-E Green", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted w/ HardCoated Low-E Green", "NA", 5350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted w/ HardCoated Low-E Grey", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted w/ HardCoated Low-E Grey", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted w/ HardCoated Low-E Grey", "NA", 5350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear Low-E", "NA", 2550.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear Low-E", "NA", 3800.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear Low-E", "NA", 5500.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Low-E", "NA", 7900.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Bronze", "NA", 3100.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Bronze", "NA", 4450.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Bronze", "NA", 5350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Blue", "NA", 3100.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Blue", "NA", 4450.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Blue", "NA", 5350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Green", "NA", 3100.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Green", "NA", 4450.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Green", "NA", 5350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Grey", "NA", 3100.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Grey", "NA", 4450.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Grey", "NA", 5350.00m, true, false, false, false, false);
 
             //Single Tempered Low w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear w/ HardCoated Low-E with Georgian Bar", "NA", 2550.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear w/ HardCoated Low-E with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear w/ HardCoated Low-E with Georgian Bar", "NA", 5500.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted w/ HardCoated Low-E Bronze with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted w/ HardCoated Low-E Bronze with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted w/ HardCoated Low-E Bronze with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted w/ HardCoated Low-E Blue with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted w/ HardCoated Low-E Blue with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted w/ HardCoated Low-E Blue with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted w/ HardCoated Low-E Green with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted w/ HardCoated Low-E Green with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted w/ HardCoated Low-E Green with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted w/ HardCoated Low-E Grey with Georgian Bar", "NA", 3150.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted w/ HardCoated Low-E Grey with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted w/ HardCoated Low-E Grey with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear Low-E with Georgian Bar", "NA", 2550.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear Low-E with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear Low-E with Georgian Bar", "NA", 5500.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Low-E with Georgian Bar", "NA", 7900.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Bronze with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Bronze with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Bronze with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Blue with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Blue with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Blue with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Green with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Green with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Green with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Grey with Georgian Bar", "NA", 3150.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Grey with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Grey with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
 
             //Single Tempered Heat-Soaked
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear", "NA", 3801.00m, true, false, false, false, false);
@@ -2857,14 +3325,14 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear with Georgian Bar", "NA", 3801.00m, true, false, false, false, false);
 
             //Single Tempered Heat-Soaked with Low-E
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E", "NA", 3350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E", "NA", 4350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E", "NA", 5350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Heat-Soaked Clear Low-E", "NA", 3350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear Low-E", "NA", 4350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear Low-E", "NA", 5350.00m, true, false, false, false, false);
 
             //Single Tempered Heat-Soaked Low-E w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E with Georgian Bar", "NA", 3350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E with Georgian Bar", "NA", 4350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Heat-Soaked Clear Low-E with Georgian Bar", "NA", 3350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear Low-E with Georgian Bar", "NA", 4350.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear Low-E with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
 
             //Single Annealed Reflective
             _glassThicknessDT.Rows.Add(8.0f, "8 mm  Recflective Clear", "NA", 2600.00m, true, false, false, false, false);
@@ -2902,7 +3370,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Grey", "NA", 3125.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Grey", "NA", 3800.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Grey", "NA", 3906.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Gold w/ HardCoated Low-E", "NA", 3600.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Gold Low-E", "NA", 3600.00m, true, false, false, false, false);
 
             //Single Tempered Reflective w/ Georgian Bar 
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Clear with Georgian Bar", "NA", 3350.00m, true, false, false, false, false);
@@ -2918,7 +3386,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Grey with Georgian Bar", "NA", 3125.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Grey with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Grey with Georgian Bar", "NA", 3906.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Gold w/ HardCoated Low-E with Georgian Bar", "NA", 3600.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Gold Low-E with Georgian Bar", "NA", 3600.00m, true, false, false, false, false);
 
             #endregion
 
@@ -2964,41 +3432,43 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted with Georgian Bar", "Double Insulated", 6110.00m, false, true, false, true, false);
 
             //Annealed with Low-e
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear with HardCoated Low-e", "Double Insulated", 3400.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Clear with HardCoated Low-e", "Double Insulated", 4550.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tinted + 10 Argon + 4 mm Clear with HardCoated Low-e", "Double Insulated", 3800.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tinted + 12 Argon + 6 mm Clear with HardCoated Low-e", "Double Insulated", 5100.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear Low-e", "Double Insulated", 3400.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Clear Low-e", "Double Insulated", 4550.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tinted + 10 Argon + 4 mm Clear Low-e", "Double Insulated", 3800.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tinted + 12 Argon + 6 mm Clear Low-e", "Double Insulated", 5100.00m, false, true, false, true, false);
 
             //Annealed  Low-e w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 3400.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 4550.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tinted + 10 Argon + 4 mm Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 3800.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tinted + 12 Argon + 6 mm Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 5100.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear Low-e with Georgian Bar", "Double Insulated", 3400.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Clear Low-e with Georgian Bar", "Double Insulated", 4550.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tinted + 10 Argon + 4 mm Clear Low-e with Georgian Bar", "Double Insulated", 3800.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tinted + 12 Argon + 6 mm Clear Low-e with Georgian Bar", "Double Insulated", 5100.00m, false, true, false, true, false);
 
             //Tempered with Low-e
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 4000.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 4200.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 5000.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 5700.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 5900.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", 6600.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear Low-e", "Double Insulated", 4000.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear Low-e", "Double Insulated", 4200.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear Low-e", "Double Insulated", 5000.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 5700.00m, false, true, false, true, false);
+
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 5900.00m, false, true, false, true, false);
+
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 6600.00m, false, true, false, true, false);
 
             //Tempered Low-e w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 4000.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 4200.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 5000.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 5700.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 5900.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 6600.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 4000.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 4200.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5000.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5700.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5900.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 6600.00m, false, true, false, true, false);
             //Tempered Heat-Soaked with Low-e
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear with HardCoated Low-e", "Double Insulated", 7500.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear Low-e", "Double Insulated", 7500.00m, false, true, false, true, false);
 
             //Tempered Heat-Soaked Low-e w/ Georgian Bar
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear with HardCoated Low-e with Georgian Bar", "Double Insulated", 7500.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear Low-e with Georgian Bar", "Double Insulated", 7500.00m, false, true, false, true, false);
 
 
 
@@ -3027,7 +3497,7 @@ namespace PresentationLayer.Presenter
 
             _glassThicknessDT.Rows.Add(12.52f, "5 mm Tempered Clear with Low-e + 1.52 + 6 mm Tempered Tinted", "Double Laminated", 7200.00m, false, true, false, false, true);//
 
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-e", "Double Laminated", 7500.00m, false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear Low-e", "Double Laminated", 7500.00m, false, true, false, false, true);
 
             _glassThicknessDT.Rows.Add(6.38f, "3 mm  Clear + 0.38 + 3 mm  Clear", "Double Laminated", 2350.00m, false, true, false, false, true);
             _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 + 4 mm  Clear", "Double Laminated", 2800.00m, false, true, false, false, true);
@@ -3057,12 +3527,12 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Clear", "Double Laminated", 5400.00m, false, true, false, false, true);
 
             _glassThicknessDT.Rows.Add(12.76f, "6 mm  Tinted + 0.76 + 6 mm  Tinted", "Double Laminated", 4600.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  with HardCoated Low-e", "Double Laminated", 4200.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear with HardCoated Low-e", "Double Laminated", 6600.00m, false, true, false, false, true);//Same above but diff price and pos
+            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  Low-e", "Double Laminated", 4200.00m, false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear Low-e", "Double Laminated", 6600.00m, false, true, false, false, true);//Same above but diff price and pos
             _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear", "Double Laminated", 5700.00m, false, true, false, false, true);
             _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear", "Double Laminated", 6500.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with HardCoated Low-e", "Double Laminated", 6800.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with HardCoated Low-e", "Double Laminated", 8000.00m, false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear Low-e", "Double Laminated", 6800.00m, false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e", "Double Laminated", 8000.00m, false, true, false, false, true);
 
             //with Georgian Bar 
 
@@ -3087,7 +3557,7 @@ namespace PresentationLayer.Presenter
 
             _glassThicknessDT.Rows.Add(12.52f, "5 mm Tempered Clear with Low-e + 1.52 + 6 mm Tempered Tinted with Georgian Bar", "Double Laminated", 7200.00m, false, true, false, false, true);//
 
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-e with Georgian Bar", "Double Laminated", 7500.00m, false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear Low-e with Georgian Bar", "Double Laminated", 7500.00m, false, true, false, false, true);
 
             _glassThicknessDT.Rows.Add(6.38f, "3 mm  Clear + 0.38 + 3 mm  Clear with Georgian Bar", "Double Laminated", 2350.00m, false, true, false, false, true);
             _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 + 4 mm  Clear with Georgian Bar", "Double Laminated", 2800.00m, false, true, false, false, true);
@@ -3117,16 +3587,16 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 5400.00m, false, true, false, false, true);
 
             _glassThicknessDT.Rows.Add(12.76f, "6 mm  Tinted + 0.76 + 6 mm  Tinted with Georgian Bar", "Double Laminated", 4600.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  with HardCoated Low-e with Georgian Bar", "Double Laminated", 4200.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear with HardCoated Low-e with Georgian Bar", "Double Laminated", 6600.00m, false, true, false, false, true);//Same above but diff price and pos
+            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  Low-e with Georgian Bar", "Double Laminated", 4200.00m, false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear Low-e with Georgian Bar", "Double Laminated", 6600.00m, false, true, false, false, true);//Same above but diff price and pos
             _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with Georgian Bar", "Double Laminated", 5700.00m, false, true, false, false, true);
             _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 6500.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with HardCoated Low-e with Georgian Bar", "Double Laminated", 6800.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with HardCoated Low-e with Georgian Bar", "Double Laminated", 8000.00m, false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Laminated", 6800.00m, false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Laminated", 8000.00m, false, true, false, false, true);
 
             #endregion
 
-            #endregion
+            #endregion                                                              
 
             #region Triple
 
@@ -3177,6 +3647,23 @@ namespace PresentationLayer.Presenter
             _colorDT.Rows.Add("Euro Grey");
 
 
+            if (_userModel.AccountType == "User Level 1" ||
+                _userModel.AccountType == "User Level 2" ||
+                _userModel.AccountType == "User Level 3")
+            {
+                _mainView.PriceHistorytoolStripButtonVisible = false;
+                if (_userModel.AccountType == "User Level 1")
+                {
+                    _mainView.PriceHistorytoolStripButtonVisible = true;
+                }
+                _mainView.DateAssignedtoolStripButtonVisible = true;
+            }
+            else
+            {
+                _mainView.PriceHistorytoolStripButtonVisible = false;
+                _mainView.DateAssignedtoolStripButtonVisible = false;
+            }
+
             _mainView.GetCurrentPrice().Maximum = decimal.MaxValue;
             _mainView.GetCurrentPrice().DecimalPlaces = 2;
             bgw.WorkerReportsProgress = true;
@@ -3193,6 +3680,7 @@ namespace PresentationLayer.Presenter
 
 
         }
+
         private void OnAddProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             try
@@ -3214,8 +3702,6 @@ namespace PresentationLayer.Presenter
             {
                 if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
                 {
-
-
                     SetChangesMark();
                     add_existing = true;
                     _isOpenProject = false;
@@ -3231,6 +3717,7 @@ namespace PresentationLayer.Presenter
                     file_lines = File.ReadAllLines(outFile);
                     f.MoveTo(Path.ChangeExtension(addExistingwndrfile, ".wndr"));
                     onload = true;
+                    _isFromAddExisting = true; // selecting new factor 
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
 
@@ -3241,6 +3728,7 @@ namespace PresentationLayer.Presenter
                     ////        MessageBox.Show(strline);
                     ////    }
                     ////}
+
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     StartWorker("Add_Existing_Items");
@@ -3317,6 +3805,8 @@ namespace PresentationLayer.Presenter
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
             }
+
+
         }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -3441,12 +3931,19 @@ namespace PresentationLayer.Presenter
                                              _windoorModel.WD_profile,
                                              true);
 
+                            if(_factorFromAddExisting > 0)
+                            {
+                                setNewFactor();
+                            }
+
                             _mainView.GetToolStripLabelLoading().Text = "Finished";
 
                             ToggleMode(false, true);
                             _mainView.GetToolStripLabelLoading().Visible = true;
                             //autoDescription = true;
                             onload = false;
+                            _isFromAddExisting = false;
+
                             break;
 
                         case "GetCloudFiles":
@@ -3508,7 +4005,7 @@ namespace PresentationLayer.Presenter
             {
                 inside_screen = false;
                 _itemLoad = true;
-                if (_isOpenProject && !isNewProject)
+                if (_isOpenProject && !isNewProject || _isFromAddExisting)
                 {
                     inside_quotation = true;
                 }
@@ -3613,6 +4110,18 @@ namespace PresentationLayer.Presenter
                 frmDimension_baseColor = "";
 
             }
+            else if (row_str == "*_*")
+            {
+                if (inside_quoteHistory)
+                {
+                    Load_QuoteHistory();
+                    inside_quoteHistory = false;
+                }
+                else
+                {
+                    inside_quoteHistory = true;
+                }
+            }
             else if (row_str == ")")
             {
                 _basePlatformPresenter.InvalidateBasePlatform();
@@ -3644,6 +4153,20 @@ namespace PresentationLayer.Presenter
                     inside_rdlcDic = true;
                 }
             }
+            else if (row_str == "</NU>")
+            {
+                if (inside_GlassUpgrade)
+                {
+                    Load_GlassUpgrade();
+                    inside_GlassUpgrade = false;
+                }
+                else
+                {
+                    inside_GlassUpgrade = true;
+                }
+            }
+
+
             if (row_str == "EndofFile")
             {
                 add_existing = false;
@@ -3674,129 +4197,147 @@ namespace PresentationLayer.Presenter
             switch (inside_quotation)
             {
                 case true:
-                    #region Load for Quotation Model
-                    if (row_str.Contains("QuoteId"))
+                    if (!_isFromAddExisting)
                     {
-                        _quoteId = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("ProjectName"))
-                    {
-                        _projectName = extractedValue_str;
-                    }
-                    else if (row_str.Contains("ClientsName:"))
-                    {
-                        inputted_projectName = extractedValue_str;
-                    }
-                    else if (row_str.Contains("ClientsTitleLastname:"))
-                    {
-                        _titleLastname = extractedValue_str;
-                    }
-                    else if (row_str.Contains("ProjectAddress:"))
-                    {
-                        _projectAddress = extractedValue_str;
-                    }
-                    else if (row_str.Contains("CustomerRefNo"))
-                    {
-                        _custRefNo = extractedValue_str;
-                        inputted_custRefNo = extractedValue_str;
-                    }
-                    else if (row_str.Contains("DateAssigned"))
-                    {
-                        _dateAssigned = Convert.ToDateTime(extractedValue_str);
-                    }
-                    else if (row_str.Contains("AEIC:"))
-                    {
-                        _aeic = extractedValue_str;
-                    }
-                    else if (row_str.Contains("AEIC_POS:"))
-                    {
-                        _position = extractedValue_str;
-                    }
-                    else if (row_str.Contains("ProvinceIntownOutofTown:"))
-                    {
-                        _provinceIntownOutofTown = Convert.ToBoolean(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("PricingFactor"))
-                    {
-                        _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : (String.Format("{0:0.00}", Convert.ToDecimal(extractedValue_str))));
-                    }
-                    else if (row_str.Contains("Quotation_ref_no"))
-                    {
-                        inputted_quotationRefNo = extractedValue_str;
-                    }
-                    else if (row_str.Contains("Quotation_Date"))
-                    {
-                        inputted_quoteDate = Convert.ToDateTime(extractedValue_str);
-                        Scenario_Quotation(false, false, false, false, true, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
-                        _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
-                        _quotationModel.Customer_Ref_Number = inputted_custRefNo;
-                        _quotationModel.Date_Assigned = dateAssigned;
+                        #region Load for Quotation Model
 
-                    }
-                    else if (row_str.Contains("Frame_PUFoamingQty_Total"))
-                    {
-                        _quotationModel.Frame_PUFoamingQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Frame_SealantWHQty_Total"))
-                    {
-                        _quotationModel.Frame_SealantWHQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Glass_SealantWHQty_Total"))
-                    {
-                        _quotationModel.Glass_SealantWHQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("GlazingSpacer_TotalQty"))
-                    {
-                        _quotationModel.GlazingSpacer_TotalQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("GlazingSeal_TotalQty"))
-                    {
-                        _quotationModel.GlazingSeal_TotalQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Screws_for_Fabrication"))
-                    {
-                        _quotationModel.Screws_for_Fabrication = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Expansion_BoltQty_Total"))
-                    {
-                        _quotationModel.Expansion_BoltQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-
-                    }
-                    else if (row_str.Contains("Screws_for_Installation"))
-                    {
-                        _quotationModel.Screws_for_Installation = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-
-                    }
-                    else if (row_str.Contains("Screws_for_Cladding"))
-                    {
-                        _quotationModel.Screws_for_Cladding = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Rebate_Qty"))
-                    {
-                        _quotationModel.Rebate_Qty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Plastic_CoverQty_Total"))
-                    {
-                        _quotationModel.Plastic_CoverQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-
-                    else if (row_str.Contains("BOM_Filter:"))
-                    {
-                        foreach (BillOfMaterialsFilter bomf in BillOfMaterialsFilter.GetAll())
+                        if (row_str.Contains("QuoteId"))
                         {
-                            if (bomf.ToString() == extractedValue_str)
+                            _quoteId = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("ProjectName"))
+                        {
+                            _projectName = extractedValue_str;
+                        }
+                        else if (row_str.Contains("ClientsName:"))
+                        {
+                            inputted_projectName = extractedValue_str;
+                        }
+                        else if (row_str.Contains("ClientsTitleLastname:"))
+                        {
+                            _titleLastname = extractedValue_str;
+                        }
+                        else if (row_str.Contains("ProjectAddress:"))
+                        {
+                            _projectAddress = extractedValue_str;
+                        }
+                        else if (row_str.Contains("CustomerRefNo"))
+                        {
+                            _custRefNo = extractedValue_str;
+                            inputted_custRefNo = extractedValue_str;
+                        }
+                        else if (row_str.Contains("DateAssigned"))
+                        {
+                            _dateAssigned = Convert.ToDateTime(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Date_Assigned_Mainpresenter:"))
+                        {
+                            _quotationModel.Date_Assigned_Mainpresenter = Convert.ToDateTime(extractedValue_str);
+                        }
+                        else if (row_str.Contains("AEIC:"))
+                        {
+                            _aeic = extractedValue_str;
+                        }
+                        else if (row_str.Contains("AEIC_POS:"))
+                        {
+                            _position = extractedValue_str;
+                        }
+                        else if (row_str.Contains("ProvinceIntownOutofTown:"))
+                        {
+                            _provinceIntownOutofTown = Convert.ToBoolean(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("PricingFactor"))
+                        {
+                            _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : (String.Format("{0:0.00}", Convert.ToDecimal(extractedValue_str))));
+                        }
+                        else if (row_str.Contains("Quotation_ref_no"))
+                        {
+                            inputted_quotationRefNo = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Quotation_Date"))
+                        {
+                            inputted_quoteDate = Convert.ToDateTime(extractedValue_str);
+                            Scenario_Quotation(false, false, false, false, true, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                            _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
+                            _quotationModel.Customer_Ref_Number = inputted_custRefNo;
+                            _quotationModel.Date_Assigned = dateAssigned;
+                            //_quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
+                        }
+                        else if (row_str.Contains("Frame_PUFoamingQty_Total"))
+                        {
+                            _quotationModel.Frame_PUFoamingQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Frame_SealantWHQty_Total"))
+                        {
+                            _quotationModel.Frame_SealantWHQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Glass_SealantWHQty_Total"))
+                        {
+                            _quotationModel.Glass_SealantWHQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("GlazingSpacer_TotalQty"))
+                        {
+                            _quotationModel.GlazingSpacer_TotalQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("GlazingSeal_TotalQty"))
+                        {
+                            _quotationModel.GlazingSeal_TotalQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screws_for_Fabrication"))
+                        {
+                            _quotationModel.Screws_for_Fabrication = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Expansion_BoltQty_Total"))
+                        {
+                            _quotationModel.Expansion_BoltQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screws_for_Installation"))
+                        {
+                            _quotationModel.Screws_for_Installation = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screws_for_Cladding"))
+                        {
+                            _quotationModel.Screws_for_Cladding = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Rebate_Qty"))
+                        {
+                            _quotationModel.Rebate_Qty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Plastic_CoverQty_Total"))
+                        {
+                            _quotationModel.Plastic_CoverQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+
+                        else if (row_str.Contains("BOM_Filter:"))
+                        {
+                            foreach (BillOfMaterialsFilter bomf in BillOfMaterialsFilter.GetAll())
                             {
-                                _quotationModel.BOM_Filter = bomf;
+                                if (bomf.ToString() == extractedValue_str)
+                                {
+                                    _quotationModel.BOM_Filter = bomf;
+                                }
                             }
                         }
+                        else if (row_str.Contains("BOM_Status:"))
+                        {
+                            _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
+                            inside_quotation = false;
+                        }
+
+                        #endregion
                     }
-                    else if (row_str.Contains("BOM_Status:"))
+                    else
                     {
-                        _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
-                        inside_quotation = false;
+                        if (row_str.Contains("PricingFactor"))
+                        {
+                            _factorFromAddExisting = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : (String.Format("{0:0.00}", Convert.ToDecimal(extractedValue_str))));
+                            //setNewFactor();   
+                        }
                     }
                     break;
-                #endregion
+
                 case false:
                     if (inside_item)
                     {
@@ -4051,6 +4592,30 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("IsFromLoad:"))
                         {
                             _windoorModel.IsFromLoad = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("lst_TotalPriceHistory:"))
+                        {
+                            _windoorModel.lst_TotalPriceHistory = new List<string>();
+                        }
+                        else if (row_str.Contains("TotalPriceHistoryStatus:"))
+                        {
+                            _windoorModel.TotalPriceHistoryStatus = extractedValue_str;
+                        } 
+                        else if (row_str.Contains("SystemSuggestedPrice:"))
+                        {
+                            _windoorModel.SystemSuggestedPrice = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("pnlLeftCounter:"))
+                        {
+                            _windoorModel.pnlLeftCounter = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("pnlRightCounter:"))
+                        {
+                            _windoorModel.pnlRightCounter = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("pnlCount:"))
+                        {
+                            _windoorModel.pnlCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         #endregion
                     }
@@ -6232,6 +6797,10 @@ namespace PresentationLayer.Presenter
                         {
                             panel_PopUpHandleOptionVisibilty = Convert.ToBoolean(extractedValue_str);
                         }
+                        else if (row_str.Contains("Panel_MotorizedMechRemoteOption:"))
+                        {
+                            panel_MotorizedMechRemoteOption = Convert.ToBoolean(extractedValue_str);
+                        }
                         else if (row_str.Contains("Panel_RotoswingForSlidingHandleOptionVisibilty:"))
                         {
                             panel_RotoswingForSlidingHandleOptionVisibilty = Convert.ToBoolean(extractedValue_str);
@@ -6403,11 +6972,18 @@ namespace PresentationLayer.Presenter
                                     panel_AluminumPullHandleArticleNo = aphan;
                                 }
                             }
+                        }
 
+                        else if (row_str.Contains("Panel_MotorizedMechRemoteArtNo:"))
+                        {
 
-
-
-
+                            foreach (MotorizedMechRemote_ArticleNo motoRemArt in MotorizedMechRemote_ArticleNo.GetAll())
+                            {
+                                if (motoRemArt.ToString() == extractedValue_str)
+                                {
+                                    panel_MotorizedMechRemoteArtNo = motoRemArt;
+                                }
+                            }
                         }
                         //List<int> Panel_LstSealForHandleMultiplier
                         else if (row_str.Contains("Panel_LstSealForHandleMultiplier:"))
@@ -8080,6 +8656,10 @@ namespace PresentationLayer.Presenter
                                     _EntrytoKeyWordUsing = false;
                                     _EntrytoKeyWordPriceValidity = false;
                                 }
+                                else if (value.ToLower().Contains("prices are net of discounts"))
+                                {
+                                    value = "\n" + "\n" + value;
+                                }
 
                                 //Add new line
 
@@ -8164,6 +8744,84 @@ namespace PresentationLayer.Presenter
 
                             RDLCDictionary_value = RDLCDictionary_value + value;
                             rdlcDicChangeKey = false;
+                        }
+                        #endregion
+                    }
+                    else if (inside_quoteHistory)
+                    {
+                        #region Load for QuoteHistory
+                        if (row_str != "*_*")
+                        {
+                            //if (row_str.Contains("` COMPUTATION FOR SAVING `"))
+                            //{
+                            //    _quoteHistory = row_str + "\n";
+                            //}
+                            //else
+                            //{
+                            //    _quoteHistory = _quoteHistory + row_str + "\n";
+                            //}
+                            _quoteHistory = _quoteHistory + row_str + "\n";
+                        }
+                        #endregion
+                    }
+                    else if (inside_GlassUpgrade)
+                    {
+                        #region Load for GlassUpgrade
+                        if (row_str.Contains("Item No:"))
+                        {
+                            _guItemNo = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Window/Door I.D.:"))
+                        {
+                            _guWindoorID = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Qty:"))
+                        {
+                            _guQty = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Width:"))
+                        {
+                            _guWidth = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Height:"))
+                        {
+                            _guHeight = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Original Glass Used:"))
+                        {
+                            _guOrigGlass = extractedValue_str;
+                        }
+                        else if (row_str.Contains("GlassPrice:"))
+                        {
+                            _guGlassPrice = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Upgraded To:"))
+                        {
+                            _guUpgradeTo = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Glass Upgrade Price:"))
+                        {
+                            _guGlassUpgradePrice = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Upgrade Value:"))
+                        {
+                            _guUpgradeValue = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Amount Per Unit:"))
+                        {
+                            _guAmountPerUnit = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Total Net Prices:"))
+                        {
+                            _guTotalNetPrice = extractedValue_str;
+                        }
+                        else if (row_str.Contains("GlassType:"))
+                        {
+                            _guGlassType = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Primary Key:"))
+                        {
+                            _guPrimaryKey = extractedValue_str;
                         }
                         #endregion
                     }
@@ -8387,6 +9045,8 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_MVDOptionsVisibility = panel_MVDOptionsVisibility;
             pnlModel.Panel_RotaryOptionsVisibility = panel_RotaryOptionsVisibility;
             pnlModel.Panel_GlassType_Insu_Lami = panel_GlassType_Insu_Lami;
+            pnlModel.Panel_MotorizedMechRemoteArtNo = panel_MotorizedMechRemoteArtNo;
+            pnlModel.Panel_MotorizedMechRemoteOption = panel_MotorizedMechRemoteOption;
             #region Explosion
             pnlModel.PanelGlass_ID = panel_GlassID;
             pnlModel.Panel_GlassThicknessDesc = panel_GlassThicknessDesc;
@@ -8638,7 +9298,6 @@ namespace PresentationLayer.Presenter
 
             if (panel_Parent.Parent.Name.Contains("frame"))
             {
-
                 _frameModel.Lst_Panel.Add(pnlModel);
                 pnlModel.Imager_SetDimensionsToBind_FrameParent();
                 _framePropertiesUCPresenter.GetFramePropertiesUC().GetFramePropertiesPNL().Controls.Add(panelPropUC);
@@ -8649,19 +9308,16 @@ namespace PresentationLayer.Presenter
                 {
                     _multiModelParent = _multiPanelModel2ndLvl;
                     _multiPropUC2ndLvl.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
-
                 }
                 else if (panel_Parent.Parent.Parent.Parent.Parent.Name.Contains("Frame"))
                 {
                     _multiModelParent = _multiPanelModel3rdLvl;
                     _multiPropUC3rdLvl.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
-
                 }
                 else
                 {
                     _multiModelParent = _multiPanelModel4thLvl;
                     _multiPropUC4thLvl.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
-
                 }
                 pnlModel.Panel_ParentMultiPanelModel = _multiModelParent;
                 _multiModelParent.MPanelLst_Panel.Add(pnlModel);
@@ -8669,8 +9325,6 @@ namespace PresentationLayer.Presenter
                 pnlModel.SetPanelMargin_using_ZoomPercentage();
                 pnlModel.SetPanelMarginImager_using_ImageZoomPercentage();
                 panelPropUC.BringToFront();
-
-
             }
 
             IMultiPanelMullionUC multiMullionUC;
@@ -9068,16 +9722,62 @@ namespace PresentationLayer.Presenter
             }
             inside_panel = false;
         }
+        private void Load_QuoteHistory()
+        {
+            _windoorModel.lst_TotalPriceHistory.Add(_quoteHistory);
+            _quoteHistory = null;
+        }
+        private void Load_GlassUpgrade()
+        {
+
+            if (!_guHolderDT.Columns.Contains("Item No."))
+            {
+                _guHolderDT.Columns.Add("Item No.", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Window/Door I.D.", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Qty", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Width", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Height", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Original Glass Used", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("GlassPrice", Type.GetType("System.String"));
+
+                _guHolderDT.Columns.Add("Upgraded To", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Glass Upgrade Price", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Upgrade Value", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Amount Per Unit", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Total Net Prices", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("GlassType", Type.GetType("System.String"));
+                _guHolderDT.Columns.Add("Primary Key", Type.GetType("System.String"));
+            }
+            _guHolderDT.Rows.Add(_guItemNo,
+                        _guWindoorID,
+                        _guQty,
+                        _guWidth,
+                        _guHeight,
+                        _guOrigGlass,
+                        _guGlassPrice,
+                        _guUpgradeTo,
+                        _guGlassUpgradePrice,
+                        _guUpgradeValue,
+                        _guAmountPerUnit,
+                        _guTotalNetPrice,
+                        _guGlassType,
+                        _guPrimaryKey);
+
+            _nonUnglazed = _guHolderDT.AsEnumerable().ToList();
+        }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen, inside_rdlcDic,
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi,
+             inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory, inside_GlassUpgrade,
              rdlcDicChangeKey = true,
-             add_existing = false;
-
+             add_existing = false,
+            _isFromAddExisting = false,
+            _allpanelsIsMesh;
         int _EntryCountOfKeyWordUsing,
             _EntryCountOfKeyWordPriceValidity;
         bool _EntrytoKeyWordUsing = false,
              _EntrytoKeyWordPriceValidity = false;
+        decimal _factorFromAddExisting;
 
         #region Frame Properties
 
@@ -9326,7 +10026,8 @@ namespace PresentationLayer.Presenter
              panel_DummyDHandleOptionVisibilty,
              panel_PopUpHandleOptionVisibilty,
              panel_TrackRailArtNoVisibility,
-             panel_RotoswingForSlidingHandleOptionVisibilty;
+             panel_RotoswingForSlidingHandleOptionVisibilty,
+             panel_MotorizedMechRemoteOption;
         int panel_GlassID,
             panel_GlazingBeadWidth,
             panel_GlazingBeadWidthDecimal,
@@ -9489,6 +10190,7 @@ namespace PresentationLayer.Presenter
         SlidingDoorKitGs100_1_ArticleNo panel_SlidingDoorKitGs100_1ArtNo;
         GS100CoverKit_ArticleNo panel_GS100CoverKitArtNo;
         AluminumPullHandle_ArticleNo panel_AluminumPullHandleArticleNo;
+        MotorizedMechRemote_ArticleNo panel_MotorizedMechRemoteArtNo;
         #endregion
         #endregion
         #region Divider Properties
@@ -9669,12 +10371,33 @@ namespace PresentationLayer.Presenter
         string RDLCDictionary_key,
                RDLCDictionary_value;
         #endregion
+        #region Quotation History Properties
+        string _quoteHistory;
+        #endregion
+        #region GlassUpgrade Properties
+        string _guItemNo,
+               _guWindoorID,
+               _guQty,
+               _guWidth,
+               _guHeight,
+               _guOrigGlass,
+               _guGlassPrice,
+               _guUpgradeTo,
+               _guGlassUpgradePrice,
+               _guUpgradeValue,
+               _guAmountPerUnit,
+               _guTotalNetPrice,
+               _guGlassType,
+               _guPrimaryKey;
+
+        #endregion
         string mpnllvl = "";
 
         #region ViewUpdate(Controls)
 
         public void Clearing_Operation()
         {
+
             _quotationModel = null;
             _frameModel = null;
             _windoorModel = null;
@@ -9691,6 +10414,8 @@ namespace PresentationLayer.Presenter
             _multiModelParent = null;
             mpnllvl = string.Empty;
             _screenList = new List<IScreenModel>();
+            _nonUnglazed = new List<DataRow>();
+            _guHolderDT.Clear();
             _pnlItems.Controls.Clear();
 
 
@@ -9716,7 +10441,15 @@ namespace PresentationLayer.Presenter
             _wndrFileName = string.Empty;
             _mainView.GetToolStripButtonSave().Enabled = false;
             _mainView.CreateNewWindoorBtnEnabled = false;
+
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
+
+
+            #region dispose objects           
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            #endregion
 
         }
 
@@ -9796,13 +10529,13 @@ namespace PresentationLayer.Presenter
         {
             if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
             {
+                #region 0wd 0Ht
                 if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     Clearing_Operation();
                 }
                 else if (QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
                 {
-
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
@@ -9826,7 +10559,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
-                    _mainView.GetCurrentPrice().Value = 0;
+                    //    _mainView.GetCurrentPrice().Value = 0;
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
@@ -9866,16 +10599,19 @@ namespace PresentationLayer.Presenter
 
                     //_frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
                     //_frmDimensionPresenter.mainPresenter_newItem_ClickedOK = false;
-                    //_frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
+                    //_frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;    
                     //_frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
                     //_frmDimensionPresenter.mainPresenter_OpenWindoorFile_ClickedOK = true;
 
                 }
+                #endregion
             }
             else if (frmDimension_numWd != 0 && frmDimension_numHt != 0) //from frmDimension to here
             {
+                #region !0wd !0Ht
                 if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
+                    #region new item 
                     _wndrFilePath = string.Empty;
                     _wndrFileName = string.Empty;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
@@ -9895,6 +10631,8 @@ namespace PresentationLayer.Presenter
                         _quotationModel = _quotationServices.AddQuotationModel(input_qrefno, _quotationDate, _quoteId);
                         _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                         _quotationModel.Date_Assigned = dateAssigned;
+                        _quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
+
                         SetPricingFactor();
 
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
@@ -9934,11 +10672,13 @@ namespace PresentationLayer.Presenter
                         _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
+                    #endregion
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile && !Duplicate) // Open File
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
+                        #region create new item
                         _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
                         if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
                               _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
@@ -9985,9 +10725,11 @@ namespace PresentationLayer.Presenter
                         _pnlItems.PerformLayout();
 
                         //_frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                        #endregion
                     }
                     else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
+                        #region create new concrete
                         int concreteID = _windoorModel.concreteIDCounter += 1;
                         _concreteModel = _concreteServices.AddConcreteModel(frmDimension_numWd,
                                                                             frmDimension_numHt,
@@ -10005,9 +10747,11 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                         _windoorModel.Fit_MyControls_ToBindDimensions();
                         _windoorModel.Fit_MyControls_ImagersToBindDimensions();
+                        #endregion
                     }
                     else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
+                        #region create new frame
                         _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
                                                                    frmDimension_numHt,
                                                                    frameType,
@@ -10035,7 +10779,7 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_ReinfWidth = frm_ReinfWidth;
                         _frameModel.Frame_ReinfHeight = frm_ReinfHeight;
                         _frameModel.Frame_ExplosionHeight = frm_ExplosionHeight;
-                        //_frameModel.FrameProp_Height = frmProp_Height;
+                        _frameModel.FrameProp_Height = frmProp_Height;
                         _frameModel.Frame_BotFrameEnable = frm_BotfrmEnable;
                         _frameModel.Frame_SlidingRailsQtyVisibility = false;
                         _frameModel.Frame_ConnectionTypeVisibility = false;
@@ -10050,11 +10794,11 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_MilledArtNo = frm_MilledArtNo;
                         _frameModel.Frame_MilledReinfArtNo = frm_MilledReinfArtNo;
                         _frameModel.Frame_MechanicalJointConnector_Artno = frm_MechJointArticleNo;
-                        _frameModel.Frame_TrackProfileArtNoVisibility = frm_TrackProfileArtNoVisibility;
+                        _frameModel.Frame_TrackProfileArtNoVisibility = false;
                         _frameModel.Frame_TrackProfileArtNo = frm_TrackProfile_ArticleNo;
                         _frameModel.Frame_ConnectingProfile_ArticleNo = frm_ConnectingProfile_ArticleNo;
                         _frameModel.Frame_MeshType = frm_MeshType;
-                        _frameModel.Frame_ScreenVisibility = frm_ScreenVisibility;
+                        _frameModel.Frame_ScreenVisibility = false;
                         _frameModel.Frame_ScreenOption = frm_ScreenOption;
                         _frameModel.Frame_ScreenHeightOption = frm_ScreenHeightOption;
                         _frameModel.Frame_ScreenHeightVisibility = frm_ScreenHeightVisibility;
@@ -10071,8 +10815,10 @@ namespace PresentationLayer.Presenter
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
+
                         _framePropertiesUCPresenter = _framePropertiesUCPresenter.GetNewInstance(_frameModel, _unityC, this);
                         AddFrameUC(_frameModel, _framePropertiesUCPresenter);
+
                         _frameModel.Frame_UC = (UserControl)_frameUC;
                         _frameModel.Frame_PropertiesUC = (UserControl)_framePropertiesUCPresenter.GetFramePropertiesUC();
                         AddFrameList_WindoorModel(_frameModel);
@@ -10090,13 +10836,16 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                         _windoorModel.Fit_MyControls_ToBindDimensions();
                         _windoorModel.Fit_MyControls_ImagersToBindDimensions();
-
+                        #endregion
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && Duplicate) // Open File
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && Duplicate) // open file
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.Duplicate)
                     {
+                        #region duplicate
+
+                        ForceRestartAndLoadFile();//checkuserobject
                         wndr_content = new List<string>();
                         SaveWindoorModel(_windoorModel);
                         wndr_content.Add("EndofFile");
@@ -10108,13 +10857,15 @@ namespace PresentationLayer.Presenter
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
                         StartWorker("Duplicate_Item");
 
-
+                        #endregion
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //Add new Item
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
+                        #region add item
+                        ForceRestartAndLoadFile();//checkuserobject
                         Windoor_Save_UserControl();
                         Windoor_Save_PropertiesUC();
 
@@ -10163,12 +10914,17 @@ namespace PresentationLayer.Presenter
                         _pnlItems.PerformLayout();
 
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+
+                        _mainView.GetCurrentPrice().Value = 0;
+                        #endregion
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //add frame
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
+                        #region add frame
+                        ForceRestartAndLoadFile();//checkuserobject
                         bool NewFrameSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
                                                                                        frmDimension_numHt);
                         BottomFrameTypes frameBotFrameType = null;
@@ -10242,13 +10998,15 @@ namespace PresentationLayer.Presenter
                         {
                             MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Frame Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
+                        #endregion
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile && !Duplicate) //add concrete
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
-
+                        #region add concrete
+                        ForceRestartAndLoadFile();//checkuserobject
                         bool NewConcreteSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
                                                                                           frmDimension_numHt);
                         if (NewConcreteSizeFit)
@@ -10277,9 +11035,10 @@ namespace PresentationLayer.Presenter
                         {
                             MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Concrete Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
+                        #endregion
                     }
                 }
-
+                #endregion
             }
             //GetIntownOutofTown();
         }
@@ -10467,6 +11226,8 @@ namespace PresentationLayer.Presenter
 
         public void Set_pnlPropertiesBody_ScrollView(int scroll_value)
         {
+            _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
+            _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
             _pnlPropertiesBody.VerticalScroll.Value += scroll_value;
             _pnlPropertiesBody.PerformLayout();
         }
@@ -11487,11 +12248,50 @@ namespace PresentationLayer.Presenter
                              false);
         }
 
+        private void QuotationPriceHistory()
+        {
+            try
+            {
+                foreach (IWindoorModel wdr in _quotationModel.Lst_Windoor)
+                {
+                    DateTime thisDay = DateTime.Now;
+                    string PrevSave = "";
+                    //_quotationModel.lst_TotalPriceHistory = new List<string>();
+                    if (wdr.lst_TotalPriceHistory.Count != 0)
+                    {
+                        PrevSave = wdr.lst_TotalPriceHistory.Last();
+                    }
+                    if (wdr.TotalPriceHistoryStatus == "System Generated Price")
+                    {
+                        string SystemGeneratedPriceToSave = thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "````` Save Time\n" + wdr.TotalPriceHistory;
+                        if (PrevSave != SystemGeneratedPriceToSave)
+                        {
+                            wdr.lst_TotalPriceHistory.Add(SystemGeneratedPriceToSave);
+                        }
+                    }
+                    else if (wdr.TotalPriceHistoryStatus == "Edited Price")
+                    {
+                        string EditedPriceToSave = thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "`````\nEdited Price: " + wdr.WD_price.ToString() + "\n\n\n";
+                        if (PrevSave != EditedPriceToSave)
+                        {
+                            wdr.lst_TotalPriceHistory.Add(EditedPriceToSave);
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this + " error " + " saving price history " + "\n" + ex.Message);
+            }
+        }
+
         public void SaveChanges()
         {
             _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
             if (_wndrFilePath != "")
             {
+                QuotationPriceHistory();//save price history
 
                 string txtfile = _wndrFilePath.Replace(".wndr", ".txt");
                 File.WriteAllLines(txtfile, Saving_dotwndr());
@@ -12142,26 +12942,11 @@ namespace PresentationLayer.Presenter
             }
             //GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
             GetMainView().GetCurrentPrice().Value = _windoorModel.WD_currentPrice;
+            Console.WriteLine(GetMainView().GetCurrentPrice().Value);
             SetChangesMark();
         }
 
-        public async void GetIntownOutofTown()
-        {
 
-            decimal value;
-            string[] province = projectAddress.Split(',');
-            value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-
-            if (value == 1.30m)
-            {
-                ProvinceIntownOutofTown = true;
-            }
-            else if (value == 1.40m)
-            {
-                ProvinceIntownOutofTown = false;
-            }
-
-        }
         public void updatePriceFromMainViewToItemList()
         {
             if (_quotationModel != null)
@@ -12227,7 +13012,7 @@ namespace PresentationLayer.Presenter
                             availableHeight -= Maxheight;
                             Maxheight = 0;
                         }
-                        else
+                        else 
                         {
                             if (availableHeight > frmDimension_numHt &&
                               (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd &&
@@ -12306,8 +13091,6 @@ namespace PresentationLayer.Presenter
             }
             return isDimensionFit;
         }
-
-
 
         #endregion
 

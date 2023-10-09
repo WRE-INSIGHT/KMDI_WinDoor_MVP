@@ -47,23 +47,38 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
         {
             CheckBox chk = (CheckBox)sender;
 
-            if (chk.Checked == false)
+            if (_mainPresenter.ItemLoad == false)
             {
-                chk.Text = "No";
-                _frameModel.Frame_ScreenHeightVisibility = false;
-                _frameModel.Frame_ScreenOption = false;
-                _FramePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(-constants.frame_ScreenHeightProperty_PanelHeight);
-                _frameModel.Frame_ScreenHeightOption = false;
+                if (chk.Checked == false)
+                {
+                    chk.Text = "No";
+                    _frameModel.Frame_ScreenHeightVisibility = false;
+                    _frameModel.Frame_ScreenOption = false;
+                    _FramePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(-constants.frame_ScreenHeightProperty_PanelHeight);
+                    _frameModel.Frame_ScreenHeightOption = false;
+                }
+                else if (chk.Checked == true)
+                {
+                    chk.Text = "Yes";
+                    _frameModel.Frame_ScreenHeightVisibility = true;
+                    _frameModel.Frame_ScreenOption = true;
+                    _FramePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(constants.frame_ScreenHeightProperty_PanelHeight);
+                }
             }
-            else if (chk.Checked == true)
+            else
             {
-                chk.Text = "Yes";
-                _frameModel.Frame_ScreenHeightVisibility = true;
-                _frameModel.Frame_ScreenOption = true;
-                _FramePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(constants.frame_ScreenHeightProperty_PanelHeight);
+                if(chk.Checked == true)
+                {
+                    chk.Text = "Yes"; 
+                    _frameModel.Frame_ScreenHeightVisibility = true;
+                    _frameModel.Frame_ScreenOption = true;
+                    _FramePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(-constants.frame_ScreenHeightProperty_PanelHeight);
+                    _FramePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(constants.frame_ScreenHeightProperty_PanelHeight);
+                }
             }
+
             _mainPresenter.GetCurrentPrice();
-        }
+        } 
 
         private void _screenPropertyUC_FScreenPropertyUCLoadEventRaised(object sender, EventArgs e)
         {

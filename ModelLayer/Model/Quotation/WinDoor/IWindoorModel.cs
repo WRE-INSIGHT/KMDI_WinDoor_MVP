@@ -53,6 +53,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         Dictionary<int, decimal> Dictionary_ht_redArrowLines { get; set; }
         Dictionary<int, decimal> Dictionary_wd_redArrowLines { get; set; }
         bool IsFromLoad { get; set; }
+        decimal SystemSuggestedPrice { get; set; }
 
         float GetZoom_forRendering();
         void SetImageRenderingZoom();
@@ -77,6 +78,12 @@ namespace ModelLayer.Model.Quotation.WinDoor
         string setDiscount { get; set; }
         string WD_TopViewType { get; set; }
         string WD_itemName { get; set; }
+        string TotalPriceHistory { get; set; }
+        string TotalPriceHistoryStatus { get; set; }
+        List<string> lst_TotalPriceHistory { get; set; }
+        int pnlLeftCounter { get; set; }
+        int pnlRightCounter { get; set; }
+        int pnlCount { get; set; }
         void Fit_MyControls_ToBindDimensions();
         void SetfrmDimentionZoom();
         void Fit_MyControls_ImagersToBindDimensions();

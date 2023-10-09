@@ -31,6 +31,8 @@ namespace ServiceLayer.Services.WindoorServices
                                       List<IConcreteModel> lst_concrete = null,
                                       List<Control> lst_Objects = null,
                                       int wd_costingPoints = 0,
-                                      bool isFromLoad = false);
+                                      bool isFromLoad = false,
+                                      List<string> lst_TotalPriceHistory = null,
+                                      decimal SystemSuggestedPrice = 0);
     }
 }

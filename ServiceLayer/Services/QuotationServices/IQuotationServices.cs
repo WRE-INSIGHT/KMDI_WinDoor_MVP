@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.WinDoor;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ModelLayer.Model.Quotation;
-using ModelLayer.Model.Quotation.WinDoor;
 
 namespace ServiceLayer.Services.QuotationServices
 {

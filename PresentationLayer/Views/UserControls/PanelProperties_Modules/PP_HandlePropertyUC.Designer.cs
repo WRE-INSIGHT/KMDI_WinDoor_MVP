@@ -85,6 +85,8 @@
             this.cmb_HandleType.TabIndex = 16;
             this.cmb_HandleType.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_HandleType_DrawItem);
             this.cmb_HandleType.SelectedValueChanged += new System.EventHandler(this.cmb_HandleType_SelectedValueChanged);
+            this.cmb_HandleType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_HandleType_KeyPress);
+            this.cmb_HandleType.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_HandleType_MouseWheel);
             // 
             // pnl_HandleTypeOptions
             // 

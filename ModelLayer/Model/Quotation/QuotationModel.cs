@@ -42,12 +42,17 @@ namespace ModelLayer.Model.Quotation
         public int Plastic_CoverQty_Total { get; set; }
         public decimal PricingFactor { get; set; }
         public DateTime Date_Assigned { get; set; }
+        public DateTime Date_Assigned_Mainpresenter { get; set; }
+
         public string Customer_Ref_Number { get; set; }
         public BillOfMaterialsFilter BOM_Filter { get; set; }
         public bool BOM_Status { get; set; }
         public string BOMandItemlistStatus { get; set; }
         public bool itemSelectStatus { get; set; }
         public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
+        public bool FactorChange { get; set; }
+
+
 
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
@@ -103,11 +108,13 @@ namespace ModelLayer.Model.Quotation
 
             bool perFrame = false,
                  SlidingMotorizePerFrame = false,
+                 TopHungPerFrame = false,
                  slidingChck = false;
             foreach (IFrameModel frame in item.lst_frame)
             {
                 perFrame = true;
                 SlidingMotorizePerFrame = true;
+                TopHungPerFrame = true;
                 slidingChck = false;
 
                 frame.SetExplosionValues_Frame();
@@ -137,7 +144,8 @@ namespace ModelLayer.Model.Quotation
                 }
 
                 if (frame.Frame_Type == Frame_Padding.Door &&
-                    frame.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                    frame.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                    frame.Frame_If_SlidingTypeTopHung == false)
                 {
                     frame.Insert_ConnectingProfile_MaterialList(Material_List);
                 }
@@ -153,6 +161,14 @@ namespace ModelLayer.Model.Quotation
                 {
                     frame.Insert_MilledFrameInfo_MaterialList(Material_List);
                     total_screws_fabrication += frame.Add_MilledFrameWidth_screws4fab();
+                }
+
+                if (frame.Frame_If_SlidingTypeTopHung == true &&
+                    frame.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                    frame.Frame_BotFrameArtNo == BottomFrameTypes._None &&
+                    frame.Frame_CladdingQty != 0)
+                {
+                    frame.Insert_CladdingProfile_MaterialList(Material_List);
                 }
 
                 if (frame.Lst_MultiPanel.Count() >= 1 && frame.Lst_Panel.Count() == 0)
@@ -751,13 +767,16 @@ namespace ModelLayer.Model.Quotation
 
                                                 if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
                                                 {
-                                                    div_nxtCtrl.Insert_FixedCam_MaterialList(Material_List);
-                                                    add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
+                                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Window)
+                                                    {
+                                                        div_nxtCtrl.Insert_FixedCam_MaterialList(Material_List);
+                                                        add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
 
-                                                    div_nxtCtrl.Insert_SnapNKeep_MaterialList(Material_List);
+                                                        div_nxtCtrl.Insert_SnapNKeep_MaterialList(Material_List);
 
-                                                    int snapNkeep_screws = div_nxtCtrl.Add_SnapNKeep_screws4fab();
-                                                    add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                        int snapNkeep_screws = div_nxtCtrl.Add_SnapNKeep_screws4fab();
+                                                        add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                    }
 
                                                     if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
                                                     {
@@ -879,14 +898,17 @@ namespace ModelLayer.Model.Quotation
 
                                                 if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
                                                 {
-                                                    div_prevCtrl.Insert_FixedCam_MaterialList(Material_List);
+                                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Window)
+                                                    {
+                                                        div_prevCtrl.Insert_FixedCam_MaterialList(Material_List);
 
-                                                    add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
+                                                        add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
 
-                                                    div_prevCtrl.Insert_SnapNKeep_MaterialList(Material_List);
+                                                        div_prevCtrl.Insert_SnapNKeep_MaterialList(Material_List);
 
-                                                    int snapNkeep_screws = div_prevCtrl.Add_SnapNKeep_screws4fab();
-                                                    add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                        int snapNkeep_screws = div_prevCtrl.Add_SnapNKeep_screws4fab();
+                                                        add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                    }
 
                                                     if (div_prevCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
                                                     {
@@ -1089,6 +1111,26 @@ namespace ModelLayer.Model.Quotation
                                                         pnl_curCtrl.Insert_CoverForCornerPivotRest_MaterialList(Material_List, basecol);
                                                         add_screws_fab_pivotRest += 1;
                                                     }
+
+
+                                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Door)
+                                                    {
+                                                        //if (frame.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                                        //{
+                                                        //    pnl.Insert_FillerProfileForNoBotFrameInfo_MaterialList(Material_List);
+                                                        //    pnl.Insert_BrushSealForNoBotFrame_MaterialList(Material_List);
+                                                        //}
+
+                                                        pnl_curCtrl.Insert_SnapNKeep_MaterialList(Material_List);
+
+                                                        pnl_curCtrl.Insert_FixedCam_MaterialList(Material_List);
+
+
+                                                        int FixedCamAndSnapInKeepQty = (frame.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                                                         frame.Frame_BotFrameArtNo == BottomFrameTypes._None) ? 1 : 2;
+                                                        add_screws_fab_snapInKeep += FixedCamAndSnapInKeepQty * 2;
+                                                        add_screws_fab_fxdcam += FixedCamAndSnapInKeepQty * 2;
+                                                    }
                                                 }
                                             }
 
@@ -1226,7 +1268,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         where = "Frame";
                                     }
-                                    if (pnl_curCtrl.Panel_Type.Contains("Louver"))
+                                    if (!pnl_curCtrl.Panel_Type.Contains("Louver"))
                                     {
                                         pnl_curCtrl.Insert_GlazingBead_MaterialList(Material_List, where);
                                     }
@@ -1367,10 +1409,13 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 #endregion
 
-                                Console.WriteLine("no div bottom frame:" + boundedByBottomFrame);
+                                //Console.WriteLine("no div bottom frame:" + boundedByBottomFrame);
 
 
-                                int OverLappingPanel_Qty = 0;
+                                int OverLappingPanel_Qty = 0,
+                                    perimeterBrushSeal = 0,
+                                    perimeterFinPlate = 0;
+
                                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                                 {
                                     if (pnl.Panel_Overlap_Sash == OverlapSash._Left ||
@@ -1383,6 +1428,21 @@ namespace ModelLayer.Model.Quotation
                                         OverLappingPanel_Qty += 2;
                                     }
                                     pnl.Panel_OverLappingPanelQty = OverLappingPanel_Qty;
+
+
+                                    if (pnl.Panel_Type.Contains("Sliding"))
+                                    {
+                                        perimeterBrushSeal += pnl.Panel_SashHeight - 5;
+                                        if (frame.Frame_If_SlidingTypeTopHung == true)
+                                        {
+                                            perimeterFinPlate += pnl.Panel_SashWidth - 5;
+                                        }
+                                    }
+                                    else if (pnl.Panel_Type.Contains("Fixed"))
+                                    {
+                                        perimeterBrushSeal += pnl.Panel_SashHeight + 10;
+                                    }
+                                    pnl.TopHungbrushSealPerimeter = perimeterBrushSeal;
                                 }
 
                                 if (pnl_curCtrl != null)
@@ -1454,7 +1514,9 @@ namespace ModelLayer.Model.Quotation
 
                                 if (pnl_curCtrl != null)
                                 {
-                                    if (item.WD_profile == "PremiLine Profile" && pnl_curCtrl.Panel_Type.Contains("Fixed"))
+                                    if (item.WD_profile == "PremiLine Profile" &&
+                                        pnl_curCtrl.Panel_Type.Contains("Fixed") &&
+                                        frame.Frame_If_SlidingTypeTopHung == false)
                                     {
                                         pnl_curCtrl.Insert_CoverProfileForPremiInfo_MaterialList(Material_List);
                                     }
@@ -1474,6 +1536,15 @@ namespace ModelLayer.Model.Quotation
                                         if (pnl_curCtrl.Panel_Type.Contains("Fixed") && pnl_curCtrl.Panel_ChkText == "dSash")
                                         {
                                             pnl_curCtrl.Insert_SpacerFixedSash_MaterialList(Material_List);
+
+                                            if (frame.Frame_If_SlidingTypeTopHung == true &&
+                                                frame.Frame_ConnectionType == FrameConnectionType._None)
+                                            {
+                                                pnl_curCtrl.Insert_ConnectingProfile_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_Interlock_Tophung_ForFixed_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_ExternsionForInterlock_Tophung_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_PVCSettingPlate_MaterialList(Material_List);
+                                            }
                                         }
 
                                         if (pnl_curCtrl.Panel_ChkText != "dSash")
@@ -1500,19 +1571,43 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 bothOverlapQtyMultiplier = 2;
                                             }
-                                            //if (OverLappingPanel_Qty != 0)
-                                            //{
-                                            pnl_curCtrl.Insert_Interlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
-                                            pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
-                                            // } 
+                                            if (frame.Frame_If_SlidingTypeTopHung == false)
+                                            {
+                                                pnl_curCtrl.Insert_Interlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
+                                                pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
+                                            }
                                         }
 
+                                        if (frame.Frame_If_SlidingTypeTopHung == true &&
+                                            frame.Frame_ConnectionType == FrameConnectionType._None)
+                                        {
+                                            if (TopHungPerFrame == true)
+                                            {
+                                                pnl_curCtrl.Insert_CoverProfileForTopHungInfo_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_BrushSealForTopHung_MaterialList(Material_List, perimeterBrushSeal);
+                                                pnl_curCtrl.Insert_SlidingSashBottomGuide_MaterialList(Material_List, OverLappingPanel_Qty);
+                                                pnl_curCtrl.Insert_BrushForSliding_MaterialList(Material_List, perimeterFinPlate);
+
+                                                TopHungPerFrame = false;
+                                            }
+                                        }
 
                                         if (pnl_curCtrl.Panel_Type.Contains("Sliding"))
                                         {
                                             if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
                                                 pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                             {
+                                                if (frame.Frame_If_SlidingTypeTopHung == true &&
+                                                    frame.Frame_ConnectionType == FrameConnectionType._None)
+                                                {
+                                                    pnl_curCtrl.Insert_SlidingAccessoriesRoller_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_Interlock_Tophung_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_ExternsionForInterlock_Tophung_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_GUPremilineTopTrack_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_FinPlate_MaterialList(Material_List);
+
+                                                }
+
                                                 if (frame.Frame_SlidingRailsQty == 3)
                                                 {
                                                     slidingChck = true;
@@ -1530,19 +1625,22 @@ namespace ModelLayer.Model.Quotation
                                                 pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_AluminumTrack_MaterialList(Material_List);
 
-                                                if (perFrame == true)
+                                                if (frame.Frame_If_SlidingTypeTopHung == false &&
+                                                    perFrame == true)
                                                 {
                                                     pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_EndCapForWeatherBar_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
+
                                                     perFrame = false;
                                                 }
 
                                                 pnl_curCtrl.Insert_Rollers_MaterialList(Material_List);
 
-                                                if (pnl_curCtrl.Panel_EspagnoletteArtNo != Espagnolette_ArticleNo._None)
+                                                if (pnl_curCtrl.Panel_EspagnoletteArtNo != Espagnolette_ArticleNo._None &&
+                                                    pnl_curCtrl.Panel_Overlap_Sash != OverlapSash._None)
                                                 {
                                                     pnl_curCtrl.Insert_StrikerForSliding_MaterialList(Material_List);
                                                 }
@@ -1908,6 +2006,12 @@ namespace ModelLayer.Model.Quotation
 
                                     if (frame.Frame_Type == FrameModel.Frame_Padding.Door)
                                     {
+                                        if (frame.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            pnl.Insert_FillerProfileForNoBotFrameInfo_MaterialList(Material_List);
+                                            pnl.Insert_BrushSealForNoBotFrame_MaterialList(Material_List);
+                                        }
+
                                         pnl.Insert_SnapNKeep_MaterialList(Material_List);
 
                                         pnl.Insert_FixedCam_MaterialList(Material_List);
@@ -1953,9 +2057,12 @@ namespace ModelLayer.Model.Quotation
                                             bothOverlapQtyMultiplier = 2;
                                         }
                                         pnl.Insert_SealingBlock_MaterialList(Material_List);
-                                        pnl.Insert_Interlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
-                                        pnl.Insert_ExternsionForInterlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
 
+                                        if (frame.Frame_If_SlidingTypeTopHung == false)
+                                        {
+                                            pnl.Insert_Interlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
+                                            pnl.Insert_ExternsionForInterlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
+                                        }
                                     }
                                     if (pnl.Panel_RollersTypes != null)
                                     {
@@ -2355,12 +2462,7 @@ namespace ModelLayer.Model.Quotation
             item.WD_Selected = true;
         }
 
-        public QuotationModel(string quotation_ref_no,
-                              List<IWindoorModel> lst_Windoor)
-        {
-            Quotation_ref_no = quotation_ref_no;
-            Lst_Windoor = lst_Windoor;
-        }
+
 
         #region VariablesForPricing
 
@@ -2372,7 +2474,8 @@ namespace ModelLayer.Model.Quotation
              ChckPlasticWedge = false,
              chckAlumPullHandle = false,
              check1stFrame = false,
-            chckPerFrameMotorMech = false;
+            chckPerFrameMotorMech = false,
+            OneSideFoil_whiteBase = false;
 
         string BOM_divDesc,
                HandleDesc,
@@ -2386,15 +2489,20 @@ namespace ModelLayer.Model.Quotation
 
                 FramePricePerLinearMeter_7502_WoodGrain = 465.13m,
                 FramePricePerLinearMeter_7502_White = 332.57m,
+                FramePricePerLinearMeter_7502_White_1sideFoil = 398.85m,
                 FramePricePerLinearMeter_7507_WoodGrain = 507.99m,
                 FramePricePerLinearMeter_7507_White = 354.28m,
+                FramePricePerLinearMeter_7507_White_1sideFoil = 431.14m,
                 FramePricePerLinearMeter_2060_White = 271.35m,//G58
                 FramePricePerLinearMeter_6050_WoodGrain = 483.36m,
                 FramePricePerLinearMeter_6050_White = 378.19m,
+                FramePricePerLinearMeter_6050_White_1sideFoil = 430.77m,
                 FramePricePerLinearMeter_6052_WoodGrain = 725.02m,//704.60m, 2/22/23
                 FramePricePerLinearMeter_6052_White = 567.15m,//563.48m, 2/22/23
+                FramePricePerLinearMeter_6052_White_1sideFoil = 634.04m,
                 FramePricePerLinearMeter_6052Milled_WoodGrain = 590m,
-                FramePricePerLinearMeter_6052Milled_White = 400m,
+                FramePricePerLinearMeter_6052Milled_White = 567.15m,
+                FramePricePerLinearMeter_6052Milled_White_1sideFoil = 634.04m,
                 FramePricePerLinearMeter_6055_WoodGrain = 310.04m,
                 FramePricePerLinearMeter_6055_White = 254.74m,
                 FrameReinPricePerLinearMeter_7502 = 123.55m,
@@ -2407,17 +2515,23 @@ namespace ModelLayer.Model.Quotation
 
                 SashPricePerLinearMeter_7581_WoodGrain = 550.13m,
                 SashPricePerLinearMeter_7581_White = 375.30m,
+                SashPricePerLinearMeter_7581_White_1sideFoil = 462.72m,
                 SashPricePerLinearMeter_373_WoodGrain = 712.66m,
                 SashPricePerLinearMeter_373_White = 511.72m,
+                SashPricePerLinearMeter_373_White_1sideFoil = 612.19m,
                 SashPricePerLinearMeter_374_WoodGrain = 801.83m,
                 SashPricePerLinearMeter_374_White = 511.72m,
+                SashPricePerLinearMeter_374_White_1sideFoil = 676.74m,
                 SashPricePerLinearMeter_395_WoodGrain = 556.57m,
                 SashPricePerLinearMeter_395_White = 412.47m,
+                SashPricePerLinearMeter_395_White_1sideFoil = 489.52m,
                 SashPricePerLinearMeter_2067_White = 303.50m,
-                SashPricePerLinearMeter_6040_WoodGrain = 500,// 550.13m,
-                SashPricePerLinearMeter_6040_White = 325, //373.94m,
+                SashPricePerLinearMeter_6040_WoodGrain = 500.00m,// 550.13m,
+                SashPricePerLinearMeter_6040_White = 325.00m, //373.94m,
+                SashPricePerLinearMeter_6040_White_1sideFoil = 460.61m,
                 SashPricePerLinearMeter_6041_WoodGrain = 683.91m,
                 SashPricePerLinearMeter_6041_White = 483.13m,
+                SashPricePerLinearMeter_6041_White_1sideFoil = 583.52m,
                 SashReinPricePerLinearMeter_7581 = 89.86m,
                 SashReinPricePerLinearMeter_373And374 = 835.18m,
                 SashReinPricePerLinearMeter_395 = 305.14m,
@@ -2478,15 +2592,19 @@ namespace ModelLayer.Model.Quotation
 
         #region single
 
+        PVC_SheetWood_6mm_PricepPerSqrMeter = 3700.00m,
+        PVC_SheetWood_12mm_PricePerSqrMeter = 7400.00m,
         Glass_6mmClr_PricePerSqrMeter = 670.00m,
         Glass_8mmClr_PricePerSqrMeter = 1662.00m,
         Glass_10mmClr_PricePerSqrMeter = 1662.00m,
         Glass_12mmClr_PricePerSqrMeter = 1941.00m,
         Glass_12mmClrOversized_PricePerSqrMeter = 6000.00m,
+        Glass_12mmTempTintedOversized_PricePerSqrMeter = 7050.00m,
         Glass_6mmTemp_PricePerSqrMeter = 1614.00m,
         Glass_8mmTemp_PricePerSqrMeter = 3201.00m,
         Glass_10mmTemp_PricePerSqrMeter = 3201.00m,
         Glass_12mmTemp_PricePerSqrMeter = 3619.00m,
+        Glass_15mmTemp_PricePerSqrMeter = 12000.00m,
 
 
         Glass_6mmTempTinted_PricePerSqrMeter = 1929.00m,
@@ -2514,6 +2632,7 @@ namespace ModelLayer.Model.Quotation
         Glass_6mmTempClr_HrdCtd_LowE = 2550.00m,
         Glass_8mmTempClr_HrdCtd_LowE = 3800.00m,
         Glass_10mmTempClr_HrdCtd_LowE = 5500.00m,
+        Glass_12mmTempClr_HrdCtd_LowE = 7900.00m,
         Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 3100.00m,
         Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 4450.00m,
         Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 5350.00m,
@@ -2715,8 +2834,10 @@ namespace ModelLayer.Model.Quotation
                 GURollerPricePerPiece = 1323.08m,
                 MotorizeMechPrice = 15000.00m,
                 MotorizeMechHeavyDutyPrice = 39000.00m,
-                MotorizeMechUsingRemotePrice = 19445.50m,
-                RemoteForMotorizeMechPrice = 4749.00m,
+                MotorizeMechUsingRemotePrice = 19500.00m,
+                MotorizeMechRemotePricePerPiece = 4500.00m,
+
+                RemoteForMotorizeMechPrice,
 
                 RestrictorStayPrice,
                 SnapInKeepPrice,
@@ -2755,7 +2876,6 @@ namespace ModelLayer.Model.Quotation
                 RollerBasePrice,
                 MotorizePrice,
                 MotorizeMechPricePerPiece,
-                MotorizeMechRemotePricePerPiece,
         #endregion
         #region Accessories
 
@@ -2950,7 +3070,7 @@ namespace ModelLayer.Model.Quotation
         #endregion
 
 
-        BrushSealPricePerLinearMeter = 15.80m,
+                BrushSealPricePerLinearMeter = 15.80m,
                 SealantPricePerCan_BrownBlack = 430m,
                 SealantPricePerCan_Clear = 170m,
                 PUFoamingPricePerCan = 210m,
@@ -2959,8 +3079,6 @@ namespace ModelLayer.Model.Quotation
                 SealantPricePerCan,
                 SealantPrice,
                 PUFoamingPrice,
-
-
 
                 MaterialCostBreakDownBase,
 
@@ -2974,21 +3092,41 @@ namespace ModelLayer.Model.Quotation
                 AccesorriesCost,
                 AncillaryProfileCost,
                 TotaPrice,
+                BaseTotalPrice,
+                BaseTotalPriceWithFactor,
 
                 provinceBaseMultiplier;
         #endregion
 
         #region changePriceBasedOnDate
-
+        DateTime cus_ref_date;
         public void changePriceBasedonDate()
         {
-            var cus_ref_date = Date_Assigned;
+            cus_ref_date = Date_Assigned;
+
+            if (Date_Assigned_Mainpresenter == DateTime.Parse("01-01-0001"))
+            {
+                Date_Assigned_Mainpresenter = Date_Assigned;
+            }
+
+            if (Date_Assigned != Date_Assigned_Mainpresenter)
+            {
+                cus_ref_date = Date_Assigned_Mainpresenter;
+            }
+
+            DateTime _junedateoldago = DateTime.Parse("06-04-2023");
+
             DateTime inc_price_date = DateTime.Parse("10-15-2022");
-            DateTime inc_price_date_2 = DateTime.Parse("05-04-2023");//waterseepage 
-            DateTime inc_price_date_3 = DateTime.Parse("05-26-2023");//Double //Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe 
+            //DateTime inc_price_date_2 = DateTime.Parse("05-04-2023");//waterseepage 
+            DateTime inc_price_date_3 = DateTime.Parse("05-11-2023");  // waterseepage
+            DateTime inc_price_date_4 = DateTime.Parse("05-26-2023");  //Double //Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe 
+            DateTime inc_price_date_5 = DateTime.Parse("06-22-2023");  //6052 white and woodgrain frame,  DividerRein_7536_PricePerSqrMeter
+            DateTime inc_price_date_6 = DateTime.Parse("07-20-2023");  //change, patch date
+            DateTime inc_price_date_7 = DateTime.Parse("08-04-2023"); // MotorizeMechRemotePricePerPiece 
+            DateTime inc_price_date_8 = DateTime.Parse("08-30-2023"); // 6 mm Tempered Clear w/ HardCoated Low-E remove desc hardcoated 
 
 
-            if (cus_ref_date >= inc_price_date && cus_ref_date < inc_price_date_2)
+            if (cus_ref_date >= inc_price_date && cus_ref_date <= _junedateoldago)
             {
                 #region setnewPrice
                 #region FrameAndSashPrice
@@ -3031,7 +3169,7 @@ namespace ModelLayer.Model.Quotation
                 Divider_7536_PricePerSqrMeter = 663.32m;
                 Divider_7538_PricePerSqrMeter = 817.34m;
                 Divider_2069_PricePerSqrMeter = 284.12m; // G58
-                DividerRein_7536_PricePerSqrMeter = 406.86m;//866.23m
+                DividerRein_7536_PricePerSqrMeter = 866.23m;
                 DividerRein_7538_PricePerSqrMeter = 858.52m;
 
                 claddingPricePerLinearMeter = 907.62m;//profile and reinforcement price
@@ -3043,6 +3181,7 @@ namespace ModelLayer.Model.Quotation
                 DummyMullionPricePerLinearMeter_7533_White = 608.75m;
                 DummyMullionPricePerLinearMeter_385_White = 580.72m;
                 #endregion
+
                 #region GlassPrice
 
                 #region single
@@ -3201,6 +3340,7 @@ namespace ModelLayer.Model.Quotation
 
                 _4millFilmPrice_PricePerSqrMeter = 2600m;
                 #endregion
+
                 #region FittingAndSupplies
                 FS_16HD_casementPricePerPiece = 825.81m;
                 FS_26HD_casementPricePerPiece = 1839.35m;
@@ -3303,9 +3443,21 @@ namespace ModelLayer.Model.Quotation
                 LaborCost = 0;
                 InstallationCost = 0;
                 MaterialCost = 0;
-                #endregion
+                #endregion        
+
+                if (cus_ref_date >= inc_price_date_3 && cus_ref_date < inc_price_date_4)
+                {
+                    // waterseepage
+                    WaterSeepagePricePerLinearMeter = 378.47m;
+                }
+                else if (cus_ref_date >= inc_price_date_4 && cus_ref_date < inc_price_date_5)
+                {
+                    //Double //Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe 
+                    WaterSeepagePricePerLinearMeter = 378.47m;
+                    Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;
+                }
             }
-            else if (cus_ref_date >= inc_price_date_2 && cus_ref_date < inc_price_date_3)
+            else
             {
                 #region setnewPrice
                 #region FrameAndSashPrice
@@ -3348,7 +3500,7 @@ namespace ModelLayer.Model.Quotation
                 Divider_7536_PricePerSqrMeter = 663.32m;
                 Divider_7538_PricePerSqrMeter = 817.34m;
                 Divider_2069_PricePerSqrMeter = 284.12m; // G58
-                DividerRein_7536_PricePerSqrMeter = 406.86m;
+                DividerRein_7536_PricePerSqrMeter = 866.23m;//406.86m
                 DividerRein_7538_PricePerSqrMeter = 858.52m;
 
                 claddingPricePerLinearMeter = 907.62m;//profile and reinforcement price
@@ -3360,7 +3512,6 @@ namespace ModelLayer.Model.Quotation
                 DummyMullionPricePerLinearMeter_7533_White = 608.75m;
                 DummyMullionPricePerLinearMeter_385_White = 580.72m;
                 #endregion
-
                 #region GlassPrice
 
                 #region single
@@ -3373,7 +3524,9 @@ namespace ModelLayer.Model.Quotation
                 Glass_8mmTemp_PricePerSqrMeter = 3201.00m;
                 Glass_10mmTemp_PricePerSqrMeter = 3201.00m;
                 Glass_12mmTemp_PricePerSqrMeter = 3619.00m;
+                Glass_15mmTemp_PricePerSqrMeter = 12000.00m;
                 Glass_12mmClrOversized_PricePerSqrMeter = 6000.00m;
+                Glass_12mmTempTintedOversized_PricePerSqrMeter = 7050.00m;
 
 
                 Glass_6mmAnnealedTinted_Brnz_Bl_Grn_Gry = 985.00m;
@@ -3395,6 +3548,7 @@ namespace ModelLayer.Model.Quotation
                 Glass_6mmTempClr_HrdCtd_LowE = 2550.00m;
                 Glass_8mmTempClr_HrdCtd_LowE = 3800.00m;
                 Glass_10mmTempClr_HrdCtd_LowE = 5500.00m;
+                Glass_12mmTempClr_HrdCtd_LowE = 7900.00m;
                 Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 3100.00m;
                 Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 4450.00m;
                 Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 5350.00m;
@@ -3519,7 +3673,6 @@ namespace ModelLayer.Model.Quotation
 
                 _4millFilmPrice_PricePerSqrMeter = 2600m;
                 #endregion
-
                 #region FittingAndSupplies
                 FS_16HD_casementPricePerPiece = 825.81m;
                 FS_26HD_casementPricePerPiece = 1839.35m;
@@ -3577,6 +3730,7 @@ namespace ModelLayer.Model.Quotation
 
                 HDRollerPricePerPiece = 566.06m;
                 GURollerPricePerPiece = 1323.08m;
+                MotorizeMechRemotePricePerPiece = 19445.50m;
 
                 #endregion
                 #region Accessories
@@ -3607,7 +3761,7 @@ namespace ModelLayer.Model.Quotation
                 InterlockPricePerPiece = 333.77m;
                 ExtensionForInterlockPricePerPiece = 789.01m;
                 AluminumTrackPricePerLinearMeter = 251.10m;
-                WaterSeepagePricePerLinearMeter = 378.47m;
+                WaterSeepagePricePerLinearMeter = 153.73m;
                 AluminumPullHandlePricePerLinearMeter = 2480.18m;
 
                 #endregion
@@ -3623,328 +3777,107 @@ namespace ModelLayer.Model.Quotation
                 InstallationCost = 0;
                 MaterialCost = 0;
                 #endregion
+
+                if (cus_ref_date >= inc_price_date_3 && cus_ref_date < inc_price_date_4)
+                {
+                    // waterseepage
+                    WaterSeepagePricePerLinearMeter = 378.47m;
+                }
+                else if (cus_ref_date >= inc_price_date_4 && cus_ref_date < inc_price_date_5)
+                {
+                    //Double //Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe 
+                    WaterSeepagePricePerLinearMeter = 378.47m;
+                    Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;
+                }
+                else if (cus_ref_date >= inc_price_date_5 && cus_ref_date < inc_price_date_6)
+                {
+                    //frame  baseprice 6052 // divider reinforcement 7536 
+                    WaterSeepagePricePerLinearMeter = 378.47m;
+                    Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    DividerRein_7536_PricePerSqrMeter = 406.86m;
+
+                }
+                else if (cus_ref_date >= inc_price_date_6 && cus_ref_date < inc_price_date_7)
+                {
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    FramePricePerLinearMeter_6052_White_1sideFoil = 634.04m;
+                    FramePricePerLinearMeter_6052Milled_WoodGrain = 725.02m;
+                    FramePricePerLinearMeter_6052Milled_White = 567.15m;
+                    FramePricePerLinearMeter_6052Milled_White_1sideFoil = 634.04m;
+                    WaterSeepagePricePerLinearMeter = 378.47m;
+                    Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    DividerRein_7536_PricePerSqrMeter = 406.86m;
+                }
+                else if (cus_ref_date >= inc_price_date_7 && cus_ref_date < inc_price_date_8)
+                {
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    FramePricePerLinearMeter_6052_White_1sideFoil = 634.04m;
+                    FramePricePerLinearMeter_6052Milled_WoodGrain = 725.02m;
+                    FramePricePerLinearMeter_6052Milled_White = 567.15m;
+                    FramePricePerLinearMeter_6052Milled_White_1sideFoil = 634.04m;
+                    WaterSeepagePricePerLinearMeter = 378.47m;
+                    Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    DividerRein_7536_PricePerSqrMeter = 406.86m;
+
+                    MotorizeMechRemotePricePerPiece = 4500.00m;// 19445.50m                    
+                }
+                else if (cus_ref_date >= inc_price_date_8)
+                {
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    FramePricePerLinearMeter_6052_White_1sideFoil = 634.04m;
+                    FramePricePerLinearMeter_6052Milled_WoodGrain = 725.02m;
+                    FramePricePerLinearMeter_6052Milled_White = 567.15m;
+                    FramePricePerLinearMeter_6052Milled_White_1sideFoil = 634.04m;
+                    WaterSeepagePricePerLinearMeter = 378.47m;
+                    Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    DividerRein_7536_PricePerSqrMeter = 406.86m;
+
+                    MotorizeMechRemotePricePerPiece = 4500.00m;// 19445.50m 
+                    Glass_6mmTempClr_HrdCtd_LowE = 2600.00m;//2550.00m
+                }
             }
-            else if (cus_ref_date >= inc_price_date_3)
+
+            #region motorized 1 day diff
+            if (cus_ref_date < DateTime.Parse("08-02-2023"))
             {
-                #region setnewPrice
-                #region FrameAndSashPrice
-                FramePricePerLinearMeter_7502_WoodGrain = 465.13m;
-                FramePricePerLinearMeter_7502_White = 332.57m;
-                FramePricePerLinearMeter_7507_WoodGrain = 507.99m;
-                FramePricePerLinearMeter_7507_White = 354.28m;
-                FramePricePerLinearMeter_2060_White = 271.35m;//G58
-                FramePricePerLinearMeter_6050_WoodGrain = 483.36m;
-                FramePricePerLinearMeter_6050_White = 378.19m;
-                FramePricePerLinearMeter_6052_WoodGrain = 704.60m;
-                FramePricePerLinearMeter_6052_White = 563.48m;
-                FrameReinPricePerLinearMeter_7502 = 123.55m;
-                FrameReinPricePerLinearMeter_7507 = 406.86m;
-                G58ReinPricePerLinearMeter_V226 = 140.69m;//G58 reinforcement for frame; sash and divider
-                FrameReinPricePerLinearMeter_6050 = 114.76m;
-                FrameReinPricePerLinearMeter_6052 = 194.68m;
-
-                SashPricePerLinearMeter_7581_WoodGrain = 550.13m;
-                SashPricePerLinearMeter_7581_White = 375.30m;
-                SashPricePerLinearMeter_373_WoodGrain = 712.66m;
-                SashPricePerLinearMeter_373_White = 511.72m;
-                SashPricePerLinearMeter_374_WoodGrain = 801.83m;
-                SashPricePerLinearMeter_374_White = 511.72m;
-                SashPricePerLinearMeter_395_WoodGrain = 556.57m;
-                SashPricePerLinearMeter_395_White = 412.47m;
-                SashPricePerLinearMeter_2067_White = 303.50m;
-                SashPricePerLinearMeter_6040_WoodGrain = 500;// 550.13m;
-                SashPricePerLinearMeter_6040_White = 325; //373.94m;
-                SashPricePerLinearMeter_6041_WoodGrain = 683.91m;
-                SashPricePerLinearMeter_6041_White = 483.13m;
-                SashReinPricePerLinearMeter_7581 = 89.86m;
-                SashReinPricePerLinearMeter_373And374 = 835.18m;
-                SashReinPricePerLinearMeter_395 = 305.14m;
-                SashReinPricePerLinearMeter_6040 = 287.58m;
-                SashReinPricePerLinearMeter_6041 = 655.49m;
-
-                #endregion
-                #region Mullion/TransomPrice
-                Divider_7536_PricePerSqrMeter = 663.32m;
-                Divider_7538_PricePerSqrMeter = 817.34m;
-                Divider_2069_PricePerSqrMeter = 284.12m; // G58
-                DividerRein_7536_PricePerSqrMeter = 406.86m;
-                DividerRein_7538_PricePerSqrMeter = 858.52m;
-
-                claddingPricePerLinearMeter = 907.62m;//profile and reinforcement price
-
-                #endregion
-                #region DummyMullionPrice
-                DummyMullionPricePerLinearMeter_7533_WoodGrain = 608.75m;
-                DummyMullionPricePerLinearMeter_385_WoodGrain = 580.72m;
-                DummyMullionPricePerLinearMeter_7533_White = 608.75m;
-                DummyMullionPricePerLinearMeter_385_White = 580.72m;
-                #endregion
-
-                #region GlassPrice
-
-                #region single
-
-                Glass_6mmClr_PricePerSqrMeter = 670.00m;
-                Glass_8mmClr_PricePerSqrMeter = 1662.00m;
-                Glass_10mmClr_PricePerSqrMeter = 1662.00m;
-                Glass_12mmClr_PricePerSqrMeter = 1941.00m;
-                Glass_6mmTemp_PricePerSqrMeter = 1614.00m;
-                Glass_8mmTemp_PricePerSqrMeter = 3201.00m;
-                Glass_10mmTemp_PricePerSqrMeter = 3201.00m;
-                Glass_12mmTemp_PricePerSqrMeter = 3619.00m;
-                Glass_12mmClrOversized_PricePerSqrMeter = 6000.00m;
-
-
-                Glass_6mmAnnealedTinted_Brnz_Bl_Grn_Gry = 985.00m;
-                Glass_8mmAnnealedTinted_Brnz_Bl_Grn_Gry = 2334.00m;
-                Glass_10mmAnnealedTinted_Brnz_Bl_Grn_Gry = 2334.00m;
-                Glass_12mmAnnealedTinted_Brnz_Bl_Grn_Gry = 2709.00m;
-                Glass_6mmTempTinted_Brnz_Bl_Grn_Gry = 1929.00m;
-                Glass_8mmTempTinted_Brnz_Bl_Grn_Gry = 3872.00m;
-                Glass_10mmTempTinted_Brnz_Bl_Grn_Gry = 3872.00m;
-                Glass_12mmTempTinted_Brnz_Bl_Grn_Gry = 4387.00m;
-
-                Glass_6mmAnnealedClr_HrdCtd_LowE = 2000.00m;
-                Glass_8mmAnnealedClr_HrdCtd_LowE = 3200.00m;
-                Glass_10mmAnnealedClr_HrdCtd_LowE = 4900.00m;
-                Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 2300.00m;
-                Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 3850.00m;
-                Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 4200.00m;
-
-                Glass_6mmTempClr_HrdCtd_LowE = 2550.00m;
-                Glass_8mmTempClr_HrdCtd_LowE = 3800.00m;
-                Glass_10mmTempClr_HrdCtd_LowE = 5500.00m;
-                Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 3100.00m;
-                Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 4450.00m;
-                Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry = 5350.00m;
-
-                Glass_8mmTempHeatSoakedClr = 3801.00m;
-                Glass_10mmTempHeatSoakedClr = 3801.00m;
-
-                Glass_6mmTempHeatSoakedClr_HrdCtd_LowE = 3350.00m;
-                Glass_8mmTempHeatSoakedClr_HrdCtd_LowE = 4350.00m;
-                Glass_10mmTempHeatSoakedClr_HrdCtd_LowE = 5350.00m;
-
-                Glass_8mmAnnealed_ReflectiveClr = 2600.00m;
-                Glass_6mmAnnealed_ReflectiveTinted_Brnz_Bl_Grn_Gr_Gry = 2150.00m;
-                Glass_10mmAnnealed_ReflectiveTinted_Brnz_Bl_Grn_Gr_Gry = 3105.00m;
-
-                Glass_8mmTemp_ReflectiveClr = 3350.00m;
-                Glass_6mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry = 3125.10m;
-                Glass_8mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry = 3800.00m;
-                Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry = 3906.00m;
-                Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE = 3600.00m;
-
-                #endregion
-
-                #region Double
-                //Insulated
-                Glass_Double_24mmTemp_SolarBan = 20000.00m;
-                Glass_Double_20mmSelfCleaning_TempClr = 8700.00m;
-                Glass_Double_24mmSelfCleaning_TempClr = 10400.00m;
-                Glass_Double_24mmAnnealedBronze_Argon_AnnealedClr_Argon = 4300.00m;
-
-                Glass_Double_18mmAnnealedClr_AirSS_AnnealedClr = 2800.00m;
-                Glass_Double_23mmAnnealedClr_AirSS_AnnealedClr = 3300.00m;
-                Glass_Double_23mmAnnealedClr_AirSS_AnnealedTinted = 3615.00m;
-                Glass_Double_23mmAnnealedTinted_AirSS_AnnealedTinted = 3930.00m;
-
-                Glass_Double_18mmTempClr_AirSS_AnnealedClr = 3100.00m;
-                Glass_Double_18mmTempClr_Argon_TempClr = 4200.00m;
-                Glass_Double_24mmTempClr_Argon_TempClr = 5188.00m;
-                Glass_Double_18mmTempClr_Argon_TempTinted = 4500.00m;
-                Glass_Double_23mmAnnealedClr_AirSS_TempTinted = 5550.00m;
-                Glass_Double_24mmTempClr_Argon_TempTinted = 6110.00m;
-
-                Glass_Double_18mmAnnealedClr_AirSS_AnnealedClrHrCtdLowe = 3400.00m;
-                Glass_Double_24mmAnnealedClr_Argon_AnnealedClrHrdCtdLowe = 4550.00m;
-                Glass_Double_18mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe = 3800.00m;
-                Glass_Double_24mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe = 5100.00m;
-
-                Glass_Double_18mmAnnealedClr_AirSS_TempClrHrdCtdLowe = 4000.00m;
-                Glass_Double_18mmTempClr_AirSS_TempClrHrdCtdLowe = 4200.00m;
-                Glass_Double_18mmTempClr_Argon_TempClrHrdCtdLowe = 5000.00m;
-                Glass_Double_24mmAnnealedClr_Argon_TempClrHrdCtdLowe = 5500.00m;
-                Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe = 5700.00m;
-                Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;
-                Glass_Double_18mmTempTinted_Argon_TempClrHrdCtdLowe = 5500.00m;
-                Glass_Double_24mmTempTinted_Argon_TempClrHrdCtdLowe = 6600.00m;
-
-                Glass_Double_24mmTempHeatSoakedClr_Argon_TempHeatSoakedClrHrdCtdLowe = 7500.00m;
-
-
-                //Laminated       
-                Glass_Double_11mmTempClr_SGInt_TempClr = 5800.00m;
-                Glass_Double_12mmTempClr_SGInt_TempClr = 5850.00m;
-                Glass_Double_13mmTempClr_SGInt_TempClr = 8000.00m;
-                Glass_Double_21mmTempClr_SGInt_TempClr = 11650.00m;
-                Glass_Double_25mmTempClr_SGInt_TempClr = 12750.00m;
-                Glass_Double_9mmTempClrLowe_ClrPvb_TempClr = 5650.00m;
-                Glass_Double_13mmTempClrLowe_ClrPvb_TempClr = 6850.00m;
-                Glass_Double_23mmTempClrLowe_ClrPvb_TempClr = 14850.00m;
-                Glass_Double_9mmTempClr_ClrPvb_TempTinted = 5000.00m;
-                Glass_Double_10mmTempClr_ClrPvb_TempTinted = 5200.00m;
-                Glass_Double_11mmTempClr_ClrPvb_TempTinted = 5500.00m;
-                Glass_Double_13mmTempClr_ClrPvb_TempTinted = 6150.00m;
-                Glass_Double_9mmTempTinted_ClrPvb_TempTinted = 5500.00m;
-                Glass_Double_12mmTempTinted_ClrPvb_TempTinted = 6300.00m;
-                Glass_Double_13mmTempTinted_ClrPvb_TempTinted = 6500.00m;
-                Glass_Double_12mmTempClrLowe_ClrPvb_TempTinted = 7200.00m;
-                Glass_Double_13mmTempHeatSoakedClr_Pvb_TempHeatSoakedClr = 7500.00m;
-
-                Glass_Double_6mmAnnealedClr_ClrPvb_AnnealedClr = 2350.00m;
-                Glass_Double_8mmAnnealedClr_ClrPvb_AnnealedClr = 2800.00m;
-                Glass_Double_11mmAnnealedClr_ClrPvb_AnnealedClr = 3900.00m;
-                Glass_Double_12mmAnnealedClr_ClrPvb_AnnealedClr = 4100.00m;
-                Glass_Double_21mmAnnealedClr_ClrPvb_AnnealedClr = 8000.00m;
-                Glass_Double_7mmAnnealedClrLowe_ClrPvb_AnnealedClr = 3800.00m;
-                Glass_Double_11mmAnnealedClrLowe_ClrPvb_AnnealedClr = 5000.00m;
-                Glass_Double_12mmAnnealedClrLowe_ClrPvb_AnnealedClr = 5500.00m;
-                Glass_Double_5mmAnnealedClrLowe_ClrPvb_AnnealedTinted = 4200.00m;
-                Glass_Double_6mmAnnealedTinted_ClrPvb_AnnealedClr = 2950.00m;
-                Glass_Double_11mmAnnealedTinted_ClrPvb_AnnealedClr = 4216.00m;
-                Glass_Double_12mmAnnealedTinted_ClrPvb_AnnealedClr = 4600.00m;
-                Glass_Double_6mmAnnealedClr_WhitePvb_AnnealedClr = 2900.00m;
-                Glass_Double_8mmAnnealedClr_WhitePvb_AnnealedClr = 3300.00m;
-                Glass_Double_11mmAnnealedClr_WhitePvb_AnnealedClr = 5325.00m;
-                Glass_Double_12mmAnnealedClr_SGInt_AnnealedClr = 5285.00m;
-                Glass_Double_7mmTempClr_ClrPvb_TempClr = 4050.00m;
-                Glass_Double_9mmTempClr_ClrPvb_TempClr = 4600.00m;
-                Glass_Double_11mmTempClr_ClrPvb_TempClr = 5200.00m;
-                Glass_Double_12mmTempClr_ClrPvb_TempClr = 5300.00m;
-                Glass_Double_13mmTempClr_ClrPvb_TempClr = 5400.00m;
-
-                Glass_Double_12mmAnnealedTinted_ClrPvb_AnnealedTinted = 4600.00m;
-                Glass_Double_8mmAnnealedTinted_ClrPvb_AnnealedClr = 4200.00m;
-                Glass_Double_12mmTempTinted_ClrPvb_TempClrLowe = 6600.00m;
-                Glass_Double_9mmTempClr_WhitePvb_TempClr = 5700.00m;
-                Glass_Double_13mmTempClr_WhitePvb_TempClr = 6500.00m;
-                Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe = 6800.00m;
-                Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe = 8000.00m;
-
-                #endregion
-
-                #region Triple
-                //Insulated
-                Glass_Triple_24mmAnnealedClr_AirSS_AnnealedClr_AirSS_AnnealedClr = 4900.00m;
-                Glass_Triple_24mmTempClr_AirSS_AnnealedClr_AirSS_TempClr = 6100.00m;
-                Glass_Triple_24mmTempClr_AirSs_TempClr_AirSS_TempClr = 8250.00m;
-                Glass_Triple_24mmTempClr_Argon_AnnealedClr_Argon_TempClrLowE = 8350.00m;
-
-                //Laminated
-
-                #endregion
-
-
-                _4millFilmPrice_PricePerSqrMeter = 2600m;
-                #endregion
-
-                #region FittingAndSupplies
-                FS_16HD_casementPricePerPiece = 825.81m;
-                FS_26HD_casementPricePerPiece = 1839.35m;
-
-                RestrictorStayPricePerPiece = 161.18m;
-                CornerDrivePricePerPiece = 150.11m; // standard top= 103.17; bot = 118.82
-                SnapInKeepPricePerPiece = 67.79m;
-                _35mmBacksetEspagWithCylinder = 1346.78m;
-                MiddleCLoserPricePerPiece = 18.57m;
-
-                StayBearingPricePerPiece = 41.44m;
-                StayBearingPinPricePerPiece = 8.03m;
-                CoverStayBearingPricePerPiece = 16.37m;
-                CoverCornerHingePricePerPiece = 8.37m;
-                CornerPivotRestPricePerPiece = 85.25m;
-                TopCornerHingePricePerPiece = 158.48m;
-                CorverCornerPivotRestPricePerPiece = 25.49m;
-                CorverCornerPivotRestVerticalPricePerPiece = 8.87m;
-
-                RotoswingHanldePricePerPiece = 257.93m;
-                RotoswingHanldeForSlidingPricePerPiece = 1123.91m;
-                RioHandlePricePerPiece = 481.49m;
-
-                Espag741012_PricePerPiece = 284.15m;
-                LeverEspagPricePerPiece = 825.81m;
-                TiltAndTurnEspag_N110A00006PricePerPiece = 254.39m;
-                TiltAndTurnEspag_N110A01006PricePerPiece = 465.89m;
-                TiltAndTurnEspag_N110A02206PricePerPiece = 518.40m;
-                TiltAndTurnEspag_N110A03206PricePerPiece = 570.91m;
-                TiltAndTurnEspag_N110A04206PricePerPiece = 623.42m;
-                TiltAndTurnEspag_N110A05206PricePerPiece = 675.18m;
-                TiltAndTurnEspag_N110A06206PricePerPiece = 727.69m;
-
-                _2DHingePricePerPiece = 278.94m;
-                _3DHingePricePerPiece = 990.95m;
-                NTCenterHingePricePerPiece = 170.50m;
-
-                ShootBoltStrikerPricePerPiece = 57.29m;
-                ShootBoltReversePricePerPiece = 368.25m;
-                ShootBoltNonReversePricePerPiece = 242.71m;
-
-                StrikerPricePerPiece = 57.08m;
-                StrikerLRPricePerPiece = 52.01m;//sliding
-                StrikerForDMPricePerPiece = 62.27m;
-                AdjustableStrikerPricePerPiece = 20.72m;
-                LatchDeadboltStrikerPricePerPiece = 446.37m;
-
-                MVDHandlePricePerPiece = 985.01m;
-                MVDGearPricePerPiece = 1585.92m;
-
-                Extension_639957PricePerPiece = 170.50m;
-                Extension_567639PricePerPiece = 134.04m;
-                //Extension_N299A01006PricePerPiece = 118.82m;
-                MVDExtensionPricePerPiece = 183.80m;
-
-                HDRollerPricePerPiece = 566.06m;
-                GURollerPricePerPiece = 1323.08m;
-
-                #endregion
-                #region Accessories
-                EndCapPricePerPiece = 282.96m;
-                MechanicalJoint_AV585PricePerPiece = 87.34m;
-                MechanicalJoint_9U18PricePerPiece = 138.45m;
-                GBSpacerPricePerPiece = 5.01m;
-                PlasticWedgePricePerPiece = 10.09m;
-                BarFastenerPricePerPiece = 4.40m;
-                SealingBlockPricePerPiece = 63.75m;
-                SpacerFixSashPricePerPiece = 21.42m;
-
-                #endregion
-                #region AncillaryProfile
-                GlazingGasketPricePerLinearMeter = 32.64m;
-                GlazingBeadPricePerLinearMeter = 256.62m;
-                GlazingBead_G58PricePerLinearMeter = 117.72m;
-                GeorgianBar_0724Price_White = 264.89m;
-                GeorgianBar_0724Price_Woodgrain = 312.36m;
-                GeorgianBar_0726Price_White = 403.05m;
-                GeorgianBar_0726Price_Woodgrain = 467.22m;
-                CoverProfile_0914Price = 20.68m;
-                CoverProfile_0373Price = 105.41m;
-                ThresholdForC70PricePerPiece = 1229.34m;
-                ThresholdForPremiPricePerPiece = 1181.84m;
-                WeatherBarPricePerPiece = 236.75m;
-                GuideTrackPricePerLinearMeter = 157.18m;
-                InterlockPricePerPiece = 333.77m;
-                ExtensionForInterlockPricePerPiece = 789.01m;
-                AluminumTrackPricePerLinearMeter = 251.10m;
-                WaterSeepagePricePerLinearMeter = 378.47m;
-                AluminumPullHandlePricePerLinearMeter = 2480.18m;
-
-                #endregion
-                BrushSealPricePerLinearMeter = 15.80m;
-                SealantPricePerCan_BrownBlack = 430m;
-                SealantPricePerCan_Clear = 170m;
-                PUFoamingPricePerCan = 210m;
-
-                ProfileColorPoints = 0;
-                CostingPoints = 0;
-                InstallationPoints = 0;
-                LaborCost = 0;
-                InstallationCost = 0;
-                MaterialCost = 0;
-                #endregion
+                MotorizeMechUsingRemotePrice = 19500.00m;
             }
-
+            else if (cus_ref_date >= DateTime.Parse("08-02-2023") && cus_ref_date < inc_price_date_7)
+            {
+                MotorizeMechUsingRemotePrice = 37250.00m;
+            }
+            else if (cus_ref_date >= inc_price_date_7)
+            {
+                MotorizeMechUsingRemotePrice = 19500.00m;
+            }
+            #endregion
         }
+
+        #endregion
+
+        #region changeConditionBaseOnDate 
+        DateTime changeCondition_020323 = DateTime.Parse("02-03-2023"); // georgian bar 
+        DateTime changeCondition_022323 = DateTime.Parse("02-23-2023"); // single pnl glass ht & wd
+        DateTime changeCondition_033023 = DateTime.Parse("03-30-2023"); // for 2d hinge to FS 1pnl
+        DateTime changeCondition_040423 = DateTime.Parse("04-04-2023"); // Div_Width => Div_ExplosionWidth , 1pnlFS from 2d hinge => friction stay
+        DateTime changeCondition_061423 = DateTime.Parse("06-14-2023"); // friction stay size => art#
+        DateTime changeCondition_072023 = DateTime.Parse("07-20-2023"); // points
+        DateTime changeCondition_072723 = DateTime.Parse("07-27-2023"); // gb for sliding , gbar multiplier // remove mesh in total price // 1 side foil labor price and approve by costing  
+        DateTime changeCondition_080323 = DateTime.Parse("08-03-2023"); // need baguhin yung date
+
+
+        DateTime testDate = DateTime.Parse("12-17-2022");
 
         #endregion
 
@@ -3968,6 +3901,7 @@ namespace ModelLayer.Model.Quotation
         public DataTable ItemCostingPriceAndPoints()
         {
             lstTotalPrice = new List<decimal>();
+            //lst_TotalPriceHistory = new List<string>();
 
             DataTable Price_List = new DataTable();
             Price_List.Columns.Add(CreateColumn("Description", "Description", "System.String"));
@@ -3987,12 +3921,19 @@ namespace ModelLayer.Model.Quotation
                 //    wdm.WD_Selected = true;
                 //}
 
-                if (wdm.WD_Selected == true || BOMandItemlistStatus == "PriceItemList")
+                if (wdm.WD_Selected == true || BOMandItemlistStatus == "PriceItemList") //|| FactorChange == true
                 {
 
                     foreach (IFrameModel fr in wdm.lst_frame)
                     {
-                        #region baseOnDimensionAndColorPointsif
+                        #region baseOnDimensionAndColorPointsif 
+                        if (((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                           (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None)) &&
+                           wdm.WD_BaseColor == Base_Color._White)
+                        {
+                            OneSideFoil_whiteBase = true;
+                        }
+
                         if (fr.Frame_ArtNo != FrameProfile_ArticleNo._6050 &&
                             fr.Frame_ArtNo != FrameProfile_ArticleNo._6052 &&
                             fr.Frame_ArtNo != FrameProfile_ArticleNo._2060)
@@ -4018,6 +3959,23 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 18;
                                 }
 
+                                if (cus_ref_date >= changeCondition_072023)
+                                {
+                                    if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
+                                    {
+                                        ProfileColorPoints = 18;
+                                    }
+                                    else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
+                                    {
+                                        ProfileColorPoints = 16;
+                                    }
+                                }
+
+                                if (OneSideFoil_whiteBase == true)
+                                {
+                                    ProfileColorPoints += 1;
+                                }
+
                                 //CostingPoints += ProfileColorPoints * 4;
                                 //InstallationPoints += (ProfileColorPoints / 3) * 4;
                             }
@@ -4040,32 +3998,36 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     ProfileColorPoints = 19;
                                 }
+
+                                if (cus_ref_date >= changeCondition_072023)
+                                {
+                                    if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
+                                    {
+                                        ProfileColorPoints = 19;
+                                    }
+                                    else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
+                                    {
+                                        ProfileColorPoints = 18;
+                                    }
+                                }
                             }
                         }
                         else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                         {
-                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                             {
                                 ProfileColorPoints = 16;
 
-                                if (fr.Frame_Width >= 5000)
-                                {
-                                    ProfileColorPoints = 19;
-                                }
-                                else if (fr.Frame_Height >= 5000)
+                                if (fr.Frame_Width >= 5000 || fr.Frame_Height >= 5000)
                                 {
                                     ProfileColorPoints = 19;
                                 }
                             }
-                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                             {
                                 ProfileColorPoints = 18;
 
-                                if (fr.Frame_Width >= 5000)
-                                {
-                                    ProfileColorPoints = 21;
-                                }
-                                else if (fr.Frame_Height >= 5000)
+                                if (fr.Frame_Width >= 5000 || fr.Frame_Height >= 5000)
                                 {
                                     ProfileColorPoints = 21;
                                 }
@@ -4073,30 +4035,22 @@ namespace ModelLayer.Model.Quotation
                         }
                         else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                         {
-                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                             {
                                 //ProfileColorPoints = 49;
                                 ProfileColorPoints = 34;
 
-                                if (fr.Frame_Width >= 5000)
-                                {
-                                    ProfileColorPoints = 37;
-                                }
-                                else if (fr.Frame_Height >= 5000)
+                                if (fr.Frame_Width >= 5000 || fr.Frame_Height >= 5000)
                                 {
                                     ProfileColorPoints = 37;
                                 }
                             }
-                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                             {
                                 //ProfileColorPoints = 51;
                                 ProfileColorPoints = 37;
 
-                                if (fr.Frame_Width >= 5000)
-                                {
-                                    ProfileColorPoints = 40;
-                                }
-                                else if (fr.Frame_Height >= 5000)
+                                if (fr.Frame_Width >= 5000 || fr.Frame_Height >= 5000)
                                 {
                                     ProfileColorPoints = 40;
                                 }
@@ -4125,6 +4079,23 @@ namespace ModelLayer.Model.Quotation
                                     ProfileColorPoints = 16;
                                 }
 
+                                if (cus_ref_date >= changeCondition_072023)
+                                {
+                                    if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
+                                    {
+                                        ProfileColorPoints = 16;
+                                    }
+                                    else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
+                                    {
+                                        ProfileColorPoints = 14;
+                                    }
+                                }
+
+                                if (OneSideFoil_whiteBase == true)
+                                {
+                                    ProfileColorPoints += 1;
+                                }
+
                                 //CostingPoints += ProfileColorPoints * 4;
                                 //InstallationPoints += (ProfileColorPoints / 3) * 4;
                             }
@@ -4147,6 +4118,18 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     ProfileColorPoints = 17;
                                 }
+
+                                if (cus_ref_date >= changeCondition_072023)
+                                {
+                                    if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
+                                    {
+                                        ProfileColorPoints = 17;
+                                    }
+                                    else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
+                                    {
+                                        ProfileColorPoints = 16;
+                                    }
+                                }
                             }
                         }
                         CostingPoints += ProfileColorPoints * 4;
@@ -4162,6 +4145,11 @@ namespace ModelLayer.Model.Quotation
                             if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                             {
                                 FramePricePerLinearMeter = FramePricePerLinearMeter_7502_White;
+                                if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                    (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                {
+                                    FramePricePerLinearMeter = FramePricePerLinearMeter_7502_White_1sideFoil;
+                                }
                             }
                             else
                             {
@@ -4174,6 +4162,11 @@ namespace ModelLayer.Model.Quotation
                             if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                             {
                                 FramePricePerLinearMeter = FramePricePerLinearMeter_7507_White;
+                                if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                    (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                {
+                                    FramePricePerLinearMeter = FramePricePerLinearMeter_7507_White_1sideFoil;
+                                }
                             }
                             else
                             {
@@ -4190,7 +4183,7 @@ namespace ModelLayer.Model.Quotation
                         }
                         else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                         {
-                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                             {
                                 FramePricePerLinearMeter = FramePricePerLinearMeter_6050_White;
                             }
@@ -4202,7 +4195,7 @@ namespace ModelLayer.Model.Quotation
                         }
                         else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                         {
-                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                             {
                                 FramePricePerLinearMeter = FramePricePerLinearMeter_6052_White;
                             }
@@ -4224,7 +4217,7 @@ namespace ModelLayer.Model.Quotation
                             {
                                 if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                     {
                                         FramePricePerLinearMeter = FramePricePerLinearMeter_6055_White;
                                     }
@@ -4236,7 +4229,7 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                     {
                                         FramePricePerLinearMeter = FramePricePerLinearMeter_6052Milled_White;
                                     }
@@ -4258,7 +4251,7 @@ namespace ModelLayer.Model.Quotation
                         {
                             if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                             {
-                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                 {
                                     FramePricePerLinearMeter = FramePricePerLinearMeter_6055_White;
                                 }
@@ -4270,7 +4263,7 @@ namespace ModelLayer.Model.Quotation
                             }
                             else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                             {
-                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                 {
                                     FramePricePerLinearMeter = FramePricePerLinearMeter_6052Milled_White;
                                 }
@@ -4298,7 +4291,7 @@ namespace ModelLayer.Model.Quotation
                         if ((fr.Frame_ArtNo == FrameProfile_ArticleNo._6050 || fr.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
                             fr.Frame_Width > 6000)
                         {
-                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                             {
                                 ExtensionProfile15mmPricePerLinearMeter = ExtensionProfile15mmPricePerLinearMeter_White;
                             }
@@ -4321,11 +4314,11 @@ namespace ModelLayer.Model.Quotation
                         #region SealantPrice 
                         Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)((fr.Frame_Width * 2) + (fr.Frame_Height * 2)) / 3570);
 
-                        if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                        if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                         {
                             SealantPricePerCan = SealantPricePerCan_Clear;
                         }
-                        else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                        else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                         {
                             SealantPricePerCan = SealantPricePerCan_BrownBlack;
                         }
@@ -4362,6 +4355,12 @@ namespace ModelLayer.Model.Quotation
                                     if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                     {
                                         FramePricePerLinearMeter = FramePricePerLinearMeter_7502_White;
+
+                                        if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                            (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                        {
+                                            FramePricePerLinearMeter = FramePricePerLinearMeter_7502_White_1sideFoil;
+                                        }
                                     }
                                     else
                                     {
@@ -4374,6 +4373,11 @@ namespace ModelLayer.Model.Quotation
                                     if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                     {
                                         FramePricePerLinearMeter = FramePricePerLinearMeter_7507_White;
+                                        if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                            (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                        {
+                                            FramePricePerLinearMeter = FramePricePerLinearMeter_7507_White_1sideFoil;
+                                        }
                                     }
                                     else
                                     {
@@ -4383,7 +4387,7 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                     {
                                         FramePricePerLinearMeter = FramePricePerLinearMeter_6050_White;
                                     }
@@ -4395,7 +4399,7 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                     {
                                         FramePricePerLinearMeter = FramePricePerLinearMeter_6052_White;
                                     }
@@ -4483,7 +4487,14 @@ namespace ModelLayer.Model.Quotation
                                                 DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
                                             }
 
-                                            DivPrice += ((div.Div_ExplosionWidth) / 1000m) * DividerPricePerSqrMeter;
+                                            if (cus_ref_date <= changeCondition_040423)
+                                            {
+                                                DivPrice += ((div.Div_Width) / 1000m) * DividerPricePerSqrMeter;
+                                            }
+                                            else
+                                            {
+                                                DivPrice += ((div.Div_ExplosionWidth) / 1000m) * DividerPricePerSqrMeter;
+                                            }
                                             DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerReinPricePerSqrMeter;
                                             MechJointPrice += MechanicalJointPricePerPiece * 2;
                                         }
@@ -4565,7 +4576,15 @@ namespace ModelLayer.Model.Quotation
                                                     DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
                                                 }
 
-                                                DivPrice += ((div.Div_ExplosionHeight) / 1000m) * DividerPricePerSqrMeter;
+                                                if (cus_ref_date <= changeCondition_040423)
+                                                {
+                                                    DivPrice += ((div.Div_Height) / 1000m) * DividerPricePerSqrMeter;
+                                                }
+                                                else
+                                                {
+                                                    DivPrice += ((div.Div_ExplosionHeight) / 1000m) * DividerPricePerSqrMeter;
+                                                }
+
                                                 DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerReinPricePerSqrMeter;
                                                 MechJointPrice += MechanicalJointPricePerPiece * 2;
                                                 #endregion
@@ -4600,18 +4619,37 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                                 else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                                 {
-                                                    if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                    if (cus_ref_date <= changeCondition_061423)
                                                     {
-                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        if (pnl.Panel_SashHeight >= 800)
+                                                        {
+                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        }
+                                                        else
+                                                        {
+                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        }
                                                     }
                                                     else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
                                                              pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
                                                              pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
                                                              pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
                                                     {
-                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                        {
+                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        }
+                                                        else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
+                                                                 pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                                 pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                                 pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                        {
+                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        }
                                                     }
                                                 }
 
@@ -4780,7 +4818,7 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 _2DHingePrice += _2DHingePricePerPiece * pnl.Panel_2DHingeQty_nonMotorized;
                                             }
-                                            else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
+                                            else if (cus_ref_date < changeCondition_033023)
                                             {
                                                 #region FSPrice
                                                 if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
@@ -4803,6 +4841,96 @@ namespace ModelLayer.Model.Quotation
                                                     FSBasePrice = FS_16HD_casementPricePerPiece;
                                                 }
                                                 #endregion
+                                            }
+                                            else if (cus_ref_date > changeCondition_033023 &&
+                                                     cus_ref_date <= changeCondition_040423)
+                                            {
+                                                if (pnl.Panel_HingeOptions == HingeOption._2DHinge)
+                                                {
+                                                    if (cus_ref_date <= changeCondition_061423)
+                                                    {
+                                                        #region FSPrice
+                                                        if (pnl.Panel_SashHeight >= 800)
+                                                        {
+                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                        }
+                                                        else
+                                                        {
+                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        }
+                                                        #endregion
+                                                    }
+                                                    else
+                                                    {
+                                                        #region FSPrice
+                                                        if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                                            pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                                        {
+                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                                            if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                            {
+                                                                SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                            }
+                                                        }
+                                                        else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                                 pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                                 pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                                 pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                                        {
+                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        }
+                                                        #endregion
+                                                    }
+
+                                                }
+                                            }
+                                            else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
+                                            {
+                                                if (cus_ref_date <= changeCondition_061423)
+                                                {
+                                                    #region FSPrice
+                                                    if (pnl.Panel_SashHeight >= 800)
+                                                    {
+                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                    }
+                                                    else
+                                                    {
+                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                    }
+                                                    #endregion 
+                                                }
+                                                else
+                                                {
+                                                    #region FSPrice
+                                                    if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                                        pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                                    {
+                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                                        if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                        {
+                                                            SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                        }
+                                                    }
+                                                    else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                             pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                             pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                             pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                                    {
+                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                    }
+                                                    #endregion
+                                                }
+
                                             }
 
                                             MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
@@ -4933,6 +5061,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                       (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -4946,6 +5079,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                       (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_374_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -4959,6 +5097,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                       (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_373_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -4972,6 +5115,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                       (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_395_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -4989,7 +5137,7 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                                             {
-                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
                                                 }
@@ -5002,7 +5150,7 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                             {
-                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
                                                 }
@@ -5052,6 +5200,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -5065,6 +5218,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_374_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -5078,6 +5236,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_373_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -5091,6 +5254,11 @@ namespace ModelLayer.Model.Quotation
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                                    if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                                      (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                                    {
+                                                        SashPricePerLinearMeter = SashPricePerLinearMeter_395_White_1sideFoil;
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -5108,7 +5276,7 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                                             {
-                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
                                                 }
@@ -5121,7 +5289,7 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                             {
-                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                                 {
                                                     SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
                                                 }
@@ -5136,15 +5304,19 @@ namespace ModelLayer.Model.Quotation
 
                                             SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
                                             SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
+                                            if (cus_ref_date >= changeCondition_072723)
+                                            {
+                                                if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                                {
+                                                    GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
+                                                }
+                                                else
+                                                {
+                                                    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                                }
+                                            }
 
-                                            //if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                                            //{
-                                            //    GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
-                                            //}
-                                            //else
-                                            //{
-                                            //    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
-                                            //}
+
 
                                             #endregion
                                         }
@@ -5175,13 +5347,17 @@ namespace ModelLayer.Model.Quotation
                                             else if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
                                             {
                                                 MotorizeMechPricePerPiece = MotorizeMechUsingRemotePrice;
-
-                                                MotorizeMechRemotePricePerPiece += RemoteForMotorizeMechPrice;
                                             }
 
                                             if (chckPerFrameMotorMech == true)
                                             {
                                                 MotorizePrice += MotorizeMechPricePerPiece * pnl.MotorizeMechQty();
+
+                                                if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
+                                                {
+                                                    RemoteForMotorizeMechPrice = MotorizeMechRemotePricePerPiece;
+                                                }
+
                                                 chckPerFrameMotorMech = false;
                                             }
                                         }
@@ -5191,7 +5367,12 @@ namespace ModelLayer.Model.Quotation
 
                                         if (pnl.Panel_EspagnoletteOptionsVisibility == true)
                                         {
-                                            if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
+                                            if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._None &&
+                                                 cus_ref_date >= changeCondition_080323)
+                                            {
+
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
                                             {
                                                 EspagPrice += TiltAndTurnEspag_N110A00006PricePerPiece;
                                                 EspagBasePrice = TiltAndTurnEspag_N110A00006PricePerPiece;
@@ -5368,8 +5549,20 @@ namespace ModelLayer.Model.Quotation
                                         #region GeorgianBar
                                         if (pnl.Panel_GeorgianBarOptionVisibility == true)
                                         {
-                                            GeorgianBarHorizontalQty = pnl.Panel_GeorgianBar_HorizontalQty * 2;
-                                            GeorgianBarVerticalQty = pnl.Panel_GeorgianBar_VerticalQty * 2;
+                                            int GBmultiplier = 1, multiplier = 1;
+
+                                            if (cus_ref_date >= changeCondition_020323)
+                                            {
+                                                GBmultiplier = 2;
+                                            }
+
+                                            if (cus_ref_date >= changeCondition_072723)
+                                            {
+                                                multiplier = 2;
+                                            }
+
+                                            GeorgianBarHorizontalQty = pnl.Panel_GeorgianBar_HorizontalQty * GBmultiplier;
+                                            GeorgianBarVerticalQty = pnl.Panel_GeorgianBar_VerticalQty * GBmultiplier;
 
                                             if (wdm.WD_BaseColor == Base_Color._Ivory ||
                                                 wdm.WD_BaseColor == Base_Color._White)
@@ -5378,7 +5571,7 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
                                                     {
-                                                        GeorgianBarCost += (((pnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * 2;
+                                                        GeorgianBarCost += (((pnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * multiplier;
                                                     }
                                                     if (pnl.Panel_GeorgianBar_VerticalQty != 0)
                                                     {
@@ -5473,6 +5666,11 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClrOversized_PricePerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmClrOversized_PricePerSqrMeter;
                                                 }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Tinted Oversized"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempTintedOversized_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempTintedOversized_PricePerSqrMeter;
+                                                }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedTinted_Brnz_Bl_Grn_Gry;
@@ -5513,65 +5711,86 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm  Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm  Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempClr_HrdCtd_LowE;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
+                                                }
+
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear"))
                                                 {
@@ -5583,21 +5802,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                }
+
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealed_ReflectiveClr;
@@ -5633,7 +5838,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
@@ -5680,6 +5885,22 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTemp_PricePerSqrMeter;
                                                 }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("15 mm Tempered Clear"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_15mmTemp_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_15mmTemp_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm PVC Sheet Wood(6-B2B)"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_12mm_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_12mm_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm PVC Sheet Wood"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_6mm_PricepPerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_6mm_PricepPerSqrMeter;
+                                                }
+
                                                 else
                                                 {
                                                     GlassPrice += 0;
@@ -5714,79 +5935,79 @@ namespace ModelLayer.Model.Quotation
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedBronze_Argon_AnnealedClr_Argon;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmAnnealedClr_AirSS_AnnealedClrHrCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedClr_AirSS_AnnealedClrHrCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedClr_Argon_AnnealedClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedClr_Argon_AnnealedClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tinted + 10 Argon + 4 mm Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tinted + 10 Argon + 4 mm Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted + 12 Argon + 6 mm Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted + 12 Argon + 6 mm Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmAnnealedClr_AirSS_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedClr_AirSS_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 + 4 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmTempClr_AirSS_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmTempClr_AirSS_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmTempClr_Argon_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedClr_Argon_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedClr_Argon_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmTempTinted_Argon_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmTempTinted_Argon_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempTinted_Argon_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempTinted_Argon_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempHeatSoakedClr_Argon_TempHeatSoakedClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempHeatSoakedClr_Argon_TempHeatSoakedClrHrdCtdLowe;
@@ -5932,7 +6153,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_12mmTempClrLowe_ClrPvb_TempTinted;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_12mmTempClrLowe_ClrPvb_TempTinted;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempHeatSoakedClr_Pvb_TempHeatSoakedClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempHeatSoakedClr_Pvb_TempHeatSoakedClr;
@@ -6047,12 +6268,24 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_12mmAnnealedTinted_ClrPvb_AnnealedTinted;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_12mmAnnealedTinted_ClrPvb_AnnealedTinted;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm  Tinted + 0.76 + 4 mm  with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm  Tinted + 0.76 + 4 mm  Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_8mmAnnealedTinted_ClrPvb_AnnealedClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_8mmAnnealedTinted_ClrPvb_AnnealedClr;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear with HardCoated Low-e"))
+
+
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear Low-e"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_12mmTempTinted_ClrPvb_TempClrLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_12mmTempTinted_ClrPvb_TempClrLowe;
@@ -6067,16 +6300,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with HardCoated Low-e"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                                }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with HardCoated Low-e"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                                }
+
 
                                                 #endregion
                                             }
@@ -6131,11 +6355,11 @@ namespace ModelLayer.Model.Quotation
                                         if (pnl.Panel_GlassThickness != 0.0f)
                                         {
 
-                                            if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                            if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                             {
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                                             }
-                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                             {
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                             }
@@ -6236,6 +6460,11 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClrOversized_PricePerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmClrOversized_PricePerSqrMeter;
                                                 }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Tinted Oversized"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempTintedOversized_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempTintedOversized_PricePerSqrMeter;
+                                                }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedTinted_Brnz_Bl_Grn_Gry;
@@ -6276,65 +6505,87 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm  Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm  Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempClr_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempClr_HrdCtd_LowE;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempClr_HrdCtd_LowE;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Grey"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
+                                                }
+
+
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear Low-E"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear"))
                                                 {
@@ -6346,21 +6597,8 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                                }
+
+
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealed_ReflectiveClr;
@@ -6396,7 +6634,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold w/ HardCoated Low-E"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold Low-E"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
@@ -6443,6 +6681,21 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTemp_PricePerSqrMeter;
                                                 }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("15 mm Tempered Clear"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_15mmTemp_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_15mmTemp_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm PVC Sheet Wood(6-B2B)"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_12mm_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_12mm_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm PVC Sheet Wood"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_6mm_PricepPerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_6mm_PricepPerSqrMeter;
+                                                }
                                                 else
                                                 {
                                                     GlassPrice += 0;
@@ -6477,79 +6730,79 @@ namespace ModelLayer.Model.Quotation
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedBronze_Argon_AnnealedClr_Argon;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmAnnealedClr_AirSS_AnnealedClrHrCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedClr_AirSS_AnnealedClrHrCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedClr_Argon_AnnealedClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedClr_Argon_AnnealedClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tinted + 10 Argon + 4 mm Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tinted + 10 Argon + 4 mm Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted + 12 Argon + 6 mm Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted + 12 Argon + 6 mm Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmAnnealedClr_AirSS_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedClr_AirSS_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 + 4 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmTempClr_AirSS_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmTempClr_AirSS_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmTempClr_Argon_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedClr_Argon_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedClr_Argon_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmTempTinted_Argon_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmTempTinted_Argon_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempTinted_Argon_TempClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempTinted_Argon_TempClrHrdCtdLowe;
 
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempHeatSoakedClr_Argon_TempHeatSoakedClrHrdCtdLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempHeatSoakedClr_Argon_TempHeatSoakedClrHrdCtdLowe;
@@ -6695,7 +6948,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_12mmTempClrLowe_ClrPvb_TempTinted;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_12mmTempClrLowe_ClrPvb_TempTinted;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempHeatSoakedClr_Pvb_TempHeatSoakedClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempHeatSoakedClr_Pvb_TempHeatSoakedClr;
@@ -6810,12 +7063,23 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_12mmAnnealedTinted_ClrPvb_AnnealedTinted;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_12mmAnnealedTinted_ClrPvb_AnnealedTinted;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm  Tinted + 0.76 + 4 mm  with HardCoated Low-e"))
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm  Tinted + 0.76 + 4 mm  Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_8mmAnnealedTinted_ClrPvb_AnnealedClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_8mmAnnealedTinted_ClrPvb_AnnealedClr;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear with HardCoated Low-e"))
+
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear Low-e"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_12mmTempTinted_ClrPvb_TempClrLowe;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_12mmTempTinted_ClrPvb_TempClrLowe;
@@ -6830,16 +7094,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                                 }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with HardCoated Low-e"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                                }
-                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with HardCoated Low-e"))
-                                                {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                                }
+
 
                                                 #endregion
                                             }
@@ -6894,11 +7149,11 @@ namespace ModelLayer.Model.Quotation
                                         if (pnl.Panel_GlassThickness != 0.0f)
                                         {
 
-                                            if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                            if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                             {
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                                             }
-                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                             {
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                             }
@@ -6908,8 +7163,20 @@ namespace ModelLayer.Model.Quotation
                                         #region GeorgianBar
                                         if (pnl.Panel_GeorgianBarOptionVisibility == true)
                                         {
-                                            GeorgianBarHorizontalQty = pnl.Panel_GeorgianBar_HorizontalQty * 2;
-                                            GeorgianBarVerticalQty = pnl.Panel_GeorgianBar_VerticalQty * 2;
+                                            int GBmultiplier = 1, multiplier = 1;
+
+                                            if (cus_ref_date >= changeCondition_020323)
+                                            {
+                                                GBmultiplier = 2;
+                                            }
+
+                                            if (cus_ref_date >= changeCondition_072723)
+                                            {
+                                                multiplier = 2;
+                                            }
+
+                                            GeorgianBarHorizontalQty = pnl.Panel_GeorgianBar_HorizontalQty * GBmultiplier;
+                                            GeorgianBarVerticalQty = pnl.Panel_GeorgianBar_VerticalQty * GBmultiplier;
 
                                             if (wdm.WD_BaseColor == Base_Color._Ivory ||
                                                 wdm.WD_BaseColor == Base_Color._White)
@@ -6918,7 +7185,7 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
                                                     {
-                                                        GeorgianBarCost += (((pnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * 2;
+                                                        GeorgianBarCost += (((pnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * multiplier;
                                                     }
                                                     if (pnl.Panel_GeorgianBar_VerticalQty != 0)
                                                     {
@@ -7453,11 +7720,11 @@ namespace ModelLayer.Model.Quotation
 
                                         if (pnl.Panel_GlassThickness != 0.0f)
                                         {
-                                            if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                            if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                             {
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                                             }
-                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                             {
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                             }
@@ -7672,18 +7939,37 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                         {
-                                            if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                            if (cus_ref_date <= changeCondition_061423)
                                             {
-                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                if (Singlepnl.Panel_SashHeight >= 800)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
+                                                else
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                }
                                             }
                                             else if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
-                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
-                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
-                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
                                             {
-                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
+                                                else if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
+                                                         Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                         Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                         Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                }
                                             }
                                         }
 
@@ -7834,7 +8120,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         _2DHingePrice += _2DHingePricePerPiece * Singlepnl.Panel_2DHingeQty_nonMotorized;
                                     }
-                                    else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
+                                    else if (cus_ref_date < changeCondition_033023)
                                     {
                                         #region FSPrice
                                         if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
@@ -7858,6 +8144,163 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         #endregion
                                     }
+                                    else if (cus_ref_date >= changeCondition_033023 &&
+                                             cus_ref_date <= changeCondition_040423)
+                                    {
+                                        if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge)
+                                        {
+                                            if (cus_ref_date <= changeCondition_061423) // Date_Assigned
+                                            {
+                                                #region FSPrice
+                                                if (Singlepnl.Panel_SashHeight >= 800)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
+                                                else
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                }
+                                                #endregion
+                                            }
+                                        }
+                                    }
+                                    else if (Date_Assigned >= changeCondition_040423 && Date_Assigned < changeCondition_061423)
+                                    {
+                                        if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
+                                        {
+                                            #region FSPrice
+                                            if (Singlepnl.Panel_SashHeight >= 800)
+                                            {
+                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+                                            }
+                                            else
+                                            {
+                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                            }
+                                            #endregion
+                                        }
+                                    }
+                                    else if (Date_Assigned >= changeCondition_061423)
+                                    {
+                                        #region FSPrice
+                                        if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                            Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                        {
+                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                            if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                            {
+                                                SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                            }
+                                        }
+                                        else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                        {
+                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                        }
+                                        #endregion
+                                    }
+
+                                    #region OldAlgoForFS
+
+
+                                    //else if (Date_Assigned <= changeCondition_040423)
+                                    //{
+                                    //    if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge)
+                                    //    {
+                                    //        if (Date_Assigned <= changeCondition_061423) // Date_Assigned
+                                    //        {
+                                    //            #region FSPrice
+                                    //            if (Singlepnl.Panel_SashHeight >= 800)
+                                    //            {
+                                    //                FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                    //                FSBasePrice = FS_26HD_casementPricePerPiece;
+                                    //            }
+                                    //            else
+                                    //            {
+                                    //                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                    //                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                    //            }
+                                    //            #endregion
+                                    //        }
+                                    //        else
+                                    //        {
+                                    //            #region FSPrice
+                                    //            if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                    //                Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                    //            {
+                                    //                FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                    //                FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                    //                if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                    //                {
+                                    //                    SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                    //                }
+                                    //            }
+                                    //            else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                    //                     Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                    //                     Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                    //                     Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                    //            {
+                                    //                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                    //                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                    //            }
+                                    //            #endregion
+                                    //        }
+                                    //    }
+                                    //}
+                                    //else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
+                                    //{
+                                    //    if (Date_Assigned <= changeCondition_061423) // Date_Assigned
+                                    //    {
+                                    //        #region FSPrice
+                                    //        if (Singlepnl.Panel_SashHeight >= 800)
+                                    //        {
+                                    //            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                    //            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                    //        }
+                                    //        else
+                                    //        {
+                                    //            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                    //            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                    //        }
+                                    //        #endregion
+                                    //    }
+                                    //    else
+                                    //    {
+                                    //        #region FSPrice
+                                    //        if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                    //            Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                    //        {
+                                    //            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                    //            FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                    //            if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                    //            {
+                                    //                SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                    //            }
+                                    //        }
+                                    //        else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                    //                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                    //                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                    //                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                    //        {
+                                    //            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                    //            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                    //        }
+                                    //        #endregion
+                                    //    }
+                                    //}
+
+                                    #endregion
 
 
                                     if (Singlepnl.Panel_HandleOptionsVisibility == true)
@@ -7987,6 +8430,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -8000,6 +8448,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_374_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -8013,6 +8466,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_373_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -8026,6 +8484,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_395_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -8043,7 +8506,7 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                                     {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
                                         }
@@ -8056,9 +8519,14 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                     {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -8088,6 +8556,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -8101,6 +8574,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_374_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -8114,6 +8592,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_373_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -8127,6 +8610,11 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                            if ((wdm.WD_InsideColor == Foil_Color._None && wdm.WD_OutsideColor != Foil_Color._None) ||
+                                               (wdm.WD_InsideColor != Foil_Color._None && wdm.WD_OutsideColor == Foil_Color._None))
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_395_White_1sideFoil;
+                                            }
                                         }
                                         else
                                         {
@@ -8143,7 +8631,7 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                                     {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
                                         }
@@ -8156,7 +8644,7 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                     {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
                                         {
                                             SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
                                         }
@@ -8201,12 +8689,18 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         MotorizeMechPricePerPiece = MotorizeMechUsingRemotePrice;
 
-                                        MotorizeMechRemotePricePerPiece += RemoteForMotorizeMechPrice;
+
                                     }
 
                                     if (chckPerFrameMotorMech == true)
                                     {
                                         MotorizePrice += MotorizeMechPricePerPiece * Singlepnl.Panel_MotorizedMechQty;
+                                        if (Singlepnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41731V)
+                                        {
+                                            RemoteForMotorizeMechPrice = MotorizeMechRemotePricePerPiece;
+                                        }
+
+
                                         chckPerFrameMotorMech = false;
                                     }
 
@@ -8217,7 +8711,12 @@ namespace ModelLayer.Model.Quotation
 
                                 if (Singlepnl.Panel_EspagnoletteOptionsVisibility == true && Singlepnl.Panel_ChkText != "dSash")
                                 {
-                                    if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
+                                    if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._None &&
+                                        cus_ref_date >= changeCondition_080323)
+                                    {
+
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
                                     {
                                         EspagPrice += TiltAndTurnEspag_N110A00006PricePerPiece;
                                         EspagBasePrice = TiltAndTurnEspag_N110A00006PricePerPiece;
@@ -8394,8 +8893,20 @@ namespace ModelLayer.Model.Quotation
                                 #region GeorgianBar
                                 if (Singlepnl.Panel_GeorgianBarOptionVisibility == true)
                                 {
-                                    GeorgianBarHorizontalQty = Singlepnl.Panel_GeorgianBar_HorizontalQty * 2;
-                                    GeorgianBarVerticalQty = Singlepnl.Panel_GeorgianBar_VerticalQty * 2;
+                                    int GBmultiplier = 1, multiplier = 1;
+
+                                    if (cus_ref_date >= changeCondition_020323)
+                                    {
+                                        GBmultiplier = 2;
+                                    }
+
+                                    if (cus_ref_date >= changeCondition_072723)
+                                    {
+                                        multiplier = 2;
+                                    }
+
+                                    GeorgianBarHorizontalQty = Singlepnl.Panel_GeorgianBar_HorizontalQty * GBmultiplier;
+                                    GeorgianBarVerticalQty = Singlepnl.Panel_GeorgianBar_VerticalQty * GBmultiplier;
 
                                     if (wdm.WD_BaseColor == Base_Color._Ivory ||
                                         wdm.WD_BaseColor == Base_Color._White)
@@ -8404,7 +8915,7 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
                                             {
-                                                GeorgianBarCost += (((Singlepnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * 2;
+                                                GeorgianBarCost += (((Singlepnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * multiplier;
                                             }
                                             if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
                                             {
@@ -8483,6 +8994,15 @@ namespace ModelLayer.Model.Quotation
                                     }
                                 }
 
+                                //if (testDate <= changeCondition_022323)
+                                //{
+                                //    Singlepnl.Panel_GlassWidth = Singlepnl.Panel_DisplayWidth - (33 * 2) - 6;
+                                //    Singlepnl.Panel_GlassHeight = Singlepnl.Panel_DisplayHeight - (33 * 2) - 6;
+                                //}
+                                //Console.WriteLine(Singlepnl.Panel_GlassWidth = Singlepnl.Panel_DisplayWidth - (33 * 2) - 6);
+                                //Console.WriteLine(Singlepnl.Panel_GlassHeight = Singlepnl.Panel_DisplayHeight - (33 * 2) - 6);
+
+
                                 if ((Singlepnl.Panel_GlassType_Insu_Lami == "NA") || Singlepnl.Panel_GlassType_Insu_Lami == "")
                                 {
                                     #region Single 
@@ -8495,6 +9015,11 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmClrOversized_PricePerSqrMeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmClrOversized_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Tinted Oversized"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempTintedOversized_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempTintedOversized_PricePerSqrMeter;
                                     }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Grey"))
                                     {
@@ -8536,65 +9061,87 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempClr_HrdCtd_LowE;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
+                                    }
+
+
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
                                     }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear"))
                                     {
@@ -8606,21 +9153,9 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                    }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                    }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                    }
+
+
+
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealed_ReflectiveClr;
@@ -8656,7 +9191,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
@@ -8703,6 +9238,21 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTemp_PricePerSqrMeter;
                                     }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("15 mm Tempered Clear"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_15mmTemp_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_15mmTemp_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm PVC Sheet Wood(6-B2B)"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_12mm_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_12mm_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm PVC Sheet Wood"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_6mm_PricepPerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_6mm_PricepPerSqrMeter;
+                                    }
                                     else
                                     {
                                         GlassPrice += 0;
@@ -8734,79 +9284,79 @@ namespace ModelLayer.Model.Quotation
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedBronze_Argon_AnnealedClr_Argon;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmAnnealedClr_AirSS_AnnealedClrHrCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedClr_AirSS_AnnealedClrHrCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedClr_Argon_AnnealedClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedClr_Argon_AnnealedClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tinted + 10 Argon + 4 mm Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tinted + 10 Argon + 4 mm Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted + 12 Argon + 6 mm Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted + 12 Argon + 6 mm Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmAnnealedClr_AirSS_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedClr_AirSS_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 + 4 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmTempClr_AirSS_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmTempClr_AirSS_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmTempClr_Argon_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedClr_Argon_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedClr_Argon_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmTempTinted_Argon_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmTempTinted_Argon_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempTinted_Argon_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempTinted_Argon_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempHeatSoakedClr_Argon_TempHeatSoakedClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempHeatSoakedClr_Argon_TempHeatSoakedClrHrdCtdLowe;
@@ -8952,7 +9502,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_12mmTempClrLowe_ClrPvb_TempTinted;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_12mmTempClrLowe_ClrPvb_TempTinted;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempHeatSoakedClr_Pvb_TempHeatSoakedClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempHeatSoakedClr_Pvb_TempHeatSoakedClr;
@@ -9067,15 +9617,25 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_12mmAnnealedTinted_ClrPvb_AnnealedTinted;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_12mmAnnealedTinted_ClrPvb_AnnealedTinted;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm  Tinted + 0.76 + 4 mm  with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm  Tinted + 0.76 + 4 mm  Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_8mmAnnealedTinted_ClrPvb_AnnealedClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_8mmAnnealedTinted_ClrPvb_AnnealedClr;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_12mmTempTinted_ClrPvb_TempClrLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_12mmTempTinted_ClrPvb_TempClrLowe;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear Low-e"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
                                     }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear"))
                                     {
@@ -9087,16 +9647,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with HardCoated Low-e"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                    }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with HardCoated Low-e"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                    }
+
 
                                     #endregion
                                 }
@@ -9148,11 +9699,11 @@ namespace ModelLayer.Model.Quotation
                                 if (Singlepnl.Panel_GlassThickness != 0.0f)
                                 {
 
-                                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                    if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                                     }
-                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                     }
@@ -9226,6 +9777,11 @@ namespace ModelLayer.Model.Quotation
                                 InstallationPoints += (ProfileColorPoints / 3) * 2;
 
                                 #region Glass 
+                                if (cus_ref_date >= changeCondition_022323)
+                                {
+                                    Singlepnl.Panel_GlassWidth = Singlepnl.Panel_DisplayWidth - (33 * 2) - 6;
+                                    Singlepnl.Panel_GlassHeight = Singlepnl.Panel_DisplayHeight - (33 * 2) - 6;
+                                }
 
                                 var GlassThcknessDesc_Holder = Singlepnl.Panel_GlassThicknessDesc;
                                 if (GlassThcknessDesc_Holder != null)
@@ -9248,6 +9804,11 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmClrOversized_PricePerSqrMeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmClrOversized_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Tinted Oversized"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempTintedOversized_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempTintedOversized_PricePerSqrMeter;
                                     }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted Grey"))
                                     {
@@ -9289,65 +9850,87 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempTinted_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm  Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempClr_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempClr_HrdCtd_LowE;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm Tempered Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTempClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTempClr_HrdCtd_LowE;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted w/ HardCoated Low-E Grey"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Bronze") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Blue") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Green") || Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Tinted Low-E Grey"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
+                                    }
+
+
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear Low-E"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
                                     }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear"))
                                     {
@@ -9359,21 +9942,8 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTempHeatSoakedClr_HrdCtd_LowE;
-                                    }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_8mmTempHeatSoakedClr_HrdCtd_LowE;
-                                    }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr_HrdCtd_LowE;
-                                    }
+
+
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealed_ReflectiveClr;
@@ -9409,7 +9979,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTemp_ReflectiveTinted_Brnz_Bl_Grn_Gry;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold w/ HardCoated Low-E"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Recflective Gold Low-E"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTemp_ReflectiveGold_HrdCtd_LowE;
@@ -9456,6 +10026,21 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTemp_PricePerSqrMeter;
                                     }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("15 mm Tempered Clear"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_15mmTemp_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_15mmTemp_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm PVC Sheet Wood(6-B2B)"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_12mm_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_12mm_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm PVC Sheet Wood"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_6mm_PricepPerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_6mm_PricepPerSqrMeter;
+                                    }
                                     else
                                     {
                                         GlassPrice += 0;
@@ -9487,79 +10072,79 @@ namespace ModelLayer.Model.Quotation
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedBronze_Argon_AnnealedClr_Argon;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmAnnealedClr_AirSS_AnnealedClrHrCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedClr_AirSS_AnnealedClrHrCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedClr_Argon_AnnealedClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedClr_Argon_AnnealedClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tinted + 10 Argon + 4 mm Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tinted + 10 Argon + 4 mm Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted + 12 Argon + 6 mm Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tinted + 12 Argon + 6 mm Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedTinted_Argon_AnnealedClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Clear + 10 + 4 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmAnnealedClr_AirSS_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmAnnealedClr_AirSS_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 + 4 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmTempClr_AirSS_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmTempClr_AirSS_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmTempClr_Argon_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmAnnealedClr_Argon_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmAnnealedClr_Argon_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_18mmTempTinted_Argon_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_18mmTempTinted_Argon_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempTinted_Argon_TempClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempTinted_Argon_TempClrHrdCtdLowe;
 
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempHeatSoakedClr_Argon_TempHeatSoakedClrHrdCtdLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempHeatSoakedClr_Argon_TempHeatSoakedClrHrdCtdLowe;
@@ -9705,7 +10290,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_12mmTempClrLowe_ClrPvb_TempTinted;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_12mmTempClrLowe_ClrPvb_TempTinted;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempHeatSoakedClr_Pvb_TempHeatSoakedClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempHeatSoakedClr_Pvb_TempHeatSoakedClr;
@@ -9820,12 +10405,22 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_12mmAnnealedTinted_ClrPvb_AnnealedTinted;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_12mmAnnealedTinted_ClrPvb_AnnealedTinted;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm  Tinted + 0.76 + 4 mm  with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm  Tinted + 0.76 + 4 mm  Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_8mmAnnealedTinted_ClrPvb_AnnealedClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_8mmAnnealedTinted_ClrPvb_AnnealedClr;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear with HardCoated Low-e"))
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear Low-e"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_12mmTempTinted_ClrPvb_TempClrLowe;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_12mmTempTinted_ClrPvb_TempClrLowe;
@@ -9840,16 +10435,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                     }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with HardCoated Low-e"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_9mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                    }
-                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with HardCoated Low-e"))
-                                    {
-                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClrHrdCtdLowe;
-                                    }
+
 
                                     #endregion
                                 }
@@ -9901,11 +10487,11 @@ namespace ModelLayer.Model.Quotation
                                 if (Singlepnl.Panel_GlassThickness != 0.0f)
                                 {
 
-                                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                    if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                                     }
-                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                     }
@@ -9915,8 +10501,20 @@ namespace ModelLayer.Model.Quotation
                                 #region GeorgianBar
                                 if (Singlepnl.Panel_GeorgianBarOptionVisibility == true)
                                 {
-                                    GeorgianBarHorizontalQty = Singlepnl.Panel_GeorgianBar_HorizontalQty * 2;
-                                    GeorgianBarVerticalQty = Singlepnl.Panel_GeorgianBar_VerticalQty * 2;
+                                    int GBmultiplier = 1, multiplier = 1;
+
+                                    if (cus_ref_date >= changeCondition_020323)
+                                    {
+                                        GBmultiplier = 2;
+                                    }
+
+                                    if (cus_ref_date >= changeCondition_072723)
+                                    {
+                                        multiplier = 2;
+                                    }
+
+                                    GeorgianBarHorizontalQty = Singlepnl.Panel_GeorgianBar_HorizontalQty * GBmultiplier;
+                                    GeorgianBarVerticalQty = Singlepnl.Panel_GeorgianBar_VerticalQty * GBmultiplier;
 
                                     if (wdm.WD_BaseColor == Base_Color._Ivory ||
                                         wdm.WD_BaseColor == Base_Color._White)
@@ -9925,7 +10523,7 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
                                             {
-                                                GeorgianBarCost += (((Singlepnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * 2;
+                                                GeorgianBarCost += (((Singlepnl.Panel_GlassWidth + 5) / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White * multiplier;
                                             }
                                             if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
                                             {
@@ -10508,11 +11106,11 @@ namespace ModelLayer.Model.Quotation
 
                                 if (Singlepnl.Panel_GlassThickness != 0.0f)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                    if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                                     }
-                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                     }
@@ -10551,6 +11149,13 @@ namespace ModelLayer.Model.Quotation
 
                     wdm.WD_CostingPoints = CostingPoints;
                     LaborCost = CostingPoints * CostPerPoints;
+
+                    if (OneSideFoil_whiteBase == true &&
+                        wdm.WD_profile != "PremiLine Profile")
+                    {
+                        LaborCost = LaborCost * 1.03m;
+                    }
+
                     InstallationCost = InstallationPoints * CostPerPoints;
 
                     // Math.Round( , 2) +
@@ -10584,7 +11189,7 @@ namespace ModelLayer.Model.Quotation
                                              Math.Round(StrikerLRPrice, 2) +
                                              Math.Round(BrushSealPrice, 2) +
                                              Math.Round(MotorizePrice, 2) +
-                                             Math.Round(MotorizeMechRemotePricePerPiece, 2);
+                                             Math.Round(RemoteForMotorizeMechPrice, 2);
 
                     AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
                                            Math.Round(GbPrice, 2) +
@@ -10667,17 +11272,187 @@ namespace ModelLayer.Model.Quotation
                                 Math.Round(FilmPrice, 2) +
                                 Math.Round(SecurityMeshPrice, 2);
 
+                    if (cus_ref_date >= changeCondition_072723)
+                    {
+                        TotaPrice = TotaPrice - Math.Round(SecurityMeshPrice, 2);
+                    }
+
+                    BaseTotalPrice = TotaPrice;
+
                     TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
+
+                    BaseTotalPriceWithFactor = TotaPrice;
 
                     TotaPrice = TotaPrice + LouverCost + MeshCost;
 
+                    wdm.SystemSuggestedPrice = TotaPrice;
+
                     wdm.WD_currentPrice = TotaPrice;
+
                     lstTotalPrice.Add(TotaPrice);
 
                     if (wdm.WD_price == 0)
                     {
                         wdm.WD_price = TotaPrice;
                     }
+
+                    #region Price History
+
+
+                    DateTime thisDay = DateTime.Now;
+                    //wdm.TotalPriceHistoryStatus = "System Generated Price";
+                    wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
+
+                   "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
+
+                    "`````\n\nWD_CostingPoints: " + CostingPoints.ToString() + "\n" +
+                    "LaborCost: " + LaborCost.ToString() + " = CostingPoints " + CostingPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n" +
+                    "InstallationCost: " + InstallationCost.ToString() + " = InstallationPoints " + InstallationPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n\n" +
+
+
+                    "FittingAndSuppliesCost: " + FittingAndSuppliesCost.ToString() + " = \n" +
+
+                                             "\t FSPrice: " + Math.Round(FSPrice, 2).ToString() + "+\n" +
+                                             "\t RestrictorStayPrice: " + Math.Round(RestrictorStayPrice, 2).ToString() + "+\n" +
+                                             "\t CornerDrivePrice: " + Math.Round(CornerDrivePrice, 2).ToString() + "+\n" +
+                                             "\t SnapInKeepPrice: " + Math.Round(SnapInKeepPrice, 2).ToString() + "+\n" +
+                                             "\t 35mmBacksetEspagWithCylinderPrice: " + Math.Round(_35mmBacksetEspagWithCylinderPrice, 2).ToString() + "+\n" +
+                                             "\t MiddleCLoserPrice: " + Math.Round(MiddleCLoserPrice, 2).ToString() + "+\n" +
+                                             "\t StayBearingPrice: " + Math.Round(StayBearingPrice, 2).ToString() + "+\n" +
+                                             "\t StayBearingPinPrice: " + Math.Round(StayBearingPinPrice, 2).ToString() + "+\n" +
+                                             "\t CoverStayBearingPrice: " + Math.Round(CoverStayBearingPrice, 2).ToString() + "+\n" +
+                                             "\t CoverCornerHingePrice: " + Math.Round(CoverCornerHingePrice, 2).ToString() + "+\n" +
+                                             "\t CornerPivotRestPrice: " + Math.Round(CornerPivotRestPrice, 2).ToString() + "+\n" +
+                                             "\t TopCornerHingePrice: " + Math.Round(TopCornerHingePrice, 2).ToString() + "+\n" +
+                                             "\t CorverCornerPivotRestPrice: " + Math.Round(CorverCornerPivotRestPrice, 2).ToString() + "+\n" +
+                                             "\t CorverCornerPivotRestVerticalPrice: " + Math.Round(CorverCornerPivotRestVerticalPrice, 2).ToString() + "+\n" +
+                                             "\t HandlePrice: " + Math.Round(HandlePrice, 2).ToString() + "+\n" +
+                                             "\t EspagPrice: " + Math.Round(EspagPrice, 2).ToString() + "+\n" +
+                                             "\t _2DHingePrice: " + Math.Round(_2DHingePrice, 2).ToString() + "+\n" +
+                                             "\t _3DHingePrice: " + Math.Round(_3DHingePrice, 2).ToString() + "+\n" +
+                                             "\t NTCenterHingePrice: " + Math.Round(NTCenterHingePrice, 2).ToString() + "+\n" +
+                                             "\t ShootBoltStrikerPrice: " + Math.Round(ShootBoltStrikerPrice, 2).ToString() + "+\n" +
+                                             "\t ShootBoltReversePrice: " + Math.Round(ShootBoltReversePrice, 2).ToString() + "+\n" +
+                                             "\t ShootBoltNonReversePrice: " + Math.Round(ShootBoltNonReversePrice, 2).ToString() + "+\n" +
+                                             "\t StrikerPrice: " + Math.Round(StrikerPrice, 2).ToString() + "+\n" +
+                                             "\t LatchDeadboltStrikerPrice: " + Math.Round(LatchDeadboltStrikerPrice, 2).ToString() + "+\n" +
+                                             "\t ExtensionPrice: " + Math.Round(ExtensionPrice, 2).ToString() + "+\n" +
+                                             "\t RollerPrice: " + Math.Round(RollerPrice, 2).ToString() + "+\n" +
+                                             "\t StrikerLRPrice: " + Math.Round(StrikerLRPrice, 2).ToString() + "+\n" +
+                                             "\t BrushSealPrice: " + Math.Round(BrushSealPrice, 2).ToString() + "+\n" +
+                                             "\t MotorizePrice: " + Math.Round(MotorizePrice, 2).ToString() + "+\n" +
+                                             "\t MotorizeMechRemotePricePerPiece: " + Math.Round(MotorizeMechRemotePricePerPiece, 2).ToString() + "\n\n" +
+
+                    "AncillaryProfileCost: " + AncillaryProfileCost.ToString() + " = \n" +
+
+                                             "\t ThresholdPrice:" + Math.Round(ThresholdPrice, 2).ToString() + "+\n" +
+                                             "\t GbPrice:" + Math.Round(GbPrice, 2) + "+\n" +
+                                             "\t GeorgianBarCost:" + Math.Round((GeorgianBarCost * provinceBaseMultiplier), 2) + "+\n" +
+                                             "\t CoverProfileCost:" + Math.Round(CoverProfileCost, 2) + "+\n" +
+                                             "\t GlazingGasketPrice:" + Math.Round(GlazingGasketPrice, 2) + "+\n" +
+                                             "\t WeatherBarPrice:" + Math.Round(WeatherBarPrice, 2) + "+\n" +
+                                             "\t WeatherBarFastenerPrice:" + Math.Round(WeatherBarFastenerPrice, 2) + "+\n" +
+                                             "\t WaterSeepagePrice:" + Math.Round(WaterSeepagePrice, 2) + "+\n" +
+                                             "\t GuideTrackPrice:" + Math.Round(GuideTrackPrice, 2) + "+\n" +
+                                             "\t AlumTrackPrice:" + Math.Round(AlumTrackPrice, 2) + "+\n" +
+                                             "\t InterlockPrice:" + Math.Round(InterlockPrice, 2) + "+\n" +
+                                             "\t ExtensionForInterlockPrice:" + Math.Round(ExtensionForInterlockPrice, 2) + "+\n" +
+                                             "\t AluminumPullHandlePrice:" + Math.Round(AluminumPullHandlePrice, 2) + "+\n" +
+                                             "\t GlazingAdaptorPrice:" + Math.Round((GlazingAdaptorPrice * provinceBaseMultiplier), 2) + "\n\n" +
+
+
+                    "AccesorriesCost: " + AccesorriesCost.ToString() + " = \n" +
+                                             "\t EndCapPrice:" + Math.Round(EndCapPrice, 2).ToString() + "+\n" +
+                                             "\t MechJointPrice:" + Math.Round(MechJointPrice, 2).ToString() + "+\n" +
+                                             "\t GBSpacerPrice:" + Math.Round(GBSpacerPrice, 2).ToString() + "+\n" +
+                                             "\t PlasticWedgePrice:" + Math.Round(PlasticWedgePrice, 2).ToString() + "+\n" +
+                                             "\t SealingBlockPrice:" + Math.Round(SealingBlockPrice, 2).ToString() + "\n\n" +
+
+
+
+                    "MaterialCost: " + MaterialCost.ToString() + " = \n" +
+
+                                             "\t FramePrice:" + Math.Round(FramePrice, 2).ToString() + "+\n" +
+                                             "\t FrameReinPrice:" + Math.Round(FrameReinPrice, 2).ToString() + "+\n" +
+                                             "\t SashPrice:" + Math.Round(SashPrice, 2).ToString() + "+\n" +
+                                             "\t SashReinPrice:" + Math.Round(SashReinPrice, 2).ToString() + "+\n" +
+                                             "\t DivPrice:" + Math.Round(DivPrice, 2).ToString() + "+\n" +
+                                             "\t DivReinPrice:" + Math.Round(DivReinPrice, 2).ToString() + "+\n" +
+                                             "\t claddingPrice:" + Math.Round(claddingPrice, 2).ToString() + "+\n" +
+                                             "\t DMPrice:" + Math.Round(DMPrice, 2).ToString() + "+\n" +
+                                             "\t DMReinforcementPrice:" + Math.Round(DMReinforcementPrice, 2).ToString() + "+\n" +
+                                             "\t ExtensionProfile15mmPrice:" + Math.Round(ExtensionProfile15mmPrice, 2).ToString() + "+\n" +
+                                             "\t TubularPrice:" + Math.Round(TubularPrice, 2).ToString() + "+\n" +
+                                             "\t SealantPrice:" + Math.Round(SealantPrice, 2).ToString() + "+\n" +
+                                             "\t PUFoamingPrice:" + Math.Round(PUFoamingPrice, 2).ToString() + "+\n" +
+                                             "\t FittingAndSuppliesCost:" + Math.Round(FittingAndSuppliesCost, 2).ToString() + "+\n" +
+                                             "\t AncillaryProfileCost:" + Math.Round(AncillaryProfileCost, 2).ToString() + "+\n" +
+                                             "\t AccesorriesCost:" + Math.Round(AccesorriesCost, 2).ToString() + "\n\n" +
+
+
+                    "MaterialCostBreakDownBase: " + MaterialCost.ToString() + " \n\n" +
+
+
+                    "LouverCost: " + LouverCost.ToString() + " = \n" +
+
+                                 "\t LouvreFrameWeatherStripHeadPrice:" + Math.Round(LouvreFrameWeatherStripHeadPrice, 2).ToString() + "+\n" +
+                                 "\t LouvreFrameBottomWeatherStripPrice:" + Math.Round(LouvreFrameBottomWeatherStripPrice, 2).ToString() + "+\n" +
+                                 "\t PlantonWeatherStripHeadPrice:" + Math.Round(PlantonWeatherStripHeadPrice, 2).ToString() + "+\n" +
+                                 "\t PlantonWeatherStripSillPrice:" + Math.Round(PlantonWeatherStripSillPrice, 2).ToString() + "+\n" +
+                                 "\t GalleryAdaptorPrice:" + Math.Round(GalleryAdaptorPrice, 2).ToString() + "+\n" +
+                                 "\t BubbleSealPrice:" + Math.Round(BubbleSealPrice, 2).ToString() + "+\n" +
+                                 "\t GlassBladePrice:" + Math.Round(GlassBladePrice, 2).ToString() + "+\n" +
+                                 "\t GalleryPrice:" + Math.Round(GalleryPrice, 2).ToString() + "+\n" +
+                                 "\t PowerKitIncludingWiresPrice:" + Math.Round(PowerKitIncludingWiresPrice, 2).ToString() + "+\n" +
+                                 "\t SecurityKitPrice:" + Math.Round(SecurityKitPrice, 2).ToString() + "+\n" +
+                                 "\t RingpullLeverHandlePrice:" + Math.Round(RingpullLeverHandlePrice, 2).ToString() + "\n\n" +
+
+                   "LouverPrice: " + LouverCost.ToString() + " \n\n" +
+
+                    "LouverCost: " + LouverCost.ToString() + " = LouverCost: " + LouverCost + " * PricingFactor: " + PricingFactor + " * 1.12m\n\n" +
+
+
+
+                    "MeshCost: " + MeshCost.ToString() + " = \n" +
+
+
+                               "\t SecurityMeshPrice:" + Math.Round(SecurityMeshPrice, 2) + "+\n" +
+                               "\t WireMeshPrice:" + Math.Round(WireMeshPrice, 2) + "+\n" +
+                               "\t PetMeshPrice:" + Math.Round(PetMeshPrice, 2) + "+\n" +
+                               "\t TuffMeshPrice:" + Math.Round(TuffMeshPrice, 2) + "+\n" +
+                               "\t PhiferMeshPrice:" + Math.Round(PhiferMeshPrice, 2) + "+\n" +
+                               "\t AluminumFramePrice:" + Math.Round(AluminumFramePrice, 2) + "\n\n" +
+
+
+                    "MeshPrice: " + MeshCost.ToString() + " \n\n" +
+
+
+                    "MeshCost = : MeshCost" + MeshCost.ToString() + " * " + PricingFactor.ToString() + " * 1.10m\n\n" +
+
+                        "MaterialCost: " + MaterialCost.ToString() + " = \n" +
+                                  "\t MaterialCost:" + MaterialCostBreakDownBase.ToString() + "+\n" +
+                                   "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.05m) +\n" +
+                                   "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.10m) +\n" +
+                                   "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.12m) +\n" +
+                                   "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.16m)  \n\n" +
+
+                   "TotaPrice: " + BaseTotalPrice.ToString() + " = \n" +
+
+
+                               "\t LaborCost:" + Math.Round(LaborCost, 2).ToString() + "+\n" +
+                               "\t InstallationCost:" + Math.Round(InstallationCost, 2).ToString() + "+\n" +
+                               "\t MaterialCost " + Math.Round(MaterialCost, 2).ToString() + "+\n" +
+                               "\t GlassPrice:" + Math.Round(GlassPrice, 2).ToString() + "+\n" +
+                               "\t FilmPrice:" + Math.Round(FilmPrice, 2).ToString() + "+\n" +
+                               "\t SecurityMeshPrice:" + Math.Round(SecurityMeshPrice, 2).ToString() + "\n\n" +
+
+
+                   "TotaPrice: " + BaseTotalPriceWithFactor.ToString() + " = (" + BaseTotalPrice.ToString() + " * " + PricingFactor.ToString() + ") + " + BaseTotalPrice.ToString() + ") \n\n" +
+
+                   "TotaPrice: " + TotaPrice.ToString() + " = " + BaseTotalPriceWithFactor.ToString() + " + " + LouverCost.ToString() + " + " + MeshCost.ToString() + "\n\n" +
+
+                    "` END OF COMPUTATION FOR SAVING `\n\n\n";
+                    #endregion
 
 
                     if (BOM_Status == true)
@@ -11495,6 +12270,8 @@ namespace ModelLayer.Model.Quotation
 
         public void ClearingOperation()
         {
+            OneSideFoil_whiteBase = false;
+
             CostingPoints = 0;
             InstallationPoints = 0;
             TotaPrice = 0;
@@ -11550,7 +12327,7 @@ namespace ModelLayer.Model.Quotation
             StrikerLRPrice = 0;
             RollerPrice = 0;
             MotorizePrice = 0;
-            MotorizeMechRemotePricePerPiece = 0;
+            RemoteForMotorizeMechPrice = 0;
 
             AncillaryProfileCost = 0;
             ThresholdPrice = 0;
@@ -11597,6 +12374,13 @@ namespace ModelLayer.Model.Quotation
             TuffMeshPrice = 0;
             PhiferMeshPrice = 0;
             AluminumFramePrice = 0;
+        }
+
+        public QuotationModel(string quotation_ref_no,
+                            List<IWindoorModel> lst_Windoor)
+        {
+            Quotation_ref_no = quotation_ref_no;
+            Lst_Windoor = lst_Windoor;
         }
     }
 }

@@ -47,6 +47,7 @@
             0,
             0});
             this.nud_AluminumTrackQty.ValueChanged += new System.EventHandler(this.nud_AluminumTrackQty_ValueChanged);
+            this.nud_AluminumTrackQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nud_AluminumTrackQty_MouseWheel);
             // 
             // lbl_AliminumTrack
             // 

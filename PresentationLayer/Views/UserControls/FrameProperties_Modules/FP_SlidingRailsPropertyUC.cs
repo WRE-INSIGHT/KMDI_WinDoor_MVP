@@ -34,7 +34,11 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
             this.DataBindings.Add(ModelBinding["Frame_SlidingRailsQtyVisibility"]);
             nud_RailsQty.DataBindings.Add(ModelBinding["Frame_SlidingRailsQty"]);
         }
+        private void nud_RailsQty_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
 
-       
+
     }
 }

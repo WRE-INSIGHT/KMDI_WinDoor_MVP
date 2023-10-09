@@ -32,6 +32,8 @@ namespace PresentationLayer.DataTables {
         
         private dtContractSummaryDataTable tabledtContractSummary;
         
+        private dtGlassUpgradeDataTable tabledtGlassUpgrade;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -71,6 +73,9 @@ namespace PresentationLayer.DataTables {
                 }
                 if ((ds.Tables["dtContractSummary"] != null)) {
                     base.Tables.Add(new dtContractSummaryDataTable(ds.Tables["dtContractSummary"]));
+                }
+                if ((ds.Tables["dtGlassUpgrade"] != null)) {
+                    base.Tables.Add(new dtGlassUpgradeDataTable(ds.Tables["dtGlassUpgrade"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -127,6 +132,16 @@ namespace PresentationLayer.DataTables {
         public dtContractSummaryDataTable dtContractSummary {
             get {
                 return this.tabledtContractSummary;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtGlassUpgradeDataTable dtGlassUpgrade {
+            get {
+                return this.tabledtGlassUpgrade;
             }
         }
         
@@ -209,6 +224,9 @@ namespace PresentationLayer.DataTables {
                 if ((ds.Tables["dtContractSummary"] != null)) {
                     base.Tables.Add(new dtContractSummaryDataTable(ds.Tables["dtContractSummary"]));
                 }
+                if ((ds.Tables["dtGlassUpgrade"] != null)) {
+                    base.Tables.Add(new dtGlassUpgradeDataTable(ds.Tables["dtGlassUpgrade"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -266,6 +284,12 @@ namespace PresentationLayer.DataTables {
                     this.tabledtContractSummary.InitVars();
                 }
             }
+            this.tabledtGlassUpgrade = ((dtGlassUpgradeDataTable)(base.Tables["dtGlassUpgrade"]));
+            if ((initTable == true)) {
+                if ((this.tabledtGlassUpgrade != null)) {
+                    this.tabledtGlassUpgrade.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -284,6 +308,8 @@ namespace PresentationLayer.DataTables {
             base.Tables.Add(this.tabledtScreen);
             this.tabledtContractSummary = new dtContractSummaryDataTable();
             base.Tables.Add(this.tabledtContractSummary);
+            this.tabledtGlassUpgrade = new dtGlassUpgradeDataTable();
+            base.Tables.Add(this.tabledtGlassUpgrade);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -307,6 +333,12 @@ namespace PresentationLayer.DataTables {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializedtContractSummary() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializedtGlassUpgrade() {
             return false;
         }
         
@@ -376,6 +408,9 @@ namespace PresentationLayer.DataTables {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void dtContractSummaryRowChangeEventHandler(object sender, dtContractSummaryRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void dtGlassUpgradeRowChangeEventHandler(object sender, dtGlassUpgradeRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1842,6 +1877,379 @@ namespace PresentationLayer.DataTables {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtGlassUpgradeDataTable : global::System.Data.TypedTableBase<dtGlassUpgradeRow> {
+            
+            private global::System.Data.DataColumn columndtItemNo;
+            
+            private global::System.Data.DataColumn columndtWindoorID;
+            
+            private global::System.Data.DataColumn columndtGlassDescFrom;
+            
+            private global::System.Data.DataColumn columndtGlassDescTo;
+            
+            private global::System.Data.DataColumn columndtDimension;
+            
+            private global::System.Data.DataColumn columndtNetPrice;
+            
+            private global::System.Data.DataColumn columndtQty;
+            
+            private global::System.Data.DataColumn columndtNetAmount;
+            
+            private global::System.Data.DataColumn columndtTotalNetPriceWOVat;
+            
+            private global::System.Data.DataColumn columndtGlassType;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public dtGlassUpgradeDataTable() {
+                this.TableName = "dtGlassUpgrade";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal dtGlassUpgradeDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected dtGlassUpgradeDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtItemNoColumn {
+                get {
+                    return this.columndtItemNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtWindoorIDColumn {
+                get {
+                    return this.columndtWindoorID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtGlassDescFromColumn {
+                get {
+                    return this.columndtGlassDescFrom;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtGlassDescToColumn {
+                get {
+                    return this.columndtGlassDescTo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtDimensionColumn {
+                get {
+                    return this.columndtDimension;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtNetPriceColumn {
+                get {
+                    return this.columndtNetPrice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtQtyColumn {
+                get {
+                    return this.columndtQty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtNetAmountColumn {
+                get {
+                    return this.columndtNetAmount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtTotalNetPriceWOVatColumn {
+                get {
+                    return this.columndtTotalNetPriceWOVat;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtGlassTypeColumn {
+                get {
+                    return this.columndtGlassType;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public dtGlassUpgradeRow this[int index] {
+                get {
+                    return ((dtGlassUpgradeRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event dtGlassUpgradeRowChangeEventHandler dtGlassUpgradeRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event dtGlassUpgradeRowChangeEventHandler dtGlassUpgradeRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event dtGlassUpgradeRowChangeEventHandler dtGlassUpgradeRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event dtGlassUpgradeRowChangeEventHandler dtGlassUpgradeRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AdddtGlassUpgradeRow(dtGlassUpgradeRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public dtGlassUpgradeRow AdddtGlassUpgradeRow(string dtItemNo, string dtWindoorID, string dtGlassDescFrom, string dtGlassDescTo, string dtDimension, string dtNetPrice, string dtQty, string dtNetAmount, decimal dtTotalNetPriceWOVat, string dtGlassType) {
+                dtGlassUpgradeRow rowdtGlassUpgradeRow = ((dtGlassUpgradeRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        dtItemNo,
+                        dtWindoorID,
+                        dtGlassDescFrom,
+                        dtGlassDescTo,
+                        dtDimension,
+                        dtNetPrice,
+                        dtQty,
+                        dtNetAmount,
+                        dtTotalNetPriceWOVat,
+                        dtGlassType};
+                rowdtGlassUpgradeRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtGlassUpgradeRow);
+                return rowdtGlassUpgradeRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtGlassUpgradeDataTable cln = ((dtGlassUpgradeDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtGlassUpgradeDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columndtItemNo = base.Columns["dtItemNo"];
+                this.columndtWindoorID = base.Columns["dtWindoorID"];
+                this.columndtGlassDescFrom = base.Columns["dtGlassDescFrom"];
+                this.columndtGlassDescTo = base.Columns["dtGlassDescTo"];
+                this.columndtDimension = base.Columns["dtDimension"];
+                this.columndtNetPrice = base.Columns["dtNetPrice"];
+                this.columndtQty = base.Columns["dtQty"];
+                this.columndtNetAmount = base.Columns["dtNetAmount"];
+                this.columndtTotalNetPriceWOVat = base.Columns["dtTotalNetPriceWOVat"];
+                this.columndtGlassType = base.Columns["dtGlassType"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columndtItemNo = new global::System.Data.DataColumn("dtItemNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtItemNo);
+                this.columndtWindoorID = new global::System.Data.DataColumn("dtWindoorID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtWindoorID);
+                this.columndtGlassDescFrom = new global::System.Data.DataColumn("dtGlassDescFrom", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtGlassDescFrom);
+                this.columndtGlassDescTo = new global::System.Data.DataColumn("dtGlassDescTo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtGlassDescTo);
+                this.columndtDimension = new global::System.Data.DataColumn("dtDimension", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtDimension);
+                this.columndtNetPrice = new global::System.Data.DataColumn("dtNetPrice", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtNetPrice);
+                this.columndtQty = new global::System.Data.DataColumn("dtQty", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtQty);
+                this.columndtNetAmount = new global::System.Data.DataColumn("dtNetAmount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtNetAmount);
+                this.columndtTotalNetPriceWOVat = new global::System.Data.DataColumn("dtTotalNetPriceWOVat", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtTotalNetPriceWOVat);
+                this.columndtGlassType = new global::System.Data.DataColumn("dtGlassType", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtGlassType);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public dtGlassUpgradeRow NewdtGlassUpgradeRow() {
+                return ((dtGlassUpgradeRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtGlassUpgradeRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtGlassUpgradeRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtGlassUpgradeRowChanged != null)) {
+                    this.dtGlassUpgradeRowChanged(this, new dtGlassUpgradeRowChangeEvent(((dtGlassUpgradeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtGlassUpgradeRowChanging != null)) {
+                    this.dtGlassUpgradeRowChanging(this, new dtGlassUpgradeRowChangeEvent(((dtGlassUpgradeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtGlassUpgradeRowDeleted != null)) {
+                    this.dtGlassUpgradeRowDeleted(this, new dtGlassUpgradeRowChangeEvent(((dtGlassUpgradeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtGlassUpgradeRowDeleting != null)) {
+                    this.dtGlassUpgradeRowDeleting(this, new dtGlassUpgradeRowChangeEvent(((dtGlassUpgradeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemovedtGlassUpgradeRow(dtGlassUpgradeRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DSQuotation ds = new DSQuotation();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtGlassUpgradeDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class dtQuoteRow : global::System.Data.DataRow {
@@ -2968,6 +3376,301 @@ namespace PresentationLayer.DataTables {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtGlassUpgradeRow : global::System.Data.DataRow {
+            
+            private dtGlassUpgradeDataTable tabledtGlassUpgrade;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal dtGlassUpgradeRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtGlassUpgrade = ((dtGlassUpgradeDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtItemNo {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassUpgrade.dtItemNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtItemNo\' in table \'dtGlassUpgrade\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassUpgrade.dtItemNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtWindoorID {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassUpgrade.dtWindoorIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtWindoorID\' in table \'dtGlassUpgrade\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassUpgrade.dtWindoorIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtGlassDescFrom {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassUpgrade.dtGlassDescFromColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtGlassDescFrom\' in table \'dtGlassUpgrade\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassUpgrade.dtGlassDescFromColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtGlassDescTo {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassUpgrade.dtGlassDescToColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtGlassDescTo\' in table \'dtGlassUpgrade\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassUpgrade.dtGlassDescToColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtDimension {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassUpgrade.dtDimensionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtDimension\' in table \'dtGlassUpgrade\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassUpgrade.dtDimensionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtNetPrice {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassUpgrade.dtNetPriceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtNetPrice\' in table \'dtGlassUpgrade\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassUpgrade.dtNetPriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtQty {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassUpgrade.dtQtyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtQty\' in table \'dtGlassUpgrade\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassUpgrade.dtQtyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtNetAmount {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassUpgrade.dtNetAmountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtNetAmount\' in table \'dtGlassUpgrade\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassUpgrade.dtNetAmountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal dtTotalNetPriceWOVat {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtGlassUpgrade.dtTotalNetPriceWOVatColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtTotalNetPriceWOVat\' in table \'dtGlassUpgrade\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassUpgrade.dtTotalNetPriceWOVatColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtGlassType {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassUpgrade.dtGlassTypeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtGlassType\' in table \'dtGlassUpgrade\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassUpgrade.dtGlassTypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtItemNoNull() {
+                return this.IsNull(this.tabledtGlassUpgrade.dtItemNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtItemNoNull() {
+                this[this.tabledtGlassUpgrade.dtItemNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtWindoorIDNull() {
+                return this.IsNull(this.tabledtGlassUpgrade.dtWindoorIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtWindoorIDNull() {
+                this[this.tabledtGlassUpgrade.dtWindoorIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtGlassDescFromNull() {
+                return this.IsNull(this.tabledtGlassUpgrade.dtGlassDescFromColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtGlassDescFromNull() {
+                this[this.tabledtGlassUpgrade.dtGlassDescFromColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtGlassDescToNull() {
+                return this.IsNull(this.tabledtGlassUpgrade.dtGlassDescToColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtGlassDescToNull() {
+                this[this.tabledtGlassUpgrade.dtGlassDescToColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtDimensionNull() {
+                return this.IsNull(this.tabledtGlassUpgrade.dtDimensionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtDimensionNull() {
+                this[this.tabledtGlassUpgrade.dtDimensionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtNetPriceNull() {
+                return this.IsNull(this.tabledtGlassUpgrade.dtNetPriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtNetPriceNull() {
+                this[this.tabledtGlassUpgrade.dtNetPriceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtQtyNull() {
+                return this.IsNull(this.tabledtGlassUpgrade.dtQtyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtQtyNull() {
+                this[this.tabledtGlassUpgrade.dtQtyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtNetAmountNull() {
+                return this.IsNull(this.tabledtGlassUpgrade.dtNetAmountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtNetAmountNull() {
+                this[this.tabledtGlassUpgrade.dtNetAmountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtTotalNetPriceWOVatNull() {
+                return this.IsNull(this.tabledtGlassUpgrade.dtTotalNetPriceWOVatColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtTotalNetPriceWOVatNull() {
+                this[this.tabledtGlassUpgrade.dtTotalNetPriceWOVatColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtGlassTypeNull() {
+                return this.IsNull(this.tabledtGlassUpgrade.dtGlassTypeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtGlassTypeNull() {
+                this[this.tabledtGlassUpgrade.dtGlassTypeColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -3089,6 +3792,40 @@ namespace PresentationLayer.DataTables {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public dtContractSummaryRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class dtGlassUpgradeRowChangeEvent : global::System.EventArgs {
+            
+            private dtGlassUpgradeRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public dtGlassUpgradeRowChangeEvent(dtGlassUpgradeRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public dtGlassUpgradeRow Row {
                 get {
                     return this.eventRow;
                 }

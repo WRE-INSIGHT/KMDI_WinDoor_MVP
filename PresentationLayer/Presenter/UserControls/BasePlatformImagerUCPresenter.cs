@@ -1296,10 +1296,12 @@ namespace PresentationLayer.Presenter.UserControls
                 }
 
                 int InitialDistance = _flpMain.Location.X,
-                        endOfLine = _flpMain.Width - 10,
-                        pnlLeftCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount,
-                       pnlRightCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount,
-                       line_LtR_Y = _flpMain.Location.Y + (_flpMain.Height - 3) + 70; // 70 bot pad
+                    endOfLine = _flpMain.Width - 10,
+                    //pnlLeftCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount,
+                    // pnlRightCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount,
+                    pnlLeftCounter = _windoorModel.pnlLeftCounter,
+                    pnlRightCounter = _windoorModel.pnlRightCounter,
+                    line_LtR_Y = _flpMain.Location.Y + (_flpMain.Height - 3) + 70; // 70 bot pad
 
                 Point dmnsion_w_startP_topview = new Point(_flpMain.Location.X, _flpMain.Location.Y + (_flpMain.Height - 3) + 70);
                 Point dmnsion_w_endP_topview = new Point(_flpMain.Location.X + _flpMain.Width - 3, _flpMain.Location.Y + (_flpMain.Height - 3) + 70);
@@ -3272,21 +3274,23 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                     Point[] LvrSideBlade =
                      {
-                        new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location),
+                        new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                        //new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location),
                         new Point((pInnerX - 7) + pInnerWd + 4, (int)Total_Lvr_GlassHt + pInnerY),
 
                         new Point(pInnerX-2, Lvr_NewLocation-(int)Lvr_GlassHt),
                         new Point(pInnerX+4, (int)Total_Lvr_GlassHt + pInnerY),
 
+                        //new Point(pInnerX-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
                         new Point(pInnerX-4, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location-1),
-                        new Point(pInnerX-4, Lvr_NewLocation+(int)Lvr_GlassHt+1 + pInnerY )
+                        new Point(pInnerX-4, Lvr_NewLocation+(int)Lvr_GlassHt+1 + pInnerY - 58)
                      };
                     Point[] blade =
                     {
                         new Point(pInnerX, Lvr_NewLocation - (int)Lvr_GlassHt),
                         new Point((int)client_wd + pInnerX - 7, Lvr_NewLocation - (int)Lvr_GlassHt),
                         new Point((int)client_wd + pInnerX, (int)Total_Lvr_GlassHt+ pInnerY), // - 26 para mag slant yung blade
-                        new Point(pInnerX , (int)Total_Lvr_GlassHt + pInnerY)
+                        new Point(pInnerX , (int)Total_Lvr_GlassHt + pInnerY),
                     };
                     lvrBlade.Add(LvrSideBlade, blade);
                 }

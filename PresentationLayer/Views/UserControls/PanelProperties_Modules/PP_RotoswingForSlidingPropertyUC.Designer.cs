@@ -53,6 +53,8 @@
             this.cmb_RotoswingForSlidingNo.Size = new System.Drawing.Size(82, 21);
             this.cmb_RotoswingForSlidingNo.TabIndex = 35;
             this.cmb_RotoswingForSlidingNo.SelectedValueChanged += new System.EventHandler(this.cmb_RotoswingForSlidingNo_SelectedValueChanged);
+            this.cmb_RotoswingForSlidingNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_RotoswingForSlidingNo_KeyPress);
+            this.cmb_RotoswingForSlidingNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_RotoswingForSlidingNo_MouseWheel);
             // 
             // PP_RotoswingForSlidingPropertyUC
             // 

@@ -45,6 +45,8 @@
             this.cmb_Espagnolette.TabIndex = 30;
             this.cmb_Espagnolette.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmb_Espagnolette_DrawItem);
             this.cmb_Espagnolette.SelectedValueChanged += new System.EventHandler(this.cmb_Espagnolette_SelectedValueChanged);
+            this.cmb_Espagnolette.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_Espagnolette_KeyPress);
+            this.cmb_Espagnolette.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_Espagnolette_MouseWheel);
             // 
             // label8
             // 

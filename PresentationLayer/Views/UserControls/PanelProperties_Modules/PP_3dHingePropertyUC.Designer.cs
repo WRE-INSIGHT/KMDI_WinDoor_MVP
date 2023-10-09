@@ -42,6 +42,7 @@
             this.num_3dHingeQty.Size = new System.Drawing.Size(77, 20);
             this.num_3dHingeQty.TabIndex = 39;
             this.num_3dHingeQty.ValueChanged += new System.EventHandler(this.num_3dHingeQty_ValueChanged);
+            this.num_3dHingeQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_3dHingeQty_MouseWheel);
             // 
             // label2
             // 

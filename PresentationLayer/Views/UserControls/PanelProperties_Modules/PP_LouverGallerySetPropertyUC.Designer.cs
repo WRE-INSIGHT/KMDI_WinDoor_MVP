@@ -128,6 +128,8 @@
             this.cmb_GalleryColor.Size = new System.Drawing.Size(70, 21);
             this.cmb_GalleryColor.TabIndex = 62;
             this.cmb_GalleryColor.SelectedValueChanged += new System.EventHandler(this.cmb_GalleryColor_SelectedValueChanged);
+            this.cmb_GalleryColor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_GalleryColor_KeyPress);
+            this.cmb_GalleryColor.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_GalleryColor_MouseWheel);
             // 
             // label1
             // 
@@ -150,6 +152,8 @@
             this.cmb_HandleLocation.Size = new System.Drawing.Size(70, 21);
             this.cmb_HandleLocation.TabIndex = 60;
             this.cmb_HandleLocation.SelectedValueChanged += new System.EventHandler(this.cmb_HandleLocation_SelectedValueChanged);
+            this.cmb_HandleLocation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_HandleLocation_KeyPress);
+            this.cmb_HandleLocation.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_HandleLocation_MouseWheel);
             // 
             // lbl_HandleLocation
             // 
@@ -172,6 +176,8 @@
             this.cmb_HandleType.Size = new System.Drawing.Size(70, 21);
             this.cmb_HandleType.TabIndex = 58;
             this.cmb_HandleType.SelectedValueChanged += new System.EventHandler(this.cmb_HandleType_SelectedValueChanged);
+            this.cmb_HandleType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_HandleType_KeyPress);
+            this.cmb_HandleType.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_HandleType_MouseWheel);
             // 
             // lbl_HandleType
             // 
@@ -189,6 +195,7 @@
             this.nud_NoOfBladePerSet.Name = "nud_NoOfBladePerSet";
             this.nud_NoOfBladePerSet.Size = new System.Drawing.Size(72, 20);
             this.nud_NoOfBladePerSet.TabIndex = 56;
+            this.nud_NoOfBladePerSet.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nud_NoOfBladePerSet_MouseWheel);
             // 
             // label3
             // 
@@ -211,6 +218,8 @@
             this.cmb_BladeHeight.Size = new System.Drawing.Size(70, 21);
             this.cmb_BladeHeight.TabIndex = 54;
             this.cmb_BladeHeight.SelectedValueChanged += new System.EventHandler(this.cmb_BladeHeight_SelectedValueChanged);
+            this.cmb_BladeHeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_BladeHeight_KeyPress);
+            this.cmb_BladeHeight.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_BladeHeight_MouseWheel);
             // 
             // lbl_BladeHeight
             // 

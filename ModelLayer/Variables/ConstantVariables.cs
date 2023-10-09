@@ -13,6 +13,8 @@
         public int frame_ScreenHeightProperty_PanelHeight = 26;
         public int frame_TubularOption = 27;
         public int frame_TubularHeightAndWidth = 52;
+        public int frame_CladdingProperty_PanelHeight = 28;
+
 
 
 
@@ -61,6 +63,8 @@
         public int panel_property_LouverGallerySetOptionsheight = 210;//178;
         public int panel_property_LouverGallerySetArtNoOptionsheight = 29;
         public int panel_property_LouverGlassheightDeduction = 54;
+        public int panel_property_CenterProfileOptionsheight = 30;
+
 
 
 

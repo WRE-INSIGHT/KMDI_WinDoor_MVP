@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+ 
 namespace PresentationLayer.Views
 {
     public partial class RDLCReportCompilerView : Form, IRDLCReportCompilerView
@@ -24,7 +24,6 @@ namespace PresentationLayer.Views
                 txt_oftexpenses.Text = value;
             }
         }
-
         public string TxtBxContractSummaryVat
         {
             get
@@ -79,6 +78,40 @@ namespace PresentationLayer.Views
         {
             return chk_selectall;
         }
+        public ComboBox GUGlassType()
+        {
+            return cmb_GlassType;
+        }
+        public ComboBox GUReviewedBy()
+        {
+            return cmb_guReviewedBy;
+        }
+        public ComboBox GUNotedBy()
+        {
+            return cmb_guNotedBy;
+        }
+        public TextBox GUVat()
+        {
+            return txt_guVat;
+        }
+        public CheckBox GUShowReviewedBy()
+        {
+            return chkbx_guShowReviewedBy;
+        }
+        public CheckBox GUShowNotedBy()
+        {
+            return chkbx_guShowNotedBy;
+        }
+        public CheckBox GUShowVat()
+        {
+            return chkbx_guShowVat;
+        }
+
+        public CheckedListBox GUGlassListChkLst()
+        {
+            return chklst_glassType;
+        }
+
         public  SaveFileDialog GetSaveFileDialog()
         {
             return saveFileDialog;
@@ -93,6 +126,9 @@ namespace PresentationLayer.Views
         public event EventHandler RDLCReportCompilerViewLoadEventRaised;
         public event EventHandler chkselectallCheckedChangedEventRaised;
         public event EventHandler chkboxshowVatCheckedChangedEventRaised;
+        public event EventHandler chkbxguShowReviewedByCheckedChangedEventRaised;
+        public event EventHandler chkbxguShowNotedByCheckedChanged;
+        public event EventHandler chkbxguShowVatCheckedChanged;
 
         public RDLCReportCompilerView()
         {
@@ -122,6 +158,21 @@ namespace PresentationLayer.Views
         private void chkbox_subtotal_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender,chkboxsubtotalCheckedChangedEventRaised, e);
+        }
+
+        private void chkbx_guShowReviewedBy_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbxguShowReviewedByCheckedChangedEventRaised, e);
+        }
+
+        private void chkbox_guShowNotedBy_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbxguShowNotedByCheckedChanged, e);
+        }
+
+        private void chkbx_guVat_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbxguShowVatCheckedChanged, e);
         }
     }
 }

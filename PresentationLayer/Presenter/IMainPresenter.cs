@@ -24,6 +24,8 @@ namespace PresentationLayer.Presenter
     {
         IDictionary<string, string> RDLCHeader { get; set; }
         List<IScreenModel> Screen_List { get; set; }
+        List<DataRow> NonUnglazed { get; set; }
+        List<DataRow> Unglazed { get; set; }
         Control ControlRaised_forDMSelection { get; }
         IDividerModel DivModel_forDMSelection { get; }
         IPanelModel PrevPnlModel_forDMSelection { get; }
@@ -144,5 +146,6 @@ namespace PresentationLayer.Presenter
         int ItemScroll { get; set; }
         bool ItemLoad { get; set; }
         void AddSlidingScreentoScreenList();
+        int ForceRestartAndLoadFile();
     }
 }

@@ -659,7 +659,52 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _isFromLoad = value;
             }
         }
+        public string TotalPriceHistory { get; set; }
+        public string TotalPriceHistoryStatus { get; set; }
+        public List<string> lst_TotalPriceHistory { get; set; }
+        public decimal SystemSuggestedPrice { get; set; }
 
+
+        private int _pnlLeftCounter;
+        public int pnlLeftCounter
+        {
+            get
+            {
+                return _pnlLeftCounter;
+            }
+            set
+            {
+                _pnlLeftCounter = value;
+            }
+        }
+
+
+        private int _pnlRightCounter;
+        public int pnlRightCounter
+        {
+            get
+            {
+                return _pnlRightCounter;
+            }
+            set
+            {
+                _pnlRightCounter = value;
+            }
+        }
+
+
+        private int _pnlCount;
+        public int pnlCount
+        {
+            get
+            {
+                return _pnlCount;
+            }
+            set
+            {
+                _pnlCount = value;
+            }
+        }
         #region Methods
 
         public void SetDimensions_basePlatform()
@@ -1333,7 +1378,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
                             Base_Color wd_basecolor,
                             Foil_Color wd_insidecolor,
                             Foil_Color wd_outisdecolor,
-                            bool isFromLoad
+                            bool isFromLoad,
+                            List<string> lst_totalPriceHistory,
+                            decimal systemSuggestedPrice
                             //int wd_costingPoints
                             )
         {
@@ -1364,7 +1411,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
             Dictionary_wd_redArrowLines = new Dictionary<int, decimal>();
             Dictionary_ht_redArrowLines = new Dictionary<int, decimal>();
             IsFromLoad = isFromLoad;
-
+            lst_TotalPriceHistory = lst_totalPriceHistory;
+            SystemSuggestedPrice = systemSuggestedPrice;
         }
     }
 }

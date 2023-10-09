@@ -182,17 +182,20 @@ namespace PresentationLayer.Presenter
 
         private void _frmDimensionView_cmbSystemOptionSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if (_frmDimensionView.SelectedSystem == SystemProfile_Option._C70.ToString())
+            if (mainPresenter_qoutationInputBox_ClickedOK)
             {
-                profile_type = "C70 Profile";
-            }
-            else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._Premiline.ToString())
-            {
-                profile_type = "PremiLine Profile";
-            }
-            else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._G58.ToString())
-            {
-                profile_type = "G58 Profile";
+                if (_frmDimensionView.SelectedSystem == SystemProfile_Option._C70.ToString())
+                {
+                    profile_type = "C70 Profile";
+                }
+                else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._Premiline.ToString())
+                {
+                    profile_type = "PremiLine Profile";
+                }
+                else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._G58.ToString())
+                {
+                    profile_type = "G58 Profile";
+                }
             }
         }
   
@@ -256,7 +259,7 @@ namespace PresentationLayer.Presenter
             {
                 _baseColor = "White";
             }
-            if (profile_type == string.Empty)
+             if (profile_type == string.Empty)
             {
                 profile_type = "C70 Profile";
             }
@@ -321,5 +324,7 @@ namespace PresentationLayer.Presenter
             return _isFrmClosed;
         }
 
+
+        
     }
 }

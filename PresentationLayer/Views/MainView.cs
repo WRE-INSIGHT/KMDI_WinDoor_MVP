@@ -32,6 +32,8 @@ namespace PresentationLayer.Views
                     slidingTopViewToolStripMenuItem.Enabled = true;
                     changeItemDimensionToolStripMenuItem.Enabled = true;
                     SortItemtoolStripButton1.Enabled = true;
+                    PriceHistorytoolStripButton.Enabled = true;
+                    DateAssignedtoolStripButton.Enabled = true;
                 }
                 else
                 {
@@ -46,6 +48,8 @@ namespace PresentationLayer.Views
                     slidingTopViewToolStripMenuItem.Enabled = false;
                     changeItemDimensionToolStripMenuItem.Enabled = false;
                     SortItemtoolStripButton1.Enabled = false;
+                    PriceHistorytoolStripButton.Enabled = false;
+                    DateAssignedtoolStripButton.Enabled = false;
                 }
             }
         }
@@ -68,6 +72,7 @@ namespace PresentationLayer.Views
                 refreshToolStripButton.Enabled = value;
                 ViewImagerToolStripButton1.Enabled = value;
                 deleteItemToolStripButton1.Enabled = value;
+                glassUpgradeToolStrip.Enabled = value;
             }
         }
 
@@ -81,6 +86,33 @@ namespace PresentationLayer.Views
             set
             {
                 ItemToolStripMenuItem.Enabled = value;
+            }
+        }
+
+        public bool PriceHistorytoolStripButtonVisible
+        {
+            get
+            {
+                return PriceHistorytoolStripButton.Visible;
+            }
+
+            set
+            {
+                PriceHistorytoolStripButton.Visible = value;
+            }
+        }
+
+
+        public bool DateAssignedtoolStripButtonVisible
+        {
+            get
+            {
+                return DateAssignedtoolStripButton.Visible;
+            }
+
+            set
+            {
+                DateAssignedtoolStripButton.Visible = value;
             }
         }
 
@@ -256,6 +288,9 @@ namespace PresentationLayer.Views
         public event EventHandler setNewFactorEventRaised;
         public event MouseEventHandler PanelMainMouseWheelRaiseEvent;
         public event EventHandler MainViewClosedEventRaised;
+        public event EventHandler PriceHistorytoolStripButtonClickEventRaised;
+        public event EventHandler DateAssignedtoolStripButtonClickEventRaised;
+        public event EventHandler glassUpgradeToolStripButtonClickEventRaised;
         public MainView()
         {
             InitializeComponent();
@@ -660,6 +695,14 @@ namespace PresentationLayer.Views
                 {
                     CreateNewItem_Clicked(G58ToolStripMenuItem, e);
                 }
+                else if (e.Control == true && e.KeyCode == Keys.B)
+                {
+                    billOfMaterialToolStripMenuItem_Click(sender, e);
+                }
+                else if (e.Control == true && e.KeyCode == Keys.M)
+                {
+                    listOfMaterialsToolStripMenuItem_Click(sender, e);
+                }
             }
             if (e.Control == true && e.KeyCode == Keys.O)
             {
@@ -677,6 +720,19 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseFormClosingEvent(sender, MainViewClosingEventRaised, e);
         }
 
+        private void PriceHistorytoolStripButton_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, PriceHistorytoolStripButtonClickEventRaised, e);
+        }
 
+        private void DateAssignedtoolStripButton_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, DateAssignedtoolStripButtonClickEventRaised, e);
+        }
+
+        private void glassUpgradeToolStrip_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, glassUpgradeToolStripButtonClickEventRaised, e);
+        }
     }
 }

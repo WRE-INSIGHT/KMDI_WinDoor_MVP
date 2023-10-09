@@ -1957,6 +1957,11 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelGeorgianBarOptionVisibility = value;
+                if (value == false)
+                {
+                    Panel_GeorgianBar_VerticalQty = 0;
+                    Panel_GeorgianBar_HorizontalQty = 0;
+                }
                 NotifyPropertyChanged();
             }
         }
@@ -3094,6 +3099,99 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+
+        private bool _panelCenterProfileVisibility;
+        public bool Panel_CenterProfileVisibility
+        {
+            get
+            {
+                return _panelCenterProfileVisibility;
+            }
+
+            set
+            {
+                _panelCenterProfileVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private CenterProfile_ArticleNo _panelCenterProfileArtNo;
+        public CenterProfile_ArticleNo Panel_CenterProfileArtNo
+        {
+            get
+            {
+                return _panelCenterProfileArtNo;
+            }
+
+            set
+            {
+                _panelCenterProfileArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private PVCSettingPlate_ArticleNo _panelPVCSettingPlateArtNo;
+        public PVCSettingPlate_ArticleNo Panel_PVCSettingPlateArtNo
+        {
+            get
+            {
+                return _panelPVCSettingPlateArtNo;
+            }
+            set
+            {
+                _panelPVCSettingPlateArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private FinPlate_ArticleNo _panelFinPlateArtNo;
+        public FinPlate_ArticleNo Panel_FinPlateArtNo
+        {
+            get
+            {
+                return _panelFinPlateArtNo;
+            }
+            set
+            {
+                _panelFinPlateArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private SlidingAccessoriesRoller_ArticleNo _panelSlidingAccessoriesRollerArtNo;
+        public SlidingAccessoriesRoller_ArticleNo Panel_SlidingAccessoriesRollerArtNo
+        {
+            get
+            {
+                return _panelSlidingAccessoriesRollerArtNo;
+            }
+            set
+            {
+                _panelSlidingAccessoriesRollerArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int TopHungbrushSealPerimeter { get; set; }
+
+
+        private Brush_ArticleNo _panelBrushArtNo;
+        public Brush_ArticleNo Panel_BrushArtNo
+        {
+            get
+            {
+                return _panelBrushArtNo;
+            }
+            set
+            {
+                _panelBrushArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         #endregion
 
         #region Methods
@@ -5034,6 +5132,14 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_LouverGlassheightDeduction;
             }
+            else if (mode == "addCenterProfile")
+            {
+                Panel_PropertyHeight += constants.panel_property_CenterProfileOptionsheight;
+            }
+            else if (mode == "minusCenterProfile")
+            {
+                Panel_PropertyHeight -= constants.panel_property_CenterProfileOptionsheight;
+            }
 
         }
 
@@ -5382,6 +5488,12 @@ namespace ModelLayer.Model.Quotation.Panel
                     botFrameDeduction = 33;
                     ChckBotFrame = true;
                 }
+                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                {
+                    botFrameDeduction = 5;
+                    ChckBotFrame = true;
+                    Panel_BrushArtNo = Brush_ArticleNo._SP02;
+                }
             }
             if (Panel_SashPropertyVisibility == true)
             {
@@ -5536,6 +5648,12 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_GlazingBeadHeight = Panel_GlassHeight + 200;
                 Panel_GlazingBeadHeightDecimal = Panel_GlassHeightDecimal;
 
+
+                if (Panel_Type.Contains("Awning") &&
+                    Panel_ParentFrameModel.Frame_Height <= 1800)
+                {
+                    Panel_SashReinfHeight = Panel_SashHeight - 5 - (35 * 2) - 10;
+                }
                 //Panel_GlazingBeadWidth = Panel_SashWidth;
                 //Panel_GlazingBeadWidthDecimal = Panel_SashWidthDecimal;
                 //Panel_GlazingBeadHeight = Panel_SashHeight;
@@ -5710,6 +5828,17 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_SealingBlockArtNo = SealingBlock_ArticleNo._9C63;
                     Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
 
+                    if (Panel_ParentFrameModel.Frame_If_SlidingTypeTopHung == true)
+                    {
+                        Panel_InterlockArtNo = Interlock_ArticleNo._6061;
+                        Panel_ExtensionForInterlockArtNo = ExtensionForInterlock_ArticleNo._9C61;
+                        Panel_ParentFrameModel.Frame_GUPremilineTopTrackArtNo = GUPremilineTopTrack_ArticleNo._L15015007;
+                        Panel_PVCSettingPlateArtNo = PVCSettingPlate_ArticleNo._050009005;
+                        Panel_FinPlateArtNo = FinPlate_ArticleNo._050006005;
+                        Panel_BrushArtNo = Brush_ArticleNo._SP02;
+                        Panel_SlidingAccessoriesRollerArtNo = SlidingAccessoriesRoller_ArticleNo._L15015009;
+
+                    }
                 }
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
@@ -5728,6 +5857,17 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_BrushSealArtNo = BrushSeal_ArticleNo._9091;
                     Panel_GlazingRebateBlockArtNo = GlazingRebateBlock_ArticleNo._9C56;
                     Panel_SealingBlockArtNo = SealingBlock_ArticleNo._9C63;
+
+                    if (Panel_ParentFrameModel.Frame_If_SlidingTypeTopHung == true)
+                    {
+                        Panel_InterlockArtNo = Interlock_ArticleNo._6061;
+                        Panel_ExtensionForInterlockArtNo = ExtensionForInterlock_ArticleNo._9C61;
+                        Panel_ParentFrameModel.Frame_GUPremilineTopTrackArtNo = GUPremilineTopTrack_ArticleNo._L15015007;
+                        Panel_PVCSettingPlateArtNo = PVCSettingPlate_ArticleNo._050009005;
+                        Panel_FinPlateArtNo = FinPlate_ArticleNo._050006005;
+                        Panel_BrushArtNo = Brush_ArticleNo._SP02;
+                        Panel_SlidingAccessoriesRollerArtNo = SlidingAccessoriesRoller_ArticleNo._L15015009;
+                    }
                 }
 
                 if (Panel_MotorizedOptionVisibility == true)
@@ -7271,6 +7411,10 @@ namespace ModelLayer.Model.Quotation.Panel
                 else if (Panel_SashReinfArtNo == SashReinf_ArticleNo._TV106)
                 {
                     handle_deduct = 50;
+                    if (Panel_ParentFrameModel.Frame_If_SlidingTypeTopHung == true)
+                    {
+                        handle_deduct += 15;
+                    }
                 }
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
@@ -7332,7 +7476,11 @@ namespace ModelLayer.Model.Quotation.Panel
                     TotalNumberOfPanel = 1;
                 }
 
-                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                //if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                //{
+                //    deduction_for_sashHT -= 2;
+                //}
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                 {
                     deduction_for_sashHT -= 2;
                 }
@@ -7362,6 +7510,13 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 || Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                 {
                     Panel_SashWidth = ((((Panel_ParentFrameModel.Frame_Width - deduction_for_sashWD + SashOverlap_additional) - dm_deduct) - inward_motorized_deduction) / TotalNumberOfPanel) + 5;
+
+                    if (Panel_Type.Contains("Fixed") &&
+                                          (Panel_Overlap_Sash == OverlapSash._Left ||
+                                           Panel_Overlap_Sash == OverlapSash._Right))
+                    {
+                        Panel_SashWidth += 5;
+                    }
                 }
                 else
                 {
@@ -7371,6 +7526,13 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
                 Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
                 Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
+
+                if (Panel_ParentFrameModel.Frame_If_SlidingTypeTopHung == true)
+                {
+                    // Panel_SashWidth = Panel_DisplayWidth - (53 * 2) + (86 * C42)
+                    Panel_SashHeight = Panel_DisplayHeight - (5 * 2) - 44 + 5;
+
+                }
 
                 Panel_OriginalSashWidth = Panel_SashWidth;
                 Panel_OriginalSashWidthDecimal = Panel_SashWidthDecimal;
@@ -7406,6 +7568,18 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
+
+                if (Panel_ParentFrameModel.Frame_If_SlidingTypeTopHung == true &&
+                    Panel_ParentFrameModel.Frame_ConnectionType == FrameConnectionType._None)
+                {
+                    Panel_CoverProfileArtNo = CoverProfile_ArticleNo._1182Milled;
+                }
+
+                if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None &&
+                    Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                {
+                    Panel_BrushArtNo = Brush_ArticleNo._SP02;
+                }
 
 
                 if (Panel_HingeOptions == HingeOption._2DHinge)
@@ -7676,6 +7850,17 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_SpacerArtNo = Spacer_ArticleNo._M063;
 
                     Panel_OverLappingPanelQty = OverLappingPanel_Qty;
+
+                    if (Panel_ParentFrameModel.Frame_If_SlidingTypeTopHung == true)
+                    {
+                        Panel_InterlockArtNo = Interlock_ArticleNo._6061;
+                        Panel_ExtensionForInterlockArtNo = ExtensionForInterlock_ArticleNo._9C61;
+                        Panel_ParentFrameModel.Frame_GUPremilineTopTrackArtNo = GUPremilineTopTrack_ArticleNo._L15015007;
+                        Panel_PVCSettingPlateArtNo = PVCSettingPlate_ArticleNo._050009005;
+                        Panel_FinPlateArtNo = FinPlate_ArticleNo._050006005;
+                        Panel_BrushArtNo = Brush_ArticleNo._SP02;
+                        Panel_SlidingAccessoriesRollerArtNo = SlidingAccessoriesRoller_ArticleNo._L15015009;
+                    }
                 }
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
@@ -7685,17 +7870,30 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_WeatherBarArtNo = WeatherBar_ArticleNo._1244;
                     Panel_EndCapForWeatherBarArtNo = EndCapForWeatherBar_ArticleNo._9483;
                     Panel_WaterSeepageArtNo = WaterSeepage_ArticleNo._1646;
+
                     if (OverLappingPanel_Qty != 0)
                     {
                         Panel_InterlockArtNo = Interlock_ArticleNo._6061_Milled;
                         Panel_ExtensionForInterlockArtNo = ExtensionForInterlock_ArticleNo._9C61_Milled;
                     }
+
                     Panel_WeatherBarFastenerArtNo = WeatherBarFastener_ArticleNo._9447;
                     Panel_BrushSealArtNo = BrushSeal_ArticleNo._9091;
                     Panel_GlazingRebateBlockArtNo = GlazingRebateBlock_ArticleNo._9C56;
                     Panel_SealingBlockArtNo = SealingBlock_ArticleNo._9C63;
                     Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
                     Panel_SpacerArtNo = Spacer_ArticleNo._M063;
+
+                    if (Panel_ParentFrameModel.Frame_If_SlidingTypeTopHung == true)
+                    {
+                        Panel_InterlockArtNo = Interlock_ArticleNo._6061;
+                        Panel_ExtensionForInterlockArtNo = ExtensionForInterlock_ArticleNo._9C61;
+                        Panel_ParentFrameModel.Frame_GUPremilineTopTrackArtNo = GUPremilineTopTrack_ArticleNo._L15015007;
+                        Panel_PVCSettingPlateArtNo = PVCSettingPlate_ArticleNo._050009005;
+                        Panel_FinPlateArtNo = FinPlate_ArticleNo._050006005;
+                        Panel_BrushArtNo = Brush_ArticleNo._SP02;
+                        Panel_SlidingAccessoriesRollerArtNo = SlidingAccessoriesRoller_ArticleNo._L15015009;
+                    }
 
                     if (Panel_ParentFrameModel.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                     {
@@ -8690,6 +8888,12 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_SashInfo_MaterialList(DataTable tbl_explosion)
         {
+            string ReinCutAngle = @"|  |";
+            if (Panel_Type.Contains("Awning") &&
+                Panel_ParentFrameModel.Frame_Height <= 1800)
+            {
+                ReinCutAngle = @"\  /";
+            }
             tbl_explosion.Rows.Add("Sash Width " + Panel_SashProfileArtNo.DisplayName,
                                    2, "pc(s)",
                                    Panel_SashWidth.ToString(),
@@ -8712,7 +8916,9 @@ namespace ModelLayer.Model.Quotation.Panel
                                    2, "pc(s)",
                                    Panel_SashReinfHeight.ToString(),
                                    "Sash",
-                                   @"|  |");
+                                   ReinCutAngle);
+
+
         }
 
         public void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion)
@@ -8738,6 +8944,37 @@ namespace ModelLayer.Model.Quotation.Panel
                                              "Frame",
                                              @"|  |");
         }
+
+        public void Insert_CoverProfileForTopHungInfo_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Cover Profile " + Panel_CoverProfileArtNo.DisplayName,
+                                             1, "pc(s)",
+                                             Panel_ParentFrameModel.Frame_Width.ToString(),
+                                             "Frame",
+                                             @"|  |");
+        }
+
+        public void Insert_FillerProfileForNoBotFrameInfo_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Filler Profile " + FillerProfile_ArticleNo._0914_milled.ToString(),
+                                             1, "pc(s)",
+                                             Panel_SashWidth.ToString(),
+                                             "Ancillary Profile",
+                                             @"|  |");
+
+            tbl_explosion.Rows.Add("Filler Profile " + FillerProfile_ArticleNo._0505_milled.ToString(),
+                                             1, "pc(s)",
+                                             Panel_SashWidth.ToString(),
+                                             "Ancillary Profile",
+                                             @"|  |");
+
+            tbl_explosion.Rows.Add("Filler Profile " + FillerProfile_ArticleNo._6052_milled.ToString(),
+                                             1, "pc(s)",
+                                             Panel_SashWidth.ToString(),
+                                             "Ancillary Profile",
+                                             @"|  |");
+        }
+
 
         public void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion, int motorCount)
         {
@@ -8876,6 +9113,13 @@ namespace ModelLayer.Model.Quotation.Panel
             int SnapInKeepQty = (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
                                  Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) ? 1 : 2;
+
+
+            if (Panel_Type.Contains("Awning") &&
+                                Panel_ParentFrameModel.Frame_Height >= 2100)
+            {
+                SnapInKeepQty = 0;
+            }
 
             tbl_explosion.Rows.Add("Snap-in Keep " + Panel_SnapInKeepArtNo.DisplayName,
                                    SnapInKeepQty, "pc(s)",
@@ -9379,7 +9623,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public void Insert_GBSpacer_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("GB SPACER FOR 6mm GLASS " + Panel_GBSpacerArtNo.DisplayName,
-                                   4, "pc(s)",
+                                   5, "pc(s)",
                                    "",
                                    "Sash",
                                    "");
@@ -9572,9 +9816,47 @@ namespace ModelLayer.Model.Quotation.Panel
                                                   2 * bothOverlapQtyMultiplier, "pc(s)",
                                                   Panel_SashHeight - 30,
                                                   "Sash",
+                                                  @"");
+            }
+        }
+
+        public void Insert_Interlock_Tophung_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_InterlockArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Interlock for Sliding " + Panel_InterlockArtNo.DisplayName,
+                                       1, "pc(s)",
+                                       Panel_SashHeight - 5,
+                                       "Interlock",
+                                       @"|  |");
+            }
+        }
+
+
+        public void Insert_Interlock_Tophung_ForFixed_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_InterlockArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Interlock for Fixed " + Panel_InterlockArtNo.DisplayName,
+                                       1, "pc(s)",
+                                       Panel_SashHeight + 10,
+                                       "Interlock",
+                                       @"|  |");
+            }
+        }
+
+        public void Insert_ExternsionForInterlock_Tophung_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_ExtensionForInterlockArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Extension for Interlock " + Panel_ExtensionForInterlockArtNo.DisplayName,
+                                                  1, "pc(s)",
+                                                  Panel_SashHeight - 30,
+                                                  "Ancillary",
                                                   @"|  |");
             }
         }
+
 
         public void Insert_WeatherBarFastener_MaterialList(DataTable tbl_explosion)
         {
@@ -9593,6 +9875,28 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "Weather Bar",
                                    "");
         }
+
+        public void Insert_BrushSealForNoBotFrame_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_BrushArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Brush Seal " + Panel_BrushArtNo.DisplayName,
+                                       1, "pc(s)",
+                                       Panel_SashWidth,
+                                       "Hardware & Accessories",
+                                       "");
+            }
+        }
+
+        public void Insert_BrushSealForTopHung_MaterialList(DataTable tbl_explosion, int perimeterBrushSeal)
+        {
+            tbl_explosion.Rows.Add("Brush Seal " + Panel_BrushSealArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   perimeterBrushSeal,
+                                   "Hardware & Accessories",
+                                   "");
+        }
+
 
         public void Insert_Rollers_MaterialList(DataTable tbl_explosion)
         {
@@ -9740,8 +10044,14 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_SpacerFixedSash_MaterialList(DataTable tbl_explosion)
         {
+            int qtyDeduct = 0;
+            if (Panel_ParentFrameModel.Frame_If_SlidingTypeTopHung == true)
+            {
+                Panel_GBSpacerArtNo = GBSpacer_ArticleNo._0373Milled;
+                qtyDeduct = 1;
+            }
             tbl_explosion.Rows.Add("SPACER FOR FIXED " + Panel_GBSpacerArtNo.DisplayName,
-                                   2, "pc(s)",
+                                   2 - qtyDeduct, "pc(s)",
                                    "",
                                    "Sash",
                                    "");
@@ -9927,6 +10237,79 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public void Insert_ConnectingProfile_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_ParentFrameModel.Frame_ConnectingProfile_ArticleNo != null)
+            {
+                tbl_explosion.Rows.Add("Connecting Profile " + Panel_ParentFrameModel.Frame_ConnectingProfile_ArticleNo.DisplayName,
+                                                       1, "pc(s)",
+                                                       Panel_SashWidth - 5,
+                                                       "Ancillary",
+                                                       @"");
+            }
+        }
+
+        public void Insert_GUPremilineTopTrack_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("GU Premiline Top Track " + Panel_ParentFrameModel.Frame_GUPremilineTopTrackArtNo.DisplayName,
+                                                   1, "pc(s)",
+                                                   Panel_ParentFrameModel.Frame_Width,
+                                                   "Bead",
+                                                   @"");
+
+        }
+
+        public void Insert_PVCSettingPlate_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("PVC Setting Plate Fixed Sash Bottom, 2.6m " + Panel_PVCSettingPlateArtNo.DisplayName,
+                                                   1, "pc(s)",
+                                                   "",
+                                                   "Hardware & Accessories",
+                                                   @"");
+
+        }
+
+        public void Insert_FinPlate_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Fin Plate, 2.3m " + Panel_FinPlateArtNo.DisplayName,
+                                                   1, "pc(s)",
+                                                   Panel_SashWidth - 5,
+                                                   "Hardware & Accessories",
+                                                   @"");
+
+        }
+
+
+        public void Insert_BrushForSliding_MaterialList(DataTable tbl_explosion, int FinPlatePerimeter)
+        {
+            tbl_explosion.Rows.Add("Brush Seal For Sliding " + Panel_BrushArtNo.DisplayName,
+                                                   1, "pc(s)",
+                                                   FinPlatePerimeter,
+                                                   "Hardware & Accessories",
+                                                   @"");
+
+        }
+
+        public void Insert_SlidingAccessoriesRoller_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Sliding Accessories, Roller, 125kg " + Panel_SlidingAccessoriesRollerArtNo.DisplayName,
+                                                   1, "pc(s)",
+                                                   "",
+                                                   "Hardware & Accessories",
+                                                   @"");
+
+        }
+
+
+        public void Insert_SlidingSashBottomGuide_MaterialList(DataTable tbl_explosion, int overlap)
+        {
+            tbl_explosion.Rows.Add("Sliding Sash Bottom Guide ",
+                                                   overlap, "pc(s)",
+                                                   "",
+                                                   "Hardware & Accessories",
+                                                   @"");
+
+        }
 
         public int Add_SashPerimeter_screws4fab()
         {
@@ -10343,7 +10726,9 @@ namespace ModelLayer.Model.Quotation.Panel
                           bool panelSlidingTypeVisibility,
                           SlidingTypes panelSlidingTypes,
                           string glasstype_insu_lumi,
-                          decimal glasspricepersqrmeter
+                          decimal glasspricepersqrmeter,
+                          MotorizedMechRemote_ArticleNo panelMotorizedMechRemoteArtNo,
+                          bool panelMotorizedMechRemoteOption
                           )
         {
             Panel_ID = panelID;
@@ -10426,6 +10811,9 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_HingeOptionsPropertyHeight = constants.panel_property_HingeOptionsheight;
             Panel_GlassType_Insu_Lami = glasstype_insu_lumi;
             Panel_GlassPricePerSqrMeter = glasspricepersqrmeter;
+            Panel_MotorizedMechRemoteArtNo = panelMotorizedMechRemoteArtNo;
+            Panel_MotorizedMechRemoteOption = panelMotorizedMechRemoteOption;
+
 
         }
     }

@@ -406,7 +406,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                     _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                 {
-                    _panelModel.Panel_ParentFrameModel.Frame_TrackProfileArtNo = TrackProfile_ArticleNo._L15056140;
+                        _panelModel.Panel_ParentFrameModel.Frame_TrackProfileArtNo = TrackProfile_ArticleNo._L15056140;    
                 }
             }
             else if (chk.Checked == false)

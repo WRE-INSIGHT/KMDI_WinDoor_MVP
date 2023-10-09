@@ -74,5 +74,14 @@ namespace PresentationLayer.Views.UserControls.DividerProperties_Modules
             }
             this.DataBindings.Add(sashBinding["Panel_SashProfileArtNo"]);
         }
+        public void cmb_LeverEspag_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_LeverEspag_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }
