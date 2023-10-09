@@ -288,7 +288,23 @@ namespace PresentationLayer.Presenter
             }
 
         }
+        public DataTable GlassUpgradeDT
+        {
+            get
+            {
+                return _glassUpgradeDT;
+            }
+            set
+            {
+                _glassUpgradeDT = value;
+            }
+        }
+        private DataTable _glassUpgradeDT = new DataTable();
+        decimal _totalNetPriceforPrint;
 
+        public decimal ContractSummaryLessDiscount { get; set; }
+        public int RDLCReportCompilerLessDiscountContractSummary { get; set; } // change this to decimal if possible 
+        public bool ShowLessDiscountContractSummary { get; set; }
 
         int prev_GlassItemNo,
             prev_GlassQty,
@@ -340,21 +356,8 @@ namespace PresentationLayer.Presenter
         decimal windoorpricecheck;//check price in rdlc report 
         decimal olddiscount, updateddiscount;
         int countfortick;
-
         #endregion
-        public DataTable GlassUpgradeDT
-        {
-            get
-            {
-                return _glassUpgradeDT;
-            }
-            set
-            {
-                _glassUpgradeDT = value;
-            }
-        }
-        private DataTable _glassUpgradeDT = new DataTable();
-        decimal _totalNetPriceforPrint;
+
 
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
@@ -814,6 +817,8 @@ namespace PresentationLayer.Presenter
             if (outOfTownCharges <= 50000) { outOfTownCharges = 50000; }
             total_DiscountedPrice_wo_VAT = Math.Round((windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage), 2);
 
+            ContractSummaryLessDiscount = screen_Windoor_DiscountAverage;// bring discount Ave to RDLCCompiler
+
             //Console.WriteLine(archi + " " + outOfTownCharges.ToString());
             Console.WriteLine(archi + " " + OutOfTownCharges.ToString());
             Console.WriteLine("This is total DiscountedPrice w/o Vat " + Math.Round((total_DiscountedPrice_wo_VAT), 2));
@@ -842,6 +847,7 @@ namespace PresentationLayer.Presenter
             _mainPresenter.printStatus = "ContractSummary";
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
+
             if (CallFrmRDLCCompiler != true)
             {
                 if (RenderPDFAtBackGround != true)
@@ -854,6 +860,7 @@ namespace PresentationLayer.Presenter
                     printQuote.EventLoad();
                     printQuote.GetPrintQuoteView().QuotationOuofTownExpenses = _rdlcReportCompilerOutofTownExpenses;
                     printQuote.GetPrintQuoteView().VatPercentage = _rdlcReportCompilerVatContractSummary;
+                    printQuote.GetPrintQuoteView().LessDiscount = RDLCReportCompilerLessDiscountContractSummary.ToString();
                     printQuote.PrintRDLCReport();
                 }
             }

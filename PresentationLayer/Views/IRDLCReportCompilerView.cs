@@ -8,6 +8,7 @@ namespace PresentationLayer.Views
         string TxtBxOutofTownExpenses { get; set; }
         string TxtBxContractSummaryVat { get; set; }
         string TxtBxRowlimit { get; set; }
+        string TxtContractSummaryLessDiscount { get; set; }
         CheckBox GetSubTotalCheckBox();
 
         event EventHandler chkboxsubtotalCheckedChangedEventRaised;
@@ -18,6 +19,7 @@ namespace PresentationLayer.Views
         event EventHandler chkbxguShowReviewedByCheckedChangedEventRaised;
         event EventHandler chkbxguShowNotedByCheckedChanged;
         event EventHandler chkbxguShowVatCheckedChanged;
+        event EventHandler chkbx_SummaryLessD_CheckedChangedEventRaised;
         CheckedListBox GetChecklistBoxIndex();
         void ShowRDLCReportCompilerView();
         void CloseRDLCReportCompilerView();
@@ -35,6 +37,9 @@ namespace PresentationLayer.Views
         CheckBox GUShowNotedBy();
         CheckBox GUShowVat();
         CheckedListBox GUGlassListChkLst();
+        CheckBox GetContractSummaryLessDiscountChkBx();
+        TextBox GetContractSummaryLessDiscountTxtBx();
+
 
 
     }

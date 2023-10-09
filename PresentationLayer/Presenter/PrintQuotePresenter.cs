@@ -1112,6 +1112,11 @@ namespace PresentationLayer.Presenter
                         RParam[8] = new ReportParameter("UserDefineLessDiscount", "False");
                     }
 
+                    if(_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.ShowLessDiscountContractSummary == true)
+                    {
+                        RParam[8] = new ReportParameter("UserDefineLessDiscount", "True");
+                    }
+
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
                     //_printQuoteView.QuotationOuofTownExpenses = oftexpenses.ToString("n");
 
