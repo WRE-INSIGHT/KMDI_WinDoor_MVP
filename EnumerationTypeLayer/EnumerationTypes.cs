@@ -111,6 +111,17 @@ namespace EnumerationTypeLayer
             public static readonly GlazingBead_ArticleNo _2431_9073 = new GlazingBead_ArticleNo(13, "2431 & 9073");
             public static readonly GlazingBead_ArticleNo _2433_9073 = new GlazingBead_ArticleNo(14, "2433 & 9073");
             public static readonly GlazingBead_ArticleNo _2429_9044 = new GlazingBead_ArticleNo(15, "2429 & 9044");
+            // transom for premi
+            public static readonly GlazingBead_ArticleNo _2452_2438 = new GlazingBead_ArticleNo(15, "2452(out) & 2438(in)");
+            public static readonly GlazingBead_ArticleNo _2452_2437 = new GlazingBead_ArticleNo(16, "2452(out) & 2437(in)");
+            public static readonly GlazingBead_ArticleNo _2452_2434 = new GlazingBead_ArticleNo(17, "2452(out) & 2434(in)");
+            public static readonly GlazingBead_ArticleNo _2436_2436 = new GlazingBead_ArticleNo(18, "2436(out) & 2436(in)");
+            public static readonly GlazingBead_ArticleNo _2453_2434 = new GlazingBead_ArticleNo(19, "2453(out) & 2434(in)");
+            public static readonly GlazingBead_ArticleNo _2436_2433 = new GlazingBead_ArticleNo(20, "2436(out) & 2433(in)");
+            public static readonly GlazingBead_ArticleNo _2438_2438 = new GlazingBead_ArticleNo(21, "2438(out) & 2438(in)");
+            public static readonly GlazingBead_ArticleNo _2437_2437 = new GlazingBead_ArticleNo(22, "2437(out) & 2437(in)");
+            public static readonly GlazingBead_ArticleNo _2437_2434 = new GlazingBead_ArticleNo(23, "2437(out) & 2434(in)");
+            public static readonly GlazingBead_ArticleNo _2434_2434 = new GlazingBead_ArticleNo(24, "2434(out) & 2434(in)");
 
 
 

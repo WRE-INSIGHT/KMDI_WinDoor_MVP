@@ -791,6 +791,59 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
 
                 }
+                else if ((Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                          Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
+                          Panel_Type.Contains("Sliding") &&
+                          Panel_ChkText != "dSash")
+                {
+                    if (value == 6.0f || value == 7.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2452_2438;
+                    }
+                    else if (value == 8.0f ||
+                             value == 9.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2452_2437;
+                    }
+                    else if (value == 10.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2452_2434;
+                    }
+                    else if (value >= 10.1f &&
+                             value <= 12.99f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2436_2436;
+                    }
+                    else if (value >= 13.0f ||
+                             value <= 14.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2453_2434;
+                    }
+                    else if (value == 15.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2436_2433;
+                    }
+                    else if (value == 16.0f ||
+                             value == 17.0f ||
+                             value == 18.0f ||
+                             value == 19.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2438_2438;
+                    }
+                    else if (value == 20.0f ||
+                             value == 21.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2437_2437;
+                    }
+                    else if (value == 22.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2437_2434;
+                    }
+                    else if (value == 23.0f || value == 24.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434_2434;
+                    }
+                }
                 else
                 {
                     if (Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)

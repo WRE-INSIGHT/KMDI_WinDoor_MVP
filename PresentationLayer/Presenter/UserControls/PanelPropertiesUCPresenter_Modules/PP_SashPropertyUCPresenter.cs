@@ -519,6 +519,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     else if (sel_sash == SashProfile_ArticleNo._395)
                     {
                         _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._207;
+                        _panelModel.Panel_HandleType = Handle_Type._Rotoswing;
 
                         if (_panelModel.Panel_MotorizedOptionVisibility == false)
                         {

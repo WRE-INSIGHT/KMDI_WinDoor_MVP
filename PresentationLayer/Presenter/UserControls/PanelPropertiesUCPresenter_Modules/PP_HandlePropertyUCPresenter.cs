@@ -224,7 +224,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             }
                             else
                             {
-                                _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
+                                if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                {
+                                    _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._N110A00006;
+                                }
+                                else
+                                {
+                                    _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
+                                }
                             }
                         }
 
@@ -1956,7 +1963,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             rotoswingForSlidingPropUC.Dock = DockStyle.Top;
             rotoswingForSlidingPropUC.BringToFront();
 
-            IPP_EspagnolettePropertyUCPresenter espUCP = _pp_espagnolettePropertyUCPresenter.GetNewInstance(_unityC, _panelModel,_mainPresenter);
+            IPP_EspagnolettePropertyUCPresenter espUCP = _pp_espagnolettePropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
             UserControl espPropUC = (UserControl)espUCP.GetPPEspagnolettePropertyUC();
             _pnlHandleType.Controls.Add(espPropUC);
             espPropUC.Dock = DockStyle.Top;
@@ -1980,7 +1987,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             Foil_Color outside_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_OutsideColor;
 
             Handle_Type handle = _panelModel.Panel_HandleType;
-          
+
             if ((handle != Handle_Type._Rotary && handle != Handle_Type._None) && _panelModel.Panel_Type != "Fixed Panel")
             {
                 _panelModel.Panel_EspagnoletteOptionsVisibility = true;
@@ -2018,7 +2025,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                     if (!_mainPresenter.ItemLoad)
                     {
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
+                        if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._N110A00006;
+                        }
+                        else
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
+                        }
                     }
 
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
