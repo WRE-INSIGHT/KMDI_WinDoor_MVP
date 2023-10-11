@@ -3780,7 +3780,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                             {
                                 mpnlWd_deduct = 20;
-                                mpnlHt_deduct = 15;
+                                mpnlHt_deduct = 20; //mpnlHt_deduct = 15;
                             }
                             else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
