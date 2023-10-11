@@ -1503,6 +1503,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     corner_points[6] = new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height - 1);
                     corner_points[7] = new Point(pInnerX + pInnerWd, fpnl.ClientRectangle.Height - 1);
                 }
+                else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                {
+                    corner_points[4] = new Point(-3, fpnl.ClientRectangle.Height);
+                    corner_points[5] = new Point(pInnerX + 3, pInnerY + pInnerHt);
+
+                    corner_points[6] = new Point(fpnl.ClientRectangle.Width + 3, fpnl.ClientRectangle.Height);
+                    corner_points[7] = new Point(pInnerX + pInnerWd - 3, pInnerY + pInnerHt);
+                }
             }
 
             GraphicsPath gpath = new GraphicsPath();
@@ -3276,12 +3285,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                     }
 
-                    g.DrawLine(Pens.Black, new Point(0, 0),
-                                           new Point(pInnerX, pInnerY));
+                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                    {
+                        g.DrawLine(Pens.Black, new Point(0, 0),
+                                               new Point(pInnerX, pInnerY));
 
-                    g.DrawLine(Pens.Black, new Point(loc_X, loc_Y),
-                                           new Point(pInnerX, loc2_Y));
+                        g.DrawLine(Pens.Black, new Point(loc_X - 3, loc_Y),
+                                               new Point(pInnerX + 3, loc2_Y));
+                    }
+                    else
+                    {
+                        g.DrawLine(Pens.Black, new Point(0, 0),
+                                               new Point(pInnerX, pInnerY));
 
+                        g.DrawLine(Pens.Black, new Point(loc_X, loc_Y),
+                                               new Point(pInnerX, loc2_Y));
+                    }
                     if (zoom == 0.50f)
                     {
                         divs_bounds_values[2].X -= 2;
@@ -3336,12 +3356,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             }
                         }
                     }
-
-                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
+                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                    {
+                        g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
                                            new Point(upLine_loc_X2, pInnerY));
 
-                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, botLine_locY),
-                                           new Point(botLine_locX2, botLine_locY2));
+                        g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width + 3, botLine_locY),
+                                               new Point(botLine_locX2 - 3, botLine_locY2));
+                    }
+                    else
+                    {
+                        g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
+                                           new Point(upLine_loc_X2, pInnerY));
+
+                        g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, botLine_locY),
+                                               new Point(botLine_locX2, botLine_locY2));
+                    }      
 
                     if (zoom <= 0.26f)
                     {
