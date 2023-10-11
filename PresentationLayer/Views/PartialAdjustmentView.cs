@@ -49,6 +49,7 @@ namespace PresentationLayer.Views
         {
             return this;
         }
+
         public event EventHandler _printToolStripBtnClickEventRaised;  
         public event EventHandler _partialAdjustmentViewLoadEventRaised;
 

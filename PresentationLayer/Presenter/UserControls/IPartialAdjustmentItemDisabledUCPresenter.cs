@@ -8,7 +8,7 @@ namespace PresentationLayer.Presenter.UserControls
     public interface IPartialAdjustmentItemDisabledUCPresenter
     {
         string UserControlBackground { get; set; }
-
+        int PartialAdjusmentItemDisabledUCIndexPlacement { get; set; }
         IPartialAdjustmentItemDisabledUCPresenter GetNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter, 
                                                                 IWindoorModel windoorModel, IQuotationModel quotationModel);
         IPartialAdjustmenItemDisabledUC GetPartialAdjustmentItemDisablepdUC();

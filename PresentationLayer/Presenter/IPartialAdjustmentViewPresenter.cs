@@ -12,7 +12,7 @@ namespace PresentationLayer.Presenter
                                                        IQuotationModel quotationModel, 
                                                        IWindoorModel windoorModel, 
                                                        IMainPresenter mainPresenter,
-                                                       IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter);
+                                                       IPartialAdjustmentBaseHolderPresenter partialAdjustmentBaseHolder);
         IPartialAdjustmentView GetPartialAdjustmentView();
     }
 }

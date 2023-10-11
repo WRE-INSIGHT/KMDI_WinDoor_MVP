@@ -131,6 +131,7 @@ namespace PresentationLayer.Presenter
         private IGlassUpgradePresenter _glassUpgradePresenter;
         private IPartialAdjustmentViewPresenter _partialAdjustmentViewPresenter;
         private IPartialAdjustmentUCPresenter _partialAdjustmentUCPresenter;
+        private IPartialAdjustmentBaseHolderPresenter _partialAdjustmentBaseHolderPresenter;
 
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
@@ -853,7 +854,8 @@ namespace PresentationLayer.Presenter
                              IPriceHistoryPresenter priceHistoryPresenter,
                              IGlassUpgradePresenter glassupgradePresenter,
                              IPartialAdjustmentViewPresenter partialAdjustmentViewPresenter,
-                             IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter
+                             IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter,
+                             IPartialAdjustmentBaseHolderPresenter partialAdjustmentBaseHolderPresenter
                              )
         {
             _mainView = mainView;
@@ -921,6 +923,7 @@ namespace PresentationLayer.Presenter
             _glassUpgradePresenter = glassupgradePresenter;
             _partialAdjustmentViewPresenter = partialAdjustmentViewPresenter;
             _partialAdjustmentUCPresenter = partialAdjustmentUCPresenter;
+            _partialAdjustmentBaseHolderPresenter = partialAdjustmentBaseHolderPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -1040,7 +1043,7 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_partialAdjusmentToolstripClickClickEventRaised(object sender, EventArgs e)
         {
-            IPartialAdjustmentViewPresenter partialAdjustment = _partialAdjustmentViewPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, this,_partialAdjustmentUCPresenter);
+            IPartialAdjustmentViewPresenter partialAdjustment = _partialAdjustmentViewPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, this,_partialAdjustmentBaseHolderPresenter);
             partialAdjustment.GetPartialAdjustmentView().ShowPartialAdjusmentView();
         }
 
