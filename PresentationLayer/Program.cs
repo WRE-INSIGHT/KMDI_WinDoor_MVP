@@ -481,6 +481,9 @@ namespace PresentationLayer
 
                  .RegisterType<IPartialAdjustmenItemDisabledUC, PartialAdjustmenItemDisabledUC>(new ContainerControlledLifetimeManager())
                  .RegisterType<IPartialAdjustmentItemDisabledUCPresenter,PartialAdjustmentItemDisabledUCPresenter>(new ContainerControlledLifetimeManager())
+                 
+                 .RegisterType<IPartialAdjustmentBaseHolderPresenter,PartialAdjustmentBaseHolderPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentBaseHolderUC,PartialAdjustmentBaseHolderUC>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())

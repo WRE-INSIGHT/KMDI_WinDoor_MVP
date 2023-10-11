@@ -21,6 +21,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IPartialAdjustmentUC _partialAdjustmenUC;
         private IPartialAdjustmentViewPresenter _partialAdjustmentViewPresenter;
         private IPartialAdjustmentItemDisabledUCPresenter _paAdjustmentItemDisabledUCPresenter;
+        private IPartialAdjustmentBaseHolderPresenter _paBaseHolderPresenter;
 
         Panel PanelBody;
         PictureBox OldItemPB, CurrentItemPB;
@@ -28,8 +29,10 @@ namespace PresentationLayer.Presenter.UserControls
         Label OldItemPrice, CurrentItemPrice;
 
         private string BGColor = "#2596be";
+        private int BaseHolderHeight = 0;
 
-        
+        public int PartialAdjusmentUCIndexPlacement { get; set; }
+
         public PartialAdjustmentUCPresenter(IPartialAdjustmentUC partialAdjustmentUC, IPartialAdjustmentItemDisabledUCPresenter paAdjustmentItemDisabledUCPresenter)
         {
             _partialAdjustmenUC = partialAdjustmentUC;
@@ -50,7 +53,6 @@ namespace PresentationLayer.Presenter.UserControls
             _partialAdjustmenUC.paPnlAfter_ResizeEventRaised += _partialAdjustmenUC_paPnlAfter_ResizeEventRaised;
             _partialAdjustmenUC.btn_HideAndShow_ClickEventRaised += _partialAdjustmenUC_btn_HideAndShow_ClickEventRaised;
             _partialAdjustmenUC.btn_UsePartialAdjustment_ClickEventRaised += _partialAdjustmenUC_btn_UsePartialAdjustment_ClickEventRaised;
-            
         }
 
         private void _partialAdjustmenUC_btn_UsePartialAdjustment_ClickEventRaised(object sender, EventArgs e)
@@ -69,15 +71,36 @@ namespace PresentationLayer.Presenter.UserControls
             _paAdjustmentItemDisabledUCPresenter = _paAdjustmentItemDisabledUCPresenter.GetNewInstance(_unityC, _mainPresenter, _windoorModel, _quotationModel);
              UserControl paUC = (UserControl)_paAdjustmentItemDisabledUCPresenter.GetPartialAdjustmentItemDisablepdUC();
             _paAdjustmentItemDisabledUCPresenter.UserControlBackground = BGColor;
+            _paAdjustmentItemDisabledUCPresenter.PartialAdjusmentItemDisabledUCIndexPlacement = PartialAdjusmentUCIndexPlacement; // send index placement to itemdisabled
+
+
             _mainPresenter.GetMainView().GetThis().Controls.Add(paUC);
 
             _partialAdjustmentViewPresenter.GetPartialAdjustmentView().ClosePartialAdjustmentView();
 
-        }
+        } 
 
         private void _partialAdjustmenUC_btn_HideAndShow_ClickEventRaised(object sender, EventArgs e)
         {
-            if (PanelBody.Visible == true)
+            BaseHolderHeight = 0;
+            int BHHModulo,
+                Height;
+            Height = _partialAdjustmenUC.GetAdjustmentUCForm().Size.Height;
+
+            #region 1stAlgo For UCSize
+            //if (PanelBody.Visible == true)
+            //{
+            //    PanelBody.Visible = false;
+            //    _partialAdjustmenUC.GetAdjustmentUCForm().Size = new System.Drawing.Size(732, 29);
+            //}
+            //else
+            //{
+            //    PanelBody.Visible = true;
+            //    _partialAdjustmenUC.GetAdjustmentUCForm().Size = new System.Drawing.Size(732, 200);
+            //}
+            #endregion
+
+            if (Height == 200)
             {
                 PanelBody.Visible = false;
                 _partialAdjustmenUC.GetAdjustmentUCForm().Size = new System.Drawing.Size(732, 29);
@@ -87,6 +110,20 @@ namespace PresentationLayer.Presenter.UserControls
                 PanelBody.Visible = true;
                 _partialAdjustmenUC.GetAdjustmentUCForm().Size = new System.Drawing.Size(732, 200);
             }
+
+            foreach (Control uc in _paBaseHolderPresenter.GetPABaseHolderUC().PABaseHolderPanelBody().Controls)
+            {
+                BaseHolderHeight = BaseHolderHeight + uc.Height;
+            }
+
+            BHHModulo = BaseHolderHeight % 29;
+            //if(BHHModulo == 0)
+            //{
+            //    BaseHolderHeight = BaseHolderHeight + 29;
+            //}
+            BaseHolderHeight = BaseHolderHeight + 29; // add for panelTitle_HeightBHP
+
+            _paBaseHolderPresenter.GetPABaseHolderUC().GetPABaseHolderUC().Height = BaseHolderHeight;
         }
 
         private void _partialAdjustmenUC_paPnlAfter_ResizeEventRaised(object sender, EventArgs e)
@@ -108,7 +145,6 @@ namespace PresentationLayer.Presenter.UserControls
             _partialAdjustmentViewPresenter.GetPartialAdjustmentView().GetCurrItemLbl().Location = new System.Drawing.Point((_PrevAndCurrLabelPos * 3) - 50); 
         }
 
-
         private void _partialAdjustmenUC_artialAdjustmentUC_LoadEventRaised(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
@@ -125,7 +161,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                             IQuotationModel quotationModel,
                                                             IWindoorModel windoorModel,
                                                             IMainPresenter mainPresenter,
-                                                            IPartialAdjustmentViewPresenter partialAdjustmentViewPresenter)
+                                                            IPartialAdjustmentViewPresenter partialAdjustmentViewPresenter,
+                                                            IPartialAdjustmentBaseHolderPresenter paBaseHolderPresenter)
         {
             unityC
                 .RegisterType<IPartialAdjustmentUC, PartialAdjustmentUC>()
@@ -136,9 +173,11 @@ namespace PresentationLayer.Presenter.UserControls
             partialAdjustmentUC._windoorModel = windoorModel;
             partialAdjustmentUC._mainPresenter = mainPresenter;
             partialAdjustmentUC._partialAdjustmentViewPresenter = partialAdjustmentViewPresenter;
+            partialAdjustmentUC._paBaseHolderPresenter = paBaseHolderPresenter;
 
             return partialAdjustmentUC;
-
         }
+
+
     }
 }

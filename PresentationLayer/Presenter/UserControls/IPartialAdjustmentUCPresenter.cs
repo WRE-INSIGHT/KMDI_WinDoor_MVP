@@ -7,11 +7,13 @@ namespace PresentationLayer.Presenter.UserControls
 {
     public interface IPartialAdjustmentUCPresenter
     {
+        int PartialAdjusmentUCIndexPlacement { get; set; }
         IPartialAdjustmentUC GetPartialAdjustmentUC();
         IPartialAdjustmentUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IQuotationModel quotationModel,
                                                      IWindoorModel windoorModel,
                                                      IMainPresenter mainPresenter,
-                                                     IPartialAdjustmentViewPresenter partialAdjustmentViewPresenter);
+                                                     IPartialAdjustmentViewPresenter partialAdjustmentViewPresenter,
+                                                     IPartialAdjustmentBaseHolderPresenter paBaseHolderPresenter);
     }
 }

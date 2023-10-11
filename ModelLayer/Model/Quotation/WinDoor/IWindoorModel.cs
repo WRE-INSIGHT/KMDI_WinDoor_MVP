@@ -81,6 +81,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         string TotalPriceHistory { get; set; }
         string TotalPriceHistoryStatus { get; set; }
         List<string> lst_TotalPriceHistory { get; set; }
+        List<Image> WD_PALst_Designs { get; set; }
         bool WD_IsPartialADPreviousExist { get; set; }
         Image WD_PAPreviousImage { get; set; }
         string WD_PAPreviousDescription { get; set; }

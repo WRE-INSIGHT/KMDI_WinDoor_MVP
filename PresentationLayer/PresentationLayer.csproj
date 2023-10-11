@@ -218,6 +218,7 @@
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TrackProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TubularPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IPartialAdjustmentBaseHolderPresenter.cs" />
     <Compile Include="Presenter\UserControls\IPartialAdjustmentItemDisabledUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IPartialAdjustmentUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IScreenAddOnPropertiesUCPresenter.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGallerySetOptionPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGallerySetPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_TrackRailPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PartialAdjustmentBaseHolderPresenter.cs" />
     <Compile Include="Presenter\UserControls\PartialAdjustmentItemDisabledUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PartialAdjustmentUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddOnPropertiesUCPresenter.cs" />
@@ -800,6 +802,7 @@
     <Compile Include="Views\UserControls\IMultiPanelPropertiesUC.cs" />
     <Compile Include="Views\UserControls\IPanelPropertiesUC.cs" />
     <Compile Include="Views\UserControls\IPartialAdjustmenItemDisabledUC.cs" />
+    <Compile Include="Views\UserControls\IPartialAdjustmentBaseHolderUC.cs" />
     <Compile Include="Views\UserControls\IPartialAdjustmentUC.cs" />
     <Compile Include="Views\UserControls\IQuoteItemListUC.cs" />
     <Compile Include="Views\UserControls\IScreenAddOnPropertiesUC.cs" />
@@ -1051,6 +1054,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PartialAdjustmenItemDisabledUC.Designer.cs">
       <DependentUpon>PartialAdjustmenItemDisabledUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmentBaseHolderUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmentBaseHolderUC.Designer.cs">
+      <DependentUpon>PartialAdjustmentBaseHolderUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PartialAdjustmentUC.cs">
       <SubType>UserControl</SubType>
@@ -1623,6 +1632,9 @@
     <EmbeddedResource Include="Views\UserControls\PartialAdjustmenItemDisabledUC.resx">
       <DependentUpon>PartialAdjustmenItemDisabledUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PartialAdjustmentBaseHolderUC.resx">
+      <DependentUpon>PartialAdjustmentBaseHolderUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PartialAdjustmentUC.resx">
       <DependentUpon>PartialAdjustmentUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -1807,6 +1819,8 @@
     <None Include="Resources\fade90v2.gif" />
     <None Include="Resources\fade901.gif" />
     <None Include="Resources\ExtensionBot11.png" />
+    <None Include="Resources\down-chevron.png" />
+    <None Include="Resources\down-arrow-square-outlined-button.png" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />

@@ -39,6 +39,8 @@ namespace PresentationLayer.Presenter.UserControls
         private string PaCurrentDesignDescHolder { get; set; }
         private decimal PACurrentDesignPrice { get; set; }
 
+        public int PartialAdjusmentItemDisabledUCIndexPlacement { get; set; }
+
         public PartialAdjustmentItemDisabledUCPresenter(IPartialAdjustmenItemDisabledUC pAItemDisabledUC)
         {
             _pAItemDisabledUC = pAItemDisabledUC;
@@ -46,7 +48,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             SubscribeToEventSetup();
         }
-
+        
         private void SubscribeToEventSetup()
         {
             _pAItemDisabledUC.btn_Cancel_ClickEventRaised += _pAItemDisabledUC_btn_Cancel_ClickEventRaised;
@@ -89,12 +91,24 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _pAItemDisabledUC_btn_Yes_ClickEventRaised(object sender, EventArgs e)
         {
+            try
+            {
+                _windoorModel.WD_PALst_Designs.Insert(PartialAdjusmentItemDisabledUCIndexPlacement, _windoorModel.WD_image);
+                _windoorModel.WD_PALst_Designs.RemoveAt(PartialAdjusmentItemDisabledUCIndexPlacement + 1);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + "Problem at WD_PALstDesign" + this);
+            }
 
-            _windoorModel.WD_IsPartialADPreviousExist = true;
-            _windoorModel.WD_PAPreviousImage = PaCurrentDesignImgHolder;
-            _windoorModel.WD_PAPreviousDescription = PaCurrentDesignDescHolder;
-            _windoorModel.WD_PAPreviousPrice = PACurrentDesignPrice;
 
+            if(_windoorModel.WD_IsPartialADPreviousExist == false) 
+            {
+                _windoorModel.WD_IsPartialADPreviousExist = true;
+                _windoorModel.WD_PAPreviousImage = PaCurrentDesignImgHolder;
+                _windoorModel.WD_PAPreviousDescription = PaCurrentDesignDescHolder;
+                _windoorModel.WD_PAPreviousPrice = PACurrentDesignPrice;
+            }
             MainPresenterPanelsEnabled();
         }
 
