@@ -73,7 +73,10 @@ namespace PresentationLayer.Presenter
 
                 if(wdm.WD_PALst_Designs == null)
                 {
+                    //instantiate
                     wdm.WD_PALst_Designs = new List<System.Drawing.Image>();
+                    wdm.WD_PALst_Description = new List<string>();
+                    wdm.WD_PALst_Price = new List<decimal>();
                 }
 
                 UserControl partialadjustmentItems = (UserControl)_partialAdjustmentBaseHolderPresenter.GetPABaseHolderUC();
