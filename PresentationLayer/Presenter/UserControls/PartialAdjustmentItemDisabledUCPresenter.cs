@@ -91,14 +91,29 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _pAItemDisabledUC_btn_Yes_ClickEventRaised(object sender, EventArgs e)
         {
+            int _realItemIndexPos = PartialAdjusmentItemDisabledUCIndexPlacement + 1;
+
+            #region Sudden Changes in Quantity Per Item
+            while (_realItemIndexPos > _windoorModel.WD_PALst_Designs.Count)
+            {
+                _windoorModel.WD_PALst_Designs.Add(null);
+                _windoorModel.WD_PALst_Description.Add(null);
+                _windoorModel.WD_PALst_Price.Add(0);
+            }
+            #endregion
+
             try
             {
                 _windoorModel.WD_PALst_Designs.Insert(PartialAdjusmentItemDisabledUCIndexPlacement, _windoorModel.WD_image);
-                _windoorModel.WD_PALst_Designs.RemoveAt(PartialAdjusmentItemDisabledUCIndexPlacement + 1);
+                _windoorModel.WD_PALst_Designs.RemoveAt(PartialAdjusmentItemDisabledUCIndexPlacement + 1);//Remove previous design for selected index
+                _windoorModel.WD_PALst_Description.Insert(PartialAdjusmentItemDisabledUCIndexPlacement,_windoorModel.WD_description);
+                _windoorModel.WD_PALst_Description.RemoveAt(PartialAdjusmentItemDisabledUCIndexPlacement  + 1);//Remove previous description for selected index
+                _windoorModel.WD_PALst_Price.Insert(PartialAdjusmentItemDisabledUCIndexPlacement,_windoorModel.WD_price);
+                _windoorModel.WD_PALst_Price.RemoveAt(PartialAdjusmentItemDisabledUCIndexPlacement + 1);// Remove previous price for selected index
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message + "Problem at WD_PALstDesign" + this);
+                MessageBox.Show(ex.Message + "Problem at WD_PALstDesign: " + this);
             }
 
 

@@ -76,17 +76,22 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if(_windoorModel.WD_PALst_Designs.Count > 0)
                 {
-                    if(i <= PA_LstDesignCount)
+                    if (i <= PA_LstDesignCount)
                     {
                         _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = _windoorModel.WD_PALst_Designs[i - 1];//Get Previous Img
+                        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = _windoorModel.WD_PALst_Description[i - 1];//Get Previous Desc
+                        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = _windoorModel.WD_PALst_Price[i - 1].ToString("N");//Get Previous Price
                     }
                 }
                 else
                 {
-                    #region Add Null Value To Image List
+                    #region Add Default Value To Image, Description,Price List
                     for (int j = 1; j<= ItemQuantity; j++)
                     {
-                        _windoorModel.WD_PALst_Designs.Add(null);// Always Update in ItemDisabledUC
+                        // Always Update in ItemDisabledUC
+                        _windoorModel.WD_PALst_Designs.Add(null);
+                        _windoorModel.WD_PALst_Description.Add(null);
+                        _windoorModel.WD_PALst_Price.Add(0);
                     }
                     #endregion
                 }
