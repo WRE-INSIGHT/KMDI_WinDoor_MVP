@@ -703,6 +703,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     {
                                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             divchkdm = true;
@@ -785,6 +786,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
                                 if (_multiPanelModel.MPanel_Placement == "Last")
@@ -1118,6 +1120,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || 
                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                 {
                                     if (_multiPanelModel.MPanel_ParentModel == null)
@@ -1451,6 +1454,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         pInnerHt = fpnl.ClientRectangle.Height;
@@ -1463,6 +1467,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction + _frameModel.Frame_Padding_int.Bottom);
@@ -1495,6 +1500,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                 {
                     corner_points[4] = new Point(0, fpnl.ClientRectangle.Height - 1);
@@ -1573,6 +1579,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66)
                     {
                         botFrameDeduct = (int)(9 * _frameModel.Frame_Zoom);
@@ -1590,6 +1597,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             botFrameDeduct = 11;
@@ -3004,6 +3012,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             if (zoom == 1.0f)
@@ -3112,6 +3121,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             if (zoom == 1.0f || zoom <= 0.26f)
@@ -3306,6 +3316,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             if (zoom == 1.0f || zoom == 0.26f)

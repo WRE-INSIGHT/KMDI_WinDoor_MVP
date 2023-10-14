@@ -992,6 +992,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     }
                     if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                         MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                        MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                         MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         mpnlWd_deduct = 15;
@@ -1590,6 +1591,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             ht_deduct = 10;
@@ -1829,6 +1831,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(10, 0, 10, 0);
@@ -1849,6 +1852,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(10, 0, 10, 0);
@@ -1897,6 +1901,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(8, 0, 10, 0);
@@ -1917,6 +1922,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(8, 0, 10, 0);
@@ -1964,6 +1970,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(10, 0, 0, 0);
@@ -1984,6 +1991,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(10, 0, 0, 0);
@@ -2022,6 +2030,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             {
                                 if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                     MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                    MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                     MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                 {
                                     pnl_margin = new Padding(10, 0, 10, 0);
