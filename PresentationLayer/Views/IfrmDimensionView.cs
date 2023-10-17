@@ -12,6 +12,7 @@ namespace PresentationLayer.Views
         event EventHandler cmbBaseColorOptionSelectedValueChangedEventRaised;
         event EventHandler numWidthEnterEventRaised;
         event EventHandler numHeightEnterEventRaised;
+        event EventHandler nudFrameQtyValueChangedEventRaised;
 
         int InumWidth { get; set; }
         int InumHeight { get; set; }
@@ -22,8 +23,9 @@ namespace PresentationLayer.Views
         bool ThisVisibility { get; set; }
         void ShowfrmDimension();
         void ClosefrmDimension();
+        Panel GetPanelFrameQty();
         NumericUpDown GetNumWidth();
         NumericUpDown GetNumHeigth();
-      
+
     }
 }

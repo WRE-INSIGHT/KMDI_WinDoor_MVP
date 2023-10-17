@@ -9,6 +9,7 @@ using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.Dividers;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
 using System;
@@ -16,7 +17,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using Unity;
-using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 
 namespace PresentationLayer.Presenter
 {
@@ -118,7 +118,7 @@ namespace PresentationLayer.Presenter
         void SetSelectedDivider(IDividerModel divModel,
                                 ITransomUCPresenter transomUCP = null,
                                 IMullionUCPresenter mullionUCP = null);
-        void SetSelectedPanel(IPanelModel _panelModel, 
+        void SetSelectedPanel(IPanelModel _panelModel,
                               ISlidingPanelUCPresenter slidingPanelUCPresenter,
                               ICasementPanelUCPresenter casementPanelUCPresenter,
                               IFixedPanelUCPresenter fixedPanelUCPresenter);
@@ -144,6 +144,7 @@ namespace PresentationLayer.Presenter
         void updatePriceOfMainView();
         int PropertiesScroll { get; set; }
         int ItemScroll { get; set; }
+        int FrameIteration { get; set; }
         bool ItemLoad { get; set; }
         void AddSlidingScreentoScreenList();
         int ForceRestartAndLoadFile();
