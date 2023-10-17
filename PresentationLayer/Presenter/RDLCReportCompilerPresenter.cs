@@ -93,6 +93,7 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.chkbxguShowReviewedByCheckedChangedEventRaised += new EventHandler(OnchkbxguShowReviewedByCheckedChangedEventRaised);
             _rdlcReportCompilerView.chkbxguShowNotedByCheckedChanged += new EventHandler(OnchkbxguShowNotedByCheckedChanged);
             _rdlcReportCompilerView.chkbxguShowVatCheckedChanged += new EventHandler(OnchkbxguShowVatCheckedChanged);
+            _rdlcReportCompilerView.chkbx_SummaryLessD_CheckedChangedEventRaised += new EventHandler(Onchkbx_SummaryLessD_CheckedChangedEventRaised);
             
             //bgw.WorkerReportsProgress = true;
             //bgw.WorkerSupportsCancellation = true;
@@ -153,6 +154,20 @@ namespace PresentationLayer.Presenter
                 _quoteItemListPresenter.RDLCGUShowVat = false;
             }
         }
+        private void Onchkbx_SummaryLessD_CheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_rdlcReportCompilerView.GetContractSummaryLessDiscountChkBx().Checked)
+            {
+                _quoteItemListPresenter.ShowLessDiscountContractSummary = true;
+                _rdlcReportCompilerView.GetContractSummaryLessDiscountTxtBx().Visible = true;
+            }
+            else
+            {
+                _quoteItemListPresenter.ShowLessDiscountContractSummary = false;
+                _rdlcReportCompilerView.GetContractSummaryLessDiscountTxtBx().Visible = false;
+            }
+
+        }
         private void OnchkboxsubtotalCheckedChangedEventRaised(object sender, EventArgs e)
         {
             if (_rdlcReportCompilerView.GetSubTotalCheckBox().Checked)
@@ -207,6 +222,8 @@ namespace PresentationLayer.Presenter
             _quoteItemListPresenter.CallFrmRDLCCompiler = false;
             _rdlcReportCompilerView.GetOOTTextBox().Text = _quoteItemListPresenter.OutOfTownCharges.ToString("N2");
             _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;
+            _rdlcReportCompilerView.GetContractSummaryLessDiscountTxtBx().Visible = false;
+            _rdlcReportCompilerView.GetContractSummaryLessDiscountTxtBx().Text = _quoteItemListPresenter.ContractSummaryLessDiscount.ToString();
             _rdlcReportCompilerView.TxtBxContractSummaryVat = "12";
             _rdlcReportCompilerView.TxtBxRowlimit = "21";
 
@@ -282,7 +299,7 @@ namespace PresentationLayer.Presenter
                     _loadingThread = new Thread(Bgw_CompilePDF);
                     
                     projname = _mainPresenter.inputted_projectName;
-
+                    
                     _rdlcReportCompilerView.GetSaveFileDialog().FileName = projname;
                     _rdlcReportCompilerView.GetSaveFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
                     if (_rdlcReportCompilerView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
@@ -315,7 +332,11 @@ namespace PresentationLayer.Presenter
                        #region Summary Of Contract
                                 _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
                                 _quoteItemListPresenter.RDLCReportCompilerVatContractSummery = _rdlcReportCompilerView.TxtBxContractSummaryVat;
-                               _quoteItemListPresenter.PrintContractSummaryRDLC();
+                                decimal _deci = Convert.ToDecimal(_rdlcReportCompilerView.TxtContractSummaryLessDiscount);
+                                int _wholeNum = Convert.ToInt32(_deci * 100m);
+                               _quoteItemListPresenter.RDLCReportCompilerLessDiscountContractSummary = _wholeNum;
+                        //galing quotelist naka decimal gawing whole number 
+                        _quoteItemListPresenter.PrintContractSummaryRDLC();
                                 #endregion
                        #region Screen
                                 if (_mainPresenter.Screen_List.Count != 0)
