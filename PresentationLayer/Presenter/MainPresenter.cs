@@ -36,7 +36,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -764,7 +764,19 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        private int _frameIteration;
+        public int FrameIteration
+        {
+            get
+            {
+                return _frameIteration;
+            }
 
+            set
+            {
+                _frameIteration = value;
+            }
+        }
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -1497,11 +1509,11 @@ namespace PresentationLayer.Presenter
                                     + _quotationModel.PricingFactor
                                     + "\nFactor in database: "
                                     + value
-                                    +"\nFactor From Add Existing"
-                                    +_factorFromAddExisting;
+                                    + "\nFactor From Add Existing"
+                                    + _factorFromAddExisting;
                     }
                     string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
-                 
+
                     if (input != "" && input != "0")
                     {
                         try
@@ -1525,22 +1537,22 @@ namespace PresentationLayer.Presenter
                                             _quotationModel.ItemCostingPriceAndPoints();
                                             wdm.TotalPriceHistoryStatus = "System Generated Price";
                                             wdm.WD_price = wdm.WD_currentPrice;
-                                              #region change factor algo ni sam
-                                //foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-                                //{
-                                //    wdm.TotalPriceHistoryStatus = "Change Factor";
-                                //    _quotationModel.FactorChange = true;
-                                //    GetCurrentPrice();
+                                            #region change factor algo ni sam
+                                            //foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                                            //{
+                                            //    wdm.TotalPriceHistoryStatus = "Change Factor";
+                                            //    _quotationModel.FactorChange = true;
+                                            //    GetCurrentPrice();
 
-                                //    wdm.WD_price = wdm.WD_currentPrice;
-                                //}
-                                //_quotationModel.FactorChange = false;
-                                #endregion
+                                            //    wdm.WD_price = wdm.WD_currentPrice;
+                                            //}
+                                            //_quotationModel.FactorChange = false;
+                                            #endregion
                                         }
                                     }
                                     GetCurrentPrice();
                                 }
-                                else 
+                                else
                                 {
                                     MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 }
@@ -1568,18 +1580,18 @@ namespace PresentationLayer.Presenter
                 }
                 else
                 {
-                    if(_factorFromAddExisting != _quotationModel.PricingFactor)
-                    {              
+                    if (_factorFromAddExisting != _quotationModel.PricingFactor)
+                    {
                         #region FromAddExisiting
                         string[] province = projectAddress.Split(',');
                         //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
                         //value = await _quotationServices.GetFactorByProvince(province);
-                               factorTypes = "Province: "
-                                           + (province[province.Length - 2]).Trim()
-                                           + "\nCurrent/File Factor: "
-                                           + _quotationModel.PricingFactor
-                                           + "\nFactor From AddExisting : "
-                                           + _factorFromAddExisting;
+                        factorTypes = "Province: "
+                                    + (province[province.Length - 2]).Trim()
+                                    + "\nCurrent/File Factor: "
+                                    + _quotationModel.PricingFactor
+                                    + "\nFactor From AddExisting : "
+                                    + _factorFromAddExisting;
 
                         string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
                         if (input != "" && input != "0")
@@ -1639,7 +1651,7 @@ namespace PresentationLayer.Presenter
             {
                 MessageBox.Show(ex.Message);
             }
-     
+
         }
         #endregion
 
@@ -3015,7 +3027,7 @@ namespace PresentationLayer.Presenter
             int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
             wndrFileName = _wndrFilePath.Substring(startFileName);
             FileInfo f = new FileInfo(_wndrFilePath);
-            f.MoveTo(Path.ChangeExtension(_wndrFilePath, ".txt")); 
+            f.MoveTo(Path.ChangeExtension(_wndrFilePath, ".txt"));
             string outFile = _wndrFilePath.Substring(0, startFileName) +
                              _wndrFilePath.Substring(startFileName, _wndrFilePath.LastIndexOf(".") - startFileName) + ".txt";
 
@@ -3931,7 +3943,7 @@ namespace PresentationLayer.Presenter
                                              _windoorModel.WD_profile,
                                              true);
 
-                            if(_factorFromAddExisting > 0)
+                            if (_factorFromAddExisting > 0)
                             {
                                 setNewFactor();
                             }
@@ -4596,7 +4608,7 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("TotalPriceHistoryStatus:"))
                         {
                             _windoorModel.TotalPriceHistoryStatus = extractedValue_str;
-                        } 
+                        }
                         else if (row_str.Contains("SystemSuggestedPrice:"))
                         {
                             _windoorModel.SystemSuggestedPrice = decimal.Parse(extractedValue_str);
@@ -10930,54 +10942,64 @@ namespace PresentationLayer.Presenter
                                 frameBotFrameType = BottomFrameTypes._6050;
                             }
                         }
-                        if (NewFrameSizeFit)
+
+                        if (FrameIteration == 0)
                         {
-                            int frameID = _windoorModel.frameIDCounter += 1;
-                            _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
-                                                                       frmDimension_numHt,
-                                                                       frameType,
-                                                                       _windoorModel.WD_zoom_forImageRenderer,
-                                                                       _windoorModel.WD_zoom,
-                                                                       FrameProfile_ArticleNo._7502,
-                                                                       _windoorModel,
-                                                                       frameBotFrameType,
-                                                                       frameID,
-                                                                       "",
-                                                                       true,
-                                                                       true,
-                                                                       null,
-                                                                       null,
-                                                                       null,
-                                                                       (UserControl)_frameUC,
-                                                                       (UserControl)_framePropertiesUC);
-                            _frameModel.Set_DimensionsToBind_using_FrameZoom();
-                            _frameModel.Set_ImagerDimensions_using_ImagerZoom();
-                            _frameModel.Set_FramePadding();
-
-                            IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(_frameModel);
-                            AddFrameUC(_frameModel, framePropUCP);
-
-                            _frameModel.Frame_UC = (UserControl)_frameUC;
-                            _frameModel.Frame_PropertiesUC = (UserControl)framePropUCP.GetFramePropertiesUC();
-                            AddFrameList_WindoorModel(_frameModel);
-                            _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                            _basePlatformPresenter.InvalidateBasePlatform();
-                            SetMainViewTitle(input_qrefno,
-                                            _projectName,
-                                            _custRefNo,
-                                             _windoorModel.WD_name,
-                                             _windoorModel.WD_profile,
-                                             false);
-
-                            _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-                            _windoorModel.Fit_MyControls_ToBindDimensions();
-                            _windoorModel.Fit_MyControls_ImagersToBindDimensions();
-                            GetCurrentPrice();
+                            FrameIteration = 1;
                         }
-                        else
+
+                        for (int i = 0; i < FrameIteration; i++)
                         {
-                            MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Frame Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            if (NewFrameSizeFit)
+                            {
+                                int frameID = _windoorModel.frameIDCounter += 1;
+                                _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
+                                                                           frmDimension_numHt,
+                                                                           frameType,
+                                                                           _windoorModel.WD_zoom_forImageRenderer,
+                                                                           _windoorModel.WD_zoom,
+                                                                           FrameProfile_ArticleNo._7502,
+                                                                           _windoorModel,
+                                                                           frameBotFrameType,
+                                                                           frameID,
+                                                                           "",
+                                                                           true,
+                                                                           true,
+                                                                           null,
+                                                                           null,
+                                                                           null,
+                                                                           (UserControl)_frameUC,
+                                                                           (UserControl)_framePropertiesUC);
+                                _frameModel.Set_DimensionsToBind_using_FrameZoom();
+                                _frameModel.Set_ImagerDimensions_using_ImagerZoom();
+                                _frameModel.Set_FramePadding();
+
+                                IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(_frameModel);
+                                AddFrameUC(_frameModel, framePropUCP);
+
+                                _frameModel.Frame_UC = (UserControl)_frameUC;
+                                _frameModel.Frame_PropertiesUC = (UserControl)framePropUCP.GetFramePropertiesUC();
+                                AddFrameList_WindoorModel(_frameModel);
+                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                                _basePlatformPresenter.InvalidateBasePlatform();
+                                SetMainViewTitle(input_qrefno,
+                                                _projectName,
+                                                _custRefNo,
+                                                 _windoorModel.WD_name,
+                                                 _windoorModel.WD_profile,
+                                                 false);
+
+                                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                                _windoorModel.Fit_MyControls_ToBindDimensions();
+                                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
+                                GetCurrentPrice();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Frame Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
+
                         #endregion
                     }
                 }
@@ -12992,7 +13014,7 @@ namespace PresentationLayer.Presenter
                             availableHeight -= Maxheight;
                             Maxheight = 0;
                         }
-                        else 
+                        else
                         {
                             if (availableHeight > frmDimension_numHt &&
                               (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd &&

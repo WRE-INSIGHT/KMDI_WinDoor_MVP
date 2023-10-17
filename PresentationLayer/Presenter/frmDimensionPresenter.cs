@@ -155,6 +155,14 @@ namespace PresentationLayer.Presenter
             _frmDimensionView.cmbBaseColorOptionSelectedValueChangedEventRaised += new EventHandler(_frmDimensionView_cmbBaseColorOptionSelectedValueChangedEventRaised);
             _frmDimensionView.numWidthEnterEventRaised += new EventHandler(OnnumWidthEnterEventRaised);
             _frmDimensionView.numHeightEnterEventRaised += new EventHandler(OnnumHeightEnterEventRaised);
+            _frmDimensionView.nudFrameQtyValueChangedEventRaised += _frmDimensionView_nudFrameQtyValueChangedEventRaised;
+        }
+
+      
+
+        private void _frmDimensionView_nudFrameQtyValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _mainPresenter.FrameIteration = (int)((NumericUpDown)sender).Value;
         }
 
         private void OnnumHeightEnterEventRaised(object sender, EventArgs e)
@@ -198,7 +206,7 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
-  
+
         private void OnbtnCancelClickedEventRaised(object sender, EventArgs e)
         {
             _isFrmClosed = true;
@@ -243,7 +251,7 @@ namespace PresentationLayer.Presenter
                                                       _frmDimensionView.InumWidth,
                                                       _frmDimensionView.InumHeight,
                                                       profile_type,
-                                                      _baseColor);
+                                                      _baseColor); 
                 }
             }
             catch (Exception ex)
@@ -259,11 +267,11 @@ namespace PresentationLayer.Presenter
             {
                 _baseColor = "White";
             }
-             if (profile_type == string.Empty)
+            if (profile_type == string.Empty)
             {
                 profile_type = "C70 Profile";
             }
-            
+
             //_frmDimensionView.dimension_height = 203;
             //kapag binalik mo to magagalaw yung sa line 99 ng MultiPanelMullionUCPresenter
             //_frmDimensionView.InumWidth = 400;
@@ -302,13 +310,15 @@ namespace PresentationLayer.Presenter
             if (purpose == Show_Purpose.Quotation)
             {
                 _frmDimensionView.thisHeight = 203;
+                _frmDimensionView.GetPanelFrameQty().Visible = false;
             }
             else if (purpose == Show_Purpose.CreateNew_Item ||
                      purpose == Show_Purpose.CreateNew_Frame ||
                      purpose == Show_Purpose.ChangeBasePlatformSize ||
                      purpose == Show_Purpose.AddPanelIntoMultiPanel)
             {
-                _frmDimensionView.thisHeight = 140;
+                _frmDimensionView.thisHeight = 173; // 140 238
+                _frmDimensionView.GetPanelFrameQty().Visible = true;
             }
         }
 
@@ -324,6 +334,6 @@ namespace PresentationLayer.Presenter
         }
 
 
-        
+
     }
 }

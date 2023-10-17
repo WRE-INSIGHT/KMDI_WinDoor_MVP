@@ -40,10 +40,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cmb_BaseColorOption = new System.Windows.Forms.ComboBox();
             this.cmb_SystemOption = new System.Windows.Forms.ComboBox();
+            this.pnl_FrameQty = new System.Windows.Forms.Panel();
+            this.lbl_FrameQty = new System.Windows.Forms.Label();
+            this.nud_FrameQty = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHeight)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.pnl_FrameQty.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_FrameQty)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -135,7 +140,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.numHeight);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 64);
+            this.panel1.Location = new System.Drawing.Point(0, 99);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(172, 100);
             this.panel1.TabIndex = 8;
@@ -146,10 +151,10 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.cmb_BaseColorOption);
             this.panel2.Controls.Add(this.cmb_SystemOption);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(172, 164);
+            this.panel2.Size = new System.Drawing.Size(172, 65);
             this.panel2.TabIndex = 9;
             // 
             // label4
@@ -190,13 +195,58 @@
             this.cmb_SystemOption.TabIndex = 2;
             this.cmb_SystemOption.SelectedValueChanged += new System.EventHandler(this.cmb_SystemOption_SelectedValueChanged);
             // 
+            // pnl_FrameQty
+            // 
+            this.pnl_FrameQty.Controls.Add(this.lbl_FrameQty);
+            this.pnl_FrameQty.Controls.Add(this.nud_FrameQty);
+            this.pnl_FrameQty.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnl_FrameQty.Location = new System.Drawing.Point(0, 67);
+            this.pnl_FrameQty.Name = "pnl_FrameQty";
+            this.pnl_FrameQty.Size = new System.Drawing.Size(172, 32);
+            this.pnl_FrameQty.TabIndex = 10;
+            // 
+            // lbl_FrameQty
+            // 
+            this.lbl_FrameQty.AutoSize = true;
+            this.lbl_FrameQty.Location = new System.Drawing.Point(4, 5);
+            this.lbl_FrameQty.Name = "lbl_FrameQty";
+            this.lbl_FrameQty.Size = new System.Drawing.Size(77, 19);
+            this.lbl_FrameQty.TabIndex = 2;
+            this.lbl_FrameQty.Text = "Frame Qty:";
+            // 
+            // nud_FrameQty
+            // 
+            this.nud_FrameQty.Location = new System.Drawing.Point(87, 2);
+            this.nud_FrameQty.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.nud_FrameQty.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nud_FrameQty.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nud_FrameQty.Name = "nud_FrameQty";
+            this.nud_FrameQty.Size = new System.Drawing.Size(81, 25);
+            this.nud_FrameQty.TabIndex = 3;
+            this.nud_FrameQty.ThousandsSeparator = true;
+            this.nud_FrameQty.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nud_FrameQty.ValueChanged += new System.EventHandler(this.nud_FrameQty_ValueChanged);
+            // 
             // frmDimensionView
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(172, 164);
+            this.ClientSize = new System.Drawing.Size(172, 199);
+            this.Controls.Add(this.pnl_FrameQty);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -215,6 +265,9 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.pnl_FrameQty.ResumeLayout(false);
+            this.pnl_FrameQty.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_FrameQty)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -233,5 +286,8 @@
         private System.Windows.Forms.ComboBox cmb_BaseColorOption;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel pnl_FrameQty;
+        private System.Windows.Forms.Label lbl_FrameQty;
+        public System.Windows.Forms.NumericUpDown nud_FrameQty;
     }
 }
