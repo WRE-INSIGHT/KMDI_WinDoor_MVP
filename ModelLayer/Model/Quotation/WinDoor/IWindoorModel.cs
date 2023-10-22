@@ -81,6 +81,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         string WD_itemName { get; set; }
         string TotalPriceHistory { get; set; }
         string TotalPriceHistoryStatus { get; set; }
+
         List<string> lst_TotalPriceHistory { get; set; }
         int pnlLeftCounter { get; set; }
         int pnlRightCounter { get; set; }
