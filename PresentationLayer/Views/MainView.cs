@@ -692,7 +692,7 @@ namespace PresentationLayer.Views
             if (tsBtnNwin.Enabled == true)
             {
 
-                if (e.Control == true && e.KeyCode == Keys.P)
+                if (e.Control == true && e.KeyCode == Keys.L)
                 {
                     itemListToolStripMenuItem_Click(sender, e);
                 }
@@ -700,7 +700,7 @@ namespace PresentationLayer.Views
                 {
                     saveToolStripButton_Click(sender, e);
                 }
-                else if (e.Control == true && e.KeyCode == Keys.I)
+                else if (e.Alt == true && e.KeyCode == Keys.S)
                 {
                     ScreentoolStripButton_Click(sender, e);
                 }

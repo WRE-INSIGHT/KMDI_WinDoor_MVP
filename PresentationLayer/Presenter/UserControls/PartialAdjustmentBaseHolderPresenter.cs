@@ -28,7 +28,7 @@ namespace PresentationLayer.Presenter.UserControls
         public PartialAdjustmentBaseHolderPresenter(IPartialAdjustmentBaseHolderUC paBaseHolderUC, IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter)
         {
             _paBaseHolderUC = paBaseHolderUC;
-            _partialAdjustmentUCPresenter = partialAdjustmentUCPresenter;
+            _partialAdjustmentUCPresenter = partialAdjustmentUCPresenter; 
             SubcribeToEventSetup();
         }
 
@@ -36,84 +36,174 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _paBaseHolderUC.PartialAdjustmentBaseHolderUC_LoadEventRaised += _paBaseHolderUC_PartialAdjustmentBaseHolderUC_LoadEventRaised;
             _paBaseHolderUC.btn_Expnd_ClickEventRaised += _paBaseHolderUC_btn_Expnd_ClickEventRaised;
+            _paBaseHolderUC.btn_addItemQty_ClickEventRaised += _paBaseHolderUC_btn_addItemQty_ClickEventRaised;
+        }
+
+        private void _paBaseHolderUC_btn_addItemQty_ClickEventRaised(object sender, EventArgs e)
+        {
+            _windoorModel.WD_PALst_Designs.Add(null);
+            _windoorModel.WD_PALst_Description.Add(null);
+            _windoorModel.WD_PALst_Price.Add(0);
+
+            if(_windoorModel.WD_PALst_Designs.Count != 0)
+            {
+                PA_LstDesignCount = _windoorModel.WD_PALst_Designs.Count;
+                LoadAdjustmentUCPresenter(PA_LstDesignCount,false);
+            }
+
+            Btn_ExpandBaseHolderUCHeight(true);
+
         }
 
         private void _paBaseHolderUC_btn_Expnd_ClickEventRaised(object sender, EventArgs e)
         {
-
-            foreach(Control uc in _paBaseHolderUC.PABaseHolderPanelBody().Controls)
-            {
-                uc.Height = panelTitleHeight; // force reset of UCHeight
-            }
-
-            if (_paBaseHolderUC.GetPABaseHolderUC().Height == panelTitleHeight)
-            {
-                int height_x_Quantity = (panelTitleHeight * ItemQuantity) + panelTitleHeight;
-                _paBaseHolderUC.GetPABaseHolderUC().Height = height_x_Quantity;
-                _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.down_chevron;
-            }
-            else
-            {
-                _paBaseHolderUC.GetPABaseHolderUC().Height = panelTitleHeight;
-                _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.down_arrow_square_outlined_button;
-            }
+            Btn_ExpandBaseHolderUCHeight(false);
         }
 
         private void _paBaseHolderUC_PartialAdjustmentBaseHolderUC_LoadEventRaised(object sender, EventArgs e)
         {
             PA_LstDesignCount = _windoorModel.WD_PALst_Designs.Count; // Limit for ForLoop
 
-            for (int i = 1; i <= ItemQuantity; i++)
+            #region Old Algo For Partial Adjustment Auto
+            //for (int i = 1; i <= ItemQuantity; i++)
+            //{
+            //    _partialAdjustmentUCPresenter = _partialAdjustmentUCPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, _mainPresenter, _partialAdjustmentViewPresenter, this);
+            //    UserControl partialadjustmentItems = (UserControl)_partialAdjustmentUCPresenter.GetPartialAdjustmentUC();
+            //    _paBaseHolderUC.PABaseHolderPanelBody().Controls.Add(partialadjustmentItems);
+            //    partialadjustmentItems.Dock = DockStyle.Top;
+            //    partialadjustmentItems.BringToFront();
+            //    _paBaseHolderUC.PABaseHolderPanelBody().AutoScroll = true;
+
+            //    _partialAdjustmentUCPresenter.PartialAdjusmentUCIndexPlacement = i - 1; // forward index placement of windoor 'add new' or 'update'
+
+            //    if (_windoorModel.WD_PALst_Designs.Count > 0)
+            //    {
+            //        if (i <= PA_LstDesignCount)
+            //        {
+            //            _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = _windoorModel.WD_PALst_Designs[i - 1];//Get Previous Img
+            //            _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = _windoorModel.WD_PALst_Description[i - 1];//Get Previous Desc
+            //            _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = _windoorModel.WD_PALst_Price[i - 1].ToString("N");//Get Previous Price
+            //        }
+            //    }
+            //    else
+            //    {
+            //        #region Add Default Value To Image, Description,Price List
+            //        for (int j = 1; j <= ItemQuantity; j++)
+            //        {
+            //            // Always Update in ItemDisabledUC
+            //            _windoorModel.WD_PALst_Designs.Add(null);
+            //            _windoorModel.WD_PALst_Description.Add(null);
+            //            _windoorModel.WD_PALst_Price.Add(0);
+            //        }
+            //        #endregion
+            //    }
+
+            //    if (_windoorModel.WD_IsPartialADPreviousExist == true)
+            //    {
+            //        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemDesignImage().Image = _windoorModel.WD_PAPreviousImage;
+            //        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemDescription().Text = _windoorModel.WD_PAPreviousDescription;
+            //        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemPrice().Text = Math.Round(_windoorModel.WD_PAPreviousPrice).ToString("N");
+            //    }
+            //    else
+            //    {
+            //        #region Show Current Design, No Previous Design
+            //        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetPAItemNo().Text = (i).ToString();
+            //        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = _windoorModel.WD_image;
+            //        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = _windoorModel.WD_description;
+            //        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = Math.Round(_windoorModel.WD_price, 2).ToString("N");
+            //        #endregion
+            //    }
+
+            //}
+            #endregion
+
+            if (PA_LstDesignCount != 0)
             {
-                _partialAdjustmentUCPresenter = _partialAdjustmentUCPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, _mainPresenter, _partialAdjustmentViewPresenter, this);
-                UserControl partialadjustmentItems = (UserControl)_partialAdjustmentUCPresenter.GetPartialAdjustmentUC();
-                _paBaseHolderUC.PABaseHolderPanelBody().Controls.Add(partialadjustmentItems);
-                partialadjustmentItems.Dock = DockStyle.Top;
-                partialadjustmentItems.BringToFront();
-                _paBaseHolderUC.PABaseHolderPanelBody().AutoScroll = true;
-
-                _partialAdjustmentUCPresenter.PartialAdjusmentUCIndexPlacement = i - 1; // forward index placement of windoor 'add new' or 'update'
-
-                if(_windoorModel.WD_PALst_Designs.Count > 0)
+                for (int i = 1; i <= PA_LstDesignCount; i++)
                 {
-                    if (i <= PA_LstDesignCount)
-                    {
-                        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = _windoorModel.WD_PALst_Designs[i - 1];//Get Previous Img
-                        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = _windoorModel.WD_PALst_Description[i - 1];//Get Previous Desc
-                        _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = _windoorModel.WD_PALst_Price[i - 1].ToString("N");//Get Previous Price
-                    }
+                    LoadAdjustmentUCPresenter(i,true);
                 }
-                else
-                {
-                    #region Add Default Value To Image, Description,Price List
-                    for (int j = 1; j<= ItemQuantity; j++)
-                    {
-                        // Always Update in ItemDisabledUC
-                        _windoorModel.WD_PALst_Designs.Add(null);
-                        _windoorModel.WD_PALst_Description.Add(null);
-                        _windoorModel.WD_PALst_Price.Add(0);
-                    }
-                    #endregion
-                }
-
-                if (_windoorModel.WD_IsPartialADPreviousExist == true)
-                {
-                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemDesignImage().Image = _windoorModel.WD_PAPreviousImage;
-                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemDescription().Text = _windoorModel.WD_PAPreviousDescription;
-                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemPrice().Text = Math.Round(_windoorModel.WD_PAPreviousPrice).ToString("N");
-                }
-                else
-                {
-                    #region Show Current Design, No Previous Design
-                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetPAItemNo().Text = (i).ToString();
-                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = _windoorModel.WD_image;
-                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = _windoorModel.WD_description;
-                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = Math.Round(_windoorModel.WD_price, 2).ToString("N");
-                    #endregion
-                }
-
             }
             _paBaseHolderUC.GetPABaseHolderUC().Height = panelTitleHeight;
+        }
+
+        private void LoadAdjustmentUCPresenter(int indxItemPos,bool _isPrevDesExist)
+        {
+            #region AddControlForUCPresenter
+            _partialAdjustmentUCPresenter = _partialAdjustmentUCPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, _mainPresenter, _partialAdjustmentViewPresenter, this);
+            UserControl partialadjustmentItems = (UserControl)_partialAdjustmentUCPresenter.GetPartialAdjustmentUC();
+            _paBaseHolderUC.PABaseHolderPanelBody().Controls.Add(partialadjustmentItems);
+            partialadjustmentItems.Dock = DockStyle.Top;
+            partialadjustmentItems.BringToFront();
+            _paBaseHolderUC.PABaseHolderPanelBody().AutoScroll = true;
+
+            _partialAdjustmentUCPresenter.PartialAdjusmentUCIndexPlacement = indxItemPos - 1; // forward index placement of windoor 'add new' or 'update'
+
+
+            if (_isPrevDesExist)
+            {
+                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = _windoorModel.WD_PALst_Designs[indxItemPos - 1];//Get Previous Img
+                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = _windoorModel.WD_PALst_Description[indxItemPos - 1];//Get Previous Desc
+                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = _windoorModel.WD_PALst_Price[indxItemPos - 1].ToString("N");//Get Previous Price
+            }
+
+
+            if (_windoorModel.WD_IsPartialADPreviousExist == true)
+            {
+                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemDesignImage().Image = _windoorModel.WD_PAPreviousImage;
+                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemDescription().Text = _windoorModel.WD_PAPreviousDescription;
+                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetOldItemPrice().Text = Math.Round(_windoorModel.WD_PAPreviousPrice).ToString("N");
+            }
+            else
+            {
+                #region Show Current Design, No Previous Design
+                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetPAItemNo().Text = (indxItemPos).ToString();
+                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = _windoorModel.WD_image;
+                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = _windoorModel.WD_description;
+                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = Math.Round(_windoorModel.WD_price, 2).ToString("N");
+                #endregion
+            }
+            #endregion
+        }
+
+        private void Btn_ExpandBaseHolderUCHeight(bool _isFromAddBtn)
+        {
+            #region ChangePABaseHolderUCHeight
+            foreach (Control uc in _paBaseHolderUC.PABaseHolderPanelBody().Controls)
+            {
+                uc.Height = panelTitleHeight; // force reset of UCHeight
+            }
+            if (_windoorModel.WD_PALst_Designs.Count != 0)
+            {
+                if (_paBaseHolderUC.GetPABaseHolderUC().Height == panelTitleHeight || _isFromAddBtn)
+                {
+                    int height_x_Quantity = (panelTitleHeight * _windoorModel.WD_PALst_Designs.Count) + panelTitleHeight;
+                    _paBaseHolderUC.GetPABaseHolderUC().Height = height_x_Quantity;
+                    _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.down_chevron;
+                }
+                else
+                {
+                    _paBaseHolderUC.GetPABaseHolderUC().Height = panelTitleHeight;
+                    _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.down_arrow_square_outlined_button;
+                }
+            }
+            #endregion
+        }
+
+        private void BtnColorChanger()
+        {
+            if (_windoorModel.WD_IsPartialADPreviousExist)
+            {
+
+            }
+            else if (_windoorModel.WD_PALst_Description.Count != 0)
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
         public IPartialAdjustmentBaseHolderUC GetPABaseHolderUC()   
@@ -126,11 +216,11 @@ namespace PresentationLayer.Presenter.UserControls
         }
         public void GetPABaseHolderBringToFront()
         {
-            _paBaseHolderUC.PABaseHolderBringToFront();
+           _paBaseHolderUC.PABaseHolderBringToFront();
         }
         public void GetPABaseHolderSendToBack()
         {
-            _paBaseHolderUC.PABaseHolderSendToBack();
+           _paBaseHolderUC.PABaseHolderSendToBack();
         }
         public void GetPABaseHolderInvalidate()
         {

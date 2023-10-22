@@ -27,6 +27,10 @@ namespace PresentationLayer.Views.UserControls
         {
             return btn_Expnd;
         }
+        public Button PABaseHolderAddItemQtyBtn()
+        {
+            return btn_addItemQty;
+        }
         public Label PABaseHolderItemName()
         {
             return lbl_ItemNo;
@@ -60,6 +64,7 @@ namespace PresentationLayer.Views.UserControls
 
         public event EventHandler PartialAdjustmentBaseHolderUC_LoadEventRaised;
         public event EventHandler btn_Expnd_ClickEventRaised;
+        public event EventHandler btn_addItemQty_ClickEventRaised;
 
         private void PartialAdjustmentBaseHolderUC_Load(object sender, EventArgs e)
         {
@@ -69,6 +74,11 @@ namespace PresentationLayer.Views.UserControls
         private void btn_Expnd_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, btn_Expnd_ClickEventRaised, e);
+        }
+
+        private void btn_addItemQty_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btn_addItemQty_ClickEventRaised, e);
         }
     }
 }
