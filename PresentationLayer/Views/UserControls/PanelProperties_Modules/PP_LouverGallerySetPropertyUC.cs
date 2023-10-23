@@ -107,7 +107,44 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             //cmb_HandleLocation.DataBindings.Add(ModelBinding["Panel_LouverHandleLocation"]);
             //cmb_GalleryColor.DataBindings.Add(ModelBinding["Panel_LouverGalleryColor"]);
         }
+        private void cmb_BladeHeight_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
 
+        private void cmb_BladeHeight_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void nud_NoOfBladePerSet_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+        private void cmb_HandleType_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+        private void cmb_HandleType_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void cmb_HandleLocation_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
 
+        private void cmb_HandleLocation_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void cmb_GalleryColor_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_GalleryColor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

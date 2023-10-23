@@ -49,6 +49,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             chk_RingpullLeverHandle.DataBindings.Add(ModelBinding["Panel_LouverRPLeverHandleCheck"]);
             chk_SecurityGrill.DataBindings.Add(ModelBinding["Panel_LouverSecurityGrillCheck"]);
         }
-         
+        private void cmb_BladeType_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_BladeType_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

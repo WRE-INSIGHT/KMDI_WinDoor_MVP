@@ -771,7 +771,19 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        private int _frameIteration;
+        public int FrameIteration
+        {
+            get
+            {
+                return _frameIteration;
+            }
 
+            set
+            {
+                _frameIteration = value;
+            }
+        }
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -1040,7 +1052,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                string input = Interaction.InputBox("Set new date \n\n MM/DD/YYYY", "Date Assign", dateAssigned.Date.ToString().Replace(" 12:00:00 AM", string.Empty));
+                string input = Interaction.InputBox("Set new date \n\n MM/DD/YYYY \n\n Initial Date Assign:" + dateAssigned.ToString().Replace("12:00:00 AM", string.Empty) + "\n\n Current Date Assigned:" + _quotationModel.Date_Assigned_Mainpresenter.ToString().Replace("12:00:00 AM", string.Empty), "Date Assign", dateAssigned.Date.ToString().Replace(" 12:00:00 AM", string.Empty));
 
                 if (input == "")
                 {
@@ -1051,7 +1063,7 @@ namespace PresentationLayer.Presenter
                     DateTime myDate = DateTime.Parse(input);
                     _quotationModel.Date_Assigned_Mainpresenter = myDate;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -1468,8 +1480,6 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Problem Adding Sliding Screen to Screenlist" + " " + this + ex.Message);
             }
 
-
-
         }
 
 
@@ -1490,56 +1500,171 @@ namespace PresentationLayer.Presenter
         {
             setNewFactor();
         }
-
+        string factorTypes;
         public async void setNewFactor()
         {
             decimal value;
             try
             {
-                string[] province = projectAddress.Split(',');
-                value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-                //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
-                //value = await _quotationServices.GetFactorByProvince(province);
-                string factorTypes = "Province: "
-                                   + (province[province.Length - 2]).Trim()
-                                   + "\nCurrent/File Factor: "
-                                   + _quotationModel.PricingFactor
-                                   + "\nFactor in database: "
-                                   + value;
-                string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
-                if (input != "" && input != "0")
+                if (!_isFromAddExisting)
                 {
-                    try
+                    #region Suggested & Current
+                    string[] province = projectAddress.Split(',');
+                    value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                    //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+                    //value = await _quotationServices.GetFactorByProvince(province);
+                    if (_factorFromAddExisting <= 0)
                     {
-                        decimal deci_input = Convert.ToDecimal(String.Format("{0:0.00}", Convert.ToDecimal(input)));
-                        if (deci_input > 0)
+                        factorTypes = "Province: "
+                                    + (province[province.Length - 2]).Trim()
+                                    + "\nCurrent/File Factor: "
+                                    + _quotationModel.PricingFactor
+                                    + "\nFactor in database: "
+                                    + value;
+                    }
+                    else
+                    {
+                        factorTypes = "Province: "
+                                    + (province[province.Length - 2]).Trim()
+                                    + "\nCurrent/File Factor: "
+                                    + _quotationModel.PricingFactor
+                                    + "\nFactor in database: "
+                                    + value
+                                    + "\nFactor From Add Existing"
+                                    + _factorFromAddExisting;
+                    }
+                    string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
+
+                    if (input != "" && input != "0")
+                    {
+                        try
                         {
-                            if (deci_input != _quotationModel.PricingFactor)
+                            decimal deci_input = Convert.ToDecimal(String.Format("{0:0.00}", Convert.ToDecimal(input)));
+                            if (deci_input > 0)
                             {
-                                _quotationModel.PricingFactor = deci_input;
-                                MessageBox.Show("New Factor Set Sucessfully");
-                                GetCurrentPrice();
+                                if (deci_input != _quotationModel.PricingFactor)
+                                {
+                                    _quotationModel.PricingFactor = deci_input;
+                                    MessageBox.Show("New Factor Set Sucessfully");
+
+
+                                    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
+                                    {
+                                        foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                                        {
+                                            //getnewwdmprice
+                                            wdm.WD_fileLoad = false;
+                                            _quotationModel.BOMandItemlistStatus = "PriceItemList";
+                                            _quotationModel.ItemCostingPriceAndPoints();
+                                            wdm.TotalPriceHistoryStatus = "System Generated Price";
+                                            wdm.WD_price = wdm.WD_currentPrice;
+                                            #region change factor algo ni sam
+                                            //foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                                            //{
+                                            //    wdm.TotalPriceHistoryStatus = "Change Factor";
+                                            //    _quotationModel.FactorChange = true;
+                                            //    GetCurrentPrice();
+
+                                            //    wdm.WD_price = wdm.WD_currentPrice;
+                                            //}
+                                            //_quotationModel.FactorChange = false;
+                                            #endregion
+                                        }
+                                    }
+                                    GetCurrentPrice();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                            }
+                            else if (deci_input < 0)
+                            {
+                                MessageBox.Show("Invalid number");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            if (ex.HResult == -2146233033)
+                            {
+                                MessageBox.Show("Please input a number.");
                             }
                             else
                             {
-                                MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                MessageBox.Show(ex.Message, ex.HResult.ToString());
                             }
                         }
-                        else if (deci_input < 0)
-                        {
-                            MessageBox.Show("Invalid number");
-                        }
                     }
-                    catch (Exception ex)
+
+
+                    #endregion
+                }
+                else
+                {
+                    if (_factorFromAddExisting != _quotationModel.PricingFactor)
                     {
-                        if (ex.HResult == -2146233033)
+                        #region FromAddExisiting
+                        string[] province = projectAddress.Split(',');
+                        //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+                        //value = await _quotationServices.GetFactorByProvince(province);
+                        factorTypes = "Province: "
+                                    + (province[province.Length - 2]).Trim()
+                                    + "\nCurrent/File Factor: "
+                                    + _quotationModel.PricingFactor
+                                    + "\nFactor From AddExisting : "
+                                    + _factorFromAddExisting;
+
+                        string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
+                        if (input != "" && input != "0")
                         {
-                            MessageBox.Show("Please input a number.");
+                            try
+                            {
+                                decimal deci_input = Convert.ToDecimal(String.Format("{0:0.00}", Convert.ToDecimal(input)));
+                                if (deci_input > 0)
+                                {
+                                    if (deci_input != _quotationModel.PricingFactor)
+                                    {
+                                        _quotationModel.PricingFactor = deci_input;
+                                        MessageBox.Show("New Factor Set Sucessfully");
+
+                                        if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
+                                        {
+                                            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                                            {
+                                                //getnewwdmprice
+                                                wdm.WD_fileLoad = false;
+                                                _quotationModel.BOMandItemlistStatus = "PriceItemList";
+                                                _quotationModel.ItemCostingPriceAndPoints();
+                                                wdm.TotalPriceHistoryStatus = "System Generated Price";
+                                                wdm.WD_price = wdm.WD_currentPrice;
+                                            }
+                                        }
+                                        GetCurrentPrice();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                }
+                                else if (deci_input < 0)
+                                {
+                                    MessageBox.Show("Invalid number");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                if (ex.HResult == -2146233033)
+                                {
+                                    MessageBox.Show("Please input a number.");
+                                }
+                                else
+                                {
+                                    MessageBox.Show(ex.Message, ex.HResult.ToString());
+                                }
+                            }
                         }
-                        else
-                        {
-                            MessageBox.Show(ex.Message, ex.HResult.ToString());
-                        }
+
+                        #endregion
                     }
                 }
             }
@@ -1547,6 +1672,7 @@ namespace PresentationLayer.Presenter
             {
                 MessageBox.Show(ex.Message);
             }
+
         }
         #endregion
 
@@ -1561,7 +1687,8 @@ namespace PresentationLayer.Presenter
             {
                 if (_windoorModel != null)
                 {
-                    if (_lblCurrentPrice.Value == _windoorModel.SystemSuggestedPrice && _windoorModel.SystemSuggestedPrice != 0)
+                    if (_lblCurrentPrice.Value == _windoorModel.SystemSuggestedPrice &&
+                        _windoorModel.SystemSuggestedPrice != 0)
                     {
                         _windoorModel.TotalPriceHistoryStatus = "System Generated Price";
                     }
@@ -1574,8 +1701,7 @@ namespace PresentationLayer.Presenter
                     _windoorModel.WD_fileLoad = false;
                     _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
 
-                    Console.WriteLine(_windoorModel.TotalPriceHistoryStatus);
-
+                    Console.WriteLine("MainPresenter: " + _windoorModel.TotalPriceHistoryStatus);
                 }
                 else
                 {
@@ -1848,7 +1974,7 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add(".");
             }
 
-            foreach(var item in _nonUnglazed)
+            foreach (var item in _nonUnglazed)
             {
                 wndr_content.Add("</NU>");
                 wndr_content.Add("Item No: " + item[0].ToString());
@@ -2929,6 +3055,7 @@ namespace PresentationLayer.Presenter
             file_lines = File.ReadAllLines(outFile);
             f.MoveTo(Path.ChangeExtension(outFile, ".wndr"));
             onload = true;
+            _factorFromAddExisting = 0;//reset when opening new file
             _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
             _basePlatformImagerUCPresenter.SendToBack_baseImager();
             StartWorker("Open_WndrFiles");
@@ -2978,6 +3105,10 @@ namespace PresentationLayer.Presenter
 
         private void OnMainViewLoadEventRaised(object sender, EventArgs e)
         {
+            _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
+            _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
+
+
             if (Properties.Settings.Default.FirstTym == true)
             {
                 string defDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Windoor Maker files";
@@ -3051,6 +3182,9 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear", "NA", 1662.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", "NA", 1662.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Clear", "NA", 1941.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(13.0f, "13 mm Clear", "NA", 2000.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(14.0f, "14 mm Clear", "NA", 2100.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(24.0f, "24 mm Clear", "NA", 3882.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", 0m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Clear", "NA", 0m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Euro Grey", "NA", 0m, true, false, false, false, false);
@@ -3546,9 +3680,15 @@ namespace PresentationLayer.Presenter
             _colorDT.Rows.Add("Euro Grey");
 
 
-            if (_userModel.AccountType == "User Level 1")
+            if (_userModel.AccountType == "User Level 1" ||
+                _userModel.AccountType == "User Level 2" ||
+                _userModel.AccountType == "User Level 3")
             {
-                _mainView.PriceHistorytoolStripButtonVisible = true;
+                _mainView.PriceHistorytoolStripButtonVisible = false;
+                if (_userModel.AccountType == "User Level 1")
+                {
+                    _mainView.PriceHistorytoolStripButtonVisible = true;
+                }
                 _mainView.DateAssignedtoolStripButtonVisible = true;
             }
             else
@@ -3610,6 +3750,7 @@ namespace PresentationLayer.Presenter
                     file_lines = File.ReadAllLines(outFile);
                     f.MoveTo(Path.ChangeExtension(addExistingwndrfile, ".wndr"));
                     onload = true;
+                    _isFromAddExisting = true; // selecting new factor 
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
 
@@ -3620,6 +3761,7 @@ namespace PresentationLayer.Presenter
                     ////        MessageBox.Show(strline);
                     ////    }
                     ////}
+
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     StartWorker("Add_Existing_Items");
@@ -3716,7 +3858,7 @@ namespace PresentationLayer.Presenter
                         {
                             _mainView.GetToolStripLabelLoading().Text = "Initializing";
                         }
-                     
+
                         break;
                     default:
                         break;
@@ -3820,12 +3962,19 @@ namespace PresentationLayer.Presenter
                                              _windoorModel.WD_profile,
                                              true);
 
+                            if (_factorFromAddExisting > 0)
+                            {
+                                setNewFactor();
+                            }
+
                             _mainView.GetToolStripLabelLoading().Text = "Finished";
 
                             ToggleMode(false, true);
                             _mainView.GetToolStripLabelLoading().Visible = true;
                             //autoDescription = true;
                             onload = false;
+                            _isFromAddExisting = false;
+
                             break;
 
                         case "GetCloudFiles":
@@ -3887,7 +4036,7 @@ namespace PresentationLayer.Presenter
             {
                 inside_screen = false;
                 _itemLoad = true;
-                if (_isOpenProject && !isNewProject)
+                if (_isOpenProject && !isNewProject || _isFromAddExisting)
                 {
                     inside_quotation = true;
                 }
@@ -4035,14 +4184,14 @@ namespace PresentationLayer.Presenter
                     inside_rdlcDic = true;
                 }
             }
-            else if(row_str == "</NU>")
+            else if (row_str == "</NU>")
             {
                 if (inside_GlassUpgrade)
                 {
                     Load_GlassUpgrade();
                     inside_GlassUpgrade = false;
                 }
-                 else
+                else
                 {
                     inside_GlassUpgrade = true;
                 }
@@ -4079,133 +4228,147 @@ namespace PresentationLayer.Presenter
             switch (inside_quotation)
             {
                 case true:
-                    #region Load for Quotation Model
-                    if (row_str.Contains("QuoteId"))
+                    if (!_isFromAddExisting)
                     {
-                        _quoteId = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("ProjectName"))
-                    {
-                        _projectName = extractedValue_str;
-                    }
-                    else if (row_str.Contains("ClientsName:"))
-                    {
-                        inputted_projectName = extractedValue_str;
-                    }
-                    else if (row_str.Contains("ClientsTitleLastname:"))
-                    {
-                        _titleLastname = extractedValue_str;
-                    }
-                    else if (row_str.Contains("ProjectAddress:"))
-                    {
-                        _projectAddress = extractedValue_str;
-                    }
-                    else if (row_str.Contains("CustomerRefNo"))
-                    {
-                        _custRefNo = extractedValue_str;
-                        inputted_custRefNo = extractedValue_str;
-                    }
-                    else if (row_str.Contains("DateAssigned"))
-                    {
-                        _dateAssigned = Convert.ToDateTime(extractedValue_str);
-                    }
-                    else if (row_str.Contains("Date_Assigned_Mainpresenter:"))
-                    {
-                        _quotationModel.Date_Assigned_Mainpresenter = Convert.ToDateTime(extractedValue_str);
-                    }
-                    else if (row_str.Contains("AEIC:"))
-                    {
-                        _aeic = extractedValue_str;
-                    }
-                    else if (row_str.Contains("AEIC_POS:"))
-                    {
-                        _position = extractedValue_str;
-                    }
-                    else if (row_str.Contains("ProvinceIntownOutofTown:"))
-                    {
-                        _provinceIntownOutofTown = Convert.ToBoolean(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("PricingFactor"))
-                    {
-                        _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : (String.Format("{0:0.00}", Convert.ToDecimal(extractedValue_str))));
-                    }
-                    else if (row_str.Contains("Quotation_ref_no"))
-                    {
-                        inputted_quotationRefNo = extractedValue_str;
-                    }
-                    else if (row_str.Contains("Quotation_Date"))
-                    {
-                        inputted_quoteDate = Convert.ToDateTime(extractedValue_str);
-                        Scenario_Quotation(false, false, false, false, true, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
-                        _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
-                        _quotationModel.Customer_Ref_Number = inputted_custRefNo;
-                        _quotationModel.Date_Assigned = dateAssigned;
-                        //_quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
-                    }
-                    else if (row_str.Contains("Frame_PUFoamingQty_Total"))
-                    {
-                        _quotationModel.Frame_PUFoamingQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Frame_SealantWHQty_Total"))
-                    {
-                        _quotationModel.Frame_SealantWHQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Glass_SealantWHQty_Total"))
-                    {
-                        _quotationModel.Glass_SealantWHQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("GlazingSpacer_TotalQty"))
-                    {
-                        _quotationModel.GlazingSpacer_TotalQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("GlazingSeal_TotalQty"))
-                    {
-                        _quotationModel.GlazingSeal_TotalQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Screws_for_Fabrication"))
-                    {
-                        _quotationModel.Screws_for_Fabrication = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Expansion_BoltQty_Total"))
-                    {
-                        _quotationModel.Expansion_BoltQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        #region Load for Quotation Model
 
-                    }
-                    else if (row_str.Contains("Screws_for_Installation"))
-                    {
-                        _quotationModel.Screws_for_Installation = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-
-                    }
-                    else if (row_str.Contains("Screws_for_Cladding"))
-                    {
-                        _quotationModel.Screws_for_Cladding = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Rebate_Qty"))
-                    {
-                        _quotationModel.Rebate_Qty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-                    else if (row_str.Contains("Plastic_CoverQty_Total"))
-                    {
-                        _quotationModel.Plastic_CoverQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                    }
-
-                    else if (row_str.Contains("BOM_Filter:"))
-                    {
-                        foreach (BillOfMaterialsFilter bomf in BillOfMaterialsFilter.GetAll())
+                        if (row_str.Contains("QuoteId"))
                         {
-                            if (bomf.ToString() == extractedValue_str)
+                            _quoteId = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("ProjectName"))
+                        {
+                            _projectName = extractedValue_str;
+                        }
+                        else if (row_str.Contains("ClientsName:"))
+                        {
+                            inputted_projectName = extractedValue_str;
+                        }
+                        else if (row_str.Contains("ClientsTitleLastname:"))
+                        {
+                            _titleLastname = extractedValue_str;
+                        }
+                        else if (row_str.Contains("ProjectAddress:"))
+                        {
+                            _projectAddress = extractedValue_str;
+                        }
+                        else if (row_str.Contains("CustomerRefNo"))
+                        {
+                            _custRefNo = extractedValue_str;
+                            inputted_custRefNo = extractedValue_str;
+                        }
+                        else if (row_str.Contains("DateAssigned"))
+                        {
+                            _dateAssigned = Convert.ToDateTime(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Date_Assigned_Mainpresenter:"))
+                        {
+                            _quotationModel.Date_Assigned_Mainpresenter = Convert.ToDateTime(extractedValue_str);
+                        }
+                        else if (row_str.Contains("AEIC:"))
+                        {
+                            _aeic = extractedValue_str;
+                        }
+                        else if (row_str.Contains("AEIC_POS:"))
+                        {
+                            _position = extractedValue_str;
+                        }
+                        else if (row_str.Contains("ProvinceIntownOutofTown:"))
+                        {
+                            _provinceIntownOutofTown = Convert.ToBoolean(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("PricingFactor"))
+                        {
+                            _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : (String.Format("{0:0.00}", Convert.ToDecimal(extractedValue_str))));
+                        }
+                        else if (row_str.Contains("Quotation_ref_no"))
+                        {
+                            inputted_quotationRefNo = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Quotation_Date"))
+                        {
+                            inputted_quoteDate = Convert.ToDateTime(extractedValue_str);
+                            Scenario_Quotation(false, false, false, false, true, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                            _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
+                            _quotationModel.Customer_Ref_Number = inputted_custRefNo;
+                            _quotationModel.Date_Assigned = dateAssigned;
+                            //_quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
+                        }
+                        else if (row_str.Contains("Frame_PUFoamingQty_Total"))
+                        {
+                            _quotationModel.Frame_PUFoamingQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Frame_SealantWHQty_Total"))
+                        {
+                            _quotationModel.Frame_SealantWHQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Glass_SealantWHQty_Total"))
+                        {
+                            _quotationModel.Glass_SealantWHQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("GlazingSpacer_TotalQty"))
+                        {
+                            _quotationModel.GlazingSpacer_TotalQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("GlazingSeal_TotalQty"))
+                        {
+                            _quotationModel.GlazingSeal_TotalQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screws_for_Fabrication"))
+                        {
+                            _quotationModel.Screws_for_Fabrication = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Expansion_BoltQty_Total"))
+                        {
+                            _quotationModel.Expansion_BoltQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screws_for_Installation"))
+                        {
+                            _quotationModel.Screws_for_Installation = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screws_for_Cladding"))
+                        {
+                            _quotationModel.Screws_for_Cladding = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Rebate_Qty"))
+                        {
+                            _quotationModel.Rebate_Qty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Plastic_CoverQty_Total"))
+                        {
+                            _quotationModel.Plastic_CoverQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+
+                        else if (row_str.Contains("BOM_Filter:"))
+                        {
+                            foreach (BillOfMaterialsFilter bomf in BillOfMaterialsFilter.GetAll())
                             {
-                                _quotationModel.BOM_Filter = bomf;
+                                if (bomf.ToString() == extractedValue_str)
+                                {
+                                    _quotationModel.BOM_Filter = bomf;
+                                }
                             }
                         }
+                        else if (row_str.Contains("BOM_Status:"))
+                        {
+                            _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
+                            inside_quotation = false;
+                        }
+
+                        #endregion
                     }
-                    else if (row_str.Contains("BOM_Status:"))
+                    else
                     {
-                        _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
-                        inside_quotation = false;
+                        if (row_str.Contains("PricingFactor"))
+                        {
+                            _factorFromAddExisting = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : (String.Format("{0:0.00}", Convert.ToDecimal(extractedValue_str))));
+                            //setNewFactor();   
+                        }
                     }
                     break;
-                #endregion
+
                 case false:
                     if (inside_item)
                     {
@@ -4464,6 +4627,22 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("TotalPriceHistoryStatus:"))
                         {
                             _windoorModel.TotalPriceHistoryStatus = extractedValue_str;
+                        }
+                        else if (row_str.Contains("SystemSuggestedPrice:"))
+                        {
+                            _windoorModel.SystemSuggestedPrice = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("pnlLeftCounter:"))
+                        {
+                            _windoorModel.pnlLeftCounter = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("pnlRightCounter:"))
+                        {
+                            _windoorModel.pnlRightCounter = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("pnlCount:"))
+                        {
+                            _windoorModel.pnlCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         #endregion
                     }
@@ -8471,7 +8650,7 @@ namespace PresentationLayer.Presenter
 
                             #region algo 2 
                             if (RDLCDictionary_key.Contains("QuotationBody"))
-                             {
+                            {
                                 #region QuoteBody
                                 //Check RDLCDic Contains
 
@@ -8492,7 +8671,7 @@ namespace PresentationLayer.Presenter
                                     _EntrytoKeyWordUsing = false;
                                     _EntrytoKeyWordPriceValidity = false;
                                 }
-                                else if(value.ToLower().Contains("prices are net of discounts"))
+                                else if (value.ToLower().Contains("prices are net of discounts"))
                                 {
                                     value = "\n" + "\n" + value;
                                 }
@@ -8633,11 +8812,11 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Upgraded To:"))
                         {
-                           _guUpgradeTo = extractedValue_str;
+                            _guUpgradeTo = extractedValue_str;
                         }
                         else if (row_str.Contains("Glass Upgrade Price:"))
                         {
-                           _guGlassUpgradePrice = extractedValue_str;
+                            _guGlassUpgradePrice = extractedValue_str;
                         }
                         else if (row_str.Contains("Upgrade Value:"))
                         {
@@ -8647,15 +8826,15 @@ namespace PresentationLayer.Presenter
                         {
                             _guAmountPerUnit = extractedValue_str;
                         }
-                        else if(row_str.Contains("Total Net Prices:"))
+                        else if (row_str.Contains("Total Net Prices:"))
                         {
-                           _guTotalNetPrice = extractedValue_str;
+                            _guTotalNetPrice = extractedValue_str;
                         }
                         else if (row_str.Contains("GlassType:"))
                         {
                             _guGlassType = extractedValue_str;
                         }
-                        else if(row_str.Contains("Primary Key:"))
+                        else if (row_str.Contains("Primary Key:"))
                         {
                             _guPrimaryKey = extractedValue_str;
                         }
@@ -9565,7 +9744,7 @@ namespace PresentationLayer.Presenter
         }
         private void Load_GlassUpgrade()
         {
-         
+
             if (!_guHolderDT.Columns.Contains("Item No."))
             {
                 _guHolderDT.Columns.Add("Item No.", Type.GetType("System.String"));
@@ -9583,36 +9762,37 @@ namespace PresentationLayer.Presenter
                 _guHolderDT.Columns.Add("Total Net Prices", Type.GetType("System.String"));
                 _guHolderDT.Columns.Add("GlassType", Type.GetType("System.String"));
                 _guHolderDT.Columns.Add("Primary Key", Type.GetType("System.String"));
-            }               
-                _guHolderDT.Rows.Add(_guItemNo,
-                            _guWindoorID,
-                            _guQty,
-                            _guWidth,
-                            _guHeight,
-                            _guOrigGlass,
-                            _guGlassPrice,
-                            _guUpgradeTo,
-                            _guGlassUpgradePrice,
-                            _guUpgradeValue,
-                            _guAmountPerUnit,
-                            _guTotalNetPrice,
-                            _guGlassType,
-                            _guPrimaryKey);
+            }
+            _guHolderDT.Rows.Add(_guItemNo,
+                        _guWindoorID,
+                        _guQty,
+                        _guWidth,
+                        _guHeight,
+                        _guOrigGlass,
+                        _guGlassPrice,
+                        _guUpgradeTo,
+                        _guGlassUpgradePrice,
+                        _guUpgradeValue,
+                        _guAmountPerUnit,
+                        _guTotalNetPrice,
+                        _guGlassType,
+                        _guPrimaryKey);
 
             _nonUnglazed = _guHolderDT.AsEnumerable().ToList();
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, 
-             inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory,inside_GlassUpgrade,
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi,
+             inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory, inside_GlassUpgrade,
              rdlcDicChangeKey = true,
              add_existing = false,
+            _isFromAddExisting = false,
             _allpanelsIsMesh;
-
         int _EntryCountOfKeyWordUsing,
             _EntryCountOfKeyWordPriceValidity;
         bool _EntrytoKeyWordUsing = false,
              _EntrytoKeyWordPriceValidity = false;
+        decimal _factorFromAddExisting;
 
         #region Frame Properties
 
@@ -10222,7 +10402,7 @@ namespace PresentationLayer.Presenter
                _guTotalNetPrice,
                _guGlassType,
                _guPrimaryKey;
-                           
+
         #endregion
         string mpnllvl = "";
 
@@ -10432,7 +10612,7 @@ namespace PresentationLayer.Presenter
 
                     //_frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
                     //_frmDimensionPresenter.mainPresenter_newItem_ClickedOK = false;
-                    //_frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
+                    //_frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;    
                     //_frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
                     //_frmDimensionPresenter.mainPresenter_OpenWindoorFile_ClickedOK = true;
 
@@ -10671,7 +10851,7 @@ namespace PresentationLayer.Presenter
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && Duplicate) // open file
-                {          
+                {
                     if (purpose == frmDimensionPresenter.Show_Purpose.Duplicate)
                     {
                         #region duplicate
@@ -10781,54 +10961,64 @@ namespace PresentationLayer.Presenter
                                 frameBotFrameType = BottomFrameTypes._6050;
                             }
                         }
-                        if (NewFrameSizeFit)
+
+                        if (FrameIteration == 0)
                         {
-                            int frameID = _windoorModel.frameIDCounter += 1;
-                            _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
-                                                                       frmDimension_numHt,
-                                                                       frameType,
-                                                                       _windoorModel.WD_zoom_forImageRenderer,
-                                                                       _windoorModel.WD_zoom,
-                                                                       FrameProfile_ArticleNo._7502,
-                                                                       _windoorModel,
-                                                                       frameBotFrameType,
-                                                                       frameID,
-                                                                       "",
-                                                                       true,
-                                                                       true,
-                                                                       null,
-                                                                       null,
-                                                                       null,
-                                                                       (UserControl)_frameUC,
-                                                                       (UserControl)_framePropertiesUC);
-                            _frameModel.Set_DimensionsToBind_using_FrameZoom();
-                            _frameModel.Set_ImagerDimensions_using_ImagerZoom();
-                            _frameModel.Set_FramePadding();
-
-                            IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(_frameModel);
-                            AddFrameUC(_frameModel, framePropUCP);
-
-                            _frameModel.Frame_UC = (UserControl)_frameUC;
-                            _frameModel.Frame_PropertiesUC = (UserControl)framePropUCP.GetFramePropertiesUC();
-                            AddFrameList_WindoorModel(_frameModel);
-                            _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                            _basePlatformPresenter.InvalidateBasePlatform();
-                            SetMainViewTitle(input_qrefno,
-                                            _projectName,
-                                            _custRefNo,
-                                             _windoorModel.WD_name,
-                                             _windoorModel.WD_profile,
-                                             false);
-
-                            _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-                            _windoorModel.Fit_MyControls_ToBindDimensions();
-                            _windoorModel.Fit_MyControls_ImagersToBindDimensions();
-                            GetCurrentPrice();
+                            FrameIteration = 1;
                         }
-                        else
+
+                        for (int i = 0; i < FrameIteration; i++)
                         {
-                            MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Frame Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            if (NewFrameSizeFit)
+                            {
+                                int frameID = _windoorModel.frameIDCounter += 1;
+                                _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
+                                                                           frmDimension_numHt,
+                                                                           frameType,
+                                                                           _windoorModel.WD_zoom_forImageRenderer,
+                                                                           _windoorModel.WD_zoom,
+                                                                           FrameProfile_ArticleNo._7502,
+                                                                           _windoorModel,
+                                                                           frameBotFrameType,
+                                                                           frameID,
+                                                                           "",
+                                                                           true,
+                                                                           true,
+                                                                           null,
+                                                                           null,
+                                                                           null,
+                                                                           (UserControl)_frameUC,
+                                                                           (UserControl)_framePropertiesUC);
+                                _frameModel.Set_DimensionsToBind_using_FrameZoom();
+                                _frameModel.Set_ImagerDimensions_using_ImagerZoom();
+                                _frameModel.Set_FramePadding();
+
+                                IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(_frameModel);
+                                AddFrameUC(_frameModel, framePropUCP);
+
+                                _frameModel.Frame_UC = (UserControl)_frameUC;
+                                _frameModel.Frame_PropertiesUC = (UserControl)framePropUCP.GetFramePropertiesUC();
+                                AddFrameList_WindoorModel(_frameModel);
+                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                                _basePlatformPresenter.InvalidateBasePlatform();
+                                SetMainViewTitle(input_qrefno,
+                                                _projectName,
+                                                _custRefNo,
+                                                 _windoorModel.WD_name,
+                                                 _windoorModel.WD_profile,
+                                                 false);
+
+                                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                                _windoorModel.Fit_MyControls_ToBindDimensions();
+                                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
+                                GetCurrentPrice();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Frame Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
+
                         #endregion
                     }
                 }
@@ -11057,6 +11247,8 @@ namespace PresentationLayer.Presenter
 
         public void Set_pnlPropertiesBody_ScrollView(int scroll_value)
         {
+            _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
+            _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
             _pnlPropertiesBody.VerticalScroll.Value += scroll_value;
             _pnlPropertiesBody.PerformLayout();
         }
@@ -12771,6 +12963,7 @@ namespace PresentationLayer.Presenter
             }
             //GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
             GetMainView().GetCurrentPrice().Value = _windoorModel.WD_currentPrice;
+            Console.WriteLine(GetMainView().GetCurrentPrice().Value);
             SetChangesMark();
         }
 
@@ -12919,8 +13112,6 @@ namespace PresentationLayer.Presenter
             }
             return isDimensionFit;
         }
-
-
 
         #endregion
 

@@ -47,7 +47,9 @@ namespace PresentationLayer.Presenter
         bool RDLCGUShowVat { get; set; }
         string RDLCGUFileName { get; set; }
         DataTable GlassUpgradeDT { get; set; }
-
+        decimal ContractSummaryLessDiscount { get; set; }
+        int RDLCReportCompilerLessDiscountContractSummary { get; set; }
+        bool ShowLessDiscountContractSummary { get; set; }
 
         //List<IQuoteItemListUCPresenter> _lstQuoteItemUC { get; set; }
     }

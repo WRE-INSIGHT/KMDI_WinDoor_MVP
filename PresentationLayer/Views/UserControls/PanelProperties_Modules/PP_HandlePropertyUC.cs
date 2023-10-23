@@ -247,5 +247,15 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             Console.WriteLine(this.Parent.Name);
         }
+        private void cmb_HandleType_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+
+        }
+
+        private void cmb_HandleType_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

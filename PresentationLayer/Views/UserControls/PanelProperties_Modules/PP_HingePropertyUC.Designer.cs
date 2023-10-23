@@ -45,6 +45,8 @@
             this.cmb_Hinge.Size = new System.Drawing.Size(77, 21);
             this.cmb_Hinge.TabIndex = 35;
             this.cmb_Hinge.SelectedValueChanged += new System.EventHandler(this.cmb_Hinge_SelectedValueChanged);
+            this.cmb_Hinge.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_Hinge_KeyPress);
+            this.cmb_Hinge.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_Hinge_MouseWheel);
             // 
             // label1
             // 

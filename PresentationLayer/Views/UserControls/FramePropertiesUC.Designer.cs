@@ -110,6 +110,7 @@
             0,
             0});
             this.num_fWidth.ValueChanged += new System.EventHandler(this.num_fWidth_ValueChanged);
+            this.num_fWidth.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_fWidth_MouseWheel);
             // 
             // lbl_Height
             // 
@@ -142,6 +143,7 @@
             0,
             0});
             this.num_fHeight.ValueChanged += new System.EventHandler(this.num_fHeight_ValueChanged_1);
+            this.num_fHeight.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_fHeight_MouseWheel);
             // 
             // pnl_specs
             // 
@@ -168,6 +170,8 @@
             this.cmb_FrameReinf.Size = new System.Drawing.Size(91, 21);
             this.cmb_FrameReinf.TabIndex = 14;
             this.cmb_FrameReinf.SelectedValueChanged += new System.EventHandler(this.cmb_FrameReinf_SelectedValueChanged);
+            this.cmb_FrameReinf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_FrameReinf_KeyPress);
+            this.cmb_FrameReinf.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_FrameReinf_MouseWheel);
             // 
             // label1
             // 
@@ -223,6 +227,8 @@
             this.cmb_FrameProfile.Size = new System.Drawing.Size(91, 21);
             this.cmb_FrameProfile.TabIndex = 8;
             this.cmb_FrameProfile.SelectedValueChanged += new System.EventHandler(this.cmb_FrameProfile_SelectedValueChanged);
+            this.cmb_FrameProfile.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_FrameProfile_KeyPress);
+            this.cmb_FrameProfile.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_FrameProfile_MouseWheel);
             // 
             // pnl_frameLbl
             // 

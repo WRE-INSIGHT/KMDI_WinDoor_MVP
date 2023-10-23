@@ -46,6 +46,8 @@
             this.cmb_LeverEspag.Size = new System.Drawing.Size(84, 21);
             this.cmb_LeverEspag.TabIndex = 39;
             this.cmb_LeverEspag.SelectedValueChanged += new System.EventHandler(this.cmb_LeverEspag_SelectedValueChanged);
+            this.cmb_LeverEspag.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_LeverEspag_KeyPress);
+            this.cmb_LeverEspag.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_LeverEspag_MouseWheel);
             // 
             // label1
             // 

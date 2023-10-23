@@ -66,7 +66,7 @@ namespace PresentationLayer
         /// </summary>
         [STAThread]
         static void Main(string[] args)
-         {
+        {
             if (args != null && args.Length > 0)
             {
                 string filePath = args[0];
@@ -428,9 +428,9 @@ namespace PresentationLayer
                 .RegisterType<ISP_PriceIncreaseByPercentageUCPresenter, SP_PriceIncreaseByPercentageUCPresenter>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISP_PriceIncreaseByPercentageUC, SP_PriceIncreaseByPercentageUC>(new ContainerControlledLifetimeManager())
 
-                .RegisterType<ISP_FreedomTotalChangerPresenter,SP_FreedomTotalChangerPresenter>(new ContainerControlledLifetimeManager())
-                .RegisterType<ISP_FreedomTotalChangerUC,SP_FreedomTotalChangerUC>(new ContainerControlledLifetimeManager())
-                
+                .RegisterType<ISP_FreedomTotalChangerPresenter, SP_FreedomTotalChangerPresenter>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_FreedomTotalChangerUC, SP_FreedomTotalChangerUC>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IExchangeRateView, ExchangeRateView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IExchangeRatePresenter, ExchangeRatePresenter>(new ContainerControlledLifetimeManager())
 
@@ -473,6 +473,7 @@ namespace PresentationLayer
                  .RegisterType<IGlassUpgradePresenter, GlassUpgradePresenter>(new ContainerControlledLifetimeManager())
                  .RegisterType<IGlassUpgradeView, GlassUpgradeView>(new ContainerControlledLifetimeManager())
 
+
                  .RegisterType<IPartialAdjustmentViewPresenter,PartialAdjustmentViewPresenter>(new ContainerControlledLifetimeManager())
                  .RegisterType<IPartialAdjustmentView,PartialAdjustmentView>(new ContainerControlledLifetimeManager())
 
@@ -484,6 +485,13 @@ namespace PresentationLayer
                  
                  .RegisterType<IPartialAdjustmentBaseHolderPresenter,PartialAdjustmentBaseHolderPresenter>(new ContainerControlledLifetimeManager())
                  .RegisterType<IPartialAdjustmentBaseHolderUC,PartialAdjustmentBaseHolderUC>(new ContainerControlledLifetimeManager())
+
+                 .RegisterType<IPP_CenterProfilePropertyUC, PP_CenterProfilePropertyUC>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPP_CenterProfilePropertyUCPresenter, PP_CenterProfilePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                 .RegisterType<IFP_CladdingQtyPropertyUC, FP_CladdingQtyPropertyUC>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IFP_CladdingQtyPropertyUCPresenter, FP_CladdingQtyPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())

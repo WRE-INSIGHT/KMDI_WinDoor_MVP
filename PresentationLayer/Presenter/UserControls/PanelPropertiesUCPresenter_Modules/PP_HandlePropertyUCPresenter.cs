@@ -215,13 +215,24 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     if (sel_handleType == Handle_Type._Rotoswing)
                     {
                         #region Property Height Adjustment - Rotoswing 
-                        if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+
+                        if (!_mainPresenter.ItemLoad)
                         {
-                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774275;
-                        }
-                        else
-                        {
-                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
+                            if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                            {
+                                _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774275;
+                            }
+                            else
+                            {
+                                if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                {
+                                    _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._N110A00006;
+                                }
+                                else
+                                {
+                                    _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
+                                }
+                            }
                         }
 
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
@@ -362,7 +373,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     {
                         #region Property Height Adjustment - Rotary
 
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._None;
+                        if (!_mainPresenter.ItemLoad)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._None;
+                        }
+
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -500,15 +515,20 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     else if (sel_handleType == Handle_Type._Rio)
                     {
                         #region Property Height Adjustment - Rio
-                        if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
-                            _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+
+                        if (!_mainPresenter.ItemLoad)
                         {
-                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                            if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                                _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                            {
+                                _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                            }
+                            else
+                            {
+                                _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642105;
+                            }
                         }
-                        else
-                        {
-                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642105;
-                        }
+
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -661,8 +681,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     else if (sel_handleType == Handle_Type._Rotoline)
                     {
                         #region Property Height Adjustment - Rotoline
-
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642089;
+                        if (!_mainPresenter.ItemLoad)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642089;
+                        }
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -801,7 +823,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     {
                         #region Property Height Adjustment - MVD
 
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._630963;
+                        if (!_mainPresenter.ItemLoad)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._630963;
+                        }
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -940,8 +965,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     else if (sel_handleType == Handle_Type._None)
                     {
                         #region Property Height Adjustment - None
-
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._None;
+                        if (!_mainPresenter.ItemLoad)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._None;
+                        }
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -1150,7 +1177,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     {
                         #region Property Height Adjustment - D handle
 
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                        if (!_mainPresenter.ItemLoad)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                        }
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -1291,7 +1321,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     {
                         #region Property Height Adjustment - DummyD handle
 
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                        if (!_mainPresenter.ItemLoad)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                        }
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -1431,8 +1464,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     else if (sel_handleType == Handle_Type._D_IO_Locking)
                     {
                         #region Property Height Adjustment - D IO Locking handle
-
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                        if (!_mainPresenter.ItemLoad)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                        }
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -1573,7 +1608,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     {
                         #region Property Height Adjustment - Pop-up handle
 
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774275;
+                        if (!_mainPresenter.ItemLoad)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774275;
+                        }
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -1714,8 +1752,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     else if (sel_handleType == Handle_Type._RotoswingForSliding)
                     {
                         #region Property Height Adjustment - Rotoswing For Sliding handle
-
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                        if (!_mainPresenter.ItemLoad)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                        }
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -1923,7 +1963,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             rotoswingForSlidingPropUC.Dock = DockStyle.Top;
             rotoswingForSlidingPropUC.BringToFront();
 
-            IPP_EspagnolettePropertyUCPresenter espUCP = _pp_espagnolettePropertyUCPresenter.GetNewInstance(_unityC, _panelModel,_mainPresenter);
+            IPP_EspagnolettePropertyUCPresenter espUCP = _pp_espagnolettePropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
             UserControl espPropUC = (UserControl)espUCP.GetPPEspagnolettePropertyUC();
             _pnlHandleType.Controls.Add(espPropUC);
             espPropUC.Dock = DockStyle.Top;
@@ -1947,7 +1987,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             Foil_Color outside_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_OutsideColor;
 
             Handle_Type handle = _panelModel.Panel_HandleType;
-          
+
             if ((handle != Handle_Type._Rotary && handle != Handle_Type._None) && _panelModel.Panel_Type != "Fixed Panel")
             {
                 _panelModel.Panel_EspagnoletteOptionsVisibility = true;
@@ -1982,7 +2022,18 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
-                    _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
+
+                    if (!_mainPresenter.ItemLoad)
+                    {
+                        if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._N110A00006;
+                        }
+                        else
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
+                        }
+                    }
 
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
 
@@ -2021,14 +2072,17 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 }
                 else if (handle == Handle_Type._Rio)
                 {
-                    if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
-                        _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                    if (!_mainPresenter.ItemLoad)
                     {
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
-                    }
-                    else
-                    {
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642105;
+                        if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                            _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                        }
+                        else
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642105;
+                        }
                     }
 
                     _panelModel.Panel_RioOptionsVisibility = true;
@@ -2116,7 +2170,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
-                    _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+
+                    if (!_mainPresenter.ItemLoad)
+                    {
+                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                    }
 
                     if (inside_color == Foil_Color._None)
                     {

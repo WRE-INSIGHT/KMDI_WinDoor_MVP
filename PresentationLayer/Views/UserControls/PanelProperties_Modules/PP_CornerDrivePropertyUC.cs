@@ -44,5 +44,15 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_CornerDrive.DataBindings.Add(ModelBinding["Panel_CornerDriveArtNo"]);
             this.DataBindings.Add(ModelBinding["Panel_CornerDriveOptionsVisibility"]);
         }
+
+        private void cmb_CornerDrive_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_CornerDrive_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

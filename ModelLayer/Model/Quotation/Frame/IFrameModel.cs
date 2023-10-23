@@ -91,6 +91,12 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_BotFrameVisible { get; set; }
         Frame_MechJointArticleNo Frame_MechanicalJointConnector_Artno { get; set; }
         int Frame_MechanicalJointConnectorQty { get; set; }
+        bool Frame_If_SlidingTypeTopHung { get; set; }
+        GUPremilineTopTrack_ArticleNo Frame_GUPremilineTopTrackArtNo { get; set; }
+        int Frame_CladdingQty { get; set; }
+        bool Frame_CladdingVisibility { get; set; }
+        CladdingProfileForFrame_ArticleNo Frame_CladdingArtNo { get; set; }
+        CladdingReinfForFrame_ArticleNo Frame_CladdingReinArtNo { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);
@@ -104,6 +110,7 @@ namespace ModelLayer.Model.Quotation.Frame
         void Insert_ConnectingProfile_MaterialList(DataTable tbl_explosion);
         // void Insert_ConnectorType_MaterialList(DataTable tbl_explosion);
         void Insert_GS100EMTrackProfile2p6n3m_MaterialList(DataTable tbl_explosion);
+        void Insert_CladdingProfile_MaterialList(DataTable tbl_explosion);
 
         int Add_framePerimeter_screws4fab();
         int Add_MilledFrameWidth_screws4fab();

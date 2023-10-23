@@ -78,5 +78,15 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_SashReinf.DataBindings.Add(ModelBinding["Panel_SashReinfArtNo"]);
             this.DataBindings.Add(ModelBinding["Panel_SashPropertyVisibility"]);
         }
+
+        private void cmb_SashProfile_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void cmb_SashReinf_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

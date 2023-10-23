@@ -87,8 +87,9 @@ namespace PresentationLayer.Presenter.UserControls
                     _mainPresenter.updatePriceOfMainView();
                 }
                 else
-                { 
-                    if (_windoorModel.TotalPriceHistoryStatus == "System Generated Price")
+                {
+                    if (_windoorModel.TotalPriceHistoryStatus == "System Generated Price") //|| _windoorModel.TotalPriceHistoryStatus == "Change Factor"
+
                     {
                         _mainPresenter.LblCurrentPrice.Value = _windoorModel.WD_currentPrice;
                     }
@@ -105,7 +106,7 @@ namespace PresentationLayer.Presenter.UserControls
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
 
         private void OnItemInfoUCLoadEventRaised(object sender, EventArgs e)

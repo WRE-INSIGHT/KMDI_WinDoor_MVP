@@ -50,7 +50,7 @@ namespace ModelLayer.Model.Quotation
         public string BOMandItemlistStatus { get; set; }
         public bool itemSelectStatus { get; set; }
         public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
-
+        public bool FactorChange { get; set; }
 
 
 
@@ -108,11 +108,13 @@ namespace ModelLayer.Model.Quotation
 
             bool perFrame = false,
                  SlidingMotorizePerFrame = false,
+                 TopHungPerFrame = false,
                  slidingChck = false;
             foreach (IFrameModel frame in item.lst_frame)
             {
                 perFrame = true;
                 SlidingMotorizePerFrame = true;
+                TopHungPerFrame = true;
                 slidingChck = false;
 
                 frame.SetExplosionValues_Frame();
@@ -142,7 +144,8 @@ namespace ModelLayer.Model.Quotation
                 }
 
                 if (frame.Frame_Type == Frame_Padding.Door &&
-                    frame.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                    frame.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                    frame.Frame_If_SlidingTypeTopHung == false)
                 {
                     frame.Insert_ConnectingProfile_MaterialList(Material_List);
                 }
@@ -158,6 +161,14 @@ namespace ModelLayer.Model.Quotation
                 {
                     frame.Insert_MilledFrameInfo_MaterialList(Material_List);
                     total_screws_fabrication += frame.Add_MilledFrameWidth_screws4fab();
+                }
+
+                if (frame.Frame_If_SlidingTypeTopHung == true &&
+                    frame.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                    frame.Frame_BotFrameArtNo == BottomFrameTypes._None &&
+                    frame.Frame_CladdingQty != 0)
+                {
+                    frame.Insert_CladdingProfile_MaterialList(Material_List);
                 }
 
                 if (frame.Lst_MultiPanel.Count() >= 1 && frame.Lst_Panel.Count() == 0)
@@ -756,13 +767,16 @@ namespace ModelLayer.Model.Quotation
 
                                                 if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
                                                 {
-                                                    div_nxtCtrl.Insert_FixedCam_MaterialList(Material_List);
-                                                    add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
+                                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Window)
+                                                    {
+                                                        div_nxtCtrl.Insert_FixedCam_MaterialList(Material_List);
+                                                        add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
 
-                                                    div_nxtCtrl.Insert_SnapNKeep_MaterialList(Material_List);
+                                                        div_nxtCtrl.Insert_SnapNKeep_MaterialList(Material_List);
 
-                                                    int snapNkeep_screws = div_nxtCtrl.Add_SnapNKeep_screws4fab();
-                                                    add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                        int snapNkeep_screws = div_nxtCtrl.Add_SnapNKeep_screws4fab();
+                                                        add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                    }
 
                                                     if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
                                                     {
@@ -884,14 +898,17 @@ namespace ModelLayer.Model.Quotation
 
                                                 if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
                                                 {
-                                                    div_prevCtrl.Insert_FixedCam_MaterialList(Material_List);
+                                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Window)
+                                                    {
+                                                        div_prevCtrl.Insert_FixedCam_MaterialList(Material_List);
 
-                                                    add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
+                                                        add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
 
-                                                    div_prevCtrl.Insert_SnapNKeep_MaterialList(Material_List);
+                                                        div_prevCtrl.Insert_SnapNKeep_MaterialList(Material_List);
 
-                                                    int snapNkeep_screws = div_prevCtrl.Add_SnapNKeep_screws4fab();
-                                                    add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                        int snapNkeep_screws = div_prevCtrl.Add_SnapNKeep_screws4fab();
+                                                        add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                    }
 
                                                     if (div_prevCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
                                                     {
@@ -1094,6 +1111,26 @@ namespace ModelLayer.Model.Quotation
                                                         pnl_curCtrl.Insert_CoverForCornerPivotRest_MaterialList(Material_List, basecol);
                                                         add_screws_fab_pivotRest += 1;
                                                     }
+
+
+                                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Door)
+                                                    {
+                                                        //if (frame.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                                        //{
+                                                        //    pnl.Insert_FillerProfileForNoBotFrameInfo_MaterialList(Material_List);
+                                                        //    pnl.Insert_BrushSealForNoBotFrame_MaterialList(Material_List);
+                                                        //}
+
+                                                        pnl_curCtrl.Insert_SnapNKeep_MaterialList(Material_List);
+
+                                                        pnl_curCtrl.Insert_FixedCam_MaterialList(Material_List);
+
+
+                                                        int FixedCamAndSnapInKeepQty = (frame.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                                                         frame.Frame_BotFrameArtNo == BottomFrameTypes._None) ? 1 : 2;
+                                                        add_screws_fab_snapInKeep += FixedCamAndSnapInKeepQty * 2;
+                                                        add_screws_fab_fxdcam += FixedCamAndSnapInKeepQty * 2;
+                                                    }
                                                 }
                                             }
 
@@ -1231,7 +1268,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         where = "Frame";
                                     }
-                                    if (pnl_curCtrl.Panel_Type.Contains("Louver"))
+                                    if (!pnl_curCtrl.Panel_Type.Contains("Louver"))
                                     {
                                         pnl_curCtrl.Insert_GlazingBead_MaterialList(Material_List, where);
                                     }
@@ -1372,10 +1409,13 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 #endregion
 
-                                Console.WriteLine("no div bottom frame:" + boundedByBottomFrame);
+                                //Console.WriteLine("no div bottom frame:" + boundedByBottomFrame);
 
 
-                                int OverLappingPanel_Qty = 0;
+                                int OverLappingPanel_Qty = 0,
+                                    perimeterBrushSeal = 0,
+                                    perimeterFinPlate = 0;
+
                                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                                 {
                                     if (pnl.Panel_Overlap_Sash == OverlapSash._Left ||
@@ -1388,6 +1428,21 @@ namespace ModelLayer.Model.Quotation
                                         OverLappingPanel_Qty += 2;
                                     }
                                     pnl.Panel_OverLappingPanelQty = OverLappingPanel_Qty;
+
+
+                                    if (pnl.Panel_Type.Contains("Sliding"))
+                                    {
+                                        perimeterBrushSeal += pnl.Panel_SashHeight - 5;
+                                        if (frame.Frame_If_SlidingTypeTopHung == true)
+                                        {
+                                            perimeterFinPlate += pnl.Panel_SashWidth - 5;
+                                        }
+                                    }
+                                    else if (pnl.Panel_Type.Contains("Fixed"))
+                                    {
+                                        perimeterBrushSeal += pnl.Panel_SashHeight + 10;
+                                    }
+                                    pnl.TopHungbrushSealPerimeter = perimeterBrushSeal;
                                 }
 
                                 if (pnl_curCtrl != null)
@@ -1459,7 +1514,9 @@ namespace ModelLayer.Model.Quotation
 
                                 if (pnl_curCtrl != null)
                                 {
-                                    if (item.WD_profile == "PremiLine Profile" && pnl_curCtrl.Panel_Type.Contains("Fixed"))
+                                    if (item.WD_profile == "PremiLine Profile" &&
+                                        pnl_curCtrl.Panel_Type.Contains("Fixed") &&
+                                        frame.Frame_If_SlidingTypeTopHung == false)
                                     {
                                         pnl_curCtrl.Insert_CoverProfileForPremiInfo_MaterialList(Material_List);
                                     }
@@ -1479,6 +1536,15 @@ namespace ModelLayer.Model.Quotation
                                         if (pnl_curCtrl.Panel_Type.Contains("Fixed") && pnl_curCtrl.Panel_ChkText == "dSash")
                                         {
                                             pnl_curCtrl.Insert_SpacerFixedSash_MaterialList(Material_List);
+
+                                            if (frame.Frame_If_SlidingTypeTopHung == true &&
+                                                frame.Frame_ConnectionType == FrameConnectionType._None)
+                                            {
+                                                pnl_curCtrl.Insert_ConnectingProfile_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_Interlock_Tophung_ForFixed_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_ExternsionForInterlock_Tophung_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_PVCSettingPlate_MaterialList(Material_List);
+                                            }
                                         }
 
                                         if (pnl_curCtrl.Panel_ChkText != "dSash")
@@ -1505,19 +1571,43 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 bothOverlapQtyMultiplier = 2;
                                             }
-                                            //if (OverLappingPanel_Qty != 0)
-                                            //{
-                                            pnl_curCtrl.Insert_Interlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
-                                            pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
-                                            // } 
+                                            if (frame.Frame_If_SlidingTypeTopHung == false)
+                                            {
+                                                pnl_curCtrl.Insert_Interlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
+                                                pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
+                                            }
                                         }
 
+                                        if (frame.Frame_If_SlidingTypeTopHung == true &&
+                                            frame.Frame_ConnectionType == FrameConnectionType._None)
+                                        {
+                                            if (TopHungPerFrame == true)
+                                            {
+                                                pnl_curCtrl.Insert_CoverProfileForTopHungInfo_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_BrushSealForTopHung_MaterialList(Material_List, perimeterBrushSeal);
+                                                pnl_curCtrl.Insert_SlidingSashBottomGuide_MaterialList(Material_List, OverLappingPanel_Qty);
+                                                pnl_curCtrl.Insert_BrushForSliding_MaterialList(Material_List, perimeterFinPlate);
+
+                                                TopHungPerFrame = false;
+                                            }
+                                        }
 
                                         if (pnl_curCtrl.Panel_Type.Contains("Sliding"))
                                         {
                                             if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
                                                 pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                             {
+                                                if (frame.Frame_If_SlidingTypeTopHung == true &&
+                                                    frame.Frame_ConnectionType == FrameConnectionType._None)
+                                                {
+                                                    pnl_curCtrl.Insert_SlidingAccessoriesRoller_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_Interlock_Tophung_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_ExternsionForInterlock_Tophung_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_GUPremilineTopTrack_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_FinPlate_MaterialList(Material_List);
+
+                                                }
+
                                                 if (frame.Frame_SlidingRailsQty == 3)
                                                 {
                                                     slidingChck = true;
@@ -1535,19 +1625,22 @@ namespace ModelLayer.Model.Quotation
                                                 pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_AluminumTrack_MaterialList(Material_List);
 
-                                                if (perFrame == true)
+                                                if (frame.Frame_If_SlidingTypeTopHung == false &&
+                                                    perFrame == true)
                                                 {
                                                     pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_EndCapForWeatherBar_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
+
                                                     perFrame = false;
                                                 }
 
                                                 pnl_curCtrl.Insert_Rollers_MaterialList(Material_List);
 
-                                                if (pnl_curCtrl.Panel_EspagnoletteArtNo != Espagnolette_ArticleNo._None)
+                                                if (pnl_curCtrl.Panel_EspagnoletteArtNo != Espagnolette_ArticleNo._None &&
+                                                    pnl_curCtrl.Panel_Overlap_Sash != OverlapSash._None)
                                                 {
                                                     pnl_curCtrl.Insert_StrikerForSliding_MaterialList(Material_List);
                                                 }
@@ -1913,6 +2006,12 @@ namespace ModelLayer.Model.Quotation
 
                                     if (frame.Frame_Type == FrameModel.Frame_Padding.Door)
                                     {
+                                        if (frame.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            pnl.Insert_FillerProfileForNoBotFrameInfo_MaterialList(Material_List);
+                                            pnl.Insert_BrushSealForNoBotFrame_MaterialList(Material_List);
+                                        }
+
                                         pnl.Insert_SnapNKeep_MaterialList(Material_List);
 
                                         pnl.Insert_FixedCam_MaterialList(Material_List);
@@ -1958,9 +2057,12 @@ namespace ModelLayer.Model.Quotation
                                             bothOverlapQtyMultiplier = 2;
                                         }
                                         pnl.Insert_SealingBlock_MaterialList(Material_List);
-                                        pnl.Insert_Interlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
-                                        pnl.Insert_ExternsionForInterlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
 
+                                        if (frame.Frame_If_SlidingTypeTopHung == false)
+                                        {
+                                            pnl.Insert_Interlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
+                                            pnl.Insert_ExternsionForInterlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
+                                        }
                                     }
                                     if (pnl.Panel_RollersTypes != null)
                                     {
@@ -3711,7 +3813,7 @@ namespace ModelLayer.Model.Quotation
                     FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
                     DividerRein_7536_PricePerSqrMeter = 406.86m;
                 }
-                else if(cus_ref_date >= inc_price_date_7 && cus_ref_date <  inc_price_date_8)
+                else if (cus_ref_date >= inc_price_date_7 && cus_ref_date < inc_price_date_8)
                 {
                     FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
                     FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
@@ -3751,11 +3853,11 @@ namespace ModelLayer.Model.Quotation
             {
                 MotorizeMechUsingRemotePrice = 19500.00m;
             }
-            else if(cus_ref_date >= DateTime.Parse("08-02-2023") && cus_ref_date < inc_price_date_7)
+            else if (cus_ref_date >= DateTime.Parse("08-02-2023") && cus_ref_date < inc_price_date_7)
             {
                 MotorizeMechUsingRemotePrice = 37250.00m;
             }
-            else if(cus_ref_date >= inc_price_date_7)
+            else if (cus_ref_date >= inc_price_date_7)
             {
                 MotorizeMechUsingRemotePrice = 19500.00m;
             }
@@ -3819,7 +3921,7 @@ namespace ModelLayer.Model.Quotation
                 //    wdm.WD_Selected = true;
                 //}
 
-                if (wdm.WD_Selected == true || BOMandItemlistStatus == "PriceItemList")
+                if (wdm.WD_Selected == true || BOMandItemlistStatus == "PriceItemList") //|| FactorChange == true
                 {
 
                     foreach (IFrameModel fr in wdm.lst_frame)
@@ -5687,7 +5789,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                                 }
-                                               
+
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmAnnealed_ReflectiveClr;
@@ -6186,7 +6288,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                                 }
-                                                
+
 
                                                 #endregion
                                             }
@@ -6483,7 +6585,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                                 }
-                                                
+
 
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                                 {
@@ -6981,7 +7083,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                                 }
-                                                
+
 
                                                 #endregion
                                             }
@@ -9028,7 +9130,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                     }
-                                   
+
 
 
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
@@ -9523,7 +9625,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                     }
-                                    
+
 
                                     #endregion
                                 }
@@ -9818,7 +9920,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTempHeatSoakedClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTempHeatSoakedClr;
                                     }
-                                    
+
 
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm  Recflective Clear"))
                                     {
@@ -10312,7 +10414,7 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_13mmTempClr_WhitePvb_TempClr;
                                     }
-                                    
+
 
                                     #endregion
                                 }

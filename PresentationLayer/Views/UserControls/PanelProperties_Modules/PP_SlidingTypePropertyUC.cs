@@ -44,5 +44,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             this.DataBindings.Add(ModelBinding["Panel_SlidingTypeVisibility"]);
         }
 
+        private void cmb_SlidingType_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

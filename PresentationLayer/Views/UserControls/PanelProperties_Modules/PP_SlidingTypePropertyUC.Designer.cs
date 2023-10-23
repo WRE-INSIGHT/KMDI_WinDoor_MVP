@@ -45,6 +45,7 @@
             this.cmb_SlidingType.Size = new System.Drawing.Size(77, 21);
             this.cmb_SlidingType.TabIndex = 37;
             this.cmb_SlidingType.SelectedValueChanged += new System.EventHandler(this.cmb_SlidingType_SelectedValueChanged);
+            this.cmb_SlidingType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_SlidingType_KeyPress);
             // 
             // label1
             // 

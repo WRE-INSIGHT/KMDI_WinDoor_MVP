@@ -46,6 +46,7 @@
             this.cmb_SashReinf.Size = new System.Drawing.Size(72, 21);
             this.cmb_SashReinf.TabIndex = 16;
             this.cmb_SashReinf.SelectedValueChanged += new System.EventHandler(this.cmb_SashReinf_SelectedValueChanged);
+            this.cmb_SashReinf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_SashReinf_KeyPress);
             // 
             // label4
             // 
@@ -67,6 +68,7 @@
             this.cmb_SashProfile.Size = new System.Drawing.Size(72, 21);
             this.cmb_SashProfile.TabIndex = 14;
             this.cmb_SashProfile.SelectedValueChanged += new System.EventHandler(this.cmb_SashProfile_SelectedValueChanged);
+            this.cmb_SashProfile.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_SashProfile_KeyPress);
             // 
             // label3
             // 

@@ -100,6 +100,11 @@ namespace PresentationLayer.Views
             }
         }
 
+        public Panel GetPanelFrameQty()
+        {
+            return pnl_FrameQty;
+        }
+
         public NumericUpDown GetNumWidth()
         {
             return numWidth;
@@ -116,6 +121,8 @@ namespace PresentationLayer.Views
         public event EventHandler cmbBaseColorOptionSelectedValueChangedEventRaised;
         public event EventHandler numWidthEnterEventRaised;
         public event EventHandler numHeightEnterEventRaised;
+        public event EventHandler nudFrameQtyValueChangedEventRaised;
+
 
         public void ShowfrmDimension()
         {
@@ -185,6 +192,11 @@ namespace PresentationLayer.Views
         private void numHeight_Enter(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, numHeightEnterEventRaised, e);
+        }
+
+        private void nud_FrameQty_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudFrameQtyValueChangedEventRaised, e);
         }
     }
 }

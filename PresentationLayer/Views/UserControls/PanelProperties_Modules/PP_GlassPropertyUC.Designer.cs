@@ -71,6 +71,8 @@
             this.cmb_GlassType.Size = new System.Drawing.Size(72, 21);
             this.cmb_GlassType.TabIndex = 32;
             this.cmb_GlassType.SelectedValueChanged += new System.EventHandler(this.cmb_GlassType_SelectedValueChanged);
+            this.cmb_GlassType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_GlassType_KeyPress);
+            this.cmb_GlassType.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_GlassType_MouseWheel);
             // 
             // lbl_glassthick
             // 
@@ -136,6 +138,8 @@
             this.cmb_GlazingArtNo.Size = new System.Drawing.Size(73, 21);
             this.cmb_GlazingArtNo.TabIndex = 28;
             this.cmb_GlazingArtNo.SelectedValueChanged += new System.EventHandler(this.cmb_GlazingArtNo_SelectedValueChanged);
+            this.cmb_GlazingArtNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_GlazingArtNo_KeyPress);
+            this.cmb_GlazingArtNo.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_GlazingArtNo_MouseWheel);
             // 
             // label2
             // 
@@ -160,6 +164,8 @@
             this.cmb_FilmType.Size = new System.Drawing.Size(73, 21);
             this.cmb_FilmType.TabIndex = 30;
             this.cmb_FilmType.SelectedValueChanged += new System.EventHandler(this.cmb_FilmType_SelectedValueChanged);
+            this.cmb_FilmType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_FilmType_KeyPress);
+            this.cmb_FilmType.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_FilmType_MouseWheel);
             // 
             // chk_GlazingAdaptor
             // 

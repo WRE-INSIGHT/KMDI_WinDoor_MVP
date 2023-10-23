@@ -519,6 +519,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     else if (sel_sash == SashProfile_ArticleNo._395)
                     {
                         _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._207;
+                        _panelModel.Panel_HandleType = Handle_Type._Rotoswing;
 
                         if (_panelModel.Panel_MotorizedOptionVisibility == false)
                         {
@@ -920,6 +921,37 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     {
 
                     }
+                    curr_sash = sel_sash;
+                }
+                else if (sel_sash != curr_sash &&
+                         _panelModel.Panel_Type.Contains("Fixed") == true &&
+                         _panelModel.Panel_ChkText == "dSash") //for rein recommendation in dash
+                {
+                    if (sel_sash == SashProfile_ArticleNo._7581)
+                    {
+                         _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._R675;
+                    }
+                    else if (sel_sash == SashProfile_ArticleNo._373 || sel_sash == SashProfile_ArticleNo._374)
+                    {
+                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._207;
+                    }
+                    else if (sel_sash == SashProfile_ArticleNo._395)
+                    {
+                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._655;
+                    }
+                    else if (sel_sash == SashProfile_ArticleNo._2067)
+                    {
+                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._V226;
+                    }
+                    else if (sel_sash == SashProfile_ArticleNo._6040)
+                    {
+                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV104;
+                    }
+                    else if (sel_sash == SashProfile_ArticleNo._6041)
+                    {
+                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV106;
+                    }
+
                     curr_sash = sel_sash;
                 }
             }

@@ -39,5 +39,14 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, cmbbotFrameProfileSelectedValueChangedRaised, e);
         }
+        private void cmb_botFrameProfile_Mousewheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void cmb_botFrameProfile_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

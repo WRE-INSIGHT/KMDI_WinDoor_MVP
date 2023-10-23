@@ -38,13 +38,13 @@
             this.num_2dHingeQty = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_Remote = new System.Windows.Forms.Label();
+            this.chk_Remote = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.cmb_MotorizedMechanism = new System.Windows.Forms.ComboBox();
             this.num_SetQty = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.pnl_chkMotorizedOptions = new System.Windows.Forms.Panel();
-            this.lbl_Remote = new System.Windows.Forms.Label();
-            this.chk_Remote = new System.Windows.Forms.CheckBox();
             this.pnl_motorizedOptions.SuspendLayout();
             this.pnl_ButtHinge.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_ButtHingeQty)).BeginInit();
@@ -113,6 +113,7 @@
             this.num_ButtHingeQty.Name = "num_ButtHingeQty";
             this.num_ButtHingeQty.Size = new System.Drawing.Size(69, 20);
             this.num_ButtHingeQty.TabIndex = 24;
+            this.num_ButtHingeQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_ButtHingeQty_MouseWheel);
             // 
             // label3
             // 
@@ -144,6 +145,7 @@
             this.num_2dHingeQty.Name = "num_2dHingeQty";
             this.num_2dHingeQty.Size = new System.Drawing.Size(69, 20);
             this.num_2dHingeQty.TabIndex = 24;
+            this.num_2dHingeQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_2dHingeQty_MouseWheel);
             // 
             // label2
             // 
@@ -171,60 +173,6 @@
             this.panel1.Size = new System.Drawing.Size(152, 78);
             this.panel1.TabIndex = 25;
             // 
-            // label13
-            // 
-            this.label13.AutoEllipsis = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(3, 27);
-            this.label13.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(63, 27);
-            this.label13.TabIndex = 19;
-            this.label13.Text = "Motorized\r\nMechanism";
-            // 
-            // cmb_MotorizedMechanism
-            // 
-            this.cmb_MotorizedMechanism.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmb_MotorizedMechanism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_MotorizedMechanism.FormattingEnabled = true;
-            this.cmb_MotorizedMechanism.Location = new System.Drawing.Point(79, 29);
-            this.cmb_MotorizedMechanism.Name = "cmb_MotorizedMechanism";
-            this.cmb_MotorizedMechanism.Size = new System.Drawing.Size(69, 21);
-            this.cmb_MotorizedMechanism.TabIndex = 20;
-            this.cmb_MotorizedMechanism.SelectedValueChanged += new System.EventHandler(this.cmb_MotorizedMechanism_SelectedValueChanged);
-            // 
-            // num_SetQty
-            // 
-            this.num_SetQty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.num_SetQty.Location = new System.Drawing.Point(79, 54);
-            this.num_SetQty.Name = "num_SetQty";
-            this.num_SetQty.Size = new System.Drawing.Size(69, 20);
-            this.num_SetQty.TabIndex = 22;
-            // 
-            // label1
-            // 
-            this.label1.AutoEllipsis = true;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 57);
-            this.label1.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "Set Quantity";
-            // 
-            // pnl_chkMotorizedOptions
-            // 
-            this.pnl_chkMotorizedOptions.Controls.Add(this.lbl_motorized);
-            this.pnl_chkMotorizedOptions.Controls.Add(this.chk_Motorized);
-            this.pnl_chkMotorizedOptions.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_chkMotorizedOptions.Location = new System.Drawing.Point(0, 0);
-            this.pnl_chkMotorizedOptions.Name = "pnl_chkMotorizedOptions";
-            this.pnl_chkMotorizedOptions.Size = new System.Drawing.Size(154, 31);
-            this.pnl_chkMotorizedOptions.TabIndex = 37;
-            // 
             // lbl_Remote
             // 
             this.lbl_Remote.Location = new System.Drawing.Point(4, 1);
@@ -251,6 +199,63 @@
             this.chk_Remote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chk_Remote.UseVisualStyleBackColor = false;
             this.chk_Remote.CheckedChanged += new System.EventHandler(this.chk_Remote_CheckedChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoEllipsis = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(3, 27);
+            this.label13.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(63, 27);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "Motorized\r\nMechanism";
+            // 
+            // cmb_MotorizedMechanism
+            // 
+            this.cmb_MotorizedMechanism.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb_MotorizedMechanism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_MotorizedMechanism.FormattingEnabled = true;
+            this.cmb_MotorizedMechanism.Location = new System.Drawing.Point(79, 29);
+            this.cmb_MotorizedMechanism.Name = "cmb_MotorizedMechanism";
+            this.cmb_MotorizedMechanism.Size = new System.Drawing.Size(69, 21);
+            this.cmb_MotorizedMechanism.TabIndex = 20;
+            this.cmb_MotorizedMechanism.SelectedValueChanged += new System.EventHandler(this.cmb_MotorizedMechanism_SelectedValueChanged);
+            this.cmb_MotorizedMechanism.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_MotorizedMechanism_KeyPress);
+            this.cmb_MotorizedMechanism.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmb_MotorizedMechanism_MouseWheel);
+            // 
+            // num_SetQty
+            // 
+            this.num_SetQty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.num_SetQty.Location = new System.Drawing.Point(79, 54);
+            this.num_SetQty.Name = "num_SetQty";
+            this.num_SetQty.Size = new System.Drawing.Size(69, 20);
+            this.num_SetQty.TabIndex = 22;
+            this.num_SetQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_SetQty_MouseWheel);
+            // 
+            // label1
+            // 
+            this.label1.AutoEllipsis = true;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 57);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 6, 0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Set Quantity";
+            // 
+            // pnl_chkMotorizedOptions
+            // 
+            this.pnl_chkMotorizedOptions.Controls.Add(this.lbl_motorized);
+            this.pnl_chkMotorizedOptions.Controls.Add(this.chk_Motorized);
+            this.pnl_chkMotorizedOptions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_chkMotorizedOptions.Location = new System.Drawing.Point(0, 0);
+            this.pnl_chkMotorizedOptions.Name = "pnl_chkMotorizedOptions";
+            this.pnl_chkMotorizedOptions.Size = new System.Drawing.Size(154, 31);
+            this.pnl_chkMotorizedOptions.TabIndex = 37;
             // 
             // PP_MotorizedPropertyUC
             // 
