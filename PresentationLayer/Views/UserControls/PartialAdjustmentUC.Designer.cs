@@ -75,7 +75,7 @@
             // 
             this.lbl_ItemNo.AutoSize = true;
             this.lbl_ItemNo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ItemNo.Location = new System.Drawing.Point(5, 5);
+            this.lbl_ItemNo.Location = new System.Drawing.Point(6, 5);
             this.lbl_ItemNo.Name = "lbl_ItemNo";
             this.lbl_ItemNo.Size = new System.Drawing.Size(20, 17);
             this.lbl_ItemNo.TabIndex = 4;
