@@ -707,7 +707,7 @@
             this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";
             this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
-            this.ViewImagerToolStripButton1.Text = "View Imager";
+            this.ViewImagerToolStripButton1.Text = "View Imager"; 
             this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
             // 
             // ScreentoolStripButton
