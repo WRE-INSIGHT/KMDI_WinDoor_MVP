@@ -21,6 +21,8 @@ namespace PresentationLayer.Presenter.UserControls
         private IPartialAdjustmentViewPresenter _partialAdjustmentViewPresenter;
         private IPartialAdjustmentUCPresenter _partialAdjustmentUCPresenter;
 
+
+
         private int panelTitleHeight = 29;
         private int PA_LstDesignCount = 0;
         public int ItemQuantity { get; set; }

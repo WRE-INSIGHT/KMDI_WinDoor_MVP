@@ -23,6 +23,8 @@ namespace PresentationLayer.Presenter.UserControls
         private IPartialAdjustmentItemDisabledUCPresenter _paAdjustmentItemDisabledUCPresenter;
         private IPartialAdjustmentBaseHolderPresenter _paBaseHolderPresenter;
 
+
+
         Panel PanelBody;
         PictureBox OldItemPB, CurrentItemPB;
         RichTextBox OLDItemDesc, CurrentItemDesc;
