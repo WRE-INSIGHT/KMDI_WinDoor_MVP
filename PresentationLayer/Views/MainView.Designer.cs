@@ -689,7 +689,7 @@
             // 
             this.ViewImagerToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ViewImagerToolStripButton1.Enabled = false;
-            this.ViewImagerToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("ViewImagerToolStripButton1.Image")));
+            this.ViewImagerToolStripButton1.Image = global::PresentationLayer.Properties.Resources.image2;
             this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";
             this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
@@ -827,12 +827,13 @@
             // 
             // partialAdjustmentToolstrip
             // 
+            this.partialAdjustmentToolstrip.BackgroundImage = global::PresentationLayer.Properties.Resources.cancel_30px;
+            this.partialAdjustmentToolstrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.partialAdjustmentToolstrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.partialAdjustmentToolstrip.Enabled = false;
-            this.partialAdjustmentToolstrip.Image = ((System.Drawing.Image)(resources.GetObject("partialAdjustmentToolstrip.Image")));
             this.partialAdjustmentToolstrip.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.partialAdjustmentToolstrip.Name = "partialAdjustmentToolstrip";
-            this.partialAdjustmentToolstrip.Size = new System.Drawing.Size(24, 29);
+            this.partialAdjustmentToolstrip.Size = new System.Drawing.Size(23, 29);
             this.partialAdjustmentToolstrip.Text = "PartialAdjustment";
             this.partialAdjustmentToolstrip.Click += new System.EventHandler(this.partialAdjusmentToolstrip_Click);
             // 
