@@ -71,7 +71,7 @@
             // 
             // btn_Expnd
             // 
-            this.btn_Expnd.BackgroundImage = global::PresentationLayer.Properties.Resources.down_arrow_square_outlined_button;
+            this.btn_Expnd.BackgroundImage = global::PresentationLayer.Properties.Resources.cancel_30px;
             this.btn_Expnd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_Expnd.Dock = System.Windows.Forms.DockStyle.Right;
             this.btn_Expnd.Location = new System.Drawing.Point(704, 0);

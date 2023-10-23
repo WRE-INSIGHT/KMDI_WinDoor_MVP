@@ -522,9 +522,6 @@
     <Compile Include="Views\IGlassUpgradeView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
-    <Compile Include="Views\IPartialAdjustmenItemDisabledUC.cs" />
-    <Compile Include="Views\IPartialAdjustmentBaseHolderUC.cs" />
-    <Compile Include="Views\IPartialAdjustmentUC.cs" />
     <Compile Include="Views\IPartialAdjustmentView.cs" />
     <Compile Include="Views\IPDFCompilerView.cs" />
     <Compile Include="Views\IPDFWaitFormView.cs" />
@@ -551,18 +548,6 @@
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\PartialAdjustmenItemDisabledUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\PartialAdjustmenItemDisabledUC.Designer.cs" />
-    <Compile Include="Views\PartialAdjustmentBaseHolderUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\PartialAdjustmentBaseHolderUC.Designer.cs" />
-    <Compile Include="Views\PartialAdjustmentUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\PartialAdjustmentUC.Designer.cs" />
     <Compile Include="Views\PartialAdjustmentView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1444,9 +1429,6 @@
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PartialAdjustmenItemDisabledUC.resx" />
-    <EmbeddedResource Include="Views\PartialAdjustmentBaseHolderUC.resx" />
-    <EmbeddedResource Include="Views\PartialAdjustmentUC.resx" />
     <EmbeddedResource Include="Views\PartialAdjustmentView.resx">
       <DependentUpon>PartialAdjustmentView.cs</DependentUpon>
     </EmbeddedResource>
