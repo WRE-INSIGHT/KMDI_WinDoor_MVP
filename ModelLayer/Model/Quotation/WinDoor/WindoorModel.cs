@@ -667,6 +667,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public List<string> WD_PALst_Description { get; set; }
         public List<decimal> WD_PALst_Price { get; set; }
 
+        public bool WD_IsSelectedAtPartialAdjusment { get; set; }
         public bool WD_IsPartialADPreviousExist { get; set; }
         public Image WD_PAPreviousImage { get; set; }
         public string WD_PAPreviousDescription { get; set; }
