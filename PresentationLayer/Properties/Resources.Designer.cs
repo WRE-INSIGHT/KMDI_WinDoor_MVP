@@ -305,6 +305,16 @@ namespace PresentationLayer.Properties
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+         internal static System.Drawing.Bitmap delete1 {
+            get {
+                object obj = ResourceManager.GetObject("delete1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap disabled_forward_button_104px
         {
             get
@@ -800,6 +810,16 @@ namespace PresentationLayer.Properties
             get
             {
                 object obj = ResourceManager.GetObject("plus_math_96px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PartialADJ {
+            get {
+                object obj = ResourceManager.GetObject("PartialADJ", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

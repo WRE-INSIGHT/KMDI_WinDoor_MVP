@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.pnl_BaseHolderPnl = new System.Windows.Forms.Panel();
-            this.btn_addItemQty = new System.Windows.Forms.Button();
             this.lbl_ItemNo = new System.Windows.Forms.Label();
             this.pnl_BaseHolderBody = new System.Windows.Forms.Panel();
+            this.btn_DeleteItem = new System.Windows.Forms.Button();
+            this.btn_addItemQty = new System.Windows.Forms.Button();
             this.btn_Expnd = new System.Windows.Forms.Button();
             this.pnl_BaseHolderPnl.SuspendLayout();
             this.SuspendLayout();
@@ -39,6 +40,7 @@
             // pnl_BaseHolderPnl
             // 
             this.pnl_BaseHolderPnl.BackColor = System.Drawing.SystemColors.Control;
+            this.pnl_BaseHolderPnl.Controls.Add(this.btn_DeleteItem);
             this.pnl_BaseHolderPnl.Controls.Add(this.btn_addItemQty);
             this.pnl_BaseHolderPnl.Controls.Add(this.lbl_ItemNo);
             this.pnl_BaseHolderPnl.Controls.Add(this.btn_Expnd);
@@ -47,18 +49,6 @@
             this.pnl_BaseHolderPnl.Name = "pnl_BaseHolderPnl";
             this.pnl_BaseHolderPnl.Size = new System.Drawing.Size(732, 29);
             this.pnl_BaseHolderPnl.TabIndex = 0;
-            // 
-            // btn_addItemQty
-            // 
-            this.btn_addItemQty.BackgroundImage = global::PresentationLayer.Properties.Resources.add_trans;
-            this.btn_addItemQty.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_addItemQty.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btn_addItemQty.Location = new System.Drawing.Point(676, 0);
-            this.btn_addItemQty.Name = "btn_addItemQty";
-            this.btn_addItemQty.Size = new System.Drawing.Size(28, 29);
-            this.btn_addItemQty.TabIndex = 6;
-            this.btn_addItemQty.UseVisualStyleBackColor = true;
-            this.btn_addItemQty.Click += new System.EventHandler(this.btn_addItemQty_Click);
             // 
             // lbl_ItemNo
             // 
@@ -78,6 +68,29 @@
             this.pnl_BaseHolderBody.Name = "pnl_BaseHolderBody";
             this.pnl_BaseHolderBody.Size = new System.Drawing.Size(732, 171);
             this.pnl_BaseHolderBody.TabIndex = 1;
+            // 
+            // btn_DeleteItem
+            // 
+            this.btn_DeleteItem.BackgroundImage = global::PresentationLayer.Properties.Resources.delete1;
+            this.btn_DeleteItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_DeleteItem.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btn_DeleteItem.Location = new System.Drawing.Point(648, 0);
+            this.btn_DeleteItem.Name = "btn_DeleteItem";
+            this.btn_DeleteItem.Size = new System.Drawing.Size(28, 29);
+            this.btn_DeleteItem.TabIndex = 7;
+            this.btn_DeleteItem.UseVisualStyleBackColor = true;
+            // 
+            // btn_addItemQty
+            // 
+            this.btn_addItemQty.BackgroundImage = global::PresentationLayer.Properties.Resources.add_trans;
+            this.btn_addItemQty.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_addItemQty.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btn_addItemQty.Location = new System.Drawing.Point(676, 0);
+            this.btn_addItemQty.Name = "btn_addItemQty";
+            this.btn_addItemQty.Size = new System.Drawing.Size(28, 29);
+            this.btn_addItemQty.TabIndex = 6;
+            this.btn_addItemQty.UseVisualStyleBackColor = true;
+            this.btn_addItemQty.Click += new System.EventHandler(this.btn_addItemQty_Click);
             // 
             // btn_Expnd
             // 
@@ -114,5 +127,6 @@
         private System.Windows.Forms.Button btn_Expnd;
         private System.Windows.Forms.Label lbl_ItemNo;
         private System.Windows.Forms.Button btn_addItemQty;
+        private System.Windows.Forms.Button btn_DeleteItem;
     }
 }
