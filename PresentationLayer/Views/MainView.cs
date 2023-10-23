@@ -34,6 +34,7 @@ namespace PresentationLayer.Views
                     SortItemtoolStripButton1.Enabled = true;
                     PriceHistorytoolStripButton.Enabled = true;
                     DateAssignedtoolStripButton.Enabled = true;
+                    partialAdjustmentToolstrip.Enabled = true;
                 }
                 else
                 {
@@ -50,6 +51,7 @@ namespace PresentationLayer.Views
                     SortItemtoolStripButton1.Enabled = false;
                     PriceHistorytoolStripButton.Enabled = false;
                     DateAssignedtoolStripButton.Enabled = false;
+                    partialAdjustmentToolstrip.Enabled = false;
                 }
             }
         }

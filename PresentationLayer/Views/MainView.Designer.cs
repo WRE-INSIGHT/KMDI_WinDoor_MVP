@@ -807,13 +807,13 @@
             // 
             // partialAdjustmentToolstrip
             // 
-            this.partialAdjustmentToolstrip.BackgroundImage = global::PresentationLayer.Properties.Resources.cancel_30px;
             this.partialAdjustmentToolstrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.partialAdjustmentToolstrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.partialAdjustmentToolstrip.Enabled = false;
+            this.partialAdjustmentToolstrip.Image = global::PresentationLayer.Properties.Resources.PartialADJ;
             this.partialAdjustmentToolstrip.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.partialAdjustmentToolstrip.Name = "partialAdjustmentToolstrip";
-            this.partialAdjustmentToolstrip.Size = new System.Drawing.Size(23, 29);
+            this.partialAdjustmentToolstrip.Size = new System.Drawing.Size(24, 29);
             this.partialAdjustmentToolstrip.Text = "PartialAdjustment";
             this.partialAdjustmentToolstrip.Click += new System.EventHandler(this.partialAdjusmentToolstrip_Click);
             // 

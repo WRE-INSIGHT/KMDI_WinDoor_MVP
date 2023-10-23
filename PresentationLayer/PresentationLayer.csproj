@@ -1838,6 +1838,7 @@
     <Content Include="Resources\cloud_sync_40px.png" />
     <None Include="Resources\concrete2.png" />
     <None Include="Resources\delete.png" />
+    <None Include="Resources\delete1.png" />
     <Content Include="Resources\delete_file_30px.png" />
     <None Include="Resources\ExtensionTop.png" />
     <None Include="Resources\ExtensionBot.png" />
@@ -1891,6 +1892,7 @@
     <Content Include="Resources\MultiplePanel.png" />
     <Content Include="Resources\MultiplePanel1.png" />
     <Content Include="Resources\MultiplePanelSliding.png" />
+    <None Include="Resources\PartialADJ.png" />
     <Content Include="Resources\plus2_104px.png" />
     <Content Include="Resources\plus_104px.png" />
     <None Include="Resources\plus_math_96px.png" />

@@ -163,6 +163,8 @@ namespace PresentationLayer.Presenter.UserControls
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = Math.Round(_windoorModel.WD_price, 2).ToString("N");
                 #endregion
             }
+
+            BtnColorChanger();
             #endregion
         }
 
@@ -194,15 +196,15 @@ namespace PresentationLayer.Presenter.UserControls
         {
             if (_windoorModel.WD_IsPartialADPreviousExist)
             {
-
+                _paBaseHolderUC.PABaseHolderAddItemQtyBtn().BackgroundImage = Properties.Resources.add_green;
             }
             else if (_windoorModel.WD_PALst_Description.Count != 0)
             {
-
+                _paBaseHolderUC.PABaseHolderAddItemQtyBtn().BackgroundImage = Properties.Resources.add_black;
             }
             else
             {
-
+                _paBaseHolderUC.PABaseHolderAddItemQtyBtn().BackgroundImage = Properties.Resources.add_trans;
             }
         }
 
