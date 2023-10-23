@@ -866,7 +866,7 @@ namespace PresentationLayer.Presenter
                     _cmbMultipleGlassUpgrade.Items.Clear();
                     _dgv_GlassUpgrade.Columns.Clear();
                     _dgv_GlassUpgrade.DataSource = null;
-
+                    
                     //databinding new DT
                     LoadNewItemsInMultipleGlassUpgrade(_cmbGlassType.SelectedItem.ToString());
                     LoadDataGridViewSettings();
