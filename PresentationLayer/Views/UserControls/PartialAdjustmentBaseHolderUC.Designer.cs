@@ -31,8 +31,8 @@
             this.pnl_BaseHolderPnl = new System.Windows.Forms.Panel();
             this.btn_addItemQty = new System.Windows.Forms.Button();
             this.lbl_ItemNo = new System.Windows.Forms.Label();
-            this.btn_Expnd = new System.Windows.Forms.Button();
             this.pnl_BaseHolderBody = new System.Windows.Forms.Panel();
+            this.btn_Expnd = new System.Windows.Forms.Button();
             this.pnl_BaseHolderPnl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +50,7 @@
             // 
             // btn_addItemQty
             // 
+            this.btn_addItemQty.BackgroundImage = global::PresentationLayer.Properties.Resources.add_trans;
             this.btn_addItemQty.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_addItemQty.Dock = System.Windows.Forms.DockStyle.Right;
             this.btn_addItemQty.Location = new System.Drawing.Point(676, 0);
@@ -69,18 +70,6 @@
             this.lbl_ItemNo.TabIndex = 5;
             this.lbl_ItemNo.Text = "...";
             // 
-            // btn_Expnd
-            // 
-            this.btn_Expnd.BackgroundImage = global::PresentationLayer.Properties.Resources.cancel_30px;
-            this.btn_Expnd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_Expnd.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btn_Expnd.Location = new System.Drawing.Point(704, 0);
-            this.btn_Expnd.Name = "btn_Expnd";
-            this.btn_Expnd.Size = new System.Drawing.Size(28, 29);
-            this.btn_Expnd.TabIndex = 0;
-            this.btn_Expnd.UseVisualStyleBackColor = true;
-            this.btn_Expnd.Click += new System.EventHandler(this.btn_Expnd_Click);
-            // 
             // pnl_BaseHolderBody
             // 
             this.pnl_BaseHolderBody.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -89,6 +78,18 @@
             this.pnl_BaseHolderBody.Name = "pnl_BaseHolderBody";
             this.pnl_BaseHolderBody.Size = new System.Drawing.Size(732, 171);
             this.pnl_BaseHolderBody.TabIndex = 1;
+            // 
+            // btn_Expnd
+            // 
+            this.btn_Expnd.BackgroundImage = global::PresentationLayer.Properties.Resources.arrowD_white;
+            this.btn_Expnd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_Expnd.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btn_Expnd.Location = new System.Drawing.Point(704, 0);
+            this.btn_Expnd.Name = "btn_Expnd";
+            this.btn_Expnd.Size = new System.Drawing.Size(28, 29);
+            this.btn_Expnd.TabIndex = 0;
+            this.btn_Expnd.UseVisualStyleBackColor = true;
+            this.btn_Expnd.Click += new System.EventHandler(this.btn_Expnd_Click);
             // 
             // PartialAdjustmentBaseHolderUC
             // 
