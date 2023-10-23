@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.pnl_BaseHolderPnl = new System.Windows.Forms.Panel();
-            this.lbl_ItemNo = new System.Windows.Forms.Label();
-            this.pnl_BaseHolderBody = new System.Windows.Forms.Panel();
             this.btn_addItemQty = new System.Windows.Forms.Button();
+            this.lbl_ItemNo = new System.Windows.Forms.Label();
             this.btn_Expnd = new System.Windows.Forms.Button();
+            this.pnl_BaseHolderBody = new System.Windows.Forms.Panel();
             this.pnl_BaseHolderPnl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,25 +48,6 @@
             this.pnl_BaseHolderPnl.Size = new System.Drawing.Size(732, 29);
             this.pnl_BaseHolderPnl.TabIndex = 0;
             // 
-            // lbl_ItemNo
-            // 
-            this.lbl_ItemNo.AutoSize = true;
-            this.lbl_ItemNo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ItemNo.Location = new System.Drawing.Point(3, 5);
-            this.lbl_ItemNo.Name = "lbl_ItemNo";
-            this.lbl_ItemNo.Size = new System.Drawing.Size(20, 17);
-            this.lbl_ItemNo.TabIndex = 5;
-            this.lbl_ItemNo.Text = "...";
-            // 
-            // pnl_BaseHolderBody
-            // 
-            this.pnl_BaseHolderBody.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pnl_BaseHolderBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_BaseHolderBody.Location = new System.Drawing.Point(0, 29);
-            this.pnl_BaseHolderBody.Name = "pnl_BaseHolderBody";
-            this.pnl_BaseHolderBody.Size = new System.Drawing.Size(732, 171);
-            this.pnl_BaseHolderBody.TabIndex = 1;
-            // 
             // btn_addItemQty
             // 
             this.btn_addItemQty.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -77,6 +58,16 @@
             this.btn_addItemQty.TabIndex = 6;
             this.btn_addItemQty.UseVisualStyleBackColor = true;
             this.btn_addItemQty.Click += new System.EventHandler(this.btn_addItemQty_Click);
+            // 
+            // lbl_ItemNo
+            // 
+            this.lbl_ItemNo.AutoSize = true;
+            this.lbl_ItemNo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ItemNo.Location = new System.Drawing.Point(5, 5);
+            this.lbl_ItemNo.Name = "lbl_ItemNo";
+            this.lbl_ItemNo.Size = new System.Drawing.Size(20, 17);
+            this.lbl_ItemNo.TabIndex = 5;
+            this.lbl_ItemNo.Text = "...";
             // 
             // btn_Expnd
             // 
@@ -89,6 +80,15 @@
             this.btn_Expnd.TabIndex = 0;
             this.btn_Expnd.UseVisualStyleBackColor = true;
             this.btn_Expnd.Click += new System.EventHandler(this.btn_Expnd_Click);
+            // 
+            // pnl_BaseHolderBody
+            // 
+            this.pnl_BaseHolderBody.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnl_BaseHolderBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnl_BaseHolderBody.Location = new System.Drawing.Point(0, 29);
+            this.pnl_BaseHolderBody.Name = "pnl_BaseHolderBody";
+            this.pnl_BaseHolderBody.Size = new System.Drawing.Size(732, 171);
+            this.pnl_BaseHolderBody.TabIndex = 1;
             // 
             // PartialAdjustmentBaseHolderUC
             // 

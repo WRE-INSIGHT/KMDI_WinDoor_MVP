@@ -33,6 +33,7 @@
             this._printToolStripBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this._ItemPanelToolstripBtn = new System.Windows.Forms.ToolStripButton();
+            this._itemSortToolStrpBtn = new System.Windows.Forms.ToolStripButton();
             this._pnlHeader = new System.Windows.Forms.Panel();
             this.lbl_currItem = new System.Windows.Forms.Label();
             this.lbl_prevItem = new System.Windows.Forms.Label();
@@ -40,7 +41,6 @@
             this._btn_addItem = new System.Windows.Forms.Button();
             this.chklstbx_itemList = new System.Windows.Forms.CheckedListBox();
             this._pnlBody = new System.Windows.Forms.Panel();
-            this._itemSortToolStrpBtn = new System.Windows.Forms.ToolStripButton();
             this._paToolStripMenu.SuspendLayout();
             this._pnlHeader.SuspendLayout();
             this.pnl_itemList.SuspendLayout();
@@ -84,6 +84,16 @@
             this._ItemPanelToolstripBtn.Text = "Add Item To List";
             this._ItemPanelToolstripBtn.Click += new System.EventHandler(this._ItemPanelToolstripBtn_Click);
             // 
+            // _itemSortToolStrpBtn
+            // 
+            this._itemSortToolStrpBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._itemSortToolStrpBtn.Image = ((System.Drawing.Image)(resources.GetObject("_itemSortToolStrpBtn.Image")));
+            this._itemSortToolStrpBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._itemSortToolStrpBtn.Name = "_itemSortToolStrpBtn";
+            this._itemSortToolStrpBtn.Size = new System.Drawing.Size(23, 22);
+            this._itemSortToolStrpBtn.Text = "Sort";
+            this._itemSortToolStrpBtn.Click += new System.EventHandler(this._itemSortToolStrpBtn_Click);
+            // 
             // _pnlHeader
             // 
             this._pnlHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -111,7 +121,7 @@
             this.lbl_prevItem.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbl_prevItem.AutoSize = true;
             this.lbl_prevItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_prevItem.Location = new System.Drawing.Point(106, 7);
+            this.lbl_prevItem.Location = new System.Drawing.Point(107, 7);
             this.lbl_prevItem.Name = "lbl_prevItem";
             this.lbl_prevItem.Size = new System.Drawing.Size(140, 17);
             this.lbl_prevItem.TabIndex = 5;
@@ -158,16 +168,6 @@
             this._pnlBody.Name = "_pnlBody";
             this._pnlBody.Size = new System.Drawing.Size(733, 229);
             this._pnlBody.TabIndex = 4;
-            // 
-            // _itemSortToolStrpBtn
-            // 
-            this._itemSortToolStrpBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._itemSortToolStrpBtn.Image = ((System.Drawing.Image)(resources.GetObject("_itemSortToolStrpBtn.Image")));
-            this._itemSortToolStrpBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._itemSortToolStrpBtn.Name = "_itemSortToolStrpBtn";
-            this._itemSortToolStrpBtn.Size = new System.Drawing.Size(23, 22);
-            this._itemSortToolStrpBtn.Text = "Sort";
-            this._itemSortToolStrpBtn.Click += new System.EventHandler(this._itemSortToolStrpBtn_Click);
             // 
             // PartialAdjustmentView
             // 
