@@ -84,10 +84,38 @@ namespace PresentationLayer.Properties
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AddNew_Concrete
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap add_black {
+            get {
+                object obj = ResourceManager.GetObject("add_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap add_green {
+            get {
+                object obj = ResourceManager.GetObject("add_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap add_trans {
+            get {
+                object obj = ResourceManager.GetObject("add_trans", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AddNew_Concrete {
+            get {
                 object obj = ResourceManager.GetObject("AddNew_Concrete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
@@ -124,6 +152,28 @@ namespace PresentationLayer.Properties
         {
             get
             {
+        internal static System.Drawing.Bitmap arrowD_black {
+            get {
+                object obj = ResourceManager.GetObject("arrowD_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrowD_white {
+            get {
+                object obj = ResourceManager.GetObject("arrowD_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AwningPanel {
+            get {
                 object obj = ResourceManager.GetObject("AwningPanel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
@@ -263,7 +313,6 @@ namespace PresentationLayer.Properties
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
@@ -273,7 +322,6 @@ namespace PresentationLayer.Properties
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>

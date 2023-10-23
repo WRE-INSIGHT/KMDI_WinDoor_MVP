@@ -179,12 +179,12 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     int height_x_Quantity = (panelTitleHeight * _windoorModel.WD_PALst_Designs.Count) + panelTitleHeight;
                     _paBaseHolderUC.GetPABaseHolderUC().Height = height_x_Quantity;
-                    _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.down_chevron;
+                    _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_black;
                 }
                 else
                 {
                     _paBaseHolderUC.GetPABaseHolderUC().Height = panelTitleHeight;
-                    _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.down_arrow_square_outlined_button;
+                    _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_white;
                 }
             }
             #endregion

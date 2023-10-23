@@ -393,7 +393,11 @@
     <Compile Include="Presenter\UserControls\WinDoorPanels\TiltNTurnPanelUCPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\ChangeItemColorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1362,6 +1366,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Annex.rdlc" />
     <EmbeddedResource Include="Reports\GlassSummary.rdlc" />
@@ -1823,9 +1828,14 @@
     <None Include="Resources\add-button.png" />
     <Content Include="Resources\AddNew_Door.png" />
     <Content Include="Resources\AddNew_Window.png" />
+    <None Include="Resources\add_black.png" />
+    <None Include="Resources\add_trans.png" />
+    <None Include="Resources\add_green.png" />
     <Content Include="Resources\animat-cloudsync.gif" />
     <None Include="Resources\AwningPanel.png" />
     <None Include="Resources\back_arrow_104px.png" />
+    <None Include="Resources\arrowD_black.png" />
+    <None Include="Resources\arrowD_white.png" />
     <Content Include="Resources\box_important_40px.png" />
     <None Include="Resources\calendar-icon-hand-circles-date-calendar-logo-template-deadline-concept-illustration_168129-210 %281%29.png" />
     <None Include="Resources\calendar.png" />
