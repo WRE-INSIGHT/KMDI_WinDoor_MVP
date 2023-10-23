@@ -479,6 +479,19 @@ namespace PresentationLayer
                  .RegisterType<IFP_CladdingQtyPropertyUC, FP_CladdingQtyPropertyUC>(new ContainerControlledLifetimeManager())
                  .RegisterType<IFP_CladdingQtyPropertyUCPresenter, FP_CladdingQtyPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                 .RegisterType<IPartialAdjustmentViewPresenter,PartialAdjustmentViewPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentView,PartialAdjustmentView>(new ContainerControlledLifetimeManager())
+
+                 .RegisterType<IPartialAdjustmentUC,PartialAdjustmentUC>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentUCPresenter,PartialAdjustmentUCPresenter>(new ContainerControlledLifetimeManager())
+
+                 .RegisterType<IPartialAdjustmenItemDisabledUC, PartialAdjustmenItemDisabledUC>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentItemDisabledUCPresenter,PartialAdjustmentItemDisabledUCPresenter>(new ContainerControlledLifetimeManager())
+                 
+                 .RegisterType<IPartialAdjustmentBaseHolderPresenter,PartialAdjustmentBaseHolderPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentBaseHolderUC,PartialAdjustmentBaseHolderUC>(new ContainerControlledLifetimeManager())
+
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

@@ -664,6 +664,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public decimal SystemSuggestedPrice { get; set; }
 
 
+
         private int _pnlLeftCounter;
         public int pnlLeftCounter
         {
@@ -704,6 +705,16 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _pnlCount = value;
             }
         }
+
+        public List<Image> WD_PALst_Designs { get; set; }
+        public List<string> WD_PALst_Description { get; set; }
+        public List<decimal> WD_PALst_Price { get; set; }
+
+        public bool WD_IsPartialADPreviousExist { get; set; }
+        public Image WD_PAPreviousImage { get; set; }
+        public string WD_PAPreviousDescription { get; set; }
+        public decimal WD_PAPreviousPrice { get; set; }
+     
         #region Methods
 
         public void SetDimensions_basePlatform()

@@ -81,9 +81,19 @@ namespace ModelLayer.Model.Quotation.WinDoor
         string TotalPriceHistory { get; set; }
         string TotalPriceHistoryStatus { get; set; }
         List<string> lst_TotalPriceHistory { get; set; }
+
         int pnlLeftCounter { get; set; }
         int pnlRightCounter { get; set; }
         int pnlCount { get; set; }
+
+        List<Image> WD_PALst_Designs { get; set; }
+        List<string> WD_PALst_Description { get; set; }
+        List<decimal> WD_PALst_Price { get; set; }
+        bool WD_IsPartialADPreviousExist { get; set; }
+        Image WD_PAPreviousImage { get; set; }
+        string WD_PAPreviousDescription { get; set; }
+        decimal WD_PAPreviousPrice { get; set; }
+
         void Fit_MyControls_ToBindDimensions();
         void SetfrmDimentionZoom();
         void Fit_MyControls_ImagersToBindDimensions();

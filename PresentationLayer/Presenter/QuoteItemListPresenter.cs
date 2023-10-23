@@ -1378,12 +1378,12 @@ namespace PresentationLayer.Presenter
                     //{
                     //    GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
                     //}
-
+                  
                     //if (GeorgianBarVerticalQty > 0)
                     //{
                     //    GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
                     //}
-
+                  
                     IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
                     //if (_mainPresenter.lst_glassThicknessPerItem.Count != 0)
                     //{
@@ -1611,7 +1611,7 @@ namespace PresentationLayer.Presenter
                 Console.WriteLine("Event select all.: " + chkbox_checkstate_frmQuoteItemList.ToString());
             }
         }
-
+        
         public void SetAllItemDiscount(int inputedDiscount)
         {
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
@@ -1693,7 +1693,7 @@ namespace PresentationLayer.Presenter
         }
 
 
-
+        
 
     }
 

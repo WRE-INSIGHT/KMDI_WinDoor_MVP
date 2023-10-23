@@ -129,6 +129,9 @@ namespace PresentationLayer.Presenter
         private ISetMultipleGlassThicknessPresenter _setMultipleGlassThicknessPresenter;
         private IPriceHistoryPresenter _priceHistoryPresenter;
         private IGlassUpgradePresenter _glassUpgradePresenter;
+        private IPartialAdjustmentViewPresenter _partialAdjustmentViewPresenter;
+        private IPartialAdjustmentUCPresenter _partialAdjustmentUCPresenter;
+        private IPartialAdjustmentBaseHolderPresenter _partialAdjustmentBaseHolderPresenter;
 
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
@@ -196,6 +199,8 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region GetSet
+
+        #region List 
         private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
         public IDictionary<string, string> RDLCHeader
         {
@@ -220,6 +225,8 @@ namespace PresentationLayer.Presenter
             get { return _unglazed; }
             set { _unglazed = value; }
         }
+        
+        #endregion
 
         public bool ProvinceIntownOutofTown
         {
@@ -840,7 +847,10 @@ namespace PresentationLayer.Presenter
                              IPricingPresenter pricingPresenter,
                              ISetMultipleGlassThicknessPresenter setMultipleGlassThicknessPresenter,
                              IPriceHistoryPresenter priceHistoryPresenter,
-                             IGlassUpgradePresenter glassupgradePresenter
+                             IGlassUpgradePresenter glassupgradePresenter,
+                             IPartialAdjustmentViewPresenter partialAdjustmentViewPresenter,
+                             IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter,
+                             IPartialAdjustmentBaseHolderPresenter partialAdjustmentBaseHolderPresenter
                              )
         {
             _mainView = mainView;
@@ -906,6 +916,9 @@ namespace PresentationLayer.Presenter
             _lblCurrentPrice = _mainView.GetCurrentPrice();
             _priceHistoryPresenter = priceHistoryPresenter;
             _glassUpgradePresenter = glassupgradePresenter;
+            _partialAdjustmentViewPresenter = partialAdjustmentViewPresenter;
+            _partialAdjustmentUCPresenter = partialAdjustmentUCPresenter;
+            _partialAdjustmentBaseHolderPresenter = partialAdjustmentBaseHolderPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -1019,6 +1032,14 @@ namespace PresentationLayer.Presenter
             _mainView.PriceHistorytoolStripButtonClickEventRaised += _mainView_PriceHistorytoolStripButtonClickEventRaised;
             _mainView.DateAssignedtoolStripButtonClickEventRaised += _mainView_DateAssignedtoolStripButtonClickEventRaised;
             _mainView.glassUpgradeToolStripButtonClickEventRaised += _mainView_glassUpgradeToolStripButtonClickEventRaised;
+            _mainView.partialAdjusmentToolstripClickClickEventRaised += _mainView_partialAdjusmentToolstripClickClickEventRaised;
+           
+        }
+
+        private void _mainView_partialAdjusmentToolstripClickClickEventRaised(object sender, EventArgs e)
+        {
+            IPartialAdjustmentViewPresenter partialAdjustment = _partialAdjustmentViewPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, this,_partialAdjustmentBaseHolderPresenter);
+            partialAdjustment.GetPartialAdjustmentView().ShowPartialAdjusmentView();
         }
 
         private void _mainView_glassUpgradeToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -3817,8 +3838,6 @@ namespace PresentationLayer.Presenter
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
             }
-
-
         }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
