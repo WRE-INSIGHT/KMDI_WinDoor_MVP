@@ -520,9 +520,6 @@
     <Compile Include="Views\IGlassUpgradeView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
-    <Compile Include="Views\IPartialAdjustmenItemDisabledUC.cs" />
-    <Compile Include="Views\IPartialAdjustmentBaseHolderUC.cs" />
-    <Compile Include="Views\IPartialAdjustmentUC.cs" />
     <Compile Include="Views\IPartialAdjustmentView.cs" />
     <Compile Include="Views\IPDFCompilerView.cs" />
     <Compile Include="Views\IPDFWaitFormView.cs" />
@@ -549,18 +546,6 @@
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\PartialAdjustmenItemDisabledUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\PartialAdjustmenItemDisabledUC.Designer.cs" />
-    <Compile Include="Views\PartialAdjustmentBaseHolderUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\PartialAdjustmentBaseHolderUC.Designer.cs" />
-    <Compile Include="Views\PartialAdjustmentUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\PartialAdjustmentUC.Designer.cs" />
     <Compile Include="Views\PartialAdjustmentView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -828,6 +813,9 @@
     <Compile Include="Views\UserControls\IItemInfoUC.cs" />
     <Compile Include="Views\UserControls\IMultiPanelPropertiesUC.cs" />
     <Compile Include="Views\UserControls\IPanelPropertiesUC.cs" />
+    <Compile Include="Views\UserControls\IPartialAdjustmenItemDisabledUC.cs" />
+    <Compile Include="Views\UserControls\IPartialAdjustmentBaseHolderUC.cs" />
+    <Compile Include="Views\UserControls\IPartialAdjustmentUC.cs" />
     <Compile Include="Views\UserControls\IQuoteItemListUC.cs" />
     <Compile Include="Views\UserControls\IScreenAddOnPropertiesUC.cs" />
     <Compile Include="Views\UserControls\ISortItemUC.cs" />
@@ -1079,6 +1067,24 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.Designer.cs">
       <DependentUpon>PP_TrackRailPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmenItemDisabledUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmenItemDisabledUC.Designer.cs">
+      <DependentUpon>PartialAdjustmenItemDisabledUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmentBaseHolderUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmentBaseHolderUC.Designer.cs">
+      <DependentUpon>PartialAdjustmentBaseHolderUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmentUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmentUC.Designer.cs">
+      <DependentUpon>PartialAdjustmentUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOnPropertiesUC.cs">
       <SubType>UserControl</SubType>
@@ -1414,9 +1420,6 @@
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PartialAdjustmenItemDisabledUC.resx" />
-    <EmbeddedResource Include="Views\PartialAdjustmentBaseHolderUC.resx" />
-    <EmbeddedResource Include="Views\PartialAdjustmentUC.resx" />
     <EmbeddedResource Include="Views\PartialAdjustmentView.resx">
       <DependentUpon>PartialAdjustmentView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1644,6 +1647,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.resx">
       <DependentUpon>PP_TrackRailPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PartialAdjustmenItemDisabledUC.resx">
+      <DependentUpon>PartialAdjustmenItemDisabledUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PartialAdjustmentBaseHolderUC.resx">
+      <DependentUpon>PartialAdjustmentBaseHolderUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PartialAdjustmentUC.resx">
+      <DependentUpon>PartialAdjustmentUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ScreenAddOnPropertiesUC.resx">
       <DependentUpon>ScreenAddOnPropertiesUC.cs</DependentUpon>
