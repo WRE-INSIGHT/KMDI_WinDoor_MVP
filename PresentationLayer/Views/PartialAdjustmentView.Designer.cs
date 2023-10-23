@@ -32,9 +32,9 @@
             this._paToolStripMenu = new System.Windows.Forms.ToolStrip();
             this._printToolStripBtn = new System.Windows.Forms.ToolStripButton();
             this._pnlHeader = new System.Windows.Forms.Panel();
-            this._pnlBody = new System.Windows.Forms.Panel();
-            this.lbl_prevItem = new System.Windows.Forms.Label();
             this.lbl_currItem = new System.Windows.Forms.Label();
+            this.lbl_prevItem = new System.Windows.Forms.Label();
+            this._pnlBody = new System.Windows.Forms.Panel();
             this._paToolStripMenu.SuspendLayout();
             this._pnlHeader.SuspendLayout();
             this.SuspendLayout();
@@ -69,15 +69,16 @@
             this._pnlHeader.Size = new System.Drawing.Size(733, 35);
             this._pnlHeader.TabIndex = 1;
             // 
-            // _pnlBody
+            // lbl_currItem
             // 
-            this._pnlBody.BackColor = System.Drawing.SystemColors.Control;
-            this._pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._pnlBody.Location = new System.Drawing.Point(0, 60);
-            this._pnlBody.MinimumSize = new System.Drawing.Size(732, 176);
-            this._pnlBody.Name = "_pnlBody";
-            this._pnlBody.Size = new System.Drawing.Size(733, 348);
-            this._pnlBody.TabIndex = 2;
+            this.lbl_currItem.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_currItem.AutoSize = true;
+            this.lbl_currItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_currItem.Location = new System.Drawing.Point(479, 8);
+            this.lbl_currItem.Name = "lbl_currItem";
+            this.lbl_currItem.Size = new System.Drawing.Size(133, 17);
+            this.lbl_currItem.TabIndex = 6;
+            this.lbl_currItem.Text = "Current Item Design";
             // 
             // lbl_prevItem
             // 
@@ -90,16 +91,15 @@
             this.lbl_prevItem.TabIndex = 5;
             this.lbl_prevItem.Text = "Previous Item Design";
             // 
-            // lbl_currItem
+            // _pnlBody
             // 
-            this.lbl_currItem.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lbl_currItem.AutoSize = true;
-            this.lbl_currItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_currItem.Location = new System.Drawing.Point(479, 8);
-            this.lbl_currItem.Name = "lbl_currItem";
-            this.lbl_currItem.Size = new System.Drawing.Size(133, 17);
-            this.lbl_currItem.TabIndex = 6;
-            this.lbl_currItem.Text = "Current Item Design";
+            this._pnlBody.BackColor = System.Drawing.SystemColors.Control;
+            this._pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._pnlBody.Location = new System.Drawing.Point(0, 60);
+            this._pnlBody.MinimumSize = new System.Drawing.Size(732, 176);
+            this._pnlBody.Name = "_pnlBody";
+            this._pnlBody.Size = new System.Drawing.Size(733, 348);
+            this._pnlBody.TabIndex = 2;
             // 
             // PartialAdjustmentView
             // 

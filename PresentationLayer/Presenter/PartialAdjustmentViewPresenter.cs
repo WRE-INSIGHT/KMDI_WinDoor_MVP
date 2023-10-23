@@ -25,8 +25,6 @@ namespace PresentationLayer.Presenter
         private IPartialAdjustmentBaseHolderPresenter _partialAdjustmentBaseHolderPresenter;
            
 
-
-
         public PartialAdjustmentViewPresenter(IPartialAdjustmentView partialAdjustmentView,
                                               IPrintQuotePresenter printQuotePresenter)
         {

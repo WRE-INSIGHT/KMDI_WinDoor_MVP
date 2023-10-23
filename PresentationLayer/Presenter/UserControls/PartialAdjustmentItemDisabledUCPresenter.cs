@@ -20,6 +20,8 @@ namespace PresentationLayer.Presenter.UserControls
         private IQuotationModel _quotationModel;
         private IPartialAdjustmenItemDisabledUC _pAItemDisabledUC;
 
+
+
         private UserControl _paUCView;
 
         private string _userControlBackground;     
