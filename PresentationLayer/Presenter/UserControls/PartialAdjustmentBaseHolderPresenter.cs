@@ -37,6 +37,31 @@ namespace PresentationLayer.Presenter.UserControls
             _paBaseHolderUC.PartialAdjustmentBaseHolderUC_LoadEventRaised += _paBaseHolderUC_PartialAdjustmentBaseHolderUC_LoadEventRaised;
             _paBaseHolderUC.btn_Expnd_ClickEventRaised += _paBaseHolderUC_btn_Expnd_ClickEventRaised;
             _paBaseHolderUC.btn_addItemQty_ClickEventRaised += _paBaseHolderUC_btn_addItemQty_ClickEventRaised;
+            _paBaseHolderUC.btn_DeleteItem_ClickEventRaised += _paBaseHolderUC_btn_DeleteItem_ClickEventRaised;
+        }
+
+        private void _paBaseHolderUC_btn_DeleteItem_ClickEventRaised(object sender, EventArgs e)
+        {
+            DialogResult DiagRes = MessageBox.Show("Delete " + _windoorModel.WD_name + " ?", "Delete Partial Adjustment", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (DiagRes == DialogResult.Yes)
+            {
+                foreach (Control itm in _partialAdjustmentViewPresenter.GetPartialAdjustmentView().GetPanelBody().Controls.OfType<Control>().ToList())
+                {
+                    if (_windoorModel.WD_name == itm.Name)
+                    {
+                        #region Reset to Default wdm prop
+                        _windoorModel.WD_IsSelectedAtPartialAdjusment = false;
+                        _windoorModel.WD_IsPartialADPreviousExist = false;
+                        _windoorModel.WD_PALst_Description.Clear();
+                        _windoorModel.WD_PALst_Designs.Clear();
+                        _windoorModel.WD_PALst_Price.Clear();
+                        #endregion
+                        _partialAdjustmentViewPresenter.GetPartialAdjustmentView().GetPanelBody().Controls.Remove(itm);
+
+                        break;
+                    }
+                }
+            }
         }
 
         private void _paBaseHolderUC_btn_addItemQty_ClickEventRaised(object sender, EventArgs e)
@@ -142,6 +167,10 @@ namespace PresentationLayer.Presenter.UserControls
 
             if (_isPrevDesExist)
             {
+                if(_windoorModel.WD_PALst_Designs[indxItemPos - 1] != null)
+                {
+                    _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetPAItemNo().Text = "AD";
+                }
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = _windoorModel.WD_PALst_Designs[indxItemPos - 1];//Get Previous Img
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = _windoorModel.WD_PALst_Description[indxItemPos - 1];//Get Previous Desc
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = _windoorModel.WD_PALst_Price[indxItemPos - 1].ToString("N");//Get Previous Price

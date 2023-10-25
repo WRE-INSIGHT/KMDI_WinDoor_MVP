@@ -73,10 +73,9 @@ namespace PresentationLayer.Presenter.UserControls
             _paAdjustmentItemDisabledUCPresenter.UserControlBackground = BGColor;
             _paAdjustmentItemDisabledUCPresenter.PartialAdjusmentItemDisabledUCIndexPlacement = PartialAdjusmentUCIndexPlacement; // send index placement to itemdisabled
 
-
-            _mainPresenter.GetMainView().GetThis().Controls.Add(paUC);
-
-            _partialAdjustmentViewPresenter.GetPartialAdjustmentView().ClosePartialAdjustmentView();
+            _mainPresenter.GetMainView().GetThis().Controls.Add(paUC); 
+                
+            _partialAdjustmentViewPresenter.GetPartialAdjustmentView().ClosePartialAdjustmentView(); 
 
         } 
 

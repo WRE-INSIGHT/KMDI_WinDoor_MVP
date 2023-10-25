@@ -30,46 +30,33 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PartialAdjustmentUC));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_UsePartialAdjustment = new System.Windows.Forms.Button();
             this.lbl_ItemNo = new System.Windows.Forms.Label();
-            this.btn_HideAndShow = new System.Windows.Forms.Button();
             this._paOldDescRTextBox = new System.Windows.Forms.RichTextBox();
-            this._paOldDesPictureBox = new System.Windows.Forms.PictureBox();
             this._paPnlAfter = new System.Windows.Forms.Panel();
             this._paCurrentDescRTextBox = new System.Windows.Forms.RichTextBox();
-            this._paCurrectDesPictureBox = new System.Windows.Forms.PictureBox();
             this.lbl_PrevPrice = new System.Windows.Forms.Label();
             this.lbl_CurrPrice = new System.Windows.Forms.Label();
+            this._paOldDesPictureBox = new System.Windows.Forms.PictureBox();
+            this._paCurrectDesPictureBox = new System.Windows.Forms.PictureBox();
+            this.btn_UsePartialAdjustment = new System.Windows.Forms.Button();
+            this.btn_HideAndShow = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._paOldDesPictureBox)).BeginInit();
             this._paPnlAfter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._paOldDesPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._paCurrectDesPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.btn_UsePartialAdjustment);
             this.panel1.Controls.Add(this.lbl_ItemNo);
+            this.panel1.Controls.Add(this.btn_UsePartialAdjustment);
             this.panel1.Controls.Add(this.btn_HideAndShow);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(732, 29);
             this.panel1.TabIndex = 0;
-            // 
-            // btn_UsePartialAdjustment
-            // 
-            this.btn_UsePartialAdjustment.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_UsePartialAdjustment.BackgroundImage")));
-            this.btn_UsePartialAdjustment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_UsePartialAdjustment.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btn_UsePartialAdjustment.Location = new System.Drawing.Point(671, 0);
-            this.btn_UsePartialAdjustment.Name = "btn_UsePartialAdjustment";
-            this.btn_UsePartialAdjustment.Size = new System.Drawing.Size(30, 27);
-            this.btn_UsePartialAdjustment.TabIndex = 5;
-            this.btn_UsePartialAdjustment.UseVisualStyleBackColor = true;
-            this.btn_UsePartialAdjustment.Click += new System.EventHandler(this.btn_UsePartialAdjustment_Click);
             // 
             // lbl_ItemNo
             // 
@@ -81,18 +68,6 @@
             this.lbl_ItemNo.TabIndex = 4;
             this.lbl_ItemNo.Text = "...";
             // 
-            // btn_HideAndShow
-            // 
-            this.btn_HideAndShow.BackgroundImage = global::PresentationLayer.Properties.Resources.view;
-            this.btn_HideAndShow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_HideAndShow.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btn_HideAndShow.Location = new System.Drawing.Point(701, 0);
-            this.btn_HideAndShow.Name = "btn_HideAndShow";
-            this.btn_HideAndShow.Size = new System.Drawing.Size(29, 27);
-            this.btn_HideAndShow.TabIndex = 3;
-            this.btn_HideAndShow.UseVisualStyleBackColor = true;
-            this.btn_HideAndShow.Click += new System.EventHandler(this.btn_HideAndShow_Click);
-            // 
             // _paOldDescRTextBox
             // 
             this._paOldDescRTextBox.Location = new System.Drawing.Point(179, 0);
@@ -100,16 +75,6 @@
             this._paOldDescRTextBox.Size = new System.Drawing.Size(184, 145);
             this._paOldDescRTextBox.TabIndex = 1;
             this._paOldDescRTextBox.Text = "";
-            // 
-            // _paOldDesPictureBox
-            // 
-            this._paOldDesPictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this._paOldDesPictureBox.Location = new System.Drawing.Point(0, 0);
-            this._paOldDesPictureBox.Name = "_paOldDesPictureBox";
-            this._paOldDesPictureBox.Size = new System.Drawing.Size(181, 145);
-            this._paOldDesPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this._paOldDesPictureBox.TabIndex = 0;
-            this._paOldDesPictureBox.TabStop = false;
             // 
             // _paPnlAfter
             // 
@@ -133,16 +98,6 @@
             this._paCurrentDescRTextBox.TabIndex = 1;
             this._paCurrentDescRTextBox.Text = "";
             // 
-            // _paCurrectDesPictureBox
-            // 
-            this._paCurrectDesPictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this._paCurrectDesPictureBox.Location = new System.Drawing.Point(363, 0);
-            this._paCurrectDesPictureBox.Name = "_paCurrectDesPictureBox";
-            this._paCurrectDesPictureBox.Size = new System.Drawing.Size(191, 145);
-            this._paCurrectDesPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this._paCurrectDesPictureBox.TabIndex = 0;
-            this._paCurrectDesPictureBox.TabStop = false;
-            // 
             // lbl_PrevPrice
             // 
             this.lbl_PrevPrice.AutoSize = true;
@@ -163,6 +118,50 @@
             this.lbl_CurrPrice.TabIndex = 7;
             this.lbl_CurrPrice.Text = "...";
             // 
+            // _paOldDesPictureBox
+            // 
+            this._paOldDesPictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this._paOldDesPictureBox.Location = new System.Drawing.Point(0, 0);
+            this._paOldDesPictureBox.Name = "_paOldDesPictureBox";
+            this._paOldDesPictureBox.Size = new System.Drawing.Size(181, 145);
+            this._paOldDesPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this._paOldDesPictureBox.TabIndex = 0;
+            this._paOldDesPictureBox.TabStop = false;
+            // 
+            // _paCurrectDesPictureBox
+            // 
+            this._paCurrectDesPictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this._paCurrectDesPictureBox.Location = new System.Drawing.Point(363, 0);
+            this._paCurrectDesPictureBox.Name = "_paCurrectDesPictureBox";
+            this._paCurrectDesPictureBox.Size = new System.Drawing.Size(191, 145);
+            this._paCurrectDesPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this._paCurrectDesPictureBox.TabIndex = 0;
+            this._paCurrectDesPictureBox.TabStop = false;
+            // 
+            // btn_UsePartialAdjustment
+            // 
+            this.btn_UsePartialAdjustment.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_UsePartialAdjustment.BackgroundImage")));
+            this.btn_UsePartialAdjustment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_UsePartialAdjustment.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btn_UsePartialAdjustment.Location = new System.Drawing.Point(673, 0);
+            this.btn_UsePartialAdjustment.Name = "btn_UsePartialAdjustment";
+            this.btn_UsePartialAdjustment.Size = new System.Drawing.Size(30, 29);
+            this.btn_UsePartialAdjustment.TabIndex = 5;
+            this.btn_UsePartialAdjustment.UseVisualStyleBackColor = true;
+            this.btn_UsePartialAdjustment.Click += new System.EventHandler(this.btn_UsePartialAdjustment_Click);
+            // 
+            // btn_HideAndShow
+            // 
+            this.btn_HideAndShow.BackgroundImage = global::PresentationLayer.Properties.Resources.view;
+            this.btn_HideAndShow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_HideAndShow.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btn_HideAndShow.Location = new System.Drawing.Point(703, 0);
+            this.btn_HideAndShow.Name = "btn_HideAndShow";
+            this.btn_HideAndShow.Size = new System.Drawing.Size(29, 29);
+            this.btn_HideAndShow.TabIndex = 6;
+            this.btn_HideAndShow.UseVisualStyleBackColor = true;
+            this.btn_HideAndShow.Click += new System.EventHandler(this.btn_HideAndShow_Click);
+            // 
             // PartialAdjustmentUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -176,8 +175,8 @@
             this.Load += new System.EventHandler(this.PartialAdjustmentUC_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._paOldDesPictureBox)).EndInit();
             this._paPnlAfter.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._paOldDesPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._paCurrectDesPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
