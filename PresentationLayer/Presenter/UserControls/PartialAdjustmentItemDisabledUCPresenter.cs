@@ -110,8 +110,9 @@ namespace PresentationLayer.Presenter.UserControls
                 _windoorModel.WD_PALst_Description.RemoveAt(PartialAdjusmentItemDisabledUCIndexPlacement  + 1);//Remove previous description for selected index
                 _windoorModel.WD_PALst_Price.Insert(PartialAdjusmentItemDisabledUCIndexPlacement,_windoorModel.WD_price);
                 _windoorModel.WD_PALst_Price.RemoveAt(PartialAdjusmentItemDisabledUCIndexPlacement + 1);// Remove previous price for selected index
+
             }
-            catch(Exception ex)
+            catch(Exception ex)     
             {
                 MessageBox.Show(ex.Message + "Problem at WD_PALstDesign: " + this);
             }

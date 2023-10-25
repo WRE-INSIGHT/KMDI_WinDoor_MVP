@@ -1839,6 +1839,7 @@
     <None Include="Resources\concrete2.png" />
     <None Include="Resources\delete.png" />
     <None Include="Resources\delete1.png" />
+    <None Include="Resources\cross.png" />
     <Content Include="Resources\delete_file_30px.png" />
     <None Include="Resources\ExtensionTop.png" />
     <None Include="Resources\ExtensionBot.png" />

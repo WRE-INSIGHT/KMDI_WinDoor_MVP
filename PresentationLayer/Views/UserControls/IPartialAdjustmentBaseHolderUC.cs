@@ -8,6 +8,8 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler PartialAdjustmentBaseHolderUC_LoadEventRaised;
         event EventHandler btn_Expnd_ClickEventRaised;
         event EventHandler btn_addItemQty_ClickEventRaised;
+        event EventHandler btn_DeleteItem_ClickEventRaised;
+
         UserControl GetPABaseHolderUC();
         void PABaseHolderBringToFront();
         void PABaseHolderDispose();

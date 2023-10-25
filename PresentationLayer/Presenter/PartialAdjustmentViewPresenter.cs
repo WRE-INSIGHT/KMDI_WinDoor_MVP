@@ -123,7 +123,6 @@ namespace PresentationLayer.Presenter
 
                 for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
                 {
-
                     if (_selectedItemNum == i)
                     {
                         IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
@@ -133,13 +132,12 @@ namespace PresentationLayer.Presenter
                             wdm.WD_IsSelectedAtPartialAdjusment = true;
                             LoadMoDel(wdm);
                         }
-
                     }
-
                 }
                 _partialAdjustmentView.GetItemListPnl().Visible = false;
             }
         }
+
         private void _partialAdjustmentView__printToolStripBtnClickEventRaised(object sender, EventArgs e)
         {
             throw new NotImplementedException();
@@ -184,6 +182,7 @@ namespace PresentationLayer.Presenter
             }
 
             UserControl partialadjustmentItems = (UserControl)_partialAdjustmentBaseHolderPresenter.GetPABaseHolderUC();
+            partialadjustmentItems.Name = wdm.WD_name;                                         
             _partialAdjustmentView.GetPanelBody().Controls.Add(partialadjustmentItems);
             partialadjustmentItems.Dock = DockStyle.Top;
             partialadjustmentItems.BringToFront();
