@@ -9,7 +9,7 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler btn_Expnd_ClickEventRaised;
         event EventHandler btn_addItemQty_ClickEventRaised;
         event EventHandler btn_DeleteItem_ClickEventRaised;
-
+        event EventHandler tmr_HeightExpand_TickEventRaised;
         UserControl GetPABaseHolderUC();
         void PABaseHolderBringToFront();
         void PABaseHolderDispose();
@@ -20,7 +20,7 @@ namespace PresentationLayer.Views.UserControls
         Button PABaseHolderExpandBtn();
         Button PABaseHolderAddItemQtyBtn();
         Label PABaseHolderItemName();
-
+        Timer HeightExpandTmr();
 
     }
 }
