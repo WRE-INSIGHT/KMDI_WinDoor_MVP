@@ -30,6 +30,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private string BGColor = "#2596be";
         private int BaseHolderHeight = 0;
+         
 
         public int PartialAdjusmentUCIndexPlacement { get; set; }
 

@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnl_BaseHolderPnl = new System.Windows.Forms.Panel();
             this.btn_DeleteItem = new System.Windows.Forms.Button();
             this.btn_addItemQty = new System.Windows.Forms.Button();
             this.lbl_ItemNo = new System.Windows.Forms.Label();
             this.btn_Expnd = new System.Windows.Forms.Button();
             this.pnl_BaseHolderBody = new System.Windows.Forms.Panel();
+            this.tmr_HeightExpand = new System.Windows.Forms.Timer(this.components);
             this.pnl_BaseHolderPnl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,6 +107,11 @@
             this.pnl_BaseHolderBody.Size = new System.Drawing.Size(732, 171);
             this.pnl_BaseHolderBody.TabIndex = 1;
             // 
+            // tmr_HeightExpand
+            // 
+            this.tmr_HeightExpand.Interval = 5;
+            this.tmr_HeightExpand.Tick += new System.EventHandler(this.tmr_HeightExpand_Tick);
+            // 
             // PartialAdjustmentBaseHolderUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -129,5 +136,6 @@
         private System.Windows.Forms.Label lbl_ItemNo;
         private System.Windows.Forms.Button btn_addItemQty;
         private System.Windows.Forms.Button btn_DeleteItem;
+        private System.Windows.Forms.Timer tmr_HeightExpand;
     }
 }

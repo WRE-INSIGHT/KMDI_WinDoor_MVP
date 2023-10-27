@@ -57,6 +57,11 @@ namespace PresentationLayer.Views.UserControls
             this.Invalidate();
         }
 
+        public Timer HeightExpandTmr()
+        {
+            return tmr_HeightExpand;
+        }
+
         public UserControl GetPABaseHolderUC()
         {
             return this;
@@ -66,6 +71,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler btn_Expnd_ClickEventRaised;
         public event EventHandler btn_addItemQty_ClickEventRaised;
         public event EventHandler btn_DeleteItem_ClickEventRaised;
+        public event EventHandler tmr_HeightExpand_TickEventRaised;
 
         private void PartialAdjustmentBaseHolderUC_Load(object sender, EventArgs e)
         {
@@ -85,6 +91,11 @@ namespace PresentationLayer.Views.UserControls
         private void btn_DeleteItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, btn_DeleteItem_ClickEventRaised, e);
+        }
+
+        private void tmr_HeightExpand_Tick(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, tmr_HeightExpand_TickEventRaised, e);
         }
     }
 }

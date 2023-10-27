@@ -21,8 +21,10 @@ namespace PresentationLayer.Presenter.UserControls
         private IPartialAdjustmentViewPresenter _partialAdjustmentViewPresenter;
         private IPartialAdjustmentUCPresenter _partialAdjustmentUCPresenter;
 
+        private bool _isPanelHeightExpanded;
         private int panelTitleHeight = 29;
         private int PA_LstDesignCount = 0;
+        private int _panelMaximumHeight = 0, _panelMinimumHeight = 0;
         public int ItemQuantity { get; set; }
 
         public PartialAdjustmentBaseHolderPresenter(IPartialAdjustmentBaseHolderUC paBaseHolderUC, IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter)
@@ -38,6 +40,7 @@ namespace PresentationLayer.Presenter.UserControls
             _paBaseHolderUC.btn_Expnd_ClickEventRaised += _paBaseHolderUC_btn_Expnd_ClickEventRaised;
             _paBaseHolderUC.btn_addItemQty_ClickEventRaised += _paBaseHolderUC_btn_addItemQty_ClickEventRaised;
             _paBaseHolderUC.btn_DeleteItem_ClickEventRaised += _paBaseHolderUC_btn_DeleteItem_ClickEventRaised;
+            _paBaseHolderUC.tmr_HeightExpand_TickEventRaised += _paBaseHolderUC_tmr_HeightExpand_TickEventRaised;
         }
 
         private void _paBaseHolderUC_btn_DeleteItem_ClickEventRaised(object sender, EventArgs e)
@@ -63,7 +66,37 @@ namespace PresentationLayer.Presenter.UserControls
                 }
             }
         }
+        private void _paBaseHolderUC_tmr_HeightExpand_TickEventRaised(object sender, EventArgs e)
+        {
+            if (_isPanelHeightExpanded)
+            {
+                _paBaseHolderUC.GetPABaseHolderUC().Height -= 10; // decre
 
+
+                if(_paBaseHolderUC.GetPABaseHolderUC().Height < _panelMinimumHeight)
+                {
+                    _paBaseHolderUC.GetPABaseHolderUC().Height = panelTitleHeight;
+                    _paBaseHolderUC.HeightExpandTmr().Stop();
+                    _isPanelHeightExpanded = false;
+
+                    _panelMinimumHeight = 0;
+                }
+            }
+            else
+            {
+
+                _paBaseHolderUC.GetPABaseHolderUC().Height += 10; // inc
+
+                if(_paBaseHolderUC.GetPABaseHolderUC().Height >= _panelMaximumHeight)
+                {
+                    _paBaseHolderUC.GetPABaseHolderUC().Height = _panelMaximumHeight;
+                    _paBaseHolderUC.HeightExpandTmr().Stop();
+                    _isPanelHeightExpanded = true;
+
+                    _panelMaximumHeight = 0;
+                }
+            }
+        }
         private void _paBaseHolderUC_btn_addItemQty_ClickEventRaised(object sender, EventArgs e)
         {
             _windoorModel.WD_PALst_Designs.Add(null);
@@ -82,7 +115,56 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _paBaseHolderUC_btn_Expnd_ClickEventRaised(object sender, EventArgs e)
         {
-            Btn_ExpandBaseHolderUCHeight(false);
+            //Btn_ExpandBaseHolderUCHeight(false);
+
+            #region ExpandHeightUsingTimer
+            foreach (Control uc in _paBaseHolderUC.PABaseHolderPanelBody().Controls)
+            {
+                uc.Height = panelTitleHeight; // force reset of UCHeight
+            }
+            if (_windoorModel.WD_PALst_Designs.Count != 0)
+            {
+                if (_paBaseHolderUC.GetPABaseHolderUC().Height == panelTitleHeight)
+                {
+                    int height_x_Quantity = (panelTitleHeight * _windoorModel.WD_PALst_Designs.Count) + panelTitleHeight;
+                    _panelMaximumHeight =  height_x_Quantity;
+                    _isPanelHeightExpanded = false;
+                    _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_black;
+                }
+                else
+                {
+                    _panelMinimumHeight = panelTitleHeight;
+                    _isPanelHeightExpanded = true;
+                    _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_white;
+                }
+            }
+
+            _paBaseHolderUC.HeightExpandTmr().Start();
+            #endregion
+
+        }
+        private void Btn_ExpandBaseHolderUCHeight(bool _isFromAddBtn)
+        {
+            #region ChangePABaseHolderUCHeight
+            foreach (Control uc in _paBaseHolderUC.PABaseHolderPanelBody().Controls)
+            {
+                uc.Height = panelTitleHeight; // force reset of UCHeight
+            }
+            if (_windoorModel.WD_PALst_Designs.Count != 0)
+            {
+                if (_paBaseHolderUC.GetPABaseHolderUC().Height == panelTitleHeight || _isFromAddBtn)
+                {
+                    int height_x_Quantity = (panelTitleHeight * _windoorModel.WD_PALst_Designs.Count) + panelTitleHeight;
+                    _paBaseHolderUC.GetPABaseHolderUC().Height = height_x_Quantity;
+                    _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_black;
+                }
+                else
+                {
+                    _paBaseHolderUC.GetPABaseHolderUC().Height = panelTitleHeight;
+                    _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_white;
+                }
+            }
+            #endregion
         }
 
         private void _paBaseHolderUC_PartialAdjustmentBaseHolderUC_LoadEventRaised(object sender, EventArgs e)
@@ -194,30 +276,6 @@ namespace PresentationLayer.Presenter.UserControls
             }
 
             BtnColorChanger();
-            #endregion
-        }
-
-        private void Btn_ExpandBaseHolderUCHeight(bool _isFromAddBtn)
-        {
-            #region ChangePABaseHolderUCHeight
-            foreach (Control uc in _paBaseHolderUC.PABaseHolderPanelBody().Controls)
-            {
-                uc.Height = panelTitleHeight; // force reset of UCHeight
-            }
-            if (_windoorModel.WD_PALst_Designs.Count != 0)
-            {
-                if (_paBaseHolderUC.GetPABaseHolderUC().Height == panelTitleHeight || _isFromAddBtn)
-                {
-                    int height_x_Quantity = (panelTitleHeight * _windoorModel.WD_PALst_Designs.Count) + panelTitleHeight;
-                    _paBaseHolderUC.GetPABaseHolderUC().Height = height_x_Quantity;
-                    _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_black;
-                }
-                else
-                {
-                    _paBaseHolderUC.GetPABaseHolderUC().Height = panelTitleHeight;
-                    _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_white;
-                }
-            }
             #endregion
         }
 
