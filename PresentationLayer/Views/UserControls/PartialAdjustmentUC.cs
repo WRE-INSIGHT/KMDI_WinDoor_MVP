@@ -60,12 +60,17 @@ namespace PresentationLayer.Views.UserControls
             return lbl_CurrPrice;
         }
 
+        public Panel GetHeaderPanel()
+        {
+            return pnl_Header;
+        }
         
         public event EventHandler partialAdjustmentUC_LoadEventRaised;
         public event EventHandler paPnlAfter_ResizeEventRaised;
         public event EventHandler btn_HideAndShow_ClickEventRaised;
         public event EventHandler btn_UsePartialAdjustment_ClickEventRaised;
-
+        public event EventHandler pnl_Header_MouseHoverEventRaised;
+        public event EventHandler pnl_Header_MouseLeaveEventRaised;
 
         private void PartialAdjustmentUC_Load(object sender, EventArgs e)
         {
@@ -85,6 +90,16 @@ namespace PresentationLayer.Views.UserControls
         private void btn_UsePartialAdjustment_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, btn_UsePartialAdjustment_ClickEventRaised, e);
+        }
+
+        private void pnl_Header_MouseHover(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, pnl_Header_MouseHoverEventRaised, e);
+        }
+
+        private void pnl_Header_MouseLeave(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, pnl_Header_MouseLeaveEventRaised, e);
         }
     }
 }

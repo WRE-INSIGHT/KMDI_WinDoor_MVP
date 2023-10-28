@@ -4,6 +4,7 @@ using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,6 +55,24 @@ namespace PresentationLayer.Presenter.UserControls
             _partialAdjustmenUC.paPnlAfter_ResizeEventRaised += _partialAdjustmenUC_paPnlAfter_ResizeEventRaised;
             _partialAdjustmenUC.btn_HideAndShow_ClickEventRaised += _partialAdjustmenUC_btn_HideAndShow_ClickEventRaised;
             _partialAdjustmenUC.btn_UsePartialAdjustment_ClickEventRaised += _partialAdjustmenUC_btn_UsePartialAdjustment_ClickEventRaised;
+            _partialAdjustmenUC.pnl_Header_MouseHoverEventRaised += _partialAdjustmenUC_pnl_Header_MouseHoverEventRaised;
+            _partialAdjustmenUC.pnl_Header_MouseLeaveEventRaised += _partialAdjustmenUC_pnl_Header_MouseLeaveEventRaised;
+        }
+
+        private void _partialAdjustmenUC_pnl_Header_MouseLeaveEventRaised(object sender, EventArgs e)
+        {
+            Color loc = System.Drawing.Color.FromArgb(240, 240, 240);
+            _partialAdjustmenUC.GetHeaderPanel().BackColor = loc;
+
+        }
+
+        private void _partialAdjustmenUC_pnl_Header_MouseHoverEventRaised(object sender, EventArgs e)
+        {
+            // 240,240,240 default control color // 184 205,248 hover color
+            //56 35 8
+            Color col = System.Drawing.ColorTranslator.FromHtml("#B8CDF8");
+            Color c = System.Drawing.Color.FromArgb(184,205,248);
+            _partialAdjustmenUC.GetHeaderPanel().BackColor = c;
         }
 
         private void _partialAdjustmenUC_btn_UsePartialAdjustment_ClickEventRaised(object sender, EventArgs e)
