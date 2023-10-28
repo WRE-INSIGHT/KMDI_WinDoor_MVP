@@ -25,6 +25,7 @@ namespace PresentationLayer.Presenter.UserControls
         private int panelTitleHeight = 29;
         private int PA_LstDesignCount = 0;
         private int _panelMaximumHeight = 0, _panelMinimumHeight = 0;
+        private int _ucCounter; //use in 1st algo closing PA item QTY
         public int ItemQuantity { get; set; }
 
         public PartialAdjustmentBaseHolderPresenter(IPartialAdjustmentBaseHolderUC paBaseHolderUC, IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter)
@@ -115,31 +116,69 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _paBaseHolderUC_btn_Expnd_ClickEventRaised(object sender, EventArgs e)
         {
-            //Btn_ExpandBaseHolderUCHeight(false);
+            //Btn_ExpandBaseHolderUCHeight(false); //no Timer faster ver.
+
+            #region 1st ALGO 
+            #region closing using timer
+            //foreach (Control uc in _paBaseHolderUC.PABaseHolderPanelBody().Controls)
+            //{
+            //    _ucCounter++;
+            //    uc.Height = panelTitleHeight; // force reset of UCHeight
+            //}
+
+            //if (_windoorModel.WD_PALst_Designs.Count != 0)
+            //{
+            //    if (_paBaseHolderUC.GetPABaseHolderUC().Height == panelTitleHeight)
+            //    {
+            //        int height_x_Quantity = (panelTitleHeight * _windoorModel.WD_PALst_Designs.Count) + panelTitleHeight;
+            //        _panelMaximumHeight = height_x_Quantity;
+            //        _isPanelHeightExpanded = false;
+            //        _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_black;
+            //    }
+            //    else
+            //    {
+            //        _paBaseHolderUC.GetPABaseHolderUC().Height = _ucCounter * panelTitleHeight;
+
+            //        _panelMinimumHeight = panelTitleHeight;
+            //        _isPanelHeightExpanded = true;
+            //        _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_white;
+            //    }
+            //    _paBaseHolderUC.HeightExpandTmr().Start();
+
+            //}
+            //_ucCounter = 0; // reset
+            #endregion
+            #endregion
+
+            #region 2nd Algo Smooth Close
 
             #region ExpandHeightUsingTimer
-            foreach (Control uc in _paBaseHolderUC.PABaseHolderPanelBody().Controls)
-            {
-                uc.Height = panelTitleHeight; // force reset of UCHeight
-            }
             if (_windoorModel.WD_PALst_Designs.Count != 0)
             {
                 if (_paBaseHolderUC.GetPABaseHolderUC().Height == panelTitleHeight)
                 {
+                    foreach (Control uc in _paBaseHolderUC.PABaseHolderPanelBody().Controls)
+                    {
+                        uc.Height = panelTitleHeight; // force reset of UCHeight
+                    }
+
                     int height_x_Quantity = (panelTitleHeight * _windoorModel.WD_PALst_Designs.Count) + panelTitleHeight;
-                    _panelMaximumHeight =  height_x_Quantity;
+                    _panelMaximumHeight = height_x_Quantity;
                     _isPanelHeightExpanded = false;
                     _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_black;
                 }
                 else
-                {
+                {   
                     _panelMinimumHeight = panelTitleHeight;
                     _isPanelHeightExpanded = true;
                     _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_white;
                 }
+                _paBaseHolderUC.HeightExpandTmr().Start();
+
             }
 
-            _paBaseHolderUC.HeightExpandTmr().Start();
+            #endregion
+
             #endregion
 
         }
