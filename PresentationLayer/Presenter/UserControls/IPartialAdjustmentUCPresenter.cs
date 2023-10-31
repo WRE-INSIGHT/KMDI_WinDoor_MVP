@@ -8,6 +8,7 @@ namespace PresentationLayer.Presenter.UserControls
     public interface IPartialAdjustmentUCPresenter
     {
         int PartialAdjusmentUCIndexPlacement { get; set; }
+        bool IsSelectedForDelete { get; set; }
         IPartialAdjustmentUC GetPartialAdjustmentUC();
         IPartialAdjustmentUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IQuotationModel quotationModel,

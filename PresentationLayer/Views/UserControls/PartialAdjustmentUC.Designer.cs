@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PartialAdjustmentUC));
             this.pnl_Header = new System.Windows.Forms.Panel();
             this.lbl_ItemNo = new System.Windows.Forms.Label();
@@ -40,6 +41,8 @@
             this._paCurrectDesPictureBox = new System.Windows.Forms.PictureBox();
             this.lbl_PrevPrice = new System.Windows.Forms.Label();
             this.lbl_CurrPrice = new System.Windows.Forms.Label();
+            this.tmr_BGChange = new System.Windows.Forms.Timer(this.components);
+            this.cMenuStrip_Delete = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.pnl_Header.SuspendLayout();
             this._paPnlAfter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._paOldDesPictureBox)).BeginInit();
@@ -57,8 +60,9 @@
             this.pnl_Header.Name = "pnl_Header";
             this.pnl_Header.Size = new System.Drawing.Size(732, 29);
             this.pnl_Header.TabIndex = 0;
+            this.pnl_Header.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnl_Header_MouseDown);
+            this.pnl_Header.MouseEnter += new System.EventHandler(this.pnl_Header_MouseEnter);
             this.pnl_Header.MouseLeave += new System.EventHandler(this.pnl_Header_MouseLeave);
-            this.pnl_Header.MouseHover += new System.EventHandler(this.pnl_Header_MouseHover);
             // 
             // lbl_ItemNo
             // 
@@ -81,6 +85,8 @@
             this.btn_UsePartialAdjustment.TabIndex = 5;
             this.btn_UsePartialAdjustment.UseVisualStyleBackColor = true;
             this.btn_UsePartialAdjustment.Click += new System.EventHandler(this.btn_UsePartialAdjustment_Click);
+            this.btn_UsePartialAdjustment.MouseEnter += new System.EventHandler(this.btn_UsePartialAdjustment_MouseEnter);
+            this.btn_UsePartialAdjustment.MouseLeave += new System.EventHandler(this.btn_UsePartialAdjustment_MouseLeave);
             // 
             // btn_HideAndShow
             // 
@@ -93,6 +99,8 @@
             this.btn_HideAndShow.TabIndex = 6;
             this.btn_HideAndShow.UseVisualStyleBackColor = true;
             this.btn_HideAndShow.Click += new System.EventHandler(this.btn_HideAndShow_Click);
+            this.btn_HideAndShow.MouseEnter += new System.EventHandler(this.btn_HideAndShow_MouseEnter);
+            this.btn_HideAndShow.MouseLeave += new System.EventHandler(this.btn_HideAndShow_MouseLeave);
             // 
             // _paOldDescRTextBox
             // 
@@ -164,6 +172,16 @@
             this.lbl_CurrPrice.TabIndex = 7;
             this.lbl_CurrPrice.Text = "...";
             // 
+            // tmr_BGChange
+            // 
+            this.tmr_BGChange.Interval = 1;
+            this.tmr_BGChange.Tick += new System.EventHandler(this.tmr_BGChange_Tick);
+            // 
+            // cMenuStrip_Delete
+            // 
+            this.cMenuStrip_Delete.Name = "cMenuStrip_Delete";
+            this.cMenuStrip_Delete.Size = new System.Drawing.Size(61, 4);
+            // 
             // PartialAdjustmentUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -198,5 +216,7 @@
         private System.Windows.Forms.Button btn_UsePartialAdjustment;
         private System.Windows.Forms.Label lbl_PrevPrice;
         private System.Windows.Forms.Label lbl_CurrPrice;
+        private System.Windows.Forms.Timer tmr_BGChange;
+        private System.Windows.Forms.ContextMenuStrip cMenuStrip_Delete;
     }
 }

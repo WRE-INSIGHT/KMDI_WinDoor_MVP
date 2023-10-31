@@ -31,8 +31,10 @@ namespace PresentationLayer.Presenter.UserControls
 
         private string BGColor = "#2596be";
         private int BaseHolderHeight = 0;
-         
+        private bool _isMouseHover;
+        private bool _isFromMouseRightDown;
 
+        public bool IsSelectedForDelete { get; set; }
         public int PartialAdjusmentUCIndexPlacement { get; set; }
 
         public PartialAdjustmentUCPresenter(IPartialAdjustmentUC partialAdjustmentUC, IPartialAdjustmentItemDisabledUCPresenter paAdjustmentItemDisabledUCPresenter)
@@ -55,25 +57,116 @@ namespace PresentationLayer.Presenter.UserControls
             _partialAdjustmenUC.paPnlAfter_ResizeEventRaised += _partialAdjustmenUC_paPnlAfter_ResizeEventRaised;
             _partialAdjustmenUC.btn_HideAndShow_ClickEventRaised += _partialAdjustmenUC_btn_HideAndShow_ClickEventRaised;
             _partialAdjustmenUC.btn_UsePartialAdjustment_ClickEventRaised += _partialAdjustmenUC_btn_UsePartialAdjustment_ClickEventRaised;
-            _partialAdjustmenUC.pnl_Header_MouseHoverEventRaised += _partialAdjustmenUC_pnl_Header_MouseHoverEventRaised;
+            _partialAdjustmenUC.tmr_BGChange_TickEventRaised += _partialAdjustmenUC_tmr_BGChange_TickEventRaised;
+
             _partialAdjustmenUC.pnl_Header_MouseLeaveEventRaised += _partialAdjustmenUC_pnl_Header_MouseLeaveEventRaised;
+            _partialAdjustmenUC.pnl_Header_MouseEnterEventRaised += _partialAdjustmenUC_pnl_Header_MouseEnterEventRaised;
+            _partialAdjustmenUC.btn_HideAndShow_MouseEnterEventRaised += _partialAdjustmenUC_btn_HideAndShow_MouseEnterEventRaised;
+            _partialAdjustmenUC.btn_HideAndShow_MouseLeaveEventRaised += _partialAdjustmenUC_btn_HideAndShow_MouseLeaveEventRaised;
+            _partialAdjustmenUC.btn_UsePartialAdjustment_MouseEnterEventRaised += _partialAdjustmenUC_btn_UsePartialAdjustment_MouseEnterEventRaised;
+            _partialAdjustmenUC.btn_UsePartialAdjustment_MouseLeaveEventRaised += _partialAdjustmenUC_btn_UsePartialAdjustment_MouseLeaveEventRaised;
+
+            _partialAdjustmenUC.pnl_Header_LeftMouseDownEventRaised += _partialAdjustmenUC_pnl_Header_LeftMouseDownEventRaised;
+            _partialAdjustmenUC.pnl_Header_RightMouseDownClickEventRaised += _partialAdjustmenUC_pnl_Header_RightMouseDownClickEventRaised;
+            _partialAdjustmenUC.RightMouseDownLeaveExceptionEventRaised += _partialAdjustmenUC_RightMouseDownLeaveExceptionEventRaised;
         }
 
-        private void _partialAdjustmenUC_pnl_Header_MouseLeaveEventRaised(object sender, EventArgs e)
+        private void _partialAdjustmenUC_RightMouseDownLeaveExceptionEventRaised(object sender, EventArgs e)
         {
-            Color loc = System.Drawing.Color.FromArgb(240, 240, 240);
-            _partialAdjustmenUC.GetHeaderPanel().BackColor = loc;
+            _isMouseHover = true;
+            _isFromMouseRightDown = true;
+            _partialAdjustmenUC.BGChangedTimer().Start();
+        }
+        int i;
+        private void _partialAdjustmenUC_pnl_Header_RightMouseDownClickEventRaised(object sender, EventArgs e)
+        {           
+            _windoorModel.WD_PALst_Designs.RemoveAt(PartialAdjusmentUCIndexPlacement);               
+            _windoorModel.WD_PALst_Description.RemoveAt(PartialAdjusmentUCIndexPlacement);               
+            _windoorModel.WD_PALst_Price.RemoveAt(PartialAdjusmentUCIndexPlacement); 
+           _paBaseHolderPresenter.GetPABaseHolderUC().PABaseHolderPanelBody().Controls.RemoveAt(PartialAdjusmentUCIndexPlacement);
 
         }
 
-        private void _partialAdjustmenUC_pnl_Header_MouseHoverEventRaised(object sender, EventArgs e)
+        private void _partialAdjustmenUC_pnl_Header_LeftMouseDownEventRaised(object sender, MouseEventArgs e)
+        {
+            if (IsSelectedForDelete)
+            {
+                IsSelectedForDelete = false;
+                Color loc = System.Drawing.Color.FromArgb(240, 240, 240);
+                _partialAdjustmenUC.GetHeaderPanel().BackColor = loc;
+            }
+            else
+            {
+                IsSelectedForDelete = true;
+                //255, 127, 127 light red for delete 
+                Color loc = System.Drawing.Color.FromArgb(255, 127, 127);
+                _partialAdjustmenUC.GetHeaderPanel().BackColor = loc;
+            }
+        }
+
+        #region BG Changed Timer
+        private void _partialAdjustmenUC_btn_UsePartialAdjustment_MouseLeaveEventRaised(object sender, EventArgs e)
+        {
+            _isMouseHover = false;
+            _partialAdjustmenUC.BGChangedTimer().Start();
+        }
+
+        private void _partialAdjustmenUC_btn_UsePartialAdjustment_MouseEnterEventRaised(object sender, EventArgs e)
+        {
+            _isMouseHover = true;
+            _partialAdjustmenUC.BGChangedTimer().Start();
+        }
+        private void _partialAdjustmenUC_btn_HideAndShow_MouseLeaveEventRaised(object sender, EventArgs e)
+        {
+            _isMouseHover = false;
+            _partialAdjustmenUC.BGChangedTimer().Start();
+        }
+
+        private void _partialAdjustmenUC_btn_HideAndShow_MouseEnterEventRaised(object sender, EventArgs e)
+        {
+            _isMouseHover = true;
+            _partialAdjustmenUC.BGChangedTimer().Start();
+        }
+
+        private void _partialAdjustmenUC_pnl_Header_MouseEnterEventRaised(object sender, EventArgs e)
         {
             // 240,240,240 default control color // 184 205,248 hover color
             //56 35 8
-            Color col = System.Drawing.ColorTranslator.FromHtml("#B8CDF8");
-            Color c = System.Drawing.Color.FromArgb(184,205,248);
-            _partialAdjustmenUC.GetHeaderPanel().BackColor = c;
+            _isMouseHover = true;
+            _isFromMouseRightDown = false;
+            _partialAdjustmenUC.BGChangedTimer().Start();
         }
+        private void _partialAdjustmenUC_pnl_Header_MouseLeaveEventRaised(object sender, EventArgs e)
+        {
+            _isMouseHover = false;
+            _partialAdjustmenUC.BGChangedTimer().Start();
+        }
+
+        private void _partialAdjustmenUC_tmr_BGChange_TickEventRaised(object sender, EventArgs e)
+        {
+            if (!IsSelectedForDelete)
+            {
+                if (_isMouseHover)
+                {
+                    _isMouseHover = false;
+                    Color col = System.Drawing.Color.FromArgb(184, 205, 248);
+                    _partialAdjustmenUC.GetHeaderPanel().BackColor = col;
+                    _partialAdjustmenUC.BGChangedTimer().Stop();
+                }
+                else
+                {
+                    //default bg color
+                    if (!_isFromMouseRightDown) 
+                    {
+                        _isMouseHover = true;
+                        Color loc = System.Drawing.Color.FromArgb(240, 240, 240);
+                        _partialAdjustmenUC.GetHeaderPanel().BackColor = loc;
+                        _partialAdjustmenUC.BGChangedTimer().Stop();
+                    }
+                }
+            }
+        }
+        #endregion
 
         private void _partialAdjustmenUC_btn_UsePartialAdjustment_ClickEventRaised(object sender, EventArgs e)
         {
