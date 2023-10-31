@@ -15,12 +15,20 @@ namespace PresentationLayer.Views.UserControls
         Label GetOldItemPrice();
         Label GetCurrentItemPrice();
         Panel GetHeaderPanel();
-
+        Timer BGChangedTimer();
         event EventHandler partialAdjustmentUC_LoadEventRaised;
         event EventHandler paPnlAfter_ResizeEventRaised;
         event EventHandler btn_HideAndShow_ClickEventRaised;
         event EventHandler btn_UsePartialAdjustment_ClickEventRaised;
-        event EventHandler pnl_Header_MouseHoverEventRaised;
         event EventHandler pnl_Header_MouseLeaveEventRaised;
+        event EventHandler tmr_BGChange_TickEventRaised;
+        event EventHandler pnl_Header_MouseEnterEventRaised;
+        event EventHandler btn_HideAndShow_MouseEnterEventRaised;
+        event EventHandler btn_HideAndShow_MouseLeaveEventRaised;
+        event EventHandler btn_UsePartialAdjustment_MouseEnterEventRaised;
+        event EventHandler btn_UsePartialAdjustment_MouseLeaveEventRaised;
+        event MouseEventHandler pnl_Header_LeftMouseDownEventRaised;
+        event EventHandler pnl_Header_RightMouseDownClickEventRaised;
+        event EventHandler RightMouseDownLeaveExceptionEventRaised;
     }
 }

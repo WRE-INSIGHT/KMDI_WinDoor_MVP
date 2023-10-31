@@ -64,13 +64,27 @@ namespace PresentationLayer.Views.UserControls
         {
             return pnl_Header;
         }
+
+        public Timer BGChangedTimer()
+        {
+            return tmr_BGChange;
+        }
         
         public event EventHandler partialAdjustmentUC_LoadEventRaised;
         public event EventHandler paPnlAfter_ResizeEventRaised;
         public event EventHandler btn_HideAndShow_ClickEventRaised;
         public event EventHandler btn_UsePartialAdjustment_ClickEventRaised;
-        public event EventHandler pnl_Header_MouseHoverEventRaised;
         public event EventHandler pnl_Header_MouseLeaveEventRaised;
+        public event EventHandler tmr_BGChange_TickEventRaised;
+        public event EventHandler pnl_Header_MouseEnterEventRaised;
+        public event EventHandler btn_HideAndShow_MouseEnterEventRaised;
+        public event EventHandler btn_HideAndShow_MouseLeaveEventRaised;
+        public event EventHandler btn_UsePartialAdjustment_MouseEnterEventRaised;
+        public event EventHandler btn_UsePartialAdjustment_MouseLeaveEventRaised;
+        public event MouseEventHandler pnl_Header_LeftMouseDownEventRaised;
+        public event EventHandler pnl_Header_RightMouseDownClickEventRaised;
+        public event EventHandler RightMouseDownLeaveExceptionEventRaised;
+
 
         private void PartialAdjustmentUC_Load(object sender, EventArgs e)
         {
@@ -92,14 +106,57 @@ namespace PresentationLayer.Views.UserControls
             EventHelpers.RaiseEvent(sender, btn_UsePartialAdjustment_ClickEventRaised, e);
         }
 
-        private void pnl_Header_MouseHover(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, pnl_Header_MouseHoverEventRaised, e);
-        }
 
         private void pnl_Header_MouseLeave(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, pnl_Header_MouseLeaveEventRaised, e);
+        }
+
+        private void tmr_BGChange_Tick(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, tmr_BGChange_TickEventRaised, e);
+        }
+
+        private void pnl_Header_MouseEnter(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, pnl_Header_MouseEnterEventRaised, e);
+        }
+
+        private void btn_HideAndShow_MouseEnter(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btn_HideAndShow_MouseEnterEventRaised, e);
+        }
+
+        private void btn_HideAndShow_MouseLeave(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btn_HideAndShow_MouseLeaveEventRaised, e);
+        }
+
+        private void btn_UsePartialAdjustment_MouseEnter(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btn_UsePartialAdjustment_MouseEnterEventRaised, e);
+        }
+
+        private void btn_UsePartialAdjustment_MouseLeave(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btn_UsePartialAdjustment_MouseLeaveEventRaised, e);
+        }
+        
+        private void pnl_Header_MouseDown(object sender, MouseEventArgs e)
+        {
+            
+
+            if (ModifierKeys.HasFlag(Keys.Control) && e.Button == MouseButtons.Left)
+            {
+                EventHelpers.RaiseMouseEvent(sender, pnl_Header_LeftMouseDownEventRaised, e);
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                EventHelpers.RaiseEvent(sender, RightMouseDownLeaveExceptionEventRaised, e);
+                ContextMenu m = new ContextMenu();
+                m.MenuItems.Add(new MenuItem("Delete", pnl_Header_RightMouseDownClickEventRaised));
+                m.Show(pnl_Header,new Point (e.X,e.Y));
+            }
         }
     }
 }
