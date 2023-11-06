@@ -278,6 +278,7 @@ namespace PresentationLayer.Presenter.UserControls
             #region AddControlForUCPresenter
             _partialAdjustmentUCPresenter = _partialAdjustmentUCPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, _mainPresenter, _partialAdjustmentViewPresenter, this);
             UserControl partialadjustmentItems = (UserControl)_partialAdjustmentUCPresenter.GetPartialAdjustmentUC();
+            partialadjustmentItems.Name = (indxItemPos - 1).ToString();
             _paBaseHolderUC.PABaseHolderPanelBody().Controls.Add(partialadjustmentItems);
             partialadjustmentItems.Dock = DockStyle.Top;
             partialadjustmentItems.BringToFront();
