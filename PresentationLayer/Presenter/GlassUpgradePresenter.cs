@@ -1096,9 +1096,10 @@ namespace PresentationLayer.Presenter
                 }
 
             }
-            catch
+            catch(Exception ex)
             {
                 //MessageBox.Show("Error in Loading GlassList");
+                Console.WriteLine("Error in Loading GlassList" + this + ex.Message );
             }
 
 

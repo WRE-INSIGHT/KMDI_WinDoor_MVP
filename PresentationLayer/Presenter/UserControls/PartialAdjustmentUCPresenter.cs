@@ -49,7 +49,7 @@ namespace PresentationLayer.Presenter.UserControls
             OldItemPrice = _partialAdjustmenUC.GetOldItemPrice();
             CurrentItemPrice = _partialAdjustmenUC.GetCurrentItemPrice();
             SubscribeToEventSetup();
-        }
+        }              
 
         private void SubscribeToEventSetup()
         {
@@ -58,33 +58,42 @@ namespace PresentationLayer.Presenter.UserControls
             _partialAdjustmenUC.btn_HideAndShow_ClickEventRaised += _partialAdjustmenUC_btn_HideAndShow_ClickEventRaised;
             _partialAdjustmenUC.btn_UsePartialAdjustment_ClickEventRaised += _partialAdjustmenUC_btn_UsePartialAdjustment_ClickEventRaised;
             _partialAdjustmenUC.tmr_BGChange_TickEventRaised += _partialAdjustmenUC_tmr_BGChange_TickEventRaised;
-
+         
             _partialAdjustmenUC.pnl_Header_MouseLeaveEventRaised += _partialAdjustmenUC_pnl_Header_MouseLeaveEventRaised;
             _partialAdjustmenUC.pnl_Header_MouseEnterEventRaised += _partialAdjustmenUC_pnl_Header_MouseEnterEventRaised;
             _partialAdjustmenUC.btn_HideAndShow_MouseEnterEventRaised += _partialAdjustmenUC_btn_HideAndShow_MouseEnterEventRaised;
             _partialAdjustmenUC.btn_HideAndShow_MouseLeaveEventRaised += _partialAdjustmenUC_btn_HideAndShow_MouseLeaveEventRaised;
             _partialAdjustmenUC.btn_UsePartialAdjustment_MouseEnterEventRaised += _partialAdjustmenUC_btn_UsePartialAdjustment_MouseEnterEventRaised;
             _partialAdjustmenUC.btn_UsePartialAdjustment_MouseLeaveEventRaised += _partialAdjustmenUC_btn_UsePartialAdjustment_MouseLeaveEventRaised;
-
+         
             _partialAdjustmenUC.pnl_Header_LeftMouseDownEventRaised += _partialAdjustmenUC_pnl_Header_LeftMouseDownEventRaised;
             _partialAdjustmenUC.pnl_Header_RightMouseDownClickEventRaised += _partialAdjustmenUC_pnl_Header_RightMouseDownClickEventRaised;
             _partialAdjustmenUC.RightMouseDownLeaveExceptionEventRaised += _partialAdjustmenUC_RightMouseDownLeaveExceptionEventRaised;
         }
-
+        
         private void _partialAdjustmenUC_RightMouseDownLeaveExceptionEventRaised(object sender, EventArgs e)
         {
             _isMouseHover = true;
             _isFromMouseRightDown = true;
             _partialAdjustmenUC.BGChangedTimer().Start();
         }
-        int i;
-        private void _partialAdjustmenUC_pnl_Header_RightMouseDownClickEventRaised(object sender, EventArgs e)
-        {           
-            _windoorModel.WD_PALst_Designs.RemoveAt(PartialAdjusmentUCIndexPlacement);               
-            _windoorModel.WD_PALst_Description.RemoveAt(PartialAdjusmentUCIndexPlacement);               
-            _windoorModel.WD_PALst_Price.RemoveAt(PartialAdjusmentUCIndexPlacement); 
-           _paBaseHolderPresenter.GetPABaseHolderUC().PABaseHolderPanelBody().Controls.RemoveAt(PartialAdjusmentUCIndexPlacement);
 
+        private void _partialAdjustmenUC_pnl_Header_RightMouseDownClickEventRaised(object sender, EventArgs e)
+        {
+
+            foreach(Control ctrlz in _paBaseHolderPresenter.GetPABaseHolderUC().PABaseHolderPanelBody().Controls.OfType<Control>().ToList())
+            {
+                if(PartialAdjusmentUCIndexPlacement.ToString() == ctrlz.Name)
+                {
+
+
+
+                    _windoorModel.WD_PALst_Designs.Clear();
+                    _paBaseHolderPresenter.GetPABaseHolderUC().GetPABaseHolderUC().Height -= ctrlz.Height;
+                    _paBaseHolderPresenter.GetPABaseHolderUC().PABaseHolderPanelBody().Controls.RemoveByKey(ctrlz.Name);
+                    break;
+                }
+            }
         }
 
         private void _partialAdjustmenUC_pnl_Header_LeftMouseDownEventRaised(object sender, MouseEventArgs e)
