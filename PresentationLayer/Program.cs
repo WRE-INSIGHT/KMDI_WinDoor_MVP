@@ -492,6 +492,8 @@ namespace PresentationLayer
                  
                  .RegisterType<IPartialAdjustmentBaseHolderPresenter,PartialAdjustmentBaseHolderPresenter>(new ContainerControlledLifetimeManager())
                  .RegisterType<IPartialAdjustmentBaseHolderUC,PartialAdjustmentBaseHolderUC>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IGeorgianBarCustomizeDesignView, GeorgianBarCustomizeDesignView>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IGeorgianBarCustomizeDesignPresenter, GeorgianBarCustomizeDesignPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
