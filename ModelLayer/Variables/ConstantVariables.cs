@@ -37,7 +37,7 @@
         public int panel_property_cornerDriveOptionsheight_default = 30;
         public int panel_property_extensionOptionsheight = 81;
         public int panel_property_extensionFieldsheight = 31;
-        public int panel_property_georgianBarHeight = 101;
+        public int panel_property_georgianBarHeight = 108;
         public int panel_property_rioOptionsheight_default = 28;
         public int panel_property_rotolineOptionsheight_default = 28;
         public int panel_property_mvdOptionsheight_default = 28;

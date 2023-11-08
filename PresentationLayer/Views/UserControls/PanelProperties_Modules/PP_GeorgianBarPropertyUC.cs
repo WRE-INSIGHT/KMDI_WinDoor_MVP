@@ -25,6 +25,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public event EventHandler cmbGBArtNumSelectedValueChangedEventRaised;
         public event EventHandler numVerticalValueChangedEventRaised;
         public event EventHandler numHorizontalValueChangedEventRaised;
+        public event EventHandler btnGeorgianBarCustomDesignClickEventRaised;
 
         private void PP_GeorgianBarPropertyUC_Load(object sender, EventArgs e)
         {
@@ -80,5 +81,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             ((HandledMouseEventArgs)e).Handled = true;
         }
 
+        private void btn_GeorgianBarCustomDesign_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnGeorgianBarCustomDesignClickEventRaised, e);
+        }
     }
 }
