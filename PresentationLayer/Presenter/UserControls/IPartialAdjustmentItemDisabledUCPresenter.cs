@@ -10,7 +10,7 @@ namespace PresentationLayer.Presenter.UserControls
         string UserControlBackground { get; set; }
         int PartialAdjusmentItemDisabledUCIndexPlacement { get; set; }
         IPartialAdjustmentItemDisabledUCPresenter GetNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter, 
-                                                                IWindoorModel windoorModel, IQuotationModel quotationModel);
+                                                                IWindoorModel windoorModel, IQuotationModel quotationModel, IPartialAdjustmentUCPresenter pAUCPresenter);
         IPartialAdjustmenItemDisabledUC GetPartialAdjustmentItemDisablepdUC();
 
         void paItemDisableUCPresenter_BringToFront();

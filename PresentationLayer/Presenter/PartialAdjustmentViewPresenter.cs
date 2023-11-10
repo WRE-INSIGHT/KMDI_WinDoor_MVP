@@ -44,7 +44,7 @@ namespace PresentationLayer.Presenter
             _partialAdjustmentView._ItemPanelToolstripBtn_ClickEventRaised += _partialAdjustmentView__ItemPanelToolstripBtn_ClickEventRaised;
             _partialAdjustmentView._itemSortToolStrpBtn_ClickEventRaised += _partialAdjustmentView__itemSortToolStrpBtn_ClickEventRaised;
         }
-
+        
         private void _partialAdjustmentView__partialAdjustmentViewLoadEventRaised(object sender, EventArgs e)
         {
         
@@ -191,6 +191,8 @@ namespace PresentationLayer.Presenter
             return wdm;
 
         }
+
+
         
         public IPartialAdjustmentView GetPartialAdjustmentView()
         {

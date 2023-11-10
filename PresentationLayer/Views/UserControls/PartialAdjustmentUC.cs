@@ -69,6 +69,11 @@ namespace PresentationLayer.Views.UserControls
         {
             return tmr_BGChange;
         }
+
+        public void GetUCdispose()
+        {
+             Dispose();
+        }
         
         public event EventHandler partialAdjustmentUC_LoadEventRaised;
         public event EventHandler paPnlAfter_ResizeEventRaised;
