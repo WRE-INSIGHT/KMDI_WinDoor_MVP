@@ -9,6 +9,7 @@ namespace PresentationLayer.Presenter.UserControls
     {
         int PartialAdjusmentUCIndexPlacement { get; set; }
         bool IsSelectedForDelete { get; set; }
+        bool PartialAdjustmentIsAdjusted { get; set; }
         IPartialAdjustmentUC GetPartialAdjustmentUC();
         IPartialAdjustmentUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IQuotationModel quotationModel,

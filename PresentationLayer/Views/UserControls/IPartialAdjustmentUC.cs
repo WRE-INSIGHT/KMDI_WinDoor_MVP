@@ -16,6 +16,8 @@ namespace PresentationLayer.Views.UserControls
         Label GetCurrentItemPrice();
         Panel GetHeaderPanel();
         Timer BGChangedTimer();
+        void GetUCdispose();
+
         event EventHandler partialAdjustmentUC_LoadEventRaised;
         event EventHandler paPnlAfter_ResizeEventRaised;
         event EventHandler btn_HideAndShow_ClickEventRaised;

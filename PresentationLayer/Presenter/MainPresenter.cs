@@ -11186,6 +11186,7 @@ namespace PresentationLayer.Presenter
 
                 _pnlMain.Controls.Clear();
                 _pnlPropertiesBody.Controls.Clear();
+
                 _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
 
                 //basePlatform

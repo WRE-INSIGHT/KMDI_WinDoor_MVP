@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views.UserControls;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,19 @@ namespace PresentationLayer.Presenter.UserControls
         private int _panelMaximumHeight = 0, _panelMinimumHeight = 0;
         private int _ucCounter; //use in 1st algo closing PA item QTY
         public int ItemQuantity { get; set; }
+
+        #region Multi Delete List
+        private List<Image> Lst_Designs = new List<Image>();
+        private List<string> Lst_Description = new List<string>();
+        private List<decimal> Lst_Price = new List<decimal>();
+        #endregion
+
+        private List<IPartialAdjustmentUCPresenter> _ctrlList = new List<IPartialAdjustmentUCPresenter>();
+        public List<IPartialAdjustmentUCPresenter> PABaseHolderCtrlList
+        {
+            get { return _ctrlList; }
+            set { _ctrlList = value; }
+        }
 
         public PartialAdjustmentBaseHolderPresenter(IPartialAdjustmentBaseHolderUC paBaseHolderUC, IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter)
         {
@@ -61,7 +75,7 @@ namespace PresentationLayer.Presenter.UserControls
                         _windoorModel.WD_PALst_Price.Clear();
                         #endregion
                         _partialAdjustmentViewPresenter.GetPartialAdjustmentView().GetPanelBody().Controls.Remove(itm);
-
+                        itm.Dispose();
                         break;
                     }
                 }
@@ -283,7 +297,7 @@ namespace PresentationLayer.Presenter.UserControls
             partialadjustmentItems.Dock = DockStyle.Top;
             partialadjustmentItems.BringToFront();
             _paBaseHolderUC.PABaseHolderPanelBody().AutoScroll = true;
-
+            
             _partialAdjustmentUCPresenter.PartialAdjusmentUCIndexPlacement = indxItemPos - 1; // forward index placement of windoor 'add new' or 'update'
 
 
@@ -292,6 +306,7 @@ namespace PresentationLayer.Presenter.UserControls
                 if(_windoorModel.WD_PALst_Designs[indxItemPos - 1] != null)
                 {
                     _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetPAItemNo().Text = "AD";
+                    _partialAdjustmentUCPresenter.PartialAdjustmentIsAdjusted = true;
                 }
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = _windoorModel.WD_PALst_Designs[indxItemPos - 1];//Get Previous Img
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = _windoorModel.WD_PALst_Description[indxItemPos - 1];//Get Previous Desc
@@ -315,6 +330,8 @@ namespace PresentationLayer.Presenter.UserControls
                 #endregion
             }
 
+            _ctrlList.Add(_partialAdjustmentUCPresenter);
+
             BtnColorChanger();
             #endregion
         }
@@ -332,6 +349,116 @@ namespace PresentationLayer.Presenter.UserControls
             else
             {
                 _paBaseHolderUC.PABaseHolderAddItemQtyBtn().BackgroundImage = Properties.Resources.add_trans;
+                _paBaseHolderUC.PABaseHolderExpandBtn().BackgroundImage = Properties.Resources.arrowD_white; // force set Expand_Arrow btn to default bg
+            }
+        }
+        
+        public void ClearAndAddUserControlFromDelete(bool _isMouseRight)
+        {
+            //delete from partialadjustmentUCPresenter tolstrp
+            if (_isMouseRight)
+            {
+
+                #region Single Delete
+
+                #region check for UC Adjusted, Dispose UC 'Delete'
+                _windoorModel.WD_IsPartialADPreviousExist = false;
+                foreach (IPartialAdjustmentUCPresenter PAPresenter in PABaseHolderCtrlList)
+                {
+                    if (PAPresenter.PartialAdjustmentIsAdjusted)
+                    {
+                        _windoorModel.WD_IsPartialADPreviousExist = true;
+                    }
+                    PAPresenter.GetPartialAdjustmentUC().GetUCdispose(); // Dispose after Deleting
+                }
+                #endregion
+
+                PABaseHolderCtrlList.Clear();
+                _paBaseHolderUC.PABaseHolderPanelBody().Controls.Clear();
+
+                if (_windoorModel.WD_PALst_Designs.Count != 0)
+                {
+                    for (int i = 1; i <= _windoorModel.WD_PALst_Designs.Count; i++)
+                    {
+                        LoadAdjustmentUCPresenter(i, true);
+                    }
+                }
+                _paBaseHolderUC.GetPABaseHolderUC().Height = panelTitleHeight;
+
+                BtnColorChanger();
+
+                #endregion
+
+            }
+            else
+            {
+
+                _windoorModel.WD_IsPartialADPreviousExist = false;
+
+                foreach (IPartialAdjustmentUCPresenter PAPresenter in PABaseHolderCtrlList)
+                {
+                    #region 1st algo Marked Selected
+                    //if (PAPresenter.IsSelectedForDelete)
+                    //{
+                    //    foreach (Control ctlz in GetPABaseHolderUC().PABaseHolderPanelBody().Controls.OfType<Control>().ToList())
+                    //    {
+                    //        if (ctlz.Name == PAPresenter.GetPartialAdjustmentUC().GetAdjustmentUCForm().Name)
+                    //        {
+                    //            MessageBox.Show(ctlz.Name + " " + PAPresenter.GetPartialAdjustmentUC().GetAdjustmentUCForm().Name);
+                    //            GetPABaseHolderUC().PABaseHolderPanelBody().Controls.RemoveByKey(ctlz.Name); // delete by UC Name 
+                    //            ctlz.Dispose(); // Dispose Resources
+                    //        }
+                    //    }
+                    //}
+                    #endregion
+
+                    if (!PAPresenter.IsSelectedForDelete)
+                    {
+                        Lst_Designs.Add(_windoorModel.WD_PALst_Designs[PAPresenter.PartialAdjusmentUCIndexPlacement]);
+                        Lst_Description.Add (_windoorModel.WD_PALst_Description[PAPresenter.PartialAdjusmentUCIndexPlacement]);
+                        Lst_Price.Add (_windoorModel.WD_PALst_Price[PAPresenter.PartialAdjusmentUCIndexPlacement]);
+
+                        if (PAPresenter.PartialAdjustmentIsAdjusted)
+                        {
+                            _windoorModel.WD_IsPartialADPreviousExist = true;
+                        }                                    
+                    }
+                    PAPresenter.GetPartialAdjustmentUC().GetUCdispose();              
+                }
+
+                PABaseHolderCtrlList.Clear(); // clear usercontrol List
+                _paBaseHolderUC.PABaseHolderPanelBody().Controls.Clear(); // clear UserControl Holder 
+
+                // clear WindoorModel PA_Lst
+                _windoorModel.WD_PALst_Designs.Clear();
+                _windoorModel.WD_PALst_Description.Clear();
+                _windoorModel.WD_PALst_Price.Clear();
+
+                // TemporaryList to wndrMdl
+                for(int i = 0; i < Lst_Designs.Count; i++)
+                {
+                    _windoorModel.WD_PALst_Designs.Add(Lst_Designs[i]);
+                    _windoorModel.WD_PALst_Description.Add(Lst_Description[i]);
+                    _windoorModel.WD_PALst_Price.Add(Lst_Price[i]);
+                }
+                // clear Tempo List
+
+                Lst_Designs.Clear();
+                Lst_Description.Clear();
+                Lst_Price.Clear();
+                
+                //Add
+
+                if (_windoorModel.WD_PALst_Designs.Count != 0)
+                {
+                    for (int i = 1; i <= _windoorModel.WD_PALst_Designs.Count; i++)
+                    {
+                        LoadAdjustmentUCPresenter(i, true);
+                    }
+                }
+                _paBaseHolderUC.GetPABaseHolderUC().Height = panelTitleHeight;
+
+                BtnColorChanger();
             }
         }
 

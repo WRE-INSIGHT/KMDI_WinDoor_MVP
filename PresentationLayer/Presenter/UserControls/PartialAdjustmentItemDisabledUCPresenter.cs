@@ -19,6 +19,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IWindoorModel _windoorModel;
         private IQuotationModel _quotationModel;
         private IPartialAdjustmenItemDisabledUC _pAItemDisabledUC;
+        private IPartialAdjustmentUCPresenter _pAUCPresenter;
 
         private UserControl _paUCView;
 
@@ -110,7 +111,6 @@ namespace PresentationLayer.Presenter.UserControls
                 _windoorModel.WD_PALst_Description.RemoveAt(PartialAdjusmentItemDisabledUCIndexPlacement  + 1);//Remove previous description for selected index
                 _windoorModel.WD_PALst_Price.Insert(PartialAdjusmentItemDisabledUCIndexPlacement,_windoorModel.WD_price);
                 _windoorModel.WD_PALst_Price.RemoveAt(PartialAdjusmentItemDisabledUCIndexPlacement + 1);// Remove previous price for selected index
-
             }
             catch(Exception ex)     
             {
@@ -146,13 +146,13 @@ namespace PresentationLayer.Presenter.UserControls
           _mainPresenter.GetMainView().GetTSMain().BackColor = System.Drawing.SystemColors.Control;
           _mainPresenter.GetMainView().GetPanelItems().BackColor = System.Drawing.SystemColors.Control;
 
-          _pAItemDisabledUC.DisposeThis();
-         
+            _pAItemDisabledUC.DisposeThis();      
+
         }
 
 
         public IPartialAdjustmentItemDisabledUCPresenter GetNewInstance(IUnityContainer unityC,IMainPresenter mainPresenter,IWindoorModel windoorModel,
-                                                              IQuotationModel quotationModel)
+                                                                        IQuotationModel quotationModel,IPartialAdjustmentUCPresenter pAUCPresenter)
         {
             unityC
                 .RegisterType<IPartialAdjustmenItemDisabledUC, PartialAdjustmenItemDisabledUC>()
@@ -162,6 +162,7 @@ namespace PresentationLayer.Presenter.UserControls
             PAItemDisablePresenter._mainPresenter = mainPresenter;
             PAItemDisablePresenter._windoorModel = windoorModel;
             PAItemDisablePresenter._quotationModel = quotationModel;
+            PAItemDisablePresenter._pAUCPresenter = pAUCPresenter;
 
             return PAItemDisablePresenter;
 

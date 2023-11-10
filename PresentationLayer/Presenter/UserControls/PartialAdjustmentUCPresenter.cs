@@ -35,6 +35,7 @@ namespace PresentationLayer.Presenter.UserControls
         private bool _isFromMouseRightDown;
 
         public bool IsSelectedForDelete { get; set; }
+        public bool PartialAdjustmentIsAdjusted { get; set; }
         public int PartialAdjusmentUCIndexPlacement { get; set; }
 
         public PartialAdjustmentUCPresenter(IPartialAdjustmentUC partialAdjustmentUC, IPartialAdjustmentItemDisabledUCPresenter paAdjustmentItemDisabledUCPresenter)
@@ -80,20 +81,45 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _partialAdjustmenUC_pnl_Header_RightMouseDownClickEventRaised(object sender, EventArgs e)
         {
-
-            foreach(Control ctrlz in _paBaseHolderPresenter.GetPABaseHolderUC().PABaseHolderPanelBody().Controls.OfType<Control>().ToList())
+            bool _isMultiSelect = false;
+          
+            foreach(IPartialAdjustmentUCPresenter PAPresenter in _paBaseHolderPresenter.PABaseHolderCtrlList)
             {
-                if(PartialAdjusmentUCIndexPlacement.ToString() == ctrlz.Name)
+                if (PAPresenter.IsSelectedForDelete)
                 {
-
-
-
-                    _windoorModel.WD_PALst_Designs.Clear();
-                    _paBaseHolderPresenter.GetPABaseHolderUC().GetPABaseHolderUC().Height -= ctrlz.Height;
-                    _paBaseHolderPresenter.GetPABaseHolderUC().PABaseHolderPanelBody().Controls.RemoveByKey(ctrlz.Name);
-                    break;
+                    _isMultiSelect = true;
                 }
             }
+
+            if (!_isMultiSelect)
+            {
+                foreach (Control ctrlz in _paBaseHolderPresenter.GetPABaseHolderUC().PABaseHolderPanelBody().Controls.OfType<Control>().ToList())
+                {
+                    if (PartialAdjusmentUCIndexPlacement.ToString() == ctrlz.Name)
+                    {
+                        _windoorModel.WD_PALst_Designs.RemoveAt(PartialAdjusmentUCIndexPlacement);
+                        _windoorModel.WD_PALst_Description.RemoveAt(PartialAdjusmentUCIndexPlacement);
+                        _windoorModel.WD_PALst_Price.RemoveAt(PartialAdjusmentUCIndexPlacement);
+
+                        _paBaseHolderPresenter.PABaseHolderCtrlList.RemoveAt(PartialAdjusmentUCIndexPlacement);
+
+                        _paBaseHolderPresenter.GetPABaseHolderUC().GetPABaseHolderUC().Height -= ctrlz.Height;
+                        _paBaseHolderPresenter.GetPABaseHolderUC().PABaseHolderPanelBody().Controls.RemoveByKey(ctrlz.Name);
+                        ctrlz.Dispose();
+
+                        break;
+                    }
+                }
+
+                _paBaseHolderPresenter.ClearAndAddUserControlFromDelete(true);
+                _partialAdjustmenUC_btn_HideAndShow_ClickEventRaised(sender, e);
+            }
+            else
+            {
+                _paBaseHolderPresenter.ClearAndAddUserControlFromDelete(false);
+                _partialAdjustmenUC_btn_HideAndShow_ClickEventRaised(sender, e);
+            }
+            
         }
 
         private void _partialAdjustmenUC_pnl_Header_LeftMouseDownEventRaised(object sender, MouseEventArgs e)
@@ -190,13 +216,13 @@ namespace PresentationLayer.Presenter.UserControls
             _mainPresenter.GetMainView().GetMNSMainMenu().BackColor = System.Drawing.ColorTranslator.FromHtml(BGColor);
             _mainPresenter.GetMainView().GetTSMain().BackColor = System.Drawing.ColorTranslator.FromHtml(BGColor);
 
-            _paAdjustmentItemDisabledUCPresenter = _paAdjustmentItemDisabledUCPresenter.GetNewInstance(_unityC, _mainPresenter, _windoorModel, _quotationModel);
+            _paAdjustmentItemDisabledUCPresenter = _paAdjustmentItemDisabledUCPresenter.GetNewInstance(_unityC, _mainPresenter, _windoorModel, _quotationModel,this);
              UserControl paUC = (UserControl)_paAdjustmentItemDisabledUCPresenter.GetPartialAdjustmentItemDisablepdUC();
             _paAdjustmentItemDisabledUCPresenter.UserControlBackground = BGColor;
             _paAdjustmentItemDisabledUCPresenter.PartialAdjusmentItemDisabledUCIndexPlacement = PartialAdjusmentUCIndexPlacement; // send index placement to itemdisabled
 
-            _mainPresenter.GetMainView().GetThis().Controls.Add(paUC); 
-                
+            _mainPresenter.GetMainView().GetThis().Controls.Add(paUC);
+                  
             _partialAdjustmentViewPresenter.GetPartialAdjustmentView().ClosePartialAdjustmentView(); 
 
         } 
