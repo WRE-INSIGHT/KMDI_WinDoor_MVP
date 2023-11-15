@@ -12537,7 +12537,15 @@ namespace PresentationLayer.Presenter
                                             }
                                             else if (pnl.Panel_Type.Contains("Louver"))
                                             {
-                                                lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " Blades" + "\n");
+                                                if (pnl.Panel_LouverBladeTypeOption == BladeType_Option._glass)
+                                                {
+                                                    lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " Blades" + "\n");
+                                                }
+                                                else if (pnl.Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
+                                                {
+                                                    lst_glassThickness.Add("Aluminum Blades" + "\n");
+                                                }
+
                                             }
                                             else
                                             {
@@ -12696,8 +12704,8 @@ namespace PresentationLayer.Presenter
                                     if (Singlepnl.Panel_GlassFilm.ToString() != "None")
                                     {
                                         if (Singlepnl.Panel_Type.Contains("Louver"))
-                                        {
-                                            lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + " Blades" + " with " + Singlepnl.Panel_GlassFilm.ToString() + "\n");
+                                        { 
+                                                lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + " Blades" + " with " + Singlepnl.Panel_GlassFilm.ToString() + "\n");
                                         }
                                         else
                                         {
@@ -12706,7 +12714,14 @@ namespace PresentationLayer.Presenter
                                     }
                                     else if (Singlepnl.Panel_Type.Contains("Louver"))
                                     {
-                                        lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + " Blades" + "\n");
+                                        if (Singlepnl.Panel_LouverBladeTypeOption == BladeType_Option._glass)
+                                        {
+                                            lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + " Blades" + "\n");
+                                        }
+                                        else if (Singlepnl.Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
+                                        {
+                                            lst_glassThickness.Add("Aluminum Blades" + "\n");
+                                        }
                                     }
                                     else
                                     {
