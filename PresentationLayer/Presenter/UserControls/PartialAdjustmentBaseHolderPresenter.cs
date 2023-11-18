@@ -70,6 +70,10 @@ namespace PresentationLayer.Presenter.UserControls
                         #region Reset to Default wdm prop
                         _windoorModel.WD_IsSelectedAtPartialAdjusment = false;
                         _windoorModel.WD_IsPartialADPreviousExist = false;
+                        _windoorModel.WD_PAPreviousDescription = null;
+                        _windoorModel.WD_PAPreviousImage = null;
+                        _windoorModel.WD_PAPreviousPrice = 0;
+
                         _windoorModel.WD_PALst_Description.Clear();
                         _windoorModel.WD_PALst_Designs.Clear();
                         _windoorModel.WD_PALst_Price.Clear();
