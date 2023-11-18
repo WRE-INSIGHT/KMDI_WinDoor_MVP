@@ -2052,16 +2052,37 @@ namespace PresentationLayer.Presenter
 
                         wndr_content.Add(prop.Name + ": " + Dictionary_wd_redArrowLinesArray);
                     }
-
                     else if (prop.Name == "WD_description")
                     {
                         string Wd_desu = prop.GetValue(wdm, null).ToString().Replace("\n", @"\m/");
                         wndr_content.Add(prop.Name + ": " + Wd_desu);
                     }
+                    else if (prop.Name == "WD_PAPreviousImage")
+                    {
+                         if (prop.GetValue(wdm) != null)
+                        {
+                            wndr_content.Add(prop.Name + ": " + ConvertedImageFromWndrModel(wdm.WD_PAPreviousImage).Replace("\r", "").Replace("\n", ""));
+                        }
+                        else
+                        {
+                            wndr_content.Add(prop.Name + ": "+ null);
+                        }
+                    }
+                    else if (prop.Name == "WD_PAPreviousDescription")
+                     {
+                        if (wdm.WD_PAPreviousDescription != null)
+                        {
+                            Console.WriteLine(wdm.WD_PAPreviousDescription.Replace("\r", "").Replace("\n", "/*/"));
+                            wndr_content.Add(prop.Name + ": " +wdm.WD_PAPreviousDescription.Replace("\r", "").Replace("\n", "/*/"));
+                        }
+                        else
+                        {
+                            wndr_content.Add(prop.Name + ": " + null);
+                        }
+                    }
                     else
                     {
                         wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
-
                     }
                 }
             }
@@ -2491,7 +2512,73 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add(history);
                 wndr_content.Add("*_*");
             }
+
+            if (wdm.WD_PALst_Designs != null)
+            {
+                if (wdm.WD_PALst_Designs.Count() != 0)
+                {
+                    foreach (Image bitmap in wdm.WD_PALst_Designs)
+                    {
+                        wndr_content.Add("<Image_Separator>");
+                        if (bitmap != null)
+                        {
+                            wndr_content.Add(": " + ConvertedImageFromWndrModel(bitmap).Replace("\r", "").Replace("\n", ""));
+                        }
+                        else
+                        {
+                            wndr_content.Add(": " + "null");
+                        }
+                        wndr_content.Add("<Image_Separator>");
+                    }
+
+                    foreach (string description in wdm.WD_PALst_Description)
+                    {
+                        wndr_content.Add("<Desc_Separator>");
+                        if (description != null)
+                        {
+                            wndr_content.Add(": " + description.Replace("\r", "").Replace("\n", "/*/"));
+                        }
+                        else
+                        {
+                            wndr_content.Add(": " + "null");
+                        }
+                        wndr_content.Add("<Desc_Separator>");
+                    }
+
+                    foreach (decimal price in wdm.WD_PALst_Price)
+                    {
+                        wndr_content.Add("<Price_Separator>");
+                        wndr_content.Add(": " + price.ToString());
+                        wndr_content.Add("<Price_Separator>");
+                    }
+
+                }
+            }
+
+
             wndr_content.Add(")");
+        }
+
+        private string ConvertedImageFromWndrModel(Image _wdmimage)
+        {
+            Bitmap bitmage = new Bitmap(_wdmimage);
+            MemoryStream ms = new MemoryStream();
+            bitmage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            byte[] byteimage = ms.ToArray();
+
+            string x = Convert.ToBase64String(byteimage);
+
+            return x;
+        }
+        private Image CovertStringToImage(string _wdmString)
+        {
+             byte[] imagebytes = Convert.FromBase64String(_wdmString);
+
+            using (var ms = new MemoryStream(imagebytes, 0, imagebytes.Length))
+            {
+                Image image = Image.FromStream(ms, true);
+                return image;
+            }
         }
 
         private void OnCostingItemsToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
@@ -4198,6 +4285,39 @@ namespace PresentationLayer.Presenter
                     inside_GlassUpgrade = true;
                 }
             }
+            else if (row_str == "<Image_Separator>")
+            {
+                if (inside_PartialAdjustment_Image)
+                {
+                    inside_PartialAdjustment_Image = false;
+                }
+                else
+                {
+                    inside_PartialAdjustment_Image = true;
+                }
+            }
+            else if (row_str == "<Desc_Separator>")
+            {
+                if (inside_PartialAdjustment_Description)
+                {
+                    inside_PartialAdjustment_Description = false;
+                }
+                else
+                {
+                    inside_PartialAdjustment_Description = true;
+                }
+            }
+            else if (row_str.Contains("<Price_Separator>"))
+            {
+                if (inside_PartialAdjustment_Price)
+                {
+                    inside_PartialAdjustment_Price = false;
+                }
+                else
+                {
+                    inside_PartialAdjustment_Price = true;
+                }
+            }
 
 
             if (row_str == "EndofFile")
@@ -4646,6 +4766,46 @@ namespace PresentationLayer.Presenter
                         {
                             _windoorModel.pnlCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
+                        else if (row_str.Contains("WD_PALst_Designs"))
+                        {
+                            _windoorModel.WD_PALst_Designs = new List<Image>();
+                        }
+                        else if (row_str.Contains("WD_PALst_Description"))
+                        {
+                            _windoorModel.WD_PALst_Description = new List<string>();
+                        }
+                        else if (row_str.Contains("WD_PALst_Price"))
+                        {
+                            _windoorModel.WD_PALst_Price = new List<decimal>();
+                        }
+                        else if (row_str.Contains("WD_PAPreviousImage"))
+                        {
+                            if (!string.IsNullOrWhiteSpace(extractedValue_str))
+                            {
+                               Image img = CovertStringToImage(extractedValue_str);
+                               _windoorModel.WD_PAPreviousImage = img;
+                            }
+                        }
+                        else if (row_str.Contains("WD_PAPreviousDescription"))
+                        {
+                            if (!string.IsNullOrWhiteSpace(extractedValue_str))
+                            {
+                                string _descHolder = extractedValue_str.Replace("/*/", "\n");
+                                _windoorModel.WD_PAPreviousDescription = _descHolder;
+                            }
+                        }
+                        else if (row_str.Contains("WD_PAPreviousPrice"))
+                        {
+                           _windoorModel.WD_PAPreviousPrice = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("WD_IsSelectedAtPartialAdjusment"))
+                        {
+                            _windoorModel.WD_IsSelectedAtPartialAdjusment = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("WD_IsPartialADPreviousExist"))
+                        {
+                            _windoorModel.WD_IsPartialADPreviousExist = Convert.ToBoolean(extractedValue_str);
+                        }                               
                         #endregion
                     }
                     else if (inside_frame)
@@ -8842,6 +9002,50 @@ namespace PresentationLayer.Presenter
                         }
                         #endregion
                     }
+                    else if (inside_PartialAdjustment_Image)
+                    {
+                        #region Load PartialAdjustment Lst_Images
+                        if (!row_str.Contains("<Image_Separator>"))
+                        {
+                            if (!extractedValue_str.Contains("null"))
+                            {
+                                Image _img = CovertStringToImage(extractedValue_str);
+                                _windoorModel.WD_PALst_Designs.Add(_img);
+                            }
+                            else
+                            {
+                                _windoorModel.WD_PALst_Designs.Add(null);
+                            }
+                            
+                        }
+                        #endregion
+                    }
+                    else if (inside_PartialAdjustment_Description)
+                    {
+                        #region Load PartialAdjustment Lst_Description
+                        if (!row_str.Contains("<Desc_Separator>"))
+                        {
+                            if(!extractedValue_str.Contains("null"))
+                            {
+                                string _descHolder = extractedValue_str.Replace("/*/", "\n");
+                                _windoorModel.WD_PALst_Description.Add(_descHolder);
+                            }
+                            else
+                            {
+                                _windoorModel.WD_PALst_Description.Add(null);
+                            }
+                        }
+                        #endregion
+                    }
+                    else if (inside_PartialAdjustment_Price)
+                    {
+                        #region Load PartialAdjustment Lst_Price
+                        if (!row_str.Contains("<Price_Separator>"))
+                        {
+                            _windoorModel.WD_PALst_Price.Add(decimal.Parse(extractedValue_str));
+                        }
+                        #endregion
+                    }
                     break;
             }
 
@@ -9786,6 +9990,7 @@ namespace PresentationLayer.Presenter
         #endregion
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi,
              inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory, inside_GlassUpgrade,
+             inside_PartialAdjustment_Image,inside_PartialAdjustment_Description,inside_PartialAdjustment_Price,
              rdlcDicChangeKey = true,
              add_existing = false,
             _isFromAddExisting = false,
@@ -11184,8 +11389,22 @@ namespace PresentationLayer.Presenter
                                  false);
                 //clear
 
+                //foreach (Control ctrl in _pnlMain.Controls.OfType<Control>().ToList())
+                //{
+                //    ctrl.Dispose();
+                //}
+                //foreach (Control ctrl in _pnlPropertiesBody.Controls.OfType<Control>().ToList())
+                //{
+                //    ctrl.Dispose();
+                //}
+
                 _pnlMain.Controls.Clear();
                 _pnlPropertiesBody.Controls.Clear();
+
+                //foreach (Control ctrl in _pnlMain.Controls.OfType<Control>().ToList())
+                //{
+                //    ctrl.Dispose();
+                //}
 
                 _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
 
@@ -11206,7 +11425,7 @@ namespace PresentationLayer.Presenter
                         foreach (IFrameModel frame in _windoorModel.lst_frame)
                         {
                             if (wndr_objects.Name == frame.Frame_Name)
-                            {
+                            { 
                                 _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
                                 frame.Frame_PropertiesUC.BringToFront();
                                 _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
