@@ -1,9 +1,13 @@
 ﻿using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
+using PresentationLayer.DataTables;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -140,7 +144,215 @@ namespace PresentationLayer.Presenter
 
         private void _partialAdjustmentView__printToolStripBtnClickEventRaised(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            DSQuotation _dsq = new DSQuotation();
+            string[] AlPHA = new[] { "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+
+            try
+            {
+                for(int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+                {
+                    IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
+
+                    if (wdm.WD_IsSelectedAtPartialAdjusment)
+                    {
+
+                        bool _isWDMLstIsZero = true;
+                        decimal _price_x_Qty = 0;
+
+                        MemoryStream mstream = new MemoryStream();
+                        Image ItemImage;
+                        //ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                        byte[] ArrForImage;
+                        string ImageByteToString;
+
+                        _price_x_Qty = wdm.WD_price * wdm.WD_quantity;
+
+                        if (wdm.WD_PALst_Designs != null)
+                        {
+                            if (wdm.WD_PALst_Designs.Count != 0)
+                            {
+                                _isWDMLstIsZero = false;
+                            }
+                        }
+
+
+                        if (!_isWDMLstIsZero)
+                        {
+                            bool _isWDMPreviousDesignExist = false;
+
+                            foreach (var item in wdm.WD_PALst_Designs)
+                            {
+                                if (item != null)
+                                {
+                                    _isWDMPreviousDesignExist = true;  // check for previous design exist
+                                    break;
+                                }
+                            }
+
+                            if (_isWDMPreviousDesignExist)
+                            {
+                                #region Adjustable to item below with Previous Design 
+
+                                mstream = new MemoryStream();
+                                ItemImage = wdm.WD_PAPreviousImage;
+                                ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                                ArrForImage = mstream.ToArray();
+                                ImageByteToString = Convert.ToBase64String(ArrForImage);
+
+                                _price_x_Qty = wdm.WD_PAPreviousPrice * wdm.WD_quantity; // multiple price to qty
+
+
+                                _dsq.dtPartialAdjustment.Rows.Add(wdm.WD_id,
+                                                                  wdm.WD_itemName,
+                                                                  ImageByteToString,
+                                                                  wdm.WD_PAPreviousDescription + "\n ADJUSTABLE TO ITEM BELOW",
+                                                                  wdm.WD_quantity,
+                                                                 _price_x_Qty.ToString("N", new CultureInfo("en-US")),
+                                                                  ""
+                                                     );
+
+                                #endregion 
+                            }
+                            else
+                            {
+                                #region Adjustable to item below W/O Previous Design 
+
+
+                                mstream = new MemoryStream();
+                                ItemImage = wdm.WD_image;
+                                ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                                ArrForImage = mstream.ToArray();
+                                ImageByteToString = Convert.ToBase64String(ArrForImage);
+
+                                _price_x_Qty = wdm.WD_price * wdm.WD_quantity; // multiple price to qty
+
+
+                                _dsq.dtPartialAdjustment.Rows.Add(wdm.WD_id,
+                                                                  wdm.WD_itemName,
+                                                                  ImageByteToString,
+                                                                  wdm.WD_description + "\n ADJUSTABLE TO ITEM BELOW",
+                                                                  wdm.WD_quantity,
+                                                                 _price_x_Qty.ToString("N", new CultureInfo("en-US")),
+                                                                  ""
+                                                     );
+
+                                #endregion
+                            }
+
+
+
+                            for (int j = 0; j < wdm.WD_PALst_Designs.Count; j++)
+                            {
+                                if(wdm.WD_PALst_Designs[j] == null)
+                                {
+                                    if (_isWDMPreviousDesignExist)
+                                    {
+                                        #region PartialAdjustment With New Design in another index
+                                        mstream = new MemoryStream();
+                                        ItemImage = wdm.WD_PAPreviousImage;
+                                        ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                                        ArrForImage = mstream.ToArray();
+                                        ImageByteToString = Convert.ToBase64String(ArrForImage);
+
+                                        _dsq.dtPartialAdjustment.Rows.Add(AlPHA[j],
+                                                                          wdm.WD_itemName,
+                                                                          ImageByteToString,
+                                                                          wdm.WD_PAPreviousDescription + "NO SIGNIFICANT CHANGE",
+                                                                          1,
+                                                                          wdm.WD_PAPreviousPrice.ToString("N", new CultureInfo("en-US")),
+                                                                          "0.00"
+                                                                          );
+                                        #endregion
+                                    }
+                                    else
+                                    {
+                                        #region PartialAdjustment Without New Design on any index
+                                        mstream = new MemoryStream();
+                                        ItemImage = wdm.WD_image;
+                                        ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                                        ArrForImage = mstream.ToArray();
+                                        ImageByteToString = Convert.ToBase64String(ArrForImage);
+
+                                        _dsq.dtPartialAdjustment.Rows.Add(AlPHA[j],
+                                                                          wdm.WD_itemName,
+                                                                          ImageByteToString,
+                                                                          wdm.WD_description + "NO SIGNIFICANT CHANGE",
+                                                                          1,
+                                                                          wdm.WD_price.ToString("N", new CultureInfo("en-US")),
+                                                                          "0.00"
+                                                                          );
+                                        #endregion
+                                    }
+
+                                }
+                                else
+                                {
+
+                                    mstream = new MemoryStream();
+                                    ItemImage = wdm.WD_PALst_Designs[j];
+                                    ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                                    ArrForImage = mstream.ToArray();
+                                    ImageByteToString = Convert.ToBase64String(ArrForImage);
+
+                                    decimal AdjustmentPrice =  wdm.WD_PALst_Price[j] - wdm.WD_PAPreviousPrice;
+                                    string AdjustmentPriceTostring;
+                                    if (AdjustmentPrice < 0)
+                                    {
+                                         AdjustmentPriceTostring = "( "+ AdjustmentPrice.ToString("N", new CultureInfo("en-US")).Replace("-","") + " )";
+                                    }
+                                    else
+                                    {
+                                        AdjustmentPriceTostring = AdjustmentPrice.ToString("N", new CultureInfo("en-US"));
+                                    }
+                                  
+
+                                    _dsq.dtPartialAdjustment.Rows.Add(AlPHA[j],
+                                                                      wdm.WD_itemName,
+                                                                      ImageByteToString,
+                                                                      wdm.WD_PALst_Description[j],
+                                                                      1,
+                                                                      wdm.WD_PALst_Price[j].ToString("N", new CultureInfo("en-US")),
+                                                                      AdjustmentPriceTostring
+                                                                      );
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            mstream = new MemoryStream();
+                            ItemImage = wdm.WD_image;
+                            ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                            ArrForImage = mstream.ToArray();
+                            ImageByteToString = Convert.ToBase64String(ArrForImage);
+
+                            _dsq.dtPartialAdjustment.Rows.Add(wdm.WD_id,
+                                                              wdm.WD_itemName,
+                                                              ImageByteToString,
+                                                              wdm.WD_description,
+                                                              wdm.WD_quantity,
+                                                             _price_x_Qty.ToString("N", new CultureInfo("en-US")),
+                                                              ""
+                                                              );
+                        }
+
+                    }
+                    
+                }
+
+
+                _mainPresenter.printStatus = "PartialAdjustment";
+                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
+                printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtPartialAdjustment.DefaultView;
+                printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+
+                //reset print variables 
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problem in PartialAdjustment Print: " + ex.Message);
+            }
         }
         private void _partialAdjustmentView__itemSortToolStrpBtn_ClickEventRaised(object sender, EventArgs e)
         {

@@ -445,6 +445,33 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetReviewedByCmb().SelectedIndex = 3;
                     _printQuoteView.GetNotedByCmb().SelectedIndex = 1;
                 }
+                else if (_mainPresenter.printStatus == "PartialAdjustment")
+                {
+                    Console.WriteLine("partialAdjustment");
+                    #region Salution, Body and Address for PartialAdjustment
+                    _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
+                                                     + "USING "
+                                                     + baseColor.ToUpper()
+                                                     + " PROFILES\n"
+                                                     + "USING "
+                                                     + GlassThickness.ToUpper()
+                                                     + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+                                                     + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION";
+                    _printQuoteView.QuotationSalutation = "Partial Adjustment\n\n"
+                                                           + "Contract Reference No.: "+ " " +"\n" // contract ref no
+                                                           + "JO#: " + " " + "\n\nDear" //jobOrder
+                                                           + _mainPresenter.titleLastname;
+                    _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
+
+
+                    _printQuoteView.QuotationOuofTownExpenses = "0";
+                    _printQuoteView.VatPercentage = "12";
+                    _printQuoteView.LaborandMobilization = "0";
+                    _printQuoteView.FreightCharge = "0";
+                    _printQuoteView.LessDiscount = "30";
+
+                    #endregion
+                }
                 else
                 {
                     _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
@@ -713,6 +740,10 @@ namespace PresentationLayer.Presenter
                 else if(_mainPresenter.printStatus == "GlassUpgrade")
                 {
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.GlassUpgrade.rdlc";
+                }
+                else if(_mainPresenter.printStatus == "PartialAdjustment")
+                {
+                    _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.PartialAdjustment.rdlc"; 
                 }
 
                 if (_mainPresenter.printStatus == "ScreenItem")
@@ -1173,10 +1204,6 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetQuotationBody().Anchor = AnchorStyles.Left | AnchorStyles.Right;
                     _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(620, 118);
                     _printQuoteView.GetQuotationBody().Width = _printQuoteView.GetQuotationBody().Width - 120;
-
-
-
-
                     #endregion
 
                     #region Visibility Additional info
@@ -1316,6 +1343,42 @@ namespace PresentationLayer.Presenter
                         Console.WriteLine("quoteitemlistpresenter is not used" + ex);
                     }
                     #endregion
+                }
+                else if(_mainPresenter.printStatus == "PartialAdjustment")
+                {
+
+                    _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+                    _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
+                    _printQuoteView.GetOutofTownExpenses().Visible = false;
+                    _printQuoteView.GetChkLstBox().Visible = false;
+                    _printQuoteView.ShowLastPage().Visible = false;
+                    _printQuoteView.GetUniversalLabel().Visible = false;
+                    _printQuoteView.GetOutofTownExpenses().Visible = false;
+
+                    #region label,TextBox & Rtextbox  new loc         
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(845, 26);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(639, 26);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(433, 26);
+
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(845, 3);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(639, 3);
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(433, 3);
+
+                    _printQuoteView.GetQuotationBody().Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(620, 118);
+                    _printQuoteView.GetQuotationBody().Width = _printQuoteView.GetQuotationBody().Width - 120;
+                    #endregion
+
+                    ReportParameter[] RParam = new ReportParameter[6];
+                    RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
+                    RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
+                    RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
+                    RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
+                    RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
+                    RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+
+                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+
                 }                  
             }
             catch (Exception ex)
