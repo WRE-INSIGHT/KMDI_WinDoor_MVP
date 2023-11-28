@@ -439,7 +439,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _divProperties_PanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
-
+            _divModel.Div_PnlCladdingVisibility = true;
 
             if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
             {
@@ -510,6 +510,21 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
             }
+
+            if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+
+                _divModel.Div_PnlCladdingVisibility = false;
+
+                _divModel.Div_ArtNo = Divider_ArticleNo._84300;
+
+                _divModel.AdjustPropertyPanelHeight("minusPnlCladding");
+
+                _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusPnlCladding");
+                _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusPnlCladding");
+            }
+
+
             _divProperties.ThisBinding(CreateBindingDictionary());
             _initialLoad = false;
             //IDP_LeverEspagnolettePropertyUCPresenter leverUCP = _dp_leverEspagPropertyUCP.GetNewInstance(_unityC, _divModel);
@@ -584,6 +599,8 @@ namespace PresentationLayer.Presenter.UserControls
             divBinding.Add("Div_CladdingProfileArtNo", new Binding("Text", _divModel, "Div_CladdingProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_CladdingProfileArtNoVisibility", new Binding("Visible", _divModel, "Div_CladdingProfileArtNoVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_SelectedPanel", new Binding("Text", _divModel, "Div_SelectedPanel", true, DataSourceUpdateMode.OnPropertyChanged));
+            divBinding.Add("Div_PnlCladdingVisibility", new Binding("Visible", _divModel, "Div_PnlCladdingVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+
             return divBinding;
         }
 

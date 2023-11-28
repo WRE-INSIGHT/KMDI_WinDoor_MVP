@@ -2930,6 +2930,13 @@ namespace PresentationLayer.Presenter
             {
                 Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
+            else if (tsmItem.Name == "AlutekToolStripMenuItem")
+            {
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "Alutek Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+            }
+
+
+            
         }
 
         private void OnPanelMainSizeChangedEventRaised(object sender, EventArgs e)

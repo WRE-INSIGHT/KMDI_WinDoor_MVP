@@ -44,14 +44,17 @@ namespace PresentationLayer.Presenter
             if (_quotationModel.BOM_Filter == BillOfMaterialsFilter._PriceBreakDown)
             {
                 _pricingView.GetDgvPrice().Columns[1].Visible = false;
-
+                if (_quotationModel.BOM_AluProfileType == true)
+                {
+                    _pricingView.GetDgvPrice().Columns[2].Visible = false;
+                }
                 _pricingView.GetDgvPrice().Columns[3].Visible = true;
                 _pricingView.GetDgvPrice().Columns[4].Visible = true;
             }
             else
             {
                 _pricingView.GetDgvPrice().Columns[1].Visible = true;
-
+                _pricingView.GetDgvPrice().Columns[2].Visible = true;
                 _pricingView.GetDgvPrice().Columns[3].Visible = false;
                 _pricingView.GetDgvPrice().Columns[4].Visible = false;
             }

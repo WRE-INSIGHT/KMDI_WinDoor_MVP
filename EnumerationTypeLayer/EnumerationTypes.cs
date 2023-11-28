@@ -9,6 +9,7 @@ namespace EnumerationTypeLayer
             public static readonly SystemProfile_Option _C70 = new SystemProfile_Option(0, "C70");
             public static readonly SystemProfile_Option _G58 = new SystemProfile_Option(1, "G58");
             public static readonly SystemProfile_Option _Premiline = new SystemProfile_Option(2, "Premiline");
+            public static readonly SystemProfile_Option _Alutek = new SystemProfile_Option(3, "Alutek");
 
             private SystemProfile_Option(int value, string displayName) : base(value, displayName) { }
         }
@@ -19,6 +20,8 @@ namespace EnumerationTypeLayer
             public static readonly FrameProfile_ArticleNo _2060 = new FrameProfile_ArticleNo(2, "2060"); //G58
             public static readonly FrameProfile_ArticleNo _6050 = new FrameProfile_ArticleNo(3, "6050");
             public static readonly FrameProfile_ArticleNo _6052 = new FrameProfile_ArticleNo(4, "6052");
+            public static readonly FrameProfile_ArticleNo _84100 = new FrameProfile_ArticleNo(5, "84100");//alu
+
 
             private FrameProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -38,6 +41,8 @@ namespace EnumerationTypeLayer
             public static readonly FrameReinf_ArticleNo _TV107 = new FrameReinf_ArticleNo(3, "T-V107");
             public static readonly FrameReinf_ArticleNo _TV110 = new FrameReinf_ArticleNo(4, "T-V110");
             public static readonly FrameReinf_ArticleNo _NA120 = new FrameReinf_ArticleNo(5, "NA120");
+            public static readonly FrameReinf_ArticleNo _None = new FrameReinf_ArticleNo(5, "None");
+
 
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -56,7 +61,9 @@ namespace EnumerationTypeLayer
             public static readonly Divider_ArticleNo _7538 = new Divider_ArticleNo(1, "7538");
             public static readonly Divider_ArticleNo _2069 = new Divider_ArticleNo(2, "2069");
             public static readonly Divider_ArticleNo _6052 = new Divider_ArticleNo(3, "6052");
-            public static readonly Divider_ArticleNo _None = new Divider_ArticleNo(4, "None");
+            public static readonly Divider_ArticleNo _84300 = new Divider_ArticleNo(4, "84300");//alu
+            public static readonly Divider_ArticleNo _84301 = new Divider_ArticleNo(5, "84301");//alu
+            public static readonly Divider_ArticleNo _None = new Divider_ArticleNo(6, "None");
             private Divider_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -122,6 +129,7 @@ namespace EnumerationTypeLayer
             public static readonly GlazingBead_ArticleNo _2437_2437 = new GlazingBead_ArticleNo(22, "2437(out) & 2437(in)");
             public static readonly GlazingBead_ArticleNo _2437_2434 = new GlazingBead_ArticleNo(23, "2437(out) & 2434(in)");
             public static readonly GlazingBead_ArticleNo _2434_2434 = new GlazingBead_ArticleNo(24, "2434(out) & 2434(in)");
+            public static readonly GlazingBead_ArticleNo _84500 = new GlazingBead_ArticleNo(25, "84500");
 
 
 
@@ -203,6 +211,8 @@ namespace EnumerationTypeLayer
             public static readonly SashProfile_ArticleNo _2067 = new SashProfile_ArticleNo(5, "2067"); //G58
             public static readonly SashProfile_ArticleNo _6040 = new SashProfile_ArticleNo(6, "6040");
             public static readonly SashProfile_ArticleNo _6041 = new SashProfile_ArticleNo(7, "6041");
+            public static readonly SashProfile_ArticleNo _84207 = new SashProfile_ArticleNo(8, "84207");
+
 
             private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -1289,6 +1299,9 @@ namespace EnumerationTypeLayer
             public static readonly BillOfMaterialsFilter _FittingAndSuppliesCost = new BillOfMaterialsFilter(4, "Fitting and Supplies");
             public static readonly BillOfMaterialsFilter _LouverCost = new BillOfMaterialsFilter(5, "Louver Material Cost");
             public static readonly BillOfMaterialsFilter _MeshCost = new BillOfMaterialsFilter(6, "Mesh Cost");
+            public static readonly BillOfMaterialsFilter _InstallationCost = new BillOfMaterialsFilter(7, "Installation Cost");
+
+
 
 
             private BillOfMaterialsFilter(int value, string displayName) : base(value, displayName) { }

@@ -678,8 +678,11 @@ namespace PresentationLayer.Presenter.UserControls
                     GallerySetProp.BringToFront();
                 }
 
-                if (_panelModel.Panel_Type.Contains("Fixed") ||
-                    _panelModel.Panel_Type.Contains("Sliding"))
+          
+
+                if ((_panelModel.Panel_Type.Contains("Fixed") ||
+                    _panelModel.Panel_Type.Contains("Sliding")) &&
+                    !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                 {
                     _panelModel.Panel_CenterProfileVisibility = true;
 

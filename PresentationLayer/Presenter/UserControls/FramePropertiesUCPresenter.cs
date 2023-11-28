@@ -169,10 +169,10 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             _frameModel.Frame_CladdingVisibility = true;
                             _frameModel.FrameProp_Height += constants.frame_CladdingProperty_PanelHeight;
-                            _framePropertiesUC.AddHT_PanelBody(constants.frame_CladdingProperty_PanelHeight); 
+                            _framePropertiesUC.AddHT_PanelBody(constants.frame_CladdingProperty_PanelHeight);
                         }
 
-                        
+
                         #endregion
                     }
 
@@ -437,6 +437,11 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._2060;
                     }
+                    else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84100;
+                    }
+
                 }
                 else if (_frameModel.Frame_Type == Frame_Padding.Door)
                 {
@@ -454,7 +459,10 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._2060;
                     }
-
+                    else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84100;
+                    }
                 }
             }
 
@@ -505,7 +513,7 @@ namespace PresentationLayer.Presenter.UserControls
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(ScreenPropUC);
             ScreenPropUC.Dock = DockStyle.Top;
             ScreenPropUC.BringToFront();
-             
+
             IFP_TubularPropertyUCPresenter tubular = _fp_TubularPropertyUCPresenter.GetNewInstance(_unityC, _frameModel, _mainPresenter, this);
             UserControl TubePropUC = (UserControl)tubular.GetTubularPropertyUC();
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(TubePropUC);

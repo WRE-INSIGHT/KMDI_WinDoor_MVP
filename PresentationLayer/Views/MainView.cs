@@ -734,5 +734,7 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, glassUpgradeToolStripButtonClickEventRaised, e);
         }
+
+        
     }
 }

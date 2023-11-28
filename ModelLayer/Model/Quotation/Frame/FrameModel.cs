@@ -755,7 +755,10 @@ namespace ModelLayer.Model.Quotation.Frame
                     Frame_ArtNoForPremi = FrameProfileForPremi_ArticleNo._6052_milled;
                     Frame_ConnectingProfile_ArticleNo = ConnectingProfile_ArticleNo._0373;
                 }
-
+                else if (value == FrameProfile_ArticleNo._84100)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._None;
+                }
                 NotifyPropertyChanged();
             }
         }
@@ -2250,6 +2253,14 @@ namespace ModelLayer.Model.Quotation.Frame
                     FrameProp_Height += constants.div_property_claddingBracketOptionsHeight;
                 }
                 else if (mode == "minusCladdingBracket")
+                {
+                    FrameProp_Height -= constants.div_property_claddingBracketOptionsHeight;
+                }
+                else if (mode == "addPnlCladding")
+                {
+                    FrameProp_Height += constants.div_property_claddingBracketOptionsHeight;
+                }
+                else if (mode == "minusPnlCladding")
                 {
                     FrameProp_Height -= constants.div_property_claddingBracketOptionsHeight;
                 }

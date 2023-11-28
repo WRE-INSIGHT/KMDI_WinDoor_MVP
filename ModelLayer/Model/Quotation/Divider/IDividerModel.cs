@@ -31,6 +31,7 @@ namespace ModelLayer.Model.Quotation.Divider
         int Div_CladdingBracketForConcreteQTY { get; set; }
         bool Div_claddingBracketVisibility { get; set; }
         bool Div_CladdingProfileArtNoVisibility { get; set; }
+        bool Div_PnlCladdingVisibility { get; set; }
 
         DummyMullion_ArticleNo Div_DMArtNo { get; set; }
         int Div_AlumSpacer50Qty { get; set; }

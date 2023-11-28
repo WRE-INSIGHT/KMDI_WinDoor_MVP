@@ -591,6 +591,11 @@ namespace ModelLayer.Model.Quotation.Divider
                     Div_ReinfArtNo = DividerReinf_ArticleNo._V226;
                     Div_MechJoinArtNo = Divider_MechJointArticleNo._9U18;
                 }
+                else if (value == Divider_ArticleNo._84300 ||
+                         value == Divider_ArticleNo._84301)
+                {
+                    Div_ReinfArtNo = DividerReinf_ArticleNo._None;
+                }
 
                 NotifyPropertyChanged();
             }
@@ -631,6 +636,21 @@ namespace ModelLayer.Model.Quotation.Divider
                 NotifyPropertyChanged();
             }
         }
+
+        private bool _div_PnlCladdingVisibility;
+        public bool Div_PnlCladdingVisibility
+        {
+            get
+            {
+                return _div_PnlCladdingVisibility;
+            }
+            set
+            {
+                _div_PnlCladdingVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         private CladdingProfile_ArticleNo _div_claddingProfileArtNo;
         public CladdingProfile_ArticleNo Div_CladdingProfileArtNo
@@ -713,6 +733,18 @@ namespace ModelLayer.Model.Quotation.Divider
             else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._7507)
             {
                 frame_deduction = 47;
+            }
+            else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._6050)
+            {
+                frame_deduction = 35;
+            }
+            else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+            {
+                frame_deduction = 53;
+            }
+            else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+            {
+                frame_deduction = 54;
             }
 
             if (Div_ChkDM == true)
@@ -868,6 +900,14 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2)) + (4 * 2);
                     }
+                    else if (Div_ArtNo == Divider_ArticleNo._6052)
+                    {
+                        Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                    }
+                    else if (Div_ArtNo == Divider_ArticleNo._84300)
+                    {
+                        Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                    }
 
                     if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677 || Div_ReinfArtNo == DividerReinf_ArticleNo._V226)
                     {
@@ -876,6 +916,10 @@ namespace ModelLayer.Model.Quotation.Divider
                     else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
                     {
                         Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
+                    }
+                    else if (Div_ReinfArtNo == DividerReinf_ArticleNo._TV107)
+                    {
+                        Div_ReinfWidth = (Div_ExplosionWidth - (38 * 2)) - (5 * 2);
                     }
 
                     //Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
@@ -1109,6 +1153,14 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             Div_ExplosionWidth = (Div_DisplayWidth - (left_deduction + right_deduction)) + (4 * 2);
                         }
+                        else if (Div_ArtNo == Divider_ArticleNo._6052)
+                        {
+                            Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                        }
+                        else if (Div_ArtNo == Divider_ArticleNo._84300)
+                        {
+                            Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                        }
 
                         if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677 || Div_ReinfArtNo == DividerReinf_ArticleNo._V226)
                         {
@@ -1117,6 +1169,10 @@ namespace ModelLayer.Model.Quotation.Divider
                         else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
                         {
                             Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
+                        }
+                        else if (Div_ReinfArtNo == DividerReinf_ArticleNo._TV107)
+                        {
+                            Div_ReinfWidth = (Div_ExplosionWidth - (38 * 2)) - (5 * 2);
                         }
 
                         //Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
@@ -1184,6 +1240,14 @@ namespace ModelLayer.Model.Quotation.Divider
             else if (mode == "minusCladdingBracket")
             {
                 Div_PropHeight -= constants.div_property_claddingBracketOptionsHeight;
+            }
+            else if (mode == "addPnlCladding")
+            {
+                Div_PropHeight += constants.div_property_claddingPnl;
+            }
+            else if (mode == "minusPnlCladding")
+            {
+                Div_PropHeight -= constants.div_property_claddingPnl;
             }
         }
 

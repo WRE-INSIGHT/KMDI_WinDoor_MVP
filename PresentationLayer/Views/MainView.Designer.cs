@@ -37,6 +37,7 @@
             this.C70ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PremiLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.G58ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AlutekToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.glassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.singleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doubleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -192,7 +193,8 @@
             this.ItemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.C70ToolStripMenuItem,
             this.PremiLineToolStripMenuItem,
-            this.G58ToolStripMenuItem});
+            this.G58ToolStripMenuItem,
+            this.AlutekToolStripMenuItem});
             this.ItemToolStripMenuItem.Enabled = false;
             this.ItemToolStripMenuItem.Name = "ItemToolStripMenuItem";
             this.ItemToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
@@ -218,6 +220,13 @@
             this.G58ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.G58ToolStripMenuItem.Text = "&G58";
             this.G58ToolStripMenuItem.Click += new System.EventHandler(this.CreateNewItem_Clicked);
+            // 
+            // AlutekToolStripMenuItem
+            // 
+            this.AlutekToolStripMenuItem.Name = "AlutekToolStripMenuItem";
+            this.AlutekToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.AlutekToolStripMenuItem.Text = "&Alutek";
+            this.AlutekToolStripMenuItem.Click += new System.EventHandler(this.CreateNewItem_Clicked);
             // 
             // glassToolStripMenuItem
             // 
@@ -1213,5 +1222,6 @@
         private System.Windows.Forms.ToolStripButton PriceHistorytoolStripButton;
         private System.Windows.Forms.ToolStripButton DateAssignedtoolStripButton;
         private System.Windows.Forms.ToolStripButton glassUpgradeToolStrip;
+        private System.Windows.Forms.ToolStripMenuItem AlutekToolStripMenuItem;
     }
 }

@@ -844,6 +844,10 @@ namespace ModelLayer.Model.Quotation.Panel
                         PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434_2434;
                     }
                 }
+                else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._84500;
+                }
                 else
                 {
                     if (Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
@@ -5647,6 +5651,18 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
                     Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
                 }
+                else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                {
+                    int glass_deduct = 0;
+                    if (Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                    {
+                        glass_deduct = 64;
+                    }
+                    Panel_GlassWidth = Panel_SashWidth - glass_deduct;
+                    Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
+                    Panel_GlassHeight = Panel_SashHeight - glass_deduct;
+                    Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
+                }
                 //else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
                 //{
                 //    //int sash_deduct = 0, glass_deduct = 0;
@@ -6628,6 +6644,10 @@ namespace ModelLayer.Model.Quotation.Panel
                 else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                 {
                     frameDeduction = 61;
+                }
+                else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                {
+                    frameDeduction = 23;
                 }
 
                 if (Panel_ParentFrameModel.Frame_BotFrameVisible == true)
@@ -8808,6 +8828,13 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         deduction_for_ht -= 41;
                     }
+                }
+
+
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                {
+                    deduction_for_wd = 46;
+                    deduction_for_ht = 46;
                 }
 
                 Panel_SashWidth = 0;

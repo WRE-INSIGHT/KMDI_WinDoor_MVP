@@ -239,6 +239,7 @@ namespace PresentationLayer.Views.UserControls
             cmb_DMArtNo.DataBindings.Add(ModelBinding["Div_DMArtNo"]);
             cmb_CladdingArtNo.DataBindings.Add(ModelBinding["Div_CladdingProfileArtNo"]);
             pnl_divCladdingArtNo.DataBindings.Add(ModelBinding["Div_CladdingProfileArtNoVisibility"]);
+            pnl_AddCladding.DataBindings.Add(ModelBinding["Div_PnlCladdingVisibility"]);
         }
 
         public void SetBtnSaveBackColor(Color color)
