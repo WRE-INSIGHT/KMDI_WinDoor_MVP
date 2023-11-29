@@ -2563,12 +2563,13 @@ namespace PresentationLayer.Presenter
         {
             Bitmap bitmage = new Bitmap(_wdmimage);
             MemoryStream ms = new MemoryStream();
-            bitmage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            bitmage.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             byte[] byteimage = ms.ToArray();
 
             string x = Convert.ToBase64String(byteimage);
 
             return x;
+            
         }
         private Image CovertStringToImage(string _wdmString)
         {
@@ -8867,7 +8868,11 @@ namespace PresentationLayer.Presenter
 
                                 if (value != "")
                                 {
-                                    if (!value.ToLower().Contains("dear"))
+                                    if (value.ToLower().Contains("contract reference no.:")) // for partialAdjustment 
+                                    {
+                                        value = value + "\n";
+                                    }
+                                    else if (!value.ToLower().Contains("dear"))
                                     {
                                         value = value + "\n" + "\n";
                                     }

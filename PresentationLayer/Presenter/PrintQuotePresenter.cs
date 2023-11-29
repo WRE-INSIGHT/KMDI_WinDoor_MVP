@@ -458,7 +458,7 @@ namespace PresentationLayer.Presenter
                                                      + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION";
                     _printQuoteView.QuotationSalutation = "Partial Adjustment\n\n"
                                                            + "Contract Reference No.: "+ " " +"\n" // contract ref no
-                                                           + "JO#: " + " " + "\n\nDear" //jobOrder
+                                                           + "JO No.: " + " " + "\n\nDear" //jobOrder
                                                            + _mainPresenter.titleLastname;
                     _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
 
@@ -1368,13 +1368,22 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetQuotationBody().Width = _printQuoteView.GetQuotationBody().Width - 120;
                     #endregion
 
-                    ReportParameter[] RParam = new ReportParameter[6];
+                    ReportParameter[] RParam = new ReportParameter[7];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
                     RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
                     RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
                     RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
                     RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+
+                    if (_printQuoteView.GetShowPageNum().Checked)
+                    {
+                        RParam[6] = new ReportParameter("ShowPageNumber", "True");
+                    }
+                    else
+                    {
+                        RParam[6] = new ReportParameter("ShowPageNumber", "False");
+                    }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
 

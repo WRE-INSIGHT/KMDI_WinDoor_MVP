@@ -994,11 +994,59 @@ Banilad, Mandaue City, Cebu, Phils. 6014
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>12.04295in</Height>
+    <Height>6.5742in</Height>
     <Style />
   </Body>
   <Width>7.96323in</Width>
   <Page>
+    <PageFooter>
+      <Height>0.51042in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox22">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Page: " &amp; Globals!PageNumber</Value>
+                  <Style>
+                    <FontFamily>Arial Narrow</FontFamily>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox8</rd:DefaultName>
+          <Top>0.04167in</Top>
+          <Left>7.27542in</Left>
+          <Height>0.25in</Height>
+          <Width>0.61281in</Width>
+          <Visibility>
+            <Hidden>=iif(Parameters!ShowPageNumber.Value = "True", false, true)</Hidden>
+          </Visibility>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
     <LeftMargin>0.25in</LeftMargin>
     <RightMargin>0.25in</RightMargin>
     <TopMargin>0.25in</TopMargin>
@@ -1083,6 +1131,10 @@ Banilad, Mandaue City, Cebu, Phils. 6014
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="QuoteNumber">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ShowPageNumber">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
