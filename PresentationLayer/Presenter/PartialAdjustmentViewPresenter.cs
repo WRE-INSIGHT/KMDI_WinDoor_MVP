@@ -195,6 +195,7 @@ namespace PresentationLayer.Presenter
 
                                 mstream = new MemoryStream();
                                 ItemImage = wdm.WD_PAPreviousImage;
+                                
                                 ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
                                 ArrForImage = mstream.ToArray();
                                 ImageByteToString = Convert.ToBase64String(ArrForImage);
