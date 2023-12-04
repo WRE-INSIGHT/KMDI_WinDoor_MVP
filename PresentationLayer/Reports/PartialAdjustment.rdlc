@@ -751,6 +751,11 @@ Banilad, Mandaue City, Cebu, Phils. 6014
                         <Border>
                           <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </TopBorder>
                         <BottomBorder>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
@@ -788,6 +793,11 @@ Banilad, Mandaue City, Cebu, Phils. 6014
                         <Border>
                           <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </TopBorder>
                         <BottomBorder>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
