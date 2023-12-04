@@ -206,7 +206,7 @@ namespace PresentationLayer.Presenter
                                 _dsq.dtPartialAdjustment.Rows.Add(wdm.WD_id,
                                                                   wdm.WD_itemName,
                                                                   ImageByteToString,
-                                                                  wdm.WD_PAPreviousDescription + "\n ADJUSTABLE TO ITEM BELOW",
+                                                                  wdm.WD_PAPreviousDescription + "\n ADJUSTED TO ITEM BELOW",
                                                                   wdm.WD_quantity,
                                                                  _price_x_Qty.ToString("N", new CultureInfo("en-US")),
                                                                   ""
@@ -231,7 +231,7 @@ namespace PresentationLayer.Presenter
                                 _dsq.dtPartialAdjustment.Rows.Add(wdm.WD_id,
                                                                   wdm.WD_itemName,
                                                                   ImageByteToString,
-                                                                  wdm.WD_description + "\n ADJUSTABLE TO ITEM BELOW",
+                                                                  wdm.WD_description + "\n ADJUSTED TO ITEM BELOW",
                                                                   wdm.WD_quantity,
                                                                  _price_x_Qty.ToString("N", new CultureInfo("en-US")),
                                                                   ""
