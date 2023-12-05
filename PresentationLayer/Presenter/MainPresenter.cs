@@ -11394,22 +11394,8 @@ namespace PresentationLayer.Presenter
                                  false);
                 //clear
 
-                //foreach (Control ctrl in _pnlMain.Controls.OfType<Control>().ToList())
-                //{
-                //    ctrl.Dispose();
-                //}
-                //foreach (Control ctrl in _pnlPropertiesBody.Controls.OfType<Control>().ToList())
-                //{
-                //    ctrl.Dispose();
-                //}
-
                 _pnlMain.Controls.Clear();
                 _pnlPropertiesBody.Controls.Clear();
-
-                //foreach (Control ctrl in _pnlMain.Controls.OfType<Control>().ToList())
-                //{
-                //    ctrl.Dispose();
-                //}
 
                 _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
 
