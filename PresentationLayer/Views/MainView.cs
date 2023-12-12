@@ -34,6 +34,7 @@ namespace PresentationLayer.Views
                     SortItemtoolStripButton1.Enabled = true;
                     PriceHistorytoolStripButton.Enabled = true;
                     DateAssignedtoolStripButton.Enabled = true;
+                    partialAdjustmentToolstrip.Enabled = true;
                 }
                 else
                 {
@@ -50,6 +51,7 @@ namespace PresentationLayer.Views
                     SortItemtoolStripButton1.Enabled = false;
                     PriceHistorytoolStripButton.Enabled = false;
                     DateAssignedtoolStripButton.Enabled = false;
+                    partialAdjustmentToolstrip.Enabled = false;
                 }
             }
         }
@@ -73,6 +75,7 @@ namespace PresentationLayer.Views
                 ViewImagerToolStripButton1.Enabled = value;
                 deleteItemToolStripButton1.Enabled = value;
                 glassUpgradeToolStrip.Enabled = value;
+                partialAdjustmentToolstrip.Enabled = value;
             }
         }
 
@@ -82,7 +85,6 @@ namespace PresentationLayer.Views
             {
                 return ItemToolStripMenuItem.Enabled;
             }
-
             set
             {
                 ItemToolStripMenuItem.Enabled = value;
@@ -238,12 +240,32 @@ namespace PresentationLayer.Views
             {
                 return _itemScroll;
             }
-
             set
             {
                 _itemScroll = value;
                 pnlItems.VerticalScroll.Value = value;
                 pnlItems.ScrollControlIntoView(pnlItems);
+            }
+        }
+        public bool SpecificToolStripEnable
+        {
+            get
+            {
+                return SpecificToolStripEnable;
+            }
+            set
+            {
+                openToolStripButton.Enabled = value;
+                saveToolStripButton.Enabled = value;
+                ScreentoolStripButton.Enabled = value;
+                duplicateItemToolStripButton1.Enabled = value;
+                refreshToolStripButton.Enabled = value;
+                ViewImagerToolStripButton1.Enabled = value;
+                deleteItemToolStripButton1.Enabled = value;
+                glassUpgradeToolStrip.Enabled = value;
+                partialAdjustmentToolstrip.Enabled = value;
+                PriceHistorytoolStripButton.Enabled = value;
+                DateAssignedtoolStripButton.Enabled = value;
             }
         }
 
@@ -291,6 +313,7 @@ namespace PresentationLayer.Views
         public event EventHandler PriceHistorytoolStripButtonClickEventRaised;
         public event EventHandler DateAssignedtoolStripButtonClickEventRaised;
         public event EventHandler glassUpgradeToolStripButtonClickEventRaised;
+        public event EventHandler partialAdjusmentToolstripClickClickEventRaised;
         public MainView()
         {
             InitializeComponent();
@@ -671,7 +694,7 @@ namespace PresentationLayer.Views
             if (tsBtnNwin.Enabled == true)
             {
 
-                if (e.Control == true && e.KeyCode == Keys.P)
+                if (e.Control == true && e.KeyCode == Keys.L)
                 {
                     itemListToolStripMenuItem_Click(sender, e);
                 }
@@ -679,7 +702,7 @@ namespace PresentationLayer.Views
                 {
                     saveToolStripButton_Click(sender, e);
                 }
-                else if (e.Control == true && e.KeyCode == Keys.I)
+                else if (e.Alt == true && e.KeyCode == Keys.S)
                 {
                     ScreentoolStripButton_Click(sender, e);
                 }
@@ -733,6 +756,11 @@ namespace PresentationLayer.Views
         private void glassUpgradeToolStrip_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, glassUpgradeToolStripButtonClickEventRaised, e);
+        }
+
+        private void partialAdjusmentToolstrip_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, partialAdjusmentToolstripClickClickEventRaised, e);
         }
     }
 }

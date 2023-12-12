@@ -4429,7 +4429,6 @@ namespace ModelLayer.Model.Quotation
                         {
                             ChckPlasticWedge = false;
                         }
-
                         chckPerFrameMotorMech = true;
 
                         PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
@@ -5930,6 +5929,7 @@ namespace ModelLayer.Model.Quotation
                                                 else
                                                 {
                                                     GlassPrice += 0;
+                                                    pnl.Panel_GlassPricePerSqrMeter = 0;
                                                 }
 
                                                 #endregion 
@@ -6730,6 +6730,7 @@ namespace ModelLayer.Model.Quotation
                                                 else
                                                 {
                                                     GlassPrice += 0;
+                                                    pnl.Panel_GlassPricePerSqrMeter = 0;
                                                 }
                                                 #endregion
                                             }
@@ -9306,6 +9307,7 @@ namespace ModelLayer.Model.Quotation
                                     else
                                     {
                                         GlassPrice += 0;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = 0;
                                     }
 
                                     #endregion
@@ -10099,6 +10101,7 @@ namespace ModelLayer.Model.Quotation
                                     else
                                     {
                                         GlassPrice += 0;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = 0;
                                     }
 
                                     #endregion

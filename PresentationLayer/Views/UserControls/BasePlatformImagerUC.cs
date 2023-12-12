@@ -39,7 +39,7 @@ namespace PresentationLayer.Views.UserControls
         private void BasePlatformImagerUC_Paint(object sender, PaintEventArgs e)
         {
             EventHelpers.RaisePaintEvent(this, basePlatformPaintEventRaised, e);
-        }
+        } 
 
         private void flp_frameDragDrop_Paint(object sender, PaintEventArgs e)
         {

@@ -89,7 +89,7 @@ namespace PresentationLayer.Presenter
 
         private void SubscribeToEventSetup()
         {
-
+            
             _glassUpgradeView.GlassUpgradeView_LoadEventRaised += new EventHandler(OnGlassUpgradeViewLoadEventRaised);
             _glassUpgradeView.chkbx_ItemList_SelectedValueChangedEventRaised += new EventHandler(Onchkbx_ItemList_SelectedValueChangedEventRaised);
             _glassUpgradeView.GlassUpgradeView_SizeChangedEventRaised += _glassUpgradeView_GlassUpgradeView_SizeChangedEventRaised;
@@ -866,7 +866,7 @@ namespace PresentationLayer.Presenter
                     _cmbMultipleGlassUpgrade.Items.Clear();
                     _dgv_GlassUpgrade.Columns.Clear();
                     _dgv_GlassUpgrade.DataSource = null;
-
+                    
                     //databinding new DT
                     LoadNewItemsInMultipleGlassUpgrade(_cmbGlassType.SelectedItem.ToString());
                     LoadDataGridViewSettings();
@@ -957,12 +957,13 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
+        
         private void _glassUpgradeView_glassUpgradeDGV_CellEndEditEventRaised(object sender, EventArgs e)
         {
             var currCell_col = _dgv_GlassUpgrade.CurrentCell.ColumnIndex;
             var currCell_row = _dgv_GlassUpgrade.CurrentCell.RowIndex;
             var currCell_value = _dgv_GlassUpgrade.CurrentCell.Value.ToString();
-            
+
             bool _isNegative = false;
 
             /*
@@ -986,9 +987,9 @@ namespace PresentationLayer.Presenter
                     {
                         #region non-unglazed
 
-                        if(currCell_col == 7)
+                        if (currCell_col == 7)
                         {
-                            _glassTypeWithPriKeyExist = PrimaryAndGlassTypeChecker(currCell_row,currCell_value);
+                            _glassTypeWithPriKeyExist = PrimaryAndGlassTypeChecker(currCell_row, currCell_value);
                             if (!_glassTypeWithPriKeyExist)
                             {
                                 _glassUpgradeDT.Rows[currCell_row][currCell_col] = currCell_value;
@@ -1011,7 +1012,7 @@ namespace PresentationLayer.Presenter
                                     _glassUpgradeDT.Rows[currCell_row][8] = dtrow[3].ToString(); // assign selected glass price
                                     string _prevGlassPrice = _glassUpgradeDT.Rows[currCell_row][6].ToString(); // original glass price 
                                     string _selectedGlassPrice = _glassUpgradeDT.Rows[currCell_row][8].ToString();// selected glass price
-                                    
+
                                     decimal _convePrevGlassPrice = Convert.ToDecimal(_prevGlassPrice);
                                     decimal _conveSelectedGlassPrice = Convert.ToDecimal(_selectedGlassPrice);
                                     decimal _upgradeValue;
@@ -1032,7 +1033,7 @@ namespace PresentationLayer.Presenter
                                     decimal _glassWidth = Convert.ToDecimal(_glassUpgradeDT.Rows[currCell_row][3]);
                                     decimal _glassHeight = Convert.ToDecimal(_glassUpgradeDT.Rows[currCell_row][4]);
 
-                                     //_amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.1m) / 1000000m, 2);// glass amount per unit
+                                    //_amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.1m) / 1000000m, 2);// glass amount per unit
 
                                     if (_cmbGlassType.SelectedItem.ToString() == "Tempered Glass" || _cmbGlassType.SelectedItem.ToString() == "Tinted Glass")
                                     {
@@ -1077,7 +1078,7 @@ namespace PresentationLayer.Presenter
                                 _dgv_GlassUpgrade.DataSource = PopulateDgvGlassUpgrade();
                             }
                         }
-                    }   
+                    }
                     else if (_isUnglazed)
                     {
                         #region unglazed
@@ -1100,8 +1101,6 @@ namespace PresentationLayer.Presenter
             {
                 //MessageBox.Show("Error in Loading GlassList");
             }
-
-
         }
         private void glassUpgradeDGV_ColumnHeaderMouseClickEventRaised(object sender, DataGridViewCellMouseEventArgs e)
         {

@@ -3096,7 +3096,6 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 return _panel_LouverGallerySetOptionArtNo;
             }
-
             set
             {
                 _panel_LouverGallerySetOptionArtNo = value;

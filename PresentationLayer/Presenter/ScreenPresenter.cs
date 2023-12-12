@@ -101,7 +101,7 @@ namespace PresentationLayer.Presenter
             _screenView.nudPlisseRdValueChangeEventRaise += _screenView_nudPlisseRdValueChangeEventRaise;
             _screenView.nudDiscountValueChangeEventRaised += _screenView_nudDiscountValueChangeEventRaised;
             _screenView.cmbFreedomSizeSelectedValueChangedEventRaised += _screenView_cmbFreedomSizeSelectedValueChangedEventRaised;
-            _screenView.CellEndEditEventRaised += _screenView_CellEndEditEventRaised;
+            _screenView.CellEndEditEventRaised += _screenView_CellEndEditEventRaised; 
             _screenView.dgvScreenColumnHeaderMouseClick += _screenView_dgvScreenColumnHeaderMouseClick;
             _screenView.dgvScreenCellDoubleClickEventRaised += _screenView_dgvScreenCellDoubleClickEventRaised;
             _screenView.dgvScreenCellClickEventRaised += _screenView_dgvScreenCellClickEventRaised;

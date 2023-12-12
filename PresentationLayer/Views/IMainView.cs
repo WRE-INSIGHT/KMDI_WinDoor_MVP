@@ -49,6 +49,7 @@ namespace PresentationLayer.Views
         event EventHandler PriceHistorytoolStripButtonClickEventRaised;
         event EventHandler DateAssignedtoolStripButtonClickEventRaised;
         event EventHandler glassUpgradeToolStripButtonClickEventRaised;
+        event EventHandler partialAdjusmentToolstripClickClickEventRaised;
 
         string mainview_title { get; set; }
         float Zoom { get; set; }
@@ -58,6 +59,7 @@ namespace PresentationLayer.Views
         bool CreateNewWindoorBtnEnabled { get; set; }
         int PropertiesScroll { get; set; }
         int ItemScroll { get; set; }
+        bool SpecificToolStripEnable { get; set; }
         void ShowMainView();
         void ThisBinding(Dictionary<string, Binding> binding);
         void RemoveBinding();
