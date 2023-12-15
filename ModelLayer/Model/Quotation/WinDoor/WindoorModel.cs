@@ -24,7 +24,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 return _wdProfile;
             }
             set
-            {
+            {     
                 _wdProfile = value;
                 NotifyPropertyChanged();
             }
@@ -666,6 +666,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public List<Image> WD_PALst_Designs { get; set; }
         public List<string> WD_PALst_Description { get; set; }
         public List<decimal> WD_PALst_Price { get; set; }
+        public List<int> WD_PALst_Qty { get; set; }
 
         public bool WD_IsSelectedAtPartialAdjusment { get; set; }
         public bool WD_IsPartialADPreviousExist { get; set; }
