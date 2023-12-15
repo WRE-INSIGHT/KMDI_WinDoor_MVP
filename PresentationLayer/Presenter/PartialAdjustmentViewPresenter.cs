@@ -259,7 +259,7 @@ namespace PresentationLayer.Presenter
                                                                           wdm.WD_itemName,
                                                                           ImageByteToString,
                                                                           wdm.WD_PAPreviousDescription + "NO SIGNIFICANT CHANGE",
-                                                                          1,
+                                                                          wdm.WD_PALst_Qty[j],//itemQty
                                                                           wdm.WD_PAPreviousPrice.ToString("N", new CultureInfo("en-US")),
                                                                           "0.00"
                                                                           );
@@ -278,7 +278,7 @@ namespace PresentationLayer.Presenter
                                                                           wdm.WD_itemName,
                                                                           ImageByteToString,
                                                                           wdm.WD_description + "NO SIGNIFICANT CHANGE",
-                                                                          1,
+                                                                          wdm.WD_PALst_Qty[j],//itemqty
                                                                           wdm.WD_price.ToString("N", new CultureInfo("en-US")),
                                                                           "0.00"
                                                                           );
@@ -296,6 +296,10 @@ namespace PresentationLayer.Presenter
                                     ImageByteToString = Convert.ToBase64String(ArrForImage);
 
                                     decimal AdjustmentPrice =  wdm.WD_PALst_Price[j] - wdm.WD_PAPreviousPrice;
+                                    AdjustmentPrice =  AdjustmentPrice * wdm.WD_PALst_Qty[j];
+
+                                    decimal Price = wdm.WD_PALst_Price[j] * wdm.WD_PALst_Qty[j];
+
                                     string AdjustmentPriceTostring;
                                     if (AdjustmentPrice < 0)
                                     {
@@ -311,8 +315,8 @@ namespace PresentationLayer.Presenter
                                                                       wdm.WD_itemName,
                                                                       ImageByteToString,
                                                                       wdm.WD_PALst_Description[j],
-                                                                      1,
-                                                                      wdm.WD_PALst_Price[j].ToString("N", new CultureInfo("en-US")),
+                                                                      wdm.WD_PALst_Qty[j],//itemQty
+                                                                      Price.ToString("N", new CultureInfo("en-US")),
                                                                       AdjustmentPriceTostring
                                                                       );
                                 }
@@ -392,6 +396,12 @@ namespace PresentationLayer.Presenter
                 wdm.WD_PALst_Designs = new List<System.Drawing.Image>();
                 wdm.WD_PALst_Description = new List<string>();  
                 wdm.WD_PALst_Price = new List<decimal>();
+                wdm.WD_PALst_Qty = new List<int>();
+            }
+
+            if(wdm.WD_PALst_Qty == null)
+            {
+                wdm.WD_PALst_Qty = new List<int>();
             }
 
             UserControl partialadjustmentItems = (UserControl)_partialAdjustmentBaseHolderPresenter.GetPABaseHolderUC();

@@ -89,8 +89,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
         DateTime Date_Assigned { get; set; }
         DateTime Date_Assigned_Mainpresenter { get; set; }
         List<Image> WD_PALst_Designs { get; set; }
-        List<string> WD_PALst_Description { get; set; }
+        List<string> WD_PALst_Description { get; set; }   
         List<decimal> WD_PALst_Price { get; set; }
+        List<int> WD_PALst_Qty { get; set; }
 
         bool WD_IsSelectedAtPartialAdjusment { get; set; }
         bool WD_IsPartialADPreviousExist { get; set; }

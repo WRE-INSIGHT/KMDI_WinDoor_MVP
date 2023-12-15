@@ -16,6 +16,7 @@ namespace PresentationLayer.Views.UserControls
         Label GetCurrentItemPrice();
         Panel GetHeaderPanel();
         Timer BGChangedTimer();
+        NumericUpDown GetCurrentItemQuantity();
         void GetUCdispose();
 
         event EventHandler partialAdjustmentUC_LoadEventRaised;
@@ -32,5 +33,6 @@ namespace PresentationLayer.Views.UserControls
         event MouseEventHandler pnl_Header_LeftMouseDownEventRaised;
         event EventHandler pnl_Header_RightMouseDownClickEventRaised;
         event EventHandler RightMouseDownLeaveExceptionEventRaised;
+        event EventHandler num_Qty_ValueChangedEventRaised;
     }
 }
