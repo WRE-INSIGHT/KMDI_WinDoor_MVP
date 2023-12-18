@@ -59,6 +59,7 @@ namespace PresentationLayer.Presenter.UserControls
             _partialAdjustmenUC.btn_HideAndShow_ClickEventRaised += _partialAdjustmenUC_btn_HideAndShow_ClickEventRaised;
             _partialAdjustmenUC.btn_UsePartialAdjustment_ClickEventRaised += _partialAdjustmenUC_btn_UsePartialAdjustment_ClickEventRaised;
             _partialAdjustmenUC.tmr_BGChange_TickEventRaised += _partialAdjustmenUC_tmr_BGChange_TickEventRaised;
+            _partialAdjustmenUC.num_Qty_ValueChangedEventRaised += _partialAdjustmenUC_num_Qty_ValueChangedEventRaised;
          
             _partialAdjustmenUC.pnl_Header_MouseLeaveEventRaised += _partialAdjustmenUC_pnl_Header_MouseLeaveEventRaised;
             _partialAdjustmenUC.pnl_Header_MouseEnterEventRaised += _partialAdjustmenUC_pnl_Header_MouseEnterEventRaised;
@@ -71,7 +72,20 @@ namespace PresentationLayer.Presenter.UserControls
             _partialAdjustmenUC.pnl_Header_RightMouseDownClickEventRaised += _partialAdjustmenUC_pnl_Header_RightMouseDownClickEventRaised;
             _partialAdjustmenUC.RightMouseDownLeaveExceptionEventRaised += _partialAdjustmenUC_RightMouseDownLeaveExceptionEventRaised;
         }
-        
+
+        private void _partialAdjustmenUC_num_Qty_ValueChangedEventRaised(object sender, EventArgs e)
+        {
+            Console.WriteLine("PA QTY " + _partialAdjustmenUC.GetCurrentItemQuantity().Value);
+            int numUpDownCurrent_Qty = Convert.ToInt32(_partialAdjustmenUC.GetCurrentItemQuantity().Value);
+            int frmWindoorModel_Qty = _windoorModel.WD_PALst_Qty[PartialAdjusmentUCIndexPlacement];
+            
+            if(numUpDownCurrent_Qty != frmWindoorModel_Qty)
+            {
+                _windoorModel.WD_PALst_Qty.Insert(PartialAdjusmentUCIndexPlacement, numUpDownCurrent_Qty);
+                _windoorModel.WD_PALst_Qty.RemoveAt(PartialAdjusmentUCIndexPlacement + 1);
+            }       
+        }
+
         private void _partialAdjustmenUC_RightMouseDownLeaveExceptionEventRaised(object sender, EventArgs e)
         {
             _isMouseHover = true;
@@ -100,6 +114,7 @@ namespace PresentationLayer.Presenter.UserControls
                         _windoorModel.WD_PALst_Designs.RemoveAt(PartialAdjusmentUCIndexPlacement);
                         _windoorModel.WD_PALst_Description.RemoveAt(PartialAdjusmentUCIndexPlacement);
                         _windoorModel.WD_PALst_Price.RemoveAt(PartialAdjusmentUCIndexPlacement);
+                        _windoorModel.WD_PALst_Qty.RemoveAt(PartialAdjusmentUCIndexPlacement);
 
                         _paBaseHolderPresenter.PABaseHolderCtrlList.RemoveAt(PartialAdjusmentUCIndexPlacement);
 

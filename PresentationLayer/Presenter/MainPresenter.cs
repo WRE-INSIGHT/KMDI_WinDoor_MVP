@@ -2552,6 +2552,15 @@ namespace PresentationLayer.Presenter
                         wndr_content.Add("<Price_Separator>");
                     }
 
+                    if(wdm.WD_PALst_Qty != null)
+                    {
+                        wndr_content.Add("<Qty_Separator>");
+                        string Combi = string.Join(",",wdm.WD_PALst_Qty.ToArray());
+                        wndr_content.Add(Combi);
+                        wndr_content.Add("<Qty_Separator>");
+                    }
+
+
                 }
             }
 
@@ -4322,6 +4331,17 @@ namespace PresentationLayer.Presenter
                     inside_PartialAdjustment_Price = true;
                 }
             }
+            else if (row_str.Contains("<Qty_Separator>"))
+            {
+                if (inside_PartialAdjustment_Qty)
+                {
+                    inside_PartialAdjustment_Qty = false;
+                }
+                else
+                {
+                    inside_PartialAdjustment_Qty = true;
+                }
+            }
 
 
             if (row_str == "EndofFile")
@@ -4785,6 +4805,10 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("WD_PALst_Price"))
                         {
                             _windoorModel.WD_PALst_Price = new List<decimal>();
+                        }
+                        else if (row_str.Contains("WD_PALst_Qty"))
+                        {
+                            _windoorModel.WD_PALst_Qty = new List<int>();
                         }
                         else if (row_str.Contains("WD_PAPreviousImage"))
                         {
@@ -9070,6 +9094,19 @@ namespace PresentationLayer.Presenter
                         }
                         #endregion
                     }
+                    else if (inside_PartialAdjustment_Qty)
+                    {
+                        #region Load PartialAdjustment Lst_Qty
+                        if (!row_str.Contains("<Qty_Separator>"))
+                        {
+                            List<string> res = new List<string>(row_str.Split(','));
+                            foreach (string qty in res)
+                            {
+                                _windoorModel.WD_PALst_Qty.Add(Convert.ToInt32(qty));
+                            }
+                        }                  
+                        #endregion
+                    }
                     break;
             }
 
@@ -10014,7 +10051,8 @@ namespace PresentationLayer.Presenter
         #endregion
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi,
              inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory, inside_GlassUpgrade,
-             inside_PartialAdjustment_Image,inside_PartialAdjustment_Description,inside_PartialAdjustment_Price,
+             inside_PartialAdjustment_Image, inside_PartialAdjustment_Description, inside_PartialAdjustment_Price,
+             inside_PartialAdjustment_Qty,
              rdlcDicChangeKey = true,
              add_existing = false,
             _isFromAddExisting = false,

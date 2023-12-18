@@ -43,10 +43,13 @@
             this.lbl_CurrPrice = new System.Windows.Forms.Label();
             this.tmr_BGChange = new System.Windows.Forms.Timer(this.components);
             this.cMenuStrip_Delete = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.lbl_Qty = new System.Windows.Forms.Label();
+            this.num_Qty = new System.Windows.Forms.NumericUpDown();
             this.pnl_Header.SuspendLayout();
             this._paPnlAfter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._paOldDesPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._paCurrectDesPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Qty)).BeginInit();
             this.SuspendLayout();
             // 
             // pnl_Header
@@ -182,10 +185,32 @@
             this.cMenuStrip_Delete.Name = "cMenuStrip_Delete";
             this.cMenuStrip_Delete.Size = new System.Drawing.Size(61, 4);
             // 
+            // lbl_Qty
+            // 
+            this.lbl_Qty.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbl_Qty.AutoSize = true;
+            this.lbl_Qty.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Qty.Location = new System.Drawing.Point(368, 178);
+            this.lbl_Qty.Name = "lbl_Qty";
+            this.lbl_Qty.Size = new System.Drawing.Size(30, 17);
+            this.lbl_Qty.TabIndex = 8;
+            this.lbl_Qty.Text = "Qty";
+            // 
+            // num_Qty
+            // 
+            this.num_Qty.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.num_Qty.Location = new System.Drawing.Point(395, 178);
+            this.num_Qty.Name = "num_Qty";
+            this.num_Qty.Size = new System.Drawing.Size(56, 20);
+            this.num_Qty.TabIndex = 9;
+            this.num_Qty.ValueChanged += new System.EventHandler(this.num_Qty_ValueChanged);
+            // 
             // PartialAdjustmentUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.num_Qty);
+            this.Controls.Add(this.lbl_Qty);
             this.Controls.Add(this.lbl_CurrPrice);
             this.Controls.Add(this.lbl_PrevPrice);
             this.Controls.Add(this._paPnlAfter);
@@ -198,6 +223,7 @@
             this._paPnlAfter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._paOldDesPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._paCurrectDesPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Qty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,5 +244,7 @@
         private System.Windows.Forms.Label lbl_CurrPrice;
         private System.Windows.Forms.Timer tmr_BGChange;
         private System.Windows.Forms.ContextMenuStrip cMenuStrip_Delete;
+        private System.Windows.Forms.Label lbl_Qty;
+        private System.Windows.Forms.NumericUpDown num_Qty;
     }
 }
