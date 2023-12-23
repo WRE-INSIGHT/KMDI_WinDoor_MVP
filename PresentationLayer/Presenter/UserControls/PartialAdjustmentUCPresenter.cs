@@ -60,6 +60,7 @@ namespace PresentationLayer.Presenter.UserControls
             _partialAdjustmenUC.btn_UsePartialAdjustment_ClickEventRaised += _partialAdjustmenUC_btn_UsePartialAdjustment_ClickEventRaised;
             _partialAdjustmenUC.tmr_BGChange_TickEventRaised += _partialAdjustmenUC_tmr_BGChange_TickEventRaised;
             _partialAdjustmenUC.num_Qty_ValueChangedEventRaised += _partialAdjustmenUC_num_Qty_ValueChangedEventRaised;
+            _partialAdjustmenUC.paCurrentDescRTextBox_TextChangedEventRaised += _partialAdjustmenUC_paCurrentDescRTextBox_TextChangedEventRaised;
          
             _partialAdjustmenUC.pnl_Header_MouseLeaveEventRaised += _partialAdjustmenUC_pnl_Header_MouseLeaveEventRaised;
             _partialAdjustmenUC.pnl_Header_MouseEnterEventRaised += _partialAdjustmenUC_pnl_Header_MouseEnterEventRaised;
@@ -71,6 +72,19 @@ namespace PresentationLayer.Presenter.UserControls
             _partialAdjustmenUC.pnl_Header_LeftMouseDownEventRaised += _partialAdjustmenUC_pnl_Header_LeftMouseDownEventRaised;
             _partialAdjustmenUC.pnl_Header_RightMouseDownClickEventRaised += _partialAdjustmenUC_pnl_Header_RightMouseDownClickEventRaised;
             _partialAdjustmenUC.RightMouseDownLeaveExceptionEventRaised += _partialAdjustmenUC_RightMouseDownLeaveExceptionEventRaised;
+        }
+
+        private void _partialAdjustmenUC_paCurrentDescRTextBox_TextChangedEventRaised(object sender, EventArgs e)
+        {
+            string _identifier = _windoorModel.WD_PALst_Description[PartialAdjusmentUCIndexPlacement];
+            if (_identifier != null)
+            {
+                if (CurrentItemDesc.Text.ToString() != _windoorModel.WD_PALst_Description[PartialAdjusmentUCIndexPlacement])
+                {
+                    _windoorModel.WD_PALst_Description[PartialAdjusmentUCIndexPlacement] = CurrentItemDesc.Text.ToString();
+                }
+            }
+            
         }
 
         private void _partialAdjustmenUC_num_Qty_ValueChangedEventRaised(object sender, EventArgs e)

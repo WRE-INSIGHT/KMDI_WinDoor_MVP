@@ -320,7 +320,6 @@ namespace PresentationLayer.Presenter.UserControls
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = _windoorModel.WD_PALst_Description[indxItemPos - 1];//Get Previous Desc
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = _windoorModel.WD_PALst_Price[indxItemPos - 1].ToString("N");//Get Previous Price
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemQuantity().Value = _windoorModel.WD_PALst_Qty[indxItemPos - 1];//Get Previous Qty
-                
             }
 
 
