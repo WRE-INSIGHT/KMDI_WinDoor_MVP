@@ -34,5 +34,6 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler pnl_Header_RightMouseDownClickEventRaised;
         event EventHandler RightMouseDownLeaveExceptionEventRaised;
         event EventHandler num_Qty_ValueChangedEventRaised;
+        event EventHandler paCurrentDescRTextBox_TextChangedEventRaised;
     }
 }

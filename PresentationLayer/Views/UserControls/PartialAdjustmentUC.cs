@@ -94,6 +94,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler pnl_Header_RightMouseDownClickEventRaised;
         public event EventHandler RightMouseDownLeaveExceptionEventRaised;
         public event EventHandler num_Qty_ValueChangedEventRaised;
+        public event EventHandler paCurrentDescRTextBox_TextChangedEventRaised;
 
 
         private void PartialAdjustmentUC_Load(object sender, EventArgs e)
@@ -172,6 +173,11 @@ namespace PresentationLayer.Views.UserControls
         private void num_Qty_ValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, num_Qty_ValueChangedEventRaised, e);
+        }
+
+        private void _paCurrentDescRTextBox_TextChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, paCurrentDescRTextBox_TextChangedEventRaised, e);
         }
     }
 }
