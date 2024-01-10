@@ -30,13 +30,18 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_DHandlePropertyUC_cmb_DArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_DHandleOutsideArtNo = (D_HandleArtNo)((ComboBox)sender).SelectedValue;
+            if (!_panelModel.PanelModelIsFromLoad)
+            {
+                _panelModel.Panel_DHandleOutsideArtNo = (D_HandleArtNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_DHandlePropertyUC_PPDHandlePropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             _pp_DHandlePropertyUC.ThisBinding(CreateBindingDictionary());
         }
+
+
 
         public IPP_DHandlePropertyUC GetDHandlePropertyUC()
         {
