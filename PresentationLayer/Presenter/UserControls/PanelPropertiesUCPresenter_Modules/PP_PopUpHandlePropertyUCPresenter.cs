@@ -30,7 +30,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_PopUpHandlePropertyUC_cmbPopUpArtNoSelectedValueChangedEventRaiased(object sender, EventArgs e)
         {
-            _panelModel.Panel_PopUpHandleArtNo = (PopUp_HandleArtNo)((ComboBox)sender).SelectedValue;
+            if (!_panelModel.PanelModelIsFromLoad)
+            {
+                _panelModel.Panel_PopUpHandleArtNo = (PopUp_HandleArtNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_PopUpHandlePropertyUC_PPPopUpHandlePropertyUCLoadEventRaiased(object sender, EventArgs e)

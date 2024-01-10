@@ -17,5 +17,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         Panel GetPanelBody();
         ComboBox GetHandleLoc();
         ComboBox GetHandleType();
+        ComboBox GetBladeHeight();
+        ComboBox GetGalleryColor();
     }
 }

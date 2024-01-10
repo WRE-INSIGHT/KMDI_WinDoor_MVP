@@ -37,7 +37,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _aluminumTrackUC_PPAliminumTrackPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             _aluminumTrackUC.ThisBinding(CreateBindingDictionary());
-            _aluminumTrackUC.GetNudAluminumTrackQty().Value = 1;
+            _aluminumTrackUC.GetNudAluminumTrackQty().Value = 1;           
         }
 
         public IPP_AliminumTrackPropertyUC GetAliminumTrackPropertyUC()

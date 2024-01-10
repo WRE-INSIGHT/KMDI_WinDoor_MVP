@@ -2302,7 +2302,7 @@ namespace PresentationLayer.Presenter.UserControls
                             else
                             {
                                 string glassDesc = pnl.Panel_GlassThicknessDesc;
-                                lst_glassThickness.Add(pnl.Panel_ID, glassDesc);
+                                //lst_glassThickness.Add(pnl.Panel_ID, glassDesc);
                                 if (pnl == panelModel)
                                 {
                                     pnl_ID = pnl.Panel_ID;

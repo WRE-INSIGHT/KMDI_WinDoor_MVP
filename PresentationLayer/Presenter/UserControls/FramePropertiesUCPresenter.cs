@@ -498,7 +498,6 @@ namespace PresentationLayer.Presenter.UserControls
                     if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
-
                     }
                     else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                     {
