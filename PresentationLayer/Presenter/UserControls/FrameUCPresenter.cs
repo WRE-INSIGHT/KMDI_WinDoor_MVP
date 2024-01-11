@@ -110,13 +110,13 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.deleteCmenuEventRaised += new EventHandler(OnDeleteCmenuEventRaised);
             _frameUC.outerFramePaintEventRaised += new PaintEventHandler(OnOuterFramePaintEventRaised);
             _frameUC.frameMouseClickEventRaised += new MouseEventHandler(OnFrameMouseClickEventRaised);
-            _frameUC.frameMouseEnterEventRaised += new EventHandler(OnFrameMouseEnterEventRaised);      
+            _frameUC.frameMouseEnterEventRaised += new EventHandler(OnFrameMouseEnterEventRaised);
             _frameUC.frameMouseLeaveEventRaised += new EventHandler(OnFrameMouseLeaveEventRaised);
             _frameUC.frameDragDropEventRaised += _frameUC_frameDragDropEventRaised;
             _frameUC.frameControlAddedEventRaised += _frameUC_frameControlAddedEventRaised;
-            _frameUC.frameControlRemovedEventRaised += _frameUC_frameControlRemovedEventRaised;                                   
+            _frameUC.frameControlRemovedEventRaised += _frameUC_frameControlRemovedEventRaised;
         }
-   
+
         private void _frameUC_frameControlRemovedEventRaised(object sender, ControlEventArgs e)
         {
             _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
@@ -145,7 +145,7 @@ namespace PresentationLayer.Presenter.UserControls
             //    _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
             //}
         }
-        
+
         private void _frameUC_frameDragDropEventRaised(object sender, DragEventArgs e)
         {
             _mainPresenter.ForceRestartAndLoadFile();//chksrobj
@@ -804,6 +804,9 @@ namespace PresentationLayer.Presenter.UserControls
         public void OnOuterFramePaintEventRaised(object sender, PaintEventArgs e)
         {
             Pen blkPen = new Pen(Color.Black);
+            Pen bgcolor = new Pen(Color.FromArgb(240, 240, 240), 3);
+            //Pen bgcolor = new Pen(Color.Red, 3);
+
 
             Graphics g = e.Graphics;
 
@@ -849,14 +852,43 @@ namespace PresentationLayer.Presenter.UserControls
                     new Point(pInnerX + pInnerWd,pInnerY + pInnerHt)
                 };
 
+
+
             for (int i = 0; i < corner_points.Length - 1; i += 2)
             {
-                g.DrawLine(blkPen, corner_points[i], corner_points[i + 1]);
+                if (i != 0 && i != 2)
+                {
+                    g.DrawLine(blkPen, corner_points[i], corner_points[i + 1]);
+
+                }
             }
+
 
             if (pfr.Controls.Count == 0)
             {
                 g.DrawRectangle(blkPen, pnl_inner);
+
+                //g.DrawLine(new Pen(Color.Aquamarine, 5), new Point(top_pads, left_pads), new Point(pfr.ClientRectangle.Width - (right_pads), left_pads));  //top horizontal
+                //g.DrawLine(new Pen(Color.Chocolate, 5), new Point(top_pads, left_pads), new Point(top_pads, (pfr.ClientRectangle.Height) / 2));   //verical left
+                //g.DrawLine(new Pen(Color.DarkOrange, 5), new Point(pfr.ClientRectangle.Width - (left_pads), left_pads), new Point(pfr.ClientRectangle.Width - (left_pads), pfr.ClientRectangle.Height / 2));   //verical right
+                Point[] corner_pointsInnerRemove = new[]
+          {
+                    new Point(top_pads, left_pads),
+                    new Point(pfr.ClientRectangle.Width - (right_pads), left_pads),
+                    new Point(top_pads, left_pads),
+                    new Point(top_pads, (pfr.ClientRectangle.Height) / 2),
+                    new Point(pfr.ClientRectangle.Width - (left_pads), left_pads),
+                   new Point(pfr.ClientRectangle.Width - (left_pads), pfr.ClientRectangle.Height / 2)
+                };
+
+                for (int i = 0; i < corner_pointsInnerRemove.Length - 1; i += 2)
+                {
+
+                    g.DrawLine(bgcolor, corner_pointsInnerRemove[i], corner_pointsInnerRemove[i + 1]);
+
+                }
+
+
             }
 
             int w = 1;
@@ -865,6 +897,53 @@ namespace PresentationLayer.Presenter.UserControls
                                                              0,
                                                              pfr.ClientRectangle.Width - w,
                                                              pfr.ClientRectangle.Height - w));
+
+            //g.DrawLine(new Pen(Color.Aquamarine, 5), new Point(0, 0), new Point(pfr.ClientRectangle.Width, 0));  //top horizontal
+            //g.DrawLine(new Pen(Color.Chocolate, 5), new Point(0, 0), new Point(0, pfr.ClientRectangle.Height / 2));   //verical left
+            //g.DrawLine(new Pen(Color.DarkOrange, 5), new Point(pfr.ClientRectangle.Width, 0), new Point(pfr.ClientRectangle.Width, pfr.ClientRectangle.Height / 2));   //verical right
+
+
+            Point[] corner_pointsRemove = new[]
+           {
+                    new Point(0,0),
+                    new Point(pfr.ClientRectangle.Width, 0),
+                    new Point(0,0),
+                    new Point(0, pfr.ClientRectangle.Height / 2),
+                    new Point(pfr.ClientRectangle.Width, 0),
+                    new Point(pfr.ClientRectangle.Width, pfr.ClientRectangle.Height / 2)
+           };
+
+            for (int i = 0; i < corner_pointsRemove.Length - 1; i += 2)
+            {
+                g.DrawLine(bgcolor, corner_pointsRemove[i], corner_pointsRemove[i + 1]);
+
+            }
+
+
+
+            //g.FillRectangle(new SolidBrush(Color.FromArgb(240, 240, 240)),
+            //               new Rectangle(-1,
+            //               -1,
+            //               pfr.ClientRectangle.Width + w,
+            //               pfr.ClientRectangle.Height / 2));
+
+
+            g.DrawArc(new Pen(color, w),
+                      new Rectangle(0,
+                                    0,
+                                    pfr.ClientRectangle.Width - w,
+                                    pfr.ClientRectangle.Height - w),
+                      180.0F,
+                      180.0F);
+
+            g.DrawArc(blkPen,
+                     new Rectangle(26,
+                                   26,
+                                   pfr.ClientRectangle.Width - 52,
+                                   pfr.ClientRectangle.Height - 52),
+                     180.0F,
+                     180.0F);
+
         }
 
         public IFrameUC GetFrameUC()

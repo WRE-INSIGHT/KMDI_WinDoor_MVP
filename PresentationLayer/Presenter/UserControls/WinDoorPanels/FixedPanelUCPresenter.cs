@@ -1321,6 +1321,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
             }
 
+            g.DrawArc(new Pen(Color.Red, w),
+                  new Rectangle(0,
+                                0,
+                                fixedpnl.ClientRectangle.Width - w,
+                                fixedpnl.ClientRectangle.Height - w),
+                  180.0F,
+                  180.0F);
+
+            g.DrawArc(new Pen(Color.Red, w),
+                    new Rectangle(-26,
+                                  -26,
+                                  fixedpnl.ClientRectangle.Width + 52,
+                                  fixedpnl.ClientRectangle.Height + 52),
+                    180.0F,
+                    180.0F);
+
+              
             Font drawFont = new Font("Times New Roman", font_size);
             StringFormat drawFormat = new StringFormat();
             drawFormat.Alignment = StringAlignment.Center;
