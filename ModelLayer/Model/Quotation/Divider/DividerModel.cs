@@ -744,7 +744,7 @@ namespace ModelLayer.Model.Quotation.Divider
             }
             else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._84100)
             {
-                frame_deduction = 54;
+                frame_deduction = 22;
             }
 
             if (Div_ChkDM == true)
@@ -957,6 +957,18 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 bot_deduction = (72 / 2) + frame_deduction;
                             }
+                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._6052)
+                            {
+                                bot_deduction = (53 / 2) + frame_deduction;
+                            }
+                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._84300)
+                            {
+                                bot_deduction = (23 / 2) + frame_deduction;
+                            }
+                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._84301)
+                            {
+                                bot_deduction = (52 / 2) + frame_deduction;
+                            }
                         }
                         catch (Exception)
                         {
@@ -983,6 +995,18 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 top_deduction = 72 / 2;
                             }
+                            else if (div_top.Div_ArtNo == Divider_ArticleNo._6052)
+                            {
+                                top_deduction = 53 / 2;
+                            }
+                            else if (div_top.Div_ArtNo == Divider_ArticleNo._84300)
+                            {
+                                top_deduction = 23 / 2;
+                            }
+                            else if (div_top.Div_ArtNo == Divider_ArticleNo._84301)
+                            {
+                                top_deduction = 52 / 2;
+                            }
 
                             if (div_bot.Div_ArtNo == Divider_ArticleNo._7536 || div_bot.Div_ArtNo == Divider_ArticleNo._2069)
                             {
@@ -991,6 +1015,18 @@ namespace ModelLayer.Model.Quotation.Divider
                             else if (div_bot.Div_ArtNo == Divider_ArticleNo._7538)
                             {
                                 bot_deduction = 72 / 2;
+                            }
+                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._6052)
+                            {
+                                bot_deduction = 53 / 2;
+                            }
+                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._84300)
+                            {
+                                bot_deduction = 23 / 2;
+                            }
+                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._84301)
+                            {
+                                bot_deduction = 52 / 2;
                             }
                         }
                         catch (Exception)
@@ -1014,6 +1050,18 @@ namespace ModelLayer.Model.Quotation.Divider
                         else if (div_top.Div_ArtNo == Divider_ArticleNo._7538)
                         {
                             top_deduction = (72 / 2) + frame_deduction;
+                        }
+                        else if (div_top.Div_ArtNo == Divider_ArticleNo._6052)
+                        {
+                            top_deduction = (53 / 2) + frame_deduction;
+                        }
+                        else if (div_top.Div_ArtNo == Divider_ArticleNo._84300)
+                        {
+                            top_deduction = (23 / 2) + frame_deduction;
+                        }
+                        else if (div_top.Div_ArtNo == Divider_ArticleNo._84301)
+                        {
+                            top_deduction = (52 / 2) + frame_deduction;
                         }
                     }
 
@@ -1077,6 +1125,18 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 right_deduction = (72 / 2) + frame_deduction;
                             }
+                            else if (div_right.Div_ArtNo == Divider_ArticleNo._6052)
+                            {
+                                right_deduction = (52 / 2) + frame_deduction;
+                            }
+                            else if (div_right.Div_ArtNo == Divider_ArticleNo._84300)
+                            {
+                                right_deduction = (23 / 2) + frame_deduction;
+                            }
+                            else if (div_right.Div_ArtNo == Divider_ArticleNo._84301)
+                            {
+                                right_deduction = (53 / 2) + frame_deduction;
+                            }
                         }
                         catch (Exception)
                         {
@@ -1103,6 +1163,19 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 right_deduction = 72 / 2;
                             }
+                            else if (div_right.Div_ArtNo == Divider_ArticleNo._6052)
+                            {
+                                right_deduction = 72 / 2;
+                            }
+                            else if (div_right.Div_ArtNo == Divider_ArticleNo._84300)
+                            {
+                                right_deduction = 72 / 2;
+                            }
+                            else if (div_right.Div_ArtNo == Divider_ArticleNo._84301)
+                            {
+                                right_deduction = 72 / 2;
+                            }
+
 
                             if (div_left.Div_ArtNo == Divider_ArticleNo._7536 || div_left.Div_ArtNo == Divider_ArticleNo._2069)
                             {
@@ -1111,6 +1184,18 @@ namespace ModelLayer.Model.Quotation.Divider
                             else if (div_left.Div_ArtNo == Divider_ArticleNo._7538)
                             {
                                 left_deduction = 72 / 2;
+                            }
+                            else if (div_left.Div_ArtNo == Divider_ArticleNo._6052)
+                            {
+                                left_deduction = 52 / 2;
+                            }
+                            else if (div_left.Div_ArtNo == Divider_ArticleNo._84300)
+                            {
+                                left_deduction = 23 / 2;
+                            }
+                            else if (div_left.Div_ArtNo == Divider_ArticleNo._84301)
+                            {
+                                left_deduction = 53 / 2;
                             }
                         }
                         catch (Exception)
@@ -1134,6 +1219,18 @@ namespace ModelLayer.Model.Quotation.Divider
                             else if (div_left.Div_ArtNo == Divider_ArticleNo._7538)
                             {
                                 left_deduction = (72 / 2) + frame_deduction;
+                            }
+                            else if (div_left.Div_ArtNo == Divider_ArticleNo._6052)
+                            {
+                                left_deduction = (52 / 2) + frame_deduction;
+                            }
+                            else if (div_left.Div_ArtNo == Divider_ArticleNo._84300)
+                            {
+                                left_deduction = (23 / 2) + frame_deduction;
+                            }
+                            else if (div_left.Div_ArtNo == Divider_ArticleNo._84301)
+                            {
+                                left_deduction = (53 / 2) + frame_deduction;
                             }
                         }
                         catch (Exception)

@@ -5653,11 +5653,19 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                 {
-                    int glass_deduct = 0;
+                    int sash_deduct = 0, glass_deduct = 0;
+
                     if (Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
                     {
                         glass_deduct = 64;
+                        sash_deduct = 16;
                     }
+
+                    Panel_SashWidth = Panel_DisplayWidth - (sash_deduct * 2) + 11;
+                    Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
+                    Panel_SashHeight = Panel_DisplayHeight - (sash_deduct * 2) + 11;
+                    Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
+                      
                     Panel_GlassWidth = Panel_SashWidth - glass_deduct;
                     Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
                     Panel_GlassHeight = Panel_SashHeight - glass_deduct;
@@ -6815,6 +6823,13 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
             }
+            else if (divNxt_artNo == Divider_ArticleNo._84300 || divNxt_artNo == Divider_ArticleNo._84301)
+            {
+                if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                {
+                    Sash_deduction_forNxtPrev += 16;
+                }
+            }
             else if (divNxt_artNo == Divider_ArticleNo._None)
             {
                 if (panel_placement == "Last" && mpanelparent_placement == "")
@@ -6852,6 +6867,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                     {
                         Sash_deduction_forNxtPrev += 53;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                    {
+                        Sash_deduction_forNxtPrev += 16;
                     }
                 }
                 if (mpanelparent_placement == "First")
@@ -6891,6 +6910,10 @@ namespace ModelLayer.Model.Quotation.Panel
                         else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                         {
                             Sash_deduction_forNxtPrev += 53;
+                        }
+                        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                        {
+                            Sash_deduction_forNxtPrev += 16;
                         }
                     }
                 }
@@ -6932,6 +6955,10 @@ namespace ModelLayer.Model.Quotation.Panel
                         {
                             Sash_deduction_forNxtPrev += 53;
                         }
+                        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                        {
+                            Sash_deduction_forNxtPrev += 16;
+                        }
                     }
                 }
                 else if (mpnlDivEneable == false)
@@ -6960,6 +6987,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                     {
                         Sash_deduction_forNxtPrev += 53;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                    {
+                        Sash_deduction_forNxtPrev += 16;
                     }
                 }
 
@@ -7039,6 +7070,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Sash_deduction_forNxtPrev += 53;
                     }
+                    else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                    {
+                        Sash_deduction_forNxtPrev += 16;
+                    }
                 }
                 if (mpanelparent_placement == "First")
                 {
@@ -7077,6 +7112,10 @@ namespace ModelLayer.Model.Quotation.Panel
                         else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                         {
                             Sash_deduction_forNxtPrev += 53;
+                        }
+                        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                        {
+                            Sash_deduction_forNxtPrev += 16;
                         }
                     }
                 }
@@ -7118,6 +7157,10 @@ namespace ModelLayer.Model.Quotation.Panel
                         {
                             Sash_deduction_forNxtPrev += 53;
                         }
+                        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                        {
+                            Sash_deduction_forNxtPrev += 16;
+                        }
                     }
                 }
                 else if (mpnlDivEneable == false && panel_placement == "Somewhere in Between")
@@ -7146,6 +7189,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                     {
                         Sash_deduction_forNxtPrev += 53;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                    {
+                        Sash_deduction_forNxtPrev += 16;
                     }
                 }
             }
@@ -7229,6 +7276,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Sash_deduction_forLeftorTopRightorBot += 53;
                     }
+                    else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                    {
+                        Sash_deduction_forLeftorTopRightorBot += 16;
+                    }
                 }
             }
 
@@ -7308,6 +7359,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Sash_deduction_forLeftorTopRightorBot += 53;
                     }
+                    else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                    {
+                        Sash_deduction_forLeftorTopRightorBot += 16;
+                    }
                 }
             }
 
@@ -7341,7 +7396,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 deduction_for_wd = GB_deduction_forLeftorTopRightorBot;
                 deduction_for_ht = GB_deduction_forNxtPrev;
-
+               
                 deduction_for_sashWD = Sash_deduction_forLeftorTopRightorBot;
                 deduction_for_sashHT = Sash_deduction_forNxtPrev;
             }
@@ -7593,6 +7648,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Panel_SashWidth += 5;
                     }
+                }
+                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                {
+                    Panel_SashWidth = (Panel_DisplayWidth - deduction_for_sashWD); //  - 11
                 }
                 else
                 {

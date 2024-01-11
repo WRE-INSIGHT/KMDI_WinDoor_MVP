@@ -97,6 +97,11 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_CladdingVisibility { get; set; }
         CladdingProfileForFrame_ArticleNo Frame_CladdingArtNo { get; set; }
         CladdingReinfForFrame_ArticleNo Frame_CladdingReinArtNo { get; set; }
+
+        bool Frame_InversionClipVisibility { get; set; }
+
+        bool Frame_InversionClipOption { get; set; }
+
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);

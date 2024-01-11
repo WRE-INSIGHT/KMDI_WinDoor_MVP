@@ -929,7 +929,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     if (sel_sash == SashProfile_ArticleNo._7581)
                     {
-                         _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._R675;
+                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._R675;
                     }
                     else if (sel_sash == SashProfile_ArticleNo._373 || sel_sash == SashProfile_ArticleNo._374)
                     {
@@ -1005,6 +1005,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     curr_sash = SashProfile_ArticleNo._2067;
                     _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._2067;
                     _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._V226;
+                }
+                else if (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    curr_sash = SashProfile_ArticleNo._84207;
+                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._84207;
+                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._None;
                 }
             }
             //if (_panelModel.Panel_Type.Contains("Fixed") == false)

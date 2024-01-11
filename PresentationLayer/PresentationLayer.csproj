@@ -208,12 +208,14 @@
     <Compile Include="Presenter\UserControls\ConcretePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_CladdingQtyPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_FrameConnectionTypePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_InversionClipPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_ScreenPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_TrackProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_TubularPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_CladdingQtyPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_FrameConnectionTypePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_InversionClipPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_ScreenPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TrackProfilePropertyUCPresenter.cs" />
@@ -741,6 +743,12 @@
     <Compile Include="Views\UserControls\FrameProperties_Modules\FP_FrameConnectionTypePropertyUC.Designer.cs">
       <DependentUpon>FP_FrameConnectionTypePropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_InversionClipPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_InversionClipPropertyUC.Designer.cs">
+      <DependentUpon>FP_InversionClipPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\FrameProperties_Modules\FP_MeshPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -774,6 +782,7 @@
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_BottomFramePropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_CladdingQtyPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_FrameConnectionTypePropertyUC.cs" />
+    <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_InversionClipPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_ScreenPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_SlidingRailsPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_TrackProfilePropertyUC.cs" />
@@ -1487,6 +1496,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_FrameConnectionTypePropertyUC.resx">
       <DependentUpon>FP_FrameConnectionTypePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_InversionClipPropertyUC.resx">
+      <DependentUpon>FP_InversionClipPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_MeshPropertyUC.resx">
       <DependentUpon>FP_MeshPropertyUC.cs</DependentUpon>

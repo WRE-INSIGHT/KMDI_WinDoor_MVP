@@ -479,6 +479,9 @@ namespace PresentationLayer
                  .RegisterType<IFP_CladdingQtyPropertyUC, FP_CladdingQtyPropertyUC>(new ContainerControlledLifetimeManager())
                  .RegisterType<IFP_CladdingQtyPropertyUCPresenter, FP_CladdingQtyPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                 .RegisterType<IFP_InversionClipPropertyUCPresenter, FP_InversionClipPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IFP_InversionClipPropertyUC, FP_InversionClipPropertyUC>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

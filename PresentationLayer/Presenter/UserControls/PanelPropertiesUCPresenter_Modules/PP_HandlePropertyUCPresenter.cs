@@ -1980,6 +1980,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     _panelModel.Panel_HandleType = Handle_Type._Rotoline;
                 }
+                else if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                {
+                    _panelModel.Panel_HandleType = Handle_Type._CremonHandle;
+                }
             }
 
             Base_Color base_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor;

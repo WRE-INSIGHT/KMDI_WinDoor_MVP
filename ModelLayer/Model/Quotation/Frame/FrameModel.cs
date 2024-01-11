@@ -1303,6 +1303,35 @@ namespace ModelLayer.Model.Quotation.Frame
                 NotifyPropertyChanged();
             }
         }
+
+        private bool _frameInversionClipVisibility;
+        public bool Frame_InversionClipVisibility
+        {
+            get
+            {
+                return _frameInversionClipVisibility;
+            }
+            set
+            {
+                _frameInversionClipVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _frameInversionClipOption;
+        public bool Frame_InversionClipOption
+        {
+            get
+            {
+                return _frameInversionClipOption;
+            }
+            set
+            {
+                _frameInversionClipOption = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public void SetExplosionValues_Frame()
         {
             if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel

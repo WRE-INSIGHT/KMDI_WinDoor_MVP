@@ -81,6 +81,8 @@ namespace EnumerationTypeLayer
         {
             public static readonly DummyMullion_ArticleNo _7533 = new DummyMullion_ArticleNo(0, "7533");
             public static readonly DummyMullion_ArticleNo _385P = new DummyMullion_ArticleNo(1, "385P");
+            public static readonly DummyMullion_ArticleNo _84401 = new DummyMullion_ArticleNo(2, "84401");
+
 
             private DummyMullion_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -308,13 +310,9 @@ namespace EnumerationTypeLayer
             public static readonly Handle_Type _DummyD = new Handle_Type(7, "Dummy D Handle");
             public static readonly Handle_Type _PopUp = new Handle_Type(8, "Pop-up Handle");
             public static readonly Handle_Type _RotoswingForSliding = new Handle_Type(9, "Rotoswing(Sliding) Handle");
+            public static readonly Handle_Type _CremonHandle = new Handle_Type(10, "Cremon handle");
 
-
-
-
-
-
-            public static readonly Handle_Type _None = new Handle_Type(10, "None");
+            public static readonly Handle_Type _None = new Handle_Type(11, "None");
 
             private Handle_Type(int value, string displayName) : base(value, displayName) { }
         }
