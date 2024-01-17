@@ -2635,7 +2635,8 @@ namespace ModelLayer.Model.Quotation
             chckWithOperablepanel = false,
             chckFramePacker = false,
             addFramePacker = false,
-            chckUniversalGasketAndGasketPar3mm = false;
+            chckUniversalGasketAndGasketPar3mm = false,
+            chckPerFrameSlidingMats = false;
 
         string BOM_divDesc,
                HandleDesc,
@@ -4159,11 +4160,12 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_080323 = DateTime.Parse("08-03-2023"); // espag none
         DateTime changeCondition_999999 = DateTime.Parse("11-11-2025"); // need baguhin yung date for gb price for fix 
         DateTime changeCondition_112323 = DateTime.Parse("11-23-2023"); // remove fs in motorize
+        DateTime changeCondition_011724 = DateTime.Parse("01-17-2024"); // weatherbar and etc per frame
 
 
 
 
-        DateTime testDate = DateTime.Parse("12-17-2022");
+        DateTime testDate = DateTime.Parse("01-17-2024");
 
         #endregion
 
@@ -4769,7 +4771,8 @@ namespace ModelLayer.Model.Quotation
                             ChckPlasticWedge = false;
                         }
                         chckPerFrameMotorMech = true;
-
+                        chckPerFrameSlidingMats = true;
+                        PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
 
                         #region MultiPnl 
                         if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
@@ -5446,11 +5449,29 @@ namespace ModelLayer.Model.Quotation
                                                 StrikerLRPrice += 1 * StrikerLRPricePerPiece;
                                             }
 
-                                            WeatherBarPrice += (fr.Frame_Width / 1000m) * WeatherBarPricePerPiece;
-                                            WeatherBarFastenerPrice += ((int)(fr.Frame_Width / 300)) * BarFastenerPricePerPiece;
-                                            WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
-                                            GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
-                                            AlumTrackPrice += ((AluminumTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+                                            if (changeCondition_011724 >= cus_ref_date)
+                                            {
+                                                WeatherBarPrice += (fr.Frame_Width / 1000m) * WeatherBarPricePerPiece;
+                                                WeatherBarFastenerPrice += ((int)(fr.Frame_Width / 300)) * BarFastenerPricePerPiece;
+                                                WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
+                                                GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+                                                AlumTrackPrice += ((AluminumTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+                                            }
+                                            else
+                                            {
+                                             if (chckPerFrameSlidingMats == true)
+                                                {
+                                                    WeatherBarPrice += (fr.Frame_Width / 1000m) * WeatherBarPricePerPiece;
+                                                    WeatherBarFastenerPrice += ((int)(fr.Frame_Width / 300)) * BarFastenerPricePerPiece;
+                                                    WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
+                                                    GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+                                                    AlumTrackPrice += ((AluminumTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+
+                                                    chckPerFrameSlidingMats = false;
+                                                }
+                                            }
+
+
 
 
                                             if (pnl.Panel_Overlap_Sash != OverlapSash._None)
