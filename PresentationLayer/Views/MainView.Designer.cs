@@ -86,8 +86,8 @@
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tsb_Undo = new System.Windows.Forms.ToolStripButton();
             this.newfactorBtn = new System.Windows.Forms.ToolStripButton();
-            this.SetGlassToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.SetGlassToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.ScreentoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tsb_Redo = new System.Windows.Forms.ToolStripButton();
             this.tsprogress_Loading = new System.Windows.Forms.ToolStripProgressBar();
@@ -98,6 +98,7 @@
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
             this.DateAssignedtoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.glassUpgradeToolStrip = new System.Windows.Forms.ToolStripButton();
+            this.partialAdjustmentToolstrip = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.SortItemtoolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -534,8 +535,8 @@
             this.printToolStripButton,
             this.tsb_Undo,
             this.newfactorBtn,
-            this.SetGlassToolStripMenuItem,
             this.ViewImagerToolStripButton1,
+            this.SetGlassToolStripMenuItem,
             this.ScreentoolStripButton,
             this.tsb_Redo,
             this.tsprogress_Loading,
@@ -545,7 +546,8 @@
             this.tsLbl_Loading,
             this.tsLbl_Status,
             this.DateAssignedtoolStripButton,
-            this.glassUpgradeToolStrip});
+            this.glassUpgradeToolStrip,
+            this.partialAdjustmentToolstrip});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -674,6 +676,17 @@
             this.newfactorBtn.Text = "Set New Factor";
             this.newfactorBtn.Click += new System.EventHandler(this.newfactorBtn_Click);
             // 
+            // ViewImagerToolStripButton1
+            // 
+            this.ViewImagerToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ViewImagerToolStripButton1.Enabled = false;
+            this.ViewImagerToolStripButton1.Image = global::PresentationLayer.Properties.Resources.image2;
+            this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";
+            this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
+            this.ViewImagerToolStripButton1.Text = "View Imager";
+            this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
+            // 
             // SetGlassToolStripMenuItem
             // 
             this.SetGlassToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -685,17 +698,6 @@
             this.SetGlassToolStripMenuItem.Text = "Set Glass";
             this.SetGlassToolStripMenuItem.ToolTipText = "Set Glass";
             this.SetGlassToolStripMenuItem.Click += new System.EventHandler(this.SetGlassToolStripMenuItem_Click);
-            // 
-            // ViewImagerToolStripButton1
-            // 
-            this.ViewImagerToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ViewImagerToolStripButton1.Enabled = false;
-            this.ViewImagerToolStripButton1.Image = global::PresentationLayer.Properties.Resources.image2;
-            this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";
-            this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
-            this.ViewImagerToolStripButton1.Text = "View Imager";
-            this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
             // 
             // ScreentoolStripButton
             // 
@@ -802,6 +804,18 @@
             this.glassUpgradeToolStrip.Size = new System.Drawing.Size(24, 29);
             this.glassUpgradeToolStrip.Text = "Glass Upgrade";
             this.glassUpgradeToolStrip.Click += new System.EventHandler(this.glassUpgradeToolStrip_Click);
+            // 
+            // partialAdjustmentToolstrip
+            // 
+            this.partialAdjustmentToolstrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.partialAdjustmentToolstrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.partialAdjustmentToolstrip.Enabled = false;
+            this.partialAdjustmentToolstrip.Image = global::PresentationLayer.Properties.Resources.PartialADJ;
+            this.partialAdjustmentToolstrip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.partialAdjustmentToolstrip.Name = "partialAdjustmentToolstrip";
+            this.partialAdjustmentToolstrip.Size = new System.Drawing.Size(24, 29);
+            this.partialAdjustmentToolstrip.Text = "PartialAdjustment";
+            this.partialAdjustmentToolstrip.Click += new System.EventHandler(this.partialAdjusmentToolstrip_Click);
             // 
             // pnlRight
             // 
@@ -1213,5 +1227,6 @@
         private System.Windows.Forms.ToolStripButton PriceHistorytoolStripButton;
         private System.Windows.Forms.ToolStripButton DateAssignedtoolStripButton;
         private System.Windows.Forms.ToolStripButton glassUpgradeToolStrip;
+        private System.Windows.Forms.ToolStripButton partialAdjustmentToolstrip;
     }
 }

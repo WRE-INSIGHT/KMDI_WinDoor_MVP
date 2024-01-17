@@ -2594,6 +2594,8 @@ namespace ModelLayer.Model.Quotation
 
         PVC_SheetWood_6mm_PricepPerSqrMeter = 3700.00m,
         PVC_SheetWood_12mm_PricePerSqrMeter = 7400.00m,
+        PVC_SheetWood_8mm_White_PricePerSqrMeter = 2900.00m,
+        PVC_SheetWood_8mm_Foiled_PricePerSqrMeter = 3700.00m,
         Glass_6mmClr_PricePerSqrMeter = 670.00m,
         Glass_8mmClr_PricePerSqrMeter = 1662.00m,
         Glass_10mmClr_PricePerSqrMeter = 1662.00m,
@@ -2605,6 +2607,7 @@ namespace ModelLayer.Model.Quotation
         Glass_10mmTemp_PricePerSqrMeter = 3201.00m,
         Glass_12mmTemp_PricePerSqrMeter = 3619.00m,
         Glass_15mmTemp_PricePerSqrMeter = 12000.00m,
+        Glass_19mmTemp_PricePerSqrMeter = 15500.00m,
 
 
         Glass_6mmTempTinted_PricePerSqrMeter = 1929.00m,
@@ -3874,7 +3877,10 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_061423 = DateTime.Parse("06-14-2023"); // friction stay size => art#
         DateTime changeCondition_072023 = DateTime.Parse("07-20-2023"); // points
         DateTime changeCondition_072723 = DateTime.Parse("07-27-2023"); // gb for sliding , gbar multiplier // remove mesh in total price // 1 side foil labor price and approve by costing  
-        DateTime changeCondition_080323 = DateTime.Parse("08-03-2023"); // need baguhin yung date
+        DateTime changeCondition_080323 = DateTime.Parse("08-03-2023"); // no espag
+        DateTime changeCondition_112323 = DateTime.Parse("11-23-2023"); // remove fs in motorize
+
+
 
 
         DateTime testDate = DateTime.Parse("12-17-2022");
@@ -4425,7 +4431,6 @@ namespace ModelLayer.Model.Quotation
                         {
                             ChckPlasticWedge = false;
                         }
-
                         chckPerFrameMotorMech = true;
 
                         PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
@@ -4619,34 +4624,43 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                                 else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                                 {
-                                                    if (cus_ref_date <= changeCondition_061423)
+                                                    if (pnl.Panel_MotorizedOptionVisibility == true && cus_ref_date >= changeCondition_112323)
                                                     {
-                                                        if (pnl.Panel_SashHeight >= 800)
-                                                        {
-                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
-                                                        }
-                                                        else
-                                                        {
-                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
-                                                        }
+                                                        //remove fs in motorize
                                                     }
                                                     else
                                                     {
-                                                        if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                        if (cus_ref_date <= changeCondition_061423)
                                                         {
-                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                            if (pnl.Panel_SashHeight >= 800)
+                                                            {
+                                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                            }
+                                                            else
+                                                            {
+                                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                            }
                                                         }
-                                                        else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
-                                                                 pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
-                                                                 pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
-                                                                 pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                        else
                                                         {
-                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                            if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                            {
+                                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                            }
+                                                            else if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
+                                                                     pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                                     pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                                     pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                            {
+                                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                            }
                                                         }
+
+
                                                     }
                                                 }
 
@@ -4879,45 +4893,53 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                             {
-                                                if (cus_ref_date <= changeCondition_061423)
+                                                if (pnl.Panel_MotorizedOptionVisibility == true && cus_ref_date >= changeCondition_112323)
                                                 {
-                                                    #region FSPrice
-                                                    if (pnl.Panel_SashHeight >= 800)
-                                                    {
-                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
-                                                    }
-                                                    else
-                                                    {
-                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
-                                                    }
-                                                    #endregion 
+                                                    //remove fs in motorize
                                                 }
                                                 else
                                                 {
-                                                    #region FSPrice
-                                                    if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
-                                                        pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                                    if (cus_ref_date <= changeCondition_061423)
                                                     {
-                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
-
-                                                        if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                        #region FSPrice
+                                                        if (pnl.Panel_SashHeight >= 800)
                                                         {
-                                                            SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
                                                         }
+                                                        else
+                                                        {
+                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        }
+                                                        #endregion
                                                     }
-                                                    else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
-                                                             pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
-                                                             pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
-                                                             pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                                    else
                                                     {
-                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        #region FSPrice
+                                                        if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                                            pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                                        {
+                                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                                            if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                            {
+                                                                SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                            }
+                                                        }
+                                                        else if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                                 pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                                 pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                                 pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                                        {
+                                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                        }
+                                                        #endregion
                                                     }
-                                                    #endregion
                                                 }
+
 
                                             }
 
@@ -5878,10 +5900,25 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_15mmTemp_PricePerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_15mmTemp_PricePerSqrMeter;
                                                 }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("19 mm Tempered Clear"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_19mmTemp_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_19mmTemp_PricePerSqrMeter;
+                                                }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm PVC Sheet Wood(6-B2B)"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_12mm_PricePerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_12mm_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet White"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet Foiled"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm PVC Sheet Wood"))
                                                 {
@@ -5892,6 +5929,7 @@ namespace ModelLayer.Model.Quotation
                                                 else
                                                 {
                                                     GlassPrice += 0;
+                                                    pnl.Panel_GlassPricePerSqrMeter = 0;
                                                 }
 
                                                 #endregion 
@@ -6674,10 +6712,25 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_15mmTemp_PricePerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_15mmTemp_PricePerSqrMeter;
                                                 }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("19 mm Tempered Clear"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_19mmTemp_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_19mmTemp_PricePerSqrMeter;
+                                                }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm PVC Sheet Wood(6-B2B)"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_12mm_PricePerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_12mm_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet White"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet Foiled"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm PVC Sheet Wood"))
                                                 {
@@ -6687,6 +6740,7 @@ namespace ModelLayer.Model.Quotation
                                                 else
                                                 {
                                                     GlassPrice += 0;
+                                                    pnl.Panel_GlassPricePerSqrMeter = 0;
                                                 }
                                                 #endregion
                                             }
@@ -7927,33 +7981,40 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                         {
-                                            if (cus_ref_date <= changeCondition_061423)
+                                            if (Singlepnl.Panel_MotorizedOptionVisibility == true && cus_ref_date >= changeCondition_112323)
                                             {
-                                                if (Singlepnl.Panel_SashHeight >= 800)
-                                                {
-                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
-                                                }
-                                                else
-                                                {
-                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
-                                                }
+                                                //remove fs in motorize
                                             }
                                             else
                                             {
-                                                if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                if (cus_ref_date <= changeCondition_061423)
                                                 {
-                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                    if (Singlepnl.Panel_SashHeight >= 800)
+                                                    {
+                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                    }
+                                                    else
+                                                    {
+                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                    }
                                                 }
-                                                else if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
-                                                         Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
-                                                         Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
-                                                         Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                else
                                                 {
-                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                    if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._20HD)
+                                                    {
+                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                    }
+                                                    else if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
+                                                             Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
+                                                             Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12HD ||
+                                                             Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                                    {
+                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                    }
                                                 }
                                             }
                                         }
@@ -8142,7 +8203,7 @@ namespace ModelLayer.Model.Quotation
                                             }
                                         }
                                     }
-                                    else if (Date_Assigned >= changeCondition_040423 && Date_Assigned < changeCondition_061423)
+                                    else if (cus_ref_date >= changeCondition_040423 && cus_ref_date < changeCondition_061423)
                                     {
                                         if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                         {
@@ -8160,29 +8221,36 @@ namespace ModelLayer.Model.Quotation
                                             #endregion
                                         }
                                     }
-                                    else if (Date_Assigned >= changeCondition_061423)
+                                    else if (cus_ref_date >= changeCondition_061423)
                                     {
-                                        #region FSPrice
-                                        if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
-                                            Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                        if (Singlepnl.Panel_MotorizedOptionVisibility == true && cus_ref_date >= changeCondition_112323)
                                         {
-                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                            FSBasePrice = FS_26HD_casementPricePerPiece;
-
-                                            if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                            //remove fs in motorize
+                                        }
+                                        else
+                                        {
+                                            #region FSPrice
+                                            if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm22 ||
+                                                Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                                             {
-                                                SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+
+                                                if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                {
+                                                    SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
+                                                }
                                             }
+                                            else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
+                                                     Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
+                                                     Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
+                                                     Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
+                                            {
+                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                            }
+                                            #endregion
                                         }
-                                        else if (Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm8 ||
-                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._10HD ||
-                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._12HD ||
-                                                 Singlepnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._16HD)
-                                        {
-                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                            FSBasePrice = FS_16HD_casementPricePerPiece;
-                                        }
-                                        #endregion
                                     }
 
                                     #region OldAlgoForFS
@@ -9219,10 +9287,25 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_15mmTemp_PricePerSqrMeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_15mmTemp_PricePerSqrMeter;
                                     }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("19 mm Tempered Clear"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_19mmTemp_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_19mmTemp_PricePerSqrMeter;
+                                    }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm PVC Sheet Wood(6-B2B)"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_12mm_PricePerSqrMeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_12mm_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet White"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet Foiled"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
                                     }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm PVC Sheet Wood"))
                                     {
@@ -9232,6 +9315,7 @@ namespace ModelLayer.Model.Quotation
                                     else
                                     {
                                         GlassPrice += 0;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = 0;
                                     }
 
                                     #endregion
@@ -10007,10 +10091,25 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_15mmTemp_PricePerSqrMeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_15mmTemp_PricePerSqrMeter;
                                     }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("19 mm Tempered Clear"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_19mmTemp_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_19mmTemp_PricePerSqrMeter;
+                                    }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("12 mm PVC Sheet Wood(6-B2B)"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_12mm_PricePerSqrMeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_12mm_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet White"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet Foiled"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
                                     }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm PVC Sheet Wood"))
                                     {
@@ -10020,6 +10119,7 @@ namespace ModelLayer.Model.Quotation
                                     else
                                     {
                                         GlassPrice += 0;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = 0;
                                     }
 
                                     #endregion

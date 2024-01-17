@@ -1884,7 +1884,7 @@
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.11971in</Top>
               <Left>4.38849in</Left>
-              <Height>0.38069in</Height>
+              <Height>0.29447in</Height>
               <Width>3.54167in</Width>
               <ZIndex>2</ZIndex>
               <Style>
@@ -1900,7 +1900,7 @@
             <Line Name="Line1">
               <Top>0.0904in</Top>
               <Left>4.26349in</Left>
-              <Height>0.93875in</Height>
+              <Height>0.85253in</Height>
               <Width>0in</Width>
               <ZIndex>3</ZIndex>
               <Style>
@@ -1945,9 +1945,9 @@ Banilad, Mandaue City, Cebu, Phils. 6014
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.4625in</Top>
+              <Top>0.4125in</Top>
               <Left>4.38849in</Left>
-              <Height>0.43798in</Height>
+              <Height>0.35176in</Height>
               <Width>3.54167in</Width>
               <ZIndex>4</ZIndex>
               <Style>
@@ -1979,10 +1979,10 @@ Banilad, Mandaue City, Cebu, Phils. 6014
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.83276in</Top>
+              <Top>0.73276in</Top>
               <Left>4.38849in</Left>
-              <Height>0.1984in</Height>
-              <Width>3.54167in</Width>
+              <Height>0.2232in</Height>
+              <Width>3.51126in</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -1996,9 +1996,8 @@ Banilad, Mandaue City, Cebu, Phils. 6014
             </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Left>0.01958in</Left>
           <Height>1.1254in</Height>
-          <Width>7.94365in</Width>
+          <Width>7.93016in</Width>
           <Visibility>
             <Hidden>=IIF(Globals!PageNumber = 1,FALSE,TRUE)</Hidden>
           </Visibility>
@@ -2135,8 +2134,8 @@ Banilad, Mandaue City, Cebu, Phils. 6014
             </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Top>0.29343in</Top>
-          <Left>6.17586in</Left>
+          <Top>0.53107in</Top>
+          <Left>6.15942in</Left>
           <Height>0.56655in</Height>
           <Width>1.66135in</Width>
           <ZIndex>1</ZIndex>

@@ -73,6 +73,36 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add_black {
+            get {
+                object obj = ResourceManager.GetObject("add_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap add_green {
+            get {
+                object obj = ResourceManager.GetObject("add_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap add_trans {
+            get {
+                object obj = ResourceManager.GetObject("add_trans", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AddNew_Concrete {
             get {
                 object obj = ResourceManager.GetObject("AddNew_Concrete", resourceCulture);
@@ -96,6 +126,26 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap AddNew_Window {
             get {
                 object obj = ResourceManager.GetObject("AddNew_Window", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrowD_black {
+            get {
+                object obj = ResourceManager.GetObject("arrowD_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrowD_white {
+            get {
+                object obj = ResourceManager.GetObject("arrowD_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -194,6 +244,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cross {
+            get {
+                object obj = ResourceManager.GetObject("cross", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete {
             get {
                 object obj = ResourceManager.GetObject("delete", resourceCulture);
@@ -207,6 +267,16 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap delete_file_30px {
             get {
                 object obj = ResourceManager.GetObject("delete_file_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap delete1 {
+            get {
+                object obj = ResourceManager.GetObject("delete1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -647,6 +717,16 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap MultiplePanelTransom {
             get {
                 object obj = ResourceManager.GetObject("MultiplePanelTransom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PartialADJ {
+            get {
+                object obj = ResourceManager.GetObject("PartialADJ", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

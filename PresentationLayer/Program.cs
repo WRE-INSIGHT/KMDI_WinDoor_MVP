@@ -473,6 +473,18 @@ namespace PresentationLayer
                  .RegisterType<IGlassUpgradePresenter, GlassUpgradePresenter>(new ContainerControlledLifetimeManager())
                  .RegisterType<IGlassUpgradeView, GlassUpgradeView>(new ContainerControlledLifetimeManager())
 
+                 .RegisterType<IPartialAdjustmentViewPresenter,PartialAdjustmentViewPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentView,PartialAdjustmentView>(new ContainerControlledLifetimeManager())
+
+                 .RegisterType<IPartialAdjustmentUC,PartialAdjustmentUC>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentUCPresenter,PartialAdjustmentUCPresenter>(new ContainerControlledLifetimeManager())
+
+                 .RegisterType<IPartialAdjustmenItemDisabledUC, PartialAdjustmenItemDisabledUC>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentItemDisabledUCPresenter,PartialAdjustmentItemDisabledUCPresenter>(new ContainerControlledLifetimeManager())
+                 
+                 .RegisterType<IPartialAdjustmentBaseHolderPresenter,PartialAdjustmentBaseHolderPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPartialAdjustmentBaseHolderUC,PartialAdjustmentBaseHolderUC>(new ContainerControlledLifetimeManager())
+
                  .RegisterType<IPP_CenterProfilePropertyUC, PP_CenterProfilePropertyUC>(new ContainerControlledLifetimeManager())
                  .RegisterType<IPP_CenterProfilePropertyUCPresenter, PP_CenterProfilePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 

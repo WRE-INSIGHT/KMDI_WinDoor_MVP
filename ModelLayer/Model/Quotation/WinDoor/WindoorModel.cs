@@ -24,7 +24,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 return _wdProfile;
             }
             set
-            {
+            {     
                 _wdProfile = value;
                 NotifyPropertyChanged();
             }
@@ -663,6 +663,17 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public List<string> lst_TotalPriceHistory { get; set; }
         public decimal SystemSuggestedPrice { get; set; }
 
+        public List<Image> WD_PALst_Designs { get; set; }
+        public List<string> WD_PALst_Description { get; set; }
+        public List<decimal> WD_PALst_Price { get; set; }
+        public List<int> WD_PALst_Qty { get; set; }
+
+        public bool WD_IsSelectedAtPartialAdjusment { get; set; }
+        public bool WD_IsPartialADPreviousExist { get; set; }
+        public Image WD_PAPreviousImage { get; set; }
+        public string WD_PAPreviousDescription { get; set; }
+        public decimal WD_PAPreviousPrice { get; set; }
+
 
         private int _pnlLeftCounter;
         public int pnlLeftCounter
@@ -704,6 +715,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _pnlCount = value;
             }
         }
+
         #region Methods
 
         public void SetDimensions_basePlatform()

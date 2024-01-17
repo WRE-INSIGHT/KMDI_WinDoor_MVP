@@ -177,6 +177,7 @@
     <Compile Include="Presenter\IGlassUpgradePresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
+    <Compile Include="Presenter\IPartialAdjustmentViewPresenter.cs" />
     <Compile Include="Presenter\IPDFCompilerPresenter.cs" />
     <Compile Include="Presenter\IPDFWaitFormPresenter.cs" />
     <Compile Include="Presenter\IPriceHistoryPresenter.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Presenter\ISortItemPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
+    <Compile Include="Presenter\PartialAdjustmentViewPresenter.cs" />
     <Compile Include="Presenter\PDFCompilerPresenter.cs" />
     <Compile Include="Presenter\PDFWaitFormPresenter.cs" />
     <Compile Include="Presenter\PriceHistoryPresenter.cs" />
@@ -220,6 +222,9 @@
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TrackProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TubularPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IPartialAdjustmentBaseHolderPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IPartialAdjustmentItemDisabledUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IPartialAdjustmentUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ISortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_CenterProfilePropertyUCPresenter.cs" />
@@ -234,6 +239,9 @@
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGallerySetOptionPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGallerySetPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_TrackRailPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PartialAdjustmentBaseHolderPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PartialAdjustmentItemDisabledUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PartialAdjustmentUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_1385MilledProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_373or374MilledProfilePropertyUCPresenter.cs" />
@@ -385,6 +393,11 @@
     <Compile Include="Presenter\UserControls\WinDoorPanels\TiltNTurnPanelUCPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\ChangeItemColorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -520,6 +533,7 @@
     <Compile Include="Views\IGlassUpgradeView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IPartialAdjustmentView.cs" />
     <Compile Include="Views\IPDFCompilerView.cs" />
     <Compile Include="Views\IPDFWaitFormView.cs" />
     <Compile Include="Views\IPriceHistoryView.cs" />
@@ -544,6 +558,12 @@
     </Compile>
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PartialAdjustmentView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PartialAdjustmentView.Designer.cs">
+      <DependentUpon>PartialAdjustmentView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\PDFCompilerView.cs">
       <SubType>Form</SubType>
@@ -806,6 +826,9 @@
     <Compile Include="Views\UserControls\IItemInfoUC.cs" />
     <Compile Include="Views\UserControls\IMultiPanelPropertiesUC.cs" />
     <Compile Include="Views\UserControls\IPanelPropertiesUC.cs" />
+    <Compile Include="Views\UserControls\IPartialAdjustmenItemDisabledUC.cs" />
+    <Compile Include="Views\UserControls\IPartialAdjustmentBaseHolderUC.cs" />
+    <Compile Include="Views\UserControls\IPartialAdjustmentUC.cs" />
     <Compile Include="Views\UserControls\IQuoteItemListUC.cs" />
     <Compile Include="Views\UserControls\IScreenAddOnPropertiesUC.cs" />
     <Compile Include="Views\UserControls\ISortItemUC.cs" />
@@ -1057,6 +1080,24 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.Designer.cs">
       <DependentUpon>PP_TrackRailPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmenItemDisabledUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmenItemDisabledUC.Designer.cs">
+      <DependentUpon>PartialAdjustmenItemDisabledUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmentBaseHolderUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmentBaseHolderUC.Designer.cs">
+      <DependentUpon>PartialAdjustmentBaseHolderUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmentUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PartialAdjustmentUC.Designer.cs">
+      <DependentUpon>PartialAdjustmentUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOnPropertiesUC.cs">
       <SubType>UserControl</SubType>
@@ -1324,17 +1365,13 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Reports\Annex.rdlc" />
     <EmbeddedResource Include="Reports\GlassSummary.rdlc" />
     <EmbeddedResource Include="Reports\GlassUpgrade.rdlc" />
+    <EmbeddedResource Include="Reports\PartialAdjustment.rdlc" />
     <EmbeddedResource Include="Reports\Quotation.rdlc" />
     <EmbeddedResource Include="Reports\Screen.rdlc" />
     <EmbeddedResource Include="Reports\SummaryOfContract.rdlc" />
@@ -1400,6 +1437,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PartialAdjustmentView.resx">
+      <DependentUpon>PartialAdjustmentView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PDFCompilerView.resx">
       <DependentUpon>PDFCompilerView.cs</DependentUpon>
@@ -1626,6 +1666,15 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.resx">
       <DependentUpon>PP_TrackRailPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PartialAdjustmenItemDisabledUC.resx">
+      <DependentUpon>PartialAdjustmenItemDisabledUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PartialAdjustmentBaseHolderUC.resx">
+      <DependentUpon>PartialAdjustmentBaseHolderUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PartialAdjustmentUC.resx">
+      <DependentUpon>PartialAdjustmentUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ScreenAddOnPropertiesUC.resx">
       <DependentUpon>ScreenAddOnPropertiesUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -1776,11 +1825,18 @@
     <None Include="Resources\AddNew_Concrete.png" />
     <None Include="Resources\43.png" />
     <None Include="Resources\126.gif" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\add-button.png" />
     <Content Include="Resources\AddNew_Door.png" />
     <Content Include="Resources\AddNew_Window.png" />
+    <None Include="Resources\add_black.png" />
+    <None Include="Resources\add_trans.png" />
+    <None Include="Resources\add_green.png" />
     <Content Include="Resources\animat-cloudsync.gif" />
     <None Include="Resources\AwningPanel.png" />
     <None Include="Resources\back_arrow_104px.png" />
+    <None Include="Resources\arrowD_black.png" />
+    <None Include="Resources\arrowD_white.png" />
     <Content Include="Resources\box_important_40px.png" />
     <None Include="Resources\calendar-icon-hand-circles-date-calendar-logo-template-deadline-concept-illustration_168129-210 %281%29.png" />
     <None Include="Resources\calendar.png" />
@@ -1795,6 +1851,8 @@
     <Content Include="Resources\cloud_sync_40px.png" />
     <None Include="Resources\concrete2.png" />
     <None Include="Resources\delete.png" />
+    <None Include="Resources\delete1.png" />
+    <None Include="Resources\cross.png" />
     <Content Include="Resources\delete_file_30px.png" />
     <None Include="Resources\ExtensionTop.png" />
     <None Include="Resources\ExtensionBot.png" />
@@ -1848,6 +1906,7 @@
     <Content Include="Resources\MultiplePanel.png" />
     <Content Include="Resources\MultiplePanel1.png" />
     <Content Include="Resources\MultiplePanelSliding.png" />
+    <None Include="Resources\PartialADJ.png" />
     <Content Include="Resources\plus2_104px.png" />
     <Content Include="Resources\plus_104px.png" />
     <None Include="Resources\plus_math_96px.png" />
