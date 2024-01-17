@@ -1,7 +1,5 @@
 ﻿using CommonComponents;
 using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 {
@@ -13,5 +11,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         event EventHandler cmbGBArtNumSelectedValueChangedEventRaised;
         event EventHandler numVerticalValueChangedEventRaised;
         event EventHandler numHorizontalValueChangedEventRaised;
+        event EventHandler btnGeorgianBarCustomDesignClickEventRaised;
+
     }
 }
