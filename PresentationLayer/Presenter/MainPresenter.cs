@@ -784,6 +784,19 @@ namespace PresentationLayer.Presenter
                 _frameIteration = value;
             }
         }
+
+        Dictionary<string, string[]> WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
+        public Dictionary<string, string[]> Pbl_WindoorModel_FileLines_Dictionary
+        {
+            get
+            {
+                return WindoorModel_FileLines_Dictionary;
+            }
+            set
+            {
+                WindoorModel_FileLines_Dictionary = value;
+            }
+        }
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -2880,7 +2893,7 @@ namespace PresentationLayer.Presenter
                 explosionPresenter.ShowExplosionView();
             }
         }
-
+        
         bool toggle;
         private void OnDeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
@@ -2892,6 +2905,15 @@ namespace PresentationLayer.Presenter
                 if (MessageBox.Show("Are you sure want to delete " + _windoorModel.WD_name + "?", "Delete Item",
                                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
+
+                    if(WindoorModel_FileLines_Dictionary != null || WindoorModel_FileLines_Dictionary.Count() != 0)
+                    {
+                        if(WindoorModel_FileLines_Dictionary.ContainsKey(_windoorModel.WD_name))
+                        {
+                            WindoorModel_FileLines_Dictionary.Remove(_windoorModel.WD_name);
+                        }
+                    }
+
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     int wndrId = _windoorModel.WD_id;
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
@@ -2912,17 +2934,29 @@ namespace PresentationLayer.Presenter
                             break;
                         }
                     }
-
+                    
                     _pnlPropertiesBody.Controls.Clear();
                     _pnlMain.Controls.Clear();
                     //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
+
+                    Dictionary<string, string[]> cloneDic = new Dictionary<string, string[]>();
+
                     int count = 1;
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {
+                        if (WindoorModel_FileLines_Dictionary.Keys.Contains(wdm.WD_name))
+                        {
+                            cloneDic.Add("Item " + count, WindoorModel_FileLines_Dictionary[wdm.WD_name]); // renaming item name in for load using dispose
+                        }
                         wdm.WD_name = "Item " + count;
-                        wdm.WD_id = count;
+                        wdm.WD_id = count;                            
                         count++;
                     }
+
+                    WindoorModel_FileLines_Dictionary.Clear(); // clear dictionary before adding
+                    WindoorModel_FileLines_Dictionary = cloneDic.ToDictionary(entry => entry.Key, entry => entry.Value); // insert new item name with corresponding values
+                    
+                   
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {
                         if (wndrId < _quotationModel.Lst_Windoor.Count())
@@ -5139,6 +5173,25 @@ namespace PresentationLayer.Presenter
                         {
                             frm_TubularWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
+                        if (row_str.Contains("Frame_CladdingVisibility"))
+                        {
+                            frm_CladdingVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_CladdingQty:"))
+                        {
+                            frm_CladdingQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_CladdingArtNo"))
+                        {
+                            foreach(CladdingProfileForFrame_ArticleNo Cpfa in CladdingProfileForFrame_ArticleNo.GetAll())
+                            {
+                                if(Cpfa.ToString() == extractedValue_str)
+                                {
+                                    frm_CladdingProfileForFrame_ArticleNo = Cpfa;
+                                    break;
+                                }
+                            }
+                        }
 
 
                         #endregion
@@ -5294,7 +5347,6 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("Panel_FrameGroup:"))
                         {
                             panel_FrameGroup = _frameModel.Frame_UC;
-
                         }
                         if (row_str.Contains("Panel_FramePropertiesGroup:"))
                         {
@@ -10054,7 +10106,8 @@ namespace PresentationLayer.Presenter
               frmProp_Height,
               frm_ScreenFrameHeight,
               frm_TubularHeight,
-              frm_TubularWidth;
+              frm_TubularWidth,
+              frm_CladdingQty;
 
         int[] Arr_padding_norm,
                 Arr_padding_withmpnl;
@@ -10077,7 +10130,8 @@ namespace PresentationLayer.Presenter
              frm_TubularVisibility,
              frm_TubularOption,
              frm_TubularWidthVisibility,
-             frm_TubularHeightVisibility;
+             frm_TubularHeightVisibility,
+             frm_CladdingVisibility;
         Padding frm_Padding_int,
                 frmImageRenderer_Padding_int;
         float frmImageRenderer_Zoom,
@@ -10100,6 +10154,7 @@ namespace PresentationLayer.Presenter
         MeshType frm_MeshType;
         TrackProfile_ArticleNo frm_TrackProfile_ArticleNo;
         MilledFrameReinf_ArticleNo frm_MilledReinfArtNo;
+        CladdingProfileForFrame_ArticleNo frm_CladdingProfileForFrame_ArticleNo;
         #endregion
         #region WindoorModel Properties
 
@@ -10694,7 +10749,7 @@ namespace PresentationLayer.Presenter
             _wndrFileName = string.Empty;
             _mainView.GetToolStripButtonSave().Enabled = false;
             _mainView.CreateNewWindoorBtnEnabled = false;
-
+            WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
 
 
@@ -11066,6 +11121,8 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_TubularHeightVisibility = frm_TubularHeightVisibility;
                         _frameModel.Frame_TubularHeight = frm_TubularHeight;
                         _frameModel.Frame_TubularWidth = frm_TubularWidth;
+                        _frameModel.Frame_CladdingVisibility = frm_CladdingVisibility;
+                        _frameModel.Frame_CladdingQty = frm_CladdingQty;
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
@@ -11123,6 +11180,8 @@ namespace PresentationLayer.Presenter
                         ForceRestartAndLoadFile();//checkuserobject
                         Windoor_Save_UserControl();
                         Windoor_Save_PropertiesUC();
+
+                        CheckToDisposeNCopyWindoor();
 
                         //clear previous basePlatformUC
                         _pnlMain.Controls.Clear();
@@ -11403,7 +11462,16 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
-        Dictionary<string, string[]> WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
+       
+        private void CheckToDisposeNCopyWindoor()
+        {
+            //Add New Item
+            if (_pnlMain.Controls.OfType<Control>().ToList().Count() > 0)
+            {
+                _windoorModel.WD_IsObjectCopied = true;
+                CopyObjectsPerWindoorModel();
+            }
+        }
 
         private void CopyObjectsPerWindoorModel()
         {
@@ -11971,7 +12039,6 @@ namespace PresentationLayer.Presenter
 
         }
 
-
         public void Load_Windoor_Item(IWindoorModel item)
         {
             try
@@ -11983,7 +12050,7 @@ namespace PresentationLayer.Presenter
                     CopyObjectsPerWindoorModel();
                 }
 
-                _basePlatformImagerUCPresenter.SendToBack_baseImager();
+               _basePlatformImagerUCPresenter.SendToBack_baseImager();
 
                 //save frame
                 Windoor_Save_UserControl();
@@ -12119,12 +12186,16 @@ namespace PresentationLayer.Presenter
                     _windoorModel.lst_frame.Clear();
                     _windoorModel.lst_concrete.Clear();
                     _windoorModel.lst_objects.Clear();
+
+                    
+                   
                     #endregion
 
 
                     if (WindoorModel_FileLines_Dictionary.ContainsKey(_windoorModel.WD_name))
                     {
                         file_lines = WindoorModel_FileLines_Dictionary[_windoorModel.WD_name];
+                        _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                         StartWorker("From_Dispose");
                     }
                     else
@@ -12132,7 +12203,7 @@ namespace PresentationLayer.Presenter
                         MessageBox.Show("Error: Can't Load Missing Objects (Disposed<>)","",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                     }
 
-                    #endregion
+                    #endregion      
                 }
               
              }

@@ -74,6 +74,7 @@ namespace PresentationLayer.Presenter
         string wndrFileName { get; set; }
         string wndrFilePath { get; set; }
         NumericUpDown LblCurrentPrice { get; set; }
+        Dictionary<string, string[]> Pbl_WindoorModel_FileLines_Dictionary { get; set; }
 
         IMainView GetMainView();
         IFramePropertiesUC GetFrameProperties(int frameID);

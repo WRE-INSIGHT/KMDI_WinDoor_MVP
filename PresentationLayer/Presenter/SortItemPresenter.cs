@@ -6,6 +6,7 @@ using PresentationLayer.Views.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Unity;
 
@@ -21,6 +22,7 @@ namespace PresentationLayer.Presenter
         private IMainPresenter _mainPresenter;
         #region Variables
         private List<ISortItemUCPresenter> _lstSortItemUC = new List<ISortItemUCPresenter>();
+        Dictionary<string, string[]> cloneDic = new Dictionary<string, string[]>();
         private List<string> _lstItem;
         public List<string> lstItem
         {
@@ -86,19 +88,40 @@ namespace PresentationLayer.Presenter
                             _sortItemView.GetPnlSortItem().Controls.Remove((UserControl)sortItemUC);
                         }
                     }
+
+                    if (_mainPresenter.Pbl_WindoorModel_FileLines_Dictionary != null || _mainPresenter.Pbl_WindoorModel_FileLines_Dictionary.Count != 0)
+                    {
+                        if (_mainPresenter.Pbl_WindoorModel_FileLines_Dictionary.ContainsKey(item))
+                        {
+                            _mainPresenter.Pbl_WindoorModel_FileLines_Dictionary.Remove(item);
+                        }
+                    }
+
+
                 }
                 if (itemSelected)
                 {
                     _mainPresenter.pnlPropertiesBody_MainPresenter.Controls.Clear();
                     _mainPresenter.pnlMain_MainPresenter.Controls.Clear();
                 }
+
+               
+
                 int itemcount = 0;
+                cloneDic = new Dictionary<string, string[]>();
                 foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
                     itemcount++;
+                    if (_mainPresenter.Pbl_WindoorModel_FileLines_Dictionary.ContainsKey(wdm.WD_name))
+                    {
+                        cloneDic.Add("Item " + itemcount, _mainPresenter.Pbl_WindoorModel_FileLines_Dictionary[wdm.WD_name]);  // renaming item name in for load using dispose
+                    }
                     wdm.WD_name = "Item " + itemcount;
                     wdm.WD_id = itemcount;
                 }
+
+                InsertClonedDictionayrWithNewItemName();
+
                 foreach (ISortItemUC sortItemUC in _sortItemView.GetPnlSortItem().Controls)
                 {
                     sortItemUC.ItemName = "Item " + itemcount;
@@ -166,7 +189,7 @@ namespace PresentationLayer.Presenter
                 _sortItemView.GetPnlSortItem().Controls.SetChildIndex((UserControl)e.Data.GetData(e.Data.GetFormats()[0]), index);
                 //Set index of ItemInfo based on sortitem index
                 List<IWindoorModel> lstwndr = new List<IWindoorModel>();
-                foreach (ISortItemUC sortItemuc in _sortItemView.GetPnlSortItem().Controls)
+                foreach (ISortItemUC sortItemuc in  _sortItemView.GetPnlSortItem().Controls)
                 {
                     foreach (IItemInfoUC itemInfouc in _mainPresenter.GetMainView().GetPanelItems().Controls)
                     {
@@ -189,12 +212,20 @@ namespace PresentationLayer.Presenter
                 }
                 int itemCount = 0;
                 //rename all windoor WD_name.
+                cloneDic = new Dictionary<string, string[]>();
                 foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
                     itemCount++;
+                    if (_mainPresenter.Pbl_WindoorModel_FileLines_Dictionary.ContainsKey(wdm.WD_name))
+                    {
+                        cloneDic.Add("Item " + itemCount, _mainPresenter.Pbl_WindoorModel_FileLines_Dictionary[wdm.WD_name]);  // renaming item name in for load using dispose
+                    }
                     wdm.WD_id = itemCount;
                     wdm.WD_name = "Item " + itemCount;
                 }
+
+                InsertClonedDictionayrWithNewItemName();
+
                 //rename all sortItem.
                 foreach (ISortItemUC sortItemUC in _sortItemView.GetPnlSortItem().Controls)
                 {
@@ -216,6 +247,15 @@ namespace PresentationLayer.Presenter
                 }
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             }
+
+
+        }
+
+        private void InsertClonedDictionayrWithNewItemName()
+        {
+            //insert to mainPresenter Dictionary
+            _mainPresenter.Pbl_WindoorModel_FileLines_Dictionary.Clear();  // clear dictionary before adding
+            _mainPresenter.Pbl_WindoorModel_FileLines_Dictionary = cloneDic.ToDictionary(entry => entry.Key, entry => entry.Value); // insert new item name with corresponding values
         }
 
         private void _sortItemView_SortItemViewLoadEventRaised(object sender, EventArgs e)
