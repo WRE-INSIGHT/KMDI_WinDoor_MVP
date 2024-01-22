@@ -4065,9 +4065,22 @@ namespace ModelLayer.Model.Quotation
                             OneSideFoil_whiteBase = true;
                         }
 
-                        if (fr.Frame_ArtNo != FrameProfile_ArticleNo._6050 &&
-                            fr.Frame_ArtNo != FrameProfile_ArticleNo._6052 &&
-                            fr.Frame_ArtNo != FrameProfile_ArticleNo._2060)
+                        if (fr.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                        {
+                            ProfileColorPoints = 14;
+
+                            if (fr.Frame_Width >= 3000 || fr.Frame_Height >= 3000)
+                            {
+                                ProfileColorPoints = 19;
+                            }
+                            else if (fr.Frame_Width >= 2000 || fr.Frame_Height >= 2000)
+                            {
+                                ProfileColorPoints = 18;
+                            }
+                        }
+                        else if (fr.Frame_ArtNo != FrameProfile_ArticleNo._6050 &&
+                                 fr.Frame_ArtNo != FrameProfile_ArticleNo._6052 &&
+                                 fr.Frame_ArtNo != FrameProfile_ArticleNo._2060)
                         {
                             if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                             {
@@ -4675,7 +4688,7 @@ namespace ModelLayer.Model.Quotation
                                             if (div.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                                             {
                                                 DivPrice += ((div.Div_ExplosionWidth) / 1000m) * DividerPricePerSqrMeter;
-                                                TotalDividerPerimeter += div.Div_ExplosionWidth + 108;
+                                                TotalDividerPerimeter += div.Div_ExplosionWidth;// + 108;
 
                                                 MullionConnectorPrice += 2 * MullionConnectorPricePerPiece;
                                             }
@@ -4793,7 +4806,7 @@ namespace ModelLayer.Model.Quotation
                                                 if (div.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                                                 {
                                                     DivPrice += ((div.Div_ExplosionHeight) / 1000m) * DividerPricePerSqrMeter;
-                                                    TotalDividerPerimeter += div.Div_ExplosionHeight + 108;
+                                                    TotalDividerPerimeter += div.Div_ExplosionHeight;// + 108;
 
                                                     MullionConnectorPrice += 2 * MullionConnectorPricePerPiece;
                                                 }
@@ -11577,6 +11590,11 @@ namespace ModelLayer.Model.Quotation
                             GasketPar3mmPrice = 0;
                         }
 
+
+                        wdm.WD_CostingPoints = CostingPoints;
+                        LaborCost = CostingPoints * CostPerPoints;
+                        InstallationCost = InstallationPoints * CostPerPoints;
+
                         MaterialCost = Math.Round(FramePrice, 2) +
                                        Math.Round(SashPrice, 2) +
                                        Math.Round(DivPrice, 2) +
@@ -11632,10 +11650,18 @@ namespace ModelLayer.Model.Quotation
                         Wastage = SubTotatal * 0.2m;
 
                         ImportationCost = ((MaterialCost * 1.08m) + InstallationMaterialCost) * 0.16m;
-                        ProductionCost = 6000 * DesignFactor * 1.1m;
-                        InstallationCost = 1000 * DesignFactor * 1.1m;
-                        MobilizationCost = 1500 * PricingFactor;
+                        ProductionCost = 6000 * (CostingPoints / 100) * 1.1m;
+
+                        //InstallationCost = 1000 * (InstallationPoints/100) * 1.1m;
+
+
+                        //ProductionCost = 6000 * DesignFactor * 1.1m;
+                        //InstallationCost = 1000 * DesignFactor * 1.1m;
+                        //MobilizationCost = 1500 * PricingFactor;
+                        MobilizationCost = 0;
                         FoilingCost = ((TotalFramePerimeter / 1000) * 440) + TotalDividerPerimeter;
+                        ProductionCost = ProductionCost + FoilingCost;
+                        InstallationCost = (ProductionCost / 3);
                         AdditionalCost = (TotalFramePerimeter * 200) / 1000;
 
                         Contingency = (Math.Round(SubTotatal + Wastage, 2) +
@@ -11913,19 +11939,19 @@ namespace ModelLayer.Model.Quotation
                                               Math.Round(InstallationCost, 2).ToString("N", new CultureInfo("en-US")),
                                               "Price Break Down");
 
-                            Price_List.Rows.Add("Mobilization Cost",
-                                              "",
-                                              "",
-                                              "",
-                                              Math.Round(MobilizationCost, 2).ToString("N", new CultureInfo("en-US")),
-                                              "Price Break Down");
+                            //Price_List.Rows.Add("Mobilization Cost",
+                            //                  "",
+                            //                  "",
+                            //                  "",
+                            //                  Math.Round(MobilizationCost, 2).ToString("N", new CultureInfo("en-US")),
+                            //                  "Price Break Down");
 
-                            Price_List.Rows.Add("Foiling",
-                                             "",
-                                             "",
-                                             "",
-                                             Math.Round(FoilingCost, 2).ToString("N", new CultureInfo("en-US")),
-                                             "Price Break Down");
+                            //Price_List.Rows.Add("Foiling",
+                            //                 "",
+                            //                 "",
+                            //                 "",
+                            //                 Math.Round(FoilingCost, 2).ToString("N", new CultureInfo("en-US")),
+                            //                 "Price Break Down");
 
                             Price_List.Rows.Add("Additional Cost (packing, plastic, small shop items)",
                                              "",
@@ -12197,8 +12223,8 @@ namespace ModelLayer.Model.Quotation
                                      "\n\t\t DivPrice " + Math.Round(DivPrice, 2).ToString() + " + " +
                                      // "\n\t\t CornerWindowPrice " + Math.Round(CornerWindowPrice, 2).ToString() + " + " +
                                      "\n\t\t CheveronPrice " + Math.Round(CheveronPrice, 2).ToString() + " + " +
-                                     //"\n\t\t WaterDrainageWValvesPrice " + Math.Round(WaterDrainageWValvesPrice, 2).ToString() + " + " +
-                                     //"\n\t\t HoleCapePrice " + Math.Round(HoleCapePrice, 2).ToString() + " + " +
+                            //"\n\t\t WaterDrainageWValvesPrice " + Math.Round(WaterDrainageWValvesPrice, 2).ToString() + " + " +
+                            //"\n\t\t HoleCapePrice " + Math.Round(HoleCapePrice, 2).ToString() + " + " +
 
                             "\n\n GlassCost " + GlassCost + " = GlassPrice" + Math.Round(GlassPrice, 2).ToString() +
 
