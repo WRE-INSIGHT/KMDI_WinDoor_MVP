@@ -149,5 +149,7 @@ namespace PresentationLayer.Presenter
         bool ItemLoad { get; set; }
         void AddSlidingScreentoScreenList();
         int ForceRestartAndLoadFile();
+        void DisposeDrawingandProperties();
+        void CopyObjectsPerWindoorModel();
     }
 }

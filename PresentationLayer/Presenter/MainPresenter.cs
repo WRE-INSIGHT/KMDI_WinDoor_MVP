@@ -201,6 +201,14 @@ namespace PresentationLayer.Presenter
         #region GetSet
 
         #region List 
+
+        Dictionary<string, string[]> WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
+        public Dictionary<string, string[]> Pbl_WindoorModel_FileLines_Dictionary
+        {
+            get { return WindoorModel_FileLines_Dictionary; }
+            set { WindoorModel_FileLines_Dictionary = value; }
+        }
+
         private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
         public IDictionary<string, string> RDLCHeader
         {
@@ -785,18 +793,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        Dictionary<string, string[]> WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
-        public Dictionary<string, string[]> Pbl_WindoorModel_FileLines_Dictionary
-        {
-            get
-            {
-                return WindoorModel_FileLines_Dictionary;
-            }
-            set
-            {
-                WindoorModel_FileLines_Dictionary = value;
-            }
-        }
+       
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -1152,7 +1149,7 @@ namespace PresentationLayer.Presenter
                             SaveChanges();
                             runbatfile = true;
                         }
-
+                         
                         if (_wndrFileName == "")
                         {
                             int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
@@ -1481,7 +1478,7 @@ namespace PresentationLayer.Presenter
                     }
 
                 }
-                else if (_allpanelsIsMesh == false)
+                else if (!_allpanelsIsMesh)
                 {
                     MessageBox.Show("Some panels are not using  mesh", "Sliding Screen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -2934,9 +2931,12 @@ namespace PresentationLayer.Presenter
                             break;
                         }
                     }
-                    
+
+                    DisposeDrawingandProperties();
+
                     _pnlPropertiesBody.Controls.Clear();
-                    _pnlMain.Controls.Clear();
+                    _pnlMain.Controls.Clear();                  
+
                     //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
 
                     Dictionary<string, string[]> cloneDic = new Dictionary<string, string[]>();
@@ -3113,7 +3113,7 @@ namespace PresentationLayer.Presenter
         {
             ToolStripButton tsb = (ToolStripButton)sender;
             if (tsb.Name == "tsBtnNwin")
-            {
+            {               
                 frameType = FrameModel.Frame_Padding.Window;
             }
             else if (tsb.Name == "tsBtnNdoor")
@@ -11155,7 +11155,7 @@ namespace PresentationLayer.Presenter
                     if (purpose == frmDimensionPresenter.Show_Purpose.Duplicate)
                     {
                         #region duplicate
-
+                        CheckToDisposeNCopyWindoor();
                         ForceRestartAndLoadFile();//checkuserobject
                         wndr_content = new List<string>();
                         SaveWindoorModel(_windoorModel);
@@ -11463,9 +11463,23 @@ namespace PresentationLayer.Presenter
             }
         }
        
+        public void DisposeDrawingandProperties()
+        {
+            #region Dispose Objects (Properties and Drawing)
+            foreach (Control ctrl in _pnlMain.Controls.OfType<Control>().ToList())
+            {
+                ctrl.Dispose();
+            }
+
+            foreach (Control ctrl in _pnlPropertiesBody.Controls.OfType<Control>().ToList())
+            {
+                ctrl.Dispose();
+            }
+            #endregion
+        }
+
         private void CheckToDisposeNCopyWindoor()
         {
-            //Add New Item
             if (_pnlMain.Controls.OfType<Control>().ToList().Count() > 0)
             {
                 _windoorModel.WD_IsObjectCopied = true;
@@ -11473,7 +11487,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        private void CopyObjectsPerWindoorModel()
+        public void CopyObjectsPerWindoorModel()
         {
             wndr_content = new List<string>();
 
@@ -11947,17 +11961,7 @@ namespace PresentationLayer.Presenter
                 WindoorModel_FileLines_Dictionary.Add(wdm.WD_name, file_lines);
             }
 
-            #region Dispose Objects (Properties and Drawing
-            foreach (Control ctrl in _pnlMain.Controls.OfType<Control>().ToList())
-            {
-                ctrl.Dispose();
-            }
-
-            foreach (Control ctrl in _pnlPropertiesBody.Controls.OfType<Control>().ToList())
-            {
-                ctrl.Dispose();
-            }
-            #endregion
+            DisposeDrawingandProperties();
 
             //#region Clear List Inside Model 
             //_windoorModel.lst_frame.Clear();
@@ -12044,11 +12048,7 @@ namespace PresentationLayer.Presenter
             try
              {
 
-                if (_pnlMain.Controls.OfType<Control>().ToList().Count() > 0)
-                {
-                    _windoorModel.WD_IsObjectCopied = true;
-                    CopyObjectsPerWindoorModel();
-                }
+                CheckToDisposeNCopyWindoor();
 
                _basePlatformImagerUCPresenter.SendToBack_baseImager();
 

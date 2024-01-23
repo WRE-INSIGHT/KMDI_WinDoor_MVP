@@ -399,8 +399,8 @@ namespace PresentationLayer.Presenter
                 {
                     //screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
                     //screenUnitPriceTotal = screenUnitPriceTotal + screen_priceXquantiy;
-
-                    if (item.Screen_Quantity > 1)
+                    Console.WriteLine(item.Screen_id);
+                     if (item.Screen_Quantity > 1)
                     {
                         for (int i = 1; i <= item.Screen_Quantity; i++)
                         {
@@ -412,7 +412,8 @@ namespace PresentationLayer.Presenter
                         screentotaldiscount = screentotaldiscount + item.Screen_Discount;
                     }
                 }
-
+                Console.WriteLine(_mainPresenter.Screen_List.Sum(y => y.Screen_Quantity));
+                Console.WriteLine(screentotaldiscount);
                 decimal DiscountPercentage = screentotaldiscount / _mainPresenter.Screen_List.Sum(y => y.Screen_Quantity);
 
                 Console.WriteLine(DiscountPercentage.ToString());
