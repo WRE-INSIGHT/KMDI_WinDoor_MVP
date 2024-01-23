@@ -491,6 +491,8 @@ namespace PresentationLayer
                  .RegisterType<IFP_CladdingQtyPropertyUC, FP_CladdingQtyPropertyUC>(new ContainerControlledLifetimeManager())
                  .RegisterType<IFP_CladdingQtyPropertyUCPresenter, FP_CladdingQtyPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                 .RegisterType<IGeorgianBarCustomizeDesignView, GeorgianBarCustomizeDesignView>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IGeorgianBarCustomizeDesignPresenter, GeorgianBarCustomizeDesignPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
