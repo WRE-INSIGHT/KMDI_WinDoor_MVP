@@ -44,6 +44,8 @@ namespace PresentationLayer.Presenter
                 _sortItemView.btnDelete().Enabled = value;
             }
         }
+
+        private bool _isCheked;
         #endregion
         public SortItemPresenter(ISortItemView sortItemView)
         {
@@ -57,17 +59,38 @@ namespace PresentationLayer.Presenter
             _sortItemView.SortItemDragDropEventRaiseEvent += _sortItemView_SortItemDragDropEventRaiseEvent;
             _sortItemView.SortItemDragEnterEventRaiseEvent += _sortItemView_SortItemDragEnterEventRaiseEvent;
             _sortItemView.btnDeleteClickRaiseEvent += _sortItemView_btnDeleteClickRaiseEvent;
+            _sortItemView.chkbox_SelectAll_CheckedChangedEventRaised += _sortItemView_chkbox_SelectAll_CheckedChangedEventRaised;
         }
+
+        private void _sortItemView_chkbox_SelectAll_CheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_sortItemView.GetSelectAllCheckBox().Checked)
+            {
+                _isCheked = true;
+            }
+            else
+            {
+                _isCheked = false;
+            }
+
+            foreach (ISortItemUC sortItemUC in _sortItemView.GetPnlSortItem().Controls)
+            {
+                sortItemUC.GetCheckBox().Checked = _isCheked;
+            }
+        }
+
 
         private void _sortItemView_btnDeleteClickRaiseEvent(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Are you sure, do you want to delete selected items?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dr == DialogResult.Yes)
             {
+                //Dipose Selected Windoor 
+                _mainPresenter.DisposeDrawingandProperties();
+
                 bool itemSelected = false;
                 foreach (string item in lstItem)
-                {
-
+                {                 
                     _quotationModel.Lst_Windoor.Remove(_quotationModel.Lst_Windoor.Find(wndr => wndr.WD_name == item));
                     foreach (IItemInfoUC itemInfo in _mainPresenter.pnlItems_MainPresenter.Controls)
                     {
@@ -142,6 +165,28 @@ namespace PresentationLayer.Presenter
                             }
                         }
                     }
+                    else
+                    {
+                        foreach(IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                        {
+                            #region Search selected item in Lst_windoor 
+                            // Force to Dispose,Copy and Load
+                            if (wdm.WD_Selected)
+                            {                              
+                                if (!wdm.WD_IsObjectCopied)
+                                {
+                                    wdm.WD_IsObjectCopied = true;
+                                }
+                                if (!_mainPresenter.Pbl_WindoorModel_FileLines_Dictionary.ContainsKey(wdm.WD_name))
+                                {
+                                    _mainPresenter.CopyObjectsPerWindoorModel();
+                                }                              
+                                _mainPresenter.Load_Windoor_Item(wdm);                            
+                                break;
+                            }
+                            #endregion
+                        }
+                    }
                 }
                 else
                 {
@@ -163,11 +208,9 @@ namespace PresentationLayer.Presenter
                 }
                 lstItem.Clear();
                 DeleteEnable = false;
+                _sortItemView.GetSelectAllCheckBox().Checked = false;
             }
-           
-           
-
-           
+                      
         }
 
         private void _sortItemView_SortItemDragEnterEventRaiseEvent(object sender, DragEventArgs e)
