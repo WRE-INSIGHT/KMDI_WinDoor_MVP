@@ -52,9 +52,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_middleCloserPropertyUC_MiddleCloserPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
-            if (_mainPresenter.wndrFileName == null)
+            if (_mainPresenter.wndrFileName != null)
             {
-
                 Base_Color base_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor;
                 if (base_color == Base_Color._DarkBrown)
                 {

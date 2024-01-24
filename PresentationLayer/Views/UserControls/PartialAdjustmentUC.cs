@@ -70,6 +70,10 @@ namespace PresentationLayer.Views.UserControls
             return tmr_BGChange;
         }
 
+        public NumericUpDown GetCurrentItemQuantity()
+        {
+            return num_Qty;
+        }
         public void GetUCdispose()
         {
              Dispose();
@@ -89,6 +93,7 @@ namespace PresentationLayer.Views.UserControls
         public event MouseEventHandler pnl_Header_LeftMouseDownEventRaised;
         public event EventHandler pnl_Header_RightMouseDownClickEventRaised;
         public event EventHandler RightMouseDownLeaveExceptionEventRaised;
+        public event EventHandler num_Qty_ValueChangedEventRaised;
 
 
         private void PartialAdjustmentUC_Load(object sender, EventArgs e)
@@ -162,6 +167,11 @@ namespace PresentationLayer.Views.UserControls
                 m.MenuItems.Add(new MenuItem("Delete", pnl_Header_RightMouseDownClickEventRaised));
                 m.Show(pnl_Header,new Point (e.X,e.Y));
             }
+        }
+
+        private void num_Qty_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, num_Qty_ValueChangedEventRaised, e);
         }
     }
 }

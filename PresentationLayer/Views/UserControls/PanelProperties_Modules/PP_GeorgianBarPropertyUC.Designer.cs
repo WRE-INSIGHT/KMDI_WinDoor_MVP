@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbGBArtNum = new System.Windows.Forms.ComboBox();
+            this.btn_GeorgianBarCustomDesign = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudHorizontal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVertical)).BeginInit();
             this.SuspendLayout();
@@ -42,7 +43,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(-1, 21);
+            this.label7.Location = new System.Drawing.Point(-1, 33);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 19;
@@ -52,7 +53,7 @@
             // 
             this.nudHorizontal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudHorizontal.Location = new System.Drawing.Point(65, 73);
+            this.nudHorizontal.Location = new System.Drawing.Point(65, 83);
             this.nudHorizontal.Name = "nudHorizontal";
             this.nudHorizontal.Size = new System.Drawing.Size(85, 22);
             this.nudHorizontal.TabIndex = 17;
@@ -63,7 +64,7 @@
             // 
             this.nudVertical.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudVertical.Location = new System.Drawing.Point(65, 44);
+            this.nudVertical.Location = new System.Drawing.Point(65, 54);
             this.nudVertical.Name = "nudVertical";
             this.nudVertical.Size = new System.Drawing.Size(85, 22);
             this.nudVertical.TabIndex = 16;
@@ -73,7 +74,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(-1, 48);
+            this.label2.Location = new System.Drawing.Point(-1, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 15;
@@ -82,7 +83,7 @@
             // label1
             // 
             this.label1.AutoEllipsis = true;
-            this.label1.Location = new System.Drawing.Point(-2, 76);
+            this.label1.Location = new System.Drawing.Point(-2, 86);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 18);
             this.label1.TabIndex = 14;
@@ -92,7 +93,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Location = new System.Drawing.Point(1, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 20;
@@ -104,7 +105,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbGBArtNum.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGBArtNum.FormattingEnabled = true;
-            this.cmbGBArtNum.Location = new System.Drawing.Point(65, 17);
+            this.cmbGBArtNum.Location = new System.Drawing.Point(65, 29);
             this.cmbGBArtNum.Name = "cmbGBArtNum";
             this.cmbGBArtNum.Size = new System.Drawing.Size(85, 21);
             this.cmbGBArtNum.TabIndex = 31;
@@ -112,11 +113,22 @@
             this.cmbGBArtNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbGBArtNum_KeyPress);
             this.cmbGBArtNum.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.cmbGBArtNum_MouseWheel);
             // 
+            // btn_GeorgianBarCustomDesign
+            // 
+            this.btn_GeorgianBarCustomDesign.Location = new System.Drawing.Point(82, 1);
+            this.btn_GeorgianBarCustomDesign.Name = "btn_GeorgianBarCustomDesign";
+            this.btn_GeorgianBarCustomDesign.Size = new System.Drawing.Size(67, 23);
+            this.btn_GeorgianBarCustomDesign.TabIndex = 32;
+            this.btn_GeorgianBarCustomDesign.Text = "Edit";
+            this.btn_GeorgianBarCustomDesign.UseVisualStyleBackColor = true;
+            this.btn_GeorgianBarCustomDesign.Click += new System.EventHandler(this.btn_GeorgianBarCustomDesign_Click);
+            // 
             // PP_GeorgianBarPropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.btn_GeorgianBarCustomDesign);
             this.Controls.Add(this.cmbGBArtNum);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label7);
@@ -127,7 +139,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "PP_GeorgianBarPropertyUC";
-            this.Size = new System.Drawing.Size(152, 99);
+            this.Size = new System.Drawing.Size(152, 108);
             this.Load += new System.EventHandler(this.PP_GeorgianBarPropertyUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudHorizontal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVertical)).EndInit();
@@ -145,5 +157,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbGBArtNum;
+        private System.Windows.Forms.Button btn_GeorgianBarCustomDesign;
     }
 }

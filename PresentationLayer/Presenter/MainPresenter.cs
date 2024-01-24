@@ -2562,6 +2562,15 @@ namespace PresentationLayer.Presenter
                         wndr_content.Add("<Price_Separator>");
                     }
 
+                    if(wdm.WD_PALst_Qty != null)
+                    {
+                        wndr_content.Add("<Qty_Separator>");
+                        string Combi = string.Join(",",wdm.WD_PALst_Qty.ToArray());
+                        wndr_content.Add(Combi);
+                        wndr_content.Add("<Qty_Separator>");
+                    }
+
+
                 }
             }
 
@@ -3302,6 +3311,8 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(0.0f, "Tuff Mesh", "NA", 401.70m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(0.0f, "Phifer Mesh", "NA", 132.72m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm PVC Sheet Wood", "NA", 3700.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm PVC Sheet White", "NA", 2900.00m, true, false, false, false, false);//12/13/2023
+            _glassThicknessDT.Rows.Add(8.0f, "8 mm PVC Sheet Foiled", "NA", 3700.00m, true, false, false, false, false);//12/13/2023
             _glassThicknessDT.Rows.Add(12.0f, "12 mm PVC Sheet Wood(6-B2B)", "NA", 7400.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear", "NA", 670.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear", "NA", 670.00m, true, false, false, false, false);
@@ -3387,6 +3398,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear with Georgian Bar", "NA", 3201.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear with Georgian Bar", "NA", 3201.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear with Georgian Bar", "NA", 3619.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Oversized with Georgian Bar", "NA", 6000.00m, true, false, false, false, false);//12/13/2023
             _glassThicknessDT.Rows.Add(15.0f, "15 mm Tempered Clear with Georgian Bar", "NA", 12000.00m, true, false, false, false, false);//6/15/2023
             _glassThicknessDT.Rows.Add(19.0f, "19 mm Tempered Clear with Georgian Bar", "NA", 15500.00m, true, false, false, false, false);//10/24/2023
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Bronze with Georgian Bar", "NA", 1929.00m, true, false, false, false, false);
@@ -4360,6 +4372,17 @@ namespace PresentationLayer.Presenter
                     inside_PartialAdjustment_Price = true;
                 }
             }
+            else if (row_str.Contains("<Qty_Separator>"))
+            {
+                if (inside_PartialAdjustment_Qty)
+                {
+                    inside_PartialAdjustment_Qty = false;
+                }
+                else
+                {
+                    inside_PartialAdjustment_Qty = true;
+                }
+            }
 
 
             if (row_str == "EndofFile")
@@ -4832,6 +4855,10 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("WD_PALst_Price"))
                         {
                             _windoorModel.WD_PALst_Price = new List<decimal>();
+                        }
+                        else if (row_str.Contains("WD_PALst_Qty"))
+                        {
+                            _windoorModel.WD_PALst_Qty = new List<int>();
                         }
                         else if (row_str.Contains("WD_PAPreviousImage"))
                         {
@@ -9129,6 +9156,19 @@ namespace PresentationLayer.Presenter
                         }
                         #endregion
                     }
+                    else if (inside_PartialAdjustment_Qty)
+                    {
+                        #region Load PartialAdjustment Lst_Qty
+                        if (!row_str.Contains("<Qty_Separator>"))
+                        {
+                            List<string> res = new List<string>(row_str.Split(','));
+                            foreach (string qty in res)
+                            {
+                                _windoorModel.WD_PALst_Qty.Add(Convert.ToInt32(qty));
+                            }
+                        }                  
+                        #endregion
+                    }
                     break;
             }
 
@@ -10074,7 +10114,8 @@ namespace PresentationLayer.Presenter
         #endregion
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi,
              inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory, inside_GlassUpgrade,
-             inside_PartialAdjustment_Image,inside_PartialAdjustment_Description,inside_PartialAdjustment_Price,
+             inside_PartialAdjustment_Image, inside_PartialAdjustment_Description, inside_PartialAdjustment_Price,
+             inside_PartialAdjustment_Qty,
              rdlcDicChangeKey = true,
              add_existing = false,
             _isFromAddExisting = false,

@@ -33,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls
         private List<Image> Lst_Designs = new List<Image>();
         private List<string> Lst_Description = new List<string>();
         private List<decimal> Lst_Price = new List<decimal>();
+        private List<int> Lst_Qty = new List<int>();
         #endregion
 
         private List<IPartialAdjustmentUCPresenter> _ctrlList = new List<IPartialAdjustmentUCPresenter>();
@@ -77,6 +78,8 @@ namespace PresentationLayer.Presenter.UserControls
                         _windoorModel.WD_PALst_Description.Clear();
                         _windoorModel.WD_PALst_Designs.Clear();
                         _windoorModel.WD_PALst_Price.Clear();
+                        _windoorModel.WD_PALst_Qty.Clear();
+
                         #endregion
                         _partialAdjustmentViewPresenter.GetPartialAdjustmentView().GetPanelBody().Controls.Remove(itm);
                         itm.Dispose();
@@ -121,6 +124,7 @@ namespace PresentationLayer.Presenter.UserControls
             _windoorModel.WD_PALst_Designs.Add(null);
             _windoorModel.WD_PALst_Description.Add(null);
             _windoorModel.WD_PALst_Price.Add(0);
+            _windoorModel.WD_PALst_Qty.Add(1);
 
             if(_windoorModel.WD_PALst_Designs.Count != 0)
             {
@@ -315,6 +319,8 @@ namespace PresentationLayer.Presenter.UserControls
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = _windoorModel.WD_PALst_Designs[indxItemPos - 1];//Get Previous Img
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = _windoorModel.WD_PALst_Description[indxItemPos - 1];//Get Previous Desc
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = _windoorModel.WD_PALst_Price[indxItemPos - 1].ToString("N");//Get Previous Price
+                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemQuantity().Value = _windoorModel.WD_PALst_Qty[indxItemPos - 1];//Get Previous Qty
+                
             }
 
 
@@ -331,13 +337,14 @@ namespace PresentationLayer.Presenter.UserControls
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDesignImage().Image = _windoorModel.WD_image;
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemDescription().Text = _windoorModel.WD_description;
                 _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemPrice().Text = Math.Round(_windoorModel.WD_price, 2).ToString("N");
+                _partialAdjustmentUCPresenter.GetPartialAdjustmentUC().GetCurrentItemQuantity().Value = _windoorModel.WD_PALst_Qty[indxItemPos - 1];//Get Previous Qty
                 #endregion
             }
 
             _ctrlList.Add(_partialAdjustmentUCPresenter);
 
             BtnColorChanger();
-            #endregion
+            #endregion 
         }
 
         private void BtnColorChanger()
@@ -362,7 +369,6 @@ namespace PresentationLayer.Presenter.UserControls
             //delete from partialadjustmentUCPresenter tolstrp
             if (_isMouseRight)
             {
-
                 #region Single Delete
 
                 #region check for UC Adjusted, Dispose UC 'Delete'
@@ -392,7 +398,6 @@ namespace PresentationLayer.Presenter.UserControls
                 BtnColorChanger();
 
                 #endregion
-
             }
             else
             {
@@ -421,6 +426,7 @@ namespace PresentationLayer.Presenter.UserControls
                         Lst_Designs.Add(_windoorModel.WD_PALst_Designs[PAPresenter.PartialAdjusmentUCIndexPlacement]);
                         Lst_Description.Add (_windoorModel.WD_PALst_Description[PAPresenter.PartialAdjusmentUCIndexPlacement]);
                         Lst_Price.Add (_windoorModel.WD_PALst_Price[PAPresenter.PartialAdjusmentUCIndexPlacement]);
+                        Lst_Qty.Add(_windoorModel.WD_PALst_Qty[PAPresenter.PartialAdjusmentUCIndexPlacement]);
 
                         if (PAPresenter.PartialAdjustmentIsAdjusted)
                         {
@@ -437,6 +443,7 @@ namespace PresentationLayer.Presenter.UserControls
                 _windoorModel.WD_PALst_Designs.Clear();
                 _windoorModel.WD_PALst_Description.Clear();
                 _windoorModel.WD_PALst_Price.Clear();
+                _windoorModel.WD_PALst_Qty.Clear();
 
                 // TemporaryList to wndrMdl
                 for(int i = 0; i < Lst_Designs.Count; i++)
@@ -444,12 +451,14 @@ namespace PresentationLayer.Presenter.UserControls
                     _windoorModel.WD_PALst_Designs.Add(Lst_Designs[i]);
                     _windoorModel.WD_PALst_Description.Add(Lst_Description[i]);
                     _windoorModel.WD_PALst_Price.Add(Lst_Price[i]);
+                    _windoorModel.WD_PALst_Qty.Add(Lst_Qty[i]);
                 }
                 // clear Tempo List
 
                 Lst_Designs.Clear();
                 Lst_Description.Clear();
                 Lst_Price.Clear();
+                Lst_Qty.Clear();
                 
                 //Add
 

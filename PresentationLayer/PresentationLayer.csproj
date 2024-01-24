@@ -159,6 +159,7 @@
     <Compile Include="Presenter\ExchangeRatePresenter.cs" />
     <Compile Include="Presenter\ExplosionPresenter.cs" />
     <Compile Include="Presenter\frmDimensionPresenter.cs" />
+    <Compile Include="Presenter\GeorgianBarCustomizeDesignPresenter.cs" />
     <Compile Include="Presenter\GlassThicknessListPresenter.cs" />
     <Compile Include="Presenter\GlassUpgradePresenter.cs" />
     <Compile Include="Presenter\IChangeItemColorPresenter.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Presenter\IExchangeRatePresenter.cs" />
     <Compile Include="Presenter\IExplosionPresenter.cs" />
     <Compile Include="Presenter\IfrmDimensionPresenter.cs" />
+    <Compile Include="Presenter\IGeorgianBarCustomizeDesignPresenter.cs" />
     <Compile Include="Presenter\IGlassThicknessListPresenter.cs" />
     <Compile Include="Presenter\IGlassUpgradePresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
@@ -498,6 +500,12 @@
     <Compile Include="Views\frmDimensionView.Designer.cs">
       <DependentUpon>frmDimensionView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\GeorgianBarCustomizeDesignView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\GeorgianBarCustomizeDesignView.Designer.cs">
+      <DependentUpon>GeorgianBarCustomizeDesignView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\GlassThicknessListView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -520,6 +528,7 @@
     <Compile Include="Views\IExchangeRateView.cs" />
     <Compile Include="Views\IExplosionView.cs" />
     <Compile Include="Views\IfrmDimensionView.cs" />
+    <Compile Include="Views\IGeorgianBarCustomizeDesignView.cs" />
     <Compile Include="Views\IGlassThicknessListView.cs" />
     <Compile Include="Views\IGlassUpgradeView.cs" />
     <Compile Include="Views\ILoginView.cs" />
@@ -1413,6 +1422,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmDimensionView.resx">
       <DependentUpon>frmDimensionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\GeorgianBarCustomizeDesignView.resx">
+      <DependentUpon>GeorgianBarCustomizeDesignView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\GlassThicknessListView.resx">
       <DependentUpon>GlassThicknessListView.cs</DependentUpon>

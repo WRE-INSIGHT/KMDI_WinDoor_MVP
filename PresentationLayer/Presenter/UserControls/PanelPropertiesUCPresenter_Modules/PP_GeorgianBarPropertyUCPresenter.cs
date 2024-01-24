@@ -17,12 +17,16 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
+        private IGeorgianBarCustomizeDesignPresenter _georgianBarCustomizeDesignPresenter;
 
         bool _initialLoad = true;
 
-        public PP_GeorgianBarPropertyUCPresenter(IPP_GeorgianBarPropertyUC pp_georgianBarPropertyUC)
+        public PP_GeorgianBarPropertyUCPresenter(IPP_GeorgianBarPropertyUC pp_georgianBarPropertyUC,
+                                                 IGeorgianBarCustomizeDesignPresenter georgianBarCustomizeDesignPresenter)
         {
             _pp_georgianBarPropertyUC = pp_georgianBarPropertyUC;
+            _georgianBarCustomizeDesignPresenter = georgianBarCustomizeDesignPresenter;
+
             SubcribeToEventSetUp();
         }
 
@@ -32,6 +36,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _pp_georgianBarPropertyUC.cmbGBArtNumSelectedValueChangedEventRaised += _pp_georgianBarPropertyUC_cmbGBArtNumSelectedValueChangedEventRaised;
             _pp_georgianBarPropertyUC.numVerticalValueChangedEventRaised += _pp_georgianBarPropertyUC_numVerticalValueChangedEventRaised;
             _pp_georgianBarPropertyUC.numHorizontalValueChangedEventRaised += _pp_georgianBarPropertyUC_numHorizontalValueChangedEventRaised;
+            _pp_georgianBarPropertyUC.btnGeorgianBarCustomDesignClickEventRaised += _pp_georgianBarPropertyUC_btnGeorgianBarCustomDesignClickEventRaised;
+        }
+
+        private void _pp_georgianBarPropertyUC_btnGeorgianBarCustomDesignClickEventRaised(object sender, EventArgs e)
+        {
+            IGeorgianBarCustomizeDesignPresenter GBCustomizeDesgin = _georgianBarCustomizeDesignPresenter.GetNewInstance(_mainPresenter, _unityC, _panelModel,_mainPresenter.windoorModel_MainPresenter);
+            GBCustomizeDesgin.GetGeorgianBarCustomizeDesignView().ShowView();
         }
 
         private void _pp_georgianBarPropertyUC_numHorizontalValueChangedEventRaised(object sender, EventArgs e)

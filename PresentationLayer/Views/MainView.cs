@@ -693,7 +693,7 @@ namespace PresentationLayer.Views
             if (tsBtnNwin.Enabled == true)
             {
 
-                if (e.Control == true && e.KeyCode == Keys.L)
+                if (e.Control == true && e.KeyCode == Keys.L || e.Control == true && e.KeyCode == Keys.P)
                 {
                     itemListToolStripMenuItem_Click(sender, e);
                 }

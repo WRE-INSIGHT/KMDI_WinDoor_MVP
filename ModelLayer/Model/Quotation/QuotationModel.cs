@@ -2475,7 +2475,8 @@ namespace ModelLayer.Model.Quotation
              chckAlumPullHandle = false,
              check1stFrame = false,
             chckPerFrameMotorMech = false,
-            OneSideFoil_whiteBase = false;
+            OneSideFoil_whiteBase = false,
+            chckPerFrameSlidingMats = false;
 
         string BOM_divDesc,
                HandleDesc,
@@ -2594,6 +2595,8 @@ namespace ModelLayer.Model.Quotation
 
         PVC_SheetWood_6mm_PricepPerSqrMeter = 3700.00m,
         PVC_SheetWood_12mm_PricePerSqrMeter = 7400.00m,
+        PVC_SheetWood_8mm_White_PricePerSqrMeter = 2900.00m,
+        PVC_SheetWood_8mm_Foiled_PricePerSqrMeter = 3700.00m,
         Glass_6mmClr_PricePerSqrMeter = 670.00m,
         Glass_8mmClr_PricePerSqrMeter = 1662.00m,
         Glass_10mmClr_PricePerSqrMeter = 1662.00m,
@@ -3877,11 +3880,12 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_072723 = DateTime.Parse("07-27-2023"); // gb for sliding , gbar multiplier // remove mesh in total price // 1 side foil labor price and approve by costing  
         DateTime changeCondition_080323 = DateTime.Parse("08-03-2023"); // no espag
         DateTime changeCondition_112323 = DateTime.Parse("11-23-2023"); // remove fs in motorize
+        DateTime changeCondition_011724 = DateTime.Parse("01-17-2024"); // weatherbar and etc per frame
 
 
 
 
-        DateTime testDate = DateTime.Parse("12-17-2022");
+        DateTime testDate = DateTime.Parse("01-17-2024");
 
         #endregion
 
@@ -4430,7 +4434,7 @@ namespace ModelLayer.Model.Quotation
                             ChckPlasticWedge = false;
                         }
                         chckPerFrameMotorMech = true;
-
+                        chckPerFrameSlidingMats = true;
                         PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
 
                         #region MultiPnl 
@@ -5029,11 +5033,29 @@ namespace ModelLayer.Model.Quotation
                                                 StrikerLRPrice += 1 * StrikerLRPricePerPiece;
                                             }
 
-                                            WeatherBarPrice += (fr.Frame_Width / 1000m) * WeatherBarPricePerPiece;
-                                            WeatherBarFastenerPrice += ((int)(fr.Frame_Width / 300)) * BarFastenerPricePerPiece;
-                                            WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
-                                            GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
-                                            AlumTrackPrice += ((AluminumTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+                                            if (changeCondition_011724 >= cus_ref_date)
+                                            {
+                                                WeatherBarPrice += (fr.Frame_Width / 1000m) * WeatherBarPricePerPiece;
+                                                WeatherBarFastenerPrice += ((int)(fr.Frame_Width / 300)) * BarFastenerPricePerPiece;
+                                                WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
+                                                GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+                                                AlumTrackPrice += ((AluminumTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+                                            }
+                                            else
+                                            {
+                                             if (chckPerFrameSlidingMats == true)
+                                                {
+                                                    WeatherBarPrice += (fr.Frame_Width / 1000m) * WeatherBarPricePerPiece;
+                                                    WeatherBarFastenerPrice += ((int)(fr.Frame_Width / 300)) * BarFastenerPricePerPiece;
+                                                    WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
+                                                    GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+                                                    AlumTrackPrice += ((AluminumTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+
+                                                    chckPerFrameSlidingMats = false;
+                                                }
+                                            }
+
+
 
 
                                             if (pnl.Panel_Overlap_Sash != OverlapSash._None)
@@ -5908,6 +5930,16 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_12mm_PricePerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_12mm_PricePerSqrMeter;
                                                 }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet White"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet Foiled"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
+                                                }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm PVC Sheet Wood"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_6mm_PricepPerSqrMeter;
@@ -6709,6 +6741,16 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_12mm_PricePerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_12mm_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet White"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet Foiled"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm PVC Sheet Wood"))
                                                 {
@@ -9275,6 +9317,16 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_12mm_PricePerSqrMeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_12mm_PricePerSqrMeter;
                                     }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet White"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet Foiled"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
+                                    }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm PVC Sheet Wood"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_6mm_PricepPerSqrMeter;
@@ -10068,6 +10120,16 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_12mm_PricePerSqrMeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_12mm_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet White"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_White_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("8 mm PVC Sheet Foiled"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PVC_SheetWood_8mm_Foiled_PricePerSqrMeter;
                                     }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm PVC Sheet Wood"))
                                     {
