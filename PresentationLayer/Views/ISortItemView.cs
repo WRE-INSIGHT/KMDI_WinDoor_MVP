@@ -13,11 +13,9 @@ namespace PresentationLayer.Views
         event DragEventHandler SortItemDragDropEventRaiseEvent;
         event DragEventHandler SortItemDragEnterEventRaiseEvent;
         event EventHandler btnDeleteClickRaiseEvent;
-        event EventHandler chkbox_SelectAll_CheckedChangedEventRaised;
         void showSortItem();
         Panel GetPnlSortItem();
         Form GetSortItem();
         Button btnDelete();
-        CheckBox GetSelectAllCheckBox();
     }
 }

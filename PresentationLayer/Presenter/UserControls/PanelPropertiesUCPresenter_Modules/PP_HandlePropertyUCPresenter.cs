@@ -2178,34 +2178,27 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                     if (inside_color == Foil_Color._None)
                     {
-                        if (!_mainPresenter.ItemLoad)
+                        if (base_color == Base_Color._White)
                         {
-                            if (base_color == Base_Color._White)
-                            {
-                                _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613226;
-                                _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH605543;
-                            }
-                            else if (base_color == Base_Color._DarkBrown)
-                            {
-                                _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613224;
-                                _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH613185;
-                            }
-                            else if (base_color == Base_Color._Ivory)
-                            {
-                                _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613228;
-                                _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH487261;
-                            }
+                            _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613226;
+                            _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH605543;
                         }
-                       
-                    }
-                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
-                             inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
-                    {
-                        if (!_mainPresenter.ItemLoad)
+                        else if (base_color == Base_Color._DarkBrown)
                         {
                             _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613224;
                             _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH613185;
                         }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613228;
+                            _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH487261;
+                        }
+                    }
+                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                             inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                    {
+                        _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613224;
+                        _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH613185;
                     }
                     else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
                              inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
@@ -2213,11 +2206,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                              inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
                              inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
                     {
-                        if (!_mainPresenter.ItemLoad)
-                        {
-                            _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613225;
-                            _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH605551;
-                        }
+                        _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613225;
+                        _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH605551;
                     }
 
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addDHandle");
@@ -2306,35 +2296,27 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                     if (inside_color == Foil_Color._None)
                     {
-                        if (!_mainPresenter.ItemLoad)
+                        if (base_color == Base_Color._White)
                         {
-                            if (base_color == Base_Color._White)
-                            {
-                                _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613226;
-                                _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613191;
-                            }
-                            else if (base_color == Base_Color._DarkBrown)
-                            {
-                                _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613224;
-                                _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH833310_613189;
-                            }
-                            else if (base_color == Base_Color._Ivory)
-                            {
-                                _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613228;
-                                _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613193;
-                            }
+                            _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613226;
+                            _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613191;
                         }
-                       
-                    }
-                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
-                          inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
-                    {
-                        if (!_mainPresenter.ItemLoad)
+                        else if (base_color == Base_Color._DarkBrown)
                         {
                             _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613224;
                             _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH833310_613189;
                         }
-                        
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613228;
+                            _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613193;
+                        }
+                    }
+                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                          inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                    {
+                        _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613224;
+                        _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH833310_613189;
                     }
                     else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
                              inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
@@ -2342,12 +2324,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                              inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
                              inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
                     {
-                        if (!_mainPresenter.ItemLoad)
-                        {
-                            _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613225;
-                            _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613190;
-                        }
-
+                        _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613225;
+                        _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613190;
                     }
 
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addDummyDHandle");
@@ -2377,17 +2355,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                     if (base_color == Base_Color._White || base_color == Base_Color._Ivory)
                     {
-                        if (!_mainPresenter.ItemLoad)
-                        {
-                            _panelModel.Panel_PopUpHandleArtNo = PopUp_HandleArtNo._3127668;
-                        }
+                        _panelModel.Panel_PopUpHandleArtNo = PopUp_HandleArtNo._3127668;
                     }
                     else if (base_color == Base_Color._DarkBrown)
                     {
-                        if (!_mainPresenter.ItemLoad)
-                        {
-                            _panelModel.Panel_PopUpHandleArtNo = PopUp_HandleArtNo._323778;
-                        }
+                        _panelModel.Panel_PopUpHandleArtNo = PopUp_HandleArtNo._323778;
                     }
 
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addPopUpHandle");
@@ -2417,30 +2389,23 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                     if (inside_color == Foil_Color._None)
                     {
-                        if (!_mainPresenter.ItemLoad)
+                        if (base_color == Base_Color._White)
                         {
-                            if (base_color == Base_Color._White)
-                            {
-                                _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632303;
-                            }
-                            else if (base_color == Base_Color._DarkBrown)
-                            {
-                                _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632300;
-                            }
-                            else if (base_color == Base_Color._Ivory)
-                            {
-                                _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS823094;
-                            }
+                            _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632303;
                         }
-                       
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632300;
+                        }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS823094;
+                        }
                     }
                     else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
                         inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
                     {
-                        if (!_mainPresenter.ItemLoad)
-                        {
-                            _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632300;
-                        }
+                        _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632300;
                     }
                     else if (inside_color == Foil_Color._CharcoalGray || inside_color == Foil_Color._FossilGray ||
                              inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
@@ -2448,10 +2413,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                              inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
                              inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
                     {
-                        if (!_mainPresenter.ItemLoad)
-                        {
-                            _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS823073;
-                        }
+                        _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS823073;
                     }
 
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswingForSliding");

@@ -36,11 +36,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_rotaryPropertyUC_cmbLockingKitSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            //if (!_initialLoad)
-            //{
-            //    _panelModel.Panel_LockingKitArtNo = (LockingKit_ArticleNo)((ComboBox)sender).SelectedValue;
-            //}
-            if (!_panelModel.PanelModelIsFromLoad)
+            if (!_initialLoad)
             {
                 _panelModel.Panel_LockingKitArtNo = (LockingKit_ArticleNo)((ComboBox)sender).SelectedValue;
             }
@@ -48,12 +44,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_rotaryPropertyUC_cmbRotaryArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            //if (!_initialLoad)
-            //{
-            //    _panelModel.Panel_RotaryArtNo = (Rotary_HandleArtNo)((ComboBox)sender).SelectedValue;
-            //}
-
-            if (!_panelModel.PanelModelIsFromLoad)
+            if (!_initialLoad)
             {
                 _panelModel.Panel_RotaryArtNo = (Rotary_HandleArtNo)((ComboBox)sender).SelectedValue;
             }
@@ -62,12 +53,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_rotaryPropertyUC_PPRotaryPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_rotaryPropertyUC.ThisBinding(CreateBindingDictionary());
-            //_panelModel.Panel_RotaryArtNo = Rotary_HandleArtNo._T511155KMWSS;
-           // _initialLoad = false;
-            if (!_panelModel.PanelModelIsFromLoad)
-            {
-                _panelModel.Panel_RotaryArtNo = Rotary_HandleArtNo._T511155KMWSS;
-            }
+            _panelModel.Panel_RotaryArtNo = Rotary_HandleArtNo._T511155KMWSS;
+            _initialLoad = false;
         }
 
         public IPP_RotaryPropertyUC GetPPRotaryPropertyUC()

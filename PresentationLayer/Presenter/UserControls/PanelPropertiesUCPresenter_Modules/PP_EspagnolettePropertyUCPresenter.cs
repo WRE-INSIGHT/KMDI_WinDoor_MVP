@@ -33,13 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_espagnolettePropertyUC_cmbEspagnoletteSelectedValueEventRaised(object sender, EventArgs e)
         {
-            //if (!_initialLoad)
-            //{
-            //    _panelModel.Panel_EspagnoletteArtNo = (Espagnolette_ArticleNo)((ComboBox)sender).SelectedValue;
-            //    _mainPresenter.GetCurrentPrice();
-            //}
-
-            if (_mainPresenter.ItemLoad == false)
+            if (!_initialLoad)
             {
                 _panelModel.Panel_EspagnoletteArtNo = (Espagnolette_ArticleNo)((ComboBox)sender).SelectedValue;
                 _mainPresenter.GetCurrentPrice();

@@ -31,12 +31,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _rollerPropertyUC_cmbRollerSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if (_mainPresenter.ItemLoad == false)
-            {
-                ComboBox cmb = (ComboBox)sender;
-                _panelModel.Panel_RollersTypes = (RollersTypes)cmb.SelectedValue;
-                _mainPresenter.GetCurrentPrice();
-            }
+            ComboBox cmb = (ComboBox)sender;
+            _panelModel.Panel_RollersTypes = (RollersTypes)cmb.SelectedValue;
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _rollerPropertyUC_PPRollerPropertyUCLoadEventRaised(object sender, EventArgs e)
