@@ -4611,7 +4611,6 @@ namespace ModelLayer.Model.Quotation
                             ExtensionProfile15mmPrice += (fr.Frame_Width / 1000m) * ExtensionProfile15mmPricePerLinearMeter;
                         }
 
-
                         if (changeCondition_012424 <= cus_ref_date)
                         {
                             if ((fr.Frame_ArtNo == FrameProfile_ArticleNo._7502 || fr.Frame_ArtNo == FrameProfile_ArticleNo._7507 || fr.Frame_ArtNo == FrameProfile_ArticleNo._2060) &&
@@ -4629,7 +4628,6 @@ namespace ModelLayer.Model.Quotation
                                 ExtensionProfile15mmPrice += (fr.Frame_Width / 1000m) * ExtensionProfile15mmPricePerLinearMeter;
                             }
                         }
-
                         #endregion
 
                         #region Tubular
