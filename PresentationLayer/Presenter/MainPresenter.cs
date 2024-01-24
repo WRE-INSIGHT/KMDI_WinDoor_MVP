@@ -1807,7 +1807,6 @@ namespace PresentationLayer.Presenter
         {
             ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel, _itemInfoUCPresenter);
             TopView.GetSetTopViewSlidingPanellingView().GetSetTopSlidingPanellingView();
-            //sample
         }
 
         private void _mainView_selectProjectToolStripMenuItemClickEventRaised1(object sender, EventArgs e)
