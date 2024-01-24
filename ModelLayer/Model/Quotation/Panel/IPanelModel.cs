@@ -28,6 +28,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_OriginalDisplayHeightDecimal { get; set; }
         int Panel_ID { get; set; }
         string Panel_Name { get; set; }
+        bool PanelModelIsFromLoad { get; set; }
         bool Panel_Orient { get; set; }
         bool Panel_OrientVisibility { get; set; }
         bool Panel_fileLoad { get; set; }

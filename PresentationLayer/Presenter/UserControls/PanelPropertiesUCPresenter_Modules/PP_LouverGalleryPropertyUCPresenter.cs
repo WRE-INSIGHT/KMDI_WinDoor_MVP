@@ -65,13 +65,20 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _louverGalleryPropertyUC_cmbBladeTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_LouverBladeTypeOption = (BladeType_Option)((ComboBox)sender).SelectedValue;
+            if (!_panelModel.PanelModelIsFromLoad)
+            {
+                _panelModel.Panel_LouverBladeTypeOption = (BladeType_Option)((ComboBox)sender).SelectedValue;
+            }
+        
         }
 
         private void _louverGalleryPropertyUC_LouverBladesCombinationPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             //_panelModel.Panel_LouverRPLeverHandleCheck = true;
-            _panelModel.Panel_LouverBladeTypeOption = BladeType_Option._glass;
+            if (!_panelModel.PanelModelIsFromLoad)
+            {
+                _panelModel.Panel_LouverBladeTypeOption = BladeType_Option._glass;
+            }
             _louverGalleryPropertyUC.ThisBinding(CreateBindingDictionary());
         }
 
