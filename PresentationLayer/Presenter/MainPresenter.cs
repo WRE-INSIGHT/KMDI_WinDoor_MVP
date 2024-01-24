@@ -1059,6 +1059,7 @@ namespace PresentationLayer.Presenter
             _mainView.glassUpgradeToolStripButtonClickEventRaised += _mainView_glassUpgradeToolStripButtonClickEventRaised;
             _mainView.partialAdjusmentToolstripClickClickEventRaised += _mainView_partialAdjusmentToolstripClickClickEventRaised;
            
+
         }
 
         private void _mainView_partialAdjusmentToolstripClickClickEventRaised(object sender, EventArgs e)
@@ -1826,6 +1827,7 @@ namespace PresentationLayer.Presenter
         {
             ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel);
             TopView.GetSetTopViewSlidingPanellingView().GetSetTopSlidingPanellingView();
+            //sample
         }
 
         private void _mainView_selectProjectToolStripMenuItemClickEventRaised1(object sender, EventArgs e)
