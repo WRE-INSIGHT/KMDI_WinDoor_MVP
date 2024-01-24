@@ -30,10 +30,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_DummyDHandlePropertyUCPresenter_cmbDummyDArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if (!_panelModel.PanelModelIsFromLoad)
-            {
-                _panelModel.Panel_DummyDHandleOutsideArtNo = (DummyD_HandleArtNo)((ComboBox)sender).SelectedValue;
-            }
+            _panelModel.Panel_DummyDHandleOutsideArtNo = (DummyD_HandleArtNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _pp_DummyDHandlePropertyUCPresenter_PPDummyDHandlePropertyUCLoadEventRaised(object sender, EventArgs e)

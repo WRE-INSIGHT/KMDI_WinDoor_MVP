@@ -1252,9 +1252,9 @@ namespace ModelLayer.Model.Quotation.Frame
         public int Frame_CladdingQty
         {
             get
-            { 
+            {
                 return _frameCladdingQty;
-            }  
+            }
             set
             {
                 _frameCladdingQty = value;

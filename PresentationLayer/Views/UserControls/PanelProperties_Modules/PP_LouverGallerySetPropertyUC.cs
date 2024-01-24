@@ -30,14 +30,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             return cmb_HandleType;
         }
-        public ComboBox GetBladeHeight()
-        {
-            return cmb_BladeHeight;
-        }
-        public ComboBox GetGalleryColor()
-        {
-            return cmb_GalleryColor;
-        }
 
         private void PP_LouverGallerySetPropertyUC_Load(object sender, EventArgs e)
         {
@@ -47,7 +39,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 BladeHeight.Add(item);
             }
             cmb_BladeHeight.DataSource = BladeHeight;
-            
+
             List<LouverHandleType_Option> GalleryHandle = new List<LouverHandleType_Option>();
             foreach (LouverHandleType_Option item in LouverHandleType_Option.GetAll())
             {

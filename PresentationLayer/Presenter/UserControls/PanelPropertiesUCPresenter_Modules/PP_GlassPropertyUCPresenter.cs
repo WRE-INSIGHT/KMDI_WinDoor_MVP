@@ -53,14 +53,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_glassPropertyUC_cmbFilmTypeSelectedValueEventRaised(object sender, EventArgs e)
         {
-            //if (!_initialLoad)
-            //{
-            //    _panelModel.Panel_GlassFilm = (GlassFilm_Types)((ComboBox)sender).SelectedValue;
-            //    _mainPresenter.itemDescription();
-            //    _mainPresenter.GetCurrentPrice();
-            //}
-
-            if (_mainPresenter.ItemLoad == false)
+            if (!_initialLoad)
             {
                 _panelModel.Panel_GlassFilm = (GlassFilm_Types)((ComboBox)sender).SelectedValue;
                 _mainPresenter.itemDescription();
@@ -78,13 +71,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_glassPropertyUC_cmbGlazingArtNoSelectedValueEventRaised(object sender, EventArgs e)
         {
-            //if (!_initialLoad)
-            //{
-            //    _panelModel.PanelGlazingBead_ArtNo = (GlazingBead_ArticleNo)((ComboBox)sender).SelectedValue;
-            //    _mainPresenter.GetCurrentPrice();
-            //}
-
-            if (_mainPresenter.ItemLoad == false)
+            if (!_initialLoad)
             {
                 _panelModel.PanelGlazingBead_ArtNo = (GlazingBead_ArticleNo)((ComboBox)sender).SelectedValue;
                 _mainPresenter.GetCurrentPrice();

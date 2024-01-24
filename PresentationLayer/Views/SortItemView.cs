@@ -22,15 +22,10 @@ namespace PresentationLayer.Views
         public event DragEventHandler SortItemDragDropEventRaiseEvent;
         public event DragEventHandler SortItemDragEnterEventRaiseEvent;
         public event EventHandler btnDeleteClickRaiseEvent;
-        public event EventHandler chkbox_SelectAll_CheckedChangedEventRaised;
+
         public void showSortItem()
         {
             this.ShowDialog();
-        }
-
-        public CheckBox GetSelectAllCheckBox()
-        {
-            return chkbox_SelectAll;
         }
 
         
@@ -77,11 +72,6 @@ namespace PresentationLayer.Views
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, btnDeleteClickRaiseEvent, e);
-        }
-
-        private void chkbox_SelectAll_CheckedChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, chkbox_SelectAll_CheckedChangedEventRaised, e);
         }
     }
 }

@@ -89,53 +89,26 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _LouverGallerySetPropertyUC_cmbBladeHeightSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if (!_panelModel.PanelModelIsFromLoad)
-            {
-                _panelModel.Panel_LouverBladeHeight = (BladeHeight_Option)((ComboBox)sender).SelectedValue;
-            }
-            else
-            {
-                _LouverGallerySetPropertyUC.GetBladeHeight().Text = _panelModel.Panel_LouverBladeHeight.ToString();
-            }
+            _panelModel.Panel_LouverBladeHeight = (BladeHeight_Option)((ComboBox)sender).SelectedValue;
         }
 
         private void _LouverGallerySetPropertyUC_cmbHandleTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if (!_panelModel.PanelModelIsFromLoad)
+            _panelModel.Panel_LouverHandleType = (LouverHandleType_Option)((ComboBox)sender).SelectedValue;
+            if (_panelModel.Panel_LouverHandleType == LouverHandleType_Option._none)
             {
-                _panelModel.Panel_LouverHandleType = (LouverHandleType_Option)((ComboBox)sender).SelectedValue;
-                if (_panelModel.Panel_LouverHandleType == LouverHandleType_Option._none)
-                {
-                    _panelModel.Panel_LouverHandleLocation = LouverHandleLoc_Option._none;
-                }
-            }
-            else
-            {
-                _LouverGallerySetPropertyUC.GetHandleType().Text = _panelModel.Panel_LouverHandleType.ToString();
+                _panelModel.Panel_LouverHandleLocation = LouverHandleLoc_Option._none;
             }
         }
         private void _LouverGallerySetPropertyUC_cmbHandleLocationSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if (!_panelModel.PanelModelIsFromLoad)
-            {
-                _panelModel.Panel_LouverHandleLocation = (LouverHandleLoc_Option)((ComboBox)sender).SelectedValue;
-            }
-            else
-            {
-                _LouverGallerySetPropertyUC.GetHandleLoc().Text = _panelModel.Panel_LouverHandleLocation.ToString();
-            }
+            _panelModel.Panel_LouverHandleLocation = (LouverHandleLoc_Option)((ComboBox)sender).SelectedValue;
         }
 
         private void _LouverGallerySetPropertyUC_cmbGalleryColorSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if (!_panelModel.PanelModelIsFromLoad)
-            {
-                _panelModel.Panel_LouverGalleryColor = (LouverColor_Option)((ComboBox)sender).SelectedValue;
-            }
-            else
-            {
-                _LouverGallerySetPropertyUC.GetGalleryColor().Text = _panelModel.Panel_LouverGalleryColor.ToString();
-            }
+            _panelModel.Panel_LouverGalleryColor = (LouverColor_Option)((ComboBox)sender).SelectedValue;
+
         }
 
         private void _LouverGallerySetPropertyUC_btnAddLouverClickEventRaised(object sender, EventArgs e)
@@ -289,14 +262,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         }
         private void _LouverGallerySetPropertyUC_LouverGallerySetPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
-            if (!_panelModel.PanelModelIsFromLoad)
-            {
-                //_panelModel.Panel_LouverBladeHeight = BladeHeight_Option._152;
-                _panelModel.Panel_LouverNumberBladesPerSet = 2;
-                //_panelModel.Panel_LouverHandleType = LouverHandleType_Option._single;
-                //_panelModel.Panel_LouverHandleLocation = LouverHandleLoc_Option._RH;
-                //_panelModel.Panel_LouverGalleryColor = LouverColor_Option._black;
-            }
+            //_panelModel.Panel_LouverBladeHeight = BladeHeight_Option._152;
+            _panelModel.Panel_LouverNumberBladesPerSet = 2;
+            //_panelModel.Panel_LouverHandleType = LouverHandleType_Option._single;
+            //_panelModel.Panel_LouverHandleLocation = LouverHandleLoc_Option._RH;
+            //_panelModel.Panel_LouverGalleryColor = LouverColor_Option._black;
             _LouverGallerySetPropertyUC.ThisBinding(CreateBindingDictionary());
 
             if (_lst_gallerySetOptionUCP == null)

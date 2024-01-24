@@ -201,14 +201,6 @@ namespace PresentationLayer.Presenter
         #region GetSet
 
         #region List 
-
-        Dictionary<string, string[]> WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
-        public Dictionary<string, string[]> Pbl_WindoorModel_FileLines_Dictionary
-        {
-            get { return WindoorModel_FileLines_Dictionary; }
-            set { WindoorModel_FileLines_Dictionary = value; }
-        }
-
         private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
         public IDictionary<string, string> RDLCHeader
         {
@@ -1170,7 +1162,7 @@ namespace PresentationLayer.Presenter
                             SaveChanges();
                             runbatfile = true;
                         }
-                         
+
                         if (_wndrFileName == "")
                         {
                             int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
@@ -1499,7 +1491,7 @@ namespace PresentationLayer.Presenter
                     }
 
                 }
-                else if (!_allpanelsIsMesh)
+                else if (_allpanelsIsMesh == false)
                 {
                     MessageBox.Show("Some panels are not using  mesh", "Sliding Screen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -2921,7 +2913,7 @@ namespace PresentationLayer.Presenter
                 explosionPresenter.ShowExplosionView();
             }
         }
-        
+
         bool toggle;
         private void OnDeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
@@ -2933,15 +2925,6 @@ namespace PresentationLayer.Presenter
                 if (MessageBox.Show("Are you sure want to delete " + _windoorModel.WD_name + "?", "Delete Item",
                                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-
-                    if(WindoorModel_FileLines_Dictionary != null || WindoorModel_FileLines_Dictionary.Count() != 0)
-                    {
-                        if(WindoorModel_FileLines_Dictionary.ContainsKey(_windoorModel.WD_name))
-                        {
-                            WindoorModel_FileLines_Dictionary.Remove(_windoorModel.WD_name);
-                        }
-                    }
-
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     int wndrId = _windoorModel.WD_id;
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
@@ -2963,31 +2946,16 @@ namespace PresentationLayer.Presenter
                         }
                     }
 
-                    DisposeDrawingandProperties();
-
                     _pnlPropertiesBody.Controls.Clear();
-                    _pnlMain.Controls.Clear();                  
-
+                    _pnlMain.Controls.Clear();
                     //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
-
-                    Dictionary<string, string[]> cloneDic = new Dictionary<string, string[]>();
-
                     int count = 1;
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {
-                        if (WindoorModel_FileLines_Dictionary.Keys.Contains(wdm.WD_name))
-                        {
-                            cloneDic.Add("Item " + count, WindoorModel_FileLines_Dictionary[wdm.WD_name]); // renaming item name in for load using dispose
-                        }
                         wdm.WD_name = "Item " + count;
-                        wdm.WD_id = count;                            
+                        wdm.WD_id = count;
                         count++;
                     }
-
-                    WindoorModel_FileLines_Dictionary.Clear(); // clear dictionary before adding
-                    WindoorModel_FileLines_Dictionary = cloneDic.ToDictionary(entry => entry.Key, entry => entry.Value); // insert new item name with corresponding values
-                    
-                   
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {
                         if (wndrId < _quotationModel.Lst_Windoor.Count())
@@ -3151,7 +3119,7 @@ namespace PresentationLayer.Presenter
         {
             ToolStripButton tsb = (ToolStripButton)sender;
             if (tsb.Name == "tsBtnNwin")
-            {               
+            {
                 frameType = FrameModel.Frame_Padding.Window;
             }
             else if (tsb.Name == "tsBtnNdoor")
@@ -3230,10 +3198,6 @@ namespace PresentationLayer.Presenter
                 if (todo == "Open_WndrFiles" || todo == "Add_Existing_Items" || todo == "Duplicate_Item")
                 {
                     _mainView.GetToolStripLabelLoading().Text = "Initializing";
-                    ToggleMode(true, false);
-                }
-                else if (todo == "From_Dispose")
-                {
                     ToggleMode(true, false);
                 }
                 else
@@ -4021,7 +3985,6 @@ namespace PresentationLayer.Presenter
                     case "Open_WndrFiles":
                     case "Add_Existing_Items":
                     case "Duplicate_Item":
-                    case "From_Dispose":
                         Opening_dotwndr(e.ProgressPercentage);
                         _mainView.GetTsProgressLoading().Value = e.ProgressPercentage;
                         if (_mainView.GetToolStripLabelLoading().Text != "Initializing...")
@@ -4053,7 +4016,6 @@ namespace PresentationLayer.Presenter
                     case "Open_WndrFiles":
                     case "Add_Existing_Items":
                     case "Duplicate_Item":
-                    case "From_Dispose":
                         for (int i = 0; i < file_lines.Length; i++)
                         {
                             if (bgw.CancellationPending == true)
@@ -4123,7 +4085,6 @@ namespace PresentationLayer.Presenter
                         case "Open_WndrFiles":
                         case "Add_Existing_Items":
                         case "Duplicate_Item":
-                        case "From_Dispose":
                             //tmr_fadeOutText.Enabled = true;
                             //tmr_fadeOutText.Start();
 
@@ -4131,7 +4092,6 @@ namespace PresentationLayer.Presenter
                             //string outFile = wndrfile.Substring(0, startFileName) +
                             //                 wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
                             //File.Delete(outFile);
-
                             SetMainViewTitle(input_qrefno,
                                              _projectName,
                                              _custRefNo,
@@ -4311,6 +4271,7 @@ namespace PresentationLayer.Presenter
                     _multiPanelModel2ndLvl = null;
                     mpnllvl = "";
                 }
+
             }
             else if (row_str.Contains("|"))
             {
@@ -4458,12 +4419,7 @@ namespace PresentationLayer.Presenter
                     Load_Windoor_Item(_windoorModel);
                     _lblCurrentPrice.Value = _windoorModel.WD_price;
                     ItemScroll = _mainView.GetPanelItems().VerticalScroll.Maximum;
-                }
-                else if (mainTodo == "From_Dispose")
-                {
-                     Load_Windoor_Item_From_Dispose();
-                    _lblCurrentPrice.Value = _windoorModel.WD_price;
-                    //ItemScroll = _mainView.GetPanelItems().VerticalScroll.Maximum;
+
                 }
                 PropertiesScroll = 0;
             }
@@ -4814,10 +4770,6 @@ namespace PresentationLayer.Presenter
                             if (extractedValue_str.Contains("<"))
                             {
                                 Dictionary<int, Decimal> dictionary_wd_redArrowLinesList = new Dictionary<int, Decimal>();
-                                if(mainTodo == "From_Dispose")
-                                {
-                                    dictionary_wd_redArrowLinesList.Clear();
-                                }
                                 foreach (string str in words)
                                 {
                                     if (str.Trim() != string.Empty)
@@ -4837,10 +4789,6 @@ namespace PresentationLayer.Presenter
                             if (extractedValue_str.Contains("<"))
                             {
                                 Dictionary<int, Decimal> dictionary_ht_redArrowLinesList = new Dictionary<int, Decimal>();
-                                if (mainTodo == "From_Dispose")
-                                {
-                                    dictionary_ht_redArrowLinesList.Clear();
-                                }
                                 foreach (string str in words)
                                 {
                                     if (str.Trim() != string.Empty)
@@ -5442,6 +5390,7 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("Panel_FrameGroup:"))
                         {
                             panel_FrameGroup = _frameModel.Frame_UC;
+
                         }
                         if (row_str.Contains("Panel_FramePropertiesGroup:"))
                         {
@@ -5668,15 +5617,9 @@ namespace PresentationLayer.Presenter
                         {
                             panel_LouverRPLeverHandleCheck = Convert.ToBoolean(extractedValue_str);
                         }
-                        if (row_str.Contains("Panel_CenterProfileArtNo:"))
+                        if (row_str.Contains("Panel_LouverRPLeverHandleCheck:"))
                         {
-                            foreach (CenterProfile_ArticleNo CntrPro in CenterProfile_ArticleNo.GetAll())
-                            {
-                                if(CntrPro.ToString() == extractedValue_str)
-                                {
-                                    panel_CenterProfileArtNo = CntrPro;
-                                }
-                            }
+                            panel_LouverRPLeverHandleCheck = Convert.ToBoolean(extractedValue_str);
                         }
                         if (row_str.Contains("Panel_LouverSecurityGrillCheck:"))
                         {
@@ -9462,7 +9405,6 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_GlassType_Insu_Lami = panel_GlassType_Insu_Lami;
             pnlModel.Panel_MotorizedMechRemoteArtNo = panel_MotorizedMechRemoteArtNo;
             pnlModel.Panel_MotorizedMechRemoteOption = panel_MotorizedMechRemoteOption;
-            pnlModel.Panel_CenterProfileArtNo = panel_CenterProfileArtNo;
             #region Explosion
             pnlModel.PanelGlass_ID = panel_GlassID;
             pnlModel.Panel_GlassThicknessDesc = panel_GlassThicknessDesc;
@@ -10244,8 +10186,7 @@ namespace PresentationLayer.Presenter
              frm_TubularVisibility,
              frm_TubularOption,
              frm_TubularWidthVisibility,
-             frm_TubularHeightVisibility,
-             frm_CladdingVisibility;
+             frm_TubularHeightVisibility;
         Padding frm_Padding_int,
                 frmImageRenderer_Padding_int;
         float frmImageRenderer_Zoom,
@@ -10268,7 +10209,6 @@ namespace PresentationLayer.Presenter
         MeshType frm_MeshType;
         TrackProfile_ArticleNo frm_TrackProfile_ArticleNo;
         MilledFrameReinf_ArticleNo frm_MilledReinfArtNo;
-        CladdingProfileForFrame_ArticleNo frm_CladdingProfileForFrame_ArticleNo;
         #endregion
         #region WindoorModel Properties
 
@@ -10612,7 +10552,6 @@ namespace PresentationLayer.Presenter
         GS100CoverKit_ArticleNo panel_GS100CoverKitArtNo;
         AluminumPullHandle_ArticleNo panel_AluminumPullHandleArticleNo;
         MotorizedMechRemote_ArticleNo panel_MotorizedMechRemoteArtNo;
-        CenterProfile_ArticleNo panel_CenterProfileArtNo;
         #endregion
         #endregion
         #region Divider Properties
@@ -10863,7 +10802,7 @@ namespace PresentationLayer.Presenter
             _wndrFileName = string.Empty;
             _mainView.GetToolStripButtonSave().Enabled = false;
             _mainView.CreateNewWindoorBtnEnabled = false;
-            WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
+
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
 
 
@@ -11136,7 +11075,6 @@ namespace PresentationLayer.Presenter
 
                         _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-
                         _pnlMain.Controls.Clear();
                         AddItemInfoUC(_windoorModel); //add item information user control
                         SetMainViewTitle(input_qrefno,
@@ -11149,10 +11087,8 @@ namespace PresentationLayer.Presenter
                         BotToolStrip_Enable();
                         CreateNewWindoorBtn_Enable();
                         _pnlPropertiesBody.Controls.Clear(); //Clearing Operation
-
                         //_basePlatformPresenter.RemoveBindingView();
                         //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
-
                         _pnlItems.VerticalScroll.Value = _pnlItems.VerticalScroll.Maximum;
                         _pnlItems.PerformLayout();
 
@@ -11278,14 +11214,13 @@ namespace PresentationLayer.Presenter
                     if (purpose == frmDimensionPresenter.Show_Purpose.Duplicate)
                     {
                         #region duplicate
-                        CheckToDisposeNCopyWindoor();
+
                         ForceRestartAndLoadFile();//checkuserobject
                         wndr_content = new List<string>();
                         SaveWindoorModel(_windoorModel);
                         wndr_content.Add("EndofFile");
                         file_lines = wndr_content.ToArray();
-                        ItemLoad = true; // negate auto suggest
-                        onload = true; // negate auto suggest
+                        onload = true;
                         Windoor_Save_UserControl();
                         Windoor_Save_PropertiesUC();
                         _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
@@ -11303,8 +11238,6 @@ namespace PresentationLayer.Presenter
                         ForceRestartAndLoadFile();//checkuserobject
                         Windoor_Save_UserControl();
                         Windoor_Save_PropertiesUC();
-
-                        CheckToDisposeNCopyWindoor();
 
                         //clear previous basePlatformUC
                         _pnlMain.Controls.Clear();
@@ -11588,755 +11521,91 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
-       
-        public void DisposeDrawingandProperties()
-        {
-            #region Dispose Objects (Properties and Drawing)
-            foreach (Control ctrl in _pnlMain.Controls.OfType<Control>().ToList())
-            {
-                ctrl.Dispose();
-            }
-
-            foreach (Control ctrl in _pnlPropertiesBody.Controls.OfType<Control>().ToList())
-            {
-                ctrl.Dispose();
-            }
-            #endregion
-        }
-
-        private void CheckToDisposeNCopyWindoor()
-        {
-            if (_pnlMain.Controls.OfType<Control>().ToList().Count() > 0)
-            {
-                _windoorModel.WD_IsObjectCopied = true;
-                CopyObjectsPerWindoorModel();
-            }
-        }
-
-        public void CopyObjectsPerWindoorModel()
-        {
-            wndr_content = new List<string>();
-
-            IWindoorModel wdm = _windoorModel;
-            wndr_content.Add(wdm.WD_id.ToString());
-
-            wndr_content.Add("(");
-
-            #region save to list for internal load
-            foreach (var prop in wdm.GetType().GetProperties())
-            {
-                if (prop.Name != "TotalPriceHistory")
-                {
-                    if (prop.Name == "Dictionary_ht_redArrowLines" && wdm.Dictionary_ht_redArrowLines != null)
-                    {
-
-                        string Dictionary_ht_redArrowLinesArray = "";
-                        foreach (KeyValuePair<int, Decimal> ht_redArrowLines in wdm.Dictionary_ht_redArrowLines)
-                        {
-                            Dictionary_ht_redArrowLinesArray += "<" + ht_redArrowLines.Key + "," + ht_redArrowLines.Value + ">; ";
-                        }
-
-                        wndr_content.Add(prop.Name + ": " + Dictionary_ht_redArrowLinesArray);
-                    }
-                    else if (prop.Name == "Dictionary_wd_redArrowLines" && wdm.Dictionary_wd_redArrowLines != null)
-                    {
-
-                        string Dictionary_wd_redArrowLinesArray = "";
-                        foreach (KeyValuePair<int, Decimal> wd_redArrowLines in wdm.Dictionary_wd_redArrowLines)
-                        {
-                            Dictionary_wd_redArrowLinesArray += "<" + wd_redArrowLines.Key + "," + wd_redArrowLines.Value + ">; ";
-                        }
-
-                        wndr_content.Add(prop.Name + ": " + Dictionary_wd_redArrowLinesArray);
-                    }
-                }
-            }
-
-            foreach (Control wndrObject in wdm.lst_objects)
-            {
-                if (wndrObject.Name.Contains("Frame"))
-                {
-                    #region FrameModel
-                    foreach (FrameModel frm in wdm.lst_frame)
-                    {
-                        if (frm.Frame_Name == wndrObject.Name)
-                        {
-                            wndr_content.Add("{");
-                            foreach (var prop in frm.GetType().GetProperties())
-                            {
-                                wndr_content.Add("\t" + prop.Name + ": " + prop.GetValue(frm, null));
-                            }
-                            #region  Frame Panel
-                            foreach (PanelModel pnl in frm.Lst_Panel)
-                            {
-                                wndr_content.Add("\t#");
-                                foreach (var prop in pnl.GetType().GetProperties())
-                                {
-
-
-                                    if (prop.Name == "Panel_LstLouverArtNo")
-                                    {
-                                        string lstLouverArtNo = "";
-                                        if (pnl.Panel_LstLouverArtNo != null)
-                                        {
-                                            foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
-                                            {
-                                                lstLouverArtNo += pnl_lstLouverArtNo + ",";
-                                            }
-                                        }
-                                        wndr_content.Add("\t\t" + prop.Name + ": " + lstLouverArtNo);
-                                    }
-                                    else if (prop.Name == "Panel_LstSealForHandleMultiplier")
-                                    {
-                                        string lstSealForHandleMultiplier = "";
-                                        if (pnl.Panel_LstSealForHandleMultiplier != null)
-                                        {
-                                            foreach (int panel_LstSealForHandle in pnl.Panel_LstSealForHandleMultiplier)
-                                            {
-                                                lstSealForHandleMultiplier = panel_LstSealForHandle + ",";
-                                            }
-                                        }
-                                        wndr_content.Add("\t\t" + prop.Name + ": " + lstSealForHandleMultiplier);
-                                    }
-                                    else
-                                    {
-                                        wndr_content.Add("\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
-                                    }
-
-                                }
-
-                            }
-                            #endregion
-                            #region 2nd Level MultiPanel
-                            foreach (MultiPanelModel mpnl in frm.Lst_MultiPanel)
-                            {
-                                wndr_content.Add("\t[");
-                                foreach (var prop in mpnl.GetType().GetProperties())
-                                {
-
-                                    if (prop.Name == "MPanel_Parent")
-                                    {
-                                        wndr_content.Add("\t\t" + prop.Name + ": " + mpnl.MPanel_Parent.Name);
-                                    }
-
-                                    else
-                                    {
-                                        wndr_content.Add("\t\t" + prop.Name + ": " + prop.GetValue(mpnl, null));
-                                    }
-                                }
-                                foreach (Control ctrl in mpnl.MPanelLst_Objects)
-                                {
-                                    //else if (row_str.Contains("ProjectName"))
-                                    //{
-                                    //    _projectName = extractedValue_str;
-                                    //}
-
-                                    if (ctrl.Name.Contains("PanelUC"))
-                                    {
-                                        #region 2nd Level MultiPanel Panel
-
-                                        wndr_content.Add("\t\t#");
-                                        foreach (PanelModel pnl in mpnl.MPanelLst_Panel)
-                                        {
-                                            if (ctrl.Name == pnl.Panel_Name)
-                                            {
-
-                                                foreach (var prop in pnl.GetType().GetProperties())
-                                                {
-
-                                                    if (prop.Name == "Panel_Parent")
-                                                    {
-                                                        wndr_content.Add("\t\t\t" + prop.Name + ": " + pnl.Panel_Parent.Name);
-                                                    }
-
-                                                    else if (prop.Name == "Panel_LstLouverArtNo")
-                                                    {
-                                                        string lstLouverArtNo = "";
-                                                        if (pnl.Panel_LstLouverArtNo != null)
-                                                        {
-                                                            foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
-                                                            {
-                                                                lstLouverArtNo += pnl_lstLouverArtNo + ",";
-                                                            }
-                                                        }
-                                                        wndr_content.Add("\t\t\t" + prop.Name + ": " + lstLouverArtNo);
-                                                    }
-                                                    else if (prop.Name == "Panel_LstSealForHandleMultiplier")
-                                                    {
-                                                        string lstSealForHandleMultiplier = "";
-                                                        if (pnl.Panel_LstSealForHandleMultiplier != null)
-                                                        {
-                                                            foreach (int panel_LstSealForHandle in pnl.Panel_LstSealForHandleMultiplier)
-                                                            {
-                                                                lstSealForHandleMultiplier = panel_LstSealForHandle + ",";
-                                                            }
-                                                        }
-                                                        wndr_content.Add("\t\t\t" + prop.Name + ": " + lstSealForHandleMultiplier);
-                                                    }
-                                                    else
-                                                    {
-                                                        wndr_content.Add("\t\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
-                                                    }
-                                                }
-                                                break;
-                                            }
-                                        }
-                                        #endregion
-
-                                    }
-                                    else if (ctrl.Name.Contains("MullionUC") || ctrl.Name.Contains("TransomUC"))
-                                    {
-                                        #region 2nd Level MultiPanel Divider
-
-                                        wndr_content.Add("\t\t|");
-                                        foreach (DividerModel div in mpnl.MPanelLst_Divider)
-                                        {
-                                            if (ctrl.Name == div.Div_Name)
-                                            {
-                                                foreach (var prop in div.GetType().GetProperties())
-                                                {
-                                                    if (prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
-                                                    {
-
-                                                        wndr_content.Add("\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
-                                                    }
-                                                    else if (prop.Name == "Div_Parent")
-                                                    {
-
-                                                        wndr_content.Add("\t\t\t" + prop.Name + ": " + div.Div_Parent.Name);
-                                                    }
-                                                    else if (prop.Name == "Div_CladdingSizeList" && div.Div_CladdingSizeList != null)
-                                                    {
-
-                                                        string claddingArray = "";
-                                                        foreach (KeyValuePair<int, int> cladList in div.Div_CladdingSizeList)
-                                                        {
-                                                            claddingArray += "<" + cladList.Key + "," + cladList.Value + ">; ";
-                                                        }
-
-                                                        wndr_content.Add("\t\t\t" + prop.Name + ": " + claddingArray);
-                                                    }
-                                                    else
-                                                    {
-                                                        wndr_content.Add("\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
-                                                    }
-                                                }
-                                                break;
-                                            }
-                                        }
-                                        #endregion
-
-                                    }
-                                    else if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion"))
-                                    {
-
-                                        #region 2nd Level MultiPanel MultiPanel
-
-                                        foreach (MultiPanelModel thirdlvlmpnl in mpnl.MPanelLst_MultiPanel)
-                                        {
-                                            if (ctrl.Name == thirdlvlmpnl.MPanel_Name)
-                                            {
-                                                wndr_content.Add("\t\t[");
-                                                foreach (var prop in thirdlvlmpnl.GetType().GetProperties())
-                                                {
-                                                    if (prop.Name == "MPanel_Parent" || prop.Name == "MPanel_ParentModel")
-                                                    {
-                                                        wndr_content.Add("\t\t\t" + prop.Name + ": " + thirdlvlmpnl.MPanel_Parent.Name);
-                                                    }
-                                                    else
-                                                    {
-                                                        wndr_content.Add("\t\t\t" + prop.Name + ": " + prop.GetValue(thirdlvlmpnl, null));
-                                                    }
-
-                                                }
-                                                foreach (Control thirdlvlctrl in thirdlvlmpnl.MPanelLst_Objects)
-                                                {
-                                                    if (thirdlvlctrl.Name.Contains("PanelUC"))
-                                                    {
-                                                        wndr_content.Add("\t\t\t#");
-                                                        foreach (PanelModel pnl in thirdlvlmpnl.MPanelLst_Panel)
-                                                        {
-                                                            if (thirdlvlctrl.Name == pnl.Panel_Name)
-                                                            {
-
-                                                                foreach (var prop in pnl.GetType().GetProperties())
-                                                                {
-                                                                    if (prop.Name == "Panel_Parent")
-                                                                    {
-                                                                        wndr_content.Add("\t\t\t\t" + prop.Name + ": " + pnl.Panel_Parent.Name);
-                                                                    }
-                                                                    else if (prop.Name == "Panel_LstLouverArtNo")
-                                                                    {
-                                                                        string lstLouverArtNo = "";
-                                                                        if (pnl.Panel_LstLouverArtNo != null)
-                                                                        {
-                                                                            foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
-                                                                            {
-                                                                                lstLouverArtNo += pnl_lstLouverArtNo + ",";
-                                                                            }
-                                                                        }
-                                                                        wndr_content.Add("\t\t\t\t" + prop.Name + ": " + lstLouverArtNo);
-                                                                    }
-                                                                    else if (prop.Name == "Panel_LstSealForHandleMultiplier")
-                                                                    {
-                                                                        string lstSealForHandleMultiplier = "";
-                                                                        if (pnl.Panel_LstSealForHandleMultiplier != null)
-                                                                        {
-                                                                            foreach (int panel_LstSealForHandle in pnl.Panel_LstSealForHandleMultiplier)
-                                                                            {
-                                                                                lstSealForHandleMultiplier = panel_LstSealForHandle + ",";
-                                                                            }
-                                                                        }
-                                                                        wndr_content.Add("\t\t\t\t" + prop.Name + ": " + lstSealForHandleMultiplier);
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        wndr_content.Add("\t\t\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
-                                                                    }
-
-                                                                }
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                    else if (thirdlvlctrl.Name.Contains("MullionUC") || thirdlvlctrl.Name.Contains("TransomUC"))
-                                                    {
-
-                                                        wndr_content.Add("\t\t\t|");
-                                                        foreach (DividerModel div in thirdlvlmpnl.MPanelLst_Divider)
-                                                        {
-                                                            if (thirdlvlctrl.Name == div.Div_Name)
-                                                            {
-                                                                foreach (var prop in div.GetType().GetProperties())
-                                                                {
-                                                                    if (prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
-                                                                    {
-
-                                                                        wndr_content.Add("\t\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
-
-                                                                    }
-                                                                    else if (prop.Name == "Div_Parent")
-                                                                    {
-
-                                                                        wndr_content.Add("\t\t\t\t" + prop.Name + ": " + div.Div_Parent.Name);
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        wndr_content.Add("\t\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
-                                                                    }
-                                                                }
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                    foreach (MultiPanelModel fourthlvlmpnl in thirdlvlmpnl.MPanelLst_MultiPanel)
-                                                    {
-
-                                                        if (thirdlvlctrl.Name == fourthlvlmpnl.MPanel_Name)
-                                                        {
-                                                            wndr_content.Add("\t\t\t[");
-                                                            foreach (var prop in fourthlvlmpnl.GetType().GetProperties())
-                                                            {
-                                                                if (prop.Name == "MPanel_Parent" || prop.Name == "MPanel_ParentModel")
-                                                                {
-                                                                    wndr_content.Add("\t\t\t\t" + prop.Name + ": " + fourthlvlmpnl.MPanel_Parent.Name);
-                                                                }
-                                                                else
-                                                                {
-                                                                    wndr_content.Add("\t\t\t\t" + prop.Name + ": " + prop.GetValue(fourthlvlmpnl, null));
-                                                                }
-                                                            }
-
-                                                            foreach (Control fourthlvlctrl in fourthlvlmpnl.MPanelLst_Objects)
-                                                            {
-
-                                                                if (fourthlvlctrl.Name.Contains("PanelUC"))
-                                                                {
-                                                                    wndr_content.Add("\t\t\t\t#");
-                                                                    foreach (PanelModel pnl in fourthlvlmpnl.MPanelLst_Panel)
-                                                                    {
-                                                                        if (fourthlvlctrl.Name == pnl.Panel_Name)
-                                                                        {
-
-                                                                            foreach (var prop in pnl.GetType().GetProperties())
-                                                                            {
-                                                                                if (prop.Name == "Panel_Parent")
-                                                                                {
-                                                                                    wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + pnl.Panel_Parent.Name);
-                                                                                }
-                                                                                else if (prop.Name == "Panel_LstLouverArtNo")
-                                                                                {
-                                                                                    string lstLouverArtNo = "";
-                                                                                    if (pnl.Panel_LstLouverArtNo != null)
-                                                                                    {
-                                                                                        foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
-                                                                                        {
-                                                                                            lstLouverArtNo += pnl_lstLouverArtNo + ",";
-                                                                                        }
-                                                                                    }
-                                                                                    wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + lstLouverArtNo);
-                                                                                }
-                                                                                else if (prop.Name == "Panel_LstSealForHandleMultiplier")
-                                                                                {
-                                                                                    string lstSealForHandleMultiplier = "";
-                                                                                    if (pnl.Panel_LstSealForHandleMultiplier != null)
-                                                                                    {
-                                                                                        foreach (int panel_LstSealForHandle in pnl.Panel_LstSealForHandleMultiplier)
-                                                                                        {
-                                                                                            lstSealForHandleMultiplier = panel_LstSealForHandle + ",";
-                                                                                        }
-                                                                                    }
-                                                                                    wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + lstSealForHandleMultiplier);
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
-                                                                                }
-                                                                            }
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                                }
-                                                                else if (fourthlvlctrl.Name.Contains("MullionUC") || fourthlvlctrl.Name.Contains("TransomUC"))
-                                                                {
-                                                                    foreach (DividerModel div in fourthlvlmpnl.MPanelLst_Divider)
-                                                                    {
-                                                                        if (fourthlvlctrl.Name == div.Div_Name)
-                                                                        {
-                                                                            wndr_content.Add("\t\t\t\t|");
-                                                                            foreach (var prop in div.GetType().GetProperties())
-                                                                            {
-
-
-                                                                                if (prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
-                                                                                {
-
-                                                                                    wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
-
-                                                                                }
-                                                                                else if (prop.Name == "Div_Parent")
-                                                                                {
-
-                                                                                    wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + div.Div_Parent.Name);
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
-                                                                                }
-
-
-
-                                                                            }
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                            wndr_content.Add("\t\t\t]");
-
-                                                        }
-                                                    }
-                                                }
-                                                wndr_content.Add("\t\t]");
-                                            }
-                                        }
-                                        #endregion
-                                    }
-                                }
-
-                                wndr_content.Add("\t]");
-                                break;
-                            }
-                            #endregion
-
-                        }
-                        wndr_content.Add("}");
-                    }
-                    #endregion
-                }
-                else if (wndrObject.Name.Contains("Concrete"))
-                {
-                    #region Concrete
-
-                    foreach (IConcreteModel crm in wdm.lst_concrete)
-                    {
-                        if (wndrObject.Name == crm.Concrete_Name)
-                        {
-                            wndr_content.Add("/");
-                            foreach (var prop in crm.GetType().GetProperties())
-                            {
-                                wndr_content.Add("\t" + prop.Name + ": " + prop.GetValue(crm, null));
-                            }
-                        }
-                    }
-                    #endregion
-                }
-            }
-            #endregion
-
-            wndr_content.Add(")");
-            wndr_content.Add("EndofFile");                       
-            file_lines = wndr_content.ToArray();
-
-            if (WindoorModel_FileLines_Dictionary.ContainsKey(wdm.WD_name))
-            {
-                WindoorModel_FileLines_Dictionary[wdm.WD_name] = file_lines;
-            }
-            else
-            {
-                WindoorModel_FileLines_Dictionary.Add(wdm.WD_name, file_lines);
-            }
-
-            DisposeDrawingandProperties();
-
-            //#region Clear List Inside Model 
-            //_windoorModel.lst_frame.Clear();
-            //_windoorModel.lst_concrete.Clear();
-            //_windoorModel.lst_objects.Clear();
-            //#endregion
-
-        }
-
-        private void Load_Windoor_Item_From_Dispose()
-        {
-            foreach (Control wndr_objects in _windoorModel.lst_objects)
-            {
-                if (wndr_objects.Name.Contains("Frame"))
-                {
-                    foreach (IFrameModel frame in _windoorModel.lst_frame)
-                    {
-                        if (wndr_objects.Name == frame.Frame_Name)
-                        {
-                            _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
-                            frame.Frame_PropertiesUC.BringToFront();
-                            _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
-                        }
-                    }
-
-
-                }
-                else if (wndr_objects.Name.Contains("Concrete"))
-                {
-                    foreach (IConcreteModel concrete in _windoorModel.lst_concrete)
-                    {
-                        if (wndr_objects.Name == concrete.Concrete_Name)
-                        {
-                            _pnlPropertiesBody.Controls.Add((UserControl)concrete.Concrete_PropertiesUC);
-                            concrete.Concrete_PropertiesUC.BringToFront();
-                            _basePlatformPresenter.AddConcrete((IConcreteUC)concrete.Concrete_UC);
-                        }
-                    }
-                }
-            }
-            ////frames
-
-
-            //_pnlPropertiesBody.Refresh();na
-            _mainView.RemoveBinding(_mainView.GetLblSize());
-            _mainView.RemoveBinding();
-            _windoorModel.SetPanelGlassID();
-            _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
-            _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-            _windoorModel.SetZoom();
-            qoutationModel_MainPresenter.itemSelectStatus = true;
-            //GetCurrentPrice();na
-            _itemLoad = false;
-
-            #region set panelisFromload to false
-            foreach (IFrameModel fr in _windoorModel.lst_frame)
-            {
-                if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)
-                {
-                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
-                    {
-                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-                        {
-                            pnl.PanelModelIsFromLoad = false;
-                        }
-                    }
-
-                }
-                else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)
-                {
-                    IPanelModel Singlepnl = fr.Lst_Panel[0];
-
-                    Singlepnl.PanelModelIsFromLoad = false;
-
-                }
-
-            }
-            #endregion
-
-        }
 
         public void Load_Windoor_Item(IWindoorModel item)
         {
             try
-             {
-
-                CheckToDisposeNCopyWindoor();
-
-               _basePlatformImagerUCPresenter.SendToBack_baseImager();
+            {
+                _basePlatformImagerUCPresenter.SendToBack_baseImager();
 
                 //save frame
                 Windoor_Save_UserControl();
                 Windoor_Save_PropertiesUC();
-              
-                if (!item.WD_IsObjectCopied)
+
+                //set mainview
+                _windoorModel = item;
+
+                _quotationModel.Select_Current_Windoor(_windoorModel);
+                SetMainViewTitle(input_qrefno,
+                                _projectName,
+                                _custRefNo,
+                                 _windoorModel.WD_name,
+                                 _windoorModel.WD_profile,
+                                 false);
+                //clear
+
+                _pnlMain.Controls.Clear();
+                _pnlPropertiesBody.Controls.Clear();
+
+                _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
+
+                //basePlatform
+                _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+                _basePlatformPresenter.InvalidateBasePlatform();
+
+                _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                _mainView.GetThis().Controls.Add(bpUC);
+
+
+                foreach (Control wndr_objects in _windoorModel.lst_objects)
                 {
-                    #region Load Existing Object (Not Dispose)
-                    //set mainview
-                    _windoorModel = item;  // select new windoor id       
-                    _quotationModel.Select_Current_Windoor(_windoorModel);
-                    SetMainViewTitle(input_qrefno,
-                                    _projectName,
-                                    _custRefNo,
-                                     _windoorModel.WD_name,
-                                     _windoorModel.WD_profile,
-                                     false);
-                    //clear
-
-                    _pnlMain.Controls.Clear();
-                    _pnlPropertiesBody.Controls.Clear();
-
-
-                    _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
-
-                    //basePlatform
-                    _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
-                    AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-                    _basePlatformPresenter.InvalidateBasePlatform();
-
-                    _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
-                    UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
-                    _mainView.GetThis().Controls.Add(bpUC);
-
-
-                    foreach (Control wndr_objects in _windoorModel.lst_objects)
+                    if (wndr_objects.Name.Contains("Frame"))
                     {
-                        if (wndr_objects.Name.Contains("Frame"))
+                        foreach (IFrameModel frame in _windoorModel.lst_frame)
                         {
-                            foreach (IFrameModel frame in _windoorModel.lst_frame)
-                            {
-                                if (wndr_objects.Name == frame.Frame_Name)
-                                {
-                                    _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
-                                    frame.Frame_PropertiesUC.BringToFront();
-                                    _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
-                                }
-                            }
-
-
-                        }
-                        else if (wndr_objects.Name.Contains("Concrete"))
-                        {
-                            foreach (IConcreteModel concrete in _windoorModel.lst_concrete)
-                            {
-                                if (wndr_objects.Name == concrete.Concrete_Name)
-                                {
-                                    _pnlPropertiesBody.Controls.Add((UserControl)concrete.Concrete_PropertiesUC);
-                                    concrete.Concrete_PropertiesUC.BringToFront();
-                                    _basePlatformPresenter.AddConcrete((IConcreteUC)concrete.Concrete_UC);
-                                }
+                            if (wndr_objects.Name == frame.Frame_Name)
+                            { 
+                                _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
+                                frame.Frame_PropertiesUC.BringToFront();
+                                _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
                             }
                         }
                     }
-                    ////frames
-
-
-                    //_pnlPropertiesBody.Refresh();na
-                    _mainView.RemoveBinding(_mainView.GetLblSize());
-                    _mainView.RemoveBinding();
-                    _windoorModel.SetPanelGlassID();
-                    _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
-                    _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-                    _windoorModel.SetZoom();
-                    qoutationModel_MainPresenter.itemSelectStatus = true;
-                    //GetCurrentPrice();na
-                    _itemLoad = false;
-
-                    #region set panelisFromload to false
-                    foreach (IFrameModel fr in _windoorModel.lst_frame)
+                    else if (wndr_objects.Name.Contains("Concrete"))
                     {
-                        if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)
+                        foreach (IConcreteModel concrete in _windoorModel.lst_concrete)
                         {
-                            foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                            if (wndr_objects.Name == concrete.Concrete_Name)
                             {
-                                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-                                {
-                                    pnl.PanelModelIsFromLoad = false;
-                                }
+                                _pnlPropertiesBody.Controls.Add((UserControl)concrete.Concrete_PropertiesUC);
+                                concrete.Concrete_PropertiesUC.BringToFront();
+                                _basePlatformPresenter.AddConcrete((IConcreteUC)concrete.Concrete_UC);
                             }
-
                         }
-                        else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)
-                        {
-                            IPanelModel Singlepnl = fr.Lst_Panel[0];
-
-                            Singlepnl.PanelModelIsFromLoad = false;
-
-                        }
-
                     }
-                    #endregion    
-
-                    #endregion
                 }
-                else if(item.WD_IsObjectCopied)
-                {
-                    #region Load Dispose Objects 
-                    ItemLoad = true; // negate auto suggest
-                    onload = true; // negate auto suggest
-
-                    _windoorModel = item;  // select new windoor id       
-                    _quotationModel.Select_Current_Windoor(_windoorModel);
-                    SetMainViewTitle(input_qrefno,
-                                    _projectName,
-                                    _custRefNo,
-                                     _windoorModel.WD_name,
-                                     _windoorModel.WD_profile,
-                                     false);
-
-                    _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
-
-                    //basePlatform
-                    _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
-                    AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-                    _basePlatformPresenter.InvalidateBasePlatform();
-
-                    _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
-                    UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
-                    _mainView.GetThis().Controls.Add(bpUC);
-
-                    #region Clear List Inside Model Before Adding
-                    _windoorModel.lst_frame.Clear();
-                    _windoorModel.lst_concrete.Clear();
-                    _windoorModel.lst_objects.Clear();
-
-                    
-                   
-                    #endregion
+                //frames
 
 
-                    if (WindoorModel_FileLines_Dictionary.ContainsKey(_windoorModel.WD_name))
-                    {
-                        file_lines = WindoorModel_FileLines_Dictionary[_windoorModel.WD_name];
-                        _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
-                        StartWorker("From_Dispose");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error: Can't Load Missing Objects (Disposed<>)","",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-                    }
+                //_pnlPropertiesBody.Refresh();
+                _mainView.RemoveBinding(_mainView.GetLblSize());
+                _mainView.RemoveBinding();
+                _windoorModel.SetPanelGlassID();
+                _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
+                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                _windoorModel.SetZoom();
+                qoutationModel_MainPresenter.itemSelectStatus = true;
+                //GetCurrentPrice();
+                _itemLoad = false;
 
-                    #endregion      
-                }
-              
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show("Location: " + this + "\n\n Error: " + ex.Message);
-             }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Location: " + this + "\n\n Error: " + ex.Message);
+            }
         }
 
         public void Set_pnlPropertiesBody_ScrollView(int scroll_value)

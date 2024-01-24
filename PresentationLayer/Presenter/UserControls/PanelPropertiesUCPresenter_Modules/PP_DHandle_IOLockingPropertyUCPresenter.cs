@@ -30,10 +30,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_DHandle_IOLockingPropertyUC_cmbD_IOLockingArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if (!_panelModel.PanelModelIsFromLoad)
-            {
-                _panelModel.Panel_DHandleIOLockingOutsideArtNo = (D_Handle_IO_LockingArtNo)((ComboBox)sender).SelectedValue;
-            }
+            _panelModel.Panel_DHandleIOLockingOutsideArtNo = (D_Handle_IO_LockingArtNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _pp_DHandle_IOLockingPropertyUC_PPDHandleIOLockingPropertyUCLoadEventRaised(object sender, EventArgs e)

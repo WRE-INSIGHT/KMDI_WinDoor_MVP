@@ -31,10 +31,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _centerProfilePropertyUC_CenterProfileArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if(_mainPresenter.ItemLoad == false)
-            {
-                _panelModel.Panel_CenterProfileArtNo = (CenterProfile_ArticleNo)((ComboBox)sender).SelectedValue;
-            }
+            _panelModel.Panel_CenterProfileArtNo = (CenterProfile_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _centerProfilePropertyUC_CenterProfilePropertyUCLoadEventRaised(object sender, EventArgs e)
