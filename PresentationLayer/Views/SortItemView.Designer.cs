@@ -31,6 +31,7 @@
             this.pnlSortItem = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_Delete = new System.Windows.Forms.Button();
+            this.chkbox_SelectAll = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chkbox_SelectAll);
             this.panel1.Controls.Add(this.btn_Delete);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -69,6 +71,18 @@
             this.btn_Delete.UseVisualStyleBackColor = true;
             this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
+            // chkbox_SelectAll
+            // 
+            this.chkbox_SelectAll.AutoSize = true;
+            this.chkbox_SelectAll.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkbox_SelectAll.Location = new System.Drawing.Point(133, 6);
+            this.chkbox_SelectAll.Name = "chkbox_SelectAll";
+            this.chkbox_SelectAll.Size = new System.Drawing.Size(72, 17);
+            this.chkbox_SelectAll.TabIndex = 1;
+            this.chkbox_SelectAll.Text = "Select All";
+            this.chkbox_SelectAll.UseVisualStyleBackColor = true;
+            this.chkbox_SelectAll.CheckedChanged += new System.EventHandler(this.chkbox_SelectAll_CheckedChanged);
+            // 
             // SortItemView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -81,6 +95,7 @@
             this.Text = "SortItem";
             this.Load += new System.EventHandler(this.SortItemView_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -90,5 +105,6 @@
         private System.Windows.Forms.Panel pnlSortItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_Delete;
+        private System.Windows.Forms.CheckBox chkbox_SelectAll;
     }
 }

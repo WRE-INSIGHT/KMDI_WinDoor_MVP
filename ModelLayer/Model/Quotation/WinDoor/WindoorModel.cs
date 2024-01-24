@@ -717,6 +717,19 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        private bool _wd_IsObjectCopied;
+        public bool WD_IsObjectCopied
+        {
+            get
+            {
+                return _wd_IsObjectCopied;
+            }
+            set
+            {
+                _wd_IsObjectCopied = value;
+            }
+        }
+
         #region Methods
 
         public void SetDimensions_basePlatform()

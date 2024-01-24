@@ -34,7 +34,36 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_centerHingePropertyUC_CmbCenterHingeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             ComboBox cmbCenterHinge = (ComboBox)sender;
-            if (_initialLoad == false)
+            //if (_initialLoad == false)
+            //{
+            //    _panelModel.Panel_CenterHingeOptions = (CenterHingeOption)cmbCenterHinge.SelectedValue;
+            //    CenterHingeOption sel_centerHinge = (CenterHingeOption)cmbCenterHinge.SelectedValue;
+            //    if (curr_centerHinge != sel_centerHinge)
+            //    {
+            //        if (sel_centerHinge == CenterHingeOption._NTCenterHinge)
+            //        {
+            //            _panelModel.Panel_NTCenterHingeVisibility = true;
+            //            _panelModel.AdjustPropertyPanelHeight("addNTCenterHinge");
+            //            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addNTCenterHinge");
+            //            if (_panelModel.Panel_ParentMultiPanelModel != null)
+            //            {
+            //                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addNTCenterHinge");
+            //            }
+            //        }
+            //        else if (sel_centerHinge == CenterHingeOption._MiddleCloser)
+            //        {
+            //            _panelModel.Panel_NTCenterHingeVisibility = false;
+            //            _panelModel.AdjustPropertyPanelHeight("minusNTCenterHinge");
+            //            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusNTCenterHinge");
+            //            if (_panelModel.Panel_ParentMultiPanelModel != null)
+            //            {
+            //                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusNTCenterHinge");
+            //            }
+            //        }
+            //        curr_centerHinge = sel_centerHinge;
+            //    }
+            //}
+            if (!_panelModel.PanelModelIsFromLoad)
             {
                 _panelModel.Panel_CenterHingeOptions = (CenterHingeOption)cmbCenterHinge.SelectedValue;
                 CenterHingeOption sel_centerHinge = (CenterHingeOption)cmbCenterHinge.SelectedValue;
@@ -69,9 +98,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_centerHingePropertyUC_CenterHingePropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             _pp_centerHingePropertyUC.ThisBinding(CreateBindingDictionary());
-            curr_centerHinge = CenterHingeOption._NTCenterHinge;
-            _panelModel.Panel_CenterHingeOptions = CenterHingeOption._NTCenterHinge;
-            _initialLoad = false;
+
+            if (!_panelModel.PanelModelIsFromLoad)
+            {
+                curr_centerHinge = CenterHingeOption._NTCenterHinge;
+                _panelModel.Panel_CenterHingeOptions = CenterHingeOption._NTCenterHinge;
+            }
+           // _initialLoad = false;
         }
 
         public IPP_CenterHingePropertyUC GetCenterHingePropertyUC()
