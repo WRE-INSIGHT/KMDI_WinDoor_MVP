@@ -25,5 +25,6 @@ namespace PresentationLayer.Views.UserControls
         bool itemSelected { get; set; }
         bool itemChecked { get;}
         UserControl GetSortItem();
+        CheckBox GetCheckBox();
     }
 }

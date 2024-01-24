@@ -397,7 +397,6 @@ namespace PresentationLayer.Views
         {
             return pnlItems;
         }
-
         private void CreateNewItem_Clicked(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CreateNewItemClickEventRaised, e);
@@ -405,7 +404,7 @@ namespace PresentationLayer.Views
 
         private void CreateNewFrame_Clicked(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, NewFrameButtonClickEventRaised, e);
+            EventHelpers.RaiseEvent(sender, NewFrameButtonClickEventRaised, e); 
         }
 
         public Panel GetPanelPropertiesBody()
@@ -732,6 +731,7 @@ namespace PresentationLayer.Views
                 openToolStripButton_Click(sender, e);
             }
         }
+
 
         private void MainView_KeyUp(object sender, KeyEventArgs e)
         {
