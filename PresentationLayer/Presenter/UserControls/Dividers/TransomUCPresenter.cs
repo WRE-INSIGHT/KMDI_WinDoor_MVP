@@ -364,8 +364,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     prev_mpanel.MPanel_Height++;
                                     prev_mpanel.MPanel_DisplayHeight++;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    if (/*_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f*/_divModel.Div_Zoom >= 0.01f && _divModel.Div_Zoom <= 0.26f)
                                     {
                                         prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
 
@@ -408,8 +408,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         }
                                     }
 
-                                    if (prev_mpanel.MPanelImageRenderer_Zoom == 0.26f || prev_mpanel.MPanelImageRenderer_Zoom == 0.17f ||
-                                        prev_mpanel.MPanelImageRenderer_Zoom == 0.13f || prev_mpanel.MPanelImageRenderer_Zoom == 0.10f)
+                                    if (/*prev_mpanel.MPanelImageRenderer_Zoom == 0.26f || prev_mpanel.MPanelImageRenderer_Zoom == 0.17f ||
+                                        prev_mpanel.MPanelImageRenderer_Zoom == 0.13f || prev_mpanel.MPanelImageRenderer_Zoom == 0.10f*/prev_mpanel.MPanelImageRenderer_Zoom >= 0.01f && prev_mpanel.MPanelImageRenderer_Zoom <= 0.26f)
                                     {
                                         prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
 
@@ -428,8 +428,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     prev_pnl.Panel_Height++;
                                     prev_pnl.Panel_DisplayHeight++;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    if (/*_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f*/_divModel.Div_Zoom >= 0.01f && _divModel.Div_Zoom <= 0.26f)
                                     {
                                         prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
@@ -441,8 +441,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpnl.SetDimensions_childObjs();
                                         }
                                     }
-                                    if (prev_pnl.PanelImageRenderer_Zoom == 0.26f || prev_pnl.PanelImageRenderer_Zoom == 0.17f ||
-                                        prev_pnl.PanelImageRenderer_Zoom == 0.13f || prev_pnl.PanelImageRenderer_Zoom == 0.10f)
+                                    if (/*prev_pnl.PanelImageRenderer_Zoom == 0.26f || prev_pnl.PanelImageRenderer_Zoom == 0.17f ||
+                                        prev_pnl.PanelImageRenderer_Zoom == 0.13f || prev_pnl.PanelImageRenderer_Zoom == 0.10f*/prev_pnl.PanelImageRenderer_Zoom >= 0.01f && prev_pnl.PanelImageRenderer_Zoom <= 0.26f)
                                     {
                                         prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
@@ -457,8 +457,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     nxt_mpnl.MPanel_Height--;
                                     nxt_mpnl.MPanel_DisplayHeight--;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    if (/*_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f*/_divModel.Div_Zoom >= 0.01f && _divModel.Div_Zoom <= 0.26f)
                                     {
                                         nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                         nxt_mpnl.SetDimensions_childPanelObjs(-1);
@@ -499,8 +499,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             div.SetDimensionsToBind_using_DivZoom_Imager();
                                         }
                                     }
-                                    if (nxt_mpnl.MPanelImageRenderer_Zoom == 0.26f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
-                                        nxt_mpnl.MPanelImageRenderer_Zoom == 0.13f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.10f)
+                                    if (/*nxt_mpnl.MPanelImageRenderer_Zoom == 0.26f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
+                                        nxt_mpnl.MPanelImageRenderer_Zoom == 0.13f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.10f*/nxt_mpnl.MPanelImageRenderer_Zoom >= 0.01f && nxt_mpnl.MPanelImageRenderer_Zoom <= 0.26f)
                                     {
                                         nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
 
@@ -518,8 +518,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     nxt_pnl.Panel_Height--;
                                     nxt_pnl.Panel_DisplayHeight--;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    if (/*_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f*/_divModel.Div_Zoom >= 0.01f && _divModel.Div_Zoom <= 0.26f)
                                     {
                                         nxt_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
@@ -531,8 +531,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpnl.SetDimensions_childObjs();
                                         }
                                     }
-                                    if (nxt_pnl.PanelImageRenderer_Zoom == 0.26f || nxt_pnl.PanelImageRenderer_Zoom == 0.17f ||
-                                       nxt_pnl.PanelImageRenderer_Zoom == 0.13f || nxt_pnl.PanelImageRenderer_Zoom == 0.10f)
+                                    if (/*nxt_pnl.PanelImageRenderer_Zoom == 0.26f || nxt_pnl.PanelImageRenderer_Zoom == 0.17f ||
+                                       nxt_pnl.PanelImageRenderer_Zoom == 0.13f || nxt_pnl.PanelImageRenderer_Zoom == 0.10f*/nxt_pnl.PanelImageRenderer_Zoom >= 0.01f && nxt_pnl.PanelImageRenderer_Zoom <= 0.26f)
                                     {
                                         nxt_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
@@ -570,8 +570,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     prev_mpanel.MPanel_Height--;
                                     prev_mpanel.MPanel_DisplayHeight--;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    if (/*_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f*/_divModel.Div_Zoom >= 0.01f && _divModel.Div_Zoom <= 0.26f)
                                     {
                                         prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                         prev_mpanel.SetDimensions_childPanelObjs(-1);
@@ -614,8 +614,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         }
                                     }
 
-                                    if (prev_mpanel.MPanelImageRenderer_Zoom == 0.26f || prev_mpanel.MPanelImageRenderer_Zoom == 0.17f ||
-                                        prev_mpanel.MPanelImageRenderer_Zoom == 0.13f || prev_mpanel.MPanelImageRenderer_Zoom == 0.10f)
+                                    if (/*prev_mpanel.MPanelImageRenderer_Zoom == 0.26f || prev_mpanel.MPanelImageRenderer_Zoom == 0.17f ||
+                                        prev_mpanel.MPanelImageRenderer_Zoom == 0.13f || prev_mpanel.MPanelImageRenderer_Zoom == 0.10f*/prev_mpanel.MPanelImageRenderer_Zoom >= 0.01f && prev_mpanel.MPanelImageRenderer_Zoom <= 0.26f)
                                     {
                                         prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
 
@@ -633,8 +633,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     prev_pnl.Panel_Height--;
                                     prev_pnl.Panel_DisplayHeight--;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    if (/*_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f*/_divModel.Div_Zoom >= 0.01f && _divModel.Div_Zoom <= 0.26f)
                                     {
                                         prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
@@ -646,8 +646,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpnl.SetDimensions_childObjs();
                                         }
                                     }
-                                    if (prev_pnl.PanelImageRenderer_Zoom == 0.26f || prev_pnl.PanelImageRenderer_Zoom == 0.17f ||
-                                        prev_pnl.PanelImageRenderer_Zoom == 0.13f || prev_pnl.PanelImageRenderer_Zoom == 0.10f)
+                                    if (/*prev_pnl.PanelImageRenderer_Zoom == 0.26f || prev_pnl.PanelImageRenderer_Zoom == 0.17f ||
+                                        prev_pnl.PanelImageRenderer_Zoom == 0.13f || prev_pnl.PanelImageRenderer_Zoom == 0.10f*/prev_pnl.PanelImageRenderer_Zoom >= 0.01f && prev_pnl.PanelImageRenderer_Zoom <= 0.26f)
                                     {
                                         prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
@@ -662,8 +662,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     nxt_mpnl.MPanel_Height++;
                                     nxt_mpnl.MPanel_DisplayHeight++;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    if (/*_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f*/_divModel.Div_Zoom >= 0.01f && _divModel.Div_Zoom <= 0.26f)
                                     {
                                         nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                        
@@ -708,8 +708,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         }
                                     }
 
-                                    if (nxt_mpnl.MPanelImageRenderer_Zoom == 0.26f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
-                                        nxt_mpnl.MPanelImageRenderer_Zoom == 0.13f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.10f)
+                                    if (/*nxt_mpnl.MPanelImageRenderer_Zoom == 0.26f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
+                                        nxt_mpnl.MPanelImageRenderer_Zoom == 0.13f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.10f*/nxt_mpnl.MPanelImageRenderer_Zoom >= 0.01f && nxt_mpnl.MPanelImageRenderer_Zoom <= 0.26f)
                                     {
                                         nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
 
@@ -727,8 +727,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     nxt_pnl.Panel_Height++;
                                     nxt_pnl.Panel_DisplayHeight++;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    if (/*_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f*/_divModel.Div_Zoom >= 0.01f && _divModel.Div_Zoom <= 0.26f)
                                     {
                                         nxt_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
@@ -740,8 +740,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                             mpnl.SetDimensions_childObjs();
                                         }
                                     }
-                                    if (nxt_pnl.PanelImageRenderer_Zoom == 0.26f || nxt_pnl.PanelImageRenderer_Zoom == 0.17f ||
-                                        nxt_pnl.PanelImageRenderer_Zoom == 0.13f || nxt_pnl.PanelImageRenderer_Zoom == 0.10f)
+                                    if (/*nxt_pnl.PanelImageRenderer_Zoom == 0.26f || nxt_pnl.PanelImageRenderer_Zoom == 0.17f ||
+                                        nxt_pnl.PanelImageRenderer_Zoom == 0.13f || nxt_pnl.PanelImageRenderer_Zoom == 0.10f*/nxt_pnl.PanelImageRenderer_Zoom >= 0.01f && nxt_pnl.PanelImageRenderer_Zoom <= 0.26f)
                                     {
                                         nxt_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
@@ -986,8 +986,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 prev_mpanel.MPanel_Height += transom_movement;
                                 prev_mpanel.MPanel_DisplayHeight += transom_movement;
 
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                if (/*_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f*/_divModel.Div_Zoom >= 0.01f && _divModel.Div_Zoom <= 0.26f)
                                 {
                                     prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     prev_mpanel.SetDimensions_childPanelObjs(transom_movement);
@@ -1031,8 +1031,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                 }
 
-                                if (prev_mpanel.MPanelImageRenderer_Zoom == 0.26f || prev_mpanel.MPanelImageRenderer_Zoom == 0.17f ||
-                                    prev_mpanel.MPanelImageRenderer_Zoom == 0.13f || prev_mpanel.MPanelImageRenderer_Zoom == 0.10f)
+                                if (/*prev_mpanel.MPanelImageRenderer_Zoom == 0.26f || prev_mpanel.MPanelImageRenderer_Zoom == 0.17f ||
+                                    prev_mpanel.MPanelImageRenderer_Zoom == 0.13f || prev_mpanel.MPanelImageRenderer_Zoom == 0.10f*/prev_mpanel.MPanelImageRenderer_Zoom >= 0.01f && prev_mpanel.MPanelImageRenderer_Zoom <= 0.26f)
                                 {
                                     prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
                                     prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
@@ -1051,8 +1051,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 prev_pnl.Panel_Height += transom_movement;
                                 prev_pnl.Panel_DisplayHeight += transom_movement;
 
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                if (/*_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f*/_divModel.Div_Zoom >= 0.01f && _divModel.Div_Zoom <= 0.26f )
                                 {
                                     prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
@@ -1064,8 +1064,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         mpnl.SetDimensions_childObjs();
                                     }
                                 }
-                                if (prev_pnl.PanelImageRenderer_Zoom == 0.26f || prev_pnl.PanelImageRenderer_Zoom == 0.17f ||
-                                    prev_pnl.PanelImageRenderer_Zoom == 0.13f || prev_pnl.PanelImageRenderer_Zoom == 0.10f)
+                                if (/*prev_pnl.PanelImageRenderer_Zoom == 0.26f || prev_pnl.PanelImageRenderer_Zoom == 0.17f ||
+                                    prev_pnl.PanelImageRenderer_Zoom == 0.13f || prev_pnl.PanelImageRenderer_Zoom == 0.10f*/prev_pnl.PanelImageRenderer_Zoom >= 0.01f && prev_pnl.PanelImageRenderer_Zoom <= 0.26f)
                                 {
                                     prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
@@ -1080,8 +1080,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 nxt_mpnl.MPanel_Height -= transom_movement;
                                 nxt_mpnl.MPanel_DisplayHeight -= transom_movement;
 
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                if (/*_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f*/_divModel.Div_Zoom >= 0.01f && _divModel.Div_Zoom <= 0.26f)
                                 {
                                     nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     nxt_mpnl.SetDimensions_childPanelObjs(-transom_movement);
@@ -1120,8 +1120,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         div.SetDimensionsToBind_using_DivZoom_Imager();
                                     }
                                 }
-                                if (nxt_mpnl.MPanelImageRenderer_Zoom == 0.26f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
-                                   nxt_mpnl.MPanelImageRenderer_Zoom == 0.13f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.10f)
+                                if (/*nxt_mpnl.MPanelImageRenderer_Zoom == 0.26f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
+                                   nxt_mpnl.MPanelImageRenderer_Zoom == 0.13f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.10f*/nxt_mpnl.MPanelImageRenderer_Zoom >= 0.01f && nxt_mpnl.MPanelImageRenderer_Zoom <= 0.26f)
                                 {
                                     nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
 
@@ -1139,8 +1139,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 nxt_pnl.Panel_Height -= transom_movement;
                                 nxt_pnl.Panel_DisplayHeight -= transom_movement;
 
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                if (/*_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f*/_divModel.Div_Zoom >= 0.01f && _divModel.Div_Zoom <= 0.26f)
                                 {
                                     nxt_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
@@ -1152,8 +1152,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         mpnl.SetDimensions_childObjs();
                                     }
                                 }
-                                if (nxt_pnl.PanelImageRenderer_Zoom == 0.26f || nxt_pnl.PanelImageRenderer_Zoom == 0.17f ||
-                                    nxt_pnl.PanelImageRenderer_Zoom == 0.13f || nxt_pnl.PanelImageRenderer_Zoom == 0.10f)
+                                if (/*nxt_pnl.PanelImageRenderer_Zoom == 0.26f || nxt_pnl.PanelImageRenderer_Zoom == 0.17f ||
+                                    nxt_pnl.PanelImageRenderer_Zoom == 0.13f || nxt_pnl.PanelImageRenderer_Zoom == 0.10f*/nxt_pnl.PanelImageRenderer_Zoom >= 0.01f && nxt_pnl.PanelImageRenderer_Zoom <= 0.26f)
                                 {
                                     nxt_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }

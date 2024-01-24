@@ -29,7 +29,7 @@ namespace PresentationLayer.Views.UserControls
                 }
             }
         }
-       
+
         public int PboxItemImagerHeight
         {
             get
@@ -86,8 +86,8 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(windoorModelBinding["WD_visibility"]);
             pbox_itemImage.DataBindings.Add(windoorModelBinding["WD_image"]);
             this.DataBindings.Add(windoorModelBinding["WD_Selected"]);
-            pboxSlidingTopView.DataBindings.Add(windoorModelBinding["WD_SlidingTopViewImage"]);
-            pboxSlidingTopView.DataBindings.Add(windoorModelBinding["WD_SlidingTopViewVisibility"]);
+            //pboxSlidingTopView.DataBindings.Add(windoorModelBinding["WD_SlidingTopViewImage"]);
+            //pboxSlidingTopView.DataBindings.Add(windoorModelBinding["WD_SlidingTopViewVisibility"]);
             //pbox_itemImage.DataBindings.Add(windoorModelBinding["WD_pboxImagerHeight"]);
         }
 
@@ -103,7 +103,7 @@ namespace PresentationLayer.Views.UserControls
         {
             e.Effect = DragDropEffects.All;
         }
-       
+
         private void lbl_item_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -136,7 +136,7 @@ namespace PresentationLayer.Views.UserControls
 
         private void lbl_item_TextChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void defaultDescriptionToolStripMenuItem_Click(object sender, EventArgs e)

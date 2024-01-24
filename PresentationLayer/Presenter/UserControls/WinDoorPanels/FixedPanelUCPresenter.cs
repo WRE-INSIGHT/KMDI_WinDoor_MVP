@@ -151,7 +151,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 prev_pnl.Panel_DisplayWidth += 1;
 
                                 if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f ||
+                                    _panelModel.Panel_Zoom == 0.08f || _panelModel.Panel_Zoom == 0.06f ||
+                                    _panelModel.Panel_Zoom == 0.05f || _panelModel.Panel_Zoom == 0.02f ||
+                                    _panelModel.Panel_Zoom == 0.01f)
                                 {
                                     prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
@@ -167,7 +170,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 pres_pnl.Panel_DisplayWidth -= 1;
 
                                 if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f ||
+                                    _panelModel.Panel_Zoom == 0.08f || _panelModel.Panel_Zoom == 0.06f ||
+                                    _panelModel.Panel_Zoom == 0.05f || _panelModel.Panel_Zoom == 0.02f ||
+                                    _panelModel.Panel_Zoom == 0.01f)
                                 {
                                     pres_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
@@ -203,7 +209,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 prev_pnl.Panel_DisplayWidth -= 1;
 
                                 if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f ||
+                                    _panelModel.Panel_Zoom == 0.08f || _panelModel.Panel_Zoom == 0.06f ||
+                                    _panelModel.Panel_Zoom == 0.05f || _panelModel.Panel_Zoom == 0.02f ||
+                                    _panelModel.Panel_Zoom == 0.01f)
                                 {
                                     prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
@@ -219,7 +228,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 pres_pnl.Panel_DisplayWidth += 1;
 
                                 if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f ||
+                                    _panelModel.Panel_Zoom == 0.08f || _panelModel.Panel_Zoom == 0.06f ||
+                                    _panelModel.Panel_Zoom == 0.05f || _panelModel.Panel_Zoom == 0.02f ||
+                                    _panelModel.Panel_Zoom == 0.01f)
                                 {
                                     pres_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
@@ -943,7 +955,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         prev_pnl.Panel_DisplayWidth += mullion_movement;
 
                                         if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f ||
+                                            _panelModel.Panel_Zoom == 0.08f || _panelModel.Panel_Zoom == 0.06f ||
+                                            _panelModel.Panel_Zoom == 0.05f || _panelModel.Panel_Zoom == 0.02f ||
+                                            _panelModel.Panel_Zoom == 0.01f)
                                         {
                                             prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                         }
@@ -959,7 +974,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         pres_pnl.Panel_DisplayWidth -= mullion_movement;
 
                                         if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f ||
+                                            _panelModel.Panel_Zoom == 0.08f || _panelModel.Panel_Zoom == 0.06f ||
+                                            _panelModel.Panel_Zoom == 0.05f || _panelModel.Panel_Zoom == 0.02f ||
+                                            _panelModel.Panel_Zoom == 0.01f)
                                         {
                                             pres_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                         }

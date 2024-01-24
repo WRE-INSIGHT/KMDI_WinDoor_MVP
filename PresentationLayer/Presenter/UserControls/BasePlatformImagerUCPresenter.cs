@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
 using Unity;
@@ -26,13 +25,18 @@ namespace PresentationLayer.Presenter.UserControls
 
         IWindoorModel _windoorModel;
         IMainPresenter _mainPresenter;
+        Font dmnsion_font_wd;
+        Font dmnsion_font_ht;
 
         CommonFunctions _commonfunc = new CommonFunctions();
+        int deductBotPadding;
 
+        bool topViewCheck;
         public BasePlatformImagerUCPresenter(IBasePlatformImagerUC basePlatformImagerUC)
         {
             _basePlatformImagerUC = basePlatformImagerUC;
             _flpMain = _basePlatformImagerUC.GetFlpMain();
+
             SubscribeToEventsSetup();
         }
 
@@ -59,7 +63,11 @@ namespace PresentationLayer.Presenter.UserControls
             List<Point> object_points = new List<Point>();
             List<int> curr_LocY = new List<int>();
 
+            //DeductionForBottomFramePaddingImager();
+
             int flocX = 0, controlndex = 0, flocY = 0, prev_wd_covered = 0, prev_ht_covered = 0, total_wd_covered = 0, total_ht_covered = 0, frame_row = 0;
+
+            #region oldAlgo
 
             //int occupiedWidth = 0,
             //    occupiedHeight = 0,
@@ -233,13 +241,7 @@ namespace PresentationLayer.Presenter.UserControls
             //    }
             //}
 
-
-
-
-
-
-
-
+            #endregion
 
             int occupiedWidth = 0,
               occupiedHeight = 0,
@@ -256,14 +258,20 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     if (wndrObject.Name.Contains("Frame"))
                     {
-
-
                         foreach (IFrameModel frm in _windoorModel.lst_frame)
                         {
+                            int FrameImageRendererHeight = 0;
+                            if (topViewCheck == true)
+                            {
+                                FrameImageRendererHeight = (int)Math.Round(NewimagerHeightDecuted70(frm.Frame_Height));
+                            }
+                            else if (topViewCheck == false)
+                            {
+                                FrameImageRendererHeight = frm.FrameImageRenderer_Height;
+                            }
                             if (wndrObject.Name == frm.Frame_Name)
                             {
-
-                                if(currentY != wndrObject.Location.Y)
+                                if (currentY != wndrObject.Location.Y)
                                 {
                                     flocY += MaxHeightImgager;
                                     flocX = 0;
@@ -281,7 +289,7 @@ namespace PresentationLayer.Presenter.UserControls
                                         if (Maxheight < frm.Frame_Height)
                                         {
                                             Maxheight = frm.Frame_Height;
-                                            MaxHeightImgager = frm.FrameImageRenderer_Height;
+                                            MaxHeightImgager = FrameImageRendererHeight;//frm.FrameImageRenderer_Height;
                                         }
                                     }
                                     else
@@ -290,16 +298,17 @@ namespace PresentationLayer.Presenter.UserControls
                                 }
                                 else if (availableWidth == frm.Frame_Width)
                                 {
-                                  
                                     ////Fit_MyObject_ToBindDimensions(startingObject, wndrObject);
+
+
                                     occupiedWidth += frm.Frame_Width;
                                     if (Maxheight < frm.Frame_Height)
                                     {
                                         Maxheight = frm.Frame_Height;
-                                        MaxHeightImgager = frm.FrameImageRenderer_Height;
+                                        MaxHeightImgager = FrameImageRendererHeight;//(int)Math.Round(NewimagerHeightDecuted70(frm.Frame_Height)); //frm.FrameImageRenderer_Height; 
                                     }
                                     startingObject = null;
-                                    MaxHeightImgager = frm.FrameImageRenderer_Height;
+                                    MaxHeightImgager = FrameImageRendererHeight;// (int)Math.Round(NewimagerHeightDecuted70(frm.Frame_Height)); //frm.FrameImageRenderer_Height;
                                 }
                                 else
                                 {
@@ -307,7 +316,7 @@ namespace PresentationLayer.Presenter.UserControls
                                     occupiedWidth = 0;
                                     availableWidth = _windoorModel.WD_width;
                                     availableHeight -= Maxheight;
-                                    MaxHeightImgager = frm.FrameImageRenderer_Height;
+                                    MaxHeightImgager = FrameImageRendererHeight;//(int)Math.Round(NewimagerHeightDecuted70(frm.Frame_Height)); //frm.FrameImageRenderer_Height;
                                 }
                                 if (occupiedWidth >= _windoorModel.WD_width)
                                 {
@@ -319,7 +328,6 @@ namespace PresentationLayer.Presenter.UserControls
                                 }
                                 else
                                 {
-
                                     object_points.Add(new Point(flocX, flocY));
                                     availableWidth -= frm.Frame_Width;
                                     flocX += frm.FrameImageRenderer_Width;
@@ -361,8 +369,8 @@ namespace PresentationLayer.Presenter.UserControls
                                 }
                                 else if (availableWidth == crtm.Concrete_Width)
                                 {
-                                 
-                                   
+
+
                                     if (startingObject == null)
                                     {
                                         startingObject = wndrObject;
@@ -372,7 +380,7 @@ namespace PresentationLayer.Presenter.UserControls
                                     if (Maxheight < crtm.Concrete_Height)
                                     {
                                         Maxheight = crtm.Concrete_Height;
-                                        
+
                                     }
                                     MaxHeightImgager = crtm.Concrete_ImagerHeightToBind;
 
@@ -409,16 +417,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
             }
 
-
-
-
-
-
-
-
-
-
-
+            #region oldAlgo
 
             //foreach (Size frame_size in frameImager_sizes)
             //{
@@ -467,43 +466,102 @@ namespace PresentationLayer.Presenter.UserControls
             //            flocY += frame_size.Height;
             //        }
             //        total_wd_covered = 0;
-            //    }
-
-
-
+            //    } 
             //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            #endregion
 
             return object_points;
         }
 
+        public int DeductionForBottomFramePaddingImager(int FH) // for frame 
+        {
+            int totalWdOfFrame = 0;
+
+            float frameHTOverItemHT = (float)FH / (float)_windoorModel.WD_height;
+
+            foreach (IFrameModel frm in _windoorModel.lst_frame)
+            {
+                totalWdOfFrame += frm.FrameImageRenderer_Width;
+            }
+            if (totalWdOfFrame < _windoorModel.WD_width)
+            {
+                deductBotPadding = (int)(70.0f * frameHTOverItemHT);
+            }
+            else if (totalWdOfFrame != 0)
+            {
+                deductBotPadding = (int)(70.0f * frameHTOverItemHT) / (totalWdOfFrame / _windoorModel.WD_width);
+            }
+
+            return deductBotPadding;
+        }
+
+        public int DeductionForBottomFramePaddingImagerRendering()
+        {
+            int BotPad = 0;
+            if (_windoorModel.GetZoom_forRendering() == 1.0f)
+            {
+                BotPad = 70 * 1;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.5f)
+            {
+                BotPad = 70 * 2;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.26f)
+            {
+                BotPad = 70 * 4;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.17f)
+            {
+                BotPad = 70 * 6;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.13f)
+            {
+                BotPad = 70 * 8;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.10f)
+            {
+                BotPad = 70 * 10;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.08f)
+            {
+                BotPad = 70 * 12;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.06f)
+            {
+                BotPad = 70 * 16;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.05f)
+            {
+                BotPad = 70 * 20;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.02f)
+            {
+                BotPad = 70 * 20;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.01f)
+            {
+                BotPad = 70 * 22;
+            }
+            return BotPad;
+        }
+
+
+        public float NewimagerHeightDecuted70(int FH)
+        {
+            float frameHTOverItemHT = (float)FH / (float)_windoorModel.WD_height;
+            float frameImagerRendering = (_windoorModel.WD_height - DeductionForBottomFramePaddingImagerRendering()) * frameHTOverItemHT; // frame
+            float NewImagerHeight = frameImagerRendering * _windoorModel.GetZoom_forRendering(); // imager
+
+            return NewImagerHeight;
+        }
+
+        int BotPaddingBaseOnItemSize;
+        public void BotPadBaseOnItemHT(int FH)
+        {
+            float frameHTOverItemHT = ((float)FH / _windoorModel.WD_height);
+            float NewBotPad = (70 * frameHTOverItemHT);
+            BotPaddingBaseOnItemSize = (int)NewBotPad;
+        }
         public Point Panel_MPanel_DrawPoints_ParentIsFrame(Point framePoint, int frame_topPad, int frame_leftPad)
         {
             return new Point(framePoint.X + frame_leftPad, framePoint.Y + frame_topPad);
@@ -521,15 +579,26 @@ namespace PresentationLayer.Presenter.UserControls
 
             List<Size> windoor_objects_sizes = new List<Size>();
             //int flocX = 0, flocY = 0, total_wd_covered = 0, total_ht_covered = 0, frame_row = 0;
+
             foreach (var objects in _windoorModel.lst_objects)
             {
                 if (objects.Name.Contains("Frame"))
                 {
                     foreach (IFrameModel frame in _windoorModel.lst_frame)
                     {
-                        if(objects.Name == frame.Frame_Name)
+                        int FrameImageRendererHeight = 0;
+                        if (topViewCheck == true)
                         {
-                            windoor_objects_sizes.Add(new Size(frame.FrameImageRenderer_Width, frame.FrameImageRenderer_Height));
+                            FrameImageRendererHeight = (int)Math.Round(NewimagerHeightDecuted70(frame.Frame_Height));
+                        }
+                        else if (topViewCheck == false)
+                        {
+                            FrameImageRendererHeight = frame.FrameImageRenderer_Height;
+                        }
+
+                        if (objects.Name == frame.Frame_Name)
+                        {
+                            windoor_objects_sizes.Add(new Size(frame.FrameImageRenderer_Width, frame.FrameImageRenderer_Height)); //(int)Math.Round(NewimagerHeightDecuted70(frame.Frame_Height))));//frame.FrameImageRenderer_Height));
                             break;
                         }
                     }
@@ -558,6 +627,8 @@ namespace PresentationLayer.Presenter.UserControls
                     IFrameModel frameModel = _windoorModel.lst_frame.Find(frame => frame.Frame_Name == _windoorModel.lst_objects[i].Name);
                     Draw_Frame(e, object_points[i], windoor_objects_sizes[i], frameModel);
 
+                    BotPadBaseOnItemHT(frameModel.Frame_Height);
+
                     //Draw panel per frame
                     if (frameModel.Lst_Panel.Count() == 1)
                     {
@@ -578,17 +649,26 @@ namespace PresentationLayer.Presenter.UserControls
 
                             if (mpnl.MPanel_Parent.Name.Contains("Frame"))
                             {
+                                int BotPadding = 0;
+                                if (topViewCheck == true)
+                                {
+                                    BotPadding = BotPaddingBaseOnItemSize;
+                                }
+                                else if (topViewCheck == false)
+                                {
+                                    BotPadding = 0;
+                                }
+
                                 Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(object_points[i], frameModel.FrameImageRenderer_Padding_int.Top, frameModel.FrameImageRenderer_Padding_int.Left);
-                                Draw_MultiPanel(e, mpnl, MPoint);
+                                Draw_MultiPanel(e, mpnl, MPoint, BotPadding);
                                 Draw_MultiPanelParent(mpnl, MPoint, zoom, e);
                             }
                             else if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
                             {
                                 Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(object_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X);
-                                //Draw_MultiPanelParent(mpnl, MPoint, zoom, e);
+
                                 mParentLoc_X = 0;
                                 mParentLoc_Y = 0;
-
 
                                 bool isMultiPanelName = false;
                                 foreach (Control parentMpnl_obj in mpnl.MPanel_Parent.Controls)
@@ -602,8 +682,19 @@ namespace PresentationLayer.Presenter.UserControls
                                         }
                                         else if (parentMpnl_obj.Name.Contains("TransomUC_"))
                                         {
+                                            int BotPadding = 0;
                                             IDividerModel divModel = mpnl.MPanel_ParentModel.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
-                                            mParentLoc_Y += divModel.DivImageRenderer_Height;
+
+                                            if (topViewCheck == true)
+                                            {
+                                                BotPadding = (BotPaddingBaseOnItemSize / (divModel.Div_MPanelParent.MPanel_Divisions + 1));
+                                            }
+                                            else if (topViewCheck == false)
+                                            {
+                                                BotPadding = 0;
+                                            }
+
+                                            mParentLoc_Y += divModel.DivImageRenderer_Height - BotPadding;
                                         }
                                         else if (parentMpnl_obj.Name.Contains("MultiMullion_"))
                                         {
@@ -705,7 +796,7 @@ namespace PresentationLayer.Presenter.UserControls
                                     }
 
                                 }
-                               
+
                                 mpnls = mpnl.MPanel_ParentModel;
                                 if (mpnls.MPanel_Type == "Mullion")
                                 {
@@ -730,13 +821,24 @@ namespace PresentationLayer.Presenter.UserControls
                                         }
                                         else if (mpnlParent.Name.Contains("TransomUC_"))
                                         {
+                                            int BotPadding = 0;
                                             IDividerModel divModel = mpnls.MPanel_ParentModel.MPanelLst_Divider.Find(div => div.Div_Name == mpnlParent.Name);
-                                            indY += divModel.DivImageRenderer_Height;
+
+                                            if (topViewCheck == true)
+                                            {
+                                                BotPadding = (BotPaddingBaseOnItemSize / (mpnl.MPanel_ParentModel.MPanel_Divisions + 1));
+                                            }
+                                            else if (topViewCheck == false)
+                                            {
+                                                BotPadding = 0;
+                                            }
+
+                                            indY += divModel.DivImageRenderer_Height - BotPadding;// 3rd
                                         }
                                         else if (mpnlParent.Name.Contains("MultiMullion_"))
                                         {
                                             IMultiPanelModel multiPanelModel = mpnls.MPanel_ParentModel.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == mpnlParent.Name);
-                                            if(multiPanelModel.MPanel_Placement != "Last" && mpnlParent.Name != mpnls.MPanel_Name)
+                                            if (multiPanelModel.MPanel_Placement != "Last" && mpnlParent.Name != mpnls.MPanel_Name)
                                             {
                                                 indY += multiPanelModel.MPanelImageRenderer_Height;
                                             }
@@ -777,12 +879,13 @@ namespace PresentationLayer.Presenter.UserControls
                                 if (mpnl.MPanel_Type == "Mullion")
                                 {
                                     mParentLoc_Y1 = 0;
-                                    if(mpnls.MPanel_Placement != "First")
+                                    if (mpnls.MPanel_Placement != "First")
                                     {
                                         mParentLoc_X1 += indX;
                                     }
 
-                                } else if (mpnl.MPanel_Type == "Transom")
+                                }
+                                else if (mpnl.MPanel_Type == "Transom")
                                 {
                                     mParentLoc_X1 = 0;
 
@@ -796,7 +899,7 @@ namespace PresentationLayer.Presenter.UserControls
                                 {
                                     if (mpnl.MPanel_Name != parentMpnl_obj.Name)
                                     {
-                                        if(mpnl.MPanel_Type == "Mullion")
+                                        if (mpnl.MPanel_Type == "Mullion")
                                         {
                                             if (parentMpnl_obj.Name.Contains("MultiMullion_"))
                                             {
@@ -806,8 +909,18 @@ namespace PresentationLayer.Presenter.UserControls
                                             }
                                             else if (parentMpnl_obj.Name.Contains("TransomUC_"))
                                             {
+                                                int BotPadding = 0;
                                                 IDividerModel divModel = mpnl.MPanel_ParentModel.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
-                                                mParentLoc_Y1 += divModel.DivImageRenderer_Height;
+                                                if (topViewCheck == true)
+                                                {
+                                                    BotPadding = (BotPaddingBaseOnItemSize / (mpnl.MPanel_ParentModel.MPanel_Divisions + 1));
+                                                }
+                                                else if (topViewCheck == false)
+                                                {
+                                                    BotPadding = 0;
+                                                }
+
+                                                mParentLoc_Y1 += divModel.DivImageRenderer_Height - BotPadding;//3rd
                                             }
                                         }
                                         else if (mpnl.MPanel_Type == "Transom")
@@ -824,7 +937,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                 mParentLoc_X1 += divModel.DivImageRenderer_Width;
                                             }
                                         }
-                                       if (parentMpnl_obj.Name.Contains("Panel"))
+                                        if (parentMpnl_obj.Name.Contains("Panel"))
                                         {
                                             if (mpnl.MPanel_Type == "Mullion")
                                             {
@@ -845,9 +958,9 @@ namespace PresentationLayer.Presenter.UserControls
                                 }
 
                                 Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(object_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y1, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X1);
-                               
+
                                 Draw_MultiPanelParent(mpnl, MPoint, zoom, e);
-                               
+
                             }
                         }
                     }
@@ -898,7 +1011,7 @@ namespace PresentationLayer.Presenter.UserControls
                 Point lowerPoint = new Point(0, 0);
                 if (i > cSize.Height)
                 {
-                    lowerPoint = new Point(cPoint.X + i - cSize.Height , cPoint.Y + cSize.Height - w);
+                    lowerPoint = new Point(cPoint.X + i - cSize.Height, cPoint.Y + cSize.Height - w);
                 }
                 else
                 {
@@ -913,7 +1026,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             }
             g.DrawRectangle(new Pen(color, w), new Rectangle(cPoint.X - w,
-                                                  cPoint.Y - w,
+                                                  cPoint.Y - w + 2,
                                                   cSize.Width,
                                                   cSize.Height));
         }
@@ -936,7 +1049,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                         if (panelModel.Panel_Placement == "First")
                         {
-                            objLocX += mlocX; //addition of frame_pads and div wd
+                            objLocX += mlocX; //addition of frame_pads and div wd   
                         }
                         else if (panelModel.Panel_Placement != "First")
                         {
@@ -960,9 +1073,35 @@ namespace PresentationLayer.Presenter.UserControls
                             locY_deduct = 5;
                         }
 
-                        Draw_Divider(e, divModel, new Point(objLocX, objLocY - locY_deduct));
+                        int botPadDeduct = 0;
+                        if (topViewCheck == true)
+                        {
+                            if (mpnl.MPanel_ParentModel != null) // 2nd lvl div ht
+                            {
+                                if (mpnl.MPanel_ParentModel.MPanel_Name.Contains("MultiTransom_"))
+                                {
+                                    botPadDeduct = BotPaddingBaseOnItemSize / (mpnl.MPanel_ParentModel.MPanel_Divisions + 1);
+                                }
+                                else if (mpnl.MPanel_ParentModel.MPanel_Name.Contains("MultiMullion_"))
+                                {
+                                    botPadDeduct = BotPaddingBaseOnItemSize;
+                                }
+                            }
+                            else
+                            {
+                                botPadDeduct = BotPaddingBaseOnItemSize;
+                            }
+
+                        }
+                        else if (topViewCheck == false)
+                        {
+                            botPadDeduct = 0;
+                        }
+
+                        Draw_Divider(e, divModel, new Point(objLocX, objLocY - locY_deduct), botPadDeduct);
 
                         objLocX += divModel.DivImageRenderer_Width;
+
                     }
                     else if (ctrl.Name.Contains("MultiTransom_")) //2nd level Mpanel
                     {
@@ -978,7 +1117,27 @@ namespace PresentationLayer.Presenter.UserControls
 
                         }
 
-                        Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY));
+                        int botPadDeduct = 0;
+                        if (topViewCheck == true)
+                        {
+                            if (mpnlModel.MPanel_ParentModel.MPanel_ParentModel != null)
+                            {
+                                if (mpnlModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Name.Contains("MultiTransom_"))
+                                {
+                                    botPadDeduct = BotPaddingBaseOnItemSize / (mpnlModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Divisions + 1);
+                                }
+                            }
+                            else
+                            {
+                                botPadDeduct = BotPaddingBaseOnItemSize;
+                            }
+                        }
+                        else if (topViewCheck == false)
+                        {
+                            botPadDeduct = 0;
+                        }
+
+                        Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY), botPadDeduct);
 
                         objLocX += mpnlModel.MPanelImageRenderer_Width;
                     }
@@ -1003,7 +1162,26 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                         Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
 
-                        objLocY += panelModel.PanelImageRenderer_Height;
+                        int lastLevelDivisor = 0, botPadDeduction = 0;
+                        if (topViewCheck == true)
+                        {
+                            if (mpnl.MPanel_ParentModel != null &&
+                               mpnl.MPanel_ParentModel.MPanel_ParentModel != null)
+                            {
+                                if (mpnl.MPanel_ParentModel.MPanel_ParentModel.MPanel_Name.Contains("MultiTransom_"))
+                                {
+                                    lastLevelDivisor = mpnl.MPanel_ParentModel.MPanel_ParentModel.MPanel_Divisions + 1;
+                                }
+                            }
+
+                            botPadDeduction = (BotPaddingBaseOnItemSize / ((mpnl.MPanel_Divisions + 1) + lastLevelDivisor));
+                        }
+                        else if (topViewCheck == false)
+                        {
+                            botPadDeduction = 0;
+                        }
+
+                        objLocY += panelModel.PanelImageRenderer_Height - botPadDeduction;
                     }
                     else if (ctrl.Name.Contains("TransomUC_"))
                     {
@@ -1019,9 +1197,11 @@ namespace PresentationLayer.Presenter.UserControls
                             locX_deduct = 5;
                         }
 
-                        Draw_Divider(e, divModel, new Point(objLocX - locX_deduct, objLocY));
+                        Draw_Divider(e, divModel, new Point(objLocX - locX_deduct, objLocY), 0);
 
                         objLocY += divModel.DivImageRenderer_Height;
+
+
                     }
                     else if (ctrl.Name.Contains("MultiMullion_"))//2nd level Mpanel
                     {
@@ -1036,8 +1216,18 @@ namespace PresentationLayer.Presenter.UserControls
                         {
 
                         }
-                        Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY));
-                        objLocY += mpnlModel.MPanelImageRenderer_Height;
+
+                        int botPadDeduction = 0;
+                        if (topViewCheck == true)
+                        {
+                            botPadDeduction = (BotPaddingBaseOnItemSize / (mpnl.MPanel_Divisions + 1));
+                        }
+                        else if (topViewCheck == false)
+                        {
+                            botPadDeduction = 0;
+                        }
+                        Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY), botPadDeduction);
+                        objLocY += mpnlModel.MPanelImageRenderer_Height - botPadDeduction;
                     }
                 }
             }
@@ -1045,6 +1235,10 @@ namespace PresentationLayer.Presenter.UserControls
             //Draw_MultiPanel(e, mpnlModel, MPoint);
 
         }
+
+        int
+            line_X_Distance,
+            pnlCount;
         private void _basePlatformImagerUC_basePlatformPaintEventRaised(object sender, PaintEventArgs e)
         {
             UserControl basePL = (UserControl)sender;
@@ -1056,15 +1250,28 @@ namespace PresentationLayer.Presenter.UserControls
             int ctrl_Y = 35;
             float zoom = _windoorModel.WD_zoom_forImageRenderer;
             Pen redP = new Pen(Color.Red);
+            Pen greenP = new Pen(Color.Green);
+            Pen blueP = new Pen(Color.Blue);
+            Pen BlackP = new Pen(Color.Black, 3.5f);
+
             redP.Width = 3.5f;
 
-            Font dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
-            Font dmnsion_font_ht = new Font("Segoe UI", 22, FontStyle.Bold);
+            if (_windoorModel.WD_width >= 10000)
+            {
+                dmnsion_font_wd = new Font("Segoe UI", 12, FontStyle.Bold);
+                dmnsion_font_ht = new Font("Segoe UI", 12, FontStyle.Bold);
+            }
+            else
+            {
+                dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
+                dmnsion_font_ht = new Font("Segoe UI", 22, FontStyle.Bold);
+            }
+
 
             int total_frame = _windoorModel.lst_frame.Count();
             int total_panel = 0, total_mpanel = 0;
 
-            foreach ( IFrameModel frame in _windoorModel.lst_frame)
+            foreach (IFrameModel frame in _windoorModel.lst_frame)
             {
                 total_panel += frame.Lst_Panel.Count();
                 total_mpanel += frame.Lst_MultiPanel.Count();
@@ -1087,9 +1294,117 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     locY = Draw_Arrow_Height(ht.Value, e, locY, dmnsion_font_ht, ctrl_Y);
                 }
+
+                int InitialDistance = _flpMain.Location.X,
+                    endOfLine = _flpMain.Width - 10,
+                    //pnlLeftCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount,
+                    // pnlRightCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount,
+                    pnlLeftCounter = _windoorModel.pnlLeftCounter,
+                    pnlRightCounter = _windoorModel.pnlRightCounter,
+                    line_LtR_Y = _flpMain.Location.Y + (_flpMain.Height - 3) + 70; // 70 bot pad
+
+                Point dmnsion_w_startP_topview = new Point(_flpMain.Location.X, _flpMain.Location.Y + (_flpMain.Height - 3) + 70);
+                Point dmnsion_w_endP_topview = new Point(_flpMain.Location.X + _flpMain.Width - 3, _flpMain.Location.Y + (_flpMain.Height - 3) + 70);
+
+                if (_windoorModel.WD_TopViewType == "Fold and Slide")
+                {
+                    //fold and slide top view 
+
+                    if (pnlLeftCounter != 0 || pnlRightCounter != 0)
+                    {
+                        topViewCheck = true;
+                        if (_basePlatformImagerUC.GetBasePlatformImagerUC().Padding.Bottom == 0)
+                        {
+                            _basePlatformImagerUC.GetBasePlatformImagerUC().Padding = new Padding(70, 35, 0, 70);
+                        }
+
+                        if (total_panel != 0)
+                        {
+                            line_X_Distance = Math.Abs(_flpMain.Width / total_panel);
+                        }
+
+
+                        g.DrawLine(BlackP, dmnsion_w_startP_topview, dmnsion_w_endP_topview); // line
+
+
+                        for (int a = 0; a < pnlLeftCounter; a++)
+                        {
+                            int x1 = InitialDistance,
+                                x2 = InitialDistance + (line_X_Distance / 2);
+
+                            if (a % 2 == 0)
+                            {
+                                g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, line_LtR_Y - 60));
+                            }
+                            else
+                            {
+                                g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, line_LtR_Y - 60));
+                            }
+
+                            InitialDistance = x2;
+                        }
+
+                        InitialDistance = _flpMain.Location.X + _flpMain.Width - 3;
+                        for (int a = 0; a < pnlRightCounter; a++)
+                        {
+                            int x1 = InitialDistance,
+                                x2 = InitialDistance - (line_X_Distance / 2);
+
+                            if (a % 2 == 0)
+                            {
+                                g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, line_LtR_Y - 60));
+                            }
+                            else
+                            {
+                                g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, line_LtR_Y - 60));
+                            }
+
+                            InitialDistance = x2;
+                        }
+                    }
+                }
+                else if (_windoorModel.WD_TopViewType == "Sliding Pivot")
+                {
+                    if (pnlLeftCounter != 0 || pnlRightCounter != 0)
+                    {
+                        topViewCheck = true;
+                        if (_basePlatformImagerUC.GetBasePlatformImagerUC().Padding.Bottom == 0)
+                        {
+                            _basePlatformImagerUC.GetBasePlatformImagerUC().Padding = new Padding(70, 35, 0, 70);
+                        }
+                        g.DrawLine(BlackP, dmnsion_w_startP_topview, dmnsion_w_endP_topview); // line
+
+
+                        for (int a = 0; a < pnlLeftCounter; a++)
+                        {
+                            int x1 = InitialDistance;
+
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y), new Point(x1, line_LtR_Y - 60));
+
+                            InitialDistance += 10;
+                        }
+                        for (int a = 0; a < pnlRightCounter; a++)
+                        {
+                            int x1 = endOfLine + 75;
+
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y), new Point(x1, line_LtR_Y - 60));
+
+                            endOfLine -= 10;
+                        }
+                    }
+
+
+                }
+                else
+                {
+                    topViewCheck = false;
+                    _basePlatformImagerUC.GetBasePlatformImagerUC().Padding = new Padding(70, 35, 0, 0);
+                }
             }
             else if (total_panel == 1 && total_mpanel == 0)
             {
+
+
                 string dmnsion_w = _windoorModel.WD_width.ToString();
                 Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
                 Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
@@ -1149,7 +1464,7 @@ namespace PresentationLayer.Presenter.UserControls
                 };
 
                 g.DrawLines(redP, arrwhd_pnts_H1);
-                g.DrawLine(redP, dmnsion_h_startP , dmnsion_h_endP);
+                g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
                 g.DrawLines(redP, arrwhd_pnts_H2);
                 TextRenderer.DrawText(g,
                                       dmnsion_h,
@@ -1160,6 +1475,8 @@ namespace PresentationLayer.Presenter.UserControls
                                       Color.White,
                                       TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
                 //arrow for HEIGHT
+
+
             }
 
             Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
@@ -1223,7 +1540,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             return locX;
         }
-
+        int botPaddingMultiplier;
         private float Draw_Arrow_Height(decimal ht, PaintEventArgs e, float locY, Font dmnsion_font_ht, int ctrl_Y)
         {
             //arrow for HEIGHT
@@ -1231,9 +1548,18 @@ namespace PresentationLayer.Presenter.UserControls
 
             string dmnsion_h = ht.ToString();
             float DispHt_float = float.Parse(dmnsion_h);
+            if (topViewCheck == true)
+            {
+                DispHt_float -= (float)DeductionForBottomFramePaddingImagerRendering() / _windoorModel.Dictionary_ht_redArrowLines.Count;
+            }
+            else if (topViewCheck == false)
+            {
 
+            }
             PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.GetZoom_forRendering()));
             PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + DispHt_float) * _windoorModel.GetZoom_forRendering()));
+
+
 
             if (dmnsion_h.Contains(".0"))
             {
@@ -1285,6 +1611,15 @@ namespace PresentationLayer.Presenter.UserControls
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
+            if (topViewCheck == true)
+            {
+                DeductionForBottomFramePaddingImager(frameModel.Frame_Height);
+            }
+            else if (topViewCheck == false)
+            {
+                deductBotPadding = 0;
+            }
+
             int fr_pads = frameModel.FrameImageRenderer_Padding_int.All;
 
             int top_pads = frameModel.FrameImageRenderer_Padding_int.Top,
@@ -1294,7 +1629,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             Rectangle pnl_inner = new Rectangle(new Point(fPoint.X + left_pads, fPoint.Y + top_pads),
                                                 new Size(frameModel.FrameImageRenderer_Width - (right_pads + left_pads),
-                                                         frameModel.FrameImageRenderer_Height - (top_pads + bot_pads)));
+                                                         frameModel.FrameImageRenderer_Height - deductBotPadding - (top_pads + bot_pads)));
 
 
             int pInnerX = pnl_inner.Location.X,
@@ -1308,9 +1643,9 @@ namespace PresentationLayer.Presenter.UserControls
                 new Point(pInnerX, pInnerY),
                 new Point(fPoint.X + frameModel.FrameImageRenderer_Width, fPoint.Y),
                 new Point(pInnerX + pInnerWd, pInnerY),
-                new Point(fPoint.X, frameModel.FrameImageRenderer_Height + fPoint.Y),
+                new Point(fPoint.X, frameModel.FrameImageRenderer_Height + fPoint.Y - deductBotPadding),
                 new Point(pInnerX, pInnerY + pInnerHt),
-                new Point(fPoint.X + frameModel.FrameImageRenderer_Width, frameModel.FrameImageRenderer_Height + fPoint.Y),
+                new Point(fPoint.X + frameModel.FrameImageRenderer_Width, frameModel.FrameImageRenderer_Height + fPoint.Y - deductBotPadding),
                 new Point(pInnerX + pInnerWd, pInnerY + pInnerHt)
             };
 
@@ -1326,7 +1661,7 @@ namespace PresentationLayer.Presenter.UserControls
             g.DrawRectangle(blkPen, new Rectangle(fPoint.X,
                                                   fPoint.Y,
                                                   fSize.Width - w,
-                                                  fSize.Height - w));
+                                                          fSize.Height + 3 - w));
         }
         float first = 0;
         private void Draw_Panel(PaintEventArgs e, IPanelModel panelModel, Point Ppoint)
@@ -1343,26 +1678,80 @@ namespace PresentationLayer.Presenter.UserControls
             int client_wd = 0, client_ht = 0;
 
 
-            
 
-            if(panelModel.Panel_ParentMultiPanelModel != null)
+
+            int BotPadDeduct = 0;
+            if (panelModel.Panel_ParentMultiPanelModel != null)
             {
                 if (panelModel.Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                 {
+                    if (topViewCheck == true)
+                    {
+                        if (panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel != null)
+                        {
+                            if (panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Name.Contains("MultiTransom_"))
+                            {
+                                BotPadDeduct = BotPaddingBaseOnItemSize / (panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Divisions + 1);
+                            }
+                            else
+                            {
+                                BotPadDeduct = BotPaddingBaseOnItemSize;
+                            }
+                        }
+                        else
+                        {
+                            BotPadDeduct = BotPaddingBaseOnItemSize;
+                        }
+                    }
+                    else if (topViewCheck == false)
+                    {
+                        BotPadDeduct = 0;
+                    }
+
+
 
                     client_wd = panelModel.PanelImageRenderer_Width;
-                    client_ht = panelModel.Panel_ParentMultiPanelModel.MPanelImageRenderer_Height;
+                    client_ht = panelModel.Panel_ParentMultiPanelModel.MPanelImageRenderer_Height - BotPadDeduct;
                 }
                 else if (panelModel.Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
                 {
+                    int lastLevelDivisor = 0;
+                    if (topViewCheck == true)
+                    {
+                        if (panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel != null &&
+                                               panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel != null)
+                        {
+                            if (panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Name.Contains("MultiTransom_"))
+                            {
+                                lastLevelDivisor = panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Divisions + 1;
+                            }
+                        }
+
+                        BotPadDeduct = (BotPaddingBaseOnItemSize / ((panelModel.Panel_ParentMultiPanelModel.MPanel_Divisions + 1) + lastLevelDivisor));
+                    }
+                    else if (topViewCheck == false)
+                    {
+                        BotPadDeduct = 0;
+                    }
+
+
+
                     client_wd = panelModel.Panel_ParentMultiPanelModel.MPanelImageRenderer_Width;
-                    client_ht = panelModel.PanelImageRenderer_Height;
+                    client_ht = panelModel.PanelImageRenderer_Height - BotPadDeduct;
                 }
             }
             else
             {
+                if (topViewCheck == true)
+                {
+                    BotPadDeduct = deductBotPadding;
+                }
+                else if (topViewCheck == false)
+                {
+                    BotPadDeduct = 0;
+                }
                 client_wd = panelModel.PanelImageRenderer_Width;
-                client_ht = panelModel.PanelImageRenderer_Height;
+                client_ht = panelModel.PanelImageRenderer_Height - BotPadDeduct;
             }
 
 
@@ -1376,8 +1765,11 @@ namespace PresentationLayer.Presenter.UserControls
                 outer_line = 10,
                 inner_line = 15,
                 tenPercentAdditional = 0,
-                sashOverlapValue = 0;
+                sashOverlapValue = 0,
+                thicknessDeduction = 8,
+                rectDeduct = 0;
 
+            float pThickness = 15;
             if (_windoorModel.WD_zoom_forImageRenderer == 0.50f)
             {
                 font_size = 37;
@@ -1395,6 +1787,9 @@ namespace PresentationLayer.Presenter.UserControls
                 outer_line = 5;
                 inner_line = 8;
                 gfont_size = 45;
+                thicknessDeduction = 4;
+                pThickness = 7;
+                rectDeduct = 2;
             }
             else if (_windoorModel.WD_zoom_forImageRenderer == 0.13f)
             {
@@ -1402,6 +1797,9 @@ namespace PresentationLayer.Presenter.UserControls
                 outer_line = 3;
                 inner_line = 7;
                 gfont_size = 44;
+                thicknessDeduction = 3;
+                pThickness = 6.5f;
+                rectDeduct = 4;
             }
             else if (_windoorModel.WD_zoom_forImageRenderer == 0.10f)
             {
@@ -1410,8 +1808,14 @@ namespace PresentationLayer.Presenter.UserControls
                 inner_line = 7;
                 tenPercentAdditional = 8;
                 gfont_size = 43;
+                thicknessDeduction = 3;
+                pThickness = 6.5f;
+                rectDeduct = 5;
+
             }
-          
+
+
+
             Rectangle outer_bounds = new Rectangle(Ppoint.X,
                                                    Ppoint.Y,
                                                    client_wd - w,
@@ -1544,7 +1948,7 @@ namespace PresentationLayer.Presenter.UserControls
 
 
 
-            int addX = ((client_wd - (((int)(client_wd   - sashDeduction+ pGbarInnerX) / (verticalQty + 1)) * verticalQty)) - ((client_wd + pGbarInnerX) / (verticalQty + 1))) / 2;
+            int addX = ((client_wd - (((int)(client_wd - sashDeduction + pGbarInnerX) / (verticalQty + 1)) * verticalQty)) - ((client_wd + pGbarInnerX) / (verticalQty + 1))) / 2;
 
             //vertical
             for (int ii = 0; ii < verticalQty; ii++)
@@ -1628,14 +2032,108 @@ namespace PresentationLayer.Presenter.UserControls
                 }
             }
             #endregion
+
+            #region Mesh 
+            int cond = (client_wd - w) + (client_ht - w);
+
+            int maxWidth = client_wd - w,
+                maxHeight = client_ht - w;
+
+
+            int exceedMaxHeight_slash = 0,
+                exceedMaxWidth_slash = 0,
+                exceedMaxWidth_backSlash = 0,
+                exceedMaxHeight_backSlash = 0,
+                excessHeightInPlusTen_slash = 0,
+                excessWidthInPlusTen_slash = 0,
+                excessWidthInPlusTen_backSlash = 0,
+                excessHeightInPlusTen_backSlash = 0;
+            if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+            {
+                for (int i = 10; i < cond; i += 10)
+                {
+                    if (i + inner_line >= maxHeight + inner_line)
+                    {
+                        excessHeightInPlusTen_slash = (i + Ppoint.Y - exceedMaxHeight_slash) - (maxHeight + Ppoint.Y) + 2;
+                    }
+
+                    if (i + inner_line >= maxWidth + inner_line)
+                    {
+                        excessWidthInPlusTen_slash = (i + Ppoint.X - exceedMaxWidth_slash) - (maxWidth + Ppoint.X) - 2;
+                    }
+
+                    g.DrawLine(Pens.Black,
+                               new Point(Ppoint.X + exceedMaxHeight_slash + Math.Abs(excessHeightInPlusTen_slash + 1), (i + Ppoint.Y - exceedMaxHeight_slash) - Math.Abs(excessHeightInPlusTen_slash) + 1),
+                               new Point((i + Ppoint.X - exceedMaxWidth_slash) - Math.Abs(excessWidthInPlusTen_slash + 1), Ppoint.Y + exceedMaxWidth_slash + Math.Abs(excessWidthInPlusTen_slash) + 1));
+
+                    if (i + inner_line >= maxHeight + inner_line)
+                    {
+                        exceedMaxHeight_slash += 10;
+                    }
+
+                    if (i + inner_line >= maxWidth + inner_line)
+                    {
+                        exceedMaxWidth_slash += 10;
+                    }
+
+                }
+
+                for (int i = 10; i < cond; i += 10)
+                {
+
+                    if (i + inner_line >= maxWidth + inner_line)
+                    {
+                        excessWidthInPlusTen_backSlash = (maxWidth + Ppoint.X - i + exceedMaxWidth_backSlash) - Ppoint.X + 1;
+                    }
+
+                    if (i + inner_line >= maxHeight + inner_line)
+                    {
+                        excessHeightInPlusTen_backSlash = (maxHeight + Ppoint.Y - i + exceedMaxHeight_backSlash) - Ppoint.Y - 1;
+                    }
+
+                    g.DrawLine(Pens.Black,
+                               new Point((maxWidth - i + exceedMaxWidth_backSlash + Ppoint.X) + Math.Abs(excessWidthInPlusTen_backSlash) + 1, exceedMaxWidth_backSlash + Ppoint.Y + Math.Abs(excessWidthInPlusTen_backSlash) + 1),
+                               new Point(maxWidth - exceedMaxHeight_backSlash + Ppoint.X - Math.Abs(excessHeightInPlusTen_backSlash) - 1, i - exceedMaxHeight_backSlash + Ppoint.Y - Math.Abs(excessHeightInPlusTen_backSlash) - 1));
+
+                    if (i + inner_line >= maxWidth + inner_line)
+                    {
+                        exceedMaxWidth_backSlash += 10;
+                    }
+
+                    if (i + inner_line >= maxHeight + inner_line)
+                    {
+                        exceedMaxHeight_backSlash += 10;
+                    }
+                }
+            }
+            #endregion
+
+
             if (panelModel.Panel_Type != "Louver Panel")
             {
                 //g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(Ppoint.X + outer_line,
                 //                                                   Ppoint.Y + outer_line,
                 //                                                   (client_wd - (outer_line * 2)) - w,
                 //                                                   (client_ht - (outer_line * 2)) - w));
+
                 if (panelModel.Panel_Overlap_Sash == OverlapSash._Right)
                 {
+                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
+                        panelModel.Panel_Type != "Fixed Panel" ||
+                        (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    {
+                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + thicknessDeduction);
+                        PointF BGinnerLine3 = new PointF(Ppoint.X + thicknessDeduction, Ppoint.Y);
+                        PointF BGinnerLine4 = new PointF(Ppoint.X + thicknessDeduction, Ppoint.Y + (client_ht) - w);
+                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine3, BGinnerLine4);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
+                    }
+
+
                     tenPercentAdditional += 1;
                     //outer Line
                     PointF outerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
@@ -1650,7 +2148,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
-                        //inner Line 
+                        //inner Line  
                         PointF innerLine1 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
                         PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
                         PointF innerLine3 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
@@ -1666,9 +2164,23 @@ namespace PresentationLayer.Presenter.UserControls
 
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._Left)
                 {
+                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
+                        panelModel.Panel_Type != "Fixed Panel" ||
+                        (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    {
+                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                        PointF BGinnerLine2 = new PointF(Ppoint.X - outerLineDeduction + (client_wd) - w + outerLineDeduction, Ppoint.Y + thicknessDeduction);
+                        PointF BGinnerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + thicknessDeduction, Ppoint.Y + inner_line);
+                        PointF BGinnerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + thicknessDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                        PointF BGinnerLine6 = new PointF(Ppoint.X + (inner_line * 2) - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine3, BGinnerLine4);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
+                    }
                     //outer Line
                     //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
-                    PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line); 
+                    PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
                     PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
                     PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
@@ -1678,6 +2190,7 @@ namespace PresentationLayer.Presenter.UserControls
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
+
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
                         //inner Line 
@@ -1698,6 +2211,18 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._Both)
                 {
+                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
+                    panelModel.Panel_Type != "Fixed Panel" ||
+                    (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    {
+                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + thicknessDeduction);
+                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
+                    }
+
                     //outer Line
                     //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
                     PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
@@ -1723,23 +2248,34 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._None)
                 {
-                    //outer Line
-                    g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
-                                                                      Ppoint.Y + outer_line,
-                                                                      (client_wd - (outer_line * 2)) - w,
-                                                                      (client_ht - (outer_line * 2)) - w));
-
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
+                        if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                        {
+
+                            g.DrawRectangle(new Pen(Color.White, pThickness), new Rectangle(Ppoint.X + thicknessDeduction,
+                                                                 Ppoint.Y + thicknessDeduction,
+                                                                 (client_wd - (outer_line * 2)) + w + 1 - rectDeduct,
+                                                                 (client_ht - (outer_line * 2)) + w + 1 - rectDeduct));
+                        }
+
                         //inner Line
                         g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
                                                                       Ppoint.Y + inner_line,
                                                                       (client_wd - (inner_line * 2)) - w,
                                                                       (client_ht - (inner_line * 2)) - w));
                     }
+
+                    //outer Line
+                    g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
+                                                                      Ppoint.Y + outer_line,
+                                                                      (client_wd - (outer_line * 2)) - w,
+                                                                      (client_ht - (outer_line * 2)) - w));
+
+
                 }
             }
-           
+
 
             StringFormat drawFormat = new StringFormat();
             int pnl_ID = 0;
@@ -1820,55 +2356,529 @@ namespace PresentationLayer.Presenter.UserControls
                 //lst_glassThicknessPerItem.Add(glassThick);
             }
 
+            int fontDeduct = 0,
+                Ydeduct = 0,
+                Xdeduct = 0,
+                fxdeduct = 0;
+
+            bool nxtToF = false,
+                 nxtToF_lvl2 = false,
+                 nxtToF_MinHT = false,
+                 nxtToArrow = false,
+                 minimumOfFandGlass = false,
+                 minimumOfArrowAndGlass = false,
+                 minimumOfArrowAndGlass_HT = false;
+
+
+            if (_windoorModel.WD_zoom_forImageRenderer == 0.26f)
+            {
+                if (panelModel.Panel_Type == "Sliding Panel")
+                {
+                    if (client_wd <= 182)
+                    {
+                        fontDeduct = 5;
+                        minimumOfArrowAndGlass = true;
+                    }
+
+                    if (client_ht <= 165)
+                    {
+                        nxtToArrow = true;
+                        fontDeduct = 5;
+                        if (client_ht <= 87)
+                        {
+                            minimumOfArrowAndGlass = true;
+                            fontDeduct = 15;
+                        }
+                    }
+                }
+
+                if (client_ht <= 113 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    fontDeduct = 0;
+                    // 500 in arrow ht 
+                    // 109
+                    // 111
+                    // 113
+                    nxtToF = true;
+                    if (client_wd <= 113)
+                    {
+                        // 600 in arrow wd 
+                        // 135
+                        //  
+                        //  
+                        minimumOfFandGlass = true;
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            fontDeduct = 10;
+                        }
+                        if (panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            fxdeduct = 20;
+                            fontDeduct = 15;
+                        }
+                    }
+                }
+                else if (client_wd <= 113 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    minimumOfFandGlass = true;
+                    fontDeduct = 15;
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.17f)
+            {
+                if (panelModel.Panel_Type == "Sliding Panel")
+                {
+                    if (client_wd <= 142)
+                    {
+                        fontDeduct = 5;
+                        Ydeduct = 15;
+                        minimumOfArrowAndGlass = true;
+                    }
+
+                    if (client_ht <= 145)
+                    {
+                        nxtToArrow = true;
+                        fontDeduct = 5;
+                        if (client_ht <= 40)
+                        {
+                            minimumOfArrowAndGlass = true;
+                            fontDeduct = 15;
+                        }
+                    }
+                }
+
+                if (client_ht <= 111 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    fontDeduct = 0;
+                    //750 in arrow ht
+                    // 106
+                    // 105
+                    // 110  
+                    nxtToF = true;
+                    if (client_wd <= 147)
+                    {
+                        // 600 in arrow wd 
+                        // 135
+                        //  
+                        //  
+                        minimumOfFandGlass = true;
+
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            fontDeduct = 5;
+                            if (client_wd <= 80)
+                            {
+                                fontDeduct += 10;
+                            }
+                        }
+                        if (panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            fontDeduct = 15;
+                            fxdeduct = 15;
+                            if (client_wd <= 55)
+                            {
+                                nxtToF_lvl2 = true;
+                                fontDeduct += 5;
+                            }
+                        }
+                    }
+                }
+                else if (client_wd <= 80 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    minimumOfFandGlass = true;
+                    Ydeduct = 15;
+                    fontDeduct = 15;
+                    if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                    {
+                        fontDeduct -= 15;
+                        if (client_wd <= 80)
+                        {
+                            fontDeduct += 15;
+                        }
+                    }
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.13f)
+            {
+                if (panelModel.Panel_Type == "Sliding Panel")
+                {
+                    if (client_wd <= 142)
+                    {
+                        fontDeduct += 5;
+                        Ydeduct += 15;
+                        minimumOfArrowAndGlass = true;
+                    }
+
+                    if (client_ht <= 145)
+                    {
+                        nxtToArrow = true;
+                        fontDeduct += 5;
+                        if (client_ht <= 47)
+                        {
+                            minimumOfArrowAndGlass_HT = true;
+                            if (minimumOfArrowAndGlass == true)
+                            {
+                                fontDeduct += 15;
+
+                            }
+                            else
+                            {
+                                fontDeduct += 18;
+                            }
+
+                            Xdeduct += 30;
+                        }
+                    }
+                }
+
+                if (client_ht <= 112 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    fontDeduct = 0;
+                    //1000 in arrow ht
+                    // 109
+                    // 108
+                    // 112
+                    nxtToF = true;
+                    if (client_wd <= 147)
+                    {
+                        // 600 in arrow wd 
+                        // 135
+                        //  
+                        //  
+                        minimumOfFandGlass = true;
+
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            fontDeduct = 5;
+                            if (client_wd <= 80)
+                            {
+                                fontDeduct += 10;
+                            }
+                        }
+                        if (panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            fontDeduct = 15;
+                            fxdeduct = 15;
+                            if (client_wd <= 55)
+                            {
+                                nxtToF_lvl2 = true;
+                                fontDeduct += 8;
+                                Ydeduct -= 3;
+                            }
+                        }
+                    }
+                    else if (client_ht <= 57)
+                    {
+                        if (panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            nxtToF_MinHT = true;
+                            fontDeduct += 10;
+                            Xdeduct += 15;
+                        }
+
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            fontDeduct += 15;
+                        }
+                    }
+                }
+                else if (client_wd <= 80 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    minimumOfFandGlass = true;
+                    Ydeduct = 15;
+                    fontDeduct = 15;
+                    if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                    {
+                        fontDeduct -= 15;
+                        if (client_wd <= 80)
+                        {
+                            fontDeduct += 15;
+                        }
+                    }
+                    if (panelModel.Panel_Type == "Fixed Panel")
+                    {
+                        fontDeduct += 3;
+                        if (client_wd <= 30)
+                        {
+                            Ydeduct -= 15;
+
+                        }
+                    }
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer <= 0.10f)
+            {
+                if (panelModel.Panel_Type == "Sliding Panel")
+                {
+                    if (client_wd <= 142)
+                    {
+                        fontDeduct += 5;
+                        Ydeduct += 15;
+                        minimumOfArrowAndGlass = true;
+                    }
+
+                    if (client_ht <= 145)
+                    {
+                        nxtToArrow = true;
+                        fontDeduct += 5;
+                        if (client_ht <= 47)
+                        {
+                            minimumOfArrowAndGlass_HT = true;
+                            if (minimumOfArrowAndGlass == true)
+                            {
+                                fontDeduct += 15;
+
+                            }
+                            else
+                            {
+                                fontDeduct += 18;
+                            }
+
+                            Xdeduct += 30;
+                        }
+                    }
+                }
+
+                if (client_ht <= 108 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    fontDeduct = 0;
+                    //1250 in arrow ht
+                    // 103
+                    // 102
+                    // 108
+                    nxtToF = true;
+                    if (client_wd <= 147)
+                    {
+                        minimumOfFandGlass = true;
+
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            fontDeduct = 5;
+                            if (client_wd <= 80)
+                            {
+                                fontDeduct += 10;
+                            }
+                        }
+                        if (panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            fontDeduct = 15;
+                            fxdeduct = 15;
+                            if (client_wd <= 55)
+                            {
+                                nxtToF_lvl2 = true;
+                                fontDeduct += 8;
+                                Ydeduct -= 3;
+                            }
+                        }
+                    }
+                    else if (client_ht <= 57)
+                    {
+                        if (panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            nxtToF_MinHT = true;
+                            fontDeduct += 12;
+                            Xdeduct += 17;
+                        }
+
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            fontDeduct += 15;
+                            if (client_ht <= 22)
+                            {
+                                fontDeduct += 5;
+                            }
+                        }
+                    }
+                }
+                else if (client_wd <= 80 && panelModel.Panel_Type != "Sliding Panel")
+                {
+                    minimumOfFandGlass = true;
+                    Ydeduct = 15;
+                    fontDeduct = 15;
+                    if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                    {
+                        fontDeduct -= 15;
+                        if (client_wd <= 80)
+                        {
+                            fontDeduct += 15;
+                        }
+                    }
+                    if (panelModel.Panel_Type == "Fixed Panel")
+                    {
+                        fontDeduct += 3;
+                        if (client_wd <= 30)
+                        {
+                            Ydeduct -= 15;
+
+                        }
+                    }
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.08f)
+            {
+                if (client_ht <= 103)
+                {
+                    fontDeduct = 0;
+                    //1500 in arrow ht
+                    // 99
+                    // 98
+                    // 103
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.06f)
+            {
+                if (client_ht <= 103)
+                {
+                    fontDeduct = 0;
+                    //2000 in arrow ht
+                    // 99
+                    // 98
+                    // 103
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.05f)
+            {
+                if (client_ht <= 107)
+                {
+                    fontDeduct = 0;
+                    //2500 in arrow ht
+                    // 104
+                    // 103
+                    // 107
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.02f)
+            {
+                if (client_ht <= 104)
+                {
+                    fontDeduct = 0;
+                    //6000 in arrow ht
+                    // 99
+                    // 98
+                    // 104
+                }
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.01f)
+            {
+
+            }
+
+
             foreach (KeyValuePair<string, string> entry in GlassNumberList)
             {
                 if (pnl_ThicknessDesc == entry.Value)
                 {
                     Brush the_brush = new SolidBrush(Color.FromArgb(219, 80, 80));
                     int LocY = Ppoint.Y;
-                    if(font_size + 10 < client_ht)
+                    if (font_size + 10 < client_ht)
                     {
-                        if(panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
                         {
                             LocY = Ppoint.Y + (client_ht / 2) - font_size + 10;
                         }
                         else
                         {
-                            LocY = Ppoint.Y + (client_ht / 2) + (int)(client_ht * 0.1) - 15;
-
+                            LocY = Ppoint.Y + (client_ht / 2) + (int)(client_ht * 0.1);// - 15;
                         }
                     }
-                    Font gdrawFont = new Font("Times New Roman", font_size);
-                    RectangleF glassrect = new RectangleF(Ppoint.X + (client_wd / 2) - font_size,
-                                                         LocY,
-                                                         client_wd + 100,
-                                                         font_size + 10);
+
+
+
+
+                    Rectangle pnlBound = panel_bounds;
+                    if (panelModel.Panel_Type == "Fixed Panel" || panelModel.Panel_Type == "Sliding Panel")
+                    {
+                        if (nxtToF == true ||
+                            nxtToArrow == true)
+                        {
+                            pnlBound.X += 45;
+
+
+                            if (minimumOfFandGlass == true ||
+                                minimumOfArrowAndGlass == true)
+                            {
+                                pnlBound.X -= 35;
+                                //fontDeduct = 15;
+                                if (panelModel.Panel_Type == "Sliding Panel")
+                                {
+                                    pnlBound.X -= 10;
+                                }
+                                if (nxtToF_lvl2 == true)
+                                {
+                                    fxdeduct = 0;
+
+                                    pnlBound.Y += (15 + Ydeduct);
+                                    pnlBound.X -= 10;
+                                    //fontDeduct += 5;
+                                }
+                            }
+                            else if (nxtToF_MinHT == true)
+                            {
+                                pnlBound.X -= Xdeduct;
+                            }
+                            else if (minimumOfArrowAndGlass_HT == true)
+                            {
+                                pnlBound.X -= Xdeduct;
+                            }
+                        }
+                        else if (nxtToF == false &&
+                                 panelModel.Panel_Type == "Fixed Panel")
+                        {
+                            pnlBound.Y += 40;
+                            pnlBound.Y -= Ydeduct;
+                        }
+                        else if (nxtToArrow == false &&
+                            panelModel.Panel_Type == "Sliding Panel")
+                        {
+                            pnlBound.Y += 40;
+                            pnlBound.Y -= Ydeduct;
+                        }
+                    }
+                    else if (panelModel.Panel_Type == "Casement Panel")
+                    {
+                        pnlBound.X += 4;
+                    }
+
+                    Font gdrawFont = new Font("Times New Roman", font_size - fontDeduct);
+
+                    drawFormat.Alignment = StringAlignment.Center;
+                    drawFormat.LineAlignment = StringAlignment.Center;
+
                     g.DrawString(entry.Key,
                                  gdrawFont,
                                  the_brush,
-                                 glassrect,
+                                 pnlBound,
                                  drawFormat);
+
+
+
+
                     break;
 
                 }
             }
             if (panelModel.Panel_Type == "Fixed Panel")
             {
+                Rectangle pnl = panel_bounds;
+                if (GlassNumberList.Count >= 2 && minimumOfFandGlass == true)
+                {
+                    pnl.X = pnl.X - fxdeduct;
+                    //fontDeduct = 15;
+                }
 
+                Font drawFont = new Font("Times New Roman", font_size - fontDeduct);// * zoom);
 
-                Font drawFont = new Font("Times New Roman", font_size);// * zoom);
-                
                 drawFormat.Alignment = StringAlignment.Center;
                 drawFormat.LineAlignment = StringAlignment.Center;
-                g.DrawString("F", drawFont, new SolidBrush(Color.Black), panel_bounds, drawFormat);
 
 
-                
+                g.DrawString("F", drawFont, new SolidBrush(Color.Black), pnl, drawFormat);
+
+
+
             }
             else if (panelModel.Panel_Type == "Casement Panel")
             {
-
-
                 Point sashPoint = new Point(Ppoint.X, Ppoint.Y);
 
                 //Pen dgrayPen = new Pen(Color.DimGray);
@@ -1876,7 +2886,7 @@ namespace PresentationLayer.Presenter.UserControls
                 dgrayPen.DashStyle = DashStyle.Dash;
                 dgrayPen.Width = 3;
 
-                int sashW  = client_wd,
+                int sashW = client_wd,
                     sashH = client_ht;
 
                 if (panelModel.Panel_Orient == true)//Left
@@ -1905,7 +2915,7 @@ namespace PresentationLayer.Presenter.UserControls
                 dgrayPen.DashStyle = DashStyle.Dash;
                 dgrayPen.Width = 3;
 
-                int sashW  = client_wd,
+                int sashW = client_wd,
                     sashH = client_ht;
 
                 if (panelModel.Panel_Orient == true)
@@ -1930,7 +2940,7 @@ namespace PresentationLayer.Presenter.UserControls
                     sashH = client_ht;
                 if (panelModel.Panel_Orient == false)
                 {
-                    
+
                     if (panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
                   panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
                   panelModel.Panel_SlidingTypes == SlidingTypes._Pivot ||
@@ -1948,7 +2958,7 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.2);
                             ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
-                            
+
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
                         arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
@@ -2028,7 +3038,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (panelModel.Panel_Orient == true)
                 {
-                   
+
 
                     if (panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
                         panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
@@ -2130,7 +3140,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             }
 
-            
+
             else if (panelModel.Panel_Type == "TiltNTurn Panel")
             {
                 g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
@@ -2264,21 +3274,23 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                     Point[] LvrSideBlade =
                      {
-                        new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location),
+                        new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                        //new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location),
                         new Point((pInnerX - 7) + pInnerWd + 4, (int)Total_Lvr_GlassHt + pInnerY),
 
                         new Point(pInnerX-2, Lvr_NewLocation-(int)Lvr_GlassHt),
                         new Point(pInnerX+4, (int)Total_Lvr_GlassHt + pInnerY),
 
+                        //new Point(pInnerX-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
                         new Point(pInnerX-4, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location-1),
-                        new Point(pInnerX-4, Lvr_NewLocation+(int)Lvr_GlassHt+1 + pInnerY )
+                        new Point(pInnerX-4, Lvr_NewLocation+(int)Lvr_GlassHt+1 + pInnerY - 58)
                      };
                     Point[] blade =
                     {
                         new Point(pInnerX, Lvr_NewLocation - (int)Lvr_GlassHt),
                         new Point((int)client_wd + pInnerX - 7, Lvr_NewLocation - (int)Lvr_GlassHt),
                         new Point((int)client_wd + pInnerX, (int)Total_Lvr_GlassHt+ pInnerY), // - 26 para mag slant yung blade
-                        new Point(pInnerX , (int)Total_Lvr_GlassHt + pInnerY)
+                        new Point(pInnerX , (int)Total_Lvr_GlassHt + pInnerY),
                     };
                     lvrBlade.Add(LvrSideBlade, blade);
                 }
@@ -2288,9 +3300,9 @@ namespace PresentationLayer.Presenter.UserControls
                 for (int ii = 0; ii < panelModel.Panel_LouverBladesCount; ii++)
                 {
                     IList<Point> lstPtsSide = new List<Point>();
-                    foreach(Point pnts in lvrBlade.ElementAt(ii).Key)
+                    foreach (Point pnts in lvrBlade.ElementAt(ii).Key)
                     {
-                        lstPtsSide.Add (new Point(pnts.X, pnts.Y + (int)(Lvr_GlassHt_deci / 2) + (int)((ht_allowance_deci * _windoorModel.WD_zoom_forImageRenderer) / 2)));
+                        lstPtsSide.Add(new Point(pnts.X, pnts.Y + (int)(Lvr_GlassHt_deci / 2) + (int)((ht_allowance_deci * _windoorModel.WD_zoom_forImageRenderer) / 2)));
                     }
 
                     IList<Point> lstPtsblade = new List<Point>();
@@ -2309,16 +3321,16 @@ namespace PresentationLayer.Presenter.UserControls
                             g.DrawLine(LvrPen, lstPtsSide[i], lstPtsSide[i + 1]);
                         }
                     }
-                   
+
                     for (int i = 0; i < lvrBlade.ElementAt(ii).Value.Length; i += 2)
                     {
                         g.DrawLine(p, lstPtsblade[i], lstPtsblade[i + 1]);
                     }
-                 
+
                 }
             }
         }
-        private void Draw_MultiPanel(PaintEventArgs e, IMultiPanelModel mpanelModel, Point Mpoint)
+        private void Draw_MultiPanel(PaintEventArgs e, IMultiPanelModel mpanelModel, Point Mpoint, int botPadHeightDeduct)
         {
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -2326,25 +3338,26 @@ namespace PresentationLayer.Presenter.UserControls
             float zoom = mpanelModel.MPanelImageRenderer_Zoom;
 
             int client_wd = mpanelModel.MPanelImageRenderer_Width,
-                client_ht = mpanelModel.MPanelImageRenderer_Height;
+                client_ht = mpanelModel.MPanelImageRenderer_Height - botPadHeightDeduct;
 
             Rectangle mpnl_bounds = new Rectangle(Mpoint, new Size(client_wd, client_ht));
             //SolidBrush mpnl_sBrush = new SolidBrush(Color.MistyRose);
             SolidBrush mpnl_sBrush = new SolidBrush(Color.White);
             if (mpanelModel.MPanel_Type == "Mullion")
             {
-                mpnl_sBrush = new SolidBrush(Color.White);
-                //mpnl_sBrush = new SolidBrush(Color.MistyRose);
+                //mpnl_sBrush = new SolidBrush(Color.White);
+                mpnl_sBrush = new SolidBrush(Color.MistyRose);
             }
             else if (mpanelModel.MPanel_Type == "Transom")
             {
-                mpnl_sBrush = new SolidBrush(Color.White);
+                // mpnl_sBrush = new SolidBrush(Color.White);
+                mpnl_sBrush = new SolidBrush(Color.LightSteelBlue);
             }
 
             g.FillRectangle(mpnl_sBrush, mpnl_bounds);
             g.DrawRectangle(new Pen(Color.Black, 1), mpnl_bounds);
         }
-        private void Draw_Divider(PaintEventArgs e, IDividerModel divModel, Point Dpoint)
+        private void Draw_Divider(PaintEventArgs e, IDividerModel divModel, Point Dpoint, int botPadDivDeduct)
         {
             Graphics g = e.Graphics;
 
@@ -2356,7 +3369,7 @@ namespace PresentationLayer.Presenter.UserControls
             IMultiPanelModel parent_mpnl = divModel.Div_MPanelParent;
 
             int client_wd = divModel.DivImageRenderer_Width,
-                client_ht = divModel.DivImageRenderer_Height;
+                client_ht = divModel.DivImageRenderer_Height - botPadDivDeduct;
 
             Rectangle div_rect = new Rectangle(Dpoint.X,
                                                Dpoint.Y,
@@ -2399,6 +3412,7 @@ namespace PresentationLayer.Presenter.UserControls
             imagerUCP._windoorModel = windoorModel;
             imagerUCP._mainPresenter = mainPresenter;
             imagerUCP._basePlatformImagerUC.ClearBinding((UserControl)_basePlatformImagerUC);
+
             return imagerUCP;
         }
         public Dictionary<string, Binding> CreateBindingDictionary()

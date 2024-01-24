@@ -170,7 +170,8 @@ namespace PresentationLayer.Presenter.UserControls
             }
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
-                ht = _frameModel.Frame_Height - ((int)(_frameModel.Frame_Type - 10) + bot_deduct);
+             ht = _frameModel.Frame_Height - ((int)(_frameModel.Frame_Type - 10) + bot_deduct);
+            
 
             IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
 
@@ -314,7 +315,7 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     handleArtNo = Rotoswing_HandleArtNo._RSC773452;
                 }
-
+                  
 
                 _frameModel.SetDeductFramePadding(false, false);
 
@@ -849,6 +850,15 @@ namespace PresentationLayer.Presenter.UserControls
                     new Point(pInnerX + pInnerWd,pInnerY + pInnerHt)
                 };
 
+            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 && _frameModel.Lst_MultiPanel.Count >= 1 ||
+                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 && _frameModel.Lst_MultiPanel.Count >= 1)
+            {
+                corner_points[4] = new Point(0, pfr.ClientRectangle.Height);
+                corner_points[5] = new Point(pInnerX, pInnerY + pInnerHt - 2);
+
+                corner_points[6] = new Point(pfr.ClientRectangle.Width -1, pfr.ClientRectangle.Height - 1);
+                corner_points[7] = new Point(pInnerX + pInnerWd - 1, pInnerY + pInnerHt - 3);
+            }
             for (int i = 0; i < corner_points.Length - 1; i += 2)
             {
                 g.DrawLine(blkPen, corner_points[i], corner_points[i + 1]);

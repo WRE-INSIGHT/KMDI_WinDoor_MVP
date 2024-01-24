@@ -224,7 +224,7 @@
               <Width>0.94449in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.40791in</Width>
+              <Width>2.46347in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.04898in</Width>
@@ -973,28 +973,8 @@
                           <Value>=Fields!dtImage.Value</Value>
                           <MIMEType>image/png</MIMEType>
                           <Sizing>FitProportional</Sizing>
-                          <Top>0.04519in</Top>
-                          <Left>0.05708in</Left>
-                          <Height>0.88819in</Height>
-                          <Width>2.30917in</Width>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>5pt</PaddingLeft>
-                            <PaddingRight>5pt</PaddingRight>
-                          </Style>
-                        </Image>
-                        <Image Name="Image4">
-                          <Source>Database</Source>
-                          <Value>=Fields!dtTopViewImage.Value</Value>
-                          <MIMEType>image/png</MIMEType>
-                          <Sizing>Fit</Sizing>
-                          <Top>0.98894in</Top>
-                          <Left>0.05708in</Left>
-                          <Height>0.25278in</Height>
-                          <Width>2.30917in</Width>
-                          <ZIndex>1</ZIndex>
+                          <Height>1.24172in</Height>
+                          <Width>2.44403in</Width>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1043,7 +1023,7 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>dtDescription</rd:DefaultName>
-                          <Left>0.02778in</Left>
+                          <Left>0.05556in</Left>
                           <Height>1.24172in</Height>
                           <Width>1.91879in</Width>
                           <Style>

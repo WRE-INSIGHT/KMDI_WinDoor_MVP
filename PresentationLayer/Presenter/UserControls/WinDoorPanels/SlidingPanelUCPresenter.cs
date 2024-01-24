@@ -159,7 +159,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 prev_pnl.Panel_DisplayWidth += 1;
 
                                 if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f ||
+                                    _panelModel.Panel_Zoom == 0.08f || _panelModel.Panel_Zoom == 0.06f ||
+                                    _panelModel.Panel_Zoom == 0.05f || _panelModel.Panel_Zoom == 0.02f ||
+                                    _panelModel.Panel_Zoom == 0.01f)
                                 {
                                     prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
@@ -175,7 +178,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 pres_pnl.Panel_DisplayWidth -= 1;
 
                                 if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f ||
+                                    _panelModel.Panel_Zoom == 0.08f || _panelModel.Panel_Zoom == 0.06f ||
+                                    _panelModel.Panel_Zoom == 0.05f || _panelModel.Panel_Zoom == 0.02f ||
+                                    _panelModel.Panel_Zoom == 0.01f)
                                 {
                                     pres_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
@@ -210,7 +216,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 prev_pnl.Panel_DisplayWidth -= 1;
 
                                 if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f ||
+                                    _panelModel.Panel_Zoom == 0.08f || _panelModel.Panel_Zoom == 0.06f ||
+                                    _panelModel.Panel_Zoom == 0.05f || _panelModel.Panel_Zoom == 0.02f ||
+                                    _panelModel.Panel_Zoom == 0.01f)
                                 {
                                     prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
@@ -226,7 +235,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 pres_pnl.Panel_DisplayWidth += 1;
 
                                 if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                    _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f ||
+                                    _panelModel.Panel_Zoom == 0.08f || _panelModel.Panel_Zoom == 0.06f ||
+                                    _panelModel.Panel_Zoom == 0.05f || _panelModel.Panel_Zoom == 0.02f ||
+                                    _panelModel.Panel_Zoom == 0.01f)
                                 {
                                     pres_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
@@ -970,7 +982,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         prev_pnl.Panel_DisplayWidth += mullion_movement;
 
                                         if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f ||
+                                            _panelModel.Panel_Zoom == 0.08f || _panelModel.Panel_Zoom == 0.06f ||
+                                            _panelModel.Panel_Zoom == 0.05f || _panelModel.Panel_Zoom == 0.02f ||
+                                            _panelModel.Panel_Zoom == 0.01f)
                                         {
                                             prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                         }
@@ -986,7 +1001,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         pres_pnl.Panel_DisplayWidth -= mullion_movement;
 
                                         if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f ||
+                                            _panelModel.Panel_Zoom == 0.08f || _panelModel.Panel_Zoom == 0.06f ||
+                                            _panelModel.Panel_Zoom == 0.05f || _panelModel.Panel_Zoom == 0.02f ||
+                                            _panelModel.Panel_Zoom == 0.01f)
                                         {
                                             pres_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                         }
@@ -1428,38 +1446,38 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(sliding.ClientRectangle.Width, i));
 
                 }
-                
-                    if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
-                    {
-                        g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
-                                                                               8 / rectThickness,
-                                                                               sliding.ClientRectangle.Width - 17 / rectThickness,
-                                                                               sliding.ClientRectangle.Height - 17 / rectThickness));
-                    }
-                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
-                    {
-                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                            8 / rectThickness,
-                                                                            sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                            sliding.ClientRectangle.Height - (17 / rectThickness)));
 
-                    }
-                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
-                    {
+                if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                {
+                    g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
+                                                                           8 / rectThickness,
+                                                                           sliding.ClientRectangle.Width - 17 / rectThickness,
+                                                                           sliding.ClientRectangle.Height - 17 / rectThickness));
+                }
+                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                {
+                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                        8 / rectThickness,
+                                                                        sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                        sliding.ClientRectangle.Height - (17 / rectThickness)));
 
-                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
-                                                                               8 / rectThickness,
-                                                                               sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                               sliding.ClientRectangle.Height - (17 / rectThickness)));
-                    }
-                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
-                    {
-                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                          8 / rectThickness,
-                                                                          sliding.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
-                                                                          sliding.ClientRectangle.Height - (17 / rectThickness)));
-                    }
-                
+                }
+                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                {
+
+                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
+                                                                           8 / rectThickness,
+                                                                           sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                           sliding.ClientRectangle.Height - (17 / rectThickness)));
+                }
+                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                {
+                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                      8 / rectThickness,
+                                                                      sliding.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
+                                                                      sliding.ClientRectangle.Height - (17 / rectThickness)));
+                }
+
             }
 
 

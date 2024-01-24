@@ -91,6 +91,8 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_BotFrameVisible { get; set; }
         Frame_MechJointArticleNo Frame_MechanicalJointConnector_Artno { get; set; }
         int Frame_MechanicalJointConnectorQty { get; set; }
+        int Frame_FoldAndSlideTopViewLeftCount { get; set; }
+        int Frame_FoldAndSlideTopViewRightCount { get; set; }
         bool Frame_If_SlidingTypeTopHung { get; set; }
         GUPremilineTopTrack_ArticleNo Frame_GUPremilineTopTrackArtNo { get; set; }
         int Frame_CladdingQty { get; set; }

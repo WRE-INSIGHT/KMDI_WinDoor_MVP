@@ -1805,7 +1805,7 @@ namespace PresentationLayer.Presenter
 
         private void OnSlidingTopViewToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
-            ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel, _itemInfoUCPresenter);
+            ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel);
             TopView.GetSetTopViewSlidingPanellingView().GetSetTopSlidingPanellingView();
             //sample
         }
@@ -4818,6 +4818,10 @@ namespace PresentationLayer.Presenter
                         {
                             _windoorModel.WD_WindoorNumber = extractedValue_str;
                         }
+                        if (row_str.Contains("WD_TopViewType:"))
+                        {
+                            _windoorModel.WD_TopViewType = extractedValue_str;
+                        }
                         if (row_str.Contains("IsFromLoad:"))
                         {
                             _windoorModel.IsFromLoad = Convert.ToBoolean(extractedValue_str);
@@ -5220,6 +5224,14 @@ namespace PresentationLayer.Presenter
                                     break;
                                 }
                             }
+                        }
+                        if (row_str.Contains("Frame_FoldAndSlideTopViewLeftCount:"))
+                        {
+                            frm_FoldAndSlideTopViewLeftCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_FoldAndSlideTopViewRightCount:"))
+                        {
+                            frm_FoldAndSlideTopViewRightCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
 
 
@@ -7934,6 +7946,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (inside_divider)
                     {
+                  
                         #region Load for Divider
                         if (row_str.Contains("Div_ID:"))
                         {
@@ -8242,19 +8255,20 @@ namespace PresentationLayer.Presenter
 
                             string[] words = extractedValue_str.Split(';');
                             if (extractedValue_str.Contains("<"))
-                            {
-                                foreach (string str in words)
+                            {                               
+
+                               foreach (string str in words)
                                 {
                                     if (str.Trim() != string.Empty)
                                     {
                                         int key = Convert.ToInt32(str.Split('<', ',')[1]);
-                                        int value = Convert.ToInt32(str.Split(',', '>')[1]);
+                                        int value = Convert.ToInt32(str.Split(',', '>')[1]);                                       
                                         div_CladdingSizeList.Add(key, value);
                                     }
 
                                 }
-                            }
-
+                            }                           
+                                                      
                             //div_CladdingSizeList.Reverse();
                         }
                         else if (row_str.Contains("Div_CladdingCount:"))
@@ -8571,9 +8585,11 @@ namespace PresentationLayer.Presenter
                             inside_divider = false;
                         }
                         #endregion
+                        
                     }
                     else if (inside_screen)
                     {
+                        
                         #region Load for Screen
 
 
@@ -10150,7 +10166,9 @@ namespace PresentationLayer.Presenter
               frm_ScreenFrameHeight,
               frm_TubularHeight,
               frm_TubularWidth,
-              frm_CladdingQty;
+              frm_CladdingQty,
+              frm_FoldAndSlideTopViewLeftCount,
+              frm_FoldAndSlideTopViewRightCount;
 
         int[] Arr_padding_norm,
                 Arr_padding_withmpnl;
@@ -11166,6 +11184,8 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_TubularWidth = frm_TubularWidth;
                         _frameModel.Frame_CladdingVisibility = frm_CladdingVisibility;
                         _frameModel.Frame_CladdingQty = frm_CladdingQty;
+                        _frameModel.Frame_FoldAndSlideTopViewLeftCount = frm_FoldAndSlideTopViewLeftCount;
+                        _frameModel.Frame_FoldAndSlideTopViewRightCount = frm_FoldAndSlideTopViewRightCount;
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
