@@ -3881,12 +3881,10 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_080323 = DateTime.Parse("08-03-2023"); // no espag
         DateTime changeCondition_112323 = DateTime.Parse("11-23-2023"); // remove fs in motorize
         DateTime changeCondition_011724 = DateTime.Parse("01-17-2024"); // weatherbar and etc per frame
+        DateTime changeCondition_012424 = DateTime.Parse("01-24-2024"); //extension profile
 
 
-
-
-        DateTime testDate = DateTime.Parse("01-17-2024");
-
+        DateTime testDate = DateTime.Parse("01-24-2024");
         #endregion
 
         #region glassbasedprice variable
@@ -4310,6 +4308,26 @@ namespace ModelLayer.Model.Quotation
 
                             ExtensionProfile15mmPrice += (fr.Frame_Width / 1000m) * ExtensionProfile15mmPricePerLinearMeter;
                         }
+
+
+                        if (changeCondition_012424 <= cus_ref_date)
+                        {
+                            if ((fr.Frame_ArtNo == FrameProfile_ArticleNo._7502 || fr.Frame_ArtNo == FrameProfile_ArticleNo._7507 || fr.Frame_ArtNo == FrameProfile_ArticleNo._2060) &&
+                            fr.Frame_Width > 6000)
+                            {
+                                if ((wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory) && OneSideFoil_whiteBase == false)
+                                {
+                                    ExtensionProfile15mmPricePerLinearMeter = ExtensionProfile15mmPricePerLinearMeter_White;
+                                }
+                                else
+                                {
+                                    ExtensionProfile15mmPricePerLinearMeter = ExtensionProfile15mmPricePerLinearMeter_WoodGrain;
+                                }
+
+                                ExtensionProfile15mmPrice += (fr.Frame_Width / 1000m) * ExtensionProfile15mmPricePerLinearMeter;
+                            }
+                        }
+
                         #endregion
 
                         #region Tubular
@@ -5043,7 +5061,7 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else
                                             {
-                                             if (chckPerFrameSlidingMats == true)
+                                                if (chckPerFrameSlidingMats == true)
                                                 {
                                                     WeatherBarPrice += (fr.Frame_Width / 1000m) * WeatherBarPricePerPiece;
                                                     WeatherBarFastenerPrice += ((int)(fr.Frame_Width / 300)) * BarFastenerPricePerPiece;
