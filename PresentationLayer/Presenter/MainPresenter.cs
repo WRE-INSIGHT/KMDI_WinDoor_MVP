@@ -5268,6 +5268,7 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("Frame_FoldAndSlideTopViewRightCount:"))
                         {
                             frm_FoldAndSlideTopViewRightCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
                         if (row_str.Contains("Frame_CladdingVisibility"))
                         {
                             frm_CladdingVisibility = Convert.ToBoolean(extractedValue_str);
@@ -8000,7 +8001,6 @@ namespace PresentationLayer.Presenter
                     }
                     else if (inside_divider)
                     {
-                  
                         #region Load for Divider
                         if (row_str.Contains("Div_ID:"))
                         {
@@ -8314,13 +8314,13 @@ namespace PresentationLayer.Presenter
                                     if (str.Trim() != string.Empty)
                                     {
                                         int key = Convert.ToInt32(str.Split('<', ',')[1]);
-                                        int value = Convert.ToInt32(str.Split(',', '>')[1]);                                       
+                                        int value = Convert.ToInt32(str.Split(',', '>')[1]);
                                         div_CladdingSizeList.Add(key, value);
                                     }
 
                                 }
-                            }                           
-                                                      
+                            }
+
                             //div_CladdingSizeList.Reverse();
                         }
                         else if (row_str.Contains("Div_CladdingCount:"))
@@ -8637,11 +8637,9 @@ namespace PresentationLayer.Presenter
                             inside_divider = false;
                         }
                         #endregion
-                        
                     }
                     else if (inside_screen)
                     {
-                        
                         #region Load for Screen
 
 
@@ -9243,6 +9241,7 @@ namespace PresentationLayer.Presenter
             }
 
         }
+
 
         private void Load_RDLCHeaders()
         {
