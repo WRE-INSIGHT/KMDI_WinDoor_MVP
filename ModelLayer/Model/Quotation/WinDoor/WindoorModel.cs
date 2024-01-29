@@ -24,7 +24,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 return _wdProfile;
             }
             set
-            {     
+            {
                 _wdProfile = value;
                 NotifyPropertyChanged();
             }
@@ -713,6 +713,19 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _pnlCount = value;
+            }
+        }
+
+        private bool _wd_IsObjectCopied;
+        public bool WD_IsObjectCopied
+        {
+            get
+            {
+                return _wd_IsObjectCopied;
+            }
+            set
+            {
+                _wd_IsObjectCopied = value;
             }
         }
 
