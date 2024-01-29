@@ -12972,14 +12972,14 @@ namespace PresentationLayer.Presenter
         {
             _windoorModel.lst_objects.Remove((UserControl)frameModel.Frame_UC);
             _windoorModel.lst_frame.Remove(frameModel);
-            Load_Windoor_Item(_windoorModel);
+            //Load_Windoor_Item(_windoorModel);
         }
 
         public void DeleteConcrete_OnConcreteList_WindoorModel(IConcreteModel concreteModel)
         {
             _windoorModel.lst_objects.Remove((UserControl)concreteModel.Concrete_UC);
             _windoorModel.lst_concrete.Remove(concreteModel);
-            Load_Windoor_Item(_windoorModel);
+            //Load_Windoor_Item(_windoorModel);
         }
 
 
