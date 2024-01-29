@@ -60,11 +60,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_motorizedPropertyUC_cmbMotorizedMechSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-           if (!_initialLoad)
-           {
-               _panelModel.Panel_MotorizedMechArtNo = (MotorizedMech_ArticleNo)((ComboBox)sender).SelectedValue;
-               _mainPresenter.GetCurrentPrice();
-           }
+            if (!_initialLoad)
+            {
+                _panelModel.Panel_MotorizedMechArtNo = (MotorizedMech_ArticleNo)((ComboBox)sender).SelectedValue;
+                _mainPresenter.GetCurrentPrice();
+            }
         }
 
         private void _pp_motorizedPropertyUC_chkMotorizedCheckedChangedEventRaised(object sender, EventArgs e)

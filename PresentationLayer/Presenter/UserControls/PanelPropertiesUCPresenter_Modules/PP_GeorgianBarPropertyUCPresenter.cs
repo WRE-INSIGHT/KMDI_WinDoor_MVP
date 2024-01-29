@@ -125,20 +125,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_georgianBarPropertyUC_cmbGBArtNumSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            //if (!_initialLoad)
-            //{
-            //    _panelModel.Panel_GeorgianBarArtNo = (GeorgianBar_ArticleNo)((ComboBox)sender).SelectedValue;
-            //    if (_panelModel.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
-            //    {
-            //        _pp_georgianBarPropertyUC.enable_num = true;
-            //    }
-            //    else
-            //    {
-            //        _pp_georgianBarPropertyUC.enable_num = false;
-            //    }
-            //}
-
-            if (_mainPresenter.ItemLoad == false)
+            if (!_initialLoad)
             {
                 _panelModel.Panel_GeorgianBarArtNo = (GeorgianBar_ArticleNo)((ComboBox)sender).SelectedValue;
                 if (_panelModel.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)

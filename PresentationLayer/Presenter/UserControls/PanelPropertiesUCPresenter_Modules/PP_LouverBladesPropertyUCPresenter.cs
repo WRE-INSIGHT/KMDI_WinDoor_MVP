@@ -27,10 +27,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         }
 
         private void _pp_LouverBladesPropertyUC_PPLouverBladesPropertyUCLoadEventRaised(object sender, EventArgs e)
-        {  
-          _panelModel.Set_LouverBladesCount();
-          _pp_LouverBladesPropertyUC.GetNudLouverBlades().Value = _panelModel.Panel_LouverBladesCount;
-          _pp_LouverBladesPropertyUC.ThisBinding(CreateBindingDictionary());
+        {
+            _panelModel.Set_LouverBladesCount();
+            _pp_LouverBladesPropertyUC.GetNudLouverBlades().Value = _panelModel.Panel_LouverBladesCount;
+            _pp_LouverBladesPropertyUC.ThisBinding(CreateBindingDictionary());
         }
 
         public IPP_LouverBladesPropertyUC GetIPP_LouverBladesPropertyUC()

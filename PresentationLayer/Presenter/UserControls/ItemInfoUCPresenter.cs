@@ -89,6 +89,7 @@ namespace PresentationLayer.Presenter.UserControls
                 else
                 {
                     if (_windoorModel.TotalPriceHistoryStatus == "System Generated Price") //|| _windoorModel.TotalPriceHistoryStatus == "Change Factor"
+
                     {
                         _mainPresenter.LblCurrentPrice.Value = _windoorModel.WD_currentPrice;
                     }
@@ -97,8 +98,8 @@ namespace PresentationLayer.Presenter.UserControls
                         _mainPresenter.LblCurrentPrice.Value = _windoorModel.WD_price;
                     }
                 }
-               // _mainPresenter.ItemScroll = itemscroll;
-                //_mainPresenter.ItemLoad = false;
+                _mainPresenter.ItemScroll = itemscroll;
+                _mainPresenter.ItemLoad = false;
             }
             catch (Exception ex)
             {

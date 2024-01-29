@@ -86,11 +86,6 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-        public CheckBox GetCheckBox()
-        {
-            return cb_item;
-        }
-
         private void SortItemUC_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, SortItemUCLoadEventRaised, e);

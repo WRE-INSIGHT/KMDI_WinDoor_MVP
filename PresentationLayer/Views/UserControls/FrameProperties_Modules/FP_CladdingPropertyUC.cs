@@ -13,7 +13,6 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         }
 
         public event EventHandler CladdingQtyPropertyUCLoadEventRaised;
-        public event EventHandler nudCladdingQtyValueChangedEventRaised;
 
         private void FP_CladdingQtyPropertyUC_Load(object sender, EventArgs e)
         {
@@ -30,9 +29,5 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
             ((HandledMouseEventArgs)e).Handled = true;
         }
 
-        private void nud_CladdingQty_ValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, nudCladdingQtyValueChangedEventRaised,e);
-        }
     }
 }

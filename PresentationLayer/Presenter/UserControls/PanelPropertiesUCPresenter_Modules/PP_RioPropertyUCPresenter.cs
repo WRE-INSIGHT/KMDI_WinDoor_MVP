@@ -50,12 +50,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_rioPropertyUC_PPRioPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_rioPropertyUC.ThisBinding(CreateBindingDictionary());
+            _panelModel.Panel_RioArtNo = Rio_HandleArtNo._C050C108019;
+            _panelModel.Panel_RioArtNo2 = Rio_HandleArtNo._C050C108019;
 
-            if (!_panelModel.PanelModelIsFromLoad)
-            {
-                _panelModel.Panel_RioArtNo = Rio_HandleArtNo._C050C108019;
-                _panelModel.Panel_RioArtNo2 = Rio_HandleArtNo._C050C108019;
-            }
             _initialLoad = false;
         }
 

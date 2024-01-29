@@ -25,15 +25,6 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
         private void SubcribeToEventSetUp()
         {
             _claddingQtyPropertyUC.CladdingQtyPropertyUCLoadEventRaised += _claddingQtyPropertyUC_CladdingQtyPropertyUCLoadEventRaised;
-            _claddingQtyPropertyUC.nudCladdingQtyValueChangedEventRaised += _claddingQtyPropertyUC_nudCladdingQtyValueChangedEventRaised;
-        }
-
-        private void _claddingQtyPropertyUC_nudCladdingQtyValueChangedEventRaised(object sender, EventArgs e)
-        {
-            if (!_mainpresenter.ItemLoad)
-            {
-                _frameModel.Frame_CladdingQty = Convert.ToInt32(((NumericUpDown)sender).Value);
-            }
         }
 
         private void _claddingQtyPropertyUC_CladdingQtyPropertyUCLoadEventRaised(object sender, EventArgs e)
