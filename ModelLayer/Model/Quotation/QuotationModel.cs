@@ -3884,10 +3884,7 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_012424 = DateTime.Parse("01-24-2024"); //extension profile
 
 
-
-
         DateTime testDate = DateTime.Parse("01-24-2024");
-
         #endregion
 
         #region glassbasedprice variable
