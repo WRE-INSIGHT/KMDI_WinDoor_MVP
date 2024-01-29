@@ -134,6 +134,7 @@
             this._paCurrentDescRTextBox.Size = new System.Drawing.Size(177, 145);
             this._paCurrentDescRTextBox.TabIndex = 1;
             this._paCurrentDescRTextBox.Text = "";
+            this._paCurrentDescRTextBox.TextChanged += new System.EventHandler(this._paCurrentDescRTextBox_TextChanged);
             // 
             // _paOldDesPictureBox
             // 
