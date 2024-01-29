@@ -303,7 +303,18 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
-
+        private bool _pnlModelIsFromLoad;
+        public bool PanelModelIsFromLoad
+        {
+            get
+            {
+                return _pnlModelIsFromLoad;
+            }
+            set
+            {
+                _pnlModelIsFromLoad = value;
+            }
+        }
         private bool _panelOrient;
         public bool Panel_Orient
         {
@@ -5590,7 +5601,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public void Panel_PropertyChange(bool Checked)
         {
 
-            if (_panelOrient != Checked)
+            if (_panelOrient != Checked || _pnlModelIsFromLoad)
             {
                 _panelOrient = Checked;
                 if (_panelOrient == true && Panel_Type == "Fixed Panel")

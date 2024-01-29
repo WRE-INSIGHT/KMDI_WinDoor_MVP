@@ -24,7 +24,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 return _wdProfile;
             }
             set
-            {     
+            {
                 _wdProfile = value;
                 NotifyPropertyChanged();
             }
