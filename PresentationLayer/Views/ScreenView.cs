@@ -119,6 +119,7 @@ namespace PresentationLayer.Views
         public event EventHandler nudWidthEnterEventRaised;
         public event EventHandler nudHeightEnterEventRaised;
         public event EventHandler nudFactorEnterEventRaised;
+        public event FormClosingEventHandler ScreenView_FormClosingEventRaised;
 
 
         public void ShowScreemView()
@@ -400,6 +401,11 @@ namespace PresentationLayer.Views
             {
                 EventHelpers.RaiseEvent(sender, tsBtnPrintScreenClickEventRaised, e);
             }
+        }
+
+        private void ScreenView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            EventHelpers.RaiseFormClosingEvent(sender, ScreenView_FormClosingEventRaised, e);
         }
     }
 }

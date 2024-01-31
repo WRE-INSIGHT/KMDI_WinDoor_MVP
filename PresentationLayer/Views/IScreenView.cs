@@ -42,6 +42,7 @@ namespace PresentationLayer.Views
         event EventHandler nudWidthEnterEventRaised;
         event EventHandler nudHeightEnterEventRaised;
         event EventHandler nudFactorEnterEventRaised;
+        event FormClosingEventHandler ScreenView_FormClosingEventRaised;
 
         void ShowScreemView();
 
