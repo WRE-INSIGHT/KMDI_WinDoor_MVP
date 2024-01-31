@@ -134,7 +134,6 @@ namespace PresentationLayer.Views
         {
             return txtbox_rowlimit;
         }
-
         public CheckBox GetLessDiscountchkbox()
         {
             return chkbox_LessD;
