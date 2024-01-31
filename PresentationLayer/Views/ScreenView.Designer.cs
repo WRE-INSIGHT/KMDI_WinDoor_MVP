@@ -136,12 +136,12 @@
             this.cmsScreen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem});
             this.cmsScreen.Name = "cmsScreen";
-            this.cmsScreen.Size = new System.Drawing.Size(153, 48);
+            this.cmsScreen.Size = new System.Drawing.Size(107, 26);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.deleteToolStripMenuItem.Text = "delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -561,6 +561,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Screen";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ScreenView_FormClosing);
             this.Load += new System.EventHandler(this.ScreenView_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ScreenView_KeyDown);
             this.panel2.ResumeLayout(false);
