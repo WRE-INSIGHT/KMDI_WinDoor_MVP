@@ -753,11 +753,20 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
                     _printQuoteView.GetChkLstBox().Visible = false;
+                    _printQuoteView.GetUniversalLabel().Visible = false;
 
+                    //use for screen net discount
+                    _printQuoteView.GetLessDiscountchkbox().Visible = true; 
+                    _printQuoteView.GetLessDiscountchkbox().Text = "Screen Net Of Discount";
+                    //
                     #region label,TextBox & Rtextbox  new loc         
+                    _printQuoteView.GetLessDiscountchkbox().Location = new System.Drawing.Point(34, 59);
+                    _printQuoteView.ShowLastPage().Location = new System.Drawing.Point(34, 81); 
+
                     _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(845, 26);
                     _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(639, 26);
                     _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(433, 26);
+              
 
                     _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(845, 3);
                     _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(639, 3);
@@ -766,9 +775,6 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetQuotationBody().Anchor = AnchorStyles.Left | AnchorStyles.Right;
                     _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(620, 118);
                     _printQuoteView.GetQuotationBody().Width = _printQuoteView.GetQuotationBody().Width - 120;
-
-
-
 
                     #endregion
 
@@ -1346,7 +1352,7 @@ namespace PresentationLayer.Presenter
                 }
                 else if(_mainPresenter.printStatus == "PartialAdjustment")
                 {
-
+                    #region PartialAdjustment
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
                     _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
@@ -1387,8 +1393,8 @@ namespace PresentationLayer.Presenter
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
-
-                }                  
+                    #endregion
+                }
             }
             catch (Exception ex)
             {
