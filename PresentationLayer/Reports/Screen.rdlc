@@ -235,7 +235,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Unit Price</Value>
+                              <Value>= iif(Parameters!NetOfDiscount.Value = "True", "Net Price","Unit Price")</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -548,7 +548,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=iif(Fields!dtUnitPrice.Value &lt;= 0," - " ,Fields!dtUnitPrice.Value )</Value>
+                              <Value>= iif(Parameters!NetOfDiscount.Value = "True", 
+"discountePrice", 
+iif(Fields!dtUnitPrice.Value &lt;= 0," - " ,Fields!dtUnitPrice.Value ))</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -669,7 +671,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -2530,6 +2531,9 @@ Sum(CDec(Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtQuantity.Value )
         <Height>1.22343in</Height>
         <Width>7.54336in</Width>
         <ZIndex>2</ZIndex>
+        <Visibility>
+          <Hidden>= iif(Parameters!NetOfDiscount.Value = "True", true,false)</Hidden>
+        </Visibility>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4010,6 +4014,12 @@ Banilad, Mandaue City, Cebu, Phils. 6014
     </ReportParameter>
     <ReportParameter Name="RowLimit">
       <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="NetOfDiscount">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>

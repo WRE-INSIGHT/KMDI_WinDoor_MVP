@@ -86,6 +86,11 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        public CheckBox GetCheckBox()
+        {
+            return cb_item;
+        }
+
         private void SortItemUC_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, SortItemUCLoadEventRaised, e);
@@ -110,7 +115,7 @@ namespace PresentationLayer.Views.UserControls
         {
             return this;
         }
-       
+
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, DuplicateToolStripButtonClickEventRaised, e);
@@ -129,7 +134,7 @@ namespace PresentationLayer.Views.UserControls
         private void button1_Click(object sender, EventArgs e)
         {
 
-            if(panelSort.Height > 100)
+            if (panelSort.Height > 100)
             {
                 this.Height = 28;
             }
@@ -137,7 +142,7 @@ namespace PresentationLayer.Views.UserControls
             {
                 this.Height = 141;
             }
-        
+
         }
     }
 }

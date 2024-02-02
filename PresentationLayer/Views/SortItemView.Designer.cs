@@ -30,6 +30,7 @@
         {
             this.pnlSortItem = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chkbox_SelectAll = new System.Windows.Forms.CheckBox();
             this.btn_Delete = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -50,6 +51,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chkbox_SelectAll);
             this.panel1.Controls.Add(this.btn_Delete);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -57,6 +59,17 @@
             this.panel1.Size = new System.Drawing.Size(603, 29);
             this.panel1.TabIndex = 7;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // chkbox_SelectAll
+            // 
+            this.chkbox_SelectAll.AutoSize = true;
+            this.chkbox_SelectAll.Location = new System.Drawing.Point(133, 7);
+            this.chkbox_SelectAll.Name = "chkbox_SelectAll";
+            this.chkbox_SelectAll.Size = new System.Drawing.Size(70, 17);
+            this.chkbox_SelectAll.TabIndex = 1;
+            this.chkbox_SelectAll.Text = "Select All";
+            this.chkbox_SelectAll.UseVisualStyleBackColor = true;
+            this.chkbox_SelectAll.CheckedChanged += new System.EventHandler(this.chkbox_SelectAll_CheckedChanged_1);
             // 
             // btn_Delete
             // 
@@ -81,6 +94,7 @@
             this.Text = "SortItem";
             this.Load += new System.EventHandler(this.SortItemView_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -90,5 +104,6 @@
         private System.Windows.Forms.Panel pnlSortItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_Delete;
+        private System.Windows.Forms.CheckBox chkbox_SelectAll;
     }
 }

@@ -756,7 +756,8 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetUniversalLabel().Visible = false;
 
                     //use for screen net discount
-                    _printQuoteView.GetLessDiscountchkbox().Visible = true; 
+                    _printQuoteView.GetLessDiscountchkbox().Visible = true;
+                    _printQuoteView.GetLessDiscountchkbox().Enabled = false;
                     _printQuoteView.GetLessDiscountchkbox().Text = "Screen Net Of Discount";
                     //
                     #region label,TextBox & Rtextbox  new loc         
@@ -798,7 +799,7 @@ namespace PresentationLayer.Presenter
                     }
                     #endregion
 
-                    ReportParameter[] RParam = new ReportParameter[18];
+                    ReportParameter[] RParam = new ReportParameter[19];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
                     RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
@@ -869,6 +870,15 @@ namespace PresentationLayer.Presenter
                         {
                             RParam[16] = new ReportParameter("ShowSubTotal", "True");
                         }
+                    }
+
+                    if (_printQuoteView.GetLessDiscountchkbox().Checked)
+                    {
+                        RParam[18] = new ReportParameter("NetOfDiscount", "True");
+                    }
+                    else
+                    {
+                        RParam[18] = new ReportParameter("NetOfDiscount", "False");
                     }
 
 
