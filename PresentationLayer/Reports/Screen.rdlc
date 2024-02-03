@@ -364,7 +364,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.24479in</Height>
+              <Height>0.23437in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -549,11 +549,12 @@
                           <TextRuns>
                             <TextRun>
                               <Value>= iif(Parameters!NetOfDiscount.Value = "True", 
-"discountePrice", 
+iif(Fields!dtPerItemDiscountPercentage.Value &lt;= 0," - ",CDec(Fields!dtUnitPrice.Value * Fields!dtPerItemDiscountPercentage.Value)), 
 iif(Fields!dtUnitPrice.Value &lt;= 0," - " ,Fields!dtUnitPrice.Value ))</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
+                                <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -634,7 +635,9 @@ iif(Fields!dtUnitPrice.Value &lt;= 0," - " ,Fields!dtUnitPrice.Value ))</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=iif(Fields!dtQuantity.Value &gt; 0 ,Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtQuantity.Value," - ")</Value>
+                              <Value>= iif(Parameters!NetOfDiscount.Value = "True", 
+iif(Fields!dtPerItemDiscountPercentage.Value &lt;= 0," - ",(Fields!dtUnitPrice.Value * Fields!dtPerItemDiscountPercentage.Value) * Fields!dtQuantity.Value), 
+iif(Fields!dtQuantity.Value &gt; 0 ,Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtQuantity.Value," - "))</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1180,7 +1183,9 @@ iif(Fields!dtUnitPrice.Value &lt;= 0," - " ,Fields!dtUnitPrice.Value ))</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(CDec(Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtQuantity.Value ))</Value>
+                              <Value>= iif(Parameters!NetOfDiscount.Value = "True", 
+Sum(CDec((Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtPerItemDiscountPercentage.Value) * Fields!dtQuantity.Value)), 
+Sum(CDec(Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtQuantity.Value )))</Value>
                               <Style>
                                 <FontStyle>Italic</FontStyle>
                                 <FontFamily>Segoe UI</FontFamily>
@@ -1335,7 +1340,7 @@ iif(Fields!dtUnitPrice.Value &lt;= 0," - " ,Fields!dtUnitPrice.Value ))</Value>
         <DataSetName>DataSet1</DataSetName>
         <Top>1.08507in</Top>
         <Left>0.20426in</Left>
-        <Height>1.13541in</Height>
+        <Height>1.12499in</Height>
         <Width>7.53837in</Width>
         <Style>
           <Border>
@@ -3918,6 +3923,10 @@ Banilad, Mandaue City, Cebu, Phils. 6014
         </Field>
         <Field Name="dtDiscountAverage">
           <DataField>dtDiscountAverage</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="dtPerItemDiscountPercentage">
+          <DataField>dtPerItemDiscountPercentage</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>

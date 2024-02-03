@@ -61,7 +61,7 @@ namespace PresentationLayer.Presenter
 
         CommonFunctions commonfunc = new CommonFunctions();
         Panel _pnlAddOns;
-        NumericUpDown _screenWidth, _screenHeight, _factor, _discount;
+        NumericUpDown _screenWidth, _screenHeight, _factor, _discount,_screenqty;
         TextBox _screenitemnum;
 
         public ScreenPresenter(IScreenView screenView,
@@ -113,6 +113,7 @@ namespace PresentationLayer.Presenter
             _pnlAddOns = _screenView.GetPnlAddOns();
             _screenWidth = _screenView.screen_width;
             _screenHeight = _screenView.screen_height;
+            _screenqty = _screenView.screen_quantity;
             _factor = _screenView.screen_factor;
             _discount = _screenView.screen_discountpercentage;
             _screenitemnum = _screenView.screen_itemnumber;
@@ -284,7 +285,7 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                             #endregion
-
+                            
                             #region listPrice -> netPrice
                             if (currCell_col == 4 || currCell_col == 5 || currCell_col == 6)//4-list price, 5-Qty, 6-Discount
                             {
@@ -363,9 +364,16 @@ namespace PresentationLayer.Presenter
                     }
                }               
             }
-            _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
-            _mainPresenter.SetChangesMark();
-         
+
+            try
+            {
+                _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
+                _mainPresenter.SetChangesMark();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error, Refresh Datagrid, DataGrid DataSource PopulateDgvScreen" + " " + ex.Message);
+            }
         }
 
         private void _screenView_cmbFreedomSizeSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -763,7 +771,22 @@ namespace PresentationLayer.Presenter
                         {
                             _printListPrice = Datarow.Cells[4].Value.ToString();
                         }
-                        
+
+                        #region Net of Discount
+                        string str_DiscountPerItem = Datarow.Cells[6].Value.ToString();
+                        decimal dec_DiscounPerItem = 0;
+
+                        if (str_DiscountPerItem.Contains("%"))
+                        {
+                            //use for NetPrice 
+                            dec_DiscounPerItem = 1 - (Convert.ToDecimal(  String.Format("{0,0:N2}", Decimal.Parse(str_DiscountPerItem.Replace("%","")) / 100)));
+                        }
+                        else
+                        {
+                            dec_DiscounPerItem = 0;
+                        }
+
+                        #endregion
 
                         _dsq.dtScreen.Rows.Add(Datarow.Cells[1].Value ?? string.Empty,
                                                Datarow.Cells[2].Value ?? string.Empty,
@@ -777,7 +800,8 @@ namespace PresentationLayer.Presenter
                                                "",
                                                Datarow.Cells[6].Value ?? string.Empty,
                                                "",
-                                               DiscountPercentage
+                                               DiscountPercentage, //dtDiscountAverage,
+                                               dec_DiscounPerItem //dtPerItemDiscountPercentage
                                                );
                     }
                 }
@@ -888,6 +912,7 @@ namespace PresentationLayer.Presenter
             _screenView.GetNudTotalPrice().DecimalPlaces = 2;
             _screenWidth.Maximum = decimal.MaxValue;
             _screenHeight.Maximum = decimal.MaxValue;
+            _screenqty.Maximum = int.MaxValue;
             _factor.DecimalPlaces = 1;
             _discount.Value = 30;
             _screenitemnum.Text = "1";
