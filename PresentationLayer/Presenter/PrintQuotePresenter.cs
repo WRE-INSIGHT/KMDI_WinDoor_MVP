@@ -757,7 +757,6 @@ namespace PresentationLayer.Presenter
 
                     //use for screen net discount
                     _printQuoteView.GetLessDiscountchkbox().Visible = true;
-                    _printQuoteView.GetLessDiscountchkbox().Enabled = false;
                     _printQuoteView.GetLessDiscountchkbox().Text = "Screen Net Of Discount";
                     //
                     #region label,TextBox & Rtextbox  new loc         
