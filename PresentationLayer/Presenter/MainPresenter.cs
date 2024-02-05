@@ -11528,7 +11528,6 @@ namespace PresentationLayer.Presenter
                 _mainView.Set_AssignProject_Visibility(false);
             }
         }
-
         public void Windoor_Save_PropertiesUC()
         {
             foreach (UserControl uc in _pnlPropertiesBody.Controls)
@@ -11557,7 +11556,6 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
-
         public void Windoor_Save_UserControl()
         {
             _basePlatformPresenter.RemoveBindingView();
@@ -11593,16 +11591,15 @@ namespace PresentationLayer.Presenter
             #region Dispose Objects (Properties and Drawing)
             foreach (Control ctrl in _pnlMain.Controls.OfType<Control>().ToList())
             {
-                ctrl.Dispose();
+                //ctrl.Dispose(); Disable, Check Bug For Using MultiMullion
             }
 
             foreach (Control ctrl in _pnlPropertiesBody.Controls.OfType<Control>().ToList())
             {
                 ctrl.Dispose();
-            }
+            }     
             #endregion
         }
-
         private void CheckToDisposeNCopyWindoor()
         {
             if (_pnlMain.Controls.OfType<Control>().ToList().Count() > 0)
@@ -11611,7 +11608,6 @@ namespace PresentationLayer.Presenter
                 CopyObjectsPerWindoorModel();
             }
         }
-
         public void CopyObjectsPerWindoorModel()
         {
             wndr_content = new List<string>();
@@ -12095,7 +12091,6 @@ namespace PresentationLayer.Presenter
             //#endregion
 
         }
-
         private void Load_Windoor_Item_From_Dispose()
         {
             foreach (Control wndr_objects in _windoorModel.lst_objects)
@@ -12166,8 +12161,8 @@ namespace PresentationLayer.Presenter
             }
             #endregion
 
-        }
 
+        }
         public void Load_Windoor_Item(IWindoorModel item)
         {
             try
@@ -12296,6 +12291,9 @@ namespace PresentationLayer.Presenter
                                      _windoorModel.WD_profile,
                                      false);
 
+
+                    _pnlMain.Controls.Clear();// Temporary Fix For MultiMullion
+
                     _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
 
                     //basePlatform
@@ -12330,13 +12328,13 @@ namespace PresentationLayer.Presenter
 
                     #endregion      
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Location: " + this + "\n\n Error: " + ex.Message);
             }
         }
+
 
         public void Set_pnlPropertiesBody_ScrollView(int scroll_value)
         {
@@ -12345,7 +12343,6 @@ namespace PresentationLayer.Presenter
             _pnlPropertiesBody.VerticalScroll.Value += scroll_value;
             _pnlPropertiesBody.PerformLayout();
         }
-
         private string Check_Incompatibility()
         {
             string incompatibility = "\n";
@@ -12735,7 +12732,6 @@ namespace PresentationLayer.Presenter
 
             return incompatibility.Trim();
         }
-
         private int Check_UnbalancedGlass()
         {
             int unbalancedGlass_cnt = 0;
