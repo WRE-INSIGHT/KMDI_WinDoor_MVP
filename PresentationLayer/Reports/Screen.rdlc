@@ -1779,6 +1779,9 @@ Sum(CDec(Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtQuantity.Value )
                             <Border>
                               <Style>None</Style>
                             </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1889,9 +1892,6 @@ Sum(CDec(Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtQuantity.Value )
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -2244,7 +2244,8 @@ Sum(CDec(Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtQuantity.Value )
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=iif(Parameters!ShowVat.Value = "True"," Total Net Price With VAT*","Discounted Price Without VAT*")</Value>
+                                  <Value>= iif(Parameters!NetOfDiscount.Value = "True", iif(Parameters!ShowVat.Value = "True"," Total Net Price With VAT*","Net Price Without VAT*"),
+iif(Parameters!ShowVat.Value = "True"," Total Net Price With VAT*","Discounted Price Without VAT*"))</Value>
                                   <Style>
                                     <FontFamily>segoe UI</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2491,8 +2492,16 @@ Sum(CDec(Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtQuantity.Value )
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
               <TablixMembers>
-                <TablixMember />
-                <TablixMember />
+                <TablixMember>
+                  <Visibility>
+                    <Hidden>= iif(Parameters!NetOfDiscount.Value = "True", true,false)</Hidden>
+                  </Visibility>
+                </TablixMember>
+                <TablixMember>
+                  <Visibility>
+                    <Hidden>= iif(Parameters!NetOfDiscount.Value = "True", true,false)</Hidden>
+                  </Visibility>
+                </TablixMember>
                 <TablixMember>
                   <Visibility>
                     <Hidden>= iif(Parameters!ShowVat.Value = "True" OR Parameters!ShowLandM.Value = "True" OR Parameters!ShowFC.Value = "True", false,true)</Hidden>
@@ -2536,9 +2545,6 @@ Sum(CDec(Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtQuantity.Value )
         <Height>1.22343in</Height>
         <Width>7.54336in</Width>
         <ZIndex>2</ZIndex>
-        <Visibility>
-          <Hidden>= iif(Parameters!NetOfDiscount.Value = "True", true,false)</Hidden>
-        </Visibility>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3372,7 +3378,7 @@ DELIVERY:</Value>
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>7.22732in</Height>
+    <Height>7.30024in</Height>
     <Style>
       <Border>
         <Style>None</Style>
