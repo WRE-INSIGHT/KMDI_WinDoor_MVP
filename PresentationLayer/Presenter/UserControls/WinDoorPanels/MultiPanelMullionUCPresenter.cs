@@ -1509,7 +1509,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     corner_points[6] = new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height - 1);
                     corner_points[7] = new Point(pInnerX + pInnerWd, fpnl.ClientRectangle.Height - 1);
                 }
-                else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                 if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
                          _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                 {
                     corner_points[4] = new Point(-3, fpnl.ClientRectangle.Height);
@@ -1519,6 +1519,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     corner_points[7] = new Point(pInnerX + pInnerWd - 3 , pInnerY + pInnerHt);
                 }
             }
+         //    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+         //   {
+         //       if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+         //               _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+         //       {
+         //           corner_points[4] = new Point(-3, fpnl.ClientRectangle.Height);
+         //           corner_points[5] = new Point(pInnerX + 3, pInnerY + pInnerHt);
+         //
+         //           corner_points[6] = new Point(fpnl.ClientRectangle.Width + 3, fpnl.ClientRectangle.Height);
+         //           corner_points[7] = new Point(pInnerX + pInnerWd - 3, pInnerY + pInnerHt);
+         //       }
+         //   }
 
             GraphicsPath gpath = new GraphicsPath();
             GraphicsPath gpath2 = new GraphicsPath();
@@ -3035,11 +3047,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
-                        g.DrawLine(Pens.Black, new Point(-3, locY),
-                                               new Point(pInnerX + 3, locY2));
+                        g.DrawLine(Pens.Black, new Point(0, locY),
+                                               new Point(pInnerX , locY2));
 
-                        g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width + 3, locY),
-                                               new Point(pInnerX + pInnerWd - 3, locY2));
+                        g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width  , locY),
+                                               new Point(pInnerX + pInnerWd , locY2));
                     }
                     else
                     {
