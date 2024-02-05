@@ -3312,10 +3312,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
                         g.DrawLine(Pens.Black, new Point(0, 0),
-                                               new Point(pInnerX, pInnerY));
+                                               new Point(pInnerX , pInnerY));
 
-                        g.DrawLine(Pens.Black, new Point(loc_X - 3, loc_Y),
-                                               new Point(pInnerX + 3, loc2_Y));
+                        g.DrawLine(Pens.Black, new Point(loc_X , loc_Y),
+                                               new Point(pInnerX , loc2_Y));
                     }
                     else
                     {
@@ -3386,8 +3386,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
                                            new Point(upLine_loc_X2, pInnerY));
 
-                        g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width + 3, botLine_locY),
-                                               new Point(botLine_locX2 - 3, botLine_locY2));
+                        g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width , botLine_locY),
+                                               new Point(botLine_locX2 , botLine_locY2));
                     }
                     else
                     {
