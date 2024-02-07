@@ -1818,8 +1818,8 @@ namespace PresentationLayer.Presenter.UserControls
 
             Rectangle outer_bounds = new Rectangle(Ppoint.X,
                                                    Ppoint.Y,
-                                                   client_wd - w,
-                                                   client_ht - w);
+                                                   client_wd  - 1,
+                                                   client_ht - 1 );
 
             g.DrawRectangle(new Pen(Color.Black, w), outer_bounds);
             //g.FillRectangle(Brushes.DarkGray, outer_bounds);
@@ -3282,8 +3282,8 @@ namespace PresentationLayer.Presenter.UserControls
                         new Point(pInnerX+4, (int)Total_Lvr_GlassHt + pInnerY),
 
                         //new Point(pInnerX-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
-                        new Point(pInnerX-4, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location-1),
-                        new Point(pInnerX-4, Lvr_NewLocation+(int)Lvr_GlassHt+1 + pInnerY - 58)
+                        new Point(pInnerX-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
+                        new Point(pInnerX-4, (int)Total_Lvr_GlassHt + pInnerY)
                      };
                     Point[] blade =
                     {
@@ -3314,7 +3314,7 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         if (i == 4)
                         {
-                            g.DrawLine(LvrPen2, lstPtsSide[i], lstPtsSide[i + 1]);
+                            g.DrawLine(new Pen(Color.White, 5), lstPtsSide[i], lstPtsSide[i + 1]);
                         }
                         else
                         {
