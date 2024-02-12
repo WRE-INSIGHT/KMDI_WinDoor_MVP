@@ -1633,29 +1633,61 @@ namespace PresentationLayer.Presenter
                                 decimal deci_input = Convert.ToDecimal(String.Format("{0:0.00}", Convert.ToDecimal(input)));
                                 if (deci_input > 0)
                                 {
-                                    if (deci_input != _quotationModel.PricingFactor)
-                                    {
-                                        _quotationModel.PricingFactor = deci_input;
-                                        MessageBox.Show("New Factor Set Sucessfully");
+                                    #region Algo 1
+                                    //if (deci_input != _quotationModel.PricingFactor)
+                                    //{
+                                    //    _quotationModel.PricingFactor = deci_input;
+                                    //    _factorFromAddExisting = 0; // reset
+                                    //    MessageBox.Show("New Factor Set Sucessfully");
 
-                                        if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
-                                        {
-                                            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-                                            {
-                                                //getnewwdmprice
-                                                wdm.WD_fileLoad = false;
-                                                _quotationModel.BOMandItemlistStatus = "PriceItemList";
-                                                _quotationModel.ItemCostingPriceAndPoints();
-                                                wdm.TotalPriceHistoryStatus = "System Generated Price";
-                                                wdm.WD_price = wdm.WD_currentPrice;
-                                            }
-                                        }
-                                        GetCurrentPrice();
+                                    //    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
+                                    //    {
+                                    //        foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                                    //        {
+                                    //            //getnewwdmprice
+                                    //            wdm.WD_fileLoad = false;
+                                    //            _quotationModel.BOMandItemlistStatus = "PriceItemList";
+                                    //            _quotationModel.ItemCostingPriceAndPoints();
+                                    //            wdm.TotalPriceHistoryStatus = "System Generated Price";
+                                    //            wdm.WD_price = wdm.WD_currentPrice;
+                                    //        }
+                                    //    }
+                                    //    GetCurrentPrice();
+                                    //}
+                                    //else
+                                    //{
+                                    //    _factorFromAddExisting = 0; // reset
+                                    //    MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    //}
+                                    #endregion
+
+                                    if(deci_input != _quotationModel.PricingFactor)
+                                    {
+                                        MessageBox.Show("Factor Set Sucessfully");
                                     }
                                     else
                                     {
                                         MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     }
+
+                                    _quotationModel.PricingFactor = deci_input;
+                                    _factorFromAddExisting = 0; // reset
+                                    
+
+                                    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
+                                    {
+                                        foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                                        {
+                                            //getnewwdmprice
+                                            wdm.WD_fileLoad = false;
+                                            _quotationModel.BOMandItemlistStatus = "PriceItemList";
+                                            _quotationModel.ItemCostingPriceAndPoints();
+                                            wdm.TotalPriceHistoryStatus = "System Generated Price";
+                                            wdm.WD_price = wdm.WD_currentPrice;
+                                        }
+                                    }
+                                    GetCurrentPrice();
+                  
                                 }
                                 else if (deci_input < 0)
                                 {

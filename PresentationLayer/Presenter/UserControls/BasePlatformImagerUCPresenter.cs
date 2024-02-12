@@ -1479,10 +1479,9 @@ namespace PresentationLayer.Presenter.UserControls
 
             }
 
-            Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
-            basePL.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
-
-            _windoorModel.WD_image = bm;
+                Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
+                basePL.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
+                _windoorModel.WD_image = bm; 
         }
 
         private float Draw_Arrow_Width(decimal wd, PaintEventArgs e, float locX, Font dmnsion_font_wd, int ctrl_Y)
