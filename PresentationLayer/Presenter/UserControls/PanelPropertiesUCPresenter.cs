@@ -341,6 +341,8 @@ namespace PresentationLayer.Presenter.UserControls
             //    }
             //    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             //}
+
+            _panelModel.PanelModelIsFromLoad = _mainPresenter.ItemLoad; // set bool
             _panelModel.Panel_PropertyChange(chk.Checked);
             _mainPresenter.GetCurrentPrice();
             _mainPresenter.PropertiesScroll = propertiesScroll;
@@ -352,6 +354,10 @@ namespace PresentationLayer.Presenter.UserControls
         {
             try
             {
+                if (_mainPresenter.ItemLoad)
+                {
+                    _panelModel.PanelModelIsFromLoad = true; // set bool
+                }
 
                 _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
 

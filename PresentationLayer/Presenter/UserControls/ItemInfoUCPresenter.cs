@@ -89,7 +89,6 @@ namespace PresentationLayer.Presenter.UserControls
                 else
                 {
                     if (_windoorModel.TotalPriceHistoryStatus == "System Generated Price") //|| _windoorModel.TotalPriceHistoryStatus == "Change Factor"
-
                     {
                         _mainPresenter.LblCurrentPrice.Value = _windoorModel.WD_currentPrice;
                     }
@@ -98,8 +97,8 @@ namespace PresentationLayer.Presenter.UserControls
                         _mainPresenter.LblCurrentPrice.Value = _windoorModel.WD_price;
                     }
                 }
-                _mainPresenter.ItemScroll = itemscroll;
-                _mainPresenter.ItemLoad = false;
+                // _mainPresenter.ItemScroll = itemscroll;
+                //_mainPresenter.ItemLoad = false;
             }
             catch (Exception ex)
             {
@@ -124,8 +123,8 @@ namespace PresentationLayer.Presenter.UserControls
             windoorBinding.Add("WD_visibility", new Binding("Visible", _windoorModel, "WD_visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             windoorBinding.Add("WD_image", new Binding("Image", _windoorModel, "WD_image", true, DataSourceUpdateMode.OnPropertyChanged));
             windoorBinding.Add("WD_Selected", new Binding("WD_Selected", _windoorModel, "WD_Selected", true, DataSourceUpdateMode.OnPropertyChanged));
-            //windoorBinding.Add("WD_SlidingTopViewVisibility", new Binding("Visible", _windoorModel, "WD_SlidingTopViewVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            //windoorBinding.Add("WD_SlidingTopViewImage", new Binding("Image", _windoorModel, "WD_SlidingTopViewImage", true, DataSourceUpdateMode.OnPropertyChanged));
+            windoorBinding.Add("WD_SlidingTopViewVisibility", new Binding("Visible", _windoorModel, "WD_SlidingTopViewVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            windoorBinding.Add("WD_SlidingTopViewImage", new Binding("Image", _windoorModel, "WD_SlidingTopViewImage", true, DataSourceUpdateMode.OnPropertyChanged));
             //windoorBinding.Add("WD_pboxImagerHeight", new Binding("Height", _windoorModel, "WD_pboxImagerHeight", true, DataSourceUpdateMode.OnPropertyChanged));
 
 

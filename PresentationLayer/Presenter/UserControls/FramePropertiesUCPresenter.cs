@@ -169,10 +169,10 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             _frameModel.Frame_CladdingVisibility = true;
                             _frameModel.FrameProp_Height += constants.frame_CladdingProperty_PanelHeight;
-                            _framePropertiesUC.AddHT_PanelBody(constants.frame_CladdingProperty_PanelHeight); 
+                            _framePropertiesUC.AddHT_PanelBody(constants.frame_CladdingProperty_PanelHeight);
                         }
 
-                        
+
                         #endregion
                     }
 
@@ -444,7 +444,6 @@ namespace PresentationLayer.Presenter.UserControls
                     if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
-
                     }
                     else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                     {
@@ -505,7 +504,7 @@ namespace PresentationLayer.Presenter.UserControls
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(ScreenPropUC);
             ScreenPropUC.Dock = DockStyle.Top;
             ScreenPropUC.BringToFront();
-             
+
             IFP_TubularPropertyUCPresenter tubular = _fp_TubularPropertyUCPresenter.GetNewInstance(_unityC, _frameModel, _mainPresenter, this);
             UserControl TubePropUC = (UserControl)tubular.GetTubularPropertyUC();
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(TubePropUC);

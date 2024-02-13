@@ -929,7 +929,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     if (sel_sash == SashProfile_ArticleNo._7581)
                     {
-                         _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._R675;
+                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._R675;
                     }
                     else if (sel_sash == SashProfile_ArticleNo._373 || sel_sash == SashProfile_ArticleNo._374)
                     {
