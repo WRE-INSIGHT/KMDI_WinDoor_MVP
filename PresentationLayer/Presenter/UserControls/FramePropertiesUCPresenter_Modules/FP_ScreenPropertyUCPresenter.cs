@@ -67,9 +67,9 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
             }
             else
             {
-                if(chk.Checked == true)
+                if (chk.Checked == true)
                 {
-                    chk.Text = "Yes"; 
+                    chk.Text = "Yes";
                     _frameModel.Frame_ScreenHeightVisibility = true;
                     _frameModel.Frame_ScreenOption = true;
                     _FramePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(-constants.frame_ScreenHeightProperty_PanelHeight);
@@ -78,7 +78,7 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
             }
 
             _mainPresenter.GetCurrentPrice();
-        } 
+        }
 
         private void _screenPropertyUC_FScreenPropertyUCLoadEventRaised(object sender, EventArgs e)
         {

@@ -53,7 +53,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_glassPropertyUC_cmbFilmTypeSelectedValueEventRaised(object sender, EventArgs e)
         {
-            if (!_initialLoad)
+            //if (!_initialLoad)
+            //{
+            //    _panelModel.Panel_GlassFilm = (GlassFilm_Types)((ComboBox)sender).SelectedValue;
+            //    _mainPresenter.itemDescription();
+            //    _mainPresenter.GetCurrentPrice();
+            //}
+
+            if (_mainPresenter.ItemLoad == false)
             {
                 _panelModel.Panel_GlassFilm = (GlassFilm_Types)((ComboBox)sender).SelectedValue;
                 _mainPresenter.itemDescription();
@@ -71,7 +78,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_glassPropertyUC_cmbGlazingArtNoSelectedValueEventRaised(object sender, EventArgs e)
         {
-            if (!_initialLoad)
+            //if (!_initialLoad)
+            //{
+            //    _panelModel.PanelGlazingBead_ArtNo = (GlazingBead_ArticleNo)((ComboBox)sender).SelectedValue;
+            //    _mainPresenter.GetCurrentPrice();
+            //}
+
+            if (_mainPresenter.ItemLoad == false)
             {
                 _panelModel.PanelGlazingBead_ArtNo = (GlazingBead_ArticleNo)((ComboBox)sender).SelectedValue;
                 _mainPresenter.GetCurrentPrice();
@@ -91,22 +104,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     _panelModel.Panel_GlassThicknessDesc = "Security Mesh";
                 }
-                else if (_panelModel.Panel_GlassThicknessDesc == "Wire Mesh")
-                {
-                    _panelModel.Panel_GlassThicknessDesc = "Wire Mesh";
-                }
-                else if (_panelModel.Panel_GlassThicknessDesc == "Pet Mesh")
-                {
-                    _panelModel.Panel_GlassThicknessDesc = "Pet Mesh";
-                }
-                else if (_panelModel.Panel_GlassThicknessDesc == "Tuff Mesh")
-                {
-                    _panelModel.Panel_GlassThicknessDesc = "Tuff Mesh";
-                }
-                else if (_panelModel.Panel_GlassThicknessDesc == "Phifer Mesh")
-                {
-                    _panelModel.Panel_GlassThicknessDesc = "Phifer Mesh";
-                }
                 else
                 {
                     _panelModel.Panel_GlassThickness = 6;
@@ -114,6 +111,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_GlassType_Insu_Lami = "NA";
                 }
             }
+
 
             _pp_glassPropertyUC.ThisBinding(CreateBindingDictionary());
             _panelModel.Panel_GlazingAdaptorArtNo = GlazingAdaptor_ArticleNo._6418;

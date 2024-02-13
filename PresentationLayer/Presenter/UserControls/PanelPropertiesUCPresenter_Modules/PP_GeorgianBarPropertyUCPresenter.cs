@@ -41,7 +41,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_georgianBarPropertyUC_btnGeorgianBarCustomDesignClickEventRaised(object sender, EventArgs e)
         {
-            IGeorgianBarCustomizeDesignPresenter GBCustomizeDesgin = _georgianBarCustomizeDesignPresenter.GetNewInstance(_mainPresenter, _unityC, _panelModel,_mainPresenter.windoorModel_MainPresenter);
+            IGeorgianBarCustomizeDesignPresenter GBCustomizeDesgin = _georgianBarCustomizeDesignPresenter.GetNewInstance(_mainPresenter, _unityC, _panelModel, _mainPresenter.windoorModel_MainPresenter);
             GBCustomizeDesgin.GetGeorgianBarCustomizeDesignView().ShowView();
         }
 
@@ -125,7 +125,20 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_georgianBarPropertyUC_cmbGBArtNumSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if (!_initialLoad)
+            //if (!_initialLoad)
+            //{
+            //    _panelModel.Panel_GeorgianBarArtNo = (GeorgianBar_ArticleNo)((ComboBox)sender).SelectedValue;
+            //    if (_panelModel.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
+            //    {
+            //        _pp_georgianBarPropertyUC.enable_num = true;
+            //    }
+            //    else
+            //    {
+            //        _pp_georgianBarPropertyUC.enable_num = false;
+            //    }
+            //}
+
+            if (_mainPresenter.ItemLoad == false)
             {
                 _panelModel.Panel_GeorgianBarArtNo = (GeorgianBar_ArticleNo)((ComboBox)sender).SelectedValue;
                 if (_panelModel.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)

@@ -31,7 +31,7 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
 
         private void _fp_frameConnectionTypePropertyUC_cmbConnectionTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if(!_mainPresenter.ItemLoad == true)
+            if (!_mainPresenter.ItemLoad == true)
             {
                 _frameModel.Frame_ConnectionType = (FrameConnectionType)((ComboBox)sender).SelectedValue;
                 _mainPresenter.SetChangesMark();
