@@ -372,7 +372,8 @@ namespace PresentationLayer.Presenter
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Error, Refresh Datagrid, DataGrid DataSource PopulateDgvScreen" + " " + ex.Message);
+                //MessageBox.Show("Error, Refresh Datagrid, DataGrid DataSource PopulateDgvScreen" + " " + ex.Message);
+                Console.WriteLine("Error , " + this +  " , Refresh Datagrid, DataGrid DataSource PopulateDgvScreen" + " " + ex.Message );
             }
         }
 
