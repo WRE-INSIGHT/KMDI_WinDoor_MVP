@@ -303,7 +303,6 @@ namespace EnumerationTypeLayer
 
 
 
-
             public static readonly Handle_Type _None = new Handle_Type(10, "None");
 
             private Handle_Type(int value, string displayName) : base(value, displayName) { }
