@@ -36,14 +36,19 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_2dHingePropertUC_PP2dHingeLoadEventRaised(object sender, EventArgs e)
         {
-            if (_panelModel.Panel_SashHeight <= 1499)
+
+            if (!_panelModel.PanelModelIsFromLoad)
             {
-                _panelModel.Panel_2DHingeQty_nonMotorized = 3;
+                if (_panelModel.Panel_SashHeight <= 1499)
+                {
+                    _panelModel.Panel_2DHingeQty_nonMotorized = 3;
+                }
+                else if (_panelModel.Panel_SashHeight >= 1500)
+                {
+                    _panelModel.Panel_2DHingeQty_nonMotorized = 4;
+                }
             }
-            else if (_panelModel.Panel_SashHeight >= 1500)
-            {
-                _panelModel.Panel_2DHingeQty_nonMotorized = 4;
-            }
+
 
             _pp_2dHingePropertUC.ThisBinding(CreateBindingDictionary());
             //_initialLoad = false;

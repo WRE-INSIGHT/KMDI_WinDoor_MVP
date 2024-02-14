@@ -14,6 +14,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private IUnityContainer _unityC;
         private IPanelModel _panelModel;
+        bool _initialLoad = true;
 
         public PP_RotoswingForSlidingPropertyUCPresenter(IPP_RotoswingForSlidingPropertyUC pp_RotoswingForSlidingPropertyUC)
         {
@@ -30,7 +31,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_RotoswingForSlidingPropertyUC_cmbRotoswingForSlidingNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_RotoswingForSlidingHandleArtNo = (Rotoswing_Sliding_HandleArtNo)((ComboBox)sender).SelectedValue;
+            if (!_panelModel.PanelModelIsFromLoad)
+            {
+                _panelModel.Panel_RotoswingForSlidingHandleArtNo = (Rotoswing_Sliding_HandleArtNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_RotoswingForSlidingPropertyUC_PPRotoswingForSlidingPropertyUCLoadEventRaised(object sender, EventArgs e)

@@ -30,6 +30,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             return cmb_HandleType;
         }
+        public ComboBox GetBladeHeight()
+        {
+            return cmb_BladeHeight;
+        }
+        public ComboBox GetGalleryColor()
+        {
+            return cmb_GalleryColor;
+        }
 
         private void PP_LouverGallerySetPropertyUC_Load(object sender, EventArgs e)
         {
