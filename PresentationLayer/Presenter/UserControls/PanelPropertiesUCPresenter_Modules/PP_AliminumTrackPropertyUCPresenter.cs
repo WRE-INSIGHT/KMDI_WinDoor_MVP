@@ -27,10 +27,19 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _aluminumTrackUC.PPAliminumTrackPropertyUCLoadEventRaised += _aluminumTrackUC_PPAliminumTrackPropertyUCLoadEventRaised;
             _aluminumTrackUC.AluminumTrackQtyValueChangedEventRaised += _aluminumTrackUC_AluminumTrackQtyValueChangedEventRaised;
+            _aluminumTrackUC.AluminumTrackQtyValueKeyUpEventRaised += _aluminumTrackUC_AluminumTrackQtyValueKeyUpEventRaised;
         }
 
         private void _aluminumTrackUC_AluminumTrackQtyValueChangedEventRaised(object sender, EventArgs e)
         {
+            NumericUpDown num_alumtrack = (NumericUpDown)sender;
+            _panelModel.Panel_AluminumTrackQty = (int)num_alumtrack.Value;
+            _mainPresenter.GetCurrentPrice();
+        }
+        private void _aluminumTrackUC_AluminumTrackQtyValueKeyUpEventRaised(object sender, EventArgs e)
+        {
+            NumericUpDown num_alumtrack = (NumericUpDown)sender;
+            _panelModel.Panel_AluminumTrackQty = (int)num_alumtrack.Value;
             _mainPresenter.GetCurrentPrice();
         }
 

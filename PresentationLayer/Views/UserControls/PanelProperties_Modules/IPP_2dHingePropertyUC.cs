@@ -7,5 +7,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
     {
         event EventHandler PP2dHingeLoadEventRaised;
         event EventHandler num2dHingeQtyNonMotorizedValueChangedEventRaised;
+        event EventHandler num2dHingQtyNonMotorizzedValueKeyUpEventRaised;
     }
 }

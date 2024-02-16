@@ -15,6 +15,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public event EventHandler CmbMiddleCLoserSelectedValueChangedEventRaised;
         public event EventHandler MiddleCloserPropertyUCLoadEventRaised;
         public event EventHandler MCPairQtyValueChangedEventRaised;
+        public event EventHandler MCPairQtyValueKeyPressEventRaised;
         private void cmb_MiddleCLoser_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CmbMiddleCLoserSelectedValueChangedEventRaised, e);
@@ -53,11 +54,22 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         private void cmb_MiddleCLoser_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = true;
+            
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                
+                e.Handled = true;
+            }
+
         }
         private void num_MCPairQty_MouseWheel(object sender, MouseEventArgs e)
         {
             ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void num_MCPairQty_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, MCPairQtyValueKeyPressEventRaised, e);
         }
     }
 }
