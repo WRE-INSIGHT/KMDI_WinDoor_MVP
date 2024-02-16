@@ -27,13 +27,21 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _pp_2dHingePropertUC.PP2dHingeLoadEventRaised += _pp_2dHingePropertUC_PP2dHingeLoadEventRaised;
             _pp_2dHingePropertUC.num2dHingeQtyNonMotorizedValueChangedEventRaised += _pp_2dHingePropertUC_num2dHingeQtyNonMotorizedValueChangedEventRaised;
+            _pp_2dHingePropertUC.num2dHingQtyNonMotorizzedValueKeyUpEventRaised += _pp_2dHingePropertUC_num2dHingQtyNonMotorizzedValueKeyUpEventRaised;
         }
 
         private void _pp_2dHingePropertUC_num2dHingeQtyNonMotorizedValueChangedEventRaised(object sender, EventArgs e)
         {
+            NumericUpDown num_2dHinge = (NumericUpDown)sender;
+            _panelModel.Panel_2DHingeQty_nonMotorized = (int)num_2dHinge.Value;
             _mainPresenter.GetCurrentPrice();
         }
-
+        private void _pp_2dHingePropertUC_num2dHingQtyNonMotorizzedValueKeyUpEventRaised(object sender, EventArgs e)
+        {
+            NumericUpDown num_2dHinge = (NumericUpDown)sender;
+            _panelModel.Panel_2DHingeQty_nonMotorized = (int)num_2dHinge.Value;
+            _mainPresenter.GetCurrentPrice();
+        }
         private void _pp_2dHingePropertUC_PP2dHingeLoadEventRaised(object sender, EventArgs e)
         {
 
