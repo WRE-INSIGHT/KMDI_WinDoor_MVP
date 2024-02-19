@@ -795,6 +795,7 @@ namespace PresentationLayer.Presenter
 
         //public DateTime Date_Assigned_forNewItem { get; set; }
         public DateTime Date_Assigned_Mainpresenter_forNewItem { get; set; }
+        public bool MainPresenter_IsFromDeleteFunction{ get; set; }
 
 
         Dictionary<string, string[]> WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
@@ -1544,7 +1545,7 @@ namespace PresentationLayer.Presenter
                     value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
                     //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
                     //value = await _quotationServices.GetFactorByProvince(province);
-                    if (_factorFromAddExisting <= 0)
+                    if (_factorFromAddExisting <= 0 && _factorHolderOnLoad <= 0)
                     {
                         factorTypes = "Province: "
                                     + (province[province.Length - 2]).Trim()
@@ -1552,6 +1553,17 @@ namespace PresentationLayer.Presenter
                                     + _quotationModel.PricingFactor
                                     + "\nFactor in database: "
                                     + value;
+                    }
+                    else if(_factorHolderOnLoad != 0)
+                    {
+                        factorTypes = "Province: "
+                                    + (province[province.Length - 2]).Trim()
+                                    + "\nCurrent/File Factor: "
+                                    + _quotationModel.PricingFactor
+                                    + "\nFactor in database: "
+                                    + value
+                                    + "\nFactor From Add Existing"
+                                    + _factorHolderOnLoad;
                     }
                     else
                     {
@@ -1691,6 +1703,7 @@ namespace PresentationLayer.Presenter
                                     }
 
                                     _quotationModel.PricingFactor = deci_input;
+                                    _factorHolderOnLoad = _factorFromAddExisting; // set new value 
                                     _factorFromAddExisting = 0; // reset
                                     
 
@@ -1728,6 +1741,11 @@ namespace PresentationLayer.Presenter
                         }
 
                         #endregion
+                    }
+                    else
+                    {
+                        _factorHolderOnLoad = _factorFromAddExisting;
+                        _factorFromAddExisting = 0;
                     }
                 }
             }
@@ -3248,6 +3266,7 @@ namespace PresentationLayer.Presenter
             f.MoveTo(Path.ChangeExtension(outFile, ".wndr"));
             onload = true;
             _factorFromAddExisting = 0;//reset when opening new file
+            _factorHolderOnLoad = 0;// reset when opening new file
             _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
             _basePlatformImagerUCPresenter.SendToBack_baseImager();
             StartWorker("Open_WndrFiles");
@@ -10226,7 +10245,7 @@ namespace PresentationLayer.Presenter
             _EntryCountOfKeyWordPriceValidity;
         bool _EntrytoKeyWordUsing = false,
              _EntrytoKeyWordPriceValidity = false;
-        decimal _factorFromAddExisting;
+        decimal _factorFromAddExisting,_factorHolderOnLoad;
 
         #region Frame Properties
 
@@ -12199,8 +12218,10 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-
-                CheckToDisposeNCopyWindoor();
+                if (!MainPresenter_IsFromDeleteFunction) 
+                {
+                    CheckToDisposeNCopyWindoor();
+                }
 
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
 
@@ -12360,6 +12381,8 @@ namespace PresentationLayer.Presenter
 
                     #endregion      
                 }
+
+                MainPresenter_IsFromDeleteFunction = false; // reset
             }
             catch (Exception ex)
             {
@@ -13095,14 +13118,25 @@ namespace PresentationLayer.Presenter
         {
             _windoorModel.lst_objects.Remove((UserControl)frameModel.Frame_UC);
             _windoorModel.lst_frame.Remove(frameModel);
-            //Load_Windoor_Item(_windoorModel);
+
+            if (!_windoorModel.WD_IsObjectCopied)
+            {
+                MainPresenter_IsFromDeleteFunction = true;
+                Load_Windoor_Item(_windoorModel);
+            }
+
         }
 
         public void DeleteConcrete_OnConcreteList_WindoorModel(IConcreteModel concreteModel)
         {
             _windoorModel.lst_objects.Remove((UserControl)concreteModel.Concrete_UC);
             _windoorModel.lst_concrete.Remove(concreteModel);
-            //Load_Windoor_Item(_windoorModel);
+
+            if (!_windoorModel.WD_IsObjectCopied)
+            {
+                MainPresenter_IsFromDeleteFunction = true;
+                Load_Windoor_Item(_windoorModel);
+            }
         }
 
 
