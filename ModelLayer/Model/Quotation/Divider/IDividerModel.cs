@@ -72,6 +72,7 @@ namespace ModelLayer.Model.Quotation.Divider
         CladdingReinf_ArticleNo Div_CladdingReinfArtNo { get; set; }
         Dictionary<int, int> Div_CladdingSizeList { get; set; }
         int Div_CladdingCount { get; set; }
+        MullionConnector_ArticleNo Div_DividerConnectorArtNo { get; set; }
 
         void SetExplosionValues_Div();
         void AdjustPropertyPanelHeight(string mode);
@@ -91,7 +92,7 @@ namespace ModelLayer.Model.Quotation.Divider
         void Insert_ShootboltStriker_MaterialList(DataTable tbl_explosion);
         void Insert_ShootboltReverse_MaterialList(DataTable tbl_explosion);
         void Insert_ShootboltNonReverse_MaterialList(DataTable tbl_explosion);
-
+        void Insert_DividerConnector_MaterialList(DataTable tbl_explosion);
 
         int Add_ExplosionLength_screws4fab();
         int Add_MechJoint_screws4fab();

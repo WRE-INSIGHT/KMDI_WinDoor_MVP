@@ -380,6 +380,7 @@ namespace PresentationLayer.Presenter.UserControls
                 if (curr_rbtnText == "Window" || curr_rbtnText == "Concrete")
                 {
                     _frameModel.Frame_InversionClipVisibility = true;
+                    _frameModel.Frame_InversionClipOption = true;
                     _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
                     _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
                 }
@@ -394,6 +395,7 @@ namespace PresentationLayer.Presenter.UserControls
                     if (_frameModel.Frame_Type == Frame_Padding.Window)
                     {
                         _frameModel.Frame_InversionClipVisibility = true;
+                        _frameModel.Frame_InversionClipOption = true;
                         _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
                         _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
                     }

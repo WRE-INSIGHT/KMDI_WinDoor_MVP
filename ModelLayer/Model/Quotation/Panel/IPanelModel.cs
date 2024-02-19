@@ -113,6 +113,7 @@ namespace ModelLayer.Model.Quotation.Panel
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
         FrictionStayCasement_ArticleNo Panel_FSCasementArtNo { get; set; }
+        FrictionAlutek_ArticleNo Panel_FSAlutekArtNo { get; set; }
         SnapInKeep_ArticleNo Panel_SnapInKeepArtNo { get; set; }
         FixedCam_ArticleNo Panel_FixedCamArtNo { get; set; }
         _30x25Cover_ArticleNo Panel_30x25CoverArtNo { get; set; }
@@ -334,6 +335,21 @@ namespace ModelLayer.Model.Quotation.Panel
         SlidingAccessoriesRoller_ArticleNo Panel_SlidingAccessoriesRollerArtNo { get; set; }
         int TopHungbrushSealPerimeter { get; set; }
         Brush_ArticleNo Panel_BrushArtNo { get; set; }
+        int Panel_InversionClipWidth { get; set; }
+        int Panel_InversionClipHeight { get; set; }
+        GlazingGasket_ArticleNo Panel_GlazingGasketArtNo { get; set; }
+        GlazingGasket_ArticleNo Panel_GlazingGasketArtNo2 { get; set; }
+        GlazingGasket_ArticleNo Panel_CenterGasketArtNo { get; set; }
+        InversionClip_ArticleNo Panel_InversionClipArtNo { get; set; }
+        OpenableStriker_ArticleNo Panel_OpenableStrikerArtNo { get; set; }
+        CornerCleat_ArticleNo Panel_CornerCleatArtNo { get; set; }
+        Cheveron_ArticleNo Panel_CheveronArtNo { get; set; }
+        RunUpBlock_ArticleNo Panel_RunUpBlockArtNo { get; set; }
+        PackerRod_ArticleNo Panel_PackerRodArtNo { get; set; }
+        LockingWedge_ArticleNo Panel_LockingWedgeArtNo { get; set; }
+        SSCheveron_ArticleNo Panel_SSCheveronArtNo { get; set; }
+        Unica40_ArticleNo Panel_Unica40ArtNo { get; set; }
+        LockingConnectorDevice_ArticleNo Panel_LockingConnectorArtNo { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
@@ -492,6 +508,21 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_SlidingAccessoriesRoller_MaterialList(DataTable tbl_explosion);
         void Insert_SlidingSashBottomGuide_MaterialList(DataTable tbl_explosion, int overlap);
         void Insert_BrushForSliding_MaterialList(DataTable tbl_explosion, int FinPlatePerimeter);
+        void Insert_InversionClip_MaterialList(DataTable tbl_explosion);
+        void Insert_GlazingGasket_Alutek_MaterialList(DataTable tbl_explosion, float GlassThickness);
+        void Insert_CenterGasket_MaterialList(DataTable tbl_explosion);
+        void Insert_OpenableStriker_MaterialList(DataTable tbl_explosion);
+        void Insert_Cheveron_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerWindow_MaterialList(DataTable tbl_explosion);
+        void Insert_RunUpBlock_MaterialList(DataTable tbl_explosion);
+        void Insert_PackerRod_MaterialList(DataTable tbl_explosion);
+        void Insert_LockingWedge_MaterialList(DataTable tbl_explosion);
+        void Insert_SSCheveron_MaterialList(DataTable tbl_explosion);
+        void Insert_Unica40_MaterialList(DataTable tbl_explosion);
+        void Insert_LockingConnectorDevice_MaterialList(DataTable tbl_explosion);
+
+
+
 
         #endregion
 

@@ -722,6 +722,23 @@ namespace ModelLayer.Model.Quotation.Divider
         public ShootboltReverse_ArticleNo Div_ShootboltReverseArtNo { get; set; }
         public DummyMullionStriker_ArticleNo Div_DMStrikerArtNo { get; set; }
 
+        private MullionConnector_ArticleNo _divDividerConnectorArtNo;
+        public MullionConnector_ArticleNo Div_DividerConnectorArtNo
+        {
+            get
+            {
+                return _divDividerConnectorArtNo;
+            }
+            set
+            {
+                _divDividerConnectorArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+
+
         public void SetExplosionValues_Div()
         {
             int frame_deduction = 0;
@@ -745,6 +762,7 @@ namespace ModelLayer.Model.Quotation.Divider
             else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._84100)
             {
                 frame_deduction = 22;
+                Div_DividerConnectorArtNo = MullionConnector_ArticleNo._H120;
             }
 
             if (Div_ChkDM == true)
@@ -876,6 +894,18 @@ namespace ModelLayer.Model.Quotation.Divider
                                 Div_ExplosionHeight = (Div_DisplayHeight - frame_deduction - 33) + 8; // 33 = 7502 thicness
                             }
                         }
+                        //else if (Div_ArtNo == Divider_ArticleNo._6052 && Div_MPanelParent.MPanel_DividerEnabled == true)
+                        //{
+                        //    Div_ExplosionHeight = (Div_DisplayHeight - (frame_deduction * 2)) + (4 * 2);
+                        //}
+                        else if (Div_ArtNo == Divider_ArticleNo._84300)
+                        {
+                            Div_ExplosionHeight = (Div_DisplayHeight - (frame_deduction * 2));
+                        }
+                        else if (Div_ArtNo == Divider_ArticleNo._84301)
+                        {
+                            Div_ExplosionHeight = (Div_DisplayHeight - (frame_deduction * 2));
+                        }
 
                         if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677 || Div_ReinfArtNo == DividerReinf_ArticleNo._V226)
                         {
@@ -884,6 +914,10 @@ namespace ModelLayer.Model.Quotation.Divider
                         else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
                         {
                             Div_ReinfHeight = (Div_ExplosionHeight - (50 * 2)) - (5 * 2);
+                        }
+                        else if (Div_ReinfArtNo == DividerReinf_ArticleNo._None)
+                        {
+                            Div_ReinfHeight = 0;
                         }
 
                         //Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
@@ -920,6 +954,10 @@ namespace ModelLayer.Model.Quotation.Divider
                     else if (Div_ReinfArtNo == DividerReinf_ArticleNo._TV107)
                     {
                         Div_ReinfWidth = (Div_ExplosionWidth - (38 * 2)) - (5 * 2);
+                    }
+                    else if (Div_ReinfArtNo == DividerReinf_ArticleNo._None)
+                    {
+                        Div_ReinfWidth = 0;
                     }
 
                     //Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
@@ -1082,6 +1120,21 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction)) + (4 * 2);
                             }
+                            //else if (Div_ArtNo == Divider_ArticleNo._6052)
+                            //{
+                            //    Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction));
+                            //}
+                            else if (Div_ArtNo == Divider_ArticleNo._84300)
+                            {
+                                Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction));
+                            }
+                            else if (Div_ArtNo == Divider_ArticleNo._84301)
+                            {
+                                Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction));
+                            }
+
+
+
 
                             if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677 || Div_ReinfArtNo == DividerReinf_ArticleNo._V226)
                             {
@@ -1090,6 +1143,10 @@ namespace ModelLayer.Model.Quotation.Divider
                             else if (Div_ReinfArtNo == DividerReinf_ArticleNo._R686)
                             {
                                 Div_ReinfHeight = (Div_ExplosionHeight - (50 * 2)) - (5 * 2);
+                            }
+                            else if (Div_ReinfArtNo == DividerReinf_ArticleNo._None)
+                            {
+                                Div_ReinfHeight = 0;
                             }
 
                             //Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
@@ -1271,6 +1328,10 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             Div_ReinfWidth = (Div_ExplosionWidth - (38 * 2)) - (5 * 2);
                         }
+                        else if (Div_ReinfArtNo == DividerReinf_ArticleNo._None)
+                        {
+                            Div_ReinfWidth = 0;
+                        }
 
                         //Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                         //Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
@@ -1366,23 +1427,30 @@ namespace ModelLayer.Model.Quotation.Divider
                 explosion_length2 = Div_ReinfHeight.ToString();
             }
 
+
             tbl_explosion.Rows.Add(Div_Type.ToString() + " " + div_side + " " + Div_ArtNo.DisplayName,
                                    1, "pc(s)",
                                    explosion_length,
                                    Div_Bounded,
                                    @"[  ]");
 
-            tbl_explosion.Rows.Add(Div_Type.ToString() + " Reinforcement " + div_side + " " + Div_ReinfArtNo.DisplayName,
-                                   1, "pc(s)",
-                                   explosion_length2,
-                                   Div_Type.ToString(),
-                                   @"|  |");
+            if (!Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+                tbl_explosion.Rows.Add(Div_Type.ToString() + " Reinforcement " + div_side + " " + Div_ReinfArtNo.DisplayName,
+                                       1, "pc(s)",
+                                       explosion_length2,
+                                       Div_Type.ToString(),
+                                       @"|  |");
+            }
         }
 
         public void Insert_MechJoint_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add(Div_Type.ToString() + " Mechanical Joint " + Div_MechJoinArtNo.DisplayName,
+            if (!Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+                tbl_explosion.Rows.Add(Div_Type.ToString() + " Mechanical Joint " + Div_MechJoinArtNo.DisplayName,
                                    2, "pc(s)", "");
+            }
         }
 
         public void Insert_CladdingProfile_MaterialList(DataTable tbl_explosion)
@@ -1521,6 +1589,14 @@ namespace ModelLayer.Model.Quotation.Divider
                                    3, "pc(s)",
                                    "",
                                    "Sash & DM");
+        }
+
+        public void Insert_DividerConnector_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Mullion Connector " + Div_DividerConnectorArtNo.DisplayName,
+                               2, "pc(s)",
+                               "",
+                               "Sash");
         }
 
 

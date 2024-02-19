@@ -545,7 +545,7 @@ namespace PresentationLayer.Presenter.UserControls
                         motorized.BringToFront();
 
 
-                    
+
 
 
                     }
