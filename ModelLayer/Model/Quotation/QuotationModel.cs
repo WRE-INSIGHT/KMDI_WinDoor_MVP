@@ -2601,6 +2601,8 @@ namespace ModelLayer.Model.Quotation
         Glass_8mmClr_PricePerSqrMeter = 1662.00m,
         Glass_10mmClr_PricePerSqrMeter = 1662.00m,
         Glass_12mmClr_PricePerSqrMeter = 1941.00m,
+        Glass_14mmClr_PricePerSqrMeter = 2100.00m, // 2/19/2024 recently added
+        Glass_24mmClr_PricePerSqrMeter = 3882.00m, // 2/19/2024 recently added
         Glass_12mmClrOversized_PricePerSqrMeter = 6000.00m,
         Glass_12mmTempTintedOversized_PricePerSqrMeter = 7050.00m,
         Glass_6mmTemp_PricePerSqrMeter = 1614.00m,
@@ -3128,7 +3130,7 @@ namespace ModelLayer.Model.Quotation
             DateTime inc_price_date_6 = DateTime.Parse("07-20-2023");  //change, patch date
             DateTime inc_price_date_7 = DateTime.Parse("08-04-2023"); // MotorizeMechRemotePricePerPiece 
             DateTime inc_price_date_8 = DateTime.Parse("08-30-2023"); // 6 mm Tempered Clear w/ HardCoated Low-E remove desc hardcoated 
-
+            DateTime inc_price_date_9 = DateTime.Parse("02-14-2024"); // Glass 24 mm Clear
 
             if (cus_ref_date >= inc_price_date && cus_ref_date <= _junedateoldago)
             {
@@ -3194,6 +3196,8 @@ namespace ModelLayer.Model.Quotation
                 Glass_8mmClr_PricePerSqrMeter = 1662.00m;
                 Glass_10mmClr_PricePerSqrMeter = 1662.00m;
                 Glass_12mmClr_PricePerSqrMeter = 1941.00m;
+                Glass_14mmClr_PricePerSqrMeter = 2100.00m; // 2/19/2024 recently added
+                Glass_24mmClr_PricePerSqrMeter = 3882.00m; // 2/19/2024 recently added
                 Glass_6mmTemp_PricePerSqrMeter = 1614.00m;
                 Glass_8mmTemp_PricePerSqrMeter = 3201.00m;
                 Glass_10mmTemp_PricePerSqrMeter = 3201.00m;
@@ -3524,6 +3528,9 @@ namespace ModelLayer.Model.Quotation
                 Glass_8mmClr_PricePerSqrMeter = 1662.00m;
                 Glass_10mmClr_PricePerSqrMeter = 1662.00m;
                 Glass_12mmClr_PricePerSqrMeter = 1941.00m;
+                Glass_14mmClr_PricePerSqrMeter = 2100.00m;
+                Glass_14mmClr_PricePerSqrMeter = 2100.00m; // 2/19/2024 recently added
+                Glass_24mmClr_PricePerSqrMeter = 3882.00m; // 2/19/2024 recently added
                 Glass_6mmTemp_PricePerSqrMeter = 1614.00m;
                 Glass_8mmTemp_PricePerSqrMeter = 3201.00m;
                 Glass_10mmTemp_PricePerSqrMeter = 3201.00m;
@@ -3833,7 +3840,7 @@ namespace ModelLayer.Model.Quotation
 
                     MotorizeMechRemotePricePerPiece = 4500.00m;// 19445.50m                    
                 }
-                else if (cus_ref_date >= inc_price_date_8)
+                else if (cus_ref_date >= inc_price_date_8 && cus_ref_date < inc_price_date_9)
                 {
                     FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
                     FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
@@ -3849,6 +3856,26 @@ namespace ModelLayer.Model.Quotation
 
                     MotorizeMechRemotePricePerPiece = 4500.00m;// 19445.50m 
                     Glass_6mmTempClr_HrdCtd_LowE = 2600.00m;//2550.00m
+                }
+                else if (cus_ref_date >= inc_price_date_9)
+                {
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    FramePricePerLinearMeter_6052_White_1sideFoil = 634.04m;
+                    FramePricePerLinearMeter_6052Milled_WoodGrain = 725.02m;
+                    FramePricePerLinearMeter_6052Milled_White = 567.15m;
+                    FramePricePerLinearMeter_6052Milled_White_1sideFoil = 634.04m;
+                    WaterSeepagePricePerLinearMeter = 378.47m;
+                    Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    DividerRein_7536_PricePerSqrMeter = 406.86m;
+
+                    MotorizeMechRemotePricePerPiece = 4500.00m;// 19445.50m 
+                    Glass_6mmTempClr_HrdCtd_LowE = 2600.00m;//2550.00m
+
+                    Glass_14mmClr_PricePerSqrMeter = 2100.00m; // 0m
+                    Glass_24mmClr_PricePerSqrMeter = 3882.00m; // 0m
                 }
             }
 
