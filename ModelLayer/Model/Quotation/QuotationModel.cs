@@ -2692,6 +2692,7 @@ namespace ModelLayer.Model.Quotation
         Glass_Double_24mmAnnealedClr_Argon_TempClrHrdCtdLowe = 5500.00m,
         Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe = 5700.00m,
         Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m,//05/26/23 5900.00
+        Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe_N_ = 7050.00m,//2/20/2024
         Glass_Double_18mmTempTinted_Argon_TempClrHrdCtdLowe = 5500.00m,
         Glass_Double_24mmTempTinted_Argon_TempClrHrdCtdLowe = 6600.00m,
 
@@ -3130,7 +3131,7 @@ namespace ModelLayer.Model.Quotation
             DateTime inc_price_date_6 = DateTime.Parse("07-20-2023");  //change, patch date
             DateTime inc_price_date_7 = DateTime.Parse("08-04-2023"); // MotorizeMechRemotePricePerPiece 
             DateTime inc_price_date_8 = DateTime.Parse("08-30-2023"); // 6 mm Tempered Clear w/ HardCoated Low-E remove desc hardcoated 
-            DateTime inc_price_date_9 = DateTime.Parse("02-14-2024"); // Glass 24 mm Clear
+            DateTime inc_price_date_9 = DateTime.Parse("02-20-2024"); // Glass 14 mm and 24 mm Clear
 
             if (cus_ref_date >= inc_price_date && cus_ref_date <= _junedateoldago)
             {
@@ -5934,6 +5935,16 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmClr_PricePerSqrMeter;
                                                 }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("14 mm Clear"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_14mmClr_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_14mmClr_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("24 mm Clear"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_24mmClr_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_24mmClr_PricePerSqrMeter;
+                                                }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
@@ -6074,6 +6085,17 @@ namespace ModelLayer.Model.Quotation
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                                 }
+
+
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o)"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe_N_;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe_N_;
+
+                                                }
+
+
+
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe;
@@ -6746,6 +6768,16 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmClr_PricePerSqrMeter;
                                                 }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("14 mm Clear"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_14mmClr_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_14mmClr_PricePerSqrMeter;
+                                                }
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("24 mm Clear"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_24mmClr_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_24mmClr_PricePerSqrMeter;
+                                                }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
@@ -6885,6 +6917,15 @@ namespace ModelLayer.Model.Quotation
                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                                 }
+
+                                                else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o)"))
+                                                {
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe_N_;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe_N_;
+
+                                                }
+
+
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe;
@@ -9333,6 +9374,16 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmClr_PricePerSqrMeter;
                                     }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("14 mm Clear"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_14mmClr_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_14mmClr_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("24 mm Clear"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_24mmClr_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_24mmClr_PricePerSqrMeter;
+                                    }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
@@ -9469,6 +9520,16 @@ namespace ModelLayer.Model.Quotation
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                     }
+
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o)"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe_N_;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe_N_;
+
+                                    }
+
+
+
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe;
@@ -10137,6 +10198,16 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmClr_PricePerSqrMeter;
                                     }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("14 mm Clear"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_14mmClr_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_14mmClr_PricePerSqrMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("24 mm Clear"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_24mmClr_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_24mmClr_PricePerSqrMeter;
+                                    }
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
@@ -10273,6 +10344,16 @@ namespace ModelLayer.Model.Quotation
                                         Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_23mmTempClr_Argon_TempClrHrdCtdLowe;
 
                                     }
+
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o)"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe_N_;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe_N_;
+
+                                    }
+
+
+
                                     else if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe;
