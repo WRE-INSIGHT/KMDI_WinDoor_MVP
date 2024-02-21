@@ -17,6 +17,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public event EventHandler chkMotorizedCheckedChangedEventRaised;
         public event EventHandler cmbMotorizedMechSelectedValueChangedEventRaised;
         public event EventHandler chkRemoteCheckedChangedEventRaised;
+        public event EventHandler numSetQtyValueChangedEventRaised;
+        public event EventHandler num2dHingeQtyValueChangedEventRaised;
+        public event EventHandler numButtHingeQtyValueChangedEventRaised;
 
         private void PP_MotorizedPropertyUC_Load(object sender, EventArgs e)
         {
@@ -82,6 +85,36 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         private void num_ButtHingeQty_MouseWheel(object sender, MouseEventArgs e)
         {
             ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void num_SetQty_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, numSetQtyValueChangedEventRaised, e);
+        }
+
+        private void num_SetQty_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, numSetQtyValueChangedEventRaised, e);
+        }
+
+        private void num_2dHingeQty_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, num2dHingeQtyValueChangedEventRaised, e);
+        }
+
+        private void num_2dHingeQty_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, num2dHingeQtyValueChangedEventRaised, e);
+        }
+
+        private void num_ButtHingeQty_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, numButtHingeQtyValueChangedEventRaised, e);
+        }
+
+        private void num_ButtHingeQty_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, numButtHingeQtyValueChangedEventRaised, e);
         }
     }
 }

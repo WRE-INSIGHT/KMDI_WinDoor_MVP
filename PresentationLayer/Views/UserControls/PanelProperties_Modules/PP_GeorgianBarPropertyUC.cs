@@ -85,5 +85,15 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, btnGeorgianBarCustomDesignClickEventRaised, e);
         }
+
+        private void nudVertical_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, numVerticalValueChangedEventRaised, e);
+        }
+
+        private void nudHorizontal_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, numHorizontalValueChangedEventRaised, e);
+        }
     }
 }

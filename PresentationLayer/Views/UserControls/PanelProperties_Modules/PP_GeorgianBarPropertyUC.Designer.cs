@@ -58,6 +58,7 @@
             this.nudHorizontal.Size = new System.Drawing.Size(85, 22);
             this.nudHorizontal.TabIndex = 17;
             this.nudHorizontal.ValueChanged += new System.EventHandler(this.nudHorizontal_ValueChanged);
+            this.nudHorizontal.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nudHorizontal_KeyUp);
             this.nudHorizontal.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nudHorizontal_MouseWheel);
             // 
             // nudVertical
@@ -69,6 +70,7 @@
             this.nudVertical.Size = new System.Drawing.Size(85, 22);
             this.nudVertical.TabIndex = 16;
             this.nudVertical.ValueChanged += new System.EventHandler(this.nudVertical_ValueChanged);
+            this.nudVertical.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nudVertical_KeyUp);
             this.nudVertical.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nudVertical_MouseWheel);
             // 
             // label2

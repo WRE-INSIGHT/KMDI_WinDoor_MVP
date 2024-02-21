@@ -82,6 +82,7 @@
             this.num_MCPairQty.Size = new System.Drawing.Size(75, 22);
             this.num_MCPairQty.TabIndex = 41;
             this.num_MCPairQty.ValueChanged += new System.EventHandler(this.num_MCPairQty_ValueChanged);
+            this.num_MCPairQty.KeyUp += new System.Windows.Forms.KeyEventHandler(this.num_MCPairQty_KeyUp);
             this.num_MCPairQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_MCPairQty_MouseWheel);
             // 
             // PP_MiddleCloserPropertyUC

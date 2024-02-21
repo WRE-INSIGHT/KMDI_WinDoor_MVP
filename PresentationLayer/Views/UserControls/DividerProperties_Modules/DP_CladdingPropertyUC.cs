@@ -90,5 +90,10 @@ namespace PresentationLayer.Views.UserControls.DividerProperties_Modules
         {
             ((HandledMouseEventArgs)e).Handled = true;
         }
+
+        private void num_CladdingSize_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, numCladdingSizeValueChangedEventRaised, e);
+        }
     }
 }

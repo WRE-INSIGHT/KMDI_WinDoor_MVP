@@ -32,12 +32,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_middleCloserPropertyUC_MCPairQtyValueChangedEventRaised(object sender, EventArgs e)
         {
-            NumericUpDown cmbMC = (NumericUpDown)sender;
-            _panelModel.Panel_MiddleCloserPairQty = Convert.ToInt32(cmbMC.Value);
+            NumericUpDown numMC = (NumericUpDown)sender;
+            _panelModel.Panel_MiddleCloserPairQty = (int)numMC.Value;
             _mainPresenter.GetCurrentPrice();
 
         }
-
         private void _pp_middleCloserPropertyUC_CmbMiddleCLoserSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             ComboBox cmbMC = (ComboBox)sender;

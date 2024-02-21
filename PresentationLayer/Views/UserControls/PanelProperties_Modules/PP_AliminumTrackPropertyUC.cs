@@ -44,5 +44,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             ((HandledMouseEventArgs)e).Handled = true;
         }
 
+        private void nud_AluminumTrackQty_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, AluminumTrackQtyValueChangedEventRaised, e);
+        }
     }
 }

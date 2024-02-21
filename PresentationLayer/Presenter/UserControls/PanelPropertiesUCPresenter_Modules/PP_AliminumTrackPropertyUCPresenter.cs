@@ -31,6 +31,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _aluminumTrackUC_AluminumTrackQtyValueChangedEventRaised(object sender, EventArgs e)
         {
+            NumericUpDown num_alumtrack = (NumericUpDown)sender;
+            _panelModel.Panel_AluminumTrackQty = (int)num_alumtrack.Value;
             _mainPresenter.GetCurrentPrice();
         }
 

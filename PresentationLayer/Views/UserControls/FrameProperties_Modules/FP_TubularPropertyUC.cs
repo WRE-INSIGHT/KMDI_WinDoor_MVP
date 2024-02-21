@@ -57,5 +57,15 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         {
             ((HandledMouseEventArgs)e).Handled = true;
         }
+
+        private void nud_TubularWidth_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudTubularWidthValueChangedEventRaised, e);
+        }
+
+        private void nud_TubularHeight_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudTubularHeightValueChangedEventRaised, e);
+        }
     }
 }

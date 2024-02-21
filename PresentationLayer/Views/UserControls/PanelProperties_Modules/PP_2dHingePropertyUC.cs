@@ -20,7 +20,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         public event EventHandler PP2dHingeLoadEventRaised;
         public event EventHandler num2dHingeQtyNonMotorizedValueChangedEventRaised;
-
+        
         private void PP_2dHingePropertyUC_Load(object sender, EventArgs e)
         {
             num_2dHingeQtyNonMotorized.Maximum = decimal.MaxValue;
@@ -40,6 +40,11 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         private void num_2dHingeQtyNonMotorized_Mousewheel(object sender, MouseEventArgs e)
         {
             ((HandledMouseEventArgs)e).Handled = true;
+        }
+
+        private void num_2dHingeQtyNonMotorized_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, num2dHingeQtyNonMotorizedValueChangedEventRaised, e);
         }
     }
 }

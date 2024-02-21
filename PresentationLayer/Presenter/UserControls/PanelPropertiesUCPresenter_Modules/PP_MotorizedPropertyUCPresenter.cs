@@ -35,8 +35,26 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _pp_motorizedPropertyUC.chkMotorizedCheckedChangedEventRaised += _pp_motorizedPropertyUC_chkMotorizedCheckedChangedEventRaised;
             _pp_motorizedPropertyUC.cmbMotorizedMechSelectedValueChangedEventRaised += _pp_motorizedPropertyUC_cmbMotorizedMechSelectedValueChangedEventRaised;
             _pp_motorizedPropertyUC.chkRemoteCheckedChangedEventRaised += _pp_motorizedPropertyUC_chkRemoteCheckedChangedEventRaised;
+            _pp_motorizedPropertyUC.numSetQtyValueChangedEventRaised += _pp_motorizedPropertyUC_numSetQtyValueChangedEventRaised;
+            _pp_motorizedPropertyUC.num2dHingeQtyValueChangedEventRaised += _pp_motorizedPropertyUC_num2dHingeQtyValueChangedEventRaised;
+            _pp_motorizedPropertyUC.numButtHingeQtyValueChangedEventRaised += _pp_motorizedPropertyUC_numButtHingeQtyValueChangedEventRaised;
         }
 
+        private void _pp_motorizedPropertyUC_numSetQtyValueChangedEventRaised(object sender, EventArgs e)
+        {
+            NumericUpDown numSetQty = (NumericUpDown)sender;
+            _panelModel.Panel_MotorizedMechSetQty = (int)numSetQty.Value;
+        }
+        private void _pp_motorizedPropertyUC_num2dHingeQtyValueChangedEventRaised(object sender, EventArgs e)
+        {
+            NumericUpDown num2dHinge = (NumericUpDown)sender;
+            _panelModel.Panel_2DHingeQty = (int)num2dHinge.Value;
+        }
+        private void _pp_motorizedPropertyUC_numButtHingeQtyValueChangedEventRaised(object sender, EventArgs e)
+        {
+            NumericUpDown numButtHinge = (NumericUpDown)sender;
+            _panelModel.Panel_ButtHingeQty = (int)numButtHinge.Value;
+        }
         private void _pp_motorizedPropertyUC_chkRemoteCheckedChangedEventRaised(object sender, EventArgs e)
         {
             CheckBox chk = (CheckBox)sender;

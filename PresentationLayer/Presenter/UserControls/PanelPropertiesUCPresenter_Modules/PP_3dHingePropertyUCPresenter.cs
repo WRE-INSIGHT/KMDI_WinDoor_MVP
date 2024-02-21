@@ -31,6 +31,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_3DHingePropertyUC_num3dHingeQtyValueChangedEventRaised(object sender, EventArgs e)
         {
+            NumericUpDown num_3dHinge = (NumericUpDown)sender;
+            _panelModel.Panel_3dHingeQty = (int)num_3dHinge.Value;
             _mainPresenter.GetCurrentPrice();
         }
 
