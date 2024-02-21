@@ -10,6 +10,7 @@ using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -51,6 +52,7 @@ namespace PresentationLayer.Presenter
         bool change_desc_format = false;
         string separete_descFormat = null;
         List<string> description_string_list = new List<string>();
+
 
         public PrintQuotePresenter(IPrintQuoteView printQuoteView)
         {
@@ -515,7 +517,7 @@ namespace PresentationLayer.Presenter
             try
             {
                 EventLoad();
-                //_printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load     
+                //_printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load    
                 _printQuoteView.GetReportViewer().RefreshReport();
                 _printQuoteView_btnRefreshClickEventRaised(sender, e);
             }
