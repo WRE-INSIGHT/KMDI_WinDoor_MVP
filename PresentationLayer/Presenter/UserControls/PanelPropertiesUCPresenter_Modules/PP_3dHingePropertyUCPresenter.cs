@@ -27,7 +27,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _pp_3DHingePropertyUC.PP3dHingeLoadEventRaised += _pp_3DHingePropertyUC_PP3dHingeLoadEventRaised;
             _pp_3DHingePropertyUC.num3dHingeQtyValueChangedEventRaised += _pp_3DHingePropertyUC_num3dHingeQtyValueChangedEventRaised;
-            _pp_3DHingePropertyUC.num3dHingeQtyValueKeyUpEventRaised += _pp_3DHingePropertyUC_num3dHingeQtyValueKeyUpEventRaised;
         }
 
         private void _pp_3DHingePropertyUC_num3dHingeQtyValueChangedEventRaised(object sender, EventArgs e)
@@ -35,13 +34,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             NumericUpDown num_3dHinge = (NumericUpDown)sender;
             _panelModel.Panel_3dHingeQty = (int)num_3dHinge.Value;
             _mainPresenter.GetCurrentPrice();
-        }
-        private void _pp_3DHingePropertyUC_num3dHingeQtyValueKeyUpEventRaised(object sender, EventArgs e)
-        {
-            NumericUpDown num_3dHinge = (NumericUpDown)sender;
-            _panelModel.Panel_3dHingeQty = (int)num_3dHinge.Value;
-            _mainPresenter.GetCurrentPrice();
-
         }
 
         private void _pp_3DHingePropertyUC_PP3dHingeLoadEventRaised(object sender, EventArgs e)

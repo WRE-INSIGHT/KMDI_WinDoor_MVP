@@ -34,5 +34,10 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, nudCladdingQtyValueChangedEventRaised, e);
         }
+
+        private void nud_CladdingQty_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudCladdingQtyValueChangedEventRaised, e);
+        }
     }
 }

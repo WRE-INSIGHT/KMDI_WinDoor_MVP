@@ -14,7 +14,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         public event EventHandler PP3dHingeLoadEventRaised;
         public event EventHandler num3dHingeQtyValueChangedEventRaised;
-        public event EventHandler num3dHingeQtyValueKeyUpEventRaised;
 
         private void PP_3dHingePropertyUC_Load(object sender, EventArgs e)
         {
@@ -39,7 +38,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         private void num_3dHingeQty_KeyUp(object sender, KeyEventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, num3dHingeQtyValueKeyUpEventRaised, e);
+            EventHelpers.RaiseEvent(sender, num3dHingeQtyValueChangedEventRaised, e);
         }
     }
 }

@@ -28,17 +28,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _pp_middleCloserPropertyUC.MiddleCloserPropertyUCLoadEventRaised += _pp_middleCloserPropertyUC_MiddleCloserPropertyUCLoadEventRaised;
             _pp_middleCloserPropertyUC.CmbMiddleCLoserSelectedValueChangedEventRaised += _pp_middleCloserPropertyUC_CmbMiddleCLoserSelectedValueChangedEventRaised;
             _pp_middleCloserPropertyUC.MCPairQtyValueChangedEventRaised += _pp_middleCloserPropertyUC_MCPairQtyValueChangedEventRaised;
-            _pp_middleCloserPropertyUC.MCPairQtyValueKeyPressEventRaised += _pp_middleCloserPropertyUC_MCPairQtyValueKeyPressEventRaised;
         }
 
         private void _pp_middleCloserPropertyUC_MCPairQtyValueChangedEventRaised(object sender, EventArgs e)
-        {
-            NumericUpDown numMC = (NumericUpDown)sender;
-            _panelModel.Panel_MiddleCloserPairQty = (int)numMC.Value;
-            _mainPresenter.GetCurrentPrice();
-
-        }
-        private void _pp_middleCloserPropertyUC_MCPairQtyValueKeyPressEventRaised (object sender, EventArgs e)
         {
             NumericUpDown numMC = (NumericUpDown)sender;
             _panelModel.Panel_MiddleCloserPairQty = (int)numMC.Value;

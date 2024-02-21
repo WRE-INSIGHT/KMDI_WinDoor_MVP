@@ -113,6 +113,8 @@
             this.num_ButtHingeQty.Name = "num_ButtHingeQty";
             this.num_ButtHingeQty.Size = new System.Drawing.Size(69, 20);
             this.num_ButtHingeQty.TabIndex = 24;
+            this.num_ButtHingeQty.ValueChanged += new System.EventHandler(this.num_ButtHingeQty_ValueChanged);
+            this.num_ButtHingeQty.KeyUp += new System.Windows.Forms.KeyEventHandler(this.num_ButtHingeQty_KeyUp);
             this.num_ButtHingeQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_ButtHingeQty_MouseWheel);
             // 
             // label3
@@ -145,6 +147,8 @@
             this.num_2dHingeQty.Name = "num_2dHingeQty";
             this.num_2dHingeQty.Size = new System.Drawing.Size(69, 20);
             this.num_2dHingeQty.TabIndex = 24;
+            this.num_2dHingeQty.ValueChanged += new System.EventHandler(this.num_2dHingeQty_ValueChanged);
+            this.num_2dHingeQty.KeyUp += new System.Windows.Forms.KeyEventHandler(this.num_2dHingeQty_KeyUp);
             this.num_2dHingeQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_2dHingeQty_MouseWheel);
             // 
             // label2
@@ -233,6 +237,8 @@
             this.num_SetQty.Name = "num_SetQty";
             this.num_SetQty.Size = new System.Drawing.Size(69, 20);
             this.num_SetQty.TabIndex = 22;
+            this.num_SetQty.ValueChanged += new System.EventHandler(this.num_SetQty_ValueChanged);
+            this.num_SetQty.KeyUp += new System.Windows.Forms.KeyEventHandler(this.num_SetQty_KeyUp);
             this.num_SetQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.num_SetQty_MouseWheel);
             // 
             // label1

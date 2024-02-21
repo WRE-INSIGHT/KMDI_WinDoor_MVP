@@ -26,8 +26,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public event EventHandler numVerticalValueChangedEventRaised;
         public event EventHandler numHorizontalValueChangedEventRaised;
         public event EventHandler btnGeorgianBarCustomDesignClickEventRaised;
-        public event EventHandler numVerticalValueKeyUpEventRaised;
-        public event EventHandler numHorizontalValueKeyUpEventRaised;
 
         private void PP_GeorgianBarPropertyUC_Load(object sender, EventArgs e)
         {
@@ -90,12 +88,12 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         private void nudVertical_KeyUp(object sender, KeyEventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, numVerticalValueKeyUpEventRaised, e);
+            EventHelpers.RaiseEvent(sender, numVerticalValueChangedEventRaised, e);
         }
 
         private void nudHorizontal_KeyUp(object sender, KeyEventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, numHorizontalValueKeyUpEventRaised, e);
+            EventHelpers.RaiseEvent(sender, numHorizontalValueChangedEventRaised, e);
         }
     }
 }
