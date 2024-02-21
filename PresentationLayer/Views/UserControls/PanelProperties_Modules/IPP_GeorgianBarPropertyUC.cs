@@ -12,8 +12,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         event EventHandler numVerticalValueChangedEventRaised;
         event EventHandler numHorizontalValueChangedEventRaised;
         event EventHandler btnGeorgianBarCustomDesignClickEventRaised;
-        event EventHandler numVerticalValueKeyUpEventRaised;
-        event EventHandler numHorizontalValueKeyUpEventRaised;
 
     }
 }

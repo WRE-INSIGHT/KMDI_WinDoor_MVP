@@ -19,7 +19,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         public event EventHandler PPAliminumTrackPropertyUCLoadEventRaised;
         public event EventHandler AluminumTrackQtyValueChangedEventRaised;
-        public event EventHandler AluminumTrackQtyValueKeyUpEventRaised;
 
 
         private void PP_AliminumTrackPropertyUC_Load(object sender, EventArgs e)
@@ -47,7 +46,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         private void nud_AluminumTrackQty_KeyUp(object sender, KeyEventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, AluminumTrackQtyValueKeyUpEventRaised, e);
+            EventHelpers.RaiseEvent(sender, AluminumTrackQtyValueChangedEventRaised, e);
         }
     }
 }

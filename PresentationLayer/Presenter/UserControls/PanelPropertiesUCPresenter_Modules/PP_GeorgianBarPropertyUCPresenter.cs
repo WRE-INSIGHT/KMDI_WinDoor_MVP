@@ -37,90 +37,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _pp_georgianBarPropertyUC.numVerticalValueChangedEventRaised += _pp_georgianBarPropertyUC_numVerticalValueChangedEventRaised;
             _pp_georgianBarPropertyUC.numHorizontalValueChangedEventRaised += _pp_georgianBarPropertyUC_numHorizontalValueChangedEventRaised;
             _pp_georgianBarPropertyUC.btnGeorgianBarCustomDesignClickEventRaised += _pp_georgianBarPropertyUC_btnGeorgianBarCustomDesignClickEventRaised;
-            _pp_georgianBarPropertyUC.numVerticalValueKeyUpEventRaised += _pp_georgianBarPropertyUC_numVerticalValueKeyUpEventRaised;
-            _pp_georgianBarPropertyUC.numHorizontalValueKeyUpEventRaised += _pp_georgianBarPropertyUC_numHorizontalValueKeyUpEventRaised;
         }
 
         private void _pp_georgianBarPropertyUC_btnGeorgianBarCustomDesignClickEventRaised(object sender, EventArgs e)
         {
             IGeorgianBarCustomizeDesignPresenter GBCustomizeDesgin = _georgianBarCustomizeDesignPresenter.GetNewInstance(_mainPresenter, _unityC, _panelModel, _mainPresenter.windoorModel_MainPresenter);
             GBCustomizeDesgin.GetGeorgianBarCustomizeDesignView().ShowView();
-        }
-        private void _pp_georgianBarPropertyUC_numVerticalValueKeyUpEventRaised(object sender, EventArgs e)
-        {
-            NumericUpDown numVertical = (NumericUpDown)sender;
-            _panelModel.Panel_GeorgianBar_VerticalQty = (int)numVertical.Value;
-
-            if (_panelModel.Panel_GlassHeight != 0)
-            {
-                int gbarThickness = 0;
-                if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
-                {
-                    gbarThickness = 20;
-                }
-                else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
-                {
-                    gbarThickness = 40;
-                }
-
-                int maxlimitqty = Convert.ToInt32(Math.Ceiling((decimal)(_panelModel.Panel_GlassWidth / gbarThickness)));
-
-                if (numVertical.Value > maxlimitqty)
-                {
-                    MessageBox.Show("Maximum quantity reached", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    numVertical.Value = maxlimitqty;
-                }
-                _mainPresenter.itemDescription();
-                _mainPresenter.GetCurrentPrice();
-            }
-            else
-            {
-                MessageBox.Show("Please complete the design first", "Cant compute for glass", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                numVertical.Value = 0;
-            }
-            if (_panelModel.Panel_ParentMultiPanelModel != null)
-            {
-                ((IPanelUC)_panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.Find(pnl => pnl.Name == _panelModel.Panel_Name)).InvalidateThis();
-            }
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-        }
-        private void _pp_georgianBarPropertyUC_numHorizontalValueKeyUpEventRaised(object sender, EventArgs e)
-        {
-            NumericUpDown numHorizontal = (NumericUpDown)sender;
-            _panelModel.Panel_GeorgianBar_HorizontalQty = (int)numHorizontal.Value;
-            if (_panelModel.Panel_GlassWidth != 0)
-            {
-                int gbarThickness = 0;
-                if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
-                {
-                    gbarThickness = 20;
-                }
-                else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
-                {
-                    gbarThickness = 40;
-                }
-
-                int maxlimitqty = Convert.ToInt32(Math.Ceiling((decimal)(_panelModel.Panel_GlassHeight / gbarThickness)));
-
-                if (numHorizontal.Value > maxlimitqty)
-                {
-                    MessageBox.Show("Maximum quantity reached", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    numHorizontal.Value = maxlimitqty;
-                }
-                _mainPresenter.itemDescription();
-                _mainPresenter.GetCurrentPrice();
-            }
-            else
-            {
-                MessageBox.Show("Please complete the design first", "Cant compute for glass", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                numHorizontal.Value = 0;
-            }
-
-            if (_panelModel.Panel_ParentMultiPanelModel != null)
-            {
-                ((IPanelUC)_panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.Find(pnl => pnl.Name == _panelModel.Panel_Name)).InvalidateThis();
-            }
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void _pp_georgianBarPropertyUC_numHorizontalValueChangedEventRaised(object sender, EventArgs e)

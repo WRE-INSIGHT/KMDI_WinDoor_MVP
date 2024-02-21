@@ -97,6 +97,7 @@
             this.nud_screenHeight.Size = new System.Drawing.Size(102, 20);
             this.nud_screenHeight.TabIndex = 31;
             this.nud_screenHeight.ValueChanged += new System.EventHandler(this.nud_screenHeight_ValueChanged);
+            this.nud_screenHeight.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nud_screenHeight_KeyUp);
             this.nud_screenHeight.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nud_screenHeight_MouseWheel);
             // 
             // chck_screenHeightOption

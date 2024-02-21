@@ -57,6 +57,7 @@
             0,
             0});
             this.nud_RailsQty.ValueChanged += new System.EventHandler(this.nud_RailsQty_ValueChanged);
+            this.nud_RailsQty.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nud_RailsQty_KeyUp);
             this.nud_RailsQty.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.nud_RailsQty_MouseWheel);
             // 
             // lbl_RailsQty

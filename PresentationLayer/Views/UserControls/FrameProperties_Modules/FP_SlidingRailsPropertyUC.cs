@@ -39,6 +39,9 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
             ((HandledMouseEventArgs)e).Handled = true;
         }
 
-
+        private void nud_RailsQty_KeyUp(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudRailsQtyValueChangedEventRaised, e);
+        }
     }
 }
