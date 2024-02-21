@@ -793,6 +793,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public bool MainPresenter_IsFromDeleteFunction{ get; set; }
 
         #endregion
 
@@ -1524,7 +1525,7 @@ namespace PresentationLayer.Presenter
                     value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
                     //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
                     //value = await _quotationServices.GetFactorByProvince(province);
-                    if (_factorFromAddExisting <= 0)
+                    if (_factorFromAddExisting <= 0 && _factorHolderOnLoad <= 0)
                     {
                         factorTypes = "Province: "
                                     + (province[province.Length - 2]).Trim()
@@ -1532,6 +1533,17 @@ namespace PresentationLayer.Presenter
                                     + _quotationModel.PricingFactor
                                     + "\nFactor in database: "
                                     + value;
+                    }
+                    else if(_factorHolderOnLoad != 0)
+                    {
+                        factorTypes = "Province: "
+                                    + (province[province.Length - 2]).Trim()
+                                    + "\nCurrent/File Factor: "
+                                    + _quotationModel.PricingFactor
+                                    + "\nFactor in database: "
+                                    + value
+                                    + "\nFactor From Add Existing"
+                                    + _factorHolderOnLoad;
                     }
                     else
                     {
@@ -1671,6 +1683,7 @@ namespace PresentationLayer.Presenter
                                     }
 
                                     _quotationModel.PricingFactor = deci_input;
+                                    _factorHolderOnLoad = _factorFromAddExisting; // set new value 
                                     _factorFromAddExisting = 0; // reset
                                     
 
@@ -1708,6 +1721,11 @@ namespace PresentationLayer.Presenter
                         }
 
                         #endregion
+                    }
+                    else
+                    {
+                        _factorHolderOnLoad = _factorFromAddExisting;
+                        _factorFromAddExisting = 0;
                     }
                 }
             }
@@ -3221,6 +3239,7 @@ namespace PresentationLayer.Presenter
             f.MoveTo(Path.ChangeExtension(outFile, ".wndr"));
             onload = true;
             _factorFromAddExisting = 0;//reset when opening new file
+            _factorHolderOnLoad = 0;// reset when opening new file
             _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
             _basePlatformImagerUCPresenter.SendToBack_baseImager();
             StartWorker("Open_WndrFiles");
@@ -3276,7 +3295,7 @@ namespace PresentationLayer.Presenter
         {
             _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
             _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
-
+              
 
             if (Properties.Settings.Default.FirstTym == true)
             {
@@ -3658,6 +3677,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 5700.00m, false, true, false, true, false);
 
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 5900.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o)", "Double Insulated", 7050.00m, false, true, false, true, false);
 
             _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 6600.00m, false, true, false, true, false);
@@ -3669,6 +3689,9 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
             _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5700.00m, false, true, false, true, false);
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5900.00m, false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o) with Georgian Bar", "Double Insulated", 7050.00m, false, true, false, true, false);
+
+
             _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 6600.00m, false, true, false, true, false);
             //Tempered Heat-Soaked with Low-e
@@ -10172,7 +10195,7 @@ namespace PresentationLayer.Presenter
             _EntryCountOfKeyWordPriceValidity;
         bool _EntrytoKeyWordUsing = false,
              _EntrytoKeyWordPriceValidity = false;
-        decimal _factorFromAddExisting;
+        decimal _factorFromAddExisting,_factorHolderOnLoad;
 
         #region Frame Properties
 
@@ -12133,8 +12156,10 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-
-                CheckToDisposeNCopyWindoor();
+                if (!MainPresenter_IsFromDeleteFunction) 
+                {
+                    CheckToDisposeNCopyWindoor();
+                }
 
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
 
@@ -12294,6 +12319,8 @@ namespace PresentationLayer.Presenter
 
                     #endregion      
                 }
+
+                MainPresenter_IsFromDeleteFunction = false; // reset
             }
             catch (Exception ex)
             {
@@ -13016,14 +13043,25 @@ namespace PresentationLayer.Presenter
         {
             _windoorModel.lst_objects.Remove((UserControl)frameModel.Frame_UC);
             _windoorModel.lst_frame.Remove(frameModel);
-            //Load_Windoor_Item(_windoorModel);
+
+            if (!_windoorModel.WD_IsObjectCopied)
+            {
+                MainPresenter_IsFromDeleteFunction = true;
+                Load_Windoor_Item(_windoorModel);
+            }
+
         }
 
         public void DeleteConcrete_OnConcreteList_WindoorModel(IConcreteModel concreteModel)
         {
             _windoorModel.lst_objects.Remove((UserControl)concreteModel.Concrete_UC);
             _windoorModel.lst_concrete.Remove(concreteModel);
-            //Load_Windoor_Item(_windoorModel);
+
+            if (!_windoorModel.WD_IsObjectCopied)
+            {
+                MainPresenter_IsFromDeleteFunction = true;
+                Load_Windoor_Item(_windoorModel);
+            }
         }
 
 

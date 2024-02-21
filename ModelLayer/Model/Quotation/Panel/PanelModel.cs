@@ -10098,11 +10098,15 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_ScrewSetForDhandlesVariant_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Screw Set " + Panel_ScrewSetsArtNo.DisplayName,
+            if(Panel_ScrewSetsArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Screw Set " + Panel_ScrewSetsArtNo.DisplayName,
                          1, "Set",
                          "",
                          "Handle",
                          @"");
+            }
+            
         }
 
         public void Insert_SpacerFixedSash_MaterialList(DataTable tbl_explosion)
