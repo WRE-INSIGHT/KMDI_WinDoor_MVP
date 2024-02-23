@@ -582,6 +582,7 @@ iif(Fields!dtUnitPrice.Value &lt;= 0," - " ,Fields!dtUnitPrice.Value ))</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>

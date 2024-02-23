@@ -52,8 +52,6 @@ namespace ModelLayer.Model.Quotation
         public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
         public bool FactorChange { get; set; }
 
-
-
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
             DataColumn col = new DataColumn();

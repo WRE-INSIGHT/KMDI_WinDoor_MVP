@@ -57,6 +57,12 @@ namespace PresentationLayer.Views
                 txtbx_SummaryLessD.Text = value;
             }
         }
+
+        public CheckBox GetScreenNetOfDiscountChkBox()
+        {
+            return chkbx_ScreenNetofDiscount;
+        }
+
         public CheckBox GetSubTotalCheckBox()
         {
             return chkbox_subtotal;
@@ -150,6 +156,7 @@ namespace PresentationLayer.Views
         public event EventHandler chkbxguShowNotedByCheckedChanged;
         public event EventHandler chkbxguShowVatCheckedChanged;
         public event EventHandler chkbx_SummaryLessD_CheckedChangedEventRaised;
+        public event EventHandler chkbx_ScreenNetofDiscount_CheckedChangedEventRaised;
 
         public RDLCReportCompilerView()
         {
@@ -199,6 +206,11 @@ namespace PresentationLayer.Views
         private void chkbx_SummaryLessD_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, chkbx_SummaryLessD_CheckedChangedEventRaised, e);
+        }
+
+        private void chkbx_ScreenNetofDiscount_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbx_ScreenNetofDiscount_CheckedChangedEventRaised, e);
         }
     }
 }
