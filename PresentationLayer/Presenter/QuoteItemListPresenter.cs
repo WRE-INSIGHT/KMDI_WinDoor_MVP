@@ -52,6 +52,7 @@ namespace PresentationLayer.Presenter
                      _renderPDFAtBackground,
                      _showVatContractSummary,
                      _rdlcReportCompilerShowSubTotal,
+                     _rdlcReportCompilerScreenNetOfDiscount,
                      _intInString,
                      _guShowReviewedBy,
                      _guShowNotedBy,
@@ -135,6 +136,17 @@ namespace PresentationLayer.Presenter
             set
             {
                 _rdlcReportCompilerShowSubTotal = value;
+            }
+        }
+        public bool RDLCReportCompilerScreenNetOfDiscount
+        {
+            get
+            {
+                return _rdlcReportCompilerScreenNetOfDiscount;
+            }
+            set
+            {
+                _rdlcReportCompilerScreenNetOfDiscount = value;
             }
         }
         public bool RenderPDFAtBackGround
@@ -455,6 +467,22 @@ namespace PresentationLayer.Presenter
                         Screen_NetPrice = item.Screen_NetPrice.ToString("n");
                     }
 
+                    #region Net of Discount
+                    string str_DiscountPerItem = item.Screen_Discount.ToString() + "%";
+                    decimal dec_DiscounPerItem = 0;
+
+                    if (str_DiscountPerItem.Contains("%"))
+                    {
+                        //use for NetPrice 
+                        dec_DiscounPerItem = 1 - (Convert.ToDecimal(String.Format("{0,0:N2}", Decimal.Parse(str_DiscountPerItem.Replace("%", "")) / 100)));
+                    }
+                    else
+                    {
+                        dec_DiscounPerItem = 0;
+                    }
+
+                    #endregion
+
                     _dsq.dtScreen.Rows.Add(item.Screen_Description + setDesc,
                                             Screen_DimensionFormat, // Screen widht x height
                                             item.Screen_WindoorID,
@@ -467,7 +495,8 @@ namespace PresentationLayer.Presenter
                                             "",
                                             Screen_Discount, //screen discount
                                             "",
-                                            DiscountPercentage
+                                            DiscountPercentage,
+                                            dec_DiscounPerItem // discount per item
                                             );
                 }
                 clearingOperation();

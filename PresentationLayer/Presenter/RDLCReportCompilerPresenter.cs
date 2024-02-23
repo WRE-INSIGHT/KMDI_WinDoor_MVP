@@ -49,7 +49,8 @@ namespace PresentationLayer.Presenter
         private TextBox _guTxtBxVat;
         private CheckBox _guShowReviewedBy,
                          _guShowNotedBy,
-                         _guShowVat;
+                         _guShowVat,
+                         _screenNetOfDiscount;
         private CheckedListBox _guGlassListChkLst;
 
         string[] _officialsName = { "KENNETH G. LAO", "GENALYN C. GARCIA", "STEPHANIE DE LOS SANTOS", "KEVIN CHARLES S. LAO" };
@@ -67,6 +68,7 @@ namespace PresentationLayer.Presenter
             _printQuotePresenter = printQuotePresenter;
             _pdfWaitFormPresenter = pdfWaitFormPresenter;
 
+            _screenNetOfDiscount = _rdlcReportCompilerView.GetScreenNetOfDiscountChkBox();
             _gucmbGlassType = _rdlcReportCompilerView.GUGlassType();
             _guCmbReviewedBy = _rdlcReportCompilerView.GUReviewedBy();
             _guCmbNotedBy = _rdlcReportCompilerView.GUNotedBy();
@@ -94,12 +96,15 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.chkbxguShowNotedByCheckedChanged += new EventHandler(OnchkbxguShowNotedByCheckedChanged);
             _rdlcReportCompilerView.chkbxguShowVatCheckedChanged += new EventHandler(OnchkbxguShowVatCheckedChanged);
             _rdlcReportCompilerView.chkbx_SummaryLessD_CheckedChangedEventRaised += new EventHandler(Onchkbx_SummaryLessD_CheckedChangedEventRaised);
+            _rdlcReportCompilerView.chkbx_ScreenNetofDiscount_CheckedChangedEventRaised += new EventHandler(Onchkbx_ScreenNetofDiscount_CheckedChangedEventRaised);
             
             //bgw.WorkerReportsProgress = true;
             //bgw.WorkerSupportsCancellation = true;
             //bgw.DoWork += Bgw_DoWork;
             //bgw.ProgressChanged += Bgw_ProgressChanged; 
         }
+
+
 
         //private delegate void DELEGATE();
         //private void Bgw_DoWork(object sender, DoWorkEventArgs e)
@@ -114,6 +119,18 @@ namespace PresentationLayer.Presenter
         //{
 
         //}
+
+        private void Onchkbx_ScreenNetofDiscount_CheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_screenNetOfDiscount.Checked)
+            {
+                _quoteItemListPresenter.RDLCReportCompilerScreenNetOfDiscount = true;
+            }
+            else
+            {
+                _quoteItemListPresenter.RDLCReportCompilerScreenNetOfDiscount = false;
+            }
+        }
 
         private void OnchkbxguShowReviewedByCheckedChangedEventRaised(object sender, EventArgs e)
         {

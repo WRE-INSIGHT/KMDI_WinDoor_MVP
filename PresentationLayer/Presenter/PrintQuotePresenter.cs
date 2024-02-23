@@ -882,6 +882,14 @@ namespace PresentationLayer.Presenter
                         RParam[18] = new ReportParameter("NetOfDiscount", "False");
                     }
 
+                    if (_quoteItemListPresenter != null)
+                    {
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerScreenNetOfDiscount == true)
+                        {
+                            RParam[18] = new ReportParameter("NetOfDiscount", "True");
+                        }
+                    }
+
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
 

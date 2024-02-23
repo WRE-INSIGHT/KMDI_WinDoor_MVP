@@ -20,6 +20,8 @@ namespace PresentationLayer.Views
         event EventHandler chkbxguShowNotedByCheckedChanged;
         event EventHandler chkbxguShowVatCheckedChanged;
         event EventHandler chkbx_SummaryLessD_CheckedChangedEventRaised;
+        event EventHandler chkbx_ScreenNetofDiscount_CheckedChangedEventRaised;
+        CheckBox GetScreenNetOfDiscountChkBox();
         CheckedListBox GetChecklistBoxIndex();
         void ShowRDLCReportCompilerView();
         void CloseRDLCReportCompilerView();

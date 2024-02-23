@@ -34,6 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chkbx_ScreenNetofDiscount = new System.Windows.Forms.CheckBox();
+            this.txtbx_SummaryLessD = new System.Windows.Forms.TextBox();
             this.chkbx_SummaryLessD = new System.Windows.Forms.CheckBox();
             this.btnCompileReport = new System.Windows.Forms.Button();
             this.txt_SummaryVat = new System.Windows.Forms.TextBox();
@@ -59,7 +61,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.txtbx_SummaryLessD = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -124,6 +125,7 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.chkbx_ScreenNetofDiscount);
             this.panel2.Controls.Add(this.txtbx_SummaryLessD);
             this.panel2.Controls.Add(this.chkbx_SummaryLessD);
             this.panel2.Controls.Add(this.btnCompileReport);
@@ -149,6 +151,25 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(805, 145);
             this.panel2.TabIndex = 1;
+            // 
+            // chkbx_ScreenNetofDiscount
+            // 
+            this.chkbx_ScreenNetofDiscount.AutoSize = true;
+            this.chkbx_ScreenNetofDiscount.Location = new System.Drawing.Point(145, 74);
+            this.chkbx_ScreenNetofDiscount.Name = "chkbx_ScreenNetofDiscount";
+            this.chkbx_ScreenNetofDiscount.Size = new System.Drawing.Size(102, 17);
+            this.chkbx_ScreenNetofDiscount.TabIndex = 17;
+            this.chkbx_ScreenNetofDiscount.Text = "Net Of Discount";
+            this.chkbx_ScreenNetofDiscount.UseVisualStyleBackColor = true;
+            this.chkbx_ScreenNetofDiscount.CheckedChanged += new System.EventHandler(this.chkbx_ScreenNetofDiscount_CheckedChanged);
+            // 
+            // txtbx_SummaryLessD
+            // 
+            this.txtbx_SummaryLessD.Location = new System.Drawing.Point(375, 66);
+            this.txtbx_SummaryLessD.Multiline = true;
+            this.txtbx_SummaryLessD.Name = "txtbx_SummaryLessD";
+            this.txtbx_SummaryLessD.Size = new System.Drawing.Size(78, 24);
+            this.txtbx_SummaryLessD.TabIndex = 16;
             // 
             // chkbx_SummaryLessD
             // 
@@ -277,7 +298,7 @@
             // cmb_GlassType
             // 
             this.cmb_GlassType.FormattingEnabled = true;
-            this.cmb_GlassType.Location = new System.Drawing.Point(145, 95);
+            this.cmb_GlassType.Location = new System.Drawing.Point(145, 122);
             this.cmb_GlassType.Name = "cmb_GlassType";
             this.cmb_GlassType.Size = new System.Drawing.Size(50, 21);
             this.cmb_GlassType.TabIndex = 6;
@@ -392,14 +413,6 @@
             this.saveFileDialog.Filter = "Pdf Files|*.pdf";
             this.saveFileDialog.Title = "Save ";
             // 
-            // txtbx_SummaryLessD
-            // 
-            this.txtbx_SummaryLessD.Location = new System.Drawing.Point(375, 66);
-            this.txtbx_SummaryLessD.Multiline = true;
-            this.txtbx_SummaryLessD.Name = "txtbx_SummaryLessD";
-            this.txtbx_SummaryLessD.Size = new System.Drawing.Size(78, 24);
-            this.txtbx_SummaryLessD.TabIndex = 16;
-            // 
             // RDLCReportCompilerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -457,5 +470,6 @@
         private System.Windows.Forms.CheckedListBox chklst_glassType;
         private System.Windows.Forms.CheckBox chkbx_SummaryLessD;
         private System.Windows.Forms.TextBox txtbx_SummaryLessD;
+        private System.Windows.Forms.CheckBox chkbx_ScreenNetofDiscount;
     }
 }
