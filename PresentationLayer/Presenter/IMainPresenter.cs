@@ -151,5 +151,6 @@ namespace PresentationLayer.Presenter
         int ForceRestartAndLoadFile();
         void DisposeDrawingandProperties();
         void CopyObjectsPerWindoorModel();
+        void MainPresenter_PartialAdjustment();
     }
 }

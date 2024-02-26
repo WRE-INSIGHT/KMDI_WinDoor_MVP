@@ -146,8 +146,9 @@ namespace PresentationLayer.Presenter.UserControls
           _mainPresenter.GetMainView().GetTSMain().BackColor = System.Drawing.SystemColors.Control;
           _mainPresenter.GetMainView().GetPanelItems().BackColor = System.Drawing.SystemColors.Control;
 
-            _pAItemDisabledUC.DisposeThis();      
-
+            _pAItemDisabledUC.DisposeThis();
+            //Re-Open PartialAdjustment 
+            _mainPresenter.MainPresenter_PartialAdjustment();
         }
 
 
