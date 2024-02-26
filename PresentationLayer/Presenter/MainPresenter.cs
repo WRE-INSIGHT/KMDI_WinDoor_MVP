@@ -1048,63 +1048,6 @@ namespace PresentationLayer.Presenter
 
         }
 
-        private void _mainView_partialAdjusmentToolstripClickClickEventRaised(object sender, EventArgs e)
-        {
-            IPartialAdjustmentViewPresenter partialAdjustment = _partialAdjustmentViewPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, this, _partialAdjustmentBaseHolderPresenter);
-            partialAdjustment.GetPartialAdjustmentView().ShowPartialAdjusmentView();
-        }
-
-        private void _mainView_glassUpgradeToolStripButtonClickEventRaised(object sender, EventArgs e)
-        {
-            IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
-            glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
-        }
-
-        private void _mainView_DateAssignedtoolStripButtonClickEventRaised(object sender, EventArgs e)
-        {
-            try
-            {
-                string input = Interaction.InputBox("Set new date \n\n MM/DD/YYYY \n\n Initial Date Assign:" + dateAssigned.ToString().Replace("12:00:00 AM", string.Empty) + "\n\n Current Date Assigned:" + _quotationModel.Date_Assigned_Mainpresenter.ToString().Replace("12:00:00 AM", string.Empty), "Date Assign", dateAssigned.Date.ToString().Replace(" 12:00:00 AM", string.Empty));
-
-                if (input == "")
-                {
-
-                }
-                else
-                {
-                    DateTime myDate = DateTime.Parse(input);
-                    _quotationModel.Date_Assigned_Mainpresenter = myDate;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                if (ex.HResult == -2146233033)
-                {
-                    MessageBox.Show("Please input a correct date format.");
-                }
-                else
-                {
-                    MessageBox.Show(ex.Message, ex.HResult.ToString());
-                }
-            }
-
-
-            //DateTime myDate;
-            //if (!DateTime.TryParse("03/16/23", out myDate))
-            //{
-            //    // handle parse failure
-            //    Console.WriteLine("mali ka");
-            //}
-
-        }
-
-        private void _mainView_PriceHistorytoolStripButtonClickEventRaised(object sender, EventArgs e)
-        {
-            IPriceHistoryPresenter priceHistory = _priceHistoryPresenter.CreateNewInstance(_unityC, this, _quotationModel);
-            priceHistory.GetPriceHistoryView().ShowPriceHistory();
-        }
-
         public int ForceRestartAndLoadFile()
         {
             int _userObjCount = GetGuiResources(Process.GetCurrentProcess().Handle, 1);
@@ -1242,6 +1185,12 @@ namespace PresentationLayer.Presenter
             return _userObjCount;
 
         }
+        
+        public void MainPresenter_PartialAdjustment()
+        {
+            IPartialAdjustmentViewPresenter partialAdjustment = _partialAdjustmentViewPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, this, _partialAdjustmentBaseHolderPresenter);
+            partialAdjustment.GetPartialAdjustmentView().ShowPartialAdjusmentView();
+        }
 
         public bool LimitReachDialogBox(string _maximumUserObject, string FormTitle)
         {
@@ -1275,6 +1224,63 @@ namespace PresentationLayer.Presenter
         }
 
         #region Events  
+        private void _mainView_partialAdjusmentToolstripClickClickEventRaised(object sender, EventArgs e)
+        {
+            IPartialAdjustmentViewPresenter partialAdjustment = _partialAdjustmentViewPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, this, _partialAdjustmentBaseHolderPresenter);
+            partialAdjustment.GetPartialAdjustmentView().ShowPartialAdjusmentView();
+        }
+
+        private void _mainView_glassUpgradeToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
+            glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
+        }
+
+        private void _mainView_DateAssignedtoolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                string input = Interaction.InputBox("Set new date \n\n MM/DD/YYYY \n\n Initial Date Assign:" + dateAssigned.ToString().Replace("12:00:00 AM", string.Empty) + "\n\n Current Date Assigned:" + _quotationModel.Date_Assigned_Mainpresenter.ToString().Replace("12:00:00 AM", string.Empty), "Date Assign", dateAssigned.Date.ToString().Replace(" 12:00:00 AM", string.Empty));
+
+                if (input == "")
+                {
+
+                }
+                else
+                {
+                    DateTime myDate = DateTime.Parse(input);
+                    _quotationModel.Date_Assigned_Mainpresenter = myDate;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == -2146233033)
+                {
+                    MessageBox.Show("Please input a correct date format.");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, ex.HResult.ToString());
+                }
+            }
+
+
+            //DateTime myDate;
+            //if (!DateTime.TryParse("03/16/23", out myDate))
+            //{
+            //    // handle parse failure
+            //    Console.WriteLine("mali ka");
+            //}
+
+        }
+
+        private void _mainView_PriceHistorytoolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            IPriceHistoryPresenter priceHistory = _priceHistoryPresenter.CreateNewInstance(_unityC, this, _quotationModel);
+            priceHistory.GetPriceHistoryView().ShowPriceHistory();
+        }
+
         private void OnMainViewClosingEventRaised(object sender, FormClosingEventArgs e)
         {
             //if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
