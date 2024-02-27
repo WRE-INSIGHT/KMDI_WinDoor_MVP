@@ -146,7 +146,7 @@ namespace ModelLayer.Model.Quotation
 
                 if (frame.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                 {
-                    frame.Insert_GlazingGasket_MaterialList(Material_List);
+                //    frame.Insert_GlazingGasket_MaterialList(Material_List);
                     frame.Insert_Cheveron_MaterialList(Material_List);
                     frame.Insert_CornerWindow_MaterialList(Material_List);
                 }
@@ -1277,9 +1277,10 @@ namespace ModelLayer.Model.Quotation
 
                                             if (item.WD_profile.Contains("Alutek"))
                                             {
-                                                pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness);
+                                                pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness,true);
                                                 pnl_curCtrl.Insert_CenterGasket_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_OpenableStriker_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_Cheveron_MaterialList(Material_List); 
                                                 pnl_curCtrl.Insert_CornerWindow_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_RunUpBlock_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_PackerRod_MaterialList(Material_List);
@@ -1315,7 +1316,7 @@ namespace ModelLayer.Model.Quotation
 
                                         if (item.WD_profile.Contains("Alutek"))
                                         {
-                                            pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness);
+                                            pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness,false);
                                             if (frame.Frame_InversionClipOption == true)
                                             {
                                                 pnl_curCtrl.Insert_InversionClip_MaterialList(Material_List);

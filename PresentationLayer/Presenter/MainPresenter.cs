@@ -777,6 +777,11 @@ namespace PresentationLayer.Presenter
                 _frameIteration = value;
             }
         }
+
+        public DateTime Date_Assigned { get; set; }
+        public DateTime Date_Assigned_Mainpresenter { get; set; }
+
+
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -8966,6 +8971,7 @@ namespace PresentationLayer.Presenter
                                                                                panel_Type,
                                                                                panel_Visibility,
                                                                                _frameModel.Frame_Zoom,
+                                                                               _userModel,
                                                                                _frameModel,
                                                                                null,
                                                                                panel_DisplayWidth,
@@ -10635,6 +10641,7 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                         _quotationModel.Date_Assigned = dateAssigned;
                         _quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
+                  
 
                         SetPricingFactor();
 
@@ -10645,6 +10652,9 @@ namespace PresentationLayer.Presenter
                                                                          baseColor,
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
+
+                        _windoorModel.Date_Assigned = dateAssigned;
+                        _windoorModel.Date_Assigned_Mainpresenter = dateAssigned;
                         _windoorModel.SetDimensions_basePlatform();
                         AddWndrList_QuotationModel(_windoorModel);
                         _quotationModel.Select_Current_Windoor(_windoorModel);

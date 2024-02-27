@@ -506,7 +506,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 int totalPanelCount = _multiPanelModel.MPanel_Divisions + 1;
 
                 divSize = (int)_frameModel.Frame_Type;
-                
+
 
 
                 for (int i = 0; i < iteration; i++)
@@ -597,7 +597,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 int EqualMPanelWD = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                                 suggest_Wd = EqualMPanelWD - (EqualDisplayWD - suggest_DisplayWD);
                             }
-                       
+
                             #endregion
 
                             FlowDirection flow = FlowDirection.LeftToRight;
@@ -692,7 +692,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
-                                   
+
                                 }
                                 else if (mPanelModel.MPanel_Placement != "Last")
                                 {
@@ -812,7 +812,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 }
                             }
                         }
-                       
+
                         string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
                         decimal displayWidthDecimal = 0;
                         decimal displayWidth = 0;
@@ -934,6 +934,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                data,
                                                                                true,
                                                                                _frameModel.Frame_Zoom,
+                                                                               _userModel,
                                                                                _frameModel,
                                                                                _multiPanelModel,
                                                                                suggest_DisplayWD,
@@ -999,7 +1000,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
                         panelPropUC.Dock = DockStyle.Top;
 
-                        
+
                         _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
                         panelPropUC.BringToFront();
 
@@ -1116,7 +1117,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                             if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door && _mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("C70"))
                             {
-                                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || 
+                                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                 {

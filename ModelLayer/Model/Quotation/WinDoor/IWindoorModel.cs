@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Concrete;
 using ModelLayer.Model.Quotation.Frame;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -84,6 +85,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int pnlLeftCounter { get; set; }
         int pnlRightCounter { get; set; }
         int pnlCount { get; set; }
+        DateTime Date_Assigned { get; set; }
+        DateTime Date_Assigned_Mainpresenter { get; set; }
         void Fit_MyControls_ToBindDimensions();
         void SetfrmDimentionZoom();
         void Fit_MyControls_ImagersToBindDimensions();

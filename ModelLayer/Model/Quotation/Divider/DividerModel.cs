@@ -942,6 +942,11 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
                     }
+                    else if (Div_ArtNo == Divider_ArticleNo._84301)
+                    {
+                        Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                    }
+
 
                     if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677 || Div_ReinfArtNo == DividerReinf_ArticleNo._V226)
                     {
@@ -1192,7 +1197,7 @@ namespace ModelLayer.Model.Quotation.Divider
                             }
                             else if (div_right.Div_ArtNo == Divider_ArticleNo._84301)
                             {
-                                right_deduction = (53 / 2) + frame_deduction;
+                                right_deduction = (52 / 2) + frame_deduction;
                             }
                         }
                         catch (Exception)
@@ -1226,11 +1231,11 @@ namespace ModelLayer.Model.Quotation.Divider
                             }
                             else if (div_right.Div_ArtNo == Divider_ArticleNo._84300)
                             {
-                                right_deduction = 72 / 2;
+                                right_deduction = 23 / 2;
                             }
                             else if (div_right.Div_ArtNo == Divider_ArticleNo._84301)
                             {
-                                right_deduction = 72 / 2;
+                                right_deduction = 52 / 2;
                             }
 
 
@@ -1252,7 +1257,7 @@ namespace ModelLayer.Model.Quotation.Divider
                             }
                             else if (div_left.Div_ArtNo == Divider_ArticleNo._84301)
                             {
-                                left_deduction = 53 / 2;
+                                left_deduction = 52 / 2;
                             }
                         }
                         catch (Exception)
@@ -1287,7 +1292,7 @@ namespace ModelLayer.Model.Quotation.Divider
                             }
                             else if (div_left.Div_ArtNo == Divider_ArticleNo._84301)
                             {
-                                left_deduction = (53 / 2) + frame_deduction;
+                                left_deduction = (52 / 2) + frame_deduction;
                             }
                         }
                         catch (Exception)
@@ -1312,6 +1317,10 @@ namespace ModelLayer.Model.Quotation.Divider
                             Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
                         }
                         else if (Div_ArtNo == Divider_ArticleNo._84300)
+                        {
+                            Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                        }
+                        else if (Div_ArtNo == Divider_ArticleNo._84301)
                         {
                             Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
                         }

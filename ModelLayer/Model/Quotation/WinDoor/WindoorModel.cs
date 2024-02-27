@@ -704,6 +704,10 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _pnlCount = value;
             }
         }
+
+        public DateTime Date_Assigned { get; set; }
+        public DateTime Date_Assigned_Mainpresenter { get; set; }
+
         #region Methods
 
         public void SetDimensions_basePlatform()

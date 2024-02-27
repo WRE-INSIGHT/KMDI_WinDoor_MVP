@@ -1722,7 +1722,7 @@ namespace ModelLayer.Model.Quotation.Frame
             if (Frame_ArtNo == FrameProfile_ArticleNo._84100)
             {
                 FrameGlazingGasket_ArtNo = GlazingGasket_ArticleNo._G221;
-                FrameCheveron_ArtNo = Cheveron_ArticleNo._H231;
+                FrameCheveron_ArtNo = Cheveron_ArticleNo._H083;
                 FrameCornerCleat_ArtNo = CornerCleat_ArticleNo._H079;
                 FrameInversionClip_ArtNo = InversionClip_ArticleNo._84804;
             }
@@ -2819,7 +2819,7 @@ namespace ModelLayer.Model.Quotation.Frame
         public void Insert_CornerWindow_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("Corner Window 26x10mm " + FrameCornerCleat_ArtNo.DisplayName,
-                                2, "pc(s)",
+                                4, "pc(s)",
                                 "",
                                 "Hardware & Accessories",
                                 @"");

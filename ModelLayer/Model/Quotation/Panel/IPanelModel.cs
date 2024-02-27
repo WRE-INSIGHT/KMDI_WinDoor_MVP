@@ -509,7 +509,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_SlidingSashBottomGuide_MaterialList(DataTable tbl_explosion, int overlap);
         void Insert_BrushForSliding_MaterialList(DataTable tbl_explosion, int FinPlatePerimeter);
         void Insert_InversionClip_MaterialList(DataTable tbl_explosion);
-        void Insert_GlazingGasket_Alutek_MaterialList(DataTable tbl_explosion, float GlassThickness);
+        void Insert_GlazingGasket_Alutek_MaterialList(DataTable tbl_explosion, float GlassThickness, bool withSash);
         void Insert_CenterGasket_MaterialList(DataTable tbl_explosion);
         void Insert_OpenableStriker_MaterialList(DataTable tbl_explosion);
         void Insert_Cheveron_MaterialList(DataTable tbl_explosion);

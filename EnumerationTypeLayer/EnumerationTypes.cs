@@ -1549,7 +1549,7 @@ namespace EnumerationTypeLayer
 
         public class Cheveron_ArticleNo : Enumeration<Cheveron_ArticleNo, int>
         {
-            public static readonly Cheveron_ArticleNo _H231 = new Cheveron_ArticleNo(0, "H231");
+            public static readonly Cheveron_ArticleNo _H083 = new Cheveron_ArticleNo(0, "H083");
 
             private Cheveron_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }

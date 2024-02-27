@@ -110,13 +110,13 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.deleteCmenuEventRaised += new EventHandler(OnDeleteCmenuEventRaised);
             _frameUC.outerFramePaintEventRaised += new PaintEventHandler(OnOuterFramePaintEventRaised);
             _frameUC.frameMouseClickEventRaised += new MouseEventHandler(OnFrameMouseClickEventRaised);
-            _frameUC.frameMouseEnterEventRaised += new EventHandler(OnFrameMouseEnterEventRaised);      
+            _frameUC.frameMouseEnterEventRaised += new EventHandler(OnFrameMouseEnterEventRaised);
             _frameUC.frameMouseLeaveEventRaised += new EventHandler(OnFrameMouseLeaveEventRaised);
             _frameUC.frameDragDropEventRaised += _frameUC_frameDragDropEventRaised;
             _frameUC.frameControlAddedEventRaised += _frameUC_frameControlAddedEventRaised;
-            _frameUC.frameControlRemovedEventRaised += _frameUC_frameControlRemovedEventRaised;                                   
+            _frameUC.frameControlRemovedEventRaised += _frameUC_frameControlRemovedEventRaised;
         }
-   
+
         private void _frameUC_frameControlRemovedEventRaised(object sender, ControlEventArgs e)
         {
             _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
@@ -145,7 +145,7 @@ namespace PresentationLayer.Presenter.UserControls
             //    _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
             //}
         }
-        
+
         private void _frameUC_frameDragDropEventRaised(object sender, DragEventArgs e)
         {
             _mainPresenter.ForceRestartAndLoadFile();//chksrobj
@@ -327,6 +327,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                            data,
                                                            true,
                                                            _frameModel.Frame_Zoom,
+                                                           _userModel,
                                                            _frameModel,
                                                            null,
                                                            _frameModel.Frame_Width,

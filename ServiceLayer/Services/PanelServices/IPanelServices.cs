@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.User;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 
@@ -18,6 +19,7 @@ namespace ServiceLayer.Services.PanelServices
                                   string panelType,
                                   bool panelVisibility,
                                   float panelZoom,
+                                  IUserModel panelUserModelParent,
                                   IFrameModel panelFrameModelParent,
                                   IMultiPanelModel panelMultiPanelParent,
                                   int panelDisplayWidth,
