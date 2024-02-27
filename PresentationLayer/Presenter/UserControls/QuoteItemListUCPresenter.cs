@@ -66,6 +66,30 @@ namespace PresentationLayer.Presenter.UserControls
             _quoteItemListUC.suggestedPriceToolStripMenuItemClickEventRaised += _quoteItemListUC_suggestedPriceToolStripMenuItemClickEventRaised;
             _quoteItemListUC.setAllDiscountToolStripMenuItemClickEventRaised += _quoteItemListUC_setAllDiscountToolStripMenuItemClickEventRaised;
             _quoteItemListUC.rtboxDescTextChangedEventRaised += _quoteItemListUC_rtboxDescTextChangedEventRaised;
+            _quoteItemListUC.nudWoodecValueChangedEventRaised += _quoteItemListUC_nudWoodecValueChangedEventRaised;
+        }
+
+        private void _quoteItemListUC_nudWoodecValueChangedEventRaised(object sender, EventArgs e)
+        {
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                string itemNum = _quoteItemListUC.ItemNumber;
+                itemNum = itemNum.Replace("Item ", string.Empty);
+
+                if (itemNum != "Item")
+                {
+                    if (wdm.WD_id == Convert.ToInt32(itemNum))
+                    {
+                        if (wdm.WD_Selected == true)
+                        {
+                            wdm.WD_WoodecAdditional = ((NumericUpDown)sender).Value;
+                            _mainPresenter.GetCurrentPrice();
+                            _nudItemPrice.Value = wdm.WD_price;
+                            _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
+                        }
+                    }
+                }
+            }
         }
 
         private void _quoteItemListUC_rtboxDescTextChangedEventRaised(object sender, EventArgs e)

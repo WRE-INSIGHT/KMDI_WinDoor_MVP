@@ -1,12 +1,6 @@
 ﻿using CommonComponents;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 
@@ -24,6 +18,8 @@ namespace PresentationLayer.Views
         public event EventHandler CmbBaseColorSelectedValueChangedEventRaised;
         public event EventHandler CmbInsideColorSelectedValueChangedEventRaised;
         public event EventHandler CmbOutsideColorSelectedValueChangedEventRaised;
+        public event EventHandler nudWoodecAdditionalValueChangedEventRaised;
+
 
         private void ChangeItemColorView_Load(object sender, EventArgs e)
         {
@@ -57,6 +53,16 @@ namespace PresentationLayer.Views
             this.ShowDialog();
         }
 
+        public Panel GetPanelWoodec()
+        {
+            return pnl_WoodecAdditional;
+        }
+
+        public NumericUpDown GetNudWoodec()
+        {
+            return nud_WoodecAdditional;
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, BtnOkClickEventRaised, e);
@@ -67,6 +73,7 @@ namespace PresentationLayer.Views
             cmb_baseColor.DataBindings.Add(ModelBinding["WD_BaseColor"]);
             cmb_InsideColor.DataBindings.Add(ModelBinding["WD_InsideColor"]);
             cmb_outsideColor.DataBindings.Add(ModelBinding["WD_OutsideColor"]);
+            // pnl_WoodecAdditional.DataBindings.Add(ModelBinding["WD_WoodecAdditionalVisibility"]);
         }
 
         private void cmb_baseColor_SelectedValueChanged(object sender, EventArgs e)
@@ -87,6 +94,12 @@ namespace PresentationLayer.Views
         public void CloseView()
         {
             this.Close();
+        }
+
+
+        private void nud_WoodecAdditional_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudWoodecAdditionalValueChangedEventRaised, e);
         }
     }
 }

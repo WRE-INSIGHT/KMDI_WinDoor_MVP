@@ -98,7 +98,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
         string WD_PAPreviousDescription { get; set; }
         decimal WD_PAPreviousPrice { get; set; }
         bool WD_IsObjectCopied { get; set; }
-
+        bool WD_WoodecAdditionalVisibility { get; set; }
+        decimal WD_WoodecAdditional { get; set; }
         void Fit_MyControls_ToBindDimensions();
         void SetfrmDimentionZoom();
         void Fit_MyControls_ImagersToBindDimensions();
