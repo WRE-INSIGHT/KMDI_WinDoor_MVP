@@ -193,6 +193,7 @@
             this.Name = "QuoteItemListView";
             this.ShowIcon = false;
             this.Text = "Item List";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.QuoteItemListView_FormClosed);
             this.Load += new System.EventHandler(this.QuoteItemListView_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.QuoteItemListView_KeyDown);

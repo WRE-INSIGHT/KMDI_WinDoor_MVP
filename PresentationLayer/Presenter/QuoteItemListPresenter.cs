@@ -63,7 +63,7 @@ namespace PresentationLayer.Presenter
                        _guNotedByOfficial,
                        _guVatPercentage,
                        _guFileName;
-        private int   _guReviewedOfficialPos,
+        private int _guReviewedOfficialPos,
                       _guNotedByOfficialPos;
 
         int count = 0,
@@ -264,7 +264,7 @@ namespace PresentationLayer.Presenter
         {
             get
             {
-               return _guFileName;
+                return _guFileName;
             }
             set
             {
@@ -398,6 +398,8 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.TsbtnContractSummaryClickEventRaised += new EventHandler(OnTsbtnContractSummaryClickEventRaised);
             _quoteItemListView.chkboxSelectallCheckedChangeEventRaised += new EventHandler(OnchkboxSelectallCheckedChangeEventRaised);
             _quoteItemListView.TSbtnPDFCompilerClickEventRaised += new EventHandler(OnTSbtnPDFCompilerClickEventRaised);
+          
+
         }
 
         public void PrintScreenRDLC()
@@ -815,7 +817,7 @@ namespace PresentationLayer.Presenter
                     }
 
 
-                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount,2);
+                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount, 2);
                 }
 
                 ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;
@@ -1007,7 +1009,7 @@ namespace PresentationLayer.Presenter
             Screen_NetPrice = null;
 
         }
-                
+
         private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)
         {
             PrintWindoorRDLC();
@@ -1405,12 +1407,12 @@ namespace PresentationLayer.Presenter
                     //{
                     //    GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
                     //}
-                  
+
                     //if (GeorgianBarVerticalQty > 0)
                     //{
                     //    GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
                     //}
-                  
+
                     IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
                     //if (_mainPresenter.lst_glassThicknessPerItem.Count != 0)
                     //{
@@ -1429,6 +1431,36 @@ namespace PresentationLayer.Presenter
 
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemNumber = "Item " + (i + 1);
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_itemName;
+                    if (wdm.WD_OutsideColor == wdm.WD_InsideColor)
+                    {
+                        if ((wdm.WD_OutsideColor == Foil_Color._Carbon ||
+                             wdm.WD_OutsideColor == Foil_Color._GreyOak ||
+                             wdm.WD_OutsideColor == Foil_Color._UmberOak ||
+                             wdm.WD_OutsideColor == Foil_Color._ChestnutOak ||
+                             wdm.WD_OutsideColor == Foil_Color._WashedOak)
+                             &&
+                             (wdm.WD_InsideColor == Foil_Color._Carbon ||
+                             wdm.WD_InsideColor == Foil_Color._GreyOak ||
+                             wdm.WD_InsideColor == Foil_Color._UmberOak ||
+                             wdm.WD_InsideColor == Foil_Color._ChestnutOak ||
+                             wdm.WD_InsideColor == Foil_Color._WashedOak)
+                             )
+                        {
+                            _quoteItemListUCPresenter.GetiQuoteItemListUC().woodecAddl.Value = Convert.ToDecimal(wdm.WD_WoodecAdditional);
+                            _quoteItemListUCPresenter.GetiQuoteItemListUC().GetNudWoodec().Enabled = true;
+                        }
+                        else
+                        {
+                            _quoteItemListUCPresenter.GetiQuoteItemListUC().woodecAddl.Value = 0m;
+                            _quoteItemListUCPresenter.GetiQuoteItemListUC().GetNudWoodec().Enabled = false;
+
+                        }
+                    }
+                    else
+                    {
+                        _quoteItemListUCPresenter.GetiQuoteItemListUC().woodecAddl.Value = 0m;
+                        _quoteItemListUCPresenter.GetiQuoteItemListUC().GetNudWoodec().Enabled = false;
+                    }
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = wdm.WD_WindoorNumber; //location
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = DimensionDesc
                                                                               + wdm.WD_description
@@ -1638,7 +1670,7 @@ namespace PresentationLayer.Presenter
                 Console.WriteLine("Event select all.: " + chkbox_checkstate_frmQuoteItemList.ToString());
             }
         }
-        
+
         public void SetAllItemDiscount(int inputedDiscount)
         {
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
@@ -1720,7 +1752,7 @@ namespace PresentationLayer.Presenter
         }
 
 
-        
+
 
     }
 

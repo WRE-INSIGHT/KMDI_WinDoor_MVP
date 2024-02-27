@@ -39,6 +39,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pboxItemImage = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.nud_Woodec = new System.Windows.Forms.NumericUpDown();
+            this.txt_Woodec = new System.Windows.Forms.TextBox();
             this.chk_showitemImage = new System.Windows.Forms.CheckBox();
             this.tboxItemName = new System.Windows.Forms.TextBox();
             this.txt_ItemNumber = new System.Windows.Forms.TextBox();
@@ -52,6 +54,7 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxItemImage)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Woodec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudItemQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudItemDiscount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudItemPrice)).BeginInit();
@@ -166,8 +169,10 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.chk_showitemImage);
             this.panel3.Controls.Add(this.tboxItemName);
+            this.panel3.Controls.Add(this.nud_Woodec);
+            this.panel3.Controls.Add(this.txt_Woodec);
+            this.panel3.Controls.Add(this.chk_showitemImage);
             this.panel3.Controls.Add(this.txt_ItemNumber);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
@@ -175,24 +180,45 @@
             this.panel3.Size = new System.Drawing.Size(200, 26);
             this.panel3.TabIndex = 23;
             // 
+            // nud_Woodec
+            // 
+            this.nud_Woodec.Dock = System.Windows.Forms.DockStyle.Left;
+            this.nud_Woodec.Location = new System.Drawing.Point(171, 0);
+            this.nud_Woodec.Name = "nud_Woodec";
+            this.nud_Woodec.Size = new System.Drawing.Size(43, 22);
+            this.nud_Woodec.TabIndex = 24;
+            this.nud_Woodec.ValueChanged += new System.EventHandler(this.nud_Woodec_ValueChanged);
+            // 
+            // txt_Woodec
+            // 
+            this.txt_Woodec.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_Woodec.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txt_Woodec.Enabled = false;
+            this.txt_Woodec.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txt_Woodec.Location = new System.Drawing.Point(67, 0);
+            this.txt_Woodec.Name = "txt_Woodec";
+            this.txt_Woodec.Size = new System.Drawing.Size(104, 25);
+            this.txt_Woodec.TabIndex = 23;
+            this.txt_Woodec.Text = "Woodec Add’l %";
+            // 
             // chk_showitemImage
             // 
             this.chk_showitemImage.AutoSize = true;
-            this.chk_showitemImage.Location = new System.Drawing.Point(55, 6);
+            this.chk_showitemImage.Dock = System.Windows.Forms.DockStyle.Left;
+            this.chk_showitemImage.Location = new System.Drawing.Point(52, 0);
             this.chk_showitemImage.Name = "chk_showitemImage";
-            this.chk_showitemImage.Size = new System.Drawing.Size(15, 14);
+            this.chk_showitemImage.Size = new System.Drawing.Size(15, 26);
             this.chk_showitemImage.TabIndex = 2;
             this.chk_showitemImage.UseVisualStyleBackColor = true;
             // 
             // tboxItemName
             // 
-            this.tboxItemName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tboxItemName.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.tboxItemName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tboxItemName.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.tboxItemName.Location = new System.Drawing.Point(71, 0);
+            this.tboxItemName.Location = new System.Drawing.Point(214, 0);
             this.tboxItemName.Name = "tboxItemName";
-            this.tboxItemName.Size = new System.Drawing.Size(128, 25);
+            this.tboxItemName.Size = new System.Drawing.Size(0, 25);
             this.tboxItemName.TabIndex = 3;
             this.tboxItemName.TextChanged += new System.EventHandler(this.tboxItemName_TextChanged);
             // 
@@ -303,6 +329,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pboxItemImage)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Woodec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudItemQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudItemDiscount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudItemPrice)).EndInit();
@@ -332,5 +359,7 @@
         public System.Windows.Forms.Label lblDiscount;
         public System.Windows.Forms.NumericUpDown NudItemDiscount;
         private System.Windows.Forms.CheckBox chk_showitemImage;
+        private System.Windows.Forms.TextBox txt_Woodec;
+        private System.Windows.Forms.NumericUpDown nud_Woodec;
     }
 }

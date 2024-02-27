@@ -1,5 +1,6 @@
 ﻿using CommonComponents;
 using System;
+using System.Windows.Forms;
 
 namespace PresentationLayer.Views
 {
@@ -10,8 +11,13 @@ namespace PresentationLayer.Views
         event EventHandler CmbBaseColorSelectedValueChangedEventRaised;
         event EventHandler CmbInsideColorSelectedValueChangedEventRaised;
         event EventHandler CmbOutsideColorSelectedValueChangedEventRaised;
+        event EventHandler nudWoodecAdditionalValueChangedEventRaised;
 
         void ShowThisDialog();
         void CloseView();
+        Panel GetPanelWoodec();
+        NumericUpDown GetNudWoodec();
+
+
     }
 }

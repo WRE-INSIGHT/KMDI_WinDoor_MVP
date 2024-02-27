@@ -111,6 +111,18 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        public NumericUpDown woodecAddl
+        {
+            get
+            {
+                return nud_Woodec;
+            }
+            set
+            {
+                nud_Woodec.Value = Convert.ToDecimal(value);
+            }
+        }
+
         public event EventHandler QuoteItemListUCLoadEventRaised;
         public event EventHandler LblPriceDoubleClickEventRaised;
         public event EventHandler LblDiscountDoubleClickEventRaised;
@@ -124,10 +136,11 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler suggestedPriceToolStripMenuItemClickEventRaised;
         public event EventHandler setAllDiscountToolStripMenuItemClickEventRaised;
         public event EventHandler rtboxDescTextChangedEventRaised;
+        public event EventHandler nudWoodecValueChangedEventRaised;
+
         public event KeyEventHandler NudItemPriceKeyDownEventRaised;
         public event KeyEventHandler NudItemDiscountKeyDownEventRaised;
         public event KeyEventHandler NudItemQuantityKeyDownEventRaised;
-
         public PictureBox GetPboxItemImage()
         {
             return pboxItemImage;
@@ -154,10 +167,15 @@ namespace PresentationLayer.Views.UserControls
         {
             return lblNetPrice;
         }
+        public NumericUpDown GetNudWoodec()
+        {
+            return nud_Woodec;
+        }
 
 
         private void QuoteItemListUC_Load(object sender, EventArgs e)
         {
+            nud_Woodec.Maximum = decimal.MaxValue;
             EventHelpers.RaiseEvent(sender, QuoteItemListUCLoadEventRaised, e);
         }
 
@@ -233,6 +251,11 @@ namespace PresentationLayer.Views.UserControls
         private void rtboxDesc_TextChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, rtboxDescTextChangedEventRaised, e);
+        }
+
+        private void nud_Woodec_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudWoodecValueChangedEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
