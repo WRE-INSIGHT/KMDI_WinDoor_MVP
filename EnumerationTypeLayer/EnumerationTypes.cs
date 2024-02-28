@@ -1516,6 +1516,14 @@ namespace EnumerationTypeLayer
 
             private Coupling_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+        public class ColorAppliedTo : Enumeration<ColorAppliedTo, int>
+        {
+            public static readonly ColorAppliedTo _ThisItemonly = new ColorAppliedTo(0, "This Item only");
+            public static readonly ColorAppliedTo _WholeProject = new ColorAppliedTo(1, "Whole Project");
+
+            private ColorAppliedTo(int value, string displayName) : base(value, displayName) { }
+        }
+
 
         public class InversionClip_ArticleNo : Enumeration<InversionClip_ArticleNo, int>
         {

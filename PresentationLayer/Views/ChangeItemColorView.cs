@@ -19,13 +19,16 @@ namespace PresentationLayer.Views
         public event EventHandler CmbInsideColorSelectedValueChangedEventRaised;
         public event EventHandler CmbOutsideColorSelectedValueChangedEventRaised;
         public event EventHandler nudWoodecAdditionalValueChangedEventRaised;
-
+        public event EventHandler CmbColorAppliedToSelectedValueChangedEventRaised;
 
         private void ChangeItemColorView_Load(object sender, EventArgs e)
         {
             List<Base_Color> base_col = new List<Base_Color>();
             List<Foil_Color> inside_col = new List<Foil_Color>();
             List<Foil_Color> outside_col = new List<Foil_Color>();
+            List<ColorAppliedTo> AppliedTo_col = new List<ColorAppliedTo>();
+
+            
 
             foreach (Base_Color item in Base_Color.GetAll())
             {
@@ -45,6 +48,12 @@ namespace PresentationLayer.Views
             }
             cmb_outsideColor.DataSource = outside_col;
 
+            foreach (ColorAppliedTo item in ColorAppliedTo.GetAll())
+            {
+                AppliedTo_col.Add(item);
+            }
+            cmb_ColorAppliedTo.DataSource = AppliedTo_col;
+
             EventHelpers.RaiseEvent(this, ChangeItemColorViewLoadEventRaised, e);
         }
 
@@ -63,6 +72,10 @@ namespace PresentationLayer.Views
             return nud_WoodecAdditional;
         }
 
+        public ComboBox GetColorAppliedTo()
+        {
+            return cmb_ColorAppliedTo;
+        }
         private void btnOK_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, BtnOkClickEventRaised, e);
@@ -100,6 +113,11 @@ namespace PresentationLayer.Views
         private void nud_WoodecAdditional_ValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, nudWoodecAdditionalValueChangedEventRaised, e);
+        }
+
+        private void cmb_ColorAppliedTo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CmbColorAppliedToSelectedValueChangedEventRaised, e);
         }
     }
 }

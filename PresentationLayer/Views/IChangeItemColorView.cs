@@ -12,11 +12,13 @@ namespace PresentationLayer.Views
         event EventHandler CmbInsideColorSelectedValueChangedEventRaised;
         event EventHandler CmbOutsideColorSelectedValueChangedEventRaised;
         event EventHandler nudWoodecAdditionalValueChangedEventRaised;
+        event EventHandler CmbColorAppliedToSelectedValueChangedEventRaised;
 
         void ShowThisDialog();
         void CloseView();
         Panel GetPanelWoodec();
         NumericUpDown GetNudWoodec();
+        ComboBox GetColorAppliedTo();
 
 
     }
