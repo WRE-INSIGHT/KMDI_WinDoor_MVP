@@ -67,11 +67,21 @@ namespace PresentationLayer.Presenter
                     wdm.WD_InsideColor = inside_color;
                     wdm.WD_OutsideColor = outside_color;
                     _windoorModel.SetMiddleCloser_onPanel();
-                    _mainPresenter.GetCurrentPrice();
+                    wdm.WD_WoodecAdditional = _changeItemColorView.GetNudWoodec().Value;
+
+                    //pang kuha lahat ng price
+                    wdm.WD_fileLoad = false;
+                    _mainPresenter.qoutationModel_MainPresenter.BOMandItemlistStatus = "PriceItemList";
+                    _mainPresenter.qoutationModel_MainPresenter.ItemCostingPriceAndPoints();
+                    wdm.TotalPriceHistoryStatus = "System Generated Price";
+                    wdm.WD_price = wdm.WD_currentPrice;  
                 }
+
+                _mainPresenter.GetCurrentPrice();
 
                 //set to new items
                 _mainPresenter.setColors(base_color, inside_color, outside_color);
+                _mainPresenter.setWoodecAdditional((int)_changeItemColorView.GetNudWoodec().Value);
                 _changeItemColorView.CloseView();
 
             }

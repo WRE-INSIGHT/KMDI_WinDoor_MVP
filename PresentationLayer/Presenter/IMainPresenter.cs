@@ -153,6 +153,7 @@ namespace PresentationLayer.Presenter
         void DisposeDrawingandProperties();
         void CopyObjectsPerWindoorModel();
         void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color);
+        void setWoodecAdditional(int woodecAddlPercentage);
 
     }
 }
