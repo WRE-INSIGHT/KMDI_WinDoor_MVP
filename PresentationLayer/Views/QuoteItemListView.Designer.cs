@@ -52,14 +52,14 @@
             this.pnlPrintBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPrintBody.Location = new System.Drawing.Point(0, 73);
             this.pnlPrintBody.Name = "pnlPrintBody";
-            this.pnlPrintBody.Size = new System.Drawing.Size(868, 276);
+            this.pnlPrintBody.Size = new System.Drawing.Size(1134, 276);
             this.pnlPrintBody.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.Dock = System.Windows.Forms.DockStyle.Right;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(396, 0);
+            this.label4.Location = new System.Drawing.Point(662, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(119, 46);
             this.label4.TabIndex = 7;
@@ -70,7 +70,7 @@
             // 
             this.label3.Dock = System.Windows.Forms.DockStyle.Right;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(515, 0);
+            this.label3.Location = new System.Drawing.Point(781, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 46);
             this.label3.TabIndex = 6;
@@ -81,7 +81,7 @@
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Right;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(628, 0);
+            this.label2.Location = new System.Drawing.Point(894, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(119, 46);
             this.label2.TabIndex = 5;
@@ -92,7 +92,7 @@
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Right;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(747, 0);
+            this.label1.Location = new System.Drawing.Point(1013, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 46);
             this.label1.TabIndex = 4;
@@ -110,7 +110,7 @@
             this.pnlPrintHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlPrintHeader.Location = new System.Drawing.Point(0, 25);
             this.pnlPrintHeader.Name = "pnlPrintHeader";
-            this.pnlPrintHeader.Size = new System.Drawing.Size(868, 48);
+            this.pnlPrintHeader.Size = new System.Drawing.Size(1134, 48);
             this.pnlPrintHeader.TabIndex = 4;
             // 
             // chkbox_selectall
@@ -146,7 +146,7 @@
             this.TSbtnPDFCompiler});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(868, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1134, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -185,7 +185,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(868, 349);
+            this.ClientSize = new System.Drawing.Size(1134, 349);
             this.Controls.Add(this.pnlPrintBody);
             this.Controls.Add(this.pnlPrintHeader);
             this.Controls.Add(this.toolStrip1);

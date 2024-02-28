@@ -814,6 +814,7 @@ namespace PresentationLayer.Presenter
                 WindoorModel_FileLines_Dictionary = value;
             }
         }
+        public int WoodecAdditionalForNewItem { get; set; }
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -11256,7 +11257,7 @@ namespace PresentationLayer.Presenter
                                                                          baseColor,
                                                                          InsideColor,
                                                                          OutsideColor);
-
+                        _windoorModel.WD_WoodecAdditional = WoodecAdditionalForNewItem;
                         AddWndrList_QuotationModel(_windoorModel);
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
@@ -11460,6 +11461,9 @@ namespace PresentationLayer.Presenter
                                                                          baseColor,
                                                                          InsideColor,
                                                                          OutsideColor);
+
+                        _windoorModel.WD_WoodecAdditional = WoodecAdditionalForNewItem;
+
                         AddWndrList_QuotationModel(_windoorModel);
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
@@ -14389,12 +14393,16 @@ namespace PresentationLayer.Presenter
             return isDimensionFit;
         }
 
-
         public void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color)
         {
             baseColor = base_Color;
             InsideColor = inside_Color;
             OutsideColor = outside_Color;
+        }
+
+        public void setWoodecAdditional(int woodecAddlPercentage)
+        {
+            WoodecAdditionalForNewItem = woodecAddlPercentage;
         }
         #endregion
 

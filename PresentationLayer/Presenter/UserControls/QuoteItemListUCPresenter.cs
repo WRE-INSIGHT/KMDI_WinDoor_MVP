@@ -80,13 +80,21 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     if (wdm.WD_id == Convert.ToInt32(itemNum))
                     {
-                        if (wdm.WD_Selected == true)
-                        {
                             wdm.WD_WoodecAdditional = ((NumericUpDown)sender).Value;
-                            _mainPresenter.GetCurrentPrice();
-                            _nudItemPrice.Value = wdm.WD_price;
-                            _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
-                        }
+                            //_mainPresenter.GetCurrentPrice();
+                            //_nudItemPrice.Value = wdm.WD_price;
+                            //_lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
+
+
+                        _quotationModel.BOMandItemlistStatus = "BOM";
+                        wdm.WD_Selected = true;
+                        _quotationModel.ItemCostingPriceAndPoints();
+                        //wdm.WD_price = _quotationModel.lstTotalPrice[wdm.WD_id - 1];
+                        wdm.WD_price = _quotationModel.lstTotalPrice[0];
+                        _nudItemPrice.Value = wdm.WD_price;
+                        _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
+                        wdm.WD_Selected = false;
+                        
                     }
                 }
             }
