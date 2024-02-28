@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter
 {
@@ -151,5 +152,7 @@ namespace PresentationLayer.Presenter
         int ForceRestartAndLoadFile();
         void DisposeDrawingandProperties();
         void CopyObjectsPerWindoorModel();
+        void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color);
+
     }
 }

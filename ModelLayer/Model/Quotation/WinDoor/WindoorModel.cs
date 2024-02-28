@@ -759,6 +759,18 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        private ColorAppliedTo _wd_colorAppliedTo;
+        public ColorAppliedTo WD_ColorAppliedTo
+        {
+            get
+            {
+                return _wd_colorAppliedTo;
+            }
+            set
+            {
+                _wd_colorAppliedTo = value;
+            }
+        }
 
 
         #region Methods

@@ -34,6 +34,12 @@ namespace PresentationLayer.Presenter
             _changeItemColorView.CmbOutsideColorSelectedValueChangedEventRaised += _changeItemColorView_CmbOutsideColorSelectedValueChangedEventRaised;
             _changeItemColorView.BtnOkClickEventRaised += _changeItemColorView_BtnOkClickEventRaised;
             _changeItemColorView.nudWoodecAdditionalValueChangedEventRaised += _changeItemColorView_nudWoodecAdditionalValueChangedEventRaised;
+            _changeItemColorView.CmbColorAppliedToSelectedValueChangedEventRaised += _changeItemColorView_CmbColorAppliedToSelectedValueChangedEventRaised;
+        }
+
+        private void _changeItemColorView_CmbColorAppliedToSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _windoorModel.WD_ColorAppliedTo = (ColorAppliedTo)((ComboBox)sender).SelectedValue;
         }
 
         private void _changeItemColorView_nudWoodecAdditionalValueChangedEventRaised(object sender, EventArgs e)
@@ -43,13 +49,34 @@ namespace PresentationLayer.Presenter
 
         private void _changeItemColorView_BtnOkClickEventRaised(object sender, EventArgs e)
         {
-            _windoorModel.WD_BaseColor = base_color;
-            _windoorModel.WD_InsideColor = inside_color;
-            _windoorModel.WD_OutsideColor = outside_color;
-            _windoorModel.SetMiddleCloser_onPanel();
-            _changeItemColorView.CloseView();
-            _mainPresenter.GetCurrentPrice();
-            _mainPresenter.qoutationModel_MainPresenter
+            if (_windoorModel.WD_ColorAppliedTo == ColorAppliedTo._ThisItemonly)
+            {
+                _windoorModel.WD_BaseColor = base_color;
+                _windoorModel.WD_InsideColor = inside_color;
+                _windoorModel.WD_OutsideColor = outside_color;
+                _windoorModel.SetMiddleCloser_onPanel();
+                _changeItemColorView.CloseView();
+                _mainPresenter.GetCurrentPrice();
+            }
+            else if (_windoorModel.WD_ColorAppliedTo == ColorAppliedTo._WholeProject)
+            {
+                //set to existing items
+                foreach (IWindoorModel wdm in _mainPresenter.qoutationModel_MainPresenter.Lst_Windoor)
+                {
+                    wdm.WD_BaseColor = base_color;
+                    wdm.WD_InsideColor = inside_color;
+                    wdm.WD_OutsideColor = outside_color;
+                    _windoorModel.SetMiddleCloser_onPanel();
+                    _mainPresenter.GetCurrentPrice();
+                }
+
+                //set to new items
+                _mainPresenter.setColors(base_color, inside_color, outside_color);
+                _changeItemColorView.CloseView();
+
+            }
+
+
         }
 
         private Base_Color base_color;
@@ -122,10 +149,7 @@ namespace PresentationLayer.Presenter
 
         private void _changeItemColorView_ChangeItemColorViewLoadEventRaised(object sender, EventArgs e)
         {
-            //if (_windoorModel.WD_WoodecAdditional != 0)
-            //{
-            //    _changeItemColorView.GetNudWoodec().Value = _windoorModel.WD_WoodecAdditional;
-            //}
+            _windoorModel.WD_ColorAppliedTo = ColorAppliedTo._ThisItemonly;
             _changeItemColorView.ThisBinding(CreateBindingDictionary());
         }
 
