@@ -13407,7 +13407,9 @@ namespace PresentationLayer.Presenter
                     }
                     if (wdr.TotalPriceHistoryStatus == "System Generated Price")
                     {
-                        string SystemGeneratedPriceToSave = thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "````` Save Time\n" + wdr.TotalPriceHistory;
+                        string SystemGeneratedPriceToSave = thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
+                                                            "````` Save Time\n" +
+                                                            wdr.TotalPriceHistory;
                         if (PrevSave != SystemGeneratedPriceToSave)
                         {
                             wdr.lst_TotalPriceHistory.Add(SystemGeneratedPriceToSave);
@@ -13415,7 +13417,10 @@ namespace PresentationLayer.Presenter
                     }
                     else if (wdr.TotalPriceHistoryStatus == "Edited Price")
                     {
-                        string EditedPriceToSave = thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "`````\nEdited Price: " + wdr.WD_price.ToString() + "\n\n\n";
+                        string EditedPriceToSave = thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
+                                                    "`````\nEdited Price: " +
+                                                    wdr.WD_price.ToString() +
+                                                    "\n\nItem Description = " + wdr.WD_description;
                         if (PrevSave != EditedPriceToSave)
                         {
                             wdr.lst_TotalPriceHistory.Add(EditedPriceToSave);

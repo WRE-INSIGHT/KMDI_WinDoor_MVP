@@ -11701,12 +11701,12 @@ namespace ModelLayer.Model.Quotation
 
                    "TotaPrice: " + TotaPrice.ToString() + " = " + BaseTotalPriceWithFactor.ToString() + " + " + LouverCost.ToString() + " + " + MeshCost.ToString() + "\n\n" +
 
-                   "outside color" + wdm.WD_OutsideColor +
-                   "inside color" + wdm.WD_InsideColor +
+                   "outside color: " + wdm.WD_OutsideColor + "\n" +
+                  "inside color: " + wdm.WD_InsideColor + "\n" +
 
-                   "woodec additional % " + priceBeforeWoodec + "=" + priceBeforeWoodec + wdm.WD_WoodecAdditional + "%" +
+                   "woodec additional % " + priceBeforeWoodec + " = " + priceBeforeWoodec + " + " +  wdm.WD_WoodecAdditional + "%" + "\n\n\n" +
 
-
+                   "item Description" + "\n" + wdm.WD_description +
 
                     "` END OF COMPUTATION FOR SAVING `\n\n\n";
                     #endregion
