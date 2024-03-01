@@ -5081,7 +5081,7 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else
                                             {
-                                             if (chckPerFrameSlidingMats == true)
+                                                if (chckPerFrameSlidingMats == true)
                                                 {
                                                     WeatherBarPrice += (fr.Frame_Width / 1000m) * WeatherBarPricePerPiece;
                                                     WeatherBarFastenerPrice += ((int)(fr.Frame_Width / 300)) * BarFastenerPricePerPiece;
@@ -11511,6 +11511,30 @@ namespace ModelLayer.Model.Quotation
 
                     TotaPrice = TotaPrice + LouverCost + MeshCost;
 
+                    decimal priceBeforeWoodec = 0;
+                    priceBeforeWoodec = TotaPrice;
+
+                    if (wdm.WD_OutsideColor == wdm.WD_InsideColor)
+                    {
+                        if ((wdm.WD_OutsideColor == Foil_Color._Carbon ||
+                             wdm.WD_OutsideColor == Foil_Color._GreyOak ||
+                             wdm.WD_OutsideColor == Foil_Color._UmberOak ||
+                             wdm.WD_OutsideColor == Foil_Color._ChestnutOak ||
+                             wdm.WD_OutsideColor == Foil_Color._WashedOak)
+                             &&
+                            (wdm.WD_InsideColor == Foil_Color._Carbon ||
+                             wdm.WD_InsideColor == Foil_Color._GreyOak ||
+                             wdm.WD_InsideColor == Foil_Color._UmberOak ||
+                             wdm.WD_InsideColor == Foil_Color._ChestnutOak ||
+                             wdm.WD_InsideColor == Foil_Color._WashedOak))
+                        {
+                            decimal Woodec = wdm.WD_WoodecAdditional;
+                            TotaPrice = TotaPrice + (TotaPrice * (Woodec / 100m));
+                        }
+                    }
+
+
+
                     wdm.SystemSuggestedPrice = TotaPrice;
 
                     wdm.WD_currentPrice = TotaPrice;
@@ -11676,6 +11700,13 @@ namespace ModelLayer.Model.Quotation
                    "TotaPrice: " + BaseTotalPriceWithFactor.ToString() + " = (" + BaseTotalPrice.ToString() + " * " + PricingFactor.ToString() + ") + " + BaseTotalPrice.ToString() + ") \n\n" +
 
                    "TotaPrice: " + TotaPrice.ToString() + " = " + BaseTotalPriceWithFactor.ToString() + " + " + LouverCost.ToString() + " + " + MeshCost.ToString() + "\n\n" +
+
+                   "outside color: " + wdm.WD_OutsideColor + "\n" +
+                  "inside color: " + wdm.WD_InsideColor + "\n" +
+
+                   "woodec additional % " + priceBeforeWoodec + " = " + priceBeforeWoodec + " + " +  wdm.WD_WoodecAdditional + "%" + "\n\n\n" +
+
+                   "item Description" + "\n" + wdm.WD_description +
 
                     "` END OF COMPUTATION FOR SAVING `\n\n\n";
                     #endregion

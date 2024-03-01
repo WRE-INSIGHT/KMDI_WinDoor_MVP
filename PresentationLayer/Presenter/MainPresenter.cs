@@ -176,6 +176,9 @@ namespace PresentationLayer.Presenter
         private ToolStrip _tsMain;
         private MenuStrip _msMainMenu;
         private Base_Color baseColor;
+        private Foil_Color InsideColor;
+        private Foil_Color OutsideColor;
+
 
 
 
@@ -793,8 +796,9 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        public bool MainPresenter_IsFromDeleteFunction{ get; set; }
+        public bool MainPresenter_IsFromDeleteFunction { get; set; }
 
+        public int WoodecAdditionalForNewItem { get; set; }
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -1540,7 +1544,7 @@ namespace PresentationLayer.Presenter
                                     + "\nFactor in database: "
                                     + value;
                     }
-                    else if(_factorHolderOnLoad != 0)
+                    else if (_factorHolderOnLoad != 0)
                     {
                         factorTypes = "Province: "
                                     + (province[province.Length - 2]).Trim()
@@ -1679,7 +1683,7 @@ namespace PresentationLayer.Presenter
                                     //}
                                     #endregion
 
-                                    if(deci_input != _quotationModel.PricingFactor)
+                                    if (deci_input != _quotationModel.PricingFactor)
                                     {
                                         MessageBox.Show("Factor Set Sucessfully");
                                     }
@@ -1691,7 +1695,7 @@ namespace PresentationLayer.Presenter
                                     _quotationModel.PricingFactor = deci_input;
                                     _factorHolderOnLoad = _factorFromAddExisting; // set new value 
                                     _factorFromAddExisting = 0; // reset
-                                    
+
 
                                     if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
                                     {
@@ -1706,7 +1710,7 @@ namespace PresentationLayer.Presenter
                                         }
                                     }
                                     GetCurrentPrice();
-                  
+
                                 }
                                 else if (deci_input < 0)
                                 {
@@ -3301,7 +3305,7 @@ namespace PresentationLayer.Presenter
         {
             _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
             _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
-              
+
 
             if (Properties.Settings.Default.FirstTym == true)
             {
@@ -10201,7 +10205,7 @@ namespace PresentationLayer.Presenter
             _EntryCountOfKeyWordPriceValidity;
         bool _EntrytoKeyWordUsing = false,
              _EntrytoKeyWordPriceValidity = false;
-        decimal _factorFromAddExisting,_factorHolderOnLoad;
+        decimal _factorFromAddExisting, _factorHolderOnLoad;
 
         #region Frame Properties
 
@@ -11052,6 +11056,9 @@ namespace PresentationLayer.Presenter
                     {
                         baseColor = Base_Color._DarkBrown;
                     }
+
+
+
                     if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
                     {
                         SetMainViewTitle(input_qrefno, _projectName, _custRefNo);
@@ -11118,13 +11125,23 @@ namespace PresentationLayer.Presenter
                             baseColor = Base_Color._DarkBrown;
                         }
 
+                        if (InsideColor == null)
+                        {
+                            InsideColor = Foil_Color._Walnut;
+                        }
+                        if (OutsideColor == null)
+                        {
+                            OutsideColor = Foil_Color._Walnut;
+                        }
+
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,
                                                                          _quotationModel.Lst_Windoor.Count() + 1,
                                                                          baseColor,
-                                                                         Foil_Color._Walnut,
-                                                                         Foil_Color._Walnut);
+                                                                         InsideColor,
+                                                                         OutsideColor);
+                        _windoorModel.WD_WoodecAdditional = WoodecAdditionalForNewItem;
                         AddWndrList_QuotationModel(_windoorModel);
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
@@ -11305,14 +11322,27 @@ namespace PresentationLayer.Presenter
 
                         //clear previous basePlatformUC
                         _pnlMain.Controls.Clear();
+
+                        if (InsideColor == null)
+                        {
+                            InsideColor = Foil_Color._Walnut;
+                        }
+                        if (OutsideColor == null)
+                        {
+                            OutsideColor = Foil_Color._Walnut;
+                        }
+
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,
                                                                          _quotationModel.Lst_Windoor.Count() + 1,
                                                                          baseColor,
-                                                                         Foil_Color._Walnut,
-                                                                         Foil_Color._Walnut);
+                                                                         InsideColor,
+                                                                         OutsideColor);
+
+                        _windoorModel.WD_WoodecAdditional = WoodecAdditionalForNewItem;
+
                         AddWndrList_QuotationModel(_windoorModel);
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
@@ -11592,7 +11622,7 @@ namespace PresentationLayer.Presenter
             foreach (Control ctrl in _pnlPropertiesBody.Controls.OfType<Control>().ToList())
             {
                 ctrl.Dispose();
-            }     
+            }
             #endregion
         }
         private void CheckToDisposeNCopyWindoor()
@@ -12162,7 +12192,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                if (!MainPresenter_IsFromDeleteFunction) 
+                if (!MainPresenter_IsFromDeleteFunction)
                 {
                     CheckToDisposeNCopyWindoor();
                 }
@@ -13383,7 +13413,9 @@ namespace PresentationLayer.Presenter
                     }
                     if (wdr.TotalPriceHistoryStatus == "System Generated Price")
                     {
-                        string SystemGeneratedPriceToSave = thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "````` Save Time\n" + wdr.TotalPriceHistory;
+                        string SystemGeneratedPriceToSave = thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
+                                                            "````` Save Time\n" +
+                                                            wdr.TotalPriceHistory;
                         if (PrevSave != SystemGeneratedPriceToSave)
                         {
                             wdr.lst_TotalPriceHistory.Add(SystemGeneratedPriceToSave);
@@ -13391,7 +13423,10 @@ namespace PresentationLayer.Presenter
                     }
                     else if (wdr.TotalPriceHistoryStatus == "Edited Price")
                     {
-                        string EditedPriceToSave = thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) + "`````\nEdited Price: " + wdr.WD_price.ToString() + "\n\n\n";
+                        string EditedPriceToSave = thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
+                                                    "`````\nEdited Price: " +
+                                                    wdr.WD_price.ToString() +
+                                                    "\n\nItem Description = " + wdr.WD_description;
                         if (PrevSave != EditedPriceToSave)
                         {
                             wdr.lst_TotalPriceHistory.Add(EditedPriceToSave);
@@ -14227,6 +14262,17 @@ namespace PresentationLayer.Presenter
             return isDimensionFit;
         }
 
+        public void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color)
+        {
+            baseColor = base_Color;
+            InsideColor = inside_Color;
+            OutsideColor = outside_Color;
+        }
+
+        public void setWoodecAdditional(int woodecAddlPercentage)
+        {
+            WoodecAdditionalForNewItem = woodecAddlPercentage;
+        }
         #endregion
 
     }

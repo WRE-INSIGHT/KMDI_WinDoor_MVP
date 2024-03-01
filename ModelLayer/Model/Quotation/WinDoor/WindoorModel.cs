@@ -730,6 +730,49 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+
+        private bool _wd_WoodecAdditionalVisibility;
+        public bool WD_WoodecAdditionalVisibility
+        {
+            get
+            {
+                return _wd_WoodecAdditionalVisibility;
+            }
+            set
+            {
+                _wd_WoodecAdditionalVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private decimal _wd_WoodecAdditional;
+        public decimal WD_WoodecAdditional
+        {
+            get
+            {
+                return _wd_WoodecAdditional;
+            }
+            set
+            {
+                _wd_WoodecAdditional = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private ColorAppliedTo _wd_colorAppliedTo;
+        public ColorAppliedTo WD_ColorAppliedTo
+        {
+            get
+            {
+                return _wd_colorAppliedTo;
+            }
+            set
+            {
+                _wd_colorAppliedTo = value;
+            }
+        }
+
+
         #region Methods
 
         public void SetDimensions_basePlatform()
@@ -772,12 +815,12 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
             else if (area > 16000000 && area <= 36000000) //  (4000w x 4001h / 4001w x 4000h) to 6000w x 6000h
             {
-                zm = _arr_zoomPercentage[5];            
+                zm = _arr_zoomPercentage[5];
             }
             else if (area > 36000000 && area <= 49000000) // (6000w x 6001h / 6001w x 6000h) to 7000w x 7000h
             {
                 zm = _arr_zoomPercentage[4];
-            } 
+            }
             else if (area > 49000000 && area <= 100000000) // (7000w x 7001h / 7001 x 7000 ) to 10000w x 10000h
             {
                 zm = _arr_zoomPercentage[3];
@@ -786,7 +829,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             {
                 zm = Arr_ZoomPercentage[2];
             }
-            else if(area > 144000000 && area <= 900000000) // (12000 x 12001h / 12000 x 12000) to 300000 x 300000 
+            else if (area > 144000000 && area <= 900000000) // (12000 x 12001h / 12000 x 12000) to 300000 x 300000 
             {
                 zm = Arr_ZoomPercentage[1];
             }

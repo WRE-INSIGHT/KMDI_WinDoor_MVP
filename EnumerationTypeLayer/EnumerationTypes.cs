@@ -247,7 +247,9 @@ namespace EnumerationTypeLayer
             public static readonly Foil_Color _GreyOak = new Foil_Color(11, "Grey Oak");
             public static readonly Foil_Color _Cacao = new Foil_Color(12, "Cacao");
             public static readonly Foil_Color _Havana = new Foil_Color(13, "Havana");
-            public static readonly Foil_Color _None = new Foil_Color(14, "None");
+            public static readonly Foil_Color _Carbon = new Foil_Color(14, "Carbon");
+            public static readonly Foil_Color _UmberOak = new Foil_Color(15, "Umber Oak");
+            public static readonly Foil_Color _None = new Foil_Color(16, "None");
 
             private Foil_Color(int value, string displayName) : base(value, displayName) { }
         }
@@ -1485,6 +1487,14 @@ namespace EnumerationTypeLayer
 
             private Coupling_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+        public class ColorAppliedTo : Enumeration<ColorAppliedTo, int>
+        {
+            public static readonly ColorAppliedTo _ThisItemonly = new ColorAppliedTo(0, "This Item only");
+            public static readonly ColorAppliedTo _WholeProject = new ColorAppliedTo(1, "Whole Project");
+
+            private ColorAppliedTo(int value, string displayName) : base(value, displayName) { }
+        }
+
 
     }
 }

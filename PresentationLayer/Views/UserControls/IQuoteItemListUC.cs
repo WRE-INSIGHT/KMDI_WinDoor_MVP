@@ -19,6 +19,7 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler suggestedPriceToolStripMenuItemClickEventRaised;
         event EventHandler setAllDiscountToolStripMenuItemClickEventRaised;
         event EventHandler rtboxDescTextChangedEventRaised;
+        event EventHandler nudWoodecValueChangedEventRaised;
 
         event KeyEventHandler NudItemPriceKeyDownEventRaised;
         event KeyEventHandler NudItemDiscountKeyDownEventRaised;
@@ -27,6 +28,7 @@ namespace PresentationLayer.Views.UserControls
         NumericUpDown itemQuantity { get; set; }
         NumericUpDown itemDiscount { get; set; }
         NumericUpDown itemPrice { get; set; }
+        NumericUpDown woodecAddl { get; set; }
         PictureBox GetPboxItemImage();
         //PictureBox GetPboxTopView();
         Label GetLblQuantity();
@@ -34,6 +36,7 @@ namespace PresentationLayer.Views.UserControls
         Label GetLblPrice();
         Label GetLblNetPrice();
         CheckBox GetChkboxItemImage();
+        NumericUpDown GetNudWoodec();
         CheckBox showitemMage { get; set; }
         string ItemName { get; set; }
         string ItemNumber { get; set; }
