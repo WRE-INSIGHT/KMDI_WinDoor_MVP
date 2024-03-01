@@ -3450,6 +3450,21 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public Cremon_HandleArtNo _panel_CremonArtNo;
+        public Cremon_HandleArtNo Panel_CremonArtNo
+        {
+            get
+            {
+                return _panel_CremonArtNo;
+            }
+            set
+            {
+                _panel_CremonArtNo = value;
+            }
+
+        }
+
+
         #endregion
 
         #region Methods
@@ -7038,11 +7053,11 @@ namespace ModelLayer.Model.Quotation.Panel
             if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
             {
                 #region ChangeComputationValueBaseOnDate
-                DateTime changeCondition_020323 = DateTime.Parse("01-01-2029"); // sliding deduction
+                DateTime changeMaterialValue_020323 = DateTime.Parse("01-01-2029"); // sliding deduction
 
                 cus_ref_date = Panel_ParentFrameModel.Frame_WindoorModel.Date_Assigned;
 
-                if (Panel_ParentFrameModel.Frame_WindoorModel.Date_Assigned_Mainpresenter == DateTime.Parse("01-01-0001"))
+                if (Panel_ParentFrameModel.Frame_WindoorModel.Date_Assigned_Mainpresenter == DateTime.Parse("01-01-2025"))
                 {
                     Panel_ParentFrameModel.Frame_WindoorModel.Date_Assigned_Mainpresenter = Panel_ParentFrameModel.Frame_WindoorModel.Date_Assigned;
                 }
@@ -8644,7 +8659,8 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_LockingWedgeArtNo = LockingWedge_ArticleNo._H109;
                     Panel_SSCheveronArtNo = SSCheveron_ArticleNo._H092;
                     Panel_CenterGasketArtNo = GlazingGasket_ArticleNo._G222;
-
+                    Panel_Unica40ArtNo = Unica40_ArticleNo._H116;
+                    Panel_LockingConnectorArtNo = LockingConnectorDevice_ArticleNo._H175;
                 }
 
 
@@ -9430,6 +9446,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     //}
 
                     #endregion
+                }
+                else if (Panel_HandleType == Handle_Type._CremonHandle)
+                {
+                    Panel_CremonArtNo = Cremon_HandleArtNo._H087;
                 }
 
                 #region PopupAndRSS 
@@ -11199,7 +11219,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                        "Glazing Bead",
                                        @"");
             }
-           
+
 
 
         }
@@ -11250,7 +11270,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public void Insert_RunUpBlock_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("Run Up Block " + Panel_RunUpBlockArtNo.DisplayName,
-                                1, "pc(s)",
+                                2, "pc(s)",
                                 "",
                                 "Hardware & Accessories",
                                 @"");
@@ -11303,12 +11323,32 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_CremonHandle_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Cremon handle H087" ,
+            tbl_explosion.Rows.Add("Cremon handle " + Panel_CremonArtNo.DisplayName,
                                    1, "pc(s)",
                                    "",
                                    "Sash",
                                    @"");
         }
+
+        public void Insert_Pegstay_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Pegstay H089",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_AlutekStriker_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Striker H177",
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+
 
         public int Add_SashPerimeter_screws4fab()
         {

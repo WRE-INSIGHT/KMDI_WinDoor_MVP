@@ -146,7 +146,7 @@ namespace ModelLayer.Model.Quotation
 
                 if (frame.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                 {
-                //    frame.Insert_GlazingGasket_MaterialList(Material_List);
+                    //    frame.Insert_GlazingGasket_MaterialList(Material_List);
                     frame.Insert_Cheveron_MaterialList(Material_List);
                     frame.Insert_CornerWindow_MaterialList(Material_List);
                 }
@@ -1263,6 +1263,10 @@ namespace ModelLayer.Model.Quotation
                                                 //                       @"");
                                                 //add_screws_fab_striker += 2;
                                             }
+                                            else if (pnl_curCtrl.Panel_HandleType == Handle_Type._CremonHandle)
+                                            {
+                                                pnl_curCtrl.Insert_CremonHandle_MaterialList(Material_List);
+                                            }
 
                                             if (pnl_curCtrl.Panel_HandleType != Handle_Type._Rotary)
                                             {
@@ -1277,15 +1281,19 @@ namespace ModelLayer.Model.Quotation
 
                                             if (item.WD_profile.Contains("Alutek"))
                                             {
-                                                pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness,true);
+                                                pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, true);
                                                 pnl_curCtrl.Insert_CenterGasket_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_OpenableStriker_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_Cheveron_MaterialList(Material_List); 
+                                                pnl_curCtrl.Insert_Cheveron_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_CornerWindow_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_RunUpBlock_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_PackerRod_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_LockingWedge_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_SSCheveron_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_Pegstay_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_AlutekStriker_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_Unica40_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_LockingConnectorDevice_MaterialList(Material_List);
                                             }
                                         }
                                     }
@@ -1316,7 +1324,7 @@ namespace ModelLayer.Model.Quotation
 
                                         if (item.WD_profile.Contains("Alutek"))
                                         {
-                                            pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness,false);
+                                            pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, false);
                                             if (frame.Frame_InversionClipOption == true)
                                             {
                                                 pnl_curCtrl.Insert_InversionClip_MaterialList(Material_List);
@@ -2467,7 +2475,11 @@ namespace ModelLayer.Model.Quotation
             }
             else
             {
-
+                Material_List.Rows.Add("Hole Cap M671",
+                               Expansion_BoltQty_Total,
+                               "pc(s)",
+                               "",
+                               "Frame");
             }
             var query = from r in Material_List.AsEnumerable()
                         group r by new

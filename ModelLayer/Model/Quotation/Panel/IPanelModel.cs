@@ -350,6 +350,7 @@ namespace ModelLayer.Model.Quotation.Panel
         SSCheveron_ArticleNo Panel_SSCheveronArtNo { get; set; }
         Unica40_ArticleNo Panel_Unica40ArtNo { get; set; }
         LockingConnectorDevice_ArticleNo Panel_LockingConnectorArtNo { get; set; }
+        Cremon_HandleArtNo Panel_CremonArtNo { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
@@ -520,9 +521,9 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_SSCheveron_MaterialList(DataTable tbl_explosion);
         void Insert_Unica40_MaterialList(DataTable tbl_explosion);
         void Insert_LockingConnectorDevice_MaterialList(DataTable tbl_explosion);
-
-
-
+        void Insert_CremonHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_Pegstay_MaterialList(DataTable tbl_explosion);
+        void Insert_AlutekStriker_MaterialList(DataTable tbl_explosion);
 
         #endregion
 

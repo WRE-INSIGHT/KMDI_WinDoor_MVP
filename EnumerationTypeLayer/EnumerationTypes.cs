@@ -1604,5 +1604,14 @@ namespace EnumerationTypeLayer
             private LockingConnectorDevice_ArticleNo(int value, string displayName) : base(value, displayName) { }
 
         }
+
+        public class Cremon_HandleArtNo : Enumeration<Cremon_HandleArtNo, int>
+        {
+            public static readonly Cremon_HandleArtNo _H087 = new Cremon_HandleArtNo(0, "H087");
+
+            private Cremon_HandleArtNo(int value, string displayName) : base(value, displayName) { }
+
+        }
+
     }
 }

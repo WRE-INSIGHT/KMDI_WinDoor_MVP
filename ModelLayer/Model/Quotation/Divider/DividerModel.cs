@@ -1318,11 +1318,11 @@ namespace ModelLayer.Model.Quotation.Divider
                         }
                         else if (Div_ArtNo == Divider_ArticleNo._84300)
                         {
-                            Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                            Div_ExplosionWidth = (Div_DisplayWidth - (left_deduction + right_deduction));
                         }
                         else if (Div_ArtNo == Divider_ArticleNo._84301)
                         {
-                            Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                            Div_ExplosionWidth = (Div_DisplayWidth - (left_deduction + right_deduction));
                         }
 
                         if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677 || Div_ReinfArtNo == DividerReinf_ArticleNo._V226)

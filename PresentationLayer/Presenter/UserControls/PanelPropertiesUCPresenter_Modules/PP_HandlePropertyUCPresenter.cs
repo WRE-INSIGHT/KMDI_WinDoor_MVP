@@ -1897,6 +1897,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         #region Property Height Adjustment - Rotoswing For Sliding handle
                         if (!_mainPresenter.ItemLoad)
                         {
+                            _panelModel.Panel_CremonArtNo = Cremon_HandleArtNo._H087;
                             _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._H103;
                         }
 
