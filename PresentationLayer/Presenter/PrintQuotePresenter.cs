@@ -1090,10 +1090,11 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
                     _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
 
-                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(500, 118);
+                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(350, 118);//from 500 118
 
                     #endregion
                     #region Visibility Additional Info
+
                     _printQuoteView.GetAdditionalInfoLabel().Visible = true;
                     _printQuoteView.GetLabor_N_MobiChkbox().Visible = true;
                     _printQuoteView.GetFreightChargesChkbox().Visible = true;
@@ -1113,9 +1114,12 @@ namespace PresentationLayer.Presenter
                     #endregion
 
                     _printQuoteView.GetChkLstBox().Visible = false;
-                    _printQuoteView.ShowLastPage().Visible = false;
+                    _printQuoteView.ShowLastPage().Visible = true; // screen Contract Page
+                    _printQuoteView.ShowLastPage().Text = "Net Of Discount";
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
-                    _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(38, 81);
+                    _printQuoteView.GetUniversalLabel().Location = new System.Drawing.Point(977, 26);
+                    _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(977, 50);// from 38,81
+                    _printQuoteView.ShowLastPage().Location = new System.Drawing.Point(977, 88);
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
                     _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
 

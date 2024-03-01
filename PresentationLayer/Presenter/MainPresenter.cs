@@ -175,9 +175,9 @@ namespace PresentationLayer.Presenter
         private ToolStripLabel _tsLblStatus;
         private ToolStrip _tsMain;
         private MenuStrip _msMainMenu;
-        private Base_Color baseColor;
-        private Foil_Color InsideColor;
-        private Foil_Color OutsideColor;
+        public Base_Color baseColor { get; set; }
+        public Foil_Color InsideColor { get; set; }
+        public Foil_Color OutsideColor { get; set; }
 
 
 
@@ -2015,6 +2015,10 @@ namespace PresentationLayer.Presenter
             wndr_content.Add("AEIC: " + _aeic);
             wndr_content.Add("AEIC_POS: " + _position);
             wndr_content.Add("ProvinceIntownOutofTown: " + _provinceIntownOutofTown);
+            wndr_content.Add("WoodecAdditionalForNewItem: " + WoodecAdditionalForNewItem);
+            wndr_content.Add("baseColor: " + baseColor);
+            wndr_content.Add("InsideColor: " + InsideColor);
+            wndr_content.Add("OutsideColor: " + OutsideColor);
 
             foreach (var prop in _quotationModel.GetType().GetProperties())
             {
@@ -4616,6 +4620,43 @@ namespace PresentationLayer.Presenter
                             _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
                             inside_quotation = false;
                         }
+                        else if (row_str.Contains("WoodecAdditionalForNewItem"))
+                        {
+                            WoodecAdditionalForNewItem = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("InsideColor:"))
+                        {
+                           foreach(Foil_Color clr in Foil_Color.GetAll())
+                            {
+                                if (clr.ToString() == extractedValue_str)
+                                {
+                                    InsideColor = clr;
+                                    break;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("OutsideColor"))
+                        {
+                            foreach (Foil_Color clr in Foil_Color.GetAll())
+                            {
+                                if (clr.ToString() == extractedValue_str)
+                                {
+                                    OutsideColor = clr;
+                                    break;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("baseColor"))
+                        {
+                            foreach (Base_Color clr in Base_Color.GetAll())
+                            {
+                                if (clr.ToString() == extractedValue_str)
+                                {
+                                    baseColor = clr;
+                                    break;
+                                }
+                            }
+                        }
 
                         #endregion
                     }
@@ -4960,6 +5001,25 @@ namespace PresentationLayer.Presenter
                         {
                             _windoorModel.WD_IsPartialADPreviousExist = Convert.ToBoolean(extractedValue_str);
                         }
+                        else if (row_str.Contains("WD_WoodecAdditionalVisibility"))
+                        {
+                            _windoorModel.WD_WoodecAdditionalVisibility = Convert.ToBoolean(extractedValue_str);
+                        }      
+                        else if (row_str.Contains("WD_WoodecAdditional"))
+                        {
+                            _windoorModel.WD_WoodecAdditional = decimal.Parse(extractedValue_str);
+                        }            
+                        else if (row_str.Contains("WD_ColorAppliedTo"))
+                        {
+                            foreach(ColorAppliedTo clrApl in ColorAppliedTo.GetAll())
+                            {
+                                if (clrApl.ToString() == extractedValue_str)
+                                {
+                                    _windoorModel.WD_ColorAppliedTo = clrApl;
+                                    break;
+                                }
+                            }
+                        }      
                         #endregion
                     }
                     else if (inside_frame)
@@ -10873,6 +10933,10 @@ namespace PresentationLayer.Presenter
             _wndrFileName = string.Empty;
             _mainView.GetToolStripButtonSave().Enabled = false;
             _mainView.CreateNewWindoorBtnEnabled = false;
+            WoodecAdditionalForNewItem = 0;
+            baseColor = Base_Color._White;
+            InsideColor = Foil_Color._Walnut;
+            OutsideColor = Foil_Color._Walnut;
             WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
 
