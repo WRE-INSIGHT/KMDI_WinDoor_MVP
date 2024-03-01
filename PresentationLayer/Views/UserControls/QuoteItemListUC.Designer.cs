@@ -39,10 +39,10 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pboxItemImage = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.tboxItemName = new System.Windows.Forms.TextBox();
             this.nud_Woodec = new System.Windows.Forms.NumericUpDown();
             this.txt_Woodec = new System.Windows.Forms.TextBox();
             this.chk_showitemImage = new System.Windows.Forms.CheckBox();
-            this.tboxItemName = new System.Windows.Forms.TextBox();
             this.txt_ItemNumber = new System.Windows.Forms.TextBox();
             this.NudItemQuantity = new System.Windows.Forms.NumericUpDown();
             this.NudItemDiscount = new System.Windows.Forms.NumericUpDown();
@@ -180,6 +180,17 @@
             this.panel3.Size = new System.Drawing.Size(200, 26);
             this.panel3.TabIndex = 23;
             // 
+            // tboxItemName
+            // 
+            this.tboxItemName.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.tboxItemName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tboxItemName.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.tboxItemName.Location = new System.Drawing.Point(214, 0);
+            this.tboxItemName.Name = "tboxItemName";
+            this.tboxItemName.Size = new System.Drawing.Size(0, 25);
+            this.tboxItemName.TabIndex = 3;
+            this.tboxItemName.TextChanged += new System.EventHandler(this.tboxItemName_TextChanged);
+            // 
             // nud_Woodec
             // 
             this.nud_Woodec.Dock = System.Windows.Forms.DockStyle.Left;
@@ -210,17 +221,6 @@
             this.chk_showitemImage.Size = new System.Drawing.Size(15, 26);
             this.chk_showitemImage.TabIndex = 2;
             this.chk_showitemImage.UseVisualStyleBackColor = true;
-            // 
-            // tboxItemName
-            // 
-            this.tboxItemName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.tboxItemName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tboxItemName.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.tboxItemName.Location = new System.Drawing.Point(214, 0);
-            this.tboxItemName.Name = "tboxItemName";
-            this.tboxItemName.Size = new System.Drawing.Size(0, 25);
-            this.tboxItemName.TabIndex = 3;
-            this.tboxItemName.TextChanged += new System.EventHandler(this.tboxItemName_TextChanged);
             // 
             // txt_ItemNumber
             // 
