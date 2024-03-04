@@ -2367,7 +2367,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                              inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
                              inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
                              inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
-                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray|| 
+                             inside_color == Foil_Color._Carbon || inside_color == Foil_Color._UmberOak)
                     {
                         if (!_mainPresenter.ItemLoad)
                         {
@@ -2429,7 +2430,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                              inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
                              inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
                              inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
-                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray ||
+                             inside_color == Foil_Color._Carbon || inside_color == Foil_Color._UmberOak)
                     {
                         _panelModel.Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613242;
                         _panelModel.Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._DH605216;
@@ -2496,7 +2498,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                              inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
                              inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
                              inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
-                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray ||
+                             inside_color == Foil_Color._Carbon || inside_color == Foil_Color._UmberOak)
                     {
                         if (!_mainPresenter.ItemLoad)
                         {
@@ -2602,7 +2605,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                              inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
                              inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
                              inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
-                             inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
+                             inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao ||
+                             inside_color == Foil_Color._Carbon || inside_color == Foil_Color._UmberOak)
                     {
                         if (!_mainPresenter.ItemLoad)
                         {

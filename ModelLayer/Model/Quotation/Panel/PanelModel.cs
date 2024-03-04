@@ -6062,8 +6062,8 @@ namespace ModelLayer.Model.Quotation.Panel
                              outside_color == Foil_Color._DriftWood || outside_color == Foil_Color._Graphite ||
                              outside_color == Foil_Color._JetBlack || outside_color == Foil_Color._ChestnutOak ||
                              outside_color == Foil_Color._WashedOak || outside_color == Foil_Color._GreyOak ||
-                             outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray || outside_color == Foil_Color._Carbon  ||
-                             outside_color == Foil_Color._UmberOak)
+                             outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray ||
+                             outside_color == Foil_Color._Carbon || outside_color == Foil_Color._UmberOak)
                     {
                         Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_BL;
                     }
@@ -9303,7 +9303,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                 }
                             }
                         }
-                         
+
                     }
 
                     if (allow_adjStriker)
@@ -11767,7 +11767,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_ScrewSetForDhandlesVariant_MaterialList(DataTable tbl_explosion)
         {
-            if(Panel_ScrewSetsArtNo != null)
+            if (Panel_ScrewSetsArtNo != null)
             {
                 tbl_explosion.Rows.Add("Screw Set " + Panel_ScrewSetsArtNo.DisplayName,
                          1, "Set",
@@ -11775,7 +11775,7 @@ namespace ModelLayer.Model.Quotation.Panel
                          "Handle",
                          @"");
             }
-            
+
         }
 
         public void Insert_SpacerFixedSash_MaterialList(DataTable tbl_explosion)
