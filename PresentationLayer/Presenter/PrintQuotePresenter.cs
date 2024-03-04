@@ -1115,7 +1115,7 @@ namespace PresentationLayer.Presenter
 
                     _printQuoteView.GetChkLstBox().Visible = false;
                     _printQuoteView.ShowLastPage().Visible = true; // screen Contract Page
-                    _printQuoteView.ShowLastPage().Text = "Net Of Discount";
+                    _printQuoteView.ShowLastPage().Text = "Net of Discount";
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
                     _printQuoteView.GetUniversalLabel().Location = new System.Drawing.Point(977, 26);
                     _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(977, 50);// from 38,81
@@ -1132,7 +1132,7 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.position = " ";
                     }
                     #endregion
-                    ReportParameter[] RParam = new ReportParameter[9];
+                    ReportParameter[] RParam = new ReportParameter[10];
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
                     RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
@@ -1175,6 +1175,15 @@ namespace PresentationLayer.Presenter
                     if(_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.ShowLessDiscountContractSummary == true)
                     {
                         RParam[8] = new ReportParameter("UserDefineLessDiscount", "True");
+                    }
+
+                    if (_printQuoteView.ShowLastPage().Checked)
+                    {
+                        RParam[9] = new ReportParameter("NetofDiscount", "True");
+                    }
+                    else
+                    {
+                        RParam[9] = new ReportParameter("NetofDiscount", "False");
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
