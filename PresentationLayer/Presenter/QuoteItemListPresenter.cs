@@ -52,7 +52,7 @@ namespace PresentationLayer.Presenter
                      _renderPDFAtBackground,
                      _showVatContractSummary,
                      _rdlcReportCompilerShowSubTotal,
-                     _rdlcReportCompilerScreenNetOfDiscount,
+                     _rdlcReportCompilerNetOfDiscount,
                      _intInString,
                      _guShowReviewedBy,
                      _guShowNotedBy,
@@ -138,15 +138,15 @@ namespace PresentationLayer.Presenter
                 _rdlcReportCompilerShowSubTotal = value;
             }
         }
-        public bool RDLCReportCompilerScreenNetOfDiscount
+        public bool RDLCReportCompilerNetOfDiscount
         {
             get
             {
-                return _rdlcReportCompilerScreenNetOfDiscount;
+                return _rdlcReportCompilerNetOfDiscount;
             }
             set
             {
-                _rdlcReportCompilerScreenNetOfDiscount = value;
+                _rdlcReportCompilerNetOfDiscount = value;
             }
         }
         public bool RenderPDFAtBackGround

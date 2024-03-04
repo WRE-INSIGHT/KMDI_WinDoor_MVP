@@ -124,11 +124,11 @@ namespace PresentationLayer.Presenter
         {
             if (_screenNetOfDiscount.Checked)
             {
-                _quoteItemListPresenter.RDLCReportCompilerScreenNetOfDiscount = true;
+                _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount = true;
             }
             else
             {
-                _quoteItemListPresenter.RDLCReportCompilerScreenNetOfDiscount = false;
+                _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount = false;
             }
         }
 
