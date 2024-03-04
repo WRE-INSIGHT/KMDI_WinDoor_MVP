@@ -1536,7 +1536,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Total List Price of Windows and Doors</Value>
+                                      <Value>= iif(Parameters!NetofDiscount.Value,"Total Net Price of Windows and Doors","Total List Price of Windows and Doors")</Value>
                                       <Style>
                                         <FontFamily>Segoe UI</FontFamily>
                                       </Style>
@@ -1664,7 +1664,9 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Math.Round((Fields!dtWindoorListPrice.Value),2)</Value>
+                                      <Value>= iif(Parameters!NetofDiscount.Value,
+Math.Round((Fields!dtWindoorListPrice.Value * (1 - Fields!dtDiscountAverage.Value)),2),
+Math.Round((Fields!dtWindoorListPrice.Value),2))</Value>
                                       <Style>
                                         <FontFamily>Segoe UI</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -1701,7 +1703,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Total List Price of Insect Screens</Value>
+                                      <Value>= iif(Parameters!NetofDiscount.Value,"Total Net Price of Insect Screens","Total List Price of Insect Screens")</Value>
                                       <Style>
                                         <FontFamily>Segoe UI</FontFamily>
                                       </Style>
@@ -1829,7 +1831,9 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Math.Round((Fields!dtScreenListPrice.Value),2)</Value>
+                                      <Value>= iif(Parameters!NetofDiscount.Value,
+Math.Round((Fields!dtScreenListPrice.Value * (1 - Fields!dtDiscountAverage.Value)),2),
+Math.Round((Fields!dtScreenListPrice.Value),2))</Value>
                                       <Style>
                                         <FontFamily>Segoe UI</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -2550,7 +2554,10 @@ Math.Round((Fields!dtDiscountAverage.Value),2))))
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=iif(Parameters!ShowVat.Value = "True","Total Discounted Price With VAT*","Total Discounted Price Without VAT*")</Value>
+                                      <Value>=iif(Parameters!ShowVat.Value = "True",
+
+iif(Parameters!NetofDiscount.Value,"Total Net Price With VAT*","Total Discounted Price With VAT*"),
+iif(Parameters!NetofDiscount.Value,"Total Net Price Without VAT*","Total Discounted Price Without VAT*"))</Value>
                                       <Style>
                                         <FontFamily>Segoe UI</FontFamily>
                                         <FontWeight>Bold</FontWeight>
@@ -2929,8 +2936,16 @@ Math.Round((Fields!dtScreenListPrice.Value),2))
                             <Hidden>=(Fields!dtScreenListPrice.Value &lt;= 0)</Hidden>
                           </Visibility>
                         </TablixMember>
-                        <TablixMember />
-                        <TablixMember />
+                        <TablixMember>
+                          <Visibility>
+                            <Hidden>= iif(Parameters!NetofDiscount.Value,true,false)</Hidden>
+                          </Visibility>
+                        </TablixMember>
+                        <TablixMember>
+                          <Visibility>
+                            <Hidden>= iif(Parameters!NetofDiscount.Value,true,false)</Hidden>
+                          </Visibility>
+                        </TablixMember>
                         <TablixMember>
                           <Visibility>
                             <Hidden>=iif(Parameters!ShowVat.Value = "True",false,true)</Hidden>
@@ -3225,6 +3240,10 @@ Math.Round((Fields!dtScreenListPrice.Value),2))
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="UserDefineLessDiscount">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="NetofDiscount">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
