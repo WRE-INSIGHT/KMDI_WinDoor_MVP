@@ -13657,7 +13657,7 @@ namespace ModelLayer.Model.Quotation
                    "outside color: " + wdm.WD_OutsideColor + "\n" +
                   "inside color: " + wdm.WD_InsideColor + "\n" +
 
-                   "woodec additional % " + priceBeforeWoodec + " = " + priceBeforeWoodec + " + " +  wdm.WD_WoodecAdditional + "%" + "\n\n\n" +
+                   "woodec additional % " + priceBeforeWoodec + " = " + priceBeforeWoodec + " + " + wdm.WD_WoodecAdditional + "%" + "\n\n\n" +
 
                    "item Description" + "\n" + wdm.WD_description +
 
