@@ -175,11 +175,44 @@ namespace PresentationLayer.Presenter
         private ToolStripLabel _tsLblStatus;
         private ToolStrip _tsMain;
         private MenuStrip _msMainMenu;
-        public Base_Color baseColor { get; set; }
-        public Foil_Color InsideColor { get; set; }
-        public Foil_Color OutsideColor { get; set; }
 
+        private Base_Color _baseColor;
+        public Base_Color baseColor
+        {
+            get
+            {
+                return _baseColor;
+            }
+            set
+            {
+                _baseColor = value;
+            }    
+        }
 
+        private Foil_Color _insideColor;
+        public Foil_Color InsideColor
+        {
+            get
+            {
+                return _insideColor;
+            }
+            set
+            {
+                _insideColor = value;
+            }
+        }
+        private Foil_Color _outsideColor;
+        public Foil_Color OutsideColor
+        {
+            get
+            {
+                return _outsideColor;
+            }
+            set
+            {
+                _outsideColor = value;
+            }
+        }
 
 
         private Control _controlRaised_forDMSelection;
@@ -4737,7 +4770,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("InsideColor:"))
                         {
-                           foreach(Foil_Color clr in Foil_Color.GetAll())
+                            foreach (Foil_Color clr in Foil_Color.GetAll())
                             {
                                 if (clr.ToString() == extractedValue_str)
                                 {
