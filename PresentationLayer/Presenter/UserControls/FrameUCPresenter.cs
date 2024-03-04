@@ -311,7 +311,8 @@ namespace PresentationLayer.Presenter.UserControls
                          inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
                          inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
                          inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
-                         inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
+                         inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao || inside_color == Foil_Color._Carbon || 
+                         inside_color == Foil_Color._UmberOak )
                 {
                     handleArtNo = Rotoswing_HandleArtNo._RSC773452;
                 }
