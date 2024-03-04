@@ -884,7 +884,7 @@ namespace PresentationLayer.Presenter
 
                     if (_quoteItemListPresenter != null)
                     {
-                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerScreenNetOfDiscount == true)
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount == true)
                         {
                             RParam[18] = new ReportParameter("NetOfDiscount", "True");
                         }
@@ -1044,6 +1044,14 @@ namespace PresentationLayer.Presenter
             
                     }
 
+                    if (_quoteItemListPresenter != null)
+                    {
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount == true)
+                        {
+                            RParam[8] = new ReportParameter("ShowTableHeaderV2", "True");// table header v2 and net of discount
+                        }
+                    }
+
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
                     _quoteItemListPresenter.GetQuoteItemListView().GetItemListUC_CheckBoxState = false;
                     checklist_raised = false;
@@ -1184,6 +1192,14 @@ namespace PresentationLayer.Presenter
                     else
                     {
                         RParam[9] = new ReportParameter("NetofDiscount", "False");
+                    }
+
+                    if (_quoteItemListPresenter != null)
+                    {
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount == true)
+                        {
+                            RParam[9] = new ReportParameter("NetofDiscount", "True");
+                        }
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
