@@ -912,7 +912,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                  inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
                                  inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
                                  inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
-                                 inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
+                                 inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao ||
+                                 inside_color == Foil_Color._Carbon || inside_color == Foil_Color._UmberOak
+                                 )
                         {
                             handleArtNo = Rotoswing_HandleArtNo._RSC773452;
                         }
@@ -3311,10 +3313,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
                         g.DrawLine(Pens.Black, new Point(0, 0),
-                                               new Point(pInnerX , pInnerY));
+                                               new Point(pInnerX, pInnerY));
 
-                        g.DrawLine(Pens.Black, new Point(loc_X , loc_Y),
-                                               new Point(pInnerX , loc2_Y));
+                        g.DrawLine(Pens.Black, new Point(loc_X, loc_Y),
+                                               new Point(pInnerX, loc2_Y));
                     }
                     else
                     {
@@ -3385,8 +3387,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
                                            new Point(upLine_loc_X2, pInnerY));
 
-                        g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width , botLine_locY),
-                                               new Point(botLine_locX2 , botLine_locY2));
+                        g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, botLine_locY),
+                                               new Point(botLine_locX2, botLine_locY2));
                     }
                     else
                     {
@@ -3395,7 +3397,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, botLine_locY),
                                                new Point(botLine_locX2, botLine_locY2));
-                    }      
+                    }
 
                     if (zoom <= 0.26f)
                     {
@@ -3875,7 +3877,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[0].Y -= 3;
                         divs_bounds_values[0].Height += 3;
                     }
-                    else if(zoom < 0.10f)
+                    else if (zoom < 0.10f)
                     {
                         divs_bounds_values[0].Y -= 3;
                         divs_bounds_values[0].Height += 3;
@@ -4001,7 +4003,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         divs_bounds_values[1].Height += 4;
                     }
-                    else if(zoom < 0.10f)
+                    else if (zoom < 0.10f)
                     {
                         divs_bounds_values[1].Height += 4;
                     }
@@ -4062,7 +4064,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         divs_bounds_values[1].Height += 4;
                     }
-                    else if(zoom < 0.10f)
+                    else if (zoom < 0.10f)
                     {
                         divs_bounds_values[1].Height += 4;
                     }
@@ -4077,7 +4079,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[0].Y -= 3;
                         divs_bounds_values[0].Height += 3;
                     }
-                    else if(zoom < 0.10f)
+                    else if (zoom < 0.10f)
                     {
                         divs_bounds_values[0].Y -= 3;
                         divs_bounds_values[0].Height += 3;
@@ -4305,7 +4307,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         divs_bounds_values[1].Height += 4;
                     }
-                    else if(zoom < 0.10f)
+                    else if (zoom < 0.10f)
                     {
                         divs_bounds_values[1].Height += 4;
                     }
