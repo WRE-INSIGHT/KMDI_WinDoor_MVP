@@ -1049,6 +1049,23 @@ namespace PresentationLayer.Presenter
                         if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount == true)
                         {
                             RParam[8] = new ReportParameter("ShowTableHeaderV2", "True");// table header v2 and net of discount
+
+                            if (!_printQuoteView.QuotationBody.ToLower().Contains("prices are net of discounts"))
+                            {
+                                _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
+                                                                 + "USING "
+                                                                 + baseColor.ToUpper()
+                                                                 + " PROFILES\n"
+                                                                 + "USING "
+                                                                 + GlassThickness.ToUpper()
+                                                                 + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+                                                                 + "PRICES ARE NET OF DISCOUNTS\n\n"
+                                                                 + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION";
+
+                                RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
+                            }
+
+
                         }
                     }
 

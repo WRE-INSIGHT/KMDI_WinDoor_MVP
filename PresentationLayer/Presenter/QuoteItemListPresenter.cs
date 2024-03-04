@@ -473,7 +473,7 @@ namespace PresentationLayer.Presenter
                     string str_DiscountPerItem = item.Screen_Discount.ToString() + "%";
                     decimal dec_DiscounPerItem = 0;
 
-                    if (str_DiscountPerItem.Contains("%"))
+                    if (str_DiscountPerItem.Contains("%") && str_DiscountPerItem != ("0%"))
                     {
                         //use for NetPrice 
                         dec_DiscounPerItem = 1 - (Convert.ToDecimal(String.Format("{0,0:N2}", Decimal.Parse(str_DiscountPerItem.Replace("%", "")) / 100)));
