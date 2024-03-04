@@ -3449,6 +3449,9 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Grey", "NA", 3872.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Grey", "NA", 3872.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Grey", "NA", 4387.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "6 mm Tempered Opti Clear", "NA", 2500.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "10 mm Tempered Opti Clear", "NA", 4000.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Opti Clear", "NA", 4600.00m, true, false, false, false, false);
 
             // Single Tempered w/ Georgian bar
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear with Georgian Bar", "NA", 1614.00m, true, false, false, false, false);
@@ -3474,6 +3477,10 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Grey with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Grey with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Grey with Georgian Bar", "NA", 4387.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "6 mm Tempered Opti Clear with Georgian Bar", "NA", 2500.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "10 mm Tempered Opti Clear with Georgian Bar", "NA", 4000.00m, true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Opti Clear with Georgian Bar", "NA", 4600.00m, true, false, false, false, false);
+
 
             //Single Annealed With Low-E
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear Low-E", "NA", 2000.00m, true, false, false, false, false);
