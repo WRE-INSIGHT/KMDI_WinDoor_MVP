@@ -149,17 +149,17 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 36);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(805, 145);
+            this.panel2.Size = new System.Drawing.Size(805, 160);
             this.panel2.TabIndex = 1;
             // 
             // chkbx_ScreenNetofDiscount
             // 
             this.chkbx_ScreenNetofDiscount.AutoSize = true;
-            this.chkbx_ScreenNetofDiscount.Location = new System.Drawing.Point(145, 74);
+            this.chkbx_ScreenNetofDiscount.Location = new System.Drawing.Point(296, 93);
             this.chkbx_ScreenNetofDiscount.Name = "chkbx_ScreenNetofDiscount";
-            this.chkbx_ScreenNetofDiscount.Size = new System.Drawing.Size(102, 17);
+            this.chkbx_ScreenNetofDiscount.Size = new System.Drawing.Size(100, 17);
             this.chkbx_ScreenNetofDiscount.TabIndex = 17;
-            this.chkbx_ScreenNetofDiscount.Text = "Net Of Discount";
+            this.chkbx_ScreenNetofDiscount.Text = "Net of Discount";
             this.chkbx_ScreenNetofDiscount.UseVisualStyleBackColor = true;
             this.chkbx_ScreenNetofDiscount.CheckedChanged += new System.EventHandler(this.chkbx_ScreenNetofDiscount_CheckedChanged);
             // 
@@ -186,7 +186,7 @@
             // btnCompileReport
             // 
             this.btnCompileReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCompileReport.Location = new System.Drawing.Point(296, 101);
+            this.btnCompileReport.Location = new System.Drawing.Point(296, 118);
             this.btnCompileReport.Name = "btnCompileReport";
             this.btnCompileReport.Size = new System.Drawing.Size(161, 37);
             this.btnCompileReport.TabIndex = 1;
@@ -205,7 +205,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.Black;
-            this.panel5.Location = new System.Drawing.Point(296, 93);
+            this.panel5.Location = new System.Drawing.Point(296, 111);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(161, 4);
             this.panel5.TabIndex = 8;
@@ -236,7 +236,7 @@
             this.chklst_glassType.Location = new System.Drawing.Point(633, 20);
             this.chklst_glassType.Name = "chklst_glassType";
             this.chklst_glassType.ScrollAlwaysVisible = true;
-            this.chklst_glassType.Size = new System.Drawing.Size(170, 124);
+            this.chklst_glassType.Size = new System.Drawing.Size(170, 139);
             this.chklst_glassType.TabIndex = 14;
             // 
             // txt_guVat
@@ -338,7 +338,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 20);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(139, 123);
+            this.panel4.Size = new System.Drawing.Size(139, 138);
             this.panel4.TabIndex = 1;
             // 
             // chk_showimagelist
@@ -350,7 +350,7 @@
             this.chk_showimagelist.Location = new System.Drawing.Point(0, 0);
             this.chk_showimagelist.Name = "chk_showimagelist";
             this.chk_showimagelist.ScrollAlwaysVisible = true;
-            this.chk_showimagelist.Size = new System.Drawing.Size(139, 123);
+            this.chk_showimagelist.Size = new System.Drawing.Size(139, 138);
             this.chk_showimagelist.TabIndex = 0;
             // 
             // panel3
@@ -417,7 +417,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(805, 181);
+            this.ClientSize = new System.Drawing.Size(805, 196);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
