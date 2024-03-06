@@ -4278,7 +4278,7 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show(ex.Message);
             }
         }
-
+        bool _loadRDLCHeaders = false;
         private void Opening_dotwndr(int row)
         {
             string row_str = file_lines[row].Replace("\t", "");
@@ -4298,6 +4298,7 @@ namespace PresentationLayer.Presenter
             }
             else if (row_str == "(")
             {
+                _loadRDLCHeaders = false;
                 inside_quotation = false;
                 inside_item = true;
             }
@@ -4317,7 +4318,7 @@ namespace PresentationLayer.Presenter
                 inside_concrete = true;
             }
 
-            else if (row_str.Contains("#"))
+            else if (row_str.Contains("#") && _loadRDLCHeaders == false)
             {
                 if (inside_frame)
                 {
@@ -9066,6 +9067,7 @@ namespace PresentationLayer.Presenter
                         #region Load for RLDC Headers
                         if (row_str != ".")
                         {
+                            _loadRDLCHeaders = true;
                             string[] key = row_str.Split('^');
                             var value = row_str.Substring(row_str.IndexOf("^ ") + 1);
 
