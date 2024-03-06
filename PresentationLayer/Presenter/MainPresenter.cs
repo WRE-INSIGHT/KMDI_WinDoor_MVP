@@ -4443,7 +4443,6 @@ namespace PresentationLayer.Presenter
                 inside_item = false;
                 inside_concrete = true;
             }
-
             else if (row_str.Contains("#") && _loadRDLCHeaders == false)
             {
                 if (inside_frame)
@@ -9199,7 +9198,8 @@ namespace PresentationLayer.Presenter
                         #region Load for RLDC Headers
                         if (row_str != ".")
                         {
-                            _loadRDLCHeaders = true;
+                            _loadRDLCHeaders = true; // set to give symbol '#' exception 
+
                             string[] key = row_str.Split('^');
                             var value = row_str.Substring(row_str.IndexOf("^ ") + 1);
 
@@ -10434,6 +10434,7 @@ namespace PresentationLayer.Presenter
              rdlcDicChangeKey = true,
              add_existing = false,
             _isFromAddExisting = false,
+            _loadRDLCHeaders = false,
             _allpanelsIsMesh;
         int _EntryCountOfKeyWordUsing,
             _EntryCountOfKeyWordPriceValidity;
