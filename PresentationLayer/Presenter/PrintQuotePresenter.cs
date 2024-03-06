@@ -1040,8 +1040,7 @@ namespace PresentationLayer.Presenter
                     }
                     else
                     {
-                        RParam[8] = new ReportParameter("ShowTableHeaderV2", "False");// Table Header V2
-            
+                        RParam[8] = new ReportParameter("ShowTableHeaderV2", "False");// Table Header V2          
                     }
 
                     if (_quoteItemListPresenter != null)
