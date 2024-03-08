@@ -3910,7 +3910,7 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_080323 = DateTime.Parse("08-03-2023"); // no espag
         DateTime changeCondition_112323 = DateTime.Parse("11-23-2023"); // remove fs in motorize
         DateTime changeCondition_011724 = DateTime.Parse("01-17-2024"); // weatherbar and etc per frame
-        DateTime changeCondition_030524 = DateTime.Parse("03-05-2024"); // FS price for casement 20hd
+        DateTime changeCondition_030624 = DateTime.Parse("03-06-2024"); // FS price for casement 20hd
 
 
 
@@ -4660,7 +4660,7 @@ namespace ModelLayer.Model.Quotation
                                                     {
                                                         //remove fs in motorize
                                                     }
-                                                    else if (cus_ref_date <= changeCondition_030524)
+                                                    else if (cus_ref_date <= changeCondition_030624)
                                                     {
                                                         if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
@@ -8162,7 +8162,7 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 //remove fs in motorize
                                             }
-                                            else if (cus_ref_date <= changeCondition_030524)
+                                            else if (cus_ref_date <= changeCondition_030624)
                                             {
                                                 if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||

@@ -32,6 +32,7 @@ namespace PresentationLayer.Views
         }
         private void GeorgianBarCustomizeDesignView_Load(object sender, EventArgs e)
         {
+            FormTimer.Start();
             EventHelpers.RaiseEvent(sender, GeorgianBarCustomizeDesignViewLoadEventRaised, e);
         }
 
@@ -66,6 +67,11 @@ namespace PresentationLayer.Views
         private void GeorgianBarCustomizeDesignView_MouseClick(object sender, MouseEventArgs e)
         {
             EventHelpers.RaiseMouseEvent(sender, GeorgianBarCustomizeDesignViewMouseClickEventRaised, e);
+        }
+
+        private void GeorgianBarCustomizeDesignView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FormTimer.Stop();
         }
     }
 }
