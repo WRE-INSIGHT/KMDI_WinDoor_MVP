@@ -88,6 +88,7 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             wdm.WD_WoodecAdditional = ((NumericUpDown)sender).Value;
 
+                            _quoteItemListUC_suggestedPriceToolStripMenuItemClickEventRaised(sender,e);
                             //_mainPresenter.GetCurrentPrice();
                             // _quotationModel.ItemCostingPriceAndPoints();
 
