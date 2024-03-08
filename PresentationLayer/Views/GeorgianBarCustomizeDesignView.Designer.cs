@@ -48,6 +48,7 @@
             this.Name = "GeorgianBarCustomizeDesignView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Georgian Bar";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GeorgianBarCustomizeDesignView_FormClosed);
             this.Load += new System.EventHandler(this.GeorgianBarCustomizeDesignView_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GeorgianBarCustomizeDesignView_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GeorgianBarCustomizeDesignView_MouseClick);

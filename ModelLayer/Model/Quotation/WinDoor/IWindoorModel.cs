@@ -102,8 +102,10 @@ namespace ModelLayer.Model.Quotation.WinDoor
         bool WD_WoodecAdditionalVisibility { get; set; }
         decimal WD_WoodecAdditional { get; set; }
         ColorAppliedTo WD_ColorAppliedTo { get; set; }
+        decimal WD_PriceWithWoodecAdditional { get; set; }
         void Fit_MyControls_ToBindDimensions();
         void SetfrmDimentionZoom();
         void Fit_MyControls_ImagersToBindDimensions();
+
     }
 }

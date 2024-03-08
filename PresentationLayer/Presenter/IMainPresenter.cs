@@ -159,5 +159,7 @@ namespace PresentationLayer.Presenter
         Base_Color baseColor { get; set; }
         Foil_Color InsideColor { get; set; } 
         Foil_Color OutsideColor { get; set; }
+        bool EditFromQuotationList { get; set; }
+
     }
 }

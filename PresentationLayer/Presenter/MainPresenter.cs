@@ -186,7 +186,7 @@ namespace PresentationLayer.Presenter
             set
             {
                 _baseColor = value;
-            }    
+            }
         }
 
         private Foil_Color _insideColor;
@@ -1300,7 +1300,7 @@ namespace PresentationLayer.Presenter
             return _userObjCount;
 
         }
-        
+
         public void MainPresenter_PartialAdjustment()
         {
             IPartialAdjustmentViewPresenter partialAdjustment = _partialAdjustmentViewPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, this, _partialAdjustmentBaseHolderPresenter);
@@ -1857,7 +1857,9 @@ namespace PresentationLayer.Presenter
 
         }
         #endregion
-
+        public bool EditFromQuotationList { get; set; }
+        
+        bool checkWoodecAddtional = false;
         private void OnNudCurrentPriceValueChangedEventRaised(object sender, EventArgs e)
         {
             _lblCurrentPrice.Value = ((NumericUpDown)sender).Value;
@@ -1872,17 +1874,26 @@ namespace PresentationLayer.Presenter
                     if (_lblCurrentPrice.Value == _windoorModel.SystemSuggestedPrice &&
                         _windoorModel.SystemSuggestedPrice != 0)
                     {
+
                         _windoorModel.TotalPriceHistoryStatus = "System Generated Price";
                     }
                     else
                     {
+                        Console.WriteLine(EditFromQuotationList);
                         _windoorModel.TotalPriceHistoryStatus = "Edited Price";
+                        if (!checkWoodecAddtional &&
+                            _windoorModel.WD_WoodecAdditional != 0 &&
+                            _lblCurrentPrice.Value != _windoorModel.WD_PriceWithWoodecAdditional)
+                            //&&EditFromQuotationList == false
+                        {
+                            GetPriceWithWoodec(_lblCurrentPrice.Value);
+                        }
                     }
 
                     updatePriceFromMainViewToItemList();
                     _windoorModel.WD_fileLoad = false;
                     _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
-
+                    checkWoodecAddtional = false;
                     Console.WriteLine("MainPresenter: " + _windoorModel.TotalPriceHistoryStatus);
                 }
                 else
@@ -1891,6 +1902,15 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
+        decimal EditedPriceWithWoodecAddl = 0;
+
+        public void GetPriceWithWoodec(decimal editedPrice)
+        {
+            checkWoodecAddtional = true;
+            _windoorModel.WD_PriceWithWoodecAdditional = editedPrice + (editedPrice * (_windoorModel.WD_WoodecAdditional / 100m));
+                _lblCurrentPrice.Value = _windoorModel.WD_PriceWithWoodecAdditional;
+        }
+
 
         private void OnChangeSyncDirectoryToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
@@ -5155,14 +5175,14 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("WD_WoodecAdditionalVisibility"))
                         {
                             _windoorModel.WD_WoodecAdditionalVisibility = Convert.ToBoolean(extractedValue_str);
-                        }      
+                        }
                         else if (row_str.Contains("WD_WoodecAdditional"))
                         {
                             _windoorModel.WD_WoodecAdditional = decimal.Parse(extractedValue_str);
-                        }            
+                        }
                         else if (row_str.Contains("WD_ColorAppliedTo"))
                         {
-                            foreach(ColorAppliedTo clrApl in ColorAppliedTo.GetAll())
+                            foreach (ColorAppliedTo clrApl in ColorAppliedTo.GetAll())
                             {
                                 if (clrApl.ToString() == extractedValue_str)
                                 {
@@ -5170,7 +5190,7 @@ namespace PresentationLayer.Presenter
                                     break;
                                 }
                             }
-                        }      
+                        }
                         #endregion
                     }
                     else if (inside_frame)

@@ -786,7 +786,19 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        private decimal _wdPriceWithWoodecAdditional;
+        public decimal WD_PriceWithWoodecAdditional
+        {
+            get
+            {
+                return _wdPriceWithWoodecAdditional;
+            }
 
+            set
+            {
+                _wdPriceWithWoodecAdditional = value;
+            }
+        }
         #region Methods
 
         public void SetDimensions_basePlatform()
