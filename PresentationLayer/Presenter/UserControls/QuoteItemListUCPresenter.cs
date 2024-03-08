@@ -85,16 +85,21 @@ namespace PresentationLayer.Presenter.UserControls
                         if (wdm.WD_id == Convert.ToInt32(itemNum))
                         {
                             wdm.WD_WoodecAdditional = ((NumericUpDown)sender).Value;
+                            //_mainPresenter.GetCurrentPrice();
+                            // _quotationModel.ItemCostingPriceAndPoints();
 
-                            if (wdm.TotalPriceHistoryStatus == "System Generated Price") //|| _windoorModel.TotalPriceHistoryStatus == "Change Factor"
-                            {
-                                // _nudItemPrice.Value = wdm.WD_currentPrice;
-                            }
-                            else if (wdm.TotalPriceHistoryStatus == "Edited Price")
-                            {
 
-                                // _nudItemPrice.Value = wdm.WD_price;
-                            }
+                            //_nudItemPrice.Value = wdm.WD_currentPrice;
+                            // _lblPrice.Text = wdm.WD_currentPrice.ToString("N", new CultureInfo("en-US"));
+
+                            //if (wdm.TotalPriceHistoryStatus == "System Generated Price") //|| _windoorModel.TotalPriceHistoryStatus == "Change Factor"
+                            //{
+                            //    // _nudItemPrice.Value = wdm.WD_currentPrice;
+                            //}
+                            //else if (wdm.TotalPriceHistoryStatus == "Edited Price")
+                            //{
+                            //    // _nudItemPrice.Value = wdm.WD_price;
+                            //}
 
                         }
                     }
