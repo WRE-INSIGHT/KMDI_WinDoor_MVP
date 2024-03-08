@@ -714,7 +714,6 @@ namespace PresentationLayer.Presenter
 
                     Console.WriteLine("EventPrint.: " + showImage.ToString());
                     _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
-
                     _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
                                           lstQuoteUC.GetiQuoteItemListUC().itemDesc,
                                           lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,

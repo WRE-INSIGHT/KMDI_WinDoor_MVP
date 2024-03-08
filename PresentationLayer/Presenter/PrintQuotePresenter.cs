@@ -1040,12 +1040,11 @@ namespace PresentationLayer.Presenter
                     }
                     else
                     {
-                        RParam[8] = new ReportParameter("ShowTableHeaderV2", "False");// Table Header V2
-            
+                        RParam[8] = new ReportParameter("ShowTableHeaderV2", "False");// Table Header V2          
                     }
 
                     if (_quoteItemListPresenter != null)
-                    {
+                     {
                         if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount == true)
                         {
                             RParam[8] = new ReportParameter("ShowTableHeaderV2", "True");// table header v2 and net of discount
