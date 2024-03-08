@@ -4192,7 +4192,7 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_999999 = DateTime.Parse("11-11-2025"); // need baguhin yung date for gb price for fix 
         DateTime changeCondition_112323 = DateTime.Parse("11-23-2023"); // remove fs in motorize
         DateTime changeCondition_011724 = DateTime.Parse("01-17-2024"); // weatherbar and etc per frame
-        DateTime changeCondition_030624 = DateTime.Parse("03-06-2024"); // FS price for casement 20hd
+        DateTime changeCondition_030824 = DateTime.Parse("03-08-2024"); // FS price for casement 20hd
 
 
         DateTime testDate = DateTime.Parse("01-24-2024");
@@ -5045,7 +5045,7 @@ namespace ModelLayer.Model.Quotation
                                                     {
                                                         //remove fs in motorize
                                                     }
-                                                    else if (cus_ref_date <= changeCondition_030624)
+                                                    else if (cus_ref_date <= changeCondition_030824)
                                                     {
                                                         if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
                                                             pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
@@ -8678,7 +8678,7 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 //remove fs in motorize
                                             }
-                                            else if (cus_ref_date <= changeCondition_030624)
+                                            else if (cus_ref_date <= changeCondition_030824)
                                             {
                                                 if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._10HD ||
                                                     Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._12FS ||
