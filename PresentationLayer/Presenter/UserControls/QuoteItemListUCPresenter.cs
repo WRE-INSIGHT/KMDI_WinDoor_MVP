@@ -28,8 +28,10 @@ namespace PresentationLayer.Presenter.UserControls
         NumericUpDown _nudItemDiscount;
         NumericUpDown _nudItemPrice;
 
-        bool initialLoad = true;
-        bool initialLoadWoodec = true;
+        bool initialLoad = true,
+             initialLoadWoodec = true,
+             FromSystemSuggestedPrice = false;
+
 
         decimal TotalNetPrice;
 
@@ -85,9 +87,9 @@ namespace PresentationLayer.Presenter.UserControls
                         if (wdm.WD_id == Convert.ToInt32(itemNum))
                         {
                             wdm.WD_WoodecAdditional = ((NumericUpDown)sender).Value;
+
                             //_mainPresenter.GetCurrentPrice();
                             // _quotationModel.ItemCostingPriceAndPoints();
-
 
                             //_nudItemPrice.Value = wdm.WD_currentPrice;
                             // _lblPrice.Text = wdm.WD_currentPrice.ToString("N", new CultureInfo("en-US"));
@@ -196,13 +198,14 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             _quotationModel.BOMandItemlistStatus = "BOM";
                             wdm.WD_Selected = true;
+                            FromSystemSuggestedPrice = true;
                             _quotationModel.ItemCostingPriceAndPoints();
                             //wdm.WD_price = _quotationModel.lstTotalPrice[wdm.WD_id - 1];
                             wdm.WD_price = _quotationModel.lstTotalPrice[0];
                             _nudItemPrice.Value = wdm.WD_price;
                             _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
                             wdm.WD_Selected = false;
-
+                            FromSystemSuggestedPrice = true;
 
                         }
                     }
@@ -313,7 +316,8 @@ namespace PresentationLayer.Presenter.UserControls
                             if (!initialLoad)
                             {
                                 if (_nudItemPrice.Value != wdm.WD_PriceWithWoodecAdditional &&
-                                    !checkWoodecAddtional)
+                                    !checkWoodecAddtional &&
+                                    FromSystemSuggestedPrice == false)
                                 {
                                     wdm.WD_PriceWithWoodecAdditional = inputedPrice + (inputedPrice * (wdm.WD_WoodecAdditional / 100m));
                                     wdm.WD_price = wdm.WD_PriceWithWoodecAdditional;
