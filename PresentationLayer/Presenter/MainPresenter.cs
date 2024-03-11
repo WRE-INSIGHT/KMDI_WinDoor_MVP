@@ -1780,6 +1780,7 @@ namespace PresentationLayer.Presenter
         }
         #endregion
 
+        
         private void OnNudCurrentPriceValueChangedEventRaised(object sender, EventArgs e)
         {
             _lblCurrentPrice.Value = ((NumericUpDown)sender).Value;
@@ -3402,514 +3403,9 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Columns.Add(CreateColumn("Insulated", "Insulated", "System.Boolean"));
             _glassThicknessDT.Columns.Add(CreateColumn("Laminated", "Laminated", "System.Boolean"));
 
-            #region Single
-            //single Annealed
-            _glassThicknessDT.Rows.Add(0.0f, "Unglazed", "NA", 0m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(0.0f, "Security Mesh", "NA", 2904.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(0.0f, "Wire Mesh", "NA", 2904.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(0.0f, "Pet Mesh", "NA", 650.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(0.0f, "Tuff Mesh", "NA", 401.70m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(0.0f, "Phifer Mesh", "NA", 132.72m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm PVC Sheet Wood", "NA", 3700.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm PVC Sheet White", "NA", 2900.00m, true, false, false, false, false);//12/13/2023
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm PVC Sheet Foiled", "NA", 3700.00m, true, false, false, false, false);//12/13/2023
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm PVC Sheet Wood(6-B2B)", "NA", 7400.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear", "NA", 670.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear", "NA", 670.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear", "NA", 1662.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", "NA", 1662.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Clear", "NA", 1941.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(13.0f, "13 mm Clear", "NA", 2000.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(14.0f, "14 mm Clear", "NA", 2100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(24.0f, "24 mm Clear", "NA", 3882.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", 0m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Clear", "NA", 0m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Euro Grey", "NA", 0m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Bronze", "NA", 985.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Bronze", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Bronze", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Bronze", "NA", 2709.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Blue", "NA", 985.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Blue", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Blue", "NA", 23334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Blue", "NA", 2709.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Green", "NA", 985.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Green", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Green", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Green", "NA", 2709.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Grey", "NA", 985.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Grey", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Grey", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Grey", "NA", 2709.00m, true, false, false, false, false);
 
-            //single Annealed w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm PVC Sheet Wood with Georgian Bar", "NA", 3700.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm PVC Sheet Wood(6-B2B) with Georgian Bar", "NA", 7400.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear with Georgian Bar", "NA", 670.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear with Georgian Bar", "NA", 670.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear with Georgian Bar", "NA", 1662.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear with Georgian Bar", "NA", 1662.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Clear with Georgian Bar", "NA", 1941.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Bronze with Georgian Bar", "NA", 985.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Bronze with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Bronze with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Bronze with Georgian Bar", "NA", 2709.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Blue with Georgian Bar", "NA", 985.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Blue with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Blue with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Blue with Georgian Bar", "NA", 2709.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Green with Georgian Bar", "NA", 985.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Green with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Green with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Green with Georgian Bar", "NA", 2709.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Grey with Georgian Bar", "NA", 985.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Grey with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Grey with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Grey with Georgian Bar", "NA", 2709.00m, true, false, false, false, false);
+            ClearAndAddGlassInList();
 
-            //Single Tempered
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear", "NA", 1614.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear", "NA", 3201.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear", "NA", 3201.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear", "NA", 3619.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(15.0f, "15 mm Tempered Clear", "NA", 12000.00m, true, false, false, false, false);//6/15/2023
-            _glassThicknessDT.Rows.Add(19.0f, "19 mm Tempered Clear", "NA", 15500.00m, true, false, false, false, false);//10/24/2023
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Oversized", "NA", 6000.00m, true, false, false, false, false);//
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Oversized", "NA", 7050.00m, true, false, false, false, false);//6/13/2023
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Bronze", "NA", 1929.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Bronze", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Bronze", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Bronze", "NA", 4387.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Blue", "NA", 1929.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Blue", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Blue", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Blue", "NA", 4387.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Green", "NA", 1929.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Green", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Green", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Green", "NA", 4387.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Grey", "NA", 1929.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Grey", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Grey", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Grey", "NA", 4387.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "6 mm Tempered Opti Clear", "NA", 2500.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "10 mm Tempered Opti Clear", "NA", 4000.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Opti Clear", "NA", 4600.00m, true, false, false, false, false);
-
-            // Single Tempered w/ Georgian bar
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear with Georgian Bar", "NA", 1614.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear with Georgian Bar", "NA", 3201.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear with Georgian Bar", "NA", 3201.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear with Georgian Bar", "NA", 3619.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Oversized with Georgian Bar", "NA", 6000.00m, true, false, false, false, false);//12/13/2023
-            _glassThicknessDT.Rows.Add(15.0f, "15 mm Tempered Clear with Georgian Bar", "NA", 12000.00m, true, false, false, false, false);//6/15/2023
-            _glassThicknessDT.Rows.Add(19.0f, "19 mm Tempered Clear with Georgian Bar", "NA", 15500.00m, true, false, false, false, false);//10/24/2023
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Bronze with Georgian Bar", "NA", 1929.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Bronze with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Bronze with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Bronze with Georgian Bar", "NA", 4387.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Blue with Georgian Bar", "NA", 1929.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Blue with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Blue with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Blue with Georgian Bar", "NA", 4387.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Green with Georgian Bar", "NA", 1929.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Green with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Green with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Green with Georgian Bar", "NA", 4387.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Grey with Georgian Bar", "NA", 1929.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Grey with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Grey with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Grey with Georgian Bar", "NA", 4387.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "6 mm Tempered Opti Clear with Georgian Bar", "NA", 2500.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "10 mm Tempered Opti Clear with Georgian Bar", "NA", 4000.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Opti Clear with Georgian Bar", "NA", 4600.00m, true, false, false, false, false);
-
-            //Single Annealed With Low-E
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear Low-E", "NA", 2000.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear Low-E", "NA", 3200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear Low-E", "NA", 4900.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Bronze", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Bronze", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Bronze", "NA", 4200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Blue", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Blue", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Blue", "NA", 4200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Green", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Green", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Green", "NA", 4200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Grey", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Grey", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Grey", "NA", 4200.00m, true, false, false, false, false);
-
-            //Single Annealed With Low-E w / Georgian Bar 
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear Low-E with Georgian Bar", "NA", 2000.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear Low-E with Georgian Bar", "NA", 3200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear Low-E with Georgian Bar", "NA", 4900.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Bronze with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Bronze with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Bronze with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Blue with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Blue with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Blue with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Green with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Green with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Green with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Grey with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Grey with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Grey with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
-
-
-            //Single Tempered With Low-E
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear Low-E", "NA", 2550.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear Low-E", "NA", 3800.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear Low-E", "NA", 5500.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Low-E", "NA", 7900.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Bronze", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Bronze", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Bronze", "NA", 5350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Blue", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Blue", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Blue", "NA", 5350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Green", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Green", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Green", "NA", 5350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Grey", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Grey", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Grey", "NA", 5350.00m, true, false, false, false, false);
-
-            //Single Tempered Low w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear Low-E with Georgian Bar", "NA", 2550.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear Low-E with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear Low-E with Georgian Bar", "NA", 5500.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Low-E with Georgian Bar", "NA", 7900.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Bronze with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Bronze with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Bronze with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Blue with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Blue with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Blue with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Green with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Green with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Green with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Grey with Georgian Bar", "NA", 3150.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Grey with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Grey with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
-
-            //Single Tempered Heat-Soaked
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear", "NA", 3801.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear", "NA", 3801.00m, true, false, false, false, false);
-
-            //Single Tempered Heat-Soaked w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear with Georgian Bar", "NA", 3801.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear with Georgian Bar", "NA", 3801.00m, true, false, false, false, false);
-
-            //Single Tempered Heat-Soaked with Low-E
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Heat-Soaked Clear Low-E", "NA", 3350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear Low-E", "NA", 4350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear Low-E", "NA", 5350.00m, true, false, false, false, false);
-
-            //Single Tempered Heat-Soaked Low-E w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Heat-Soaked Clear Low-E with Georgian Bar", "NA", 3350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear Low-E with Georgian Bar", "NA", 4350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear Low-E with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
-
-            //Single Annealed Reflective
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Recflective Clear", "NA", 2600.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Bronze", "NA", 2150.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Bronze", "NA", 3105.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Blue", "NA", 2150.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Blue", "NA", 3105.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Green", "NA", 2150.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Green", "NA", 3105.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Grey", "NA", 2150.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Grey", "NA", 3150.00m, true, false, false, false, false);
-
-            //Single Annealed Reflective w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm  Recflective Clear with Georgian Bar", "NA", 2600.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Bronze with Georgian Bar", "NA", 2150.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Bronze with Georgian Bar", "NA", 3105.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Blue with Georgian Bar", "NA", 2150.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Blue with Georgian Bar", "NA", 3105.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Green with Georgian Bar", "NA", 2150.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Green with Georgian Bar", "NA", 3105.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Grey with Georgian Bar", "NA", 2150.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Grey with Georgian Bar", "NA", 3105.00m, true, false, false, false, false);
-
-            //Single Tempered Reflective 
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Clear", "NA", 3350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Bronze", "NA", 3125.10m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Bronze", "NA", 3800.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Bronze", "NA", 3906.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Blue", "NA", 3125.10m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Blue", "NA", 3800.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Blue", "NA", 3906.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Green", "NA", 3125.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Green", "NA", 3800.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Green", "NA", 3906.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Grey", "NA", 3125.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Grey", "NA", 3800.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Grey", "NA", 3906.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Gold Low-E", "NA", 3600.00m, true, false, false, false, false);
-
-            //Single Tempered Reflective w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Clear with Georgian Bar", "NA", 3350.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Bronze with Georgian Bar", "NA", 3125.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Bronze with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Bronze with Georgian Bar", "NA", 3906.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Blue with Georgian Bar", "NA", 3125.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Blue with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Blue with Georgian Bar", "NA", 3906.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Green with Georgian Bar", "NA", 3125.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Green with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Green with Georgian Bar", "NA", 3906.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Grey with Georgian Bar", "NA", 3125.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Grey with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Grey with Georgian Bar", "NA", 3906.00m, true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Gold Low-E with Georgian Bar", "NA", 3600.00m, true, false, false, false, false);
-
-            #endregion
-
-            #region Double
-
-            #region Insulated
-
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear", "Double Insulated", 2000.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(20.0f, "4 mm Self-Cleaning Tempered Clear + 12 Argon + 4 mm Tempered Clear with Low-e", "Double Insulated", 8700.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Self-Cleaning Tempered Clear + 12 Argon + 6 mm Tempered Clear with Low-e", "Double Insulated", 10400.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.38f, "6 mm  Bronze + 12 Argon + (3 mm Clear + 0.38 PVB + 3 Clear )", "Double Insulated", 4300.00m, false, true, false, true, false);
-
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear with Georgian Bar", "Double Insulated", 2000.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(20.0f, "4 mm Self-Cleaning Tempered Clear + 12 Argon + 4 mm Tempered Clear with Low-e with Georgian Bar", "Double Insulated", 8700.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Self-Cleaning Tempered Clear + 12 Argon + 6 mm Tempered Clear with Low-e with Georgian Bar", "Double Insulated", 10400.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.38f, "6 mm  Bronze + 12 Argon + (3 mm Clear + 0.38 PVB + 3 Clear )", "Double Insulated with Georgian Bar", 4300.00m, false, true, false, true, false);
-            //Annealed
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear", "Double Insulated", 2800.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Clear", "Double Insulated", 3300.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tinted", "Double Insulated", 3615.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tinted + 12 + 6 mm Tinted", "Double Insulated", 3930.00m, false, true, false, true, false);
-
-            //Annealed w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear with Georgian Bar", "Double Insulated", 2800.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Clear with Georgian Bar", "Double Insulated", 3300.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tinted with Georgian Bar", "Double Insulated", 3615.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tinted + 12 + 6 mm Tinted with Georgian Bar", "Double Insulated", 3930.00m, false, true, false, true, false);
-
-            //Tempered
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Clear", "Double Insulated", 3100.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear", "Double Insulated", 4200.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear", "Double Insulated", 5188.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Tinted", "Double Insulated", 4500.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tempered Tinted", "Double Insulated", 5550.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted", "Double Insulated", 6110.00m, false, true, false, true, false);
-
-            //Tempered w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Clear with Georgian Bar", "Double Insulated", 3100.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with Georgian Bar", "Double Insulated", 4200.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with Georgian Bar", "Double Insulated", 5188.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Tinted with Georgian Bar", "Double Insulated", 4500.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tempered Tinted with Georgian Bar", "Double Insulated", 5550.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted with Georgian Bar", "Double Insulated", 6110.00m, false, true, false, true, false);
-
-            //Annealed with Low-e
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear Low-e", "Double Insulated", 3400.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Clear Low-e", "Double Insulated", 4550.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tinted + 10 Argon + 4 mm Clear Low-e", "Double Insulated", 3800.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tinted + 12 Argon + 6 mm Clear Low-e", "Double Insulated", 5100.00m, false, true, false, true, false);
-
-            //Annealed  Low-e w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear Low-e with Georgian Bar", "Double Insulated", 3400.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Clear Low-e with Georgian Bar", "Double Insulated", 4550.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tinted + 10 Argon + 4 mm Clear Low-e with Georgian Bar", "Double Insulated", 3800.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tinted + 12 Argon + 6 mm Clear Low-e with Georgian Bar", "Double Insulated", 5100.00m, false, true, false, true, false);
-
-            //Tempered with Low-e
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear Low-e", "Double Insulated", 4000.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear Low-e", "Double Insulated", 4200.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear Low-e", "Double Insulated", 5000.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 5700.00m, false, true, false, true, false);
-
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 5900.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o)", "Double Insulated", 7050.00m, false, true, false, true, false);
-
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 6600.00m, false, true, false, true, false);
-
-            //Tempered Low-e w/ Georgian Bar 
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 4000.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 4200.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5000.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5700.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5900.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o) with Georgian Bar", "Double Insulated", 7050.00m, false, true, false, true, false);
-
-
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 6600.00m, false, true, false, true, false);
-            //Tempered Heat-Soaked with Low-e
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear Low-e", "Double Insulated", 7500.00m, false, true, false, true, false);
-
-            //Tempered Heat-Soaked Low-e w/ Georgian Bar
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear Low-e with Georgian Bar", "Double Insulated", 7500.00m, false, true, false, true, false);
-
-
-
-            #endregion
-
-            #region Laminated
-
-            _glassThicknessDT.Rows.Add(11.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 5 mm Tempered Clear", "Double Laminated", 5800.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 6 mm Tempered Clear", "Double Laminated", 5850.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52  SG InterLayer + 6 mm Tempered Clear", "Double Laminated", 8000.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(21.52f, "10 mm Tempered Clear + 1.52  SG InterLayer + 10 mm Tempered Clear", "Double Laminated", 11650.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(25.52f, "12 mm Tempered Clear + 1.52  SG InterLayer + 12 mm Tempered Clear", "Double Laminated", 12750.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear with Low-e + 1.52 + 4 mm Tempered Clear", "Double Laminated", 5650.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear with Low-e + 1.52  + 6 mm Tempered Clear", "Double Laminated", 6850.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(23.04f, "10 mm Tempered Clear with Low-e + 3.04 + 10 mm Tempered Clear", "Double Laminated", 14850.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52  + 4 mm Tempered Tinted", "Double Laminated", 5000.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(10.52f, "4 mm Tempered Clear + 1.52  + 5 mm Tempered Tinted", "Double Laminated", 5200.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.52f, "4 mm Tempered Clear + 1.52  + 6 mm Tempered Tinted", "Double Laminated", 5500.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Tinted", "Double Laminated", 6150.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Tinted + 1.52 + 4 mm Tempered Tinted", "Double Laminated", 5500.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted + 1.52  + 5 mm Tempered Tinted", "Double Laminated", 6300.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Tinted + 1.52 + 6 mm Tempered Tinted", "Double Laminated", 6500.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(12.52f, "5 mm Tempered Clear with Low-e + 1.52 + 6 mm Tempered Tinted", "Double Laminated", 7200.00m, false, true, false, false, true);//
-
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear Low-e", "Double Laminated", 7500.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(6.38f, "3 mm  Clear + 0.38 + 3 mm  Clear", "Double Laminated", 2350.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 + 4 mm  Clear", "Double Laminated", 2800.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 + 5 mm  Clear", "Double Laminated", 3900.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear + 0.76 + 6 mm  Clear", "Double Laminated", 4100.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(21.04f, "10 mm  Clear + 3.04 + 8 mm  Clear", "Double Laminated", 8000.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(7.38f, "4 mm  Clear with Low-e + 0.38 + 3 mm  Clear", "Double Laminated", 3800.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear with Low-e + 0.76 + 5 mm  Clear", "Double Laminated", 5000.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear with Low-e + 0.76 + 6 mm  Clear", "Double Laminated", 5500.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(5.76f, "4 mm  Clear with Low-e + 0.76 + 1 mm  Tinted", "Double Laminated", 4200.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(6.38f, "3 mm  Tinted + 0.38 + 3 mm  Clear", "Double Laminated", 2950.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76, "6 mm  Tinted + 0.76 + 5 mm  Clear", "Double Laminated", 4216.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.76, "6 mm  Tinted + 0.76 + 6 mm  Clear", "Double Laminated", 4600.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(6.338f, "3 mm  Clear + 0.38 White PVB  + 3 mm  Clear", "Double Laminated", 2900.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 White PVB  + 4 mm  Clear", "Double Laminated", 3300.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 White PVB  + 5 mm  Clear", "Double Laminated", 5325.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(12.89f, "6 mm  Clear + 0.89 SG Interlayer  + 6 mm  Clear", "Double Laminated", 5285.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(7.52f, "3 mm Tempered Clear + 1.52 + 3 mm Tempered Clear", "Double Laminated", 4050.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 + 4 mm Tempered Clear", "Double Laminated", 4600.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.52f, "6 mm Tempered Clear + 1.52 + 4 mm Tempered Clear", "Double Laminated", 5200.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Clear + 1.52 + 5 mm Tempered Clear", "Double Laminated", 5300.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Clear", "Double Laminated", 5400.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Tinted + 0.76 + 6 mm  Tinted", "Double Laminated", 4600.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  Low-e", "Double Laminated", 4200.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear Low-e", "Double Laminated", 6600.00m, false, true, false, false, true);//Same above but diff price and pos
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear", "Double Laminated", 5700.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear", "Double Laminated", 6500.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear Low-e", "Double Laminated", 6800.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e", "Double Laminated", 8000.00m, false, true, false, false, true);
-
-            //with Georgian Bar 
-
-            _glassThicknessDT.Rows.Add(11.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 5 mm Tempered Clear with Georgian Bar", "Double Laminated", 5800.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 5850.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52  SG InterLayer + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 8000.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(21.52f, "10 mm Tempered Clear + 1.52  SG InterLayer + 10 mm Tempered Clear with Georgian Bar", "Double Laminated", 11650.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(25.52f, "12 mm Tempered Clear + 1.52  SG InterLayer + 12 mm Tempered Clear with Georgian Bar", "Double Laminated", 12750.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear with Low-e + 1.52 + 4 mm Tempered Clear with Georgian Bar", "Double Laminated", 5650.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear with Low-e + 1.52  + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 6850.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(23.04f, "10 mm Tempered Clear with Low-e + 3.04 + 10 mm Tempered Clear with Georgian Bar", "Double Laminated", 14850.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52  + 4 mm Tempered Tinted with Georgian Bar", "Double Laminated", 5000.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(10.52f, "4 mm Tempered Clear + 1.52  + 5 mm Tempered Tinted with Georgian Bar", "Double Laminated", 5200.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.52f, "4 mm Tempered Clear + 1.52  + 6 mm Tempered Tinted with Georgian Bar", "Double Laminated", 5500.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Tinted with Georgian Bar", "Double Laminated", 6150.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Tinted + 1.52 + 4 mm Tempered Tinted with Georgian Bar", "Double Laminated", 5500.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted + 1.52  + 5 mm Tempered Tinted with Georgian Bar", "Double Laminated", 6300.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Tinted + 1.52 + 6 mm Tempered Tinted with Georgian Bar", "Double Laminated", 6500.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(12.52f, "5 mm Tempered Clear with Low-e + 1.52 + 6 mm Tempered Tinted with Georgian Bar", "Double Laminated", 7200.00m, false, true, false, false, true);//
-
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear Low-e with Georgian Bar", "Double Laminated", 7500.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(6.38f, "3 mm  Clear + 0.38 + 3 mm  Clear with Georgian Bar", "Double Laminated", 2350.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 + 4 mm  Clear with Georgian Bar", "Double Laminated", 2800.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 + 5 mm  Clear with Georgian Bar", "Double Laminated", 3900.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear + 0.76 + 6 mm  Clear with Georgian Bar", "Double Laminated", 4100.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(21.04f, "10 mm  Clear + 3.04 + 8 mm  Clear with Georgian Bar", "Double Laminated", 8000.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(7.38f, "4 mm  Clear with Low-e + 0.38 + 3 mm  Clear with Georgian Bar", "Double Laminated", 3800.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear with Low-e + 0.76 + 5 mm  Clear with Georgian Bar", "Double Laminated", 5000.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear with Low-e + 0.76 + 6 mm  Clear with Georgian Bar", "Double Laminated", 5500.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(5.76f, "4 mm  Clear with Low-e + 0.76 + 1 mm  Tinted with Georgian Bar", "Double Laminated", 4200.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(6.38f, "3 mm  Tinted + 0.38 + 3 mm  Clear with Georgian Bar", "Double Laminated", 2950.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76, "6 mm  Tinted + 0.76 + 5 mm  Clear with Georgian Bar", "Double Laminated", 4216.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.76, "6 mm  Tinted + 0.76 + 6 mm  Clear with Georgian Bar", "Double Laminated", 4600.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(6.338f, "3 mm  Clear + 0.38 White PVB  + 3 mm  Clear with Georgian Bar", "Double Laminated", 2900.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 White PVB  + 4 mm  Clear with Georgian Bar", "Double Laminated", 3300.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 White PVB  + 5 mm  Clear with Georgian Bar", "Double Laminated", 5325.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(12.89f, "6 mm  Clear + 0.89 SG Interlayer  + 6 mm  Clear with Georgian Bar", "Double Laminated", 5285.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(7.52f, "3 mm Tempered Clear + 1.52 + 3 mm Tempered Clear with Georgian Bar", "Double Laminated", 4050.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 + 4 mm Tempered Clear with Georgian Bar", "Double Laminated", 4600.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.52f, "6 mm Tempered Clear + 1.52 + 4 mm Tempered Clear with Georgian Bar", "Double Laminated", 5200.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Clear + 1.52 + 5 mm Tempered Clear with Georgian Bar", "Double Laminated", 5300.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 5400.00m, false, true, false, false, true);
-
-            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Tinted + 0.76 + 6 mm  Tinted with Georgian Bar", "Double Laminated", 4600.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  Low-e with Georgian Bar", "Double Laminated", 4200.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear Low-e with Georgian Bar", "Double Laminated", 6600.00m, false, true, false, false, true);//Same above but diff price and pos
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with Georgian Bar", "Double Laminated", 5700.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 6500.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Laminated", 6800.00m, false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Laminated", 8000.00m, false, true, false, false, true);
-
-            #endregion
-
-            #endregion                                                              
-
-            #region Triple
-
-            #region InsuLated
-
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm  Clear + 6 + 4 mm  Clear + 6 + 4 mm  Clear", "Triple Insulated", 4900.00m, false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm  Clear + 6 + 4 mm Tempered Clear", "Triple Insulated", 6100.00m, false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear", "Triple Insulated", 8250.00m, false, false, true, true, false);
-            //_glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear (Type One)", false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 Argon + 4 mm  Clear + 6 Argon + 4 mm Tempered Clear with Low-e", "Triple Insulated", 8350.00m, false, false, true, true, false);
-
-            //with Georgian Bar 
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm  Clear + 6 + 4 mm  Clear + 6 + 4 mm  Clear with Georgian Bar", "Triple Insulated", 4900.00m, false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm  Clear + 6 + 4 mm Tempered Clear with Georgian Bar", "Triple Insulated", 6100.00m, false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear with Georgian Bar", "Triple Insulated", 8250.00m, false, false, true, true, false);
-            //_glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear (Type One) with Georgian Bar", false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 Argon + 4 mm  Clear + 6 Argon + 4 mm Tempered Clear with Low-e with Georgian Bar", "Triple Insulated", 8350.00m, false, false, true, true, false);
-            #endregion
-
-            #region Laminated
-
-            _glassThicknessDT.Rows.Add(19.04f, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear", "Triple Laminated", 2600.00m, false, false, true, false, true);
-            //_glassThicknessDT.Rows.Add(23.04f, "8 mm Tempered Tinted Green + 1.52 + 4 mm Tempered Clear + 1.52 + 8 mm Tempered Tinted Green", false, false, true, false, true);
-
-            //w Georgian Bar 
-            _glassThicknessDT.Rows.Add(19.04f, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear with Georgian Bar", "Triple Laminated", 2600.00m, false, false, true, false, true);
-
-            #endregion
-
-            #endregion
 
             _glassTypeDT.Columns.Add(CreateColumn("GlassType", "GlassType", "System.String"));
             _spacerDT.Columns.Add(CreateColumn("Spacer", "Spacer", "System.String"));
@@ -3962,6 +3458,530 @@ namespace PresentationLayer.Presenter
             }
 
 
+        }
+
+        private void ClearAndAddGlassInList()
+        {
+            try
+            {
+                if (_glassThicknessDT.Rows.Count != 0)
+                {
+                    _glassThicknessDT.Clear();
+                }
+
+                #region Single
+                //single Annealed
+                _glassThicknessDT.Rows.Add(0.0f, "Unglazed", "NA", 0m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(0.0f, "Security Mesh", "NA", 2904.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(0.0f, "Wire Mesh", "NA", 2904.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(0.0f, "Pet Mesh", "NA", 650.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(0.0f, "Tuff Mesh", "NA", 401.70m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(0.0f, "Phifer Mesh", "NA", 132.72m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm PVC Sheet Wood", "NA", 3700.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm PVC Sheet White", "NA", 2900.00m, true, false, false, false, false);//12/13/2023
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm PVC Sheet Foiled", "NA", 3700.00m, true, false, false, false, false);//12/13/2023
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm PVC Sheet Wood(6-B2B)", "NA", 7400.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear", "NA", 670.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear", "NA", 670.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear", "NA", 1662.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", "NA", 1662.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Clear", "NA", 1941.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(13.0f, "13 mm Clear", "NA", 2000.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(14.0f, "14 mm Clear", "NA", 2100.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(24.0f, "24 mm Clear", "NA", 3882.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", 0m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Clear", "NA", 0m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Euro Grey", "NA", 0m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Bronze", "NA", 985.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Bronze", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Bronze", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Bronze", "NA", 2709.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Blue", "NA", 985.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Blue", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Blue", "NA", 23334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Blue", "NA", 2709.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Green", "NA", 985.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Green", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Green", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Green", "NA", 2709.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Grey", "NA", 985.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Grey", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Grey", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Grey", "NA", 2709.00m, true, false, false, false, false);
+
+                //single Annealed w/ Georgian Bar 
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm PVC Sheet Wood with Georgian Bar", "NA", 3700.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm PVC Sheet Wood(6-B2B) with Georgian Bar", "NA", 7400.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear with Georgian Bar", "NA", 670.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear with Georgian Bar", "NA", 670.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear with Georgian Bar", "NA", 1662.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear with Georgian Bar", "NA", 1662.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Clear with Georgian Bar", "NA", 1941.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Bronze with Georgian Bar", "NA", 985.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Bronze with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Bronze with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Bronze with Georgian Bar", "NA", 2709.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Blue with Georgian Bar", "NA", 985.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Blue with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Blue with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Blue with Georgian Bar", "NA", 2709.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Green with Georgian Bar", "NA", 985.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Green with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Green with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Green with Georgian Bar", "NA", 2709.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Grey with Georgian Bar", "NA", 985.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Grey with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Grey with Georgian Bar", "NA", 2334.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm  Tinted Grey with Georgian Bar", "NA", 2709.00m, true, false, false, false, false);
+
+                //Single Tempered
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear", "NA", 1614.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear", "NA", 3201.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear", "NA", 3201.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear", "NA", 3619.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(15.0f, "15 mm Tempered Clear", "NA", 12000.00m, true, false, false, false, false);//6/15/2023
+                _glassThicknessDT.Rows.Add(19.0f, "19 mm Tempered Clear", "NA", 15500.00m, true, false, false, false, false);//10/24/2023
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Oversized", "NA", 6000.00m, true, false, false, false, false);//
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Oversized", "NA", 7050.00m, true, false, false, false, false);//6/13/2023
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Bronze", "NA", 1929.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Bronze", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Bronze", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Bronze", "NA", 4387.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Blue", "NA", 1929.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Blue", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Blue", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Blue", "NA", 4387.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Green", "NA", 1929.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Green", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Green", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Green", "NA", 4387.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Grey", "NA", 1929.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Grey", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Grey", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Grey", "NA", 4387.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "6 mm Tempered Opti Clear", "NA", 2500.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "10 mm Tempered Opti Clear", "NA", 4000.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Opti Clear", "NA", 4600.00m, true, false, false, false, false);
+
+                // Single Tempered w/ Georgian bar
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear with Georgian Bar", "NA", 1614.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear with Georgian Bar", "NA", 3201.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear with Georgian Bar", "NA", 3201.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear with Georgian Bar", "NA", 3619.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Oversized with Georgian Bar", "NA", 6000.00m, true, false, false, false, false);//12/13/2023
+                _glassThicknessDT.Rows.Add(15.0f, "15 mm Tempered Clear with Georgian Bar", "NA", 12000.00m, true, false, false, false, false);//6/15/2023
+                _glassThicknessDT.Rows.Add(19.0f, "19 mm Tempered Clear with Georgian Bar", "NA", 15500.00m, true, false, false, false, false);//10/24/2023
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Bronze with Georgian Bar", "NA", 1929.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Bronze with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Bronze with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Bronze with Georgian Bar", "NA", 4387.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Blue with Georgian Bar", "NA", 1929.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Blue with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Blue with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Blue with Georgian Bar", "NA", 4387.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Green with Georgian Bar", "NA", 1929.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Green with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Green with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Green with Georgian Bar", "NA", 4387.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Grey with Georgian Bar", "NA", 1929.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Grey with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Grey with Georgian Bar", "NA", 3872.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Tinted Grey with Georgian Bar", "NA", 4387.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "6 mm Tempered Opti Clear with Georgian Bar", "NA", 2500.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "10 mm Tempered Opti Clear with Georgian Bar", "NA", 4000.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Opti Clear with Georgian Bar", "NA", 4600.00m, true, false, false, false, false);
+
+                //Single Annealed With Low-E
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear Low-E", "NA", 2000.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear Low-E", "NA", 3200.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear Low-E", "NA", 4900.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Bronze", "NA", 2300.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Bronze", "NA", 3850.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Bronze", "NA", 4200.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Blue", "NA", 2300.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Blue", "NA", 3850.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Blue", "NA", 4200.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Green", "NA", 2300.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Green", "NA", 3850.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Green", "NA", 4200.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Grey", "NA", 2300.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Grey", "NA", 3850.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Grey", "NA", 4200.00m, true, false, false, false, false);
+
+                //Single Annealed With Low-E w / Georgian Bar 
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear Low-E with Georgian Bar", "NA", 2000.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear Low-E with Georgian Bar", "NA", 3200.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear Low-E with Georgian Bar", "NA", 4900.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Bronze with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Bronze with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Bronze with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Blue with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Blue with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Blue with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Green with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Green with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Green with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Low-E Grey with Georgian Bar", "NA", 2300.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tinted Low-E Grey with Georgian Bar", "NA", 3850.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tinted Low-E Grey with Georgian Bar", "NA", 4200.00m, true, false, false, false, false);
+
+
+                //Single Tempered With Low-E
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear Low-E", "NA", 2550.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear Low-E", "NA", 3800.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear Low-E", "NA", 5500.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Low-E", "NA", 7900.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Bronze", "NA", 3100.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Bronze", "NA", 4450.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Bronze", "NA", 5350.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Blue", "NA", 3100.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Blue", "NA", 4450.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Blue", "NA", 5350.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Green", "NA", 3100.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Green", "NA", 4450.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Green", "NA", 5350.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Grey", "NA", 3100.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Grey", "NA", 4450.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Grey", "NA", 5350.00m, true, false, false, false, false);
+
+                //Single Tempered Low w/ Georgian Bar 
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear Low-E with Georgian Bar", "NA", 2550.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear Low-E with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear Low-E with Georgian Bar", "NA", 5500.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Low-E with Georgian Bar", "NA", 7900.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Bronze with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Bronze with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Bronze with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Blue with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Blue with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Blue with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Green with Georgian Bar", "NA", 3100.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Green with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Green with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Low-E Grey with Georgian Bar", "NA", 3150.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Low-E Grey with Georgian Bar", "NA", 4450.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Low-E Grey with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
+
+                //Single Tempered Heat-Soaked
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear", "NA", 3801.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear", "NA", 3801.00m, true, false, false, false, false);
+
+                //Single Tempered Heat-Soaked w/ Georgian Bar 
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear with Georgian Bar", "NA", 3801.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear with Georgian Bar", "NA", 3801.00m, true, false, false, false, false);
+
+                //Single Tempered Heat-Soaked with Low-E
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Heat-Soaked Clear Low-E", "NA", 3350.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear Low-E", "NA", 4350.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear Low-E", "NA", 5350.00m, true, false, false, false, false);
+
+                //Single Tempered Heat-Soaked Low-E w/ Georgian Bar 
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Heat-Soaked Clear Low-E with Georgian Bar", "NA", 3350.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear Low-E with Georgian Bar", "NA", 4350.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear Low-E with Georgian Bar", "NA", 5350.00m, true, false, false, false, false);
+
+                //Single Annealed Reflective
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm  Recflective Clear", "NA", 2600.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Bronze", "NA", 2150.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Bronze", "NA", 3105.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Blue", "NA", 2150.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Blue", "NA", 3105.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Green", "NA", 2150.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Green", "NA", 3105.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Grey", "NA", 2150.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Grey", "NA", 3150.00m, true, false, false, false, false);
+
+                //Single Annealed Reflective w/ Georgian Bar 
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm  Recflective Clear with Georgian Bar", "NA", 2600.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Bronze with Georgian Bar", "NA", 2150.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Bronze with Georgian Bar", "NA", 3105.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Blue with Georgian Bar", "NA", 2150.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Blue with Georgian Bar", "NA", 3105.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Green with Georgian Bar", "NA", 2150.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Green with Georgian Bar", "NA", 3105.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm  Recflective Tinted Grey with Georgian Bar", "NA", 2150.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm  Recflective Tinted Grey with Georgian Bar", "NA", 3105.00m, true, false, false, false, false);
+
+                //Single Tempered Reflective 
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Clear", "NA", 3350.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Bronze", "NA", 3125.10m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Bronze", "NA", 3800.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Bronze", "NA", 3906.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Blue", "NA", 3125.10m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Blue", "NA", 3800.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Blue", "NA", 3906.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Green", "NA", 3125.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Green", "NA", 3800.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Green", "NA", 3906.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Grey", "NA", 3125.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Grey", "NA", 3800.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Grey", "NA", 3906.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Gold Low-E", "NA", 3600.00m, true, false, false, false, false);
+
+                //Single Tempered Reflective w/ Georgian Bar 
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Clear with Georgian Bar", "NA", 3350.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Bronze with Georgian Bar", "NA", 3125.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Bronze with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Bronze with Georgian Bar", "NA", 3906.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Blue with Georgian Bar", "NA", 3125.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Blue with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Blue with Georgian Bar", "NA", 3906.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Green with Georgian Bar", "NA", 3125.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Green with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Green with Georgian Bar", "NA", 3906.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Tinted Grey with Georgian Bar", "NA", 3125.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Recflective Tinted Grey with Georgian Bar", "NA", 3800.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Recflective Tinted Grey with Georgian Bar", "NA", 3906.00m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Recflective Gold Low-E with Georgian Bar", "NA", 3600.00m, true, false, false, false, false);
+
+                #endregion
+
+                #region Double
+
+                #region Insulated
+
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear", "Double Insulated", 2000.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(20.0f, "4 mm Self-Cleaning Tempered Clear + 12 Argon + 4 mm Tempered Clear with Low-e", "Double Insulated", 8700.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Self-Cleaning Tempered Clear + 12 Argon + 6 mm Tempered Clear with Low-e", "Double Insulated", 10400.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.38f, "6 mm  Bronze + 12 Argon + (3 mm Clear + 0.38 PVB + 3 Clear )", "Double Insulated", 4300.00m, false, true, false, true, false);
+
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear with Georgian Bar", "Double Insulated", 2000.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(20.0f, "4 mm Self-Cleaning Tempered Clear + 12 Argon + 4 mm Tempered Clear with Low-e with Georgian Bar", "Double Insulated", 8700.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Self-Cleaning Tempered Clear + 12 Argon + 6 mm Tempered Clear with Low-e with Georgian Bar", "Double Insulated", 10400.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.38f, "6 mm  Bronze + 12 Argon + (3 mm Clear + 0.38 PVB + 3 Clear )", "Double Insulated with Georgian Bar", 4300.00m, false, true, false, true, false);
+                //Annealed
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear", "Double Insulated", 2800.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Clear", "Double Insulated", 3300.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tinted", "Double Insulated", 3615.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(23.0f, "5 mm Tinted + 12 + 6 mm Tinted", "Double Insulated", 3930.00m, false, true, false, true, false);
+
+                //Annealed w/ Georgian Bar 
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear with Georgian Bar", "Double Insulated", 2800.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Clear with Georgian Bar", "Double Insulated", 3300.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tinted with Georgian Bar", "Double Insulated", 3615.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(23.0f, "5 mm Tinted + 12 + 6 mm Tinted with Georgian Bar", "Double Insulated", 3930.00m, false, true, false, true, false);
+
+                //Tempered
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Clear", "Double Insulated", 3100.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear", "Double Insulated", 4200.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear", "Double Insulated", 5188.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Tinted", "Double Insulated", 4500.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tempered Tinted", "Double Insulated", 5550.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted", "Double Insulated", 6110.00m, false, true, false, true, false);
+
+                //Tempered w/ Georgian Bar 
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Clear with Georgian Bar", "Double Insulated", 3100.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with Georgian Bar", "Double Insulated", 4200.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with Georgian Bar", "Double Insulated", 5188.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Tinted with Georgian Bar", "Double Insulated", 4500.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tempered Tinted with Georgian Bar", "Double Insulated", 5550.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted with Georgian Bar", "Double Insulated", 6110.00m, false, true, false, true, false);
+
+                //Annealed with Low-e
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear Low-e", "Double Insulated", 3400.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Clear Low-e", "Double Insulated", 4550.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tinted + 10 Argon + 4 mm Clear Low-e", "Double Insulated", 3800.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tinted + 12 Argon + 6 mm Clear Low-e", "Double Insulated", 5100.00m, false, true, false, true, false);
+
+                //Annealed  Low-e w/ Georgian Bar 
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear Low-e with Georgian Bar", "Double Insulated", 3400.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Clear Low-e with Georgian Bar", "Double Insulated", 4550.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tinted + 10 Argon + 4 mm Clear Low-e with Georgian Bar", "Double Insulated", 3800.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tinted + 12 Argon + 6 mm Clear Low-e with Georgian Bar", "Double Insulated", 5100.00m, false, true, false, true, false);
+
+                //Tempered with Low-e
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear Low-e", "Double Insulated", 4000.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear Low-e", "Double Insulated", 4200.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear Low-e", "Double Insulated", 5000.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 5700.00m, false, true, false, true, false);
+
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 5900.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o)", "Double Insulated", 7050.00m, false, true, false, true, false);
+
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 6600.00m, false, true, false, true, false);
+
+                //Tempered Low-e w/ Georgian Bar 
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 4000.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 4200.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5000.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5700.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5900.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o) with Georgian Bar", "Double Insulated", 7050.00m, false, true, false, true, false);
+
+
+                _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 6600.00m, false, true, false, true, false);
+                //Tempered Heat-Soaked with Low-e
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear Low-e", "Double Insulated", 7500.00m, false, true, false, true, false);
+
+                //Tempered Heat-Soaked Low-e w/ Georgian Bar
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear Low-e with Georgian Bar", "Double Insulated", 7500.00m, false, true, false, true, false);
+
+
+
+                #endregion
+
+                #region Laminated
+
+                _glassThicknessDT.Rows.Add(11.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 5 mm Tempered Clear", "Double Laminated", 5800.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 6 mm Tempered Clear", "Double Laminated", 5850.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52  SG InterLayer + 6 mm Tempered Clear", "Double Laminated", 8000.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(21.52f, "10 mm Tempered Clear + 1.52  SG InterLayer + 10 mm Tempered Clear", "Double Laminated", 11650.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(25.52f, "12 mm Tempered Clear + 1.52  SG InterLayer + 12 mm Tempered Clear", "Double Laminated", 12750.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear with Low-e + 1.52 + 4 mm Tempered Clear", "Double Laminated", 5650.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear with Low-e + 1.52  + 6 mm Tempered Clear", "Double Laminated", 6850.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(23.04f, "10 mm Tempered Clear with Low-e + 3.04 + 10 mm Tempered Clear", "Double Laminated", 14850.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52  + 4 mm Tempered Tinted", "Double Laminated", 5000.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(10.52f, "4 mm Tempered Clear + 1.52  + 5 mm Tempered Tinted", "Double Laminated", 5200.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(11.52f, "4 mm Tempered Clear + 1.52  + 6 mm Tempered Tinted", "Double Laminated", 5500.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Tinted", "Double Laminated", 6150.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Tinted + 1.52 + 4 mm Tempered Tinted", "Double Laminated", 5500.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted + 1.52  + 5 mm Tempered Tinted", "Double Laminated", 6300.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Tinted + 1.52 + 6 mm Tempered Tinted", "Double Laminated", 6500.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(12.52f, "5 mm Tempered Clear with Low-e + 1.52 + 6 mm Tempered Tinted", "Double Laminated", 7200.00m, false, true, false, false, true);//
+
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear Low-e", "Double Laminated", 7500.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(6.38f, "3 mm  Clear + 0.38 + 3 mm  Clear", "Double Laminated", 2350.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 + 4 mm  Clear", "Double Laminated", 2800.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 + 5 mm  Clear", "Double Laminated", 3900.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear + 0.76 + 6 mm  Clear", "Double Laminated", 4100.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(21.04f, "10 mm  Clear + 3.04 + 8 mm  Clear", "Double Laminated", 8000.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(7.38f, "4 mm  Clear with Low-e + 0.38 + 3 mm  Clear", "Double Laminated", 3800.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear with Low-e + 0.76 + 5 mm  Clear", "Double Laminated", 5000.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear with Low-e + 0.76 + 6 mm  Clear", "Double Laminated", 5500.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(5.76f, "4 mm  Clear with Low-e + 0.76 + 1 mm  Tinted", "Double Laminated", 4200.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(6.38f, "3 mm  Tinted + 0.38 + 3 mm  Clear", "Double Laminated", 2950.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(11.76, "6 mm  Tinted + 0.76 + 5 mm  Clear", "Double Laminated", 4216.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.76, "6 mm  Tinted + 0.76 + 6 mm  Clear", "Double Laminated", 4600.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(6.338f, "3 mm  Clear + 0.38 White PVB  + 3 mm  Clear", "Double Laminated", 2900.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 White PVB  + 4 mm  Clear", "Double Laminated", 3300.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 White PVB  + 5 mm  Clear", "Double Laminated", 5325.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(12.89f, "6 mm  Clear + 0.89 SG Interlayer  + 6 mm  Clear", "Double Laminated", 5285.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(7.52f, "3 mm Tempered Clear + 1.52 + 3 mm Tempered Clear", "Double Laminated", 4050.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 + 4 mm Tempered Clear", "Double Laminated", 4600.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(11.52f, "6 mm Tempered Clear + 1.52 + 4 mm Tempered Clear", "Double Laminated", 5200.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Clear + 1.52 + 5 mm Tempered Clear", "Double Laminated", 5300.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Clear", "Double Laminated", 5400.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(12.76f, "6 mm  Tinted + 0.76 + 6 mm  Tinted", "Double Laminated", 4600.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  Low-e", "Double Laminated", 4200.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear Low-e", "Double Laminated", 6600.00m, false, true, false, false, true);//Same above but diff price and pos
+                _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear", "Double Laminated", 5700.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear", "Double Laminated", 6500.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear Low-e", "Double Laminated", 6800.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e", "Double Laminated", 8000.00m, false, true, false, false, true);
+
+                //with Georgian Bar 
+
+                _glassThicknessDT.Rows.Add(11.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 5 mm Tempered Clear with Georgian Bar", "Double Laminated", 5800.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 5850.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52  SG InterLayer + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 8000.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(21.52f, "10 mm Tempered Clear + 1.52  SG InterLayer + 10 mm Tempered Clear with Georgian Bar", "Double Laminated", 11650.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(25.52f, "12 mm Tempered Clear + 1.52  SG InterLayer + 12 mm Tempered Clear with Georgian Bar", "Double Laminated", 12750.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear with Low-e + 1.52 + 4 mm Tempered Clear with Georgian Bar", "Double Laminated", 5650.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear with Low-e + 1.52  + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 6850.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(23.04f, "10 mm Tempered Clear with Low-e + 3.04 + 10 mm Tempered Clear with Georgian Bar", "Double Laminated", 14850.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52  + 4 mm Tempered Tinted with Georgian Bar", "Double Laminated", 5000.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(10.52f, "4 mm Tempered Clear + 1.52  + 5 mm Tempered Tinted with Georgian Bar", "Double Laminated", 5200.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(11.52f, "4 mm Tempered Clear + 1.52  + 6 mm Tempered Tinted with Georgian Bar", "Double Laminated", 5500.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Tinted with Georgian Bar", "Double Laminated", 6150.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Tinted + 1.52 + 4 mm Tempered Tinted with Georgian Bar", "Double Laminated", 5500.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted + 1.52  + 5 mm Tempered Tinted with Georgian Bar", "Double Laminated", 6300.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Tinted + 1.52 + 6 mm Tempered Tinted with Georgian Bar", "Double Laminated", 6500.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(12.52f, "5 mm Tempered Clear with Low-e + 1.52 + 6 mm Tempered Tinted with Georgian Bar", "Double Laminated", 7200.00m, false, true, false, false, true);//
+
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear Low-e with Georgian Bar", "Double Laminated", 7500.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(6.38f, "3 mm  Clear + 0.38 + 3 mm  Clear with Georgian Bar", "Double Laminated", 2350.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 + 4 mm  Clear with Georgian Bar", "Double Laminated", 2800.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 + 5 mm  Clear with Georgian Bar", "Double Laminated", 3900.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear + 0.76 + 6 mm  Clear with Georgian Bar", "Double Laminated", 4100.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(21.04f, "10 mm  Clear + 3.04 + 8 mm  Clear with Georgian Bar", "Double Laminated", 8000.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(7.38f, "4 mm  Clear with Low-e + 0.38 + 3 mm  Clear with Georgian Bar", "Double Laminated", 3800.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear with Low-e + 0.76 + 5 mm  Clear with Georgian Bar", "Double Laminated", 5000.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear with Low-e + 0.76 + 6 mm  Clear with Georgian Bar", "Double Laminated", 5500.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(5.76f, "4 mm  Clear with Low-e + 0.76 + 1 mm  Tinted with Georgian Bar", "Double Laminated", 4200.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(6.38f, "3 mm  Tinted + 0.38 + 3 mm  Clear with Georgian Bar", "Double Laminated", 2950.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(11.76, "6 mm  Tinted + 0.76 + 5 mm  Clear with Georgian Bar", "Double Laminated", 4216.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.76, "6 mm  Tinted + 0.76 + 6 mm  Clear with Georgian Bar", "Double Laminated", 4600.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(6.338f, "3 mm  Clear + 0.38 White PVB  + 3 mm  Clear with Georgian Bar", "Double Laminated", 2900.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 White PVB  + 4 mm  Clear with Georgian Bar", "Double Laminated", 3300.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 White PVB  + 5 mm  Clear with Georgian Bar", "Double Laminated", 5325.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(12.89f, "6 mm  Clear + 0.89 SG Interlayer  + 6 mm  Clear with Georgian Bar", "Double Laminated", 5285.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(7.52f, "3 mm Tempered Clear + 1.52 + 3 mm Tempered Clear with Georgian Bar", "Double Laminated", 4050.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 + 4 mm Tempered Clear with Georgian Bar", "Double Laminated", 4600.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(11.52f, "6 mm Tempered Clear + 1.52 + 4 mm Tempered Clear with Georgian Bar", "Double Laminated", 5200.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Clear + 1.52 + 5 mm Tempered Clear with Georgian Bar", "Double Laminated", 5300.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 5400.00m, false, true, false, false, true);
+
+                _glassThicknessDT.Rows.Add(12.76f, "6 mm  Tinted + 0.76 + 6 mm  Tinted with Georgian Bar", "Double Laminated", 4600.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  Low-e with Georgian Bar", "Double Laminated", 4200.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear Low-e with Georgian Bar", "Double Laminated", 6600.00m, false, true, false, false, true);//Same above but diff price and pos
+                _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with Georgian Bar", "Double Laminated", 5700.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 6500.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Laminated", 6800.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Laminated", 8000.00m, false, true, false, false, true);
+
+                #endregion
+
+                #endregion
+
+                #region Triple
+
+                #region InsuLated
+
+                _glassThicknessDT.Rows.Add(24.0f, "4 mm  Clear + 6 + 4 mm  Clear + 6 + 4 mm  Clear", "Triple Insulated", 4900.00m, false, false, true, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm  Clear + 6 + 4 mm Tempered Clear", "Triple Insulated", 6100.00m, false, false, true, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear", "Triple Insulated", 8250.00m, false, false, true, true, false);
+                //_glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear (Type One)", false, false, true, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 Argon + 4 mm  Clear + 6 Argon + 4 mm Tempered Clear with Low-e", "Triple Insulated", 8350.00m, false, false, true, true, false);
+
+                //with Georgian Bar 
+                _glassThicknessDT.Rows.Add(24.0f, "4 mm  Clear + 6 + 4 mm  Clear + 6 + 4 mm  Clear with Georgian Bar", "Triple Insulated", 4900.00m, false, false, true, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm  Clear + 6 + 4 mm Tempered Clear with Georgian Bar", "Triple Insulated", 6100.00m, false, false, true, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear with Georgian Bar", "Triple Insulated", 8250.00m, false, false, true, true, false);
+                //_glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear (Type One) with Georgian Bar", false, false, true, true, false);
+                _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 Argon + 4 mm  Clear + 6 Argon + 4 mm Tempered Clear with Low-e with Georgian Bar", "Triple Insulated", 8350.00m, false, false, true, true, false);
+                #endregion
+
+                #region Laminated
+
+                _glassThicknessDT.Rows.Add(19.04f, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear", "Triple Laminated", 2600.00m, false, false, true, false, true);
+                //_glassThicknessDT.Rows.Add(23.04f, "8 mm Tempered Tinted Green + 1.52 + 4 mm Tempered Clear + 1.52 + 8 mm Tempered Tinted Green", false, false, true, false, true);
+
+                //w Georgian Bar 
+                _glassThicknessDT.Rows.Add(19.04f, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear with Georgian Bar", "Triple Laminated", 2600.00m, false, false, true, false, true);
+
+                #endregion
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error adding Glass to list " + "\n"  + this + "\n" + ex.Message);
+            }
         }
 
         private void OnAddProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -4594,6 +4614,7 @@ namespace PresentationLayer.Presenter
                             _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
                             _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                             _quotationModel.Date_Assigned = dateAssigned;
+                            _quotationModel.MainPresenter_GlassThicknessDT = GlassThicknessDT; // try to get glass into quotation model
                             //_quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
                         }
                         else if (row_str.Contains("Frame_PUFoamingQty_Total"))
@@ -10931,6 +10952,8 @@ namespace PresentationLayer.Presenter
         public void Clearing_Operation()
         {
 
+            ClearAndAddGlassInList();
+
             _quotationModel = null;
             _frameModel = null;
             _windoorModel = null;
@@ -11172,6 +11195,7 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                         _quotationModel.Date_Assigned = dateAssigned;
                         _quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
+                        _quotationModel.MainPresenter_GlassThicknessDT = GlassThicknessDT;
 
                         SetPricingFactor();
 
