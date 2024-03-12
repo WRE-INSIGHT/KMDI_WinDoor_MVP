@@ -121,6 +121,7 @@
             this.lblZoom = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.topViewToolStrip = new System.Windows.Forms.ToolStripButton();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -547,7 +548,8 @@
             this.tsLbl_Status,
             this.DateAssignedtoolStripButton,
             this.glassUpgradeToolStrip,
-            this.partialAdjustmentToolstrip});
+            this.partialAdjustmentToolstrip,
+            this.topViewToolStrip});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -1086,6 +1088,18 @@
             // 
             this.saveFileDialog1.Filter = "WNDR files|*.wndr";
             // 
+            // topViewToolStrip
+            // 
+            this.topViewToolStrip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.topViewToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.topViewToolStrip.Enabled = false;
+            this.topViewToolStrip.Image = ((System.Drawing.Image)(resources.GetObject("topViewToolStrip.Image")));
+            this.topViewToolStrip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.topViewToolStrip.Name = "topViewToolStrip";
+            this.topViewToolStrip.Size = new System.Drawing.Size(24, 29);
+            this.topViewToolStrip.Text = "TopView";
+            this.topViewToolStrip.Click += new System.EventHandler(this.topViewToolStrip_Click);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1228,5 +1242,6 @@
         private System.Windows.Forms.ToolStripButton DateAssignedtoolStripButton;
         private System.Windows.Forms.ToolStripButton glassUpgradeToolStrip;
         private System.Windows.Forms.ToolStripButton partialAdjustmentToolstrip;
+        private System.Windows.Forms.ToolStripButton topViewToolStrip;
     }
 }

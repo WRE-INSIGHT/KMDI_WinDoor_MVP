@@ -132,6 +132,7 @@ namespace PresentationLayer.Presenter
         private IPartialAdjustmentViewPresenter _partialAdjustmentViewPresenter;
         private IPartialAdjustmentUCPresenter _partialAdjustmentUCPresenter;
         private IPartialAdjustmentBaseHolderPresenter _partialAdjustmentBaseHolderPresenter;
+        private ITopViewPresenter _topViewDesignPresenter;
 
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
@@ -865,7 +866,8 @@ namespace PresentationLayer.Presenter
                              IGlassUpgradePresenter glassupgradePresenter,
                              IPartialAdjustmentViewPresenter partialAdjustmentViewPresenter,
                              IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter,
-                             IPartialAdjustmentBaseHolderPresenter partialAdjustmentBaseHolderPresenter
+                             IPartialAdjustmentBaseHolderPresenter partialAdjustmentBaseHolderPresenter,
+                             ITopViewPresenter topViewPresenter
                              )
         {
             _mainView = mainView;
@@ -934,6 +936,7 @@ namespace PresentationLayer.Presenter
             _partialAdjustmentViewPresenter = partialAdjustmentViewPresenter;
             _partialAdjustmentUCPresenter = partialAdjustmentUCPresenter;
             _partialAdjustmentBaseHolderPresenter = partialAdjustmentBaseHolderPresenter;
+            _topViewDesignPresenter = topViewPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -1048,8 +1051,16 @@ namespace PresentationLayer.Presenter
             _mainView.DateAssignedtoolStripButtonClickEventRaised += _mainView_DateAssignedtoolStripButtonClickEventRaised;
             _mainView.glassUpgradeToolStripButtonClickEventRaised += _mainView_glassUpgradeToolStripButtonClickEventRaised;
             _mainView.partialAdjusmentToolstripClickClickEventRaised += _mainView_partialAdjusmentToolstripClickClickEventRaised;
+            _mainView.topViewToolStripButtonClickEventRaised += _mainView_topViewToolStripButtonClickEventRaised;
 
 
+        }
+
+        private void _mainView_topViewToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            //MessageBox.Show("Top View Button Clicked");
+            ITopViewPresenter topViewDesign = _topViewDesignPresenter.GetNewInstance(this, _unityC, _panelModel, _frameModel, _windoorModel);
+            topViewDesign.GetTopViewDesign().ShowTopView();     
         }
 
         private void _mainView_partialAdjusmentToolstripClickClickEventRaised(object sender, EventArgs e)

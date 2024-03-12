@@ -485,6 +485,9 @@ namespace PresentationLayer
                  .RegisterType<IPartialAdjustmentBaseHolderPresenter,PartialAdjustmentBaseHolderPresenter>(new ContainerControlledLifetimeManager())
                  .RegisterType<IPartialAdjustmentBaseHolderUC,PartialAdjustmentBaseHolderUC>(new ContainerControlledLifetimeManager())
 
+                 .RegisterType<ITopView, TopView>(new ContainerControlledLifetimeManager())
+                 .RegisterType<ITopViewPresenter, TopViewPresenter>(new ContainerControlledLifetimeManager())
+
                  .RegisterType<IPP_CenterProfilePropertyUC, PP_CenterProfilePropertyUC>(new ContainerControlledLifetimeManager())
                  .RegisterType<IPP_CenterProfilePropertyUCPresenter, PP_CenterProfilePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 

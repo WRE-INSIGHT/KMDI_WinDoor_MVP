@@ -35,6 +35,7 @@ namespace PresentationLayer.Views
                     PriceHistorytoolStripButton.Enabled = true;
                     DateAssignedtoolStripButton.Enabled = true;
                     partialAdjustmentToolstrip.Enabled = true;
+                    topViewToolStrip.Enabled = true;
                 }
                 else
                 {
@@ -52,6 +53,7 @@ namespace PresentationLayer.Views
                     PriceHistorytoolStripButton.Enabled = false;
                     DateAssignedtoolStripButton.Enabled = false;
                     partialAdjustmentToolstrip.Enabled = false;
+                    topViewToolStrip.Enabled = false;
                 }
             }
         }
@@ -76,6 +78,7 @@ namespace PresentationLayer.Views
                 deleteItemToolStripButton1.Enabled = value;
                 glassUpgradeToolStrip.Enabled = value;
                 partialAdjustmentToolstrip.Enabled = value;
+                topViewToolStrip.Enabled = value;
             }
         }
 
@@ -314,6 +317,8 @@ namespace PresentationLayer.Views
         public event EventHandler DateAssignedtoolStripButtonClickEventRaised;
         public event EventHandler glassUpgradeToolStripButtonClickEventRaised;
         public event EventHandler partialAdjusmentToolstripClickClickEventRaised;
+        public event EventHandler topViewToolStripButtonClickEventRaised;
+
         public MainView()
         {
             InitializeComponent();
@@ -761,6 +766,11 @@ namespace PresentationLayer.Views
         private void partialAdjusmentToolstrip_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, partialAdjusmentToolstripClickClickEventRaised, e);
+        }
+
+        private void topViewToolStrip_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, topViewToolStripButtonClickEventRaised, e);
         }
     }
 }

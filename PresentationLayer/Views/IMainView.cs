@@ -50,6 +50,7 @@ namespace PresentationLayer.Views
         event EventHandler DateAssignedtoolStripButtonClickEventRaised;
         event EventHandler glassUpgradeToolStripButtonClickEventRaised;
         event EventHandler partialAdjusmentToolstripClickClickEventRaised;
+        event EventHandler topViewToolStripButtonClickEventRaised;
 
         string mainview_title { get; set; }
         float Zoom { get; set; }
