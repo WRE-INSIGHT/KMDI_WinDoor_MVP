@@ -4640,6 +4640,14 @@ namespace PresentationLayer.Presenter
                         {
                             _windoorModel.pnlCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
+                        else if (row_str.Contains("Date_Assigned_Mainpresenter:"))
+                        {
+                            _windoorModel.Date_Assigned_Mainpresenter = Convert.ToDateTime(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Date_Assigned:"))
+                        {
+                            _windoorModel.Date_Assigned = Convert.ToDateTime(extractedValue_str);
+                        }
                         #endregion
                     }
                     else if (inside_frame)
