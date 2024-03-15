@@ -551,7 +551,8 @@ namespace ModelLayer.Model.Quotation
                                                                                   divArtNo_RightOrBot_lvl3,
                                                                                   pnl_curCtrl.Panel_Placement,
                                                                                   mpanel_placement,
-                                                                                  mpanelParentlvl2_placement);
+                                                                                  mpanelParentlvl2_placement,
+                                                                                  Date_Assigned.ToString());
                                     }
                                     else if (mpnl_curCtrl != null)
                                     {
@@ -710,7 +711,8 @@ namespace ModelLayer.Model.Quotation
                                                                                   divArtNo_RightOrBot_lvl3,
                                                                                   pnl_curCtrl.Panel_Placement,
                                                                                   mpanel_placement,
-                                                                                  mpanelParentlvl2_placement);
+                                                                                  mpanelParentlvl2_placement,
+                                                                                  Date_Assigned.ToString());
                                     }
                                     else if (mpnl_curCtrl != null)
                                     {
@@ -739,7 +741,8 @@ namespace ModelLayer.Model.Quotation
                                                                                     divArtNo_RightOrBot_lvl3,
                                                                                     mpnl_curCtrl.MPanel_Placement,
                                                                                     mpanel_placement,
-                                                                                    mpanelParentlvl2_placement);
+                                                                                    mpanelParentlvl2_placement
+                                                                                    );
                                     }
                                 }
 
@@ -1540,7 +1543,8 @@ namespace ModelLayer.Model.Quotation
                                                                               divArtNo_RightOrBot_lvl3,
                                                                               pnl_curCtrl.Panel_Placement,
                                                                               mpanel_placement,
-                                                                              mpanelParentlvl2_placement);
+                                                                              mpanelParentlvl2_placement,
+                                                                              Date_Assigned.ToString());
                                 }
                                 else if (mpnl_curCtrl != null)
                                 {

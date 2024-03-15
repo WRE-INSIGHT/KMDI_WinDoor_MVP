@@ -1046,6 +1046,7 @@ namespace PresentationLayer.Presenter
                 {
                     DateTime myDate = DateTime.Parse(input);
                     _quotationModel.Date_Assigned_Mainpresenter = myDate;
+                    _windoorModel.Date_Assigned_Mainpresenter = myDate;
                 }
 
             }
@@ -10641,7 +10642,7 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                         _quotationModel.Date_Assigned = dateAssigned;
                         _quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
-                  
+
 
                         SetPricingFactor();
 

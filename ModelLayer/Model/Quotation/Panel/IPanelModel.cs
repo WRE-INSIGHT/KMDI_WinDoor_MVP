@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -63,6 +64,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_HandleOptionsHeight { get; set; }
         int Panel_LouverBladesCount { get; set; }
         bool Panel_LouverBladesVisibility { get; set; }
+        DateTime Date_Assigned { get; set; }
         Color Panel_BackColor { get; set; }
 
         #region Explosion
@@ -385,8 +387,8 @@ namespace ModelLayer.Model.Quotation.Panel
                                            Divider_ArticleNo divArtNo_RightorBot_lvl3 = null,
                                            string panel_placement = "",
                                            string mpanel_placement = "", //1st level
-                                           string mpanelparent_placement = "" //2nd level
-                                           );
+                                           string mpanelparent_placement = "", //2nd level
+                                           string Date_Assigned = null);
 
         void Insert_SashInfo_MaterialList(DataTable tbl_explosion);
         void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion);
