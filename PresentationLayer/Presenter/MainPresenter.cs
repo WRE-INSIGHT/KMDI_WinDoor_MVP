@@ -1485,7 +1485,8 @@ namespace PresentationLayer.Presenter
                     decimal slidingscreen_NetPrice = Math.Round(_windoorModel.WD_currentPrice * 0.7m, 2),
                             slidingscreen_TotalAmount = _windoorModel.WD_currentPrice;
 
-                    IScreenModel scr = _screenServices.AddScreenModel(_windoorModel.WD_id,
+                    IScreenModel scr = _screenServices.AddScreenModel(0, // screen_id
+                                                                      _windoorModel.WD_id,
                                                                       _windoorModel.WD_width,
                                                                       _windoorModel.WD_height,
                                                                        ScreenType._SlidingScreen,//add screenlist to enumlayer
@@ -1868,7 +1869,8 @@ namespace PresentationLayer.Presenter
         private void OnScreenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             // int screenID = _screenModel.Screen_id += 1;
-            _screenModel = _screenServices.AddScreenModel(0.0m,
+            _screenModel = _screenServices.AddScreenModel(0,
+                                                          0.0m,
                                                           0,
                                                           0,
                                                           null,
@@ -8776,7 +8778,7 @@ namespace PresentationLayer.Presenter
 
                         if (row_str.Contains("Screen_id:"))
                         {
-                            screen_id = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            screen_id = Convert.ToInt64(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         else if (row_str.Contains("Screen_Types_Window:"))
                         {
@@ -9398,21 +9400,22 @@ namespace PresentationLayer.Presenter
         }
         private void Load_Screen()
         {
-            IScreenModel scr = _screenServices.AddScreenModel(screen_ItemNumber,
-                                                             screen_Width,
-                                                             screen_Height,
-                                                             screen_Types,
-                                                             screen_WindoorID,
-                                                             screen_UnitPrice,
-                                                             screen_Quantity,
-                                                             screen_Set,
-                                                             screen_Discount,
-                                                             screen_NetPrice,
-                                                             screen_TotalAmount,
-                                                             screen_description,
-                                                             screen_Factor,
-                                                             screen_AddOnsSpecialFactor,
-                                                             screen_displayeddimension);
+            IScreenModel scr = _screenServices.AddScreenModel(screen_id,
+                                                              screen_ItemNumber,
+                                                              screen_Width,
+                                                              screen_Height,
+                                                              screen_Types,
+                                                              screen_WindoorID,
+                                                              screen_UnitPrice,
+                                                              screen_Quantity,
+                                                              screen_Set,
+                                                              screen_Discount,
+                                                              screen_NetPrice,
+                                                              screen_TotalAmount,
+                                                              screen_description,
+                                                              screen_Factor,
+                                                              screen_AddOnsSpecialFactor,
+                                                              screen_displayeddimension);
 
             scr.Screen_id = screen_id;
             scr.Screen_Types_Window = screen_Types_Window;
@@ -10881,7 +10884,7 @@ namespace PresentationLayer.Presenter
                 screen_LaborAndMobilization,
                 screen_TotalNetPriceWithoutVat,
                 screen_AddOnsSpecialFactor;
-        int screen_id,
+           int
             screen_Set,
             screen_Quantity,
             screen_Width,
@@ -10907,6 +10910,7 @@ namespace PresentationLayer.Presenter
             screen_6052MilledProfileQty,
             screen_ExchangeRate,
             plissedRd_Panels;
+        long screen_id;
         string screen_WindoorID,
                screen_description,
                screen_displayeddimension;
