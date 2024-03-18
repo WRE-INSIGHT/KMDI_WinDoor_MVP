@@ -5,7 +5,7 @@ namespace ModelLayer.Model.Quotation.Screen
 {
     public interface IScreenModel
     {
-        int Screen_id { get; set; }
+        long Screen_id { get; set; }
         bool Screen_Types_Window { get; set; }
         bool Screen_Types_Door { get; set; }
         int Screen_Width { get; set; }

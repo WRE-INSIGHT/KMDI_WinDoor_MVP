@@ -402,6 +402,7 @@ namespace PresentationLayer.Presenter
 
             num_glassDiscount.Value = 30m;
 
+            _quotationModel.changePriceBasedonDate();
 
             foreach (WindoorModel wdm in _quotationModel.Lst_Windoor)
             {

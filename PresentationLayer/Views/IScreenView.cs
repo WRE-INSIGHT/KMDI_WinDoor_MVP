@@ -43,6 +43,8 @@ namespace PresentationLayer.Views
         event EventHandler nudHeightEnterEventRaised;
         event EventHandler nudFactorEnterEventRaised;
         event FormClosingEventHandler ScreenView_FormClosingEventRaised;
+        event EventHandler chkbox_allowEdit_CheckedChangedEventRaised;
+        event EventHandler ScreenView_ResizeEventRaised;
 
         void ShowScreemView();
 
@@ -61,6 +63,7 @@ namespace PresentationLayer.Views
 
         NumericUpDown GetNudFactor();
         NumericUpDown GetNudSets();
+        CheckBox getCheckBoxAllowEdit();
 
 
 
