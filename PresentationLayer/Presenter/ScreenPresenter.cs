@@ -300,24 +300,25 @@ namespace PresentationLayer.Presenter
 
                 //_EdittoColumns.SetToolTip(_chkboxAllowEdit, " Allow Edit to Columns");
 
-                _EdittoColumns.Show("Allow Edit To" + "\n" + "Columns",_chkboxAllowEdit);
-                _setTimerForToolTip.Start();
+                _EdittoColumns.Show("Allow Edit To" + "\n" + "Cell   ",_chkboxAllowEdit,2000);
+
+                //_setTimerForToolTip.Start();
             }      
         }
 
         private void _setTimerForToolTip_Tick(object sender, EventArgs e)
         {
-            if (tmrLoop == 2)
-            {
-                _EdittoColumns.Active = false;
-                //_EdittoColumns.Hide(_chkboxAllowEdit);
-                _setTimerForToolTip.Stop();
-                tmrLoop = 0;
-            }
-            else
-            {
-                tmrLoop++;
-            }
+            //if (tmrLoop == 2)
+            //{
+            //    _EdittoColumns.Active = false;
+            //    //_EdittoColumns.Hide(_chkboxAllowEdit);
+            //    _setTimerForToolTip.Stop();
+            //    tmrLoop = 0;
+            //}
+            //else
+            //{
+            //    tmrLoop++;
+            //}
         }
 
         private void _screenView_dgvScreenColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
