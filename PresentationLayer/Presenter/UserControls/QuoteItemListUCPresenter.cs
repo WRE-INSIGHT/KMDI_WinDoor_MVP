@@ -28,6 +28,10 @@ namespace PresentationLayer.Presenter.UserControls
         NumericUpDown _nudItemDiscount;
         NumericUpDown _nudItemPrice;
 
+        bool initialLoad = true,
+             initialLoadWoodec = true,
+             FromSystemSuggestedPrice = false;
+
 
         decimal TotalNetPrice;
 
@@ -71,33 +75,40 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _quoteItemListUC_nudWoodecValueChangedEventRaised(object sender, EventArgs e)
         {
-            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            if (!initialLoadWoodec)
             {
-                string itemNum = _quoteItemListUC.ItemNumber;
-                itemNum = itemNum.Replace("Item ", string.Empty);
-
-                if (itemNum != "Item")
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
-                    if (wdm.WD_id == Convert.ToInt32(itemNum))
+                    string itemNum = _quoteItemListUC.ItemNumber;
+                    itemNum = itemNum.Replace("Item ", string.Empty);
+
+                    if (itemNum != "Item")
                     {
-                        wdm.WD_WoodecAdditional = ((NumericUpDown)sender).Value;
-                        //_mainPresenter.GetCurrentPrice();
-                        //_nudItemPrice.Value = wdm.WD_price;
-                        //_lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
+                        if (wdm.WD_id == Convert.ToInt32(itemNum))
+                        {
+                            wdm.WD_WoodecAdditional = ((NumericUpDown)sender).Value;
 
+                            _quoteItemListUC_suggestedPriceToolStripMenuItemClickEventRaised(sender,e);
+                            //_mainPresenter.GetCurrentPrice();
+                            // _quotationModel.ItemCostingPriceAndPoints();
 
-                        _quotationModel.BOMandItemlistStatus = "BOM";
-                        wdm.WD_Selected = true;
-                        _quotationModel.ItemCostingPriceAndPoints();
-                        //wdm.WD_price = _quotationModel.lstTotalPrice[wdm.WD_id - 1];
-                        wdm.WD_price = _quotationModel.lstTotalPrice[0];
-                        _nudItemPrice.Value = wdm.WD_price;
-                        _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
-                        wdm.WD_Selected = false;
+                            //_nudItemPrice.Value = wdm.WD_currentPrice;
+                            // _lblPrice.Text = wdm.WD_currentPrice.ToString("N", new CultureInfo("en-US"));
 
+                            //if (wdm.TotalPriceHistoryStatus == "System Generated Price") //|| _windoorModel.TotalPriceHistoryStatus == "Change Factor"
+                            //{
+                            //    // _nudItemPrice.Value = wdm.WD_currentPrice;
+                            //}
+                            //else if (wdm.TotalPriceHistoryStatus == "Edited Price")
+                            //{
+                            //    // _nudItemPrice.Value = wdm.WD_price;
+                            //}
+
+                        }
                     }
                 }
             }
+            initialLoadWoodec = false;
         }
 
         private void _quoteItemListUC_rtboxDescTextChangedEventRaised(object sender, EventArgs e)
@@ -188,12 +199,14 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             _quotationModel.BOMandItemlistStatus = "BOM";
                             wdm.WD_Selected = true;
+                            FromSystemSuggestedPrice = true;
                             _quotationModel.ItemCostingPriceAndPoints();
                             //wdm.WD_price = _quotationModel.lstTotalPrice[wdm.WD_id - 1];
                             wdm.WD_price = _quotationModel.lstTotalPrice[0];
                             _nudItemPrice.Value = wdm.WD_price;
                             _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
                             wdm.WD_Selected = false;
+                            FromSystemSuggestedPrice = true;
 
                         }
                     }
@@ -284,9 +297,10 @@ namespace PresentationLayer.Presenter.UserControls
                 }
             }
         }
-
+        bool checkWoodecAddtional = false;
         private void _quoteItemListUC_NudItemPriceValueChangedEventRaised(object sender, System.EventArgs e)
         {
+
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 string itemNum = _quoteItemListUC.ItemNumber;
@@ -296,15 +310,50 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     if (wdm.WD_id == Convert.ToInt32(itemNum))
                     {
-                        wdm.WD_price = ((NumericUpDown)sender).Value;
-                        _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
+                        decimal inputedPrice = ((NumericUpDown)sender).Value;
+
+                        if (wdm.WD_WoodecAdditional != 0)
+                        {
+                            if (!initialLoad)
+                            {
+                                if (_nudItemPrice.Value != wdm.WD_PriceWithWoodecAdditional &&
+                                    !checkWoodecAddtional &&
+                                    FromSystemSuggestedPrice == false)
+                                {
+                                    wdm.WD_PriceWithWoodecAdditional = inputedPrice + (inputedPrice * (wdm.WD_WoodecAdditional / 100m));
+                                    wdm.WD_price = wdm.WD_PriceWithWoodecAdditional;
+                                    _nudItemPrice.Value = wdm.WD_price;
+
+                                    _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
+                                    _mainPresenter.EditFromQuotationList = true;
+                                    checkWoodecAddtional = true;
+
+                                }
+
+
+                            }
+                        }
+                        else
+                        {
+                            wdm.WD_price = inputedPrice;
+                            _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
+                        }
+
                         if (wdm.WD_Selected == true)
                         {
-                            _mainPresenter.GetMainView().GetCurrentPrice().Value = ((NumericUpDown)sender).Value;
+                            _mainPresenter.GetMainView().GetCurrentPrice().Value = wdm.WD_price;
                         }
+
+                        checkWoodecAddtional = false;
+
+
+
                     }
                 }
             }
+
+
+            initialLoad = false;
         }
 
         private void _quoteItemListUC_NudItemDiscountValueChangedEventRaised(object sender, System.EventArgs e)
