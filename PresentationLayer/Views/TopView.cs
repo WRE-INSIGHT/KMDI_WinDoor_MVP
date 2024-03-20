@@ -27,6 +27,14 @@ namespace PresentationLayer.Views
         public event MouseEventHandler TopViewSlidingViewMouseDownEventRaised;
         public event EventHandler TopViewSlidingViewMouseHoverEventRaised;
         public event MouseEventHandler TopViewSlidingViewMouseClickEventRaised;
+        public event EventHandler structuralToolStripClickedEventRaised;
+        public event EventHandler nonstructuralToolStripClickedEventRaised;
+        public event EventHandler leftmenuToolStripClickedEventRaised;
+        public event EventHandler rightmenuToolStripClickedEventRaised;
+        public event EventHandler bothmenuToolStripClickedEventRaised;
+        public event EventHandler popupToolStripClickedEventRaised;
+        public event EventHandler dhandleToolStripClickedEventRaised;
+        public event EventHandler cremoneToolStripClickedEventRaised;
 
 
 
@@ -110,5 +118,61 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, TopViewSlidingViewButtonClickEventRaised, e);
         }
+
+        private void StructuralToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, structuralToolStripClickedEventRaised, e);
+        }
+
+        private void nonStructuralToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nonstructuralToolStripClickedEventRaised, e);
+        }
+
+        private void popupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, popupToolStripClickedEventRaised, e);
+        }
+
+        private void dHandleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, dhandleToolStripClickedEventRaised, e);
+        }
+
+        private void cremoneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cremoneToolStripClickedEventRaised, e);
+        }
+
+        private void bothToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, bothmenuToolStripClickedEventRaised, e);
+        }
+
+        private void nonbothToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, bothmenuToolStripClickedEventRaised, e);
+        }
+
+        private void rightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, rightmenuToolStripClickedEventRaised, e);
+        }
+        private void nonrightToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, rightmenuToolStripClickedEventRaised, e);
+        }
+        private void leftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, leftmenuToolStripClickedEventRaised, e);
+        }
+        private void nonleftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, leftmenuToolStripClickedEventRaised, e);
+        }
+
+        
+
+        
     }
 }

@@ -13,6 +13,14 @@ namespace PresentationLayer.Views
         event MouseEventHandler TopViewSlidingViewMouseUpEventRaised;
         event MouseEventHandler TopViewSlidingViewMouseDownEventRaised;
         event MouseEventHandler TopViewSlidingViewMouseClickEventRaised;
+        event EventHandler structuralToolStripClickedEventRaised;
+        event EventHandler nonstructuralToolStripClickedEventRaised;
+        event EventHandler leftmenuToolStripClickedEventRaised;
+        event EventHandler rightmenuToolStripClickedEventRaised;
+        event EventHandler bothmenuToolStripClickedEventRaised;
+        event EventHandler popupToolStripClickedEventRaised;
+        event EventHandler dhandleToolStripClickedEventRaised;
+        event EventHandler cremoneToolStripClickedEventRaised;
        
         event PaintEventHandler TopViewPaintEventRaised;
 
