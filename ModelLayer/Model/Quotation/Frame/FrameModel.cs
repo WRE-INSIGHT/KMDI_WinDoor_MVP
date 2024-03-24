@@ -1638,7 +1638,6 @@ namespace ModelLayer.Model.Quotation.Frame
                      Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
             {
                 Frame_MechanicalJointConnectorQty = 4;
-
                 if (Frame_If_InwardMotorizedSliding == true)
                 {
                     Frame_ExplosionHeight = _frameHeight;
@@ -1725,6 +1724,12 @@ namespace ModelLayer.Model.Quotation.Frame
                 FrameCheveron_ArtNo = Cheveron_ArticleNo._H083;
                 FrameCornerCleat_ArtNo = CornerCleat_ArticleNo._H079;
                 FrameInversionClip_ArtNo = InversionClip_ArticleNo._84804;
+            }
+            if (Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                Frame_ArtNo == FrameProfile_ArticleNo._6052)
+            {
+                Frame_MechanicalJointConnector_Artno = Frame_MechJointArticleNo._9C52;
+                Frame_SealingElement_ArticleNo = SealingElement_ArticleNo._9C97;
             }
 
             #region Old algo

@@ -53,7 +53,7 @@ namespace ModelLayer.Model.Quotation
         public bool FactorChange { get; set; }
         public bool BOM_AluProfileType { get; set; }
 
-
+        DateTime cus_ref_date;
 
 
         private DataColumn CreateColumn(string columname, string caption, string type)
@@ -1473,7 +1473,54 @@ namespace ModelLayer.Model.Quotation
                                 #endregion
 
                                 //Console.WriteLine("no div bottom frame:" + boundedByBottomFrame);
+                                changePriceBasedonDate();
+                                DateTime FormulaChangedate_031124 = DateTime.Parse("03-13-2024"); //unequal panel for premi
 
+                                if (pnl_curCtrl.Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
+                                {
+                                    if (cus_ref_date >= FormulaChangedate_031124)
+                                    {
+                                        if (div_nxtCtrl != null)
+                                        {
+                                            divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;
+                                            divNxt_ifDM = div_nxtCtrl.Div_ChkDM;
+                                        }
+                                        if (div_prevCtrl != null)
+                                        {
+                                            divArtNo_prevCtrl = div_prevCtrl.Div_ArtNo;
+                                            divPrev_ifDM = div_prevCtrl.Div_ChkDM;
+                                        }
+                                        if (divTopOrLeft != null)
+                                        {
+                                            divArtNo_LeftOrTop = divTopOrLeft.Div_ArtNo;
+                                        }
+                                        if (divBotOrRight != null)
+                                        {
+                                            divArtNo_RightOrBot = divBotOrRight.Div_ArtNo;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (div_nxtCtrl != null)
+                                    {
+                                        divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;
+                                        divNxt_ifDM = div_nxtCtrl.Div_ChkDM;
+                                    }
+                                    if (div_prevCtrl != null)
+                                    {
+                                        divArtNo_prevCtrl = div_prevCtrl.Div_ArtNo;
+                                        divPrev_ifDM = div_prevCtrl.Div_ChkDM;
+                                    }
+                                    if (divTopOrLeft != null)
+                                    {
+                                        divArtNo_LeftOrTop = divTopOrLeft.Div_ArtNo;
+                                    }
+                                    if (divBotOrRight != null)
+                                    {
+                                        divArtNo_RightOrBot = divBotOrRight.Div_ArtNo;
+                                    }
+                                }
 
                                 int OverLappingPanel_Qty = 0,
                                     perimeterBrushSeal = 0,
@@ -3312,7 +3359,7 @@ namespace ModelLayer.Model.Quotation
         #endregion
 
         #region changePriceBasedOnDate
-        DateTime cus_ref_date;
+
         public void changePriceBasedonDate()
         {
             cus_ref_date = Date_Assigned;
@@ -4133,8 +4180,6 @@ namespace ModelLayer.Model.Quotation
 
             foreach (IWindoorModel wdm in Lst_Windoor)
             {
-
-
                 //if (BOMandItemlistStatus == "PriceItemList")
                 //{
                 //    wdm.WD_Selected = true;

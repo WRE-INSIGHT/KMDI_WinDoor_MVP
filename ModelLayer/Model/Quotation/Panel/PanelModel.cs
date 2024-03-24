@@ -7085,6 +7085,8 @@ namespace ModelLayer.Model.Quotation.Panel
             decimal pointFiveFrom84300forNxtPrev = 0,
                     pointFiveFrom84300forLeftorTopRightorBot = 0;
 
+            Console.WriteLine("Panel ID:" + Panel_ID);
+
             if (divNxt_artNo == Divider_ArticleNo._7536 || divNxt_artNo == Divider_ArticleNo._2069) //base level
             {
                 GB_deduction_forNxtPrev += (42 / 2);
@@ -7123,8 +7125,39 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (divNxt_artNo == Divider_ArticleNo._6052)
             {
-                GB_deduction_forNxtPrev += (53 / 2);
-                Sash_deduction_forNxtPrev += (53 / 2);
+                if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
+                {
+                    if (cus_ref_date >= FormulaChangedate_031124)
+                    {
+                        GB_deduction_forNxtPrev += (61 / 2);
+                        Sash_deduction_forNxtPrev += (61 / 2);
+
+                        if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                            Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                        {
+                            Sash_deduction_forNxtPrev -= 8; //sash bite allowance 8 lang as per Maam D
+                            //if (ChckBoundedByBotframe == true)
+                            //{
+                            //    Sash_deduction_forLeftorTopRightorBot += 2; //gawing -8 dahil nasa baba
+                            //}
+                        }
+                    }
+                }
+                else
+                {
+                    GB_deduction_forNxtPrev += (61 / 2);
+                    Sash_deduction_forNxtPrev += (61 / 2);
+
+                    if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                        Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                    {
+                        Sash_deduction_forNxtPrev -= 8; //sash bite allowance
+                        //if (ChckBoundedByBotframe == true)
+                        //{
+                        //    Sash_deduction_forLeftorTopRightorBot += 2; //gawing -8 dahil nasa baba
+                        //}
+                    }
+                }
             }
             else if (divNxt_artNo == Divider_ArticleNo._84300)
             {
@@ -7135,7 +7168,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Sash_deduction_forNxtPrev -= 6; //sash bite allowance
                 }
-            }
+            } 
             else if (divNxt_artNo == Divider_ArticleNo._84301)
             {
                 GB_deduction_forNxtPrev += (52 / 2);
@@ -7349,7 +7382,28 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                     else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
                     {
-                        if (cus_ref_date >= FormulaChangedate_031124)
+                        if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
+                        {
+                            if (cus_ref_date >= FormulaChangedate_031124)
+                            {
+                                if (mpnlDivEneable == false)
+                                {
+                                    if (panel_placement == "Last")
+                                    {
+                                        Sash_deduction_forNxtPrev += -35;
+                                    }
+                                    else if (panel_placement == "Somewhere in Between")
+                                    {
+                                        Sash_deduction_forNxtPrev += -35;
+                                    }
+                                    else if (panel_placement == "First")
+                                    {
+                                        Sash_deduction_forNxtPrev += 35;
+                                    }
+                                }
+                            }
+                        }
+                        else
                         {
                             if (mpnlDivEneable == false)
                             {
@@ -7366,41 +7420,30 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += 35;
                                 }
                             }
-                            else
-                            {
-                                Sash_deduction_forNxtPrev += 35;
-                            }
-
-                        }
-                        else
-                        {
-                            Sash_deduction_forNxtPrev += 35;
                         }
                     }
                     else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                     {
-                        if (cus_ref_date >= FormulaChangedate_031124)
+                        if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
                         {
-                            if (mpnlDivEneable == false)
+                            if (cus_ref_date >= FormulaChangedate_031124)
                             {
-                                if (panel_placement == "Last")
+                                if (mpnlDivEneable == false)
                                 {
-                                    Sash_deduction_forNxtPrev += -53;
-                                }
-                                else if (panel_placement == "Somewhere in Between")
-                                {
-                                    Sash_deduction_forNxtPrev += 53;
-                                }
-                                else if (panel_placement == "First")
-                                {
-                                    Sash_deduction_forNxtPrev += 53;
+                                    if (panel_placement == "Last")
+                                    {
+                                        Sash_deduction_forNxtPrev += -53;
+                                    }
+                                    else if (panel_placement == "Somewhere in Between")
+                                    {
+                                        Sash_deduction_forNxtPrev += -53;
+                                    }
+                                    else if (panel_placement == "First")
+                                    {
+                                        Sash_deduction_forNxtPrev += 53;
+                                    }
                                 }
                             }
-                            else
-                            {
-                                Sash_deduction_forNxtPrev += 53;
-                            }
-
                         }
                         else
                         {
@@ -7521,9 +7564,9 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                     else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
                     {
-                        if (cus_ref_date >= FormulaChangedate_031124)
+                        if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
                         {
-                            if (mpnlDivEneable == false)
+                            if (cus_ref_date >= FormulaChangedate_031124)
                             {
                                 Sash_deduction_forNxtPrev += -35;
                             }
@@ -7534,25 +7577,25 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                         else
                         {
-                            Sash_deduction_forNxtPrev += 35;
+                            Sash_deduction_forNxtPrev += -35;
                         }
                     }
                     else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                     {
-                        if (cus_ref_date >= FormulaChangedate_031124)
+                        if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
                         {
-                            if (mpnlDivEneable == false)
-                            {
-                                Sash_deduction_forNxtPrev += -53;
+                            if (cus_ref_date >= FormulaChangedate_031124)
+                            { 
+                                    Sash_deduction_forNxtPrev += -53; 
                             }
                             else
                             {
                                 Sash_deduction_forNxtPrev += 53;
                             }
-                        }
+                        } 
                         else
                         {
-                            Sash_deduction_forNxtPrev += 53;
+                            Sash_deduction_forNxtPrev += -53;
                         }
                     }
                     else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
@@ -7710,18 +7753,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         {
                             if (mpnlDivEneable == false)
                             {
-                                if (panel_placement == "Last")
-                                {
-                                    Sash_deduction_forNxtPrev += -35;
-                                }
-                                else if (panel_placement == "Somewhere in Between")
-                                {
-                                    Sash_deduction_forNxtPrev += -35;
-                                }
-                                else if (panel_placement == "First")
-                                {
-                                    Sash_deduction_forNxtPrev += 35;
-                                }
+                                Sash_deduction_forNxtPrev += -35;
                             }
                             else
                             {
@@ -7730,7 +7762,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                         else
                         {
-                            Sash_deduction_forNxtPrev += 35;
+                            Sash_deduction_forNxtPrev += -35;
                         }
                     }
                     else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
@@ -7810,6 +7842,42 @@ namespace ModelLayer.Model.Quotation.Panel
                              Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
                     {
                         Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
+                    }
+                }
+            }
+            else if (divArtNo_LeftorTop == Divider_ArticleNo._6052)
+            {
+                if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
+                {
+                    if (cus_ref_date >= FormulaChangedate_031124)
+                    {
+                        GB_deduction_forLeftorTopRightorBot += (61 / 2);
+                        Sash_deduction_forLeftorTopRightorBot += (61 / 2);
+
+                        if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                            Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                        {
+                            Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
+                            //if (ChckBoundedByBotframe == true)
+                            //{
+                            //    Sash_deduction_forLeftorTopRightorBot += 2; //gawing -8 dahil nasa baba
+                            //}
+                        }
+                    }
+                }
+                else
+                {
+                    GB_deduction_forLeftorTopRightorBot += (61 / 2);
+                    Sash_deduction_forLeftorTopRightorBot += (61 / 2);
+
+                    if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                        Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                    {
+                        Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
+                        //if (ChckBoundedByBotframe == true)
+                        //{
+                        //    Sash_deduction_forLeftorTopRightorBot += 2; //gawing -8 dahil nasa baba
+                        //}
                     }
                 }
             }
@@ -7934,8 +8002,39 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (divArtNo_RightorBot == Divider_ArticleNo._6052)
             {
-                GB_deduction_forLeftorTopRightorBot += (53 / 2);
-                Sash_deduction_forLeftorTopRightorBot += (53 / 2);
+                if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
+                {
+                    if (cus_ref_date >= FormulaChangedate_031124)
+                    {
+                        GB_deduction_forLeftorTopRightorBot += (61 / 2);
+                        Sash_deduction_forLeftorTopRightorBot += (61 / 2);
+
+                        if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                            Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                        {
+                            Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
+                            //if (ChckBoundedByBotframe == true)
+                            //{
+                            //    Sash_deduction_forLeftorTopRightorBot += 2; //gawing -8 dahil nasa baba
+                            //}
+                        }
+                    }
+                }
+                else
+                {
+                    GB_deduction_forLeftorTopRightorBot += (61 / 2);
+                    Sash_deduction_forLeftorTopRightorBot += (61 / 2);
+
+                    if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                        Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                    {
+                        Sash_deduction_forLeftorTopRightorBot -= 8; //sash bite allowance
+                        //if (ChckBoundedByBotframe == true)
+                        //{
+                        //    Sash_deduction_forLeftorTopRightorBot += 2; //gawing -8 dahil nasa baba
+                        //}
+                    }
+                }
             }
             else if (divArtNo_RightorBot == Divider_ArticleNo._84300)
             {
@@ -8031,7 +8130,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (divArtNo_LeftorTop_lvl3 == Divider_ArticleNo._6052)
             {
-                GB_deduction_lvl3 += (53 / 2);
+                GB_deduction_lvl3 += (61 / 2);
             }
             else if (divArtNo_LeftorTop_lvl3 == Divider_ArticleNo._84300)
             {
@@ -8052,7 +8151,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._6052)
             {
-                GB_deduction_lvl3 += (53 / 2);
+                GB_deduction_lvl3 += (61 / 2);
             }
             else if (divArtNo_RightorBot_lvl3 == Divider_ArticleNo._84300)
             {
@@ -8338,22 +8437,28 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 || Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                 {
-                    if (cus_ref_date >= FormulaChangedate_031124)
+                    if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
                     {
-                        Panel_SashWidth = (Panel_DisplayWidth - deduction_for_sashWD) + 5;
+                        if (cus_ref_date >= FormulaChangedate_031124)
+                        {
+                            Panel_SashWidth = (Panel_DisplayWidth - deduction_for_sashWD) + 5;
+                        }
+                        else
+                        {
+                            Panel_SashWidth = ((((Panel_ParentFrameModel.Frame_Width - deduction_for_sashWD + SashOverlap_additional) - dm_deduct) - inward_motorized_deduction) / TotalNumberOfPanel) + 5;
+
+                            if (Panel_Type.Contains("Fixed") &&
+                                                  (Panel_Overlap_Sash == OverlapSash._Left ||
+                                                   Panel_Overlap_Sash == OverlapSash._Right))
+                            {
+                                Panel_SashWidth += 5;
+                            }
+                        }
                     }
                     else
                     {
-                        Panel_SashWidth = ((((Panel_ParentFrameModel.Frame_Width - deduction_for_sashWD + SashOverlap_additional) - dm_deduct) - inward_motorized_deduction) / TotalNumberOfPanel) + 5;
-
-                        if (Panel_Type.Contains("Fixed") &&
-                                              (Panel_Overlap_Sash == OverlapSash._Left ||
-                                               Panel_Overlap_Sash == OverlapSash._Right))
-                        {
-                            Panel_SashWidth += 5;
-                        }
+                        Panel_SashWidth = (Panel_DisplayWidth - deduction_for_sashWD) + 5;
                     }
-
                 }
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
                 {
@@ -9688,14 +9793,15 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                 {
                     int inversionClip_Deduction = 0;
+
                     if (Panel_ParentFrameModel.Frame_InversionClipOption == true)
                     {
                         inversionClip_Deduction = 46;
                         Panel_InversionClipArtNo = InversionClip_ArticleNo._84804;
                     }
+
                     Panel_InversionClipWidth = Panel_DisplayWidth - deduction_for_wd + 5; // 2.5 * 2
                     Panel_InversionClipHeight = Panel_DisplayHeight - deduction_for_ht + 5;
-
 
                     Panel_GlazingBeadWidth = Panel_DisplayWidth - deduction_for_wd - (inversionClip_Deduction * 2) + (20 * 2);
                     Panel_GlazingBeadHeight = Panel_DisplayHeight - deduction_for_ht - (inversionClip_Deduction * 2);

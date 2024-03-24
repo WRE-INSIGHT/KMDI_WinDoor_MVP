@@ -778,8 +778,8 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        public DateTime Date_Assigned { get; set; }
-        public DateTime Date_Assigned_Mainpresenter { get; set; }
+        //public DateTime Date_Assigned_forNewItem { get; set; }
+        public DateTime Date_Assigned_Mainpresenter_forNewItem { get; set; }
 
 
         #endregion
@@ -1047,6 +1047,7 @@ namespace PresentationLayer.Presenter
                     DateTime myDate = DateTime.Parse(input);
                     _quotationModel.Date_Assigned_Mainpresenter = myDate;
                     _windoorModel.Date_Assigned_Mainpresenter = myDate;
+                    Date_Assigned_Mainpresenter_forNewItem = myDate;
                 }
 
             }
@@ -10723,6 +10724,9 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
 
+                        _windoorModel.Date_Assigned = dateAssigned;
+                        _windoorModel.Date_Assigned_Mainpresenter = dateAssigned;
+
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                         _mainView.GetThis().Controls.Add(bpUC);
@@ -10902,6 +10906,9 @@ namespace PresentationLayer.Presenter
                         AddWndrList_QuotationModel(_windoorModel);
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
+
+                        _windoorModel.Date_Assigned = dateAssigned;
+                        _windoorModel.Date_Assigned_Mainpresenter = dateAssigned;
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();

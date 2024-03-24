@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.User;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -51,6 +52,7 @@ namespace ModelLayer.Model.Quotation.Panel
         Padding Panel_MarginToBind { get; set; }
         Padding PanelImageRenderer_Margin { get; set; }
         float Panel_Zoom { get; set; }
+        IUserModel Panel_ParentUserModel { get; set; }
         IFrameModel Panel_ParentFrameModel { get; set; }
         IMultiPanelModel Panel_ParentMultiPanelModel { get; set; }
         int Panel_PropertyHeight { get; set; }
