@@ -29,13 +29,14 @@ namespace PresentationLayer.Presenter
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
         private IWindoorModel _windoorModel;
-
+        private ITopViewPanelViewerPresenter _topViewPanelViewerPresenter;
+        
        
 
         PictureBox _pboxFrame;
         Font handle_names;
 
-
+        public int TotalPoints { get; set; }
 
         int topview_pnlCount = 0,
             CursorLocX,
@@ -69,8 +70,10 @@ namespace PresentationLayer.Presenter
         List<string> Lst_Handles = new List<string>();
         List<string> Lst_Interlock = new List<string>();
 
-        public TopViewPresenter(ITopView topViewdesign)
+        public TopViewPresenter(ITopView topViewdesign,
+                                ITopViewPanelViewerPresenter topViewPanelViewerPresenter)
         {
+            _topViewPanelViewerPresenter = topViewPanelViewerPresenter;
             _topViewdesign = topViewdesign;
 
             _pboxFrame = topViewdesign.GetPbox();
@@ -1061,21 +1064,18 @@ namespace PresentationLayer.Presenter
 
                 }
                 //
-
-                MessageBox.Show("Total Points: " + (total + interlock_total));
-
-
-         
-
-                
-
+                // _topviewpanelviewer.showTopViewPanelViewer();
+                // MessageBox.Show("Total Points: " + (total + interlock_total));
+                TotalPoints = total + interlock_total;
+              //  MessageBox.Show("Total Points: " + TotalPoints);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            ITopViewPanelViewerPresenter panelViewer = _topViewPanelViewerPresenter.CreateNewInstance(_unityC,_mainPresenter, this, _windoorModel);
+            panelViewer.GetSetTopViewSlidingPanellingView().showTopViewPanelViewer();
 
-           
         }
 
         private void _topViewdesign_FormTimerTickEventRaised(object sender, EventArgs e)

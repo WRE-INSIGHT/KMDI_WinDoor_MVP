@@ -36,16 +36,16 @@
             this.pnl_left = new System.Windows.Forms.Panel();
             this.btnMinusLeftLine = new System.Windows.Forms.Button();
             this.btnAddLeftLine = new System.Windows.Forms.Button();
-            this.pbox_frame = new System.Windows.Forms.PictureBox();
             this.pnl_SlidingArrow = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmb_topViewType = new System.Windows.Forms.ComboBox();
+            this.pbox_frame = new System.Windows.Forms.PictureBox();
             this.pnl_SlidingTopView.SuspendLayout();
             this.pnl_right.SuspendLayout();
             this.pnl_left.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbox_frame)).BeginInit();
             this.pnl_SlidingArrow.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_frame)).BeginInit();
             this.SuspendLayout();
             // 
             // pnl_SlidingTopView
@@ -133,16 +133,6 @@
             this.btnAddLeftLine.UseVisualStyleBackColor = true;
             this.btnAddLeftLine.Click += new System.EventHandler(this.btnAddLeftLine_Click);
             // 
-            // pbox_frame
-            // 
-            this.pbox_frame.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbox_frame.Location = new System.Drawing.Point(70, 35);
-            this.pbox_frame.Name = "pbox_frame";
-            this.pbox_frame.Size = new System.Drawing.Size(404, 339);
-            this.pbox_frame.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbox_frame.TabIndex = 0;
-            this.pbox_frame.TabStop = false;
-            // 
             // pnl_SlidingArrow
             // 
             this.pnl_SlidingArrow.BackColor = System.Drawing.Color.White;
@@ -175,6 +165,16 @@
             this.cmb_topViewType.Size = new System.Drawing.Size(147, 21);
             this.cmb_topViewType.TabIndex = 0;
             // 
+            // pbox_frame
+            // 
+            this.pbox_frame.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbox_frame.Location = new System.Drawing.Point(70, 35);
+            this.pbox_frame.Name = "pbox_frame";
+            this.pbox_frame.Size = new System.Drawing.Size(404, 339);
+            this.pbox_frame.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbox_frame.TabIndex = 0;
+            this.pbox_frame.TabStop = false;
+            // 
             // SetTopViewSlidingPanellingView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,9 +190,9 @@
             this.pnl_SlidingTopView.ResumeLayout(false);
             this.pnl_right.ResumeLayout(false);
             this.pnl_left.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbox_frame)).EndInit();
             this.pnl_SlidingArrow.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_frame)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -200,7 +200,6 @@
         #endregion
 
         private System.Windows.Forms.Panel pnl_SlidingTopView;
-        private System.Windows.Forms.PictureBox pbox_frame;
         private System.Windows.Forms.Panel pnl_SlidingArrow;
         private System.Windows.Forms.Panel pnl_panelling;
         private System.Windows.Forms.Panel pnl_right;
@@ -211,5 +210,6 @@
         private System.Windows.Forms.Button btnAddLeftLine;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cmb_topViewType;
+        private System.Windows.Forms.PictureBox pbox_frame;
     }
 }

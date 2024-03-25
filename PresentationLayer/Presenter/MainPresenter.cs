@@ -133,6 +133,7 @@ namespace PresentationLayer.Presenter
         private IPartialAdjustmentUCPresenter _partialAdjustmentUCPresenter;
         private IPartialAdjustmentBaseHolderPresenter _partialAdjustmentBaseHolderPresenter;
         private ITopViewPresenter _topViewDesignPresenter;
+        private ITopViewPanelViewerPresenter _topViewPanelViewerPresenter;
 
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;

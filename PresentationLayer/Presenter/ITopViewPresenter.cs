@@ -8,6 +8,7 @@ namespace PresentationLayer.Presenter
 {
     public interface ITopViewPresenter
     {
+        int TotalPoints { get; set; }
         ITopView GetTopViewDesign();
         ITopViewPresenter GetNewInstance(IMainPresenter mainPresenter,
                                             IUnityContainer unityC,
