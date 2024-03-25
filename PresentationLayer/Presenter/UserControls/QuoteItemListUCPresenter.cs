@@ -88,7 +88,7 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             wdm.WD_WoodecAdditional = ((NumericUpDown)sender).Value;
 
-                            _quoteItemListUC_suggestedPriceToolStripMenuItemClickEventRaised(sender,e);
+                            _quoteItemListUC_suggestedPriceToolStripMenuItemClickEventRaised(sender, e);
                             //_mainPresenter.GetCurrentPrice();
                             // _quotationModel.ItemCostingPriceAndPoints();
 
@@ -316,6 +316,11 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             if (!initialLoad)
                             {
+                                if (wdm.SystemSuggestedPrice != inputedPrice)
+                                {
+                                    FromSystemSuggestedPrice = false;
+                                }
+
                                 if (_nudItemPrice.Value != wdm.WD_PriceWithWoodecAdditional &&
                                     !checkWoodecAddtional &&
                                     FromSystemSuggestedPrice == false)
