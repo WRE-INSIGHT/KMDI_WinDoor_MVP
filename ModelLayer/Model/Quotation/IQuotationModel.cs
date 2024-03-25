@@ -40,6 +40,8 @@ namespace ModelLayer.Model.Quotation
         bool FactorChange { get; set; }
         DataTable GetListOfMaterials(IWindoorModel item);
         void Select_Current_Windoor(IWindoorModel item);
+        void changePriceBasedonDate();
         DataTable ItemCostingPriceAndPoints();
+        DataTable MainPresenter_GlassThicknessDT { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.Screen
@@ -762,7 +763,7 @@ namespace ModelLayer.Model.Quotation.Screen
 
         #region Properties
 
-        public int Screen_id { get; set; }
+        public long Screen_id { get; set; }
 
         private bool _screen_Types_Window;
 
@@ -1810,6 +1811,7 @@ namespace ModelLayer.Model.Quotation.Screen
             var _strippedItemNum = (int)Decimal.Truncate(Screen_ItemNumber);
             Screen_NextItemNumber = _strippedItemNum + 1;
 
+            //try catch for flow??
             try
             {
                 decimal result = ItemList.First(j => j == Screen_ItemNumber);
@@ -1820,6 +1822,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 Screen_ItemNumber = Screen_ItemNumber;
                 ItemList.Add(Screen_ItemNumber);
             }
+
         }
         public void DeleteItemNumber(decimal x)
         {
@@ -2253,7 +2256,7 @@ namespace ModelLayer.Model.Quotation.Screen
             _builtInWidthIsBelowMinimum = false;
             _builInHeigthIsBelowMinimum = false;
         }
-
+       
         public void ComputeScreenTotalPrice()
         {
             cus_ref_date = Date_Assigned;
@@ -7168,7 +7171,8 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
 
-        public ScreenModel(decimal screen_itemnumber,
+        public ScreenModel(long screen_id,
+                           decimal screen_itemnumber,
                            int screen_width,
                            int screen_height,
                            ScreenType screen_types,
@@ -7185,6 +7189,7 @@ namespace ModelLayer.Model.Quotation.Screen
                            string screen_displayeddimension
                            )
         {
+            Screen_id = screen_id;
             Screen_ItemNumber = screen_itemnumber;
             Screen_Width = screen_width;
             Screen_Height = screen_height;

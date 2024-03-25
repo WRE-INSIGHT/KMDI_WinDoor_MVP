@@ -14,7 +14,8 @@ namespace ServiceLayer.Services.ScreenServices
             _modelCheck = modelCheck;
         }
 
-             private IScreenModel CreateScreen(decimal screen_itemnumber,
+             private IScreenModel CreateScreen(long screen_id,
+                                               decimal screen_itemnumber,
                                                int screen_width,
                                                int screen_height,
                                                ScreenType screen_types,
@@ -31,7 +32,8 @@ namespace ServiceLayer.Services.ScreenServices
                                                string screen_displayeddimension
                                                )
         {
-             IScreenModel scrn = new ScreenModel(screen_itemnumber,
+             IScreenModel scrn = new ScreenModel(screen_id,
+                                                screen_itemnumber,
                                                 screen_width,
                                                 screen_height,
                                                 screen_types,
@@ -51,7 +53,8 @@ namespace ServiceLayer.Services.ScreenServices
             return scrn;
         }
 
-              public IScreenModel AddScreenModel(decimal screen_itemnumber,
+              public IScreenModel AddScreenModel(long screen_id,
+                                                decimal screen_itemnumber,
                                                 int screen_width,
                                                 int screen_height,
                                                 ScreenType screen_types,
@@ -69,7 +72,8 @@ namespace ServiceLayer.Services.ScreenServices
                                                  )
         {
 
-               IScreenModel _screenModel = CreateScreen(screen_itemnumber,
+               IScreenModel _screenModel = CreateScreen(screen_id,
+                                                        screen_itemnumber,
                                                         screen_width,
                                                         screen_height,
                                                         screen_types,

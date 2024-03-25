@@ -10,7 +10,9 @@ using ServiceLayer.Services.ScreenServices;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -41,7 +43,9 @@ namespace PresentationLayer.Presenter
         private DataGridView _dgv_Screen;
         private ScreenType screenType;
         private bool sortAscending = true,
-                     screenInitialLoad = true;
+                     screenInitialLoad = true,
+                     _allowEditToColumns = true,
+                     _onLoad = true;
         private decimal screenDiscountAverage,
                         _Screen_priceXquantiy,
                         _Screen_factor,
@@ -57,12 +61,16 @@ namespace PresentationLayer.Presenter
                        centerClosureDesc,
                        _printListPrice
                       ;
+        private int tmrLoop = 0;
 
 
         CommonFunctions commonfunc = new CommonFunctions();
         Panel _pnlAddOns;
         NumericUpDown _screenWidth, _screenHeight, _factor, _discount,_screenqty;
         TextBox _screenitemnum;
+        CheckBox _chkboxAllowEdit;
+        ToolTip _EdittoColumns;
+        Timer _setTimerForToolTip;
 
         public ScreenPresenter(IScreenView screenView,
                                IPrintQuotePresenter printQuotePresenter,
@@ -108,7 +116,9 @@ namespace PresentationLayer.Presenter
             _screenView.nudFactorEnterEventRaised += _screenView_nudFactorEnterEventRaised;
             _screenView.nudHeightEnterEventRaised += _screenView_nudHeightEnterEventRaised;
             _screenView.nudWidthEnterEventRaised += _screenView_nudWidthEnterEventRaised;
-            _screenView.ScreenView_FormClosingEventRaised += _screenView_ScreenView_FormClosingEventRaised;       
+            _screenView.ScreenView_FormClosingEventRaised += _screenView_ScreenView_FormClosingEventRaised;
+            _screenView.chkbox_allowEdit_CheckedChangedEventRaised += _screenView_chkbox_allowEdit_CheckedChangedEventRaised;
+            _screenView.ScreenView_ResizeEventRaised += _screenView_ScreenView_ResizeEventRaised;
 
             _pnlAddOns = _screenView.GetPnlAddOns();
             _screenWidth = _screenView.screen_width;
@@ -117,16 +127,141 @@ namespace PresentationLayer.Presenter
             _factor = _screenView.screen_factor;
             _discount = _screenView.screen_discountpercentage;
             _screenitemnum = _screenView.screen_itemnumber;
+            _chkboxAllowEdit = _screenView.getCheckBoxAllowEdit();
 
+        }
+
+        private void _screenView_ScreenView_ResizeEventRaised(object sender, EventArgs e)
+        {
+            // Control Location          
+
+        }
+
+        private void _screenView_chkbox_allowEdit_CheckedChangedEventRaised(object sender, EventArgs e)
+       {
+            try
+            {          
+                 bool _isBreak = false;
+                 
+                 if (_chkboxAllowEdit.Checked)
+                 {
+                     _allowEditToColumns = true;
+                 
+                     if (!_onLoad)
+                     {
+                         int _indexCounter = 0;
+                 
+                         for (int i = 0; i < _screenDT.Rows.Count; i++)
+                         {
+                             _indexCounter = 0;
+                 
+                             decimal item = Convert.ToDecimal(_screenDT.Rows[i].ItemArray[0]);
+                 
+                             foreach (DataRow dtrow in _screenDT.Rows)
+                             {
+                                 decimal comp = Convert.ToDecimal(dtrow.ItemArray[0]);
+                 
+                                 if (i != _indexCounter)
+                                 {
+                                     if (item == comp)
+                                     {
+                                         MessageBox.Show("Similar Item Number Detected " + "Item #" + item + " ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                         _chkboxAllowEdit.Checked = false;
+                                         _allowEditToColumns = false;
+                                         _isBreak = true;
+                                         SelectSimilarItems(item);                                                                    
+                                         break;
+                                     }
+                                 }
+                                 _indexCounter++;
+                 
+                             }
+                 
+                             if (_isBreak)
+                             {
+                                 break;
+                             }
+                 
+                         }
+
+                        #region Update ItemNumber MainPresenter
+                        if (!_isBreak)
+                         {
+                             int _index = 0;
+                 
+                             foreach(var item in _mainPresenter.Screen_List)
+                             {
+                                 item.Screen_ItemNumber = Convert.ToDecimal(_screenDT.Rows[_index].ItemArray[0]);
+                                 _index++;
+                             }
+                 
+                             _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
+                         }
+                        #endregion
+
+                    }
+
+
+                }
+                 else
+                 {
+                     _allowEditToColumns = false;                                                         
+                 }
+               
+                SetReadPropDgvColumn();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error in Allow_Edit_CheckChange " + this + ex.Message);
+            }
+        }
+
+        private void SelectSimilarItems(decimal itemNum)
+        {
+            foreach(DataGridViewRow dtgRow in _dgv_Screen.Rows)
+            {
+               if(Convert.ToDecimal(dtgRow.Cells[0].Value) == itemNum)
+                {
+                    dtgRow.Selected = true;
+                }
+            }
+        }
+
+        private void SetReadPropDgvColumn()
+        {
+            if (!_onLoad)
+            {
+                if (_allowEditToColumns)
+                {
+                    foreach(DataGridViewColumn dgvCol in _dgv_Screen.Columns)
+                    {
+                        dgvCol.ReadOnly = false;
+                    }
+                }
+                else
+                {
+                    foreach (DataGridViewColumn dgvCol in _dgv_Screen.Columns)
+                    {
+                        if (!dgvCol.Index.Equals(0))
+                        {
+                            dgvCol.ReadOnly = true;
+                        }
+                    }
+                }
+            }
         }
 
         private void _screenView_ScreenView_FormClosingEventRaised(object sender, FormClosingEventArgs e)
         {
-            //foreach(DataGridViewRow r in _dgv_Screen.Rows)
-            //{
-            //    //Console.WriteLine(r.Cells[0].Value + " " + r.Cells[1].Value + " " + r.Cells[2].Value + " " + r.Cells[3].Value + " " + r.Cells[4].Value + " " + r.Cells[5].Value + " " + r.Cells[6].Value + " " + r.Cells[7].Value + " " + r.Cells[8].Value + " " +r.Cells[9].Value + " " + r.Cells[10].Value + " " + r.Cells[11].Value);
-            //    MessageBox.Show("Item No_" + r.Cells[0].Value + "Insect Screen_ " + r.Cells[1].Value + "Dimension_ " + r.Cells[2].Value + "WIndoorID_ " + r.Cells[3].Value + " Price_" + r.Cells[4].Value + "QTY_ " + r.Cells[5].Value + "Discount_ " + r.Cells[6].Value + " NetPrice" + r.Cells[7].Value + "ScreenTypeOriginal " + r.Cells[8].Value + " Factor" + r.Cells[9].Value + "PricingDimension " + r.Cells[10].Value + "AddOnsSpecialFactor " + r.Cells[11].Value);
-            //}
+            foreach(var item in _mainPresenter.Screen_List)
+            {
+                //check for screen id 
+                if(item.Screen_id == 0)
+                {
+                   item.Screen_id =  PriKeyGen(item.Screen_Types, item.Screen_ItemNumber);
+                }
+            }
         }
 
         private void _screenView_nudWidthEnterEventRaised(object sender, EventArgs e)
@@ -152,6 +287,38 @@ namespace PresentationLayer.Presenter
         private void _screenView_dgvScreenCellDoubleClickEventRaised(object sender, EventArgs e)
         {
             _dgv_Screen.SelectionMode = DataGridViewSelectionMode.CellSelect;
+
+            if (!_allowEditToColumns && !_dgv_Screen.CurrentCell.ColumnIndex.Equals(0))
+            {
+
+                _EdittoColumns.Active = true;
+                //_EdittoColumns.AutoPopDelay = 4000;
+                //_EdittoColumns.InitialDelay = 600;
+                _EdittoColumns.IsBalloon = true;
+                _EdittoColumns.ToolTipIcon = ToolTipIcon.Info;
+                _EdittoColumns.ShowAlways = true;
+
+                //_EdittoColumns.SetToolTip(_chkboxAllowEdit, " Allow Edit to Columns");
+
+                _EdittoColumns.Show("Allow Edit To" + "\n" + "Cell   ",_chkboxAllowEdit,2000);
+
+                //_setTimerForToolTip.Start();
+            }      
+        }
+
+        private void _setTimerForToolTip_Tick(object sender, EventArgs e)
+        {
+            //if (tmrLoop == 2)
+            //{
+            //    _EdittoColumns.Active = false;
+            //    //_EdittoColumns.Hide(_chkboxAllowEdit);
+            //    _setTimerForToolTip.Stop();
+            //    tmrLoop = 0;
+            //}
+            //else
+            //{
+            //    tmrLoop++;
+            //}
         }
 
         private void _screenView_dgvScreenColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -213,156 +380,160 @@ namespace PresentationLayer.Presenter
             foreach (DataRow dtrow in _screenDT.Select())
             {
                decimal dtrowitem = Convert.ToDecimal(dtrow.ItemArray[0]);
-               if (itemnumber == dtrowitem)
-               {
-                    if (_initialLoop)
+
+                if (_allowEditToColumns)
+                {
+                    if (itemnumber == dtrowitem)
                     {
-                        try
+                        if (_initialLoop)
                         {
-                            #region itemnumber -> windoorId
-                            if (currCell_col == 0)
+                            try
                             {
-                                foreach (var item in _mainPresenter.Screen_List.ToArray())
+                                #region itemnumber -> windoorId
+                                if (currCell_col == 0)
                                 {
-                                    _rowCountForItemNoEdit++;
-
-                                    #region 1st Algo 
-                                    if (item.Screen_ItemNumber == Convert.ToDecimal(prev_itemnumber))
+                                    foreach (var item in _mainPresenter.Screen_List.ToArray())
                                     {
-                                        try
+                                        _rowCountForItemNoEdit++;
+
+                                        #region 1st Algo 
+                                        if (item.Screen_ItemNumber == Convert.ToDecimal(prev_itemnumber))
                                         {
-                                            if (_initialLoopForItemNoEdit)
+                                            try
                                             {
-                                                _rowCountForItemNoEdit = currCell_row;// use for editing item number outside the initial loop
-
-                                                item.Screen_ItemNumber = Convert.ToDecimal(dtrow.ItemArray[0]);
-                                                Console.WriteLine(item.Screen_ItemNumber.ToString());
-                                                _screenModel.Screen_ItemNumber = item.Screen_ItemNumber;
-                                                _screenModel.ItemNumberList();
-                                                _screenModel.DeleteItemNumber(Convert.ToDecimal(prev_itemnumber));
-                                                _screenView.getTxtitemListNumber().Text = _screenModel.Screen_NextItemNumber.ToString();
-
-                                                prev_itemnumber = item.Screen_ItemNumber;
-                                                _initialLoopForItemNoEdit = false;
-
-                                            }
-                                            else if (!_initialLoopForItemNoEdit)
-                                            {                                            
-                                                item.Screen_ItemNumber += 1;
-                                                prev_itemnumber = item.Screen_ItemNumber;
-                                                _screenDT.Rows[_rowCountForItemNoEdit][currCell_col] = item.Screen_ItemNumber;
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            MessageBox.Show("Invalid Input: " + " " + ex.Message);
-                                            Console.WriteLine("Error in " + this + " " + ex.Message);
-                                        }
-
-                                    }
-                                    #endregion
-                                }
-                            }
-                            else if (currCell_col == 1 || currCell_col == 2 || currCell_col == 3)
-                            {
-                                foreach (var item in _mainPresenter.Screen_List.ToArray())
-                                {
-                                    if (item.Screen_ItemNumber == Convert.ToDecimal(itemnumber))
-                                    {
-                                        var new_screenType = dtrow.ItemArray[1].ToString().Trim();
-                                        //foreach (var scrtype in ScreenType.GetAll())
-                                        //{
-                                        //    if (new_screenType == scrtype.DisplayName)
-                                        //    {
-                                        //        item.Screen_Types = scrtype;                                            
-                                        //    }
-                                        //}
-                                        item.Screen_Description = new_screenType;
-                                        item.Screen_DisplayedDimension = dtrow.ItemArray[2].ToString();
-                                        item.Screen_WindoorID = dtrow.ItemArray[3].ToString();
-                                        break;
-                                    }
-                                }
-                            }
-                            #endregion
-                            
-                            #region listPrice -> netPrice
-                            if (currCell_col == 4 || currCell_col == 5 || currCell_col == 6)//4-list price, 5-Qty, 6-Discount
-                            {
-                                foreach (ScreenType scrtyp in ScreenType.GetAll())
-                                {
-                                    string scrType_str = Convert.ToString(scrtyp);
-                                    string[] screenSplit_Arr = Convert.ToString(dtrow.ItemArray[1]).Split('(');
-                                    //var screenType = screenSplit_Arr[0].TrimEnd();
-                                    string screenType = Convert.ToString(dtrow.ItemArray[8]);
-                                    if (screenType == scrType_str)
-                                    {
-                                        _screenModel.FromCellEndEdit = true;
-                                        _screenModel.Screen_Types = scrtyp;
-
-                                        try
-                                        {
-                                            _screenModel.Screen_UnitPrice = Convert.ToDecimal(dtrow.ItemArray[4]);
-                                            _screenModel.Screen_Quantity = Convert.ToInt32(dtrow.ItemArray[5]);
-                                            _screenModel.DiscountPercentage = Convert.ToDecimal(dtrow.ItemArray[6].ToString().Trim('%')) / 100m;
-                                            _screenModel.ComputeScreenTotalPrice();
-
-                                            _screenDT.Rows[currCell_row][4] = _screenModel.Screen_UnitPrice.ToString("n");
-                                            _screenDT.Rows[currCell_row][5] = _screenModel.Screen_Quantity;
-                                            _screenDT.Rows[currCell_row][6] = Convert.ToString(_screenModel.Screen_Discount) + "%";
-                                            _screenDT.Rows[currCell_row][7] = _screenModel.Screen_NetPrice.ToString("n");
-
-                                            _screenView.screen_discountpercentage.Value = _screenModel.Screen_Discount;
-                                            _screenView.screen_quantity.Value = _screenModel.Screen_Quantity;
-
-                                            foreach (var item in _mainPresenter.Screen_List.ToArray())
-                                            {
-                                                if (item.Screen_ItemNumber == Convert.ToDecimal(itemnumber))
+                                                if (_initialLoopForItemNoEdit)
                                                 {
-                                                    item.Screen_UnitPrice = _screenModel.Screen_UnitPrice;
-                                                    item.Screen_Quantity = _screenModel.Screen_Quantity;
-                                                    item.Screen_Discount = _screenModel.Screen_Discount;
-                                                    item.Screen_NetPrice = _screenModel.Screen_NetPrice;
-                                                    item.Screen_TotalAmount = _screenModel.Screen_TotalAmount;
-                                                    break;
+                                                    _rowCountForItemNoEdit = currCell_row;// use for editing item number outside the initial loop
+
+                                                    item.Screen_ItemNumber = Convert.ToDecimal(dtrow.ItemArray[0]);
+                                                    Console.WriteLine(item.Screen_ItemNumber.ToString());
+                                                    _screenModel.Screen_ItemNumber = item.Screen_ItemNumber;
+                                                    _screenModel.ItemNumberList();
+                                                    _screenModel.DeleteItemNumber(Convert.ToDecimal(prev_itemnumber));
+                                                    _screenView.getTxtitemListNumber().Text = _screenModel.Screen_NextItemNumber.ToString();
+
+                                                    prev_itemnumber = item.Screen_ItemNumber;
+                                                    _initialLoopForItemNoEdit = false;
+
+                                                }
+                                                else if (!_initialLoopForItemNoEdit)
+                                                {
+                                                    item.Screen_ItemNumber += 1;
+                                                    prev_itemnumber = item.Screen_ItemNumber;
+                                                    _screenDT.Rows[_rowCountForItemNoEdit][currCell_col] = item.Screen_ItemNumber;
                                                 }
                                             }
+                                            catch (Exception ex)
+                                            {
+                                                MessageBox.Show("Invalid Input: " + " " + ex.Message);
+                                                Console.WriteLine("Error in " + this + " " + ex.Message);
+                                            }
+
+                                        }
+                                        #endregion
+                                    }
+                                }
+                                else if (currCell_col == 1 || currCell_col == 2 || currCell_col == 3)
+                                {
+                                    foreach (var item in _mainPresenter.Screen_List.ToArray())
+                                    {
+                                        if (item.Screen_ItemNumber == Convert.ToDecimal(itemnumber))
+                                        {
+                                            var new_screenType = dtrow.ItemArray[1].ToString().Trim();
+                                            //foreach (var scrtype in ScreenType.GetAll())
+                                            //{
+                                            //    if (new_screenType == scrtype.DisplayName)
+                                            //    {
+                                            //        item.Screen_Types = scrtype;                                            
+                                            //    }
+                                            //}
+                                            item.Screen_Description = new_screenType;
+                                            item.Screen_DisplayedDimension = dtrow.ItemArray[2].ToString();
+                                            item.Screen_WindoorID = dtrow.ItemArray[3].ToString();
+                                            break;
+                                        }
+                                    }
+                                }
+                                #endregion
+
+                                #region listPrice -> netPrice
+                                if (currCell_col == 4 || currCell_col == 5 || currCell_col == 6)//4-list price, 5-Qty, 6-Discount
+                                {
+                                    foreach (ScreenType scrtyp in ScreenType.GetAll())
+                                    {
+                                        string scrType_str = Convert.ToString(scrtyp);
+                                        string[] screenSplit_Arr = Convert.ToString(dtrow.ItemArray[1]).Split('(');
+                                        //var screenType = screenSplit_Arr[0].TrimEnd();
+                                        string screenType = Convert.ToString(dtrow.ItemArray[8]);
+                                        if (screenType == scrType_str)
+                                        {
+                                            _screenModel.FromCellEndEdit = true;
+                                            _screenModel.Screen_Types = scrtyp;
 
                                             try
                                             {
-                                                _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
+                                                _screenModel.Screen_UnitPrice = Convert.ToDecimal(dtrow.ItemArray[4]);
+                                                _screenModel.Screen_Quantity = Convert.ToInt32(dtrow.ItemArray[5]);
+                                                _screenModel.DiscountPercentage = Convert.ToDecimal(dtrow.ItemArray[6].ToString().Trim('%')) / 100m;
+                                                _screenModel.ComputeScreenTotalPrice();
+
+                                                _screenDT.Rows[currCell_row][4] = _screenModel.Screen_UnitPrice.ToString("n");
+                                                _screenDT.Rows[currCell_row][5] = _screenModel.Screen_Quantity;
+                                                _screenDT.Rows[currCell_row][6] = Convert.ToString(_screenModel.Screen_Discount) + "%";
+                                                _screenDT.Rows[currCell_row][7] = _screenModel.Screen_NetPrice.ToString("n");
+
+                                                _screenView.screen_discountpercentage.Value = _screenModel.Screen_Discount;
+                                                _screenView.screen_quantity.Value = _screenModel.Screen_Quantity;
+
+                                                foreach (var item in _mainPresenter.Screen_List.ToArray())
+                                                {
+                                                    if (item.Screen_ItemNumber == Convert.ToDecimal(itemnumber))
+                                                    {
+                                                        item.Screen_UnitPrice = _screenModel.Screen_UnitPrice;
+                                                        item.Screen_Quantity = _screenModel.Screen_Quantity;
+                                                        item.Screen_Discount = _screenModel.Screen_Discount;
+                                                        item.Screen_NetPrice = _screenModel.Screen_NetPrice;
+                                                        item.Screen_TotalAmount = _screenModel.Screen_TotalAmount;
+                                                        break;
+                                                    }
+                                                }
+
+                                                try
+                                                {
+                                                    _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
+
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine("Error refresh DataGrid");
+                                                }
 
                                             }
                                             catch (Exception ex)
                                             {
-                                                Console.WriteLine("Error refresh DataGrid");
-                                            }
+                                                MessageBox.Show("Invalid Input: " + this + "\n\n Error: " + ex.Message);
 
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            MessageBox.Show("Invalid Input: " + this + "\n\n Error: " + ex.Message);
+                                            }
 
                                         }
 
                                     }
 
                                 }
-
+                                #endregion
                             }
-                            #endregion
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Cell End Edit " + ex.Message);
-                        }
-                        _screenModel.Screen_UnitPrice = 0;
-                        _screenModel.Screen_Quantity = 0;
-                        _screenModel.DiscountPercentage = 0;
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("Cell End Edit " + ex.Message);
+                            }
+                            _screenModel.Screen_UnitPrice = 0;
+                            _screenModel.Screen_Quantity = 0;
+                            _screenModel.DiscountPercentage = 0;
 
-                        _initialLoop = false;
+                            _initialLoop = false;
+                        }
                     }
-               }               
+                }      
             }
 
             try
@@ -924,6 +1095,9 @@ namespace PresentationLayer.Presenter
             _screenModel.PlissedRd_Panels = 1;
             _screenModel.DiscountPercentage = 0.3m;
             _screenModel.Date_Assigned = _mainPresenter.dateAssigned;
+
+            _chkboxAllowEdit.Checked = true;
+
             WindoorIDGetter(); 
         
             _dgv_Screen.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.Programmatic);
@@ -942,6 +1116,15 @@ namespace PresentationLayer.Presenter
             {
                 _freedomScreenType.Add(item);
             }
+
+            _onLoad = false;
+            _EdittoColumns = new ToolTip();
+            _setTimerForToolTip = new Timer();
+
+            #region Set Timer Create EventHandler 
+            _setTimerForToolTip.Interval = 1000;//1 sec
+            _setTimerForToolTip.Tick += _setTimerForToolTip_Tick;
+            #endregion
 
 
             IScreenAddOnPropertiesUCPresenter addOnsPropUCP = _screenAddOnPropertiesUCPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel,this);
@@ -1096,8 +1279,57 @@ namespace PresentationLayer.Presenter
             return dt;
         }
 
+        private long PriKeyGen(ScreenType ScType,decimal itemnum)
+        {
+            long _priKeyGen = 0;
+
+            string[] screenType = ScType.ToString().Split();
+
+            StringBuilder firstChar = new StringBuilder();
+
+            foreach (string words in screenType)
+            {
+                if (!String.IsNullOrEmpty(words))
+                {
+                    firstChar.Append(words[0]);
+                }
+            }
+
+            string holder = "";
+            string itemNumStr = itemnum.ToString();
+
+            if (itemNumStr.Contains("."))
+            {
+                itemNumStr = itemNumStr.Replace(".", "");
+            }
+
+            foreach (char chr in firstChar.ToString())
+            {
+                holder = holder + GetCharIndex(chr).ToString();
+            }
+
+            holder = itemNumStr + holder;
+
+            _priKeyGen = (Convert.ToInt64(holder));
+
+            return _priKeyGen;
+
+        }
+
+        private static int GetCharIndex(char value)
+        {
+            char upper = char.ToUpper(value);
+            if (upper < 'A' || upper > 'Z')
+            {
+                upper = 'A';
+            }
+
+            return (int)upper - (int)'A';
+        }
+
         public DataRow CreateNewRow_ScreenDT()
         {
+
             DataRow newRow;
             newRow = _screenDT.NewRow();
             string _Screen_Type;
@@ -1153,9 +1385,10 @@ namespace PresentationLayer.Presenter
             newRow["Factor"] = _Screen_factor;
             newRow["PricingDimension"] = _Screen_PricingDimension;
             newRow["AddOnsSpecialFactor"] = _Screen_addOnsSpecialFactor;
-            
 
-            IScreenModel scr = _screenService.AddScreenModel(_screenModel.Screen_ItemNumber,
+            _screenModel.Screen_id = PriKeyGen(_screenModel.Screen_Types,_screenModel.Screen_ItemNumber); // set priKey
+            IScreenModel scr = _screenService.AddScreenModel(_screenModel.Screen_id,
+                                                             _screenModel.Screen_ItemNumber,
                                                              _screenModel.Screen_Width,
                                                              _screenModel.Screen_Height,
                                                              _screenModel.Screen_Types,

@@ -5,7 +5,8 @@ namespace ServiceLayer.Services.ScreenServices
 {
     public interface IScreenServices
     {
-        IScreenModel AddScreenModel(decimal screen_itemnumber,
+        IScreenModel AddScreenModel(long screen_id,
+                                    decimal screen_itemnumber,
                                     int screen_width,
                                     int screen_height,
                                     ScreenType screen_types,
