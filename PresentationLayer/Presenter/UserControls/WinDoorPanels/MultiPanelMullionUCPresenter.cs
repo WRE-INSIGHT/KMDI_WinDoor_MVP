@@ -167,7 +167,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             try
             {
-                
+
                 Console.WriteLine("Mpanel Width " + _multiPanelModel.MPanel_WidthToBind);
                 Console.WriteLine("Mpanel height " + _multiPanelModel.MPanel_HeightToBind);
                 Console.WriteLine();
@@ -507,7 +507,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 int totalPanelCount = _multiPanelModel.MPanel_Divisions + 1;
 
                 divSize = (int)_frameModel.Frame_Type;
-                
+
 
 
                 for (int i = 0; i < iteration; i++)
@@ -598,7 +598,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 int EqualMPanelWD = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                                 suggest_Wd = EqualMPanelWD - (EqualDisplayWD - suggest_DisplayWD);
                             }
-                       
+
                             #endregion
 
                             FlowDirection flow = FlowDirection.LeftToRight;
@@ -693,7 +693,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
-                                   
+
                                 }
                                 else if (mPanelModel.MPanel_Placement != "Last")
                                 {
@@ -922,7 +922,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                  inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
                                  inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
                                  inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
-                                 inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
+                                 inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao ||
+                                 inside_color == Foil_Color._Carbon || inside_color == Foil_Color._UmberOak)
                         {
                             handleArtNo = Rotoswing_HandleArtNo._RSC773452;
                         }
@@ -1001,7 +1002,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
                         panelPropUC.Dock = DockStyle.Top;
 
-                        
+
                         _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
                         panelPropUC.BringToFront();
 
@@ -1118,7 +1119,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                             if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door && _mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("C70"))
                             {
-                                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || 
+                                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
@@ -1509,28 +1510,28 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     corner_points[6] = new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height - 1);
                     corner_points[7] = new Point(pInnerX + pInnerWd, fpnl.ClientRectangle.Height - 1);
                 }
-                 if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                 {
                     corner_points[4] = new Point(-3, fpnl.ClientRectangle.Height);
                     corner_points[5] = new Point(pInnerX + 3, pInnerY + pInnerHt);
 
                     corner_points[6] = new Point(fpnl.ClientRectangle.Width + 3, fpnl.ClientRectangle.Height);
-                    corner_points[7] = new Point(pInnerX + pInnerWd - 3 , pInnerY + pInnerHt);
+                    corner_points[7] = new Point(pInnerX + pInnerWd - 3, pInnerY + pInnerHt);
                 }
             }
-         //    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-         //   {
-         //       if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-         //               _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
-         //       {
-         //           corner_points[4] = new Point(-3, fpnl.ClientRectangle.Height);
-         //           corner_points[5] = new Point(pInnerX + 3, pInnerY + pInnerHt);
-         //
-         //           corner_points[6] = new Point(fpnl.ClientRectangle.Width + 3, fpnl.ClientRectangle.Height);
-         //           corner_points[7] = new Point(pInnerX + pInnerWd - 3, pInnerY + pInnerHt);
-         //       }
-         //   }
+            //    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+            //   {
+            //       if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+            //               _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+            //       {
+            //           corner_points[4] = new Point(-3, fpnl.ClientRectangle.Height);
+            //           corner_points[5] = new Point(pInnerX + 3, pInnerY + pInnerHt);
+            //
+            //           corner_points[6] = new Point(fpnl.ClientRectangle.Width + 3, fpnl.ClientRectangle.Height);
+            //           corner_points[7] = new Point(pInnerX + pInnerWd - 3, pInnerY + pInnerHt);
+            //       }
+            //   }
 
             GraphicsPath gpath = new GraphicsPath();
             GraphicsPath gpath2 = new GraphicsPath();
@@ -3048,10 +3049,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
                         g.DrawLine(Pens.Black, new Point(0, locY),
-                                               new Point(pInnerX , locY2));
+                                               new Point(pInnerX, locY2));
 
-                        g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width  , locY),
-                                               new Point(pInnerX + pInnerWd , locY2));
+                        g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, locY),
+                                               new Point(pInnerX + pInnerWd, locY2));
                     }
                     else
                     {

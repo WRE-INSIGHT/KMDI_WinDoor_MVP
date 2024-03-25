@@ -1062,7 +1062,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Format(Math.Round(Sum(Fields!dtPrice.Value),2),"N")</Value>
+                              <Value>= iif(Parameters!ShowTableHeaderV2.Value = "True"
+
+,Format(Math.Round(Sum(Fields!dtNetPrice.Value / iif(Fields!dtQuantity.Value &lt;= 0 ,1,Fields!dtQuantity.Value)),2),"N")
+
+,Format(Math.Round(Sum(Fields!dtPrice.Value),2),"N"))</Value>
                               <Style>
                                 <FontFamily>Arial Narrow</FontFamily>
                                 <Format>0.00;(0.00)</Format>

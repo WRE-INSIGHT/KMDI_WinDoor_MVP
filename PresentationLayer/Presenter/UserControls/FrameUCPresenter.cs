@@ -110,13 +110,13 @@ namespace PresentationLayer.Presenter.UserControls
             _frameUC.deleteCmenuEventRaised += new EventHandler(OnDeleteCmenuEventRaised);
             _frameUC.outerFramePaintEventRaised += new PaintEventHandler(OnOuterFramePaintEventRaised);
             _frameUC.frameMouseClickEventRaised += new MouseEventHandler(OnFrameMouseClickEventRaised);
-            _frameUC.frameMouseEnterEventRaised += new EventHandler(OnFrameMouseEnterEventRaised);      
+            _frameUC.frameMouseEnterEventRaised += new EventHandler(OnFrameMouseEnterEventRaised);
             _frameUC.frameMouseLeaveEventRaised += new EventHandler(OnFrameMouseLeaveEventRaised);
             _frameUC.frameDragDropEventRaised += _frameUC_frameDragDropEventRaised;
             _frameUC.frameControlAddedEventRaised += _frameUC_frameControlAddedEventRaised;
-            _frameUC.frameControlRemovedEventRaised += _frameUC_frameControlRemovedEventRaised;                                   
+            _frameUC.frameControlRemovedEventRaised += _frameUC_frameControlRemovedEventRaised;
         }
-   
+
         private void _frameUC_frameControlRemovedEventRaised(object sender, ControlEventArgs e)
         {
             _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
@@ -145,7 +145,7 @@ namespace PresentationLayer.Presenter.UserControls
             //    _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(true);
             //}
         }
-        
+
         private void _frameUC_frameDragDropEventRaised(object sender, DragEventArgs e)
         {
             _mainPresenter.ForceRestartAndLoadFile();//chksrobj
@@ -171,7 +171,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
              ht = _frameModel.Frame_Height - ((int)(_frameModel.Frame_Type - 10) + bot_deduct);
-            
+
 
             IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
 
@@ -311,11 +311,12 @@ namespace PresentationLayer.Presenter.UserControls
                          inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
                          inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
                          inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
-                         inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
+                         inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao ||
+                         inside_color == Foil_Color._Carbon | inside_color == Foil_Color._UmberOak)
                 {
                     handleArtNo = Rotoswing_HandleArtNo._RSC773452;
                 }
-                  
+
 
                 _frameModel.SetDeductFramePadding(false, false);
 
@@ -861,7 +862,7 @@ namespace PresentationLayer.Presenter.UserControls
                     corner_points[7] = new Point(pInnerX + pInnerWd - 1, pInnerY + pInnerHt - 3);
                 }
             }
-          
+
             for (int i = 0; i < corner_points.Length - 1; i += 2)
             {
                 g.DrawLine(blkPen, corner_points[i], corner_points[i + 1]);

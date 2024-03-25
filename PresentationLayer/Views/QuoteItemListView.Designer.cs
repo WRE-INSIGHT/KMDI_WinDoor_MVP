@@ -52,7 +52,7 @@
             this.pnlPrintBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPrintBody.Location = new System.Drawing.Point(0, 73);
             this.pnlPrintBody.Name = "pnlPrintBody";
-            this.pnlPrintBody.Size = new System.Drawing.Size(1134, 276);
+            this.pnlPrintBody.Size = new System.Drawing.Size(1134, 338);
             this.pnlPrintBody.TabIndex = 5;
             // 
             // label4
@@ -185,7 +185,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1134, 349);
+            this.ClientSize = new System.Drawing.Size(1134, 411);
             this.Controls.Add(this.pnlPrintBody);
             this.Controls.Add(this.pnlPrintHeader);
             this.Controls.Add(this.toolStrip1);
@@ -193,7 +193,6 @@
             this.Name = "QuoteItemListView";
             this.ShowIcon = false;
             this.Text = "Item List";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.QuoteItemListView_FormClosed);
             this.Load += new System.EventHandler(this.QuoteItemListView_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.QuoteItemListView_KeyDown);

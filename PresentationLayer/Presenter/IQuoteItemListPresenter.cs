@@ -33,7 +33,7 @@ namespace PresentationLayer.Presenter
         decimal OutOfTownCharges { get; }
         string RDLCReportCompilerVatContractSummery { get; set; }
         bool RDLCReportCompilerShowSubTotal { get; set; }
-        bool RDLCReportCompilerScreenNetOfDiscount { get; set; }
+        bool RDLCReportCompilerNetOfDiscount { get; set; }
         void ContractSummaryComputation();
         bool ShowVatContactSummary { get; set; }
         string RDLCReportCompilerRowLimit { get; set; }

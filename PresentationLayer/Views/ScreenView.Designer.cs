@@ -35,6 +35,7 @@
             this.cmsScreen = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.chkbox_allowEdit = new System.Windows.Forms.CheckBox();
             this.txt_ItemNum = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -147,6 +148,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.chkbox_allowEdit);
             this.panel3.Controls.Add(this.txt_ItemNum);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label1);
@@ -162,6 +164,17 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(798, 37);
             this.panel3.TabIndex = 2;
+            // 
+            // chkbox_allowEdit
+            // 
+            this.chkbox_allowEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkbox_allowEdit.AutoSize = true;
+            this.chkbox_allowEdit.Location = new System.Drawing.Point(640, 12);
+            this.chkbox_allowEdit.Name = "chkbox_allowEdit";
+            this.chkbox_allowEdit.Size = new System.Drawing.Size(15, 14);
+            this.chkbox_allowEdit.TabIndex = 42;
+            this.chkbox_allowEdit.UseVisualStyleBackColor = true;
+            this.chkbox_allowEdit.CheckedChanged += new System.EventHandler(this.chkbox_allowEdit_CheckedChanged);
             // 
             // txt_ItemNum
             // 
@@ -564,6 +577,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ScreenView_FormClosing);
             this.Load += new System.EventHandler(this.ScreenView_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ScreenView_KeyDown);
+            this.Resize += new System.EventHandler(this.ScreenView_Resize);
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Screen)).EndInit();
@@ -631,5 +645,6 @@
         private System.Windows.Forms.TextBox txt_ItemNum;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmb_freedomSize;
+        private System.Windows.Forms.CheckBox chkbox_allowEdit;
     }
 }

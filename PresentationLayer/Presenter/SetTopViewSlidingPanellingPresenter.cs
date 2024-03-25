@@ -366,7 +366,7 @@ namespace PresentationLayer.Presenter
         private void _setTopViewSlidingPanelling_SetTopViewSlidingPanellingViewLoadEventRaised(object sender, System.EventArgs e)
         {
 
-            if (_windoorModel.WD_TopViewType == null)
+            if (_windoorModel.WD_TopViewType == null || _windoorModel.WD_TopViewType == string.Empty)
             {
                 _windoorModel.WD_TopViewType = "Fold and Slide";
             }

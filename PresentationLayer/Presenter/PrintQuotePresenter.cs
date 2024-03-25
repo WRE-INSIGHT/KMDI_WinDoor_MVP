@@ -884,7 +884,7 @@ namespace PresentationLayer.Presenter
 
                     if (_quoteItemListPresenter != null)
                     {
-                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerScreenNetOfDiscount == true)
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount == true)
                         {
                             RParam[18] = new ReportParameter("NetOfDiscount", "True");
                         }
@@ -1040,8 +1040,32 @@ namespace PresentationLayer.Presenter
                     }
                     else
                     {
-                        RParam[8] = new ReportParameter("ShowTableHeaderV2", "False");// Table Header V2
-            
+                        RParam[8] = new ReportParameter("ShowTableHeaderV2", "False");// Table Header V2          
+                    }
+
+                    if (_quoteItemListPresenter != null)
+                     {
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount == true)
+                        {
+                            RParam[8] = new ReportParameter("ShowTableHeaderV2", "True");// table header v2 and net of discount
+
+                            if (!_printQuoteView.QuotationBody.ToLower().Contains("prices are net of discounts"))
+                            {
+                                _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
+                                                                 + "USING "
+                                                                 + baseColor.ToUpper()
+                                                                 + " PROFILES\n"
+                                                                 + "USING "
+                                                                 + GlassThickness.ToUpper()
+                                                                 + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+                                                                 + "PRICES ARE NET OF DISCOUNTS\n\n"
+                                                                 + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION";
+
+                                RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
+                            }
+
+
+                        }
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
@@ -1090,10 +1114,11 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
                     _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
 
-                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(500, 118);
+                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(350, 118);//from 500 118
 
                     #endregion
                     #region Visibility Additional Info
+
                     _printQuoteView.GetAdditionalInfoLabel().Visible = true;
                     _printQuoteView.GetLabor_N_MobiChkbox().Visible = true;
                     _printQuoteView.GetFreightChargesChkbox().Visible = true;
@@ -1113,9 +1138,12 @@ namespace PresentationLayer.Presenter
                     #endregion
 
                     _printQuoteView.GetChkLstBox().Visible = false;
-                    _printQuoteView.ShowLastPage().Visible = false;
+                    _printQuoteView.ShowLastPage().Visible = true; // screen Contract Page
+                    _printQuoteView.ShowLastPage().Text = "Net of Discount";
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
-                    _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(38, 81);
+                    _printQuoteView.GetUniversalLabel().Location = new System.Drawing.Point(977, 26);
+                    _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(977, 50);// from 38,81
+                    _printQuoteView.ShowLastPage().Location = new System.Drawing.Point(977, 88);
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
                     _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
 
@@ -1128,7 +1156,7 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.position = " ";
                     }
                     #endregion
-                    ReportParameter[] RParam = new ReportParameter[9];
+                    ReportParameter[] RParam = new ReportParameter[10];
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
                     RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
@@ -1171,6 +1199,23 @@ namespace PresentationLayer.Presenter
                     if(_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.ShowLessDiscountContractSummary == true)
                     {
                         RParam[8] = new ReportParameter("UserDefineLessDiscount", "True");
+                    }
+
+                    if (_printQuoteView.ShowLastPage().Checked)
+                    {
+                        RParam[9] = new ReportParameter("NetofDiscount", "True");
+                    }
+                    else
+                    {
+                        RParam[9] = new ReportParameter("NetofDiscount", "False");
+                    }
+
+                    if (_quoteItemListPresenter != null)
+                    {
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount == true)
+                        {
+                            RParam[9] = new ReportParameter("NetofDiscount", "True");
+                        }
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);

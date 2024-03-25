@@ -120,7 +120,8 @@ namespace PresentationLayer.Views
         public event EventHandler nudHeightEnterEventRaised;
         public event EventHandler nudFactorEnterEventRaised;
         public event FormClosingEventHandler ScreenView_FormClosingEventRaised;
-
+        public event EventHandler chkbox_allowEdit_CheckedChangedEventRaised;
+        public event EventHandler ScreenView_ResizeEventRaised;
 
         public void ShowScreemView()
         {
@@ -193,6 +194,11 @@ namespace PresentationLayer.Views
         public TextBox getTxtitemListNumber()
         {
             return txt_ItemNum;
+        }
+
+        public CheckBox getCheckBoxAllowEdit()
+        {
+            return chkbox_allowEdit;
         }
  
         private void ScreenView_Load(object sender, EventArgs e)
@@ -406,6 +412,16 @@ namespace PresentationLayer.Views
         private void ScreenView_FormClosing(object sender, FormClosingEventArgs e)
         {
             EventHelpers.RaiseFormClosingEvent(sender, ScreenView_FormClosingEventRaised, e);
+        }
+
+        private void chkbox_allowEdit_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbox_allowEdit_CheckedChangedEventRaised, e);
+        }
+
+        private void ScreenView_Resize(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, ScreenView_ResizeEventRaised, e);
         }
     }
 }

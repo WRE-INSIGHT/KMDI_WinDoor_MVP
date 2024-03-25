@@ -258,7 +258,7 @@ namespace PresentationLayer.Presenter
                                         _dsq.dtPartialAdjustment.Rows.Add(AlPHA[j],
                                                                           wdm.WD_itemName,
                                                                           ImageByteToString,
-                                                                          wdm.WD_PAPreviousDescription + "NO SIGNIFICANT CHANGE",
+                                                                          wdm.WD_PAPreviousDescription + "\n NO SIGNIFICANT CHANGE",
                                                                           wdm.WD_PALst_Qty[j],//itemQty
                                                                           wdm.WD_PAPreviousPrice.ToString("N", new CultureInfo("en-US")),
                                                                           "0.00"
@@ -277,7 +277,7 @@ namespace PresentationLayer.Presenter
                                         _dsq.dtPartialAdjustment.Rows.Add(AlPHA[j],
                                                                           wdm.WD_itemName,
                                                                           ImageByteToString,
-                                                                          wdm.WD_description + "NO SIGNIFICANT CHANGE",
+                                                                          wdm.WD_description + "\n NO SIGNIFICANT CHANGE",
                                                                           wdm.WD_PALst_Qty[j],//itemqty
                                                                           wdm.WD_price.ToString("N", new CultureInfo("en-US")),
                                                                           "0.00"
