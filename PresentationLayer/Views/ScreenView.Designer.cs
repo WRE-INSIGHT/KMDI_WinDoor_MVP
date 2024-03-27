@@ -73,6 +73,8 @@
             this.tsScreen = new System.Windows.Forms.ToolStrip();
             this.tsBtnExchangeRate = new System.Windows.Forms.ToolStripButton();
             this.tsBtnPrintScreen = new System.Windows.Forms.ToolStripButton();
+            this.tsb_ScreenAdjustment = new System.Windows.Forms.ToolStripButton();
+            this.tsb_Switch = new System.Windows.Forms.ToolStripButton();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Screen)).BeginInit();
@@ -532,7 +534,9 @@
             this.tsScreen.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tsScreen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsBtnExchangeRate,
-            this.tsBtnPrintScreen});
+            this.tsBtnPrintScreen,
+            this.tsb_Switch,
+            this.tsb_ScreenAdjustment});
             this.tsScreen.Location = new System.Drawing.Point(0, 0);
             this.tsScreen.Name = "tsScreen";
             this.tsScreen.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -560,6 +564,30 @@
             this.tsBtnPrintScreen.Size = new System.Drawing.Size(24, 24);
             this.tsBtnPrintScreen.Text = "Print Screen";
             this.tsBtnPrintScreen.Click += new System.EventHandler(this.tsBtnPrintScreen_Click);
+            // 
+            // tsb_ScreenAdjustment
+            // 
+            this.tsb_ScreenAdjustment.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsb_ScreenAdjustment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsb_ScreenAdjustment.Image = global::PresentationLayer.Properties.Resources.PartialADJ;
+            this.tsb_ScreenAdjustment.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_ScreenAdjustment.Name = "tsb_ScreenAdjustment";
+            this.tsb_ScreenAdjustment.Size = new System.Drawing.Size(24, 24);
+            this.tsb_ScreenAdjustment.Text = "Screen Partial Adjustment";
+            this.tsb_ScreenAdjustment.Visible = false;
+            this.tsb_ScreenAdjustment.Click += new System.EventHandler(this.tsb_ScreenAdjustment_Click);
+            // 
+            // tsb_Switch
+            // 
+            this.tsb_Switch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsb_Switch.AutoSize = false;
+            this.tsb_Switch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsb_Switch.Image = global::PresentationLayer.Properties.Resources.GreenSwitch;
+            this.tsb_Switch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_Switch.Name = "tsb_Switch";
+            this.tsb_Switch.Size = new System.Drawing.Size(30, 24);
+            this.tsb_Switch.Text = "Switch";
+            this.tsb_Switch.Click += new System.EventHandler(this.tsb_Switch_Click);
             // 
             // ScreenView
             // 
@@ -646,5 +674,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmb_freedomSize;
         private System.Windows.Forms.CheckBox chkbox_allowEdit;
+        private System.Windows.Forms.ToolStripButton tsb_ScreenAdjustment;
+        private System.Windows.Forms.ToolStripButton tsb_Switch;
     }
 }

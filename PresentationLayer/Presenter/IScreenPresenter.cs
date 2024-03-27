@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPresenter_Module;
 using PresentationLayer.Views;
 using ServiceLayer.Services.QuotationServices;
+using System.Collections.Generic;
 using System.Data;
 using Unity;
 
@@ -26,5 +27,6 @@ namespace PresentationLayer.Presenter
         DataTable PopulateDgvScreen();
         DataRow CreateNewRow_ScreenDT();
         void GetCurrentAmount();
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.Screen
@@ -83,5 +84,9 @@ namespace ModelLayer.Model.Quotation.Screen
         bool Screen_FreedomTotalChangerVisibility { get; set; }
         bool Screen_FreedomTotalChangerIsChecked { get; set; }
         DateTime Date_Assigned { get; set; }
-}
+
+        IDictionary<long, decimal> Dic_PaScreenID { get; set; }
+        IList<IScreenModel> Lst_ScreenPartialAdjustment { get; set; }
+
+    }
 }

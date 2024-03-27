@@ -91,6 +91,15 @@ namespace PresentationLayer.Views
             }
         }
 
+        public ToolStripButton GetToolStripBtnSwitch()
+        {
+            return tsb_Switch;
+        }
+        public ToolStripButton GetToolStripBtnScreenAdjustment()
+        {
+            return tsb_ScreenAdjustment;
+        }
+
         public event EventHandler ScreenViewLoadEventRaised;
         public event EventHandler btnAddClickEventRaised;
         public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
@@ -122,6 +131,8 @@ namespace PresentationLayer.Views
         public event FormClosingEventHandler ScreenView_FormClosingEventRaised;
         public event EventHandler chkbox_allowEdit_CheckedChangedEventRaised;
         public event EventHandler ScreenView_ResizeEventRaised;
+        public event EventHandler tsb_ScreenAdjustment_ClickEventRaised;
+        public event EventHandler tsb_Switch_ClickEventRaised;
 
         public void ShowScreemView()
         {
@@ -422,6 +433,16 @@ namespace PresentationLayer.Views
         private void ScreenView_Resize(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, ScreenView_ResizeEventRaised, e);
+        }
+
+        private void tsb_ScreenAdjustment_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, tsb_ScreenAdjustment_ClickEventRaised, e);
+        }
+
+        private void tsb_Switch_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, tsb_Switch_ClickEventRaised, e);
         }
     }
 }

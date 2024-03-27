@@ -187,6 +187,7 @@
     <Compile Include="Presenter\IpromptYesNoPresenter.cs" />
     <Compile Include="Presenter\IQuoteItemListPresenter.cs" />
     <Compile Include="Presenter\IRDLCReportCompilerPresenter.cs" />
+    <Compile Include="Presenter\IScreenPartialAdjustmentSelectionPresenter.cs" />
     <Compile Include="Presenter\IScreenPresenter.cs" />
     <Compile Include="Presenter\ISetMultipleGlassThicknessPresenter.cs" />
     <Compile Include="Presenter\ISetTopViewSlidingPanellingPresenter.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Presenter\promptYesNoPresenter.cs" />
     <Compile Include="Presenter\QuoteItemListPresenter.cs" />
     <Compile Include="Presenter\RDLCReportCompilerPresenter.cs" />
+    <Compile Include="Presenter\ScreenPartialAdjustmentSelectionPresenter.cs" />
     <Compile Include="Presenter\ScreenPresenter.cs" />
     <Compile Include="Presenter\SetMultipleGlassThicknessPresenter.cs" />
     <Compile Include="Presenter\SetTopViewSlidingPanellingPresenter.cs" />
@@ -543,6 +545,7 @@
     <Compile Include="Views\IpromptYesNo.cs" />
     <Compile Include="Views\IQuoteItemListView.cs" />
     <Compile Include="Views\IRDLCReportCompilerView.cs" />
+    <Compile Include="Views\IScreenPartialAdjusmentSelectionView.cs" />
     <Compile Include="Views\IScreenView.cs" />
     <Compile Include="Views\ISetMultipleGlassThicknessView.cs" />
     <Compile Include="Views\ISetTopViewSlidingPanellingView.cs" />
@@ -618,6 +621,12 @@
     </Compile>
     <Compile Include="Views\RDLCReportCompilerView.Designer.cs">
       <DependentUpon>RDLCReportCompilerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScreenPartialAdjusmentSelectionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ScreenPartialAdjusmentSelectionView.Designer.cs">
+      <DependentUpon>ScreenPartialAdjusmentSelectionView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ScreenView.cs">
       <SubType>Form</SubType>
@@ -1468,6 +1477,9 @@
     <EmbeddedResource Include="Views\RDLCReportCompilerView.resx">
       <DependentUpon>RDLCReportCompilerView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ScreenPartialAdjusmentSelectionView.resx">
+      <DependentUpon>ScreenPartialAdjusmentSelectionView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ScreenView.resx">
       <DependentUpon>ScreenView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1887,6 +1899,7 @@
     <None Include="Resources\folder1.png" />
     <None Include="Resources\glass2.png" />
     <None Include="Resources\glass_upgrade.png" />
+    <None Include="Resources\GreenSwitch.png" />
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <None Include="Resources\icons8_front_sorting_96px.png" />
@@ -1913,6 +1926,7 @@
     <None Include="Resources\print.png" />
     <Content Include="Resources\redo_30px.png" />
     <None Include="Resources\refresh2.png" />
+    <None Include="Resources\RedSwitch.png" />
     <Content Include="Resources\refresh_30px.png" />
     <None Include="Resources\search_filled_100px.png" />
     <None Include="Resources\report.png" />

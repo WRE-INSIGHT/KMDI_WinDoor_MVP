@@ -544,6 +544,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GreenSwitch {
+            get {
+                object obj = ResourceManager.GetObject("GreenSwitch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_banknotes_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-banknotes-48", resourceCulture);
@@ -757,6 +767,16 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap print {
             get {
                 object obj = ResourceManager.GetObject("print", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RedSwitch {
+            get {
+                object obj = ResourceManager.GetObject("RedSwitch", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

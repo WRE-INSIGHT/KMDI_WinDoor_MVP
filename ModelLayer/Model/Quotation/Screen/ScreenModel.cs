@@ -1796,6 +1796,15 @@ namespace ModelLayer.Model.Quotation.Screen
 
         public DateTime Date_Assigned { get; set; }
 
+        #region Dictionary for Screen Partial Adjustment
+
+        private IDictionary<long, decimal> _dic_PaScreenID = new Dictionary<long, decimal>();
+        private IList<IScreenModel> _lst_ScreenPartialAdjustment = new List<IScreenModel>();
+
+        public IDictionary<long, decimal> Dic_PaScreenID { get { return _dic_PaScreenID; } set { _dic_PaScreenID = value; } }
+        public IList<IScreenModel> Lst_ScreenPartialAdjustment { get { return _lst_ScreenPartialAdjustment; } set { _lst_ScreenPartialAdjustment = value; } }
+
+        #endregion
 
         #region changeConditionBasedonPrice
 
@@ -1806,6 +1815,7 @@ namespace ModelLayer.Model.Quotation.Screen
         #endregion
 
         List<decimal> ItemList = new List<decimal>();
+
         public void ItemNumberList()
         {
             var _strippedItemNum = (int)Decimal.Truncate(Screen_ItemNumber);
