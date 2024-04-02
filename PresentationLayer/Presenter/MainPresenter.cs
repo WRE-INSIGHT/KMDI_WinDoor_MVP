@@ -3978,7 +3978,7 @@ namespace PresentationLayer.Presenter
                             //autoDescription = true;
                             onload = false;
                             _isFromAddExisting = false;
-
+                             QuotationModelDateTimeChecker();
                             break;
 
                         case "GetCloudFiles":
@@ -4023,11 +4023,28 @@ namespace PresentationLayer.Presenter
                     //sql_Transaction_result = "";
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex)    
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void QuotationModelDateTimeChecker()
+        {
+            foreach (IQuotationModel wdm in _quotationModel.Lst_Windoor)
+            {
+                if (wdm.Date_Assigned == DateTime.Parse("01-01-0001"))
+                {
+                    wdm.Date_Assigned = _quotationModel.Date_Assigned;
+                }
+                if (wdm.Date_Assigned_Mainpresenter == DateTime.Parse("01-01-0001"))
+                {
+                    wdm.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
+                }
+            }
+
+        }
+
         private void Opening_dotwndr(int row)
         {
             string row_str = file_lines[row].Replace("\t", "");
