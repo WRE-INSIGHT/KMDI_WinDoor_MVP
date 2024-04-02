@@ -55,7 +55,6 @@ namespace ModelLayer.Model.Quotation
 
         DateTime cus_ref_date;
 
-
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
             DataColumn col = new DataColumn();
@@ -1385,8 +1384,6 @@ namespace ModelLayer.Model.Quotation
                             int obj_count = mpnl.GetVisibleObjects().Count();
                             for (int i = 0; i < obj_count; i++)
                             {
-
-
                                 Control cur_ctrl = mpnl.GetVisibleObjects().ToList()[i];
                                 IPanelModel pnl_curCtrl = panels.Find(pnl => pnl.Panel_Name == cur_ctrl.Name);
                                 IMultiPanelModel mpnl_curCtrl = mpanels.Find(mpanel => mpanel.MPanel_Name == cur_ctrl.Name);
@@ -1521,6 +1518,29 @@ namespace ModelLayer.Model.Quotation
                                         divArtNo_RightOrBot = divBotOrRight.Div_ArtNo;
                                     }
                                 }
+
+                                //Control nxt_ctrl, prevCtrl;
+                                //if (mpnl_curCtrl != null)
+                                //{
+                                //    if (mpnl_curCtrl.MPanel_Placement == "First")
+                                //    {
+                                //        nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i + 1];
+                                //        div_nxtCtrl = divs.Find(div => div.Div_Name == nxt_ctrl.Name);
+                                //    }
+                                //    else if (mpnl_curCtrl.MPanel_Placement == "Somewhere in Between")
+                                //    {
+                                //        nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i + 1];
+                                //        div_nxtCtrl = divs.Find(div => div.Div_Name == nxt_ctrl.Name);
+
+                                //        prevCtrl = mpnl.GetVisibleObjects().ToList()[i - 1];
+                                //        div_prevCtrl = divs.Find(div => div.Div_Name == prevCtrl.Name);
+                                //    }
+                                //    else if (mpnl_curCtrl.MPanel_Placement == "Last")
+                                //    {
+                                //        prevCtrl = mpnl.GetVisibleObjects().ToList()[i - 1];
+                                //        div_prevCtrl = divs.Find(div => div.Div_Name == prevCtrl.Name);
+                                //    }
+                                //}
 
                                 int OverLappingPanel_Qty = 0,
                                     perimeterBrushSeal = 0,

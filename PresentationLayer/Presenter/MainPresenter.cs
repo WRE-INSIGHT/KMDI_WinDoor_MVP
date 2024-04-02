@@ -1046,7 +1046,10 @@ namespace PresentationLayer.Presenter
                 {
                     DateTime myDate = DateTime.Parse(input);
                     _quotationModel.Date_Assigned_Mainpresenter = myDate;
-                    _windoorModel.Date_Assigned_Mainpresenter = myDate;
+                    foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                    {
+                        wdm.Date_Assigned_Mainpresenter = myDate;
+                    }
                     Date_Assigned_Mainpresenter_forNewItem = myDate;
                 }
 
@@ -3706,7 +3709,11 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.Save();
             }
 
-
+            //foreach (IQuotationModel wdm in _quotationModel.Lst_Windoor)
+            //{
+            //    wdm.Date_Assigned = _quotationModel.Date_Assigned;
+            //    wdm.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
+            //}
         }
 
         private void OnAddProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -10664,7 +10671,7 @@ namespace PresentationLayer.Presenter
                                                                          Foil_Color._Walnut);
 
                         _windoorModel.Date_Assigned = dateAssigned;
-                        _windoorModel.Date_Assigned_Mainpresenter = dateAssigned;
+                        _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
                         _windoorModel.SetDimensions_basePlatform();
                         AddWndrList_QuotationModel(_windoorModel);
                         _quotationModel.Select_Current_Windoor(_windoorModel);
@@ -10725,7 +10732,7 @@ namespace PresentationLayer.Presenter
                         _windoorModel.SetDimensions_basePlatform();
 
                         _windoorModel.Date_Assigned = dateAssigned;
-                        _windoorModel.Date_Assigned_Mainpresenter = dateAssigned;
+                        _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -10908,7 +10915,7 @@ namespace PresentationLayer.Presenter
                         _windoorModel.SetDimensions_basePlatform();
 
                         _windoorModel.Date_Assigned = dateAssigned;
-                        _windoorModel.Date_Assigned_Mainpresenter = dateAssigned;
+                        _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
