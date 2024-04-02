@@ -4031,7 +4031,7 @@ namespace PresentationLayer.Presenter
 
         private void QuotationModelDateTimeChecker()
         {
-            foreach (IQuotationModel wdm in _quotationModel.Lst_Windoor)
+            foreach (var wdm in _quotationModel.Lst_Windoor)
             {
                 if (wdm.Date_Assigned == DateTime.Parse("01-01-0001"))
                 {
