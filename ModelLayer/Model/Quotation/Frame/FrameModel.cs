@@ -611,7 +611,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 if (_is_MPanel) // meaning MPanel
                 {
                     if (Frame_Type == Frame_Padding.Window)
-                    { 
+                    {
                         Frame_Padding_int = new Padding(15);
                     }
                     else if (Frame_Type == Frame_Padding.Door)
@@ -1329,6 +1329,8 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 _frameInversionClipOption = value;
                 NotifyPropertyChanged();
+            }
+        }
         private int _frameFoldAndSlideTopViewLeftCount;
         public int Frame_FoldAndSlideTopViewLeftCount
         {

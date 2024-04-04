@@ -720,17 +720,17 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public DateTime Date_Assigned { get; set; }
         public DateTime Date_Assigned_Mainpresenter { get; set; }
 
-        public List<Image> WD_PALst_Designs { get; set; }
-        public List<string> WD_PALst_Description { get; set; }
-        public List<decimal> WD_PALst_Price { get; set; }
+        //public List<Image> WD_PALst_Designs { get; set; }
+        //public List<string> WD_PALst_Description { get; set; }
+        //public List<decimal> WD_PALst_Price { get; set; }
 
-        public bool WD_IsPartialADPreviousExist { get; set; }
-        public Image WD_PAPreviousImage { get; set; }
-        public string WD_PAPreviousDescription { get; set; }
-        public decimal WD_PAPreviousPrice { get; set; }
+        //public bool WD_IsPartialADPreviousExist { get; set; }
+        //public Image WD_PAPreviousImage { get; set; }
+        //public string WD_PAPreviousDescription { get; set; }
+        //public decimal WD_PAPreviousPrice { get; set; }
 
 
-        
+
         private bool _wd_IsObjectCopied;
         public bool WD_IsObjectCopied
         {
