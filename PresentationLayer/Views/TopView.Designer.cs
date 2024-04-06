@@ -52,8 +52,12 @@
             this.ts_Cremone = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_Frame)).BeginInit();
             this.cmenu_TopViewProperties.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_TVSave
@@ -80,20 +84,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(48, 13);
+            this.label1.Location = new System.Drawing.Point(78, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "No. of Tracks:";
+            this.label1.Text = "Structural";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(48, 39);
+            this.label2.Location = new System.Drawing.Point(78, 37);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.Size = new System.Drawing.Size(75, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "No. of Panels:";
+            this.label2.Text = "Non-Structural";
             // 
             // lbl_Tracks
             // 
@@ -102,6 +106,7 @@
             this.lbl_Tracks.Name = "lbl_Tracks";
             this.lbl_Tracks.Size = new System.Drawing.Size(0, 13);
             this.lbl_Tracks.TabIndex = 4;
+            this.lbl_Tracks.Visible = false;
             // 
             // lbl_Panels
             // 
@@ -110,6 +115,7 @@
             this.lbl_Panels.Name = "lbl_Panels";
             this.lbl_Panels.Size = new System.Drawing.Size(0, 13);
             this.lbl_Panels.TabIndex = 5;
+            this.lbl_Panels.Visible = false;
             // 
             // FormTimer
             // 
@@ -123,7 +129,7 @@
             this.interlockToolStripMenuItem,
             this.handleToolStripMenuItem});
             this.cmenu_TopViewProperties.Name = "cmenu_TopViewProperties";
-            this.cmenu_TopViewProperties.Size = new System.Drawing.Size(153, 70);
+            this.cmenu_TopViewProperties.Size = new System.Drawing.Size(121, 48);
             // 
             // interlockToolStripMenuItem
             // 
@@ -131,7 +137,7 @@
             this.ts_Structural,
             this.ts_nonStructural});
             this.interlockToolStripMenuItem.Name = "interlockToolStripMenuItem";
-            this.interlockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.interlockToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.interlockToolStripMenuItem.Text = "Interlock";
             // 
             // ts_Structural
@@ -148,21 +154,21 @@
             // leftToolStripMenuItem
             // 
             this.leftToolStripMenuItem.Name = "leftToolStripMenuItem";
-            this.leftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.leftToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.leftToolStripMenuItem.Text = "Left";
             this.leftToolStripMenuItem.Click += new System.EventHandler(this.leftToolStripMenuItem_Click);
             // 
             // rightToolStripMenuItem
             // 
             this.rightToolStripMenuItem.Name = "rightToolStripMenuItem";
-            this.rightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rightToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.rightToolStripMenuItem.Text = "Right";
             this.rightToolStripMenuItem.Click += new System.EventHandler(this.rightToolStripMenuItem_Click);
             // 
             // bothToolStripMenuItem
             // 
             this.bothToolStripMenuItem.Name = "bothToolStripMenuItem";
-            this.bothToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bothToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.bothToolStripMenuItem.Text = "Both";
             this.bothToolStripMenuItem.Click += new System.EventHandler(this.bothToolStripMenuItem_Click);
             // 
@@ -180,21 +186,21 @@
             // nonleftToolStripMenuItem
             // 
             this.nonleftToolStripMenuItem.Name = "nonleftToolStripMenuItem";
-            this.nonleftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nonleftToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.nonleftToolStripMenuItem.Text = "Left";
             this.nonleftToolStripMenuItem.Click += new System.EventHandler(this.nonleftToolStripMenuItem_Click);
             // 
             // nonrightToolStripMenuItem1
             // 
             this.nonrightToolStripMenuItem1.Name = "nonrightToolStripMenuItem1";
-            this.nonrightToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.nonrightToolStripMenuItem1.Size = new System.Drawing.Size(102, 22);
             this.nonrightToolStripMenuItem1.Text = "Right";
             this.nonrightToolStripMenuItem1.Click += new System.EventHandler(this.nonrightToolStripMenuItem1_Click);
             // 
             // nonbothToolStripMenuItem
             // 
             this.nonbothToolStripMenuItem.Name = "nonbothToolStripMenuItem";
-            this.nonbothToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nonbothToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.nonbothToolStripMenuItem.Text = "Both";
             this.nonbothToolStripMenuItem.Click += new System.EventHandler(this.nonbothToolStripMenuItem_Click);
             // 
@@ -205,7 +211,7 @@
             this.ts_dHandle,
             this.ts_Cremone});
             this.handleToolStripMenuItem.Name = "handleToolStripMenuItem";
-            this.handleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.handleToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.handleToolStripMenuItem.Text = "Handle";
             // 
             // ts_Popup
@@ -249,11 +255,31 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "OUTSIDE";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Crimson;
+            this.pictureBox1.Location = new System.Drawing.Point(51, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(21, 16);
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Green;
+            this.pictureBox2.Location = new System.Drawing.Point(51, 36);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(21, 16);
+            this.pictureBox2.TabIndex = 8;
+            this.pictureBox2.TabStop = false;
+            // 
             // TopView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 509);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lbl_Panels);
@@ -272,6 +298,8 @@
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TopView_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.pbox_Frame)).EndInit();
             this.cmenu_TopViewProperties.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,5 +330,7 @@
         private System.Windows.Forms.ToolStripMenuItem nonleftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nonrightToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem nonbothToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

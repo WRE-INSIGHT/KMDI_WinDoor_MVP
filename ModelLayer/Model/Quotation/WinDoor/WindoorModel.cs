@@ -142,6 +142,21 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        //top view Points
+        private int _wdtopviewpoints;
+        public int WD_topviewpoints
+        {
+            get
+            {
+                return _wdtopviewpoints;
+            }
+            set
+            {
+                _wdtopviewpoints = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private int _wdHeightforBasePlatformImageRenderer;
         public int WD_height_4basePlatform_forImageRenderer
         {
@@ -355,7 +370,19 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 NotifyPropertyChanged();
             }
         }
-
+        private Image _wdTopViewImage;
+        public Image WD_TopViewImage
+        {
+            get
+            {
+                return _wdTopViewImage;
+            }
+            set
+            {
+                _wdTopViewImage = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private bool _wdSlidingTopViewVisibility;
         public bool WD_SlidingTopViewVisibility
@@ -527,6 +554,19 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdSelected = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _wdTopviewsave;
+        public bool WD_TopViewSaved
+        {
+            get
+            {
+                return _wdTopviewsave;
+            }
+            set
+            {
+                _wdTopviewsave = value;
                 NotifyPropertyChanged();
             }
         }

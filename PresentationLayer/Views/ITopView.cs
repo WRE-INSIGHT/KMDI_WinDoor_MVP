@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views
 {
-    public interface ITopView
+    public interface ITopView : IViewCommon
     {
         event EventHandler TopViewSlidingViewLoadEventRaised;
         event EventHandler FormTimerTickEventRaised;
@@ -24,7 +25,7 @@ namespace PresentationLayer.Views
        
         event PaintEventHandler TopViewPaintEventRaised;
 
-
+        int rail_tracks { get; set; }
         PictureBox GetPbox();
         Label GetLabelTracks();
         Label GetLabelPanel();

@@ -5,12 +5,12 @@ using Unity;
 
 namespace PresentationLayer.Presenter
 {
-    public interface ITopViewPanelViewerPresenter
+    public interface ITopViewPanelViewerPresenter : IPresenterCommon
     {
+
         ITopViewPanelViewer GetSetTopViewSlidingPanellingView();
         ITopViewPanelViewerPresenter CreateNewInstance(IUnityContainer unityC,
-                                                        IMainPresenter mainPresenter,
-                                                        ITopViewPresenter topviewPresenter,
+                                                        IMainPresenter mainPresenter,                                                        
                                                         IWindoorModel windoorModel);
     }
 }

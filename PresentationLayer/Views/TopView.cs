@@ -38,7 +38,18 @@ namespace PresentationLayer.Views
         public event EventHandler cremoneToolStripClickedEventRaised;
 
 
-
+        private int _railtracks;
+        public int rail_tracks
+        {
+            get
+            {
+                return _railtracks;
+            }
+            set
+            {
+                _railtracks = value;
+            }
+        }
 
         public void ShowTopView()
         {
@@ -89,7 +100,10 @@ namespace PresentationLayer.Views
         {
             return this;
         }
-
+        public void ThisBinding(Dictionary<string, Binding> ModelBinding)
+        {
+        //    this.DataBindings.Add(ModelBinding["Frame_SlidingRailsQty"]);
+        }
         private void TopView_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, TopViewSlidingViewLoadEventRaised, e);

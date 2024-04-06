@@ -901,7 +901,8 @@ namespace PresentationLayer.Presenter
                              IPartialAdjustmentViewPresenter partialAdjustmentViewPresenter,
                              IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter,
                              IPartialAdjustmentBaseHolderPresenter partialAdjustmentBaseHolderPresenter,
-                             ITopViewPresenter topViewPresenter
+                             ITopViewPresenter topViewPresenter,
+                             ITopViewPanelViewerPresenter topViewPanelViewerPresenter
                              )
         {
             _mainView = mainView;
@@ -971,6 +972,7 @@ namespace PresentationLayer.Presenter
             _partialAdjustmentUCPresenter = partialAdjustmentUCPresenter;
             _partialAdjustmentBaseHolderPresenter = partialAdjustmentBaseHolderPresenter;
             _topViewDesignPresenter = topViewPresenter;
+            _topViewPanelViewerPresenter = topViewPanelViewerPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -1093,8 +1095,17 @@ namespace PresentationLayer.Presenter
         private void _mainView_topViewToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             //MessageBox.Show("Top View Button Clicked");
-            ITopViewPresenter topViewDesign = _topViewDesignPresenter.GetNewInstance(this, _unityC, _panelModel, _frameModel, _windoorModel);
-            topViewDesign.GetTopViewDesign().ShowTopView();     
+            if (_windoorModel.WD_Selected == true)
+            {
+                if (_windoorModel.WD_TopViewSaved == true)
+                {
+                    Get_TopViewPanelViewer();
+                }
+                else
+                {
+                    Get_TopViewSelectPanel();
+                }
+            }
         }
 
         private void _mainView_partialAdjusmentToolstripClickClickEventRaised(object sender, EventArgs e)
@@ -1291,7 +1302,19 @@ namespace PresentationLayer.Presenter
             return _userObjCount;
 
         }
-
+        public void Get_TopViewPanelViewer()
+        {
+            ITopViewPanelViewerPresenter panelViewer = _topViewPanelViewerPresenter.CreateNewInstance(_unityC, this, _windoorModel);
+            panelViewer.GetSetTopViewSlidingPanellingView().showTopViewPanelViewer();
+            //  panelViewer.GetSetTopViewSlidingPanellingView().TopView_BringtoFront();
+            //  topViewDesign.GetTopViewDesign().CloseTopView();
+        }
+        public void Get_TopViewSelectPanel()
+        {
+            ITopViewPresenter topViewDesign = _topViewDesignPresenter.GetNewInstance(this, _unityC, _panelModel, _frameModel, _windoorModel, _quotationModel);
+            topViewDesign.GetTopViewDesign().ShowTopView();
+          
+        }
         public void MainPresenter_PartialAdjustment()
         {
             IPartialAdjustmentViewPresenter partialAdjustment = _partialAdjustmentViewPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, this, _partialAdjustmentBaseHolderPresenter);

@@ -155,6 +155,8 @@ namespace PresentationLayer.Presenter
         void MainPresenter_PartialAdjustment();
         void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color);
         void setWoodecAdditional(int woodecAddlPercentage);
+        void Get_TopViewSelectPanel();
+        void Get_TopViewPanelViewer();
 
         Base_Color baseColor { get; set; }
         Foil_Color InsideColor { get; set; } 

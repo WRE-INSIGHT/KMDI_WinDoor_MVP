@@ -1881,6 +1881,7 @@
     <None Include="Resources\Combination2.png" />
     <None Include="Resources\Combination3.png" />
     <None Include="Resources\Combination4.png" />
+    <None Include="Resources\Combination5.png" />
     <Content Include="Resources\delete_file_30px.png" />
     <None Include="Resources\ExtensionTop.png" />
     <None Include="Resources\ExtensionBot.png" />

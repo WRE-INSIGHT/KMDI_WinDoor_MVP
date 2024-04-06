@@ -30,8 +30,8 @@ namespace PresentationLayer.Presenter
         private IFrameModel _frameModel;
         private IWindoorModel _windoorModel;
         private ITopViewPanelViewerPresenter _topViewPanelViewerPresenter;
-        
-       
+        private IQuotationModel _quotationModel;
+
 
         PictureBox _pboxFrame;
         Font handle_names;
@@ -768,118 +768,12 @@ namespace PresentationLayer.Presenter
 
         private void _topViewdesign_nonstructuralToolStripClickedEventRaised(object sender, EventArgs e)
         {
-           //interlockselected = true;
-           //
-           //for (int ii = 0; ii < Lst_PanelRectangle.Count; ii++)
-           //{
-           //
-           //    Rectangle rect = Lst_PanelRectangle[ii];
-           //   
-           //    // Console.WriteLine(" " + Lst_Panelpointsystem[ii] );
-           //
-           //
-           //    if (rect.Contains(CursorLocX, CursorLocY))
-           //    {
-           //        if (selectedPanelRectangles.Contains(rect))
-           //        {
-           //           
-           //            if(lst_interlockPanelRectangles.Contains(rect))
-           //            {
-           //                int test_interlock = lst_interlockPanelRectangles.IndexOf(rect);
-           //                nonstructselected = false;
-           //                if(structselected == true)
-           //                {
-           //                    lst_interlockPanelRectangles.Remove(rect);
-           //                    Lst_Interlock.Remove(Lst_Interlock[test_interlock]);
-           //                    lst_interlockPanelRectangles.Add(rect);
-           //                    Lst_Interlock.Add("Non-Structural");
-           //                    nonstructselected = true;
-           //                    Console.WriteLine("Changed from Structural to Non-Structural");
-           //                }
-           //                else
-           //                {
-           //                    lst_interlockPanelRectangles.Remove(rect);
-           //                    Lst_Interlock.Remove(Lst_Interlock[test_interlock]);
-           //                }
-           //              
-           //
-           //                Console.WriteLine("Removed Non Struct");
-           //               
-           //            }
-           //            else
-           //            {
-           //
-           //                lst_interlockPanelRectangles.Add(rect);
-           //                Lst_Interlock.Add("Non-Structural");
-           //                // structPanelRectangles.Remove(rect);
-           //                nonstructselected = true;
-           //                Console.WriteLine("Added Non Struct");
-           //            }
-           //
-           //        }
-           //
-           //        _topViewdesign.GetPbox().Invalidate();
-           //        break;
-           //
-           //    }
-           //}
+      
 
         }
         private void _topViewdesign_structuralToolStripClickedEventRaised(object sender, EventArgs e)
         {
-           // interlockselected = true;
-           //
-           // for (int ii = 0; ii < Lst_PanelRectangle.Count; ii++)
-           // {
-           //
-           //     Rectangle rect = Lst_PanelRectangle[ii];
-           //
-           //     // Console.WriteLine(" " + Lst_Panelpointsystem[ii] );
-           //
-           //
-           //     if (rect.Contains(CursorLocX, CursorLocY))
-           //     {
-           //         if (selectedPanelRectangles.Contains(rect))
-           //         {
-           //
-           //             if (lst_interlockPanelRectangles.Contains(rect))
-           //             {
-           //                 structselected = false;
-           //                 int test_interlock = lst_interlockPanelRectangles.IndexOf(rect);
-           //                 
-           //                 if(nonstructselected == true)
-           //                 {
-           //                     lst_interlockPanelRectangles.Remove(rect);
-           //                     Lst_Interlock.Remove(Lst_Interlock[test_interlock]);
-           //                     lst_interlockPanelRectangles.Add(rect);
-           //                     Lst_Interlock.Add("Structural");
-           //                     structselected = true;
-           //                     Console.WriteLine("Changed from Non-Structural to Structural");
-           //                 }
-           //                 else
-           //                 {
-           //                     lst_interlockPanelRectangles.Remove(rect);
-           //                     Lst_Interlock.Remove(Lst_Interlock[test_interlock]);
-           //                 }
-           //                 Console.WriteLine("Removed Structural");
-           //             }
-           //             else
-           //             {
-           //
-           //                 lst_interlockPanelRectangles.Add(rect);
-           //                 Lst_Interlock.Add("Structural");
-           //                 structselected = true;
-           //                 // structPanelRectangles.Remove(rect);
-           //                 Console.WriteLine("Added Structural");
-           //             }
-           //
-           //         }
-           //
-           //         _topViewdesign.GetPbox().Invalidate();
-           //         break;
-           //
-           //     }
-           // }
+     
         }
         private void _topViewdesign_TopViewSlidingViewMouseClickEventRaised(object sender, MouseEventArgs e)
         {
@@ -974,6 +868,7 @@ namespace PresentationLayer.Presenter
         private void _topViewdesign_TopViewSlidingViewButtonClickEventRaised (object sender, EventArgs e)
         {
 
+
             try
             {
                 int sum = 0,
@@ -1067,17 +962,24 @@ namespace PresentationLayer.Presenter
                 // _topviewpanelviewer.showTopViewPanelViewer();
                 // MessageBox.Show("Total Points: " + (total + interlock_total));
                 TotalPoints = total + interlock_total;
+                _windoorModel.WD_topviewpoints = TotalPoints;
+                _windoorModel.WD_TopViewSaved = true;
               //  MessageBox.Show("Total Points: " + TotalPoints);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            ITopViewPanelViewerPresenter panelViewer = _topViewPanelViewerPresenter.CreateNewInstance(_unityC,_mainPresenter, this, _windoorModel);
-            panelViewer.GetSetTopViewSlidingPanellingView().showTopViewPanelViewer();
+            _mainPresenter.Get_TopViewPanelViewer();
+            _topViewdesign.CloseTopView();
+
+
 
         }
-
+        public void Get_TopViewPanelViewer()
+        {
+           
+        }
         private void _topViewdesign_FormTimerTickEventRaised(object sender, EventArgs e)
         {
            // _topViewdesign.GetPbox().Invalidate();
@@ -1091,7 +993,7 @@ namespace PresentationLayer.Presenter
         }
         private void _topViewdesign_TopViewSlidingViewLoadEventRaised(object sender, EventArgs e)
         {
-        
+            _frameModel.Frame_SlidingRailsQty = _frameModel.Frame_SlidingRailsQty;
 
             foreach (IFrameModel fr in _windoorModel.lst_frame)
             {
@@ -1104,8 +1006,18 @@ namespace PresentationLayer.Presenter
 
                 }
             }
-          //  test_pnlCount = _windoorModel.pnlCount;
-            topview_track = _frameModel.Frame_SlidingRailsQty;
+            
+            foreach (IWindoorModel wndr in _quotationModel.Lst_Windoor)
+            {
+                if(_windoorModel.WD_Selected == true)
+                {
+                    topview_track = _frameModel.Frame_SlidingRailsQty;
+                }
+            }
+                //  test_pnlCount = _windoorModel.pnlCount;
+               
+            string test_name = _windoorModel.WD_name;
+            Console.WriteLine("Item: " + test_name + " Sliding Rails: " + topview_track);
             int total_points = 0,
                 sum_points = 0,
                 sum = 0;
@@ -1146,13 +1058,14 @@ namespace PresentationLayer.Presenter
             
             Console.WriteLine("Total Points: " + total_points);
 
-          //  foreach (int value in Lst_Panelpointsystem)
-          //  {
-          //      Console.WriteLine(value);
-          //    
-          //  }
+            //  foreach (int value in Lst_Panelpointsystem)
+            //  {
+            //      Console.WriteLine(value);
+            //    
+            //  }
 
-
+            _topViewdesign.ThisBinding(CreateBindingDictionary());
+            _topViewdesign.GetThis().Invalidate();
             _topViewdesign.GetLabelTracks().Text = _frameModel.Frame_SlidingRailsQty.ToString();
             _topViewdesign.GetLabelPanel().Text = topview_pnlCount.ToString();
         }
@@ -1436,20 +1349,21 @@ namespace PresentationLayer.Presenter
             return _topViewdesign;
         }
 
-  //      public Dictionary<string, Binding> CreateBindingDictionary()
-  //      {
-  //          Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
-  //          binding.Add("pboxFrame", new Binding("Image", _windoorModel, "WD_flpImage", true, DataSourceUpdateMode.OnPropertyChanged));
-  //          binding.Add("WD_TopViewType", new Binding("TEXT", _windoorModel, "WD_TopViewType", true, DataSourceUpdateMode.OnPropertyChanged));
-  //
-  //          return binding;
-  //      }
+        public Dictionary<string, Binding> CreateBindingDictionary()
+        {
+            Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
+           // binding.Add("Frame_SlidingRailsQty", new Binding("Value", _frameModel, "Frame_SlidingRailsQty", true, DataSourceUpdateMode.OnPropertyChanged));
+            //       binding.Add("WD_TopViewType", new Binding("TEXT", _windoorModel, "WD_TopViewType", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            return binding;
+        }
 
         public ITopViewPresenter GetNewInstance(IMainPresenter mainPresenter,
                                            IUnityContainer unityC,
                                            IPanelModel panelModel,
                                            IFrameModel frameModel,
-                                           IWindoorModel windoorModel)
+                                           IWindoorModel windoorModel,
+                                           IQuotationModel quotationModel)
           {
             unityC
              .RegisterType<ITopView, TopView>()
@@ -1460,6 +1374,7 @@ namespace PresentationLayer.Presenter
             TVPresenter._panelModel = panelModel;
             TVPresenter._frameModel = frameModel;
             TVPresenter._windoorModel = windoorModel;
+            TVPresenter._quotationModel = quotationModel;
 
             return TVPresenter;
         }
