@@ -1781,7 +1781,7 @@ namespace PresentationLayer.Presenter
         }
         #endregion
         public bool EditFromQuotationList { get; set; }
-        
+
         bool checkWoodecAddtional = false;
         private void OnNudCurrentPriceValueChangedEventRaised(object sender, EventArgs e)
         {
@@ -1807,7 +1807,7 @@ namespace PresentationLayer.Presenter
                         if (!checkWoodecAddtional &&
                             _windoorModel.WD_WoodecAdditional != 0 &&
                             _lblCurrentPrice.Value != _windoorModel.WD_PriceWithWoodecAdditional)
-                            //&&EditFromQuotationList == false
+                        //&&EditFromQuotationList == false
                         {
                             GetPriceWithWoodec(_lblCurrentPrice.Value);
                         }
@@ -1831,7 +1831,7 @@ namespace PresentationLayer.Presenter
         {
             checkWoodecAddtional = true;
             _windoorModel.WD_PriceWithWoodecAdditional = editedPrice + (editedPrice * (_windoorModel.WD_WoodecAdditional / 100m));
-                _lblCurrentPrice.Value = _windoorModel.WD_PriceWithWoodecAdditional;
+            _lblCurrentPrice.Value = _windoorModel.WD_PriceWithWoodecAdditional;
         }
 
 
@@ -4001,7 +4001,7 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error adding Glass to list " + "\n"  + this + "\n" + ex.Message);
+                MessageBox.Show("Error adding Glass to list " + "\n" + this + "\n" + ex.Message);
             }
         }
 
@@ -9529,6 +9529,7 @@ namespace PresentationLayer.Presenter
                                                                                panel_Type,
                                                                                panel_Visibility,
                                                                                _frameModel.Frame_Zoom,
+                                                                               _userModel,
                                                                                _frameModel,
                                                                                null,
                                                                                panel_DisplayWidth,
@@ -10903,32 +10904,32 @@ namespace PresentationLayer.Presenter
                 screen_LaborAndMobilization,
                 screen_TotalNetPriceWithoutVat,
                 screen_AddOnsSpecialFactor;
-           int
-            screen_Set,
-            screen_Quantity,
-            screen_Width,
-            screen_Height,
-            screen_Discount,
-            screen_0505Width,
-            screen_1067Height,
-            screen_0505Qty,
-            screen_1067Qty,
-            screen_LatchKitQty,
-            screen_IntermediatePartQty,
-            screen_6040MilledProfile,
-            screen_6040MilledProfileQty,
-            screen_LandCover,
-            screen_LandCoverQty,
-            screen_1067PVCbox,
-            screen_1067PVCboxQty,
-            screen_1385MilledProfile,
-            screen_1385MilledProfileQty,
-            screen_373or374MilledProfile,
-            screen_373or374MilledProfileQty,
-            screen_6052MilledProfile,
-            screen_6052MilledProfileQty,
-            screen_ExchangeRate,
-            plissedRd_Panels;
+        int
+         screen_Set,
+         screen_Quantity,
+         screen_Width,
+         screen_Height,
+         screen_Discount,
+         screen_0505Width,
+         screen_1067Height,
+         screen_0505Qty,
+         screen_1067Qty,
+         screen_LatchKitQty,
+         screen_IntermediatePartQty,
+         screen_6040MilledProfile,
+         screen_6040MilledProfileQty,
+         screen_LandCover,
+         screen_LandCoverQty,
+         screen_1067PVCbox,
+         screen_1067PVCboxQty,
+         screen_1385MilledProfile,
+         screen_1385MilledProfileQty,
+         screen_373or374MilledProfile,
+         screen_373or374MilledProfileQty,
+         screen_6052MilledProfile,
+         screen_6052MilledProfileQty,
+         screen_ExchangeRate,
+         plissedRd_Panels;
         long screen_id;
         string screen_WindoorID,
                screen_description,

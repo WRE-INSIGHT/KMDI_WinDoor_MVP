@@ -52,7 +52,7 @@ namespace ModelLayer.Model.Quotation
         public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
         public bool FactorChange { get; set; }
 
-        public DataTable MainPresenter_GlassThicknessDT { get; set; } 
+        public DataTable MainPresenter_GlassThicknessDT { get; set; }
 
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
@@ -534,7 +534,8 @@ namespace ModelLayer.Model.Quotation
                                                                                   divArtNo_RightOrBot_lvl3,
                                                                                   pnl_curCtrl.Panel_Placement,
                                                                                   mpanel_placement,
-                                                                                  mpanelParentlvl2_placement);
+                                                                                  mpanelParentlvl2_placement,
+                                                                                  Date_Assigned.ToString());
                                     }
                                     else if (mpnl_curCtrl != null)
                                     {
@@ -693,7 +694,8 @@ namespace ModelLayer.Model.Quotation
                                                                                   divArtNo_RightOrBot_lvl3,
                                                                                   pnl_curCtrl.Panel_Placement,
                                                                                   mpanel_placement,
-                                                                                  mpanelParentlvl2_placement);
+                                                                                  mpanelParentlvl2_placement,
+                                                                                  Date_Assigned.ToString());
                                     }
                                     else if (mpnl_curCtrl != null)
                                     {
@@ -1411,6 +1413,54 @@ namespace ModelLayer.Model.Quotation
 
                                 //Console.WriteLine("no div bottom frame:" + boundedByBottomFrame);
 
+                                changePriceBasedonDate();
+                                DateTime FormulaChangedate_031124 = DateTime.Parse("03-13-2024"); //unequal panel for premi
+
+                                if (pnl_curCtrl.Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
+                                {
+                                    if (cus_ref_date >= FormulaChangedate_031124)
+                                    {
+                                        if (div_nxtCtrl != null)
+                                        {
+                                            divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;
+                                            divNxt_ifDM = div_nxtCtrl.Div_ChkDM;
+                                        }
+                                        if (div_prevCtrl != null)
+                                        {
+                                            divArtNo_prevCtrl = div_prevCtrl.Div_ArtNo;
+                                            divPrev_ifDM = div_prevCtrl.Div_ChkDM;
+                                        }
+                                        if (divTopOrLeft != null)
+                                        {
+                                            divArtNo_LeftOrTop = divTopOrLeft.Div_ArtNo;
+                                        }
+                                        if (divBotOrRight != null)
+                                        {
+                                            divArtNo_RightOrBot = divBotOrRight.Div_ArtNo;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (div_nxtCtrl != null)
+                                    {
+                                        divArtNo_nxtCtrl = div_nxtCtrl.Div_ArtNo;
+                                        divNxt_ifDM = div_nxtCtrl.Div_ChkDM;
+                                    }
+                                    if (div_prevCtrl != null)
+                                    {
+                                        divArtNo_prevCtrl = div_prevCtrl.Div_ArtNo;
+                                        divPrev_ifDM = div_prevCtrl.Div_ChkDM;
+                                    }
+                                    if (divTopOrLeft != null)
+                                    {
+                                        divArtNo_LeftOrTop = divTopOrLeft.Div_ArtNo;
+                                    }
+                                    if (divBotOrRight != null)
+                                    {
+                                        divArtNo_RightOrBot = divBotOrRight.Div_ArtNo;
+                                    }
+                                }
 
                                 int OverLappingPanel_Qty = 0,
                                     perimeterBrushSeal = 0,
@@ -1480,7 +1530,8 @@ namespace ModelLayer.Model.Quotation
                                                                               divArtNo_RightOrBot_lvl3,
                                                                               pnl_curCtrl.Panel_Placement,
                                                                               mpanel_placement,
-                                                                              mpanelParentlvl2_placement);
+                                                                              mpanelParentlvl2_placement,
+                                                                              Date_Assigned.ToString());
                                 }
                                 else if (mpnl_curCtrl != null)
                                 {
@@ -3957,37 +4008,37 @@ namespace ModelLayer.Model.Quotation
         private decimal GlassPriceFromMainPresenter(string glassDesc)
         {
             decimal holder = 0;
-                        if (glassDesc != null)
+            if (glassDesc != null)
             {
                 foreach (DataRow dtrow in MainPresenter_GlassThicknessDT.Rows)
                 {
                     string glassdescMainPresenter = dtrow[1].ToString();
-            
+
                     if (glassDesc.Trim() == glassdescMainPresenter.Trim())
                     {
                         holder = Convert.ToDecimal(dtrow[3].ToString());
                         break;
                     }
-            
+
                 }
-            }   
+            }
             return holder;
         }
 
         private void SetNewPriceForGlass(string glassDesc, decimal price)
         {
-            foreach(DataRow dtrow in MainPresenter_GlassThicknessDT.Rows)
+            foreach (DataRow dtrow in MainPresenter_GlassThicknessDT.Rows)
             {
                 string glassDescMainPresenter = dtrow[1].ToString();
-                if(glassDesc.Trim() == glassDescMainPresenter.Trim())
+                if (glassDesc.Trim() == glassDescMainPresenter.Trim())
                 {
                     string glassdescfromlist = dtrow[1].ToString(); // glass desc before
                     string glasspricefromlist = dtrow[3].ToString(); // glass price before
 
                     dtrow[3] = price; // set new price based on date
 
-                     glassdescfromlist = dtrow[1].ToString(); // glass desc
-                     glasspricefromlist = dtrow[3].ToString(); // glass new price
+                    glassdescfromlist = dtrow[1].ToString(); // glass desc
+                    glasspricefromlist = dtrow[3].ToString(); // glass new price
 
                     break;
                 }
@@ -10196,7 +10247,7 @@ namespace ModelLayer.Model.Quotation
                                         Singlepnl.Panel_GlassThicknessDesc = GlassThcknessDesc_Holder.Replace("with Georgian Bar", "").Replace(" ", " ");
                                     }
                                 }
-                            
+
                                 //Glass Price Selection Using New Algo
                                 GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * GlassPriceFromMainPresenter(Singlepnl.Panel_GlassThicknessDesc);
                                 Singlepnl.Panel_GlassPricePerSqrMeter = GlassPriceFromMainPresenter(Singlepnl.Panel_GlassThicknessDesc);
