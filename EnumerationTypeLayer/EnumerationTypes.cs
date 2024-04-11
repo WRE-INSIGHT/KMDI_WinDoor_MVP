@@ -9,6 +9,7 @@ namespace EnumerationTypeLayer
             public static readonly SystemProfile_Option _C70 = new SystemProfile_Option(0, "C70");
             public static readonly SystemProfile_Option _G58 = new SystemProfile_Option(1, "G58");
             public static readonly SystemProfile_Option _Premiline = new SystemProfile_Option(2, "Premiline");
+            public static readonly SystemProfile_Option _Alutek = new SystemProfile_Option(3, "Alutek");
 
             private SystemProfile_Option(int value, string displayName) : base(value, displayName) { }
         }

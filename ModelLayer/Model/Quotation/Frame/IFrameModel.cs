@@ -99,6 +99,12 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_CladdingVisibility { get; set; }
         CladdingProfileForFrame_ArticleNo Frame_CladdingArtNo { get; set; }
         CladdingReinfForFrame_ArticleNo Frame_CladdingReinArtNo { get; set; }
+        bool Frame_InversionClipVisibility { get; set; }
+        bool Frame_InversionClipOption { get; set; }
+        InversionClip_ArticleNo FrameInversionClip_ArtNo { get; set; }
+        GlazingGasket_ArticleNo FrameGlazingGasket_ArtNo { get; set; }
+        Cheveron_ArticleNo FrameCheveron_ArtNo { get; set; }
+        CornerCleat_ArticleNo FrameCornerCleat_ArtNo { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);

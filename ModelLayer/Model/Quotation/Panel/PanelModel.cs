@@ -7088,6 +7088,26 @@ namespace ModelLayer.Model.Quotation.Panel
 
             #endregion
 
+            if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
+            {
+                #region AssignCustomerRef
+
+                if (Panel_ParentFrameModel.Frame_WindoorModel.Date_Assigned_Mainpresenter == DateTime.Parse("01-01-0001"))
+                {
+                    Panel_ParentFrameModel.Frame_WindoorModel.Date_Assigned_Mainpresenter = Panel_ParentFrameModel.Frame_WindoorModel.Date_Assigned;
+                }
+
+                if (Panel_ParentFrameModel.Frame_WindoorModel.Date_Assigned != Panel_ParentFrameModel.Frame_WindoorModel.Date_Assigned_Mainpresenter)
+                {
+                    cus_ref_date = Panel_ParentFrameModel.Frame_WindoorModel.Date_Assigned_Mainpresenter;
+                }
+
+                #endregion
+
+                //if (cus_ref_date >= FormulaChangedate_031124)
+
+            }
+
 
             decimal pointFiveFrom84300forNxtPrev = 0,
                     pointFiveFrom84300forLeftorTopRightorBot = 0;
@@ -8658,18 +8678,6 @@ namespace ModelLayer.Model.Quotation.Panel
                                                                     //}
                     }
                 }
-
-
-
-
-
-
-
-
-
-
-
-
             }
             else if (divArtNo_RightorBot == Divider_ArticleNo._84300)
             {
@@ -10417,6 +10425,28 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_OriginalGlassWidth = (Panel_OriginalDisplayWidth - deduction_for_wd) - 6;
                 Panel_OriginalGlassHeight = (Panel_OriginalDisplayHeight - deduction_for_ht) - 6;
 
+                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    int inversionClip_Deduction = 0;
+
+                    if (Panel_ParentFrameModel.Frame_InversionClipOption == true)
+                    {
+                        inversionClip_Deduction = 46;
+                        Panel_InversionClipArtNo = InversionClip_ArticleNo._84804;
+                    }
+
+                    Panel_InversionClipWidth = Panel_DisplayWidth - deduction_for_wd + 5; // 2.5 * 2
+                    Panel_InversionClipHeight = Panel_DisplayHeight - deduction_for_ht + 5;
+
+                    Panel_GlazingBeadWidth = Panel_DisplayWidth - deduction_for_wd - (inversionClip_Deduction * 2) + (20 * 2);
+                    Panel_GlazingBeadHeight = Panel_DisplayHeight - deduction_for_ht - (inversionClip_Deduction * 2);
+
+                    Panel_GlassWidth = (Panel_DisplayWidth - deduction_for_wd) - (inversionClip_Deduction * 2) + (20 * 2) - (4 * 2);
+                    Panel_GlassHeight = (Panel_DisplayHeight - deduction_for_ht) - (inversionClip_Deduction * 2) + (20 * 2) - (4 * 2);
+
+                    Panel_OriginalGlassWidth = (Panel_OriginalDisplayWidth - deduction_for_wd) - (inversionClip_Deduction * 2) + (20 * 2) - (4 * 2);
+                    Panel_OriginalGlassHeight = (Panel_OriginalDisplayHeight - deduction_for_ht) - (inversionClip_Deduction * 2) + (20 * 2) - (4 * 2);
+                }
 
                 if (Panel_Type.Contains("Louver"))
                 {
@@ -10529,6 +10559,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             return motor;
         }
+
         #region Material_List
 
         public void Insert_SashInfo_MaterialList(DataTable tbl_explosion)
@@ -10550,20 +10581,20 @@ namespace ModelLayer.Model.Quotation.Panel
                                    Panel_SashHeight.ToString(),
                                    "Sash",
                                    @"\  /");
+            if (!Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+                tbl_explosion.Rows.Add("Sash Reinf Width " + Panel_SashReinfArtNo.DisplayName,
+                                                  2, "pc(s)",
+                                                  Panel_SashReinfWidth.ToString(),
+                                                  "Sash",
+                                                  @"|  |");
 
-            tbl_explosion.Rows.Add("Sash Reinf Width " + Panel_SashReinfArtNo.DisplayName,
-                                   2, "pc(s)",
-                                   Panel_SashReinfWidth.ToString(),
-                                   "Sash",
-                                   @"|  |");
-
-            tbl_explosion.Rows.Add("Sash Reinf Height " + Panel_SashReinfArtNo.DisplayName,
-                                   2, "pc(s)",
-                                   Panel_SashReinfHeight.ToString(),
-                                   "Sash",
-                                   ReinCutAngle);
-
-
+                tbl_explosion.Rows.Add("Sash Reinf Height " + Panel_SashReinfArtNo.DisplayName,
+                                       2, "pc(s)",
+                                       Panel_SashReinfHeight.ToString(),
+                                       "Sash",
+                                       ReinCutAngle);
+            }
         }
 
         public void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion)
@@ -10736,21 +10767,48 @@ namespace ModelLayer.Model.Quotation.Panel
         {
             if (Panel_Type.Contains("Awning"))
             {
-                tbl_explosion.Rows.Add("Friction Stay " + Panel_FrictionStayArtNo.DisplayName,
-                                       1, "pair(s)",
-                                       "",
-                                       "Sash & Frame",
-                                       @"");
+                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    tbl_explosion.Rows.Add("Friction Stay " + Panel_FSAlutekArtNo.DisplayName,
+                                         1, "pair(s)",
+                                         "",
+                                         "Sash & Frame",
+                                         @"");
+
+                }
+                else
+                {
+                    tbl_explosion.Rows.Add("Friction Stay " + Panel_FrictionStayArtNo.DisplayName,
+                                                          1, "pair(s)",
+                                                          "",
+                                                          "Sash & Frame",
+                                                          @"");
+
+                }
+
             }
             else if (Panel_Type.Contains("Casement"))
             {
-                tbl_explosion.Rows.Add("Friction Stay " + Panel_FSCasementArtNo.DisplayName,
-                                       1, "pair(s)",
-                                       "",
-                                       "Sash & Frame",
-                                       @"");
+                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    tbl_explosion.Rows.Add("Friction Stay " + Panel_FSAlutekArtNo.DisplayName,
+                                         1, "pair(s)",
+                                         "",
+                                         "Sash & Frame",
+                                         @"");
 
+                }
+                else
+                {
+                    tbl_explosion.Rows.Add("Friction Stay " + Panel_FSCasementArtNo.DisplayName,
+                                      1, "pair(s)",
+                                      "",
+                                      "Sash & Frame",
+                                      @"");
+
+                }
             }
+
         }
 
         public void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion)
@@ -11033,8 +11091,6 @@ namespace ModelLayer.Model.Quotation.Panel
                                        @"");
             }
         }
-        //
-
 
         public void Insert_CornerDrive_MaterialList(DataTable tbl_explosion)
         {
@@ -11178,7 +11234,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
                         inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
                         inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray ||
-                                 inside_color == Foil_Color._UmberOak || inside_color == Foil_Color._Carbon)
+                        inside_color == Foil_Color._UmberOak || inside_color == Foil_Color._Carbon)
             {
                 MVDFoilColorInside = "BL ";
             }
@@ -11392,7 +11448,6 @@ namespace ModelLayer.Model.Quotation.Panel
             }
 
         }
-
 
         public void Insert_GuideTrackProfile_MaterialList(DataTable tbl_explosion)
         {
@@ -11682,15 +11737,11 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_ScrewSetForDhandlesVariant_MaterialList(DataTable tbl_explosion)
         {
-            if (Panel_ScrewSetsArtNo != null)
-            {
-                tbl_explosion.Rows.Add("Screw Set " + Panel_ScrewSetsArtNo.DisplayName,
+            tbl_explosion.Rows.Add("Screw Set " + Panel_ScrewSetsArtNo.DisplayName,
                          1, "Set",
                          "",
                          "Handle",
                          @"");
-            }
-
         }
 
         public void Insert_SpacerFixedSash_MaterialList(DataTable tbl_explosion)
@@ -11930,7 +11981,6 @@ namespace ModelLayer.Model.Quotation.Panel
 
         }
 
-
         public void Insert_BrushForSliding_MaterialList(DataTable tbl_explosion, int FinPlatePerimeter)
         {
             tbl_explosion.Rows.Add("Brush Seal For Sliding " + Panel_BrushArtNo.DisplayName,
@@ -11951,7 +12001,6 @@ namespace ModelLayer.Model.Quotation.Panel
 
         }
 
-
         public void Insert_SlidingSashBottomGuide_MaterialList(DataTable tbl_explosion, int overlap)
         {
             tbl_explosion.Rows.Add("Sliding Sash Bottom Guide ",
@@ -11961,6 +12010,226 @@ namespace ModelLayer.Model.Quotation.Panel
                                                    @"");
 
         }
+
+        public void Insert_InversionClip_MaterialList(DataTable tbl_explosion)
+        {
+            if (Panel_InversionClipArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Inversion Clip Width " + Panel_InversionClipArtNo.DisplayName,
+                                       2, "pc(s)",
+                                       Panel_InversionClipWidth,
+                                       "Hardware & Accessories",
+                                        @"\  /");
+
+                tbl_explosion.Rows.Add("Inversion Clip Height " + Panel_InversionClipArtNo.DisplayName,
+                                       2, "pc(s)",
+                                       Panel_InversionClipHeight,
+                                       "Hardware & Accessories",
+                                        @"\  /");
+            }
+        }
+
+        public void Insert_GlazingGasket_Alutek_MaterialList(DataTable tbl_explosion, float GlassThickness, bool withSash)
+        {
+            if (GlassThickness == 4.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G224;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+            else if (GlassThickness == 6.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G223;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+            else if (GlassThickness == 8.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G287;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G224;
+            }
+            else if (GlassThickness == 10.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G223;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+            else
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G223;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+
+            tbl_explosion.Rows.Add("Glazing Gasket (P" + PanelGlass_ID + ") Width " + Panel_GlazingGasketArtNo.DisplayName,
+                              2, "pc(s)",
+                              Panel_GlazingBeadWidth.ToString(),
+                              "Glazing Bead",
+                              @"");
+
+
+            tbl_explosion.Rows.Add("Glazing Gasket (P" + PanelGlass_ID + ") Height " + Panel_GlazingGasketArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_GlazingBeadHeight.ToString(),
+                                   "Glazing Bead",
+                                   @"");
+
+            if (withSash == true)
+            {
+                tbl_explosion.Rows.Add("Glazing Gasket (P" + PanelGlass_ID + ") Width " + Panel_GlazingGasketArtNo2.DisplayName,
+                          2, "pc(s)",
+                          Panel_SashWidth.ToString(),
+                          "Glazing Bead",
+                          @"");
+
+
+                tbl_explosion.Rows.Add("Glazing Gasket (P" + PanelGlass_ID + ") Height " + Panel_GlazingGasketArtNo2.DisplayName,
+                                       2, "pc(s)",
+                                       Panel_SashHeight.ToString(),
+                                       "Glazing Bead",
+                                       @"");
+            }
+            else if (withSash == false)
+            {
+                tbl_explosion.Rows.Add("Glazing Gasket (P" + PanelGlass_ID + ") Width " + Panel_GlazingGasketArtNo2.DisplayName,
+                         2, "pc(s)",
+                         Panel_Width.ToString(),
+                         "Glazing Bead",
+                         @"");
+
+
+                tbl_explosion.Rows.Add("Glazing Gasket (P" + PanelGlass_ID + ") Height " + Panel_GlazingGasketArtNo2.DisplayName,
+                                       2, "pc(s)",
+                                       Panel_Height.ToString(),
+                                       "Glazing Bead",
+                                       @"");
+            }
+
+
+
+        }
+
+        public void Insert_CenterGasket_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Center Gasket Width " + Panel_CenterGasketArtNo.DisplayName,
+                         2, "pc(s)",
+                         Panel_DisplayWidth.ToString(),
+                         "Sash",
+                         @"");
+
+
+            tbl_explosion.Rows.Add("Center Gasket (Frame) Height " + Panel_CenterGasketArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_DisplayHeight.ToString(),
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_OpenableStriker_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Openable Striker, 50mm " + Panel_OpenableStrikerArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Hardware & Accessories",
+                                   @"");
+        }
+
+        public void Insert_Cheveron_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Cheveron " + Panel_CheveronArtNo.DisplayName,
+                                   4, "pc(s)",
+                                   "",
+                                   "Hardware & Accessories",
+                                   @"");
+        }
+
+        public void Insert_CornerWindow_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Corner Window 26x10mm " + Panel_CornerCleatArtNo.DisplayName,
+                                4, "pc(s)",
+                                "",
+                                "Hardware & Accessories",
+                                @"");
+        }
+
+        public void Insert_RunUpBlock_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Run Up Block " + Panel_RunUpBlockArtNo.DisplayName,
+                                2, "pc(s)",
+                                "",
+                                "Hardware & Accessories",
+                                @"");
+        }
+
+        public void Insert_PackerRod_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Packer Rod " + Panel_PackerRodArtNo.DisplayName,
+                                2, "pc(s)",
+                                "",
+                                "Hardware & Accessories",
+                                @"");
+        }
+
+        public void Insert_LockingWedge_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Locking Wedge " + Panel_LockingWedgeArtNo.DisplayName,
+                                1, "pc(s)",
+                                "",
+                                "Hardware & Accessories",
+                                @"");
+        }
+
+        public void Insert_SSCheveron_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("SS Cheveron " + Panel_SSCheveronArtNo.DisplayName,
+                                4, "pc(s)",
+                                "",
+                                "Hardware & Accessories",
+                                @"");
+        }
+
+        public void Insert_Unica40_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Unica 40 " + Panel_Unica40ArtNo.DisplayName,
+                                1, "pc(s)",
+                                "",
+                                "Hardware & Accessories",
+                                @"");
+        }
+
+        public void Insert_LockingConnectorDevice_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Locking Connector Device " + Panel_LockingConnectorArtNo.DisplayName,
+                                1, "pc(s)",
+                                "",
+                                "Hardware & Accessories",
+                                @"");
+        }
+
+        public void Insert_CremonHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Cremon handle " + Panel_CremonArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_Pegstay_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Pegstay H089",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_AlutekStriker_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Striker H177",
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+
 
         public int Add_SashPerimeter_screws4fab()
         {

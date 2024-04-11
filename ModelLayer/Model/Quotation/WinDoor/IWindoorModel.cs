@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Concrete;
 using ModelLayer.Model.Quotation.Frame;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -102,6 +103,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
         decimal WD_WoodecAdditional { get; set; }
         ColorAppliedTo WD_ColorAppliedTo { get; set; }
         decimal WD_PriceWithWoodecAdditional { get; set; }
+        DateTime Date_Assigned { get; set; }
+
+        DateTime Date_Assigned_Mainpresenter { get; set; }
         void Fit_MyControls_ToBindDimensions();
         void SetfrmDimentionZoom();
         void Fit_MyControls_ImagersToBindDimensions();

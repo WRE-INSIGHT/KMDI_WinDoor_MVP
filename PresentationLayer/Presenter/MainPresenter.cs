@@ -828,6 +828,7 @@ namespace PresentationLayer.Presenter
                 _frameIteration = value;
             }
         }
+        public DateTime Date_Assigned_Mainpresenter_forNewItem { get; set; }
 
         public bool MainPresenter_IsFromDeleteFunction { get; set; }
 
@@ -1287,6 +1288,11 @@ namespace PresentationLayer.Presenter
                 {
                     DateTime myDate = DateTime.Parse(input);
                     _quotationModel.Date_Assigned_Mainpresenter = myDate;
+                    foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                    {
+                        wdm.Date_Assigned_Mainpresenter = myDate;
+                    }
+                    Date_Assigned_Mainpresenter_forNewItem = myDate;
                 }
 
             }
@@ -3203,6 +3209,11 @@ namespace PresentationLayer.Presenter
             {
                 Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
+            else if (tsmItem.Name == "AlutekToolStripMenuItem")
+            {
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "Alutek Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+            }
+
         }
 
         private void OnPanelMainSizeChangedEventRaised(object sender, EventArgs e)
@@ -4269,7 +4280,7 @@ namespace PresentationLayer.Presenter
                             //autoDescription = true;
                             onload = false;
                             _isFromAddExisting = false;
-
+                            QuotationModelDateTimeChecker();
                             break;
 
                         case "GetCloudFiles":
@@ -4319,6 +4330,24 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void QuotationModelDateTimeChecker()
+        {
+            foreach (var wdm in _quotationModel.Lst_Windoor)
+            {
+                if (wdm.Date_Assigned == DateTime.Parse("01-01-0001"))
+                {
+                    wdm.Date_Assigned = _quotationModel.Date_Assigned;
+                }
+                if (wdm.Date_Assigned_Mainpresenter == DateTime.Parse("01-01-0001"))
+                {
+                    wdm.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
+                }
+            }
+
+        }
+
+
         private void Opening_dotwndr(int row)
         {
             string row_str = file_lines[row].Replace("\t", "");
@@ -11230,10 +11259,17 @@ namespace PresentationLayer.Presenter
                                                                          baseColor,
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
+                        _windoorModel.Date_Assigned = dateAssigned;
+                        _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
                         _windoorModel.SetDimensions_basePlatform();
                         AddWndrList_QuotationModel(_windoorModel);
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _mainView.Zoom = _windoorModel.WD_zoom;
+
+                       
+
+
+
                         //_mainView.PropertiesScroll = _windoorModel.WD_PropertiesScroll;
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -11259,6 +11295,7 @@ namespace PresentationLayer.Presenter
                         _mainView.RemoveBinding();
                         _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                        Console.WriteLine("factor from quotation model" + _quotationModel.PricingFactor);
                     }
                     #endregion
                 }
@@ -11296,8 +11333,13 @@ namespace PresentationLayer.Presenter
                                                                          OutsideColor);
                         _windoorModel.WD_WoodecAdditional = WoodecAdditionalForNewItem;
                         AddWndrList_QuotationModel(_windoorModel);
+ 
+
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
+
+                        _windoorModel.Date_Assigned = dateAssigned;
+                        _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -11499,6 +11541,9 @@ namespace PresentationLayer.Presenter
                         AddWndrList_QuotationModel(_windoorModel);
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
+
+                        _windoorModel.Date_Assigned = dateAssigned;
+                        _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -13654,6 +13699,11 @@ namespace PresentationLayer.Presenter
             {
                 string[] province = projectAddress.Split(',');
                 _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+
+                if (_windoorModel.WD_profile.Contains("Alutek"))
+                {
+                    _quotationModel.PricingFactor += 1;
+                }
             }
             catch (Exception ex)
             {

@@ -611,7 +611,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 if (_is_MPanel) // meaning MPanel
                 {
                     if (Frame_Type == Frame_Padding.Window)
-                    { 
+                    {
                         Frame_Padding_int = new Padding(15);
                     }
                     else if (Frame_Type == Frame_Padding.Door)
@@ -1327,6 +1327,89 @@ namespace ModelLayer.Model.Quotation.Frame
                 NotifyPropertyChanged();
             }
         }
+
+        private bool _frameInversionClipVisibility;
+        public bool Frame_InversionClipVisibility
+        {
+            get
+            {
+                return _frameInversionClipVisibility;
+            }
+            set
+            {
+                _frameInversionClipVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _frameInversionClipOption;
+        public bool Frame_InversionClipOption
+        {
+            get
+            {
+                return _frameInversionClipOption;
+            }
+            set
+            {
+                _frameInversionClipOption = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        public InversionClip_ArticleNo _frameInversionClip_ArtNo;
+        public InversionClip_ArticleNo FrameInversionClip_ArtNo
+        {
+            get
+            {
+                return _frameInversionClip_ArtNo;
+            }
+            set
+            {
+                _frameInversionClip_ArtNo = value;
+            }
+        }
+
+        public GlazingGasket_ArticleNo _frameGlazingGasket_ArtNo;
+        public GlazingGasket_ArticleNo FrameGlazingGasket_ArtNo
+        {
+            get
+            {
+                return _frameGlazingGasket_ArtNo;
+            }
+            set
+            {
+                _frameGlazingGasket_ArtNo = value;
+            }
+        }
+
+        public Cheveron_ArticleNo _frameCheveron_ArtNo;
+        public Cheveron_ArticleNo FrameCheveron_ArtNo
+        {
+            get
+            {
+                return _frameCheveron_ArtNo;
+            }
+            set
+            {
+                _frameCheveron_ArtNo = value;
+            }
+        }
+
+        public CornerCleat_ArticleNo _frameCornerCleat_ArtNo;
+        public CornerCleat_ArticleNo FrameCornerCleat_ArtNo
+        {
+            get
+            {
+                return _frameCornerCleat_ArtNo;
+            }
+            set
+            {
+                _frameCornerCleat_ArtNo = value;
+            }
+        }
+         
+
         public void SetExplosionValues_Frame()
         {
             if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel
@@ -1464,6 +1547,10 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
                 Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - (10 * deductMultiplier);
             }
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._84100)
+            {
+                Frame_ReinfHeight = 0;
+            }
             else
             {
                 Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - 10;
@@ -1500,6 +1587,10 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ReinfWidth = _frameWidth - (38 * 2) - 10;
                 }
+            }
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._84100)
+            {
+                Frame_ReinfWidth = 0;
             }
             else
             {
@@ -1572,7 +1663,6 @@ namespace ModelLayer.Model.Quotation.Frame
                      Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
             {
                 Frame_MechanicalJointConnectorQty = 4;
-
                 if (Frame_If_InwardMotorizedSliding == true)
                 {
                     Frame_ExplosionHeight = _frameHeight;
@@ -1581,6 +1671,10 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ExplosionHeight = _frameHeight - (MechjointDeduction * 2);
                 }
+            }
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._84100)
+            {
+                Frame_ExplosionHeight = _frameHeight;
             }
             else
             {
@@ -1639,11 +1733,29 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
 
             }
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._84100)
+            {
+                Frame_ExplosionWidth = _frameWidth;
+
+            }
             else
             {
                 Frame_ExplosionWidth = (_frameWidth / MaxCutofRein) + 5;
             }
 
+            if (Frame_ArtNo == FrameProfile_ArticleNo._84100)
+            {
+                FrameGlazingGasket_ArtNo = GlazingGasket_ArticleNo._G221;
+                FrameCheveron_ArtNo = Cheveron_ArticleNo._H083;
+                FrameCornerCleat_ArtNo = CornerCleat_ArticleNo._H079;
+                FrameInversionClip_ArtNo = InversionClip_ArticleNo._84804;
+            }
+            if (Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                Frame_ArtNo == FrameProfile_ArticleNo._6052)
+            {
+                Frame_MechanicalJointConnector_Artno = Frame_MechJointArticleNo._9C52;
+                Frame_SealingElement_ArticleNo = SealingElement_ArticleNo._9C97;
+            }
 
             #region Old algo
             //       public void SetExplosionValues_Frame()

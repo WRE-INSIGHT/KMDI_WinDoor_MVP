@@ -158,7 +158,7 @@ namespace PresentationLayer.Presenter
             _frmDimensionView.nudFrameQtyValueChangedEventRaised += _frmDimensionView_nudFrameQtyValueChangedEventRaised;
         }
 
-      
+
 
         private void _frmDimensionView_nudFrameQtyValueChangedEventRaised(object sender, EventArgs e)
         {
@@ -203,6 +203,10 @@ namespace PresentationLayer.Presenter
                 else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._G58.ToString())
                 {
                     profile_type = "G58 Profile";
+                }
+                else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._Alutek.ToString())
+                {
+                    profile_type = "Alutek Profile";
                 }
             }
         }
@@ -251,7 +255,7 @@ namespace PresentationLayer.Presenter
                                                       _frmDimensionView.InumWidth,
                                                       _frmDimensionView.InumHeight,
                                                       profile_type,
-                                                      _baseColor); 
+                                                      _baseColor);
                 }
             }
             catch (Exception ex)
