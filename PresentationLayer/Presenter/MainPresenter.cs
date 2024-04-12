@@ -5129,6 +5129,15 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
+                        else if (row_str.Contains("Date_Assigned_Mainpresenter"))
+                        {
+                            _windoorModel.Date_Assigned_Mainpresenter = DateTime.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Date_Assigned"))
+                        {
+                            _windoorModel.Date_Assigned = DateTime.Parse(extractedValue_str);
+                        }
+                        
                         #endregion
                     }
                     else if (inside_frame)
