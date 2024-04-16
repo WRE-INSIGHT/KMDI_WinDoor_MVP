@@ -46,8 +46,6 @@ namespace PresentationLayer.Presenter
 
         bool addpnltoList,
             addtrcktoList,
-            leftselected,
-            rightselected,
             interlockselected,
             nonstructselected,
             structselected,
@@ -57,18 +55,18 @@ namespace PresentationLayer.Presenter
 
         Color pnlClickedColor = Color.Blue;
         List<int> Lst_PanelLineY = new List<int>();
-        List<int> Lst_samePoints = new List<int>();
         List<int> Lst_multiplier = new List<int>();
+        List<int> Lst_Panelpointsystem = new List<int>();
+        List<int> Lst_Paneltotal = new List<int>();
+        List<string> Lst_Handles = new List<string>();
+        List<string> Lst_Interlock = new List<string>();
         List<Rectangle> Lst_PanelRectangle = new List<Rectangle>();
         List<Rectangle> selectedPanelRectangles = new List<Rectangle>();
         List<Rectangle> lst_handlePanelRectangles = new List<Rectangle>();
         List<Rectangle> lst_interlockPanelRectangles = new List<Rectangle>();
 
 
-        List<int> Lst_Panelpointsystem = new List<int>();
-        List<int> Lst_Paneltotal = new List<int>();
-        List<string> Lst_Handles = new List<string>();
-        List<string> Lst_Interlock = new List<string>();
+        
 
         public TopViewPresenter(ITopView topViewdesign,
                                 ITopViewPanelViewerPresenter topViewPanelViewerPresenter)
@@ -110,7 +108,7 @@ namespace PresentationLayer.Presenter
 
             if (parent.Text == "Structural")
             {
-                Console.WriteLine(" Call for Structural Both");
+                //Console.WriteLine(" Call for Structural Both");
       
                 for (int ii = 0; ii < Lst_PanelRectangle.Count; ii++)
                 {
@@ -139,7 +137,7 @@ namespace PresentationLayer.Presenter
                                     Lst_Interlock[test_interlock] = "Structural";
                                   //  Lst_Interlock.Add("Structural");
                                     structselected = true;
-                                    Console.WriteLine("Changed from Non-Structural to Structural");
+                                  //  Console.WriteLine("Changed from Non-Structural to Structural");
                                 }
                                 else
                                 {
@@ -153,7 +151,7 @@ namespace PresentationLayer.Presenter
                                     {
                                         lst_interlockPanelRectangles.Remove(rect);
                                         Lst_Interlock.Remove(Lst_Interlock[test_interlock]);
-                                        Console.WriteLine("Removed Structural");
+                                  //      Console.WriteLine("Removed Structural");
                                     }
                                  
                                 }
@@ -166,7 +164,7 @@ namespace PresentationLayer.Presenter
                                 Lst_Interlock.Add("Structural");
                                 structselected = true;
                                 // structPanelRectangles.Remove(rect);
-                                Console.WriteLine("Added Structural");
+                            //    Console.WriteLine("Added Structural");
                             }
 
                         }
@@ -215,7 +213,7 @@ namespace PresentationLayer.Presenter
                                     {
                                         lst_interlockPanelRectangles.Remove(rect);
                                         Lst_Interlock.Remove(Lst_Interlock[test_interlock]);
-                                        Console.WriteLine("Removed Non Struct");
+                                   //     Console.WriteLine("Removed Non Struct");
                                     }
                                     
                                 }
@@ -231,7 +229,7 @@ namespace PresentationLayer.Presenter
                                 Lst_Interlock.Add("Non-Structural");
                                 // structPanelRectangles.Remove(rect);
                                 nonstructselected = true;
-                                Console.WriteLine("Added Non Struct");
+                             //   Console.WriteLine("Added Non Struct");
                             }
 
                         }
@@ -283,7 +281,7 @@ namespace PresentationLayer.Presenter
                                     Lst_Interlock[test_interlock] = "Left Structural";
                                     //Lst_Interlock.Add("Left Structural");
                                     structselected = true;
-                                    Console.WriteLine("Changed to  Left Structural");
+                                //    Console.WriteLine("Changed to  Left Structural");
                                 }
                                 else
                                 {
@@ -297,7 +295,7 @@ namespace PresentationLayer.Presenter
                                     {
                                         lst_interlockPanelRectangles.Remove(rect);
                                         Lst_Interlock.Remove(Lst_Interlock[test_interlock]);
-                                        Console.WriteLine("Removed  Left Structural");
+                                    //    Console.WriteLine("Removed  Left Structural");
                                     }
                                     
                                 }
@@ -309,7 +307,7 @@ namespace PresentationLayer.Presenter
                                 lst_interlockPanelRectangles.Add(rect);
                                 Lst_Interlock.Add("Left Structural");
                                 structselected = true;
-                                Console.WriteLine("Added Left Structural");
+                              //  Console.WriteLine("Added Left Structural");
                             }
 
                         }
@@ -558,6 +556,7 @@ namespace PresentationLayer.Presenter
 
                             if (popupselected == true)
                             {
+                                popupselected = false;
                                 //lst_handlePanelRectangles.Remove(rect);
                                 //Lst_Handles.Remove(Lst_Handles[test_handle]);
                                 //
@@ -569,6 +568,7 @@ namespace PresentationLayer.Presenter
                             }   
                             else if(dhandleselected == true)
                             {
+                                dhandleselected = false;
                                 // lst_handlePanelRectangles.Remove(rect);
                                 // Lst_Handles.Remove(Lst_Handles[test_handle]);
                                 //
@@ -580,7 +580,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-
+                                cremoneselected = false;
                                 lst_handlePanelRectangles.Remove(rect);
                                 Lst_Handles.Remove(Lst_Handles[test_handle]);
                                 Console.WriteLine("Removed Cremone");
@@ -659,6 +659,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
+                                dhandleselected = false;
                                 lst_handlePanelRectangles.Remove(rect);
                                 Lst_Handles.Remove(Lst_Handles[test_handle]);
                                 Console.WriteLine("Removed D-Handle");
@@ -718,17 +719,17 @@ namespace PresentationLayer.Presenter
                                // lst_handlePanelRectangles.Remove(rect);
                                // Lst_Handles.Remove(Lst_Handles[test_handle]);
                                // lst_handlePanelRectangles.Add(rect);
-                                Console.WriteLine("Removed Dhandle to Popup Handle");
+                              //  Console.WriteLine("Removed Dhandle to Popup Handle");
                                 // Lst_Handles.Add(toolstrip);
                                 Lst_Handles[test_handle] = toolstrip;
                                 popupselected = true;
                             }
                             else if(cremoneselected == true)
                             {
-                              //  cremoneselected = false;
+                                cremoneselected = false;
                               //  lst_handlePanelRectangles.Remove(rect);
                               //  Lst_Handles.Remove(Lst_Handles[test_handle]);
-                                Console.WriteLine("Removed Cremone to Pop up Handle");
+                            //    Console.WriteLine("Removed Cremone to Pop up Handle");
                                 //  lst_handlePanelRectangles.Add(rect);
                                 //  Lst_Handles.Add(toolstrip);
                                 Lst_Handles[test_handle] = toolstrip;
@@ -736,9 +737,10 @@ namespace PresentationLayer.Presenter
                             }
                            else
                             {
+                                popupselected = false;
                                 lst_handlePanelRectangles.Remove(rect);
                                 Lst_Handles.Remove(Lst_Handles[test_handle]);
-                                Console.WriteLine("Removed Popup Handle");
+                               // Console.WriteLine("Removed Popup Handle");
                             }
                            
                         }
@@ -751,8 +753,8 @@ namespace PresentationLayer.Presenter
                             Lst_Handles.Add(toolstrip);
                             popupselected = true;
                         
-                            Console.WriteLine("Added Pop up Handle");
-                            Console.WriteLine("Rectangle: " + lst_handlePanelRectangles.IndexOf(rect));
+                          //  Console.WriteLine("Added Pop up Handle");
+                          //  Console.WriteLine("Rectangle: " + lst_handlePanelRectangles.IndexOf(rect));
                            // Console.WriteLine("String: " + Lst_Handles[test_handle]);
 
                         }
@@ -798,12 +800,18 @@ namespace PresentationLayer.Presenter
                                if (e.Button == MouseButtons.Left)
                                 {
                                 int test_interlock = selectedPanelRectangles.IndexOf(rect);
+                                Console.WriteLine("Index: " + test_interlock);
                                 //Remove Rectangle if de-select
                                 selectedPanelRectangles.Remove(rect);
                                 lst_interlockPanelRectangles.Remove(rect);
                                 lst_handlePanelRectangles.Remove(rect);
+                              //  Lst_Handles[test_interlock] = "";
+                               if(selectedPanelRectangles.Remove(rect))
+                                {
+                                    Lst_Handles[test_interlock] = "";
+                                }
                                 //Lst_Handles.Remove()
-                                if(lst_handlePanelRectangles.Count == 0)
+                                if (lst_handlePanelRectangles.Count == 0)
                                 {
                                     Lst_Handles.Clear();
                                 }

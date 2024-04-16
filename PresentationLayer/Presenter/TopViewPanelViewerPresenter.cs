@@ -26,6 +26,7 @@ namespace PresentationLayer.Presenter
                     _pboxPanel;
         Panel _pnlPanelling;
 
+        Bitmap topview_image;
 
         Image topview_toppart, 
             topview_bottompart;
@@ -46,6 +47,7 @@ namespace PresentationLayer.Presenter
         {
             _topViewPanelViewer.TopViewPanelViewLoadEventRaised += _topViewPanelViewer_TopViewPanelViewLoadEventRaised;
             _topViewPanelViewer.TopViewPanelViewButtonClickEventRaised += _topViewPanelViewer_TopViewPanelViewButtonClickEventRaised;
+            _topViewPanelViewer.TopViewPanelViewSizeChangedEventRaised += _topViewPanelViewer_TopViewPanelViewSizeChangedEventRaised;
             _topViewPanelViewer.pnlSlidingArrowPaintEventRaised += _topViewPanelViewer_pnlSlidingArrowPaintEventRaised;
             _topViewPanelViewer.TopViewSlidingViewMouseUpEventRaised += _topViewPanelViewer_TopViewSlidingViewMouseUpEventRaised;
         }
@@ -66,12 +68,12 @@ namespace PresentationLayer.Presenter
         }
         private void _topViewPanelViewer_TopViewSlidingViewMouseUpEventRaised(object sender, MouseEventArgs e)
         {
-           // Console.WriteLine("X: " + e.X + " Y: " + e.Y);
+         //   Console.WriteLine("X: " + e.X + " Y: " + e.Y);
         }
         private void _topViewPanelViewer_pnlSlidingArrowPaintEventRaised(object sender, PaintEventArgs e)
         {
             Panel basePL = (Panel)sender;
-            PictureBox pbox = (PictureBox)basePL.Controls[0];
+            PictureBox pbox = (PictureBox)basePL.Controls[1];
             Font dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
             Font panel_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
             PictureBox pbox_Panel = (PictureBox)_topViewPanelViewer.GetPnlPanelViewer();
@@ -117,15 +119,16 @@ namespace PresentationLayer.Presenter
                         //g.DrawRectangle(new Pen(Color.Red, 1), pnl_rectangle);
                         //
                         //pnl_rectangle.X += (pnl_width - width_reduce) / 2;
-                        //  Console.WriteLine(" Width :" + wd_count);
+                     //   Console.WriteLine("Count: " + KV_WD.Key);
+                     //    Console.WriteLine(" Width :" + wd_count);
                         decimal WidthPercentage = wd_count / _windoorModel.WD_width,
                                 FinalWidth = WidthPercentage * TotalArrowWidthBounds;
 
                         pnllocX = Draw_Panel_Arrow(KV_WD.Key, KV_WD.Value, FinalWidth, e, pnllocX, dmnsion_font_wd, locX);
-                        // Console.WriteLine(" Value :" + KV_WD.Value);
-                        // Console.WriteLine(" Width :" + TotalArrowWidthBounds);
-                        // Console.WriteLine(" WidthPercentage :" + WidthPercentage);
-                        // Console.WriteLine(" FinalWidth = Actual_Width" + FinalWidth);
+                     //    Console.WriteLine(" Value :" + KV_WD.Value);
+                     //    Console.WriteLine(" Width :" + TotalArrowWidthBounds);
+                     //    Console.WriteLine(" WidthPercentage :" + WidthPercentage);
+                     //    Console.WriteLine(" FinalWidth = Actual_Width" + FinalWidth);
                         //  decimal WidthPercentage = KV_WD.Value / _windoorModel.WD_width,
                         //          FinalWidth = WidthPercentage * TotalArrowWidthBounds;
                         //  locX = Draw_Arrow_Width(KV_WD.Value, FinalWidth, e, locX, dmnsion_font_wd, ctrl_Y);
@@ -136,12 +139,13 @@ namespace PresentationLayer.Presenter
 
                 Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
                 basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
-                topview_bottompart = bm;
+                _windoorModel.WD_TopViewImage = bm;
 
-                isImgBinded = true;
+               // isImgBinded = true;
                 g.Dispose();
+               
                // _topViewPanelViewer.GetPnlTopViewer().Invalidate();
-                _topViewPanelViewer.GetTopViewPanelViewer().Invalidate();
+               // _topViewPanelViewer.GetTopViewPanelViewer().Refresh();
             }
 
           
@@ -169,10 +173,10 @@ namespace PresentationLayer.Presenter
        
 
             PointF dmnsion_startP = new PointF((_pboxPanel.Location.X + pnllocX),
-                                                _pnlPanelling.Height - pnl_Y);
+                                                (_pnlPanelling.Height / 2) - pnl_Y);
 
             PointF dmnsion_endP = new PointF(((_pboxPanel.Location.X - 3) + (pnllocX + DispWd_float)),
-                                             _pnlPanelling.Height - pnl_Y);
+                                             (_pnlPanelling.Height / 2) - pnl_Y);
 
             Size s2 = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
             Size s3 = TextRenderer.MeasureText(panel_coutns, panel_font_wd);
@@ -229,7 +233,7 @@ namespace PresentationLayer.Presenter
                 TextRenderer.DrawText(g,
                                       dmnsion_w,
                                       dmnsion_font_wd,
-                                      new Rectangle(new Point((int)(mid - (s2.Width / 2)), _pnlPanelling.Height - 42),
+                                      new Rectangle(new Point((int)(mid - (s2.Width / 2)), (_pnlPanelling.Height / 2) - 34),
                                                     new Size(s2.Width, s2.Height)),
                                       Color.Black,
                                       SystemColors.ControlLightLight,
@@ -243,7 +247,11 @@ namespace PresentationLayer.Presenter
             pnllocX += DispWd_float;
             return pnllocX;
         }
-        
+        private void _topViewPanelViewer_TopViewPanelViewSizeChangedEventRaised(object sender, EventArgs e)
+        {
+         //  _topViewPanelViewer.GetPnlTopViewer().Invalidate();
+         //  _topViewPanelViewer.GetTopViewPanelViewer().Refresh();
+        }
         private void _topViewPanelViewer_TopViewPanelViewLoadEventRaised(object sender, EventArgs e)
         {
            
@@ -279,32 +287,38 @@ namespace PresentationLayer.Presenter
 
             if (points_for_topview == 12)
             {
-                pbox_Topview.Image = Properties.Resources.Combination1;
+                // pbox_Topview.Image = Properties.Resources.Combination1;
+                topview_bottompart = Properties.Resources.Combination1;
             }
             else if (points_for_topview == 10)
             {
-                pbox_Topview.Image = Properties.Resources.Combination2;
+                // pbox_Topview.Image = Properties.Resources.Combination2;
+                topview_bottompart = Properties.Resources.Combination2;
             }
             else if (points_for_topview == 8)
             {
-                pbox_Topview.Image = Properties.Resources.Combination3;
+                // pbox_Topview.Image = Properties.Resources.Combination3;
+                topview_bottompart = Properties.Resources.Combination3;
             }
             else if (points_for_topview == 14)
             {
-                pbox_Topview.Image = Properties.Resources.Combination4;
+                // pbox_Topview.Image = Properties.Resources.Combination4;
+                topview_bottompart = Properties.Resources.Combination4;
             }
             else if (points_for_topview == 18)
             {
-                pbox_Topview.Image = Properties.Resources.Combination5;
+                // pbox_Topview.Image = Properties.Resources.Combination5;
+                topview_bottompart = Properties.Resources.Combination5;
             }
 
-           
+
             pbox_Topview.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbox_Topview.Image = topview_bottompart;
 
-            topview_bottompart = pbox_Topview.Image;
+        //    topview_bottompart = pbox_Topview.Image;
 
-   
-            LoadTopViewPanel(pbox_Topview);
+
+         
 
             //  _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
