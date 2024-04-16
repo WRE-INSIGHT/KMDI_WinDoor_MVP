@@ -7376,7 +7376,8 @@ namespace ModelLayer.Model.Quotation.Panel
                         outside_color == Foil_Color._DriftWood || outside_color == Foil_Color._Graphite ||
                         outside_color == Foil_Color._JetBlack || outside_color == Foil_Color._ChestnutOak ||
                         outside_color == Foil_Color._WashedOak || outside_color == Foil_Color._GreyOak ||
-                        outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray)
+                        outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray ||
+                        outside_color == Foil_Color._UmberOak || outside_color == Foil_Color._Carbon)
                     {
                         Panel_ButtHingeArtNo = ButtHinge_ArticleNo._BL;
                     }
@@ -7818,7 +7819,8 @@ namespace ModelLayer.Model.Quotation.Panel
                              outside_color == Foil_Color._DriftWood || outside_color == Foil_Color._Graphite ||
                              outside_color == Foil_Color._JetBlack || outside_color == Foil_Color._ChestnutOak ||
                              outside_color == Foil_Color._WashedOak || outside_color == Foil_Color._GreyOak ||
-                             outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray)
+                             outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray ||
+                             outside_color == Foil_Color._UmberOak || outside_color == Foil_Color._Carbon)
                     {
                         Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_BL;
                     }
@@ -8523,7 +8525,8 @@ namespace ModelLayer.Model.Quotation.Panel
                                  inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
                                  inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
                                  inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
-                                 inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                                 inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray ||
+                                 inside_color == Foil_Color._UmberOak || inside_color == Foil_Color._Carbon)
                         {
                             Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
                         }
@@ -8537,7 +8540,8 @@ namespace ModelLayer.Model.Quotation.Panel
                                  outside_color == Foil_Color._DriftWood || outside_color == Foil_Color._Graphite ||
                                  outside_color == Foil_Color._JetBlack || outside_color == Foil_Color._ChestnutOak ||
                                  outside_color == Foil_Color._WashedOak || outside_color == Foil_Color._GreyOak ||
-                                 outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray)
+                                 outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray ||
+                                 outside_color == Foil_Color._UmberOak || outside_color == Foil_Color._Carbon)
                         {
                             Panel_CylinderCoverArtNo2 = Cylinder_CoverArtNo._EPSW_9005_614441;
                         }
@@ -8568,7 +8572,9 @@ namespace ModelLayer.Model.Quotation.Panel
                                  inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
                                  inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
                                  inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
-                                 inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                                 inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray ||
+                                 inside_color == Foil_Color._UmberOak || inside_color == Foil_Color._Carbon)
+
                         {
                             Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
                         }
@@ -8602,7 +8608,8 @@ namespace ModelLayer.Model.Quotation.Panel
                              inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
                              inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
                              inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
-                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray ||
+                                 inside_color == Foil_Color._UmberOak || inside_color == Foil_Color._Carbon)
                     {
                         Panel_CylinderCoverArtNo = Cylinder_CoverArtNo._EPSW_9005_614441;
                     }
@@ -9596,7 +9603,8 @@ namespace ModelLayer.Model.Quotation.Panel
                         inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
                         inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
                         inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
-                        inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                        inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray ||
+                                 inside_color == Foil_Color._UmberOak || inside_color == Foil_Color._Carbon)
             {
                 MVDFoilColorInside = "BL ";
             }
@@ -9612,7 +9620,8 @@ namespace ModelLayer.Model.Quotation.Panel
                         outside_color == Foil_Color._DriftWood || outside_color == Foil_Color._Graphite ||
                         outside_color == Foil_Color._JetBlack || outside_color == Foil_Color._ChestnutOak ||
                         outside_color == Foil_Color._WashedOak || outside_color == Foil_Color._GreyOak ||
-                        outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray)
+                        outside_color == Foil_Color._Cacao || outside_color == Foil_Color._CharcoalGray ||
+                        outside_color == Foil_Color._UmberOak || outside_color == Foil_Color._Carbon)
             {
                 MVDFoilColorOutside = "BL ";
             }
