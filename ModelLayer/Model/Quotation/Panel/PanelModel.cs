@@ -857,6 +857,10 @@ namespace ModelLayer.Model.Quotation.Panel
                         PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434_2434;
                     }
                 }
+                else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._84500;
+                }
                 else
                 {
                     if (Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)

@@ -118,6 +118,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                         MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+                else if (sel_handleType == Handle_Type._CremonHandle)
+                {
+                    if (Frame_ArtNo != FrameProfile_ArticleNo._84100)
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
 
             }
             EventHelpers.RaiseEvent(sender, cmbHandleTypeSelectedValueEventRaised, e);
@@ -238,6 +245,17 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 else
                 {
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
+            else if (text.Contains("Cremon"))
+            {
+                if (Frame_ArtNo != FrameProfile_ArticleNo._84100)
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
                 }
             }
             // Draw the text    

@@ -12636,6 +12636,13 @@ namespace PresentationLayer.Presenter
                                 incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                             }
                         }
+                        else if (handletype == Handle_Type._CremonHandle)
+                        {
+                            if (frame_art != FrameProfile_ArticleNo._84100)
+                            {
+                                incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
+                            }
+                        }
 
                         if (espag_art == Espagnolette_ArticleNo._741012 || espag_art == Espagnolette_ArticleNo._EQ87NT ||
                         espag_art == Espagnolette_ArticleNo._628806 || espag_art == Espagnolette_ArticleNo._628807 ||
@@ -12683,6 +12690,13 @@ namespace PresentationLayer.Presenter
                                  espag_art == Espagnolette_ArticleNo._731852 || espag_art == Espagnolette_ArticleNo._6_90137_10_0_1)
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._6052) && !(sash_art == SashProfile_ArticleNo._6041))
+                            {
+                                MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+                        else if (espag_art == Espagnolette_ArticleNo._H102 || espag_art == Espagnolette_ArticleNo._H103)
+                        {
+                            if (frame_art != FrameProfile_ArticleNo._84100)
                             {
                                 MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }

@@ -127,6 +127,9 @@ namespace EnumerationTypeLayer
             public static readonly GlazingBead_ArticleNo _2437_2437 = new GlazingBead_ArticleNo(22, "2437(out) & 2437(in)");
             public static readonly GlazingBead_ArticleNo _2437_2434 = new GlazingBead_ArticleNo(23, "2437(out) & 2434(in)");
             public static readonly GlazingBead_ArticleNo _2434_2434 = new GlazingBead_ArticleNo(24, "2434(out) & 2434(in)");
+            //alutek
+            public static readonly GlazingBead_ArticleNo _84500 = new GlazingBead_ArticleNo(25, "84500");
+
 
 
 
@@ -318,13 +321,10 @@ namespace EnumerationTypeLayer
             public static readonly Handle_Type _DummyD = new Handle_Type(7, "Dummy D Handle");
             public static readonly Handle_Type _PopUp = new Handle_Type(8, "Pop-up Handle");
             public static readonly Handle_Type _RotoswingForSliding = new Handle_Type(9, "Rotoswing(Sliding) Handle");
+            public static readonly Handle_Type _CremonHandle = new Handle_Type(10, "Cremon handle");
 
-
-
-
-
-            public static readonly Handle_Type _None = new Handle_Type(10, "None");
-
+            public static readonly Handle_Type _None = new Handle_Type(11, "None");
+             
             private Handle_Type(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -474,7 +474,10 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _774287 = new Espagnolette_ArticleNo(20, "774287");
             public static readonly Espagnolette_ArticleNo _731852 = new Espagnolette_ArticleNo(21, "731852");
             public static readonly Espagnolette_ArticleNo _6_90137_10_0_1 = new Espagnolette_ArticleNo(22, "6-90137-10-0-1");
-            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(23, "None");
+            public static readonly Espagnolette_ArticleNo _H102 = new Espagnolette_ArticleNo(23, "H102");
+            public static readonly Espagnolette_ArticleNo _H103 = new Espagnolette_ArticleNo(24, "H103");
+
+            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(25, "None");
 
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }

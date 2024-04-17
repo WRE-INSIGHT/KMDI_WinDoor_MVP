@@ -2490,51 +2490,56 @@ namespace ModelLayer.Model.Quotation.Frame
                                    Frame_ExplosionHeight,
                                    "Frame",
                                    cutTypeHt);
+            if (!Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
 
-            if (Frame_If_InwardMotorizedSliding == true)
-            {
-                tbl_explosion.Rows.Add("Frame Reinf Width " + FrameReinf_ArticleNo._NA120.ToString(),
-                                  reinfQty, "pc(s)",
-                                  _frameWidth.ToString(),
-                                  "Frame",
-                                  @"|  |");
-            }
-            else if ((Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
-                     Frame_BotFrameArtNo == BottomFrameTypes._7502) &&
-                     Frame_BotFrameVisible == true)
-            {
-                reinfQty = 1;
-            }
-            else if (Frame_If_SlidingTypeTopHung == true)
-            {
-                reinfQty = 1;
-            }
-            else
-            {
-                reinfQty = 2;
-            }
 
-            if (Frame_ReinfWidthMorethan5800 == true)
-            {
+                if (Frame_If_InwardMotorizedSliding == true)
+                {
+                    tbl_explosion.Rows.Add("Frame Reinf Width " + FrameReinf_ArticleNo._NA120.ToString(),
+                                      reinfQty, "pc(s)",
+                                      _frameWidth.ToString(),
+                                      "Frame",
+                                      @"|  |");
+                }
+                else if ((Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                         Frame_BotFrameArtNo == BottomFrameTypes._7502) &&
+                         Frame_BotFrameVisible == true)
+                {
+                    reinfQty = 1;
+                }
+                else if (Frame_If_SlidingTypeTopHung == true)
+                {
+                    reinfQty = 1;
+                }
+                else
+                {
+                    reinfQty = 2;
+                }
+
+                if (Frame_ReinfWidthMorethan5800 == true)
+                {
+                    tbl_explosion.Rows.Add("Frame Reinf Width " + Frame_ReinfArtNo.ToString(),
+                                       2, "pc(s)",
+                                       "5800",
+                                       "Frame",
+                                       @"|  |");
+                }
+
                 tbl_explosion.Rows.Add("Frame Reinf Width " + Frame_ReinfArtNo.ToString(),
-                                   2, "pc(s)",
-                                   "5800",
-                                   "Frame",
-                                   @"|  |");
+                                       reinfQty, "pc(s)",
+                                       Frame_ReinfWidth.ToString(),
+                                       "Frame",
+                                       @"|  |");
+
+                tbl_explosion.Rows.Add("Frame Reinf Height " + Frame_ReinfArtNo.ToString(),
+                                       2, "pc(s)",
+                                       Frame_ReinfHeight.ToString(),
+                                       "Frame",
+                                       @"|  |");
             }
-
-            tbl_explosion.Rows.Add("Frame Reinf Width " + Frame_ReinfArtNo.ToString(),
-                                   reinfQty, "pc(s)",
-                                   Frame_ReinfWidth.ToString(),
-                                   "Frame",
-                                   @"|  |");
-
-            tbl_explosion.Rows.Add("Frame Reinf Height " + Frame_ReinfArtNo.ToString(),
-                                   2, "pc(s)",
-                                   Frame_ReinfHeight.ToString(),
-                                   "Frame",
-                                   @"|  |");
         }
+
         int reinfDeduct;
         public void Insert_frameInfoForPremi_MaterialList(DataTable tbl_explosion) //2nd frame for sliding using 3 rails
         {
