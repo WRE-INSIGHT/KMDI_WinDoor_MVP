@@ -1621,8 +1621,8 @@ namespace PresentationLayer.Presenter
                                     MessageBox.Show("New Factor Set Sucessfully");
 
 
-                                    //if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
-                                    //{
+                                    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
+                                    {
                                         foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                                         {
                                             //getnewwdmprice
@@ -1645,7 +1645,7 @@ namespace PresentationLayer.Presenter
 
                                         }
                                         GetCurrentPrice();
-                                    //}
+                                    }
                                 }
                                 else
                                 {
