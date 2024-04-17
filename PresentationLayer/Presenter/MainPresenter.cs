@@ -71,6 +71,7 @@ namespace PresentationLayer.Presenter
         private IConcreteModel _concreteModel;
         private IConcreteUC _concreteUC;
         private IPanelModel _panelModel;
+        private IScreenPartialAdjustmentProperties _screenPartialAdjustmentProperties;
 
         ConstantVariables constants = new ConstantVariables();
         private ILoginView _loginView;
@@ -238,37 +239,42 @@ namespace PresentationLayer.Presenter
 
         #region List 
 
-        Dictionary<string, string[]> WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
+        private Dictionary<string, string[]> WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
+        private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
+        private List<IScreenModel> _screenList = new List<IScreenModel>();
+        private List<DataRow> _nonUnglazed = new List<DataRow>();
+        private List<DataRow> _unglazed = new List<DataRow>();
+        private Dictionary<long, decimal> _dic_PaScreenID = new Dictionary<long, decimal>();
+        private List<IScreenPartialAdjustmentProperties> _lst_ScreenPartialAdjustment = new List<IScreenPartialAdjustmentProperties>();
+
         public Dictionary<string, string[]> Pbl_WindoorModel_FileLines_Dictionary
         {
             get { return WindoorModel_FileLines_Dictionary; }
             set { WindoorModel_FileLines_Dictionary = value; }
-        }
-
-        private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
+        } 
         public IDictionary<string, string> RDLCHeader
         {
             get { return _rdlcHeaders; }
             set { _rdlcHeaders = value; }
-        }
-        private List<IScreenModel> _screenList = new List<IScreenModel>();
+        }    
         public List<IScreenModel> Screen_List
         {
             get { return _screenList; }
             set { _screenList = value; }
-        }
-        private List<DataRow> _nonUnglazed = new List<DataRow>();
+        }    
         public List<DataRow> NonUnglazed
         {
             get { return _nonUnglazed; }
             set { _nonUnglazed = value; }
         }
-        private List<DataRow> _unglazed = new List<DataRow>();
         public List<DataRow> Unglazed
         {
             get { return _unglazed; }
             set { _unglazed = value; }
         }
+
+        public Dictionary<long, decimal> Dic_PaScreenID { get { return _dic_PaScreenID; } set { _dic_PaScreenID = value; } }
+        public List<IScreenPartialAdjustmentProperties> Lst_ScreenPartialAdjustment { get { return _lst_ScreenPartialAdjustment; } set { _lst_ScreenPartialAdjustment = value; } }
 
         #endregion
 
@@ -353,7 +359,6 @@ namespace PresentationLayer.Presenter
             {
                 return input_qrefno;
             }
-
             set
             {
                 input_qrefno = value;
@@ -766,7 +771,6 @@ namespace PresentationLayer.Presenter
             {
                 return _screenModel;
             }
-
             set
             {
                 _screenModel = value;
@@ -898,7 +902,8 @@ namespace PresentationLayer.Presenter
                              IGlassUpgradePresenter glassupgradePresenter,
                              IPartialAdjustmentViewPresenter partialAdjustmentViewPresenter,
                              IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter,
-                             IPartialAdjustmentBaseHolderPresenter partialAdjustmentBaseHolderPresenter
+                             IPartialAdjustmentBaseHolderPresenter partialAdjustmentBaseHolderPresenter,
+                             IScreenPartialAdjustmentProperties screenPartialAdjustmentProperties
                              )
         {
             _mainView = mainView;
@@ -967,6 +972,7 @@ namespace PresentationLayer.Presenter
             _partialAdjustmentViewPresenter = partialAdjustmentViewPresenter;
             _partialAdjustmentUCPresenter = partialAdjustmentUCPresenter;
             _partialAdjustmentBaseHolderPresenter = partialAdjustmentBaseHolderPresenter;
+            _screenPartialAdjustmentProperties = screenPartialAdjustmentProperties;
 
             SubscribeToEventsSetup();
         }
@@ -1615,8 +1621,8 @@ namespace PresentationLayer.Presenter
                                     MessageBox.Show("New Factor Set Sucessfully");
 
 
-                                    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
-                                    {
+                                    //if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
+                                    //{
                                         foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                                         {
                                             //getnewwdmprice
@@ -1636,9 +1642,10 @@ namespace PresentationLayer.Presenter
                                             //}
                                             //_quotationModel.FactorChange = false;
                                             #endregion
+
                                         }
-                                    }
-                                    GetCurrentPrice();
+                                        GetCurrentPrice();
+                                    //}
                                 }
                                 else
                                 {
@@ -1906,7 +1913,7 @@ namespace PresentationLayer.Presenter
                                                           string.Empty);
 
             _screenModel.Screen_PVCVisibility = false;
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel);//, _screenDT);
+            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel, _screenPartialAdjustmentProperties);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
         }
 
@@ -14262,6 +14269,7 @@ namespace PresentationLayer.Presenter
             {
                 _quotationModel.ItemCostingPriceAndPoints();
             }
+
             //GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
             GetMainView().GetCurrentPrice().Value = _windoorModel.WD_currentPrice;
             Console.WriteLine(GetMainView().GetCurrentPrice().Value);
@@ -14426,6 +14434,6 @@ namespace PresentationLayer.Presenter
             WoodecAdditionalForNewItem = woodecAddlPercentage;
         }
         #endregion
-
     }
+
 }

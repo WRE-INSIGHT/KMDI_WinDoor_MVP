@@ -68,6 +68,8 @@ namespace PresentationLayer.Views
         CheckBox getCheckBoxAllowEdit();
         ToolStripButton GetToolStripBtnSwitch();
         ToolStripButton GetToolStripBtnScreenAdjustment();
+        Button GetAddBtn();
+        ComboBox GetScreenTypeCmb();
 
 
     }

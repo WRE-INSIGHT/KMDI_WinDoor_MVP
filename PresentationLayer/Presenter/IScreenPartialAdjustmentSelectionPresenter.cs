@@ -9,7 +9,8 @@ namespace PresentationLayer.Presenter
         IScreenPartialAdjustmentSelectionPresenter CreateNewInstance(IUnityContainer unityC, 
                                                                      IMainPresenter mainPreseter, 
                                                                      IScreenPresenter screenPresenter, 
-                                                                     IScreenModel screenModel);
+                                                                     IScreenModel screenModel,
+                                                                     IScreenPartialAdjustmentProperties screenPartialAdjustmentProperties);
         IScreenPartialAdjusmentSelectionView GetScreenPartialAdjustmentView();
     }
 }

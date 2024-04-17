@@ -497,6 +497,8 @@ namespace PresentationLayer
                  .RegisterType<IScreenPartialAdjusmentSelectionView,ScreenPartialAdjusmentSelectionView>(new ContainerControlledLifetimeManager())
                  .RegisterType<IScreenPartialAdjustmentSelectionPresenter,ScreenPartialAdjustmentSelectionPresenter>(new ContainerControlledLifetimeManager())
 
+                 .RegisterType<IScreenPartialAdjustmentProperties, ScreenPartialAdjustmentProperties>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

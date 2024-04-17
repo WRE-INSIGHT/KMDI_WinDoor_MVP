@@ -91,6 +91,11 @@ namespace PresentationLayer.Views
             }
         }
 
+        public Button GetAddBtn()
+        {
+            return btn_add;
+        }
+
         public ToolStripButton GetToolStripBtnSwitch()
         {
             return tsb_Switch;
@@ -210,6 +215,10 @@ namespace PresentationLayer.Views
         public CheckBox getCheckBoxAllowEdit()
         {
             return chkbox_allowEdit;
+        }
+        public ComboBox GetScreenTypeCmb()
+        {
+            return cmb_ScreenType;
         }
  
         private void ScreenView_Load(object sender, EventArgs e)
