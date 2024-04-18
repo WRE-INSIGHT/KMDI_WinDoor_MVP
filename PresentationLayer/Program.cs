@@ -494,6 +494,9 @@ namespace PresentationLayer
                  .RegisterType<IGeorgianBarCustomizeDesignView, GeorgianBarCustomizeDesignView>(new ContainerControlledLifetimeManager())
                  .RegisterType<IGeorgianBarCustomizeDesignPresenter, GeorgianBarCustomizeDesignPresenter>(new ContainerControlledLifetimeManager())
 
+                 .RegisterType<IFP_InversionClipPropertyUC, FP_InversionClipPropertyUC>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IFP_InversionClipPropertyUCPresenter, FP_InversionClipPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

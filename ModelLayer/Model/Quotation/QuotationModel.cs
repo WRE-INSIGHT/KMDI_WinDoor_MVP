@@ -4717,6 +4717,14 @@ namespace ModelLayer.Model.Quotation
                         {
                             SealantPricePerCan = SealantPricePerCan_BrownBlack;
                         }
+
+
+                        if (wdm.WD_profile.Contains("Alutek"))
+                        {
+                            SealantPricePerCan = 600;
+                        }
+
+
                         SealantPrice += Frame_SealantWHQty_Total * SealantPricePerCan;
                         #endregion 
 
@@ -4903,8 +4911,27 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                                 DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
                                             }
+                                            else if (div.Div_ArtNo == Divider_ArticleNo._84300)
+                                            {
+                                                DividerPricePerSqrMeter = Divider_84300_PricePerSqrMeter;
+                                                DividerReinPricePerSqrMeter = 0;
+                                                MechanicalJointPricePerPiece = 0;
+                                            }
+                                            else if (div.Div_ArtNo == Divider_ArticleNo._84301)
+                                            {
+                                                DividerPricePerSqrMeter = Divider_84301_PricePerSqrMeter;
+                                                DividerReinPricePerSqrMeter = 0;
+                                                MechanicalJointPricePerPiece = 0;
+                                            }
 
-                                            if (cus_ref_date <= changeCondition_040423)
+                                            if (div.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                                            {
+                                                DivPrice += ((div.Div_ExplosionWidth) / 1000m) * DividerPricePerSqrMeter;
+                                                TotalDividerPerimeter += div.Div_ExplosionWidth;// + 108;
+
+                                                MullionConnectorPrice += 2 * MullionConnectorPricePerPiece;
+                                            }
+                                            else if (cus_ref_date <= changeCondition_040423)
                                             {
                                                 DivPrice += ((div.Div_Width) / 1000m) * DividerPricePerSqrMeter;
                                             }
@@ -4992,8 +5019,27 @@ namespace ModelLayer.Model.Quotation
                                                     }
                                                     DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
                                                 }
+                                                else if (div.Div_ArtNo == Divider_ArticleNo._84300)
+                                                {
+                                                    DividerPricePerSqrMeter = Divider_84300_PricePerSqrMeter;
+                                                    DividerReinPricePerSqrMeter = 0;
+                                                    MechanicalJointPricePerPiece = 0;
+                                                }
+                                                else if (div.Div_ArtNo == Divider_ArticleNo._84301)
+                                                {
+                                                    DividerPricePerSqrMeter = Divider_84301_PricePerSqrMeter;
+                                                    DividerReinPricePerSqrMeter = 0;
+                                                    MechanicalJointPricePerPiece = 0;
+                                                }
 
-                                                if (cus_ref_date <= changeCondition_040423)
+                                                if (div.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                                                {
+                                                    DivPrice += ((div.Div_ExplosionHeight) / 1000m) * DividerPricePerSqrMeter;
+                                                    TotalDividerPerimeter += div.Div_ExplosionHeight;// + 108;
+
+                                                    MullionConnectorPrice += 2 * MullionConnectorPricePerPiece;
+                                                } 
+                                                else if (cus_ref_date <= changeCondition_040423)
                                                 {
                                                     DivPrice += ((div.Div_Height) / 1000m) * DividerPricePerSqrMeter;
                                                 }
@@ -5424,6 +5470,32 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                             }
                                         }
+
+                                        if (fr.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                                        {
+                                            if (chckPerFrameGlazingGasket == true)
+                                            {
+
+                                                CornerCleatPrice += 4 * CornerCleatPricePerPiece;
+                                                CheveronPrice += 4 * CheveronPricePerPiece;
+
+                                                chckPerFrameGlazingGasket = false;
+                                            }
+
+                                            if (chckFramePacker == false)
+                                            {
+                                                decimal FramePackerQty = Math.Round((((decimal)(fr.Frame_Width * 2) + (decimal)(fr.Frame_Height * 2)) / 600), 2);
+                                                FramePackerPrice += FramePackerQty * FramePackerPricePerPiece;
+                                                chckFramePacker = true;
+                                                addFramePacker = true;
+                                            }
+
+                                            // GlazingShimPrice += 8 * GlazingShimPricePerPiece;
+                                            CornerCleatPrice += 4 * CornerCleatPricePerPiece;
+                                            PackerRodPrice += 2 * PackerRodPricePerPiece;
+                                            PegstayPrice += PegstayPricePerPiece;
+                                            LockingConnectorDevicePrice += LockingConnectorDevicePricePerPiece;
+                                        }
                                         #endregion
                                         #region Sliding 
                                         else if (pnl.Panel_Type.Contains("Sliding"))
@@ -5547,8 +5619,8 @@ namespace ModelLayer.Model.Quotation
                                         if (pnl.Panel_ChkText == "dSash" && pnl.Panel_Type.Contains("Fixed"))
                                         {
                                             #region SashPrice 
-                                            SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2;
-
+                                            SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2; 
+                                            decimal GbPricePerLinearMeter = GlazingBeadPricePerLinearMeter;
                                             if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
                                             {
                                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
@@ -5654,12 +5726,23 @@ namespace ModelLayer.Model.Quotation
 
                                                 SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
                                             }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_84207;
+                                                SashReinPricePerLinearMeter = 0;
+                                                GbPricePerLinearMeter = GlazingBead_84500PricePerLinearMeter;
 
+                                                GlazingGasketGbeadForAluPrice += ((((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
+                                                GlazingGasketSashForAluPrice += ((SashPerimeter / 1000m) * GlazingGasket_FrameSash_PerPiece);
+                                                CenterGasketPrice += ((((pnl.Panel_DisplayWidth * 2) + (pnl.Panel_DisplayHeight * 2)) / 1000m) * CenterGasketPerPiece);
+
+
+                                            }
 
 
                                             SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
                                             SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
-                                            GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                            GbPrice += (SashPerimeter / 1000m) * GbPricePerLinearMeter;
                                             #endregion
 
                                             MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
@@ -5793,19 +5876,40 @@ namespace ModelLayer.Model.Quotation
 
                                                 SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
                                             }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_84207;
+                                                SashReinPricePerLinearMeter = 0;
 
+                                                GlazingGasketGbeadForAluPrice += ((((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
+                                                GlazingGasketSashForAluPrice += ((SashPerimeter / 1000m) * GlazingGasket_FrameSash_PerPiece);
+                                                CenterGasketPrice += ((((pnl.Panel_DisplayWidth * 2) + (pnl.Panel_DisplayHeight * 2)) / 1000m) * CenterGasketPerPiece);
+
+                                            }
 
                                             SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
                                             SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
+
                                             if (cus_ref_date >= changeCondition_072723)
                                             {
                                                 if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
                                                 {
                                                     GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
                                                 }
+                                                else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                                                {
+                                                    GbPrice += (((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingBead_84500PricePerLinearMeter;
+                                                }
                                                 else
                                                 {
                                                     GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                                                {
+                                                    GbPrice += (((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingBead_84500PricePerLinearMeter;
                                                 }
                                             }
 
@@ -5904,6 +6008,11 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 EspagPrice += MVDGearPricePerPiece;
                                                 EspagBasePrice = MVDGearPricePerPiece;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H102 ||
+                                                     pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H103)
+                                            {
+                                                TransmissionRodPrice += TransmissionRodPricePerPiece;
                                             }
                                             else
                                             {
@@ -7012,6 +7121,28 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         #endregion
 
+                                        #region Alutek
+
+
+                                        OpenableStrikerPrice += 2 * OpenableStrikerPricePerPiece;
+                                        CheveronPrice += 4 * CheveronPricePerPiece;
+                                        FrictionStayPrice += FrictionStayPricePerPiece;
+                                        RunUpblockPrice += RunUpblockPricePerPiece;
+                                        LockingWedgesPrice += 2 * LockingWedgesPricePerPiece;
+                                        SSCheveronPrice += 4 * SSCheveronPricePerPiece;
+
+                                        //WaterDrainageWValvesPrice += 2 * WaterDrainageWValvesPricePerPiece;
+                                        CremonHandlePrice += CremonHandlePricePerPiece;
+                                        Unica40Price += Unica40PricePerPiece;
+
+
+
+
+                                        TotalGlassPerimeter += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m));
+
+
+                                        #endregion
+
                                         HandleDesc = pnl.Panel_HandleType.ToString();
 
                                         CostingPoints += ProfileColorPoints * 4;
@@ -7979,6 +8110,32 @@ namespace ModelLayer.Model.Quotation
                                                 AluminumFramePrice += (((pnl.Panel_GlassHeight / 1000m) + (pnl.Panel_GlassWidth / 1000m)) * 2) * AluminumFramePricePerSquaremeter;
                                             }
                                         }
+                                        #endregion
+
+                                        #region alutekAcc
+                                        CornerCleatPrice += 6 * CornerCleatPricePerPiece;
+
+                                        //CornerWindowPrice += 4 * CornerWindowPricePerPiece;
+                                        //CheveronPrice += 4 * CheveronPricePerPiece;
+                                        //WaterDrainageWValvesPrice += 2 * WaterDrainageWValvesPricePerPiece;
+                                        //HoleCapePrice += 10 * HoleCapePricePerPiece;
+
+                                        if (fr.Frame_InversionClipOption == true)
+                                        {
+                                            InversionClipPrice += (((pnl.Panel_InversionClipWidth * 2) + (pnl.Panel_InversionClipHeight * 2)) / 1000m) * InversionClipPricePerPiece;
+                                        }
+
+
+                                        //UniversalGasketPrice += ((fr.Frame_Width * 2) + (fr.Frame_Height * 2)) * UniversalGasketPricePerPiece;
+                                        //GasketPar3mmPrice += ((pnl.Panel_GlazingBeadWidth*2) + (pnl.Panel_GlazingBeadHeight *2)) * GasketPar3mmPricePerPiece;
+
+                                        //GlazingGasketForAluPrice += (((((pnl.Panel_DisplayWidth - 95.8m) * 2) + ((pnl.Panel_DisplayHeight - 125.2m) * 2)) * GlazingGasket_FrameSash_PerPiece) / 1000m);
+                                        GlazingGasketGbeadForAluPrice += ((((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
+
+                                        //GlazingShimPrice += 8 * GlazingShimPricePerPiece; //inalis ang glazing shim
+
+                                        TotalGlassPerimeter += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m));
+
                                         #endregion
                                     }
                                     else if (pnl.Panel_Type.Contains("Louver"))
@@ -9061,6 +9218,34 @@ namespace ModelLayer.Model.Quotation
                                     }
 
                                     MiddleCLoserPrice += MiddleCLoserPricePerPiece * Singlepnl.Panel_MiddleCloserPairQty;
+
+                                    if (fr.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                                    {
+                                        if (chckPerFrameGlazingGasket == true)
+                                        {
+                                            GlazingGasketFrameForAluPrice += ((((fr.Frame_Height + fr.Frame_Width) * 2) / 1000m) * GlazingGasket_FrameSash_PerPiece);
+
+                                            CornerCleatPrice += 4 * CornerCleatPricePerPiece;
+                                            CheveronPrice += 4 * CheveronPricePerPiece;
+
+                                            chckPerFrameGlazingGasket = false;
+                                        }
+
+                                        if (chckFramePacker == false)
+                                        {
+                                            decimal FramePackerQty = Math.Round((((decimal)(fr.Frame_Width * 2) + (decimal)(fr.Frame_Height * 2)) / 600), 2);
+                                            FramePackerPrice += FramePackerQty * FramePackerPricePerPiece;
+                                            chckFramePacker = true;
+                                            addFramePacker = true;
+                                        }
+
+                                        // GlazingShimPrice += 8 * GlazingShimPricePerPiece;
+                                        CornerCleatPrice += 4 * CornerCleatPricePerPiece;
+                                        PackerRodPrice += 2 * PackerRodPricePerPiece;
+                                        PegstayPrice += PegstayPricePerPiece;
+                                        LockingConnectorDevicePrice += LockingConnectorDevicePricePerPiece;
+                                    }
+
                                 }
                                 #endregion
                                 #region Sliding 
@@ -9167,7 +9352,7 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     #region SashPrice 
                                     SashPerimeter = (Singlepnl.Panel_SashHeight + Singlepnl.Panel_SashWidth) * 2;
-
+                                    decimal GbPricePerLinearMeter = GlazingBeadPricePerLinearMeter;
                                     if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
                                     {
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
@@ -9278,12 +9463,24 @@ namespace ModelLayer.Model.Quotation
 
                                         SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
                                     }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_84207;
+                                        SashReinPricePerLinearMeter = 0;
+                                        GbPricePerLinearMeter = GlazingBead_84500PricePerLinearMeter;
+
+
+                                        GlazingGasketGbeadForAluPrice += ((((Singlepnl.Panel_GlazingBeadWidth * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
+                                        GlazingGasketSashForAluPrice += ((SashPerimeter / 1000m) * GlazingGasket_FrameSash_PerPiece);
+                                        CenterGasketPrice += ((((Singlepnl.Panel_DisplayWidth * 2) + (Singlepnl.Panel_DisplayHeight * 2)) / 1000m) * CenterGasketPerPiece);
+
+                                    }
 
 
 
                                     SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
                                     SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
-                                    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                    GbPrice += (SashPerimeter / 1000m) * GbPricePerLinearMeter;
                                     #endregion
 
                                     MiddleCLoserPrice += MiddleCLoserPricePerPiece * Singlepnl.Panel_MiddleCloserPairQty;
@@ -9398,6 +9595,16 @@ namespace ModelLayer.Model.Quotation
 
                                         SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
                                     }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_84207;
+                                        SashReinPricePerLinearMeter = 0;
+
+                                        GlazingGasketGbeadForAluPrice += ((((Singlepnl.Panel_GlazingBeadWidth * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
+                                        GlazingGasketSashForAluPrice += ((SashPerimeter / 1000m) * GlazingGasket_FrameSash_PerPiece);
+                                        CenterGasketPrice += ((((Singlepnl.Panel_DisplayWidth * 2) + (Singlepnl.Panel_DisplayHeight * 2)) / 1000m) * CenterGasketPerPiece);
+
+                                    }
 
                                     SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
                                     SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
@@ -9498,6 +9705,11 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         EspagPrice += MVDGearPricePerPiece;
                                         EspagBasePrice = MVDGearPricePerPiece;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H102 ||
+                                           Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H103)
+                                    {
+                                        TransmissionRodPrice += TransmissionRodPricePerPiece;
                                     }
                                     else
                                     {
@@ -10603,6 +10815,25 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 #endregion
 
+                                #region Alutek 
+
+                                //TransmissionRodPrice += TransmissionRodPricePerPiece; nasa espag region
+                                OpenableStrikerPrice += 2 * OpenableStrikerPricePerPiece;
+                                CheveronPrice += 4 * CheveronPricePerPiece;
+                                FrictionStayPrice += FrictionStayPricePerPiece;
+                                RunUpblockPrice += RunUpblockPricePerPiece;
+                                LockingWedgesPrice += 2 * LockingWedgesPricePerPiece;
+                                SSCheveronPrice += 4 * SSCheveronPricePerPiece;
+
+                                //WaterDrainageWValvesPrice += 2 * WaterDrainageWValvesPricePerPiece;
+                                CremonHandlePrice += CremonHandlePricePerPiece;
+                                Unica40Price += Unica40PricePerPiece;
+
+                                TotalGlassPerimeter += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m));
+
+
+                                #endregion
+
                                 HandleDesc = Singlepnl.Panel_HandleType.ToString();
 
                                 CostingPoints += ProfileColorPoints * 4;
@@ -11545,6 +11776,19 @@ namespace ModelLayer.Model.Quotation
                                     }
                                 }
                                 #endregion
+
+                                #region alutekAcc    
+                                CornerCleatPrice += 4 * CornerCleatPricePerPiece;
+
+                                CheveronPrice += 4 * CheveronPricePerPiece;
+                                if (fr.Frame_InversionClipOption == true)
+                                {
+                                    InversionClipPrice += (((Singlepnl.Panel_InversionClipWidth * 2) + (Singlepnl.Panel_InversionClipHeight * 2)) / 1000m) * InversionClipPricePerPiece;
+                                }
+
+                                GlazingGasketGbeadForAluPrice += (((Singlepnl.Panel_GlazingBeadHeight * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000) * GlazingGasket_GlazingBead_PerPiece;
+                                #endregion
+
                             }
                             else if (Singlepnl.Panel_Type.Contains("Louver"))
                             {
