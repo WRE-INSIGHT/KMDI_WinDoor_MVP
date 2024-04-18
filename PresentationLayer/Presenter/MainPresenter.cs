@@ -1562,6 +1562,13 @@ namespace PresentationLayer.Presenter
         {
             setNewFactor();
         }
+
+        #region changeConditionBaseOnDate
+
+        DateTime changeCondition_092123 = DateTime.Parse("09-21-2023"); // para maretain yung lumang file na di nag geget current price pag nag change ng factor
+
+        #endregion
+
         string factorTypes;
         public async void setNewFactor()
         {
@@ -1621,7 +1628,8 @@ namespace PresentationLayer.Presenter
                                     MessageBox.Show("New Factor Set Sucessfully");
 
 
-                                    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
+                                    if (_quotationModel.Date_Assigned >= changeCondition_092123 || 
+                                        _quotationModel.Date_Assigned_Mainpresenter >= changeCondition_092123)
                                     {
                                         foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                                         {
@@ -1737,7 +1745,8 @@ namespace PresentationLayer.Presenter
                                     _factorFromAddExisting = 0; // reset
 
 
-                                    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
+                                    if (_quotationModel.Date_Assigned >= changeCondition_092123 ||
+                                        _quotationModel.Date_Assigned_Mainpresenter >= changeCondition_092123) 
                                     {
                                         foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                                         {
