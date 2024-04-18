@@ -119,6 +119,9 @@ namespace ModelLayer.Model.Quotation.Frame
         // void Insert_ConnectorType_MaterialList(DataTable tbl_explosion);
         void Insert_GS100EMTrackProfile2p6n3m_MaterialList(DataTable tbl_explosion);
         void Insert_CladdingProfile_MaterialList(DataTable tbl_explosion);
+        void Insert_GlazingGasket_MaterialList(DataTable tbl_explosion);
+        void Insert_Cheveron_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerWindow_MaterialList(DataTable tbl_explosion);
 
         int Add_framePerimeter_screws4fab();
         int Add_MilledFrameWidth_screws4fab();

@@ -6908,6 +6908,10 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_ScrewSetsArtNo = ScrewSets._DH613176;
                 }
+                else if (Panel_HandleType == Handle_Type._CremonHandle)
+                {
+                    Panel_CremonArtNo = Cremon_HandleArtNo._H087;
+                }
             }
             else if (Panel_SashPropertyVisibility == false)
             {
@@ -9548,7 +9552,23 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_SlidingDoorKitGs100_1ArtNo = SlidingDoorKitGs100_1_ArticleNo._A9002180;
                         Panel_GS100CoverKitArtNo = GS100CoverKit_ArticleNo._L15049052;
                     }
-                    Panel_OverLappingPanelQty = OverLappingPanel_Qty;
+                }
+
+                Panel_OverLappingPanelQty = OverLappingPanel_Qty;
+
+                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._84200 ||
+                  Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                {
+                    Panel_OpenableStrikerArtNo = OpenableStriker_ArticleNo._H117;
+                    Panel_CornerCleatArtNo = CornerCleat_ArticleNo._H079;
+                    Panel_CheveronArtNo = Cheveron_ArticleNo._H083;
+                    Panel_RunUpBlockArtNo = RunUpBlock_ArticleNo._M673;
+                    Panel_PackerRodArtNo = PackerRod_ArticleNo._H149;
+                    Panel_LockingWedgeArtNo = LockingWedge_ArticleNo._H109;
+                    Panel_SSCheveronArtNo = SSCheveron_ArticleNo._H092;
+                    Panel_CenterGasketArtNo = GlazingGasket_ArticleNo._G222;
+                    Panel_Unica40ArtNo = Unica40_ArticleNo._H116;
+                    Panel_LockingConnectorArtNo = LockingConnectorDevice_ArticleNo._H175;
                 }
 
                 #region MiddleCloser
@@ -10338,6 +10358,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     //}
 
                     #endregion
+                }
+                else if (Panel_HandleType == Handle_Type._CremonHandle)
+                {
+                    Panel_CremonArtNo = Cremon_HandleArtNo._H087;
                 }
 
                 #region PopupAndRSS 

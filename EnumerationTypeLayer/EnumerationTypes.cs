@@ -42,6 +42,7 @@ namespace EnumerationTypeLayer
             public static readonly FrameReinf_ArticleNo _TV110 = new FrameReinf_ArticleNo(4, "T-V110");
             public static readonly FrameReinf_ArticleNo _NA120 = new FrameReinf_ArticleNo(5, "NA120");
 
+            public static readonly FrameReinf_ArticleNo _None = new FrameReinf_ArticleNo(6, "None");
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 

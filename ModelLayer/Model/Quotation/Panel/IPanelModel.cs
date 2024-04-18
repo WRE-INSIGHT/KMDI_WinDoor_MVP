@@ -511,6 +511,21 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_SlidingAccessoriesRoller_MaterialList(DataTable tbl_explosion);
         void Insert_SlidingSashBottomGuide_MaterialList(DataTable tbl_explosion, int overlap);
         void Insert_BrushForSliding_MaterialList(DataTable tbl_explosion, int FinPlatePerimeter);
+        void Insert_InversionClip_MaterialList(DataTable tbl_explosion);
+        void Insert_GlazingGasket_Alutek_MaterialList(DataTable tbl_explosion, float GlassThickness, bool withSash);
+        void Insert_CenterGasket_MaterialList(DataTable tbl_explosion);
+        void Insert_OpenableStriker_MaterialList(DataTable tbl_explosion);
+        void Insert_Cheveron_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerWindow_MaterialList(DataTable tbl_explosion);
+        void Insert_RunUpBlock_MaterialList(DataTable tbl_explosion);
+        void Insert_PackerRod_MaterialList(DataTable tbl_explosion);
+        void Insert_LockingWedge_MaterialList(DataTable tbl_explosion);
+        void Insert_SSCheveron_MaterialList(DataTable tbl_explosion);
+        void Insert_Unica40_MaterialList(DataTable tbl_explosion);
+        void Insert_LockingConnectorDevice_MaterialList(DataTable tbl_explosion);
+        void Insert_CremonHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_Pegstay_MaterialList(DataTable tbl_explosion);
+        void Insert_AlutekStriker_MaterialList(DataTable tbl_explosion);
 
         #endregion
 

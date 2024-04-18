@@ -437,6 +437,10 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._2060;
                     }
+                    else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84100;
+                    }
                 }
                 else if (_frameModel.Frame_Type == Frame_Padding.Door)
                 {
@@ -453,7 +457,10 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._2060;
                     }
-
+                    else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84100;
+                    }
                 }
             }
 

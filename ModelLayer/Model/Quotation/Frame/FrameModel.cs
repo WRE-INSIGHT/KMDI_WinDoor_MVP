@@ -755,6 +755,10 @@ namespace ModelLayer.Model.Quotation.Frame
                     Frame_ArtNoForPremi = FrameProfileForPremi_ArticleNo._6052_milled;
                     Frame_ConnectingProfile_ArticleNo = ConnectingProfile_ArticleNo._0373;
                 }
+                else if (value == FrameProfile_ArticleNo._84100)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._None;
+                }
 
                 NotifyPropertyChanged();
             }
@@ -2816,7 +2820,39 @@ namespace ModelLayer.Model.Quotation.Frame
 
         }
 
+        public void Insert_GlazingGasket_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Glazing Gasket Width " + FrameGlazingGasket_ArtNo.DisplayName,
+                        2, "pc(s)",
+                        Frame_Width.ToString(),
+                        "Frame",
+                        @"");
 
+
+            tbl_explosion.Rows.Add("Glazing Gasket Height " + FrameGlazingGasket_ArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   Frame_Height.ToString(),
+                                   "Frame",
+                                   @"");
+        }
+
+        public void Insert_Cheveron_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Cheveron " + FrameCheveron_ArtNo.DisplayName,
+                                   4, "pc(s)",
+                                   "",
+                                   "Hardware & Accessories",
+                                   @"");
+        }
+
+        public void Insert_CornerWindow_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Corner Window 26x10mm " + FrameCornerCleat_ArtNo.DisplayName,
+                                4, "pc(s)",
+                                "",
+                                "Hardware & Accessories",
+                                @"");
+        }
 
 
 

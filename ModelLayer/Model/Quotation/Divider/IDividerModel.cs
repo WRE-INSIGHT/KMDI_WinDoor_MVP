@@ -93,7 +93,7 @@ namespace ModelLayer.Model.Quotation.Divider
         void Insert_ShootboltStriker_MaterialList(DataTable tbl_explosion);
         void Insert_ShootboltReverse_MaterialList(DataTable tbl_explosion);
         void Insert_ShootboltNonReverse_MaterialList(DataTable tbl_explosion);
-
+        void Insert_DividerConnector_MaterialList(DataTable tbl_explosion);
 
         int Add_ExplosionLength_screws4fab();
         int Add_MechJoint_screws4fab();
