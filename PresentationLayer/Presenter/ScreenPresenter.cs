@@ -151,7 +151,6 @@ namespace PresentationLayer.Presenter
         private void _screenView_addNewItemToolStripMenuItem_ClickEventRaised(object sender, EventArgs e)
         {
             decimal itemNumberBasedOnParentItem = 0;
-            bool _childrenItemNumberExist;
 
             if(_dgv_Screen.SelectedRows.Count == 1)
             {
@@ -165,16 +164,41 @@ namespace PresentationLayer.Presenter
                     {
                         if(_deciItemNumber == item.Screen_ItemNumber)
                         {
+                            _deciItemNumber = _deciItemNumber + .1m; // to avoid .1 in ItemNumber
+
+                            do
+                            {
+                                itemNumberBasedOnParentItem = _deciItemNumber + .1m;
+                                _deciItemNumber = itemNumberBasedOnParentItem;                   
+                            }
+
+                            while (IsChildrenItemNumberExit(itemNumberBasedOnParentItem));
 
 
+                          
                         }
-
                         break;
-
                     }
                 }
             }
             
+        }
+
+        private bool IsChildrenItemNumberExit(decimal itemNum)
+        {
+            bool itemNumExist = false;
+
+            foreach(IScreenPartialAdjustmentProperties item in _mainPresenter.Lst_ScreenPartialAdjustment)
+            {
+                if(item.Screen_ItemNumber == itemNum)
+                {
+                    itemNumExist = true;
+                    break;
+                }
+            }
+
+            return itemNumExist;
+
         }
 
         public void Insert_Adjustment_to_DGV(IScreenPartialAdjustmentProperties sdm)
