@@ -73,8 +73,9 @@
             this.tsScreen = new System.Windows.Forms.ToolStrip();
             this.tsBtnExchangeRate = new System.Windows.Forms.ToolStripButton();
             this.tsBtnPrintScreen = new System.Windows.Forms.ToolStripButton();
-            this.tsb_ScreenAdjustment = new System.Windows.Forms.ToolStripButton();
             this.tsb_Switch = new System.Windows.Forms.ToolStripButton();
+            this.tsb_ScreenAdjustment = new System.Windows.Forms.ToolStripButton();
+            this.addNewItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Screen)).BeginInit();
@@ -137,9 +138,10 @@
             // cmsScreen
             // 
             this.cmsScreen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.addNewItemToolStripMenuItem});
             this.cmsScreen.Name = "cmsScreen";
-            this.cmsScreen.Size = new System.Drawing.Size(107, 26);
+            this.cmsScreen.Size = new System.Drawing.Size(153, 70);
             // 
             // deleteToolStripMenuItem
             // 
@@ -565,6 +567,18 @@
             this.tsBtnPrintScreen.Text = "Print Screen";
             this.tsBtnPrintScreen.Click += new System.EventHandler(this.tsBtnPrintScreen_Click);
             // 
+            // tsb_Switch
+            // 
+            this.tsb_Switch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsb_Switch.AutoSize = false;
+            this.tsb_Switch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsb_Switch.Image = global::PresentationLayer.Properties.Resources.GreenSwitch;
+            this.tsb_Switch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_Switch.Name = "tsb_Switch";
+            this.tsb_Switch.Size = new System.Drawing.Size(30, 24);
+            this.tsb_Switch.Text = "Switch";
+            this.tsb_Switch.Click += new System.EventHandler(this.tsb_Switch_Click);
+            // 
             // tsb_ScreenAdjustment
             // 
             this.tsb_ScreenAdjustment.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -577,17 +591,12 @@
             this.tsb_ScreenAdjustment.Visible = false;
             this.tsb_ScreenAdjustment.Click += new System.EventHandler(this.tsb_ScreenAdjustment_Click);
             // 
-            // tsb_Switch
+            // addNewItemToolStripMenuItem
             // 
-            this.tsb_Switch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsb_Switch.AutoSize = false;
-            this.tsb_Switch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsb_Switch.Image = global::PresentationLayer.Properties.Resources.GreenSwitch;
-            this.tsb_Switch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_Switch.Name = "tsb_Switch";
-            this.tsb_Switch.Size = new System.Drawing.Size(30, 24);
-            this.tsb_Switch.Text = "Switch";
-            this.tsb_Switch.Click += new System.EventHandler(this.tsb_Switch_Click);
+            this.addNewItemToolStripMenuItem.Name = "addNewItemToolStripMenuItem";
+            this.addNewItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addNewItemToolStripMenuItem.Text = "Add New Item";
+            this.addNewItemToolStripMenuItem.Click += new System.EventHandler(this.addNewItemToolStripMenuItem_Click);
             // 
             // ScreenView
             // 
@@ -676,5 +685,6 @@
         private System.Windows.Forms.CheckBox chkbox_allowEdit;
         private System.Windows.Forms.ToolStripButton tsb_ScreenAdjustment;
         private System.Windows.Forms.ToolStripButton tsb_Switch;
+        private System.Windows.Forms.ToolStripMenuItem addNewItemToolStripMenuItem;
     }
 }

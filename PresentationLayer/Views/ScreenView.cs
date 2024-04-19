@@ -91,20 +91,7 @@ namespace PresentationLayer.Views
             }
         }
 
-        public Button GetAddBtn()
-        {
-            return btn_add;
-        }
-
-        public ToolStripButton GetToolStripBtnSwitch()
-        {
-            return tsb_Switch;
-        }
-        public ToolStripButton GetToolStripBtnScreenAdjustment()
-        {
-            return tsb_ScreenAdjustment;
-        }
-
+  
         public event EventHandler ScreenViewLoadEventRaised;
         public event EventHandler btnAddClickEventRaised;
         public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
@@ -138,6 +125,7 @@ namespace PresentationLayer.Views
         public event EventHandler ScreenView_ResizeEventRaised;
         public event EventHandler tsb_ScreenAdjustment_ClickEventRaised;
         public event EventHandler tsb_Switch_ClickEventRaised;
+        public event EventHandler addNewItemToolStripMenuItem_ClickEventRaised;
 
         public void ShowScreemView()
         {
@@ -220,7 +208,29 @@ namespace PresentationLayer.Views
         {
             return cmb_ScreenType;
         }
- 
+        public Button GetAddBtn()
+        {
+            return btn_add;
+        }
+
+        public ToolStripButton GetToolStripBtnSwitch()
+        {
+            return tsb_Switch;
+        }
+        public ToolStripButton GetToolStripBtnScreenAdjustment()
+        {
+            return tsb_ScreenAdjustment;
+        }
+
+        public ContextMenuStrip GetDgvContextMenuStrip()
+        {
+            return cmsScreen;
+        }
+        public ToolStripMenuItem GetScreenPartialAddItemCMS()
+        {
+            return addNewItemToolStripMenuItem;
+        }
+
         private void ScreenView_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
@@ -452,6 +462,11 @@ namespace PresentationLayer.Views
         private void tsb_Switch_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, tsb_Switch_ClickEventRaised, e);
+        }
+
+        private void addNewItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, addNewItemToolStripMenuItem_ClickEventRaised, e);
         }
     }
 }

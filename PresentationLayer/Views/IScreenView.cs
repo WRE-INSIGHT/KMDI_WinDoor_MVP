@@ -47,6 +47,7 @@ namespace PresentationLayer.Views
         event EventHandler ScreenView_ResizeEventRaised;
         event EventHandler tsb_ScreenAdjustment_ClickEventRaised;
         event EventHandler tsb_Switch_ClickEventRaised;
+        event EventHandler addNewItemToolStripMenuItem_ClickEventRaised;
 
         void ShowScreemView();
 
@@ -70,6 +71,8 @@ namespace PresentationLayer.Views
         ToolStripButton GetToolStripBtnScreenAdjustment();
         Button GetAddBtn();
         ComboBox GetScreenTypeCmb();
+        ContextMenuStrip GetDgvContextMenuStrip();
+        ToolStripMenuItem GetScreenPartialAddItemCMS();
 
 
     }

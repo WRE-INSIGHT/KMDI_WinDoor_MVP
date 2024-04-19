@@ -76,6 +76,8 @@ namespace PresentationLayer.Presenter
         CheckBox _chkboxAllowEdit;
         ToolTip _EdittoColumns;
         Timer _setTimerForToolTip;
+        ContextMenuStrip _dgvContextMenuStrip;
+        ToolStripMenuItem _screenPartialAddItemMenu;
     
         public ScreenPresenter(IScreenView screenView,
                                IPrintQuotePresenter printQuotePresenter,
@@ -128,6 +130,7 @@ namespace PresentationLayer.Presenter
             _screenView.ScreenView_ResizeEventRaised += _screenView_ScreenView_ResizeEventRaised;
             _screenView.tsb_ScreenAdjustment_ClickEventRaised += _screenView_tsb_ScreenAdjustment_ClickEventRaised;
             _screenView.tsb_Switch_ClickEventRaised += _screenView_tsb_Switch_ClickEventRaised;
+            _screenView.addNewItemToolStripMenuItem_ClickEventRaised += _screenView_addNewItemToolStripMenuItem_ClickEventRaised;
 
             _pnlAddOns = _screenView.GetPnlAddOns();
             _screenWidth = _screenView.screen_width;
@@ -137,10 +140,42 @@ namespace PresentationLayer.Presenter
             _discount = _screenView.screen_discountpercentage;
             _screenitemnum = _screenView.screen_itemnumber;
             _chkboxAllowEdit = _screenView.getCheckBoxAllowEdit();
+            _dgvContextMenuStrip = _screenView.GetDgvContextMenuStrip();
+            _screenPartialAddItemMenu = _screenView.GetScreenPartialAddItemCMS();
 
         }
 
+
+
         #region Events
+        private void _screenView_addNewItemToolStripMenuItem_ClickEventRaised(object sender, EventArgs e)
+        {
+            decimal itemNumberBasedOnParentItem = 0;
+            bool _childrenItemNumberExist;
+
+            if(_dgv_Screen.SelectedRows.Count == 1)
+            {
+                foreach (DataGridViewRow row in _dgv_Screen.SelectedRows)
+                {
+                    var itemNumber = row.Cells[0].Value;
+                    var itemIndex = row.Cells[0].RowIndex;
+                    decimal _deciItemNumber = Convert.ToDecimal(itemNumber);
+
+                    foreach(IScreenPartialAdjustmentProperties item in _mainPresenter.Lst_ScreenPartialAdjustment)
+                    {
+                        if(_deciItemNumber == item.Screen_ItemNumber)
+                        {
+
+
+                        }
+
+                        break;
+
+                    }
+                }
+            }
+            
+        }
 
         public void Insert_Adjustment_to_DGV(IScreenPartialAdjustmentProperties sdm)
         {         
@@ -196,6 +231,7 @@ namespace PresentationLayer.Presenter
                 #endregion
                 #region Button Visibility
                 _screenView.GetToolStripBtnScreenAdjustment().Visible = true;
+                _screenPartialAddItemMenu.Visible = true;
                 #endregion
 
                 //Load Screen Partial Adjustment Dt Columns
@@ -215,6 +251,7 @@ namespace PresentationLayer.Presenter
                 #endregion
                 #region Button Visibility
                 _screenView.GetToolStripBtnScreenAdjustment().Visible = false;
+                _screenPartialAddItemMenu.Visible = false;
                 #endregion
 
                 //Load Screen Dt Columns
@@ -1638,7 +1675,8 @@ namespace PresentationLayer.Presenter
                 _freedomScreenType.Add(item);
             }
 
-            _onLoad = false;
+            _screenPartialAddItemMenu.Visible = false;
+             _onLoad = false;
             _EdittoColumns = new ToolTip();
             _setTimerForToolTip = new Timer();
 

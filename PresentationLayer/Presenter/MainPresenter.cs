@@ -11230,6 +11230,8 @@ namespace PresentationLayer.Presenter
             mpnllvl = string.Empty;
             _screenList = new List<IScreenModel>();
             _nonUnglazed = new List<DataRow>();
+            _dic_PaScreenID = new Dictionary<long, decimal>();
+            _lst_ScreenPartialAdjustment = new List<IScreenPartialAdjustmentProperties>();
             _guHolderDT.Clear();
             _pnlItems.Controls.Clear();
 
