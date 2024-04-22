@@ -151,8 +151,9 @@ namespace PresentationLayer.Presenter
         private void _screenView_addNewItemToolStripMenuItem_ClickEventRaised(object sender, EventArgs e)
         {
             decimal itemNumberBasedOnParentItem = 0;
+            bool _qtyShowPrompt = false,_addNewItem = false;
 
-            if(_dgv_Screen.SelectedRows.Count == 1)
+            if (_dgv_Screen.SelectedRows.Count == 1)
             {
                 foreach (DataGridViewRow row in _dgv_Screen.SelectedRows)
                 {
@@ -160,28 +161,139 @@ namespace PresentationLayer.Presenter
                     var itemIndex = row.Cells[0].RowIndex;
                     decimal _deciItemNumber = Convert.ToDecimal(itemNumber);
 
+
                     foreach(IScreenPartialAdjustmentProperties item in _mainPresenter.Lst_ScreenPartialAdjustment)
                     {
-                        if(_deciItemNumber == item.Screen_ItemNumber)
-                        {
-                            _deciItemNumber = _deciItemNumber + .1m; // to avoid .1 in ItemNumber
 
-                            do
+                        if (_deciItemNumber == item.Screen_ItemNumber)
+                        {
+                            if (item.Screen_Quantity > 1)
                             {
-                                itemNumberBasedOnParentItem = _deciItemNumber + .1m;
-                                _deciItemNumber = itemNumberBasedOnParentItem;                   
+                                _qtyShowPrompt = false;
+                                _addNewItem = true;
+                            }
+                            else
+                            {
+                                _qtyShowPrompt = true;
                             }
 
-                            while (IsChildrenItemNumberExit(itemNumberBasedOnParentItem));
+                            if (_qtyShowPrompt)
+                            {
+                                string _qty = "Input Number of Items to Add";
 
+                                if (DialogResult.OK == ShowQtyPrompt("Validate Quantity", "Quantity is less than 1,\nAre you sure to add another screen?", ref _qty))
+                                {
+                                    _addNewItem = true;
+                                }
+                                else
+                                {
+                                    _addNewItem = false;
+                                }
 
-                          
+                            }
+
+                            if (_addNewItem)
+                            {
+                                _deciItemNumber = _deciItemNumber + .1m; // to avoid .1 in ItemNumber
+
+                                do
+                                {
+                                    itemNumberBasedOnParentItem = _deciItemNumber + .1m;
+                                    _deciItemNumber = itemNumberBasedOnParentItem;
+                                }
+
+                                while (IsChildrenItemNumberExit(itemNumberBasedOnParentItem));
+
+                                long asd = ChildIDBasedOnParent(item, itemNumberBasedOnParentItem);
+
+                                _mainPresenter.Dic_PaScreenID.Add(ChildIDBasedOnParent(item, itemNumberBasedOnParentItem), itemNumberBasedOnParentItem); // add  to dic_PaScreenID child Id
+
+                                break;
+                            }
                         }
-                        break;
                     }
                 }
             }
             
+        }
+        private DialogResult ShowQtyPrompt(string title, string promptText, ref string value)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+            NumericUpDown numericupdown = new NumericUpDown();
+
+            form.Text = title;
+            label.Text = promptText;
+            //textBox.Text = value;
+
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Cancel";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+
+            label.SetBounds(9, 20, 372, 13);
+            //textBox.SetBounds(12, 45, 372, 20);
+            numericupdown.SetBounds(12, 45, 372, 20);
+            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonCancel.SetBounds(309, 72, 75, 23);
+
+            label.AutoSize = true;
+            //textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            numericupdown.Anchor = numericupdown.Anchor | AnchorStyles.Right;
+            buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+            form.ClientSize = new Size(396, 107);
+            //form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.Controls.AddRange(new Control[] { label, numericupdown, buttonOk, buttonCancel });
+            form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+
+            DialogResult dialogResult = form.ShowDialog();
+            //value = textBox.Text;
+            value = numericupdown.Value.ToString();
+            return dialogResult;
+        }
+        private bool IsQtyValidated(long ItemNumber)
+        {
+            bool isQtyMorethanOne = false;
+
+            foreach(var item in _mainPresenter.Screen_List)
+            {
+                if(item.Screen_id == ItemNumber)
+                {
+                    if(item.Screen_Quantity > 1)
+                    {
+                        isQtyMorethanOne = true;
+                        break;
+                    }
+                }
+            }
+            return isQtyMorethanOne;
+        }
+
+
+        private long ChildIDBasedOnParent(IScreenPartialAdjustmentProperties SPAP,decimal itemNumberBasedOnParentItem)
+        {
+            long childID = 0;
+            foreach(var mpScreenList in _mainPresenter.Screen_List)
+            {
+                if(mpScreenList.Screen_id == SPAP.Screen_id)
+                {
+                    childID = PriKeyGen(mpScreenList.Screen_Types, itemNumberBasedOnParentItem);
+                    break;
+                }
+            }
+
+            return childID; 
         }
 
         private bool IsChildrenItemNumberExit(decimal itemNum)
