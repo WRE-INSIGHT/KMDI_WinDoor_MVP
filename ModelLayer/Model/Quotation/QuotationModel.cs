@@ -3413,6 +3413,8 @@ namespace ModelLayer.Model.Quotation
             DateTime inc_price_date_7 = DateTime.Parse("08-04-2023"); // MotorizeMechRemotePricePerPiece 
             DateTime inc_price_date_8 = DateTime.Parse("08-30-2023"); // 6 mm Tempered Clear w/ HardCoated Low-E remove desc hardcoated 
             DateTime inc_price_date_9 = DateTime.Parse("02-20-2024"); // Glass 14 mm and 24 mm Clear
+            DateTime inc_price_date_10 = DateTime.Parse("04-19-2024"); // new base price of georgian bar
+
 
             if (cus_ref_date >= inc_price_date && cus_ref_date <= _junedateoldago)
             {
@@ -4154,7 +4156,7 @@ namespace ModelLayer.Model.Quotation
                     SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
                     SetNewPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m); // Glass_6mmTempClr_HrdCtd_LowE
                 }
-                else if (cus_ref_date >= inc_price_date_9)
+                else if (cus_ref_date >= inc_price_date_9 && cus_ref_date < inc_price_date_10)
                 {
                     FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
                     FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
@@ -4177,7 +4179,37 @@ namespace ModelLayer.Model.Quotation
                     SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
                     SetNewPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m); // Glass_6mmTempClr_HrdCtd_LowE
                 }
-            }
+                else if (cus_ref_date >= inc_price_date_10)
+                {
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    FramePricePerLinearMeter_6052_White_1sideFoil = 634.04m;
+                    FramePricePerLinearMeter_6052Milled_WoodGrain = 725.02m;
+                    FramePricePerLinearMeter_6052Milled_White = 567.15m;
+                    FramePricePerLinearMeter_6052Milled_White_1sideFoil = 634.04m;
+                    WaterSeepagePricePerLinearMeter = 378.47m;
+                    Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;//5900
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    DividerRein_7536_PricePerSqrMeter = 406.86m;
+
+                    MotorizeMechRemotePricePerPiece = 4500.00m;// 19445.50m 
+                    Glass_6mmTempClr_HrdCtd_LowE = 2600.00m;//2550.00m
+
+                    Glass_14mmClr_PricePerSqrMeter = 2100.00m; // 0m
+                    Glass_24mmClr_PricePerSqrMeter = 3882.00m; // 0m
+
+                    SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                    SetNewPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m); // Glass_6mmTempClr_HrdCtd_LowE
+
+                    GeorgianBar_0724Price_White = 154.93m; //264.89m;
+                    GeorgianBar_0724Price_Woodgrain = 154.93m; // 312.36m;
+                    GeorgianBar_0726Price_White = 307.75m; //403.05m;
+                    GeorgianBar_0726Price_Woodgrain = 307.75m; // 467.22m;
+                }
+
+
+             }
 
             #region motorized 1 day diff
             if (cus_ref_date < DateTime.Parse("08-02-2023"))
@@ -4209,11 +4241,12 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_112323 = DateTime.Parse("11-23-2023"); // remove fs in motorize
         DateTime changeCondition_011724 = DateTime.Parse("01-17-2024"); // weatherbar and etc per frame
         DateTime changeCondition_030824 = DateTime.Parse("03-08-2024"); // FS price for casement 20hd
+        DateTime changeCondition_041924 = DateTime.Parse("04-19-2024"); // georgian bar computation correction 
 
 
 
 
-        DateTime testDate = DateTime.Parse("01-17-2024");
+        DateTime testDate = DateTime.Parse("04-19-2024");
 
         #endregion
 
@@ -4821,6 +4854,7 @@ namespace ModelLayer.Model.Quotation
                         #endregion
 
                         #region PUFoaming
+
                         if (wdm.WD_profile.Contains("Alutek"))
                         {
                             PUFoamingPricePerCan = 600;
@@ -12448,6 +12482,12 @@ namespace ModelLayer.Model.Quotation
                         {
                             provinceBaseMultiplier = 3.00m;
                         }
+                        
+                        if (cus_ref_date >= changeCondition_041924)
+                        {
+                            provinceBaseMultiplier = 1;
+                        }
+
 
                         wdm.WD_CostingPoints = CostingPoints;
                         LaborCost = CostingPoints * CostPerPoints;
@@ -13326,7 +13366,7 @@ namespace ModelLayer.Model.Quotation
 
                             Price_List.Rows.Add("Georgian Bar Cost",
                                        GeorgianBarPrice.ToString("N", new CultureInfo("en-US")),
-                                       Math.Round(GeorgianBarCost * 3, 2).ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(GeorgianBarCost * provinceBaseMultiplier, 2).ToString("N", new CultureInfo("en-US")),
                                        "",
                                        "",
                                        "Ancillary Profile");
@@ -13403,7 +13443,7 @@ namespace ModelLayer.Model.Quotation
 
                             Price_List.Rows.Add("Glazing Adaptor Price",
                                   GlazingAdaptorPricePerMeter.ToString("N", new CultureInfo("en-US")),
-                                  Math.Round(GlazingAdaptorPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(GlazingAdaptorPrice * GlazingAdaptorPrice, 2).ToString("N", new CultureInfo("en-US")),
                                   "",
                                   "",
                                   "Ancillary Profile");

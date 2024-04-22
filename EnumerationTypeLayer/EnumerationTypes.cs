@@ -130,6 +130,7 @@ namespace EnumerationTypeLayer
             public static readonly GlazingBead_ArticleNo _2434_2434 = new GlazingBead_ArticleNo(24, "2434(out) & 2434(in)");
             //alutek
             public static readonly GlazingBead_ArticleNo _84500 = new GlazingBead_ArticleNo(25, "84500");
+            public static readonly GlazingBead_ArticleNo _84502 = new GlazingBead_ArticleNo(26, "84502");
 
 
 
