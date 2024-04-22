@@ -24,6 +24,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IFP_ScreenPropertyUCPresenter _fp_ScreenPropertyUCPresenter;
         private IFP_TubularPropertyUCPresenter _fp_TubularPropertyUCPresenter;
         private IFP_CladdingQtyPropertyUCPresenter _fp_CladdingQtyPropertyUCPresenter;
+        private IFP_InversionClipPropertyUCPresenter _fp_InversionClipPropertyUCPresenter;
 
         private IMainPresenter _mainPresenter;
         private IFrameModel _frameModel;
@@ -41,7 +42,8 @@ namespace PresentationLayer.Presenter.UserControls
                                           IFP_TrackProfilePropertyUCPresenter fp_TrackProfilePropertyUCPresenter,
                                           IFP_ScreenPropertyUCPresenter fp_ScreenPropertyUCPresenter,
                                           IFP_TubularPropertyUCPresenter fp_TubularPropertyUCPresenter,
-                                          IFP_CladdingQtyPropertyUCPresenter fp_CladdingQtyPropertyUCPresenter)
+                                          IFP_CladdingQtyPropertyUCPresenter fp_CladdingQtyPropertyUCPresenter,
+                                          IFP_InversionClipPropertyUCPresenter fp_InversionClipPropertyUCPresenter)
         {
             _framePropertiesUC = framePropertiesUC;
             _frameServices = frameServices;
@@ -52,6 +54,7 @@ namespace PresentationLayer.Presenter.UserControls
             _fp_ScreenPropertyUCPresenter = fp_ScreenPropertyUCPresenter;
             _fp_TubularPropertyUCPresenter = fp_TubularPropertyUCPresenter;
             _fp_CladdingQtyPropertyUCPresenter = fp_CladdingQtyPropertyUCPresenter;
+            _fp_InversionClipPropertyUCPresenter = fp_InversionClipPropertyUCPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -201,6 +204,15 @@ namespace PresentationLayer.Presenter.UserControls
                     //RailsDeductHt = true;
                     #endregion
 
+                }
+                else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                {
+                    if (_frameModel.Frame_InversionClipVisibility == false)
+                    {
+                        _frameModel.Frame_InversionClipVisibility = true;
+                        _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
+                        _framePropertiesUC.AddHT_PanelBody(constants.frame_InversionClipOption);
+                    }
                 }
                 else if (!(_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
                            _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052))
@@ -363,6 +375,43 @@ namespace PresentationLayer.Presenter.UserControls
 
                 curr_rbtnText = rbtn.Text;
             }
+            else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+                if (curr_rbtnText == "Window" || curr_rbtnText == "Concrete")
+                {
+                    _frameModel.Frame_InversionClipVisibility = true;
+                    _frameModel.Frame_InversionClipOption = true;
+                    _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
+                    _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
+                }
+                else if (curr_rbtnText == "Door")
+                {
+                    _frameModel.Frame_InversionClipVisibility = false;
+                    _frameModel.FrameProp_Height -= constants.frame_InversionClipOption;
+                    _framePropertiesUC.AddHT_PanelBody(-constants.frame_InversionClipOption);
+                }
+                else if (curr_rbtnText == "")
+                {
+                    if (_frameModel.Frame_Type == Frame_Padding.Window)
+                    {
+                        _frameModel.Frame_InversionClipVisibility = true;
+                        _frameModel.Frame_InversionClipOption = true;
+                        _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
+                        _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
+                    }
+                    else if (_frameModel.Frame_Type == Frame_Padding.Door)
+                    {
+                        _frameModel.Frame_InversionClipVisibility = false;
+                        _frameModel.FrameProp_Height -= constants.frame_InversionClipOption;
+                        _framePropertiesUC.AddHT_PanelBody(-constants.frame_InversionClipOption);
+                    }
+
+                }
+
+                curr_rbtnText = rbtn.Text;
+            }
+
+
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
         }
@@ -441,6 +490,7 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84100;
                     }
+
                 }
                 else if (_frameModel.Frame_Type == Frame_Padding.Door)
                 {
@@ -448,6 +498,7 @@ namespace PresentationLayer.Presenter.UserControls
                     if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
+
                     }
                     else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                     {
@@ -517,6 +568,15 @@ namespace PresentationLayer.Presenter.UserControls
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(TubePropUC);
             TubePropUC.Dock = DockStyle.Top;
             TubePropUC.BringToFront();
+
+            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+                IFP_InversionClipPropertyUCPresenter InversionClip = _fp_InversionClipPropertyUCPresenter.GetNewInstance(_unityC, _frameModel);
+                UserControl InversionClipUC = (UserControl)InversionClip.GetInversionClipPropertyUC();
+                _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(InversionClipUC);
+                InversionClipUC.Dock = DockStyle.Top;
+                InversionClipUC.BringToFront();
+            }
 
 
             if (_frameModel.Frame_ScreenOption)

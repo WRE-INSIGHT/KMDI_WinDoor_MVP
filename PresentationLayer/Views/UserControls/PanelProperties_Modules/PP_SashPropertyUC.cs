@@ -52,13 +52,16 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             SashProfile_ArticleNo sel_sash = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
             if (sel_sash == SashProfile_ArticleNo._7581 ||
-                sel_sash == SashProfile_ArticleNo._374)
+                sel_sash == SashProfile_ArticleNo._374 ||
+                sel_sash == SashProfile_ArticleNo._2067 ||
+                sel_sash == SashProfile_ArticleNo._84200)
             {
                 lbl_InOutOrient.Text = "Outward";
                 lbl_InOutOrient.ForeColor = Color.Black;
             }
             else if (sel_sash == SashProfile_ArticleNo._395 ||
-                     sel_sash == SashProfile_ArticleNo._373)
+                     sel_sash == SashProfile_ArticleNo._373 ||
+                     sel_sash == SashProfile_ArticleNo._84207)
             {
                 lbl_InOutOrient.Text = "Inward";
                 lbl_InOutOrient.ForeColor = Color.CadetBlue;

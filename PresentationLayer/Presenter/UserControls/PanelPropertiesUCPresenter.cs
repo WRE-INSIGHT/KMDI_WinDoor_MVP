@@ -341,8 +341,6 @@ namespace PresentationLayer.Presenter.UserControls
             //    }
             //    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             //}
-
-            _panelModel.PanelModelIsFromLoad = _mainPresenter.ItemLoad; // set bool
             _panelModel.Panel_PropertyChange(chk.Checked);
             _mainPresenter.GetCurrentPrice();
             _mainPresenter.PropertiesScroll = propertiesScroll;
@@ -354,24 +352,22 @@ namespace PresentationLayer.Presenter.UserControls
         {
             try
             {
-                if (_mainPresenter.ItemLoad)
-                {
-                    _panelModel.PanelModelIsFromLoad = true; // set bool
-                }
 
                 _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
-
-                if ((_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false) && _panelModel.Panel_Type.Contains("Sliding") == false &&
-                     _panelModel.Panel_HingeOptions == HingeOption._FrictionStay)
+                if (!_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                 {
-                    _panelModel.Panel_MiddleCloserVisibility = true;
-
-                    _panelModel.AdjustPropertyPanelHeight("addMC");
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
-
-                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    if ((_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false) && _panelModel.Panel_Type.Contains("Sliding") == false &&
+                     _panelModel.Panel_HingeOptions == HingeOption._FrictionStay)
                     {
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMC");
+                        _panelModel.Panel_MiddleCloserVisibility = true;
+
+                        _panelModel.AdjustPropertyPanelHeight("addMC");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
+
+                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMC");
+                        }
                     }
                 }
 
@@ -406,6 +402,7 @@ namespace PresentationLayer.Presenter.UserControls
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
                     }
                 }
+
 
                 if (_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false)
                 {
@@ -508,7 +505,7 @@ namespace PresentationLayer.Presenter.UserControls
 
 
 
-                if (!_panelModel.Panel_Type.Contains("Sliding"))
+                if (!_panelModel.Panel_Type.Contains("Sliding") && !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                 {
                     IPP_HingePropertyUCPresenter hingePropUCP = _pp_hingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     UserControl hingeProp = (UserControl)hingePropUCP.GetPP_HingePropertyUC();
@@ -538,11 +535,36 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 if (_panelModel.Panel_SashPropertyVisibility == true)
                 {
-                    IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-                    UserControl motorized = (UserControl)motorizedPropUCP.GetPPMotorizedPropertyUC();
-                    _pnlPanelSpecs.Controls.Add(motorized);
-                    motorized.Dock = DockStyle.Top;
-                    motorized.BringToFront();
+
+                    if (!_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                        UserControl motorized = (UserControl)motorizedPropUCP.GetPPMotorizedPropertyUC();
+                        _pnlPanelSpecs.Controls.Add(motorized);
+                        motorized.Dock = DockStyle.Top;
+                        motorized.BringToFront();
+
+
+
+
+
+                    }
+                    else
+                    {
+
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusChkMotorized");
+                        //_panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusHandle");
+
+                        _panelModel.AdjustPropertyPanelHeight("minusChkMotorized");
+                        //_panelModel.AdjustPropertyPanelHeight("minusHandle");
+
+                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusChkMotorized");
+                            //_panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHandle");
+
+                        }
+                    }
 
                     IPP_HandlePropertyUCPresenter handlePropUCP = _pp_handlePropertUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     UserControl handle = (UserControl)handlePropUCP.GetPPHandlePropertyUC();
@@ -550,7 +572,11 @@ namespace PresentationLayer.Presenter.UserControls
                     handle.Dock = DockStyle.Top;
                     handle.BringToFront();
 
-                    if (!_panelModel.Panel_Type.Contains("Sliding"))
+
+
+
+                    if (!_panelModel.Panel_Type.Contains("Sliding") &&
+                        !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                     {
                         IPP_MiddleCloserPropertyUCPresenter mcUCP = _pp_middleCloserPropertyUCP.GetNewInstance(_panelModel, _unityC, _mainPresenter);
                         UserControl mc = (UserControl)mcUCP.GetMiddleCloserPropertyUC();
@@ -684,8 +710,11 @@ namespace PresentationLayer.Presenter.UserControls
                     GallerySetProp.BringToFront();
                 }
 
-                if (_panelModel.Panel_Type.Contains("Fixed") ||
-                    _panelModel.Panel_Type.Contains("Sliding"))
+
+
+                if ((_panelModel.Panel_Type.Contains("Fixed") ||
+                    _panelModel.Panel_Type.Contains("Sliding")) &&
+                    !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                 {
                     _panelModel.Panel_CenterProfileVisibility = true;
 
