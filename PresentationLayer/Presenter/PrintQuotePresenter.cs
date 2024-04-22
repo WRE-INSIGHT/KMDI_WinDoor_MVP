@@ -229,7 +229,7 @@ namespace PresentationLayer.Presenter
             }
 
             if (_mainPresenter.printStatus != "GlassUpgrade")
-            {
+                {
                 if (_rdlcHeaderIsPresent == true)
                 {
                     //_mainPresenter.RDLCHeader[GlassThickness_key] = GlassThickness;

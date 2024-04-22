@@ -1795,7 +1795,23 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         public DateTime Date_Assigned { get; set; }
+        
+        #region Dictionary for Screen Partial Adjustment
 
+        public ScreenType Screen_Type_Revised { get; set; }
+        public string Screen_Description_Revised { get; set; }
+        public int Screen_Set_Revised { get; set; }
+        public decimal Screen_UnitPrice_Revised { get; set; }
+        public int Screen_Quantity_Revised { get; set;}
+        public int Screen_Discount_Revised { get; set; }
+        public decimal Screen_NetPrice_Revised { get; set; }
+        public string Screen_DisplayedDimes_Revised { get; set; }
+        public decimal Screen_Factor_Revised { get; set; }
+        public decimal Screen_AddOnsSpecialFactor_Revised { get; set; }
+        public decimal Screen_Adjustment_Price { get; set; }
+        public bool Screen_isAdjusted { get; set; }
+
+        #endregion
 
         #region changeConditionBasedonPrice
 
@@ -1806,6 +1822,7 @@ namespace ModelLayer.Model.Quotation.Screen
         #endregion
 
         List<decimal> ItemList = new List<decimal>();
+
         public void ItemNumberList()
         {
             var _strippedItemNum = (int)Decimal.Truncate(Screen_ItemNumber);
@@ -2256,7 +2273,19 @@ namespace ModelLayer.Model.Quotation.Screen
             _builtInWidthIsBelowMinimum = false;
             _builInHeigthIsBelowMinimum = false;
         }
-       
+        public void ReSelectScreenType(string screen)
+        {
+            if (screen != Screen_Types.ToString())
+            {
+                foreach (ScreenType scr in ScreenType.GetAll())
+                {
+                    if (scr.ToString() == screen)
+                    {
+                        Screen_Types = scr;
+                    }
+                }
+            }
+        }
         public void ComputeScreenTotalPrice()
         {
             cus_ref_date = Date_Assigned;

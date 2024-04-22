@@ -45,6 +45,9 @@ namespace PresentationLayer.Views
         event FormClosingEventHandler ScreenView_FormClosingEventRaised;
         event EventHandler chkbox_allowEdit_CheckedChangedEventRaised;
         event EventHandler ScreenView_ResizeEventRaised;
+        event EventHandler tsb_ScreenAdjustment_ClickEventRaised;
+        event EventHandler tsb_Switch_ClickEventRaised;
+        event EventHandler addNewItemToolStripMenuItem_ClickEventRaised;
 
         void ShowScreemView();
 
@@ -64,7 +67,12 @@ namespace PresentationLayer.Views
         NumericUpDown GetNudFactor();
         NumericUpDown GetNudSets();
         CheckBox getCheckBoxAllowEdit();
-
+        ToolStripButton GetToolStripBtnSwitch();
+        ToolStripButton GetToolStripBtnScreenAdjustment();
+        Button GetAddBtn();
+        ComboBox GetScreenTypeCmb();
+        ContextMenuStrip GetDgvContextMenuStrip();
+        ToolStripMenuItem GetScreenPartialAddItemCMS();
 
 
     }
