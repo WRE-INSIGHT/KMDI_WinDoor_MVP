@@ -5535,6 +5535,54 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
+                        if (row_str.Contains("Frame_InversionClipVisibility:"))
+                        {
+                            frm_InversionClipVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_InversionClipOption:"))
+                        {
+                            frm_InversionClipOption = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("FrameInversionClip_ArtNo:"))
+                        {
+                            foreach(InversionClip_ArticleNo ICAN in InversionClip_ArticleNo.GetAll())
+                            {
+                                if(ICAN.ToString() == extractedValue_str)
+                                {
+                                    frm_FrameInversionClip_ArtNo = ICAN;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("FrameGlazingGasket_ArtNo:"))
+                        {
+                            foreach(GlazingGasket_ArticleNo GAN in GlazingGasket_ArticleNo.GetAll())
+                            {
+                                if(GAN.ToString() == extractedValue_str)
+                                {
+                                    frm_FrameGlazingGasket_ArtNo = GAN;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("FrameCheveron_ArtNo:"))
+                        {
+                            foreach(Cheveron_ArticleNo CAN in Cheveron_ArticleNo.GetAll())
+                            {
+                                if(CAN.ToString() == extractedValue_str)
+                                {
+                                    frm_FrameCheveron_ArtNo = CAN;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("FrameCornerCleat_ArtNo:"))
+                        {
+                            foreach(CornerCleat_ArticleNo CCAN in CornerCleat_ArticleNo.GetAll())
+                            {
+                                if(CCAN.ToString() == extractedValue_str)
+                                {
+                                    frm_FrameCornerCleat_ArtNo = CCAN;
+                                }
+                            }
+                        }
 
 
                         #endregion
@@ -6452,6 +6500,106 @@ namespace PresentationLayer.Presenter
                                 if (ean.ToString() == extractedValue_str)
                                 {
                                     panel_ExtensionRight2ArtNo = ean;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_OpenableStrikerArtNo:"))
+                        {
+                            foreach(OpenableStriker_ArticleNo OSA in OpenableStriker_ArticleNo.GetAll())
+                            {
+                                if(OSA.ToString() == extractedValue_str)
+                                {
+                                    panel_OpenableStrikerArtNo = OSA;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CornerCleatArtNo:"))
+                        {
+                            foreach(CornerCleat_ArticleNo CCA in CornerCleat_ArticleNo.GetAll())
+                            {
+                                if(CCA.ToString() == extractedValue_str)
+                                {
+                                    panel_CornerCleatArtNo = CCA;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CheveronArtNo:"))
+                        {
+                            foreach(Cheveron_ArticleNo CAN in Cheveron_ArticleNo.GetAll())
+                            {
+                                if(CAN.ToString() == extractedValue_str)
+                                {
+                                    panel_CheveronArtNo = CAN;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_RunUpBlockArtNo:"))
+                        {
+                            foreach(RunUpBlock_ArticleNo RAN in RunUpBlock_ArticleNo.GetAll())
+                            {
+                                if(RAN.ToString() == extractedValue_str)
+                                {
+                                    panel_RunUpBlockArtNo = RAN;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_PackerRodArtNo:"))
+                        {
+                            foreach(PackerRod_ArticleNo PAN in PackerRod_ArticleNo.GetAll())
+                            {
+                                if(PAN.ToString() == extractedValue_str)
+                                {
+                                    panel_PackerRodArtNo = PAN;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_LockingWedgeArtNo:"))
+                        {
+                            foreach(LockingWedge_ArticleNo LAN in LockingWedge_ArticleNo.GetAll())
+                            {
+                                if(LAN.ToString() == extractedValue_str)
+                                {
+                                    panel_LockingWedgeArtNo = LAN;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_SSCheveronArtNo:"))
+                        {
+                            foreach(SSCheveron_ArticleNo SSAN in SSCheveron_ArticleNo.GetAll())
+                            {
+                                if(SSAN.ToString() == extractedValue_str)
+                                {
+                                    panel_SSCheveronArtNo = SSAN;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_Unica40ArtNo:"))
+                        {
+                            foreach(Unica40_ArticleNo UAN in Unica40_ArticleNo.GetAll())
+                            {
+                                if(UAN.ToString() == extractedValue_str)
+                                {
+                                    panel_Unica40ArtNo = UAN;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_LockingConnectorArtNo:"))
+                        {
+                            foreach(LockingConnectorDevice_ArticleNo LCDA in LockingConnectorDevice_ArticleNo.GetAll())
+                            {
+                                if(LCDA.ToString() == extractedValue_str)
+                                {
+                                    panel_LockingConnectorArtNo = LCDA;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CremonArtNo:"))
+                        {
+                            foreach(Cremon_HandleArtNo CHN in Cremon_HandleArtNo.GetAll())
+                            {
+                                if(CHN.ToString() == extractedValue_str)
+                                {
+                                    panel_CremonArtNo = CHN;
                                 }
                             }
                         }
@@ -10056,8 +10204,16 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_GS100CoverKitArtNo = panel_GS100CoverKitArtNo;
             pnlModel.Panel_OverLappingPanelQty = panel_OverLappingPanelQty;
             pnlModel.Panel_AluminumPullHandleArtNo = panel_AluminumPullHandleArticleNo;
-
-
+            pnlModel.Panel_OpenableStrikerArtNo = panel_OpenableStrikerArtNo;
+            pnlModel.Panel_CornerCleatArtNo = panel_CornerCleatArtNo;
+            pnlModel.Panel_CheveronArtNo = panel_CheveronArtNo;
+            pnlModel.Panel_RunUpBlockArtNo = panel_RunUpBlockArtNo;
+            pnlModel.Panel_PackerRodArtNo = panel_PackerRodArtNo;
+            pnlModel.Panel_LockingWedgeArtNo = panel_LockingWedgeArtNo;
+            pnlModel.Panel_SSCheveronArtNo = panel_SSCheveronArtNo;
+            pnlModel.Panel_Unica40ArtNo = panel_Unica40ArtNo;
+            pnlModel.Panel_LockingConnectorArtNo = panel_LockingConnectorArtNo;
+            pnlModel.Panel_CremonArtNo = panel_CremonArtNo;
 
 
             #region louvre 
@@ -10648,7 +10804,9 @@ namespace PresentationLayer.Presenter
              frm_TubularOption,
              frm_TubularWidthVisibility,
              frm_TubularHeightVisibility,
-             frm_CladdingVisibility;
+             frm_CladdingVisibility,
+             frm_InversionClipVisibility,
+             frm_InversionClipOption;
         Padding frm_Padding_int,
                 frmImageRenderer_Padding_int;
         float frmImageRenderer_Zoom,
@@ -10672,6 +10830,12 @@ namespace PresentationLayer.Presenter
         TrackProfile_ArticleNo frm_TrackProfile_ArticleNo;
         MilledFrameReinf_ArticleNo frm_MilledReinfArtNo;
         CladdingProfileForFrame_ArticleNo frm_CladdingProfileForFrame_ArticleNo;
+
+        InversionClip_ArticleNo frm_FrameInversionClip_ArtNo;
+        GlazingGasket_ArticleNo frm_FrameGlazingGasket_ArtNo;
+        Cheveron_ArticleNo frm_FrameCheveron_ArtNo;
+        CornerCleat_ArticleNo frm_FrameCornerCleat_ArtNo;
+
         #endregion
         #region WindoorModel Properties
 
@@ -11016,6 +11180,18 @@ namespace PresentationLayer.Presenter
         AluminumPullHandle_ArticleNo panel_AluminumPullHandleArticleNo;
         MotorizedMechRemote_ArticleNo panel_MotorizedMechRemoteArtNo;
         CenterProfile_ArticleNo panel_CenterProfileArtNo;
+
+        OpenableStriker_ArticleNo panel_OpenableStrikerArtNo;
+        CornerCleat_ArticleNo panel_CornerCleatArtNo;
+        Cheveron_ArticleNo panel_CheveronArtNo;
+        RunUpBlock_ArticleNo panel_RunUpBlockArtNo;
+        PackerRod_ArticleNo panel_PackerRodArtNo;
+        LockingWedge_ArticleNo panel_LockingWedgeArtNo;
+        SSCheveron_ArticleNo panel_SSCheveronArtNo;
+        Unica40_ArticleNo panel_Unica40ArtNo;
+        LockingConnectorDevice_ArticleNo panel_LockingConnectorArtNo;
+        Cremon_HandleArtNo panel_CremonArtNo;
+
         #endregion
         #endregion
         #region Divider Properties
@@ -11702,6 +11878,12 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_TubularWidth = frm_TubularWidth;
                         _frameModel.Frame_CladdingVisibility = frm_CladdingVisibility;
                         _frameModel.Frame_CladdingQty = frm_CladdingQty;
+                        _frameModel.Frame_InversionClipVisibility = frm_InversionClipVisibility;
+                        _frameModel.Frame_InversionClipOption = frm_InversionClipOption;
+                        _frameModel.FrameInversionClip_ArtNo = frm_FrameInversionClip_ArtNo;
+                        _frameModel.FrameGlazingGasket_ArtNo = frm_FrameGlazingGasket_ArtNo;
+                        _frameModel.FrameCheveron_ArtNo = frm_FrameCheveron_ArtNo;
+                        _frameModel.FrameCornerCleat_ArtNo = frm_FrameCornerCleat_ArtNo;
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
