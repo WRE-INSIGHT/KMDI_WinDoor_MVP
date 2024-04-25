@@ -1312,6 +1312,7 @@ namespace ModelLayer.Model.Quotation
                                         pnl_curCtrl.Insert_SealForHandle_MaterialList(Material_List);
                                         pnl_curCtrl.Insert_LouvreGallerySet_MaterialList(Material_List);
                                     }
+
                                     string where = "";
                                     if (pnl_curCtrl.Panel_SashPropertyVisibility == true)
                                     {
@@ -1321,6 +1322,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         where = "Frame";
                                     }
+
                                     if (!pnl_curCtrl.Panel_Type.Contains("Louver"))
                                     {
                                         pnl_curCtrl.Insert_GlazingBead_MaterialList(Material_List, where);
@@ -1947,6 +1949,11 @@ namespace ModelLayer.Model.Quotation
                                     pnl_curCtrl.Insert_GBSpacer_MaterialList(Material_List);
                                 }
 
+                                if (item.WD_profile.Contains("Alutek"))
+                                {
+                                    pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, pnl_curCtrl.Panel_SashPropertyVisibility);
+                                }
+
                                 if (pnl_curCtrl.Panel_ChkGlazingAdaptor == true)
                                 {
                                     pnl_curCtrl.Insert_GlazingAdapator_MaterialList(Material_List, where);
@@ -1991,7 +1998,8 @@ namespace ModelLayer.Model.Quotation
                         total_screws_fabrication += pnl.Add_SashPerimeter_screws4fab();
                         pnl.Insert_SashInfo_MaterialList(Material_List);
 
-                        if (pnl.Panel_Type.Contains("Fixed") == false)
+                        if (pnl.Panel_Type.Contains("Fixed") == false &&
+                            !item.WD_profile.Contains("Alutek"))
                         {
                             pnl.Insert_CoverProfileInfo_MaterialList(Material_List);
                         }
@@ -2232,7 +2240,9 @@ namespace ModelLayer.Model.Quotation
 
 
 
-                            if (pnl.Panel_HingeOptions == HingeOption._FrictionStay && pnl.Panel_MiddleCloserPairQty > 0)
+                            if (pnl.Panel_HingeOptions == HingeOption._FrictionStay &&
+                                pnl.Panel_MiddleCloserPairQty > 0 &&
+                                !item.WD_profile.Contains("Alutek"))
                             {
                                 pnl.Insert_MiddleCloser_MaterialList(Material_List);
                                 add_screws_fab_mc += (4 * pnl.Panel_MiddleCloserPairQty);//MC
@@ -2381,6 +2391,11 @@ namespace ModelLayer.Model.Quotation
                     if (!pnl.Panel_Type.Contains("Louver"))
                     {
                         pnl.Insert_GlazingBead_MaterialList(Material_List, where);
+                    }
+
+                    if (item.WD_profile.Contains("Alutek"))
+                    {
+                        pnl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl.Panel_GlassThickness, pnl.Panel_SashPropertyVisibility);
                     }
 
                     if ((pnl.Panel_Type.Contains("Awning") || pnl.Panel_Type.Contains("Casement")) &&
@@ -2548,11 +2563,11 @@ namespace ModelLayer.Model.Quotation
             }
             else
             {
-                Material_List.Rows.Add("Hole Cap M671",
-                               Expansion_BoltQty_Total,
-                               "pc(s)",
-                               "",
-                               "Frame");
+                //Material_List.Rows.Add("Hole Cap M671",
+                //               Expansion_BoltQty_Total,
+                //               "pc(s)",
+                //               "",
+                //               "Frame");
             }
             var query = from r in Material_List.AsEnumerable()
                         group r by new
@@ -4950,6 +4965,9 @@ namespace ModelLayer.Model.Quotation
                                                 DividerPricePerSqrMeter = Divider_84300_PricePerSqrMeter;
                                                 DividerReinPricePerSqrMeter = 0;
                                                 MechanicalJointPricePerPiece = 0;
+
+
+                                                MullionConnectorPrice += 2 * MullionConnectorPricePerPiece; // sa small lang meron dhil screw ang gamit sa big
                                             }
                                             else if (div.Div_ArtNo == Divider_ArticleNo._84301)
                                             {
@@ -4963,7 +4981,6 @@ namespace ModelLayer.Model.Quotation
                                                 DivPrice += ((div.Div_ExplosionWidth) / 1000m) * DividerPricePerSqrMeter;
                                                 TotalDividerPerimeter += div.Div_ExplosionWidth;// + 108;
 
-                                                MullionConnectorPrice += 2 * MullionConnectorPricePerPiece;
                                             }
                                             else if (cus_ref_date <= changeCondition_040423)
                                             {
@@ -7155,8 +7172,7 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         #endregion
 
-                                        #region Alutek
-
+                                        #region Alutek 
 
                                         OpenableStrikerPrice += 2 * OpenableStrikerPricePerPiece;
                                         CheveronPrice += 4 * CheveronPricePerPiece;
@@ -7168,10 +7184,7 @@ namespace ModelLayer.Model.Quotation
                                         //WaterDrainageWValvesPrice += 2 * WaterDrainageWValvesPricePerPiece;
                                         CremonHandlePrice += CremonHandlePricePerPiece;
                                         Unica40Price += Unica40PricePerPiece;
-
-
-
-
+                                         
                                         TotalGlassPerimeter += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m));
 
 

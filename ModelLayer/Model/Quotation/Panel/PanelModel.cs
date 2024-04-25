@@ -6611,8 +6611,10 @@ namespace ModelLayer.Model.Quotation.Panel
                               glass_weight = Panel_GlassThickness * ((Panel_GlassWidth / 1000f) * (Panel_GlassHeight / 1000f)) * 2.5f;
                         int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
 
-                        float total_weightWithAllowance = 0;
-                        total_weightWithAllowance = total_weight * 1.01f;
+                        //float total_weightWithAllowance = 0;
+                        //total_weightWithAllowance = total_weight * 1.01f; hindi na need lagyan - ren  04/11/24
+
+
 
                         if (total_weight <= 18)
                         {
@@ -7498,7 +7500,7 @@ namespace ModelLayer.Model.Quotation.Panel
             else
             {
                 #region NewAlgo 
-                if (divNxt_artNo == Divider_ArticleNo._7536 || divNxt_artNo == Divider_ArticleNo._2069) //base level
+                 if (divNxt_artNo == Divider_ArticleNo._7536 || divNxt_artNo == Divider_ArticleNo._2069) //base level
                 {
                     GB_deduction_forNxtPrev += (42 / 2);
                     Sash_deduction_forNxtPrev += (42 / 2);
@@ -7640,33 +7642,38 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                         else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
                         {
-                            if (panel_placement == "Last")
-                            {
-                                Sash_deduction_forNxtPrev += -35;
-                            }
-                            else if (panel_placement == "Somewhere in Between")
-                            {
-                                Sash_deduction_forNxtPrev += -35;
-                            }
-                            else if (panel_placement == "First")
-                            {
-                                Sash_deduction_forNxtPrev += 35;
-                            }
+                            Sash_deduction_forNxtPrev += 35;
+                            //current algo
+                            //if (panel_placement == "Last")
+                            //{
+                            //    Sash_deduction_forNxtPrev += -35;
+                            //}
+                            //else if (panel_placement == "Somewhere in Between")
+                            //{
+                            //    Sash_deduction_forNxtPrev += -35;
+                            //}
+                            //else if (panel_placement == "First")
+                            //{
+                            //    Sash_deduction_forNxtPrev += 35;
+                            //}
                         }
                         else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                         {
-                            if (panel_placement == "Last")
-                            {
-                                Sash_deduction_forNxtPrev += -53;
-                            }
-                            else if (panel_placement == "Somewhere in Between")
-                            {
-                                Sash_deduction_forNxtPrev += -53;
-                            }
-                            else if (panel_placement == "First")
-                            {
-                                Sash_deduction_forNxtPrev += 53;
-                            }
+                            Sash_deduction_forNxtPrev += 53;
+
+                            //current algo
+                            //if (panel_placement == "Last")
+                            //{
+                            //    Sash_deduction_forNxtPrev += -53;
+                            //}
+                            //else if (panel_placement == "Somewhere in Between")
+                            //{
+                            //    Sash_deduction_forNxtPrev += -53;
+                            //}
+                            //else if (panel_placement == "First")
+                            //{
+                            //    Sash_deduction_forNxtPrev += 53;
+                            //}
                         }
                         else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                         {
@@ -7754,11 +7761,29 @@ namespace ModelLayer.Model.Quotation.Panel
 
                             if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
                             {
-                                Sash_deduction_forNxtPrev += -35;
+                                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                {
+                                    Sash_deduction_forNxtPrev += -35;
+                                }
+                                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                {
+                                    Sash_deduction_forNxtPrev += -43;
+                                }
+
+                                // Sash_deduction_forNxtPrev += -35;
+
                             }
                             else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                             {
-                                Sash_deduction_forNxtPrev += -53;
+                                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                {
+                                    Sash_deduction_forNxtPrev += -35;
+                                }
+                                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                {
+                                    Sash_deduction_forNxtPrev += -43;
+                                }
+                                // Sash_deduction_forNxtPrev += -53;
                             }
                         }
 
@@ -7903,39 +7928,74 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += 39;
                             }
                         }
-                        else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110 ||
-                                 Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
+                        else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
                         {
-                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+
+                            if (panel_placement == "Somewhere in Between")
                             {
-                                if (panel_placement == "Last")
+                                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                { 
+                                    Sash_deduction_forNxtPrev += -35;
+                                }
+                                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                {
+                                    Sash_deduction_forNxtPrev += -43;
+                                }
+                            }
+                            else
+                            {
+                                Sash_deduction_forNxtPrev += 35;
+                            }
+                            //if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                            //{
+                            //    if (panel_placement == "Last")
+                            //    {
+                            //        Sash_deduction_forNxtPrev += -35;
+                            //    }
+                            //    else if (panel_placement == "Somewhere in Between")
+                            //    {
+                            //        Sash_deduction_forNxtPrev += -35;
+                            //    }
+                            //    else if (panel_placement == "First")
+                            //    {
+                            //        Sash_deduction_forNxtPrev += 35;
+                            //    }
+                            //}
+                            //else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                            //{
+                            //    if (panel_placement == "Last")
+                            //    {
+                            //        Sash_deduction_forNxtPrev += -43;
+                            //    }
+                            //    else if (panel_placement == "Somewhere in Between")
+                            //    {
+                            //        Sash_deduction_forNxtPrev += -43;
+                            //    }
+                            //    else if (panel_placement == "First")
+                            //    {
+                            //        Sash_deduction_forNxtPrev += 43;
+                            //    }
+                            //}
+                        }
+                        else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
+                        {
+
+                            if (panel_placement == "Somewhere in Between")
+                            {
+                                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                                 {
                                     Sash_deduction_forNxtPrev += -35;
                                 }
-                                else if (panel_placement == "Somewhere in Between")
+                                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                 {
-                                    Sash_deduction_forNxtPrev += -35;
-                                }
-                                else if (panel_placement == "First")
-                                {
-                                    Sash_deduction_forNxtPrev += 35;
+                                    Sash_deduction_forNxtPrev += -43;
                                 }
                             }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                            else
                             {
-                                if (panel_placement == "Last")
-                                {
-                                    Sash_deduction_forNxtPrev += -53;
-                                }
-                                else if (panel_placement == "Somewhere in Between")
-                                {
-                                    Sash_deduction_forNxtPrev += -53;
-                                }
-                                else if (panel_placement == "First")
-                                {
-                                    Sash_deduction_forNxtPrev += 53;
-                                }
+                                Sash_deduction_forNxtPrev += 53;
                             }
+                            //Sash_deduction_forNxtPrev += 53; 
                         }
                         else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                         {
@@ -8079,12 +8139,33 @@ namespace ModelLayer.Model.Quotation.Panel
                             }
                         }
                         else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
-                        {
-                            Sash_deduction_forNxtPrev += -35;
+                        { 
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                            {
+                                Sash_deduction_forNxtPrev += -35;
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                            {
+                                Sash_deduction_forNxtPrev += -43;
+                            }
+
+                            //current algo
+                            //Sash_deduction_forNxtPrev += -35;
                         }
                         else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                         {
-                            Sash_deduction_forNxtPrev += -53;
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                            {
+                                Sash_deduction_forNxtPrev += -35;
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                            {
+                                Sash_deduction_forNxtPrev += -43;
+                            }
+
+                            //current algo
+                            //Sash_deduction_forNxtPrev += -53;
+
                         }
                         else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                         {
@@ -8137,14 +8218,18 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += 39;
                                 }
                             }
-                            else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
+                            else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110 ||
+                                     Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                             {
-                                Sash_deduction_forNxtPrev += -35;
-                            }
-                            else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
-                            {
-                                Sash_deduction_forNxtPrev += -53;
-                            }
+                                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                {
+                                    Sash_deduction_forNxtPrev += -35;
+                                }
+                                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                {
+                                    Sash_deduction_forNxtPrev += -43;
+                                }
+                            } 
                             else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                             {
                                 Sash_deduction_forNxtPrev += 22;
@@ -8197,14 +8282,28 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += 39;
                                 }
                             }
-                            else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
+                            else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110 ||
+                                     Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                             {
-                                Sash_deduction_forNxtPrev += -35;
-                            }
-                            else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
-                            {
-                                Sash_deduction_forNxtPrev += -53;
-                            }
+                                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                {
+                                    Sash_deduction_forNxtPrev += -35;
+                                }
+                                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                {
+                                    Sash_deduction_forNxtPrev += -43;
+                                }
+                                //if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                //   Panel_HandleType == Handle_Type._None)
+                                //{
+                                //    Sash_deduction_forNxtPrev += -25;
+                                //}
+                                //else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                //         Panel_HandleType == Handle_Type._None)
+                                //{
+                                //    Sash_deduction_forNxtPrev += -27;
+                                //}
+                            } 
                             else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                             {
                                 Sash_deduction_forNxtPrev += 22;
@@ -8257,17 +8356,34 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += 39;
                                 }
                             }
-                            else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
+                            else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110 ||
+                                     Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                             {
                                 // ieedit pa
 
                                 //Sash_deduction_forNxtPrev += 35; // luma
-                                Sash_deduction_forNxtPrev += -35;
-                            }
-                            else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
-                            {
-                                Sash_deduction_forNxtPrev += -53;
-                            }
+                                //Sash_deduction_forNxtPrev += -35;
+                        
+                                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                {
+                                    Sash_deduction_forNxtPrev += -35;
+                                }
+                                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                {
+                                    Sash_deduction_forNxtPrev += -43;
+                                }
+                            
+                                //if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 || 
+                                //     Panel_HandleType == Handle_Type._None)
+                                //{
+                                //    Sash_deduction_forNxtPrev += -25;
+                                //}
+                                //else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                //         Panel_HandleType == Handle_Type._None)
+                                //{
+                                //    Sash_deduction_forNxtPrev += -27;
+                                //}
+                            } 
                             else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                             {
                                 Sash_deduction_forNxtPrev += 22;
@@ -8318,13 +8434,17 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += 39;
                                 }
                             }
-                            else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
+                            else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110 ||
+                                     Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                             {
-                                Sash_deduction_forNxtPrev += -35;
-                            }
-                            else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
-                            {
-                                Sash_deduction_forNxtPrev += -53;
+                                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                {
+                                    Sash_deduction_forNxtPrev += -35;
+                                }
+                                else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                {
+                                    Sash_deduction_forNxtPrev += -43;
+                                }
                             }
                             else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                             {
@@ -8361,10 +8481,34 @@ namespace ModelLayer.Model.Quotation.Panel
                             if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                             {
                                 Sash_deduction_forNxtPrev += -35;
+
+                                if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                   Panel_HandleType == Handle_Type._None)
+                                {
+                                    Sash_deduction_forNxtPrev += 30;
+                                }
+                                else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                         Panel_HandleType == Handle_Type._None)
+                                {
+                                    Sash_deduction_forNxtPrev += 31;
+                                }
                             }
                             else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                             {
-                                Sash_deduction_forNxtPrev += -53;
+                                Sash_deduction_forNxtPrev += -43;
+
+                                if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                   Panel_HandleType == Handle_Type._None)
+                                {
+                                    Sash_deduction_forNxtPrev += 38; 
+
+                                }
+                                else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                         Panel_HandleType == Handle_Type._None)
+                                {
+                                    Sash_deduction_forNxtPrev += 41; 
+
+                                }
                             }
 
                         }
@@ -8404,7 +8548,9 @@ namespace ModelLayer.Model.Quotation.Panel
                             {
                                 if (panel_placement == "Last")
                                 {
-                                    Sash_deduction_forNxtPrev += 35;
+                                    Sash_deduction_forNxtPrev += -35;
+                                    //Sash_deduction_forNxtPrev += 35; current
+
                                 }
                                 else if (panel_placement == "Somewhere in Between")
                                 {
@@ -8419,15 +8565,17 @@ namespace ModelLayer.Model.Quotation.Panel
                             {
                                 if (panel_placement == "Last")
                                 {
-                                    Sash_deduction_forNxtPrev += 53;
+                                    Sash_deduction_forNxtPrev += -43;
+                                    //current
+                                    //Sash_deduction_forNxtPrev += 43;
                                 }
                                 else if (panel_placement == "Somewhere in Between")
                                 {
-                                    Sash_deduction_forNxtPrev += -53;
+                                    Sash_deduction_forNxtPrev += -43;
                                 }
                                 else if (panel_placement == "First")
                                 {
-                                    Sash_deduction_forNxtPrev += -53;
+                                    Sash_deduction_forNxtPrev += -43;
                                 }
                             }
                         }
@@ -9123,6 +9271,11 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         if (cus_ref_date >= FormulaChangedate_031124)
                         {
+                            //if ((panel_placement == "Last" || panel_placement == "First") &&
+                            //     Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                            //{
+                            //    deduction_for_sashWD =  Math.Abs(deduction_for_sashWD); 
+                            //}  
                             Panel_SashWidth = (Panel_DisplayWidth - deduction_for_sashWD) + 5;
                         }
                         else
@@ -11442,17 +11595,25 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_GeorgianBar_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Georgian bar P" + PanelGlass_ID + " (Horizontal) " + Panel_GeorgianBarArtNo.DisplayName,
-                                   Panel_GeorgianBar_HorizontalQty * 2, "pc(s)",
-                                   Panel_GlassWidth + 5,
-                                   "Glass",
-                                   "");
+            if (Panel_GeorgianBar_HorizontalQty != 0)
+            {
+                tbl_explosion.Rows.Add("Georgian bar P" + PanelGlass_ID + " (Horizontal) " + Panel_GeorgianBarArtNo.DisplayName,
+                                  Panel_GeorgianBar_HorizontalQty * 2, "pc(s)",
+                                  Panel_GlassWidth + 5,
+                                  "Glass",
+                                  "");
+            }
+           
 
-            tbl_explosion.Rows.Add("Georgian bar P" + PanelGlass_ID + " (Vertical) " + Panel_GeorgianBarArtNo.DisplayName,
-                                   Panel_GeorgianBar_VerticalQty * 2, "pc(s)",
-                                   Panel_GlassHeight + 5,
-                                   "Glass",
-                                   "");
+            if (Panel_GeorgianBar_VerticalQty != 0)
+            {
+                tbl_explosion.Rows.Add("Georgian bar P" + PanelGlass_ID + " (Vertical) " + Panel_GeorgianBarArtNo.DisplayName,
+                                                  Panel_GeorgianBar_VerticalQty * 2, "pc(s)",
+                                                  Panel_GlassHeight + 5,
+                                                  "Glass",
+                                                  "");
+            }
+           
         }
         public void Insert_LatchAndDeadboltStriker_MaterialList(DataTable tbl_explosion)
         {

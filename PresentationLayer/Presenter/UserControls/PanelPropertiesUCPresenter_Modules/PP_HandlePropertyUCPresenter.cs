@@ -131,14 +131,26 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _panelModel.AdjustPropertyPanelHeight("addEspagnolette");
             _panelModel.AdjustHandlePropertyHeight("addEspagnolette");
 
-            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
-            _panelModel.AdjustPropertyPanelHeight("addExtension");
+         
 
             if (_panelModel.Panel_ParentMultiPanelModel != null)
             {
                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
-                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
             }
+
+            if (!_panelModel.Panel_Type.Contains("Sliding"))
+            {
+                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
+                _panelModel.AdjustPropertyPanelHeight("addExtension");
+
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                {
+                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
+                }
+            }
+         
+
+            
 
             int fieldExtension_count2 = 0;
 
@@ -1145,14 +1157,25 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.AdjustHandlePropertyHeight("minusEspagnolette");
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
 
-                        _panelModel.AdjustPropertyPanelHeight("minusExtension");
-                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
-
+                       
                         if (_panelModel.Panel_ParentMultiPanelModel != null)
                         {
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
                         }
+
+                       
+                        if (!_panelModel.Panel_Type.Contains("Sliding"))
+                        {
+                            _panelModel.AdjustPropertyPanelHeight("minusExtension");
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
+                             
+                            if (_panelModel.Panel_ParentMultiPanelModel != null)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
+                            }
+                        }
+                        
 
                         int fieldExtension_count2 = 0;
 
@@ -1894,7 +1917,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     else if (sel_handleType == Handle_Type._CremonHandle)
                     {
 
-                        #region Property Height Adjustment - Rotoswing For Sliding handle
+                        #region Property Height Adjustment - Cremon
                         if (!_mainPresenter.ItemLoad)
                         {
                             _panelModel.Panel_CremonArtNo = Cremon_HandleArtNo._H087;
