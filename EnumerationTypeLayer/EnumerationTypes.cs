@@ -80,6 +80,9 @@ namespace EnumerationTypeLayer
         {
             public static readonly DummyMullion_ArticleNo _7533 = new DummyMullion_ArticleNo(0, "7533");
             public static readonly DummyMullion_ArticleNo _385P = new DummyMullion_ArticleNo(1, "385P");
+            public static readonly DummyMullion_ArticleNo _84401 = new DummyMullion_ArticleNo(2, "84401"); // alutek
+
+
 
             private DummyMullion_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
