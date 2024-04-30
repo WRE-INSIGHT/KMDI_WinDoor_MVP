@@ -352,7 +352,7 @@ namespace PresentationLayer.Presenter.UserControls
         {
             try
             {
-                Console.WriteLine("nt cetner hinge " + _panelModel.Panel_NTCenterHingeVisibility);
+            
 
                 _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
                 if (!_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
@@ -504,7 +504,7 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                     }
                 }
-                Console.WriteLine("nt cetner hinge after" + _panelModel.Panel_NTCenterHingeVisibility);
+            
 
 
                 if (!_panelModel.Panel_Type.Contains("Sliding") && 
@@ -515,27 +515,27 @@ namespace PresentationLayer.Presenter.UserControls
                     _pnlPanelSpecs.Controls.Add(hingeProp);
                     hingeProp.Dock = DockStyle.Top;
                     hingeProp.BringToFront();
-                    Console.WriteLine("nt cetner hinge after 2" + _panelModel.Panel_NTCenterHingeVisibility);
+
                     IPP_2dHingePropertyUCPresenter _2dHingePropUCP = _pp_2dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     UserControl _2dhingeProp = (UserControl)_2dHingePropUCP.GetPP_2dHingePropertyUC();
                     _pnlPanelSpecs.Controls.Add(_2dhingeProp);
                     _2dhingeProp.Dock = DockStyle.Top;
                     _2dhingeProp.BringToFront();
-                    Console.WriteLine("nt cetner hinge after 3" + _panelModel.Panel_NTCenterHingeVisibility);
+
 
                     IPP_CenterHingePropertyUCPresenter centerHingePropUCP = _pp_centerHingePropertyUCPresenter.GetNewInstance(_panelModel, _unityC);
                     UserControl centerHingeProp = (UserControl)centerHingePropUCP.GetCenterHingePropertyUC();
                     _pnlPanelSpecs.Controls.Add(centerHingeProp);
                     centerHingeProp.Dock = DockStyle.Top;
                     centerHingeProp.BringToFront();
-                    Console.WriteLine("nt cetner hinge after 4" + _panelModel.Panel_NTCenterHingeVisibility);
+
                      
                     IPP_NTCenterHingePropertyUCPresenter ntcenterHingePropUCP = _pp_ntCenterHingePropertyUCPresenter.GetNewInstance(_panelModel, _unityC);
                     UserControl ntcenterHingeProp = (UserControl)ntcenterHingePropUCP.GetNTCenterHingePropertyUC();
                     _pnlPanelSpecs.Controls.Add(ntcenterHingeProp);
                     ntcenterHingeProp.Dock = DockStyle.Top;
                     ntcenterHingeProp.BringToFront();
-                    Console.WriteLine("nt cetner hinge after 5" + _panelModel.Panel_NTCenterHingeVisibility);
+
 
                 }
 
@@ -655,7 +655,8 @@ namespace PresentationLayer.Presenter.UserControls
                 }
 
 
-                if (_panelModel.Panel_Type.Contains("Casement"))
+                if (_panelModel.Panel_Type.Contains("Casement") &&
+                    !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                 {
                     _panelModel.Panel_ExtensionOptionsVisibility = true;
 

@@ -6705,6 +6705,33 @@ namespace ModelLayer.Model.Quotation.Panel
                         fs_dimension_based = FrictionStayCasement_ArticleNo._None;
                     }
 
+                    if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        float sash_weight = (((Panel_SashWidth / 1000f) + (Panel_SashHeight / 1000f)) * 2) * 0.95f,
+                              glass_weight = Panel_GlassThickness * ((Panel_GlassWidth / 1000f) * (Panel_GlassHeight / 1000f)) * 2.5f;
+                        int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
+
+                        float total_weightWithAllowance = 0;
+                        total_weightWithAllowance = total_weight * 1.01f;
+
+                        if (total_weight <= 18)
+                        {
+                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H091;
+                        }
+                        else if (total_weight >= 19 && total_weight <= 24)
+                        {
+                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H029;
+                        }
+                        else if (total_weight >= 25 && total_weight <= 45)
+                        {
+                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H231;
+                        }
+                        else if (total_weight >= 46)// upto 60kg
+                        {
+                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H232;
+                        }
+                    }
+
                     if (Panel_GlassThickness >= 12.0f)
                     {
                         float sash_weight = ((((Panel_SashWidth / 1000) + (Panel_SashHeight / 1000)) * 2) * 1) * 3,

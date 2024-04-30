@@ -7101,15 +7101,14 @@ namespace ModelLayer.Model.Quotation
                                         //sealant for glass
                                         Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) * 2) / 6842));
                                         if (pnl.Panel_GlassThickness != 0.0f)
-                                        {
-
+                                        { 
                                             if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
                                             {
-                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan;
                                             }
                                             else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
                                             {
-                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan;
                                             }
                                         }
 
@@ -8011,15 +8010,15 @@ namespace ModelLayer.Model.Quotation
                                         Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) * 2) / 6842));
                                         if (pnl.Panel_GlassThickness != 0.0f)
                                         {
-
-                                            if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
-                                            {
-                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
-                                            }
-                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
-                                            {
-                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
-                                            }
+                                            SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan;
+                                            //if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
+                                            //{
+                                            //    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                            //}
+                                            //else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
+                                            //{
+                                            //    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                            //}
                                         }
 
                                         #endregion
@@ -8610,14 +8609,16 @@ namespace ModelLayer.Model.Quotation
 
                                         if (pnl.Panel_GlassThickness != 0.0f)
                                         {
-                                            if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
-                                            {
-                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
-                                            }
-                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
-                                            {
-                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
-                                            }
+                                            SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan;
+
+                                            //if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
+                                            //{
+                                            //    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                            //}
+                                            //else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
+                                            //{
+                                            //    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                            //}
                                         }
                                         #endregion
 
@@ -10794,15 +10795,16 @@ namespace ModelLayer.Model.Quotation
                                 Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((Singlepnl.Panel_GlassWidth + Singlepnl.Panel_GlassHeight) * 2) / 6842));
                                 if (Singlepnl.Panel_GlassThickness != 0.0f)
                                 {
+                                    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan;
 
-                                    if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
-                                    {
-                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
-                                    }
-                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
-                                    {
-                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
-                                    }
+                                    //if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
+                                    //{
+                                    //    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                    //}
+                                    //else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
+                                    //{
+                                    //    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                    //}
                                 }
                                 #endregion
 
@@ -11677,15 +11679,16 @@ namespace ModelLayer.Model.Quotation
                                 Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((Singlepnl.Panel_GlassWidth + Singlepnl.Panel_GlassHeight) * 2) / 6842));
                                 if (Singlepnl.Panel_GlassThickness != 0.0f)
                                 {
+                                    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan;
 
-                                    if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
-                                    {
-                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
-                                    }
-                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
-                                    {
-                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
-                                    }
+                                    //if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
+                                    //{
+                                    //    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                    //}
+                                    //else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
+                                    //{
+                                    //    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                    //}
                                 }
                                 #endregion
 
@@ -12310,14 +12313,16 @@ namespace ModelLayer.Model.Quotation
 
                                 if (Singlepnl.Panel_GlassThickness != 0.0f)
                                 {
-                                    if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
-                                    {
-                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
-                                    }
-                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
-                                    {
-                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
-                                    }
+                                    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan;
+
+                                    //if ((wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White) && OneSideFoil_whiteBase == false)
+                                    //{
+                                    //    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                    //}
+                                    //else if (wdm.WD_BaseColor == Base_Color._DarkBrown || OneSideFoil_whiteBase == true)
+                                    //{
+                                    //    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                    //}
                                 }
                                 #endregion
 
