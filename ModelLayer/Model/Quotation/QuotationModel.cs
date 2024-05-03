@@ -3328,7 +3328,7 @@ namespace ModelLayer.Model.Quotation
                 TotalFramePerimeter,
                 TotalGlassPerimeter,
                 TotalDividerPerimeter,
-
+                TotalSashPerimeter,
                 //fixed
                 //CornerWindowPrice, inalis dahil same sila ni corner cleat = corner window
                 //WaterDrainageWValvesPrice, inalis dahil di na ginagamit
@@ -5968,6 +5968,8 @@ namespace ModelLayer.Model.Quotation
 
                                             #endregion
                                         }
+
+                                        TotalSashPerimeter += SashPerimeter;
                                         #endregion
 
                                         if (pnl.Panel_GlassThickness == 6.0f)
@@ -9659,6 +9661,8 @@ namespace ModelLayer.Model.Quotation
                                     GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
                                     #endregion
                                 }
+
+                                TotalSashPerimeter += SashPerimeter;
                                 #endregion
 
                                 if (Singlepnl.Panel_GlassThickness == 6.0f)
@@ -12458,7 +12462,7 @@ namespace ModelLayer.Model.Quotation
                         //InstallationCost = 1000 * DesignFactor * 1.1m;
                         //MobilizationCost = 1500 * PricingFactor;
                         MobilizationCost = 0;
-                        FoilingCost = (((TotalFramePerimeter + TotalDividerPerimeter) / 1000) * 440);
+                        FoilingCost = (((TotalFramePerimeter + TotalDividerPerimeter + TotalSashPerimeter) / 1000) * 440);
                         ProductionCost = ProductionCost + FoilingCost;
                         InstallationCost = (ProductionCost / 3);
                         AdditionalCost = (TotalFramePerimeter * 200) / 1000;
@@ -14227,7 +14231,7 @@ namespace ModelLayer.Model.Quotation
             ProductionCost = 0;
             TotalFramePerimeter = 0;
             TotalDividerPerimeter = 0;
-
+            TotalSashPerimeter = 0;
         }
 
         public QuotationModel(string quotation_ref_no,
