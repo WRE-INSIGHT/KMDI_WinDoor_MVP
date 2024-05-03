@@ -2984,6 +2984,7 @@ namespace PresentationLayer.Presenter
         private void OnChangeItemColorClickEventRaised(object sender, EventArgs e)
         {
             IChangeItemColorPresenter presenter = _changeItemColorPresenter.GetNewInstance(_unityC, this, _windoorModel);
+            presenter.GetChangeItemColorView().FromMainpresenter_profileType = _windoorModel.WD_profile;
             presenter.ShowView();
         }
 
@@ -13033,7 +13034,15 @@ namespace PresentationLayer.Presenter
                         }
                         else if (handletype == Handle_Type._Rio || handletype == Handle_Type._Rotoline || handletype == Handle_Type._MVD)
                         {
-
+                            if (handletype == Handle_Type._Rotoline)
+                            {
+                                if (!(frame_art == FrameProfile_ArticleNo._7507 && (sash_art == SashProfile_ArticleNo._374 || sash_art == SashProfile_ArticleNo._373)) &&
+                                    !(frame_art == FrameProfile_ArticleNo._6052 && sash_art == SashProfile_ArticleNo._6041) &&
+                                    !(frame_art == FrameProfile_ArticleNo._6050 && sash_art == SashProfile_ArticleNo._6040))
+                                {
+                                    incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
+                                }
+                            }
                             if (!(frame_art == FrameProfile_ArticleNo._7507 && (sash_art == SashProfile_ArticleNo._374 || sash_art == SashProfile_ArticleNo._373)) &&
                                 !(frame_art == FrameProfile_ArticleNo._6052 && sash_art == SashProfile_ArticleNo._6041))
                             {

@@ -242,6 +242,9 @@ namespace EnumerationTypeLayer
             public static readonly Base_Color _White = new Base_Color(0, "White");
             public static readonly Base_Color _Ivory = new Base_Color(1, "Ivory");
             public static readonly Base_Color _DarkBrown = new Base_Color(2, "Dark Brown");
+            public static readonly Base_Color _PowderCoated= new Base_Color(3, "Powder Coated");
+            public static readonly Base_Color _Foiled = new Base_Color(4, "Foiled");
+
 
             private Base_Color(int value, string displayName) : base(value, displayName) { }
         }
@@ -1316,6 +1319,10 @@ namespace EnumerationTypeLayer
             public static readonly BillOfMaterialsFilter _FittingAndSuppliesCost = new BillOfMaterialsFilter(4, "Fitting and Supplies");
             public static readonly BillOfMaterialsFilter _LouverCost = new BillOfMaterialsFilter(5, "Louver Material Cost");
             public static readonly BillOfMaterialsFilter _MeshCost = new BillOfMaterialsFilter(6, "Mesh Cost");
+            public static readonly BillOfMaterialsFilter _InstallationCost = new BillOfMaterialsFilter(7, "Installation Cost");
+
+
+            
 
 
             private BillOfMaterialsFilter(int value, string displayName) : base(value, displayName) { }

@@ -695,7 +695,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         #region Property Height Adjustment - Rotoline
                         if (!_mainPresenter.ItemLoad)
                         {
-                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642089;
+                            if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                            {
+                                _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774275;
+                            }
+                            else
+                            {
+                                _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642089;
+                            }
                         }
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;

@@ -4577,7 +4577,7 @@ namespace ModelLayer.Model.Quotation
 
                         #region FramePrice
                         FramePerimeter = (fr.Frame_Height + fr.Frame_Width) * 2;
-
+                        TotalFramePerimeter += FramePerimeter;
                         if (fr.Frame_ArtNo == FrameProfile_ArticleNo._7502)
                         {
                             if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
@@ -12345,6 +12345,9 @@ namespace ModelLayer.Model.Quotation
                         #endregion
 
                     }
+
+                    decimal powderCoatedMultiplier = 1;
+
                     if (wdm.WD_profile.Contains("Alutek"))
                     {
                         #region AlutekComputation
@@ -12360,10 +12363,10 @@ namespace ModelLayer.Model.Quotation
                         if (chckWithOperablepanel == false)
                         {
                             //Fixed
-                            GlazingShimPrice = 0;
+                            //GlazingShimPrice = 0;
                             //InversionClipPrice = 0;
                             // GlazingGasketForAluPrice = 0;
-                            MullionConnectorPrice = 0;
+                            //MullionConnectorPrice = 0;
 
                             //for the meantime  pero need alisin
                             //UniversalGasketPrice = 0;
@@ -12375,10 +12378,17 @@ namespace ModelLayer.Model.Quotation
                             //AW
                             //HoleCapePrice = 0;
                             //CornerWindowPrice = 0;
-                            UniversalGasketPrice = 0;
+                            //UniversalGasketPrice = 0;
                             //GasketPar3mmPrice = 0;
                         }
 
+                        if (wdm.WD_BaseColor == Base_Color._PowderCoated)
+                        {
+                            FramePrice = FramePrice * 1.8m;
+                            SashPrice = SashPrice * 1.8m;
+                            DivPrice = DivPrice * 1.8m;
+                            InversionClipPrice = InversionClipPrice * 1.8m;
+                        }
 
                         wdm.WD_CostingPoints = CostingPoints;
                         LaborCost = CostingPoints * CostPerPoints;
@@ -12391,14 +12401,14 @@ namespace ModelLayer.Model.Quotation
                                        Math.Round(CheveronPrice, 2) +
                                        //Math.Round(WaterDrainageWValvesPrice, 2) +
                                        //Math.Round(HoleCapePrice, 2) +
-                                       Math.Round(UniversalGasketPrice, 2) +
+                                       //Math.Round(UniversalGasketPrice, 2) +
                                        // Math.Round(GasketPar3mmPrice, 2) +
                                        //aw
-                                       Math.Round(InversionClipPrice, 2) +
+                                       Math.Round(InversionClipPrice * powderCoatedMultiplier, 2) +
                                        Math.Round(GbPrice, 2) +
                                        Math.Round(GlazingGasketForAluPrice, 2) +
                                        Math.Round(CenterGasketPrice, 2) +
-                                       Math.Round(GlazingShimPrice, 2) +
+                                       //Math.Round(GlazingShimPrice, 2) +
                                        Math.Round(TransmissionRodPrice, 2) +
                                        Math.Round(OpenableStrikerPrice, 2) +
                                        Math.Round(CornerCleatPrice, 2) +
