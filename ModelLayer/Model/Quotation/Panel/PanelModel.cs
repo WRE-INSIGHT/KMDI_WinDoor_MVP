@@ -7121,7 +7121,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
             cus_ref_date = DateTime.Parse(Date_Assigned);
 
-            DateTime FormulaChangedate_050324 = DateTime.Parse("05-03-2024"); //unequal panel for premi
+            DateTime FormulaChangedate_050624 = DateTime.Parse("05-06-2024"); //unequal panel for premi
 
             #endregion
 
@@ -7149,7 +7149,7 @@ namespace ModelLayer.Model.Quotation.Panel
             decimal pointFiveFrom84300forNxtPrev = 0,
                     pointFiveFrom84300forLeftorTopRightorBot = 0;
             if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)" &&
-                cus_ref_date <= FormulaChangedate_050324)
+                cus_ref_date <= FormulaChangedate_050624)
             {
                 #region OldAlgo 
                 if (divNxt_artNo == Divider_ArticleNo._7536 || divNxt_artNo == Divider_ArticleNo._2069) //base level
@@ -7567,7 +7567,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
                     {
-                        if (cus_ref_date >= FormulaChangedate_050324)
+                        if (cus_ref_date >= FormulaChangedate_050624)
                         {
                             //bago
                             GB_deduction_forNxtPrev += (61 / 2);
@@ -8183,7 +8183,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
                     {
-                        if (cus_ref_date >= FormulaChangedate_050324)
+                        if (cus_ref_date >= FormulaChangedate_050624)
                         {
                             //bago
                             GB_deduction_forNxtPrev += (61 / 2);
@@ -8942,7 +8942,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
                 {
-                    if (cus_ref_date >= FormulaChangedate_050324)
+                    if (cus_ref_date >= FormulaChangedate_050624)
                     {
                         //bago
                         GB_deduction_forLeftorTopRightorBot += (61 / 2);
@@ -9102,7 +9102,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
                 {
-                    if (cus_ref_date >= FormulaChangedate_050324)
+                    if (cus_ref_date >= FormulaChangedate_050624)
                     {
                         //bago
                         GB_deduction_forLeftorTopRightorBot += (61 / 2);
@@ -9235,7 +9235,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
                 {
-                    if (cus_ref_date >= FormulaChangedate_050324)
+                    if (cus_ref_date >= FormulaChangedate_050624)
                     {
                         //bago
                         GB_deduction_lvl3 += (61 / 2);
@@ -9272,7 +9272,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
                 {
-                    if (cus_ref_date >= FormulaChangedate_050324)
+                    if (cus_ref_date >= FormulaChangedate_050624)
                     {
                         //bago
                         GB_deduction_lvl3 += (61 / 2);
@@ -9573,7 +9573,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     if (Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
                     {
-                        if (cus_ref_date >= FormulaChangedate_050324)
+                        if (cus_ref_date >= FormulaChangedate_050624)
                         {
                             //if ((panel_placement == "Last" || panel_placement == "First") &&
                             //     Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
