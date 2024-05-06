@@ -78,7 +78,12 @@ namespace PresentationLayer.Presenter
         Timer _setTimerForToolTip;
         ContextMenuStrip _dgvContextMenuStrip;
         ToolStripMenuItem _screenPartialAddItemMenu;
-    
+
+        CheckBox checkbox;
+        NumericUpDown numericupdown;
+        ComboBox comboBox;
+
+
         public ScreenPresenter(IScreenView screenView,
                                IPrintQuotePresenter printQuotePresenter,
                                IScreenAddOnPropertiesUCPresenter screenAddOnPropertiesUCPresenter,
@@ -145,13 +150,13 @@ namespace PresentationLayer.Presenter
 
         }
 
-
-
         #region Events
         private void _screenView_addNewItemToolStripMenuItem_ClickEventRaised(object sender, EventArgs e)
         {
-            decimal itemNumberBasedOnParentItem = 0;
-            bool _qtyShowPrompt = false,_addNewItem = false;
+            decimal itemNumberBasedOnParentItem = 0, _childUnitPrice = 0m,_childNetPrice = 0m;
+            bool _qtysetIsMultiple = false,_addNewItem = false;
+            int itemqty = 1;
+            string title = "", promptext = "", numText = "",prioToDeDuct = "";
 
             if (_dgv_Screen.SelectedRows.Count == 1)
             {
@@ -161,94 +166,253 @@ namespace PresentationLayer.Presenter
                     var itemIndex = row.Cells[0].RowIndex;
                     decimal _deciItemNumber = Convert.ToDecimal(itemNumber);
 
-
                     foreach(IScreenPartialAdjustmentProperties item in _mainPresenter.Lst_ScreenPartialAdjustment)
                     {
-
+                        
                         if (_deciItemNumber == item.Screen_ItemNumber)
                         {
-                            if (item.Screen_Quantity > 1)
+                            if (item.Screen_Quantity > 1 || item.Screen_Set > 1)
                             {
-                                _qtyShowPrompt = false;
+                                _qtysetIsMultiple = true;
+                                title = "Quantity/Set";
+                                promptext = "\nAre you sure to add another screen?\nSet Priority to Deduct";
+                                numText = "Input Number of Items to Add";
+                            }
+                            else
+                            {
+                                _qtysetIsMultiple = false;
+                                title = "Validate Quantity/Set";
+                                promptext = "Notice: Only 1 Quantity Detected,\nAre you sure to add another screen?";
+                                numText = "Input Number of Items to Add";
+                            }
+
+                            if (DialogResult.OK == ShowQtyPrompt(title, promptext, numText,_qtysetIsMultiple, ref itemqty,ref prioToDeDuct))
+                            {
                                 _addNewItem = true;
                             }
                             else
                             {
-                                _qtyShowPrompt = true;
+                                _addNewItem = false;
                             }
-
-                            if (_qtyShowPrompt)
-                            {
-                                string _qty = "Input Number of Items to Add";
-
-                                if (DialogResult.OK == ShowQtyPrompt("Validate Quantity", "Quantity is less than 1,\nAre you sure to add another screen?", ref _qty))
-                                {
-                                    _addNewItem = true;
-                                }
-                                else
-                                {
-                                    _addNewItem = false;
-                                }
-
-                            }
-
+                            
                             if (_addNewItem)
                             {
+                                PriceNQtyDeduction(item,itemqty,prioToDeDuct,ref _childUnitPrice,ref _childNetPrice);
+
                                 _deciItemNumber = _deciItemNumber + .1m; // to avoid .1 in ItemNumber
 
-                                do
+                                for (int j = 1; j <= itemqty; j++)
                                 {
-                                    itemNumberBasedOnParentItem = _deciItemNumber + .1m;
-                                    _deciItemNumber = itemNumberBasedOnParentItem;
+                                    do
+                                    {
+                                        itemNumberBasedOnParentItem = _deciItemNumber + .1m;
+                                        _deciItemNumber = itemNumberBasedOnParentItem;
+                                    }
+
+                                    while (IsChildrenItemNumberExit(itemNumberBasedOnParentItem));
+
+                                    long ChildID = ChildIDBasedOnParent(item, itemNumberBasedOnParentItem); // 'item' for finding Parent Screen type
+
+                                    _mainPresenter.Dic_PaScreenID.Add(ChildID, itemNumberBasedOnParentItem); // add  to dic_PaScreenID child Id
+
+                                    IScreenPartialAdjustmentProperties Spap = new ScreenPartialAdjustmentProperties();
+
+                                    //decimal _netPriceForChildScreen = 0m;
+
+                                    //if (item.Screen_Quantity > 1 || item.Screen_Set > 1) // qty of parent screen
+                                    //{   
+                                    //    _netPriceForChildScreen = item.Screen_NetPrice / item.Screen_Quantity;
+                                    //}
+                                    //else
+                                    //{
+                                    //    _netPriceForChildScreen = item.Screen_NetPrice;
+                                    //}
+
+                                    Spap.Screen_id = ChildID; // primary key 
+                                    Spap.Screen_ItemNumber = itemNumberBasedOnParentItem; // child item number
+                                    Spap.Screen_WindoorID = item.Screen_WindoorID;
+                                    Spap.Screen_Description = item.Screen_Description;
+                                    Spap.Screen_Set = 1; // default value for child set 
+                                    Spap.Screen_DisplayedDimension = item.Screen_DisplayedDimension;
+                                    //Spap.Screen_UnitPrice = item.Screen_UnitPrice;
+                                    Spap.Screen_UnitPrice = _childUnitPrice;
+                                    Spap.Screen_Quantity = 1; //default value for child qty
+                                    //Spap.Screen_NetPrice = _netPriceForChildScreen;
+                                    Spap.Screen_NetPrice = _childNetPrice;
+                                    Spap.Screen_Discount = item.Screen_Discount;
+                                    Spap.Screen_TotalAmount = item.Screen_UnitPrice; // unitprice is equal to total amount for child screen
+
+                                    _mainPresenter.Lst_ScreenPartialAdjustment.Add(Spap);
+                                    Insert_Adjustment_to_DGV(Spap);
                                 }
-
-                                while (IsChildrenItemNumberExit(itemNumberBasedOnParentItem));
-
-                                long asd = ChildIDBasedOnParent(item, itemNumberBasedOnParentItem);
-
-                                _mainPresenter.Dic_PaScreenID.Add(ChildIDBasedOnParent(item, itemNumberBasedOnParentItem), itemNumberBasedOnParentItem); // add  to dic_PaScreenID child Id
 
                                 break;
                             }
                         }
                     }
                 }
+                SortScreenPartialAdjustmentList();
+                SortScreenDataTableAscending();
+
+                //PopulateDataGridView();
+
+                LoadScreenPartialAdjustmentColumns();
+
+                if (_mainPresenter.Lst_ScreenPartialAdjustment.Count != 0)
+                {
+                    LoadScreenPartialList();
+                }
+
             }
             
         }
-        private DialogResult ShowQtyPrompt(string title, string promptText, ref string value)
+
+        private void PriceNQtyDeduction(IScreenPartialAdjustmentProperties SPAP,int qtytoDeductForLoop,string prioToDeduct,ref decimal childUnitPrice, ref decimal childNetPrice)
         {
+            decimal UnitPriceWoSet,
+                    discountedPrice,
+                    newNetPriceWoQty,
+                    nUntPrce_x_nSet,
+                    nNetPrce_x_nQty,
+                    newTotalAmount,
+                    UnitPriceWnSet;
+
+            if (SPAP.Screen_Quantity > 1 || SPAP.Screen_Set > 1)
+           {
+                decimal newDiscount = (SPAP.Screen_Discount / 100m);
+
+                int newQtyCount = SPAP.Screen_Quantity;
+                int newSetCount = SPAP.Screen_Set;
+
+                if(prioToDeduct == "Quantity")
+                {
+                    newQtyCount = SPAP.Screen_Quantity - qtytoDeductForLoop;
+
+                    if(newQtyCount <= 1)
+                    {
+                        if(newQtyCount < 0)//if negative value deduct to set 
+                        {
+                            int negativeValueToSet = SPAP.Screen_Set - Math.Abs(newQtyCount);
+
+                            if(negativeValueToSet <= 1)
+                            {
+                                newSetCount = 1;
+                            }
+                            else
+                            {
+                                newSetCount = negativeValueToSet;
+                            }
+
+                        }
+                        newQtyCount = 1;
+                    }
+
+                }
+                else if (prioToDeduct == "Set")
+                {
+                    newSetCount = SPAP.Screen_Set- qtytoDeductForLoop;
+
+                    if (newSetCount <= 1)
+                    {
+                        if (newSetCount < 0)//if negative value deduct to set 
+                        {
+                            int negativeValueToSet = SPAP.Screen_Quantity - Math.Abs(newSetCount);
+
+                            if (negativeValueToSet <= 1)
+                            {
+                                newQtyCount = 1;
+                            }
+                            else
+                            {
+                                newQtyCount = negativeValueToSet;
+                            }
+                            
+                        }
+
+                        newSetCount = 1;
+
+                    }
+                }
+
+               #region based unitprice and netprice set and qty of 1
+                UnitPriceWoSet = SPAP.Screen_UnitPrice / SPAP.Screen_Set; //based
+                decimal basedDis = UnitPriceWoSet * newDiscount;
+                childUnitPrice = UnitPriceWoSet; // Based UnitPrice
+                childNetPrice = UnitPriceWoSet - basedDis; // based netprice
+                #endregion
+
+                UnitPriceWnSet = UnitPriceWoSet * newSetCount; 
+                discountedPrice = UnitPriceWnSet * newDiscount;  
+
+                newNetPriceWoQty = (UnitPriceWnSet - discountedPrice);
+                
+                nUntPrce_x_nSet = UnitPriceWoSet * newSetCount; // new unit orice
+                nNetPrce_x_nQty = newNetPriceWoQty * newQtyCount; // new net price
+
+                newTotalAmount = nUntPrce_x_nSet * newQtyCount; // screen total amount
+
+                SPAP.Screen_UnitPrice = nUntPrce_x_nSet;
+                SPAP.Screen_NetPrice = nNetPrce_x_nQty;
+                SPAP.Screen_Quantity = newQtyCount;
+                SPAP.Screen_Set = newSetCount;
+                SPAP.Screen_TotalAmount = newTotalAmount;
+
+
+
+            }
+        }
+
+        #region Custom Input Box
+        private DialogResult ShowQtyPrompt(string title, string promptText, string numText,bool ismultipleqtyset,ref int value,ref string prioDeduct)
+        {
+
             Form form = new Form();
             Label label = new Label();
             TextBox textBox = new TextBox();
             Button buttonOk = new Button();
             Button buttonCancel = new Button();
-            NumericUpDown numericupdown = new NumericUpDown();
+            numericupdown = new NumericUpDown();
+            checkbox = new CheckBox();
+            comboBox = new ComboBox();
+
+            comboBox.Items.Add("Quantity");
+            comboBox.Items.Add("Set");
+            comboBox.SelectedIndex = 0;
+
+            checkbox.CheckedChanged += Checkbox_CheckedChanged;
 
             form.Text = title;
             label.Text = promptText;
             //textBox.Text = value;
+
+            numericupdown.Maximum = decimal.MaxValue;
 
             buttonOk.Text = "OK";
             buttonCancel.Text = "Cancel";
             buttonOk.DialogResult = DialogResult.OK;
             buttonCancel.DialogResult = DialogResult.Cancel;
 
+            //positions
             label.SetBounds(9, 20, 372, 13);
             //textBox.SetBounds(12, 45, 372, 20);
-            numericupdown.SetBounds(12, 45, 372, 20);
-            buttonOk.SetBounds(228, 72, 75, 23);
-            buttonCancel.SetBounds(309, 72, 75, 23);
+            checkbox.SetBounds(190,30,372,20);
+            comboBox.SetBounds(122, 50, 180, 20); 
+            numericupdown.SetBounds(12, 78, 372, 20); // 25
+            buttonOk.SetBounds(228, 102, 80, 23); // 25
+            buttonCancel.SetBounds(309, 102, 75, 23); // 25
 
+            //anchors and dock
             label.AutoSize = true;
             //textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            checkbox.Anchor = numericupdown.Anchor | AnchorStyles.Right;
+            comboBox.Anchor = comboBox.Anchor | AnchorStyles.Right;
             numericupdown.Anchor = numericupdown.Anchor | AnchorStyles.Right;
             buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 
-            form.ClientSize = new Size(396, 107);
+            form.ClientSize = new Size(396, 130);
             //form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
-            form.Controls.AddRange(new Control[] { label, numericupdown, buttonOk, buttonCancel });
+            form.Controls.AddRange(new Control[] { comboBox,label, checkbox,numericupdown, buttonOk, buttonCancel });
             form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
             form.StartPosition = FormStartPosition.CenterScreen;
@@ -256,12 +420,64 @@ namespace PresentationLayer.Presenter
             form.MaximizeBox = false;
             form.AcceptButton = buttonOk;
             form.CancelButton = buttonCancel;
+            numericupdown.Enabled = false;
+            comboBox.Enabled = false;
+
+            if (ismultipleqtyset)
+            {
+                comboBox.Visible = true;
+            }
+            else
+            {
+                comboBox.Visible = false;
+            }
 
             DialogResult dialogResult = form.ShowDialog();
             //value = textBox.Text;
-            value = numericupdown.Value.ToString();
+
+            try
+            {
+                value = Convert.ToInt32(numericupdown.Value);
+                prioDeduct = comboBox.SelectedItem.ToString();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error: Display Custom Modal\n" + ex.Message);
+            }
+           
+              
             return dialogResult;
+        }   
+
+        private void Checkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkbox.Checked)
+            {
+                numericupdown.Enabled = true;
+                comboBox.Enabled = true;
+            }
+            else
+            {
+                numericupdown.Enabled = false;
+                comboBox.Enabled = false;
+            }
         }
+        #endregion
+
+        private ScreenType GetScreenType(IScreenPartialAdjustmentProperties spap)
+        {
+            ScreenType xs = null;
+            foreach(var item in _mainPresenter.Screen_List)
+            {
+                if(item.Screen_id == spap.Screen_id)
+                {
+                    xs = item.Screen_Types;
+                }
+            }
+
+            return xs;
+        }
+
         private bool IsQtyValidated(long ItemNumber)
         {
             bool isQtyMorethanOne = false;
@@ -886,42 +1102,25 @@ namespace PresentationLayer.Presenter
                 {
                     if (sortAscending == true)
                     {
-                        DataTable Sortedtable = _screenDT.AsEnumerable().OrderBy(r => r.Field<decimal>("Item No."))
-                                                                    .CopyToDataTable();
-                        _screenDT.Clear();
-                        _screenDT = Sortedtable.AsEnumerable().CopyToDataTable();
-                        sortAscending = false;
+                        SortScreenDataTableAscending();
 
                         if (_switchIsAddScreen)
                         {
                             #region Sort Screen List
-                            List<IScreenModel> sortedlist = new List<IScreenModel>();
-
-                            sortedlist = _mainPresenter.Screen_List.AsEnumerable().OrderBy(r => r.Screen_ItemNumber).ToList();
-                            _mainPresenter.Screen_List.Clear();
-
-                            _mainPresenter.Screen_List.AddRange(sortedlist);
+                            SortScreenList();
                             #endregion
                         }
                         else
                         {
                             #region Sort Screen Partial Adjusment List
-                            List<IScreenPartialAdjustmentProperties> sortedList = new List<IScreenPartialAdjustmentProperties>();
-                            sortedList = _mainPresenter.Lst_ScreenPartialAdjustment.AsEnumerable().OrderBy(r => r.Screen_ItemNumber).ToList();
-                            _mainPresenter.Lst_ScreenPartialAdjustment.Clear();
-
-                            _mainPresenter.Lst_ScreenPartialAdjustment.AddRange(sortedList);
+                            SortScreenPartialAdjustmentList();
                             #endregion
                         }
 
                     }
                     else
                     {
-                        DataTable Sortedtable = _screenDT.AsEnumerable().OrderBy(r => r.Field<decimal>("Item No.")).Reverse()
-                                                                    .CopyToDataTable();
-                        _screenDT.Clear();
-                        _screenDT = Sortedtable.AsEnumerable().CopyToDataTable();
-                        sortAscending = true;
+                        SortScreenDataTableDescending();
                     }
 
                     _dgv_Screen.DataSource = PopulateDgvScreen();
@@ -931,6 +1130,54 @@ namespace PresentationLayer.Presenter
             }
 
         }
+
+        #region Sort ScreenDT And List 
+
+        private void SortScreenPartialAdjustmentList()
+        {
+            #region Sort MainPresenter Partial Adjustment List
+            List<IScreenPartialAdjustmentProperties> sortedList = new List<IScreenPartialAdjustmentProperties>();
+            sortedList = _mainPresenter.Lst_ScreenPartialAdjustment.AsEnumerable().OrderBy(r => r.Screen_ItemNumber).ToList();
+            _mainPresenter.Lst_ScreenPartialAdjustment.Clear();
+
+            _mainPresenter.Lst_ScreenPartialAdjustment.AddRange(sortedList);
+            #endregion
+        }
+
+        private void SortScreenList()
+        {
+            #region Sort MainPresenter Screen List
+            List<IScreenModel> sortedlist = new List<IScreenModel>();
+
+            sortedlist = _mainPresenter.Screen_List.AsEnumerable().OrderBy(r => r.Screen_ItemNumber).ToList();
+            _mainPresenter.Screen_List.Clear();
+
+            _mainPresenter.Screen_List.AddRange(sortedlist);
+            #endregion
+        }
+
+        private void SortScreenDataTableAscending()
+        {
+            #region DataTable Ascending
+            DataTable Sortedtable = _screenDT.AsEnumerable().OrderBy(r => r.Field<decimal>("Item No."))
+                                                                    .CopyToDataTable();
+            _screenDT.Clear();
+            _screenDT = Sortedtable.AsEnumerable().CopyToDataTable();
+            sortAscending = false;
+            #endregion
+        }
+        private void SortScreenDataTableDescending()
+        {
+            #region DataTable Descending
+            DataTable Sortedtable = _screenDT.AsEnumerable().OrderBy(r => r.Field<decimal>("Item No.")).Reverse()
+                                                                    .CopyToDataTable();
+            _screenDT.Clear();
+            _screenDT = Sortedtable.AsEnumerable().CopyToDataTable();
+            sortAscending = true;
+            #endregion
+        }
+
+        #endregion
 
         private void _screenView_CellEndEditEventRaised(object sender, EventArgs e)
         {
@@ -1698,10 +1945,26 @@ namespace PresentationLayer.Presenter
                     {
                         if (scp.Screen_ItemNumber == item_num)
                         {
-                            decimal _adjustedPrice = _screenModel.Screen_UnitPrice - scp.Screen_UnitPrice;
+                            //decimal _adjustedPrice = _screenModel.Screen_UnitPrice - scp.Screen_UnitPrice; // missing qty
+
+                            if (_screenModel.Screen_Set > 1) // current model (computation)
+                            {
+                                _setDesc = " (Sets of " + _screenModel.Screen_Set.ToString() + ")";
+                            }
+                            else
+                            {
+                                _setDesc = " ";
+                            }
+
+
+                            decimal _adjustedPrice = 0;
+                            decimal frmSCMTotalAmount = Math.Round(_screenModel.Screen_TotalAmount,1);
+                            decimal frmLSTTotalAmount = Math.Round(scp.Screen_TotalAmount, 1);
+
+                            _adjustedPrice = frmSCMTotalAmount - frmLSTTotalAmount;
 
                             scp.Screen_Type_Revised = _screenModel.Screen_Types;
-                            scp.Screen_Description_Revised = _screenModel.Screen_Description;
+                            scp.Screen_Description_Revised = _screenModel.Screen_Description + _setDesc;
                             scp.Screen_Set_Revised = _screenModel.Screen_Set;
                             scp.Screen_UnitPrice_Revised = _screenModel.Screen_UnitPrice;
                             scp.Screen_Quantity_Revised = _screenModel.Screen_Quantity;
@@ -1710,6 +1973,7 @@ namespace PresentationLayer.Presenter
                             scp.Screen_DisplayedDimes_Revised = _screenModel.Screen_DisplayedDimension;
                             scp.Screen_Factor_Revised = _screenModel.Screen_Factor;
                             scp.Screen_AddOnsSpecialFactor_Revised = _screenModel.Screen_AddOnsSpecialFactor;
+                            scp.Screen_TotalAmount_Revised = _screenModel.Screen_TotalAmount;
                             scp.Screen_Adjustment_Price = _adjustedPrice;
 
                             foreach (DataRow dtrow in _screenDT.Select())

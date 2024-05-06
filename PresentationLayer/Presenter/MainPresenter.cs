@@ -3556,7 +3556,7 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(13.0f, "13 mm Clear", "NA", 2000.00m, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(14.0f, "14 mm Clear", "NA", 2100.00m, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(24.0f, "24 mm Clear", "NA", 3882.00m, true, false, false, false, false);
-                _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", 0m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", 0, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Clear", "NA", 0m, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Euro Grey", "NA", 0m, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Bronze", "NA", 985.00m, true, false, false, false, false);
@@ -9654,9 +9654,14 @@ namespace PresentationLayer.Presenter
                         #region Load ScreenPartialAdjustment_List
                         if (row_str != "●")
                         {
+
                             if (row_str.Contains("Screen_isAdjusted:"))
                             {
                                 pa_Screen_isAdjusted = Convert.ToBoolean(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_TotalAmount_Revised:"))
+                            {
+                                pa_Screen_TotalAmount_Revised = decimal.Parse(extractedValue_str);
                             }
                             else if (row_str.Contains("Screen_Adjustment_Price:"))
                             {
@@ -9707,6 +9712,14 @@ namespace PresentationLayer.Presenter
                                         pa_Screen_Type_Revised = sct;
                                     }
                                 }
+                            }
+                            else if (row_str.Contains("Screen_Discount:"))
+                            {
+                                pa_Screen_Discount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_TotalAmount:"))
+                            {
+                                pa_Screen_TotalAmount = decimal.Parse(extractedValue_str);
                             }
                             else if (row_str.Contains("Screen_NetPrice:"))
                             {
@@ -9766,7 +9779,10 @@ namespace PresentationLayer.Presenter
                 SPA.Screen_DisplayedDimension = pa_Screen_DisplayedDimension;
                 SPA.Screen_UnitPrice = pa_Screen_UnitPrice;
                 SPA.Screen_Quantity = pa_Screen_Quantity;
+                SPA.Screen_Discount = pa_Screen_Discount;
                 SPA.Screen_NetPrice = pa_Screen_NetPrice;
+                SPA.Screen_TotalAmount = pa_Screen_TotalAmount;
+
                 SPA.Screen_Type_Revised = pa_Screen_Type_Revised;
                 SPA.Screen_Description_Revised = pa_Screen_Description_Revised;
                 SPA.Screen_Set_Revised = pa_Screen_Set_Revised;
@@ -9778,8 +9794,11 @@ namespace PresentationLayer.Presenter
                 SPA.Screen_Factor_Revised = pa_Screen_Factor_Revised;
                 SPA.Screen_AddOnsSpecialFactor_Revised = pa_Screen_AddOnsSpecialFactor_Revised;
                 SPA.Screen_Adjustment_Price = pa_Screen_Adjustment_Price;
+                SPA.Screen_TotalAmount_Revised = pa_Screen_TotalAmount_Revised;
                 SPA.Screen_isAdjusted = pa_Screen_isAdjusted;
-                
+
+
+
                 Lst_ScreenPartialAdjustment.Add(SPA);
             }
             catch (Exception ex)
@@ -11397,13 +11416,15 @@ namespace PresentationLayer.Presenter
         #region IScreenPartialAdjustmentProperties
         long pa_Screen_id;
         decimal pa_Screen_ItemNumber, 
+                pa_Screen_TotalAmount,
                 pa_Screen_UnitPrice, 
                 pa_Screen_NetPrice, 
                 pa_Screen_UnitPrice_Revised,
                 pa_Screen_NetPrice_Revised, 
                 pa_Screen_Factor_Revised, 
                 pa_Screen_AddOnsSpecialFactor_Revised,
-                pa_Screen_Adjustment_Price;
+                pa_Screen_Adjustment_Price,
+                pa_Screen_TotalAmount_Revised;
 
         string pa_Screen_WindoorID, 
                pa_Screen_Description, 
@@ -11411,7 +11432,8 @@ namespace PresentationLayer.Presenter
                pa_Screen_Description_Revised,
                pa_Screen_DisplayedDimes_Revised;
 
-        int pa_Screen_Set, 
+        int pa_Screen_Set,
+            pa_Screen_Discount,
             pa_Screen_Quantity, 
             pa_Screen_Set_Revised, 
             pa_Screen_Quantity_Revised, 

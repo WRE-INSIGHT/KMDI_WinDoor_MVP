@@ -34,6 +34,7 @@
             this.dgv_Screen = new System.Windows.Forms.DataGridView();
             this.cmsScreen = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNewItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
             this.chkbox_allowEdit = new System.Windows.Forms.CheckBox();
             this.txt_ItemNum = new System.Windows.Forms.TextBox();
@@ -75,7 +76,6 @@
             this.tsBtnPrintScreen = new System.Windows.Forms.ToolStripButton();
             this.tsb_Switch = new System.Windows.Forms.ToolStripButton();
             this.tsb_ScreenAdjustment = new System.Windows.Forms.ToolStripButton();
-            this.addNewItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Screen)).BeginInit();
@@ -124,6 +124,7 @@
             this.dgv_Screen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_Screen.Location = new System.Drawing.Point(0, 37);
             this.dgv_Screen.Name = "dgv_Screen";
+            this.dgv_Screen.RowHeadersWidth = 51;
             this.dgv_Screen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Screen.Size = new System.Drawing.Size(798, 510);
             this.dgv_Screen.TabIndex = 30;
@@ -137,18 +138,26 @@
             // 
             // cmsScreen
             // 
+            this.cmsScreen.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsScreen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
             this.addNewItemToolStripMenuItem});
             this.cmsScreen.Name = "cmsScreen";
-            this.cmsScreen.Size = new System.Drawing.Size(153, 70);
+            this.cmsScreen.Size = new System.Drawing.Size(175, 52);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
             this.deleteToolStripMenuItem.Text = "delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // addNewItemToolStripMenuItem
+            // 
+            this.addNewItemToolStripMenuItem.Name = "addNewItemToolStripMenuItem";
+            this.addNewItemToolStripMenuItem.Size = new System.Drawing.Size(174, 24);
+            this.addNewItemToolStripMenuItem.Text = "Add New Item";
+            this.addNewItemToolStripMenuItem.Click += new System.EventHandler(this.addNewItemToolStripMenuItem_Click);
             // 
             // panel3
             // 
@@ -173,9 +182,9 @@
             // 
             this.chkbox_allowEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkbox_allowEdit.AutoSize = true;
-            this.chkbox_allowEdit.Location = new System.Drawing.Point(640, 12);
+            this.chkbox_allowEdit.Location = new System.Drawing.Point(637, 12);
             this.chkbox_allowEdit.Name = "chkbox_allowEdit";
-            this.chkbox_allowEdit.Size = new System.Drawing.Size(15, 14);
+            this.chkbox_allowEdit.Size = new System.Drawing.Size(18, 17);
             this.chkbox_allowEdit.TabIndex = 42;
             this.chkbox_allowEdit.UseVisualStyleBackColor = true;
             this.chkbox_allowEdit.CheckedChanged += new System.EventHandler(this.chkbox_allowEdit_CheckedChanged);
@@ -184,7 +193,7 @@
             // 
             this.txt_ItemNum.Location = new System.Drawing.Point(62, 8);
             this.txt_ItemNum.Name = "txt_ItemNum";
-            this.txt_ItemNum.Size = new System.Drawing.Size(38, 22);
+            this.txt_ItemNum.Size = new System.Drawing.Size(38, 26);
             this.txt_ItemNum.TabIndex = 0;
             this.txt_ItemNum.TextChanged += new System.EventHandler(this.txt_ItemNum_TextChanged);
             // 
@@ -193,7 +202,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.Size = new System.Drawing.Size(62, 19);
             this.label2.TabIndex = 41;
             this.label2.Text = "Item No.";
             // 
@@ -203,7 +212,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(656, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.Size = new System.Drawing.Size(78, 19);
             this.label1.TabIndex = 40;
             this.label1.Text = "Discount %";
             // 
@@ -212,7 +221,7 @@
             this.nud_Discount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nud_Discount.Location = new System.Drawing.Point(727, 8);
             this.nud_Discount.Name = "nud_Discount";
-            this.nud_Discount.Size = new System.Drawing.Size(59, 22);
+            this.nud_Discount.Size = new System.Drawing.Size(59, 26);
             this.nud_Discount.TabIndex = 4;
             this.nud_Discount.ValueChanged += new System.EventHandler(this.nud_Discount_ValueChanged);
             this.nud_Discount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_Discount_KeyPress);
@@ -221,7 +230,7 @@
             // 
             this.nud_Quantity.Location = new System.Drawing.Point(509, 8);
             this.nud_Quantity.Name = "nud_Quantity";
-            this.nud_Quantity.Size = new System.Drawing.Size(50, 22);
+            this.nud_Quantity.Size = new System.Drawing.Size(50, 26);
             this.nud_Quantity.TabIndex = 3;
             this.nud_Quantity.Value = new decimal(new int[] {
             1,
@@ -236,7 +245,7 @@
             this.lbl_Quantity.AutoSize = true;
             this.lbl_Quantity.Location = new System.Drawing.Point(452, 12);
             this.lbl_Quantity.Name = "lbl_Quantity";
-            this.lbl_Quantity.Size = new System.Drawing.Size(51, 13);
+            this.lbl_Quantity.Size = new System.Drawing.Size(63, 19);
             this.lbl_Quantity.TabIndex = 38;
             this.lbl_Quantity.Text = "Quantity";
             // 
@@ -244,7 +253,7 @@
             // 
             this.txt_windoorID.Location = new System.Drawing.Point(218, 8);
             this.txt_windoorID.Name = "txt_windoorID";
-            this.txt_windoorID.Size = new System.Drawing.Size(100, 22);
+            this.txt_windoorID.Size = new System.Drawing.Size(100, 26);
             this.txt_windoorID.TabIndex = 1;
             this.txt_windoorID.TextChanged += new System.EventHandler(this.txt_windoorID_TextChanged);
             // 
@@ -253,7 +262,7 @@
             this.lbl_WindoorID.AutoSize = true;
             this.lbl_WindoorID.Location = new System.Drawing.Point(117, 12);
             this.lbl_WindoorID.Name = "lbl_WindoorID";
-            this.lbl_WindoorID.Size = new System.Drawing.Size(95, 13);
+            this.lbl_WindoorID.Size = new System.Drawing.Size(113, 19);
             this.lbl_WindoorID.TabIndex = 35;
             this.lbl_WindoorID.Text = "Window/Door ID";
             // 
@@ -261,7 +270,7 @@
             // 
             this.nud_Sets.Location = new System.Drawing.Point(385, 8);
             this.nud_Sets.Name = "nud_Sets";
-            this.nud_Sets.Size = new System.Drawing.Size(50, 22);
+            this.nud_Sets.Size = new System.Drawing.Size(50, 26);
             this.nud_Sets.TabIndex = 2;
             this.nud_Sets.Value = new decimal(new int[] {
             1,
@@ -275,7 +284,7 @@
             this.lbl_sets.AutoSize = true;
             this.lbl_sets.Location = new System.Drawing.Point(330, 12);
             this.lbl_sets.Name = "lbl_sets";
-            this.lbl_sets.Size = new System.Drawing.Size(49, 13);
+            this.lbl_sets.Size = new System.Drawing.Size(59, 19);
             this.lbl_sets.TabIndex = 29;
             this.lbl_sets.Text = "No. Sets";
             // 
@@ -333,7 +342,7 @@
             this.cmb_freedomSize.FormattingEnabled = true;
             this.cmb_freedomSize.Location = new System.Drawing.Point(143, 111);
             this.cmb_freedomSize.Name = "cmb_freedomSize";
-            this.cmb_freedomSize.Size = new System.Drawing.Size(74, 21);
+            this.cmb_freedomSize.Size = new System.Drawing.Size(74, 27);
             this.cmb_freedomSize.TabIndex = 4;
             this.cmb_freedomSize.SelectedValueChanged += new System.EventHandler(this.cmb_freedomSize_SelectedValueChanged);
             // 
@@ -342,7 +351,7 @@
             this.lbl_plissedRd.AutoSize = true;
             this.lbl_plissedRd.Location = new System.Drawing.Point(12, 114);
             this.lbl_plissedRd.Name = "lbl_plissedRd";
-            this.lbl_plissedRd.Size = new System.Drawing.Size(40, 13);
+            this.lbl_plissedRd.Size = new System.Drawing.Size(48, 19);
             this.lbl_plissedRd.TabIndex = 87;
             this.lbl_plissedRd.Text = "Panels";
             // 
@@ -350,7 +359,7 @@
             // 
             this.nud_plissedRd.Location = new System.Drawing.Point(87, 110);
             this.nud_plissedRd.Name = "nud_plissedRd";
-            this.nud_plissedRd.Size = new System.Drawing.Size(50, 22);
+            this.nud_plissedRd.Size = new System.Drawing.Size(50, 26);
             this.nud_plissedRd.TabIndex = 3;
             this.nud_plissedRd.Value = new decimal(new int[] {
             1,
@@ -364,7 +373,7 @@
             this.lbl_Plissé.AutoSize = true;
             this.lbl_Plissé.Location = new System.Drawing.Point(11, 92);
             this.lbl_Plissé.Name = "lbl_Plissé";
-            this.lbl_Plissé.Size = new System.Drawing.Size(61, 13);
+            this.lbl_Plissé.Size = new System.Drawing.Size(74, 19);
             this.lbl_Plissé.TabIndex = 84;
             this.lbl_Plissé.Text = "Plissé Type";
             // 
@@ -373,7 +382,7 @@
             this.cmb_PlisséType.FormattingEnabled = true;
             this.cmb_PlisséType.Location = new System.Drawing.Point(87, 89);
             this.cmb_PlisséType.Name = "cmb_PlisséType";
-            this.cmb_PlisséType.Size = new System.Drawing.Size(130, 21);
+            this.cmb_PlisséType.Size = new System.Drawing.Size(130, 27);
             this.cmb_PlisséType.TabIndex = 2;
             this.cmb_PlisséType.SelectedIndexChanged += new System.EventHandler(this.cmb_PlisséType_SelectedIndexChanged);
             // 
@@ -382,7 +391,7 @@
             this.rdBtn_Door.AutoSize = true;
             this.rdBtn_Door.Location = new System.Drawing.Point(136, 11);
             this.rdBtn_Door.Name = "rdBtn_Door";
-            this.rdBtn_Door.Size = new System.Drawing.Size(51, 17);
+            this.rdBtn_Door.Size = new System.Drawing.Size(61, 23);
             this.rdBtn_Door.TabIndex = 5;
             this.rdBtn_Door.Text = "Door";
             this.rdBtn_Door.UseVisualStyleBackColor = true;
@@ -393,7 +402,7 @@
             this.rdBtn_Window.AutoSize = true;
             this.rdBtn_Window.Location = new System.Drawing.Point(26, 10);
             this.rdBtn_Window.Name = "rdBtn_Window";
-            this.rdBtn_Window.Size = new System.Drawing.Size(69, 17);
+            this.rdBtn_Window.Size = new System.Drawing.Size(80, 23);
             this.rdBtn_Window.TabIndex = 4;
             this.rdBtn_Window.Text = "Window";
             this.rdBtn_Window.UseVisualStyleBackColor = true;
@@ -414,7 +423,7 @@
             this.lbl_color.AutoSize = true;
             this.lbl_color.Location = new System.Drawing.Point(11, 40);
             this.lbl_color.Name = "lbl_color";
-            this.lbl_color.Size = new System.Drawing.Size(61, 13);
+            this.lbl_color.Size = new System.Drawing.Size(74, 19);
             this.lbl_color.TabIndex = 79;
             this.lbl_color.Text = "Base Color";
             // 
@@ -423,7 +432,7 @@
             this.cmb_baseColor.FormattingEnabled = true;
             this.cmb_baseColor.Location = new System.Drawing.Point(87, 37);
             this.cmb_baseColor.Name = "cmb_baseColor";
-            this.cmb_baseColor.Size = new System.Drawing.Size(130, 21);
+            this.cmb_baseColor.Size = new System.Drawing.Size(130, 27);
             this.cmb_baseColor.TabIndex = 0;
             this.cmb_baseColor.SelectedValueChanged += new System.EventHandler(this.cmb_baseColor_SelectedValueChanged);
             // 
@@ -431,7 +440,7 @@
             // 
             this.nud_Factor.Location = new System.Drawing.Point(87, 190);
             this.nud_Factor.Name = "nud_Factor";
-            this.nud_Factor.Size = new System.Drawing.Size(130, 22);
+            this.nud_Factor.Size = new System.Drawing.Size(130, 26);
             this.nud_Factor.TabIndex = 7;
             this.nud_Factor.ValueChanged += new System.EventHandler(this.nud_Factor_ValueChanged);
             this.nud_Factor.Enter += new System.EventHandler(this.nud_Factor_Enter);
@@ -441,7 +450,7 @@
             this.lbl_Factor.AutoSize = true;
             this.lbl_Factor.Location = new System.Drawing.Point(12, 192);
             this.lbl_Factor.Name = "lbl_Factor";
-            this.lbl_Factor.Size = new System.Drawing.Size(39, 13);
+            this.lbl_Factor.Size = new System.Drawing.Size(47, 19);
             this.lbl_Factor.TabIndex = 78;
             this.lbl_Factor.Text = "Factor";
             // 
@@ -450,7 +459,7 @@
             this.nud_TotalPrice.Enabled = false;
             this.nud_TotalPrice.Location = new System.Drawing.Point(87, 230);
             this.nud_TotalPrice.Name = "nud_TotalPrice";
-            this.nud_TotalPrice.Size = new System.Drawing.Size(130, 22);
+            this.nud_TotalPrice.Size = new System.Drawing.Size(130, 26);
             this.nud_TotalPrice.TabIndex = 8;
             this.nud_TotalPrice.TabStop = false;
             // 
@@ -459,7 +468,7 @@
             this.lbl_whitePrice.AutoSize = true;
             this.lbl_whitePrice.Location = new System.Drawing.Point(12, 232);
             this.lbl_whitePrice.Name = "lbl_whitePrice";
-            this.lbl_whitePrice.Size = new System.Drawing.Size(32, 13);
+            this.lbl_whitePrice.Size = new System.Drawing.Size(38, 19);
             this.lbl_whitePrice.TabIndex = 75;
             this.lbl_whitePrice.Text = "Total";
             // 
@@ -468,7 +477,7 @@
             this.lbl_ScreenType.AutoSize = true;
             this.lbl_ScreenType.Location = new System.Drawing.Point(11, 65);
             this.lbl_ScreenType.Name = "lbl_ScreenType";
-            this.lbl_ScreenType.Size = new System.Drawing.Size(67, 13);
+            this.lbl_ScreenType.Size = new System.Drawing.Size(81, 19);
             this.lbl_ScreenType.TabIndex = 74;
             this.lbl_ScreenType.Text = "Screen Type";
             // 
@@ -477,7 +486,7 @@
             this.cmb_ScreenType.FormattingEnabled = true;
             this.cmb_ScreenType.Location = new System.Drawing.Point(87, 62);
             this.cmb_ScreenType.Name = "cmb_ScreenType";
-            this.cmb_ScreenType.Size = new System.Drawing.Size(130, 21);
+            this.cmb_ScreenType.Size = new System.Drawing.Size(130, 27);
             this.cmb_ScreenType.TabIndex = 1;
             this.cmb_ScreenType.SelectedValueChanged += new System.EventHandler(this.cmb_ScreenType_SelectedValueChanged);
             // 
@@ -485,7 +494,7 @@
             // 
             this.nud_Height.Location = new System.Drawing.Point(87, 162);
             this.nud_Height.Name = "nud_Height";
-            this.nud_Height.Size = new System.Drawing.Size(130, 22);
+            this.nud_Height.Size = new System.Drawing.Size(130, 26);
             this.nud_Height.TabIndex = 6;
             this.nud_Height.ValueChanged += new System.EventHandler(this.nud_Height_ValueChanged);
             this.nud_Height.Enter += new System.EventHandler(this.nud_Height_Enter);
@@ -495,7 +504,7 @@
             // 
             this.nud_Width.Location = new System.Drawing.Point(87, 134);
             this.nud_Width.Name = "nud_Width";
-            this.nud_Width.Size = new System.Drawing.Size(130, 22);
+            this.nud_Width.Size = new System.Drawing.Size(130, 26);
             this.nud_Width.TabIndex = 5;
             this.nud_Width.ValueChanged += new System.EventHandler(this.nud_Width_ValueChanged);
             this.nud_Width.Enter += new System.EventHandler(this.nud_Width_Enter);
@@ -506,7 +515,7 @@
             this.lbl_ScreenHeight.AutoSize = true;
             this.lbl_ScreenHeight.Location = new System.Drawing.Point(12, 164);
             this.lbl_ScreenHeight.Name = "lbl_ScreenHeight";
-            this.lbl_ScreenHeight.Size = new System.Drawing.Size(42, 13);
+            this.lbl_ScreenHeight.Size = new System.Drawing.Size(50, 19);
             this.lbl_ScreenHeight.TabIndex = 73;
             this.lbl_ScreenHeight.Text = "Height";
             // 
@@ -515,7 +524,7 @@
             this.lbl_ScreenWidth.AutoSize = true;
             this.lbl_ScreenWidth.Location = new System.Drawing.Point(12, 136);
             this.lbl_ScreenWidth.Name = "lbl_ScreenWidth";
-            this.lbl_ScreenWidth.Size = new System.Drawing.Size(39, 13);
+            this.lbl_ScreenWidth.Size = new System.Drawing.Size(46, 19);
             this.lbl_ScreenWidth.TabIndex = 72;
             this.lbl_ScreenWidth.Text = "Width";
             // 
@@ -525,7 +534,7 @@
             this.label4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(2, 207);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(222, 15);
+            this.label4.Size = new System.Drawing.Size(266, 17);
             this.label4.TabIndex = 77;
             this.label4.Text = "___________________________________________";
             // 
@@ -552,7 +561,7 @@
             this.tsBtnExchangeRate.Image = global::PresentationLayer.Properties.Resources.exchange;
             this.tsBtnExchangeRate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnExchangeRate.Name = "tsBtnExchangeRate";
-            this.tsBtnExchangeRate.Size = new System.Drawing.Size(24, 24);
+            this.tsBtnExchangeRate.Size = new System.Drawing.Size(29, 24);
             this.tsBtnExchangeRate.Text = "Exchange Rate";
             this.tsBtnExchangeRate.Visible = false;
             this.tsBtnExchangeRate.Click += new System.EventHandler(this.tsBtnExchangeRate_Click);
@@ -563,7 +572,7 @@
             this.tsBtnPrintScreen.Image = global::PresentationLayer.Properties.Resources.print;
             this.tsBtnPrintScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnPrintScreen.Name = "tsBtnPrintScreen";
-            this.tsBtnPrintScreen.Size = new System.Drawing.Size(24, 24);
+            this.tsBtnPrintScreen.Size = new System.Drawing.Size(29, 24);
             this.tsBtnPrintScreen.Text = "Print Screen";
             this.tsBtnPrintScreen.Click += new System.EventHandler(this.tsBtnPrintScreen_Click);
             // 
@@ -586,21 +595,14 @@
             this.tsb_ScreenAdjustment.Image = global::PresentationLayer.Properties.Resources.PartialADJ;
             this.tsb_ScreenAdjustment.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_ScreenAdjustment.Name = "tsb_ScreenAdjustment";
-            this.tsb_ScreenAdjustment.Size = new System.Drawing.Size(24, 24);
+            this.tsb_ScreenAdjustment.Size = new System.Drawing.Size(29, 24);
             this.tsb_ScreenAdjustment.Text = "Screen Partial Adjustment";
             this.tsb_ScreenAdjustment.Visible = false;
             this.tsb_ScreenAdjustment.Click += new System.EventHandler(this.tsb_ScreenAdjustment_Click);
             // 
-            // addNewItemToolStripMenuItem
-            // 
-            this.addNewItemToolStripMenuItem.Name = "addNewItemToolStripMenuItem";
-            this.addNewItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.addNewItemToolStripMenuItem.Text = "Add New Item";
-            this.addNewItemToolStripMenuItem.Click += new System.EventHandler(this.addNewItemToolStripMenuItem_Click);
-            // 
             // ScreenView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1033, 574);
             this.Controls.Add(this.panel2);

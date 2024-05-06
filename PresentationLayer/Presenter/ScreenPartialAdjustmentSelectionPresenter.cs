@@ -73,9 +73,10 @@ namespace PresentationLayer.Presenter
                         if (!_mainPresenter.Dic_PaScreenID.Keys.Contains(ScrLst.Screen_id))
                         {
                             _mainPresenter.Dic_PaScreenID.Add(ScrLst.Screen_id, ScrLst.Screen_ItemNumber);
-                             ScrLst.Screen_isAdjusted = true;
 
                             IScreenPartialAdjustmentProperties Spap = new ScreenPartialAdjustmentProperties();
+
+                            Spap.Screen_isAdjusted = true;
 
                             Spap.Screen_id = ScrLst.Screen_id;
                             Spap.Screen_ItemNumber = ScrLst.Screen_ItemNumber;
@@ -86,6 +87,8 @@ namespace PresentationLayer.Presenter
                             Spap.Screen_UnitPrice = ScrLst.Screen_UnitPrice;
                             Spap.Screen_Quantity = ScrLst.Screen_Quantity;
                             Spap.Screen_NetPrice = ScrLst.Screen_NetPrice;
+                            Spap.Screen_Discount = ScrLst.Screen_Discount;
+                            Spap.Screen_TotalAmount = ScrLst.Screen_TotalAmount;
 
                             _mainPresenter.Lst_ScreenPartialAdjustment.Add(Spap);
                                                       
