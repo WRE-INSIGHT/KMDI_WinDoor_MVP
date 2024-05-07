@@ -7121,7 +7121,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
             cus_ref_date = DateTime.Parse(Date_Assigned);
 
-            DateTime FormulaChangedate_050624 = DateTime.Parse("05-06-2024"); //unequal panel for premi
+            DateTime FormulaChangedate_050724 = DateTime.Parse("05-07-2024"); //unequal panel for premi
 
             #endregion
 

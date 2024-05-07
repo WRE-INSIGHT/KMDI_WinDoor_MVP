@@ -4256,7 +4256,7 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_112323 = DateTime.Parse("11-23-2023"); // remove fs in motorize
         DateTime changeCondition_011724 = DateTime.Parse("01-17-2024"); // weatherbar and etc per frame
         DateTime changeCondition_030824 = DateTime.Parse("03-08-2024"); // FS price for casement 20hd
-        DateTime changeCondition_050624 = DateTime.Parse("05-06-2024"); // georgian bar multiplier
+        DateTime changeCondition_050724 = DateTime.Parse("05-07-2024"); // georgian bar multiplier
 
 
 
@@ -12516,7 +12516,7 @@ namespace ModelLayer.Model.Quotation
                             provinceBaseMultiplier = 3.00m;
                         }
                         
-                        if (cus_ref_date >= changeCondition_050624)
+                        if (cus_ref_date >= changeCondition_050724)
                         {
                             provinceBaseMultiplier = 1;
                         }
