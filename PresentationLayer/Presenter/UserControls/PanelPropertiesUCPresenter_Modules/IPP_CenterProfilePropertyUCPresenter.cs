@@ -10,6 +10,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         IPP_CenterProfilePropertyUC GetCenterProfilePropertyUC();
         IPP_CenterProfilePropertyUCPresenter CreateNewInstance(IMainPresenter mainPresenter,
                                                                       IUnityContainer unityC,
-                                                                      IPanelModel panelModel);
+                                                                      IPanelModel panelModel,
+                                                                      IFramePropertiesUCPresenter framePropertiesUCPresenter);
     }
 }

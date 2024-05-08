@@ -15,6 +15,8 @@
         public int frame_TubularHeightAndWidth = 52;
         public int frame_CladdingProperty_PanelHeight = 28;
         public int frame_InversionClipOption = 27;
+        public int frame_WithCenterClosureSelectedPanel = 30;
+
 
 
 

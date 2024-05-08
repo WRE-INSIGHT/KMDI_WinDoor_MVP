@@ -5422,6 +5422,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_PropertyHeight -= constants.panel_property_CenterProfileOptionsheight;
             }
 
+
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)
