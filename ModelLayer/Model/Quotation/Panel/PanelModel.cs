@@ -689,7 +689,7 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         private Color _panelBackColor;
-        public Color Panel_BackColor
+        public  Color Panel_BackColor
         {
             get
             {

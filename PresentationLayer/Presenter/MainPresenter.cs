@@ -995,7 +995,7 @@ namespace PresentationLayer.Presenter
             if (status == "DMPreSelection")
             {
                 _windoorModel.WD_CmenuDeleteVisibility = false;
-
+                
                 _tsLblStatus.Text = "Select one of the highlighted panel";
                 _controlRaised_forDMSelection = controlRaised;
                 _pnlControlSub.Enabled = false;
@@ -1928,8 +1928,9 @@ namespace PresentationLayer.Presenter
                                                           string.Empty);
 
             _screenModel.Screen_PVCVisibility = false;
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel, _screenPartialAdjustmentProperties);//, _screenDT);
-            glassThicknessPresenter.GetScreenView().ShowScreemView();
+            IScreenPresenter screenPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel, _screenPartialAdjustmentProperties);//, _screenDT);
+            screenPresenter.GetScreenView().ProfileType_MainPresenter = _windoorModel.WD_profile;
+            screenPresenter.GetScreenView().ShowScreemView();
         }
 
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)

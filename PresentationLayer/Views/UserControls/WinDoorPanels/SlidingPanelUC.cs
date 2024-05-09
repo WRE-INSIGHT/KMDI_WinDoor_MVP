@@ -113,6 +113,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["Panel_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Placement"]);
             this.DataBindings.Add(ModelBinding["Panel_CmenuDeleteVisibility"]);
+            this.DataBindings.Add(ModelBinding["Panel_BackColor"]);
         }
 
         private void SlidingPanelUC_Paint(object sender, PaintEventArgs e)

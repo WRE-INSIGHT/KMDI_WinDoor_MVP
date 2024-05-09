@@ -50,26 +50,25 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             int ndx = lst_pnl.IndexOf(CurrentPanel);
             string prev_pnl_str = lst_pnl[ndx - 1].Panel_Name;
 
-            CurrentPanel.Panel_BackColor = Color.Red;
-            //prev_pnl = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(prev => prev.Panel_Name == prev_pnl_str);
-            //prev_pnl.Panel_BackColor = Color.Red;
+            prev_pnl = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(prev => prev.Panel_Name == prev_pnl_str);
+            prev_pnl.Panel_BackColor = SystemColors.Highlight;
 
-            //string nxt_pnl_str = "";
-            //if (lst_pnl.Count > ndx + 1)
-            //{
-            //    nxt_pnl_str = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel[ndx + 1].Panel_Name;
-            //    nxt_pnl = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(prev => prev.Panel_Name == nxt_pnl_str);
-            //    nxt_pnl.Panel_BackColor = SystemColors.Highlight;
-            //}
+            string nxt_pnl_str = "";
+            if (lst_pnl.Count > ndx + 1)
+            {
+                nxt_pnl_str = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel[ndx + 1].Panel_Name;
+                nxt_pnl = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(prev => prev.Panel_Name == nxt_pnl_str);
+                nxt_pnl.Panel_BackColor = SystemColors.Highlight;
+            }
 
-            //if (_panelModel.Panel_ParentMultiPanelModel.MPanel_DividerEnabled == false)
-            //{
-            //    _mainPresenter.SetLblStatus("DMPreSelection", true, (Control)sender, _divModel, prev_pnl, nxt_pnl, this);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Not applicable on fixed panels", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            //}
+            if (_panelModel.Panel_ParentMultiPanelModel.MPanel_DividerEnabled == false)
+            {
+               // _mainPresenter.SetLblStatus("DMPreSelection", true, (Control)sender, _divModel, prev_pnl, nxt_pnl, this);
+            }
+            else
+            {
+                MessageBox.Show("Not applicable on fixed panels", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
         }
 
         private void _centerProfilePropertyUC_CenterProfileArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)

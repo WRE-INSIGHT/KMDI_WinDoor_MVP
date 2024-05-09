@@ -42,17 +42,18 @@
             // 
             // cmenu_sliding
             // 
+            this.cmenu_sliding.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmenu_sliding.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
             this.overlapSashToolStripMenuItem,
             this.addToScreenToolStripMenuItem});
             this.cmenu_sliding.Name = "cmenu_casement";
-            this.cmenu_sliding.Size = new System.Drawing.Size(153, 92);
+            this.cmenu_sliding.Size = new System.Drawing.Size(173, 76);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(172, 24);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -64,51 +65,53 @@
             this.BothToolStripMenuItem,
             this.noneToolStripMenuItem});
             this.overlapSashToolStripMenuItem.Name = "overlapSashToolStripMenuItem";
-            this.overlapSashToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.overlapSashToolStripMenuItem.Size = new System.Drawing.Size(172, 24);
             this.overlapSashToolStripMenuItem.Text = "Overlap Sash";
             // 
             // RightToolStripMenuItem
             // 
             this.RightToolStripMenuItem.Name = "RightToolStripMenuItem";
-            this.RightToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.RightToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
             this.RightToolStripMenuItem.Text = "Right";
             this.RightToolStripMenuItem.Click += new System.EventHandler(this.RightToolStripMenuItem_Click);
             // 
             // LeftToolStripMenuItem
             // 
             this.LeftToolStripMenuItem.Name = "LeftToolStripMenuItem";
-            this.LeftToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.LeftToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
             this.LeftToolStripMenuItem.Text = "Left";
             this.LeftToolStripMenuItem.Click += new System.EventHandler(this.LeftToolStripMenuItem_Click);
             // 
             // BothToolStripMenuItem
             // 
             this.BothToolStripMenuItem.Name = "BothToolStripMenuItem";
-            this.BothToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.BothToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
             this.BothToolStripMenuItem.Text = "Both";
             this.BothToolStripMenuItem.Click += new System.EventHandler(this.BothToolStripMenuItem_Click);
             // 
             // noneToolStripMenuItem
             // 
             this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
             this.noneToolStripMenuItem.Text = "None";
             this.noneToolStripMenuItem.Click += new System.EventHandler(this.noneToolStripMenuItem_Click);
             // 
             // addToScreenToolStripMenuItem
             // 
             this.addToScreenToolStripMenuItem.Name = "addToScreenToolStripMenuItem";
-            this.addToScreenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addToScreenToolStripMenuItem.Size = new System.Drawing.Size(172, 24);
             this.addToScreenToolStripMenuItem.Text = "Add to Screen";
             this.addToScreenToolStripMenuItem.Click += new System.EventHandler(this.addToScreenToolStripMenuItem_Click);
             // 
             // SlidingPanelUC
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SlidingPanelUC";
+            this.Size = new System.Drawing.Size(200, 185);
             this.SizeChanged += new System.EventHandler(this.SlidingPanelUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.SlidingPanelUC_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SlidingPanelUC_KeyDown);
