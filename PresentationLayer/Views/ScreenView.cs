@@ -305,28 +305,30 @@ namespace PresentationLayer.Views
 
         private void cmb_baseColor_SelectedValueChanged(object sender, EventArgs e)
         {
-            cmb_baseColor.DataSource = null;
-            List<Base_Color> baseColor = new List<Base_Color>();
-            foreach (Base_Color item in Base_Color.GetAll())
-            {
-                if (ProfileType_MainPresenter.Contains(SystemProfile_Option._Alutek.ToString()))
-                {
-                    if (item == Base_Color._PowderCoated ||
-                        item == Base_Color._Foiled)
-                    {
-                        baseColor.Add(item);
-                    }
-                }
-                else
-                {
-                    if (item != Base_Color._PowderCoated &&
-                        item != Base_Color._Foiled)
-                    {
-                        baseColor.Add(item);
-                    }
-                }
-            }
-            cmb_baseColor.DataSource = baseColor;
+            //cmb_baseColor.DataSource = null;
+            //List<Base_Color> baseColor = new List<Base_Color>();
+            //foreach (Base_Color item in Base_Color.GetAll())
+            //{
+            //    if (ProfileType_MainPresenter.Contains(SystemProfile_Option._Alutek.ToString()))
+            //    {
+            //        if (item == Base_Color._PowderCoated ||
+            //            item == Base_Color._Foiled)
+            //        {
+            //            baseColor.Add(item);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (item != Base_Color._PowderCoated &&
+            //            item != Base_Color._Foiled)
+            //        {
+            //            baseColor.Add(item);
+            //        }
+            //    }
+            //}
+            //cmb_baseColor.DataSource = baseColor;
+
+
             EventHelpers.RaiseEvent(sender, cmbbaseColorSelectedValueChangedEventRaised, e);
         }
 
