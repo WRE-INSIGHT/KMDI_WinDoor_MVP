@@ -829,6 +829,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             casementUC = (UserControl)sender;
             if (_panelModel.Panel_BackColor == SystemColors.Highlight)
             {
+                if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                    _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                {
+
+                }
+                else
+                { 
+                
+                
+                
                 _panelModel.Panel_HandleType = Handle_Type._None;
                 if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
                 {
@@ -870,6 +880,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 _mainPresenter.SetLblStatus("DMSelection", false, null, null, _panelModel);
                 _mainPresenter.GetCurrentPrice();
+                }
             }
             else
             {

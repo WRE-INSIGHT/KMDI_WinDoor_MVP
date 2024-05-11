@@ -12635,10 +12635,10 @@ namespace ModelLayer.Model.Quotation
 
 
                         MaterialCost = MaterialCost +
-                                       (MaterialCost * 0.05m) +
-                                       (MaterialCost * 0.10m) +
-                                       (MaterialCost * 0.12m) +
-                                       (MaterialCost * 0.16m);
+                                       (MaterialCost * 0.05m) + // wastage
+                                       (MaterialCost * 0.10m) + // contingenciesForOverheadCost
+                                       (MaterialCost * 0.12m) + // vat 
+                                       (MaterialCost * 0.16m); // DutiesAndTaxes
 
                         TotaPrice = Math.Round(LaborCost, 2) +
                                     Math.Round(InstallationCost, 2) +

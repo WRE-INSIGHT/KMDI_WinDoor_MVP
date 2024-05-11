@@ -287,38 +287,65 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 //Console.WriteLine("Panel Renderer Width " + _panelModel.PanelImageRenderer_Width);
                 //Console.WriteLine("Panel Renderer Height " + _panelModel.PanelImageRenderer_Height);
-                Console.WriteLine("Sliding WidthToBind " + _panelModel.Panel_WidthToBind);
-                Console.WriteLine("Sliding HeightToBind " + _panelModel.Panel_HeightToBind);
-                Console.WriteLine("Sliding Width " + _panelModel.Panel_Width);
-                Console.WriteLine("Sliding Height " + _panelModel.Panel_Height);
-                //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
-                //Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
+
+                    //Console.WriteLine("Sliding WidthToBind " + _panelModel.Panel_WidthToBind);
+                    //Console.WriteLine("Sliding HeightToBind " + _panelModel.Panel_HeightToBind);
+                    //Console.WriteLine("Sliding Width " + _panelModel.Panel_Width);
+                    //Console.WriteLine("Sliding Height " + _panelModel.Panel_Height);
+
+                    //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
+                    //Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
 
 
 
 
-                //Console.WriteLine("Panel_Display_Width " + _panelModel.Panel_DisplayWidth);
-                //Console.WriteLine("Panel_Display_Height " + _panelModel.Panel_DisplayHeight);
-                //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
-                //Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
+                    //Console.WriteLine("Panel_Display_Width " + _panelModel.Panel_DisplayWidth);
+                    //Console.WriteLine("Panel_Display_Height " + _panelModel.Panel_DisplayHeight);
+                    //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
+                    //Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
 
-                slidingUC = (UserControl)sender;
-                Console.WriteLine(slidingUC.Width);
-                Console.WriteLine("Location: " + slidingUC.Location);
-                Console.WriteLine();
-
-                IWindoorModel wdm = _frameModel.Frame_WindoorModel;
-                int propertyHeight = 0;
-                int framePropertyHeight = 0;
-                int concretePropertyHeight = 0;
-                int mpnlPropertyHeight = 0;
-                int pnlPropertyHeight = 0;
-                int divPropertyHeight = 0;
-                foreach (Control wndrObject in wdm.lst_objects)
+                    slidingUC = (UserControl)sender;
+                    //Console.WriteLine(slidingUC.Width);
+                    //Console.WriteLine("Location: " + slidingUC.Location);
+                 if (_panelModel.Panel_BackColor == SystemColors.Highlight)
                 {
-                    if (wndrObject.Name.Contains("Frame"))
+                    if (_mainPresenter.PrevPanelModel_forCenterProfileSelection != null)
                     {
-                        #region FrameModel
+                        _mainPresenter.PrevPanelModel_forCenterProfileSelection.Panel_BackColor = Color.DarkGray;
+                    }
+
+                    if (_mainPresenter.NxtPnlModel_forCenterProfileSelection != null)
+                    {
+                        _mainPresenter.NxtPnlModel_forCenterProfileSelection.Panel_BackColor = Color.DarkGray;
+                    }
+                    _mainPresenter.SetLblStatusForCenterProfile("CPSelection", 
+                                                                false, 
+                                                                null,
+                                                                _mainPresenter.PrevPanelModel_forCenterProfileSelection,
+                                                                null,
+                                                                _mainPresenter.NxtPnlModel_forCenterProfileSelection);
+
+
+
+                     
+                    
+                     
+                    _mainPresenter.GetCurrentPrice();
+                }
+                else
+                { 
+                     IWindoorModel wdm = _frameModel.Frame_WindoorModel;
+                     int propertyHeight = 0;
+                     int framePropertyHeight = 0;
+                     int concretePropertyHeight = 0;
+                     int mpnlPropertyHeight = 0;
+                     int pnlPropertyHeight = 0;
+                     int divPropertyHeight = 0;
+                     foreach (Control wndrObject in wdm.lst_objects)
+                     {
+                         if (wndrObject.Name.Contains("Frame"))
+                         {
+                             #region FrameModel
                         foreach (FrameModel frm in wdm.lst_frame)
                         {
                             if (frm.Frame_Name == wndrObject.Name)
@@ -500,10 +527,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
 
                         #endregion
-                    }
-                    else
-                    {
-                        #region Concrete
+                         }
+                         else
+                         {
+                             #region Concrete
 
                         foreach (IConcreteModel crm in wdm.lst_concrete)
                         {
@@ -514,9 +541,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             }
                         }
                         #endregion
-                    }
-
-
+                         } 
+                     }
                 }
             }
             catch (Exception ex)
