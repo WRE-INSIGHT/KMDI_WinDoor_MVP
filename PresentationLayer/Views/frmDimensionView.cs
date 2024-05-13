@@ -137,12 +137,7 @@ namespace PresentationLayer.Views
             }
             cmb_SystemOption.DataSource = systemType;
 
-            List<Base_Color> BaseColor = new List<Base_Color>();
-            foreach (Base_Color item in Base_Color.GetAll())
-            {
-                BaseColor.Add(item);
-            }
-            cmb_BaseColorOption.DataSource = BaseColor;
+       
 
 
             EventHelpers.RaiseEvent(this, frmDimensionLoadEventRaised, e);
@@ -176,6 +171,29 @@ namespace PresentationLayer.Views
 
         private void cmb_SystemOption_SelectedValueChanged(object sender, EventArgs e)
         {
+            SystemProfile_Option systemType = (SystemProfile_Option)((ComboBox)sender).SelectedValue;
+            //cmb_BaseColorOption.Items.Clear();
+            cmb_BaseColorOption.DataSource = null;
+            List<Base_Color> BaseColor = new List<Base_Color>();
+            foreach (Base_Color item in Base_Color.GetAll())
+            {
+                if (systemType == SystemProfile_Option._Alutek)
+                {
+                    if (item == Base_Color._Foiled || item == Base_Color._PowderCoated)
+                    {
+                        BaseColor.Add(item);
+                    }
+                }
+                else 
+                {
+                    if (item != Base_Color._Foiled && item != Base_Color._PowderCoated)
+                    {
+                        BaseColor.Add(item);
+                    }
+                } 
+            }
+            cmb_BaseColorOption.DataSource = BaseColor;
+
             EventHelpers.RaiseEvent(sender, cmbSystemOptionSelectedValueChangedEventRaised, e);
         }
 

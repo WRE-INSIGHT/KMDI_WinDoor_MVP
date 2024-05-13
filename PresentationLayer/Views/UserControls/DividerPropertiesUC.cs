@@ -267,6 +267,14 @@ namespace PresentationLayer.Views.UserControls
                         MessageBox.Show("You've selected an incompatible item, be advised", Divider_Type.ToString() + " Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+                else if (dm == DummyMullion_ArticleNo._84401)
+                {
+                    if (!(Panel_SashProfileArtNo == SashProfile_ArticleNo._84207 ||
+                        Panel_SashProfileArtNo == SashProfile_ArticleNo._84200))
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised", Divider_Type.ToString() + " Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
             }
             EventHelpers.RaiseEvent(sender, cmbDMArtNoSelectedValueChangedEventRaised, e);
         }
@@ -316,6 +324,17 @@ namespace PresentationLayer.Views.UserControls
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373 ||
                     Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
+            else if (dm == DummyMullion_ArticleNo._84401)
+            {
+                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._84207 || Panel_SashProfileArtNo == SashProfile_ArticleNo._84200)
                 {
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
                 }

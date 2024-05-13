@@ -36,6 +36,8 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_LouverGalleryPropertyUCPresenter _pp_louverGalleryPropertyUCPresenter;
         private IPP_LouverGallerySetPropertyUCPresenter _pp_louverGallerySetPropertyUCPresenter;
         private IPP_CenterProfilePropertyUCPresenter _pp_CenterProfilePropertyUCPresenter;
+        private IFramePropertiesUCPresenter _pp_FramePropertiesUCPresenter;
+
 
         private IUnityContainer _unityC;
 
@@ -61,7 +63,8 @@ namespace PresentationLayer.Presenter.UserControls
                                           IPP_LouverBladesPropertyUCPresenter pp_louverBladesPropertyUCPresenter,
                                           IPP_LouverGalleryPropertyUCPresenter pp_louverGalleryPropertyUCPresenter,
                                           IPP_LouverGallerySetPropertyUCPresenter pp_louverGallerySetPropertyUCPresenter,
-                                          IPP_CenterProfilePropertyUCPresenter pp_CenterProfilePropertyUCPresenter)
+                                          IPP_CenterProfilePropertyUCPresenter pp_CenterProfilePropertyUCPresenter,
+                                          IFramePropertiesUCPresenter pp_FramePropertiesUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
@@ -85,6 +88,8 @@ namespace PresentationLayer.Presenter.UserControls
             _pp_louverGalleryPropertyUCPresenter = pp_louverGalleryPropertyUCPresenter;
             _pp_louverGallerySetPropertyUCPresenter = pp_louverGallerySetPropertyUCPresenter;
             _pp_CenterProfilePropertyUCPresenter = pp_CenterProfilePropertyUCPresenter;
+            _pp_FramePropertiesUCPresenter = pp_FramePropertiesUCPresenter;
+
 
             SubscribeToEventsSetup();
         }
@@ -737,11 +742,15 @@ namespace PresentationLayer.Presenter.UserControls
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCenterProfile");
                     }
 
-                    IPP_CenterProfilePropertyUCPresenter centerProfile = _pp_CenterProfilePropertyUCPresenter.CreateNewInstance(_mainPresenter, _unityC, _panelModel);
+                    IPP_CenterProfilePropertyUCPresenter centerProfile = _pp_CenterProfilePropertyUCPresenter.CreateNewInstance(_mainPresenter, _unityC, _panelModel, _pp_FramePropertiesUCPresenter);
                     UserControl centerProfileProp = (UserControl)centerProfile.GetCenterProfilePropertyUC();
                     _pnlPanelSpecs.Controls.Add(centerProfileProp);
                     centerProfileProp.Dock = DockStyle.Top;
                     centerProfileProp.BringToFront();
+
+
+
+
                 }
 
                 IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);

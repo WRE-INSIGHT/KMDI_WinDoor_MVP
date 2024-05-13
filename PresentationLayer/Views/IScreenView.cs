@@ -12,7 +12,7 @@ namespace PresentationLayer.Views
         TextBox screen_itemnumber { get; set; }
         NumericUpDown screen_quantity { get; set; }
         NumericUpDown screen_discountpercentage { get; set; }
-
+        string ProfileType_MainPresenter { get; set; }
         string screenViewWindoorID { get; set; }
         event EventHandler ScreenViewLoadEventRaised;
         event EventHandler btnAddClickEventRaised;

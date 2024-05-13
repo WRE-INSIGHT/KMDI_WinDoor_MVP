@@ -429,6 +429,7 @@
             // 
             // cmb_baseColor
             // 
+            this.cmb_baseColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_baseColor.FormattingEnabled = true;
             this.cmb_baseColor.Location = new System.Drawing.Point(87, 37);
             this.cmb_baseColor.Name = "cmb_baseColor";
@@ -483,6 +484,7 @@
             // 
             // cmb_ScreenType
             // 
+            this.cmb_ScreenType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_ScreenType.FormattingEnabled = true;
             this.cmb_ScreenType.Location = new System.Drawing.Point(87, 62);
             this.cmb_ScreenType.Name = "cmb_ScreenType";
