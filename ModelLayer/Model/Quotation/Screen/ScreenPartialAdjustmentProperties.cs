@@ -21,6 +21,7 @@ namespace ModelLayer.Model.Quotation.Screen
         public decimal Screen_NetPrice { get; set; }
         public int Screen_Discount { get; set; }
         public decimal Screen_TotalAmount { get; set;}
+        public int Screen_Original_Quantity { get; set; }
         
 
         public ScreenType Screen_Type_Revised { get; set; }
@@ -36,5 +37,7 @@ namespace ModelLayer.Model.Quotation.Screen
         public decimal Screen_Adjustment_Price { get; set; }
         public bool Screen_isAdjusted { get; set; }
         public decimal Screen_TotalAmount_Revised { get; set;}
+        public bool Screen_IsChild { get; set; }
+        public long Screen_Parent_ID { get; set; }
     }
 }

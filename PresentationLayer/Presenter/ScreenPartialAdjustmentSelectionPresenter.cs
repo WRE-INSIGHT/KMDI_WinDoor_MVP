@@ -77,6 +77,9 @@ namespace PresentationLayer.Presenter
                             IScreenPartialAdjustmentProperties Spap = new ScreenPartialAdjustmentProperties();
 
                             Spap.Screen_isAdjusted = true;
+                            Spap.Screen_IsChild = false;
+                            Spap.Screen_Parent_ID = 0;
+                            Spap.Screen_Original_Quantity = ScrLst.Screen_Quantity;
 
                             Spap.Screen_id = ScrLst.Screen_id;
                             Spap.Screen_ItemNumber = ScrLst.Screen_ItemNumber;
