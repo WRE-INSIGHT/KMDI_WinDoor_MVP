@@ -7964,29 +7964,27 @@ namespace ModelLayer.Model.Quotation
 
                                                     BladeGlassMultiplier = ((1 * Convert.ToInt32(lvrgBlades)) / BladeUsagePerPieceOfGlassCount);//1 = # of panel
 
-                                                    if (pnl.Panel_GlassThicknessDesc.Contains("Clear"))
+                                                    if (pnl.Panel_GlassThicknessDesc == "6 mm Frosted Euro Grey")
                                                     {
-                                                        GlassBladePrice += ((191.21m * forex) / 40) * Math.Round(BladeGlassMultiplier);
-                                                        pnl.Panel_GlassPricePerSqrMeter = ((191.21m * forex) / 40);
-
-                                                    }
-                                                    else if (pnl.Panel_GlassThicknessDesc == "6mm Acid Etched Euro Grey")
-                                                    {
-                                                        GlassBladePrice += ((286.81m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                        GlassBladePrice += ((286.81m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                                         pnl.Panel_GlassPricePerSqrMeter = ((286.81m * forex) / 40);
-
                                                     }
-                                                    else if (pnl.Panel_GlassThicknessDesc.Contains("Acid Etched"))
+                                                    else if (pnl.Panel_GlassThicknessDesc.Contains("Frosted"))
                                                     {
-                                                        GlassBladePrice += ((262.91m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                        GlassBladePrice += ((262.91m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                                         pnl.Panel_GlassPricePerSqrMeter = ((262.91m * forex) / 40);
 
                                                     }
                                                     else if (pnl.Panel_GlassThicknessDesc.Contains("Euro Grey"))
                                                     {
-                                                        GlassBladePrice += ((215.11m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                        GlassBladePrice += ((215.11m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                                         pnl.Panel_GlassPricePerSqrMeter = ((215.11m * forex) / 40);
 
+                                                    }
+                                                    else if (pnl.Panel_GlassThicknessDesc.Contains("Clear"))
+                                                    {
+                                                        GlassBladePrice += ((191.21m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
+                                                        pnl.Panel_GlassPricePerSqrMeter = ((191.21m * forex) / 40);
                                                     }
                                                 }
                                             }
@@ -11579,18 +11577,13 @@ namespace ModelLayer.Model.Quotation
                                             }
 
                                             BladeGlassMultiplier = ((1 * Convert.ToInt32(lvrgBlades)) / BladeUsagePerPieceOfGlassCount);//1 = # of panel
-
-                                            if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
-                                            {
-                                                GlassBladePrice += ((191.21m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
-                                                Singlepnl.Panel_GlassPricePerSqrMeter = ((191.21m * forex) / 40);
-                                            }
-                                            else if (Singlepnl.Panel_GlassThicknessDesc == "6mm Acid Etched Euro Grey")
+                                             
+                                            if (Singlepnl.Panel_GlassThicknessDesc == "6 mm Frosted Euro Grey")
                                             {
                                                 GlassBladePrice += ((286.81m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                                 Singlepnl.Panel_GlassPricePerSqrMeter = ((286.81m * forex) / 40);
                                             }
-                                            else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Acid Etched"))
+                                            else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Frosted"))
                                             {
                                                 GlassBladePrice += ((262.91m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                                 Singlepnl.Panel_GlassPricePerSqrMeter = ((262.91m * forex) / 40);
@@ -11601,6 +11594,11 @@ namespace ModelLayer.Model.Quotation
                                                 GlassBladePrice += ((215.11m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                                 Singlepnl.Panel_GlassPricePerSqrMeter = ((215.11m * forex) / 40);
 
+                                            }
+                                            else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
+                                            {
+                                                GlassBladePrice += ((191.21m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
+                                                Singlepnl.Panel_GlassPricePerSqrMeter = ((191.21m * forex) / 40);
                                             }
                                         }
                                     }
