@@ -3605,7 +3605,7 @@ namespace PresentationLayer.Presenter
                 {
                     _glassThicknessDT.Clear();
                 }
-
+                decimal forex = 55m;
                 #region Single
                 //single Annealed
                 _glassThicknessDT.Rows.Add(0.0f, "Unglazed", "NA", 0m, true, false, false, false, false);
@@ -3626,9 +3626,9 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(13.0f, "13 mm Clear", "NA", 2000.00m, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(14.0f, "14 mm Clear", "NA", 2100.00m, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(24.0f, "24 mm Clear", "NA", 3882.00m, true, false, false, false, false);
-                _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", 0m, true, false, false, false, false);
-                _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Clear", "NA", 0m, true, false, false, false, false);
-                _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Euro Grey", "NA", 0m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", Math.Round(((215.11m * forex) / 40), 2), true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Frosted Clear", "NA", Math.Round(((262.91m * forex) / 40), 2), true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Frosted Euro Grey", "NA", Math.Round(((286.81m * forex) / 40), 2), true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Bronze", "NA", 985.00m, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Bronze", "NA", 2334.00m, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Bronze", "NA", 2334.00m, true, false, false, false, false);
