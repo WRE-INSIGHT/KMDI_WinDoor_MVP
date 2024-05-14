@@ -320,10 +320,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     _mainPresenter.SetLblStatusForCenterProfile("CPSelection", 
                                                                 false, 
-                                                                null,
-                                                                _mainPresenter.PrevPanelModel_forCenterProfileSelection,
-                                                                null,
-                                                                _mainPresenter.NxtPnlModel_forCenterProfileSelection);
+                                                                null);
 
 
 

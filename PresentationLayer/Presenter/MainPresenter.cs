@@ -1071,7 +1071,16 @@ namespace PresentationLayer.Presenter
                 _prevPanelModel_forCenterProfileSelection = prev_pnl;
                 _currentPanelModel_forCenterProfileSelection = curnt_pnl;
                 _nxtPanelModel_forCenterProfileSelection = nxt_pnl;
-                 
+
+                if (prev_pnl != null)
+                {
+                    prev_pnl.Panel_PartnerWithCenterProfile = false;
+                }
+
+                if (nxt_pnl != null)
+                {
+                    nxt_pnl.Panel_PartnerWithCenterProfile = false;
+                }
             }
             else if (status == "CPSelection") 
             {
