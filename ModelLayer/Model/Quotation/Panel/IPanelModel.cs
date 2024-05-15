@@ -527,7 +527,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_CremonHandle_MaterialList(DataTable tbl_explosion);
         void Insert_Pegstay_MaterialList(DataTable tbl_explosion);
         void Insert_AlutekStriker_MaterialList(DataTable tbl_explosion);
-
+        void Insert_CenterProfile_MaterialList(DataTable tbl_explosion);
         #endregion
 
         int MotorizeMechQty();

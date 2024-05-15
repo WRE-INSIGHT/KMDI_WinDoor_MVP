@@ -7537,7 +7537,6 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else
             {
-          
                 #region NewAlgo 
                 if (divNxt_artNo == Divider_ArticleNo._7536 || divNxt_artNo == Divider_ArticleNo._2069) //base level
                 {
@@ -12947,7 +12946,14 @@ namespace ModelLayer.Model.Quotation.Panel
                                    @"");
         }
 
-
+        public void Insert_CenterProfile_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Center Profile " + Panel_CenterProfileArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   Panel_SashHeight - 5,
+                                   "Sash",
+                                   @"");
+        }
 
         public int Add_SashPerimeter_screws4fab()
         {

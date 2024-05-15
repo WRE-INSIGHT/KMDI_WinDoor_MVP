@@ -103,12 +103,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     _centerProfilePropertyUC.AddHT_FormBody(constants.frame_WithCenterClosureSelectedPanel);
                     withCenterProfile = true; 
-                }
-
+                } 
             }
-
-            Console.WriteLine(CenterProfile_ArticleNo._None.ToString());
-
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _centerProfilePropertyUC_CenterProfilePropertyUCLoadEventRaised(object sender, EventArgs e)
