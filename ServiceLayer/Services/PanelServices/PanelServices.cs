@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.User;
 using ServiceLayer.CommonServices;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -32,6 +33,7 @@ namespace ServiceLayer.Services.PanelServices
                                             int panelIndexInsideMPanel,
                                             float panelImageRendererZoom,
                                             float panelZoom,
+                                            IUserModel panelParentUserModel,
                                             IFrameModel panelFrameModelParent,
                                             IMultiPanelModel panelMultiPanelParent,
                                             GlazingBead_ArticleNo panelGlazingBeadArtNo,
@@ -100,6 +102,7 @@ namespace ServiceLayer.Services.PanelServices
                                              panelIndexInsideMPanel,
                                              panelImageRendererZoom,
                                              panelZoom,
+                                             panelParentUserModel,
                                              panelFrameModelParent,
                                              panelMultiPanelParent,
                                              panelGlazingBeadArtNo,
@@ -171,6 +174,7 @@ namespace ServiceLayer.Services.PanelServices
                                          string panelType,
                                          bool panelVisibility,
                                          float panelZoom,
+                                         IUserModel panelParentUserModel,
                                          IFrameModel panelFrameModelParent,
                                          IMultiPanelModel panelMultiPanelParent,
                                          int panelDisplayWidth,
@@ -223,7 +227,7 @@ namespace ServiceLayer.Services.PanelServices
                                          bool panelOrient = false,
                                          HingeOption panelHingeOptions = null,
                                          bool panelSlidingTypeVisibility = false,
-                                         SlidingTypes panelSlidingTypes = null, 
+                                         SlidingTypes panelSlidingTypes = null,
                                          string glasstype_insu_lumi = null,
                                          decimal glasspricepersqrmeter = 0,
                                          MotorizedMechRemote_ArticleNo panelMotorizedMechRemoteArtNo = null,
@@ -232,13 +236,13 @@ namespace ServiceLayer.Services.PanelServices
         {
             if (panelName == "")
             {
-                if(panelID == 0)
+                if (panelID == 0)
                 {
-                    panelID = 1; 
+                    panelID = 1;
                 }
                 panelName = panelType.Replace(" Panel", "") + "PanelUC_" + panelID;
             }
-            
+
             if (panelHingeOptions == null)
             {
                 panelHingeOptions = HingeOption._FrictionStay;
@@ -263,6 +267,7 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelIndexInsideMPanel,
                                                        panelImageRendererZoom,
                                                        panelZoom,
+                                                       panelParentUserModel,
                                                        panelFrameModelParent,
                                                        panelMultiPanelParent,
                                                        panelGlazingBeadArtNo,
@@ -309,7 +314,7 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelGeorgianBarOptionVisibility,
                                                        panelHingeOptions,
                                                        panelSlidingTypeVisibility,
-                                                       panelSlidingTypes, 
+                                                       panelSlidingTypes,
                                                        glasstype_insu_lumi,
                                                        glasspricepersqrmeter,
                                                        panelMotorizedMechRemoteArtNo,

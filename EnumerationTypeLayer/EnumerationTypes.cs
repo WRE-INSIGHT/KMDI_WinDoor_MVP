@@ -9,6 +9,7 @@ namespace EnumerationTypeLayer
             public static readonly SystemProfile_Option _C70 = new SystemProfile_Option(0, "C70");
             public static readonly SystemProfile_Option _G58 = new SystemProfile_Option(1, "G58");
             public static readonly SystemProfile_Option _Premiline = new SystemProfile_Option(2, "Premiline");
+            public static readonly SystemProfile_Option _Alutek = new SystemProfile_Option(3, "Alutek");
 
             private SystemProfile_Option(int value, string displayName) : base(value, displayName) { }
         }
@@ -19,6 +20,8 @@ namespace EnumerationTypeLayer
             public static readonly FrameProfile_ArticleNo _2060 = new FrameProfile_ArticleNo(2, "2060"); //G58
             public static readonly FrameProfile_ArticleNo _6050 = new FrameProfile_ArticleNo(3, "6050");
             public static readonly FrameProfile_ArticleNo _6052 = new FrameProfile_ArticleNo(4, "6052");
+            public static readonly FrameProfile_ArticleNo _84100 = new FrameProfile_ArticleNo(5, "84100");//alu
+
 
             private FrameProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -39,6 +42,7 @@ namespace EnumerationTypeLayer
             public static readonly FrameReinf_ArticleNo _TV110 = new FrameReinf_ArticleNo(4, "T-V110");
             public static readonly FrameReinf_ArticleNo _NA120 = new FrameReinf_ArticleNo(5, "NA120");
 
+            public static readonly FrameReinf_ArticleNo _None = new FrameReinf_ArticleNo(6, "None");
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -56,7 +60,9 @@ namespace EnumerationTypeLayer
             public static readonly Divider_ArticleNo _7538 = new Divider_ArticleNo(1, "7538");
             public static readonly Divider_ArticleNo _2069 = new Divider_ArticleNo(2, "2069");
             public static readonly Divider_ArticleNo _6052 = new Divider_ArticleNo(3, "6052");
-            public static readonly Divider_ArticleNo _None = new Divider_ArticleNo(4, "None");
+            public static readonly Divider_ArticleNo _84300 = new Divider_ArticleNo(4, "84300");//alu
+            public static readonly Divider_ArticleNo _84301 = new Divider_ArticleNo(5, "84301");//alu
+            public static readonly Divider_ArticleNo _None = new Divider_ArticleNo(6, "None");
             private Divider_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -74,6 +80,9 @@ namespace EnumerationTypeLayer
         {
             public static readonly DummyMullion_ArticleNo _7533 = new DummyMullion_ArticleNo(0, "7533");
             public static readonly DummyMullion_ArticleNo _385P = new DummyMullion_ArticleNo(1, "385P");
+            public static readonly DummyMullion_ArticleNo _84401 = new DummyMullion_ArticleNo(2, "84401"); // alutek
+
+
 
             private DummyMullion_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -122,6 +131,10 @@ namespace EnumerationTypeLayer
             public static readonly GlazingBead_ArticleNo _2437_2437 = new GlazingBead_ArticleNo(22, "2437(out) & 2437(in)");
             public static readonly GlazingBead_ArticleNo _2437_2434 = new GlazingBead_ArticleNo(23, "2437(out) & 2434(in)");
             public static readonly GlazingBead_ArticleNo _2434_2434 = new GlazingBead_ArticleNo(24, "2434(out) & 2434(in)");
+            //alutek
+            public static readonly GlazingBead_ArticleNo _84500 = new GlazingBead_ArticleNo(25, "84500");
+            public static readonly GlazingBead_ArticleNo _84502 = new GlazingBead_ArticleNo(26, "84502");
+
 
 
 
@@ -203,6 +216,8 @@ namespace EnumerationTypeLayer
             public static readonly SashProfile_ArticleNo _2067 = new SashProfile_ArticleNo(5, "2067"); //G58
             public static readonly SashProfile_ArticleNo _6040 = new SashProfile_ArticleNo(6, "6040");
             public static readonly SashProfile_ArticleNo _6041 = new SashProfile_ArticleNo(7, "6041");
+            public static readonly SashProfile_ArticleNo _84207 = new SashProfile_ArticleNo(8, "84207");//alutek
+            public static readonly SashProfile_ArticleNo _84200 = new SashProfile_ArticleNo(9, "84200");
 
             private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -227,6 +242,9 @@ namespace EnumerationTypeLayer
             public static readonly Base_Color _White = new Base_Color(0, "White");
             public static readonly Base_Color _Ivory = new Base_Color(1, "Ivory");
             public static readonly Base_Color _DarkBrown = new Base_Color(2, "Dark Brown");
+            public static readonly Base_Color _PowderCoated= new Base_Color(3, "Powder Coated");
+            public static readonly Base_Color _Foiled = new Base_Color(4, "Foiled");
+
 
             private Base_Color(int value, string displayName) : base(value, displayName) { }
         }
@@ -288,6 +306,17 @@ namespace EnumerationTypeLayer
             private FrictionStayCasement_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class FrictionAlutek_ArticleNo : Enumeration<FrictionAlutek_ArticleNo, int>
+        {
+            public static FrictionAlutek_ArticleNo _H029 = new FrictionAlutek_ArticleNo(0, "H029 (16\" FS)");
+            public static readonly FrictionAlutek_ArticleNo _H091 = new FrictionAlutek_ArticleNo(1, "H091 (12\" FS)");
+            public static readonly FrictionAlutek_ArticleNo _H231 = new FrictionAlutek_ArticleNo(2, "H231 (20\" FS)");
+            public static readonly FrictionAlutek_ArticleNo _H232 = new FrictionAlutek_ArticleNo(3, "H232 (24\" FS)");
+            public static readonly FrictionAlutek_ArticleNo _None = new FrictionAlutek_ArticleNo(4, "None");
+
+            private FrictionAlutek_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
         public class Handle_Type : Enumeration<Handle_Type, int>
         {
             public static readonly Handle_Type _Rotoswing = new Handle_Type(0, "Rotoswing Handle");
@@ -300,13 +329,10 @@ namespace EnumerationTypeLayer
             public static readonly Handle_Type _DummyD = new Handle_Type(7, "Dummy D Handle");
             public static readonly Handle_Type _PopUp = new Handle_Type(8, "Pop-up Handle");
             public static readonly Handle_Type _RotoswingForSliding = new Handle_Type(9, "Rotoswing(Sliding) Handle");
+            public static readonly Handle_Type _CremonHandle = new Handle_Type(10, "Cremon handle");
 
-
-
-
-
-            public static readonly Handle_Type _None = new Handle_Type(10, "None");
-
+            public static readonly Handle_Type _None = new Handle_Type(11, "None");
+             
             private Handle_Type(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -456,7 +482,10 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _774287 = new Espagnolette_ArticleNo(20, "774287");
             public static readonly Espagnolette_ArticleNo _731852 = new Espagnolette_ArticleNo(21, "731852");
             public static readonly Espagnolette_ArticleNo _6_90137_10_0_1 = new Espagnolette_ArticleNo(22, "6-90137-10-0-1");
-            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(23, "None");
+            public static readonly Espagnolette_ArticleNo _H102 = new Espagnolette_ArticleNo(23, "H102");
+            public static readonly Espagnolette_ArticleNo _H103 = new Espagnolette_ArticleNo(24, "H103");
+
+            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(25, "None");
 
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -994,7 +1023,7 @@ namespace EnumerationTypeLayer
 
         public class CenterProfile_ArticleNo : Enumeration<CenterProfile_ArticleNo, int>
         {
-            public static readonly CenterProfile_ArticleNo _none = new CenterProfile_ArticleNo(0, "None");
+            public static readonly CenterProfile_ArticleNo _None = new CenterProfile_ArticleNo(0, "None");
             public static readonly CenterProfile_ArticleNo _A000 = new CenterProfile_ArticleNo(1, "A000"); // aluminum
             public static readonly CenterProfile_ArticleNo _6067 = new CenterProfile_ArticleNo(2, "6067"); // pvc
 
@@ -1290,6 +1319,10 @@ namespace EnumerationTypeLayer
             public static readonly BillOfMaterialsFilter _FittingAndSuppliesCost = new BillOfMaterialsFilter(4, "Fitting and Supplies");
             public static readonly BillOfMaterialsFilter _LouverCost = new BillOfMaterialsFilter(5, "Louver Material Cost");
             public static readonly BillOfMaterialsFilter _MeshCost = new BillOfMaterialsFilter(6, "Mesh Cost");
+            public static readonly BillOfMaterialsFilter _InstallationCost = new BillOfMaterialsFilter(7, "Installation Cost");
+
+
+            
 
 
             private BillOfMaterialsFilter(int value, string displayName) : base(value, displayName) { }
@@ -1495,6 +1528,103 @@ namespace EnumerationTypeLayer
             private ColorAppliedTo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class InversionClip_ArticleNo : Enumeration<InversionClip_ArticleNo, int>
+        {
+            public static readonly InversionClip_ArticleNo _84804 = new InversionClip_ArticleNo(0, "84804");
+
+            private InversionClip_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GlazingGasket_ArticleNo : Enumeration<GlazingGasket_ArticleNo, int>
+        {
+            public static readonly GlazingGasket_ArticleNo _G221 = new GlazingGasket_ArticleNo(0, "G221");
+            public static readonly GlazingGasket_ArticleNo _G222 = new GlazingGasket_ArticleNo(1, "G222");
+            public static readonly GlazingGasket_ArticleNo _G223 = new GlazingGasket_ArticleNo(2, "G223");
+            public static readonly GlazingGasket_ArticleNo _G224 = new GlazingGasket_ArticleNo(3, "G224");
+            public static readonly GlazingGasket_ArticleNo _G287 = new GlazingGasket_ArticleNo(4, "G287");
+
+            private GlazingGasket_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class OpenableStriker_ArticleNo : Enumeration<OpenableStriker_ArticleNo, int>
+        {
+            public static readonly OpenableStriker_ArticleNo _H117 = new OpenableStriker_ArticleNo(0, "H117");
+
+            private OpenableStriker_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CornerCleat_ArticleNo : Enumeration<CornerCleat_ArticleNo, int>
+        {
+            public static readonly CornerCleat_ArticleNo _H079 = new CornerCleat_ArticleNo(0, "H079");
+
+            private CornerCleat_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Cheveron_ArticleNo : Enumeration<Cheveron_ArticleNo, int>
+        {
+            public static readonly Cheveron_ArticleNo _H083 = new Cheveron_ArticleNo(0, "H083");
+
+            private Cheveron_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class RunUpBlock_ArticleNo : Enumeration<RunUpBlock_ArticleNo, int>
+        {
+            public static readonly RunUpBlock_ArticleNo _M673 = new RunUpBlock_ArticleNo(0, "M673");
+
+            private RunUpBlock_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class PackerRod_ArticleNo : Enumeration<PackerRod_ArticleNo, int>
+        {
+            public static readonly PackerRod_ArticleNo _H149 = new PackerRod_ArticleNo(0, "H149");
+
+            private PackerRod_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LockingWedge_ArticleNo : Enumeration<LockingWedge_ArticleNo, int>
+        {
+            public static readonly LockingWedge_ArticleNo _H109 = new LockingWedge_ArticleNo(0, "H109");
+
+            private LockingWedge_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SSCheveron_ArticleNo : Enumeration<SSCheveron_ArticleNo, int>
+        {
+            public static readonly SSCheveron_ArticleNo _H092 = new SSCheveron_ArticleNo(0, "H092");
+
+            private SSCheveron_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MullionConnector_ArticleNo : Enumeration<MullionConnector_ArticleNo, int>
+        {
+            public static readonly MullionConnector_ArticleNo _H120 = new MullionConnector_ArticleNo(0, "H120");
+
+            private MullionConnector_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Unica40_ArticleNo : Enumeration<Unica40_ArticleNo, int>
+        {
+            public static readonly Unica40_ArticleNo _H116 = new Unica40_ArticleNo(0, "H116");
+
+            private Unica40_ArticleNo(int value, string displayName) : base(value, displayName) { }
+
+        }
+
+        public class LockingConnectorDevice_ArticleNo : Enumeration<LockingConnectorDevice_ArticleNo, int>
+        {
+            public static readonly LockingConnectorDevice_ArticleNo _H175 = new LockingConnectorDevice_ArticleNo(0, "H175");
+
+            private LockingConnectorDevice_ArticleNo(int value, string displayName) : base(value, displayName) { }
+
+        }
+
+        public class Cremon_HandleArtNo : Enumeration<Cremon_HandleArtNo, int>
+        {
+            public static readonly Cremon_HandleArtNo _H087 = new Cremon_HandleArtNo(0, "H087");
+
+            private Cremon_HandleArtNo(int value, string displayName) : base(value, displayName) { }
+
+        }
 
     }
 }

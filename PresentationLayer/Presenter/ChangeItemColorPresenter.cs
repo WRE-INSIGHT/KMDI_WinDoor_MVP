@@ -16,13 +16,14 @@ namespace PresentationLayer.Presenter
         private IMainPresenter _mainPresenter;
         private IWindoorModel _windoorModel;
 
-        Panel pnlWoodec;
+        Panel pnlWoodec,pnlInOutColor;
 
         public ChangeItemColorPresenter(IChangeItemColorView changeItemColorView)
         {
             _changeItemColorView = changeItemColorView;
 
             pnlWoodec = _changeItemColorView.GetPanelWoodec();
+            pnlInOutColor = _changeItemColorView.GetPanelInOutColor();
             SubscribeToEventsSetup();
         }
 
@@ -37,6 +38,10 @@ namespace PresentationLayer.Presenter
             _changeItemColorView.CmbColorAppliedToSelectedValueChangedEventRaised += _changeItemColorView_CmbColorAppliedToSelectedValueChangedEventRaised;
         }
 
+        public IChangeItemColorView GetChangeItemColorView()
+        {
+            return _changeItemColorView;
+        }
         private void _changeItemColorView_CmbColorAppliedToSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             _windoorModel.WD_ColorAppliedTo = (ColorAppliedTo)((ComboBox)sender).SelectedValue;
@@ -154,7 +159,19 @@ namespace PresentationLayer.Presenter
 
         private void _changeItemColorView_CmbBaseColorSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
+
             base_color = (Base_Color)((ComboBox)sender).SelectedValue;
+            if (base_color == Base_Color._PowderCoated)
+            {
+                pnlInOutColor.Visible = false;
+                pnlWoodec.Visible = false;
+            }
+            else
+            {
+                pnlInOutColor.Visible =true;
+                pnlWoodec.Visible = false;
+
+            } 
         }
 
         private void _changeItemColorView_ChangeItemColorViewLoadEventRaised(object sender, EventArgs e)

@@ -84,18 +84,29 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                         MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
-                else if (sel_handleType == Handle_Type._Rio || sel_handleType == Handle_Type._Rotoline || sel_handleType == Handle_Type._MVD)
+                else if (sel_handleType == Handle_Type._Rio  || sel_handleType == Handle_Type._MVD)
                 {
                     if (sel_handleType == Handle_Type._Rio)
                     {
                         if (!(Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
-                             (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
-                              Panel_SashProfileArtNo == SashProfile_ArticleNo._373)) &&
+                             (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 || Panel_SashProfileArtNo == SashProfile_ArticleNo._373)) &&
                             !(Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                               Panel_SashProfileArtNo == SashProfile_ArticleNo._6041))
                         {
                             MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
+                    } 
+                }
+                else if ( sel_handleType == Handle_Type._Rotoline)
+                {
+                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._6050 &&
+                          (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 || Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)) &&
+                        !(Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+                         (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 || Panel_SashProfileArtNo == SashProfile_ArticleNo._373)) &&
+                        !(Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                          Panel_SashProfileArtNo == SashProfile_ArticleNo._6041))
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else if (sel_handleType == Handle_Type._PopUp)
@@ -114,6 +125,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 {
                     if (!(Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                         Panel_SashProfileArtNo == SashProfile_ArticleNo._6041))
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else if (sel_handleType == Handle_Type._CremonHandle)
+                {
+                    if (Frame_ArtNo != FrameProfile_ArticleNo._84100)
                     {
                         MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -198,6 +216,27 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                         e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
                     }
                 }
+                else if (text.Contains("Rotoline"))
+                {
+                    if (Frame_ArtNo == FrameProfile_ArticleNo._6050 &&
+                       ( Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 || Panel_SashProfileArtNo == SashProfile_ArticleNo._6041))
+                    {
+                        e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                    }
+                    else
+                    {
+                        if (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
+                           (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                            Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
+                        {
+                            e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                        }
+                        else
+                        {
+                            e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                        }
+                    }
+                }
                 else
                 {
                     if (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
@@ -238,6 +277,17 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 else
                 {
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
+            else if (text.Contains("Cremon"))
+            {
+                if (Frame_ArtNo != FrameProfile_ArticleNo._84100)
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
                 }
             }
             // Draw the text    

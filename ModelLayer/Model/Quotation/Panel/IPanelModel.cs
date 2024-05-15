@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.User;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -51,6 +52,7 @@ namespace ModelLayer.Model.Quotation.Panel
         Padding Panel_MarginToBind { get; set; }
         Padding PanelImageRenderer_Margin { get; set; }
         float Panel_Zoom { get; set; }
+        IUserModel Panel_ParentUserModel { get; set; }
         IFrameModel Panel_ParentFrameModel { get; set; }
         IMultiPanelModel Panel_ParentMultiPanelModel { get; set; }
         int Panel_PropertyHeight { get; set; }
@@ -335,6 +337,22 @@ namespace ModelLayer.Model.Quotation.Panel
         SlidingAccessoriesRoller_ArticleNo Panel_SlidingAccessoriesRollerArtNo { get; set; }
         int TopHungbrushSealPerimeter { get; set; }
         Brush_ArticleNo Panel_BrushArtNo { get; set; }
+        int Panel_InversionClipWidth { get; set; }
+        int Panel_InversionClipHeight { get; set; }
+        GlazingGasket_ArticleNo Panel_GlazingGasketArtNo { get; set; }
+        GlazingGasket_ArticleNo Panel_GlazingGasketArtNo2 { get; set; }
+        GlazingGasket_ArticleNo Panel_CenterGasketArtNo { get; set; }
+        InversionClip_ArticleNo Panel_InversionClipArtNo { get; set; }
+        OpenableStriker_ArticleNo Panel_OpenableStrikerArtNo { get; set; }
+        CornerCleat_ArticleNo Panel_CornerCleatArtNo { get; set; }
+        Cheveron_ArticleNo Panel_CheveronArtNo { get; set; }
+        RunUpBlock_ArticleNo Panel_RunUpBlockArtNo { get; set; }
+        PackerRod_ArticleNo Panel_PackerRodArtNo { get; set; }
+        LockingWedge_ArticleNo Panel_LockingWedgeArtNo { get; set; }
+        SSCheveron_ArticleNo Panel_SSCheveronArtNo { get; set; }
+        Unica40_ArticleNo Panel_Unica40ArtNo { get; set; }
+        LockingConnectorDevice_ArticleNo Panel_LockingConnectorArtNo { get; set; }
+        Cremon_HandleArtNo Panel_CremonArtNo { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
@@ -369,8 +387,8 @@ namespace ModelLayer.Model.Quotation.Panel
                                            Divider_ArticleNo divArtNo_RightorBot_lvl3 = null,
                                            string panel_placement = "",
                                            string mpanel_placement = "", //1st level
-                                           string mpanelparent_placement = "" //2nd level
-                                           );
+                                           string mpanelparent_placement = "", //2nd level
+                                           string Date_Assigned = null);
 
         void Insert_SashInfo_MaterialList(DataTable tbl_explosion);
         void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion);
@@ -493,6 +511,21 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_SlidingAccessoriesRoller_MaterialList(DataTable tbl_explosion);
         void Insert_SlidingSashBottomGuide_MaterialList(DataTable tbl_explosion, int overlap);
         void Insert_BrushForSliding_MaterialList(DataTable tbl_explosion, int FinPlatePerimeter);
+        void Insert_InversionClip_MaterialList(DataTable tbl_explosion);
+        void Insert_GlazingGasket_Alutek_MaterialList(DataTable tbl_explosion, float GlassThickness, bool withSash);
+        void Insert_CenterGasket_MaterialList(DataTable tbl_explosion);
+        void Insert_OpenableStriker_MaterialList(DataTable tbl_explosion);
+        void Insert_Cheveron_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerWindow_MaterialList(DataTable tbl_explosion);
+        void Insert_RunUpBlock_MaterialList(DataTable tbl_explosion);
+        void Insert_PackerRod_MaterialList(DataTable tbl_explosion);
+        void Insert_LockingWedge_MaterialList(DataTable tbl_explosion);
+        void Insert_SSCheveron_MaterialList(DataTable tbl_explosion);
+        void Insert_Unica40_MaterialList(DataTable tbl_explosion);
+        void Insert_LockingConnectorDevice_MaterialList(DataTable tbl_explosion);
+        void Insert_CremonHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_Pegstay_MaterialList(DataTable tbl_explosion);
+        void Insert_AlutekStriker_MaterialList(DataTable tbl_explosion);
 
         #endregion
 

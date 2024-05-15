@@ -38,6 +38,7 @@ namespace ModelLayer.Model.Quotation
         List<decimal> lstTotalPrice { get; set; }
         bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
         bool FactorChange { get; set; }
+        bool BOM_AluProfileType { get; set; }
         DataTable GetListOfMaterials(IWindoorModel item);
         void Select_Current_Windoor(IWindoorModel item);
         void changePriceBasedonDate();

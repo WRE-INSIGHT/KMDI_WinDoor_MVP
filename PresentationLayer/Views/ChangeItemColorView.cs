@@ -12,6 +12,8 @@ namespace PresentationLayer.Views
         {
             InitializeComponent();
         }
+        public string FromMainpresenter_profileType { get; set; }
+
 
         public event EventHandler ChangeItemColorViewLoadEventRaised;
         public event EventHandler BtnOkClickEventRaised;
@@ -32,7 +34,23 @@ namespace PresentationLayer.Views
 
             foreach (Base_Color item in Base_Color.GetAll())
             {
-                base_col.Add(item);
+                if (FromMainpresenter_profileType.Contains("Alutek"))
+                {
+                    if (item.DisplayName == Base_Color._PowderCoated.ToString() ||
+                        item.DisplayName == Base_Color._Foiled.ToString())
+                    {
+                        base_col.Add(item);
+                    }
+
+                }
+                else
+                {
+                    if (!(item.DisplayName == Base_Color._PowderCoated.ToString() ||
+                        item.DisplayName == Base_Color._Foiled.ToString()))
+                    {
+                        base_col.Add(item);
+                    }
+                }
             }
             cmb_baseColor.DataSource = base_col;
 
@@ -60,6 +78,10 @@ namespace PresentationLayer.Views
         public void ShowThisDialog()
         {
             this.ShowDialog();
+        }
+        public Panel GetPanelInOutColor()
+        {
+            return pnl_InOutColor;
         }
 
         public Panel GetPanelWoodec()

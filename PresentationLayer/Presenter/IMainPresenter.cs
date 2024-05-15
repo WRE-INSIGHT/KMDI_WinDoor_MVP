@@ -27,6 +27,8 @@ namespace PresentationLayer.Presenter
         List<IScreenModel> Screen_List { get; set; }
         List<DataRow> NonUnglazed { get; set; }
         List<DataRow> Unglazed { get; set; }
+        Dictionary<long, decimal> Dic_PaScreenID { get; set; }
+        List<IScreenPartialAdjustmentProperties> Lst_ScreenPartialAdjustment { get; set; }
         Control ControlRaised_forDMSelection { get; }
         IDividerModel DivModel_forDMSelection { get; }
         IPanelModel PrevPnlModel_forDMSelection { get; }

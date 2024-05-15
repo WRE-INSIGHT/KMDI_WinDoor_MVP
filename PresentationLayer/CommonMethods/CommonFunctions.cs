@@ -830,6 +830,24 @@ namespace PresentationLayer.CommonMethods
             Rectangle headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
             e.Graphics.DrawString(rowIdx, rowFont, SystemBrushes.ControlText, headerBounds, centerFormat);
         }
+         
+        public void rowpostpaintForJB(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            DataGridView grid = (DataGridView)sender;
+            e.PaintHeader(DataGridViewPaintParts.Background);
+            e.Graphics.FillRectangle(Brushes.Red, e.ClipBounds);
+            string rowIdx = (e.RowIndex + 1).ToString();
+            Font rowFont = new Font("Segoe UI", 9.0f,
+                                    FontStyle.Regular,
+                                    GraphicsUnit.Point);
+            StringFormat centerFormat = new StringFormat();
+            centerFormat.Alignment = StringAlignment.Far;
+            centerFormat.LineAlignment = StringAlignment.Near;
+
+            Rectangle headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
+            e.Graphics.DrawString(rowIdx, rowFont, SystemBrushes.ControlText, headerBounds, centerFormat);
+        }
+
 
         public Control FindImagerControl(int id, string type, IMultiPanelModel mpanelParent)
         {

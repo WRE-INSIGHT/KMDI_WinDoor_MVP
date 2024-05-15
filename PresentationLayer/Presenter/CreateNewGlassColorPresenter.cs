@@ -30,7 +30,7 @@ namespace PresentationLayer.Presenter
 
         private void OnDgvGlassColorListRowpostpaintEventRaised(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            commonfunc.rowpostpaint(sender, e);
+            commonfunc.rowpostpaintForJB(sender, e);
         }
 
         string ChkRowStatus;

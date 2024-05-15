@@ -1795,17 +1795,36 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         public DateTime Date_Assigned { get; set; }
+        
+        #region Dictionary for Screen Partial Adjustment
 
+        public ScreenType Screen_Type_Revised { get; set; }
+        public string Screen_Description_Revised { get; set; }
+        public int Screen_Set_Revised { get; set; }
+        public decimal Screen_UnitPrice_Revised { get; set; }
+        public int Screen_Quantity_Revised { get; set;}
+        public int Screen_Discount_Revised { get; set; }
+        public decimal Screen_NetPrice_Revised { get; set; }
+        public string Screen_DisplayedDimes_Revised { get; set; }
+        public decimal Screen_Factor_Revised { get; set; }
+        public decimal Screen_AddOnsSpecialFactor_Revised { get; set; }
+        public decimal Screen_Adjustment_Price { get; set; }
+        public bool Screen_isAdjusted { get; set; }
+
+        #endregion
 
         #region changeConditionBasedonPrice
 
         DateTime condition_1 = DateTime.Parse("08-11-2023"); // freedom total price 
+        DateTime newFactorBasedOnDB = DateTime.Parse("05-15-2024"); // newFactorOnDB
+        DateTime _1067PVCwReinPrice = DateTime.Parse("05-15-2024"); // switch price pvc with rein
 
         #endregion
 
         #endregion
 
         List<decimal> ItemList = new List<decimal>();
+
         public void ItemNumberList()
         {
             var _strippedItemNum = (int)Decimal.Truncate(Screen_ItemNumber);
@@ -2256,7 +2275,20 @@ namespace ModelLayer.Model.Quotation.Screen
             _builtInWidthIsBelowMinimum = false;
             _builInHeigthIsBelowMinimum = false;
         }
-       
+        public void ReSelectScreenType(string screen)
+        {
+            if (screen != Screen_Types.ToString())
+            {
+                foreach (ScreenType scr in ScreenType.GetAll())
+                {
+                    if (scr.ToString() == screen)
+                    {
+                        Screen_Types = scr;
+                    }
+                }
+            }
+        }
+        
         public void ComputeScreenTotalPrice()
         {
             cus_ref_date = Date_Assigned;
@@ -2279,6 +2311,13 @@ namespace ModelLayer.Model.Quotation.Screen
                 milled6052profilePricePerLinearMeter = 400;
 
                 _builtinPowderCoatingMultiplier = 1.08m;
+
+                if(cus_ref_date >= _1067PVCwReinPrice)
+                {
+                    pvc1067PriceLinearMeter = 410;
+                    pvc1067withreinforcementPriceLinearMeter = 420;
+                }
+
             }
             else if (Screen_BaseColor == Base_Color._DarkBrown)
             {
@@ -2295,6 +2334,12 @@ namespace ModelLayer.Model.Quotation.Screen
                 milled6052profilePricePerLinearMeter = 590;
 
                 _builtinPowderCoatingMultiplier = 1.2m;
+
+                if (cus_ref_date >= _1067PVCwReinPrice)
+                {
+                    pvc1067PriceLinearMeter = 660;
+                    pvc1067withreinforcementPriceLinearMeter = 735;
+                }
 
             }
 
@@ -2313,14 +2358,29 @@ namespace ModelLayer.Model.Quotation.Screen
 
             #endregion
             #region AddOnsSpecialFactor
-            if(Screen_AddOnsSpecialFactor == 1.3m)
+            if(cus_ref_date >= newFactorBasedOnDB)
             {
-                AddOnsSpecialFactor = 2.9m;
+                if (Screen_AddOnsSpecialFactor == 1.2m)
+                {
+                    AddOnsSpecialFactor = 2.2m;
+                }
+                else
+                {
+                    AddOnsSpecialFactor = 2.3m;
+                }
             }
             else
             {
-                AddOnsSpecialFactor = 3.0m;
+                if (Screen_AddOnsSpecialFactor == 1.3m)
+                {
+                    AddOnsSpecialFactor = 2.9m;
+                }
+                else
+                {
+                    AddOnsSpecialFactor = 3.0m;
+                }
             }
+            
             Console.WriteLine("Addons is using a Factor " + AddOnsSpecialFactor);
 
             #endregion

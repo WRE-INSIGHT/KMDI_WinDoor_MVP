@@ -101,7 +101,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCenterHinge");
                                     }
                                 }
-
+                                
 
                                 if (_panelModel.Panel_NTCenterHingeVisibility == true)
                                 {
@@ -1006,6 +1006,16 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._2067;
                     _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._V226;
                 }
+                else if (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    curr_sash = SashProfile_ArticleNo._84207;
+                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._84207;
+                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._None;
+                }
+            }
+            else if(curr_sash == null)
+            {
+                curr_sash = _panelModel.Panel_SashProfileArtNo;
             }
             //if (_panelModel.Panel_Type.Contains("Fixed") == false)
             //{

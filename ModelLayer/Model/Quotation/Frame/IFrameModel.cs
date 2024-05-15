@@ -99,6 +99,12 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_CladdingVisibility { get; set; }
         CladdingProfileForFrame_ArticleNo Frame_CladdingArtNo { get; set; }
         CladdingReinfForFrame_ArticleNo Frame_CladdingReinArtNo { get; set; }
+        bool Frame_InversionClipVisibility { get; set; }
+        bool Frame_InversionClipOption { get; set; }
+        InversionClip_ArticleNo FrameInversionClip_ArtNo { get; set; }
+        GlazingGasket_ArticleNo FrameGlazingGasket_ArtNo { get; set; }
+        Cheveron_ArticleNo FrameCheveron_ArtNo { get; set; }
+        CornerCleat_ArticleNo FrameCornerCleat_ArtNo { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);
@@ -113,6 +119,9 @@ namespace ModelLayer.Model.Quotation.Frame
         // void Insert_ConnectorType_MaterialList(DataTable tbl_explosion);
         void Insert_GS100EMTrackProfile2p6n3m_MaterialList(DataTable tbl_explosion);
         void Insert_CladdingProfile_MaterialList(DataTable tbl_explosion);
+        void Insert_GlazingGasket_MaterialList(DataTable tbl_explosion);
+        void Insert_Cheveron_MaterialList(DataTable tbl_explosion);
+        void Insert_CornerWindow_MaterialList(DataTable tbl_explosion);
 
         int Add_framePerimeter_screws4fab();
         int Add_MilledFrameWidth_screws4fab();

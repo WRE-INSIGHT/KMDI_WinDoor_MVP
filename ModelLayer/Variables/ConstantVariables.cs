@@ -14,6 +14,9 @@
         public int frame_TubularOption = 27;
         public int frame_TubularHeightAndWidth = 52;
         public int frame_CladdingProperty_PanelHeight = 28;
+        public int frame_InversionClipOption = 27;
+        public int frame_WithCenterClosureSelectedPanel = 30;
+
 
 
 
@@ -80,6 +83,7 @@
         public int div_property_claddingOptionsHeight = 28;
         public int div_property_claddingArtNoOptionsHeight = 34;
         public int div_property_claddingBracketOptionsHeight = 74;
+        public int div_property_claddingPnl = 56;
         public int div_property_pnlAddcladdingOptionsHeight = 56;
         public int div_property_divArtOptionsHeight = 90;
         public int div_property_DMArtOptionsHeight = 56;

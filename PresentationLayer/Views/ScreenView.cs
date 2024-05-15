@@ -91,6 +91,8 @@ namespace PresentationLayer.Views
             }
         }
 
+        public string ProfileType_MainPresenter { get; set; }
+
         public event EventHandler ScreenViewLoadEventRaised;
         public event EventHandler btnAddClickEventRaised;
         public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
@@ -122,6 +124,9 @@ namespace PresentationLayer.Views
         public event FormClosingEventHandler ScreenView_FormClosingEventRaised;
         public event EventHandler chkbox_allowEdit_CheckedChangedEventRaised;
         public event EventHandler ScreenView_ResizeEventRaised;
+        public event EventHandler tsb_ScreenAdjustment_ClickEventRaised;
+        public event EventHandler tsb_Switch_ClickEventRaised;
+        public event EventHandler addNewItemToolStripMenuItem_ClickEventRaised;
 
         public void ShowScreemView()
         {
@@ -200,7 +205,33 @@ namespace PresentationLayer.Views
         {
             return chkbox_allowEdit;
         }
- 
+        public ComboBox GetScreenTypeCmb()
+        {
+            return cmb_ScreenType;
+        }
+        public Button GetAddBtn()
+        {
+            return btn_add;
+        }
+
+        public ToolStripButton GetToolStripBtnSwitch()
+        {
+            return tsb_Switch;
+        }
+        public ToolStripButton GetToolStripBtnScreenAdjustment()
+        {
+            return tsb_ScreenAdjustment;
+        }
+
+        public ContextMenuStrip GetDgvContextMenuStrip()
+        {
+            return cmsScreen;
+        }
+        public ToolStripMenuItem GetScreenPartialAddItemCMS()
+        {
+            return addNewItemToolStripMenuItem;
+        }
+
         private void ScreenView_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
@@ -214,7 +245,22 @@ namespace PresentationLayer.Views
             List<Base_Color> baseColor = new List<Base_Color>();
             foreach (Base_Color item in Base_Color.GetAll())
             {
-                baseColor.Add(item);
+                if (ProfileType_MainPresenter.Contains(SystemProfile_Option._Alutek.ToString()))
+                {
+                    if (item == Base_Color._PowderCoated ||
+                        item == Base_Color._Foiled)
+                    {
+                        baseColor.Add(item);
+                    }
+                }
+                else
+                {
+                    if (item != Base_Color._PowderCoated &&
+                        item != Base_Color._Foiled)
+                    {
+                        baseColor.Add(item);
+                    }
+                }
             }
             cmb_baseColor.DataSource = baseColor;
 
@@ -259,6 +305,30 @@ namespace PresentationLayer.Views
 
         private void cmb_baseColor_SelectedValueChanged(object sender, EventArgs e)
         {
+            //cmb_baseColor.DataSource = null;
+            //List<Base_Color> baseColor = new List<Base_Color>();
+            //foreach (Base_Color item in Base_Color.GetAll())
+            //{
+            //    if (ProfileType_MainPresenter.Contains(SystemProfile_Option._Alutek.ToString()))
+            //    {
+            //        if (item == Base_Color._PowderCoated ||
+            //            item == Base_Color._Foiled)
+            //        {
+            //            baseColor.Add(item);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (item != Base_Color._PowderCoated &&
+            //            item != Base_Color._Foiled)
+            //        {
+            //            baseColor.Add(item);
+            //        }
+            //    }
+            //}
+            //cmb_baseColor.DataSource = baseColor;
+
+
             EventHelpers.RaiseEvent(sender, cmbbaseColorSelectedValueChangedEventRaised, e);
         }
 
@@ -422,6 +492,21 @@ namespace PresentationLayer.Views
         private void ScreenView_Resize(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, ScreenView_ResizeEventRaised, e);
+        }
+
+        private void tsb_ScreenAdjustment_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, tsb_ScreenAdjustment_ClickEventRaised, e);
+        }
+
+        private void tsb_Switch_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, tsb_Switch_ClickEventRaised, e);
+        }
+
+        private void addNewItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, addNewItemToolStripMenuItem_ClickEventRaised, e);
         }
     }
 }

@@ -15,6 +15,22 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         public event EventHandler CenterProfilePropertyUCLoadEventRaised;
         public event EventHandler CenterProfileArtNoSelectedValueChangedEventRaised;
+        public event EventHandler btnSelectCPPanelClickEventRiased;
+
+        public void AddHT_FormBody(int addht)
+        {
+            this.Height += addht;
+        }
+
+        public Button GetBtnSelectCenterProfilePanel()
+        {
+            return btn_SelectCPPanel;
+        }
+
+        public Panel GetCenterProfileSelectedPanel()
+        {
+            return pnl_CenterProfilePanelSelect;
+        }
 
         private void PP_CenterProfilePropertyUC_Load(object sender, EventArgs e)
         {
@@ -45,6 +61,11 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         private void cmb_CenterProfileArtNo_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void btn_SelectCPPanel_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnSelectCPPanelClickEventRiased, e);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.Screen
@@ -83,5 +84,24 @@ namespace ModelLayer.Model.Quotation.Screen
         bool Screen_FreedomTotalChangerVisibility { get; set; }
         bool Screen_FreedomTotalChangerIsChecked { get; set; }
         DateTime Date_Assigned { get; set; }
-}
+
+        #region Dictionary of Screen Partial Adjustment
+
+        ScreenType Screen_Type_Revised { get; set; }
+        string Screen_Description_Revised { get; set; }
+        decimal Screen_UnitPrice_Revised { get; set; }
+        int Screen_Quantity_Revised { get; set; }
+        int Screen_Discount_Revised { get; set; }
+        decimal Screen_NetPrice_Revised { get; set; }
+        int Screen_Set_Revised { get; set; }
+        string Screen_DisplayedDimes_Revised { get; set; }
+        decimal Screen_Adjustment_Price { get; set; }
+        bool Screen_isAdjusted { get; set; }
+        decimal Screen_Factor_Revised { get; set; }
+        decimal Screen_AddOnsSpecialFactor_Revised { get; set; }
+        void ReSelectScreenType(string screen);
+
+        #endregion
+
+    }
 }

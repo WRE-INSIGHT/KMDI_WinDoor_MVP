@@ -329,6 +329,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                            data,
                                                            true,
                                                            _frameModel.Frame_Zoom,
+                                                           _userModel,
                                                            _frameModel,
                                                            null,
                                                            _frameModel.Frame_Width,

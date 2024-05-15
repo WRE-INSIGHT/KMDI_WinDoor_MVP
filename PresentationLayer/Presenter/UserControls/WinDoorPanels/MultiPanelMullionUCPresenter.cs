@@ -937,6 +937,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                data,
                                                                                true,
                                                                                _frameModel.Frame_Zoom,
+                                                                               _userModel,
                                                                                _frameModel,
                                                                                _multiPanelModel,
                                                                                suggest_DisplayWD,

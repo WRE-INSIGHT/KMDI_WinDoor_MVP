@@ -71,6 +71,7 @@ namespace PresentationLayer.Presenter
         private IConcreteModel _concreteModel;
         private IConcreteUC _concreteUC;
         private IPanelModel _panelModel;
+        private IScreenPartialAdjustmentProperties _screenPartialAdjustmentProperties;
 
         ConstantVariables constants = new ConstantVariables();
         private ILoginView _loginView;
@@ -240,37 +241,42 @@ namespace PresentationLayer.Presenter
 
         #region List 
 
-        Dictionary<string, string[]> WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
+        private Dictionary<string, string[]> WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
+        private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
+        private List<IScreenModel> _screenList = new List<IScreenModel>();
+        private List<DataRow> _nonUnglazed = new List<DataRow>();
+        private List<DataRow> _unglazed = new List<DataRow>();
+        private Dictionary<long, decimal> _dic_PaScreenID = new Dictionary<long, decimal>();
+        private List<IScreenPartialAdjustmentProperties> _lst_ScreenPartialAdjustment = new List<IScreenPartialAdjustmentProperties>();
+
         public Dictionary<string, string[]> Pbl_WindoorModel_FileLines_Dictionary
         {
             get { return WindoorModel_FileLines_Dictionary; }
             set { WindoorModel_FileLines_Dictionary = value; }
-        }
-
-        private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
+        } 
         public IDictionary<string, string> RDLCHeader
         {
             get { return _rdlcHeaders; }
             set { _rdlcHeaders = value; }
-        }
-        private List<IScreenModel> _screenList = new List<IScreenModel>();
+        }    
         public List<IScreenModel> Screen_List
         {
             get { return _screenList; }
             set { _screenList = value; }
-        }
-        private List<DataRow> _nonUnglazed = new List<DataRow>();
+        }    
         public List<DataRow> NonUnglazed
         {
             get { return _nonUnglazed; }
             set { _nonUnglazed = value; }
         }
-        private List<DataRow> _unglazed = new List<DataRow>();
         public List<DataRow> Unglazed
         {
             get { return _unglazed; }
             set { _unglazed = value; }
         }
+
+        public Dictionary<long, decimal> Dic_PaScreenID { get { return _dic_PaScreenID; } set { _dic_PaScreenID = value; } }
+        public List<IScreenPartialAdjustmentProperties> Lst_ScreenPartialAdjustment { get { return _lst_ScreenPartialAdjustment; } set { _lst_ScreenPartialAdjustment = value; } }
 
         #endregion
 
@@ -355,7 +361,6 @@ namespace PresentationLayer.Presenter
             {
                 return input_qrefno;
             }
-
             set
             {
                 input_qrefno = value;
@@ -768,7 +773,6 @@ namespace PresentationLayer.Presenter
             {
                 return _screenModel;
             }
-
             set
             {
                 _screenModel = value;
@@ -830,6 +834,7 @@ namespace PresentationLayer.Presenter
                 _frameIteration = value;
             }
         }
+        public DateTime Date_Assigned_Mainpresenter_forNewItem { get; set; }
 
         public bool MainPresenter_IsFromDeleteFunction { get; set; }
 
@@ -901,8 +906,10 @@ namespace PresentationLayer.Presenter
                              IPartialAdjustmentViewPresenter partialAdjustmentViewPresenter,
                              IPartialAdjustmentUCPresenter partialAdjustmentUCPresenter,
                              IPartialAdjustmentBaseHolderPresenter partialAdjustmentBaseHolderPresenter,
+                             IScreenPartialAdjustmentProperties screenPartialAdjustmentProperties,
                              ITopViewPresenter topViewPresenter,
                              ITopViewPanelViewerPresenter topViewPanelViewerPresenter
+
                              )
         {
             _mainView = mainView;
@@ -971,6 +978,7 @@ namespace PresentationLayer.Presenter
             _partialAdjustmentViewPresenter = partialAdjustmentViewPresenter;
             _partialAdjustmentUCPresenter = partialAdjustmentUCPresenter;
             _partialAdjustmentBaseHolderPresenter = partialAdjustmentBaseHolderPresenter;
+            _screenPartialAdjustmentProperties = screenPartialAdjustmentProperties;
             _topViewDesignPresenter = topViewPresenter;
             _topViewPanelViewerPresenter = topViewPanelViewerPresenter;
 
@@ -994,7 +1002,7 @@ namespace PresentationLayer.Presenter
             if (status == "DMPreSelection")
             {
                 _windoorModel.WD_CmenuDeleteVisibility = false;
-
+                
                 _tsLblStatus.Text = "Select one of the highlighted panel";
                 _controlRaised_forDMSelection = controlRaised;
                 _pnlControlSub.Enabled = false;
@@ -1112,57 +1120,6 @@ namespace PresentationLayer.Presenter
         {
             IPartialAdjustmentViewPresenter partialAdjustment = _partialAdjustmentViewPresenter.GetNewInstance(_unityC, _quotationModel, _windoorModel, this, _partialAdjustmentBaseHolderPresenter);
             partialAdjustment.GetPartialAdjustmentView().ShowPartialAdjusmentView();
-        }
-
-        private void _mainView_glassUpgradeToolStripButtonClickEventRaised(object sender, EventArgs e)
-        {
-            IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
-            glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
-        }
-
-        private void _mainView_DateAssignedtoolStripButtonClickEventRaised(object sender, EventArgs e)
-        {
-            try
-            {
-                string input = Interaction.InputBox("Set new date \n\n MM/DD/YYYY \n\n Initial Date Assign:" + dateAssigned.ToString().Replace("12:00:00 AM", string.Empty) + "\n\n Current Date Assigned:" + _quotationModel.Date_Assigned_Mainpresenter.ToString().Replace("12:00:00 AM", string.Empty), "Date Assign", dateAssigned.Date.ToString().Replace(" 12:00:00 AM", string.Empty));
-
-                if (input == "")
-                {
-
-                }
-                else
-                {
-                    DateTime myDate = DateTime.Parse(input);
-                    _quotationModel.Date_Assigned_Mainpresenter = myDate;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                if (ex.HResult == -2146233033)
-                {
-                    MessageBox.Show("Please input a correct date format.");
-                }
-                else
-                {
-                    MessageBox.Show(ex.Message, ex.HResult.ToString());
-                }
-            }
-
-
-            //DateTime myDate;
-            //if (!DateTime.TryParse("03/16/23", out myDate))
-            //{
-            //    // handle parse failure
-            //    Console.WriteLine("mali ka");
-            //}
-
-        }
-
-        private void _mainView_PriceHistorytoolStripButtonClickEventRaised(object sender, EventArgs e)
-        {
-            IPriceHistoryPresenter priceHistory = _priceHistoryPresenter.CreateNewInstance(_unityC, this, _quotationModel);
-            priceHistory.GetPriceHistoryView().ShowPriceHistory();
         }
 
         public int ForceRestartAndLoadFile()
@@ -1354,6 +1311,61 @@ namespace PresentationLayer.Presenter
 
         #region Events  
 
+        private void _mainView_glassUpgradeToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            IGlassUpgradePresenter glassUpgradePresenter = _glassUpgradePresenter.CreateNewIntance(_windoorModel, this, _quotationModel, _unityC);
+            glassUpgradePresenter.GetGlassUpgradeView().ShowGlassUpgradeView();
+        }
+
+        private void _mainView_DateAssignedtoolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                string input = Interaction.InputBox("Set new date \n\n MM/DD/YYYY \n\n Initial Date Assign:" + dateAssigned.ToString().Replace("12:00:00 AM", string.Empty) + "\n\n Current Date Assigned:" + _quotationModel.Date_Assigned_Mainpresenter.ToString().Replace("12:00:00 AM", string.Empty), "Date Assign", dateAssigned.Date.ToString().Replace(" 12:00:00 AM", string.Empty));
+
+                if (input == "")
+                {
+
+                }
+                else
+                {
+                    DateTime myDate = DateTime.Parse(input);
+                    _quotationModel.Date_Assigned_Mainpresenter = myDate;
+                    foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                    {
+                        wdm.Date_Assigned_Mainpresenter = myDate;
+                    }
+                    Date_Assigned_Mainpresenter_forNewItem = myDate;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == -2146233033)
+                {
+                    MessageBox.Show("Please input a correct date format.");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, ex.HResult.ToString());
+                }
+            }
+
+
+            //DateTime myDate;
+            //if (!DateTime.TryParse("03/16/23", out myDate))
+            //{
+            //    // handle parse failure
+            //    Console.WriteLine("mali ka");
+            //}
+
+        }
+
+        private void _mainView_PriceHistorytoolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            IPriceHistoryPresenter priceHistory = _priceHistoryPresenter.CreateNewInstance(_unityC, this, _quotationModel);
+            priceHistory.GetPriceHistoryView().ShowPriceHistory();
+        }
 
         private void OnMainViewClosingEventRaised(object sender, FormClosingEventArgs e)
         {
@@ -1593,6 +1605,13 @@ namespace PresentationLayer.Presenter
         {
             setNewFactor();
         }
+
+        #region changeConditionBaseOnDate
+
+        DateTime changeCondition_092123 = DateTime.Parse("09-21-2023"); // para maretain yung lumang file na di nag geget current price pag nag change ng factor
+
+        #endregion
+
         string factorTypes;
         public async void setNewFactor()
         {
@@ -1603,7 +1622,7 @@ namespace PresentationLayer.Presenter
                 {
                     #region Suggested & Current
                     string[] province = projectAddress.Split(',');
-                    value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                    value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim(),dateAssigned);
                     //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
                     //value = await _quotationServices.GetFactorByProvince(province);
                     if (_factorFromAddExisting <= 0 && _factorHolderOnLoad <= 0)
@@ -1652,7 +1671,8 @@ namespace PresentationLayer.Presenter
                                     MessageBox.Show("New Factor Set Sucessfully");
 
 
-                                    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
+                                    if (_quotationModel.Date_Assigned >= changeCondition_092123 || 
+                                        _quotationModel.Date_Assigned_Mainpresenter >= changeCondition_092123)
                                     {
                                         foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                                         {
@@ -1673,9 +1693,10 @@ namespace PresentationLayer.Presenter
                                             //}
                                             //_quotationModel.FactorChange = false;
                                             #endregion
+
                                         }
+                                        GetCurrentPrice();
                                     }
-                                    GetCurrentPrice();
                                 }
                                 else
                                 {
@@ -1768,7 +1789,8 @@ namespace PresentationLayer.Presenter
                                     _factorFromAddExisting = 0; // reset
 
 
-                                    if (_quotationModel.Date_Assigned >= DateTime.Parse("09-21-2023") || _quotationModel.Date_Assigned_Mainpresenter >= DateTime.Parse("09-21-2023"))
+                                    if (_quotationModel.Date_Assigned >= changeCondition_092123 ||
+                                        _quotationModel.Date_Assigned_Mainpresenter >= changeCondition_092123) 
                                     {
                                         foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                                         {
@@ -1818,7 +1840,7 @@ namespace PresentationLayer.Presenter
         }
         #endregion
         public bool EditFromQuotationList { get; set; }
-        
+
         bool checkWoodecAddtional = false;
         private void OnNudCurrentPriceValueChangedEventRaised(object sender, EventArgs e)
         {
@@ -1844,7 +1866,7 @@ namespace PresentationLayer.Presenter
                         if (!checkWoodecAddtional &&
                             _windoorModel.WD_WoodecAdditional != 0 &&
                             _lblCurrentPrice.Value != _windoorModel.WD_PriceWithWoodecAdditional)
-                            //&&EditFromQuotationList == false
+                        //&&EditFromQuotationList == false
                         {
                             GetPriceWithWoodec(_lblCurrentPrice.Value);
                         }
@@ -1868,7 +1890,7 @@ namespace PresentationLayer.Presenter
         {
             checkWoodecAddtional = true;
             _windoorModel.WD_PriceWithWoodecAdditional = editedPrice + (editedPrice * (_windoorModel.WD_WoodecAdditional / 100m));
-                _lblCurrentPrice.Value = _windoorModel.WD_PriceWithWoodecAdditional;
+            _lblCurrentPrice.Value = _windoorModel.WD_PriceWithWoodecAdditional;
         }
 
 
@@ -1943,8 +1965,9 @@ namespace PresentationLayer.Presenter
                                                           string.Empty);
 
             _screenModel.Screen_PVCVisibility = false;
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel);//, _screenDT);
-            glassThicknessPresenter.GetScreenView().ShowScreemView();
+            IScreenPresenter screenPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel, _screenPartialAdjustmentProperties);//, _screenDT);
+            screenPresenter.GetScreenView().ProfileType_MainPresenter = _windoorModel.WD_profile;
+            screenPresenter.GetScreenView().ShowScreemView();
         }
 
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
@@ -2185,7 +2208,25 @@ namespace PresentationLayer.Presenter
             //}
             #endregion
 
+            foreach (var dic in Dic_PaScreenID)
+            {
+                wndr_content.Add("○");
+                wndr_content.Add(dic.Key + "^ " + dic.Value);
+                wndr_content.Add("○");
+            }
+
+            foreach(IScreenPartialAdjustmentProperties SPA in Lst_ScreenPartialAdjustment)
+            {
+                wndr_content.Add("●");
+                foreach (var prop in SPA.GetType().GetProperties())
+                {
+                    wndr_content.Add(prop.Name + ": " + prop.GetValue(SPA, null));
+                }
+                wndr_content.Add("●");
+            }
+
             wndr_content.Add("EndofFile");
+
             #endregion
 
             return wndr_content;
@@ -2981,6 +3022,7 @@ namespace PresentationLayer.Presenter
         private void OnChangeItemColorClickEventRaised(object sender, EventArgs e)
         {
             IChangeItemColorPresenter presenter = _changeItemColorPresenter.GetNewInstance(_unityC, this, _windoorModel);
+            presenter.GetChangeItemColorView().FromMainpresenter_profileType = _windoorModel.WD_profile;
             presenter.ShowView();
         }
 
@@ -3240,6 +3282,11 @@ namespace PresentationLayer.Presenter
             {
                 Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
+            else if (tsmItem.Name == "AlutekToolStripMenuItem")
+            {
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "Alutek Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+            }
+
         }
 
         private void OnPanelMainSizeChangedEventRaised(object sender, EventArgs e)
@@ -3526,7 +3573,7 @@ namespace PresentationLayer.Presenter
                 {
                     _glassThicknessDT.Clear();
                 }
-
+                decimal forex = 55m;
                 #region Single
                 //single Annealed
                 _glassThicknessDT.Rows.Add(0.0f, "Unglazed", "NA", 0m, true, false, false, false, false);
@@ -3547,9 +3594,9 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(13.0f, "13 mm Clear", "NA", 2000.00m, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(14.0f, "14 mm Clear", "NA", 2100.00m, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(24.0f, "24 mm Clear", "NA", 3882.00m, true, false, false, false, false);
-                _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", 0m, true, false, false, false, false);
-                _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Clear", "NA", 0m, true, false, false, false, false);
-                _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Euro Grey", "NA", 0m, true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", Math.Round(((215.11m * forex) / 40), 2), true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Frosted Clear", "NA", Math.Round(((262.91m * forex) / 40), 2), true, false, false, false, false);
+                _glassThicknessDT.Rows.Add(6.0f, "6 mm Frosted Euro Grey", "NA", Math.Round(((286.81m * forex) / 40), 2), true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Bronze", "NA", 985.00m, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Bronze", "NA", 2334.00m, true, false, false, false, false);
                 _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Bronze", "NA", 2334.00m, true, false, false, false, false);
@@ -4038,7 +4085,7 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error adding Glass to list " + "\n"  + this + "\n" + ex.Message);
+                MessageBox.Show("Error adding Glass to list " + "\n" + this + "\n" + ex.Message);
             }
         }
 
@@ -4306,7 +4353,7 @@ namespace PresentationLayer.Presenter
                             //autoDescription = true;
                             onload = false;
                             _isFromAddExisting = false;
-
+                            QuotationModelDateTimeChecker();
                             break;
 
                         case "GetCloudFiles":
@@ -4356,6 +4403,24 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void QuotationModelDateTimeChecker()
+        {
+            foreach (var wdm in _quotationModel.Lst_Windoor)
+            {
+                if (wdm.Date_Assigned == DateTime.Parse("01-01-0001"))
+                {
+                    wdm.Date_Assigned = _quotationModel.Date_Assigned;
+                }
+                if (wdm.Date_Assigned_Mainpresenter == DateTime.Parse("01-01-0001"))
+                {
+                    wdm.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
+                }
+            }
+
+        }
+
+
         private void Opening_dotwndr(int row)
         {
             string row_str = file_lines[row].Replace("\t", "");
@@ -4569,6 +4634,30 @@ namespace PresentationLayer.Presenter
                 else
                 {
                     inside_PartialAdjustment_Qty = true;
+                }
+            }
+            else if (row_str.Contains("○"))
+            {
+                if (inside_ScreenPartialDictionary)
+                {
+                    Load_ScreenPADictionary();
+                    inside_ScreenPartialDictionary = false;
+                }
+                else
+                {
+                    inside_ScreenPartialDictionary = true;
+                }
+            }
+            else if (row_str.Contains("●"))
+            {
+                if (inside_ScreenPartialAdjustment_List)
+                {
+                    Load_ScreenPA_List();
+                    inside_ScreenPartialAdjustment_List = false;
+                }
+                else
+                {
+                    inside_ScreenPartialAdjustment_List = true;
                 }
             }
 
@@ -5137,6 +5226,15 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
+                        else if (row_str.Contains("Date_Assigned_Mainpresenter"))
+                        {
+                            _windoorModel.Date_Assigned_Mainpresenter = DateTime.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Date_Assigned"))
+                        {
+                            _windoorModel.Date_Assigned = DateTime.Parse(extractedValue_str);
+                        }
+                        
                         #endregion
                     }
                     else if (inside_frame)
@@ -5473,6 +5571,54 @@ namespace PresentationLayer.Presenter
                                 {
                                     frm_CladdingProfileForFrame_ArticleNo = Cpfa;
                                     break;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("Frame_InversionClipVisibility:"))
+                        {
+                            frm_InversionClipVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_InversionClipOption:"))
+                        {
+                            frm_InversionClipOption = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("FrameInversionClip_ArtNo:"))
+                        {
+                            foreach(InversionClip_ArticleNo ICAN in InversionClip_ArticleNo.GetAll())
+                            {
+                                if(ICAN.ToString() == extractedValue_str)
+                                {
+                                    frm_FrameInversionClip_ArtNo = ICAN;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("FrameGlazingGasket_ArtNo:"))
+                        {
+                            foreach(GlazingGasket_ArticleNo GAN in GlazingGasket_ArticleNo.GetAll())
+                            {
+                                if(GAN.ToString() == extractedValue_str)
+                                {
+                                    frm_FrameGlazingGasket_ArtNo = GAN;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("FrameCheveron_ArtNo:"))
+                        {
+                            foreach(Cheveron_ArticleNo CAN in Cheveron_ArticleNo.GetAll())
+                            {
+                                if(CAN.ToString() == extractedValue_str)
+                                {
+                                    frm_FrameCheveron_ArtNo = CAN;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("FrameCornerCleat_ArtNo:"))
+                        {
+                            foreach(CornerCleat_ArticleNo CCAN in CornerCleat_ArticleNo.GetAll())
+                            {
+                                if(CCAN.ToString() == extractedValue_str)
+                                {
+                                    frm_FrameCornerCleat_ArtNo = CCAN;
                                 }
                             }
                         }
@@ -6393,6 +6539,106 @@ namespace PresentationLayer.Presenter
                                 if (ean.ToString() == extractedValue_str)
                                 {
                                     panel_ExtensionRight2ArtNo = ean;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_OpenableStrikerArtNo:"))
+                        {
+                            foreach(OpenableStriker_ArticleNo OSA in OpenableStriker_ArticleNo.GetAll())
+                            {
+                                if(OSA.ToString() == extractedValue_str)
+                                {
+                                    panel_OpenableStrikerArtNo = OSA;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CornerCleatArtNo:"))
+                        {
+                            foreach(CornerCleat_ArticleNo CCA in CornerCleat_ArticleNo.GetAll())
+                            {
+                                if(CCA.ToString() == extractedValue_str)
+                                {
+                                    panel_CornerCleatArtNo = CCA;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CheveronArtNo:"))
+                        {
+                            foreach(Cheveron_ArticleNo CAN in Cheveron_ArticleNo.GetAll())
+                            {
+                                if(CAN.ToString() == extractedValue_str)
+                                {
+                                    panel_CheveronArtNo = CAN;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_RunUpBlockArtNo:"))
+                        {
+                            foreach(RunUpBlock_ArticleNo RAN in RunUpBlock_ArticleNo.GetAll())
+                            {
+                                if(RAN.ToString() == extractedValue_str)
+                                {
+                                    panel_RunUpBlockArtNo = RAN;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_PackerRodArtNo:"))
+                        {
+                            foreach(PackerRod_ArticleNo PAN in PackerRod_ArticleNo.GetAll())
+                            {
+                                if(PAN.ToString() == extractedValue_str)
+                                {
+                                    panel_PackerRodArtNo = PAN;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_LockingWedgeArtNo:"))
+                        {
+                            foreach(LockingWedge_ArticleNo LAN in LockingWedge_ArticleNo.GetAll())
+                            {
+                                if(LAN.ToString() == extractedValue_str)
+                                {
+                                    panel_LockingWedgeArtNo = LAN;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_SSCheveronArtNo:"))
+                        {
+                            foreach(SSCheveron_ArticleNo SSAN in SSCheveron_ArticleNo.GetAll())
+                            {
+                                if(SSAN.ToString() == extractedValue_str)
+                                {
+                                    panel_SSCheveronArtNo = SSAN;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_Unica40ArtNo:"))
+                        {
+                            foreach(Unica40_ArticleNo UAN in Unica40_ArticleNo.GetAll())
+                            {
+                                if(UAN.ToString() == extractedValue_str)
+                                {
+                                    panel_Unica40ArtNo = UAN;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_LockingConnectorArtNo:"))
+                        {
+                            foreach(LockingConnectorDevice_ArticleNo LCDA in LockingConnectorDevice_ArticleNo.GetAll())
+                            {
+                                if(LCDA.ToString() == extractedValue_str)
+                                {
+                                    panel_LockingConnectorArtNo = LCDA;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CremonArtNo:"))
+                        {
+                            foreach(Cremon_HandleArtNo CHN in Cremon_HandleArtNo.GetAll())
+                            {
+                                if(CHN.ToString() == extractedValue_str)
+                                {
+                                    panel_CremonArtNo = CHN;
                                 }
                             }
                         }
@@ -9428,12 +9674,161 @@ namespace PresentationLayer.Presenter
                         }
                         #endregion
                     }
+                    else if (inside_ScreenPartialDictionary)
+                    {
+                        #region Load Screen PartialAdjustment Dictionary
+                        if (row_str != "○")
+                        {
+                            string[] key = row_str.Split('^');
+                            var value = row_str.Substring(row_str.IndexOf("^ ") + 1);
+
+                            _screenPADictionaryKey = Convert.ToInt64(key[0]);
+                            _screenPADictionaryValue = Convert.ToInt32(value);
+                        }
+                        #endregion
+                    }
+                    else if (inside_ScreenPartialAdjustment_List)
+                    {
+                        #region Load ScreenPartialAdjustment_List
+                        if (row_str != "●")
+                        {
+                            if (row_str.Contains("Screen_isAdjusted:"))
+                            {
+                                pa_Screen_isAdjusted = Convert.ToBoolean(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_Adjustment_Price:"))
+                            {
+                                pa_Screen_Adjustment_Price = decimal.Parse(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_AddOnsSpecialFactor_Revised:"))
+                            {
+                                pa_Screen_AddOnsSpecialFactor_Revised = decimal.Parse(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_Factor_Revised:"))
+                            {
+                                pa_Screen_Factor_Revised = decimal.Parse(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_DisplayedDimes_Revised:")) 
+                            {
+                                pa_Screen_DisplayedDimes_Revised = extractedValue_str;
+                            }
+                            else if (row_str.Contains("Screen_NetPrice_Revised:"))
+                            {
+                                pa_Screen_NetPrice_Revised = decimal.Parse(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_Discount_Revised:"))
+                            {
+                                pa_Screen_Discount_Revised = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_Quantity_Revised:"))
+                            {
+                                pa_Screen_Quantity_Revised = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_UnitPrice_Revised:"))
+                            {
+                                pa_Screen_UnitPrice_Revised = decimal.Parse(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_Set_Revised:"))
+                            {
+                                pa_Screen_Set_Revised = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_Description_Revised:"))
+                            {
+                                pa_Screen_Description_Revised = extractedValue_str;
+                            }
+                            else if (row_str.Contains("Screen_Type_Revised:"))
+                            {
+                                foreach(ScreenType sct in ScreenType.GetAll())
+                                {
+                                    if(sct.ToString() == extractedValue_str)
+                                    {
+                                        pa_Screen_Type_Revised = sct;
+                                    }
+                                }
+                            }
+                            else if (row_str.Contains("Screen_NetPrice:"))
+                            {
+                                pa_Screen_NetPrice = decimal.Parse(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_Quantity:"))
+                            {
+                                pa_Screen_Quantity = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_UnitPrice:"))
+                            {
+                                pa_Screen_UnitPrice = decimal.Parse(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_DisplayedDimension:"))
+                            {
+                                pa_Screen_DisplayedDimension = extractedValue_str;
+                            }
+                            else if (row_str.Contains("Screen_Set:"))
+                            {
+                                pa_Screen_Set = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_Description:"))
+                            {
+                                pa_Screen_Description = extractedValue_str;
+                            }
+                            else if (row_str.Contains("Screen_WindoorID:"))
+                            {
+                                pa_Screen_WindoorID = extractedValue_str;
+                            }
+                            else if (row_str.Contains("Screen_ItemNumber:"))
+                            {
+                                pa_Screen_ItemNumber = decimal.Parse(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_id:"))
+                            {
+                                pa_Screen_id = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                        }
+                        #endregion
+                    }
                     break;
             }
 
         }
 
-
+        private void Load_ScreenPA_List()
+        {
+            try
+            {             
+                IScreenPartialAdjustmentProperties SPA = new ScreenPartialAdjustmentProperties();
+                
+                SPA.Screen_id = pa_Screen_id;
+                SPA.Screen_ItemNumber = pa_Screen_ItemNumber;
+                SPA.Screen_WindoorID = pa_Screen_WindoorID;
+                SPA.Screen_Description = pa_Screen_Description;
+                SPA.Screen_Set = pa_Screen_Set;
+                SPA.Screen_DisplayedDimension = pa_Screen_DisplayedDimension;
+                SPA.Screen_UnitPrice = pa_Screen_UnitPrice;
+                SPA.Screen_Quantity = pa_Screen_Quantity;
+                SPA.Screen_NetPrice = pa_Screen_NetPrice;
+                SPA.Screen_Type_Revised = pa_Screen_Type_Revised;
+                SPA.Screen_Description_Revised = pa_Screen_Description_Revised;
+                SPA.Screen_Set_Revised = pa_Screen_Set_Revised;
+                SPA.Screen_UnitPrice_Revised = pa_Screen_UnitPrice_Revised;
+                SPA.Screen_Quantity_Revised = pa_Screen_Quantity_Revised;
+                SPA.Screen_Discount_Revised = pa_Screen_Discount_Revised;
+                SPA.Screen_NetPrice_Revised = pa_Screen_NetPrice_Revised;
+                SPA.Screen_DisplayedDimes_Revised = pa_Screen_DisplayedDimes_Revised;
+                SPA.Screen_Factor_Revised = pa_Screen_Factor_Revised;
+                SPA.Screen_AddOnsSpecialFactor_Revised = pa_Screen_AddOnsSpecialFactor_Revised;
+                SPA.Screen_Adjustment_Price = pa_Screen_Adjustment_Price;
+                SPA.Screen_isAdjusted = pa_Screen_isAdjusted;
+                
+                Lst_ScreenPartialAdjustment.Add(SPA);
+            }
+            catch (Exception ex)
+            {
+               MessageBox.Show("Error Screen PartialAdjustment" + " " + ex.Message);
+            }
+        }
+        private void Load_ScreenPADictionary()
+        {
+            Dic_PaScreenID.Add(_screenPADictionaryKey, _screenPADictionaryValue);
+        }
         private void Load_RDLCHeaders()
         {
             if (add_existing == false)
@@ -9566,6 +9961,7 @@ namespace PresentationLayer.Presenter
                                                                                panel_Type,
                                                                                panel_Visibility,
                                                                                _frameModel.Frame_Zoom,
+                                                                               _userModel,
                                                                                _frameModel,
                                                                                null,
                                                                                panel_DisplayWidth,
@@ -9847,8 +10243,16 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_GS100CoverKitArtNo = panel_GS100CoverKitArtNo;
             pnlModel.Panel_OverLappingPanelQty = panel_OverLappingPanelQty;
             pnlModel.Panel_AluminumPullHandleArtNo = panel_AluminumPullHandleArticleNo;
-
-
+            pnlModel.Panel_OpenableStrikerArtNo = panel_OpenableStrikerArtNo;
+            pnlModel.Panel_CornerCleatArtNo = panel_CornerCleatArtNo;
+            pnlModel.Panel_CheveronArtNo = panel_CheveronArtNo;
+            pnlModel.Panel_RunUpBlockArtNo = panel_RunUpBlockArtNo;
+            pnlModel.Panel_PackerRodArtNo = panel_PackerRodArtNo;
+            pnlModel.Panel_LockingWedgeArtNo = panel_LockingWedgeArtNo;
+            pnlModel.Panel_SSCheveronArtNo = panel_SSCheveronArtNo;
+            pnlModel.Panel_Unica40ArtNo = panel_Unica40ArtNo;
+            pnlModel.Panel_LockingConnectorArtNo = panel_LockingConnectorArtNo;
+            pnlModel.Panel_CremonArtNo = panel_CremonArtNo;
 
 
             #region louvre 
@@ -10376,17 +10780,20 @@ namespace PresentationLayer.Presenter
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi,
              inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory, inside_GlassUpgrade,
              inside_PartialAdjustment_Image, inside_PartialAdjustment_Description, inside_PartialAdjustment_Price,
-             inside_PartialAdjustment_Qty,
+             inside_PartialAdjustment_Qty,inside_ScreenPartialDictionary,inside_ScreenPartialAdjustment_List,
              rdlcDicChangeKey = true,
              add_existing = false,
             _isFromAddExisting = false,
             _loadRDLCHeaders = false,
             _allpanelsIsMesh;
         int _EntryCountOfKeyWordUsing,
-            _EntryCountOfKeyWordPriceValidity;
+            _EntryCountOfKeyWordPriceValidity,
+            _screenPADictionaryValue;
         bool _EntrytoKeyWordUsing = false,
              _EntrytoKeyWordPriceValidity = false;
         decimal _factorFromAddExisting, _factorHolderOnLoad;
+        long _screenPADictionaryKey;
+
 
         #region Frame Properties
 
@@ -10436,7 +10843,9 @@ namespace PresentationLayer.Presenter
              frm_TubularOption,
              frm_TubularWidthVisibility,
              frm_TubularHeightVisibility,
-             frm_CladdingVisibility;
+             frm_CladdingVisibility,
+             frm_InversionClipVisibility,
+             frm_InversionClipOption;
         Padding frm_Padding_int,
                 frmImageRenderer_Padding_int;
         float frmImageRenderer_Zoom,
@@ -10460,6 +10869,12 @@ namespace PresentationLayer.Presenter
         TrackProfile_ArticleNo frm_TrackProfile_ArticleNo;
         MilledFrameReinf_ArticleNo frm_MilledReinfArtNo;
         CladdingProfileForFrame_ArticleNo frm_CladdingProfileForFrame_ArticleNo;
+
+        InversionClip_ArticleNo frm_FrameInversionClip_ArtNo;
+        GlazingGasket_ArticleNo frm_FrameGlazingGasket_ArtNo;
+        Cheveron_ArticleNo frm_FrameCheveron_ArtNo;
+        CornerCleat_ArticleNo frm_FrameCornerCleat_ArtNo;
+
         #endregion
         #region WindoorModel Properties
 
@@ -10804,6 +11219,18 @@ namespace PresentationLayer.Presenter
         AluminumPullHandle_ArticleNo panel_AluminumPullHandleArticleNo;
         MotorizedMechRemote_ArticleNo panel_MotorizedMechRemoteArtNo;
         CenterProfile_ArticleNo panel_CenterProfileArtNo;
+
+        OpenableStriker_ArticleNo panel_OpenableStrikerArtNo;
+        CornerCleat_ArticleNo panel_CornerCleatArtNo;
+        Cheveron_ArticleNo panel_CheveronArtNo;
+        RunUpBlock_ArticleNo panel_RunUpBlockArtNo;
+        PackerRod_ArticleNo panel_PackerRodArtNo;
+        LockingWedge_ArticleNo panel_LockingWedgeArtNo;
+        SSCheveron_ArticleNo panel_SSCheveronArtNo;
+        Unica40_ArticleNo panel_Unica40ArtNo;
+        LockingConnectorDevice_ArticleNo panel_LockingConnectorArtNo;
+        Cremon_HandleArtNo panel_CremonArtNo;
+
         #endregion
         #endregion
         #region Divider Properties
@@ -10940,32 +11367,32 @@ namespace PresentationLayer.Presenter
                 screen_LaborAndMobilization,
                 screen_TotalNetPriceWithoutVat,
                 screen_AddOnsSpecialFactor;
-           int
-            screen_Set,
-            screen_Quantity,
-            screen_Width,
-            screen_Height,
-            screen_Discount,
-            screen_0505Width,
-            screen_1067Height,
-            screen_0505Qty,
-            screen_1067Qty,
-            screen_LatchKitQty,
-            screen_IntermediatePartQty,
-            screen_6040MilledProfile,
-            screen_6040MilledProfileQty,
-            screen_LandCover,
-            screen_LandCoverQty,
-            screen_1067PVCbox,
-            screen_1067PVCboxQty,
-            screen_1385MilledProfile,
-            screen_1385MilledProfileQty,
-            screen_373or374MilledProfile,
-            screen_373or374MilledProfileQty,
-            screen_6052MilledProfile,
-            screen_6052MilledProfileQty,
-            screen_ExchangeRate,
-            plissedRd_Panels;
+        int
+         screen_Set,
+         screen_Quantity,
+         screen_Width,
+         screen_Height,
+         screen_Discount,
+         screen_0505Width,
+         screen_1067Height,
+         screen_0505Qty,
+         screen_1067Qty,
+         screen_LatchKitQty,
+         screen_IntermediatePartQty,
+         screen_6040MilledProfile,
+         screen_6040MilledProfileQty,
+         screen_LandCover,
+         screen_LandCoverQty,
+         screen_1067PVCbox,
+         screen_1067PVCboxQty,
+         screen_1385MilledProfile,
+         screen_1385MilledProfileQty,
+         screen_373or374MilledProfile,
+         screen_373or374MilledProfileQty,
+         screen_6052MilledProfile,
+         screen_6052MilledProfileQty,
+         screen_ExchangeRate,
+         plissedRd_Panels;
         long screen_id;
         string screen_WindoorID,
                screen_description,
@@ -11005,6 +11432,32 @@ namespace PresentationLayer.Presenter
                _guPrimaryKey;
 
         #endregion
+        #region IScreenPartialAdjustmentProperties
+        long pa_Screen_id;
+        decimal pa_Screen_ItemNumber, 
+                pa_Screen_UnitPrice, 
+                pa_Screen_NetPrice, 
+                pa_Screen_UnitPrice_Revised,
+                pa_Screen_NetPrice_Revised, 
+                pa_Screen_Factor_Revised, 
+                pa_Screen_AddOnsSpecialFactor_Revised,
+                pa_Screen_Adjustment_Price;
+
+        string pa_Screen_WindoorID, 
+               pa_Screen_Description, 
+               pa_Screen_DisplayedDimension, 
+               pa_Screen_Description_Revised,
+               pa_Screen_DisplayedDimes_Revised;
+
+        int pa_Screen_Set, 
+            pa_Screen_Quantity, 
+            pa_Screen_Set_Revised, 
+            pa_Screen_Quantity_Revised, 
+            pa_Screen_Discount_Revised;
+        ScreenType pa_Screen_Type_Revised;
+        bool pa_Screen_isAdjusted;        
+        #endregion
+
         string mpnllvl = "";
 
         #region ViewUpdate(Controls)
@@ -11031,6 +11484,8 @@ namespace PresentationLayer.Presenter
             mpnllvl = string.Empty;
             _screenList = new List<IScreenModel>();
             _nonUnglazed = new List<DataRow>();
+            _dic_PaScreenID = new Dictionary<long, decimal>();
+            _lst_ScreenPartialAdjustment = new List<IScreenPartialAdjustmentProperties>();
             _guHolderDT.Clear();
             _pnlItems.Controls.Clear();
 
@@ -11266,10 +11721,17 @@ namespace PresentationLayer.Presenter
                                                                          baseColor,
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
+                        _windoorModel.Date_Assigned = dateAssigned;
+                        _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
                         _windoorModel.SetDimensions_basePlatform();
                         AddWndrList_QuotationModel(_windoorModel);
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _mainView.Zoom = _windoorModel.WD_zoom;
+
+                       
+
+
+
                         //_mainView.PropertiesScroll = _windoorModel.WD_PropertiesScroll;
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -11295,6 +11757,7 @@ namespace PresentationLayer.Presenter
                         _mainView.RemoveBinding();
                         _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                        Console.WriteLine("factor from quotation model" + _quotationModel.PricingFactor);
                     }
                     #endregion
                 }
@@ -11332,8 +11795,13 @@ namespace PresentationLayer.Presenter
                                                                          OutsideColor);
                         _windoorModel.WD_WoodecAdditional = WoodecAdditionalForNewItem;
                         AddWndrList_QuotationModel(_windoorModel);
+ 
+
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
+
+                        _windoorModel.Date_Assigned = dateAssigned;
+                        _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -11449,6 +11917,12 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_TubularWidth = frm_TubularWidth;
                         _frameModel.Frame_CladdingVisibility = frm_CladdingVisibility;
                         _frameModel.Frame_CladdingQty = frm_CladdingQty;
+                        _frameModel.Frame_InversionClipVisibility = frm_InversionClipVisibility;
+                        _frameModel.Frame_InversionClipOption = frm_InversionClipOption;
+                        _frameModel.FrameInversionClip_ArtNo = frm_FrameInversionClip_ArtNo;
+                        _frameModel.FrameGlazingGasket_ArtNo = frm_FrameGlazingGasket_ArtNo;
+                        _frameModel.FrameCheveron_ArtNo = frm_FrameCheveron_ArtNo;
+                        _frameModel.FrameCornerCleat_ArtNo = frm_FrameCornerCleat_ArtNo;
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
@@ -11535,6 +12009,9 @@ namespace PresentationLayer.Presenter
                         AddWndrList_QuotationModel(_windoorModel);
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
+
+                        _windoorModel.Date_Assigned = dateAssigned;
+                        _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -12595,7 +13072,15 @@ namespace PresentationLayer.Presenter
                         }
                         else if (handletype == Handle_Type._Rio || handletype == Handle_Type._Rotoline || handletype == Handle_Type._MVD)
                         {
-
+                            if (handletype == Handle_Type._Rotoline)
+                            {
+                                if (!(frame_art == FrameProfile_ArticleNo._7507 && (sash_art == SashProfile_ArticleNo._374 || sash_art == SashProfile_ArticleNo._373)) &&
+                                    !(frame_art == FrameProfile_ArticleNo._6052 && sash_art == SashProfile_ArticleNo._6041) &&
+                                    !(frame_art == FrameProfile_ArticleNo._6050 && sash_art == SashProfile_ArticleNo._6040))
+                                {
+                                    incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
+                                }
+                            }
                             if (!(frame_art == FrameProfile_ArticleNo._7507 && (sash_art == SashProfile_ArticleNo._374 || sash_art == SashProfile_ArticleNo._373)) &&
                                 !(frame_art == FrameProfile_ArticleNo._6052 && sash_art == SashProfile_ArticleNo._6041))
                             {
@@ -12614,6 +13099,13 @@ namespace PresentationLayer.Presenter
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._6052 &&
                                   sash_art == SashProfile_ArticleNo._6041))
+                            {
+                                incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
+                            }
+                        }
+                        else if (handletype == Handle_Type._CremonHandle)
+                        {
+                            if (frame_art != FrameProfile_ArticleNo._84100)
                             {
                                 incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                             }
@@ -12665,6 +13157,13 @@ namespace PresentationLayer.Presenter
                                  espag_art == Espagnolette_ArticleNo._731852 || espag_art == Espagnolette_ArticleNo._6_90137_10_0_1)
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._6052) && !(sash_art == SashProfile_ArticleNo._6041))
+                            {
+                                MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+                        else if (espag_art == Espagnolette_ArticleNo._H102 || espag_art == Espagnolette_ArticleNo._H103)
+                        {
+                            if (frame_art != FrameProfile_ArticleNo._84100)
                             {
                                 MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
@@ -13689,7 +14188,12 @@ namespace PresentationLayer.Presenter
             try
             {
                 string[] province = projectAddress.Split(',');
-                _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim(), dateAssigned);
+
+                if (_windoorModel.WD_profile.Contains("Alutek"))
+                {
+                    _quotationModel.PricingFactor += 1;
+                }
             }
             catch (Exception ex)
             {
@@ -14299,6 +14803,7 @@ namespace PresentationLayer.Presenter
             {
                 _quotationModel.ItemCostingPriceAndPoints();
             }
+
             //GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
             GetMainView().GetCurrentPrice().Value = _windoorModel.WD_currentPrice;
             Console.WriteLine(GetMainView().GetCurrentPrice().Value);
@@ -14463,6 +14968,6 @@ namespace PresentationLayer.Presenter
             WoodecAdditionalForNewItem = woodecAddlPercentage;
         }
         #endregion
-
     }
+
 }
