@@ -2230,7 +2230,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 #endregion
 
                 #endregion                          
-           
+    
                 #region BuiltInPrice Selector
                 if (loopCountLimit == 2)
                 {

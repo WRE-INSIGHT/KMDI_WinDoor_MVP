@@ -315,6 +315,105 @@ namespace PresentationLayer.Presenter
             
 
         }
+        private void PriceNQtyAddition(long screen_id, ref bool delete)
+        {
+            bool isChild = false;
+            int qtyToAdd = 0;
+            long parent_id = 0;
+
+            foreach (IScreenPartialAdjustmentProperties spap in _mainPresenter.Lst_ScreenPartialAdjustment) // searh child screen
+            {
+                if (screen_id == spap.Screen_id)
+                {
+                    if (spap.Screen_IsChild)
+                    {
+                        isChild = true;
+                        qtyToAdd = spap.Screen_Quantity;
+                        parent_id = spap.Screen_Parent_ID;
+                    }
+
+                    break;
+                }
+            }
+
+            if (isChild)
+            {
+                foreach (IScreenPartialAdjustmentProperties spap in _mainPresenter.Lst_ScreenPartialAdjustment) // search parent screen
+                {
+                    if (spap.Screen_id == parent_id)
+                    {
+                        if (spap.Screen_Type_Revised == null)
+                        {
+                            delete = true;
+
+                            if (spap.Screen_Quantity < spap.Screen_Original_Quantity)
+                            {
+                                decimal newDiscountPercentage = (spap.Screen_Discount / 100m);
+
+                                int ParentQtyCount = spap.Screen_Quantity + qtyToAdd;
+
+                                if (ParentQtyCount > spap.Screen_Original_Quantity)// more than original quantity
+                                {
+                                    ParentQtyCount = spap.Screen_Original_Quantity;
+                                }
+
+                                decimal discount = spap.Screen_UnitPrice * newDiscountPercentage;
+                                decimal Discounted_UnitPrice = (spap.Screen_UnitPrice - discount);
+
+                                decimal ParentNetPrice = Discounted_UnitPrice * ParentQtyCount;
+                                decimal ParentScreenTotalAmount = spap.Screen_UnitPrice * ParentQtyCount;
+
+                                spap.Screen_Quantity = ParentQtyCount; // new screen_quantity
+                                spap.Screen_NetPrice = ParentNetPrice; // new screen netprice
+                                spap.Screen_TotalAmount = ParentScreenTotalAmount; // new screen_total_amount
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Parent screen's already adjusted, Screen_Type_Revised is not Null");
+                            delete = false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //delete Parent and Child Screen
+                DialogResult Resdel = MessageBox.Show("Deleting parent screen will also delete succeding child screen/s,\nDo you want to continue? ", "Confirmation", MessageBoxButtons.YesNo);
+
+                if (DialogResult.Yes == Resdel)
+                {
+                    delete = true;
+
+                    parent_id = screen_id;
+
+                    List<decimal> screenItemNum = new List<decimal>();
+
+                    foreach (IScreenPartialAdjustmentProperties childScreens in _mainPresenter.Lst_ScreenPartialAdjustment)
+                    {
+                        if (childScreens.Screen_IsChild)
+                        {
+                            if (childScreens.Screen_Parent_ID == parent_id)
+                            {
+                                screenItemNum.Add(childScreens.Screen_ItemNumber);// add to list
+                            }
+                        }
+                    }
+
+                    foreach (var itemsToDel in screenItemNum)
+                    {
+                        _mainPresenter.Lst_ScreenPartialAdjustment.RemoveAll(x => x.Screen_ItemNumber == itemsToDel);// delete
+                    }
+
+                }
+                else if (DialogResult.No == Resdel)
+                {
+                    delete = false;
+                }
+
+            }
+        }
 
 
 
@@ -848,18 +947,21 @@ namespace PresentationLayer.Presenter
 
         private void _screenView_tsb_ScreenAdjustment_ClickEventRaised(object sender, EventArgs e)
         {
-            IScreenPartialAdjustmentSelectionPresenter partialAdjusmentSelection = _screenPartialAdjustmentSelection.CreateNewInstance(_unityC,
-                                                                                                                                       _mainPresenter,
-                                                                                                                                       this,
-                                                                                                                                       _screenModel,
-                                                                                                                                       _screenPartiallAdjustmentProperties);
+            if (_screenView.GetToolStripBtnScreenAdjustment().Visible)
+            {
+                IScreenPartialAdjustmentSelectionPresenter partialAdjusmentSelection = _screenPartialAdjustmentSelection.CreateNewInstance(_unityC,
+                                                                                                                                           _mainPresenter,
+                                                                                                                                           this,
+                                                                                                                                           _screenModel,
+                                                                                                                                           _screenPartiallAdjustmentProperties);
 
-            partialAdjusmentSelection.GetScreenPartialAdjustmentView().ShowPartialAdjustmentSelectionView();
+                partialAdjusmentSelection.GetScreenPartialAdjustmentView().ShowPartialAdjustmentSelectionView();
+            }
         }
 
         private void _screenView_ScreenView_ResizeEventRaised(object sender, EventArgs e)
         {
-            // Control Location          
+            // Control Location           
         }
 
         private void _screenView_chkbox_allowEdit_CheckedChangedEventRaised(object sender, EventArgs e)
@@ -1487,105 +1589,7 @@ namespace PresentationLayer.Presenter
             WindoorIDGetter();
         }
 
-        private void PriceNQtyAddition(long screen_id,ref bool delete)
-        {
-            bool isChild = false;
-            int qtyToAdd = 0;
-            long parent_id = 0;
-
-            foreach(IScreenPartialAdjustmentProperties spap in _mainPresenter.Lst_ScreenPartialAdjustment) // searh child screen
-            {
-                if(screen_id == spap.Screen_id)
-                {
-                    if (spap.Screen_IsChild)
-                    {
-                        isChild = true;
-                        qtyToAdd = spap.Screen_Quantity;
-                        parent_id = spap.Screen_Parent_ID;
-                    }
-
-                    break;
-                }
-            }
-
-            if (isChild)
-            {
-                foreach (IScreenPartialAdjustmentProperties spap in _mainPresenter.Lst_ScreenPartialAdjustment) // search parent screen
-                {
-                    if (spap.Screen_id == parent_id)
-                    {
-                        if (spap.Screen_Type_Revised == null)
-                        {
-                            delete = true;
-
-                            if (spap.Screen_Quantity < spap.Screen_Original_Quantity) 
-                            {
-                                decimal newDiscountPercentage = (spap.Screen_Discount / 100m);
-
-                                int ParentQtyCount = spap.Screen_Quantity + qtyToAdd;
-
-                                if(ParentQtyCount > spap.Screen_Original_Quantity)// more than original quantity
-                                {
-                                    ParentQtyCount = spap.Screen_Original_Quantity;
-                                }
-
-                                decimal discount = spap.Screen_UnitPrice * newDiscountPercentage;
-                                decimal Discounted_UnitPrice = (spap.Screen_UnitPrice - discount);
-
-                                decimal ParentNetPrice = Discounted_UnitPrice * ParentQtyCount;
-                                decimal ParentScreenTotalAmount = spap.Screen_UnitPrice * ParentQtyCount;
-
-                                spap.Screen_Quantity = ParentQtyCount; // new screen_quantity
-                                spap.Screen_NetPrice = ParentNetPrice; // new screen netprice
-                                spap.Screen_TotalAmount = ParentScreenTotalAmount; // new screen_total_amount
-                            }
-
-                        }
-                        else
-                        {
-                            MessageBox.Show("Parent screen's already adjusted, Screen_Type_Revised is not Null");
-                            delete = false;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                //delete Parent and Child Screen
-                DialogResult Resdel = MessageBox.Show("Deleting parent screen will also delete succeding child screen/s,\nDo you want to continue? ","Confirmation",MessageBoxButtons.YesNo);
-
-                if(DialogResult.Yes == Resdel)
-                {
-                    delete = true;
-
-                    parent_id = screen_id;
-
-                    List<decimal> screenItemNum = new List<decimal>();
-
-                    foreach(IScreenPartialAdjustmentProperties childScreens in _mainPresenter.Lst_ScreenPartialAdjustment)
-                    {
-                        if (childScreens.Screen_IsChild)
-                        {
-                            if(childScreens.Screen_Parent_ID == parent_id)
-                            {
-                                screenItemNum.Add(childScreens.Screen_ItemNumber);// add to list
-                            }
-                        }
-                    }
-
-                    foreach(var itemsToDel in screenItemNum)
-                    {
-                        _mainPresenter.Lst_ScreenPartialAdjustment.RemoveAll(x => x.Screen_ItemNumber == itemsToDel);// delete
-                    }
-                   
-                }
-                else if(DialogResult.No == Resdel)
-                {
-                    delete = false;
-                }
-                
-            }
-        }
+        
 
         private void _screenView_cmbPlisséTypeSelectedIndexChangedEventRaised(object sender, EventArgs e)
         {
@@ -1848,6 +1852,27 @@ namespace PresentationLayer.Presenter
 
         private void _screenView_tsBtnPrintScreenClickEventRaised(object sender, EventArgs e)
         {
+            if (_screenView.GetToolStripBtnScreenAdjustment().Visible)
+            {
+                PrintScreenPartialAdjustmentList();
+            }
+            else
+            {
+                PrintScreenList();
+            }
+            
+        }
+
+        private void PrintScreenPartialAdjustmentList()
+        {
+            #region Screen Partial Adjustment List
+
+            #region
+        }
+
+        private void PrintScreenList()
+        {
+            #region Screen List
             DSQuotation _dsq = new DSQuotation();
             /*
             (Name - index)
@@ -1863,14 +1888,14 @@ namespace PresentationLayer.Presenter
             try
             {
 
-                var ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);             
+                var ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
                 foreach (var item in _mainPresenter.Screen_List)
                 {
                     //Screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
                     //NetPriceTotal = NetPriceTotal + Screen_priceXquantiy;
-                    if (item.Screen_Quantity > 1 )
+                    if (item.Screen_Quantity > 1)
                     {
-                        for(int i = 1; i <= item.Screen_Quantity; i++)
+                        for (int i = 1; i <= item.Screen_Quantity; i++)
                         {
                             screenDiscountAverage = screenDiscountAverage + item.Screen_Discount;
                         }
@@ -1891,12 +1916,12 @@ namespace PresentationLayer.Presenter
 
                 decimal DiscountPercentage = screenDiscountAverage / _mainPresenter.Screen_List.Sum(y => y.Screen_Quantity);
                 Console.WriteLine(DiscountPercentage.ToString());
-                
+
                 if (_screenDT != null)
                 {
                     foreach (DataGridViewRow Datarow in _screenView.GetDatagrid().Rows)
                     {
-                        if(Datarow.Cells[4].Value.ToString() == " - ")
+                        if (Datarow.Cells[4].Value.ToString() == " - ")
                         {
                             _printListPrice = "0";
                         }
@@ -1912,7 +1937,7 @@ namespace PresentationLayer.Presenter
                         if (str_DiscountPerItem.Contains("%"))
                         {
                             //use for NetPrice 
-                            dec_DiscounPerItem = 1 - (Convert.ToDecimal(  String.Format("{0,0:N2}", Decimal.Parse(str_DiscountPerItem.Replace("%","")) / 100)));
+                            dec_DiscounPerItem = 1 - (Convert.ToDecimal(String.Format("{0,0:N2}", Decimal.Parse(str_DiscountPerItem.Replace("%", "")) / 100)));
                         }
                         else
                         {
@@ -1950,8 +1975,7 @@ namespace PresentationLayer.Presenter
             {
                 MessageBox.Show("Screen List Count is 0: ", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-
+            #endregion
         }
 
         private void _screenView_dgvScreenRowPostPaintEventRaised(object sender, DataGridViewRowPostPaintEventArgs e)

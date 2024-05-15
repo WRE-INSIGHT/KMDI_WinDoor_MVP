@@ -1380,7 +1380,6 @@ namespace PresentationLayer.Presenter
 
             //    }
             //}
-
             if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
             {
                 DialogResult dialogResult = MessageBox.Show("Changes in file is not save, Do you wish to continue ? ", "Closing Application",
