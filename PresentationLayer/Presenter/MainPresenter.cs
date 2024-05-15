@@ -1656,7 +1656,7 @@ namespace PresentationLayer.Presenter
                 {
                     #region Suggested & Current
                     string[] province = projectAddress.Split(',');
-                    value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                    value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim(),dateAssigned);
                     //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
                     //value = await _quotationServices.GetFactorByProvince(province);
                     if (_factorFromAddExisting <= 0 && _factorHolderOnLoad <= 0)
@@ -14222,7 +14222,7 @@ namespace PresentationLayer.Presenter
             try
             {
                 string[] province = projectAddress.Split(',');
-                _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim(), dateAssigned);
 
                 if (_windoorModel.WD_profile.Contains("Alutek"))
                 {
