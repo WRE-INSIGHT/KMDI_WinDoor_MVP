@@ -3202,8 +3202,8 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        private bool _panelPartnerWithCenterProfile;
-        public bool Panel_PartnerWithCenterProfile 
+        private CenterProfile_ArticleNo _panelPartnerWithCenterProfile;
+        public CenterProfile_ArticleNo Panel_PartnerWithCenterProfile 
         {
             get
             {
@@ -7537,6 +7537,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else
             {
+          
                 #region NewAlgo 
                 if (divNxt_artNo == Divider_ArticleNo._7536 || divNxt_artNo == Divider_ArticleNo._2069) //base level
                 {
@@ -8284,14 +8285,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += -35;
                                 
                                 if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                Panel_PartnerWithCenterProfile == true)
+                                Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None )
                                 {
                                     Sash_deduction_forNxtPrev += 35;
-                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                        Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                     {
                                         Sash_deduction_forNxtPrev += -4;
                                     }
-                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                        Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                     {
                                         Sash_deduction_forNxtPrev += -5;
                                     }
@@ -8302,14 +8305,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += -43;
 
                                 if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                Panel_PartnerWithCenterProfile == true)
+                                Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                 {
                                     Sash_deduction_forNxtPrev += 43;
-                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                        Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                     {
                                         Sash_deduction_forNxtPrev += -4;
                                     }
-                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                             Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                     {
                                         Sash_deduction_forNxtPrev += -5;
                                     }
@@ -8323,14 +8328,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += -35;
 
                                 if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                Panel_PartnerWithCenterProfile == true)
+                                Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                 {
                                     Sash_deduction_forNxtPrev += 35;
-                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                        Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                     {
                                         Sash_deduction_forNxtPrev += -4;
                                     }
-                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                             Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                     {
                                         Sash_deduction_forNxtPrev += -5;
                                     }
@@ -8341,14 +8348,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += -43;
 
                                 if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                               Panel_PartnerWithCenterProfile == true)
+                               Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                 {
                                     Sash_deduction_forNxtPrev += 43;
-                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                        Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                     {
                                         Sash_deduction_forNxtPrev += -4;
                                     }
-                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                             Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                     {
                                         Sash_deduction_forNxtPrev += -5;
                                     }
@@ -8414,14 +8423,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += -35;
 
                                     if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                        Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                     {
                                         Sash_deduction_forNxtPrev += 35;
-                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                            Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                         {
                                             Sash_deduction_forNxtPrev += -4;
                                         }
-                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                                 Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                         {
                                             Sash_deduction_forNxtPrev += -5;
                                         }
@@ -8432,14 +8443,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += -43;
 
                                     if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                        Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                     {
                                         Sash_deduction_forNxtPrev += 43;
-                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                            Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                         {
                                             Sash_deduction_forNxtPrev += -4;
                                         }
-                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                                 Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                         {
                                             Sash_deduction_forNxtPrev += -5;
                                         }
@@ -8503,14 +8516,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += -35;
 
                                     if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                        Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                     {
                                         Sash_deduction_forNxtPrev += 35;
-                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                            Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                         {
                                             Sash_deduction_forNxtPrev += -4;
                                         }
-                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                                 Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                         {
                                             Sash_deduction_forNxtPrev += -5;
                                         }
@@ -8521,14 +8536,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += -43;
 
                                     if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                         Panel_PartnerWithCenterProfile == true)
+                                         Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                     {
                                         Sash_deduction_forNxtPrev += 43;
-                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                            Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                         {
                                             Sash_deduction_forNxtPrev += -4;
                                         }
-                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                                 Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                         {
                                             Sash_deduction_forNxtPrev += -5;
                                         }
@@ -8592,14 +8609,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += -35;
 
                                     if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                        Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                     {
                                         Sash_deduction_forNxtPrev += 35;
-                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                            Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                         {
                                             Sash_deduction_forNxtPrev += -4;
                                         }
-                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                                 Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                         {
                                             Sash_deduction_forNxtPrev += -5;
                                         }
@@ -8611,14 +8630,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += -43;
 
                                     if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                        Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                     {
                                         Sash_deduction_forNxtPrev += 43;
-                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                            Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                         {
                                             Sash_deduction_forNxtPrev += -4;
                                         }
-                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                                 Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                         {
                                             Sash_deduction_forNxtPrev += -5;
                                         }
@@ -8685,14 +8706,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += -35;
 
                                     if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                        Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                     {
                                         Sash_deduction_forNxtPrev += 35;
-                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                            Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                         {
                                             Sash_deduction_forNxtPrev += -4;
                                         }
-                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                                 Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                         {
                                             Sash_deduction_forNxtPrev += -5;
                                         }
@@ -8703,15 +8726,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                 {
                                     Sash_deduction_forNxtPrev += -43;
 
-                                    if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                        Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                     {
                                         Sash_deduction_forNxtPrev += 43;
                                         if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
                                         {
                                             Sash_deduction_forNxtPrev += -4;
                                         }
-                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                                 Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                         {
                                             Sash_deduction_forNxtPrev += -5;
                                         }
@@ -8775,14 +8799,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += -35;
 
                                     if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                         Panel_PartnerWithCenterProfile == true)
+                                         Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                     {
                                         Sash_deduction_forNxtPrev += 35;
-                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                            Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                         {
                                             Sash_deduction_forNxtPrev += -4;
                                         }
-                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                                 Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                         {
                                             Sash_deduction_forNxtPrev += -5;
                                         }
@@ -8793,14 +8819,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += -43;
 
                                     if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                        Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                     {
                                         Sash_deduction_forNxtPrev += 43;
-                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                            Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                         {
                                             Sash_deduction_forNxtPrev += -4;
                                         }
-                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                                 Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                         {
                                             Sash_deduction_forNxtPrev += -5;
                                         }
@@ -8864,14 +8892,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += -35;
 
                                     if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                        Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                     {
                                         Sash_deduction_forNxtPrev += 35;
-                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                            Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                         {
                                             Sash_deduction_forNxtPrev += -4;
                                         }
-                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                                 Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                         {
                                             Sash_deduction_forNxtPrev += -5;
                                         }
@@ -8882,14 +8912,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                     Sash_deduction_forNxtPrev += -43;
 
                                     if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                        Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                     {
-                                        Sash_deduction_forNxtPrev += 43;
-                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                        Sash_deduction_forNxtPrev += 43; 
+                                        if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                            Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                         {
                                             Sash_deduction_forNxtPrev += -4;
                                         }
-                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                        else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                                 Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                         {
                                             Sash_deduction_forNxtPrev += -5;
                                         }
@@ -8933,14 +8965,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += -35;
 
                                 if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                    Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                 {
                                     Sash_deduction_forNxtPrev += 35;
-                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                        Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                     {
                                         Sash_deduction_forNxtPrev += -4;
                                     }
-                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                             Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                     {
                                         Sash_deduction_forNxtPrev += -5;
                                     }
@@ -8952,14 +8986,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                 Sash_deduction_forNxtPrev += -43;
 
                                 if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                    Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                 {
                                     Sash_deduction_forNxtPrev += 43;
-                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                        Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                     {
                                         Sash_deduction_forNxtPrev += -4;
                                     }
-                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                             Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                     {
                                         Sash_deduction_forNxtPrev += -5;
                                     }
@@ -9015,14 +9051,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                 }
 
                                 if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                    Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                 {
                                     Sash_deduction_forNxtPrev += 35;
-                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                        Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                     {
                                         Sash_deduction_forNxtPrev += -4;
                                     }
-                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                             Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                     {
                                         Sash_deduction_forNxtPrev += -5;
                                     }
@@ -9046,14 +9084,16 @@ namespace ModelLayer.Model.Quotation.Panel
                                 }
 
                                 if (Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None ||
-                                        Panel_PartnerWithCenterProfile == true)
+                                    Panel_PartnerWithCenterProfile != CenterProfile_ArticleNo._None)
                                 {
                                     Sash_deduction_forNxtPrev += 43;
-                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067)
+                                    if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._6067 ||
+                                        Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._6067)
                                     {
                                         Sash_deduction_forNxtPrev += -4;
                                     }
-                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000)
+                                    else if (Panel_CenterProfileArtNo == CenterProfile_ArticleNo._A000 ||
+                                             Panel_PartnerWithCenterProfile == CenterProfile_ArticleNo._A000)
                                     {
                                         Sash_deduction_forNxtPrev += -5;
                                     }
@@ -13327,8 +13367,7 @@ namespace ModelLayer.Model.Quotation.Panel
                           string glasstype_insu_lumi,
                           decimal glasspricepersqrmeter,
                           MotorizedMechRemote_ArticleNo panelMotorizedMechRemoteArtNo,
-                          bool panelMotorizedMechRemoteOption
-                          )
+                          bool panelMotorizedMechRemoteOption)
         {
             Panel_ID = panelID;
             Panel_fileLoad = false;

@@ -1054,7 +1054,8 @@ namespace PresentationLayer.Presenter
                                                   Control controlRaised = null, 
                                                   IPanelModel prev_pnl = null,
                                                   IPanelModel curnt_pnl = null,
-                                                  IPanelModel nxt_pnl = null)
+                                                  IPanelModel nxt_pnl = null,
+                                                  IPanelModel selected_pnl = null)
         {
             _tsLblStatus.Visible = visibility;
 
@@ -1074,12 +1075,12 @@ namespace PresentationLayer.Presenter
 
                 if (prev_pnl != null)
                 {
-                    prev_pnl.Panel_PartnerWithCenterProfile = false;
+                    prev_pnl.Panel_PartnerWithCenterProfile = CenterProfile_ArticleNo._None;
                 }
 
                 if (nxt_pnl != null)
                 {
-                    nxt_pnl.Panel_PartnerWithCenterProfile = false;
+                    nxt_pnl.Panel_PartnerWithCenterProfile = CenterProfile_ArticleNo._None;
                 }
             }
             else if (status == "CPSelection") 
@@ -1091,9 +1092,10 @@ namespace PresentationLayer.Presenter
                 _msMainMenu.Enabled = true;
                 _pnlPropertiesBody.Enabled = true;
                 _tsMain.Enabled = true;
-                _controlRaised_forCenterProfileSelection.Text = "P" + prev_pnl.PanelGlass_ID;
+                _controlRaised_forCenterProfileSelection.Text = "P" + selected_pnl.PanelGlass_ID;
                 _controlRaised_forCenterProfileSelection.BackColor = System.Drawing.Color.PaleGreen;
-                _currentPanelModel_forCenterProfileSelection.Panel_HandleType = Handle_Type._None; 
+                _currentPanelModel_forCenterProfileSelection.Panel_HandleType = Handle_Type._None;
+                selected_pnl.Panel_PartnerWithCenterProfile = _currentPanelModel_forCenterProfileSelection.Panel_CenterProfileArtNo;
             }
         }
 

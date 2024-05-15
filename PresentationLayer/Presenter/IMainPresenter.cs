@@ -93,7 +93,8 @@ namespace PresentationLayer.Presenter
                                                   Control controlRaised = null,
                                                   IPanelModel prev_pnl = null,
                                                   IPanelModel curnt_pnl = null,
-                                                  IPanelModel nxt_pnl = null);
+                                                  IPanelModel nxt_pnl = null,
+                                                  IPanelModel selected_pnl = null);
 
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);

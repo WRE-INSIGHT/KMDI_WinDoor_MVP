@@ -113,6 +113,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _centerProfilePropertyUC_CenterProfilePropertyUCLoadEventRaised(object sender, EventArgs e)
         {
+            if (_panelModel.Panel_PartnerWithCenterProfile == null)
+            {
+                _panelModel.Panel_PartnerWithCenterProfile = CenterProfile_ArticleNo._None;
+            }
+                
             _centerProfilePropertyUC.ThisBinding(CreateBindingDictionary());
         }
 
