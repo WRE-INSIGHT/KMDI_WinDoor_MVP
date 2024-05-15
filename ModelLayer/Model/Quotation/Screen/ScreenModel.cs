@@ -1816,8 +1816,8 @@ namespace ModelLayer.Model.Quotation.Screen
         #region changeConditionBasedonPrice
 
         DateTime condition_1 = DateTime.Parse("08-11-2023"); // freedom total price 
-        DateTime newFactorBasedOnDB = DateTime.Parse("05-14-2024"); // newFactorOnDB
-        DateTime _1067PVCwReinPrice = DateTime.Parse("05-14-2024"); // switch price pvc with rein
+        DateTime newFactorBasedOnDB = DateTime.Parse("05-15-2024"); // newFactorOnDB
+        DateTime _1067PVCwReinPrice = DateTime.Parse("05-15-2024"); // switch price pvc with rein
 
         #endregion
 
