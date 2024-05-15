@@ -19,7 +19,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Quotation
             _sqlConString = sqlConString;
         }
 
-        public async Task<decimal> GetFactorByProvince(string province)
+        public async Task<decimal> GetFactorByProvince(string province,DateTime cus_ref_date)
         {
             decimal factor = 0;
 
@@ -37,6 +37,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Quotation
                         sqlcmd.CommandType = CommandType.StoredProcedure;
                         sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "GetFactorByProvince";
                         sqlcmd.Parameters.Add("@Province", SqlDbType.VarChar).Value = province;
+                        sqlcmd.Parameters.Add("@ImplementationDate", SqlDbType.VarChar).Value = cus_ref_date;
 
                         factor = (decimal)await sqlcmd.ExecuteScalarAsync();
                         sqltrans.Commit();
