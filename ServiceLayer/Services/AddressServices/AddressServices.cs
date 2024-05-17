@@ -19,9 +19,9 @@ namespace ServiceLayer.Services.AddressServices
             _addressRepo = addressRepo;
             _modelCheck = modelCheck;
         }
-        public async Task<DataTable> Get_Factor(string searchStr)
+        public async Task<DataTable> Get_Factor(string searchStr,DateTime cus_ref_date)
         {
-            return await _addressRepo.Get_Factor(searchStr);
+            return await _addressRepo.Get_Factor(searchStr,cus_ref_date);
         }
 
         public async Task UpdateFactor(string Id, decimal factor)

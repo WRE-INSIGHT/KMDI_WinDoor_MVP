@@ -16,7 +16,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Address
         {
             _sqlConString = sqlConString;
         }
-        public async Task<DataTable> Get_Factor(string searchStr)
+        public async Task<DataTable> Get_Factor(string searchStr,DateTime cus_ref_date)
         {
             DataTable dt = new DataTable();
             SqlDataAdapter sqladapter = new SqlDataAdapter();
@@ -35,6 +35,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Address
                         sqlcmd.CommandType = CommandType.StoredProcedure;
                         sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "GetFactor";
                         sqlcmd.Parameters.Add("@Search", SqlDbType.VarChar).Value = searchStr;
+                        sqlcmd.Parameters.Add("@Implementation", SqlDbType.VarChar).Value = cus_ref_date;
 
                         sqladapter.SelectCommand = sqlcmd;
                         sqladapter.Fill(dt);
