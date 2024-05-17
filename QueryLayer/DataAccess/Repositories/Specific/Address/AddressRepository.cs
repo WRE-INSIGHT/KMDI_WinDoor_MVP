@@ -35,7 +35,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Address
                         sqlcmd.CommandType = CommandType.StoredProcedure;
                         sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "GetFactor";
                         sqlcmd.Parameters.Add("@Search", SqlDbType.VarChar).Value = searchStr;
-                        sqlcmd.Parameters.Add("@Implementation", SqlDbType.VarChar).Value = cus_ref_date;
+                        sqlcmd.Parameters.Add("@ImplementationDate", SqlDbType.VarChar).Value = cus_ref_date;
 
                         sqladapter.SelectCommand = sqlcmd;
                         sqladapter.Fill(dt);
