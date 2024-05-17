@@ -2119,7 +2119,7 @@ namespace PresentationLayer.Presenter
             try
             {
                 string[] province = _mainPresenter.projectAddress.Split(',');
-                decimal value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                decimal value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim(),_mainPresenter.dateAssigned);
                 _screenModel.Screen_AddOnsSpecialFactor = value;
                 Console.WriteLine(_screenModel.Screen_AddOnsSpecialFactor.ToString() + " Project Factor Based on Location ");
             }

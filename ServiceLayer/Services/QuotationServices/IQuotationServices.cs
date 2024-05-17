@@ -14,6 +14,6 @@ namespace ServiceLayer.Services.QuotationServices
                                           List<IWindoorModel> lst_wndr = null);
         void ValidateModel(IQuotationModel quotationModel);
         Task<int> Insert_Quotation(IQuotationModel quotationModel, int user_id);
-        Task<decimal> GetFactorByProvince(string province);
+        Task<decimal> GetFactorByProvince(string province, DateTime cus_ref_date);
     }
 }
