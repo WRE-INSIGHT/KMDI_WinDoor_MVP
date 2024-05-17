@@ -415,8 +415,6 @@ namespace PresentationLayer.Presenter
             }
         }
 
-
-
         #region Custom Input Box
         private DialogResult ShowQtyPrompt(string title, string promptText, string numText,ref int value)
         {
@@ -528,7 +526,6 @@ namespace PresentationLayer.Presenter
 
             return xs;
         }
-
         private bool IsQtyValidated(long ItemNumber)
         {
             bool isQtyMorethanOne = false;
@@ -546,8 +543,6 @@ namespace PresentationLayer.Presenter
             }
             return isQtyMorethanOne;
         }
-
-
         private long ChildIDBasedOnParent(IScreenPartialAdjustmentProperties SPAP,decimal itemNumberBasedOnParentItem)
         {
             long childID = 0;
@@ -562,7 +557,6 @@ namespace PresentationLayer.Presenter
 
             return childID; 
         }
-
         private bool IsChildrenItemNumberExit(decimal itemNum)
         {
             bool itemNumExist = false;
@@ -579,7 +573,6 @@ namespace PresentationLayer.Presenter
             return itemNumExist;
 
         }
-
         public void Insert_Adjustment_to_DGV(IScreenPartialAdjustmentProperties sdm)
         {         
             #region Populate DataTable for Partiald Adjustment
@@ -622,7 +615,6 @@ namespace PresentationLayer.Presenter
             _screenDT.Rows.Add(newRow);
             #endregion
         }
-
         private void _screenView_tsb_Switch_ClickEventRaised(object sender, EventArgs e)
         {
             if (_switchIsAddScreen)
@@ -667,7 +659,6 @@ namespace PresentationLayer.Presenter
 
             }
         }
-
         private void LoadScreenPartialList()
         {
             foreach(var item in _mainPresenter.Lst_ScreenPartialAdjustment)
@@ -944,7 +935,6 @@ namespace PresentationLayer.Presenter
             _dgv_Screen.EnableHeadersVisualStyles = true;
             #endregion
         }
-
         private void _screenView_tsb_ScreenAdjustment_ClickEventRaised(object sender, EventArgs e)
         {
             if (_screenView.GetToolStripBtnScreenAdjustment().Visible)
@@ -958,12 +948,10 @@ namespace PresentationLayer.Presenter
                 partialAdjusmentSelection.GetScreenPartialAdjustmentView().ShowPartialAdjustmentSelectionView();
             }
         }
-
         private void _screenView_ScreenView_ResizeEventRaised(object sender, EventArgs e)
         {
             // Control Location           
         }
-
         private void _screenView_chkbox_allowEdit_CheckedChangedEventRaised(object sender, EventArgs e)
         {
             try
@@ -1043,7 +1031,6 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Error in Allow_Edit_CheckChange " + this + ex.Message);
             }
         }
-
         private void SelectSimilarItems(decimal itemNum)
         {
             foreach (DataGridViewRow dtgRow in _dgv_Screen.Rows)
@@ -1054,7 +1041,6 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
-
         private void SetReadPropDgvColumn()
         {
             if (!_onLoad)
@@ -1078,7 +1064,6 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
-
         private void _screenView_ScreenView_FormClosingEventRaised(object sender, FormClosingEventArgs e)
         {
             foreach (var item in _mainPresenter.Screen_List)
@@ -1589,8 +1574,6 @@ namespace PresentationLayer.Presenter
             WindoorIDGetter();
         }
 
-        
-
         private void _screenView_cmbPlisséTypeSelectedIndexChangedEventRaised(object sender, EventArgs e)
         {
             //plisse and freedom use the same combobox
@@ -1867,7 +1850,96 @@ namespace PresentationLayer.Presenter
         {
             #region Screen Partial Adjustment List
 
-            #region
+
+            try
+            {
+                DSQuotation _dsq = new DSQuotation();
+
+                foreach(IScreenPartialAdjustmentProperties spap in _mainPresenter.Lst_ScreenPartialAdjustment)
+                {
+                    decimal _itemNumber = 0m,
+                            _unitPrice = 0m, _unitPrice_rev = 0m,
+                            _totalAmount = 0m, _totalAmount_rev = 0m,
+                            _adjustment = 0m ;
+                    int    _qty = 0, _qty_rev = 0;
+                    string _desc = "", _desc_rev = "",_windoorId;
+
+                    
+                    if (!spap.Screen_IsChild)
+                    {
+                        _itemNumber = spap.Screen_ItemNumber;
+                    }
+                    else
+                    {
+                        _itemNumber = 0;
+                    }
+                    
+                    if (spap.Screen_Description_Revised == "")
+                    {
+                        _desc_rev = "";
+                    }
+                    else
+                    {
+                        _desc_rev = spap.Screen_Description_Revised;
+                    }
+
+                    _windoorId = spap.Screen_WindoorID;
+
+                    _desc = spap.Screen_Description;
+                    
+                    _unitPrice = spap.Screen_UnitPrice;
+                    _unitPrice_rev = spap.Screen_UnitPrice_Revised;
+
+                    _qty = spap.Screen_Quantity;
+                    _qty_rev = spap.Screen_Quantity_Revised;
+
+                    _totalAmount = spap.Screen_TotalAmount;
+                    _totalAmount_rev = spap.Screen_TotalAmount_Revised;
+
+                    _adjustment = spap.Screen_Adjustment_Price;
+
+                    _dsq.dtScreenAdjustment.Rows.Add(_itemNumber,
+                                                      _windoorId,
+                                                      _desc,
+                                                      _unitPrice,
+                                                      _qty,
+                                                      _totalAmount,
+                                                      _desc_rev,
+                                                      _unitPrice_rev,
+                                                      _qty_rev,
+                                                      _totalAmount_rev,
+                                                      _adjustment);
+                    //_dsq.dtScreenAdjustment.Rows.Add(0m,
+                    //                                 "Test",
+                    //                                   0m,
+                    //                                   0,
+                    //                                   0m,
+                    //                                   0m,
+                    //                                   "test",
+                    //                                   0m,
+                    //                                   0,
+                    //                                   0m,
+                    //                                   0m);
+
+
+                }
+
+                foreach (var item in _dsq.dtScreenAdjustment)
+                {
+                    Console.WriteLine(item.dtItemNo + item.dtDescription);
+                }
+
+                _mainPresenter.printStatus = "ScreenPartialAdjustment";
+
+                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
+                printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreen.DefaultView;
+                printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error Screen Partial Adjustment RDLC \n" + ex.Message);
+            }
+            #endregion
         }
 
         private void PrintScreenList()
@@ -2134,7 +2206,7 @@ namespace PresentationLayer.Presenter
         {
             LoadScreenColumns();
 
-             GetProjectFactor();
+            // GetProjectFactor();
             _screenView.GetNudTotalPrice().Maximum = decimal.MaxValue;
             _screenView.GetNudTotalPrice().DecimalPlaces = 2;
             _screenWidth.Maximum = decimal.MaxValue;
@@ -2223,6 +2295,7 @@ namespace PresentationLayer.Presenter
 
         #endregion
 
+        #region Methods
         public DataTable PopulateDgvScreen()
         {
             if (_switchIsAddScreen)
@@ -2260,7 +2333,7 @@ namespace PresentationLayer.Presenter
 
                 }
             }
-            else if(!_switchIsAddScreen)
+            else if (!_switchIsAddScreen)
             {
                 dt = new DataTable();
 
@@ -2307,12 +2380,12 @@ namespace PresentationLayer.Presenter
                 }
 
             }
-            
-                return dt;    
-                  
+
+            return dt;
+
         }
 
-        private long PriKeyGen(ScreenType ScType,decimal itemnum)
+        private long PriKeyGen(ScreenType ScType, decimal itemnum)
         {
             long _priKeyGen = 0;
 
@@ -2396,14 +2469,14 @@ namespace PresentationLayer.Presenter
                 _Screen_PricingDimension = _screenModel.Screen_Width + " x " + _screenModel.Screen_Height;
                 _Screen_addOnsSpecialFactor = _screenModel.Screen_AddOnsSpecialFactor;
             }
-            
+
             newRow["Item No."] = _screenModel.Screen_ItemNumber;
-            newRow["Type of Insect Screen"] = _screenModel.Screen_Description  + _setDesc + centerClosureDesc;
+            newRow["Type of Insect Screen"] = _screenModel.Screen_Description + _setDesc + centerClosureDesc;
             newRow["Dimension (mm) \n per panel"] = _Screen_DimensionFormat;
             newRow["Window/Door I.D."] = _screenModel.Screen_WindoorID;
             newRow["Price"] = _Screen_UnitPrice;
 
-            if(_screenModel.Screen_Quantity == 0)
+            if (_screenModel.Screen_Quantity == 0)
             {
                 newRow["Quantity"] = DBNull.Value;
             }
@@ -2418,8 +2491,8 @@ namespace PresentationLayer.Presenter
             newRow["Factor"] = _Screen_factor;
             newRow["PricingDimension"] = _Screen_PricingDimension;
             newRow["AddOnsSpecialFactor"] = _Screen_addOnsSpecialFactor;
-            
-            _screenModel.Screen_id = PriKeyGen(_screenModel.Screen_Types,_screenModel.Screen_ItemNumber); // set priKey
+
+            _screenModel.Screen_id = PriKeyGen(_screenModel.Screen_Types, _screenModel.Screen_ItemNumber); // set priKey
 
             IScreenModel scr = _screenService.AddScreenModel(_screenModel.Screen_id,
                                                              _screenModel.Screen_ItemNumber,
@@ -2437,7 +2510,7 @@ namespace PresentationLayer.Presenter
                                                              _screenModel.Screen_Factor,
                                                              _screenModel.Screen_AddOnsSpecialFactor,
                                                              _screenModel.Screen_DisplayedDimension);
-           
+
             _mainPresenter.Screen_List.Add(scr);
 
             return newRow;
@@ -2452,6 +2525,16 @@ namespace PresentationLayer.Presenter
             return col;
         }
 
+        public void PopulateDataGridView()
+        {
+            //refresh
+            _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
+        }
+        public IScreenView GetScreenView()
+        {
+            return _screenView;
+        }
+        #endregion
 
         public Dictionary<string, Binding> CreateBindingDictionary()
         {
@@ -2475,16 +2558,6 @@ namespace PresentationLayer.Presenter
             binding.Add("Freedom_ScreenSize", new Binding("Text", _screenModel, "Freedom_ScreenSize", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
-        }
-
-        public void PopulateDataGridView()
-        {
-            //refresh
-            _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
-        }
-        public IScreenView GetScreenView()
-        {
-            return _screenView;
         }
 
         public IScreenPresenter CreateNewInstance(IUnityContainer unityC,

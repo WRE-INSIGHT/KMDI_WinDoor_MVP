@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.Screen
-{
+{               
     public class ScreenPartialAdjustmentProperties : IScreenPartialAdjustmentProperties
     {
 

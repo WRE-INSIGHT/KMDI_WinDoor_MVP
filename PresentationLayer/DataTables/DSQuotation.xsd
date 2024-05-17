@@ -104,6 +104,23 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="dtScreenAdjustment" msprop:Generator_TableClassName="dtScreenAdjustmentDataTable" msprop:Generator_TableVarName="tabledtScreenAdjustment" msprop:Generator_RowChangedName="dtScreenAdjustmentRowChanged" msprop:Generator_TablePropName="dtScreenAdjustment" msprop:Generator_RowDeletingName="dtScreenAdjustmentRowDeleting" msprop:Generator_RowChangingName="dtScreenAdjustmentRowChanging" msprop:Generator_RowEvHandlerName="dtScreenAdjustmentRowChangeEventHandler" msprop:Generator_RowDeletedName="dtScreenAdjustmentRowDeleted" msprop:Generator_RowClassName="dtScreenAdjustmentRow" msprop:Generator_UserTableName="dtScreenAdjustment" msprop:Generator_RowEvArgName="dtScreenAdjustmentRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="dtItemNo" msprop:Generator_ColumnVarNameInTable="columndtItemNo" msprop:Generator_ColumnPropNameInRow="dtItemNo" msprop:Generator_ColumnPropNameInTable="dtItemNoColumn" msprop:Generator_UserColumnName="dtItemNo" type="xs:decimal" minOccurs="0" />
+              <xs:element name="dtWindoorID" msprop:Generator_ColumnVarNameInTable="columndtWindoorID" msprop:Generator_ColumnPropNameInRow="dtWindoorID" msprop:Generator_ColumnPropNameInTable="dtWindoorIDColumn" msprop:Generator_UserColumnName="dtWindoorID" type="xs:string" minOccurs="0" />
+              <xs:element name="dtDescription" msprop:Generator_ColumnVarNameInTable="columndtDescription" msprop:Generator_ColumnPropNameInRow="dtDescription" msprop:Generator_ColumnPropNameInTable="dtDescriptionColumn" msprop:Generator_UserColumnName="dtDescription" type="xs:string" minOccurs="0" />
+              <xs:element name="dtPrice" msprop:Generator_ColumnVarNameInTable="columndtPrice" msprop:Generator_ColumnPropNameInRow="dtPrice" msprop:Generator_ColumnPropNameInTable="dtPriceColumn" msprop:Generator_UserColumnName="dtPrice" type="xs:decimal" minOccurs="0" />
+              <xs:element name="dtQty" msprop:Generator_ColumnVarNameInTable="columndtQty" msprop:Generator_ColumnPropNameInRow="dtQty" msprop:Generator_ColumnPropNameInTable="dtQtyColumn" msprop:Generator_UserColumnName="dtQty" type="xs:int" minOccurs="0" />
+              <xs:element name="dtTotalAmount" msprop:Generator_ColumnVarNameInTable="columndtTotalAmount" msprop:Generator_ColumnPropNameInRow="dtTotalAmount" msprop:Generator_ColumnPropNameInTable="dtTotalAmountColumn" msprop:Generator_UserColumnName="dtTotalAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="dtDescription_Rev" msprop:Generator_ColumnVarNameInTable="columndtDescription_Rev" msprop:Generator_ColumnPropNameInRow="dtDescription_Rev" msprop:Generator_ColumnPropNameInTable="dtDescription_RevColumn" msprop:Generator_UserColumnName="dtDescription_Rev" type="xs:string" minOccurs="0" />
+              <xs:element name="dtPrice_Rev" msprop:Generator_ColumnVarNameInTable="columndtPrice_Rev" msprop:Generator_ColumnPropNameInRow="dtPrice_Rev" msprop:Generator_ColumnPropNameInTable="dtPrice_RevColumn" msprop:Generator_UserColumnName="dtPrice_Rev" type="xs:decimal" minOccurs="0" />
+              <xs:element name="dtQty_Rev" msprop:Generator_ColumnVarNameInTable="columndtQty_Rev" msprop:Generator_ColumnPropNameInRow="dtQty_Rev" msprop:Generator_ColumnPropNameInTable="dtQty_RevColumn" msprop:Generator_UserColumnName="dtQty_Rev" type="xs:int" minOccurs="0" />
+              <xs:element name="dtTotalAmount_Rev" msprop:Generator_ColumnVarNameInTable="columndtTotalAmount_Rev" msprop:Generator_ColumnPropNameInRow="dtTotalAmount_Rev" msprop:Generator_ColumnPropNameInTable="dtTotalAmount_RevColumn" msprop:Generator_UserColumnName="dtTotalAmount_Rev" type="xs:decimal" minOccurs="0" />
+              <xs:element name="dtAdjustment" msprop:Generator_ColumnVarNameInTable="columndtAdjustment" msprop:Generator_ColumnPropNameInRow="dtAdjustment" msprop:Generator_ColumnPropNameInTable="dtAdjustmentColumn" msprop:Generator_UserColumnName="dtAdjustment" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
