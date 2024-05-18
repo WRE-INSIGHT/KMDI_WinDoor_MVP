@@ -76,6 +76,24 @@ namespace PresentationLayer.Presenter
 
                             IScreenPartialAdjustmentProperties Spap = new ScreenPartialAdjustmentProperties();
 
+                            string desc = "";
+
+                            if (ScrLst.Screen_Set > 1)
+                            {
+                                if (ScrLst.Screen_Description.Contains("(Sets of"))
+                                {
+                                    desc = " ";
+                                }
+                                else
+                                {
+                                    desc = " (Sets of " + ScrLst.Screen_Set.ToString() + ")";
+                                }
+                            }
+                            else
+                            {
+                                desc = " ";
+                            }
+
                             Spap.Screen_isAdjusted = true;
                             Spap.Screen_IsChild = false;
                             Spap.Screen_Parent_ID = 0;
@@ -84,7 +102,7 @@ namespace PresentationLayer.Presenter
                             Spap.Screen_id = ScrLst.Screen_id;
                             Spap.Screen_ItemNumber = ScrLst.Screen_ItemNumber;
                             Spap.Screen_WindoorID = ScrLst.Screen_WindoorID;
-                            Spap.Screen_Description = ScrLst.Screen_Description;
+                            Spap.Screen_Description = ScrLst.Screen_Description + desc;
                             Spap.Screen_Set = ScrLst.Screen_Set;
                             Spap.Screen_DisplayedDimension = ScrLst.Screen_DisplayedDimension;
                             Spap.Screen_UnitPrice = ScrLst.Screen_UnitPrice;

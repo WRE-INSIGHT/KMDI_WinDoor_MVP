@@ -1850,28 +1850,30 @@ namespace PresentationLayer.Presenter
         {
             #region Screen Partial Adjustment List
 
-
             try
             {
                 DSQuotation _dsq = new DSQuotation();
 
                 foreach(IScreenPartialAdjustmentProperties spap in _mainPresenter.Lst_ScreenPartialAdjustment)
                 {
-                    decimal _itemNumber = 0m,
-                            _unitPrice = 0m, _unitPrice_rev = 0m,
+                    string _itemNumber = "";
+                    decimal _unitPrice = 0m, _unitPrice_rev = 0m,
                             _totalAmount = 0m, _totalAmount_rev = 0m,
-                            _adjustment = 0m ;
+                            _adjustment = 0m,
+                            _totalCloseContract = 0m,
+                            _totalRevisedContract = 0m,
+                            _totalAdjustment = 0m;
                     int    _qty = 0, _qty_rev = 0;
                     string _desc = "", _desc_rev = "",_windoorId;
 
                     
                     if (!spap.Screen_IsChild)
                     {
-                        _itemNumber = spap.Screen_ItemNumber;
+                        _itemNumber = spap.Screen_ItemNumber.ToString();
                     }
                     else
                     {
-                        _itemNumber = 0;
+                        _itemNumber = "";
                     }
                     
                     if (spap.Screen_Description_Revised == "")
@@ -1898,41 +1900,32 @@ namespace PresentationLayer.Presenter
 
                     _adjustment = spap.Screen_Adjustment_Price;
 
+                    _totalCloseContract = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_TotalAmount);
+                    _totalRevisedContract = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_TotalAmount_Revised);
+                    _totalAdjustment = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_Adjustment_Price);
+
+                    Console.WriteLine(Math.Round(_totalCloseContract,2));
+                    Console.WriteLine(Math.Round(_totalRevisedContract,2));
+                    Console.WriteLine(Math.Round(_totalAdjustment,2));
+
                     _dsq.dtScreenAdjustment.Rows.Add(_itemNumber,
                                                       _windoorId,
                                                       _desc,
-                                                      _unitPrice,
+                                                      Math.Round(_unitPrice,2),
                                                       _qty,
-                                                      _totalAmount,
+                                                      Math.Round(_totalAmount,2),
                                                       _desc_rev,
-                                                      _unitPrice_rev,
+                                                      Math.Round(_unitPrice_rev,2),
                                                       _qty_rev,
-                                                      _totalAmount_rev,
-                                                      _adjustment);
-                    //_dsq.dtScreenAdjustment.Rows.Add(0m,
-                    //                                 "Test",
-                    //                                   0m,
-                    //                                   0,
-                    //                                   0m,
-                    //                                   0m,
-                    //                                   "test",
-                    //                                   0m,
-                    //                                   0,
-                    //                                   0m,
-                    //                                   0m);
+                                                      Math.Round(_totalAmount_rev,2),
+                                                      Math.Round(_adjustment,2));
 
-
-                }
-
-                foreach (var item in _dsq.dtScreenAdjustment)
-                {
-                    Console.WriteLine(item.dtItemNo + item.dtDescription);
                 }
 
                 _mainPresenter.printStatus = "ScreenPartialAdjustment";
 
                 IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
-                printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreen.DefaultView;
+                printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreenAdjustment.DefaultView;
                 printQuote.GetPrintQuoteView().ShowPrintQuoteView();
             }
             catch(Exception ex)

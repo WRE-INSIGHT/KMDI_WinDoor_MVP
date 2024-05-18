@@ -2851,7 +2851,7 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtScreenAdjustmentRow AdddtScreenAdjustmentRow(decimal dtItemNo, string dtWindoorID, string dtDescription, decimal dtPrice, int dtQty, decimal dtTotalAmount, string dtDescription_Rev, decimal dtPrice_Rev, int dtQty_Rev, decimal dtTotalAmount_Rev, decimal dtAdjustment) {
+            public dtScreenAdjustmentRow AdddtScreenAdjustmentRow(string dtItemNo, string dtWindoorID, string dtDescription, decimal dtPrice, int dtQty, decimal dtTotalAmount, string dtDescription_Rev, decimal dtPrice_Rev, int dtQty_Rev, decimal dtTotalAmount_Rev, decimal dtAdjustment) {
                 dtScreenAdjustmentRow rowdtScreenAdjustmentRow = ((dtScreenAdjustmentRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         dtItemNo,
@@ -2903,7 +2903,7 @@ namespace PresentationLayer.DataTables {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columndtItemNo = new global::System.Data.DataColumn("dtItemNo", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columndtItemNo = new global::System.Data.DataColumn("dtItemNo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtItemNo);
                 this.columndtWindoorID = new global::System.Data.DataColumn("dtWindoorID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtWindoorID);
@@ -4729,10 +4729,10 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal dtItemNo {
+            public string dtItemNo {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtScreenAdjustment.dtItemNoColumn]));
+                        return ((string)(this[this.tabledtScreenAdjustment.dtItemNoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'dtItemNo\' in table \'dtScreenAdjustment\' is DBNull.", e);

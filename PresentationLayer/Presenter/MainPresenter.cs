@@ -9766,10 +9766,10 @@ namespace PresentationLayer.Presenter
                             }
                             else if (row_str.Contains("Screen_id:"))
                             {
-                                pa_Screen_id = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                                pa_Screen_id = Convert.ToInt64(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             }
                         }
-                        #endregion
+                        #endregion  
                     }
                     break;
             }
