@@ -604,7 +604,14 @@ namespace PresentationLayer.Presenter
 
             if (sdm.Screen_Set > 1)
             {
-                setDesc = " (Sets of " + sdm.Screen_Set.ToString() + ")";
+                if (sdm.Screen_Description.Contains("(Sets of"))
+                {
+                    setDesc = " ";
+                }
+                else
+                {
+                    setDesc = " (Sets of " + sdm.Screen_Set.ToString() + ")";
+                }
             }
             else
             {

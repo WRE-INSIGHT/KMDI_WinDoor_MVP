@@ -1486,13 +1486,22 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetUniversalLabel().Visible = false;
                     _printQuoteView.ShowLastPage().Visible = false;
 
-                    ReportParameter[] RParam = new ReportParameter[5];
+                    ReportParameter[] RParam = new ReportParameter[6];
 
                     RParam[0] = new ReportParameter("Date", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
                     RParam[2] = new ReportParameter("ClientName", _printQuoteView.QuotationSalutation);
                     RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
                     RParam[4] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+
+                    if (_printQuoteView.GetShowPageNum().Checked)
+                    {
+                        RParam[5] = new ReportParameter("ShowPageNum", "True");
+                    }
+                    else
+                    {
+                        RParam[5] = new ReportParameter("ShowPageNum", "False");
+                    }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
                     #endregion

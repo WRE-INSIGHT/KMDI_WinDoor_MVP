@@ -241,37 +241,37 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.32153in</Width>
+                  <Width>0.31471in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.07519in</Width>
+                  <Width>1.06837in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.15596in</Width>
+                  <Width>1.14914in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.7106in</Width>
+                  <Width>0.70378in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.28257in</Width>
+                  <Width>0.27575in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.72727in</Width>
+                  <Width>0.72045in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.12727in</Width>
+                  <Width>1.12045in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.65227in</Width>
+                  <Width>0.64545in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.26894in</Width>
+                  <Width>0.26212in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.71894in</Width>
+                  <Width>0.71212in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.8606in</Width>
+                  <Width>0.85378in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1116,7 +1116,14 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=iif(Fields!dtDescription_Rev.Value = "","-",Fields!dtPrice_Rev.Value)</Value>
+                                  <Value>=iif(Fields!dtDescription_Rev.Value like "No Insect Screen ",
+"-"
+,
+iif(Fields!dtDescription_Rev.Value like "Unnecessary for Insect Screen ",
+"-"
+,
+iif(Fields!dtDescription_Rev.Value = "","-",Fields!dtPrice_Rev.Value))
+)</Value>
                                   <Style>
                                     <FontFamily>segoe ui</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1151,7 +1158,14 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=iif(Fields!dtDescription_Rev.Value = "","-",Fields!dtQty_Rev.Value)</Value>
+                                  <Value>=iif(Fields!dtDescription_Rev.Value like "No Insect Screen ",
+"-"
+,
+iif(Fields!dtDescription_Rev.Value like "Unnecessary for Insect Screen ",
+"-"
+,
+iif(Fields!dtDescription_Rev.Value = "","-",Fields!dtQty_Rev.Value))
+)</Value>
                                   <Style>
                                     <FontFamily>segoe ui</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1185,7 +1199,14 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=iif(Fields!dtDescription_Rev.Value = "","-",Fields!dtTotalAmount_Rev.Value)</Value>
+                                  <Value>=iif(Fields!dtDescription_Rev.Value like "No Insect Screen ",
+"-"
+,
+iif(Fields!dtDescription_Rev.Value like "Unnecessary for Insect Screen ",
+"-"
+,
+iif(Fields!dtDescription_Rev.Value like "","-",Fields!dtTotalAmount_Rev.Value))
+)</Value>
                                   <Style>
                                     <FontFamily>segoe ui</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1282,7 +1303,7 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
             <Top>3.29667in</Top>
             <Left>0.0425in</Left>
             <Height>0.99166in</Height>
-            <Width>7.90114in</Width>
+            <Width>7.82614in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1307,7 +1328,7 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>4.73in</Top>
+            <Top>4.555in</Top>
             <Left>1.43922in</Left>
             <Height>0.1875in</Height>
             <Width>1.425in</Width>
@@ -1341,7 +1362,7 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>4.73in</Top>
+            <Top>4.555in</Top>
             <Left>3.58836in</Left>
             <Height>0.1875in</Height>
             <Width>0.72727in</Width>
@@ -1351,7 +1372,6 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
                 <Style>None</Style>
               </Border>
               <BottomBorder>
-                <Color>HotPink</Color>
                 <Style>Double</Style>
                 <Width>2.25pt</Width>
               </BottomBorder>
@@ -1378,7 +1398,7 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>4.95429in</Top>
+            <Top>4.77929in</Top>
             <Left>1.43922in</Left>
             <Height>0.1875in</Height>
             <Width>1.425in</Width>
@@ -1412,7 +1432,7 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>4.95429in</Top>
+            <Top>4.77929in</Top>
             <Left>6.36411in</Left>
             <Height>0.1875in</Height>
             <Width>0.72727in</Width>
@@ -1422,7 +1442,6 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
                 <Style>None</Style>
               </Border>
               <BottomBorder>
-                <Color>HotPink</Color>
                 <Style>Double</Style>
                 <Width>2.25pt</Width>
               </BottomBorder>
@@ -1449,7 +1468,7 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>5.16679in</Top>
+            <Top>4.99179in</Top>
             <Left>1.43922in</Left>
             <Height>0.2125in</Height>
             <Width>1.3375in</Width>
@@ -1483,8 +1502,8 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>5.19179in</Top>
-            <Left>7.08304in</Left>
+            <Top>5.01679in</Top>
+            <Left>6.98304in</Left>
             <Height>0.1875in</Height>
             <Width>0.8606in</Width>
             <ZIndex>7</ZIndex>
@@ -1498,14 +1517,49 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox16">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>SUBJECT TO CHANGES AND ADJUSTMENT BASED ON ACTUAL DESIGNS, MEASUREMENTS AND QUANTITIES.</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>5.4584in</Top>
+            <Left>0.53in</Left>
+            <Height>0.24792in</Height>
+            <Width>7.02614in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>Double</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>7.30024in</Height>
+        <Height>6.01437in</Height>
         <Style />
       </Body>
-      <Width>7.94365in</Width>
+      <Width>7.88114in</Width>
       <Page>
         <PageFooter>
-          <Height>0.475in</Height>
+          <Height>0.43224in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1530,6 +1584,9 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
               <Left>3.455in</Left>
               <Height>0.25in</Height>
               <Width>1in</Width>
+              <Visibility>
+                <Hidden>=iif(Parameters!ShowPageNum.Value = "True", false, true)</Hidden>
+              </Visibility>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1576,6 +1633,10 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="ShowPageNum">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1606,6 +1667,11 @@ iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>1</RowIndex>
           <ParameterName>QuoteNumber</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>ShowPageNum</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
