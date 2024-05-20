@@ -123,7 +123,7 @@ namespace PresentationLayer.Presenter
             _screenView.nudPlisseRdValueChangeEventRaise += _screenView_nudPlisseRdValueChangeEventRaise;
             _screenView.nudDiscountValueChangeEventRaised += _screenView_nudDiscountValueChangeEventRaised;
             _screenView.cmbFreedomSizeSelectedValueChangedEventRaised += _screenView_cmbFreedomSizeSelectedValueChangedEventRaised;
-            _screenView.CellEndEditEventRaised += _screenView_CellEndEditEventRaised; 
+            _screenView.CellEndEditEventRaised += _screenView_CellEndEditEventRaised;
             _screenView.dgvScreenColumnHeaderMouseClick += _screenView_dgvScreenColumnHeaderMouseClick;
             _screenView.dgvScreenCellDoubleClickEventRaised += _screenView_dgvScreenCellDoubleClickEventRaised;
             _screenView.dgvScreenCellClickEventRaised += _screenView_dgvScreenCellClickEventRaised;
@@ -153,7 +153,7 @@ namespace PresentationLayer.Presenter
         #region Events
         private void _screenView_addNewItemToolStripMenuItem_ClickEventRaised(object sender, EventArgs e)
         {
-            decimal itemNumberBasedOnParentItem = 0, 
+            decimal itemNumberBasedOnParentItem = 0,
                     childNetPrice = 0m,
                     childScreenTotalAmount = 0m;
             bool _addNewItem = false;
@@ -171,96 +171,104 @@ namespace PresentationLayer.Presenter
                     var itemIndex = row.Cells[0].RowIndex;
                     decimal _deciItemNumber = Convert.ToDecimal(itemNumber);
 
-                    foreach(IScreenPartialAdjustmentProperties item in _mainPresenter.Lst_ScreenPartialAdjustment)
+                    foreach (IScreenPartialAdjustmentProperties item in _mainPresenter.Lst_ScreenPartialAdjustment)
                     {
-                        
+
                         if (_deciItemNumber == item.Screen_ItemNumber)
                         {
                             if (!item.Screen_IsChild)
                             {
-
-                                if (item.Screen_Quantity > 1)
+                                if (item.Screen_Type_Revised == null)
                                 {
-                                    title = "Quantity";
-                                    promptext = "\nAre you sure to add another screen?";
-                                    numText = "Input Number of Quantity";
-                                }
-                                else
-                                {
-                                    title = "Validate Quantity";
-                                    promptext = "Notice: Only 1 Quantity Detected,\nAre you sure to add another screen?";
-                                    numText = "Input Number of Quantity";
-                                }
 
-                                if (DialogResult.OK == ShowQtyPrompt(title, promptext, numText, ref childqtyCount))
-                                {
-                                    _addNewItem = true;
-                                }
-                                else
-                                {
-                                    _addNewItem = false;
-                                }
 
-                                if (_addNewItem)
-                                {
-                                    PriceNQtyDeduction(item, childqtyCount, ref childNetPrice, ref childScreenTotalAmount);
-
-                                    _deciItemNumber = _deciItemNumber + .1m; // to avoid .1 in ItemNumber
-
-                                    do
+                                    if (item.Screen_Quantity > 1)
                                     {
-                                        itemNumberBasedOnParentItem = _deciItemNumber + .1m;
-                                        _deciItemNumber = itemNumberBasedOnParentItem;
-                                    }
-
-                                    while (IsChildrenItemNumberExit(itemNumberBasedOnParentItem));
-
-                                    long ChildID = ChildIDBasedOnParent(item, itemNumberBasedOnParentItem); // 'item' for finding Parent Screen type
-
-                                    _mainPresenter.Dic_PaScreenID.Add(ChildID, itemNumberBasedOnParentItem); // add  to dic_PaScreenID child Id
-
-                                    IScreenPartialAdjustmentProperties Spap = new ScreenPartialAdjustmentProperties();
-
-                                    Spap.Screen_Parent_ID = item.Screen_id; // used for delete (add qty back)
-
-                                    Spap.Screen_id = ChildID; // primary key 
-                                    Spap.Screen_ItemNumber = itemNumberBasedOnParentItem; // child item number
-                                    Spap.Screen_WindoorID = item.Screen_WindoorID;
-
-                                    if (item.Screen_Set > 1)
-                                    {
-                                        if (item.Screen_Description.Contains("(Sets of"))
-                                        {
-                                            setDesc = " ";
-                                        }
-                                        else
-                                        {
-                                            setDesc = " (Sets of " + item.Screen_Set.ToString() + ")";
-                                        }
+                                        title = "Quantity";
+                                        promptext = "\nAre you sure to add another screen?";
+                                        numText = "Input Number of Quantity";
                                     }
                                     else
                                     {
-                                        setDesc = " ";
+                                        title = "Validate Quantity";
+                                        promptext = "Notice: Only 1 Quantity Detected,\nAre you sure to add another screen?";
+                                        numText = "Input Number of Quantity";
                                     }
 
+                                    if (DialogResult.OK == ShowQtyPrompt(title, promptext, numText, ref childqtyCount))
+                                    {
+                                        _addNewItem = true;
+                                    }
+                                    else
+                                    {
+                                        _addNewItem = false;
+                                    }
 
-                                    Spap.Screen_Description = item.Screen_Description + setDesc;
-                                    Spap.Screen_Set = item.Screen_Set;
-                                    Spap.Screen_DisplayedDimension = item.Screen_DisplayedDimension;
-                                    Spap.Screen_UnitPrice = item.Screen_UnitPrice;
-                                    Spap.Screen_Quantity = childqtyCount;
-                                    Spap.Screen_NetPrice = childNetPrice;
-                                    Spap.Screen_Discount = item.Screen_Discount;
-                                    Spap.Screen_TotalAmount = childScreenTotalAmount;
-                                    Spap.Screen_Original_Quantity = 0;// child screen original qty is always zero
+                                    if (_addNewItem)
+                                    {
+                                        PriceNQtyDeduction(item, childqtyCount, ref childNetPrice, ref childScreenTotalAmount);
 
-                                    Spap.Screen_IsChild = true;
+                                        _deciItemNumber = _deciItemNumber + .1m; // to avoid .1 in ItemNumber
 
-                                    _mainPresenter.Lst_ScreenPartialAdjustment.Add(Spap);
-                                    Insert_Adjustment_to_DGV(Spap);
+                                        do
+                                        {
+                                            itemNumberBasedOnParentItem = _deciItemNumber + .1m;
+                                            _deciItemNumber = itemNumberBasedOnParentItem;
+                                        }
+
+                                        while (IsChildrenItemNumberExit(itemNumberBasedOnParentItem));
+
+                                        long ChildID = ChildIDBasedOnParent(item, itemNumberBasedOnParentItem); // 'item' for finding Parent Screen type
+
+                                        _mainPresenter.Dic_PaScreenID.Add(ChildID, itemNumberBasedOnParentItem); // add  to dic_PaScreenID child Id
+
+                                        IScreenPartialAdjustmentProperties Spap = new ScreenPartialAdjustmentProperties();
+
+                                        Spap.Screen_Parent_ID = item.Screen_id; // used for delete (add qty back)
+
+                                        Spap.Screen_id = ChildID; // primary key 
+                                        Spap.Screen_ItemNumber = itemNumberBasedOnParentItem; // child item number
+                                        Spap.Screen_WindoorID = item.Screen_WindoorID;
+
+                                        if (item.Screen_Set > 1)
+                                        {
+                                            if (item.Screen_Description.Contains("(Sets of"))
+                                            {
+                                                setDesc = " ";
+                                            }
+                                            else
+                                            {
+                                                setDesc = " (Sets of " + item.Screen_Set.ToString() + ")";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            setDesc = " ";
+                                        }
 
 
-                                    break;
+                                        Spap.Screen_Description = item.Screen_Description + setDesc;
+                                        Spap.Screen_Set = item.Screen_Set;
+                                        Spap.Screen_DisplayedDimension = item.Screen_DisplayedDimension;
+                                        Spap.Screen_UnitPrice = item.Screen_UnitPrice;
+                                        Spap.Screen_Quantity = childqtyCount;
+                                        Spap.Screen_NetPrice = childNetPrice;
+                                        Spap.Screen_Discount = item.Screen_Discount;
+                                        Spap.Screen_TotalAmount = childScreenTotalAmount;
+                                        Spap.Screen_Original_Quantity = 0;// child screen original qty is always zero
+
+                                        Spap.Screen_IsChild = true;
+
+                                        _mainPresenter.Lst_ScreenPartialAdjustment.Add(Spap);
+                                        Insert_Adjustment_to_DGV(Spap);
+
+
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Parent screen's already adjusted,\nScreen_Type_Revised is not null", "Notification: Invalid to add new item", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                             }
                             else
@@ -282,6 +290,10 @@ namespace PresentationLayer.Presenter
                     LoadScreenPartialList();
                 }
 
+            }
+            else
+            {
+                MessageBox.Show("Select One Row at a Time","Multiple Rows Detected",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
             
         }
@@ -371,7 +383,7 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-                            MessageBox.Show("Parent screen's already adjusted, Screen_Type_Revised is not Null");
+                            MessageBox.Show("Parent screen's already adjusted, Screen_Type_Revised is not null","Notification",MessageBoxButtons.OK,MessageBoxIcon.Information);
                             delete = false;
                         }
                     }
@@ -379,7 +391,7 @@ namespace PresentationLayer.Presenter
             }
             else
             {
-                //delete Parent and Child Screen
+                //delete Parent and Child Screen 
                 DialogResult Resdel = MessageBox.Show("Deleting parent screen will also delete succeding child screen/s,\nDo you want to continue? ", "Confirmation", MessageBoxButtons.YesNo);
 
                 if (DialogResult.Yes == Resdel)
@@ -387,31 +399,39 @@ namespace PresentationLayer.Presenter
                     delete = true;
 
                     parent_id = screen_id;
-
-                    List<decimal> screenItemNum = new List<decimal>();
-
-                    foreach (IScreenPartialAdjustmentProperties childScreens in _mainPresenter.Lst_ScreenPartialAdjustment)
-                    {
-                        if (childScreens.Screen_IsChild)
-                        {
-                            if (childScreens.Screen_Parent_ID == parent_id)
-                            {
-                                screenItemNum.Add(childScreens.Screen_ItemNumber);// add to list
-                            }
-                        }
-                    }
-
-                    foreach (var itemsToDel in screenItemNum)
-                    {
-                        _mainPresenter.Lst_ScreenPartialAdjustment.RemoveAll(x => x.Screen_ItemNumber == itemsToDel);// delete
-                    }
-
+                    DeleteParentAndChildScreen(parent_id);
                 }
                 else if (DialogResult.No == Resdel)
                 {
                     delete = false;
                 }
 
+            }
+        }
+
+        private void DeleteParentAndChildScreen(long parent_id)
+        {
+            List<decimal> screenItemNum = new List<decimal>();
+            List<long> dicID = new List<long>();
+            dicID.ToArray();
+            screenItemNum.ToArray();
+
+            foreach (IScreenPartialAdjustmentProperties childScreens in _mainPresenter.Lst_ScreenPartialAdjustment)
+            {
+                if (childScreens.Screen_IsChild)
+                {
+                    if (childScreens.Screen_Parent_ID == parent_id)
+                    {
+                        screenItemNum.Add(childScreens.Screen_ItemNumber);// add to list
+                        dicID.Add(childScreens.Screen_id);
+                    }
+                }
+            }
+
+            for (int i = 0; i < screenItemNum.Count; i++)
+            {
+                _mainPresenter.Lst_ScreenPartialAdjustment.RemoveAll(x => x.Screen_ItemNumber == screenItemNum[i]);
+                _mainPresenter.Dic_PaScreenID.Remove(dicID[i]);
             }
         }
 
@@ -1505,7 +1525,8 @@ namespace PresentationLayer.Presenter
                                 {                              
                                     var scp = _mainPresenter.Lst_ScreenPartialAdjustment.FirstOrDefault(x => x.Screen_ItemNumber == _delScreenRow);
                                     _mainPresenter.Dic_PaScreenID.Remove(scp.Screen_id);                                                                                        
-                                    _mainPresenter.Lst_ScreenPartialAdjustment.RemoveAll(s => s.Screen_ItemNumber == _delScreenRow); // delete in mainP model list                                
+                                    _mainPresenter.Lst_ScreenPartialAdjustment.RemoveAll(s => s.Screen_ItemNumber == _delScreenRow); // delete in mainP model list                                  
+                                    DeleteParentAndChildScreen(scp.Screen_id); 
                                 }
 
                                 _prev_itemnum = _itemnumholder;
@@ -1918,7 +1939,10 @@ namespace PresentationLayer.Presenter
                                                       Math.Round(_unitPrice_rev,2),
                                                       _qty_rev,
                                                       Math.Round(_totalAmount_rev,2),
-                                                      Math.Round(_adjustment,2));
+                                                      Math.Round(_adjustment,2),
+                                                      Math.Round(_totalCloseContract, 2),
+                                                      Math.Round(_totalRevisedContract, 2),
+                                                      Math.Round(_totalAdjustment, 2));
 
                 }
 

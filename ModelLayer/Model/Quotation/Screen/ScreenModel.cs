@@ -6883,8 +6883,14 @@ namespace ModelLayer.Model.Quotation.Screen
                 #endregion
 
                 #region Screen DisplayedDimension
-
-                Screen_DisplayedDimension = Screen_Width + " x " + Screen_Height;
+                if(Screen_Types == ScreenType._NoInsectScreen || Screen_Types == ScreenType._UnnecessaryForInsectScreen)
+                {
+                    Screen_DisplayedDimension = "";
+                }
+                else
+                {
+                    Screen_DisplayedDimension = Screen_Width + " x " + Screen_Height;
+                }
 
                 #endregion
 

@@ -12,7 +12,7 @@
     <Shape ID="DesignTable:dtContractSummary" ZOrder="5" X="-5" Y="55" Height="149" Width="191" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="145" />
     <Shape ID="DesignTable:dtGlassUpgrade" ZOrder="3" X="824" Y="63" Height="264" Width="219" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="260" />
     <Shape ID="DesignTable:dtPartialAdjustment" ZOrder="2" X="1055" Y="64" Height="195" Width="209" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="191" />
-    <Shape ID="DesignTable:dtScreenAdjustment" ZOrder="1" X="583" Y="459" Height="286" Width="215" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="282" />
+    <Shape ID="DesignTable:dtScreenAdjustment" ZOrder="1" X="583" Y="459" Height="309" Width="215" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="305" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

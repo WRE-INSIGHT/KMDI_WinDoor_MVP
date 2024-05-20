@@ -2693,6 +2693,12 @@ namespace PresentationLayer.DataTables {
             
             private global::System.Data.DataColumn columndtAdjustment;
             
+            private global::System.Data.DataColumn columndtCloseContractTotal;
+            
+            private global::System.Data.DataColumn columndtRevisedContractTotal;
+            
+            private global::System.Data.DataColumn columndtAdjustmentPriceTotal;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public dtScreenAdjustmentDataTable() {
@@ -2816,6 +2822,30 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn dtCloseContractTotalColumn {
+                get {
+                    return this.columndtCloseContractTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn dtRevisedContractTotalColumn {
+                get {
+                    return this.columndtRevisedContractTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn dtAdjustmentPriceTotalColumn {
+                get {
+                    return this.columndtAdjustmentPriceTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2851,7 +2881,7 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtScreenAdjustmentRow AdddtScreenAdjustmentRow(string dtItemNo, string dtWindoorID, string dtDescription, decimal dtPrice, int dtQty, decimal dtTotalAmount, string dtDescription_Rev, decimal dtPrice_Rev, int dtQty_Rev, decimal dtTotalAmount_Rev, decimal dtAdjustment) {
+            public dtScreenAdjustmentRow AdddtScreenAdjustmentRow(string dtItemNo, string dtWindoorID, string dtDescription, decimal dtPrice, int dtQty, decimal dtTotalAmount, string dtDescription_Rev, decimal dtPrice_Rev, int dtQty_Rev, decimal dtTotalAmount_Rev, decimal dtAdjustment, decimal dtCloseContractTotal, decimal dtRevisedContractTotal, decimal dtAdjustmentPriceTotal) {
                 dtScreenAdjustmentRow rowdtScreenAdjustmentRow = ((dtScreenAdjustmentRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         dtItemNo,
@@ -2864,7 +2894,10 @@ namespace PresentationLayer.DataTables {
                         dtPrice_Rev,
                         dtQty_Rev,
                         dtTotalAmount_Rev,
-                        dtAdjustment};
+                        dtAdjustment,
+                        dtCloseContractTotal,
+                        dtRevisedContractTotal,
+                        dtAdjustmentPriceTotal};
                 rowdtScreenAdjustmentRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtScreenAdjustmentRow);
                 return rowdtScreenAdjustmentRow;
@@ -2898,6 +2931,9 @@ namespace PresentationLayer.DataTables {
                 this.columndtQty_Rev = base.Columns["dtQty_Rev"];
                 this.columndtTotalAmount_Rev = base.Columns["dtTotalAmount_Rev"];
                 this.columndtAdjustment = base.Columns["dtAdjustment"];
+                this.columndtCloseContractTotal = base.Columns["dtCloseContractTotal"];
+                this.columndtRevisedContractTotal = base.Columns["dtRevisedContractTotal"];
+                this.columndtAdjustmentPriceTotal = base.Columns["dtAdjustmentPriceTotal"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2925,6 +2961,12 @@ namespace PresentationLayer.DataTables {
                 base.Columns.Add(this.columndtTotalAmount_Rev);
                 this.columndtAdjustment = new global::System.Data.DataColumn("dtAdjustment", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtAdjustment);
+                this.columndtCloseContractTotal = new global::System.Data.DataColumn("dtCloseContractTotal", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtCloseContractTotal);
+                this.columndtRevisedContractTotal = new global::System.Data.DataColumn("dtRevisedContractTotal", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtRevisedContractTotal);
+                this.columndtAdjustmentPriceTotal = new global::System.Data.DataColumn("dtAdjustmentPriceTotal", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtAdjustmentPriceTotal);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4907,6 +4949,57 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal dtCloseContractTotal {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtScreenAdjustment.dtCloseContractTotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtCloseContractTotal\' in table \'dtScreenAdjustment\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtScreenAdjustment.dtCloseContractTotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal dtRevisedContractTotal {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtScreenAdjustment.dtRevisedContractTotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtRevisedContractTotal\' in table \'dtScreenAdjustment\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtScreenAdjustment.dtRevisedContractTotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal dtAdjustmentPriceTotal {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtScreenAdjustment.dtAdjustmentPriceTotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtAdjustmentPriceTotal\' in table \'dtScreenAdjustment\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtScreenAdjustment.dtAdjustmentPriceTotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsdtItemNoNull() {
                 return this.IsNull(this.tabledtScreenAdjustment.dtItemNoColumn);
             }
@@ -5035,6 +5128,42 @@ namespace PresentationLayer.DataTables {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetdtAdjustmentNull() {
                 this[this.tabledtScreenAdjustment.dtAdjustmentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsdtCloseContractTotalNull() {
+                return this.IsNull(this.tabledtScreenAdjustment.dtCloseContractTotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetdtCloseContractTotalNull() {
+                this[this.tabledtScreenAdjustment.dtCloseContractTotalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsdtRevisedContractTotalNull() {
+                return this.IsNull(this.tabledtScreenAdjustment.dtRevisedContractTotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetdtRevisedContractTotalNull() {
+                this[this.tabledtScreenAdjustment.dtRevisedContractTotalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsdtAdjustmentPriceTotalNull() {
+                return this.IsNull(this.tabledtScreenAdjustment.dtAdjustmentPriceTotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetdtAdjustmentPriceTotalNull() {
+                this[this.tabledtScreenAdjustment.dtAdjustmentPriceTotalColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -19,7 +19,7 @@
       <Fields>
         <Field Name="dtItemNo">
           <DataField>dtItemNo</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="dtWindoorID">
           <DataField>dtWindoorID</DataField>
@@ -59,6 +59,18 @@
         </Field>
         <Field Name="dtAdjustment">
           <DataField>dtAdjustment</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="dtCloseContractTotal">
+          <DataField>dtCloseContractTotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="dtRevisedContractTotal">
+          <DataField>dtRevisedContractTotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="dtAdjustmentPriceTotal">
+          <DataField>dtAdjustmentPriceTotal</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
@@ -954,7 +966,11 @@ No.</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!dtPrice.Value</Value>
+                                  <Value>=iif(Fields!dtDescription.Value like "No Insect Screen ",
+"-"
+,
+iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!dtPrice.Value)
+)</Value>
                                   <Style>
                                     <FontFamily>segoe ui</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -989,7 +1005,11 @@ No.</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!dtQty.Value</Value>
+                                  <Value>=iif(Fields!dtDescription.Value like "No Insect Screen ",
+"-"
+,
+iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!dtQty.Value)
+)</Value>
                                   <Style>
                                     <FontFamily>segoe ui</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1023,7 +1043,11 @@ No.</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!dtTotalAmount.Value</Value>
+                                  <Value>=iif(Fields!dtDescription.Value like "No Insect Screen ",
+"-"
+,
+iif(Fields!dtDescription.Value like "Unnecessary for Insect Screen ","-",Fields!dtTotalAmount.Value)
+)</Value>
                                   <Style>
                                     <FontFamily>segoe ui</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1058,14 +1082,16 @@ No.</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!dtDescription_Rev.Value</Value>
+                                  <Value>=iif(Fields!dtDescription_Rev.Value = "","-",Fields!dtDescription_Rev.Value)</Value>
                                   <Style>
                                     <FontFamily>segoe ui</FontFamily>
                                     <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>dtDescription_Rev</rd:DefaultName>
@@ -1090,7 +1116,7 @@ No.</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=iif(Fields!dtDescription_Rev.Value = "","",Fields!dtPrice_Rev.Value)</Value>
+                                  <Value>=iif(Fields!dtDescription_Rev.Value = "","-",Fields!dtPrice_Rev.Value)</Value>
                                   <Style>
                                     <FontFamily>segoe ui</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1099,7 +1125,7 @@ No.</Value>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Center</TextAlign>
+                                <TextAlign>Right</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -1125,7 +1151,7 @@ No.</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=iif(Fields!dtDescription_Rev.Value = "","",Fields!dtQty_Rev.Value)</Value>
+                                  <Value>=iif(Fields!dtDescription_Rev.Value = "","-",Fields!dtQty_Rev.Value)</Value>
                                   <Style>
                                     <FontFamily>segoe ui</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1133,7 +1159,7 @@ No.</Value>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Center</TextAlign>
+                                <TextAlign>Right</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -1159,7 +1185,7 @@ No.</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=iif(Fields!dtDescription_Rev.Value = "","",Fields!dtTotalAmount_Rev.Value)</Value>
+                                  <Value>=iif(Fields!dtDescription_Rev.Value = "","-",Fields!dtTotalAmount_Rev.Value)</Value>
                                   <Style>
                                     <FontFamily>segoe ui</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1168,7 +1194,7 @@ No.</Value>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Center</TextAlign>
+                                <TextAlign>Right</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -1194,7 +1220,7 @@ No.</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=iif(Fields!dtDescription_Rev.Value = "","",Fields!dtAdjustment.Value)</Value>
+                                  <Value>=iif(Fields!dtDescription_Rev.Value = "","-",Fields!dtAdjustment.Value)</Value>
                                   <Style>
                                     <FontFamily>segoe ui</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1202,7 +1228,9 @@ No.</Value>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>dtAdjustment</rd:DefaultName>
@@ -1254,7 +1282,7 @@ No.</Value>
             <Top>3.29667in</Top>
             <Left>0.0425in</Left>
             <Height>0.99166in</Height>
-            <Width>7.90115in</Width>
+            <Width>7.90114in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1262,6 +1290,214 @@ No.</Value>
               </Border>
             </Style>
           </Tablix>
+          <Textbox Name="Textbox2">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Total Closed Contract Price</Value>
+                    <Style>
+                      <FontFamily>segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>4.73in</Top>
+            <Left>1.43922in</Left>
+            <Height>0.1875in</Height>
+            <Width>1.425in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!dtCloseContractTotal.Value</Value>
+                    <Style>
+                      <FontFamily>segoe ui</FontFamily>
+                      <FontSize>7pt</FontSize>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>4.73in</Top>
+            <Left>3.58836in</Left>
+            <Height>0.1875in</Height>
+            <Width>0.72727in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BottomBorder>
+                <Color>HotPink</Color>
+                <Style>Double</Style>
+                <Width>2.25pt</Width>
+              </BottomBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Total Revised Contract Price</Value>
+                    <Style>
+                      <FontFamily>segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>4.95429in</Top>
+            <Left>1.43922in</Left>
+            <Height>0.1875in</Height>
+            <Width>1.425in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!dtRevisedContractTotal.Value</Value>
+                    <Style>
+                      <FontFamily>segoe ui</FontFamily>
+                      <FontSize>7pt</FontSize>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>4.95429in</Top>
+            <Left>6.36411in</Left>
+            <Height>0.1875in</Height>
+            <Width>0.72727in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BottomBorder>
+                <Color>HotPink</Color>
+                <Style>Double</Style>
+                <Width>2.25pt</Width>
+              </BottomBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox13">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Total List Adjustment Price</Value>
+                    <Style>
+                      <FontFamily>segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>5.16679in</Top>
+            <Left>1.43922in</Left>
+            <Height>0.2125in</Height>
+            <Width>1.3375in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox15">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!dtAdjustmentPriceTotal.Value</Value>
+                    <Style>
+                      <FontFamily>segoe ui </FontFamily>
+                      <FontSize>7pt</FontSize>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>5.19179in</Top>
+            <Left>7.08304in</Left>
+            <Height>0.1875in</Height>
+            <Width>0.8606in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>7.30024in</Height>
         <Style />
