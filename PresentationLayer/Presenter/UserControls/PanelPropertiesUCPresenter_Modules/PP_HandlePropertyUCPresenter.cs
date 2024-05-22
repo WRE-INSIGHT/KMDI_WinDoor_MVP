@@ -115,7 +115,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 }
 
                 if ((div_nxt != null && div_nxt.Div_ChkDM == true) ||
-                    (div_prev != null && div_prev.Div_ChkDM == true))
+                    (div_prev != null && div_prev.Div_ChkDM == true) &&
+                    !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                 {
                     _panelModel.Panel_CornerDriveOptionsVisibility = true;
                     _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
