@@ -6207,6 +6207,22 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
+                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._84207 ||
+                    Panel_SashProfileArtNo == SashProfile_ArticleNo._84200)
+                {
+                    Panel_CenterGasketArtNo = GlazingGasket_ArticleNo._G222;
+                    Panel_OpenableStrikerArtNo = OpenableStriker_ArticleNo._H117;
+                    Panel_CornerCleatArtNo = CornerCleat_ArticleNo._H079;
+                    Panel_CheveronArtNo = Cheveron_ArticleNo._H083;
+                    Panel_RunUpBlockArtNo = RunUpBlock_ArticleNo._M673;
+                    Panel_PackerRodArtNo = PackerRod_ArticleNo._H149;
+                    Panel_LockingWedgeArtNo = LockingWedge_ArticleNo._H109;
+                    Panel_SSCheveronArtNo = SSCheveron_ArticleNo._H092;
+                    Panel_CenterGasketArtNo = GlazingGasket_ArticleNo._G222;
+                    Panel_Unica40ArtNo = Unica40_ArticleNo._H116;
+                    Panel_LockingConnectorArtNo = LockingConnectorDevice_ArticleNo._H175;
+                }
+
                 if (Panel_MotorizedOptionVisibility == true)
                 {
                     Panel_30x25CoverArtNo = _30x25Cover_ArticleNo._1067_Milled;
@@ -12834,7 +12850,7 @@ namespace ModelLayer.Model.Quotation.Panel
             tbl_explosion.Rows.Add("Center Gasket (Frame) Height " + Panel_CenterGasketArtNo.DisplayName,
                                    2, "pc(s)",
                                    Panel_DisplayHeight.ToString(),
-                                   "Sash",
+                                   "Frame",
                                    @"");
         }
 

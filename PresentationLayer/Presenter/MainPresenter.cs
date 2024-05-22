@@ -13460,6 +13460,12 @@ namespace PresentationLayer.Presenter
                         {
                             incompatibility += "\n\nOn " + div.Div_Name + "\nSash Profile : " + div.Div_DMPanel.Panel_SashProfileArtNo.DisplayName + ", Dummy Mullion : " + div.Div_DMArtNo.DisplayName;
                         }
+                        else if (div.Div_DMArtNo == DummyMullion_ArticleNo._84401 &&
+                                (div.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207 ||
+                                 div.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._84200))
+                        {
+                            incompatibility += "\n\nOn " + div.Div_Name + "\nSash Profile : " + div.Div_DMPanel.Panel_SashProfileArtNo.DisplayName + ", Dummy Mullion : " + div.Div_DMArtNo.DisplayName;
+                        }
                     }
                     else if (div.Div_ChkDM == true && div.Div_DMPanel == null)
                     {

@@ -213,7 +213,7 @@ namespace PresentationLayer.Presenter.UserControls
                 if (chk.Checked == true)
                 {
                     _divProperties.GetDMArtNoPNL().SendToBack();
-                    _divModel.Div_ArtNo = Divider_ArticleNo._None;
+                     _divModel.Div_ArtNo = Divider_ArticleNo._None;
                     _divModel.Div_ReinfArtNo = DividerReinf_ArticleNo._None;
                     _divModel.AdjustPropertyPanelHeight("addDM");
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addDM");
@@ -223,9 +223,13 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusDivArt");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusDivArt");
 
-                    _divModel.AdjustPropertyPanelHeight("minusPanelAddCladding");
-                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
-                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+                   
+                    if (_divModel.Div_PnlCladdingVisibility == true)
+                    {
+                        _divModel.AdjustPropertyPanelHeight("minusPanelAddCladding");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusPanelAddCladding");
+                    }
 
                     if (_divModel.Div_DMPanel != null && _divModel.Div_LeverEspagVisibility == false)
                     {
@@ -251,7 +255,8 @@ namespace PresentationLayer.Presenter.UserControls
                         _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladding");
                     }
 
-                    if (prev_pnlModel != null)
+                    if (prev_pnlModel != null &&
+                        !_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                     {
                         if (prev_pnlModel.Panel_CornerDriveOptionsVisibility == false && prev_pnlModel.Panel_Type != "Fixed Panel")
                         {
@@ -264,7 +269,8 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                     }
 
-                    if (nxt_pnlModel != null)
+                    if (nxt_pnlModel != null &&
+                        !_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                     {
                         if (nxt_pnlModel.Panel_CornerDriveOptionsVisibility == false && prev_pnlModel.Panel_Type != "Fixed Panel")
                         {
@@ -276,6 +282,8 @@ namespace PresentationLayer.Presenter.UserControls
                             //added_scrollView += const_var.panel_property_cornerDriveOptionsheight_default;
                         }
                     }
+
+
                 }
                 else if (chk.Checked == false)
                 {
@@ -287,9 +295,12 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusDM");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusDM");
 
-                    _divModel.AdjustPropertyPanelHeight("addPanelAddCladding");
-                    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
-                    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+                    if (_divModel.Div_PnlCladdingVisibility == true)
+                    {
+                        _divModel.AdjustPropertyPanelHeight("addPanelAddCladding");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addPanelAddCladding");
+                    }
 
                     if (_divModel.Div_DMPanel != null && _divModel.Div_LeverEspagVisibility == true)
                     {

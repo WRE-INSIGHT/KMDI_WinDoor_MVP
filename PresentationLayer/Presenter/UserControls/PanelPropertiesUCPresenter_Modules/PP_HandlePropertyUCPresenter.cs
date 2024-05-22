@@ -138,7 +138,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
             }
 
-            if (!_panelModel.Panel_Type.Contains("Sliding"))
+            if (!_panelModel.Panel_Type.Contains("Sliding") &&
+                !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
             {
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
                 _panelModel.AdjustPropertyPanelHeight("addExtension");
@@ -1167,12 +1168,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                        
                         if (_panelModel.Panel_ParentMultiPanelModel != null)
                         {
-                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
+                            //_panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
                         }
 
                        
-                        if (!_panelModel.Panel_Type.Contains("Sliding"))
+                        if (!_panelModel.Panel_Type.Contains("Sliding") && 
+                            !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                         {
                             _panelModel.AdjustPropertyPanelHeight("minusExtension");
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
@@ -1922,8 +1924,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         #endregion
                     }
                     else if (sel_handleType == Handle_Type._CremonHandle)
-                    {
-
+                    { 
                         #region Property Height Adjustment - Cremon
                         if (!_mainPresenter.ItemLoad)
                         {
