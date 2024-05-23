@@ -13,6 +13,7 @@ namespace PresentationLayer.Views.UserControls
     {
         int FrameID { get; set; }
         Frame_Padding Frame_Type { get; set; }
+        string ProfileType_FromMainPresenter { get; set; }
 
         event EventHandler FramePropertiesLoadEventRaised;
         event EventHandler NumFHeightValueChangedEventRaised;

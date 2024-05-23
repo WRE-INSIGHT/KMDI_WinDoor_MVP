@@ -849,12 +849,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                      {
                          if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                          {
-                             _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
-                         }
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._CremonHandle;
+                            }
+                            else
+                            {
+                                _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
+
+                            }
+                        }
                          else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                          {
-                             _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
-                         }
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._CremonHandle;
+                            }
+                            else
+                            { 
+                                _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
+                            }
+                        }
 
                      }
                      else

@@ -13777,8 +13777,10 @@ namespace PresentationLayer.Presenter
         public IFramePropertiesUCPresenter AddFramePropertiesUC(IFrameModel frameModel)
         {
             IFramePropertiesUCPresenter FramePropertiesUCP = _framePropertiesUCPresenter.GetNewInstance(frameModel, _unityC, this);
+            FramePropertiesUCP.GetFramePropertiesUC().ProfileType_FromMainPresenter = frameModel.Frame_WindoorModel.WD_profile;
             _framePropertiesUC = FramePropertiesUCP.GetFramePropertiesUC();
             _pnlPropertiesBody.Controls.Add((UserControl)_framePropertiesUC);
+
 
             return FramePropertiesUCP;
         }

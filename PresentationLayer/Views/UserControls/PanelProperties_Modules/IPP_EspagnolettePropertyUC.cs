@@ -8,6 +8,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
     {
         FrameProfile_ArticleNo Frame_ArtNo { get; set; }
         SashProfile_ArticleNo Panel_SashProfileArtNo { get; set; }
+        string ProfileType_FromMainPresenter { get; set; }
+
         event EventHandler cmbEspagnoletteSelectedValueEventRaised;
         event EventHandler PPEspagnolettePropertyLoadEventRaised;
     }

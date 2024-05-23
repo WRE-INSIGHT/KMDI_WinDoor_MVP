@@ -442,7 +442,8 @@ namespace PresentationLayer.Presenter.UserControls
                 }
 
                 IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-                UserControl sashProp = (UserControl)sashPropUCP.GetPPSashPropertyUC();
+                sashPropUCP.GetPPSashPropertyUC().ProfileType_FromMainPresenter = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile;
+                 UserControl sashProp = (UserControl)sashPropUCP.GetPPSashPropertyUC();
                 _pnlPanelSpecs.Controls.Add(sashProp);
                 sashProp.Dock = DockStyle.Top;
                 sashProp.BringToFront();
@@ -580,6 +581,7 @@ namespace PresentationLayer.Presenter.UserControls
                     }
 
                     IPP_HandlePropertyUCPresenter handlePropUCP = _pp_handlePropertUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                    handlePropUCP.GetPPHandlePropertyUC().ProfileType_FromMainPresenter = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile;
                     UserControl handle = (UserControl)handlePropUCP.GetPPHandlePropertyUC();
                     _pnlPanelSpecs.Controls.Add(handle);
                     handle.Dock = DockStyle.Top;
@@ -754,6 +756,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
 
                 IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                glassPropUCP.GetPPGlassPropertyUC().ProfileType_FromMainPresenter = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile;
                 UserControl glassProp = (UserControl)glassPropUCP.GetPPGlassPropertyUC();
                 _pnlPanelSpecs.Controls.Add(glassProp);
                 glassProp.Dock = DockStyle.Top;

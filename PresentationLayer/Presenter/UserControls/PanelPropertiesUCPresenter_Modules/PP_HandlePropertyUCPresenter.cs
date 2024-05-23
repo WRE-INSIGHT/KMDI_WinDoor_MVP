@@ -2148,6 +2148,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             rotoswingForSlidingPropUC.BringToFront();
 
             IPP_EspagnolettePropertyUCPresenter espUCP = _pp_espagnolettePropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+            espUCP.GetPPEspagnolettePropertyUC().ProfileType_FromMainPresenter = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile;
             UserControl espPropUC = (UserControl)espUCP.GetPPEspagnolettePropertyUC();
             _pnlHandleType.Controls.Add(espPropUC);
             espPropUC.Dock = DockStyle.Top;
