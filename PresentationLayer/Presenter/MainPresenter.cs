@@ -9722,6 +9722,10 @@ namespace PresentationLayer.Presenter
                                     {
                                         pa_Screen_Type_Revised = sct;
                                     }
+                                    else if ("" == extractedValue_str)
+                                    {
+                                        pa_Screen_Type_Revised = null;
+                                    }
                                 }
                             }
                             else if (row_str.Contains("Screen_Discount:"))
