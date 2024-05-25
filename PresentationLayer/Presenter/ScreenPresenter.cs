@@ -246,7 +246,9 @@ namespace PresentationLayer.Presenter
                                                 setDesc = " ";
                                             }
 
-                                            Spap.Screen_Description = item.Screen_Description + setDesc;
+
+
+                                            Spap.Screen_Description = item.Screen_Description.Trim()+ setDesc;
                                             Spap.Screen_Set = item.Screen_Set;
                                             Spap.Screen_DisplayedDimension = item.Screen_DisplayedDimension;
                                             Spap.Screen_UnitPrice = item.Screen_UnitPrice;
