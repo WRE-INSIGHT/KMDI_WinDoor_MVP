@@ -7751,6 +7751,10 @@ namespace PresentationLayer.Presenter
                             }
 
                         }
+                        else if (row_str.Contains("Panel_CenterProfileVisibility:"))
+                        {
+                            panel_CenterProfileVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
                         #endregion
                     }
                     else if (inside_multi)
@@ -11052,7 +11056,8 @@ namespace PresentationLayer.Presenter
              panel_PopUpHandleOptionVisibilty,
              panel_TrackRailArtNoVisibility,
              panel_RotoswingForSlidingHandleOptionVisibilty,
-             panel_MotorizedMechRemoteOption;
+             panel_MotorizedMechRemoteOption,
+             panel_CenterProfileVisibility;
         int panel_GlassID,
             panel_GlazingBeadWidth,
             panel_GlazingBeadWidthDecimal,
