@@ -12,6 +12,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
+using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -153,6 +154,24 @@ namespace PresentationLayer.Presenter.UserControls
                 nxt_pnl_str = _divModel.Div_MPanelParent.MPanelLst_Objects[ndx + 1].Name;
                 nxt_pnl = _divModel.Div_MPanelParent.MPanelLst_Panel.Find(prev => prev.Panel_Name == nxt_pnl_str);
                 nxt_pnl.Panel_BackColor = SystemColors.Highlight;
+            }
+
+            if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+                _divModel.Div_DMArtNo = DummyMullion_ArticleNo._84401;
+            }
+            else
+            {
+                if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+
+                    if (_divModel.Div_FrameParent.Frame_Type == Frame_Padding.Window)
+                    {
+                        _divModel.Div_DMArtNo = DummyMullion_ArticleNo._7533;
+                    }
+                    else if (_divModel.Div_FrameParent.Frame_Type == Frame_Padding.Door)
+                    {
+                        _divModel.Div_DMArtNo = DummyMullion_ArticleNo._385P;
+                    }
             }
 
             if (prev_pnl.Panel_Name.Contains("Fixed") == false || nxt_pnl.Panel_Name.Contains("Fixed") == false)

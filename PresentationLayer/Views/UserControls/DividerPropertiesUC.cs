@@ -311,7 +311,7 @@ namespace PresentationLayer.Views.UserControls
                 else if (dm == DummyMullion_ArticleNo._84401)
                 {
                     if (!(Panel_SashProfileArtNo == SashProfile_ArticleNo._84207 ||
-                        Panel_SashProfileArtNo == SashProfile_ArticleNo._84200))
+                          Panel_SashProfileArtNo == SashProfile_ArticleNo._84200))
                     {
                         MessageBox.Show("You've selected an incompatible item, be advised", Divider_Type.ToString() + " Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }

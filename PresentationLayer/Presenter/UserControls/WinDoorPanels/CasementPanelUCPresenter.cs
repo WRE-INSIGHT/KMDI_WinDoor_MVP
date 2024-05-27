@@ -836,7 +836,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 else
                 {  
-                     _panelModel.Panel_HandleType = Handle_Type._None;
+                     _panelModel.Panel_HandleType = Handle_Type._None; 
+
                      if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
                      {
                          _panelModel.Panel_CornerDriveOptionsVisibility = false;
@@ -856,7 +857,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             else
                             {
                                 _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
-
                             }
                         }
                          else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)

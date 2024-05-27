@@ -58,7 +58,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             {
                 if (ProfileType_FromMainPresenter.Contains("Alutek"))
                 {
-                    if (item == Handle_Type._CremonHandle)
+                    if (item == Handle_Type._CremonHandle || item == Handle_Type._None)
                     {
                         rio.Add(item);
                     }

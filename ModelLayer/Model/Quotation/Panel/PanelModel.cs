@@ -9651,6 +9651,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         dm_deduct = 4;
                     }
+                    else if (divNxt.Div_DMArtNo == DummyMullion_ArticleNo._84401)
+                    {
+                        dm_deduct = 3;
+                    }
                 }
 
                 if (if_divPrev_is_dummy_mullion)
@@ -9662,6 +9666,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (divPrev.Div_DMArtNo == DummyMullion_ArticleNo._385P)
                     {
                         dm_deduct = 4;
+                    }
+                    else if (divPrev.Div_DMArtNo == DummyMullion_ArticleNo._84401)
+                    {
+                        dm_deduct = 3;
                     }
                 }
 
@@ -9817,7 +9825,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         else
                         {
                             Panel_SashWidth = ((((Panel_ParentFrameModel.Frame_Width - deduction_for_sashWD + SashOverlap_additional) - dm_deduct) - inward_motorized_deduction) / TotalNumberOfPanel) + 5;
-
+    
                             if (Panel_Type.Contains("Fixed") &&
                                                   (Panel_Overlap_Sash == OverlapSash._Left ||
                                                    Panel_Overlap_Sash == OverlapSash._Right))
@@ -9834,7 +9842,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._84207 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._84200)
                 {
-                    Panel_SashWidth = (Panel_DisplayWidth - deduction_for_sashWD); //  - 11
+                    Panel_SashWidth = ((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct); 
                 }
                 else
                 {
