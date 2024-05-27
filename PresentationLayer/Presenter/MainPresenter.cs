@@ -9799,7 +9799,7 @@ namespace PresentationLayer.Presenter
                 SPA.Screen_NetPrice = pa_Screen_NetPrice;
                 SPA.Screen_TotalAmount = pa_Screen_TotalAmount;
                 SPA.Screen_Original_Quantity = pa_Screen_Original_Quantity;
-
+                
                 SPA.Screen_Type_Revised = pa_Screen_Type_Revised;
                 SPA.Screen_Description_Revised = pa_Screen_Description_Revised;
                 SPA.Screen_Set_Revised = pa_Screen_Set_Revised;
