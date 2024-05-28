@@ -765,47 +765,49 @@ namespace ModelLayer.Model.Quotation
                                             if (div_nxtCtrl.Div_ChkDM == true && div_nxtCtrl.Div_DMPanel == pnl_curCtrl)
                                             {
                                                 div_nxtCtrl.Insert_DummyMullion_MaterialList(Material_List);
-                                                div_nxtCtrl.Insert_Endcap4DM_MaterialList(Material_List);
+                                                if (!item.WD_profile.Contains("Alutek"))
+                                                {  
+                                                    div_nxtCtrl.Insert_Endcap4DM_MaterialList(Material_List);
 
-                                                int expHt_screws = div_nxtCtrl.Add_ExplosionLength_screws4fab();
-                                                total_screws_fabrication += expHt_screws;
+                                                    int expHt_screws = div_nxtCtrl.Add_ExplosionLength_screws4fab();
+                                                    total_screws_fabrication += expHt_screws;
 
-                                                if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._385P)
-                                                {
-                                                    if (div_nxtCtrl.Div_DMStrikerArtNo != null)
+                                                    if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._385P)
                                                     {
-                                                        div_nxtCtrl.Insert_DMStriker_MaterialList(Material_List);
+                                                        if (div_nxtCtrl.Div_DMStrikerArtNo != null)
+                                                        {
+                                                            div_nxtCtrl.Insert_DMStriker_MaterialList(Material_List);
+                                                        }
+                                                    }
+
+                                                    int dmStriker_screws = div_nxtCtrl.Add_DMStriker_screws4fab();
+                                                    add_screws_fab_striker += dmStriker_screws;
+
+                                                    int endcap_screws = div_nxtCtrl.Add_EndCapDM_screws4fab();
+                                                    add_screws_fab_endcap += endcap_screws;
+
+                                                    if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
+                                                    {
+                                                        if (frame.Frame_Type == FrameModel.Frame_Padding.Window)
+                                                        {
+                                                            div_nxtCtrl.Insert_FixedCam_MaterialList(Material_List);
+                                                            add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
+
+                                                            div_nxtCtrl.Insert_SnapNKeep_MaterialList(Material_List);
+
+                                                            int snapNkeep_screws = div_nxtCtrl.Add_SnapNKeep_screws4fab();
+                                                            add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                        }
+
+                                                        if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                                        {
+                                                            div_nxtCtrl.Insert_AlumSpacer_MaterialList(Material_List);
+
+                                                            int alumSpacer_screws = div_nxtCtrl.Add_AlumSpacer_screws4fab();
+                                                            add_screws_fab_alum += alumSpacer_screws;
+                                                        }
                                                     }
                                                 }
-
-                                                int dmStriker_screws = div_nxtCtrl.Add_DMStriker_screws4fab();
-                                                add_screws_fab_striker += dmStriker_screws;
-
-                                                int endcap_screws = div_nxtCtrl.Add_EndCapDM_screws4fab();
-                                                add_screws_fab_endcap += endcap_screws;
-
-                                                if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
-                                                {
-                                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Window)
-                                                    {
-                                                        div_nxtCtrl.Insert_FixedCam_MaterialList(Material_List);
-                                                        add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
-
-                                                        div_nxtCtrl.Insert_SnapNKeep_MaterialList(Material_List);
-
-                                                        int snapNkeep_screws = div_nxtCtrl.Add_SnapNKeep_screws4fab();
-                                                        add_screws_fab_snapInKeep += snapNkeep_screws;
-                                                    }
-
-                                                    if (div_nxtCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
-                                                    {
-                                                        div_nxtCtrl.Insert_AlumSpacer_MaterialList(Material_List);
-
-                                                        int alumSpacer_screws = div_nxtCtrl.Add_AlumSpacer_screws4fab();
-                                                        add_screws_fab_alum += alumSpacer_screws;
-                                                    }
-                                                }
-
                                                 if (div_nxtCtrl.Div_DMPanel != null &&
                                                    (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
                                                      div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
@@ -908,42 +910,45 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 div_prevCtrl.Insert_DummyMullion_MaterialList(Material_List);
 
-                                                div_prevCtrl.Insert_Endcap4DM_MaterialList(Material_List);
+                                                if (!item.WD_profile.Contains("Alutek"))
+                                                { 
+                                                  div_prevCtrl.Insert_Endcap4DM_MaterialList(Material_List);
+                                                  
+                                                  int expLength_screws = div_prevCtrl.Add_ExplosionLength_screws4fab();
+                                                  total_screws_fabrication += expLength_screws;
+                                                  
+                                                  div_prevCtrl.Insert_DMStriker_MaterialList(Material_List);
+                                                  
+                                                  int DMStriker_screws = div_prevCtrl.Add_DMStriker_screws4fab();
+                                                  add_screws_fab_striker += DMStriker_screws;
+                                                  
+                                                  int endCapDM_screws = div_prevCtrl.Add_EndCapDM_screws4fab();
+                                                  add_screws_fab_endcap += endCapDM_screws;
+                                                    
 
-                                                int expLength_screws = div_prevCtrl.Add_ExplosionLength_screws4fab();
-                                                total_screws_fabrication += expLength_screws;
+                                                  if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
+                                                  {
+                                                      if (frame.Frame_Type == FrameModel.Frame_Padding.Window)
+                                                      {
+                                                          div_prevCtrl.Insert_FixedCam_MaterialList(Material_List);
 
-                                                div_prevCtrl.Insert_DMStriker_MaterialList(Material_List);
+                                                          add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
 
-                                                int DMStriker_screws = div_prevCtrl.Add_DMStriker_screws4fab();
-                                                add_screws_fab_striker += DMStriker_screws;
+                                                          div_prevCtrl.Insert_SnapNKeep_MaterialList(Material_List);
 
-                                                int endCapDM_screws = div_prevCtrl.Add_EndCapDM_screws4fab();
-                                                add_screws_fab_endcap += endCapDM_screws;
+                                                          int snapNkeep_screws = div_prevCtrl.Add_SnapNKeep_screws4fab();
+                                                          add_screws_fab_snapInKeep += snapNkeep_screws;
+                                                      }
 
-                                                if ((frame.Frame_ArtNo == FrameProfile_ArticleNo._7507 && pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395) == false)
-                                                {
-                                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Window)
-                                                    {
-                                                        div_prevCtrl.Insert_FixedCam_MaterialList(Material_List);
+                                                      if (div_prevCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                                      {
+                                                          div_prevCtrl.Insert_AlumSpacer_MaterialList(Material_List);
 
-                                                        add_screws_fab_fxdcam += (2 * 2); //2 * 2pcs,FixedCam
-
-                                                        div_prevCtrl.Insert_SnapNKeep_MaterialList(Material_List);
-
-                                                        int snapNkeep_screws = div_prevCtrl.Add_SnapNKeep_screws4fab();
-                                                        add_screws_fab_snapInKeep += snapNkeep_screws;
-                                                    }
-
-                                                    if (div_prevCtrl.Div_DMArtNo == DummyMullion_ArticleNo._7533)
-                                                    {
-                                                        div_prevCtrl.Insert_AlumSpacer_MaterialList(Material_List);
-
-                                                        int alumSpacer_screws = div_prevCtrl.Add_AlumSpacer_screws4fab();
-                                                        add_screws_fab_alum += alumSpacer_screws;
-                                                    }
+                                                          int alumSpacer_screws = div_prevCtrl.Add_AlumSpacer_screws4fab();
+                                                          add_screws_fab_alum += alumSpacer_screws;
+                                                      }
+                                                  }
                                                 }
-
                                                 if (div_prevCtrl.Div_DMPanel != null &&
                                                     (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
                                                      div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
@@ -3373,8 +3378,11 @@ namespace ModelLayer.Model.Quotation
 
         #endregion
         #region Divider
+
                 Divider_84300_PricePerSqrMeter = 347.53m,
                 Divider_84301_PricePerSqrMeter = 490.14m,
+                DividerDM_84401_PricePerSqrMeter = 341.12m,
+
         #endregion
         #region InstallationMats
 
@@ -5132,6 +5140,12 @@ namespace ModelLayer.Model.Quotation
                                                     ShootBoltReversePrice += ShootBoltReversePricePerPiece;
                                                     ShootBoltNonReversePrice += ShootBoltNonReversePricePerPiece * 3;
                                                 }
+                                                else if (div.Div_DMArtNo == DummyMullion_ArticleNo._84401)
+                                                {
+                                                        DummyMullionPricePerLinearMeter = DividerDM_84401_PricePerSqrMeter;
+                                                        FrameReinPricePerLinearMeter_7502 = 0;
+                                                }
+                                                
 
                                                 DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter;
                                                 DMReinforcementPrice += (div.Div_Height / 1000m) * FrameReinPricePerLinearMeter_7502;

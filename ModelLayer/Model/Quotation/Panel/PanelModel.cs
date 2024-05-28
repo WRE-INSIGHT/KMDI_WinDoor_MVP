@@ -9897,6 +9897,15 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_GlazingBeadHeight = Panel_GlassHeight + 200;
                 Panel_GlazingBeadHeightDecimal = Panel_GlassHeightDecimal;
 
+                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                   // Panel_SashHeight -= 5;
+                    Panel_GlazingBeadWidth = Panel_SashWidth - (handle_deduct * 2) + (20 * 2) + ZeroPointSevenAdditional;
+                    Panel_GlazingBeadHeight = Panel_SashHeight - (handle_deduct * 2) + ZeroPointSevenAdditional;
+
+                    Panel_GlassWidth = Panel_SashWidth - (handle_deduct * 2) + (20 * 2) - (4 * 2);
+                    Panel_GlassHeight = Panel_SashHeight - (handle_deduct * 2) + (20 * 2) - (4 * 2);
+                }
 
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
                 Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
