@@ -333,6 +333,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_CenterProfileVisibility { get; set; }
         CenterProfile_ArticleNo Panel_CenterProfileArtNo { get; set; }
         CenterProfile_ArticleNo Panel_PartnerWithCenterProfile { get; set; }
+        IPanelModel Panel_CPPanel { get; set; }
         PVCSettingPlate_ArticleNo Panel_PVCSettingPlateArtNo { get; set; }
         FinPlate_ArticleNo Panel_FinPlateArtNo { get; set; }
         SlidingAccessoriesRoller_ArticleNo Panel_SlidingAccessoriesRollerArtNo { get; set; }

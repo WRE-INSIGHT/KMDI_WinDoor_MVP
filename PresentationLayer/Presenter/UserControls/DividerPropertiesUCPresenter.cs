@@ -163,7 +163,7 @@ namespace PresentationLayer.Presenter.UserControls
             else
             {
                 if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
-
+                { 
                     if (_divModel.Div_FrameParent.Frame_Type == Frame_Padding.Window)
                     {
                         _divModel.Div_DMArtNo = DummyMullion_ArticleNo._7533;
@@ -172,6 +172,7 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         _divModel.Div_DMArtNo = DummyMullion_ArticleNo._385P;
                     }
+                }
             }
 
             if (prev_pnl.Panel_Name.Contains("Fixed") == false || nxt_pnl.Panel_Name.Contains("Fixed") == false)

@@ -3215,6 +3215,19 @@ namespace ModelLayer.Model.Quotation.Panel
             }        
         }
 
+        private IPanelModel _panel_CPPanel;
+        public IPanelModel Panel_CPPanel
+        {
+            get
+            {
+                return _panel_CPPanel;
+            }
+            set
+            {
+                _panel_CPPanel = value;
+            }
+        }
+
         private PVCSettingPlate_ArticleNo _panelPVCSettingPlateArtNo;
         public PVCSettingPlate_ArticleNo Panel_PVCSettingPlateArtNo
         {
