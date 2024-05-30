@@ -746,6 +746,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                     IPP_CenterProfilePropertyUCPresenter centerProfile = _pp_CenterProfilePropertyUCPresenter.CreateNewInstance(_mainPresenter, _unityC, _panelModel, _pp_FramePropertiesUCPresenter);
                     UserControl centerProfileProp = (UserControl)centerProfile.GetCenterProfilePropertyUC();
+                    //centerProfile.GetCenterProfilePropertyUC().GetBtnSelectCenterProfilePanel();
                     _pnlPanelSpecs.Controls.Add(centerProfileProp);
                     centerProfileProp.Dock = DockStyle.Top;
                     centerProfileProp.BringToFront();

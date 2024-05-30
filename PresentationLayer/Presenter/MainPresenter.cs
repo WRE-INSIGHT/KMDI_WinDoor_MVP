@@ -10340,6 +10340,8 @@ namespace PresentationLayer.Presenter
             UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
             panelPropUC.Dock = DockStyle.Top;
 
+            
+
             if (panel_Parent.Parent.Name.Contains("frame"))
             {
                 _frameModel.Lst_Panel.Add(pnlModel);
@@ -10406,6 +10408,9 @@ namespace PresentationLayer.Presenter
                                                                               frmUCPresenter);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     _frameModel.Frame_UC.Controls.Add((UserControl)fixedUC);
+
+                    
+
                 }
                 else
                 {
@@ -11967,7 +11972,9 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_UC = (UserControl)_frameUC;
                         _frameModel.Frame_PropertiesUC = (UserControl)_framePropertiesUCPresenter.GetFramePropertiesUC();
                         AddFrameList_WindoorModel(_frameModel);
-                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+
+                        _framePropertiesUCPresenter.GetFramePropertiesUC().ProfileType_FromMainPresenter = _frameModel.Frame_WindoorModel.WD_profile;
+
                         _basePlatformImagerUCPresenter.Invalidate_flpMain();
                         _basePlatformPresenter.InvalidateBasePlatform();
 
