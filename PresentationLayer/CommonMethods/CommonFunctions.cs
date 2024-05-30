@@ -123,6 +123,7 @@ namespace PresentationLayer.CommonMethods
                 if (divType == DividerModel.DividerType.Mullion)
                 {
                     IDividerPropertiesUCPresenter divPropUCP = mainPresenter.divPropertiesUCP.GetNewInstance(_unityC, divModel, mainPresenter);
+                    divPropUCP.GetDivProperties().ProfileType_FromMainPresenter = frameModel.Frame_WindoorModel.WD_profile;
                     UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
                     divPropUC.Dock = DockStyle.Top;
                     multiMullionUCP.multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
