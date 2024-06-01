@@ -67,6 +67,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_LouverBladesCount { get; set; }
         bool Panel_LouverBladesVisibility { get; set; }
         Color Panel_BackColor { get; set; }
+        int Panel_PartnerPanelGlassID { get; set; }
 
         #region Explosion
 

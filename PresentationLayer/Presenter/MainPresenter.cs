@@ -215,6 +215,18 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public Control ControlRaised_forCenterProfileSelection
+        {
+            get
+            {
+                return _controlRaised_forCenterProfileSelection;
+            }
+            set
+            {
+                _controlRaised_forCenterProfileSelection = value;
+            }
+        }
+
 
         private Control _controlRaised_forDMSelection;
         private Control _controlRaised_forCenterProfileSelection;
@@ -1096,8 +1108,43 @@ namespace PresentationLayer.Presenter
                 _controlRaised_forCenterProfileSelection.BackColor = System.Drawing.Color.PaleGreen;
                 _currentPanelModel_forCenterProfileSelection.Panel_HandleType = Handle_Type._None;
                 selected_pnl.Panel_PartnerWithCenterProfile = _currentPanelModel_forCenterProfileSelection.Panel_CenterProfileArtNo;
+
+                _currentPanelModel_forCenterProfileSelection.Panel_PartnerPanelGlassID = selected_pnl.PanelGlass_ID; // set for load purpose
+
+            }
+            else if (status == "CPSelectionOnLoad")
+            {
+                _windoorModel.WD_CmenuDeleteVisibility = true;
+
+                _tsLblStatus.Text = "";
+                _pnlControlSub.Enabled = true;
+                _msMainMenu.Enabled = true;
+                _pnlPropertiesBody.Enabled = true;
+                _tsMain.Enabled = true;
+
+                _controlRaised_forCenterProfileSelection.Text = "P" + curnt_pnl.Panel_PartnerPanelGlassID;
+                _controlRaised_forCenterProfileSelection.BackColor = System.Drawing.Color.PaleGreen;
+                curnt_pnl.Panel_HandleType = Handle_Type._None;
+
             }
         }
+
+        public void OnLoadSearchCenterProfielArtNo(IPanelModel pnlModel)
+        {
+            List<IPanelModel> lst_pnl = pnlModel.Panel_ParentMultiPanelModel.MPanelLst_Panel;
+
+            foreach (IPanelModel item in lst_pnl)
+            {
+                if (pnlModel.Panel_Name == item.Panel_Name)
+                {
+                    if (item.Panel_CenterProfileArtNo.ToString() != "None")
+                    {
+                        SetLblStatusForCenterProfile("CPSelectionOnLoad", false, null, null, item, null, null);
+                    }
+                }
+            }
+        }
+
 
         public void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC)
         {
@@ -6037,6 +6084,20 @@ namespace PresentationLayer.Presenter
                         {
                             panel_LouverRPLeverHandleCheck = Convert.ToBoolean(extractedValue_str);
                         }
+                        if (row_str.Contains("Panel_PartnerWithCenterProfile:"))
+                        {
+                            foreach (CenterProfile_ArticleNo PartnerCntrPro in CenterProfile_ArticleNo.GetAll())
+                            {
+                                if (PartnerCntrPro.ToString() == extractedValue_str)
+                                {
+                                    panel_PartnerWithCenterProfile = PartnerCntrPro;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("Panel_PartnerPanelGlassID:"))
+                        {
+                            panel_PartnerPanelGlassID = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
                         if (row_str.Contains("Panel_CenterProfileArtNo:"))
                         {
                             foreach (CenterProfile_ArticleNo CntrPro in CenterProfile_ArticleNo.GetAll())
@@ -10082,7 +10143,7 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_GlassType_Insu_Lami = panel_GlassType_Insu_Lami;
             pnlModel.Panel_MotorizedMechRemoteArtNo = panel_MotorizedMechRemoteArtNo;
             pnlModel.Panel_MotorizedMechRemoteOption = panel_MotorizedMechRemoteOption;
-            pnlModel.Panel_CenterProfileArtNo = panel_CenterProfileArtNo;
+            
             #region Explosion
             pnlModel.PanelGlass_ID = panel_GlassID;
             pnlModel.Panel_GlassThicknessDesc = panel_GlassThicknessDesc;
@@ -10287,6 +10348,9 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_Unica40ArtNo = panel_Unica40ArtNo;
             pnlModel.Panel_LockingConnectorArtNo = panel_LockingConnectorArtNo;
             pnlModel.Panel_CremonArtNo = panel_CremonArtNo;
+            pnlModel.Panel_PartnerPanelGlassID = panel_PartnerPanelGlassID;
+            pnlModel.Panel_CenterProfileArtNo = panel_CenterProfileArtNo;
+            pnlModel.Panel_PartnerWithCenterProfile = panel_PartnerWithCenterProfile;
 
 
             #region louvre 
@@ -10769,6 +10833,7 @@ namespace PresentationLayer.Presenter
                     }
                 }
             }
+            //_panelModel = pnlModel;
             inside_panel = false;
         }
         private void Load_QuoteHistory()
@@ -11150,7 +11215,8 @@ namespace PresentationLayer.Presenter
             panel_HingeOptionsPropertyHeight,
             panel_AluminumTrackQty,
             panel_StrikerArtno_SlidingQty,
-            panel_OverLappingPanelQty;
+            panel_OverLappingPanelQty,
+            panel_PartnerPanelGlassID;
         GlazingBead_ArticleNo panel_GlazingBeadArtNo;
         GlazingAdaptor_ArticleNo panel_GlazingAdaptorArtNo;
         GBSpacer_ArticleNo panel_GBSpacerArtNo;
@@ -11258,6 +11324,8 @@ namespace PresentationLayer.Presenter
         AluminumPullHandle_ArticleNo panel_AluminumPullHandleArticleNo;
         MotorizedMechRemote_ArticleNo panel_MotorizedMechRemoteArtNo;
         CenterProfile_ArticleNo panel_CenterProfileArtNo;
+        CenterProfile_ArticleNo panel_PartnerWithCenterProfile;
+        
 
         OpenableStriker_ArticleNo panel_OpenableStrikerArtNo;
         CornerCleat_ArticleNo panel_CornerCleatArtNo;

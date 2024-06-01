@@ -172,6 +172,8 @@ namespace PresentationLayer.Presenter
         Foil_Color InsideColor { get; set; } 
         Foil_Color OutsideColor { get; set; }
         bool EditFromQuotationList { get; set; }
+        Control ControlRaised_forCenterProfileSelection { get; set; }
+        void OnLoadSearchCenterProfielArtNo(IPanelModel pnlModel);
 
     }
 }

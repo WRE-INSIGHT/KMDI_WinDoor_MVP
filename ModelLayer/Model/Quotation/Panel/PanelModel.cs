@@ -3228,6 +3228,8 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public int Panel_PartnerPanelGlassID { get; set; }
+
         private PVCSettingPlate_ArticleNo _panelPVCSettingPlateArtNo;
         public PVCSettingPlate_ArticleNo Panel_PVCSettingPlateArtNo
         {
