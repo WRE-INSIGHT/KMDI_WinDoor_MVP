@@ -1137,9 +1137,12 @@ namespace PresentationLayer.Presenter
             {
                 if (pnlModel.Panel_Name == item.Panel_Name)
                 {
-                    if (item.Panel_CenterProfileArtNo.ToString() != "None")
+                    if (item.Panel_CenterProfileArtNo != null)
                     {
-                        SetLblStatusForCenterProfile("CPSelectionOnLoad", false, null, null, item, null, null);
+                        if (item.Panel_CenterProfileArtNo.ToString() != "None")
+                        {
+                            SetLblStatusForCenterProfile("CPSelectionOnLoad", false, null, null, item, null, null);
+                        }
                     }
                 }
             }
