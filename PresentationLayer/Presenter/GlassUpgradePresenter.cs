@@ -105,7 +105,22 @@ namespace PresentationLayer.Presenter
             _glassUpgradeView.GlassUpgradeView_FormClosingEventRaised += _glassUpgradeView_GlassUpgradeView_FormClosingEventRaised;
             _glassUpgradeView._printBtn_ClickEventRaised += _glassUpgradeView_printBtn_ClickEventRaised;
             _glassUpgradeView.upgradeToToolStripMenuItemClickEventRaised += _glassUpgradeView_upgradeToToolStripMenuItemClickEventRaised;
+            _glassUpgradeView.cmb_multipleGlassUpgrade_EnterEventRaised += _glassUpgradeView_cmb_multipleGlassUpgrade_EnterEventRaised;
+            _glassUpgradeView.cmb_multipleGlassUpgrade_LeaveEventRaised += _glassUpgradeView_cmb_multipleGlassUpgrade_LeaveEventRaised;
                
+        }
+
+        private void _glassUpgradeView_cmb_multipleGlassUpgrade_LeaveEventRaised(object sender, EventArgs e)
+        {
+            _cmbMultipleGlassUpgrade.Width = 353;
+            _cmbMultipleGlassUpgrade.DroppedDown = false;
+
+        }
+
+        private void _glassUpgradeView_cmb_multipleGlassUpgrade_EnterEventRaised(object sender, EventArgs e)
+        {
+            _cmbMultipleGlassUpgrade.Width = 580;
+            _cmbMultipleGlassUpgrade.DroppedDown = true;
         }
 
         private void _glassUpgradeView_upgradeToToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -888,8 +903,7 @@ namespace PresentationLayer.Presenter
                     _dgv_GlassUpgrade.DataSource = null;
 
                     _autoCmpltSC = new AutoCompleteStringCollection();
-                    
-                    
+                      
                     //databinding new DT
                     LoadNewItemsInMultipleGlassUpgrade(_cmbGlassType.SelectedItem.ToString());
                     LoadDataGridViewSettings();
