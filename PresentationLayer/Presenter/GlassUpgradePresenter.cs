@@ -38,6 +38,8 @@ namespace PresentationLayer.Presenter
         private CheckBox _allowDuplicate;
         private Label _lblWindoor;
 
+        private AutoCompleteStringCollection _autoCmpltSC;
+
         #region Variable
 
         int _descCurrentStateWidth,
@@ -200,7 +202,21 @@ namespace PresentationLayer.Presenter
                                     decimal _glassWidth = Convert.ToDecimal(_glassUpgradeDT.Rows[currCell_row][3]);
                                     decimal _glassHeight = Convert.ToDecimal(_glassUpgradeDT.Rows[currCell_row][4]);
 
-                                    decimal _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.1m) / 1000000m, 2);// glass amount per unit
+                                    decimal _amountPerUnit = 0.0m;
+
+                                    if (_cmbGlassType.SelectedItem.ToString() == "Tempered Glass" || _cmbGlassType.SelectedItem.ToString() == "Tinted Glass")
+                                    {
+                                        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.5m) / 1000000m, 2);
+                                    }
+                                    else if (_cmbGlassType.SelectedItem.ToString() == "Insulated Glass Unit (IGU)")
+                                    {
+                                        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue) / 1000000m, 2);
+                                    }
+                                    else if (_cmbGlassType.SelectedItem.ToString() == "Laminated Glass")
+                                    {
+                                        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.3m) / 1000000m, 2);
+                                    }
+
                                     decimal _totalNetPrice = Math.Round(_amountPerUnit * _glassQty, 2);// glass total net price
 
 
@@ -421,6 +437,9 @@ namespace PresentationLayer.Presenter
             _dgv_GlassUpgrade.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.Programmatic);
 
             LoadNonUnglazedGlassList();
+
+            _cmbMultipleGlassUpgrade.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            _cmbMultipleGlassUpgrade.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
         private void DefaultWidthAndLocGetter()
         {
@@ -867,6 +886,9 @@ namespace PresentationLayer.Presenter
                     _cmbMultipleGlassUpgrade.Items.Clear();
                     _dgv_GlassUpgrade.Columns.Clear();
                     _dgv_GlassUpgrade.DataSource = null;
+
+                    _autoCmpltSC = new AutoCompleteStringCollection();
+                    
                     
                     //databinding new DT
                     LoadNewItemsInMultipleGlassUpgrade(_cmbGlassType.SelectedItem.ToString());
@@ -902,12 +924,14 @@ namespace PresentationLayer.Presenter
                     if (GlassType == "")
                     {
                         _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                        _autoCmpltSC.Add(row[1].ToString());
                     }
                     else if (GlassType == "Tempered Glass")
                     {
                         if (row[1].ToString().Contains("Tempered"))
                         {
                             _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                             _autoCmpltSC.Add(row[1].ToString());
                         }
                     }
                     else if (GlassType == "Insulated Glass Unit (IGU)")
@@ -915,6 +939,7 @@ namespace PresentationLayer.Presenter
                         if (row[2].ToString().Contains("Insulated"))
                         {
                             _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                            _autoCmpltSC.Add(row[1].ToString());
                         }
                     }
                     else if (GlassType == "Laminated Glass")
@@ -922,6 +947,7 @@ namespace PresentationLayer.Presenter
                         if (row[2].ToString().Contains("Laminated"))
                         {
                             _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                            _autoCmpltSC.Add(row[1].ToString());
                         }
                     }
                     else if (GlassType == "Tinted Glass")
@@ -929,10 +955,13 @@ namespace PresentationLayer.Presenter
                         if (row[1].ToString().Contains("Tinted"))
                         {
                             _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                            _autoCmpltSC.Add(row[1].ToString());
                         }
                     }
                 }
             }
+
+            _cmbMultipleGlassUpgrade.AutoCompleteCustomSource = _autoCmpltSC;
         }
         private void _glassUpgradeView_glassUpgradeDGV_CellMouseClickEventRaised(object sender, DataGridViewCellMouseEventArgs e)
         {
