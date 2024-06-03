@@ -107,14 +107,22 @@ namespace PresentationLayer.Presenter
             _glassUpgradeView.upgradeToToolStripMenuItemClickEventRaised += _glassUpgradeView_upgradeToToolStripMenuItemClickEventRaised;
             _glassUpgradeView.cmb_multipleGlassUpgrade_EnterEventRaised += _glassUpgradeView_cmb_multipleGlassUpgrade_EnterEventRaised;
             _glassUpgradeView.cmb_multipleGlassUpgrade_LeaveEventRaised += _glassUpgradeView_cmb_multipleGlassUpgrade_LeaveEventRaised;
+            _glassUpgradeView.cmb_multipleGlassUpgrade_TextChangedEventRaised += _glassUpgradeView_cmb_multipleGlassUpgrade_TextChangedEventRaised;
                
         }
 
+        private void _glassUpgradeView_cmb_multipleGlassUpgrade_TextChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_cmbMultipleGlassUpgrade.Text != "")
+            {
+               _cmbMultipleGlassUpgrade.DroppedDown = false;
+            }
+        }
+        
         private void _glassUpgradeView_cmb_multipleGlassUpgrade_LeaveEventRaised(object sender, EventArgs e)
         {
             _cmbMultipleGlassUpgrade.Width = 353;
             _cmbMultipleGlassUpgrade.DroppedDown = false;
-
         }
 
         private void _glassUpgradeView_cmb_multipleGlassUpgrade_EnterEventRaised(object sender, EventArgs e)

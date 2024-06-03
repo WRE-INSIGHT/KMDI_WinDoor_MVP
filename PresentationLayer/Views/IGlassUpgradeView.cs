@@ -32,7 +32,8 @@ namespace PresentationLayer.Views
         event EventHandler upgradeToToolStripMenuItemClickEventRaised;
         event EventHandler cmb_multipleGlassUpgrade_EnterEventRaised;
         event EventHandler cmb_multipleGlassUpgrade_LeaveEventRaised;
-
+        event EventHandler cmb_multipleGlassUpgrade_TextChangedEventRaised;
+        
 
         void CloseGlassUpgradeView();
         ComboBox GlassTypeCmb();

@@ -108,7 +108,7 @@
             this.panel_Header.Controls.Add(this.lbl_glass);
             this.panel_Header.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_Header.Location = new System.Drawing.Point(0, 0);
-            this.panel_Header.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel_Header.Margin = new System.Windows.Forms.Padding(4);
             this.panel_Header.Name = "panel_Header";
             this.panel_Header.Size = new System.Drawing.Size(1243, 236);
             this.panel_Header.TabIndex = 0;
@@ -120,11 +120,12 @@
             this.cmb_multipleGlassUpgrade.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.cmb_multipleGlassUpgrade.FormattingEnabled = true;
             this.cmb_multipleGlassUpgrade.Location = new System.Drawing.Point(31, 207);
-            this.cmb_multipleGlassUpgrade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_multipleGlassUpgrade.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_multipleGlassUpgrade.Name = "cmb_multipleGlassUpgrade";
             this.cmb_multipleGlassUpgrade.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cmb_multipleGlassUpgrade.Size = new System.Drawing.Size(353, 25);
             this.cmb_multipleGlassUpgrade.TabIndex = 22;
+            this.cmb_multipleGlassUpgrade.TextChanged += new System.EventHandler(this.cmb_multipleGlassUpgrade_TextChanged);
             this.cmb_multipleGlassUpgrade.Enter += new System.EventHandler(this.cmb_multipleGlassUpgrade_Enter);
             this.cmb_multipleGlassUpgrade.Leave += new System.EventHandler(this.cmb_multipleGlassUpgrade_Leave);
             // 
@@ -146,7 +147,7 @@
             this.chkbx_Duplicate.AutoSize = true;
             this.chkbx_Duplicate.BackColor = System.Drawing.Color.WhiteSmoke;
             this.chkbx_Duplicate.Location = new System.Drawing.Point(1119, 5);
-            this.chkbx_Duplicate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkbx_Duplicate.Margin = new System.Windows.Forms.Padding(4);
             this.chkbx_Duplicate.Name = "chkbx_Duplicate";
             this.chkbx_Duplicate.Size = new System.Drawing.Size(125, 21);
             this.chkbx_Duplicate.TabIndex = 20;
@@ -158,7 +159,7 @@
             this.chkbx_selectall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkbx_selectall.AutoSize = true;
             this.chkbx_selectall.Location = new System.Drawing.Point(1117, 36);
-            this.chkbx_selectall.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkbx_selectall.Margin = new System.Windows.Forms.Padding(4);
             this.chkbx_selectall.Name = "chkbx_selectall";
             this.chkbx_selectall.Size = new System.Drawing.Size(88, 21);
             this.chkbx_selectall.TabIndex = 3;
@@ -172,7 +173,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_add.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btn_add.Location = new System.Drawing.Point(1108, 160);
-            this.btn_add.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_add.Margin = new System.Windows.Forms.Padding(4);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(131, 28);
             this.btn_add.TabIndex = 5;
@@ -195,7 +196,7 @@
             // num_discount
             // 
             this.num_discount.Location = new System.Drawing.Point(483, 98);
-            this.num_discount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.num_discount.Margin = new System.Windows.Forms.Padding(4);
             this.num_discount.Name = "num_discount";
             this.num_discount.Size = new System.Drawing.Size(91, 22);
             this.num_discount.TabIndex = 2;
@@ -208,7 +209,7 @@
             this.pnl_desc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnl_desc.Controls.Add(this.lbl_desc);
             this.pnl_desc.Location = new System.Drawing.Point(851, 31);
-            this.pnl_desc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnl_desc.Margin = new System.Windows.Forms.Padding(4);
             this.pnl_desc.Name = "pnl_desc";
             this.pnl_desc.Size = new System.Drawing.Size(255, 200);
             this.pnl_desc.TabIndex = 19;
@@ -227,7 +228,7 @@
             // 
             this.pbox_itemImage.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pbox_itemImage.Location = new System.Drawing.Point(597, 33);
-            this.pbox_itemImage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbox_itemImage.Margin = new System.Windows.Forms.Padding(4);
             this.pbox_itemImage.Name = "pbox_itemImage";
             this.pbox_itemImage.Size = new System.Drawing.Size(249, 198);
             this.pbox_itemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -238,7 +239,7 @@
             // 
             this.txt_itemDesc.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txt_itemDesc.Location = new System.Drawing.Point(220, 129);
-            this.txt_itemDesc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_itemDesc.Margin = new System.Windows.Forms.Padding(4);
             this.txt_itemDesc.Multiline = true;
             this.txt_itemDesc.Name = "txt_itemDesc";
             this.txt_itemDesc.Size = new System.Drawing.Size(29, 30);
@@ -250,7 +251,7 @@
             this.chkbx_ItemList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkbx_ItemList.FormattingEnabled = true;
             this.chkbx_ItemList.Location = new System.Drawing.Point(1108, 60);
-            this.chkbx_ItemList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkbx_ItemList.Margin = new System.Windows.Forms.Padding(4);
             this.chkbx_ItemList.Name = "chkbx_ItemList";
             this.chkbx_ItemList.Size = new System.Drawing.Size(129, 89);
             this.chkbx_ItemList.TabIndex = 4;
@@ -375,7 +376,7 @@
             this.cmb_glassType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_glassType.FormattingEnabled = true;
             this.cmb_glassType.Location = new System.Drawing.Point(120, 39);
-            this.cmb_glassType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_glassType.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_glassType.Name = "cmb_glassType";
             this.cmb_glassType.Size = new System.Drawing.Size(265, 24);
             this.cmb_glassType.TabIndex = 1;
@@ -441,7 +442,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.glassUpgradeDGV);
             this.panel1.Location = new System.Drawing.Point(0, 239);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1243, 316);
             this.panel1.TabIndex = 1;
@@ -457,7 +458,7 @@
             this.glassUpgradeDGV.ContextMenuStrip = this.cmsGlassUpgrade;
             this.glassUpgradeDGV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.glassUpgradeDGV.Location = new System.Drawing.Point(0, 0);
-            this.glassUpgradeDGV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.glassUpgradeDGV.Margin = new System.Windows.Forms.Padding(4);
             this.glassUpgradeDGV.Name = "glassUpgradeDGV";
             this.glassUpgradeDGV.RowHeadersWidth = 51;
             this.glassUpgradeDGV.Size = new System.Drawing.Size(1243, 316);
@@ -493,7 +494,7 @@
             // 
             this.num_glassAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.num_glassAmount.Location = new System.Drawing.Point(1087, 562);
-            this.num_glassAmount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.num_glassAmount.Margin = new System.Windows.Forms.Padding(4);
             this.num_glassAmount.Name = "num_glassAmount";
             this.num_glassAmount.ReadOnly = true;
             this.num_glassAmount.Size = new System.Drawing.Size(151, 22);
@@ -516,7 +517,7 @@
             // 
             this.num_wdwsAndDoors.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.num_wdwsAndDoors.Location = new System.Drawing.Point(1087, 593);
-            this.num_wdwsAndDoors.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.num_wdwsAndDoors.Margin = new System.Windows.Forms.Padding(4);
             this.num_wdwsAndDoors.Name = "num_wdwsAndDoors";
             this.num_wdwsAndDoors.ReadOnly = true;
             this.num_wdwsAndDoors.Size = new System.Drawing.Size(151, 22);
@@ -547,7 +548,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel_Header);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(1258, 665);
             this.Name = "GlassUpgradeView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -209,6 +209,7 @@ namespace PresentationLayer.Views
         public event EventHandler upgradeToToolStripMenuItemClickEventRaised;
         public event EventHandler cmb_multipleGlassUpgrade_EnterEventRaised;
         public event EventHandler cmb_multipleGlassUpgrade_LeaveEventRaised;
+        public event EventHandler cmb_multipleGlassUpgrade_TextChangedEventRaised;
 
         #endregion
 
@@ -285,6 +286,11 @@ namespace PresentationLayer.Views
         private void cmb_multipleGlassUpgrade_Leave(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmb_multipleGlassUpgrade_LeaveEventRaised,e);
+        }
+
+        private void cmb_multipleGlassUpgrade_TextChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmb_multipleGlassUpgrade_TextChangedEventRaised,e);
         }
     }
 }
