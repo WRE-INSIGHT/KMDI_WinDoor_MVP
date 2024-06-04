@@ -41,7 +41,7 @@ namespace PresentationLayer.Presenter.Costing_Head
         {
             try
             {
-                await Load_DGVFactor(_factorView.SearchFactorStr);
+                await Load_DGVFactor(_factorView.SearchFactorStr,_mainPresenter.dateAssigned);
 
                 _dgvFactor.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
                 _dgvFactor.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -89,7 +89,7 @@ namespace PresentationLayer.Presenter.Costing_Head
             }
             try
             {
-                await Load_DGVFactor("");
+                await Load_DGVFactor("", _mainPresenter.dateAssigned);
 
                 _dgvFactor.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
                 _dgvFactor.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -106,7 +106,7 @@ namespace PresentationLayer.Presenter.Costing_Head
         {
             try
             {
-                await Load_DGVFactor("");
+                await Load_DGVFactor("", _mainPresenter.dateAssigned);
 
                 _dgvFactor.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
                 _dgvFactor.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -118,9 +118,9 @@ namespace PresentationLayer.Presenter.Costing_Head
             }
         }
 
-        private async Task Load_DGVFactor(string searchStr)
+        private async Task Load_DGVFactor(string searchStr,DateTime cus_ref_date)
         {
-            DataTable dt = await _addressServices.Get_Factor(searchStr);
+            DataTable dt = await _addressServices.Get_Factor(searchStr, cus_ref_date);
             _dgvFactor.DataSource = dt;
 
             foreach (DataGridViewColumn col in _dgvFactor.Columns)

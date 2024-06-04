@@ -1451,7 +1451,6 @@ namespace PresentationLayer.Presenter
 
             //    }
             //}
-
             if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
             {
                 DialogResult dialogResult = MessageBox.Show("Changes in file is not save, Do you wish to continue ? ", "Closing Application",
@@ -9717,7 +9716,7 @@ namespace PresentationLayer.Presenter
                             var value = row_str.Substring(row_str.IndexOf("^ ") + 1);
 
                             _screenPADictionaryKey = Convert.ToInt64(key[0]);
-                            _screenPADictionaryValue = Convert.ToInt32(value);
+                            _screenPADictionaryValue = Convert.ToDecimal(value);
                         }
                         #endregion
                     }
@@ -9726,9 +9725,25 @@ namespace PresentationLayer.Presenter
                         #region Load ScreenPartialAdjustment_List
                         if (row_str != "●")
                         {
-                            if (row_str.Contains("Screen_isAdjusted:"))
+                            if (row_str.Contains("Screen_Parent_ID"))
+                            {
+                                pa_Screen_Parent_ID = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_IsChild"))
+                            {
+                                pa_Screen_isChild = Convert.ToBoolean(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_isAdjusted:"))
                             {
                                 pa_Screen_isAdjusted = Convert.ToBoolean(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_Original_Quantity"))
+                            {
+                                pa_Screen_Original_Quantity = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_TotalAmount_Revised:"))
+                            {
+                                pa_Screen_TotalAmount_Revised = decimal.Parse(extractedValue_str);
                             }
                             else if (row_str.Contains("Screen_Adjustment_Price:"))
                             {
@@ -9778,7 +9793,19 @@ namespace PresentationLayer.Presenter
                                     {
                                         pa_Screen_Type_Revised = sct;
                                     }
+                                    else if ("" == extractedValue_str)
+                                    {
+                                        pa_Screen_Type_Revised = null;
+                                    }
                                 }
+                            }
+                            else if (row_str.Contains("Screen_Discount:"))
+                            {
+                                pa_Screen_Discount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_TotalAmount:"))
+                            {
+                                pa_Screen_TotalAmount = decimal.Parse(extractedValue_str);
                             }
                             else if (row_str.Contains("Screen_NetPrice:"))
                             {
@@ -9814,10 +9841,10 @@ namespace PresentationLayer.Presenter
                             }
                             else if (row_str.Contains("Screen_id:"))
                             {
-                                pa_Screen_id = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                                pa_Screen_id = Convert.ToInt64(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             }
                         }
-                        #endregion
+                        #endregion  
                     }
                     break;
             }
@@ -9831,6 +9858,7 @@ namespace PresentationLayer.Presenter
                 IScreenPartialAdjustmentProperties SPA = new ScreenPartialAdjustmentProperties();
                 
                 SPA.Screen_id = pa_Screen_id;
+                SPA.Screen_Parent_ID = pa_Screen_Parent_ID;
                 SPA.Screen_ItemNumber = pa_Screen_ItemNumber;
                 SPA.Screen_WindoorID = pa_Screen_WindoorID;
                 SPA.Screen_Description = pa_Screen_Description;
@@ -9838,7 +9866,11 @@ namespace PresentationLayer.Presenter
                 SPA.Screen_DisplayedDimension = pa_Screen_DisplayedDimension;
                 SPA.Screen_UnitPrice = pa_Screen_UnitPrice;
                 SPA.Screen_Quantity = pa_Screen_Quantity;
+                SPA.Screen_Discount = pa_Screen_Discount;
                 SPA.Screen_NetPrice = pa_Screen_NetPrice;
+                SPA.Screen_TotalAmount = pa_Screen_TotalAmount;
+                SPA.Screen_Original_Quantity = pa_Screen_Original_Quantity;
+
                 SPA.Screen_Type_Revised = pa_Screen_Type_Revised;
                 SPA.Screen_Description_Revised = pa_Screen_Description_Revised;
                 SPA.Screen_Set_Revised = pa_Screen_Set_Revised;
@@ -9850,8 +9882,10 @@ namespace PresentationLayer.Presenter
                 SPA.Screen_Factor_Revised = pa_Screen_Factor_Revised;
                 SPA.Screen_AddOnsSpecialFactor_Revised = pa_Screen_AddOnsSpecialFactor_Revised;
                 SPA.Screen_Adjustment_Price = pa_Screen_Adjustment_Price;
+                SPA.Screen_TotalAmount_Revised = pa_Screen_TotalAmount_Revised;
                 SPA.Screen_isAdjusted = pa_Screen_isAdjusted;
-                
+                SPA.Screen_IsChild = pa_Screen_isChild;
+
                 Lst_ScreenPartialAdjustment.Add(SPA);
             }
             catch (Exception ex)
@@ -10821,11 +10855,12 @@ namespace PresentationLayer.Presenter
             _loadRDLCHeaders = false,
             _allpanelsIsMesh;
         int _EntryCountOfKeyWordUsing,
-            _EntryCountOfKeyWordPriceValidity,
-            _screenPADictionaryValue;
+            _EntryCountOfKeyWordPriceValidity;
         bool _EntrytoKeyWordUsing = false,
              _EntrytoKeyWordPriceValidity = false;
-        decimal _factorFromAddExisting, _factorHolderOnLoad;
+        decimal _factorFromAddExisting, 
+                _factorHolderOnLoad, 
+                _screenPADictionaryValue;
         long _screenPADictionaryKey;
 
 
@@ -11467,15 +11502,18 @@ namespace PresentationLayer.Presenter
 
         #endregion
         #region IScreenPartialAdjustmentProperties
-        long pa_Screen_id;
+        long pa_Screen_id,
+             pa_Screen_Parent_ID;
         decimal pa_Screen_ItemNumber, 
+                pa_Screen_TotalAmount,
                 pa_Screen_UnitPrice, 
                 pa_Screen_NetPrice, 
                 pa_Screen_UnitPrice_Revised,
                 pa_Screen_NetPrice_Revised, 
                 pa_Screen_Factor_Revised, 
                 pa_Screen_AddOnsSpecialFactor_Revised,
-                pa_Screen_Adjustment_Price;
+                pa_Screen_Adjustment_Price,
+                pa_Screen_TotalAmount_Revised;
 
         string pa_Screen_WindoorID, 
                pa_Screen_Description, 
@@ -11483,13 +11521,16 @@ namespace PresentationLayer.Presenter
                pa_Screen_Description_Revised,
                pa_Screen_DisplayedDimes_Revised;
 
-        int pa_Screen_Set, 
+        int pa_Screen_Set,
+            pa_Screen_Discount,
             pa_Screen_Quantity, 
             pa_Screen_Set_Revised, 
             pa_Screen_Quantity_Revised, 
-            pa_Screen_Discount_Revised;
+            pa_Screen_Discount_Revised,
+            pa_Screen_Original_Quantity;
         ScreenType pa_Screen_Type_Revised;
-        bool pa_Screen_isAdjusted;        
+        bool pa_Screen_isAdjusted,
+             pa_Screen_isChild;        
         #endregion
 
         string mpnllvl = "";

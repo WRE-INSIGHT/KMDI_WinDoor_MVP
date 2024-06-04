@@ -474,6 +474,18 @@ namespace PresentationLayer.Presenter
 
                     #endregion
                 }
+                else if(_mainPresenter.printStatus == "ScreenPartialAdjustment")
+                {
+                    _printQuoteView.QuotationSalutation = "Dear " + _mainPresenter.titleLastname;
+                    _printQuoteView.QuotationAddress ="To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
+                    _printQuoteView.QuotationBody = "Thank you for letting us server you. Please find herewidth Adjusted Contract for the Insect Screens corresponding to the Adjusted Windows Prices under Quote No.:";
+
+                    _printQuoteView.QuotationOuofTownExpenses = "0";
+                    _printQuoteView.VatPercentage = "12";
+                    _printQuoteView.LaborandMobilization = "0";
+                    _printQuoteView.FreightCharge = "0";
+                    _printQuoteView.LessDiscount = "30";
+                }
                 else
                 {
                     _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
@@ -746,6 +758,10 @@ namespace PresentationLayer.Presenter
                 else if(_mainPresenter.printStatus == "PartialAdjustment")
                 {
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.PartialAdjustment.rdlc"; 
+                }
+                else if (_mainPresenter.printStatus == "ScreenPartialAdjustment")
+                {
+                    _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.ScreenPartialAdjustment.rdlc";
                 }
 
                 if (_mainPresenter.printStatus == "ScreenItem")
@@ -1454,6 +1470,37 @@ namespace PresentationLayer.Presenter
                     else
                     {
                         RParam[6] = new ReportParameter("ShowPageNumber", "False");
+                    }
+
+                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+                    #endregion
+                }
+                else if (_mainPresenter.printStatus == "ScreenPartialAdjustment")
+                {
+                    #region Screen Partial Adjustment
+
+                    _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+                    _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
+                    _printQuoteView.GetOutofTownExpenses().Visible = false;
+                    _printQuoteView.GetChkLstBox().Visible = false;
+                    _printQuoteView.GetUniversalLabel().Visible = false;
+                    _printQuoteView.ShowLastPage().Visible = false;
+
+                    ReportParameter[] RParam = new ReportParameter[6];
+
+                    RParam[0] = new ReportParameter("Date", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
+                    RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
+                    RParam[2] = new ReportParameter("ClientName", _printQuoteView.QuotationSalutation);
+                    RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
+                    RParam[4] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+
+                    if (_printQuoteView.GetShowPageNum().Checked)
+                    {
+                        RParam[5] = new ReportParameter("ShowPageNum", "True");
+                    }
+                    else
+                    {
+                        RParam[5] = new ReportParameter("ShowPageNum", "False");
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);

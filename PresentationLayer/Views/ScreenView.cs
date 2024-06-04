@@ -477,6 +477,14 @@ namespace PresentationLayer.Views
             {
                 EventHelpers.RaiseEvent(sender, tsBtnPrintScreenClickEventRaised, e);
             }
+            else if(e.Control == true && e.KeyCode == Keys.Tab)
+            {
+                EventHelpers.RaiseEvent(sender, tsb_Switch_ClickEventRaised, e);
+            }
+            else if(e.Control == true && e.KeyCode == Keys.Oem3)
+            {
+                EventHelpers.RaiseEvent(sender, tsb_ScreenAdjustment_ClickEventRaised, e);
+            }
         }
 
         private void ScreenView_FormClosing(object sender, FormClosingEventArgs e)
