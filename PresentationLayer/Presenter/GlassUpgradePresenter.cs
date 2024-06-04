@@ -37,6 +37,7 @@ namespace PresentationLayer.Presenter
         private CheckBox _chkboxSelectAll;
         private CheckBox _allowDuplicate;
         private Label _lblWindoor;
+        DateTime _cusrefdate;
 
         private AutoCompleteStringCollection _autoCmpltSC;
 
@@ -227,18 +228,26 @@ namespace PresentationLayer.Presenter
 
                                     decimal _amountPerUnit = 0.0m;
 
-                                    if (_cmbGlassType.SelectedItem.ToString() == "Tempered Glass" || _cmbGlassType.SelectedItem.ToString() == "Tinted Glass")
+                                    if (_cusrefdate >= DateTime.Parse("06-04-2024"))
                                     {
-                                        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.5m) / 1000000m, 2);
+                                        if (_cmbGlassType.SelectedItem.ToString() == "Tempered Glass" || _cmbGlassType.SelectedItem.ToString() == "Tinted Glass")
+                                        {
+                                            _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.5m) / 1000000m, 2);
+                                        }
+                                        else if (_cmbGlassType.SelectedItem.ToString() == "Insulated Glass Unit (IGU)")
+                                        {
+                                            _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue) / 1000000m, 2);
+                                        }
+                                        else if (_cmbGlassType.SelectedItem.ToString() == "Laminated Glass")
+                                        {
+                                            _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.3m) / 1000000m, 2);
+                                        }
                                     }
-                                    else if (_cmbGlassType.SelectedItem.ToString() == "Insulated Glass Unit (IGU)")
+                                    else
                                     {
-                                        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue) / 1000000m, 2);
+                                         _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.1m) / 1000000m, 2);// glass amount per unit
                                     }
-                                    else if (_cmbGlassType.SelectedItem.ToString() == "Laminated Glass")
-                                    {
-                                        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.3m) / 1000000m, 2);
-                                    }
+
 
                                     decimal _totalNetPrice = Math.Round(_amountPerUnit * _glassQty, 2);// glass total net price
 
@@ -463,6 +472,17 @@ namespace PresentationLayer.Presenter
 
             _cmbMultipleGlassUpgrade.AutoCompleteSource = AutoCompleteSource.CustomSource;
             _cmbMultipleGlassUpgrade.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+
+
+            if(_mainPresenter.dateAssigned != _quotationModel.Date_Assigned_Mainpresenter)
+            {
+                _cusrefdate = _quotationModel.Date_Assigned_Mainpresenter;
+            }
+            else
+            {
+                _cusrefdate = _mainPresenter.dateAssigned;
+            }
+
         }
         private void DefaultWidthAndLocGetter()
         {
