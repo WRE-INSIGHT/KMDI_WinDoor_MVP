@@ -293,6 +293,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _fixedPanelUC.cmenuFxdOverlapSashVisibility = false;
                     _fixedPanelUC.GetcmenuFxd().Show(new Point(Cursor.Position.X, Cursor.Position.Y));
                 }
+                else if (_panelModel.Panel_BackColor == SystemColors.Highlight)
+                {   
+                    if (_mainPresenter.PrevPanelModel_forCenterProfileSelection != null)
+                    {
+                        _mainPresenter.PrevPanelModel_forCenterProfileSelection.Panel_BackColor = Color.DarkGray;
+                    }
+                     
+                    if (_mainPresenter.NxtPnlModel_forCenterProfileSelection != null)
+                    {
+                        _mainPresenter.NxtPnlModel_forCenterProfileSelection.Panel_BackColor = Color.DarkGray;
+                    }
+                   _mainPresenter.SetLblStatusForCenterProfile("CPSelection", false, null, null, null, null,_panelModel);
+                   _mainPresenter.GetCurrentPrice();
+                }
                 else
                 {
                     IWindoorModel wdm = _frameModel.Frame_WindoorModel;
@@ -1799,6 +1813,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Placement", new Binding("Panel_Placement", _panelModel, "Panel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelGlass_ID", new Binding("PanelGlass_ID", _panelModel, "PanelGlass_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_CmenuDeleteVisibility", new Binding("Panel_CmenuDeleteVisibility", _panelModel, "Panel_CmenuDeleteVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_BackColor", new Binding("BackColor", _panelModel, "Panel_BackColor", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

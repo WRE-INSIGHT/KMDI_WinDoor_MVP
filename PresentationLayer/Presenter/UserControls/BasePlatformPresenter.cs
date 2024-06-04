@@ -64,25 +64,28 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 UserControl basePlatform = (UserControl)sender;
                 Panel pnlMain = (Panel)basePlatform.Parent;
-                int cX, cY;
-                cX = (pnlMain.Width - basePlatform.Width) / 2;
-                cY = (pnlMain.Height - basePlatform.Height) / 2;
+                if (pnlMain != null)
+                { 
+                     int cX, cY;
+                     cX = (pnlMain.Width - basePlatform.Width) / 2;
+                     cY = (pnlMain.Height - basePlatform.Height) / 2;
 
-                if (cX <= 30 && cY <= 30)
-                {
-                    basePlatform.Location = new Point(60, 60);
-                }
-                else if (cX <= 30)
-                {
-                    basePlatform.Location = new Point(60, cY);
-                }
-                else if (cY <= 30)
-                {
-                    basePlatform.Location = new Point(cX, 60);
-                }
-                else
-                {
-                    basePlatform.Location = new Point(cX - 17, cY - 35);
+                    if (cX <= 30 && cY <= 30)
+                    {
+                        basePlatform.Location = new Point(60, 60);
+                    }
+                    else if (cX <= 30)
+                    {
+                        basePlatform.Location = new Point(60, cY);
+                    }
+                    else if (cY <= 30)
+                    {
+                        basePlatform.Location = new Point(cX, 60);
+                    }
+                    else
+                    {
+                        basePlatform.Location = new Point(cX - 17, cY - 35);
+                    }
                 }
             }
             catch (Exception ex)
