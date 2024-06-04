@@ -10049,6 +10049,7 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_GlassType_Insu_Lami = panel_GlassType_Insu_Lami;
             pnlModel.Panel_MotorizedMechRemoteArtNo = panel_MotorizedMechRemoteArtNo;
             pnlModel.Panel_MotorizedMechRemoteOption = panel_MotorizedMechRemoteOption;
+            pnlModel.Panel_CenterProfileVisibility = panel_CenterProfileVisibility;
             pnlModel.Panel_CenterProfileArtNo = panel_CenterProfileArtNo;
             #region Explosion
             pnlModel.PanelGlass_ID = panel_GlassID;
