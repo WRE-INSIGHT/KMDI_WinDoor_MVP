@@ -8986,6 +8986,9 @@ namespace PresentationLayer.Presenter
                             _divModel_forDMSelection = _prev_divModel;
                             _divPropUCP_forDMSelection = _divPropertiesUCP.GetNewInstance(_unityC, divModel, this);
                             _controlRaised_forDMSelection = _divPropUCP_forDMSelection.GetDivProperties().GetBtnSelectDMPanel();
+
+                            _divPropUCP_forDMSelection.GetDivProperties().ProfileType_FromMainPresenter = _frameModel.Frame_WindoorModel.WD_profile;
+
                             UserControl divPropUC = (UserControl)_divPropUCP_forDMSelection.GetDivProperties();
                             divPropUC.Dock = DockStyle.Top;
                             if (div_Parent.Parent.Parent.Name.Contains("Frame"))
@@ -10409,7 +10412,7 @@ namespace PresentationLayer.Presenter
 
             
 
-            if (panel_Parent.Parent.Name.Contains("frame"))
+                if (panel_Parent.Parent.Name.Contains("frame"))
             {
                 _frameModel.Lst_Panel.Add(pnlModel);
                 pnlModel.Imager_SetDimensionsToBind_FrameParent();
