@@ -332,6 +332,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_LouverRPLeverHandleCheck { get; set; }
         bool Panel_CenterProfileVisibility { get; set; }
         CenterProfile_ArticleNo Panel_CenterProfileArtNo { get; set; }
+        CenterProfile_ArticleNo Panel_PartnerWithCenterProfile { get; set; }
         PVCSettingPlate_ArticleNo Panel_PVCSettingPlateArtNo { get; set; }
         FinPlate_ArticleNo Panel_FinPlateArtNo { get; set; }
         SlidingAccessoriesRoller_ArticleNo Panel_SlidingAccessoriesRollerArtNo { get; set; }
@@ -526,7 +527,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_CremonHandle_MaterialList(DataTable tbl_explosion);
         void Insert_Pegstay_MaterialList(DataTable tbl_explosion);
         void Insert_AlutekStriker_MaterialList(DataTable tbl_explosion);
-
+        void Insert_CenterProfile_MaterialList(DataTable tbl_explosion);
         #endregion
 
         int MotorizeMechQty();

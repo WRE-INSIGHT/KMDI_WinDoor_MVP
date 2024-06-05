@@ -217,6 +217,7 @@ namespace PresentationLayer.Presenter
 
 
         private Control _controlRaised_forDMSelection;
+        private Control _controlRaised_forCenterProfileSelection;
         private IDividerModel _divModel_forDMSelection;
         private IPanelModel _prevPanelModel_forDMSelection;
         private IPanelModel _nxtPanelModel_forDMSelection;
@@ -232,7 +233,9 @@ namespace PresentationLayer.Presenter
         private IDividerModel _prev_divModel;
         private IMullionImagerUCPresenter _mullionImagerUCP;
         private ITransomImagerUCPresenter _transomImagerUCP;
-
+        private IPanelModel _prevPanelModel_forCenterProfileSelection;
+        private IPanelModel _currentPanelModel_forCenterProfileSelection;
+        private IPanelModel _nxtPanelModel_forCenterProfileSelection;
         #endregion
 
         #region GetSet
@@ -837,6 +840,23 @@ namespace PresentationLayer.Presenter
         public bool MainPresenter_IsFromDeleteFunction { get; set; }
 
         public int WoodecAdditionalForNewItem { get; set; }
+
+        public IPanelModel PrevPanelModel_forCenterProfileSelection
+        {
+            get
+            {
+                return _prevPanelModel_forCenterProfileSelection;
+            }
+        }
+
+        public IPanelModel NxtPnlModel_forCenterProfileSelection
+        {
+            get
+            {
+                return _nxtPanelModel_forCenterProfileSelection;
+            }
+        } 
+
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -1007,7 +1027,8 @@ namespace PresentationLayer.Presenter
                 _nxtPanelModel_forDMSelection = nxt_pnl;
                 _divPropUCP_forDMSelection = divPropUCP;
             }
-            else if (status == "DMSelection")
+            else if (status == "DMSelection")           
+
             {
                 _windoorModel.WD_CmenuDeleteVisibility = true;
 
@@ -1025,6 +1046,56 @@ namespace PresentationLayer.Presenter
                 _divPropUCP_forDMSelection.GetDivProperties().Bind_DMPanelModel(divBinding);
                 //_divPropUCP_forDMSelection.GetLeverEspagUCP().BindSashProfileArtNo();
                 _divPropUCP_forDMSelection.GetLeverEspagUCP(_unityC, _divModel_forDMSelection).BindSashProfileArtNo();
+            }
+        }
+
+        public void SetLblStatusForCenterProfile (string status,
+                                                  bool visibility,
+                                                  Control controlRaised = null, 
+                                                  IPanelModel prev_pnl = null,
+                                                  IPanelModel curnt_pnl = null,
+                                                  IPanelModel nxt_pnl = null,
+                                                  IPanelModel selected_pnl = null)
+        {
+            _tsLblStatus.Visible = visibility;
+
+            if (status == "CPPreSelection")
+            {
+                _windoorModel.WD_CmenuDeleteVisibility = false;
+
+                _tsLblStatus.Text = "Select one of the highlighted panel";
+                _controlRaised_forCenterProfileSelection = controlRaised;
+                _pnlControlSub.Enabled = false;
+                _msMainMenu.Enabled = false;
+                _pnlPropertiesBody.Enabled = false;
+                _tsMain.Enabled = false;
+                _prevPanelModel_forCenterProfileSelection = prev_pnl;
+                _currentPanelModel_forCenterProfileSelection = curnt_pnl;
+                _nxtPanelModel_forCenterProfileSelection = nxt_pnl;
+
+                if (prev_pnl != null)
+                {
+                    prev_pnl.Panel_PartnerWithCenterProfile = CenterProfile_ArticleNo._None;
+                }
+
+                if (nxt_pnl != null)
+                {
+                    nxt_pnl.Panel_PartnerWithCenterProfile = CenterProfile_ArticleNo._None;
+                }
+            }
+            else if (status == "CPSelection") 
+            {
+                _windoorModel.WD_CmenuDeleteVisibility = true;
+
+                _tsLblStatus.Text = "";
+                _pnlControlSub.Enabled = true;
+                _msMainMenu.Enabled = true;
+                _pnlPropertiesBody.Enabled = true;
+                _tsMain.Enabled = true;
+                _controlRaised_forCenterProfileSelection.Text = "P" + selected_pnl.PanelGlass_ID;
+                _controlRaised_forCenterProfileSelection.BackColor = System.Drawing.Color.PaleGreen;
+                _currentPanelModel_forCenterProfileSelection.Panel_HandleType = Handle_Type._None;
+                selected_pnl.Panel_PartnerWithCenterProfile = _currentPanelModel_forCenterProfileSelection.Panel_CenterProfileArtNo;
             }
         }
 
