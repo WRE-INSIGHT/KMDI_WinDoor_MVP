@@ -510,33 +510,35 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
             }
-            if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("C70"))
-            {
-                _divModel.Div_ArtNo = Divider_ArticleNo._7536;
+
+
+            if (_mainPresenter.ItemLoad == false)
+            { 
+                 if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("C70"))
+                 {
+                     _divModel.Div_ArtNo = Divider_ArticleNo._7536;
+                 }
+                 else if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
+                 {
+                     _divModel.Div_ArtNo = Divider_ArticleNo._6052;
+                 }
+                 else if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("G58"))
+                 {
+                     _divModel.Div_ArtNo = Divider_ArticleNo._2069;
+                 }
+                 else if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                 {
+                
+                     _divModel.Div_PnlCladdingVisibility = false;
+                
+                     _divModel.Div_ArtNo = Divider_ArticleNo._84300;
+                
+                     _divModel.AdjustPropertyPanelHeight("minusPnlCladding");
+                
+                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusPnlCladding");
+                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusPnlCladding");
+                 } 
             }
-            else if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
-            {
-                _divModel.Div_ArtNo = Divider_ArticleNo._6052;
-            }
-            else if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("G58"))
-            {
-                _divModel.Div_ArtNo = Divider_ArticleNo._2069;
-            }
-            else if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
-            {
-
-                _divModel.Div_PnlCladdingVisibility = false;
-
-                _divModel.Div_ArtNo = Divider_ArticleNo._84300;
-
-                _divModel.AdjustPropertyPanelHeight("minusPnlCladding");
-
-                _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusPnlCladding");
-                _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusPnlCladding");
-            }
-
-
-
 
             _divProperties.ThisBinding(CreateBindingDictionary());
             _initialLoad = false;
