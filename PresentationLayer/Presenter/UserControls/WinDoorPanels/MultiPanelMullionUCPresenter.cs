@@ -736,6 +736,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     _multiPanelModel.MPanelLst_Divider.Add(divModel);
 
                                     IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
+                                    divPropUCP.GetDivProperties().ProfileType_FromMainPresenter = _frameModel.Frame_WindoorModel.WD_profile;
                                     UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
                                     divPropUC.Dock = DockStyle.Top;
                                     _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
@@ -1164,6 +1165,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _multiPanelModel.MPanelLst_Divider.Add(divModel);
 
                             IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
+                            divPropUCP.GetDivProperties().ProfileType_FromMainPresenter = _frameModel.Frame_WindoorModel.WD_profile;
                             UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
                             divPropUC.Dock = DockStyle.Top;
                             _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);

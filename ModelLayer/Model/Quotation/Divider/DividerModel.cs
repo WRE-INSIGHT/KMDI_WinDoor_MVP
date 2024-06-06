@@ -899,7 +899,22 @@ namespace ModelLayer.Model.Quotation.Divider
                 {
                     if (Div_ChkDM == true && Div_DMPanel != null)
                     {
-                        Div_ExplosionHeight = (Div_DMPanel.Panel_SashHeight - (38 * 2)) - 5;
+                        int dmDeduct = 0;
+                        if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            dmDeduct = 32;                         }
+                        else 
+                        {
+                            dmDeduct = 38;
+                        }
+
+                        Div_ExplosionHeight = (Div_DMPanel.Panel_SashHeight - (dmDeduct * 2)) - 5;
+                        
+                        if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            Div_ExplosionHeight += 5;// mawala yung allowance
+                        }
+                         
                         Div_AlumSpacer50Qty = (int)(Math.Ceiling(((decimal)Div_ExplosionHeight / 300)) - 2);
                     }
                     else if (Div_ChkDM == false)
@@ -1142,7 +1157,23 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         if (Div_ChkDM == true && Div_DMPanel != null)
                         {
-                            Div_ExplosionHeight = (Div_DMPanel.Panel_SashHeight - (38 * 2)) - 5;
+                            int dmDeduct = 0;
+                            if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                dmDeduct = 32;// mawala yung allowance
+                            }
+                            else
+                            {
+                                dmDeduct = 38;
+                            }
+
+                            Div_ExplosionHeight = (Div_DMPanel.Panel_SashHeight - (dmDeduct * 2)) - 5;
+
+                            if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                Div_ExplosionHeight += 5;// mawala yung allowance
+                            }
+
                             Div_AlumSpacer50Qty = (int)(Math.Ceiling(((decimal)Div_ExplosionHeight / 300)) - 2);
                         }
                         else if (Div_ChkDM == false)

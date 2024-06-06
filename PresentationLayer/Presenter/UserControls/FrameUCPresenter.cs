@@ -384,6 +384,7 @@ namespace PresentationLayer.Presenter.UserControls
                 panelPropUC.Dock = DockStyle.Top;
                 framePropUC.GetFramePropertiesPNL().Controls.Add(panelPropUC);
 
+
                 if (data == "Fixed Panel")
                 {
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");

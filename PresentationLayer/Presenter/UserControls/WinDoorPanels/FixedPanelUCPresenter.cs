@@ -304,6 +304,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         _mainPresenter.NxtPnlModel_forCenterProfileSelection.Panel_BackColor = Color.DarkGray;
                     }
+                    _panelModel.Panel_CPPanel = _panelModel;
                    _mainPresenter.SetLblStatusForCenterProfile("CPSelection", false, null, null, null, null,_panelModel);
                    _mainPresenter.GetCurrentPrice();
                 }
