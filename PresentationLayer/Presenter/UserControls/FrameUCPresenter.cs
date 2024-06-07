@@ -395,6 +395,7 @@ namespace PresentationLayer.Presenter.UserControls
                     IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC,
                                                                                _panelModel,
                                                                                _frameModel,
+                                                                               _userModel,
                                                                                _mainPresenter,
                                                                                this);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
@@ -420,6 +421,7 @@ namespace PresentationLayer.Presenter.UserControls
                     ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC,
                                                                                         _panelModel,
                                                                                         _frameModel,
+                                                                                        _userModel,
                                                                                         _mainPresenter,
                                                                                         this);
                     ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
@@ -445,6 +447,7 @@ namespace PresentationLayer.Presenter.UserControls
                     IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
                                                                                   _panelModel,
                                                                                   _frameModel,
+                                                                                  _userModel,
                                                                                   _mainPresenter,
                                                                                   this);
                     IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
@@ -470,6 +473,7 @@ namespace PresentationLayer.Presenter.UserControls
                     ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC,
                                                                                      _panelModel,
                                                                                      _frameModel,
+                                                                                     _userModel,
                                                                                      _mainPresenter,
                                                                                      this);
                     ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
@@ -495,6 +499,7 @@ namespace PresentationLayer.Presenter.UserControls
                     ITiltNTurnPanelUCPresenter tiltNTurnUCP = _tiltNTurnUCP.GetNewInstance(_unityC,
                                                                                            _panelModel,
                                                                                            _frameModel,
+                                                                                           _userModel,
                                                                                            _mainPresenter,
                                                                                            this);
                     ITiltNTurnPanelUC tiltnTurnUC = tiltNTurnUCP.GetTiltNTurnPanelUC();
@@ -530,6 +535,7 @@ namespace PresentationLayer.Presenter.UserControls
                     ILouverPanelUCPresenter louverPanelUCP = _louverPanelUCP.GetNewInstance(_unityC,
                                                                                             _panelModel,
                                                                                             _frameModel,
+                                                                                            _userModel,
                                                                                             _mainPresenter,
                                                                                             this);
                     ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();

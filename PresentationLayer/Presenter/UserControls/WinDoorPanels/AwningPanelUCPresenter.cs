@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -32,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
+        private IUserModel _userModel;
         private IMultiPanelModel _multiPanelModel;
         private ConstantVariables constants = new ConstantVariables();
 
@@ -533,6 +535,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.Reload_MultiPanelMargin();
                 _commonFunctions.Automatic_Div_Addition(_mainPresenter,
                                                         _frameModel,
+                                                        _userModel,
                                                         _divServices,
                                                         //_frameUCP,
                                                         _transomUCP,
@@ -866,6 +869,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                       IPanelModel panelModel,
                                                       IFrameModel frameModel,
+                                                      IUserModel userModel,
                                                       IMainPresenter mainPresenter,
                                                       IFrameUCPresenter frameUCP)
         {
@@ -875,6 +879,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             AwningPanelUCPresenter awningUCP = unityC.Resolve<AwningPanelUCPresenter>();
             awningUCP._panelModel = panelModel;
             awningUCP._frameModel = frameModel;
+            awningUCP._userModel = userModel;
             awningUCP._mainPresenter = mainPresenter;
             awningUCP._frameUCP = frameUCP;
             awningUCP._unityC = unityC;
@@ -885,6 +890,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMultiPanelMullionUCPresenter multiPanelUCP,
@@ -896,6 +902,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             AwningPanelUCPresenter awningUCP = unityC.Resolve<AwningPanelUCPresenter>();
             awningUCP._panelModel = panelModel;
             awningUCP._frameModel = frameModel;
+            awningUCP._userModel = userModel;
             awningUCP._mainPresenter = mainPresenter;
             awningUCP._multiPanelModel = multiPanelModel;
             awningUCP._multiPanelMullionUCP = multiPanelUCP;
@@ -908,6 +915,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMultiPanelTransomUCPresenter multiPanelTransomUCP,
@@ -919,6 +927,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             AwningPanelUCPresenter awningUCP = unityC.Resolve<AwningPanelUCPresenter>();
             awningUCP._panelModel = panelModel;
             awningUCP._frameModel = frameModel;
+            awningUCP._userModel = userModel;
             awningUCP._mainPresenter = mainPresenter;
             awningUCP._multiPanelModel = multiPanelModel;
             awningUCP._multiPanelTransomUCP = multiPanelTransomUCP;

@@ -2,6 +2,7 @@
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.User;
 using ServiceLayer.CommonServices;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,7 @@ namespace ServiceLayer.Services.DividerServices
                                                 IMultiPanelModel divMPanelParent,
                                                 Dictionary<int, int> divCladdingSizeList,
                                                 IFrameModel divFrameParent,
+                                                IUserModel divUserModel,
                                                 bool divChkDM,
                                                 bool divArtVisibility,
                                                 DummyMullion_ArticleNo divDMArtNo,
@@ -62,6 +64,7 @@ namespace ServiceLayer.Services.DividerServices
                                                 divMPanelParent,
                                                 divCladdingSizeList,
                                                 divFrameParent,
+                                                divUserModel,
                                                 divChkDM,
                                                 divArtVisibility,
                                                 divDMArtNo,
@@ -88,6 +91,7 @@ namespace ServiceLayer.Services.DividerServices
                                              int divDisplayHeight,
                                              IMultiPanelModel divMPanelParent,
                                              IFrameModel divFrameParent,
+                                             IUserModel divUserModel,
                                              int divID = 0,
                                              float divImageRendererZoom = 1,
                                              string divFrameType = "",
@@ -139,6 +143,7 @@ namespace ServiceLayer.Services.DividerServices
                                                          divMPanelParent,
                                                          divCladdingSizeList,
                                                          divFrameParent,
+                                                         divUserModel,
                                                          divChkDM,
                                                          divArtVisibility,
                                                          divDMArtNo,

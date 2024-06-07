@@ -332,7 +332,7 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     if (mpnl.MPanel_Type == "Transom" && div_nxtCtrl != null)
                                     {
-                                        div_nxtCtrl.SetExplosionValues_Div();
+                                        div_nxtCtrl.SetExplosionValues_Div(Date_Assigned.ToString());
 
                                         div_nxtCtrl.Insert_DivProfile_DivReinf_Info_MaterialList(Material_List);
                                         div_nxtCtrl.Insert_MechJoint_MaterialList(Material_List);
@@ -427,7 +427,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         mullion_already_added = true;
 
-                                        div_nxtCtrl.SetExplosionValues_Div();
+                                        div_nxtCtrl.SetExplosionValues_Div(Date_Assigned.ToString());
 
                                         div_nxtCtrl.Insert_DivProfile_DivReinf_Info_MaterialList(Material_List);
 
@@ -753,7 +753,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         if (mpnl.MPanel_Type == "Mullion")
                                         {
-                                            div_nxtCtrl.SetExplosionValues_Div();
+                                            div_nxtCtrl.SetExplosionValues_Div(Date_Assigned.ToString());
 
                                             if (div_nxtCtrl.Div_ChkDM == false && pnl_curCtrl.Panel_AdjStrikerArtNo != null && pnl_curCtrl.Panel_AdjStrikerQty > 0)
                                             {
@@ -897,7 +897,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         if (mpnl.MPanel_Type == "Mullion")
                                         {
-                                            div_prevCtrl.SetExplosionValues_Div();
+                                            div_prevCtrl.SetExplosionValues_Div(Date_Assigned.ToString());
 
                                             if (div_prevCtrl.Div_ChkDM == false && pnl_curCtrl.Panel_AdjStrikerArtNo != null && pnl_curCtrl.Panel_AdjStrikerQty > 0)
                                             {

@@ -8944,6 +8944,7 @@ namespace PresentationLayer.Presenter
                                                                                   div_DisplayHeight,
                                                                                   div_MPanelParent,
                                                                                   div_FrameParent,
+                                                                                  div_UserModel,
                                                                                   GetDividerCount(),
                                                                                   divImageRenderer_Zoom,
                                                                                   _frameModel.Frame_Type.ToString(),
@@ -10517,6 +10518,7 @@ namespace PresentationLayer.Presenter
                     fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
                                                                               pnlModel,
                                                                               _frameModel,
+                                                                              _userModel,
                                                                               this,
                                                                               frmUCPresenter);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
@@ -10534,6 +10536,7 @@ namespace PresentationLayer.Presenter
                         fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
                                                                       pnlModel,
                                                                       _frameModel,
+                                                                      _userModel,
                                                                       this,
                                                                       _multiModelParent,
                                                                       _multiMullionUCP,
@@ -10553,6 +10556,7 @@ namespace PresentationLayer.Presenter
                         fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
                                                                        pnlModel,
                                                                        _frameModel,
+                                                                       _userModel,
                                                                        this,
                                                                        _multiModelParent,
                                                                        _multiTransomUCP,
@@ -10584,6 +10588,7 @@ namespace PresentationLayer.Presenter
                     casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
                                                                               pnlModel,
                                                                               _frameModel,
+                                                                              _userModel,
                                                                               this,
                                                                               frmUCPresenter);
                     ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
@@ -10596,6 +10601,7 @@ namespace PresentationLayer.Presenter
                         casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
                                                                       pnlModel,
                                                                       _frameModel,
+                                                                      _userModel,
                                                                       this,
                                                                       _multiModelParent,
                                                                       _multiMullionUCP,
@@ -10611,7 +10617,8 @@ namespace PresentationLayer.Presenter
                     {
                         casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
                                                                        pnlModel,
-                                                                       _frameModel,
+                                                                       _frameModel, 
+                                                                       _userModel,
                                                                        this,
                                                                        _multiModelParent,
                                                                        _multiTransomUCP,
@@ -10644,6 +10651,7 @@ namespace PresentationLayer.Presenter
                     awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
                                                                               pnlModel,
                                                                               _frameModel,
+                                                                              _userModel,
                                                                               this,
                                                                               frmUCPresenter);
                     IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
@@ -10656,6 +10664,7 @@ namespace PresentationLayer.Presenter
                         awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
                                                                       pnlModel,
                                                                       _frameModel,
+                                                                      _userModel,
                                                                       this,
                                                                       _multiModelParent,
                                                                       _multiMullionUCP,
@@ -10670,6 +10679,7 @@ namespace PresentationLayer.Presenter
                         awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
                                                                        pnlModel,
                                                                        _frameModel,
+                                                                       _userModel,
                                                                        this,
                                                                        _multiModelParent,
                                                                        _multiTransomUCP,
@@ -10703,6 +10713,7 @@ namespace PresentationLayer.Presenter
                     slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
                                                                               pnlModel,
                                                                               _frameModel,
+                                                                              _userModel,
                                                                               this,
                                                                               frmUCPresenter);
                     ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
@@ -10715,6 +10726,7 @@ namespace PresentationLayer.Presenter
                         slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
                                                                       pnlModel,
                                                                       _frameModel,
+                                                                      _userModel,
                                                                       this,
                                                                       _multiModelParent,
                                                                       _multiMullionUCP,
@@ -10729,6 +10741,7 @@ namespace PresentationLayer.Presenter
                         slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
                                                                        pnlModel,
                                                                        _frameModel,
+                                                                       _userModel,
                                                                        this,
                                                                        _multiModelParent,
                                                                        _multiTransomUCP,
@@ -10763,6 +10776,7 @@ namespace PresentationLayer.Presenter
                     tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
                                                                               pnlModel,
                                                                               _frameModel,
+                                                                              _userModel,
                                                                               this,
                                                                               frmUCPresenter);
                     ITiltNTurnPanelUC tiltNTurnUC = tiltNTurnUCP.GetTiltNTurnPanelUC();
@@ -10775,6 +10789,7 @@ namespace PresentationLayer.Presenter
                         tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
                                                                       pnlModel,
                                                                       _frameModel,
+                                                                      _userModel,
                                                                       this,
                                                                       _multiModelParent,
                                                                       _multiMullionUCP,
@@ -10789,6 +10804,7 @@ namespace PresentationLayer.Presenter
                         tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
                                                                        pnlModel,
                                                                        _frameModel,
+                                                                       _userModel,
                                                                        this,
                                                                        _multiModelParent,
                                                                        _multiTransomUCP,
@@ -10815,6 +10831,7 @@ namespace PresentationLayer.Presenter
                     louverPanelUCP = (LouverPanelUCPresenter)_louverPanelUCP.GetNewInstance(_unityC,
                                                                               pnlModel,
                                                                               _frameModel,
+                                                                              _userModel,
                                                                               this,
                                                                               frmUCPresenter);
                     ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();
@@ -10827,6 +10844,7 @@ namespace PresentationLayer.Presenter
                         louverPanelUCP = (LouverPanelUCPresenter)_louverPanelUCP.GetNewInstance(_unityC,
                                                                                    pnlModel,
                                                                                    _frameModel,
+                                                                                   _userModel,
                                                                                    this,
                                                                                    _multiModelParent,
                                                                                    _multiMullionUCP);
@@ -10840,6 +10858,7 @@ namespace PresentationLayer.Presenter
                         louverPanelUCP = (LouverPanelUCPresenter)_louverPanelUCP.GetNewInstance(_unityC,
                                                                                    pnlModel,
                                                                                    _frameModel,
+                                                                                   _userModel,
                                                                                    this,
                                                                                    _multiModelParent,
                                                                                    _multiTransomUCP);
@@ -11432,6 +11451,7 @@ namespace PresentationLayer.Presenter
         SnapInKeep_ArticleNo div_SnapNKeepDM;
         IMultiPanelModel div_MPanelParent;
         IFrameModel div_FrameParent;
+        IUserModel div_UserModel;
         IPanelModel div_DMPanel;
         Divider_ArticleNo div_ArtNo;
         DividerReinf_ArticleNo div_ReinfArtNo;

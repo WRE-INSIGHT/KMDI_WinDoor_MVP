@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using PresentationLayer.Presenter;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -30,6 +31,7 @@ namespace PresentationLayer.CommonMethods
     {
         public void Automatic_Div_Addition(IMainPresenter mainPresenter,
                                            IFrameModel frameModel,
+                                           IUserModel userModel,
                                            IDividerServices divServices,
                                            ITransomUCPresenter _transomUCP,
                                            IUnityContainer _unityC,
@@ -108,6 +110,7 @@ namespace PresentationLayer.CommonMethods
                                                                      parentModel.MPanel_DisplayHeight,
                                                                      parentModel,
                                                                      frameModel,
+                                                                     userModel,
                                                                      divID,
                                                                      frameModel.FrameImageRenderer_Zoom,
                                                                      frameModel.Frame_Type.ToString(),

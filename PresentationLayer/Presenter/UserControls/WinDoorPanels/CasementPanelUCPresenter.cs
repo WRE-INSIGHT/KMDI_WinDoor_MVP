@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -32,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
+        private IUserModel _userModel;
         private IMultiPanelModel _multiPanelModel;
         private ConstantVariables constants = new ConstantVariables();
 
@@ -1282,6 +1284,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _commonFunctions.Automatic_Div_Addition(_mainPresenter,
                                                         _frameModel,
+                                                        _userModel,
                                                         _divServices,
                                                         //_frameUCP,
                                                         _transomUCP,
@@ -1728,6 +1731,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IFrameUCPresenter frameUCP)
         {
@@ -1737,6 +1741,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             CasementPanelUCPresenter casementUCP = unityC.Resolve<CasementPanelUCPresenter>();
             casementUCP._panelModel = panelModel;
             casementUCP._frameModel = frameModel;
+            casementUCP._userModel = userModel;
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._frameUCP = frameUCP;
             casementUCP._unityC = unityC;
@@ -1747,6 +1752,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMultiPanelMullionUCPresenter multiPanelUCP,
@@ -1758,6 +1764,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             CasementPanelUCPresenter casementUCP = unityC.Resolve<CasementPanelUCPresenter>();
             casementUCP._panelModel = panelModel;
             casementUCP._frameModel = frameModel;
+            casementUCP._userModel = userModel;
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._multiPanelModel = multiPanelModel;
             casementUCP._multiPanelMullionUCP = multiPanelUCP;
@@ -1770,6 +1777,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMultiPanelTransomUCPresenter multiTransomUCP,
@@ -1781,6 +1789,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             CasementPanelUCPresenter casementUCP = unityC.Resolve<CasementPanelUCPresenter>();
             casementUCP._panelModel = panelModel;
             casementUCP._frameModel = frameModel;
+            casementUCP._userModel = userModel;
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._multiPanelModel = multiPanelModel;
             casementUCP._multiPanelTransomUCP = multiTransomUCP;

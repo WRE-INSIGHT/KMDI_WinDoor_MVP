@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.User;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
@@ -45,6 +46,7 @@ namespace ModelLayer.Model.Quotation.Divider
         bool Div_ArtVisibility { get; set; }
         IMultiPanelModel Div_MPanelParent { get; set; }
         IFrameModel Div_FrameParent { get; set; }
+        IUserModel Div_UserModel { get; set; }
         IPanelModel Div_DMPanel { get; set; }
         bool Div_LeverEspagVisibility { get; set; }
         LeverEspagnolette_ArticleNo Div_LeverEspagArtNo { get; set; }
@@ -75,7 +77,7 @@ namespace ModelLayer.Model.Quotation.Divider
         Dictionary<int, int> Div_CladdingSizeList { get; set; }
         int Div_CladdingCount { get; set; }
 
-        void SetExplosionValues_Div();
+        void SetExplosionValues_Div(string Date_Assigned = null);
         void AdjustPropertyPanelHeight(string mode);
 
         void Insert_DivProfile_DivReinf_Info_MaterialList(DataTable tbl_explosion);
