@@ -776,7 +776,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
             cus_ref_date = DateTime.Parse(Date_Assigned);
 
-            DateTime FormulaChangedate_032624 = DateTime.Parse("03-26-2024"); //unequal panel for premi
+            DateTime FormulaChangedate_032624 = DateTime.Parse("03-26-2024"); //lagay new condition for deduction
             DateTime FormulaChangedate_060724 = DateTime.Parse("06-07-2024"); //lagay ng premi condition galing nakacomment
 
             #endregion
@@ -810,7 +810,7 @@ namespace ModelLayer.Model.Quotation.Divider
             {
                 frame_deduction = 47;
             }
-            else if (cus_ref_date >= FormulaChangedate_032624 ||
+            else if ((Div_UserModel.Department == "Sales & Operations (Costing)" && cus_ref_date >= FormulaChangedate_032624) ||
                      Div_UserModel.Department != "Sales & Operations (Costing)")
             {
                 if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._6050)
@@ -973,9 +973,8 @@ namespace ModelLayer.Model.Quotation.Divider
                                 Div_ExplosionHeight = (Div_DisplayHeight - frame_deduction - 33) + 8; // 33 = 7502 thicness
                             }
                         }
-                        else if (Div_ArtNo == Divider_ArticleNo._6052 &&
-                            Div_MPanelParent.MPanel_DividerEnabled == true &&
-                            cus_ref_date >= FormulaChangedate_060724)
+                        else if ((Div_ArtNo == Divider_ArticleNo._6052 && Div_MPanelParent.MPanel_DividerEnabled == true && cus_ref_date >= FormulaChangedate_060724) ||
+                                   Div_UserModel.Department != "Sales & Operations (Costing)")
                         {
                             Div_ExplosionHeight = (Div_DisplayHeight - (frame_deduction * 2)) + (4 * 2);
                         }
@@ -1015,7 +1014,7 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2)) + (4 * 2);
                     }
-                    else if (cus_ref_date >= FormulaChangedate_032624 ||
+                    else if ((Div_UserModel.Department == "Sales & Operations (Costing)" && cus_ref_date >= FormulaChangedate_032624) ||
                              Div_UserModel.Department != "Sales & Operations (Costing)")
                     {
                         if (Div_ArtNo == Divider_ArticleNo._6052)
@@ -1042,7 +1041,7 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
                     }
-                    else if (cus_ref_date >= FormulaChangedate_032624 ||
+                    else if ((Div_UserModel.Department == "Sales & Operations (Costing)" && cus_ref_date >= FormulaChangedate_032624) ||
                              Div_UserModel.Department != "Sales & Operations (Costing)")
                     {
                         if (Div_ReinfArtNo == DividerReinf_ArticleNo._TV107)
@@ -1252,8 +1251,8 @@ namespace ModelLayer.Model.Quotation.Divider
                             else if (cus_ref_date >= FormulaChangedate_032624 ||
                                      Div_UserModel.Department != "Sales & Operations (Costing)")
                             {
-                                if (Div_ArtNo == Divider_ArticleNo._6052 &&
-                                    cus_ref_date >= FormulaChangedate_060724)
+                                if ((Div_ArtNo == Divider_ArticleNo._6052 && cus_ref_date >= FormulaChangedate_060724) ||
+                                    Div_UserModel.Department != "Sales & Operations (Costing)")
                                 {
                                     Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction));
                                 }

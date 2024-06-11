@@ -8944,7 +8944,7 @@ namespace PresentationLayer.Presenter
                                                                                   div_DisplayHeight,
                                                                                   div_MPanelParent,
                                                                                   div_FrameParent,
-                                                                                  div_UserModel,
+                                                                                  _userModel,
                                                                                   GetDividerCount(),
                                                                                   divImageRenderer_Zoom,
                                                                                   _frameModel.Frame_Type.ToString(),
@@ -11451,7 +11451,7 @@ namespace PresentationLayer.Presenter
         SnapInKeep_ArticleNo div_SnapNKeepDM;
         IMultiPanelModel div_MPanelParent;
         IFrameModel div_FrameParent;
-        IUserModel div_UserModel;
+        //IUserModel div_UserModel;
         IPanelModel div_DMPanel;
         Divider_ArticleNo div_ArtNo;
         DividerReinf_ArticleNo div_ReinfArtNo;

@@ -6515,6 +6515,8 @@ namespace ModelLayer.Model.Quotation
                                         GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * GlassPriceFromMainPresenter(pnl.Panel_GlassThicknessDesc);
                                         pnl.Panel_GlassPricePerSqrMeter = GlassPriceFromMainPresenter(pnl.Panel_GlassThicknessDesc);
 
+                                        Console.WriteLine(GlassPriceFromMainPresenter(pnl.Panel_GlassThicknessDesc).ToString());
+
                                         if (GlassThcknessDesc_Holder != null)
                                         {
                                             if (GlassThcknessDesc_Holder.Contains("with Georgian Bar"))
@@ -6649,6 +6651,8 @@ namespace ModelLayer.Model.Quotation
                                         //Glass Price Selection Using New Algo
                                         GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * GlassPriceFromMainPresenter(pnl.Panel_GlassThicknessDesc); ;
                                         pnl.Panel_GlassPricePerSqrMeter = GlassPriceFromMainPresenter(pnl.Panel_GlassThicknessDesc); ;
+
+                                        Console.Write(GlassPriceFromMainPresenter(pnl.Panel_GlassThicknessDesc).ToString());
 
                                         if (GlassThcknessDesc_Holder != null)
                                         {
