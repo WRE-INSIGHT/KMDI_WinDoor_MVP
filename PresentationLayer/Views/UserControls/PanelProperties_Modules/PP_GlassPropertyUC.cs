@@ -13,6 +13,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             InitializeComponent();
         }
 
+        public string ProfileType_FromMainPresenter { get; set; }
+
         public event EventHandler PPGlassPropertyLoadEventRaised;
         public event EventHandler cmbGlassTypeSelectedValueEventRaised;
         public event EventHandler cmbGlazingArtNoSelectedValueEventRaised;
@@ -25,7 +27,22 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             List<GlazingBead_ArticleNo> gArtNo = new List<GlazingBead_ArticleNo>();
             foreach (GlazingBead_ArticleNo item in GlazingBead_ArticleNo.GetAll())
             {
-                gArtNo.Add(item);
+                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                {
+                    if (item == GlazingBead_ArticleNo._84500 ||
+                        item == GlazingBead_ArticleNo._84502)
+                    {
+                        gArtNo.Add(item);
+                    } 
+                }
+                else
+                {
+                    if (item != GlazingBead_ArticleNo._84500 &&
+                        item != GlazingBead_ArticleNo._84502)
+                    {
+                        gArtNo.Add(item);
+                    }
+                }
             }
             cmb_GlazingArtNo.DataSource = gArtNo;
 

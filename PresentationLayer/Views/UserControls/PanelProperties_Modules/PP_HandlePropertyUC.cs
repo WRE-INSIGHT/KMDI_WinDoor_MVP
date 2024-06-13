@@ -44,6 +44,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             }
         }
 
+        public string ProfileType_FromMainPresenter { get; set; }
+
         public event EventHandler PPHandlePropertyLoadEventRaised;
         public event EventHandler cmbHandleTypeSelectedValueEventRaised;
 
@@ -54,7 +56,20 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             List<Handle_Type> rio = new List<Handle_Type>();
             foreach (Handle_Type item in Handle_Type.GetAll())
             {
-                rio.Add(item);
+                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                {
+                    if (item == Handle_Type._CremonHandle || item == Handle_Type._None)
+                    {
+                        rio.Add(item);
+                    }
+                }
+                else
+                {
+                    if (item != Handle_Type._CremonHandle)
+                    {
+                        rio.Add(item);
+                    } 
+                }
             }
             cmb_HandleType.DataSource = rio;
 

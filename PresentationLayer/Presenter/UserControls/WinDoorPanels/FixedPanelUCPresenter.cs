@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -32,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
+        private IUserModel _userModel;
         private IMultiPanelModel _multiPanelModel;
         private ConstantVariables constants = new ConstantVariables();
 
@@ -304,6 +306,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         _mainPresenter.NxtPnlModel_forCenterProfileSelection.Panel_BackColor = Color.DarkGray;
                     }
+                    _panelModel.Panel_CPPanel = _panelModel;
                    _mainPresenter.SetLblStatusForCenterProfile("CPSelection", false, null, null, null, null,_panelModel);
                    _mainPresenter.GetCurrentPrice();
                 }
@@ -1684,6 +1687,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _commonFunctions.Automatic_Div_Addition(_mainPresenter,
                                                         _frameModel,
+                                                        _userModel,
                                                         _divServices,
                                                         //_frameUCP,
                                                         _transomUCP,
@@ -1730,6 +1734,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IPanelModel panelModel,
                                                      IFrameModel frameModel,
+                                                     IUserModel userModel,
                                                      IMainPresenter mainPresenter,
                                                      IFrameUCPresenter frameUCP)
         {
@@ -1749,6 +1754,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IPanelModel panelModel,
                                                      IFrameModel frameModel,
+                                                     IUserModel userModel,
                                                      IMainPresenter mainPresenter,
                                                      IMultiPanelModel multiPanelModel,
                                                      IMultiPanelMullionUCPresenter multiPanelUCP,
@@ -1760,6 +1766,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
             fixedPanelUCP._panelModel = panelModel;
             fixedPanelUCP._frameModel = frameModel;
+            fixedPanelUCP._userModel = userModel;
             fixedPanelUCP._mainPresenter = mainPresenter;
             fixedPanelUCP._multiPanelModel = multiPanelModel;
             fixedPanelUCP._multiPanelMullionUCP = multiPanelUCP;
@@ -1772,6 +1779,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IPanelModel panelModel,
                                                      IFrameModel frameModel,
+                                                     IUserModel userModel,
                                                      IMainPresenter mainPresenter,
                                                      IMultiPanelModel multiPanelModel,
                                                      IMultiPanelTransomUCPresenter multiPanelTransomUCP,
@@ -1783,6 +1791,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
             fixedPanelUCP._panelModel = panelModel;
             fixedPanelUCP._frameModel = frameModel;
+            fixedPanelUCP._userModel = userModel;
             fixedPanelUCP._mainPresenter = mainPresenter;
             fixedPanelUCP._multiPanelModel = multiPanelModel;
             fixedPanelUCP._multiPanelTransomUCP = multiPanelTransomUCP;

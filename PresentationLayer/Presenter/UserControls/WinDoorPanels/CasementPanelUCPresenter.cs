@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -32,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
+        private IUserModel _userModel;
         private IMultiPanelModel _multiPanelModel;
         private ConstantVariables constants = new ConstantVariables();
 
@@ -835,51 +837,77 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 }
                 else
-                { 
-                
-                
-                
-                _panelModel.Panel_HandleType = Handle_Type._None;
-                if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
-                {
-                    _panelModel.Panel_CornerDriveOptionsVisibility = false;
-                    _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                {  
+                     _panelModel.Panel_HandleType = Handle_Type._None; 
 
-                }
-                if (_panelModel == _mainPresenter.PrevPnlModel_forDMSelection)
-                {
-                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                    {
-                        _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
-                    }
-                    else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                    {
-                        _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
-                    }
+                     if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
+                     {
+                         _panelModel.Panel_CornerDriveOptionsVisibility = false;
+                         _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
+                         _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                         _frameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
 
-                }
-                else
-                {
-                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                    {
-                        _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
-                    }
-                    else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                    {
-                        _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
-                    }
+                     }
+                     if (_panelModel == _mainPresenter.PrevPnlModel_forDMSelection)
+                     {
+                         if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                         {
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._CremonHandle;
+                            }
+                            else
+                            {
+                                _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
+                            }
+                        }
+                         else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                         {
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._CremonHandle;
+                            }
+                            else
+                            { 
+                                _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
+                            }
+                        }
 
-                }
-                _mainPresenter.DivModel_forDMSelection.Div_DMPanel = _panelModel;
-                _mainPresenter.PrevPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
-                if (_mainPresenter.NxtPnlModel_forDMSelection != null)
-                {
-                    _mainPresenter.NxtPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
-                }
-                _mainPresenter.SetLblStatus("DMSelection", false, null, null, _panelModel);
-                _mainPresenter.GetCurrentPrice();
+                     }
+                     else
+                     {
+                         if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                         {
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._CremonHandle;
+                            }
+                            else
+                            {
+                                _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
+                            }
+                        }
+                         else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                         {
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._CremonHandle;
+                            }
+                            else
+                            {
+                                _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
+                            }
+                        }
+
+                     }
+                     _mainPresenter.DivModel_forDMSelection.Div_DMPanel = _panelModel;
+                     _mainPresenter.PrevPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
+                     if (_mainPresenter.NxtPnlModel_forDMSelection != null)
+                     {
+                         _mainPresenter.NxtPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
+                     }
+                     _mainPresenter.SetLblStatus("DMSelection", false, null, null, _panelModel);
+                     _mainPresenter.GetCurrentPrice();
                 }
             }
             else
@@ -1256,6 +1284,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _commonFunctions.Automatic_Div_Addition(_mainPresenter,
                                                         _frameModel,
+                                                        _userModel,
                                                         _divServices,
                                                         //_frameUCP,
                                                         _transomUCP,
@@ -1702,6 +1731,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IFrameUCPresenter frameUCP)
         {
@@ -1711,6 +1741,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             CasementPanelUCPresenter casementUCP = unityC.Resolve<CasementPanelUCPresenter>();
             casementUCP._panelModel = panelModel;
             casementUCP._frameModel = frameModel;
+            casementUCP._userModel = userModel;
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._frameUCP = frameUCP;
             casementUCP._unityC = unityC;
@@ -1721,6 +1752,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMultiPanelMullionUCPresenter multiPanelUCP,
@@ -1732,6 +1764,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             CasementPanelUCPresenter casementUCP = unityC.Resolve<CasementPanelUCPresenter>();
             casementUCP._panelModel = panelModel;
             casementUCP._frameModel = frameModel;
+            casementUCP._userModel = userModel;
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._multiPanelModel = multiPanelModel;
             casementUCP._multiPanelMullionUCP = multiPanelUCP;
@@ -1744,6 +1777,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMultiPanelTransomUCPresenter multiTransomUCP,
@@ -1755,6 +1789,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             CasementPanelUCPresenter casementUCP = unityC.Resolve<CasementPanelUCPresenter>();
             casementUCP._panelModel = panelModel;
             casementUCP._frameModel = frameModel;
+            casementUCP._userModel = userModel;
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._multiPanelModel = multiPanelModel;
             casementUCP._multiPanelTransomUCP = multiTransomUCP;
