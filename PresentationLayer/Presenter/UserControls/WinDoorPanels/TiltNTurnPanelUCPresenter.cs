@@ -444,30 +444,33 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
 
             #region Mesh
-            if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+            if (_panelModel.Panel_GlassThicknessDesc != null)
             {
-                int cond = tiltNTurn.ClientRectangle.Width + tiltNTurn.ClientRectangle.Height;
-
-                int maxWidth = tiltNTurn.ClientRectangle.Width;
-
-                for (int i = 10; i < cond; i += 10)
+                if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
                 {
-                    g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+                    int cond = tiltNTurn.ClientRectangle.Width + tiltNTurn.ClientRectangle.Height;
 
-                }
+                    int maxWidth = tiltNTurn.ClientRectangle.Width;
 
-                for (int i = 10; i < cond; i += 10)
-                {
-                    g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(tiltNTurn.ClientRectangle.Width, i));
+                    for (int i = 10; i < cond; i += 10)
+                    {
+                        g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
 
-                }
-               
+                    }
+
+                    for (int i = 10; i < cond; i += 10)
+                    {
+                        g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(tiltNTurn.ClientRectangle.Width, i));
+
+                    }
+
                     g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
                                                                            8 / rectThickness,
                                                                            tiltNTurn.ClientRectangle.Width - 17 / rectThickness,
                                                                            tiltNTurn.ClientRectangle.Height - 17 / rectThickness));
 
-                
+
+                }
             }
             #endregion
 

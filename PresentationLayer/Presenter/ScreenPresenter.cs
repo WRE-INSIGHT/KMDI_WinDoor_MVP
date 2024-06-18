@@ -2232,7 +2232,7 @@ namespace PresentationLayer.Presenter
         {
             LoadScreenColumns();
 
-            // GetProjectFactor();
+             GetProjectFactor();
             _screenView.GetNudTotalPrice().Maximum = decimal.MaxValue;
             _screenView.GetNudTotalPrice().DecimalPlaces = 2;
             _screenWidth.Maximum = decimal.MaxValue;
