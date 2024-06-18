@@ -1037,6 +1037,11 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 pnl_curCtrl.Insert_FrictionStay_MaterialList(Material_List);
 
+                                                if (item.WD_profile.Contains("Alutek"))
+                                                {
+                                                    pnl_curCtrl.Insert_FrictionStayPacker_MaterialList(Material_List);
+                                                }
+                                                  
                                                 if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
                                                 {
                                                     pnl_curCtrl.Insert_SnapNKeep_MaterialList(Material_List);
@@ -1060,6 +1065,11 @@ namespace ModelLayer.Model.Quotation
                                                     if (pnl_curCtrl.Panel_HingeOptions == HingeOption._FrictionStay)
                                                     {
                                                         pnl_curCtrl.Insert_FrictionStay_MaterialList(Material_List);
+
+                                                        if (item.WD_profile.Contains("Alutek"))
+                                                        {
+                                                            pnl_curCtrl.Insert_FrictionStayPacker_MaterialList(Material_List);
+                                                        }
 
                                                         int FSCasement_screws = pnl_curCtrl.Add_FSCasement_screws4fab();
                                                         add_screws_fab_fs_or_rs += FSCasement_screws;
@@ -2046,6 +2056,11 @@ namespace ModelLayer.Model.Quotation
                             {
                                 pnl.Insert_FrictionStay_MaterialList(Material_List);
 
+                                if (item.WD_profile.Contains("Alutek"))
+                                {
+                                    pnl.Insert_FrictionStayPacker_MaterialList(Material_List);
+                                }
+
                                 if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26 &&
                                     !item.WD_profile.Contains("Alutek"))
                                 {
@@ -2117,6 +2132,11 @@ namespace ModelLayer.Model.Quotation
                                     if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                     {
                                         pnl.Insert_FrictionStay_MaterialList(Material_List);
+
+                                        if (item.WD_profile.Contains("Alutek"))
+                                        {
+                                            pnl.Insert_FrictionStayPacker_MaterialList(Material_List);
+                                        }
 
                                         int fs_screws = pnl.Add_FSCasement_screws4fab();
                                         add_screws_fab_fs_or_rs += fs_screws;
@@ -3411,7 +3431,7 @@ namespace ModelLayer.Model.Quotation
                 TransmissionRodPricePerPiece = 145.96m,
                 OpenableStrikerPricePerPiece = 35.74m,
                 CornerCleatPricePerPiece = 37.23m,
-                FrictionStayPricePerPiece = 320.22m,
+                FrictionStayPricePerPiece = 320.22m, 
                 RunUpblockPricePerPiece = 23.83m,
                 PackerRodPricePerPiece = 123.06m,
                 LockingWedgesPricePerPiece = 83.41m,
@@ -5810,7 +5830,7 @@ namespace ModelLayer.Model.Quotation
                                                 else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                                                 {
                                                     CenterProfilePrice += ((pnl.Panel_SashHeight - 5) / 1000m) * CenterProfile_A000AluminumPricePerLinearMeter_Woodgrain;
-                                                    CenterProfilePricePerLinearMeter = CenterProfile_A000AluminumPricePerLinearMeter_White;
+                                                    CenterProfilePricePerLinearMeter = CenterProfile_A000AluminumPricePerLinearMeter_Woodgrain;
                                                 }
                                             }
 
@@ -6611,6 +6631,7 @@ namespace ModelLayer.Model.Quotation
                                             OpenableStrikerPrice += 2 * OpenableStrikerPricePerPiece;
                                             CheveronPrice += 4 * CheveronPricePerPiece;
                                             FrictionStayPrice += FrictionStayPricePerPiece;
+                                            FrictionStayPackerPrice += FrictionStayPackerPricePerPiece;
                                             RunUpblockPrice += RunUpblockPricePerPiece;
                                             LockingWedgesPrice += 2 * LockingWedgesPricePerPiece;
                                             SSCheveronPrice += 4 * SSCheveronPricePerPiece;
@@ -8923,6 +8944,7 @@ namespace ModelLayer.Model.Quotation
                                   OpenableStrikerPrice += 2 * OpenableStrikerPricePerPiece;
                                   CheveronPrice += 4 * CheveronPricePerPiece;
                                   FrictionStayPrice += FrictionStayPricePerPiece;
+                                  FrictionStayPackerPrice += FrictionStayPackerPricePerPiece;
                                   RunUpblockPrice += RunUpblockPricePerPiece;
                                   LockingWedgesPrice += 2 * LockingWedgesPricePerPiece;
                                   SSCheveronPrice += 4 * SSCheveronPricePerPiece;

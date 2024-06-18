@@ -1297,6 +1297,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public FrictionStayCasement_ArticleNo Panel_FSCasementArtNo { get; set; }
         public FrictionAlutek_ArticleNo Panel_FSAlutekArtNo { get; set; }
+        public FrictionAlutekPacker_ArticleNo Panel_FSPackerAlutekArtNo { get; set; }
 
         public SnapInKeep_ArticleNo Panel_SnapInKeepArtNo { get; set; }
         public FixedCam_ArticleNo Panel_FixedCamArtNo { get; set; }
@@ -6652,32 +6653,28 @@ namespace ModelLayer.Model.Quotation.Panel
 
 
                     if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
-                    {
-                        float sash_weight = (((Panel_SashWidth / 1000f) + (Panel_SashHeight / 1000f)) * 2) * 0.95f,
-                              glass_weight = Panel_GlassThickness * ((Panel_GlassWidth / 1000f) * (Panel_GlassHeight / 1000f)) * 2.5f;
-                        int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
+                    { 
+                            float sash_weight = (((Panel_SashWidth / 1000f) + (Panel_SashHeight / 1000f)) * 2) * 0.95f,
+                                  glass_weight = Panel_GlassThickness * ((Panel_GlassWidth / 1000f) * (Panel_GlassHeight / 1000f)) * 2.5f;
+                            decimal total_weight = Math.Ceiling((decimal)(sash_weight + glass_weight));
 
-                        //float total_weightWithAllowance = 0;
-                        //total_weightWithAllowance = total_weight * 1.01f; hindi na need lagyan - ren  04/11/24
-
-
-
-                        if (total_weight <= 18)
-                        {
-                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H091;
-                        }
-                        else if (total_weight >= 19 && total_weight <= 24)
-                        {
-                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H029;
-                        }
-                        else if (total_weight >= 25 && total_weight <= 45)
-                        {
-                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H231;
-                        }
-                        else if (total_weight >= 46)// upto 60kg
-                        {
-                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H232;
-                        }
+                            if (total_weight <= 13)
+                            {
+                                Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H091;
+                            }
+                            else if (total_weight >= 13.1m && total_weight <= 18.5m)
+                            {
+                                Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H029;
+                            }
+                            else if (total_weight >= 18.6m && total_weight <= 39.5m)
+                            {
+                                Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H231;
+                            }
+                            else if (total_weight >= 39.6m)// upto 60kg
+                            {
+                                Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H232;
+                            }
+                        Panel_FSPackerAlutekArtNo = FrictionAlutekPacker_ArticleNo._H149;
                     }
 
 
@@ -10693,27 +10690,26 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         float sash_weight = (((Panel_SashWidth / 1000f) + (Panel_SashHeight / 1000f)) * 2) * 0.95f,
                               glass_weight = Panel_GlassThickness * ((Panel_GlassWidth / 1000f) * (Panel_GlassHeight / 1000f)) * 2.5f;
-                        int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
+                        decimal total_weight = Math.Ceiling((decimal)(sash_weight + glass_weight)); 
 
-                        float total_weightWithAllowance = 0;
-                        total_weightWithAllowance = total_weight * 1.01f;
-
-                        if (total_weight <= 18)
+                        if (total_weight <= 13)
                         {
                             Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H091;
                         }
-                        else if (total_weight >= 19 && total_weight <= 24)
+                        else if (total_weight >= 13.1m && total_weight <= 18.5m)
                         {
                             Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H029;
                         }
-                        else if (total_weight >= 25 && total_weight <= 45)
+                        else if (total_weight >= 18.6m && total_weight <= 39.5m)
                         {
                             Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H231;
                         }
-                        else if (total_weight >= 46)// upto 60kg
+                        else if (total_weight >= 39.6m)// upto 60kg
                         {
                             Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H232;
                         }
+
+                        Panel_FSPackerAlutekArtNo = FrictionAlutekPacker_ArticleNo._H149; 
                     }
 
 
@@ -11587,6 +11583,16 @@ namespace ModelLayer.Model.Quotation.Panel
             }
 
         }
+
+        public void Insert_FrictionStayPacker_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Friction Stay " + Panel_FSPackerAlutekArtNo.DisplayName,
+                                        1, "pair(s)",
+                                        "",
+                                        "Sash & Frame",
+                                        @"");
+        }
+
 
         public void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion)
         {

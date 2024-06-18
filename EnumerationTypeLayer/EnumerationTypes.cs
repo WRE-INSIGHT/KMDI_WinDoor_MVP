@@ -317,6 +317,13 @@ namespace EnumerationTypeLayer
             private FrictionAlutek_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        
+        public class FrictionAlutekPacker_ArticleNo : Enumeration<FrictionAlutekPacker_ArticleNo, int>
+        {
+            public static FrictionAlutekPacker_ArticleNo _H149 = new FrictionAlutekPacker_ArticleNo(0, "H149"); 
+            
+            private FrictionAlutekPacker_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
         public class Handle_Type : Enumeration<Handle_Type, int>
         {
             public static readonly Handle_Type _Rotoswing = new Handle_Type(0, "Rotoswing Handle");

@@ -1581,7 +1581,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void Insert_DivProfile_DivReinf_Info_MaterialList(DataTable tbl_explosion)
         {
-            string div_side = "", explosion_length = "", explosion_length2 = "";
+            string div_side = "", explosion_length = "", explosion_length2 = "", cutAngle = @"[  ]";
             if (Div_Type == DividerType.Transom)
             {
                 div_side = "Width";
@@ -1595,12 +1595,16 @@ namespace ModelLayer.Model.Quotation.Divider
                 explosion_length2 = Div_ReinfHeight.ToString();
             }
 
+            if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+                cutAngle = @"|  |";
+            }
 
             tbl_explosion.Rows.Add(Div_Type.ToString() + " " + div_side + " " + Div_ArtNo.DisplayName,
                                    1, "pc(s)",
                                    explosion_length,
                                    Div_Bounded,
-                                   @"[  ]");
+                                   cutAngle);
 
             if (!Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
             {

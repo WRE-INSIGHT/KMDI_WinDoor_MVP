@@ -399,6 +399,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_FillerProfileForNoBotFrameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion, int motorCount);
         void Insert_FrictionStay_MaterialList(DataTable tbl_explosion);
+        void Insert_FrictionStayPacker_MaterialList(DataTable tbl_explosion);
         void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion);
         void Insert_FixedCam_MaterialList(DataTable tbl_explosion);
         void Insert_PlasticWedge_MaterialList(DataTable tbl_explosion);
