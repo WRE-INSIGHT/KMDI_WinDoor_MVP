@@ -1448,58 +1448,59 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
 
             #region Mesh
-            if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
-            {
-                int cond = sliding.ClientRectangle.Width + sliding.ClientRectangle.Height;
-
-                int maxWidth = sliding.ClientRectangle.Width;
-
-                for (int i = 10; i < cond; i += 10)
+            if (_panelModel.Panel_GlassThicknessDesc != null)
+            { 
+                if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
                 {
-                    g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+                    int cond = sliding.ClientRectangle.Width + sliding.ClientRectangle.Height;
 
-                }
+                    int maxWidth = sliding.ClientRectangle.Width;
 
-                for (int i = 10; i < cond; i += 10)
-                {
-                    g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(sliding.ClientRectangle.Width, i));
+                    for (int i = 10; i < cond; i += 10)
+                    {
+                        g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
 
-                }
+                    }
 
-                if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
-                {
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
-                                                                           8 / rectThickness,
-                                                                           sliding.ClientRectangle.Width - 17 / rectThickness,
-                                                                           sliding.ClientRectangle.Height - 17 / rectThickness));
-                }
-                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
-                {
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                        8 / rectThickness,
-                                                                        sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                        sliding.ClientRectangle.Height - (17 / rectThickness)));
+                    for (int i = 10; i < cond; i += 10)
+                    {
+                        g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(sliding.ClientRectangle.Width, i));
 
-                }
-                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
-                {
+                    }
 
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
-                                                                           8 / rectThickness,
-                                                                           sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                           sliding.ClientRectangle.Height - (17 / rectThickness)));
-                }
-                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
-                {
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                      8 / rectThickness,
-                                                                      sliding.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
-                                                                      sliding.ClientRectangle.Height - (17 / rectThickness)));
-                }
+                    if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
+                                                                               8 / rectThickness,
+                                                                               sliding.ClientRectangle.Width - 17 / rectThickness,
+                                                                               sliding.ClientRectangle.Height - 17 / rectThickness));
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                            8 / rectThickness,
+                                                                            sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                            sliding.ClientRectangle.Height - (17 / rectThickness)));
 
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                    {
+
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
+                                                                               8 / rectThickness,
+                                                                               sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                               sliding.ClientRectangle.Height - (17 / rectThickness)));
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                          8 / rectThickness,
+                                                                          sliding.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
+                                                                          sliding.ClientRectangle.Height - (17 / rectThickness)));
+                    }
+
+                } 
             }
-
-
 
 
             #endregion
