@@ -1131,17 +1131,22 @@ namespace PresentationLayer.Presenter
 
         public void OnLoadSearchCenterProfielArtNo(IPanelModel pnlModel)
         {
-            List<IPanelModel> lst_pnl = pnlModel.Panel_ParentMultiPanelModel.MPanelLst_Panel;
-
-            foreach (IPanelModel item in lst_pnl)
+            if (pnlModel.Panel_ParentMultiPanelModel != null)
             {
-                if (pnlModel.Panel_Name == item.Panel_Name)
+
+
+                List<IPanelModel> lst_pnl = pnlModel.Panel_ParentMultiPanelModel.MPanelLst_Panel;
+
+                foreach (IPanelModel item in lst_pnl)
                 {
-                    if (item.Panel_CenterProfileArtNo != null)
+                    if (pnlModel.Panel_Name == item.Panel_Name)
                     {
-                        if (item.Panel_CenterProfileArtNo.ToString() != "None")
+                        if (item.Panel_CenterProfileArtNo != null)
                         {
-                            SetLblStatusForCenterProfile("CPSelectionOnLoad", false, null, null, item, null, null);
+                            if (item.Panel_CenterProfileArtNo.ToString() != "None")
+                            {
+                                SetLblStatusForCenterProfile("CPSelectionOnLoad", false, null, null, item, null, null);
+                            }
                         }
                     }
                 }

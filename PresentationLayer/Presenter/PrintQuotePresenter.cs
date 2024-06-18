@@ -76,12 +76,20 @@ namespace PresentationLayer.Presenter
 
         private void _printQuoteView_chkboxsubtotalCheckedChangedEventRaised(object sender, EventArgs e)
         {
-            if (_mainPresenter.printStatus == "ScreenItem")
+            if (_mainPresenter.printStatus == "ScreenItem" || _mainPresenter.printStatus == "GlassUpgrade")
             {
                 if (_printQuoteView.GetSubTotalCheckBox().Checked)
                 {
-                    _printQuoteView.GetRowLimitTxtBox().Visible = true;
-                    _printQuoteView.GetRowLimitTxtBox().Location = new System.Drawing.Point(330, 117);
+                    if(_mainPresenter.printStatus == "ScreenItem")
+                    {
+                        _printQuoteView.GetRowLimitTxtBox().Visible = true;
+                        _printQuoteView.GetRowLimitTxtBox().Location = new System.Drawing.Point(330, 117);
+                    }
+                    else if(_mainPresenter.printStatus == "GlassUpgrade")
+                    {
+                        _printQuoteView.GetRowLimitTxtBox().Visible = true;
+                        _printQuoteView.GetRowLimitTxtBox().Location = new System.Drawing.Point(1350, 50);
+                    } 
                 }
                 else
                 {
@@ -1296,18 +1304,21 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetVatChkbox().Visible = true;
                     _printQuoteView.GetLabor_N_MobiChkbox().Visible = true; // use labor&Mobi chkbox for showing "Reviewed By"
                     _printQuoteView.GetFreightChargesChkbox().Visible = true; // use FreightCharge chkbox for showing "Noted By"
-
+                    _printQuoteView.GetSubTotalCheckBox().Visible = true;
+                    
                     _printQuoteView.GetLabor_N_MobiChkbox().Text = "Show Reviewed by";
                     _printQuoteView.GetFreightChargesChkbox().Text = "Show Noted by";
                     
                     _printQuoteView.GetVatChkbox().Location = new System.Drawing.Point(205, 26);
                     _printQuoteView.GetLabor_N_MobiChkbox().Location = new System.Drawing.Point(205, 51);
                     _printQuoteView.GetFreightChargesChkbox().Location = new System.Drawing.Point(205, 93);
+                    _printQuoteView.GetSubTotalCheckBox().Location = new System.Drawing.Point(1350,26);
+
 
                     #endregion
 
 
-                    ReportParameter[] RParam = new ReportParameter[15];
+                    ReportParameter[] RParam = new ReportParameter[17];
                     RParam[0] = new ReportParameter("clientName", _printQuoteView.QuotationSalutation);
                     RParam[1] = new ReportParameter("date", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[2] = new ReportParameter("quoteNo", _mainPresenter.inputted_quotationRefNo);
@@ -1316,6 +1327,7 @@ namespace PresentationLayer.Presenter
                     RParam[5] = new ReportParameter("aeic_pos", _mainPresenter.position);
                     RParam[6] = new ReportParameter("clientAddress", _printQuoteView.QuotationAddress);
                     RParam[8] = new ReportParameter("quoteBody", _printQuoteView.QuotationBody);
+                    RParam[15] = new ReportParameter("RowLimit", _printQuoteView.RowLimit);
 
                     if (_quoteItemListPresenter == null)
                     {
@@ -1344,6 +1356,15 @@ namespace PresentationLayer.Presenter
                         else
                         {
                             RParam[10] = new ReportParameter("showNotedBy", "False");
+                        }
+
+                        if (_printQuoteView.GetSubTotalCheckBox().Checked)
+                        {
+                            RParam[16] = new ReportParameter("ShowSubTotal", "True");
+                        }
+                        else
+                        {
+                            RParam[16] = new ReportParameter("ShowSubTotal", "False");
                         }
 
                         RParam[11] = new ReportParameter("reviewedByOfficial", _printQuoteView.GetReviewedByCmb().SelectedItem.ToString());
