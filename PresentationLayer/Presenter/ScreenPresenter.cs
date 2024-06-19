@@ -2224,15 +2224,30 @@ namespace PresentationLayer.Presenter
             catch (Exception ex)
             {
                 MessageBox.Show(this + " " + ex.Message );
+                GetProjectFactorFromFile();
             }
                      
 
         }
+
+        private void GetProjectFactorFromFile()
+        {
+            if (_screenModel.Screen_AddOnsSpecialFactor < 1)
+            {
+                foreach (IScreenModel scm in _mainPresenter.Screen_List)
+                {
+                    _screenModel.Screen_AddOnsSpecialFactor = scm.Screen_AddOnsSpecialFactor;
+                    break;
+                }
+            }
+        }
+        
         private void _screenView_ScreenViewLoadEventRaised(object sender, System.EventArgs e)
         {
             LoadScreenColumns();
 
              GetProjectFactor();
+
             _screenView.GetNudTotalPrice().Maximum = decimal.MaxValue;
             _screenView.GetNudTotalPrice().DecimalPlaces = 2;
             _screenWidth.Maximum = decimal.MaxValue;
