@@ -24,6 +24,9 @@ namespace PresentationLayer.Presenter
         void PrintScreenRDLC();
         void QuoteItemList_PrintAnnexRDLC();
         void PrintGlassUpgrade();
+        void PrintContractSummaryPartialAdjustmentRDLC();
+        void PrintWindoorPartialAdjustmentRDLC();
+
         List<IQuoteItemListUCPresenter> LstQuoteItemUC { get; set; }
         List<ShowItemImage> ShowItemImage_CheckList { get; set; }
         List<int> RDLCReportCompilerItemIndexes { get; set; }

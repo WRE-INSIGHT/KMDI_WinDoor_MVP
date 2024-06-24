@@ -12,6 +12,8 @@ namespace PresentationLayer.Views
 
         void GetPDFCompilerView();
         void ClosePDFCompilerView();
+        CheckBox GetPartialAdjustmentCheckbox();
+        CheckBox GetAnnexCheckbox();
         OpenFileDialog GetFileDialog();
 
     }

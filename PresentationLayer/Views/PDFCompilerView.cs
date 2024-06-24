@@ -25,6 +25,17 @@ namespace PresentationLayer.Views
         {
             return openFileDialog1;
         }
+
+        public CheckBox GetPartialAdjustmentCheckbox()
+        {
+            return partialAdjustment_chkbx;
+        }
+
+        public CheckBox GetAnnexCheckbox()
+        {
+            return wthAnnex_chkbx;
+        }
+
         public PDFCompilerView()
         {
             InitializeComponent();
