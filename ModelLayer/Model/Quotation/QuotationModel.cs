@@ -80,6 +80,9 @@ namespace ModelLayer.Model.Quotation
                 total_glassHeight = 0,
                 glazing_seal = 0,
                 glazing_spacer = 0,
+                total_CenterGasketLength = 0,
+                total_UniversalGasketLength = 0,
+                total_GlazingGasketLength = 0,
                 total_screws_fabrication = 0,
                 total_screws_installation = 0,
                 total_cladding_size = 0,
@@ -106,7 +109,9 @@ namespace ModelLayer.Model.Quotation
                 frame_height = 0,
                 MechJointConnectorQty = 0;
 
-            string screws_for_inst_where = "";
+            string screws_for_inst_where = "",
+                   total_GlazingGasketLengthDesc = "",
+                   total_UniversalGasketLengthDesc = "";
 
             bool perFrame = false,
                  SlidingMotorizePerFrame = false,
@@ -765,9 +770,10 @@ namespace ModelLayer.Model.Quotation
                                             if (div_nxtCtrl.Div_ChkDM == true && div_nxtCtrl.Div_DMPanel == pnl_curCtrl)
                                             {
                                                 div_nxtCtrl.Insert_DummyMullion_MaterialList(Material_List);
+                                                div_nxtCtrl.Insert_Endcap4DM_MaterialList(Material_List);
+
                                                 if (!item.WD_profile.Contains("Alutek"))
                                                 {  
-                                                    div_nxtCtrl.Insert_Endcap4DM_MaterialList(Material_List);
 
                                                     int expHt_screws = div_nxtCtrl.Add_ExplosionLength_screws4fab();
                                                     total_screws_fabrication += expHt_screws;
@@ -808,6 +814,11 @@ namespace ModelLayer.Model.Quotation
                                                         }
                                                     }
                                                 }
+                                                else
+                                                {
+                                                    div_nxtCtrl.Insert_ShootboltForAlutek_MaterialList(Material_List);
+                                                }
+
                                                 if (div_nxtCtrl.Div_DMPanel != null &&
                                                    (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
                                                      div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
@@ -909,10 +920,10 @@ namespace ModelLayer.Model.Quotation
                                             if (div_prevCtrl.Div_ChkDM == true && div_prevCtrl.Div_DMPanel == pnl_curCtrl)
                                             {
                                                 div_prevCtrl.Insert_DummyMullion_MaterialList(Material_List);
+                                                div_prevCtrl.Insert_Endcap4DM_MaterialList(Material_List);
 
                                                 if (!item.WD_profile.Contains("Alutek"))
                                                 { 
-                                                  div_prevCtrl.Insert_Endcap4DM_MaterialList(Material_List);
                                                   
                                                   int expLength_screws = div_prevCtrl.Add_ExplosionLength_screws4fab();
                                                   total_screws_fabrication += expLength_screws;
@@ -949,6 +960,11 @@ namespace ModelLayer.Model.Quotation
                                                       }
                                                   }
                                                 }
+                                                else
+                                                {
+                                                    div_prevCtrl.Insert_ShootboltForAlutek_MaterialList(Material_List);
+                                                }
+
                                                 if (div_prevCtrl.Div_DMPanel != null &&
                                                     (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
                                                      div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
@@ -1178,6 +1194,10 @@ namespace ModelLayer.Model.Quotation
                                                         add_screws_fab_fxdcam += FixedCamAndSnapInKeepQty * 2;
                                                     }
                                                 }
+                                                else if (frame.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                                                { 
+                                                        pnl_curCtrl.Insert_FrictionStay_MaterialList(Material_List);
+                                                }
                                             }
 
 
@@ -1298,19 +1318,41 @@ namespace ModelLayer.Model.Quotation
 
                                             if (item.WD_profile.Contains("Alutek"))
                                             {
-                                                pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, true);
-                                                pnl_curCtrl.Insert_CenterGasket_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_OpenableStriker_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_Cheveron_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_CornerWindow_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_RunUpBlock_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_PackerRod_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_LockingWedge_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_SSCheveron_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_Pegstay_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_AlutekStriker_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_Unica40_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_LockingConnectorDevice_MaterialList(Material_List);
+                                                if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84200 ||
+                                                    pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                                                {
+                                                    total_GlazingGasketLength += pnl_curCtrl.Add_GasketLength_Alutek(true, pnl_curCtrl.Panel_GlassThickness);
+                                                    total_UniversalGasketLength += pnl_curCtrl.Add_UniversalGasketLength_Alutek();
+                                                    total_GlazingGasketLengthDesc = pnl_curCtrl.Panel_GlazingGasketArtNo.ToString();
+                                                    total_UniversalGasketLengthDesc = pnl_curCtrl.Panel_GlazingGasketArtNo2.ToString();
+                                                    //pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, true);
+
+                                                    total_CenterGasketLength += pnl_curCtrl.Add_CenterGasket();
+                                                    //pnl_curCtrl.Insert_CenterGasket_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_Cheveron_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_CornerWindow_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_RunUpBlock_MaterialList(Material_List, pnl_curCtrl.Panel_Type);
+                                                    pnl_curCtrl.Insert_PackerRod_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_LockingWedge_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_SSCheveron_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_Pegstay_MaterialList(Material_List);
+                                                    //pnl_curCtrl.Insert_AlutekStriker_MaterialList(Material_List, pnl_curCtrl.Panel_Type);
+
+                                                    if (pnl_curCtrl.Panel_HandleType != Handle_Type._None)
+                                                    {
+                                                        pnl_curCtrl.Insert_Unica40_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_OpenableStriker_MaterialList(Material_List, pnl_curCtrl.Panel_Type);
+                                                        pnl_curCtrl.Insert_LockingConnectorDevice_MaterialList(Material_List);
+                                                    }
+
+                                                    if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172 ||
+                                                        pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
+                                                    {
+                                                        pnl_curCtrl.Insert_TwoWayLockingConnector_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_OneWayLockingConnector_MaterialList(Material_List);
+                                                    }
+
+                                                }
                                             }
                                         }
                                     }
@@ -1343,7 +1385,13 @@ namespace ModelLayer.Model.Quotation
 
                                         if (item.WD_profile.Contains("Alutek"))
                                         {
-                                            pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, false);
+                                            total_GlazingGasketLength += pnl_curCtrl.Add_GasketLength_Alutek(false, pnl_curCtrl.Panel_GlassThickness);
+                                            total_UniversalGasketLength += pnl_curCtrl.Add_UniversalGasketLength_Alutek();
+                                            total_GlazingGasketLengthDesc = pnl_curCtrl.Panel_GlazingGasketArtNo.ToString();
+                                            total_UniversalGasketLengthDesc = pnl_curCtrl.Panel_GlazingGasketArtNo2.ToString();
+
+
+                                            //pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, false);
                                             if (frame.Frame_InversionClipOption == true)
                                             {
                                                 pnl_curCtrl.Insert_InversionClip_MaterialList(Material_List);
@@ -1970,7 +2018,12 @@ namespace ModelLayer.Model.Quotation
 
                                 if (item.WD_profile.Contains("Alutek"))
                                 {
-                                    pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, pnl_curCtrl.Panel_SashPropertyVisibility);
+                                    total_GlazingGasketLength += pnl_curCtrl.Add_GasketLength_Alutek(pnl_curCtrl.Panel_SashPropertyVisibility, pnl_curCtrl.Panel_GlassThickness);
+                                    total_UniversalGasketLength += pnl_curCtrl.Add_UniversalGasketLength_Alutek();
+                                    total_GlazingGasketLengthDesc = pnl_curCtrl.Panel_GlazingGasketArtNo.ToString();
+                                    total_UniversalGasketLengthDesc = pnl_curCtrl.Panel_GlazingGasketArtNo2.ToString();
+
+                                    //pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, pnl_curCtrl.Panel_SashPropertyVisibility);
                                 }
 
                                 if (pnl_curCtrl.Panel_ChkGlazingAdaptor == true)
@@ -2080,48 +2133,34 @@ namespace ModelLayer.Model.Quotation
 
                                 if (item.WD_profile.Contains("Alutek"))
                                 {
-                                    if (pnl.Panel_CenterGasketArtNo != null)
+                                    if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84200 ||
+                                        pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
                                     {
-                                        pnl.Insert_CenterGasket_MaterialList(Material_List);
-                                    } 
-                                    if (pnl.Panel_OpenableStrikerArtNo != null)
-                                    {
-                                        pnl.Insert_OpenableStriker_MaterialList(Material_List);
-                                    } 
-                                    if (pnl.Panel_CheveronArtNo != null)
-                                    {
+                                        total_CenterGasketLength += pnl.Add_CenterGasket();
+                                        //pnl.Insert_CenterGasket_MaterialList(Material_List);
                                         pnl.Insert_Cheveron_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_CornerCleatArtNo != null)
-                                    {
                                         pnl.Insert_CornerWindow_MaterialList(Material_List);
+                                        pnl.Insert_RunUpBlock_MaterialList(Material_List, pnl.Panel_Type);
+                                        pnl.Insert_PackerRod_MaterialList(Material_List); 
+                                        pnl.Insert_LockingWedge_MaterialList(Material_List); 
+                                        pnl.Insert_SSCheveron_MaterialList(Material_List); 
+                                        pnl.Insert_Pegstay_MaterialList(Material_List);
+                                        //pnl.Insert_AlutekStriker_MaterialList(Material_List, pnl.Panel_Type); 
+                                        if (pnl.Panel_HandleType != Handle_Type._None)
+                                        {
+                                            pnl.Insert_Unica40_MaterialList(Material_List);
+                                            pnl.Insert_OpenableStriker_MaterialList(Material_List, pnl.Panel_Type);
+                                            pnl.Insert_LockingConnectorDevice_MaterialList(Material_List);
+                                        }
+
+                                        if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172 ||
+                                            pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
+                                        {
+                                            pnl.Insert_TwoWayLockingConnector_MaterialList(Material_List);
+                                            pnl.Insert_OneWayLockingConnector_MaterialList(Material_List);
+                                        }
+
                                     }
-                                    if (pnl.Panel_RunUpBlockArtNo != null)
-                                    {
-                                        pnl.Insert_RunUpBlock_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_PackerRodArtNo != null)
-                                    {
-                                        pnl.Insert_PackerRod_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_LockingWedgeArtNo != null)
-                                    {
-                                        pnl.Insert_LockingWedge_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_SSCheveronArtNo != null)
-                                    {
-                                        pnl.Insert_SSCheveron_MaterialList(Material_List);
-                                    }
-                                    pnl.Insert_Pegstay_MaterialList(Material_List);
-                                    pnl.Insert_AlutekStriker_MaterialList(Material_List);
-                                    if (pnl.Panel_Unica40ArtNo != null)
-                                    {
-                                        pnl.Insert_Unica40_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_LockingConnectorArtNo != null)
-                                    {
-                                        pnl.Insert_LockingConnectorDevice_MaterialList(Material_List);
-                                    } 
                                 }
 
                             }
@@ -2247,51 +2286,43 @@ namespace ModelLayer.Model.Quotation
                                         add_screws_fab_fxdcam += FixedCamAndSnapInKeepQty * 2;
                                     }
                                 }
+                                else if (frame.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                                { 
+                                        pnl.Insert_FrictionStay_MaterialList(Material_List);
+                                }
+
+
 
                                 if (item.WD_profile.Contains("Alutek"))
                                 {
-                                    if (pnl.Panel_CenterGasketArtNo != null)
+                                    if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84200 ||
+                                        pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
                                     {
-                                        pnl.Insert_CenterGasket_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_OpenableStrikerArtNo != null)
-                                    {
-                                        pnl.Insert_OpenableStriker_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_CheveronArtNo != null)
-                                    {
+                                        total_CenterGasketLength += pnl.Add_CenterGasket();
+                                        //pnl.Insert_CenterGasket_MaterialList(Material_List);
                                         pnl.Insert_Cheveron_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_CornerCleatArtNo != null)
-                                    {
                                         pnl.Insert_CornerWindow_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_RunUpBlockArtNo != null)
-                                    {
-                                        pnl.Insert_RunUpBlock_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_PackerRodArtNo != null)
-                                    {
+                                        pnl.Insert_RunUpBlock_MaterialList(Material_List, pnl.Panel_Type);
                                         pnl.Insert_PackerRod_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_LockingWedgeArtNo != null)
-                                    {
                                         pnl.Insert_LockingWedge_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_SSCheveronArtNo != null)
-                                    {
                                         pnl.Insert_SSCheveron_MaterialList(Material_List);
-                                    }
-                                    pnl.Insert_Pegstay_MaterialList(Material_List);
-                                    pnl.Insert_AlutekStriker_MaterialList(Material_List);
-                                    if (pnl.Panel_Unica40ArtNo != null)
-                                    {
-                                        pnl.Insert_Unica40_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_LockingConnectorArtNo != null)
-                                    {
-                                        pnl.Insert_LockingConnectorDevice_MaterialList(Material_List);
-                                    }
+                                        pnl.Insert_Pegstay_MaterialList(Material_List);
+                                        //pnl.Insert_AlutekStriker_MaterialList(Material_List, pnl.Panel_Type);
+
+                                        if (pnl.Panel_HandleType != Handle_Type._None)
+                                        {  
+                                            pnl.Insert_OpenableStriker_MaterialList(Material_List, pnl.Panel_Type);
+                                            pnl.Insert_Unica40_MaterialList(Material_List);
+                                            pnl.Insert_LockingConnectorDevice_MaterialList(Material_List); 
+                                        }
+
+                                        if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172 ||
+                                            pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
+                                        {
+                                            pnl.Insert_TwoWayLockingConnector_MaterialList(Material_List);
+                                            pnl.Insert_OneWayLockingConnector_MaterialList(Material_List);
+                                        }
+                                    } 
                                 }
                             }
                             else if (pnl.Panel_Type.Contains("Sliding"))
@@ -2513,7 +2544,7 @@ namespace ModelLayer.Model.Quotation
                         pnl.Insert_SealForHandle_MaterialList(Material_List);
                         pnl.Insert_LouvreGallerySet_MaterialList(Material_List);
                     }
-
+                     
                     if (!pnl.Panel_Type.Contains("Louver"))
                     {
                         pnl.Insert_GlazingBead_MaterialList(Material_List, where);
@@ -2521,7 +2552,12 @@ namespace ModelLayer.Model.Quotation
 
                     if (item.WD_profile.Contains("Alutek"))
                     {
-                        pnl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl.Panel_GlassThickness, pnl.Panel_SashPropertyVisibility);
+                        total_GlazingGasketLength += pnl.Add_GasketLength_Alutek(pnl.Panel_SashPropertyVisibility, pnl.Panel_GlassThickness);
+                        total_UniversalGasketLength += pnl.Add_UniversalGasketLength_Alutek();
+                        total_GlazingGasketLengthDesc = pnl.Panel_GlazingGasketArtNo.ToString();
+                        total_UniversalGasketLengthDesc = pnl.Panel_GlazingGasketArtNo2.ToString();
+
+                        //pnl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl.Panel_GlassThickness, pnl.Panel_SashPropertyVisibility);
                     }
 
                     if ((pnl.Panel_Type.Contains("Awning") || pnl.Panel_Type.Contains("Casement")) &&
@@ -2689,11 +2725,40 @@ namespace ModelLayer.Model.Quotation
             }
             else
             {
-                //Material_List.Rows.Add("Hole Cap M671",
-                //               Expansion_BoltQty_Total,
-                //               "pc(s)",
-                //               "",
-                //               "Frame");
+                Material_List.Rows.Add("Hole Cap M671",
+                               Expansion_BoltQty_Total + 1,
+                               "pc(s)",
+                               "",
+                               "Frame");
+
+                if (total_GlazingGasketLength > 0)
+                {
+                  
+                    Material_List.Rows.Add("Glazing Gasket " + total_GlazingGasketLengthDesc,
+                                            1,
+                                           "pc(s)",
+                                           total_GlazingGasketLength.ToString(),
+                                           "Sash");
+                }
+
+                if (total_UniversalGasketLength > 0)
+                {
+
+                    Material_List.Rows.Add("Universal Gasket " + total_UniversalGasketLengthDesc,
+                                            1,
+                                           "pc(s)",
+                                           total_UniversalGasketLength.ToString(),
+                                           "Frame");
+                }
+
+                if (total_CenterGasketLength > 0)
+                {
+                    Material_List.Rows.Add("Center Gasket G222",
+                                           1,
+                                          "pc(s)",
+                                          total_CenterGasketLength.ToString(),
+                                          "Sash");
+                }
             }
             var query = from r in Material_List.AsEnumerable()
                         group r by new
@@ -3420,7 +3485,7 @@ namespace ModelLayer.Model.Quotation
                 //CornerWindowPricePerPiece = 37.23m,
                 CheveronPricePerPiece = 4.47m,
                 //WaterDrainageWValvesPricePerPiece = 8.94m,
-                //HoleCapePricePerPiece = 2.98m,
+                HoleCapePricePerPiece = 2.98m,
                 UniversalGasketPricePerPiece = 22.60m,
                 //GasketPar3mmPricePerPiece = 14.07m, same lang ng gasket for gb
 
@@ -3468,7 +3533,7 @@ namespace ModelLayer.Model.Quotation
                 //fixed
                 //CornerWindowPrice, inalis dahil same sila ni corner cleat = corner window
                 //WaterDrainageWValvesPrice, inalis dahil di na ginagamit
-                //HoleCapePrice, inalis dahil di na ginagamit
+                HoleCapePrice, //inalis dahil di na ginagamit // pinabalik nanaman!!!! 6/21/24
                 UniversalGasketPrice,
                 //GasketPar3mmPrice, same lang sila ni gasket for glazing bead
                 ExpansionBoltPrice,
@@ -6843,7 +6908,7 @@ namespace ModelLayer.Model.Quotation
                                            //CornerWindowPrice += 4 * CornerWindowPricePerPiece;
                                            //CheveronPrice += 4 * CheveronPricePerPiece;
                                            //WaterDrainageWValvesPrice += 2 * WaterDrainageWValvesPricePerPiece;
-                                           //HoleCapePrice += 10 * HoleCapePricePerPiece;
+                                           HoleCapePrice += 10 * HoleCapePricePerPiece;
                                            
                                            if (fr.Frame_InversionClipOption == true)
                                            {
@@ -9904,7 +9969,7 @@ namespace ModelLayer.Model.Quotation
                                        //Math.Round(CornerWindowPrice, 2) +
                                        Math.Round(CheveronPrice, 2) +
                                        //Math.Round(WaterDrainageWValvesPrice, 2) +
-                                       //Math.Round(HoleCapePrice, 2) +
+                                       Math.Round(HoleCapePrice, 2) +
                                        //Math.Round(UniversalGasketPrice, 2) +
                                        // Math.Round(GasketPar3mmPrice, 2) +
                                        //aw
@@ -10491,12 +10556,12 @@ namespace ModelLayer.Model.Quotation
                                            "",
                                            "Material Cost");
 
-                            //Price_List.Rows.Add("Hole Cape Price",
-                            //               HoleCapePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                            //               Math.Round(HoleCapePrice, 2).ToString("N", new CultureInfo("en-US")),
-                            //               "",
-                            //               "",
-                            //               "Material Cost");
+                            Price_List.Rows.Add("Hole Cape Price",
+                                           HoleCapePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(HoleCapePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
 
                             Price_List.Rows.Add("Total",
                                         "",
@@ -11698,7 +11763,8 @@ namespace ModelLayer.Model.Quotation
             //CornerWindowPrice = 0;
             CheveronPrice = 0;
             //WaterDrainageWValvesPrice = 0;
-            //HoleCapePrice = 0;
+            
+            HoleCapePrice = 0;
             UniversalGasketPrice = 0;
             //GasketPar3mmPrice = 0;
             ExpansionBoltPrice = 0;
@@ -11717,6 +11783,7 @@ namespace ModelLayer.Model.Quotation
             OpenableStrikerPrice = 0;
             CornerCleatPrice = 0;
             FrictionStayPrice = 0;
+            FrictionStayPackerPrice = 0;
             RunUpblockPrice = 0;
             PackerRodPrice = 0;
             LockingWedgesPrice = 0;
