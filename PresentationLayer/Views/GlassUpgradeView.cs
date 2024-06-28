@@ -190,6 +190,33 @@ namespace PresentationLayer.Views
             }
         }
 
+        public CheckBox GetOOTAdditionalCheckbox()
+        {
+            return chkbox_Additional;
+        }
+
+        public NumericUpDown GetOOTAdditionalNum()
+        {
+            return num_Additional;
+        }
+
+        public Label GetOOTSuggestLabel()
+        {
+            return lbl_ootPerSuggest;
+        }
+
+        public NumericUpDown OOTAdditionalPercentage
+        {
+            get
+            {
+                return num_Additional;
+            }
+            set
+            {
+                num_Additional.Value = Convert.ToDecimal(value);
+            }
+        }
+
         #endregion
 
         #region EventHandler
@@ -210,6 +237,7 @@ namespace PresentationLayer.Views
         public event EventHandler cmb_multipleGlassUpgrade_EnterEventRaised;
         public event EventHandler cmb_multipleGlassUpgrade_LeaveEventRaised;
         public event EventHandler cmb_multipleGlassUpgrade_TextChangedEventRaised;
+        public event EventHandler chkbox_Additional_CheckedChangedEventRaised;
 
         #endregion
 
@@ -291,6 +319,11 @@ namespace PresentationLayer.Views
         private void cmb_multipleGlassUpgrade_TextChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmb_multipleGlassUpgrade_TextChangedEventRaised,e);
+        }
+
+        private void chkbox_Additional_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbox_Additional_CheckedChangedEventRaised, e);
         }
     }
 }

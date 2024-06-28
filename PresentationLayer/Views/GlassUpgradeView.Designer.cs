@@ -67,6 +67,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.num_wdwsAndDoors = new System.Windows.Forms.NumericUpDown();
             this._lblWindoor = new System.Windows.Forms.Label();
+            this.chkbox_Additional = new System.Windows.Forms.CheckBox();
+            this.num_Additional = new System.Windows.Forms.NumericUpDown();
+            this.lbl_ootPerSuggest = new System.Windows.Forms.Label();
             this.panel_Header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_discount)).BeginInit();
             this.pnl_desc.SuspendLayout();
@@ -77,11 +80,15 @@
             this.cmsGlassUpgrade.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_glassAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_wdwsAndDoors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Additional)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Header
             // 
             this.panel_Header.BackColor = System.Drawing.SystemColors.Window;
+            this.panel_Header.Controls.Add(this.lbl_ootPerSuggest);
+            this.panel_Header.Controls.Add(this.num_Additional);
+            this.panel_Header.Controls.Add(this.chkbox_Additional);
             this.panel_Header.Controls.Add(this.cmb_multipleGlassUpgrade);
             this.panel_Header.Controls.Add(this.lbl_multipleGlassUpgrade);
             this.panel_Header.Controls.Add(this.chkbx_Duplicate);
@@ -185,7 +192,7 @@
             // 
             this.lbl_discount.AutoSize = true;
             this.lbl_discount.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_discount.Location = new System.Drawing.Point(396, 101);
+            this.lbl_discount.Location = new System.Drawing.Point(257, 140);
             this.lbl_discount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_discount.Name = "lbl_discount";
             this.lbl_discount.Size = new System.Drawing.Size(70, 19);
@@ -195,7 +202,7 @@
             // 
             // num_discount
             // 
-            this.num_discount.Location = new System.Drawing.Point(483, 98);
+            this.num_discount.Location = new System.Drawing.Point(344, 137);
             this.num_discount.Margin = new System.Windows.Forms.Padding(4);
             this.num_discount.Name = "num_discount";
             this.num_discount.Size = new System.Drawing.Size(91, 22);
@@ -266,7 +273,7 @@
             this._glassUpgToolStrip.Location = new System.Drawing.Point(0, 0);
             this._glassUpgToolStrip.Name = "_glassUpgToolStrip";
             this._glassUpgToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this._glassUpgToolStrip.Size = new System.Drawing.Size(1243, 27);
+            this._glassUpgToolStrip.Size = new System.Drawing.Size(1243, 31);
             this._glassUpgToolStrip.TabIndex = 12;
             this._glassUpgToolStrip.Text = "_glassUpgToolStrip";
             // 
@@ -276,7 +283,7 @@
             this._printBtn.Image = global::PresentationLayer.Properties.Resources.print;
             this._printBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._printBtn.Name = "_printBtn";
-            this._printBtn.Size = new System.Drawing.Size(29, 24);
+            this._printBtn.Size = new System.Drawing.Size(29, 28);
             this._printBtn.Text = "toolStripButton1";
             this._printBtn.Click += new System.EventHandler(this._printBtn_Click);
             // 
@@ -536,6 +543,36 @@
             this._lblWindoor.TabIndex = 17;
             this._lblWindoor.Text = "Windows / Doors: ";
             // 
+            // chkbox_Additional
+            // 
+            this.chkbox_Additional.AutoSize = true;
+            this.chkbox_Additional.Location = new System.Drawing.Point(396, 86);
+            this.chkbox_Additional.Name = "chkbox_Additional";
+            this.chkbox_Additional.Size = new System.Drawing.Size(147, 21);
+            this.chkbox_Additional.TabIndex = 23;
+            this.chkbox_Additional.Text = "OOT Additional %:";
+            this.chkbox_Additional.UseVisualStyleBackColor = true;
+            this.chkbox_Additional.CheckedChanged += new System.EventHandler(this.chkbox_Additional_CheckedChanged);
+            // 
+            // num_Additional
+            // 
+            this.num_Additional.Location = new System.Drawing.Point(537, 86);
+            this.num_Additional.Name = "num_Additional";
+            this.num_Additional.Size = new System.Drawing.Size(57, 22);
+            this.num_Additional.TabIndex = 24;
+            this.num_Additional.Visible = false;
+            // 
+            // lbl_ootPerSuggest
+            // 
+            this.lbl_ootPerSuggest.AutoSize = true;
+            this.lbl_ootPerSuggest.ForeColor = System.Drawing.Color.Red;
+            this.lbl_ootPerSuggest.Location = new System.Drawing.Point(396, 113);
+            this.lbl_ootPerSuggest.Name = "lbl_ootPerSuggest";
+            this.lbl_ootPerSuggest.Size = new System.Drawing.Size(125, 17);
+            this.lbl_ootPerSuggest.TabIndex = 25;
+            this.lbl_ootPerSuggest.Text = "Use of AddPerSug";
+            this.lbl_ootPerSuggest.Visible = false;
+            // 
             // GlassUpgradeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -569,6 +606,7 @@
             this.cmsGlassUpgrade.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.num_glassAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_wdwsAndDoors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Additional)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -612,5 +650,8 @@
         private System.Windows.Forms.ToolStripMenuItem upgradeToToolStripMenuItem;
         private System.Windows.Forms.Label lbl_multipleGlassUpgrade;
         private System.Windows.Forms.ComboBox cmb_multipleGlassUpgrade;
+        private System.Windows.Forms.NumericUpDown num_Additional;
+        private System.Windows.Forms.CheckBox chkbox_Additional;
+        private System.Windows.Forms.Label lbl_ootPerSuggest;
     }
 }
