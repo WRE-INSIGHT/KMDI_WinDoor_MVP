@@ -9572,7 +9572,7 @@ namespace ModelLayer.Model.Quotation
                                                     {
                                                         alumBladesPrice = 926.47m * 5.8m;
                                                     }
-                                                    GlassBladePrice = alumBladesPrice * Math.Ceiling(BladeAluMultiplier);
+                                                    GlassBladePrice += alumBladesPrice * Math.Ceiling(BladeAluMultiplier);
                                                     Singlepnl.Panel_GlassPricePerSqrMeter = alumBladesPrice;
                                                 }
                                             }
