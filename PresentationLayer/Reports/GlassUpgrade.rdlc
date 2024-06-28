@@ -2046,7 +2046,7 @@ First(Fields!dtTotalNetPriceWOVat.Value, "DataSet1"))</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Glass have to be included in the shipment of the windows/door otherwise, we will have to charge shipping cost separately.</Value>
+                    <Value>Glass have to be included in the shipment of the windows/door, otherwise, we will have to charge shipping costs separately.</Value>
                     <Style>
                       <FontFamily>segoe UI</FontFamily>
                       <FontSize>9pt</FontSize>
