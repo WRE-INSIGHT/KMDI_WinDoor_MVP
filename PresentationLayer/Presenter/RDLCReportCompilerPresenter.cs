@@ -99,11 +99,26 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.chkbxguShowVatCheckedChanged += new EventHandler(OnchkbxguShowVatCheckedChanged);
             _rdlcReportCompilerView.chkbx_SummaryLessD_CheckedChangedEventRaised += new EventHandler(Onchkbx_SummaryLessD_CheckedChangedEventRaised);
             _rdlcReportCompilerView.chkbx_ScreenNetofDiscount_CheckedChangedEventRaised += new EventHandler(Onchkbx_ScreenNetofDiscount_CheckedChangedEventRaised);
+            _rdlcReportCompilerView.chkbx_GuSubtotal_CheckedChangedEventRaised += new EventHandler(Onchkbx_GuSubtotal_CheckedChangedEventRaised);
             
             //bgw.WorkerReportsProgress = true;
             //bgw.WorkerSupportsCancellation = true;
             //bgw.DoWork += Bgw_DoWork;
             //bgw.ProgressChanged += Bgw_ProgressChanged; 
+        }
+
+        private void Onchkbx_GuSubtotal_CheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_rdlcReportCompilerView.GetGlassUpgradeSubTotal().Checked)
+            {
+                _quoteItemListPresenter.RDLCGUShowSubTotal = true;
+                _rdlcReportCompilerView.GetGlassUpgradeRowLimitTxtBx().Visible = true;
+            }
+            else
+            {
+                _quoteItemListPresenter.RDLCGUShowSubTotal = false;
+                _rdlcReportCompilerView.GetGlassUpgradeRowLimitTxtBx().Visible = false;
+            }
         }
 
 
@@ -269,6 +284,7 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.GetContractSummaryLessDiscountTxtBx().Text = _quoteItemListPresenter.ContractSummaryLessDiscount.ToString();
             _rdlcReportCompilerView.TxtBxContractSummaryVat = "12";
             _rdlcReportCompilerView.TxtBxRowlimit = "21";
+            _rdlcReportCompilerView.TxtGlassUpgradeRowLimit = "22";
 
             LoadSettingsForGlassUpgrade();
 
@@ -394,18 +410,24 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-                            //#region P.A. Windoor RDLC
-                            //_quoteItemListPresenter.PrintWindoorPartialAdjustmentRDLC();
-                            //#endregion
-                            //#region P.A. Summary of Contract
-                            //_quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
-                            //_quoteItemListPresenter.RDLCReportCompilerVatContractSummery = _rdlcReportCompilerView.TxtBxContractSummaryVat;
-                            //decimal _deci = Convert.ToDecimal(_rdlcReportCompilerView.TxtContractSummaryLessDiscount);
-                            //int _wholeNum = Convert.ToInt32(_deci * 100m);
-                            //_quoteItemListPresenter.RDLCReportCompilerLessDiscountContractSummary = _wholeNum;
-                            ////galing quotelist naka decimal gawing whole number 
-                            //_quoteItemListPresenter.PrintContractSummaryPartialAdjustmentRDLC();
-                            //#endregion
+                            #region P.A. Windoor RDLC
+                            _quoteItemListPresenter.PrintWindoorPartialAdjustmentRDLC();
+                            #endregion
+                            #region P.A. Summary of Contract
+                            _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
+                            _quoteItemListPresenter.RDLCReportCompilerVatContractSummery = _rdlcReportCompilerView.TxtBxContractSummaryVat;
+                            decimal _deci = Convert.ToDecimal(_rdlcReportCompilerView.TxtContractSummaryLessDiscount);
+                            int _wholeNum = Convert.ToInt32(_deci * 100m);
+                            _quoteItemListPresenter.RDLCReportCompilerLessDiscountContractSummary = _wholeNum;
+                            //galing quotelist naka decimal gawing whole number 
+                            _quoteItemListPresenter.PrintContractSummaryPartialAdjustmentRDLC();
+                            #endregion
+                            #region P.A. Screen 
+                            if(_mainPresenter.Lst_ScreenPartialAdjustment.Count != 0)
+                            {
+                                _quoteItemListPresenter.PrintScreenPartialAdjustmentRDLC();
+                            }
+                            #endregion
                         }
 
                         #region Glass Upgrade
@@ -439,7 +461,8 @@ namespace PresentationLayer.Presenter
                             _quoteItemListPresenter.RDLCGUNotedByOfficial = _guCmbNotedBy.SelectedItem.ToString();
                             int notedOfficialPosIndex = _guCmbNotedBy.SelectedIndex; // indx pos
                             _quoteItemListPresenter.RDLCGUNotedByOfficialPos = notedOfficialPosIndex;
-                            _quoteItemListPresenter.RDLCGUVatPercentage = _guTxtBxVat.Text;                          
+                            _quoteItemListPresenter.RDLCGUVatPercentage = _guTxtBxVat.Text;
+                            _quoteItemListPresenter.RDLCGURowLimit = _rdlcReportCompilerView.TxtGlassUpgradeRowLimit;
                             _quoteItemListPresenter.PrintGlassUpgrade();
 
                             _loopCounter++;

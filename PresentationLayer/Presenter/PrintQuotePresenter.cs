@@ -1404,6 +1404,15 @@ namespace PresentationLayer.Presenter
                             RParam[10] = new ReportParameter("showNotedBy", "False");
                         }
 
+                        if (_quoteItemListPresenter.RDLCGUShowSubTotal)
+                        {
+                            RParam[16] = new ReportParameter("ShowSubTotal", "True");
+                        }
+                        else
+                        {
+                            RParam[16] = new ReportParameter("ShowSubTotal", "False");
+                        }
+
                         RParam[11] = new ReportParameter("reviewedByOfficial",_quoteItemListPresenter.RDLCGUReviewedByOfficial);
                         int _indxOfReviewedOfficial = _quoteItemListPresenter.RDLCGUReviewedByOfficialPos;
                         RParam[12] = new ReportParameter("reviewedOfficialPos", _officialsPosition[_indxOfReviewedOfficial]);
@@ -1494,6 +1503,34 @@ namespace PresentationLayer.Presenter
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+                    
+                    #region RenderPDFAtBackground
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    {
+                        Warning[] warnings;
+                        string[] streamIds;
+                        string mimeType = string.Empty;
+                        string encoding = string.Empty;
+                        string extension = string.Empty;
+
+                        byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                           ("PDF",
+                           null,
+                           out mimeType,
+                           out encoding,
+                           out extension,
+                           out streamIds,
+                           out warnings
+                           );
+
+                        string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\Quotation.PDF";
+                        using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                        {
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+                    }
+                    #endregion
+
                     #endregion
                 }
                 else if (_mainPresenter.printStatus == "ScreenPartialAdjustment")
@@ -1525,6 +1562,41 @@ namespace PresentationLayer.Presenter
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+
+                    try
+                    {
+                        #region RenderPDFAtBackground
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                        {
+                            Warning[] warnings;
+                            string[] streamIds;
+                            string mimeType = string.Empty;
+                            string encoding = string.Empty;
+                            string extension = string.Empty;
+
+                            byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                               ("PDF",
+                               null,
+                               out mimeType,
+                               out encoding,
+                               out extension,
+                               out streamIds,
+                               out warnings
+                               );
+
+                            string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\Screen.PDF";
+                            using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                            {
+                                fs.Write(bytes, 0, bytes.Length);
+                            }
+                        }
+                        #endregion
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("quoteitemlistpresenter is not used" + ex);
+                    }
+
                     #endregion
                 }
             }

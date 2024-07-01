@@ -2,6 +2,7 @@
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.Screen;
 using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.DataTables;
 using PresentationLayer.Presenter.UserControls;
@@ -270,6 +271,9 @@ namespace PresentationLayer.Presenter
                 _guFileName = value;
             }
         }
+
+        public bool RDLCGUShowSubTotal { get; set; }
+        public string RDLCGURowLimit { get; set; }
 
         public List<IQuoteItemListUCPresenter> LstQuoteItemUC
         {
@@ -896,7 +900,7 @@ namespace PresentationLayer.Presenter
             clearingOperation();
             #endregion
         }
-
+         
         public void PrintContractSummaryPartialAdjustmentRDLC()
         {
             #region PrintContractSummary P.A.
@@ -1258,7 +1262,9 @@ namespace PresentationLayer.Presenter
 
 
                 _mainPresenter.printStatus = "PartialAdjustment";
-                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
+               
+               // IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
+                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
                 printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtPartialAdjustment.DefaultView;
  
 
@@ -1280,12 +1286,106 @@ namespace PresentationLayer.Presenter
             #endregion
         }
 
+        public void PrintScreenPartialAdjustmentRDLC()
+        {
+            #region Screen Partial Adjustment List
+
+            try
+            {
+                DSQuotation _dsq = new DSQuotation();
+
+                foreach (IScreenPartialAdjustmentProperties spap in _mainPresenter.Lst_ScreenPartialAdjustment)
+                {
+                    string _itemNumber = "";
+                    decimal _unitPrice = 0m, _unitPrice_rev = 0m,
+                            _totalAmount = 0m, _totalAmount_rev = 0m,
+                            _adjustment = 0m,
+                            _totalCloseContract = 0m,
+                            _totalRevisedContract = 0m,
+                            _totalAdjustment = 0m;
+                    int _qty = 0, _qty_rev = 0;
+                    string _desc = "", _desc_rev = "", _windoorId;
+
+
+                    if (!spap.Screen_IsChild)
+                    {
+                        _itemNumber = spap.Screen_ItemNumber.ToString();
+                    }
+                    else
+                    {
+                        _itemNumber = "";
+                    }
+
+                    if (spap.Screen_Description_Revised == "")
+                    {
+                        _desc_rev = "";
+                    }
+                    else
+                    {
+                        _desc_rev = spap.Screen_Description_Revised;
+                    }
+
+                    _windoorId = spap.Screen_WindoorID;
+
+                    _desc = spap.Screen_Description;
+
+                    _unitPrice = spap.Screen_UnitPrice;
+                    _unitPrice_rev = spap.Screen_UnitPrice_Revised;
+
+                    _qty = spap.Screen_Quantity;
+                    _qty_rev = spap.Screen_Quantity_Revised;
+
+                    _totalAmount = spap.Screen_TotalAmount;
+                    _totalAmount_rev = spap.Screen_TotalAmount_Revised;
+
+                    _adjustment = spap.Screen_Adjustment_Price;
+
+                    _totalCloseContract = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_TotalAmount);
+                    _totalRevisedContract = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_TotalAmount_Revised);
+                    _totalAdjustment = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_Adjustment_Price);
+
+                    Console.WriteLine(Math.Round(_totalCloseContract, 2));
+                    Console.WriteLine(Math.Round(_totalRevisedContract, 2));
+                    Console.WriteLine(Math.Round(_totalAdjustment, 2));
+
+                    _dsq.dtScreenAdjustment.Rows.Add(_itemNumber,
+                                                      _windoorId,
+                                                      _desc,
+                                                      Math.Round(_unitPrice, 2),
+                                                      _qty,
+                                                      Math.Round(_totalAmount, 2),
+                                                      _desc_rev,
+                                                      Math.Round(_unitPrice_rev, 2),
+                                                      _qty_rev,
+                                                      Math.Round(_totalAmount_rev, 2),
+                                                      Math.Round(_adjustment, 2),
+                                                      Math.Round(_totalCloseContract, 2),
+                                                      Math.Round(_totalRevisedContract, 2),
+                                                      Math.Round(_totalAdjustment, 2));
+
+                }
+
+                _mainPresenter.printStatus = "ScreenPartialAdjustment";
+
+                //IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
+                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
+                printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreenAdjustment.DefaultView;
+                printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Screen Partial Adjustment RDLC \n" + ex.Message);
+            }
+            #endregion
+        }
+
         public void QuoteItemList_PrintAnnexRDLC()
         {
             _printQuotePresenter.printAnnexRDLC();
         }
         public void ContractSummaryComputation()
         {
+            #region Contract Summary Computation
             DSQuotation _dtqoute = new DSQuotation();
             try
             {
@@ -1368,6 +1468,7 @@ namespace PresentationLayer.Presenter
             total_DiscountedPrice_wo_VAT = Math.Round((windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage), 2);
 
             clearingOperation();
+            #endregion
         }
         private void clearingOperation()
         {
@@ -1961,6 +2062,7 @@ namespace PresentationLayer.Presenter
         }
         public void PrintGlassUpgrade()
         {
+
             DSQuotation _dsq = new DSQuotation();
             string _itemNumHolder,
                    _dimension;
@@ -2013,13 +2115,14 @@ namespace PresentationLayer.Presenter
 
                     }
                 }
-                //change this to render backgroundS
+                //change this to render background
                 _mainPresenter.printStatus = "GlassUpgrade";
                 IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
                 printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtGlassUpgrade.DefaultView;
                 printQuote.GetPrintQuoteView().GlassType = _guGlassType;
                 printQuote.EventLoad();
                 printQuote.GetPrintQuoteView().VatPercentage = _guVatPercentage;
+                printQuote.GetPrintQuoteView().RowLimit = RDLCGURowLimit;
                 printQuote.PrintRDLCReport();
 
                 //reset print variables 

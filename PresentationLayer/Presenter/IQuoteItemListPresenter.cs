@@ -26,6 +26,7 @@ namespace PresentationLayer.Presenter
         void PrintGlassUpgrade();
         void PrintContractSummaryPartialAdjustmentRDLC();
         void PrintWindoorPartialAdjustmentRDLC();
+        void PrintScreenPartialAdjustmentRDLC();
 
         List<IQuoteItemListUCPresenter> LstQuoteItemUC { get; set; }
         List<ShowItemImage> ShowItemImage_CheckList { get; set; }
@@ -54,6 +55,8 @@ namespace PresentationLayer.Presenter
         decimal ContractSummaryLessDiscount { get; set; }
         int RDLCReportCompilerLessDiscountContractSummary { get; set; }
         bool ShowLessDiscountContractSummary { get; set; }
+        bool RDLCGUShowSubTotal { get; set; }
+        string RDLCGURowLimit { get; set; }
 
         //List<IQuoteItemListUCPresenter> _lstQuoteItemUC { get; set; }
     }
