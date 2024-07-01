@@ -171,6 +171,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(binding["Panel_Placement"]);
             this.DataBindings.Add(binding["PanelGlass_ID"]);
             this.DataBindings.Add(binding["Panel_CmenuDeleteVisibility"]);
+            this.DataBindings.Add(binding["Panel_BackColor"]);
+
         }
 
         private void FixedPanelUC_MouseClick(object sender, MouseEventArgs e)

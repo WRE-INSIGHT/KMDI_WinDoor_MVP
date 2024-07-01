@@ -88,6 +88,14 @@ namespace PresentationLayer.Presenter
                           IPanelModel prev_pnl = null,
                           IPanelModel nxt_pnl = null,
                           IDividerPropertiesUCPresenter divPropUCP = null);
+        void SetLblStatusForCenterProfile(string status,
+                                                  bool visibility,
+                                                  Control controlRaised = null,
+                                                  IPanelModel prev_pnl = null,
+                                                  IPanelModel curnt_pnl = null,
+                                                  IPanelModel nxt_pnl = null,
+                                                  IPanelModel selected_pnl = null);
+
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);
         void AddWndrList_QuotationModel(IWindoorModel wndr);
@@ -158,10 +166,14 @@ namespace PresentationLayer.Presenter
         void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color);
         void setWoodecAdditional(int woodecAddlPercentage);
 
+        IPanelModel PrevPanelModel_forCenterProfileSelection { get; }
+        IPanelModel NxtPnlModel_forCenterProfileSelection { get; }
         Base_Color baseColor { get; set; }
         Foil_Color InsideColor { get; set; } 
         Foil_Color OutsideColor { get; set; }
         bool EditFromQuotationList { get; set; }
+        Control ControlRaised_forCenterProfileSelection { get; set; }
+        void OnLoadSearchCenterProfielArtNo(IPanelModel pnlModel);
 
     }
 }

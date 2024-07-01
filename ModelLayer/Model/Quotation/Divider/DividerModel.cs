@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using System;
 using System.Collections.Generic;
@@ -365,6 +366,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public IMultiPanelModel Div_MPanelParent { get; set; }
         public IFrameModel Div_FrameParent { get; set; }
+        public IUserModel Div_UserModel { get; set; }
         public IPanelModel Div_DMPanel { get; set; }
 
         #region Methods
@@ -766,11 +768,38 @@ namespace ModelLayer.Model.Quotation.Divider
             }
         }
 
-
-
-
-        public void SetExplosionValues_Div()
+        public void SetExplosionValues_Div(string Date_Assigned = null)
         {
+            #region ChangeComputationValueBaseOnDate
+
+            DateTime cus_ref_date;
+
+            cus_ref_date = DateTime.Parse(Date_Assigned);
+
+            DateTime FormulaChangedate_032624 = DateTime.Parse("03-26-2024"); //lagay new condition for deduction
+            DateTime FormulaChangedate_060724 = DateTime.Parse("06-07-2024"); //lagay ng premi condition galing nakacomment
+
+            #endregion
+
+            if (Div_UserModel != null)
+            { 
+               if (Div_UserModel.Department == "Sales & Operations (Costing)")
+               {
+                   #region AssignCustomerRef
+
+                   if (Div_FrameParent.Frame_WindoorModel.Date_Assigned_Mainpresenter == DateTime.Parse("01-01-0001"))
+                   {
+                       Div_FrameParent.Frame_WindoorModel.Date_Assigned_Mainpresenter = Div_FrameParent.Frame_WindoorModel.Date_Assigned;
+                   }
+
+                   if (Div_FrameParent.Frame_WindoorModel.Date_Assigned != Div_FrameParent.Frame_WindoorModel.Date_Assigned_Mainpresenter)
+                   {
+                       cus_ref_date = Div_FrameParent.Frame_WindoorModel.Date_Assigned_Mainpresenter;
+                   }
+
+                   #endregion  
+               }
+            }
             int frame_deduction = 0;
 
             if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
@@ -781,19 +810,24 @@ namespace ModelLayer.Model.Quotation.Divider
             {
                 frame_deduction = 47;
             }
-            else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._6050)
+            else if ((Div_UserModel.Department == "Sales & Operations (Costing)" && cus_ref_date >= FormulaChangedate_032624) ||
+                     Div_UserModel.Department != "Sales & Operations (Costing)")
             {
-                frame_deduction = 35;
+                if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._6050)
+                {
+                    frame_deduction = 35;
+                }
+                else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                {
+                    frame_deduction = 53;
+                }
+                else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                {
+                    frame_deduction = 22;
+                    Div_DividerConnectorArtNo = MullionConnector_ArticleNo._H120;
+                }
             }
-            else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._6052)
-            {
-                frame_deduction = 53;
-            }
-            else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._84100)
-            {
-                frame_deduction = 22;
-                Div_DividerConnectorArtNo = MullionConnector_ArticleNo._H120;
-            }
+           
 
             if (Div_ChkDM == true)
             {
@@ -899,7 +933,22 @@ namespace ModelLayer.Model.Quotation.Divider
                 {
                     if (Div_ChkDM == true && Div_DMPanel != null)
                     {
-                        Div_ExplosionHeight = (Div_DMPanel.Panel_SashHeight - (38 * 2)) - 5;
+                        int dmDeduct = 0;
+                        if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            dmDeduct = 32;                         }
+                        else 
+                        {
+                            dmDeduct = 38;
+                        }
+
+                        Div_ExplosionHeight = (Div_DMPanel.Panel_SashHeight - (dmDeduct * 2)) - 5;
+                        
+                        if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            Div_ExplosionHeight += 5;// mawala yung allowance
+                        }
+                         
                         Div_AlumSpacer50Qty = (int)(Math.Ceiling(((decimal)Div_ExplosionHeight / 300)) - 2);
                     }
                     else if (Div_ChkDM == false)
@@ -924,10 +973,11 @@ namespace ModelLayer.Model.Quotation.Divider
                                 Div_ExplosionHeight = (Div_DisplayHeight - frame_deduction - 33) + 8; // 33 = 7502 thicness
                             }
                         }
-                        //else if (Div_ArtNo == Divider_ArticleNo._6052 && Div_MPanelParent.MPanel_DividerEnabled == true)
-                        //{
-                        //    Div_ExplosionHeight = (Div_DisplayHeight - (frame_deduction * 2)) + (4 * 2);
-                        //}
+                        else if ((Div_ArtNo == Divider_ArticleNo._6052 && Div_MPanelParent.MPanel_DividerEnabled == true && cus_ref_date >= FormulaChangedate_060724) ||
+                                   Div_UserModel.Department != "Sales & Operations (Costing)")
+                        {
+                            Div_ExplosionHeight = (Div_DisplayHeight - (frame_deduction * 2)) + (4 * 2);
+                        }
                         else if (Div_ArtNo == Divider_ArticleNo._84300)
                         {
                             Div_ExplosionHeight = (Div_DisplayHeight - (frame_deduction * 2));
@@ -964,18 +1014,23 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2)) + (4 * 2);
                     }
-                    else if (Div_ArtNo == Divider_ArticleNo._6052)
+                    else if ((Div_UserModel.Department == "Sales & Operations (Costing)" && cus_ref_date >= FormulaChangedate_032624) ||
+                             Div_UserModel.Department != "Sales & Operations (Costing)")
                     {
-                        Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                        if (Div_ArtNo == Divider_ArticleNo._6052)
+                        {
+                            Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                        }
+                        else if (Div_ArtNo == Divider_ArticleNo._84300)
+                        {
+                            Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                        }
+                        else if (Div_ArtNo == Divider_ArticleNo._84301)
+                        {
+                            Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                        }
                     }
-                    else if (Div_ArtNo == Divider_ArticleNo._84300)
-                    {
-                        Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
-                    }
-                    else if (Div_ArtNo == Divider_ArticleNo._84301)
-                    {
-                        Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
-                    }
+
 
 
                     if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677 || Div_ReinfArtNo == DividerReinf_ArticleNo._V226)
@@ -986,14 +1041,19 @@ namespace ModelLayer.Model.Quotation.Divider
                     {
                         Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
                     }
-                    else if (Div_ReinfArtNo == DividerReinf_ArticleNo._TV107)
+                    else if ((Div_UserModel.Department == "Sales & Operations (Costing)" && cus_ref_date >= FormulaChangedate_032624) ||
+                             Div_UserModel.Department != "Sales & Operations (Costing)")
                     {
-                        Div_ReinfWidth = (Div_ExplosionWidth - (38 * 2)) - (5 * 2);
+                        if (Div_ReinfArtNo == DividerReinf_ArticleNo._TV107)
+                        {
+                            Div_ReinfWidth = (Div_ExplosionWidth - (38 * 2)) - (5 * 2);
+                        }
+                        else if (Div_ReinfArtNo == DividerReinf_ArticleNo._None)
+                        {
+                            Div_ReinfWidth = 0;
+                        }
                     }
-                    else if (Div_ReinfArtNo == DividerReinf_ArticleNo._None)
-                    {
-                        Div_ReinfWidth = 0;
-                    }
+                   
 
                     //Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                     //Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
@@ -1030,18 +1090,22 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 bot_deduction = (72 / 2) + frame_deduction;
                             }
-                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._6052)
+                            else if (cus_ref_date >= FormulaChangedate_032624 ||
+                                     Div_UserModel.Department != "Sales & Operations (Costing)")
                             {
-                                bot_deduction = (53 / 2) + frame_deduction;
-                            }
-                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._84300)
-                            {
-                                bot_deduction = (23 / 2) + frame_deduction;
-                            }
-                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._84301)
-                            {
-                                bot_deduction = (52 / 2) + frame_deduction;
-                            }
+                                if (div_bot.Div_ArtNo == Divider_ArticleNo._6052)
+                                {
+                                    bot_deduction = (53 / 2) + frame_deduction;
+                                }
+                                else if (div_bot.Div_ArtNo == Divider_ArticleNo._84300)
+                                {
+                                    bot_deduction = (23 / 2) + frame_deduction;
+                                }
+                                else if (div_bot.Div_ArtNo == Divider_ArticleNo._84301)
+                                {
+                                    bot_deduction = (52 / 2) + frame_deduction;
+                                }
+                            } 
                         }
                         catch (Exception)
                         {
@@ -1068,18 +1132,23 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 top_deduction = 72 / 2;
                             }
-                            else if (div_top.Div_ArtNo == Divider_ArticleNo._6052)
+                            else if (cus_ref_date >= FormulaChangedate_032624 ||
+                                     Div_UserModel.Department != "Sales & Operations (Costing)")
                             {
-                                top_deduction = 53 / 2;
+                                if (div_top.Div_ArtNo == Divider_ArticleNo._6052)
+                                {
+                                    top_deduction = 53 / 2;
+                                }
+                                else if (div_top.Div_ArtNo == Divider_ArticleNo._84300)
+                                {
+                                    top_deduction = 23 / 2;
+                                }
+                                else if (div_top.Div_ArtNo == Divider_ArticleNo._84301)
+                                {
+                                    top_deduction = 52 / 2;
+                                }
                             }
-                            else if (div_top.Div_ArtNo == Divider_ArticleNo._84300)
-                            {
-                                top_deduction = 23 / 2;
-                            }
-                            else if (div_top.Div_ArtNo == Divider_ArticleNo._84301)
-                            {
-                                top_deduction = 52 / 2;
-                            }
+
 
                             if (div_bot.Div_ArtNo == Divider_ArticleNo._7536 || div_bot.Div_ArtNo == Divider_ArticleNo._2069)
                             {
@@ -1089,18 +1158,22 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 bot_deduction = 72 / 2;
                             }
-                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._6052)
+                            else if (cus_ref_date >= FormulaChangedate_032624 ||
+                                     Div_UserModel.Department != "Sales & Operations (Costing)")
                             {
-                                bot_deduction = 53 / 2;
-                            }
-                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._84300)
-                            {
-                                bot_deduction = 23 / 2;
-                            }
-                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._84301)
-                            {
-                                bot_deduction = 52 / 2;
-                            }
+                                if (div_bot.Div_ArtNo == Divider_ArticleNo._6052)
+                                {
+                                    bot_deduction = 53 / 2;
+                                }
+                                else if (div_bot.Div_ArtNo == Divider_ArticleNo._84300)
+                                {
+                                    bot_deduction = 23 / 2;
+                                }
+                                else if (div_bot.Div_ArtNo == Divider_ArticleNo._84301)
+                                {
+                                    bot_deduction = 52 / 2;
+                                }
+                            } 
                         }
                         catch (Exception)
                         {
@@ -1124,25 +1197,45 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             top_deduction = (72 / 2) + frame_deduction;
                         }
-                        else if (div_top.Div_ArtNo == Divider_ArticleNo._6052)
+                        else if (cus_ref_date >= FormulaChangedate_032624 ||
+                                 Div_UserModel.Department != "Sales & Operations (Costing)")
                         {
-                            top_deduction = (53 / 2) + frame_deduction;
-                        }
-                        else if (div_top.Div_ArtNo == Divider_ArticleNo._84300)
-                        {
-                            top_deduction = (23 / 2) + frame_deduction;
-                        }
-                        else if (div_top.Div_ArtNo == Divider_ArticleNo._84301)
-                        {
-                            top_deduction = (52 / 2) + frame_deduction;
-                        }
+                            if (div_top.Div_ArtNo == Divider_ArticleNo._6052)
+                            {
+                                top_deduction = (53 / 2) + frame_deduction;
+                            }
+                            else if (div_top.Div_ArtNo == Divider_ArticleNo._84300)
+                            {
+                                top_deduction = (23 / 2) + frame_deduction;
+                            }
+                            else if (div_top.Div_ArtNo == Divider_ArticleNo._84301)
+                            {
+                                top_deduction = (52 / 2) + frame_deduction;
+                            }
+                        } 
                     }
 
                     if (Div_Type == DividerType.Mullion)
                     {
                         if (Div_ChkDM == true && Div_DMPanel != null)
                         {
-                            Div_ExplosionHeight = (Div_DMPanel.Panel_SashHeight - (38 * 2)) - 5;
+                            int dmDeduct = 0;
+                            if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                dmDeduct = 32;// mawala yung allowance
+                            }
+                            else
+                            {
+                                dmDeduct = 38;
+                            }
+
+                            Div_ExplosionHeight = (Div_DMPanel.Panel_SashHeight - (dmDeduct * 2)) - 5;
+
+                            if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                Div_ExplosionHeight += 5;// mawala yung allowance
+                            }
+
                             Div_AlumSpacer50Qty = (int)(Math.Ceiling(((decimal)Div_ExplosionHeight / 300)) - 2);
                         }
                         else if (Div_ChkDM == false)
@@ -1155,18 +1248,24 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction)) + (4 * 2);
                             }
-                            //else if (Div_ArtNo == Divider_ArticleNo._6052)
-                            //{
-                            //    Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction));
-                            //}
-                            else if (Div_ArtNo == Divider_ArticleNo._84300)
+                            else if (cus_ref_date >= FormulaChangedate_032624 ||
+                                     Div_UserModel.Department != "Sales & Operations (Costing)")
                             {
-                                Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction));
+                                if ((Div_ArtNo == Divider_ArticleNo._6052 && cus_ref_date >= FormulaChangedate_060724) ||
+                                    Div_UserModel.Department != "Sales & Operations (Costing)")
+                                {
+                                    Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction));
+                                }
+                                else if (Div_ArtNo == Divider_ArticleNo._84300)
+                                {
+                                    Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction));
+                                }
+                                else if (Div_ArtNo == Divider_ArticleNo._84301)
+                                {
+                                    Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction));
+                                }
                             }
-                            else if (Div_ArtNo == Divider_ArticleNo._84301)
-                            {
-                                Div_ExplosionHeight = (Div_DisplayHeight - (top_deduction + bot_deduction));
-                            }
+                           
 
 
 
@@ -1217,18 +1316,23 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 right_deduction = (72 / 2) + frame_deduction;
                             }
-                            else if (div_right.Div_ArtNo == Divider_ArticleNo._6052)
+                            else if (cus_ref_date >= FormulaChangedate_032624 ||
+                                     Div_UserModel.Department != "Sales & Operations (Costing)")
                             {
-                                right_deduction = (52 / 2) + frame_deduction;
+                                if (div_right.Div_ArtNo == Divider_ArticleNo._6052)
+                                {
+                                    right_deduction = (52 / 2) + frame_deduction;
+                                }
+                                else if (div_right.Div_ArtNo == Divider_ArticleNo._84300)
+                                {
+                                    right_deduction = (23 / 2) + frame_deduction;
+                                }
+                                else if (div_right.Div_ArtNo == Divider_ArticleNo._84301)
+                                {
+                                    right_deduction = (52 / 2) + frame_deduction;
+                                }
                             }
-                            else if (div_right.Div_ArtNo == Divider_ArticleNo._84300)
-                            {
-                                right_deduction = (23 / 2) + frame_deduction;
-                            }
-                            else if (div_right.Div_ArtNo == Divider_ArticleNo._84301)
-                            {
-                                right_deduction = (52 / 2) + frame_deduction;
-                            }
+                           
                         }
                         catch (Exception)
                         {
@@ -1255,18 +1359,23 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 right_deduction = 72 / 2;
                             }
-                            else if (div_right.Div_ArtNo == Divider_ArticleNo._6052)
+                            else if (cus_ref_date >= FormulaChangedate_032624 ||
+                                     Div_UserModel.Department != "Sales & Operations (Costing)")
                             {
-                                right_deduction = 72 / 2;
+                                if (div_right.Div_ArtNo == Divider_ArticleNo._6052)
+                                {
+                                    right_deduction = 72 / 2;
+                                }
+                                else if (div_right.Div_ArtNo == Divider_ArticleNo._84300)
+                                {
+                                    right_deduction = 23 / 2;
+                                }
+                                else if (div_right.Div_ArtNo == Divider_ArticleNo._84301)
+                                {
+                                    right_deduction = 52 / 2;
+                                }
                             }
-                            else if (div_right.Div_ArtNo == Divider_ArticleNo._84300)
-                            {
-                                right_deduction = 23 / 2;
-                            }
-                            else if (div_right.Div_ArtNo == Divider_ArticleNo._84301)
-                            {
-                                right_deduction = 52 / 2;
-                            }
+
 
 
                             if (div_left.Div_ArtNo == Divider_ArticleNo._7536 || div_left.Div_ArtNo == Divider_ArticleNo._2069)
@@ -1277,18 +1386,23 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 left_deduction = 72 / 2;
                             }
-                            else if (div_left.Div_ArtNo == Divider_ArticleNo._6052)
+                            else if (cus_ref_date >= FormulaChangedate_032624 ||
+                                     Div_UserModel.Department != "Sales & Operations (Costing)")
                             {
-                                left_deduction = 52 / 2;
+                                if (div_left.Div_ArtNo == Divider_ArticleNo._6052)
+                                {
+                                    left_deduction = 52 / 2;
+                                }
+                                else if (div_left.Div_ArtNo == Divider_ArticleNo._84300)
+                                {
+                                    left_deduction = 23 / 2;
+                                }
+                                else if (div_left.Div_ArtNo == Divider_ArticleNo._84301)
+                                {
+                                    left_deduction = 52 / 2;
+                                }
                             }
-                            else if (div_left.Div_ArtNo == Divider_ArticleNo._84300)
-                            {
-                                left_deduction = 23 / 2;
-                            }
-                            else if (div_left.Div_ArtNo == Divider_ArticleNo._84301)
-                            {
-                                left_deduction = 52 / 2;
-                            }
+                            
                         }
                         catch (Exception)
                         {
@@ -1312,18 +1426,23 @@ namespace ModelLayer.Model.Quotation.Divider
                             {
                                 left_deduction = (72 / 2) + frame_deduction;
                             }
-                            else if (div_left.Div_ArtNo == Divider_ArticleNo._6052)
+                            else if (cus_ref_date >= FormulaChangedate_032624 ||
+                                     Div_UserModel.Department != "Sales & Operations (Costing)")
                             {
-                                left_deduction = (52 / 2) + frame_deduction;
+                                if (div_left.Div_ArtNo == Divider_ArticleNo._6052)
+                                {
+                                    left_deduction = (52 / 2) + frame_deduction;
+                                }
+                                else if (div_left.Div_ArtNo == Divider_ArticleNo._84300)
+                                {
+                                    left_deduction = (23 / 2) + frame_deduction;
+                                }
+                                else if (div_left.Div_ArtNo == Divider_ArticleNo._84301)
+                                {
+                                    left_deduction = (52 / 2) + frame_deduction;
+                                }
                             }
-                            else if (div_left.Div_ArtNo == Divider_ArticleNo._84300)
-                            {
-                                left_deduction = (23 / 2) + frame_deduction;
-                            }
-                            else if (div_left.Div_ArtNo == Divider_ArticleNo._84301)
-                            {
-                                left_deduction = (52 / 2) + frame_deduction;
-                            }
+                            
                         }
                         catch (Exception)
                         {
@@ -1342,17 +1461,22 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             Div_ExplosionWidth = (Div_DisplayWidth - (left_deduction + right_deduction)) + (4 * 2);
                         }
-                        else if (Div_ArtNo == Divider_ArticleNo._6052)
+                        else if (cus_ref_date >= FormulaChangedate_032624 ||
+                                 Div_UserModel.Department != "Sales & Operations (Costing)")
                         {
-                            Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
-                        }
-                        else if (Div_ArtNo == Divider_ArticleNo._84300)
-                        {
-                            Div_ExplosionWidth = (Div_DisplayWidth - (left_deduction + right_deduction));
-                        }
-                        else if (Div_ArtNo == Divider_ArticleNo._84301)
-                        {
-                            Div_ExplosionWidth = (Div_DisplayWidth - (left_deduction + right_deduction));
+                            if (Div_ArtNo == Divider_ArticleNo._6052)
+                            {
+                                Div_ExplosionWidth = (Div_DisplayWidth - (frame_deduction * 2));
+                            }
+                            else if (Div_ArtNo == Divider_ArticleNo._84300)
+                            {
+                                Div_ExplosionWidth = (Div_DisplayWidth - (left_deduction + right_deduction));
+                            }
+                            else if (Div_ArtNo == Divider_ArticleNo._84301)
+                            {
+                                Div_ExplosionWidth = (Div_DisplayWidth - (left_deduction + right_deduction));
+                            }
+
                         }
 
                         if (Div_ReinfArtNo == DividerReinf_ArticleNo._R677 || Div_ReinfArtNo == DividerReinf_ArticleNo._V226)
@@ -1363,14 +1487,19 @@ namespace ModelLayer.Model.Quotation.Divider
                         {
                             Div_ReinfWidth = (Div_ExplosionWidth - (50 * 2)) - (5 * 2);
                         }
-                        else if (Div_ReinfArtNo == DividerReinf_ArticleNo._TV107)
+                        else if (cus_ref_date >= FormulaChangedate_032624 ||
+                                 Div_UserModel.Department != "Sales & Operations (Costing)")
                         {
-                            Div_ReinfWidth = (Div_ExplosionWidth - (38 * 2)) - (5 * 2);
+                            if (Div_ReinfArtNo == DividerReinf_ArticleNo._TV107)
+                            {
+                                Div_ReinfWidth = (Div_ExplosionWidth - (38 * 2)) - (5 * 2);
+                            }
+                            else if (Div_ReinfArtNo == DividerReinf_ArticleNo._None)
+                            {
+                                Div_ReinfWidth = 0;
+                            }
                         }
-                        else if (Div_ReinfArtNo == DividerReinf_ArticleNo._None)
-                        {
-                            Div_ReinfWidth = 0;
-                        }
+                       
 
                         //Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._1338;
                         //Div_CladdingReinfArtNo = CladdingReinf_ArticleNo._9120;
@@ -1452,7 +1581,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void Insert_DivProfile_DivReinf_Info_MaterialList(DataTable tbl_explosion)
         {
-            string div_side = "", explosion_length = "", explosion_length2 = "";
+            string div_side = "", explosion_length = "", explosion_length2 = "", cutAngle = @"[  ]";
             if (Div_Type == DividerType.Transom)
             {
                 div_side = "Width";
@@ -1466,12 +1595,16 @@ namespace ModelLayer.Model.Quotation.Divider
                 explosion_length2 = Div_ReinfHeight.ToString();
             }
 
+            if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+                cutAngle = @"|  |";
+            }
 
             tbl_explosion.Rows.Add(Div_Type.ToString() + " " + div_side + " " + Div_ArtNo.DisplayName,
                                    1, "pc(s)",
                                    explosion_length,
                                    Div_Bounded,
-                                   @"[  ]");
+                                   cutAngle);
 
             if (!Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
             {
@@ -1837,6 +1970,7 @@ namespace ModelLayer.Model.Quotation.Divider
                             IMultiPanelModel divMPanelParent,
                             Dictionary<int, int> divCladdingSizeList,
                             IFrameModel divFrameParent,
+                            IUserModel divUserModel,
                             bool divChkDM,
                             bool divArtVisibility,
                             DummyMullion_ArticleNo divDMArtNo,
@@ -1859,6 +1993,7 @@ namespace ModelLayer.Model.Quotation.Divider
             Div_MPanelParent = divMPanelParent;
             Div_CladdingSizeList = divCladdingSizeList;
             Div_FrameParent = divFrameParent;
+            Div_UserModel = divUserModel;
             Div_ChkDM = divChkDM;
             Div_ArtVisibility = divArtVisibility;
             Div_DMArtNo = divDMArtNo;
@@ -1874,7 +2009,7 @@ namespace ModelLayer.Model.Quotation.Divider
                 Div_ChkDMVisibility = false;
             }
 
-            SetExplosionValues_Div();
+            SetExplosionValues_Div("01-01-0001");
 
             Div_PropHeight = constants.div_propertyheight_default +
                              constants.div_property_pnlAddcladdingOptionsHeight;

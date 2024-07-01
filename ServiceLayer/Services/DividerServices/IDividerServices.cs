@@ -6,6 +6,7 @@ using static EnumerationTypeLayer.EnumerationTypes;
 using System.Collections.Generic;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.User;
 
 namespace ServiceLayer.Services.DividerServices
 {
@@ -21,6 +22,7 @@ namespace ServiceLayer.Services.DividerServices
                                       int divDisplayHeight,
                                       IMultiPanelModel divMPanelParent,
                                       IFrameModel divFrameParent,
+                                      IUserModel divUserModel,
                                       int divID = 0,
                                       float divImageRendererZoom = 1,
                                       string divFrameType = "",

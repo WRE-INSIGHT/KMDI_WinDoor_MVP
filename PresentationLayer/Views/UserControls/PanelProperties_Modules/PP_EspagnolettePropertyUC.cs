@@ -44,6 +44,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             }
         }
 
+        public string ProfileType_FromMainPresenter { get; set; }
+
         public event EventHandler PPEspagnolettePropertyLoadEventRaised;
         public event EventHandler cmbEspagnoletteSelectedValueEventRaised;
 
@@ -54,7 +56,22 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             List<Espagnolette_ArticleNo> espArtNo = new List<Espagnolette_ArticleNo>();
             foreach (Espagnolette_ArticleNo item in Espagnolette_ArticleNo.GetAll())
             {
-                espArtNo.Add(item);
+                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                {
+                    if (item == Espagnolette_ArticleNo._H102 ||
+                        item == Espagnolette_ArticleNo._H103)
+                    {
+                        espArtNo.Add(item);
+                    }
+                }
+                else
+                {
+                    if (item != Espagnolette_ArticleNo._H102 &&
+                        item != Espagnolette_ArticleNo._H103)
+                    {
+                        espArtNo.Add(item);
+                    }
+                }
             }
             cmb_Espagnolette.DataSource = espArtNo;
 

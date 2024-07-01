@@ -694,6 +694,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                           _multiPanelModel.MPanel_DisplayHeight,
                                                                                           _multiPanelModel,
                                                                                           _frameModel,
+                                                                                          _userModel,
                                                                                           _mainPresenter.GetDividerCount(),
                                                                                           _frameModel.FrameImageRenderer_Zoom,
                                                                                           _frameModel.Frame_Type.ToString());
@@ -704,6 +705,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     _multiPanelModel.MPanelLst_Divider.Add(divModel);
 
                                     IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
+                                    divPropUCP.GetDivProperties().ProfileType_FromMainPresenter = _frameModel.Frame_WindoorModel.WD_profile;
                                     UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
                                     divPropUC.Dock = DockStyle.Top;
                                     _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
@@ -997,6 +999,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC,
                                                                                        _panelModel,
                                                                                        _frameModel,
+                                                                                       _userModel,
                                                                                        _mainPresenter,
                                                                                        _multiPanelModel,
                                                                                        this,
@@ -1020,6 +1023,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC,
                                                                                                 _panelModel,
                                                                                                 _frameModel,
+                                                                                                _userModel,
                                                                                                 _mainPresenter,
                                                                                                 _multiPanelModel,
                                                                                                 this,
@@ -1043,6 +1047,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
                                                                                           _panelModel,
                                                                                           _frameModel,
+                                                                                          _userModel,
                                                                                           _mainPresenter,
                                                                                           _multiPanelModel,
                                                                                           this,
@@ -1066,6 +1071,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC,
                                                                                              _panelModel,
                                                                                              _frameModel,
+                                                                                             _userModel,
                                                                                              _mainPresenter,
                                                                                              _multiPanelModel,
                                                                                              this,
@@ -1089,6 +1095,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             ITiltNTurnPanelUCPresenter tiltNTurnUCP = _tiltNTurnUCP.GetNewInstance(_unityC,
                                                                                                    _panelModel,
                                                                                                    _frameModel,
+                                                                                                   _userModel,
                                                                                                    _mainPresenter,
                                                                                                    _multiPanelModel,
                                                                                                    this,
@@ -1105,6 +1112,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             ILouverPanelUCPresenter louverPanelUCP = _louverPanelUCP.GetNewInstance(_unityC,
                                                                                                    _panelModel,
                                                                                                    _frameModel,
+                                                                                                   _userModel,
                                                                                                    _mainPresenter,
                                                                                                    _multiPanelModel,
                                                                                                    this);
@@ -1140,6 +1148,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                   _multiPanelModel.MPanel_DisplayHeight,
                                                                                   _multiPanelModel,
                                                                                   _frameModel,
+                                                                                  _userModel,
                                                                                   _mainPresenter.GetDividerCount(),
                                                                                   _frameModel.FrameImageRenderer_Zoom,
                                                                                   _frameModel.Frame_Type.ToString());
@@ -1150,6 +1159,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _multiPanelModel.MPanelLst_Divider.Add(divModel);
 
                             IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
+                            divPropUCP.GetDivProperties().ProfileType_FromMainPresenter = _frameModel.Frame_WindoorModel.WD_profile;
                             UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
                             divPropUC.Dock = DockStyle.Top;
                             _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
@@ -1334,6 +1344,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanel_ParentModel.Reload_PanelMargin();
                 _commonFunctions.Automatic_Div_Addition(_mainPresenter,
                                                         _frameModel,
+                                                        _userModel,
                                                         _divServices,
                                                         _transomUCP,
                                                         _unityC,

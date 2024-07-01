@@ -48,14 +48,18 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             IPanelModel CurrentPanel = lst_pnl.Find(obj => obj.Panel_Name == _panelModel.Panel_Name);
             IPanelModel prev_pnl = null, nxt_pnl = null;
             int ndx = lst_pnl.IndexOf(CurrentPanel);
-            string prev_pnl_str = lst_pnl[ndx - 1].Panel_Name;
-
-            prev_pnl = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(prev => prev.Panel_Name == prev_pnl_str);
-            prev_pnl.Panel_BackColor = SystemColors.Highlight;
-
-            string nxt_pnl_str = "";
-            if (lst_pnl.Count > ndx + 1)
+            
+            if (CurrentPanel.Panel_Placement != "First")
             {
+                string prev_pnl_str = lst_pnl[ndx - 1].Panel_Name; 
+                prev_pnl = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(prev => prev.Panel_Name == prev_pnl_str);
+                prev_pnl.Panel_BackColor =  SystemColors.Highlight;
+            }
+           
+
+            if (lst_pnl.Count > ndx + 1 && CurrentPanel.Panel_Placement != "Last")
+            {
+                string nxt_pnl_str = ""; 
                 nxt_pnl_str = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel[ndx + 1].Panel_Name;
                 nxt_pnl = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(prev => prev.Panel_Name == nxt_pnl_str);
                 nxt_pnl.Panel_BackColor = SystemColors.Highlight;
@@ -63,11 +67,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             if (_panelModel.Panel_ParentMultiPanelModel.MPanel_DividerEnabled == false)
             {
-               // _mainPresenter.SetLblStatus("DMPreSelection", true, (Control)sender, _divModel, prev_pnl, nxt_pnl, this);
+                _mainPresenter.SetLblStatusForCenterProfile("CPPreSelection", true, (Control)sender, prev_pnl, CurrentPanel, nxt_pnl);
             }
             else
             {
-                MessageBox.Show("Not applicable on fixed panels", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Not applicable on Divider Enabled", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -99,16 +103,18 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     _centerProfilePropertyUC.AddHT_FormBody(constants.frame_WithCenterClosureSelectedPanel);
                     withCenterProfile = true; 
-                }
-
+                } 
             }
-
-            Console.WriteLine(CenterProfile_ArticleNo._None.ToString());
-
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _centerProfilePropertyUC_CenterProfilePropertyUCLoadEventRaised(object sender, EventArgs e)
         {
+            if (_panelModel.Panel_PartnerWithCenterProfile == null)
+            {
+                _panelModel.Panel_PartnerWithCenterProfile = CenterProfile_ArticleNo._None;
+            }
+                
             _centerProfilePropertyUC.ThisBinding(CreateBindingDictionary());
         }
 

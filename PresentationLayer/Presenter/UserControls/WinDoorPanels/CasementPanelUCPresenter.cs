@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -32,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
+        private IUserModel _userModel;
         private IMultiPanelModel _multiPanelModel;
         private ConstantVariables constants = new ConstantVariables();
 
@@ -829,47 +831,84 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             casementUC = (UserControl)sender;
             if (_panelModel.Panel_BackColor == SystemColors.Highlight)
             {
-                _panelModel.Panel_HandleType = Handle_Type._None;
-                if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
+                if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                    _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                 {
-                    _panelModel.Panel_CornerDriveOptionsVisibility = false;
-                    _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
-                    _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
-
-                }
-                if (_panelModel == _mainPresenter.PrevPnlModel_forDMSelection)
-                {
-                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                    {
-                        _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
-                    }
-                    else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                    {
-                        _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
-                    }
 
                 }
                 else
-                {
-                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                    {
-                        _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
-                    }
-                    else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                    {
-                        _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
-                    }
+                {  
+                     _panelModel.Panel_HandleType = Handle_Type._None; 
 
+                     if (_panelModel.Panel_CornerDriveOptionsVisibility == true)
+                     {
+                         _panelModel.Panel_CornerDriveOptionsVisibility = false;
+                         _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
+                         _multiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                         _frameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+
+                     }
+                     if (_panelModel == _mainPresenter.PrevPnlModel_forDMSelection)
+                     {
+                         if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                         {
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._CremonHandle;
+                            }
+                            else
+                            {
+                                _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
+                            }
+                        }
+                         else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                         {
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._CremonHandle;
+                            }
+                            else
+                            { 
+                                _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
+                            }
+                        }
+
+                     }
+                     else
+                     {
+                         if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                         {
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._CremonHandle;
+                            }
+                            else
+                            {
+                                _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
+                            }
+                        }
+                         else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                         {
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._CremonHandle;
+                            }
+                            else
+                            {
+                                _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
+                            }
+                        }
+
+                     }
+                     _mainPresenter.DivModel_forDMSelection.Div_DMPanel = _panelModel;
+                     _mainPresenter.PrevPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
+                     if (_mainPresenter.NxtPnlModel_forDMSelection != null)
+                     {
+                         _mainPresenter.NxtPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
+                     }
+                     _mainPresenter.SetLblStatus("DMSelection", false, null, null, _panelModel);
+                     _mainPresenter.GetCurrentPrice();
                 }
-                _mainPresenter.DivModel_forDMSelection.Div_DMPanel = _panelModel;
-                _mainPresenter.PrevPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
-                if (_mainPresenter.NxtPnlModel_forDMSelection != null)
-                {
-                    _mainPresenter.NxtPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
-                }
-                _mainPresenter.SetLblStatus("DMSelection", false, null, null, _panelModel);
-                _mainPresenter.GetCurrentPrice();
             }
             else
             {
@@ -1245,6 +1284,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _commonFunctions.Automatic_Div_Addition(_mainPresenter,
                                                         _frameModel,
+                                                        _userModel,
                                                         _divServices,
                                                         //_frameUCP,
                                                         _transomUCP,
@@ -1447,57 +1487,60 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
 
             #region Mesh
-            if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
-            {
-                int cond = casement.ClientRectangle.Width + casement.ClientRectangle.Height;
-
-                int maxWidth = casement.ClientRectangle.Width;
-
-                for (int i = 10; i < cond; i += 10)
+            if (_panelModel.Panel_GlassThicknessDesc != null)
+            { 
+                if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
                 {
-                    g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+                    int cond = casement.ClientRectangle.Width + casement.ClientRectangle.Height;
+
+                    int maxWidth = casement.ClientRectangle.Width;
+
+                    for (int i = 10; i < cond; i += 10)
+                    {
+                        g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+
+                    }
+
+                    for (int i = 10; i < cond; i += 10)
+                    {
+                        g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(casement.ClientRectangle.Width, i));
+
+                    }
+
+
+
+                    if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
+                                                                               8 / rectThickness,
+                                                                               casement.ClientRectangle.Width - 17 / rectThickness,
+                                                                               casement.ClientRectangle.Height - 17 / rectThickness));
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                            8 / rectThickness,
+                                                                            casement.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                            casement.ClientRectangle.Height - (17 / rectThickness)));
+
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                    {
+
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
+                                                                               8 / rectThickness,
+                                                                               casement.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                               casement.ClientRectangle.Height - (17 / rectThickness)));
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                          8 / rectThickness,
+                                                                          casement.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
+                                                                          casement.ClientRectangle.Height - (17 / rectThickness)));
+                    }
 
                 }
-
-                for (int i = 10; i < cond; i += 10)
-                {
-                    g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(casement.ClientRectangle.Width, i));
-
-                }
-
-
-
-                if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
-                {
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
-                                                                           8 / rectThickness,
-                                                                           casement.ClientRectangle.Width - 17 / rectThickness,
-                                                                           casement.ClientRectangle.Height - 17 / rectThickness));
-                }
-                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
-                {
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                        8 / rectThickness,
-                                                                        casement.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                        casement.ClientRectangle.Height - (17 / rectThickness)));
-
-                }
-                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
-                {
-
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
-                                                                           8 / rectThickness,
-                                                                           casement.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                           casement.ClientRectangle.Height - (17 / rectThickness)));
-                }
-                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
-                {
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                      8 / rectThickness,
-                                                                      casement.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
-                                                                      casement.ClientRectangle.Height - (17 / rectThickness)));
-                }
-
             }
             #endregion
 
@@ -1691,6 +1734,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IFrameUCPresenter frameUCP)
         {
@@ -1700,6 +1744,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             CasementPanelUCPresenter casementUCP = unityC.Resolve<CasementPanelUCPresenter>();
             casementUCP._panelModel = panelModel;
             casementUCP._frameModel = frameModel;
+            casementUCP._userModel = userModel;
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._frameUCP = frameUCP;
             casementUCP._unityC = unityC;
@@ -1710,6 +1755,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMultiPanelMullionUCPresenter multiPanelUCP,
@@ -1721,6 +1767,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             CasementPanelUCPresenter casementUCP = unityC.Resolve<CasementPanelUCPresenter>();
             casementUCP._panelModel = panelModel;
             casementUCP._frameModel = frameModel;
+            casementUCP._userModel = userModel;
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._multiPanelModel = multiPanelModel;
             casementUCP._multiPanelMullionUCP = multiPanelUCP;
@@ -1733,6 +1780,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMultiPanelTransomUCPresenter multiTransomUCP,
@@ -1744,6 +1792,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             CasementPanelUCPresenter casementUCP = unityC.Resolve<CasementPanelUCPresenter>();
             casementUCP._panelModel = panelModel;
             casementUCP._frameModel = frameModel;
+            casementUCP._userModel = userModel;
             casementUCP._mainPresenter = mainPresenter;
             casementUCP._multiPanelModel = multiPanelModel;
             casementUCP._multiPanelTransomUCP = multiTransomUCP;

@@ -16,7 +16,8 @@ namespace PresentationLayer.Views
         NumericUpDown WindowsDoorsNum { get; set; }
         TextBox ItemDescriptionTxt { get; set; }
         PictureBox ItemImage { get; set; }
-        
+        NumericUpDown OOTAdditionalPercentage { get; set; }
+
         event EventHandler GlassUpgradeView_LoadEventRaised;
         event EventHandler chkbx_ItemList_SelectedValueChangedEventRaised;
         event EventHandler GlassUpgradeView_SizeChangedEventRaised;
@@ -30,7 +31,11 @@ namespace PresentationLayer.Views
         event FormClosingEventHandler GlassUpgradeView_FormClosingEventRaised;
         event EventHandler _printBtn_ClickEventRaised;
         event EventHandler upgradeToToolStripMenuItemClickEventRaised;
-        
+        event EventHandler cmb_multipleGlassUpgrade_EnterEventRaised;
+        event EventHandler cmb_multipleGlassUpgrade_LeaveEventRaised;
+        event EventHandler cmb_multipleGlassUpgrade_TextChangedEventRaised;
+        event EventHandler chkbox_Additional_CheckedChangedEventRaised;
+
 
         void CloseGlassUpgradeView();
         ComboBox GlassTypeCmb();
@@ -44,5 +49,9 @@ namespace PresentationLayer.Views
         CheckBox SelectAllItems();
         ComboBox MultipleGlassUpgrade();
         void ShowGlassUpgradeView();
+        CheckBox GetOOTAdditionalCheckbox();
+        NumericUpDown GetOOTAdditionalNum();
+        Label GetOOTSuggestLabel();
+
     }
 }
