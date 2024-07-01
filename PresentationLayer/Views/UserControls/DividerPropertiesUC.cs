@@ -93,59 +93,71 @@ namespace PresentationLayer.Views.UserControls
             List<Divider_ArticleNo> dArtNo = new List<Divider_ArticleNo>();
             foreach (Divider_ArticleNo item in Divider_ArticleNo.GetAll())
             {
-                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                if (ProfileType_FromMainPresenter != null)
                 {
-                    if (item == Divider_ArticleNo._84300 ||
-                        item == Divider_ArticleNo._84301)
+                    if (ProfileType_FromMainPresenter.Contains("Alutek"))
                     {
-                        dArtNo.Add(item);
-                    } 
-                }
-                else
-                {
-                    if (item != Divider_ArticleNo._84300 &&
-                        item != Divider_ArticleNo._84301)
+                        if (item == Divider_ArticleNo._84300 ||
+                            item == Divider_ArticleNo._84301)
+                        {
+                            dArtNo.Add(item);
+                        }
+                    }
+                    else
                     {
-                        dArtNo.Add(item);
+                        if (item != Divider_ArticleNo._84300 &&
+                            item != Divider_ArticleNo._84301)
+                        {
+                            dArtNo.Add(item);
+                        }
                     }
                 }
+                 
             }
             cmb_divArtNo.DataSource = dArtNo;
 
             List<DividerReinf_ArticleNo> dReinfArtNo = new List<DividerReinf_ArticleNo>();
             foreach (DividerReinf_ArticleNo item in DividerReinf_ArticleNo.GetAll())
             {
-                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                if (ProfileType_FromMainPresenter != null)
                 {
-                    if (item == DividerReinf_ArticleNo._None)
+                    if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                    {
+                        if (item == DividerReinf_ArticleNo._None)
+                        {
+                            dReinfArtNo.Add(item);
+                        }
+                    }
+                    else
                     {
                         dReinfArtNo.Add(item);
                     }
                 }
-                else
-                { 
-                        dReinfArtNo.Add(item); 
-                } 
+               
             }
             cmb_divReinf.DataSource = dReinfArtNo;
 
             List<DummyMullion_ArticleNo> dMArtNo = new List<DummyMullion_ArticleNo>();
             foreach (DummyMullion_ArticleNo item in DummyMullion_ArticleNo.GetAll())
             {
-                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                if (ProfileType_FromMainPresenter != null)
                 {
-                    if (item == DummyMullion_ArticleNo._84401)
+                    if (ProfileType_FromMainPresenter.Contains("Alutek"))
                     {
-                        dMArtNo.Add(item);
+                        if (item == DummyMullion_ArticleNo._84401)
+                        {
+                            dMArtNo.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if (item != DummyMullion_ArticleNo._84401)
+                        {
+                            dMArtNo.Add(item);
+                        }
                     }
                 }
-                else
-                {
-                    if (item != DummyMullion_ArticleNo._84401)
-                    {
-                        dMArtNo.Add(item);
-                    }
-                }
+                
               
             }
             cmb_DMArtNo.DataSource = dMArtNo;
