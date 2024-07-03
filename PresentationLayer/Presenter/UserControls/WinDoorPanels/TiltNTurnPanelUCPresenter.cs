@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -30,6 +31,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
+        private IUserModel _userModel;
         private IMultiPanelModel _multiPanelModel;
         private ConstantVariables constants = new ConstantVariables();
         private IMultiPanelMullionUCPresenter _multiPanelMullionUCP;
@@ -268,6 +270,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.Reload_MultiPanelMargin();
                 _commonFunctions.Automatic_Div_Addition(_mainPresenter,
                                                         _frameModel,
+                                                        _userModel,
                                                         _divServices,
                                                         //_frameUCP,
                                                         _transomUCP,
@@ -441,30 +444,33 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
 
             #region Mesh
-            if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+            if (_panelModel.Panel_GlassThicknessDesc != null)
             {
-                int cond = tiltNTurn.ClientRectangle.Width + tiltNTurn.ClientRectangle.Height;
-
-                int maxWidth = tiltNTurn.ClientRectangle.Width;
-
-                for (int i = 10; i < cond; i += 10)
+                if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
                 {
-                    g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+                    int cond = tiltNTurn.ClientRectangle.Width + tiltNTurn.ClientRectangle.Height;
 
-                }
+                    int maxWidth = tiltNTurn.ClientRectangle.Width;
 
-                for (int i = 10; i < cond; i += 10)
-                {
-                    g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(tiltNTurn.ClientRectangle.Width, i));
+                    for (int i = 10; i < cond; i += 10)
+                    {
+                        g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
 
-                }
-               
+                    }
+
+                    for (int i = 10; i < cond; i += 10)
+                    {
+                        g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(tiltNTurn.ClientRectangle.Width, i));
+
+                    }
+
                     g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
                                                                            8 / rectThickness,
                                                                            tiltNTurn.ClientRectangle.Width - 17 / rectThickness,
                                                                            tiltNTurn.ClientRectangle.Height - 17 / rectThickness));
 
-                
+
+                }
             }
             #endregion
 
@@ -611,6 +617,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ITiltNTurnPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                       IPanelModel panelModel,
                                                       IFrameModel frameModel,
+                                                      IUserModel userModel,
                                                       IMainPresenter mainPresenter,
                                                       IFrameUCPresenter frameUCP)
         {
@@ -620,6 +627,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             TiltNTurnPanelUCPresenter presenter = unityC.Resolve<TiltNTurnPanelUCPresenter>();
             presenter._panelModel = panelModel;
             presenter._frameModel = frameModel;
+            presenter._userModel = userModel;
             presenter._mainPresenter = mainPresenter;
             presenter._frameUCP = frameUCP;
             presenter._unityC = unityC;
@@ -630,6 +638,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ITiltNTurnPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMultiPanelMullionUCPresenter multiPanelUCP,
@@ -641,6 +650,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             TiltNTurnPanelUCPresenter presenter = unityC.Resolve<TiltNTurnPanelUCPresenter>();
             presenter._panelModel = panelModel;
             presenter._frameModel = frameModel;
+            presenter._userModel = userModel;
             presenter._mainPresenter = mainPresenter;
             presenter._multiPanelModel = multiPanelModel;
             presenter._multiPanelMullionUCP = multiPanelUCP;
@@ -653,6 +663,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ITiltNTurnPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMultiPanelTransomUCPresenter multiPanelTransomUCP,
@@ -664,6 +675,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             TiltNTurnPanelUCPresenter presenter = unityC.Resolve<TiltNTurnPanelUCPresenter>();
             presenter._panelModel = panelModel;
             presenter._frameModel = frameModel;
+            presenter._userModel = userModel;
             presenter._mainPresenter = mainPresenter;
             presenter._multiPanelModel = multiPanelModel;
             presenter._multiPanelTransomUCP = multiPanelTransomUCP;

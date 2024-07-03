@@ -44,6 +44,7 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        public string ProfileType_FromMainPresenter { get; set; }
         public FramePropertiesUC()
         {
             InitializeComponent();
@@ -71,14 +72,37 @@ namespace PresentationLayer.Views.UserControls
 
             foreach (FrameProfile_ArticleNo item in FrameProfile_ArticleNo.GetAll())
             {
-                fArtNo.Add(item);
+                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                {
+                    if (item == FrameProfile_ArticleNo._84100)
+                    {
+                        fArtNo.Add(item);
+                    }
+                }
+                else
+                {
+                    if (item != FrameProfile_ArticleNo._84100)
+                    {
+                        fArtNo.Add(item);
+                    }
+                }
             }
             cmb_FrameProfile.DataSource = fArtNo;
 
             List<FrameReinf_ArticleNo> fReinf = new List<FrameReinf_ArticleNo>();
             foreach (FrameReinf_ArticleNo item in FrameReinf_ArticleNo.GetAll())
             {
-                fReinf.Add(item);
+                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                {
+                    if (item == FrameReinf_ArticleNo._None)
+                    {
+                        fReinf.Add(item);
+                    }
+                }
+                else
+                {
+                    fReinf.Add(item);
+                }  
             }
             cmb_FrameReinf.DataSource = fReinf;
 

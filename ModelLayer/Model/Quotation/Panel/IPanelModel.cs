@@ -67,6 +67,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_LouverBladesCount { get; set; }
         bool Panel_LouverBladesVisibility { get; set; }
         Color Panel_BackColor { get; set; }
+        int Panel_PartnerPanelGlassID { get; set; }
 
         #region Explosion
 
@@ -332,6 +333,8 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_LouverRPLeverHandleCheck { get; set; }
         bool Panel_CenterProfileVisibility { get; set; }
         CenterProfile_ArticleNo Panel_CenterProfileArtNo { get; set; }
+        CenterProfile_ArticleNo Panel_PartnerWithCenterProfile { get; set; }
+        IPanelModel Panel_CPPanel { get; set; }
         PVCSettingPlate_ArticleNo Panel_PVCSettingPlateArtNo { get; set; }
         FinPlate_ArticleNo Panel_FinPlateArtNo { get; set; }
         SlidingAccessoriesRoller_ArticleNo Panel_SlidingAccessoriesRollerArtNo { get; set; }
@@ -396,6 +399,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_FillerProfileForNoBotFrameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion, int motorCount);
         void Insert_FrictionStay_MaterialList(DataTable tbl_explosion);
+        void Insert_FrictionStayPacker_MaterialList(DataTable tbl_explosion);
         void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion);
         void Insert_FixedCam_MaterialList(DataTable tbl_explosion);
         void Insert_PlasticWedge_MaterialList(DataTable tbl_explosion);
@@ -526,7 +530,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_CremonHandle_MaterialList(DataTable tbl_explosion);
         void Insert_Pegstay_MaterialList(DataTable tbl_explosion);
         void Insert_AlutekStriker_MaterialList(DataTable tbl_explosion);
-
+        void Insert_CenterProfile_MaterialList(DataTable tbl_explosion);
         #endregion
 
         int MotorizeMechQty();

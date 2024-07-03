@@ -36,7 +36,11 @@ namespace PresentationLayer.Presenter
         private ComboBox _cmbMultipleGlassUpgrade;
         private CheckBox _chkboxSelectAll;
         private CheckBox _allowDuplicate;
+        private CheckBox _chkbxOOTAdditional;
         private Label _lblWindoor;
+        DateTime _cusrefdate;
+
+        private AutoCompleteStringCollection _autoCmpltSC;
 
         #region Variable
 
@@ -83,6 +87,7 @@ namespace PresentationLayer.Presenter
             _lblWindoor = _glassUpgradeView.WindoorLbl();
             _allowDuplicate = _glassUpgradeView.AllodDuplicate();
             _cmbMultipleGlassUpgrade = _glassUpgradeView.MultipleGlassUpgrade();
+            _chkbxOOTAdditional = _glassUpgradeView.GetOOTAdditionalCheckbox();
 
             SubscribeToEventSetup();
         }
@@ -103,7 +108,43 @@ namespace PresentationLayer.Presenter
             _glassUpgradeView.GlassUpgradeView_FormClosingEventRaised += _glassUpgradeView_GlassUpgradeView_FormClosingEventRaised;
             _glassUpgradeView._printBtn_ClickEventRaised += _glassUpgradeView_printBtn_ClickEventRaised;
             _glassUpgradeView.upgradeToToolStripMenuItemClickEventRaised += _glassUpgradeView_upgradeToToolStripMenuItemClickEventRaised;
+            _glassUpgradeView.cmb_multipleGlassUpgrade_EnterEventRaised += _glassUpgradeView_cmb_multipleGlassUpgrade_EnterEventRaised;
+            _glassUpgradeView.cmb_multipleGlassUpgrade_LeaveEventRaised += _glassUpgradeView_cmb_multipleGlassUpgrade_LeaveEventRaised;
+            _glassUpgradeView.cmb_multipleGlassUpgrade_TextChangedEventRaised += _glassUpgradeView_cmb_multipleGlassUpgrade_TextChangedEventRaised;
+            _glassUpgradeView.chkbox_Additional_CheckedChangedEventRaised += _glassUpgradeView_chkbox_Additional_CheckedChangedEventRaised;
                
+        }
+
+        private void _glassUpgradeView_chkbox_Additional_CheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_chkbxOOTAdditional.Checked)
+            {
+                _glassUpgradeView.GetOOTAdditionalNum().Visible = true;         
+            }
+            else
+            {
+                _glassUpgradeView.GetOOTAdditionalNum().Visible = false;
+            }
+        }
+
+        private void _glassUpgradeView_cmb_multipleGlassUpgrade_TextChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_cmbMultipleGlassUpgrade.Text != "")
+            {
+               _cmbMultipleGlassUpgrade.DroppedDown = false;
+            }
+        }
+        
+        private void _glassUpgradeView_cmb_multipleGlassUpgrade_LeaveEventRaised(object sender, EventArgs e)
+        {
+            _cmbMultipleGlassUpgrade.Width = 353;
+            _cmbMultipleGlassUpgrade.DroppedDown = false;
+        }
+
+        private void _glassUpgradeView_cmb_multipleGlassUpgrade_EnterEventRaised(object sender, EventArgs e)
+        {
+            _cmbMultipleGlassUpgrade.Width = 580;
+            _cmbMultipleGlassUpgrade.DroppedDown = true;
         }
 
         private void _glassUpgradeView_upgradeToToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -128,6 +169,20 @@ namespace PresentationLayer.Presenter
                     break;
                 }
             }
+        }
+
+        private decimal AdditionalPercentage(decimal totalNetPrice)
+        {
+
+            if (_chkbxOOTAdditional.Checked)
+            {
+                decimal additionalPercentage = _glassUpgradeView.OOTAdditionalPercentage.Value / 100m;
+                decimal priceInc = totalNetPrice * additionalPercentage;
+                decimal newTotalNetPrice = totalNetPrice + priceInc;
+                totalNetPrice = newTotalNetPrice;
+            }
+
+            return totalNetPrice;
         }
         private void MultipleGlassUpgrade(int currCell_row, int currCell_col, string currCell_value)
         {
@@ -200,9 +255,45 @@ namespace PresentationLayer.Presenter
                                     decimal _glassWidth = Convert.ToDecimal(_glassUpgradeDT.Rows[currCell_row][3]);
                                     decimal _glassHeight = Convert.ToDecimal(_glassUpgradeDT.Rows[currCell_row][4]);
 
-                                    decimal _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.1m) / 1000000m, 2);// glass amount per unit
+                                    decimal _amountPerUnit = 0.0m;
+
+                                    //if (_cusrefdate >= DateTime.Parse("06-04-2024"))
+                                    //{
+                                    //    if (_cmbGlassType.SelectedItem.ToString() == "Tempered Glass" || _cmbGlassType.SelectedItem.ToString() == "Tinted Glass")
+                                    //    {
+                                    //        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.5m) / 1000000m, 2);
+                                    //    }
+                                    //    else if (_cmbGlassType.SelectedItem.ToString() == "Insulated Glass Unit (IGU)")
+                                    //    {
+                                    //        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue) / 1000000m, 2);
+                                    //    }
+                                    //    else if (_cmbGlassType.SelectedItem.ToString() == "Laminated Glass")
+                                    //    {
+                                    //        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.3m) / 1000000m, 2);
+                                    //    }
+                                    //}
+                                    //else
+                                    //{
+                                    //     _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.1m) / 1000000m, 2);// glass amount per unit
+                                    //}
+
+                                    if (_cmbGlassType.SelectedItem.ToString() == "Tempered Glass" || _cmbGlassType.SelectedItem.ToString() == "Tinted Glass")
+                                    {
+                                        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.5m) / 1000000m, 2);
+                                    }
+                                    else if (_cmbGlassType.SelectedItem.ToString() == "Insulated Glass Unit (IGU)")
+                                    {
+                                        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue) / 1000000m, 2);
+                                    }
+                                    else if (_cmbGlassType.SelectedItem.ToString() == "Laminated Glass")
+                                    {
+                                        _amountPerUnit = Math.Round((_glassWidth * _glassHeight * _upgradeValue * 1.3m) / 1000000m, 2);
+                                    }
+
+
                                     decimal _totalNetPrice = Math.Round(_amountPerUnit * _glassQty, 2);// glass total net price
 
+                                    _totalNetPrice =  AdditionalPercentage(_totalNetPrice);
 
                                     if (_isNegative)
                                     {
@@ -239,6 +330,8 @@ namespace PresentationLayer.Presenter
                 //MessageBox.Show("Error in Loading GlassList");
             }
         }
+
+
 
         private DataColumn CreateColumn(string columnName, string caption, string type)
         {
@@ -365,6 +458,8 @@ namespace PresentationLayer.Presenter
         }
         private void OnGlassUpgradeViewLoadEventRaised(object sender, EventArgs e)
         {
+            _mainPresenter.ClearAndAddGlassInList(true);
+
             _glassUpgradeDT.Columns.Add(CreateColumn("Item No.", "Item No", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Window/Door I.D.", "Window/Door I.D.", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Qty", "Qty", "System.String"));
@@ -420,8 +515,54 @@ namespace PresentationLayer.Presenter
 
             _dgv_GlassUpgrade.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.Programmatic);
 
+
             LoadNonUnglazedGlassList();
+
+            _cmbMultipleGlassUpgrade.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            _cmbMultipleGlassUpgrade.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+
+
+            if(_mainPresenter.dateAssigned != _quotationModel.Date_Assigned_Mainpresenter)
+            {
+                _cusrefdate = _quotationModel.Date_Assigned_Mainpresenter;
+            }
+            else
+            {
+                _cusrefdate = _mainPresenter.dateAssigned;
+            }
+
+            _glassUpgradeView.OOTAdditionalPercentage.Value = 10;
+            CheckForFactorOOT();
         }
+
+        private void CheckForFactorOOT()
+        {
+            #region CheckForFactor
+            bool isOOTAdditionalPrice = false;
+
+            if(_cusrefdate >= DateTime.Parse("05-15-2024"))
+            {
+                if(_quotationModel.PricingFactor == 1.3m)
+                {
+                    isOOTAdditionalPrice = true;
+                }
+            }
+            else
+            {
+                if (_quotationModel.PricingFactor == 1.4m)
+                {
+                    isOOTAdditionalPrice = true;
+                }
+            }
+
+            if (isOOTAdditionalPrice)
+            {
+                _glassUpgradeView.GetOOTSuggestLabel().Visible = true;
+                _glassUpgradeView.GetOOTSuggestLabel().Text = "Suggest to Use OOT Additional %";
+            }
+            #endregion
+        }
+
         private void DefaultWidthAndLocGetter()
         {
             //default
@@ -867,7 +1008,9 @@ namespace PresentationLayer.Presenter
                     _cmbMultipleGlassUpgrade.Items.Clear();
                     _dgv_GlassUpgrade.Columns.Clear();
                     _dgv_GlassUpgrade.DataSource = null;
-                    
+
+                    _autoCmpltSC = new AutoCompleteStringCollection();
+                      
                     //databinding new DT
                     LoadNewItemsInMultipleGlassUpgrade(_cmbGlassType.SelectedItem.ToString());
                     LoadDataGridViewSettings();
@@ -902,12 +1045,14 @@ namespace PresentationLayer.Presenter
                     if (GlassType == "")
                     {
                         _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                        _autoCmpltSC.Add(row[1].ToString());
                     }
                     else if (GlassType == "Tempered Glass")
                     {
                         if (row[1].ToString().Contains("Tempered"))
                         {
                             _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                             _autoCmpltSC.Add(row[1].ToString());
                         }
                     }
                     else if (GlassType == "Insulated Glass Unit (IGU)")
@@ -915,6 +1060,7 @@ namespace PresentationLayer.Presenter
                         if (row[2].ToString().Contains("Insulated"))
                         {
                             _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                            _autoCmpltSC.Add(row[1].ToString());
                         }
                     }
                     else if (GlassType == "Laminated Glass")
@@ -922,6 +1068,7 @@ namespace PresentationLayer.Presenter
                         if (row[2].ToString().Contains("Laminated"))
                         {
                             _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                            _autoCmpltSC.Add(row[1].ToString());
                         }
                     }
                     else if (GlassType == "Tinted Glass")
@@ -929,10 +1076,13 @@ namespace PresentationLayer.Presenter
                         if (row[1].ToString().Contains("Tinted"))
                         {
                             _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                            _autoCmpltSC.Add(row[1].ToString());
                         }
                     }
                 }
             }
+
+            _cmbMultipleGlassUpgrade.AutoCompleteCustomSource = _autoCmpltSC;
         }
         private void _glassUpgradeView_glassUpgradeDGV_CellMouseClickEventRaised(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -1050,6 +1200,8 @@ namespace PresentationLayer.Presenter
                                     }
 
                                     decimal _totalNetPrice = Math.Round(_amountPerUnit * _glassQty, 2);// glass total net price
+
+                                    _totalNetPrice = AdditionalPercentage(_totalNetPrice); // additional percentage for OOT 
 
                                     if (_isNegative)
                                     {

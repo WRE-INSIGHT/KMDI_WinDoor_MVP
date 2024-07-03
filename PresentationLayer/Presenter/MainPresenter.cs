@@ -217,8 +217,21 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public Control ControlRaised_forCenterProfileSelection
+        {
+            get
+            {
+                return _controlRaised_forCenterProfileSelection;
+            }
+            set
+            {
+                _controlRaised_forCenterProfileSelection = value;
+            }
+        }
+
 
         private Control _controlRaised_forDMSelection;
+        private Control _controlRaised_forCenterProfileSelection;
         private IDividerModel _divModel_forDMSelection;
         private IPanelModel _prevPanelModel_forDMSelection;
         private IPanelModel _nxtPanelModel_forDMSelection;
@@ -234,7 +247,9 @@ namespace PresentationLayer.Presenter
         private IDividerModel _prev_divModel;
         private IMullionImagerUCPresenter _mullionImagerUCP;
         private ITransomImagerUCPresenter _transomImagerUCP;
-
+        private IPanelModel _prevPanelModel_forCenterProfileSelection;
+        private IPanelModel _currentPanelModel_forCenterProfileSelection;
+        private IPanelModel _nxtPanelModel_forCenterProfileSelection;
         #endregion
 
         #region GetSet
@@ -839,6 +854,23 @@ namespace PresentationLayer.Presenter
         public bool MainPresenter_IsFromDeleteFunction { get; set; }
 
         public int WoodecAdditionalForNewItem { get; set; }
+
+        public IPanelModel PrevPanelModel_forCenterProfileSelection
+        {
+            get
+            {
+                return _prevPanelModel_forCenterProfileSelection;
+            }
+        }
+
+        public IPanelModel NxtPnlModel_forCenterProfileSelection
+        {
+            get
+            {
+                return _nxtPanelModel_forCenterProfileSelection;
+            }
+        } 
+
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -1014,7 +1046,8 @@ namespace PresentationLayer.Presenter
                 _nxtPanelModel_forDMSelection = nxt_pnl;
                 _divPropUCP_forDMSelection = divPropUCP;
             }
-            else if (status == "DMSelection")
+            else if (status == "DMSelection")           
+
             {
                 _windoorModel.WD_CmenuDeleteVisibility = true;
 
@@ -1034,6 +1067,99 @@ namespace PresentationLayer.Presenter
                 _divPropUCP_forDMSelection.GetLeverEspagUCP(_unityC, _divModel_forDMSelection).BindSashProfileArtNo();
             }
         }
+
+        public void SetLblStatusForCenterProfile (string status,
+                                                  bool visibility,
+                                                  Control controlRaised = null, 
+                                                  IPanelModel prev_pnl = null,
+                                                  IPanelModel curnt_pnl = null,
+                                                  IPanelModel nxt_pnl = null,
+                                                  IPanelModel selected_pnl = null)
+        {
+            _tsLblStatus.Visible = visibility;
+
+            if (status == "CPPreSelection")
+            {
+                _windoorModel.WD_CmenuDeleteVisibility = false;
+
+                _tsLblStatus.Text = "Select one of the highlighted panel";
+                _controlRaised_forCenterProfileSelection = controlRaised;
+                _pnlControlSub.Enabled = false;
+                _msMainMenu.Enabled = false;
+                _pnlPropertiesBody.Enabled = false;
+                _tsMain.Enabled = false;
+                _prevPanelModel_forCenterProfileSelection = prev_pnl;
+                _currentPanelModel_forCenterProfileSelection = curnt_pnl;
+                _nxtPanelModel_forCenterProfileSelection = nxt_pnl;
+
+                if (prev_pnl != null)
+                {
+                    prev_pnl.Panel_PartnerWithCenterProfile = CenterProfile_ArticleNo._None;
+                }
+
+                if (nxt_pnl != null)
+                {
+                    nxt_pnl.Panel_PartnerWithCenterProfile = CenterProfile_ArticleNo._None;
+                }
+            }
+            else if (status == "CPSelection") 
+            {
+                _windoorModel.WD_CmenuDeleteVisibility = true;
+
+                _tsLblStatus.Text = "";
+                _pnlControlSub.Enabled = true;
+                _msMainMenu.Enabled = true;
+                _pnlPropertiesBody.Enabled = true;
+                _tsMain.Enabled = true;
+                _controlRaised_forCenterProfileSelection.Text = "P" + selected_pnl.PanelGlass_ID;
+                _controlRaised_forCenterProfileSelection.BackColor = System.Drawing.Color.PaleGreen;
+                _currentPanelModel_forCenterProfileSelection.Panel_HandleType = Handle_Type._None;
+                selected_pnl.Panel_PartnerWithCenterProfile = _currentPanelModel_forCenterProfileSelection.Panel_CenterProfileArtNo;
+
+                _currentPanelModel_forCenterProfileSelection.Panel_PartnerPanelGlassID = selected_pnl.PanelGlass_ID; // set for load purpose
+
+            }
+            else if (status == "CPSelectionOnLoad")
+            {
+                _windoorModel.WD_CmenuDeleteVisibility = true;
+
+                _tsLblStatus.Text = "";
+                _pnlControlSub.Enabled = true;
+                _msMainMenu.Enabled = true;
+                _pnlPropertiesBody.Enabled = true;
+                _tsMain.Enabled = true;
+
+                _controlRaised_forCenterProfileSelection.Text = "P" + curnt_pnl.Panel_PartnerPanelGlassID;
+                _controlRaised_forCenterProfileSelection.BackColor = System.Drawing.Color.PaleGreen;
+                curnt_pnl.Panel_HandleType = Handle_Type._None;
+
+            }
+        }
+
+        public void OnLoadSearchCenterProfielArtNo(IPanelModel pnlModel)
+        {
+            if (pnlModel.Panel_ParentMultiPanelModel != null)
+            {
+
+
+                List<IPanelModel> lst_pnl = pnlModel.Panel_ParentMultiPanelModel.MPanelLst_Panel;
+
+                foreach (IPanelModel item in lst_pnl)
+                {
+                    if (pnlModel.Panel_Name == item.Panel_Name)
+                    {
+                        if (item.Panel_CenterProfileArtNo != null)
+                        {
+                            if (item.Panel_CenterProfileArtNo.ToString() != "None")
+                            {
+                                SetLblStatusForCenterProfile("CPSelectionOnLoad", false, null, null, item, null, null);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
 
         public void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC)
         {
@@ -1417,7 +1543,6 @@ namespace PresentationLayer.Presenter
 
             //    }
             //}
-
             if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
             {
                 DialogResult dialogResult = MessageBox.Show("Changes in file is not save, Do you wish to continue ? ", "Closing Application",
@@ -3509,7 +3634,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Columns.Add(CreateColumn("Laminated", "Laminated", "System.Boolean"));
 
 
-            ClearAndAddGlassInList();
+            ClearAndAddGlassInList(false);
 
 
             _glassTypeDT.Columns.Add(CreateColumn("GlassType", "GlassType", "System.String"));
@@ -3565,7 +3690,7 @@ namespace PresentationLayer.Presenter
 
         }
 
-        private void ClearAndAddGlassInList()
+        public void ClearAndAddGlassInList(bool _callfrmGlassUpgrade)
         {
             try
             {
@@ -3874,6 +3999,8 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tempered Tinted", "Double Insulated", 5550.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted", "Double Insulated", 6110.00m, false, true, false, true, false);
 
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm White Tempered + 1.52 PVB + 6 mm White Tempered", "Double Insulated", 5100.00m, false, true, false, true, false); //6/28/24
+                
                 //Tempered w/ Georgian Bar 
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Clear with Georgian Bar", "Double Insulated", 3100.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with Georgian Bar", "Double Insulated", 4200.00m, false, true, false, true, false);
@@ -3881,6 +4008,9 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Tinted with Georgian Bar", "Double Insulated", 4500.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tempered Tinted with Georgian Bar", "Double Insulated", 5550.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted with Georgian Bar", "Double Insulated", 6110.00m, false, true, false, true, false);
+
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm White Tempered + 1.52 PVB + 6 mm White Tempered with Georgian Bar", "Double Insulated", 5100.00m, false, true, false, true, false); //6/28/24
+
 
                 //Annealed with Low-e
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear Low-e", "Double Insulated", 3400.00m, false, true, false, true, false);
@@ -3907,6 +4037,21 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 6600.00m, false, true, false, true, false);
 
+                if (_dateAssigned == DateTime.Parse("01-01-0001") || _dateAssigned >= DateTime.Parse("06-30-2024"))
+                {
+                    _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 + 5 mm White Tempered", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                    _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 + 10 mm White Tempered", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+                }
+                else
+                {
+                    _glassThicknessDT.Rows.Add(23.0f, "6 mm Double Silver Low-e + 12 + 5 White Tempered", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                    _glassThicknessDT.Rows.Add(32.0f, "10 mm Low-e + 12 + 10 mm Tempered", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+                }
+
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Double Silver Low-e + 12 + 6 mm White Tempered", "Double Insulated", 4500.00m, false, true, false, true, false);//new glass 6/28/24
+
+                _glassThicknessDT.Rows.Add(28.0f, "8 mm Tempered Double Silver Low-e + 12 + 8 mm White Tempered", "Double Insulated", 7280.00m, false, true, false, true, false);//new glass 6/28/24
+
                 //Tempered Low-e w/ Georgian Bar 
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 4000.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 4200.00m, false, true, false, true, false);
@@ -3916,9 +4061,26 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5900.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o) with Georgian Bar", "Double Insulated", 7050.00m, false, true, false, true, false);
 
-
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 6600.00m, false, true, false, true, false);
+
+                if (_dateAssigned == DateTime.Parse("01-01-0001") || _dateAssigned >= DateTime.Parse("06-30-2024"))
+                {
+                    _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 + 5 mm White Tempered with Georgian Bar", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                    _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 + 10 mm White Tempered with Georgian Bar", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+                }
+                else
+                {
+                    _glassThicknessDT.Rows.Add(23.0f, "6 mm Double Silver Low-e + 12 + 5 White Tempered with Georgian Bar", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                    _glassThicknessDT.Rows.Add(32.0f, "10 mm Low-e + 12 + 10 mm Tempered", "Double Insulated Georgian Bar", 10600.00m, false, true, false, true, false);//new glass
+                }
+
+
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Double Silver Low-e + 12 + 6 mm White Tempered with Georgian Bar", "Double Insulated", 4500.00m, false, true, false, true, false);//new glass 6/28/24
+
+                _glassThicknessDT.Rows.Add(28.0f, "8 mm Tempered Double Silver Low-e + 12 + 8 mm White Tempered with Georgian Bar", "Double Insulated", 7280.00m, false, true, false, true, false);//new glass 6/28/24
+
+
                 //Tempered Heat-Soaked with Low-e
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear Low-e", "Double Insulated", 7500.00m, false, true, false, true, false);
 
@@ -6003,6 +6165,20 @@ namespace PresentationLayer.Presenter
                         {
                             panel_LouverRPLeverHandleCheck = Convert.ToBoolean(extractedValue_str);
                         }
+                        if (row_str.Contains("Panel_PartnerWithCenterProfile:"))
+                        {
+                            foreach (CenterProfile_ArticleNo PartnerCntrPro in CenterProfile_ArticleNo.GetAll())
+                            {
+                                if (PartnerCntrPro.ToString() == extractedValue_str)
+                                {
+                                    panel_PartnerWithCenterProfile = PartnerCntrPro;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("Panel_PartnerPanelGlassID:"))
+                        {
+                            panel_PartnerPanelGlassID = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
                         if (row_str.Contains("Panel_CenterProfileArtNo:"))
                         {
                             foreach (CenterProfile_ArticleNo CntrPro in CenterProfile_ArticleNo.GetAll())
@@ -7789,6 +7965,10 @@ namespace PresentationLayer.Presenter
                             }
 
                         }
+                        else if (row_str.Contains("Panel_CenterProfileVisibility:"))
+                        {
+                            panel_CenterProfileVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
                         #endregion
                     }
                     else if (inside_multi)
@@ -8839,6 +9019,7 @@ namespace PresentationLayer.Presenter
                                                                                   div_DisplayHeight,
                                                                                   div_MPanelParent,
                                                                                   div_FrameParent,
+                                                                                  _userModel,
                                                                                   GetDividerCount(),
                                                                                   divImageRenderer_Zoom,
                                                                                   _frameModel.Frame_Type.ToString(),
@@ -8888,6 +9069,9 @@ namespace PresentationLayer.Presenter
                             _divModel_forDMSelection = _prev_divModel;
                             _divPropUCP_forDMSelection = _divPropertiesUCP.GetNewInstance(_unityC, divModel, this);
                             _controlRaised_forDMSelection = _divPropUCP_forDMSelection.GetDivProperties().GetBtnSelectDMPanel();
+
+                            _divPropUCP_forDMSelection.GetDivProperties().ProfileType_FromMainPresenter = _frameModel.Frame_WindoorModel.WD_profile;
+
                             UserControl divPropUC = (UserControl)_divPropUCP_forDMSelection.GetDivProperties();
                             divPropUC.Dock = DockStyle.Top;
                             if (div_Parent.Parent.Parent.Name.Contains("Frame"))
@@ -9683,7 +9867,7 @@ namespace PresentationLayer.Presenter
                             var value = row_str.Substring(row_str.IndexOf("^ ") + 1);
 
                             _screenPADictionaryKey = Convert.ToInt64(key[0]);
-                            _screenPADictionaryValue = Convert.ToInt32(value);
+                            _screenPADictionaryValue = Convert.ToDecimal(value);
                         }
                         #endregion
                     }
@@ -9692,9 +9876,25 @@ namespace PresentationLayer.Presenter
                         #region Load ScreenPartialAdjustment_List
                         if (row_str != "●")
                         {
-                            if (row_str.Contains("Screen_isAdjusted:"))
+                            if (row_str.Contains("Screen_Parent_ID"))
+                            {
+                                pa_Screen_Parent_ID = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_IsChild"))
+                            {
+                                pa_Screen_isChild = Convert.ToBoolean(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_isAdjusted:"))
                             {
                                 pa_Screen_isAdjusted = Convert.ToBoolean(extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_Original_Quantity"))
+                            {
+                                pa_Screen_Original_Quantity = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_TotalAmount_Revised:"))
+                            {
+                                pa_Screen_TotalAmount_Revised = decimal.Parse(extractedValue_str);
                             }
                             else if (row_str.Contains("Screen_Adjustment_Price:"))
                             {
@@ -9744,7 +9944,19 @@ namespace PresentationLayer.Presenter
                                     {
                                         pa_Screen_Type_Revised = sct;
                                     }
+                                    else if ("" == extractedValue_str)
+                                    {
+                                        pa_Screen_Type_Revised = null;
+                                    }
                                 }
+                            }
+                            else if (row_str.Contains("Screen_Discount:"))
+                            {
+                                pa_Screen_Discount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            }
+                            else if (row_str.Contains("Screen_TotalAmount:"))
+                            {
+                                pa_Screen_TotalAmount = decimal.Parse(extractedValue_str);
                             }
                             else if (row_str.Contains("Screen_NetPrice:"))
                             {
@@ -9780,10 +9992,10 @@ namespace PresentationLayer.Presenter
                             }
                             else if (row_str.Contains("Screen_id:"))
                             {
-                                pa_Screen_id = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                                pa_Screen_id = Convert.ToInt64(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             }
                         }
-                        #endregion
+                        #endregion  
                     }
                     break;
             }
@@ -9797,6 +10009,7 @@ namespace PresentationLayer.Presenter
                 IScreenPartialAdjustmentProperties SPA = new ScreenPartialAdjustmentProperties();
                 
                 SPA.Screen_id = pa_Screen_id;
+                SPA.Screen_Parent_ID = pa_Screen_Parent_ID;
                 SPA.Screen_ItemNumber = pa_Screen_ItemNumber;
                 SPA.Screen_WindoorID = pa_Screen_WindoorID;
                 SPA.Screen_Description = pa_Screen_Description;
@@ -9804,7 +10017,11 @@ namespace PresentationLayer.Presenter
                 SPA.Screen_DisplayedDimension = pa_Screen_DisplayedDimension;
                 SPA.Screen_UnitPrice = pa_Screen_UnitPrice;
                 SPA.Screen_Quantity = pa_Screen_Quantity;
+                SPA.Screen_Discount = pa_Screen_Discount;
                 SPA.Screen_NetPrice = pa_Screen_NetPrice;
+                SPA.Screen_TotalAmount = pa_Screen_TotalAmount;
+                SPA.Screen_Original_Quantity = pa_Screen_Original_Quantity;
+                
                 SPA.Screen_Type_Revised = pa_Screen_Type_Revised;
                 SPA.Screen_Description_Revised = pa_Screen_Description_Revised;
                 SPA.Screen_Set_Revised = pa_Screen_Set_Revised;
@@ -9816,8 +10033,10 @@ namespace PresentationLayer.Presenter
                 SPA.Screen_Factor_Revised = pa_Screen_Factor_Revised;
                 SPA.Screen_AddOnsSpecialFactor_Revised = pa_Screen_AddOnsSpecialFactor_Revised;
                 SPA.Screen_Adjustment_Price = pa_Screen_Adjustment_Price;
+                SPA.Screen_TotalAmount_Revised = pa_Screen_TotalAmount_Revised;
                 SPA.Screen_isAdjusted = pa_Screen_isAdjusted;
-                
+                SPA.Screen_IsChild = pa_Screen_isChild;
+
                 Lst_ScreenPartialAdjustment.Add(SPA);
             }
             catch (Exception ex)
@@ -10048,6 +10267,7 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_GlassType_Insu_Lami = panel_GlassType_Insu_Lami;
             pnlModel.Panel_MotorizedMechRemoteArtNo = panel_MotorizedMechRemoteArtNo;
             pnlModel.Panel_MotorizedMechRemoteOption = panel_MotorizedMechRemoteOption;
+            pnlModel.Panel_CenterProfileVisibility = panel_CenterProfileVisibility;
             pnlModel.Panel_CenterProfileArtNo = panel_CenterProfileArtNo;
             #region Explosion
             pnlModel.PanelGlass_ID = panel_GlassID;
@@ -10253,6 +10473,9 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_Unica40ArtNo = panel_Unica40ArtNo;
             pnlModel.Panel_LockingConnectorArtNo = panel_LockingConnectorArtNo;
             pnlModel.Panel_CremonArtNo = panel_CremonArtNo;
+            pnlModel.Panel_PartnerPanelGlassID = panel_PartnerPanelGlassID;
+            pnlModel.Panel_CenterProfileArtNo = panel_CenterProfileArtNo;
+            pnlModel.Panel_PartnerWithCenterProfile = panel_PartnerWithCenterProfile;
 
 
             #region louvre 
@@ -10306,7 +10529,9 @@ namespace PresentationLayer.Presenter
             UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
             panelPropUC.Dock = DockStyle.Top;
 
-            if (panel_Parent.Parent.Name.Contains("frame"))
+            
+
+                if (panel_Parent.Parent.Name.Contains("frame"))
             {
                 _frameModel.Lst_Panel.Add(pnlModel);
                 pnlModel.Imager_SetDimensionsToBind_FrameParent();
@@ -10368,10 +10593,14 @@ namespace PresentationLayer.Presenter
                     fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
                                                                               pnlModel,
                                                                               _frameModel,
+                                                                              _userModel,
                                                                               this,
                                                                               frmUCPresenter);
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     _frameModel.Frame_UC.Controls.Add((UserControl)fixedUC);
+
+                    
+
                 }
                 else
                 {
@@ -10382,6 +10611,7 @@ namespace PresentationLayer.Presenter
                         fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
                                                                       pnlModel,
                                                                       _frameModel,
+                                                                      _userModel,
                                                                       this,
                                                                       _multiModelParent,
                                                                       _multiMullionUCP,
@@ -10401,6 +10631,7 @@ namespace PresentationLayer.Presenter
                         fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
                                                                        pnlModel,
                                                                        _frameModel,
+                                                                       _userModel,
                                                                        this,
                                                                        _multiModelParent,
                                                                        _multiTransomUCP,
@@ -10432,6 +10663,7 @@ namespace PresentationLayer.Presenter
                     casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
                                                                               pnlModel,
                                                                               _frameModel,
+                                                                              _userModel,
                                                                               this,
                                                                               frmUCPresenter);
                     ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
@@ -10444,6 +10676,7 @@ namespace PresentationLayer.Presenter
                         casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
                                                                       pnlModel,
                                                                       _frameModel,
+                                                                      _userModel,
                                                                       this,
                                                                       _multiModelParent,
                                                                       _multiMullionUCP,
@@ -10459,7 +10692,8 @@ namespace PresentationLayer.Presenter
                     {
                         casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
                                                                        pnlModel,
-                                                                       _frameModel,
+                                                                       _frameModel, 
+                                                                       _userModel,
                                                                        this,
                                                                        _multiModelParent,
                                                                        _multiTransomUCP,
@@ -10492,6 +10726,7 @@ namespace PresentationLayer.Presenter
                     awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
                                                                               pnlModel,
                                                                               _frameModel,
+                                                                              _userModel,
                                                                               this,
                                                                               frmUCPresenter);
                     IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
@@ -10504,6 +10739,7 @@ namespace PresentationLayer.Presenter
                         awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
                                                                       pnlModel,
                                                                       _frameModel,
+                                                                      _userModel,
                                                                       this,
                                                                       _multiModelParent,
                                                                       _multiMullionUCP,
@@ -10518,6 +10754,7 @@ namespace PresentationLayer.Presenter
                         awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
                                                                        pnlModel,
                                                                        _frameModel,
+                                                                       _userModel,
                                                                        this,
                                                                        _multiModelParent,
                                                                        _multiTransomUCP,
@@ -10551,6 +10788,7 @@ namespace PresentationLayer.Presenter
                     slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
                                                                               pnlModel,
                                                                               _frameModel,
+                                                                              _userModel,
                                                                               this,
                                                                               frmUCPresenter);
                     ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
@@ -10563,6 +10801,7 @@ namespace PresentationLayer.Presenter
                         slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
                                                                       pnlModel,
                                                                       _frameModel,
+                                                                      _userModel,
                                                                       this,
                                                                       _multiModelParent,
                                                                       _multiMullionUCP,
@@ -10577,6 +10816,7 @@ namespace PresentationLayer.Presenter
                         slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
                                                                        pnlModel,
                                                                        _frameModel,
+                                                                       _userModel,
                                                                        this,
                                                                        _multiModelParent,
                                                                        _multiTransomUCP,
@@ -10611,6 +10851,7 @@ namespace PresentationLayer.Presenter
                     tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
                                                                               pnlModel,
                                                                               _frameModel,
+                                                                              _userModel,
                                                                               this,
                                                                               frmUCPresenter);
                     ITiltNTurnPanelUC tiltNTurnUC = tiltNTurnUCP.GetTiltNTurnPanelUC();
@@ -10623,6 +10864,7 @@ namespace PresentationLayer.Presenter
                         tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
                                                                       pnlModel,
                                                                       _frameModel,
+                                                                      _userModel,
                                                                       this,
                                                                       _multiModelParent,
                                                                       _multiMullionUCP,
@@ -10637,6 +10879,7 @@ namespace PresentationLayer.Presenter
                         tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
                                                                        pnlModel,
                                                                        _frameModel,
+                                                                       _userModel,
                                                                        this,
                                                                        _multiModelParent,
                                                                        _multiTransomUCP,
@@ -10663,6 +10906,7 @@ namespace PresentationLayer.Presenter
                     louverPanelUCP = (LouverPanelUCPresenter)_louverPanelUCP.GetNewInstance(_unityC,
                                                                               pnlModel,
                                                                               _frameModel,
+                                                                              _userModel,
                                                                               this,
                                                                               frmUCPresenter);
                     ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();
@@ -10675,6 +10919,7 @@ namespace PresentationLayer.Presenter
                         louverPanelUCP = (LouverPanelUCPresenter)_louverPanelUCP.GetNewInstance(_unityC,
                                                                                    pnlModel,
                                                                                    _frameModel,
+                                                                                   _userModel,
                                                                                    this,
                                                                                    _multiModelParent,
                                                                                    _multiMullionUCP);
@@ -10688,6 +10933,7 @@ namespace PresentationLayer.Presenter
                         louverPanelUCP = (LouverPanelUCPresenter)_louverPanelUCP.GetNewInstance(_unityC,
                                                                                    pnlModel,
                                                                                    _frameModel,
+                                                                                   _userModel,
                                                                                    this,
                                                                                    _multiModelParent,
                                                                                    _multiTransomUCP);
@@ -10730,6 +10976,7 @@ namespace PresentationLayer.Presenter
                     }
                 }
             }
+            //_panelModel = pnlModel;
             inside_panel = false;
         }
         private void Load_QuoteHistory()
@@ -10787,11 +11034,12 @@ namespace PresentationLayer.Presenter
             _loadRDLCHeaders = false,
             _allpanelsIsMesh;
         int _EntryCountOfKeyWordUsing,
-            _EntryCountOfKeyWordPriceValidity,
-            _screenPADictionaryValue;
+            _EntryCountOfKeyWordPriceValidity;
         bool _EntrytoKeyWordUsing = false,
              _EntrytoKeyWordPriceValidity = false;
-        decimal _factorFromAddExisting, _factorHolderOnLoad;
+        decimal _factorFromAddExisting, 
+                _factorHolderOnLoad, 
+                _screenPADictionaryValue;
         long _screenPADictionaryKey;
 
 
@@ -11054,7 +11302,8 @@ namespace PresentationLayer.Presenter
              panel_PopUpHandleOptionVisibilty,
              panel_TrackRailArtNoVisibility,
              panel_RotoswingForSlidingHandleOptionVisibilty,
-             panel_MotorizedMechRemoteOption;
+             panel_MotorizedMechRemoteOption,
+             panel_CenterProfileVisibility;
         int panel_GlassID,
             panel_GlazingBeadWidth,
             panel_GlazingBeadWidthDecimal,
@@ -11111,7 +11360,8 @@ namespace PresentationLayer.Presenter
             panel_HingeOptionsPropertyHeight,
             panel_AluminumTrackQty,
             panel_StrikerArtno_SlidingQty,
-            panel_OverLappingPanelQty;
+            panel_OverLappingPanelQty,
+            panel_PartnerPanelGlassID;
         GlazingBead_ArticleNo panel_GlazingBeadArtNo;
         GlazingAdaptor_ArticleNo panel_GlazingAdaptorArtNo;
         GBSpacer_ArticleNo panel_GBSpacerArtNo;
@@ -11219,6 +11469,8 @@ namespace PresentationLayer.Presenter
         AluminumPullHandle_ArticleNo panel_AluminumPullHandleArticleNo;
         MotorizedMechRemote_ArticleNo panel_MotorizedMechRemoteArtNo;
         CenterProfile_ArticleNo panel_CenterProfileArtNo;
+        CenterProfile_ArticleNo panel_PartnerWithCenterProfile;
+        
 
         OpenableStriker_ArticleNo panel_OpenableStrikerArtNo;
         CornerCleat_ArticleNo panel_CornerCleatArtNo;
@@ -11274,6 +11526,7 @@ namespace PresentationLayer.Presenter
         SnapInKeep_ArticleNo div_SnapNKeepDM;
         IMultiPanelModel div_MPanelParent;
         IFrameModel div_FrameParent;
+        //IUserModel div_UserModel;
         IPanelModel div_DMPanel;
         Divider_ArticleNo div_ArtNo;
         DividerReinf_ArticleNo div_ReinfArtNo;
@@ -11433,15 +11686,18 @@ namespace PresentationLayer.Presenter
 
         #endregion
         #region IScreenPartialAdjustmentProperties
-        long pa_Screen_id;
+        long pa_Screen_id,
+             pa_Screen_Parent_ID;
         decimal pa_Screen_ItemNumber, 
+                pa_Screen_TotalAmount,
                 pa_Screen_UnitPrice, 
                 pa_Screen_NetPrice, 
                 pa_Screen_UnitPrice_Revised,
                 pa_Screen_NetPrice_Revised, 
                 pa_Screen_Factor_Revised, 
                 pa_Screen_AddOnsSpecialFactor_Revised,
-                pa_Screen_Adjustment_Price;
+                pa_Screen_Adjustment_Price,
+                pa_Screen_TotalAmount_Revised;
 
         string pa_Screen_WindoorID, 
                pa_Screen_Description, 
@@ -11449,13 +11705,16 @@ namespace PresentationLayer.Presenter
                pa_Screen_Description_Revised,
                pa_Screen_DisplayedDimes_Revised;
 
-        int pa_Screen_Set, 
+        int pa_Screen_Set,
+            pa_Screen_Discount,
             pa_Screen_Quantity, 
             pa_Screen_Set_Revised, 
             pa_Screen_Quantity_Revised, 
-            pa_Screen_Discount_Revised;
+            pa_Screen_Discount_Revised,
+            pa_Screen_Original_Quantity;
         ScreenType pa_Screen_Type_Revised;
-        bool pa_Screen_isAdjusted;        
+        bool pa_Screen_isAdjusted,
+             pa_Screen_isChild;        
         #endregion
 
         string mpnllvl = "";
@@ -11465,7 +11724,7 @@ namespace PresentationLayer.Presenter
         public void Clearing_Operation()
         {
 
-            ClearAndAddGlassInList();
+            ClearAndAddGlassInList(false);
 
             _quotationModel = null;
             _frameModel = null;
@@ -11933,7 +12192,9 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_UC = (UserControl)_frameUC;
                         _frameModel.Frame_PropertiesUC = (UserControl)_framePropertiesUCPresenter.GetFramePropertiesUC();
                         AddFrameList_WindoorModel(_frameModel);
-                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+
+                        _framePropertiesUCPresenter.GetFramePropertiesUC().ProfileType_FromMainPresenter = _frameModel.Frame_WindoorModel.WD_profile;
+
                         _basePlatformImagerUCPresenter.Invalidate_flpMain();
                         _basePlatformPresenter.InvalidateBasePlatform();
 
@@ -13426,6 +13687,12 @@ namespace PresentationLayer.Presenter
                         {
                             incompatibility += "\n\nOn " + div.Div_Name + "\nSash Profile : " + div.Div_DMPanel.Panel_SashProfileArtNo.DisplayName + ", Dummy Mullion : " + div.Div_DMArtNo.DisplayName;
                         }
+                        else if (div.Div_DMArtNo == DummyMullion_ArticleNo._84401 &&
+                                !(div.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207 ||
+                                 div.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._84200))
+                        {
+                            incompatibility += "\n\nOn " + div.Div_Name + "\nSash Profile : " + div.Div_DMPanel.Panel_SashProfileArtNo.DisplayName + ", Dummy Mullion : " + div.Div_DMArtNo.DisplayName;
+                        }
                     }
                     else if (div.Div_ChkDM == true && div.Div_DMPanel == null)
                     {
@@ -13737,8 +14004,10 @@ namespace PresentationLayer.Presenter
         public IFramePropertiesUCPresenter AddFramePropertiesUC(IFrameModel frameModel)
         {
             IFramePropertiesUCPresenter FramePropertiesUCP = _framePropertiesUCPresenter.GetNewInstance(frameModel, _unityC, this);
+            FramePropertiesUCP.GetFramePropertiesUC().ProfileType_FromMainPresenter = frameModel.Frame_WindoorModel.WD_profile;
             _framePropertiesUC = FramePropertiesUCP.GetFramePropertiesUC();
             _pnlPropertiesBody.Controls.Add((UserControl)_framePropertiesUC);
+
 
             return FramePropertiesUCP;
         }

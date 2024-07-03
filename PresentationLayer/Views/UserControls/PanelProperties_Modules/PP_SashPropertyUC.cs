@@ -19,6 +19,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             InitializeComponent();
         }
 
+        public string  ProfileType_FromMainPresenter { get; set; }
+
         public event EventHandler PPSashPropertyLoadEventRaised;
         public event EventHandler cmbSashProfileSelectedValueEventRaised;
         public event EventHandler cmbSashProfileReinfSelectedValueEventRaised;
@@ -28,17 +30,41 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             List<SashProfile_ArticleNo> sash = new List<SashProfile_ArticleNo>();
             foreach (SashProfile_ArticleNo item in SashProfile_ArticleNo.GetAll())
             {
-
-
-                sash.Add(item);
+                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                {
+                    if (item == SashProfile_ArticleNo._84200 ||
+                        item == SashProfile_ArticleNo._84207)
+                    {
+                        sash.Add(item);
+                    }
+                }
+                else
+                {
+                    if (item != SashProfile_ArticleNo._84200 &&
+                        item != SashProfile_ArticleNo._84207)
+                    {
+                        sash.Add(item);
+                    }
+                }
             }
             cmb_SashProfile.DataSource = sash;
 
             List<SashReinf_ArticleNo> sashReinf = new List<SashReinf_ArticleNo>();
             foreach (SashReinf_ArticleNo item in SashReinf_ArticleNo.GetAll())
             {
-                sashReinf.Add(item);
+                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                {
+                    if (item == SashReinf_ArticleNo._None)
+                    {
+                        sashReinf.Add(item);
+                    }
+                }
+                else
+                { 
+                        sashReinf.Add(item);   
+                }
             }
+            
             cmb_SashReinf.DataSource = sashReinf;
             cmb_SashProfile.MouseWheel += new MouseEventHandler(ComboBox_MouseWheel);
             cmb_SashReinf.MouseWheel += new MouseEventHandler(ComboBox_MouseWheel);

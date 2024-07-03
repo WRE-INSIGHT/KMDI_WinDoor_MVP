@@ -115,7 +115,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 }
 
                 if ((div_nxt != null && div_nxt.Div_ChkDM == true) ||
-                    (div_prev != null && div_prev.Div_ChkDM == true))
+                    (div_prev != null && div_prev.Div_ChkDM == true) &&
+                    !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                 {
                     _panelModel.Panel_CornerDriveOptionsVisibility = true;
                     _panelModel.AdjustPropertyPanelHeight("addCornerDrive");
@@ -138,7 +139,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
             }
 
-            if (!_panelModel.Panel_Type.Contains("Sliding"))
+            if (!_panelModel.Panel_Type.Contains("Sliding") &&
+                !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
             {
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addExtension");
                 _panelModel.AdjustPropertyPanelHeight("addExtension");
@@ -1167,12 +1169,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                        
                         if (_panelModel.Panel_ParentMultiPanelModel != null)
                         {
-                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
+                            //_panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
                         }
 
                        
-                        if (!_panelModel.Panel_Type.Contains("Sliding"))
+                        if (!_panelModel.Panel_Type.Contains("Sliding") && 
+                            !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                         {
                             _panelModel.AdjustPropertyPanelHeight("minusExtension");
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
@@ -1922,8 +1925,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         #endregion
                     }
                     else if (sel_handleType == Handle_Type._CremonHandle)
-                    {
-
+                    { 
                         #region Property Height Adjustment - Cremon
                         if (!_mainPresenter.ItemLoad)
                         {
@@ -2146,6 +2148,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             rotoswingForSlidingPropUC.BringToFront();
 
             IPP_EspagnolettePropertyUCPresenter espUCP = _pp_espagnolettePropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+            espUCP.GetPPEspagnolettePropertyUC().ProfileType_FromMainPresenter = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile;
             UserControl espPropUC = (UserControl)espUCP.GetPPEspagnolettePropertyUC();
             _pnlHandleType.Controls.Add(espPropUC);
             espPropUC.Dock = DockStyle.Top;

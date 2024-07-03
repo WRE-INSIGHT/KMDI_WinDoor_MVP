@@ -73,19 +73,43 @@ namespace PresentationLayer.Presenter
                         if (!_mainPresenter.Dic_PaScreenID.Keys.Contains(ScrLst.Screen_id))
                         {
                             _mainPresenter.Dic_PaScreenID.Add(ScrLst.Screen_id, ScrLst.Screen_ItemNumber);
-                             ScrLst.Screen_isAdjusted = true;
 
                             IScreenPartialAdjustmentProperties Spap = new ScreenPartialAdjustmentProperties();
+
+                            string desc = "";
+
+                            if (ScrLst.Screen_Set > 1)
+                            {
+                                if (ScrLst.Screen_Description.Contains("(Sets of"))
+                                {
+                                    desc = " ";
+                                }
+                                else
+                                {
+                                    desc = " (Sets of " + ScrLst.Screen_Set.ToString() + ")";
+                                }
+                            }
+                            else
+                            {
+                                desc = " ";
+                            }
+
+                            Spap.Screen_isAdjusted = true;
+                            Spap.Screen_IsChild = false;
+                            Spap.Screen_Parent_ID = 0;
+                            Spap.Screen_Original_Quantity = ScrLst.Screen_Quantity;
 
                             Spap.Screen_id = ScrLst.Screen_id;
                             Spap.Screen_ItemNumber = ScrLst.Screen_ItemNumber;
                             Spap.Screen_WindoorID = ScrLst.Screen_WindoorID;
-                            Spap.Screen_Description = ScrLst.Screen_Description;
+                            Spap.Screen_Description = ScrLst.Screen_Description + desc;
                             Spap.Screen_Set = ScrLst.Screen_Set;
                             Spap.Screen_DisplayedDimension = ScrLst.Screen_DisplayedDimension;
                             Spap.Screen_UnitPrice = ScrLst.Screen_UnitPrice;
                             Spap.Screen_Quantity = ScrLst.Screen_Quantity;
                             Spap.Screen_NetPrice = ScrLst.Screen_NetPrice;
+                            Spap.Screen_Discount = ScrLst.Screen_Discount;
+                            Spap.Screen_TotalAmount = ScrLst.Screen_TotalAmount;
 
                             _mainPresenter.Lst_ScreenPartialAdjustment.Add(Spap);
                                                       
