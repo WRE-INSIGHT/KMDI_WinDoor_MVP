@@ -1053,7 +1053,7 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                         else if (panelModel.Panel_Placement != "First")
                         {
-                        }
+                        }                    
 
                         Draw_Panel(e, panelModel, new Point(objLocX + 1, objLocY));
 
@@ -1160,6 +1160,12 @@ namespace PresentationLayer.Presenter.UserControls
                         {
 
                         }
+                       if (panelModel.PanelImageRenderer_Zoom == panelModel.Panel_Zoom)
+                       {
+                           panelModel.PanelImageRenderer_Height = panelModel.Panel_HeightToBind;
+                       }
+                       // Console.WriteLine("1 Panel Imager Height Bind:" + panelModel.Panel_HeightToBind);
+                       // Console.WriteLine("2 Panel Imager Height:" + panelModel.PanelImageRenderer_Height);
                         Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
 
                         int lastLevelDivisor = 0, botPadDeduction = 0;
