@@ -458,6 +458,8 @@ namespace PresentationLayer.Presenter
         }
         private void OnGlassUpgradeViewLoadEventRaised(object sender, EventArgs e)
         {
+            _mainPresenter.ClearAndAddGlassInList(true);
+
             _glassUpgradeDT.Columns.Add(CreateColumn("Item No.", "Item No", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Window/Door I.D.", "Window/Door I.D.", "System.String"));
             _glassUpgradeDT.Columns.Add(CreateColumn("Qty", "Qty", "System.String"));
@@ -512,6 +514,7 @@ namespace PresentationLayer.Presenter
             DefaultWidthAndLocGetter();
 
             _dgv_GlassUpgrade.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.Programmatic);
+
 
             LoadNonUnglazedGlassList();
 
