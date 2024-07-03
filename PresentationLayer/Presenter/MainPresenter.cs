@@ -4000,16 +4000,21 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 6600.00m, false, true, false, true, false);
 
-                if (_dateAssigned == DateTime.Parse("01-01-0001") || _dateAssigned >= DateTime.Parse("06-30-2024"))
-                {
-                    _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 + 5 mm White Tempered", "Double Insulated", 4250.00m, false, true, false, true, false);//
-                    _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 + 10 mm White Tempered", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
-                }
-                else
-                {
-                    _glassThicknessDT.Rows.Add(23.0f, "6 mm Double Silver Low-e + 12 + 5 White Tempered", "Double Insulated", 4250.00m, false, true, false, true, false);//
-                    _glassThicknessDT.Rows.Add(32.0f, "10 mm Low-e + 12 + 10 mm Tempered", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
-                }
+                //if (_dateAssigned == DateTime.Parse("01-01-0001") || _dateAssigned >= DateTime.Parse("06-30-2024"))
+                //{
+                //    _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 + 5 mm White Tempered", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                //    _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 + 10 mm White Tempered", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+                //}
+                //else
+                //{
+                //    _glassThicknessDT.Rows.Add(23.0f, "6 mm Double Silver Low-e + 12 + 5 White Tempered", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                //    _glassThicknessDT.Rows.Add(32.0f, "10 mm Low-e + 12 + 10 mm Tempered", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+                //}
+
+                _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 + 5 mm White Tempered", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 + 10 mm White Tempered", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+                _glassThicknessDT.Rows.Add(23.0f, "6 mm Double Silver Low-e + 12 + 5 White Tempered", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                _glassThicknessDT.Rows.Add(32.0f, "10 mm Low-e + 12 + 10 mm Tempered", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
 
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Double Silver Low-e + 12 + 6 mm White Tempered", "Double Insulated", 4500.00m, false, true, false, true, false);//new glass 6/28/24
 
@@ -4027,16 +4032,21 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 6600.00m, false, true, false, true, false);
 
-                if (_dateAssigned == DateTime.Parse("01-01-0001") || _dateAssigned >= DateTime.Parse("06-30-2024"))
-                {
-                    _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 + 5 mm White Tempered with Georgian Bar", "Double Insulated", 4250.00m, false, true, false, true, false);//
-                    _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 + 10 mm White Tempered with Georgian Bar", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
-                }
-                else
-                {
-                    _glassThicknessDT.Rows.Add(23.0f, "6 mm Double Silver Low-e + 12 + 5 White Tempered with Georgian Bar", "Double Insulated", 4250.00m, false, true, false, true, false);//
-                    _glassThicknessDT.Rows.Add(32.0f, "10 mm Low-e + 12 + 10 mm Tempered", "Double Insulated Georgian Bar", 10600.00m, false, true, false, true, false);//new glass
-                }
+                //if (_dateAssigned == DateTime.Parse("01-01-0001") || _dateAssigned >= DateTime.Parse("06-30-2024"))
+                //{
+                //    _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 + 5 mm White Tempered with Georgian Bar", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                //    _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 + 10 mm White Tempered with Georgian Bar", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+                //}
+                //else
+                //{
+                //    _glassThicknessDT.Rows.Add(23.0f, "6 mm Double Silver Low-e + 12 + 5 White Tempered with Georgian Bar", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                //    _glassThicknessDT.Rows.Add(32.0f, "10 mm Low-e + 12 + 10 mm Tempered", "Double Insulated Georgian Bar", 10600.00m, false, true, false, true, false);//new glass
+                //}
+
+                _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 + 5 mm White Tempered with Georgian Bar", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 + 10 mm White Tempered with Georgian Bar", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+                _glassThicknessDT.Rows.Add(23.0f, "6 mm Double Silver Low-e + 12 + 5 White Tempered with Georgian Bar", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                _glassThicknessDT.Rows.Add(32.0f, "10 mm Low-e + 12 + 10 mm Tempered", "Double Insulated Georgian Bar", 10600.00m, false, true, false, true, false);//new glass
 
 
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Double Silver Low-e + 12 + 6 mm White Tempered with Georgian Bar", "Double Insulated", 4500.00m, false, true, false, true, false);//new glass 6/28/24
