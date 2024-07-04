@@ -2046,6 +2046,30 @@ First(Fields!dtTotalNetPriceWOVat.Value, "DataSet1"))</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
+                    <Value>Glass have to be included in the shipment of the windows/door, otherwise, we will have to charge shipping costs separately.</Value>
+                    <Style>
+                      <FontFamily>segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
                     <Value>For any question or clarification, please feel free to call us at our office telephone nos.: for NCR 8715-8777, 8912-4333 and 8912-3545, or email us at aftersales@kennethandmock.com, for Cebu 032 346-1112, or email us at cebu@kennethandmock.com.</Value>
                     <Style>
                       <FontFamily>segoe UI</FontFamily>
