@@ -117,6 +117,7 @@ namespace ModelLayer.Model.Quotation.Panel
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
         FrictionStayCasement_ArticleNo Panel_FSCasementArtNo { get; set; }
+        FrictionAlutek_ArticleNo Panel_FSAlutekArtNo { get; set; }
         SnapInKeep_ArticleNo Panel_SnapInKeepArtNo { get; set; }
         FixedCam_ArticleNo Panel_FixedCamArtNo { get; set; }
         _30x25Cover_ArticleNo Panel_30x25CoverArtNo { get; set; }
@@ -519,7 +520,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_BrushForSliding_MaterialList(DataTable tbl_explosion, int FinPlatePerimeter);
         void Insert_InversionClip_MaterialList(DataTable tbl_explosion);
         int Add_GasketLength_Alutek(bool withSash, float GlassThickness);
-        int Add_UniversalGasketLength_Alutek();
+        int Add_UniversalGasketLength_Alutek(bool withSash);
         void Insert_GlazingGasket_Alutek_MaterialList(DataTable tbl_explosion, float GlassThickness, bool withSash);
         int Add_CenterGasket();
         void Insert_CenterGasket_MaterialList(DataTable tbl_explosion);

@@ -12914,18 +12914,27 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 totalGlazingGasketLength += (Panel_SashWidth + Panel_SashHeight) * 2;
             }
-            else if (withSash == true)
+            else if (withSash == false)
             {
                 totalGlazingGasketLength += (Panel_Width + Panel_Height) * 2;
             } 
              
             return totalGlazingGasketLength;
         }
-        public int Add_UniversalGasketLength_Alutek()
+        public int Add_UniversalGasketLength_Alutek(bool withSash)
         {
-            int TotalUniversalGlazingGasketLength = 0;
+            int TotalUniversalGlazingGasketLength = 0 , multiplier = 0;
 
-            TotalUniversalGlazingGasketLength += (Panel_GlazingBeadWidth + Panel_GlazingBeadHeight) * 2;
+            if (withSash == true)
+            {
+                multiplier = 3;
+            }
+            else if (withSash == false)
+            {
+                multiplier = 1;
+            }
+
+            TotalUniversalGlazingGasketLength = ((Panel_DisplayWidth + Panel_DisplayHeight) * 2) * multiplier;
 
             return TotalUniversalGlazingGasketLength;
         }
@@ -13003,6 +13012,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                        @"");
             }
         } 
+
         public int Add_CenterGasket()
         {
             return (Panel_DisplayWidth * 2) + (Panel_DisplayHeight * 2);
@@ -13029,11 +13039,11 @@ namespace ModelLayer.Model.Quotation.Panel
             int strikerCount = 0;
             if (panelType.Contains("Awning"))
             {
-                strikerCount = 3;
+                strikerCount = 2;
             }
             else if (panelType.Contains("Casement"))
             {
-                strikerCount = 2;
+                strikerCount = 3;
             }
 
             tbl_explosion.Rows.Add("Openable Striker, 50mm " + Panel_OpenableStrikerArtNo.DisplayName,
@@ -13066,11 +13076,11 @@ namespace ModelLayer.Model.Quotation.Panel
             int runUpCount = 0;
             if (panelType.Contains("Awning"))
             {
-                runUpCount = 3;
+                runUpCount = 2;
             }
             else if (panelType.Contains("Casement"))  
             {
-                runUpCount = 2;
+                runUpCount = 1;
             }
 
             tbl_explosion.Rows.Add("Run Up Block " + Panel_RunUpBlockArtNo.DisplayName,
