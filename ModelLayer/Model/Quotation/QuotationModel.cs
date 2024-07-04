@@ -6739,10 +6739,7 @@ namespace ModelLayer.Model.Quotation
                                                 */
                                                 #endregion
                                                 UniversalGasketAluPrice += ((((pnl.Panel_DisplayWidth + pnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPricePerLinearMeter) * 3;
-                                                GlazingGasketAluPrice += (((pnl.Panel_SashWidth * 2) + (pnl.Panel_SashHeight * 2)) / 1000m);
-
-
-                                                GlazingGasketAluPrice += (((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m);
+                                                GlazingGasketAluPrice += (((pnl.Panel_SashWidth * 2) + (pnl.Panel_SashHeight * 2)) / 1000m); 
                                                 CenterGasketAluPrice += ((((pnl.Panel_DisplayWidth + pnl.Panel_DisplayHeight) * 2) / 1000m) * CenterGasketPerLinearMeter);
                                             }
 
@@ -6965,7 +6962,7 @@ namespace ModelLayer.Model.Quotation
                                            CornerCleatPrice += 6 * CornerCleatPricePerPiece;
                                            HoleCapePrice += 10 * HoleCapePricePerPiece;
 
-                                            #region Inalis na pero wag mo na pabalikin
+                                            #region Inalis na kaya wag mo na pabalikin
                                             //CornerWindowPrice += 4 * CornerWindowPricePerPiece;
                                             //CheveronPrice += 4 * CheveronPricePerPiece;
                                             //WaterDrainageWValvesPrice += 2 * WaterDrainageWValvesPricePerPiece;
@@ -6985,6 +6982,8 @@ namespace ModelLayer.Model.Quotation
 
                                             //old algo
                                             //GlazingGasketGbeadForAluPrice += ((((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
+                                            UniversalGasketAluPrice += ((((pnl.Panel_DisplayWidth + pnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPricePerLinearMeter);
+                                            GlazingGasketAluPrice += (((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m);
 
                                             TotalGlassPerimeter += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m));
                                         }
@@ -9087,6 +9086,10 @@ namespace ModelLayer.Model.Quotation
                                         CenterGasketPrice += ((((Singlepnl.Panel_DisplayWidth * 2) + (Singlepnl.Panel_DisplayHeight * 2)) / 1000m) * CenterGasketPerPiece);
                                         */
                                         #endregion
+                                        UniversalGasketAluPrice += ((((Singlepnl.Panel_DisplayWidth + Singlepnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPricePerLinearMeter) * 3;
+                                        GlazingGasketAluPrice += (((Singlepnl.Panel_SashWidth * 2) + (Singlepnl.Panel_SashHeight * 2)) / 1000m);
+                                        CenterGasketAluPrice += ((((Singlepnl.Panel_DisplayWidth + Singlepnl.Panel_DisplayHeight) * 2) / 1000m) * CenterGasketPerLinearMeter);
+
                                   }
 
                                     //TransmissionRodPrice += TransmissionRodPricePerPiece; nasa espag region
@@ -9319,8 +9322,10 @@ namespace ModelLayer.Model.Quotation
                                   {
                                       InversionClipPrice += (((Singlepnl.Panel_InversionClipWidth * 2) + (Singlepnl.Panel_InversionClipHeight * 2)) / 1000m) * InversionClipPricePerPiece;
                                   }
-                                 //old algo
-                                  //GlazingGasketGbeadForAluPrice += (((Singlepnl.Panel_GlazingBeadHeight * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000) * GlazingGasket_GlazingBead_PerPiece;
+                                    //old algo
+                                    //GlazingGasketGbeadForAluPrice += (((Singlepnl.Panel_GlazingBeadHeight * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000) * GlazingGasket_GlazingBead_PerPiece;
+                                    UniversalGasketAluPrice += ((((Singlepnl.Panel_DisplayWidth + Singlepnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPricePerLinearMeter);
+                                    GlazingGasketAluPrice += (((Singlepnl.Panel_GlazingBeadWidth * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000m);
                                 }
                                 #endregion
 
@@ -9729,7 +9734,7 @@ namespace ModelLayer.Model.Quotation
                                                     {
                                                         alumBladesPrice = 926.47m * 5.8m;
                                                     }
-                                                    GlassBladePrice += alumBladesPrice * Math.Ceiling(BladeAluMultiplier);
+                                                    GlassBladePrice = alumBladesPrice * Math.Ceiling(BladeAluMultiplier);
                                                     Singlepnl.Panel_GlassPricePerSqrMeter = alumBladesPrice;
                                                 }
                                             }

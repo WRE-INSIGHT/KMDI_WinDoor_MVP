@@ -12916,7 +12916,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (withSash == false)
             {
-                totalGlazingGasketLength += (Panel_Width + Panel_Height) * 2;
+                totalGlazingGasketLength += (Panel_GlazingBeadWidth + Panel_GlazingBeadHeight) * 2;
             } 
              
             return totalGlazingGasketLength;
