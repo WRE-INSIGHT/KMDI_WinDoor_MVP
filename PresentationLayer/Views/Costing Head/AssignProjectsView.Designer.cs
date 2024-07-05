@@ -77,7 +77,7 @@
             this.txt_SearchProj.Location = new System.Drawing.Point(0, 0);
             this.txt_SearchProj.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_SearchProj.Name = "txt_SearchProj";
-            this.txt_SearchProj.Size = new System.Drawing.Size(754, 29);
+            this.txt_SearchProj.Size = new System.Drawing.Size(754, 34);
             this.txt_SearchProj.TabIndex = 0;
             this.txt_SearchProj.TextChanged += new System.EventHandler(this.txt_SearchProj_TextChanged);
             this.txt_SearchProj.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_SearchProj_KeyDown);
@@ -95,6 +95,7 @@
             this.dgv_Projects.Location = new System.Drawing.Point(0, 29);
             this.dgv_Projects.Name = "dgv_Projects";
             this.dgv_Projects.ReadOnly = true;
+            this.dgv_Projects.RowHeadersWidth = 51;
             this.dgv_Projects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Projects.Size = new System.Drawing.Size(789, 392);
             this.dgv_Projects.TabIndex = 4;
@@ -102,45 +103,46 @@
             // 
             // cmenu_dgvProj
             // 
+            this.cmenu_dgvProj.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmenu_dgvProj.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.assignCostEngrToolStripMenuItem,
             this.customerRefNoToolStripMenuItem,
             this.clearToolStripMenuItem,
             this.deleteProjectToolStripMenuItem});
             this.cmenu_dgvProj.Name = "cmenu_dgvProj";
-            this.cmenu_dgvProj.Size = new System.Drawing.Size(169, 114);
+            this.cmenu_dgvProj.Size = new System.Drawing.Size(211, 128);
             // 
             // assignCostEngrToolStripMenuItem
             // 
             this.assignCostEngrToolStripMenuItem.Name = "assignCostEngrToolStripMenuItem";
-            this.assignCostEngrToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.assignCostEngrToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.assignCostEngrToolStripMenuItem.Text = "Assign Cost Engr";
             this.assignCostEngrToolStripMenuItem.Click += new System.EventHandler(this.assignCostEngrToolStripMenuItem_Click);
             // 
             // customerRefNoToolStripMenuItem
             // 
             this.customerRefNoToolStripMenuItem.Name = "customerRefNoToolStripMenuItem";
-            this.customerRefNoToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.customerRefNoToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.customerRefNoToolStripMenuItem.Text = "Customer Ref. No";
             this.customerRefNoToolStripMenuItem.Click += new System.EventHandler(this.customerRefNoToolStripMenuItem_Click);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.clearToolStripMenuItem.Text = "Clear Assigned";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
             // deleteProjectToolStripMenuItem
             // 
             this.deleteProjectToolStripMenuItem.Name = "deleteProjectToolStripMenuItem";
-            this.deleteProjectToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.deleteProjectToolStripMenuItem.Text = "Delete Project";
+            this.deleteProjectToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.deleteProjectToolStripMenuItem.Text = "Delete Row";
             this.deleteProjectToolStripMenuItem.Click += new System.EventHandler(this.deleteProjectToolStripMenuItem_Click);
             // 
             // AssignProjectsView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(789, 421);
             this.Controls.Add(this.dgv_Projects);

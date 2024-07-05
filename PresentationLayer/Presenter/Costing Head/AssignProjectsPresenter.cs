@@ -69,7 +69,8 @@ namespace PresentationLayer.Presenter.Costing_Head
                         //await _projQuoteServices.Insert_ProjQuote(pqModel, _userModel.UserID);
                     }
 
-                    await Load_DGVProjects("");
+                    //await Load_DGVProjects(""); 7-15-2024 
+                    await Load_DGVProjects(_assignProjView.SearchProjStr);
                 }
             }
             catch (Exception ex)
