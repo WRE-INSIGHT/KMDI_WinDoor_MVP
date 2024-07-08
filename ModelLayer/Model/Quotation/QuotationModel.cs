@@ -3477,6 +3477,7 @@ namespace ModelLayer.Model.Quotation
                 Divider_84301_PricePerSqrMeter = 490.14m,
                 DividerDM_84401_PricePerSqrMeter = 341.12m,
                 EndCap_M649_PricePerPiece = 38.72m,
+                Shootbolt_H110_PricePerPiece = 178.72m,
         #endregion
         #region InstallationMats
 
@@ -3602,6 +3603,7 @@ namespace ModelLayer.Model.Quotation
                 PolymideStripPrice,
                 OneWayLockingConnectorPrice,
                 TwoWayLockingConnectorPrice,
+                ShootBoltPrice,
         #endregion
 
                 BrushSealPricePerLinearMeter = 15.80m,
@@ -5269,7 +5271,7 @@ namespace ModelLayer.Model.Quotation
                                                         DummyMullionPricePerLinearMeter = DividerDM_84401_PricePerSqrMeter;
                                                         FrameReinPricePerLinearMeter_7502 = 0;
                                                         EndCapPricePerPiece = EndCap_M649_PricePerPiece;
-
+                                                        ShootBoltPrice += Shootbolt_H110_PricePerPiece;
                                                 }
 
 
@@ -6403,7 +6405,7 @@ namespace ModelLayer.Model.Quotation
                                             else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172 ||
                                                      pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
                                             {
-                                                PolymideStripPrice = (pnl.Panel_SashHeight / 1000m) * PolymideStrip_H172_PerLinearMeter; //mas mahal na yung ginamit yung plastic nalang
+                                                PolymideStripPrice += (pnl.Panel_SashHeight / 1000m) * PolymideStrip_H172_PerLinearMeter; //mas mahal na yung ginamit yung plastic nalang
 
                                                 OneWayLockingConnectorPrice +=  OneWayLockingConnectorPricePerPiece * 2;
                                                 TwoWayLockingConnectorPrice +=  TwoWayLockingConnectorPricePerPiece;
@@ -10186,6 +10188,7 @@ namespace ModelLayer.Model.Quotation
                             FramePrice = FramePrice * 1.8m;
                             SashPrice = SashPrice * 1.8m;
                             DivPrice = DivPrice * 1.8m;
+                            DMPrice = DMPrice * 1.8m;
                             InversionClipPrice = InversionClipPrice * 1.8m;
                             GbPrice = GbPrice * 1.8m;
                         }
@@ -10205,7 +10208,7 @@ namespace ModelLayer.Model.Quotation
                                        //Math.Round(UniversalGasketPrice, 2) +
                                        // Math.Round(GasketPar3mmPrice, 2) +
                                        //aw
-                                       Math.Round(InversionClipPrice * powderCoatedMultiplier, 2) +
+                                       Math.Round(InversionClipPrice, 2) +
                                        Math.Round(GbPrice, 2) +
                                        //Math.Round(GlazingGasketForAluPrice, 2) + old algo ng gasket
                                        //Math.Round(CenterGasketPrice, 2) + old algo ng gasket
@@ -10231,7 +10234,10 @@ namespace ModelLayer.Model.Quotation
                                        Math.Round(FrictionStayPackerPrice, 2) +
                                        Math.Round(OneWayLockingConnectorPrice, 2) +
                                        Math.Round(TwoWayLockingConnectorPrice, 2) +
-                                       Math.Round(PolymideStripPrice, 2)
+                                       Math.Round(PolymideStripPrice, 2) +
+                                       Math.Round(ShootBoltPrice, 2) + 
+                                       Math.Round(DMPrice, 2) +
+                                       Math.Round(PolymideStripPrice, 2) 
                                        ;
 
 
@@ -10654,6 +10660,29 @@ namespace ModelLayer.Model.Quotation
                                            "",
                                            "Material Cost");
 
+                            Price_List.Rows.Add("Universal Gasket Price",
+                                           UniversalGasketPerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(UniversalGasketAluPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+                            Price_List.Rows.Add("Center Gasket Price",
+                                           CenterGasketPerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(CenterGasketAluPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+
+                            Price_List.Rows.Add("Glazing Gasket Price",
+                                           GasketPerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(GlazingGasketAluPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+
                             Price_List.Rows.Add("Center Gasket Price",
                                            CenterGasketPerPiece.ToString("N", new CultureInfo("en-US")),
                                            Math.Round(CenterGasketPrice, 2).ToString("N", new CultureInfo("en-US")),
@@ -10801,6 +10830,28 @@ namespace ModelLayer.Model.Quotation
                                            "",
                                            "Material Cost");
 
+                            Price_List.Rows.Add("Shootbolt Price",
+                                           Shootbolt_H110_PricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(ShootBoltPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+                            Price_List.Rows.Add("One Way Locking Connector Price",
+                                           OneWayLockingConnectorPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(OneWayLockingConnectorPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+                            Price_List.Rows.Add("Two Way Locking Connector Price",
+                                           TwoWayLockingConnectorPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(TwoWayLockingConnectorPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+
                             Price_List.Rows.Add("Total",
                                         "",
                                         Math.Round(MaterialCost, 2).ToString("N", new CultureInfo("en-US")),
@@ -10851,15 +10902,47 @@ namespace ModelLayer.Model.Quotation
                             wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
 
                            "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
+                           "\n\nBase color " + wdm.WD_BaseColor +
+                           "\nFramePrice, SashPrice, DivPrice, InversionClipPrice, GbPrice add 8% if powder coated" +
 
+                           "\nCosting Points: " + CostingPoints +
+                            "\nLabor Cost " + LaborCost + " = " + "Costing Points " + CostingPoints + "*" + "CostPerPoints " + CostPerPoints +
+                            "\nInstallationCost " + InstallationCost + " = " + "InstallationPoints " + InstallationPoints + " * " + "CostPerPoints " + CostPerPoints + 
 
                             "\n\n MaterialCost " + MaterialCost + " = FramePrice " + Math.Round(FramePrice, 2).ToString() + " + " +
                                      "\n\t\t SashPrice " + Math.Round(SashPrice, 2).ToString() + " + " +
                                      "\n\t\t DivPrice " + Math.Round(DivPrice, 2).ToString() + " + " +
                                      // "\n\t\t CornerWindowPrice " + Math.Round(CornerWindowPrice, 2).ToString() + " + " +
                                      "\n\t\t CheveronPrice " + Math.Round(CheveronPrice, 2).ToString() + " + " +
-                            //"\n\t\t WaterDrainageWValvesPrice " + Math.Round(WaterDrainageWValvesPrice, 2).ToString() + " + " +
-                            //"\n\t\t HoleCapePrice " + Math.Round(HoleCapePrice, 2).ToString() + " + " +
+                                     //"\n\t\t WaterDrainageWValvesPrice " + Math.Round(WaterDrainageWValvesPrice, 2).ToString() + " + " +
+                                     "\n\t\t HoleCapePrice " + Math.Round(HoleCapePrice, 2).ToString() + " + " +
+                                     "\n\t\t InversionClipPrice" + Math.Round(InversionClipPrice, 2).ToString() + " + " +
+                                     "\n\t\t GbPrice " + Math.Round(GbPrice, 2).ToString() + " + " +
+                                     "\n\t\t UniversalGasketAluPrice " + Math.Round(UniversalGasketAluPrice, 2).ToString() + " + " +
+                                     "\n\t\t CenterGasketAluPrice " + Math.Round(CenterGasketAluPrice, 2).ToString() + " + " +
+                                     "\n\t\t GlazingGasketAluPrice " + Math.Round(GlazingGasketAluPrice, 2).ToString() + " + " +
+                                     "\n\t\t TransmissionRodPrice " + Math.Round(TransmissionRodPrice, 2).ToString() + " + " +
+                                     "\n\t\t OpenableStrikerPrice " + Math.Round(OpenableStrikerPrice, 2).ToString() + " + " +
+                                     "\n\t\t CornerCleatPrice " + Math.Round(CornerCleatPrice, 2).ToString() + " + " +
+                                     "\n\t\t FrictionStayPrice " + Math.Round(FrictionStayPrice, 2).ToString() + " + " +
+                                     "\n\t\t RunUpblockPrice " + Math.Round(RunUpblockPrice, 2).ToString() + " + " +
+                                     "\n\t\t PackerRodPrice " + Math.Round(PackerRodPrice, 2).ToString() + " + " +
+                                     "\n\t\t LockingWedgesPrice " + Math.Round(LockingWedgesPrice, 2).ToString() + " + " +
+                                     "\n\t\t SSCheveronPrice " + Math.Round(SSCheveronPrice, 2).ToString() + " + " +
+                                     "\n\t\t PegstayPrice " + Math.Round(PegstayPrice, 2).ToString() + " + " +
+                                     "\n\t\t CremonHandlePrice " + Math.Round(CremonHandlePrice, 2).ToString() + " + " +
+                                     "\n\t\t Unica40Price " + Math.Round(Unica40Price, 2).ToString() + " + " +
+                                     "\n\t\t LockingConnectorDevicePrice " + Math.Round(LockingConnectorDevicePrice, 2).ToString() + " + " +
+                                     "\n\t\t FrictionStayPackerPrice " + Math.Round(FrictionStayPackerPrice, 2).ToString() + " + " +
+                                     "\n\t\t OneWayLockingConnectorPrice " + Math.Round(OneWayLockingConnectorPrice, 2).ToString() + " + " +
+                                     "\n\t\t TwoWayLockingConnectorPrice " + Math.Round(TwoWayLockingConnectorPrice, 2).ToString() + " + " +
+                                     "\n\t\t PolymideStripPrice " + Math.Round(PolymideStripPrice, 2).ToString() + " + " +
+                                     "\n\t\t ShootBoltPrice " + Math.Round(ShootBoltPrice, 2).ToString() + " + " +
+                                     "\n\t\t DMPrice " + Math.Round(DMPrice, 2).ToString() + " + " +
+                                     "\n\t\t PolymideStripPrice " + Math.Round(PolymideStripPrice, 2).ToString() + " + " +
+
+
+
 
                             "\n\n GlassCost " + GlassCost + " = GlassPrice" + Math.Round(GlassPrice, 2).ToString() +
 
@@ -12012,12 +12095,17 @@ namespace ModelLayer.Model.Quotation
             GlazingGasketFrameForAluPrice = 0;
             GlazingGasketSashForAluPrice = 0;
             GlazingGasketGbeadForAluPrice = 0;
+            UniversalGasketAluPrice = 0;
+            CenterGasketAluPrice = 0;
+            GlazingGasketAluPrice = 0;
+
 
             InversionClipPrice = 0;
             GlazingGasketForAluPrice = 0;
             CenterGasketPrice = 0;
             GlazingShimPrice = 0;
             TransmissionRodPrice = 0;
+            PolymideStripPrice = 0;
             OpenableStrikerPrice = 0;
             CornerCleatPrice = 0;
             FrictionStayPrice = 0;
@@ -12033,6 +12121,10 @@ namespace ModelLayer.Model.Quotation
             CremonHandlePrice = 0;
             Unica40Price = 0;
             LockingConnectorDevicePrice = 0;
+            OneWayLockingConnectorPrice = 0;
+            TwoWayLockingConnectorPrice = 0;
+            ShootBoltPrice = 0;
+
 
             GlassCost = 0;
             InstallationMaterialCost = 0;

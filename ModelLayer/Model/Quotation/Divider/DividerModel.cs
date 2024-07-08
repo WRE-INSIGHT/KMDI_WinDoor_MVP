@@ -1684,7 +1684,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void Insert_DummyMullion_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Dummy Mullion Height " + Div_DMArtNo.DisplayName,
+            tbl_explosion.Rows.Add("Dummy Mu]llion Height " + Div_DMArtNo.DisplayName,
                                    1, "pc(s)",
                                    Div_ExplosionHeight.ToString(),
                                    Div_Bounded,
