@@ -2963,6 +2963,7 @@ namespace ModelLayer.Model.Quotation
                 DMPrice,
                 DMReinforcementPrice,
                 DummyMullionPricePerLinearMeter,
+                EndCapPricePerPiece,
         #endregion
         #region GlassPrice
 
@@ -3264,7 +3265,7 @@ namespace ModelLayer.Model.Quotation
         #endregion
         #region Accessories
 
-        EndCapPricePerPiece = 282.96m,
+        EndCap_9C68_PricePerPiece = 282.96m,
                 MechanicalJoint_AV585PricePerPiece = 87.34m,
                 MechanicalJoint_9U18PricePerPiece = 138.45m,
                 GBSpacerPricePerPiece = 5.01m,
@@ -3475,11 +3476,11 @@ namespace ModelLayer.Model.Quotation
                 Divider_84300_PricePerSqrMeter = 347.53m,
                 Divider_84301_PricePerSqrMeter = 490.14m,
                 DividerDM_84401_PricePerSqrMeter = 341.12m,
-
+                EndCap_M649_PricePerPiece = 38.72m,
         #endregion
         #region InstallationMats
 
-            ExpansionBoltPricePerPiece = 30.0m,
+        ExpansionBoltPricePerPiece = 30.0m,
 
             FramePackerPricePerPiece = 5.96m,
             CremonHandlePricePerPiece = 320.22m,
@@ -3504,7 +3505,12 @@ namespace ModelLayer.Model.Quotation
                 TransmissionRodPricePerPiece = 145.96m,
                 OpenableStrikerPricePerPiece = 35.74m,
                 CornerCleatPricePerPiece = 37.23m,
-                FrictionStayPricePerPiece = 320.22m,
+                //FrictionStayPricePerPiece = 320.22m,
+                FrictionStay_H091_PricePerPiece = 268.09m,
+                FrictionStay_H029_PricePerPiece = 282.0m,
+                FrictionStay_H231_PricePerPiece = 286.8m,
+                FrictionStay_H232_PricePerPiece = 337.8m,
+
                 RunUpblockPricePerPiece = 23.83m,
                 PackerRodPricePerPiece = 123.06m,
                 LockingWedgesPricePerPiece = 83.41m,
@@ -3520,12 +3526,14 @@ namespace ModelLayer.Model.Quotation
                 CenterGasketPerLinearMeter = 24.13m,
                 Gasket_G223_PerLinearMeter = 14.07m,
                 Gasket_G224_PerLinearMeter = 20.63m,
+                Gasket_G287_PerLinearMeter = 9.41m,
 
 
                 GlazingBead_84500PricePerLinearMeter = 117.97m,
 
                 //CW
                 FrictionStayPackerPricePerPiece = 123.06m,
+                PolymideStrip_H172_PerLinearMeter = 113.36m,
                 OneWayLockingConnectorPricePerPiece = 119.69m, //158.32INR
                 TwoWayLockingConnectorPricePerPiece = 126.73m, //167.63INR
         #endregion
@@ -3561,6 +3569,7 @@ namespace ModelLayer.Model.Quotation
                 OpenableStrikerPrice,
                 CornerCleatPrice,
                 FrictionStayPrice,
+                FrictionStayPricePerPiece,
                 RunUpblockPrice,
                 PackerRodPrice,
                 LockingWedgesPrice,
@@ -3582,7 +3591,10 @@ namespace ModelLayer.Model.Quotation
                 UniversalGasketAluPrice,
                 CenterGasketAluPrice,
                 GlazingGasketAluPrice,
-                
+                GasketPerLinearMeter,
+                UniversalGasketPerLinearMeter,
+
+
                 GlazingShimPrice,
 
                 //CW
@@ -3610,7 +3622,7 @@ namespace ModelLayer.Model.Quotation
                 LaborCost = 0,
                 InstallationCost = 0,
                 MaterialCost = 0,
-              GlassCost = 0,// for alu
+                GlassCost = 0,// for alu
                 FittingAndSuppliesCost,
                 AccesorriesCost,
                 AncillaryProfileCost,
@@ -5234,6 +5246,7 @@ namespace ModelLayer.Model.Quotation
                                                     {
                                                         DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_WoodGrain;
                                                     }
+                                                    EndCapPricePerPiece = EndCap_9C68_PricePerPiece;
                                                 }
                                                 else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
                                                 {
@@ -5248,13 +5261,17 @@ namespace ModelLayer.Model.Quotation
                                                     ShootBoltStrikerPrice += ShootBoltStrikerPricePerPiece;
                                                     ShootBoltReversePrice += ShootBoltReversePricePerPiece;
                                                     ShootBoltNonReversePrice += ShootBoltNonReversePricePerPiece * 3;
+                                                    EndCapPricePerPiece = EndCap_9C68_PricePerPiece;
+
                                                 }
                                                 else if (div.Div_DMArtNo == DummyMullion_ArticleNo._84401)
                                                 {
                                                         DummyMullionPricePerLinearMeter = DividerDM_84401_PricePerSqrMeter;
                                                         FrameReinPricePerLinearMeter_7502 = 0;
+                                                        EndCapPricePerPiece = EndCap_M649_PricePerPiece;
+
                                                 }
-                                                
+
 
                                                 DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter;
                                                 DMReinforcementPrice += (div.Div_Height / 1000m) * FrameReinPricePerLinearMeter_7502;
@@ -6383,22 +6400,14 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 TransmissionRodPrice += TransmissionRodPricePerPiece;
                                             }
-                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172)
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172 ||
+                                                     pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
                                             {
-                                                PolymideStripPrice = (pnl.Panel_SashHeight / 1000m) * 0m; //wala pang base price
-
+                                                PolymideStripPrice = (pnl.Panel_SashHeight / 1000m) * PolymideStrip_H172_PerLinearMeter; //mas mahal na yung ginamit yung plastic nalang
 
                                                 OneWayLockingConnectorPrice +=  OneWayLockingConnectorPricePerPiece * 2;
                                                 TwoWayLockingConnectorPrice +=  TwoWayLockingConnectorPricePerPiece;
-                                            }
-                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
-                                            {
-
-                                                PolymideStripPrice = (pnl.Panel_SashHeight / 1000m) * 0m; //wala pang base price
-
-                                                OneWayLockingConnectorPrice += OneWayLockingConnectorPricePerPiece * 2;
-                                                TwoWayLockingConnectorPrice += TwoWayLockingConnectorPricePerPiece;
-                                            }
+                                            } 
                                             else
                                             {
                                                 EspagPrice += Espag741012_PricePerPiece;
@@ -6738,17 +6747,61 @@ namespace ModelLayer.Model.Quotation
                                                 CenterGasketPrice += ((((pnl.Panel_DisplayWidth * 2) + (pnl.Panel_DisplayHeight * 2)) / 1000m) * CenterGasketPerPiece);
                                                 */
                                                 #endregion
-                                                UniversalGasketAluPrice += ((((pnl.Panel_DisplayWidth + pnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPricePerLinearMeter) * 3;
-                                                GlazingGasketAluPrice += (((pnl.Panel_SashWidth * 2) + (pnl.Panel_SashHeight * 2)) / 1000m); 
+
+                                                #region gaskets 
+                                                if (pnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G223)
+                                                {
+                                                    GasketPerLinearMeter = Gasket_G223_PerLinearMeter;
+                                                }
+                                                else if (pnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G224)
+                                                {
+                                                    GasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                                }
+                                                else if (pnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G287)
+                                                {
+                                                    GasketPerLinearMeter = Gasket_G287_PerLinearMeter;
+                                                }
+
+                                                if (pnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G221)
+                                                {
+                                                    UniversalGasketPerLinearMeter = UniversalGasketPricePerLinearMeter;
+                                                }
+                                                else if (pnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G224)
+                                                {
+                                                    UniversalGasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                                }
+
+                                                UniversalGasketAluPrice += ((((pnl.Panel_DisplayWidth + pnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPerLinearMeter) * 3;
+                                                GlazingGasketAluPrice += (((pnl.Panel_SashWidth * 2) + (pnl.Panel_SashHeight * 2)) / 1000m) * GasketPerLinearMeter; 
                                                 CenterGasketAluPrice += ((((pnl.Panel_DisplayWidth + pnl.Panel_DisplayHeight) * 2) / 1000m) * CenterGasketPerLinearMeter);
+                                                #endregion
                                             }
 
-                                            CheveronPrice += 4 * CheveronPricePerPiece;
                                             if (pnl.Panel_FSAlutekArtNo != FrictionAlutek_ArticleNo._None)
                                             {
+                                                if (pnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H091)
+                                                {
+                                                    FrictionStayPricePerPiece = FrictionStay_H091_PricePerPiece;
+                                                }
+                                                else if (pnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H029)
+                                                {
+                                                    FrictionStayPricePerPiece = FrictionStay_H029_PricePerPiece;
+                                                }
+                                                else if (pnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H231)
+                                                {
+                                                    FrictionStayPricePerPiece = FrictionStay_H231_PricePerPiece;
+                                                }
+                                                else if (pnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H232)
+                                                {
+                                                    FrictionStayPricePerPiece = FrictionStay_H232_PricePerPiece;
+                                                }
+
                                                 FrictionStayPrice += FrictionStayPricePerPiece;
                                                 FrictionStayPackerPrice += FrictionStayPackerPricePerPiece;
-                                            } 
+                                            }
+
+
+                                            CheveronPrice += 4 * CheveronPricePerPiece;
                                             RunUpblockPrice += RunUpBlockQty * RunUpblockPricePerPiece;
                                             SSCheveronPrice += 4 * SSCheveronPricePerPiece;
 
@@ -6982,9 +7035,31 @@ namespace ModelLayer.Model.Quotation
 
                                             //old algo
                                             //GlazingGasketGbeadForAluPrice += ((((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
-                                            UniversalGasketAluPrice += ((((pnl.Panel_DisplayWidth + pnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPricePerLinearMeter);
-                                            GlazingGasketAluPrice += (((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m);
 
+                                            if (pnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G223)
+                                            {
+                                                GasketPerLinearMeter = Gasket_G223_PerLinearMeter;
+                                            }
+                                            else if (pnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G224)
+                                            {
+                                                GasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                            }
+                                            else if (pnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G287)
+                                            {
+                                                GasketPerLinearMeter = Gasket_G287_PerLinearMeter;
+                                            }
+
+                                            if (pnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G221)
+                                            {
+                                                UniversalGasketPerLinearMeter = UniversalGasketPricePerLinearMeter;
+                                            }
+                                            else if (pnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G224)
+                                            {
+                                                UniversalGasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                            }
+
+                                            UniversalGasketAluPrice += ((((pnl.Panel_DisplayWidth + pnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPerLinearMeter);
+                                            GlazingGasketAluPrice += (((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GasketPerLinearMeter;
                                             TotalGlassPerimeter += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m));
                                         }
                                         #endregion
@@ -8733,18 +8808,10 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         TransmissionRodPrice += TransmissionRodPricePerPiece;
                                     }
-                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172)
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172 ||
+                                             Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
                                     {
-                                        PolymideStripPrice = (Singlepnl.Panel_SashHeight / 1000m) * 0m;//wala pang base price
-
-
-                                        OneWayLockingConnectorPrice += OneWayLockingConnectorPricePerPiece * 2;
-                                        TwoWayLockingConnectorPrice += TwoWayLockingConnectorPricePerPiece;
-                                    }
-                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
-                                    {
-
-                                        PolymideStripPrice = (Singlepnl.Panel_SashHeight / 1000m) * 0m;//wala pang base price
+                                        PolymideStripPrice = (Singlepnl.Panel_SashHeight / 1000m) * PolymideStrip_H172_PerLinearMeter; //
 
                                         OneWayLockingConnectorPrice += OneWayLockingConnectorPricePerPiece * 2;
                                         TwoWayLockingConnectorPrice += TwoWayLockingConnectorPricePerPiece;
@@ -9086,8 +9153,31 @@ namespace ModelLayer.Model.Quotation
                                         CenterGasketPrice += ((((Singlepnl.Panel_DisplayWidth * 2) + (Singlepnl.Panel_DisplayHeight * 2)) / 1000m) * CenterGasketPerPiece);
                                         */
                                         #endregion
-                                        UniversalGasketAluPrice += ((((Singlepnl.Panel_DisplayWidth + Singlepnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPricePerLinearMeter) * 3;
-                                        GlazingGasketAluPrice += (((Singlepnl.Panel_SashWidth * 2) + (Singlepnl.Panel_SashHeight * 2)) / 1000m);
+
+                                        if (Singlepnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G223)
+                                        {
+                                            GasketPerLinearMeter = Gasket_G223_PerLinearMeter;
+                                        }
+                                        else if (Singlepnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G224)
+                                        {
+                                            GasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                        }
+                                        else if (Singlepnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G287)
+                                        {
+                                            GasketPerLinearMeter = Gasket_G287_PerLinearMeter;
+                                        }
+
+                                        if (Singlepnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G221)
+                                        {
+                                            UniversalGasketPerLinearMeter = UniversalGasketPricePerLinearMeter;
+                                        }
+                                        else if (Singlepnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G224)
+                                        {
+                                            UniversalGasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                        }
+                                        
+                                        UniversalGasketAluPrice += ((((Singlepnl.Panel_DisplayWidth + Singlepnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPerLinearMeter) * 3;
+                                        GlazingGasketAluPrice += (((Singlepnl.Panel_SashWidth * 2) + (Singlepnl.Panel_SashHeight * 2)) / 1000m) * GasketPerLinearMeter;
                                         CenterGasketAluPrice += ((((Singlepnl.Panel_DisplayWidth + Singlepnl.Panel_DisplayHeight) * 2) / 1000m) * CenterGasketPerLinearMeter);
 
                                   }
@@ -9099,13 +9189,30 @@ namespace ModelLayer.Model.Quotation
                                     RunUpblockPrice += RunUpblockPricePerPiece;
                                     SSCheveronPrice += 4 * SSCheveronPricePerPiece;
 
-                                  if (Singlepnl.Panel_FSAlutekArtNo != FrictionAlutek_ArticleNo._None)
-                                  {
-                                      FrictionStayPrice += FrictionStayPricePerPiece;
-                                      FrictionStayPackerPrice += FrictionStayPackerPricePerPiece;
-                                  }
-                                         
-                                  if (Singlepnl.Panel_HandleType != Handle_Type._None)
+                                    if (Singlepnl.Panel_FSAlutekArtNo != FrictionAlutek_ArticleNo._None)
+                                    {
+                                        if (Singlepnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H091)
+                                        {
+                                            FrictionStayPricePerPiece = FrictionStay_H091_PricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H029)
+                                        {
+                                            FrictionStayPricePerPiece = FrictionStay_H029_PricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H231)
+                                        {
+                                            FrictionStayPricePerPiece = FrictionStay_H231_PricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H232)
+                                        {
+                                            FrictionStayPricePerPiece = FrictionStay_H232_PricePerPiece;
+                                        }
+
+                                        FrictionStayPrice += FrictionStayPricePerPiece;
+                                        FrictionStayPackerPrice += FrictionStayPackerPricePerPiece;
+                                    }
+
+                                    if (Singlepnl.Panel_HandleType != Handle_Type._None)
                                   {
                                       OpenableStrikerPrice += 2 * OpenableStrikerPricePerPiece;
                                       LockingWedgesPrice += LockingWedgesPricePerPiece;
@@ -9324,8 +9431,31 @@ namespace ModelLayer.Model.Quotation
                                   }
                                     //old algo
                                     //GlazingGasketGbeadForAluPrice += (((Singlepnl.Panel_GlazingBeadHeight * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000) * GlazingGasket_GlazingBead_PerPiece;
-                                    UniversalGasketAluPrice += ((((Singlepnl.Panel_DisplayWidth + Singlepnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPricePerLinearMeter);
-                                    GlazingGasketAluPrice += (((Singlepnl.Panel_GlazingBeadWidth * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000m);
+
+                                    if (Singlepnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G223)
+                                    {
+                                        GasketPerLinearMeter = Gasket_G223_PerLinearMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G224)
+                                    {
+                                        GasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G287)
+                                    {
+                                        GasketPerLinearMeter = Gasket_G287_PerLinearMeter;
+                                    }
+
+                                    if (Singlepnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G221)
+                                    {
+                                        UniversalGasketPerLinearMeter = UniversalGasketPricePerLinearMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G224)
+                                    {
+                                        UniversalGasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                    } 
+
+                                    UniversalGasketAluPrice += ((((Singlepnl.Panel_DisplayWidth + Singlepnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPerLinearMeter);
+                                    GlazingGasketAluPrice += (((Singlepnl.Panel_GlazingBeadWidth * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GasketPerLinearMeter;
                                 }
                                 #endregion
 
@@ -10082,8 +10212,7 @@ namespace ModelLayer.Model.Quotation
                                        //Math.Round(GlazingShimPrice, 2) + 
                                        Math.Round(UniversalGasketAluPrice, 2) +
                                        Math.Round(CenterGasketAluPrice, 2) +
-                                       Math.Round(GlazingGasketAluPrice, 2) +
-
+                                       Math.Round(GlazingGasketAluPrice, 2) + 
                                        Math.Round(TransmissionRodPrice, 2) +
                                        Math.Round(OpenableStrikerPrice, 2) +
                                        Math.Round(CornerCleatPrice, 2) +
