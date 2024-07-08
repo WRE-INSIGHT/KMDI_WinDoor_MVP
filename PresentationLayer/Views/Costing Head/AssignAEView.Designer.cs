@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmenu_dgvClient = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.assignAEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lListofAE = new System.Windows.Forms.Label();
             this.btnEqual = new System.Windows.Forms.Button();
@@ -54,7 +55,6 @@
             this.cmenu_dgvProject = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deletetoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Save = new System.Windows.Forms.Button();
-            this.editProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenu_dgvClient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Client)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_AEIC)).BeginInit();
@@ -69,25 +69,33 @@
             this.editProjectToolStripMenuItem,
             this.deleteToolStripMenuItem1});
             this.cmenu_dgvClient.Name = "contextMenuStrip1";
-            this.cmenu_dgvClient.Size = new System.Drawing.Size(153, 92);
+            this.cmenu_dgvClient.Size = new System.Drawing.Size(137, 70);
             this.cmenu_dgvClient.Opening += new System.ComponentModel.CancelEventHandler(this.cmenu_dgvClient_Opening);
             // 
             // assignAEToolStripMenuItem
             // 
             this.assignAEToolStripMenuItem.Name = "assignAEToolStripMenuItem";
-            this.assignAEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.assignAEToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.assignAEToolStripMenuItem.Text = "Add Project";
             this.assignAEToolStripMenuItem.Click += new System.EventHandler(this.assignAEToolStripMenuItem_Click);
+            // 
+            // editProjectToolStripMenuItem
+            // 
+            this.editProjectToolStripMenuItem.Name = "editProjectToolStripMenuItem";
+            this.editProjectToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.editProjectToolStripMenuItem.Text = "Edit Project";
+            this.editProjectToolStripMenuItem.Click += new System.EventHandler(this.editProjectToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem1
             // 
             this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
-            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
             this.deleteToolStripMenuItem1.Text = "Delete";
             this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
             // 
             // lListofAE
             // 
+            this.lListofAE.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lListofAE.AutoSize = true;
             this.lListofAE.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lListofAE.Location = new System.Drawing.Point(281, 229);
@@ -98,7 +106,8 @@
             // 
             // btnEqual
             // 
-            this.btnEqual.AutoSize = true;
+            this.btnEqual.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEqual.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(80)))));
             this.btnEqual.FlatAppearance.BorderSize = 0;
             this.btnEqual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -123,6 +132,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(334, 34);
@@ -133,6 +143,7 @@
             // 
             // btn_SearchProj
             // 
+            this.btn_SearchProj.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_SearchProj.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btn_SearchProj.BackgroundImage = global::PresentationLayer.Properties.Resources.search_filled_100px;
             this.btn_SearchProj.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -147,8 +158,10 @@
             // 
             // txt_SearchClientStr
             // 
+            this.txt_SearchClientStr.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_SearchClientStr.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_SearchClientStr.Location = new System.Drawing.Point(12, 63);
+            this.txt_SearchClientStr.Location = new System.Drawing.Point(12, 64);
             this.txt_SearchClientStr.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_SearchClientStr.Name = "txt_SearchClientStr";
             this.txt_SearchClientStr.Size = new System.Drawing.Size(228, 29);
@@ -157,6 +170,7 @@
             // 
             // btn_SearchAEIC
             // 
+            this.btn_SearchAEIC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_SearchAEIC.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btn_SearchAEIC.BackgroundImage = global::PresentationLayer.Properties.Resources.search_filled_100px;
             this.btn_SearchAEIC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -171,8 +185,9 @@
             // 
             // txt_SearchAEICStr
             // 
+            this.txt_SearchAEICStr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_SearchAEICStr.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_SearchAEICStr.Location = new System.Drawing.Point(339, 63);
+            this.txt_SearchAEICStr.Location = new System.Drawing.Point(339, 64);
             this.txt_SearchAEICStr.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_SearchAEICStr.Name = "txt_SearchAEICStr";
             this.txt_SearchAEICStr.Size = new System.Drawing.Size(228, 29);
@@ -184,8 +199,11 @@
             this.dgv_Client.AllowUserToAddRows = false;
             this.dgv_Client.AllowUserToDeleteRows = false;
             this.dgv_Client.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgv_Client.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.LightGray;
+            this.dgv_Client.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgv_Client.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_Client.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Client.ContextMenuStrip = this.cmenu_dgvClient;
             this.dgv_Client.Location = new System.Drawing.Point(12, 93);
@@ -200,8 +218,10 @@
             this.dgv_AEIC.AllowUserToAddRows = false;
             this.dgv_AEIC.AllowUserToDeleteRows = false;
             this.dgv_AEIC.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            this.dgv_AEIC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightGray;
+            this.dgv_AEIC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgv_AEIC.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_AEIC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_AEIC.Location = new System.Drawing.Point(339, 93);
             this.dgv_AEIC.Name = "dgv_AEIC";
@@ -215,16 +235,18 @@
             this.dgv_Project.AllowUserToAddRows = false;
             this.dgv_Project.AllowUserToDeleteRows = false;
             this.dgv_Project.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
-            this.dgv_Project.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Project.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.LightGray;
+            this.dgv_Project.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.dgv_Project.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Project.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgv_Project.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Project.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ProjectName,
@@ -285,6 +307,7 @@
             // 
             // btn_Save
             // 
+            this.btn_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Save.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btn_Save.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Save.FlatAppearance.BorderSize = 0;
@@ -296,13 +319,6 @@
             this.btn_Save.Text = "Save";
             this.btn_Save.UseVisualStyleBackColor = false;
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
-            // 
-            // editProjectToolStripMenuItem
-            // 
-            this.editProjectToolStripMenuItem.Name = "editProjectToolStripMenuItem";
-            this.editProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.editProjectToolStripMenuItem.Text = "Edit Project";
-            this.editProjectToolStripMenuItem.Click += new System.EventHandler(this.editProjectToolStripMenuItem_Click);
             // 
             // AssignAEView
             // 
@@ -322,6 +338,7 @@
             this.Controls.Add(this.btnEqual);
             this.Controls.Add(this.lListofAE);
             this.Name = "AssignAEView";
+            this.ShowIcon = false;
             this.Text = "Assign AE";
             this.Load += new System.EventHandler(this.AssignAE_Load);
             this.cmenu_dgvClient.ResumeLayout(false);
