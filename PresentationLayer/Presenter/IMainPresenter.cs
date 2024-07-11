@@ -164,7 +164,7 @@ namespace PresentationLayer.Presenter
         void CopyObjectsPerWindoorModel();
         void MainPresenter_PartialAdjustment();
         void ClearAndAddGlassInList(bool _callfrmGlassUpgrade);
-        void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color);
+        void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color, PowderCoatType_Color powderCoatType_Color);
         void setWoodecAdditional(int woodecAddlPercentage);
 
         IPanelModel PrevPanelModel_forCenterProfileSelection { get; }

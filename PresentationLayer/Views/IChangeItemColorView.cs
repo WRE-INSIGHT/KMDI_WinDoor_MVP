@@ -15,13 +15,15 @@ namespace PresentationLayer.Views
         event EventHandler CmbOutsideColorSelectedValueChangedEventRaised;
         event EventHandler nudWoodecAdditionalValueChangedEventRaised;
         event EventHandler CmbColorAppliedToSelectedValueChangedEventRaised;
-
+        event EventHandler cmbPowderCoatTypeSelectedValueChangedEventRaised;
         void ShowThisDialog();
         void CloseView();
         Panel GetPanelInOutColor();
         Panel GetPanelWoodec();
         NumericUpDown GetNudWoodec();
         ComboBox GetColorAppliedTo();
+        ComboBox GetCmbPowderCoatedType();
+        Panel GetPnlPowderCoatdType();
 
 
     }

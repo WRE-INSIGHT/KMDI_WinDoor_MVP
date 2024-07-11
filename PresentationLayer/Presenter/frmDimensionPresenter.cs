@@ -186,6 +186,14 @@ namespace PresentationLayer.Presenter
             {
                 _baseColor = "Dark Brown";
             }
+            else if (_frmDimensionView.SelectedBaseColor == Base_Color._PowderCoated.ToString())
+            {
+                _baseColor = "Powder Coated";
+            }
+            else if (_frmDimensionView.SelectedBaseColor == Base_Color._Foiled.ToString())
+            {
+                _baseColor = "Foiled";
+            }
         }
 
         private void _frmDimensionView_cmbSystemOptionSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -207,6 +215,8 @@ namespace PresentationLayer.Presenter
                 else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._Alutek.ToString())
                 {
                     profile_type = "Alutek Profile";
+                    _baseColor = "Powder Coated";
+
                 }
             }
         }
@@ -269,11 +279,26 @@ namespace PresentationLayer.Presenter
         {
             if (_baseColor == string.Empty)
             {
-                _baseColor = "White";
+                if (_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("C70"))
+                {
+                    _baseColor = "White";
+                }
+                else if (_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("Alutek"))
+                {
+                    _baseColor = "Powder Coated";
+                }
             }
             if (profile_type == string.Empty)
             {
-                profile_type = "C70 Profile";
+                if (_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("C70"))
+                {
+                    profile_type = "C70 Profile";
+                }
+                else if (_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("Alutek"))
+                {
+                    profile_type = "Alutek Profile";
+
+                }
             }
 
             //_frmDimensionView.dimension_height = 203;

@@ -274,6 +274,15 @@ namespace EnumerationTypeLayer
             private Foil_Color(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class PowderCoatType_Color : Enumeration<PowderCoatType_Color, int>
+        {
+            public static readonly PowderCoatType_Color _Standard = new PowderCoatType_Color(0, "Standard");
+            public static readonly PowderCoatType_Color _Special = new PowderCoatType_Color(1, "Special"); 
+
+            private PowderCoatType_Color(int value, string displayName) : base(value, displayName) { }
+        }
+
+
         public class CoverProfile_ArticleNo : Enumeration<CoverProfile_ArticleNo, int>
         {
             public static readonly CoverProfile_ArticleNo _0914 = new CoverProfile_ArticleNo(0, "0914");

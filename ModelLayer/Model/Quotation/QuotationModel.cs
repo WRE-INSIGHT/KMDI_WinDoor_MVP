@@ -10182,16 +10182,28 @@ namespace ModelLayer.Model.Quotation
                                                    GlazingGasketGbeadForAluPrice;
                         */
                         #endregion
-
+                        decimal AddiitionalColorPercentage = 0;
                         if (wdm.WD_BaseColor == Base_Color._PowderCoated)
                         {
-                            FramePrice = FramePrice * 1.8m;
-                            SashPrice = SashPrice * 1.8m;
-                            DivPrice = DivPrice * 1.8m;
-                            DMPrice = DMPrice * 1.8m;
-                            InversionClipPrice = InversionClipPrice * 1.8m;
-                            GbPrice = GbPrice * 1.8m;
+                            AddiitionalColorPercentage = 1.08m;
+                           
+                            if (wdm.WD_PowderCoatType == PowderCoatType_Color._Special)
+                            {
+                                AddiitionalColorPercentage = 1.10m;
+                            }
                         }
+                        else if (wdm.WD_BaseColor == Base_Color._Foiled)
+                        {
+                            AddiitionalColorPercentage = 1.10m;
+                        }
+
+                        FramePrice = FramePrice * AddiitionalColorPercentage;
+                        SashPrice = SashPrice * AddiitionalColorPercentage;
+                        DivPrice = DivPrice * AddiitionalColorPercentage;
+                        DMPrice = DMPrice * AddiitionalColorPercentage;
+                        InversionClipPrice = InversionClipPrice * AddiitionalColorPercentage;
+                        GbPrice = GbPrice * AddiitionalColorPercentage;
+
 
                         wdm.WD_CostingPoints = CostingPoints;
                         LaborCost = CostingPoints * CostPerPoints;
@@ -10275,6 +10287,11 @@ namespace ModelLayer.Model.Quotation
                         ProductionCost = ProductionCost + FoilingCost;
                         InstallationCost = (ProductionCost / 3);
                         AdditionalCost = (TotalFramePerimeter * 200) / 1000;
+
+                        if (wdm.WD_BaseColor == Base_Color._PowderCoated)
+                        {
+                            FoilingCost = 0;
+                        }
 
                         Contingency = (Math.Round(SubTotatal + Wastage, 2) +
                                       Math.Round(ImportationCost, 2) +

@@ -215,6 +215,19 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        private PowderCoatType_Color _powderCoatType;
+        public PowderCoatType_Color PowderCoatType
+        {
+            get
+            {
+                return _powderCoatType;
+            }
+            set
+            {
+                _powderCoatType = value;
+            }
+        }
+
         public Control ControlRaised_forCenterProfileSelection
         {
             get
@@ -11923,7 +11936,7 @@ namespace PresentationLayer.Presenter
                     _wndrFileName = string.Empty;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
-                              _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
+                        _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
                     {
                         baseColor = Base_Color._White;
                     }
@@ -11931,7 +11944,23 @@ namespace PresentationLayer.Presenter
                     {
                         baseColor = Base_Color._DarkBrown;
                     }
+                    else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._PowderCoated.ToString())
+                    {
+                        baseColor = Base_Color._PowderCoated;
+                    }
+                    else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Foiled.ToString())
+                    {
+                        baseColor = Base_Color._Foiled;
+                    }
 
+                    if (InsideColor == null)
+                    {
+                        InsideColor = Foil_Color._Walnut;
+                    }
+                    if (OutsideColor == null)
+                    {
+                        OutsideColor = Foil_Color._Walnut;
+                    }
 
 
                     if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
@@ -11960,7 +11989,10 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _mainView.Zoom = _windoorModel.WD_zoom;
 
-                       
+                        if (baseColor == Base_Color._PowderCoated)
+                        {
+                            _windoorModel.WD_PowderCoatType = PowderCoatType_Color._Standard;
+                        }
 
 
 
@@ -12008,6 +12040,14 @@ namespace PresentationLayer.Presenter
                         {
                             baseColor = Base_Color._DarkBrown;
                         }
+                        else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._PowderCoated.ToString())
+                        {
+                            baseColor = Base_Color._PowderCoated;
+                        }
+                        else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Foiled.ToString())
+                        {
+                            baseColor = Base_Color._Foiled;
+                        }
 
                         if (InsideColor == null)
                         {
@@ -12027,13 +12067,16 @@ namespace PresentationLayer.Presenter
                                                                          OutsideColor);
                         _windoorModel.WD_WoodecAdditional = WoodecAdditionalForNewItem;
                         AddWndrList_QuotationModel(_windoorModel);
- 
-
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
 
                         _windoorModel.Date_Assigned = dateAssigned;
                         _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
+                       
+                        if (baseColor == Base_Color._PowderCoated)
+                        {
+                            _windoorModel.WD_PowderCoatType = PowderCoatType;
+                        }
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -12246,6 +12289,11 @@ namespace PresentationLayer.Presenter
 
                         _windoorModel.Date_Assigned = dateAssigned;
                         _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
+
+                        if (baseColor == Base_Color._PowderCoated)
+                        {
+                            _windoorModel.WD_PowderCoatType = PowderCoatType;
+                        }
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -15199,11 +15247,12 @@ namespace PresentationLayer.Presenter
             return isDimensionFit;
         }
 
-        public void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color)
+        public void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color, PowderCoatType_Color powderCoatType_Color)
         {
             baseColor = base_Color;
             InsideColor = inside_Color;
             OutsideColor = outside_Color;
+            PowderCoatType = powderCoatType_Color;
         }
 
         public void setWoodecAdditional(int woodecAddlPercentage)
