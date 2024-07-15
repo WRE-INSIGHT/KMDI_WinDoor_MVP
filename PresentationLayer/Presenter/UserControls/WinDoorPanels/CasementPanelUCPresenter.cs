@@ -834,7 +834,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
                     _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                 {
+                    _mainPresenter.PrevPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
+                    if (_mainPresenter.NxtPnlModel_forDMSelection != null)
+                    {
+                        _mainPresenter.NxtPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
+                    }
 
+                    _mainPresenter.WrongSelectionOfDummyMullion();
+                    MessageBox.Show("Please use a C70 profile for Dummy Mullion ");
                 }
                 else
                 {  

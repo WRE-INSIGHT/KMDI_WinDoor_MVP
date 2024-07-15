@@ -10,7 +10,7 @@ using ModelLayer.Model.Quotation.Screen;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using ModelLayer.Variables;
-using PresentationLayer.CommonMethods;
+using PresentationLayer.CommonMethods;  
 using PresentationLayer.Presenter.Costing_Head;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -1072,6 +1072,17 @@ namespace PresentationLayer.Presenter
                 //_divPropUCP_forDMSelection.GetLeverEspagUCP().BindSashProfileArtNo();
                 _divPropUCP_forDMSelection.GetLeverEspagUCP(_unityC, _divModel_forDMSelection).BindSashProfileArtNo();
             }
+        }
+
+        public void WrongSelectionOfDummyMullion()
+        {
+            _windoorModel.WD_CmenuDeleteVisibility = true;
+
+            _tsLblStatus.Text = "";
+            _pnlControlSub.Enabled = true;
+            _msMainMenu.Enabled = true;
+            _pnlPropertiesBody.Enabled = true;
+            _tsMain.Enabled = true;
         }
 
         public void SetLblStatusForCenterProfile (string status,
@@ -14543,7 +14554,8 @@ namespace PresentationLayer.Presenter
                GeorgianBarHorizontalDesc,
                GeorgianBarVerticalDesc,
                additionalZero,
-               GeorgianBarArtNoDesc;
+               GeorgianBarArtNoDesc,
+               AlutekFrameDesc;
         #endregion
         public void itemDescription()
         {
@@ -14565,6 +14577,11 @@ namespace PresentationLayer.Presenter
                             else if (fr.Frame_Type == Frame_Padding.Door)
                             {
                                 FrameTypeDesc = "Door";
+                            }
+
+                            if (fr.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                            {
+                                AlutekFrameDesc = "AluSys-46";
                             }
 
                             #region MultiPnl
@@ -15027,6 +15044,13 @@ namespace PresentationLayer.Presenter
                     if (pnl_LouverChk == true)
                     {
                         wdm.WD_description += "Min. wall thickness is 225mm";
+                    }
+
+                    if (wdm.WD_profile.Contains("Alutek"))
+                    {
+                        string AddAluFrame = wdm.WD_description.Replace("Alutek Profile", AlutekFrameDesc);
+
+                        wdm.WD_description = AddAluFrame;
                     }
 
                     glassThick = string.Empty;

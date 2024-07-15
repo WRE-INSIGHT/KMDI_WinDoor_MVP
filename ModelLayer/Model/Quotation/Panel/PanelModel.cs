@@ -11638,7 +11638,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public void Insert_FrictionStayPacker_MaterialList(DataTable tbl_explosion)
         {
             Panel_FSPackerAlutekArtNo = FrictionAlutekPacker_ArticleNo._H149;
-            tbl_explosion.Rows.Add("Friction Stay " + Panel_FSPackerAlutekArtNo.DisplayName,
+            tbl_explosion.Rows.Add("Friction Stay Packer" + Panel_FSPackerAlutekArtNo.DisplayName,
                                         1, "pair(s)",
                                         "",
                                         "Sash & Frame",
@@ -12939,6 +12939,34 @@ namespace ModelLayer.Model.Quotation.Panel
             return TotalUniversalGlazingGasketLength;
         }
 
+        public void checkGasketArtNo(float GlassThickness)
+        {
+            if (GlassThickness == 4.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G224;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+            else if (GlassThickness == 6.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G223;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+            else if (GlassThickness == 8.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G287;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G224;
+            }
+            else if (GlassThickness == 10.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G223;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+            else
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G223;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+        }
 
         public void Insert_GlazingGasket_Alutek_MaterialList(DataTable tbl_explosion, float GlassThickness, bool withSash)
         {

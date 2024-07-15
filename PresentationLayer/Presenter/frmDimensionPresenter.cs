@@ -279,26 +279,11 @@ namespace PresentationLayer.Presenter
         {
             if (_baseColor == string.Empty)
             {
-                if (_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("C70"))
-                {
-                    _baseColor = "White";
-                }
-                else if (_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("Alutek"))
-                {
-                    _baseColor = "Powder Coated";
-                }
+                _baseColor = "White";
             }
             if (profile_type == string.Empty)
             {
-                if (_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("C70"))
-                {
-                    profile_type = "C70 Profile";
-                }
-                else if (_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("Alutek"))
-                {
-                    profile_type = "Alutek Profile";
-
-                }
+                profile_type = "C70 Profile";
             }
 
             //_frmDimensionView.dimension_height = 203;

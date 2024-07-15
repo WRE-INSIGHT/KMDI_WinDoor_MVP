@@ -95,6 +95,7 @@ namespace PresentationLayer.Presenter
                                                   IPanelModel curnt_pnl = null,
                                                   IPanelModel nxt_pnl = null,
                                                   IPanelModel selected_pnl = null);
+        void WrongSelectionOfDummyMullion();
 
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);

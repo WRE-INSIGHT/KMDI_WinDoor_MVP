@@ -203,7 +203,10 @@ namespace PresentationLayer.Presenter
         private void _changeItemColorView_ChangeItemColorViewLoadEventRaised(object sender, EventArgs e)
         {
             _windoorModel.WD_ColorAppliedTo = ColorAppliedTo._ThisItemonly;
-            _windoorModel.WD_PowderCoatType = PowderCoatType_Color._Standard;
+            if (_windoorModel.WD_PowderCoatType == null)
+            {
+                _windoorModel.WD_PowderCoatType = PowderCoatType_Color._Standard;
+            }
             _changeItemColorView.ThisBinding(CreateBindingDictionary());
         }
 
