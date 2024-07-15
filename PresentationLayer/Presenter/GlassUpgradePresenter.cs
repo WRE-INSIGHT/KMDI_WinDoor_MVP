@@ -456,8 +456,18 @@ namespace PresentationLayer.Presenter
 
             return dgvcell;
         }
+        private void CheckForSelectedGlassOnLoad()
+        {
+            foreach (var item in _mainPresenter.NonUnglazed)
+            { 
+                    Console.WriteLine("original glass " + item[5].ToString());
+
+                    Console.WriteLine("Upgraded glass " + item[7].ToString());     
+            }
+        }
         private void OnGlassUpgradeViewLoadEventRaised(object sender, EventArgs e)
         {
+            CheckForSelectedGlassOnLoad();
             _mainPresenter.ClearAndAddGlassInList(true);
 
             _glassUpgradeDT.Columns.Add(CreateColumn("Item No.", "Item No", "System.String"));
