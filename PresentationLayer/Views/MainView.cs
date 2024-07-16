@@ -269,6 +269,32 @@ namespace PresentationLayer.Views
             }
         }
 
+        public bool SettingsForC70PremiG85ToolstripEnable
+        {
+            get
+            {
+                return SettingsForC70PremiG85ToolstripEnable;
+            }
+            set 
+            {
+                C70ToolStripMenuItem.Enabled = value;
+                PremiLineToolStripMenuItem.Enabled = value;
+                G58ToolStripMenuItem.Enabled = value;
+            } 
+        }
+
+        public bool AlutekToolStripEnable 
+        {
+            get 
+            {
+                return AlutekToolStripEnable;
+            }
+            set
+            {
+                AlutekToolStripMenuItem.Enabled = value;
+            }
+        }
+
         #endregion
         public event EventHandler MainViewLoadEventRaised;
         public event FormClosingEventHandler MainViewClosingEventRaised;
@@ -706,17 +732,21 @@ namespace PresentationLayer.Views
                 {
                     ScreentoolStripButton_Click(sender, e);
                 }
-                else if (e.Alt == true && e.KeyCode == Keys.C)
+                else if (e.Alt == true && e.KeyCode == Keys.C && C70ToolStripMenuItem.Enabled == true)
                 {
                     CreateNewItem_Clicked(C70ToolStripMenuItem, e);
                 }
-                else if (e.Alt == true && e.KeyCode == Keys.P)
+                else if (e.Alt == true && e.KeyCode == Keys.P && PremiLineToolStripMenuItem.Enabled == true)
                 {
                     CreateNewItem_Clicked(PremiLineToolStripMenuItem, e);
                 }
-                else if (e.Alt == true && e.KeyCode == Keys.G)
+                else if (e.Alt == true && e.KeyCode == Keys.G && G58ToolStripMenuItem.Enabled == true)
                 {
                     CreateNewItem_Clicked(G58ToolStripMenuItem, e);
+                }
+                else if (e.Alt == true && e.KeyCode == Keys.A && AlutekToolStripMenuItem.Enabled == true)
+                {
+                    CreateNewItem_Clicked(AlutekToolStripMenuItem, e);
                 }
                 else if (e.Control == true && e.KeyCode == Keys.B)
                 {
