@@ -11945,8 +11945,26 @@ namespace PresentationLayer.Presenter
                     {
                         baseColor = Base_Color._DarkBrown;
                     }
+ 
+                    if (InsideColor == null)
+                    {
+                        InsideColor = Foil_Color._Walnut;
+                    }
+                    if (OutsideColor == null)
+                    {
+                        OutsideColor = Foil_Color._Walnut;
+                    } 
 
-
+                    if (frmDimension_profileType.Contains("Alutek"))
+                    {
+                        _mainView.AlutekToolStripEnable = true;
+                        _mainView.SettingsForC70PremiG85ToolstripEnable = false;
+                    }
+                    else
+                    {
+                        _mainView.AlutekToolStripEnable = false;
+                        _mainView.SettingsForC70PremiG85ToolstripEnable = true;
+                    }
 
                     if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
                     {

@@ -60,6 +60,8 @@ namespace PresentationLayer.Views
         int PropertiesScroll { get; set; }
         int ItemScroll { get; set; }
         bool SpecificToolStripEnable { get; set; }
+        bool SettingsForC70PremiG85ToolstripEnable { get; set; }
+        bool AlutekToolStripEnable { get; set; }
         void ShowMainView();
         void ThisBinding(Dictionary<string, Binding> binding);
         void RemoveBinding();
