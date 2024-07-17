@@ -29,6 +29,7 @@ namespace PresentationLayer.Presenter
         List<DataRow> Unglazed { get; set; }
         Dictionary<long, decimal> Dic_PaScreenID { get; set; }
         List<IScreenPartialAdjustmentProperties> Lst_ScreenPartialAdjustment { get; set; }
+        List<string> Lst_GlassDescException { get; set; }
         Control ControlRaised_forDMSelection { get; }
         IDividerModel DivModel_forDMSelection { get; }
         IPanelModel PrevPnlModel_forDMSelection { get; }
@@ -175,6 +176,7 @@ namespace PresentationLayer.Presenter
         bool EditFromQuotationList { get; set; }
         Control ControlRaised_forCenterProfileSelection { get; set; }
         void OnLoadSearchCenterProfielArtNo(IPanelModel pnlModel);
+       
 
     }
 }
