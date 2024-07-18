@@ -3638,7 +3638,8 @@ namespace ModelLayer.Model.Quotation
                 VAT = 0,
                 DutiesAndTaxes = 0,
 
-                provinceBaseMultiplier;
+                provinceBaseMultiplier,
+                AddiitionalColorPercentage = 0;
         #endregion
 
         #region changePriceBasedOnDate
@@ -10257,8 +10258,7 @@ namespace ModelLayer.Model.Quotation
                                                    GlazingGasketSashForAluPrice +
                                                    GlazingGasketGbeadForAluPrice;
                         */
-                        #endregion
-                        decimal AddiitionalColorPercentage = 0;
+                        #endregion 
                         if (wdm.WD_BaseColor == Base_Color._PowderCoated)
                         {
                             AddiitionalColorPercentage = 1.08m;
@@ -10360,15 +10360,17 @@ namespace ModelLayer.Model.Quotation
                         //MobilizationCost = 1500 * PricingFactor;
                         MobilizationCost = 0;
                         FoilingCost = (((TotalFramePerimeter + TotalDividerPerimeter + TotalSashPerimeter) / 1000) * 440);
-                        ProductionCost = ProductionCost + FoilingCost;
-                        InstallationCost = (ProductionCost / 3);
-                        AdditionalCost = (TotalFramePerimeter * 200) / 1000;
-
+                       
                         if (wdm.WD_BaseColor == Base_Color._PowderCoated)
                         {
                             FoilingCost = 0;
                         }
 
+                        ProductionCost = ProductionCost + FoilingCost;
+                        InstallationCost = (ProductionCost / 3);
+                        AdditionalCost = (TotalFramePerimeter * 200) / 1000;
+
+                       
                         Contingency = (Math.Round(SubTotatal + Wastage, 2) +
                                       Math.Round(ImportationCost, 2) +
                                       Math.Round(ProductionCost, 2) +
@@ -10559,6 +10561,7 @@ namespace ModelLayer.Model.Quotation
                         TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
 
                         BaseTotalPriceWithFactor = TotaPrice;
+
 
                         TotaPrice = TotaPrice + LouverCost + MeshCost;
 
@@ -11015,9 +11018,10 @@ namespace ModelLayer.Model.Quotation
                             wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
 
                            "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
-                           "\n\nBase color " + wdm.WD_BaseColor +
-                           "\nFramePrice, SashPrice, DivPrice, InversionClipPrice, GbPrice add 8% if powder coated" +
-
+                           "\n\nBase color " + wdm.WD_BaseColor.ToString() +
+                           "\n\nPowderCoated type " + wdm.WD_PowderCoatType.ToString() + 
+                           "\nFramePrice, SashPrice, DivPrice, DMPrice, InversionClipPrice, GbPrice add " + AddiitionalColorPercentage +"% if powder coated" +
+                           
                            "\nCosting Points: " + CostingPoints +
                             "\nLabor Cost " + LaborCost + " = " + "Costing Points " + CostingPoints + "*" + "CostPerPoints " + CostPerPoints +
                             "\nInstallationCost " + InstallationCost + " = " + "InstallationPoints " + InstallationPoints + " * " + "CostPerPoints " + CostPerPoints + 
@@ -11052,6 +11056,8 @@ namespace ModelLayer.Model.Quotation
                                      "\n\t\t PolymideStripPrice " + Math.Round(PolymideStripPrice, 2).ToString() + " + " +
                                      "\n\t\t ShootBoltPrice " + Math.Round(ShootBoltPrice, 2).ToString() + " + " +
                                      "\n\t\t DMPrice " + Math.Round(DMPrice, 2).ToString() + " + " +
+                                     "\n\t\t EndCapPrice " + Math.Round(EndCapPrice, 2).ToString() + " + " +
+
 
 
 

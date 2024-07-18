@@ -2021,10 +2021,9 @@ namespace PresentationLayer.Presenter
             Run_GetListOfMaterials_SpecificItem();
             _quotationModel.BOMandItemlistStatus = "BOM";
             IPricingPresenter PricingPresenter = _pricingPresenter.CreateNewInstance(_unityC, this, _quotationModel);
+            PricingPresenter.GetPricingView().ProfileType_FromMainPresenter = _windoorModel.WD_profile;
             PricingPresenter.GetPricingView().ShowPricingList();
             _quotationModel.Select_Current_Windoor(_windoorModel);
-
-
         }
 
         private void OnDuplicateToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -3437,15 +3436,27 @@ namespace PresentationLayer.Presenter
 
         private void OnNewFrameButtonClickEventRaised(object sender, EventArgs e)
         {
-            ToolStripButton tsb = (ToolStripButton)sender;
-            if (tsb.Name == "tsBtnNwin")
+            if (sender.ToString() == "FromWindowShortCut")
             {
                 frameType = FrameModel.Frame_Padding.Window;
             }
-            else if (tsb.Name == "tsBtnNdoor")
+            else if (sender.ToString() == "FromDoorShortCut")
             {
                 frameType = FrameModel.Frame_Padding.Door;
             }
+            else
+            {
+                ToolStripButton tsb = (ToolStripButton)sender;
+                if (tsb.Name == "tsBtnNwin")
+                {
+                    frameType = FrameModel.Frame_Padding.Window;
+                }
+                else if (tsb.Name == "tsBtnNdoor")
+                {
+                    frameType = FrameModel.Frame_Padding.Door;
+                }
+            }
+           
             Scenario_Quotation(false, false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
         }
         string[] file_lines;
