@@ -10,7 +10,7 @@ using ModelLayer.Model.Quotation.Screen;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using ModelLayer.Variables;
-using PresentationLayer.CommonMethods;
+using PresentationLayer.CommonMethods;  
 using PresentationLayer.Presenter.Costing_Head;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -212,6 +212,19 @@ namespace PresentationLayer.Presenter
             set
             {
                 _outsideColor = value;
+            }
+        }
+
+        private PowderCoatType_Color _powderCoatType;
+        public PowderCoatType_Color PowderCoatType
+        {
+            get
+            {
+                return _powderCoatType;
+            }
+            set
+            {
+                _powderCoatType = value;
             }
         }
 
@@ -1059,6 +1072,17 @@ namespace PresentationLayer.Presenter
                 //_divPropUCP_forDMSelection.GetLeverEspagUCP().BindSashProfileArtNo();
                 _divPropUCP_forDMSelection.GetLeverEspagUCP(_unityC, _divModel_forDMSelection).BindSashProfileArtNo();
             }
+        }
+
+        public void WrongSelectionOfDummyMullion()
+        {
+            _windoorModel.WD_CmenuDeleteVisibility = true;
+
+            _tsLblStatus.Text = "";
+            _pnlControlSub.Enabled = true;
+            _msMainMenu.Enabled = true;
+            _pnlPropertiesBody.Enabled = true;
+            _tsMain.Enabled = true;
         }
 
         public void SetLblStatusForCenterProfile (string status,
@@ -1997,10 +2021,9 @@ namespace PresentationLayer.Presenter
             Run_GetListOfMaterials_SpecificItem();
             _quotationModel.BOMandItemlistStatus = "BOM";
             IPricingPresenter PricingPresenter = _pricingPresenter.CreateNewInstance(_unityC, this, _quotationModel);
+            PricingPresenter.GetPricingView().ProfileType_FromMainPresenter = _windoorModel.WD_profile;
             PricingPresenter.GetPricingView().ShowPricingList();
             _quotationModel.Select_Current_Windoor(_windoorModel);
-
-
         }
 
         private void OnDuplicateToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -3413,15 +3436,27 @@ namespace PresentationLayer.Presenter
 
         private void OnNewFrameButtonClickEventRaised(object sender, EventArgs e)
         {
-            ToolStripButton tsb = (ToolStripButton)sender;
-            if (tsb.Name == "tsBtnNwin")
+            if (sender.ToString() == "FromWindowShortCut")
             {
                 frameType = FrameModel.Frame_Padding.Window;
             }
-            else if (tsb.Name == "tsBtnNdoor")
+            else if (sender.ToString() == "FromDoorShortCut")
             {
                 frameType = FrameModel.Frame_Padding.Door;
             }
+            else
+            {
+                ToolStripButton tsb = (ToolStripButton)sender;
+                if (tsb.Name == "tsBtnNwin")
+                {
+                    frameType = FrameModel.Frame_Padding.Window;
+                }
+                else if (tsb.Name == "tsBtnNdoor")
+                {
+                    frameType = FrameModel.Frame_Padding.Door;
+                }
+            }
+           
             Scenario_Quotation(false, false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
         }
         string[] file_lines;
@@ -11937,7 +11972,7 @@ namespace PresentationLayer.Presenter
                     _wndrFileName = string.Empty;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
-                              _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
+                        _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
                     {
                         baseColor = Base_Color._White;
                     }
@@ -11945,7 +11980,15 @@ namespace PresentationLayer.Presenter
                     {
                         baseColor = Base_Color._DarkBrown;
                     }
- 
+                    else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._PowderCoated.ToString())
+                    {
+                        baseColor = Base_Color._PowderCoated;
+                    }
+                    else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Foiled.ToString())
+                    {
+                        baseColor = Base_Color._Foiled;
+                    }
+
                     if (InsideColor == null)
                     {
                         InsideColor = Foil_Color._Walnut;
@@ -11992,7 +12035,10 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _mainView.Zoom = _windoorModel.WD_zoom;
 
-                       
+                        if (baseColor == Base_Color._PowderCoated)
+                        {
+                            _windoorModel.WD_PowderCoatType = PowderCoatType_Color._Standard;
+                        }
 
 
 
@@ -12040,6 +12086,14 @@ namespace PresentationLayer.Presenter
                         {
                             baseColor = Base_Color._DarkBrown;
                         }
+                        else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._PowderCoated.ToString())
+                        {
+                            baseColor = Base_Color._PowderCoated;
+                        }
+                        else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Foiled.ToString())
+                        {
+                            baseColor = Base_Color._Foiled;
+                        }
 
                         if (InsideColor == null)
                         {
@@ -12059,13 +12113,16 @@ namespace PresentationLayer.Presenter
                                                                          OutsideColor);
                         _windoorModel.WD_WoodecAdditional = WoodecAdditionalForNewItem;
                         AddWndrList_QuotationModel(_windoorModel);
- 
-
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
 
                         _windoorModel.Date_Assigned = dateAssigned;
                         _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
+                       
+                        if (baseColor == Base_Color._PowderCoated)
+                        {
+                            _windoorModel.WD_PowderCoatType = PowderCoatType;
+                        }
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -12278,6 +12335,11 @@ namespace PresentationLayer.Presenter
 
                         _windoorModel.Date_Assigned = dateAssigned;
                         _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
+
+                        if (baseColor == Base_Color._PowderCoated)
+                        {
+                            _windoorModel.WD_PowderCoatType = PowderCoatType;
+                        }
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -13427,7 +13489,8 @@ namespace PresentationLayer.Presenter
                                 MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
-                        else if (espag_art == Espagnolette_ArticleNo._H102 || espag_art == Espagnolette_ArticleNo._H103)
+                        else if (espag_art == Espagnolette_ArticleNo._H102 || espag_art == Espagnolette_ArticleNo._H103 ||
+                                 espag_art == Espagnolette_ArticleNo._H172 || espag_art == Espagnolette_ArticleNo._84819)
                         {
                             if (frame_art != FrameProfile_ArticleNo._84100)
                             {
@@ -14526,7 +14589,8 @@ namespace PresentationLayer.Presenter
                GeorgianBarHorizontalDesc,
                GeorgianBarVerticalDesc,
                additionalZero,
-               GeorgianBarArtNoDesc;
+               GeorgianBarArtNoDesc,
+               AlutekFrameDesc;
         #endregion
         public void itemDescription()
         {
@@ -14548,6 +14612,11 @@ namespace PresentationLayer.Presenter
                             else if (fr.Frame_Type == Frame_Padding.Door)
                             {
                                 FrameTypeDesc = "Door";
+                            }
+
+                            if (fr.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                            {
+                                AlutekFrameDesc = "AluSys-46";
                             }
 
                             #region MultiPnl
@@ -15012,6 +15081,13 @@ namespace PresentationLayer.Presenter
                         wdm.WD_description += "Min. wall thickness is 225mm";
                     }
 
+                    if (wdm.WD_profile.Contains("Alutek"))
+                    {
+                        string AddAluFrame = wdm.WD_description.Replace("Alutek Profile", AlutekFrameDesc);
+
+                        wdm.WD_description = AddAluFrame;
+                    }
+
                     glassThick = string.Empty;
                     lst_glassThickness.Clear();
                     pnl_LouverChk = false;
@@ -15230,11 +15306,12 @@ namespace PresentationLayer.Presenter
             return isDimensionFit;
         }
 
-        public void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color)
+        public void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color, PowderCoatType_Color powderCoatType_Color)
         {
             baseColor = base_Color;
             InsideColor = inside_Color;
             OutsideColor = outside_Color;
+            PowderCoatType = powderCoatType_Color;
         }
 
         public void setWoodecAdditional(int woodecAddlPercentage)

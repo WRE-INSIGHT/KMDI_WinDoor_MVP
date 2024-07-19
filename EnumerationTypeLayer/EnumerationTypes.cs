@@ -91,6 +91,8 @@ namespace EnumerationTypeLayer
         {
             public static readonly EndcapDM_ArticleNo _K7533 = new EndcapDM_ArticleNo(0, "K7533");
             public static readonly EndcapDM_ArticleNo _K385 = new EndcapDM_ArticleNo(1, "K385");
+            public static readonly EndcapDM_ArticleNo _M649 = new EndcapDM_ArticleNo(2, "M649");
+
 
             private EndcapDM_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -271,6 +273,15 @@ namespace EnumerationTypeLayer
 
             private Foil_Color(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class PowderCoatType_Color : Enumeration<PowderCoatType_Color, int>
+        {
+            public static readonly PowderCoatType_Color _Standard = new PowderCoatType_Color(0, "Standard");
+            public static readonly PowderCoatType_Color _Special = new PowderCoatType_Color(1, "Special"); 
+
+            private PowderCoatType_Color(int value, string displayName) : base(value, displayName) { }
+        }
+
 
         public class CoverProfile_ArticleNo : Enumeration<CoverProfile_ArticleNo, int>
         {
@@ -489,10 +500,13 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _774287 = new Espagnolette_ArticleNo(20, "774287");
             public static readonly Espagnolette_ArticleNo _731852 = new Espagnolette_ArticleNo(21, "731852");
             public static readonly Espagnolette_ArticleNo _6_90137_10_0_1 = new Espagnolette_ArticleNo(22, "6-90137-10-0-1");
+            //ALUTEK
             public static readonly Espagnolette_ArticleNo _H102 = new Espagnolette_ArticleNo(23, "H102");
-            public static readonly Espagnolette_ArticleNo _H103 = new Espagnolette_ArticleNo(24, "H103");
+            public static readonly Espagnolette_ArticleNo _H103 = new Espagnolette_ArticleNo(24, "H103"); 
+            public static readonly Espagnolette_ArticleNo _H172 = new Espagnolette_ArticleNo(25, "H172");
+            public static readonly Espagnolette_ArticleNo _84819 = new Espagnolette_ArticleNo(26, "84819");
 
-            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(25, "None");
+            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(27, "None");
 
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -1625,13 +1639,32 @@ namespace EnumerationTypeLayer
 
         }
 
+        public class TwoWayLockingConnector_ArticleNo : Enumeration<TwoWayLockingConnector_ArticleNo, int>
+        {
+            public static readonly TwoWayLockingConnector_ArticleNo _H193 = new TwoWayLockingConnector_ArticleNo(0, "H193");
+
+            private TwoWayLockingConnector_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class OneWayLockingConnector_ArticleNo : Enumeration<OneWayLockingConnector_ArticleNo, int>
+        {
+            public static readonly OneWayLockingConnector_ArticleNo _H192 = new OneWayLockingConnector_ArticleNo(0, "H192");
+
+            private OneWayLockingConnector_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
         public class Cremon_HandleArtNo : Enumeration<Cremon_HandleArtNo, int>
         {
             public static readonly Cremon_HandleArtNo _H087 = new Cremon_HandleArtNo(0, "H087");
 
-            private Cremon_HandleArtNo(int value, string displayName) : base(value, displayName) { }
-
+            private Cremon_HandleArtNo(int value, string displayName) : base(value, displayName) { } 
         }
 
+        public class ShootboltForAlutek_HandleArtNo : Enumeration<ShootboltForAlutek_HandleArtNo, int>
+        {
+            public static readonly ShootboltForAlutek_HandleArtNo _H110 = new ShootboltForAlutek_HandleArtNo(0, "H110");
+
+            private ShootboltForAlutek_HandleArtNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

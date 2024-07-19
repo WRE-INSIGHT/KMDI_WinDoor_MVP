@@ -110,34 +110,34 @@
             this.clearToolStripMenuItem,
             this.deleteProjectToolStripMenuItem});
             this.cmenu_dgvProj.Name = "cmenu_dgvProj";
-            this.cmenu_dgvProj.Size = new System.Drawing.Size(211, 128);
+            this.cmenu_dgvProj.Size = new System.Drawing.Size(195, 100);
             // 
             // assignCostEngrToolStripMenuItem
             // 
             this.assignCostEngrToolStripMenuItem.Name = "assignCostEngrToolStripMenuItem";
-            this.assignCostEngrToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.assignCostEngrToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
             this.assignCostEngrToolStripMenuItem.Text = "Assign Cost Engr";
             this.assignCostEngrToolStripMenuItem.Click += new System.EventHandler(this.assignCostEngrToolStripMenuItem_Click);
             // 
             // customerRefNoToolStripMenuItem
             // 
             this.customerRefNoToolStripMenuItem.Name = "customerRefNoToolStripMenuItem";
-            this.customerRefNoToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.customerRefNoToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
             this.customerRefNoToolStripMenuItem.Text = "Customer Ref. No";
             this.customerRefNoToolStripMenuItem.Click += new System.EventHandler(this.customerRefNoToolStripMenuItem_Click);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
             this.clearToolStripMenuItem.Text = "Clear Assigned";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
             // deleteProjectToolStripMenuItem
             // 
             this.deleteProjectToolStripMenuItem.Name = "deleteProjectToolStripMenuItem";
-            this.deleteProjectToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
-            this.deleteProjectToolStripMenuItem.Text = "Delete Row";
+            this.deleteProjectToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
+            this.deleteProjectToolStripMenuItem.Text = "Delete Project";
             this.deleteProjectToolStripMenuItem.Click += new System.EventHandler(this.deleteProjectToolStripMenuItem_Click);
             // 
             // AssignProjectsView

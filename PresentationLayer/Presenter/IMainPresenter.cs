@@ -95,6 +95,7 @@ namespace PresentationLayer.Presenter
                                                   IPanelModel curnt_pnl = null,
                                                   IPanelModel nxt_pnl = null,
                                                   IPanelModel selected_pnl = null);
+        void WrongSelectionOfDummyMullion();
 
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);
@@ -164,7 +165,7 @@ namespace PresentationLayer.Presenter
         void CopyObjectsPerWindoorModel();
         void MainPresenter_PartialAdjustment();
         void ClearAndAddGlassInList(bool _callfrmGlassUpgrade);
-        void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color);
+        void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color, PowderCoatType_Color powderCoatType_Color);
         void setWoodecAdditional(int woodecAddlPercentage);
 
         IPanelModel PrevPanelModel_forCenterProfileSelection { get; }

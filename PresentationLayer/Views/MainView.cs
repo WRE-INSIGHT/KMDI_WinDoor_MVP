@@ -431,6 +431,8 @@ namespace PresentationLayer.Views
 
         private void CreateNewFrame_Clicked(object sender, EventArgs e)
         {
+
+            HelpRequested:
             EventHelpers.RaiseEvent(sender, NewFrameButtonClickEventRaised, e);
         }
 
@@ -755,6 +757,14 @@ namespace PresentationLayer.Views
                 else if (e.Control == true && e.KeyCode == Keys.M)
                 {
                     listOfMaterialsToolStripMenuItem_Click(sender, e);
+                }
+                else if (e.Control == true && e.KeyCode == Keys.W)
+                {  
+                    CreateNewFrame_Clicked("FromWindowShortCut", e);
+                }
+                else if (e.Control == true && e.KeyCode == Keys.D)
+                { 
+                    CreateNewFrame_Clicked("FromDoorShortCut", e);
                 }
             }
             if (e.Control == true && e.KeyCode == Keys.O)
