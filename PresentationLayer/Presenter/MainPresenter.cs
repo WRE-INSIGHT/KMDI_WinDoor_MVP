@@ -5471,6 +5471,17 @@ namespace PresentationLayer.Presenter
                         {
                             _windoorModel.Date_Assigned = DateTime.Parse(extractedValue_str);
                         }
+                        else if (row_str.Contains("WD_PowderCoatType:"))
+                        {
+                            foreach(PowderCoatType_Color pwdctyp in PowderCoatType_Color.GetAll())
+                            {
+                                if(pwdctyp.ToString() == extractedValue_str)
+                                {
+                                    _windoorModel.WD_PowderCoatType = pwdctyp;
+                                    break;
+                                }
+                            }
+                        }
                         
                         #endregion
                     }
