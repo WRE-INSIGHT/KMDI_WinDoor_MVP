@@ -3513,6 +3513,18 @@ namespace PresentationLayer.Presenter
 
             file_lines = File.ReadAllLines(outFile);
             f.MoveTo(Path.ChangeExtension(outFile, ".wndr"));
+
+            if (file_lines.Contains("WD_profile: Alutek Profile"))
+            {
+                _mainView.SettingsForC70PremiG85ToolstripEnable = false;
+                _mainView.AlutekToolStripEnable = true;
+            }
+            else
+            {
+                _mainView.SettingsForC70PremiG85ToolstripEnable = true;
+                _mainView.AlutekToolStripEnable = false;
+            }
+
             onload = true;
             _factorFromAddExisting = 0;//reset when opening new file
             _factorHolderOnLoad = 0;// reset when opening new file
@@ -4308,28 +4320,32 @@ namespace PresentationLayer.Presenter
                     Windoor_Save_PropertiesUC();
                     file_lines = File.ReadAllLines(outFile);
                     f.MoveTo(Path.ChangeExtension(addExistingwndrfile, ".wndr"));
-                    onload = true;
-                    _isFromAddExisting = true; // selecting new factor 
-                    Windoor_Save_UserControl();
-                    Windoor_Save_PropertiesUC();
 
-                    ////foreach(string strline in file_lines) 
-                    ////{
-                    ////    if(strline.Contains("WD_name:"))
-                    ////    {
-                    ////        MessageBox.Show(strline);
-                    ////    }
-                    ////}
+                    if (AllowAddExistingQt())
+                    {
+                        onload = true;
+                        _isFromAddExisting = true; // selecting new factor 
+                        Windoor_Save_UserControl();
+                        Windoor_Save_PropertiesUC();
 
-                    _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
-                    _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                    StartWorker("Add_Existing_Items");
-                    SetMainViewTitle(input_qrefno,
-                                 _projectName,
-                                 _custRefNo,
-                                 _windoorModel.WD_name,
-                                 _windoorModel.WD_profile,
-                                 false);
+                        ////foreach(string strline in file_lines) 
+                        ////{
+                        ////    if(strline.Contains("WD_name:"))
+                        ////    {
+                        ////        MessageBox.Show(strline);
+                        ////    }
+                        ////}
+
+                        _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
+                        _basePlatformImagerUCPresenter.SendToBack_baseImager();
+                        StartWorker("Add_Existing_Items");
+                        SetMainViewTitle(input_qrefno,
+                                     _projectName,
+                                     _custRefNo,
+                                     _windoorModel.WD_name,
+                                     _windoorModel.WD_profile,
+                                     false);
+                    }
                 }
             }
             catch (Exception ex)
@@ -4337,6 +4353,43 @@ namespace PresentationLayer.Presenter
                 csfunc.LogToFile(ex.Message, ex.StackTrace);
                 MessageBox.Show("Corrupted file", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private bool AllowAddExistingQt()
+        {
+            bool _profileAlu = false,
+                 _allowAddExisting = true;
+
+
+           foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+           {
+               if (wdm.WD_profile == "Alutek Profile")
+               {
+                   _profileAlu = true;
+                   break;
+               }
+           }
+
+           if (!_profileAlu)
+           {
+               if (file_lines.Contains("WD_profile: Alutek Profile"))
+               {
+                   _allowAddExisting = false;
+                    MessageBox.Show("Unable to Add Existing Project\nSelected File Contains: Alutek Profile/s", "File", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+               }
+           }
+           else
+           {
+               if (file_lines.Contains("WD_profile: C70 Profile") || file_lines.Contains("WD_profile: PremiLine Profile") || file_lines.Contains("WD_profile: G58 Profile"))
+               {
+                   _allowAddExisting = false;
+                    MessageBox.Show("Unable to Add Existing Project\nSelected File Contains: C70/Premi/G58 Profile/s", "File", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+            }
+
+           return _allowAddExisting;
+            
         }
 
         private void OnSortItemButtonClickEventRaised(object sender, EventArgs e)
@@ -5417,6 +5470,17 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("Date_Assigned"))
                         {
                             _windoorModel.Date_Assigned = DateTime.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("WD_PowderCoatType:"))
+                        {
+                            foreach(PowderCoatType_Color pwdctyp in PowderCoatType_Color.GetAll())
+                            {
+                                if(pwdctyp.ToString() == extractedValue_str)
+                                {
+                                    _windoorModel.WD_PowderCoatType = pwdctyp;
+                                    break;
+                                }
+                            }
                         }
                         
                         #endregion
