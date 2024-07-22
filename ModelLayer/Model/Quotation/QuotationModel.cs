@@ -11015,18 +11015,19 @@ namespace ModelLayer.Model.Quotation
 
                             DateTime thisDay = DateTime.Now;
 
+
                             wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
 
-                           "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
-                           "\n\nBase color " + wdm.WD_BaseColor.ToString() +
-                           "\n\nPowderCoated type " + wdm.WD_PowderCoatType.ToString() + 
-                           "\nFramePrice, SashPrice, DivPrice, DMPrice, InversionClipPrice, GbPrice add " + AddiitionalColorPercentage +"% if powder coated" +
-                           
-                           "\nCosting Points: " + CostingPoints +
-                            "\nLabor Cost " + LaborCost + " = " + "Costing Points " + CostingPoints + "*" + "CostPerPoints " + CostPerPoints +
-                            "\nInstallationCost " + InstallationCost + " = " + "InstallationPoints " + InstallationPoints + " * " + "CostPerPoints " + CostPerPoints + 
-
-                            "\n\n MaterialCost " + MaterialCost + " = FramePrice " + Math.Round(FramePrice, 2).ToString() + " + " +
+                                     "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
+                                     "\n\nBase color " + wdm.WD_BaseColor.ToString() +
+                                     "\n\nPowderCoated type " + wdm.WD_PowderCoatType.ToString() +
+                                     "\nFramePrice, SashPrice, DivPrice, DMPrice, InversionClipPrice, GbPrice add " + AddiitionalColorPercentage + "% if powder coated" +
+                                    
+                                     "\nCosting Points: " + CostingPoints +
+                                      "\nLabor Cost " + LaborCost + " = " + "Costing Points " + CostingPoints + "*" + "CostPerPoints " + CostPerPoints +
+                                      "\nInstallationCost " + InstallationCost + " = " + "InstallationPoints " + InstallationPoints + " * " + "CostPerPoints " + CostPerPoints +
+                                     
+                                     "\n\n MaterialCost " + MaterialCost + " = FramePrice " + Math.Round(FramePrice, 2).ToString() + " + " +
                                      "\n\t\t SashPrice " + Math.Round(SashPrice, 2).ToString() + " + " +
                                      "\n\t\t DivPrice " + Math.Round(DivPrice, 2).ToString() + " + " +
                                      // "\n\t\t CornerWindowPrice " + Math.Round(CornerWindowPrice, 2).ToString() + " + " +
@@ -11099,7 +11100,7 @@ namespace ModelLayer.Model.Quotation
                                        "\n\t\t Contingency " + Math.Round(Contingency, 2).ToString() + ") * " + PricingFactor +
 
                              "\n\n BaseTotalPriceWithFactor " + BaseTotalPriceWithFactor + " = TotaPrice" + TotaPrice;
-
+                                
                             #endregion
                         }
                         else
