@@ -1410,6 +1410,7 @@
     <EmbeddedResource Include="Reports\Quotation.rdlc" />
     <EmbeddedResource Include="Reports\Screen.rdlc" />
     <EmbeddedResource Include="Reports\ScreenPartialAdjustment.rdlc" />
+    <EmbeddedResource Include="Reports\PartialADJSummaryOfContract.rdlc" />
     <EmbeddedResource Include="Reports\SummaryOfContract.rdlc" />
     <EmbeddedResource Include="Views\ChangeItemColorView.resx">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>

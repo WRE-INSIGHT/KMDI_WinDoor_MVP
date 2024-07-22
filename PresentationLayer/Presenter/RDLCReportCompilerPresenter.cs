@@ -274,9 +274,15 @@ namespace PresentationLayer.Presenter
                 _quoteItemListPresenter.CallFrmRDLCCompiler = true;
                 _quoteItemListPresenter.PrintContractSummaryPartialAdjustmentRDLC();
                 _quoteItemListPresenter.CallFrmRDLCCompiler = false;
+
+                _rdlcReportCompilerView.GetRDLCReportCompilerForm().Text = "Report Compiler - Partial Adjustment";
+
+                _rdlcReportCompilerView.GetChecklistBoxIndex().Enabled = false;
+                _rdlcReportCompilerView.GetSubTotalCheckBox().Enabled = false;
+                _rdlcReportCompilerView.CheckListSelectAll().Enabled = false;
+                _rdlcReportCompilerView.GetScreenRowLimitTxtBx().Enabled = false;
+
             }
-
-
 
             _rdlcReportCompilerView.GetOOTTextBox().Text = _quoteItemListPresenter.OutOfTownCharges.ToString("N2");
             _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;

@@ -45,6 +45,7 @@ namespace PresentationLayer.Views
         TextBox GetContractSummaryLessDiscountTxtBx();
         CheckBox GetGlassUpgradeSubTotal();
         TextBox GetGlassUpgradeRowLimitTxtBx();
+        TextBox GetScreenRowLimitTxtBx();
 
 
     }

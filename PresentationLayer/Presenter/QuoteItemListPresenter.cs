@@ -904,9 +904,10 @@ namespace PresentationLayer.Presenter
         public void PrintContractSummaryPartialAdjustmentRDLC()
         {
             #region PrintContractSummary P.A.
-
+            
             #region windoor
             DSQuotation _dtqoute = new DSQuotation();
+            List<decimal> adjusmentPriceList = new List<decimal>();
             try
             {
                 foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
@@ -914,8 +915,19 @@ namespace PresentationLayer.Presenter
                     if (wdm.WD_IsSelectedAtPartialAdjusment)
                     {
 
+                        for(int i = 0; i < wdm.WD_PALst_Price.Count; i++)
+                        {
+                            var PA_price_qty = wdm.WD_PALst_Price[i] * wdm.WD_PALst_Qty[i]; //list price P.A. windoor
+                            var adjustment_price = PA_price_qty - wdm.WD_PAPreviousPrice;
+                            adjusmentPriceList.Add(adjustment_price); // use for new contract summary rdlc 
+                        }
+
                         var price_x_quantity = wdm.WD_price * wdm.WD_quantity;
-                        windoorTotalListPrice = windoorTotalListPrice + price_x_quantity;
+
+                        //windoorTotalListPrice = windoorTotalListPrice + price_x_quantity;
+
+                        windoorTotalListPrice = adjusmentPriceList.Sum();// use for new contract summary rdlc 
+
                         if (wdm.WD_quantity > 1)
                         {
                             for (int i = 1; i <= wdm.WD_quantity; i++)
@@ -934,7 +946,7 @@ namespace PresentationLayer.Presenter
                 //windoorDiscountAverage = windoortotaldiscount / _quotationModel.Lst_Windoor.Sum(y => y.WD_quantity) / 100;//change
                 windoorTotalListCount = _quotationModel.Lst_Windoor.Where(m => m.WD_IsSelectedAtPartialAdjusment == true).Sum(m => m.WD_quantity);
                 windoorDiscountAverage = windoortotaldiscount / _quotationModel.Lst_Windoor.Where(m => m.WD_IsSelectedAtPartialAdjusment == true).Sum(m => m.WD_quantity) / 100;
-
+                
             }
             catch (Exception ex)
             {
@@ -942,11 +954,11 @@ namespace PresentationLayer.Presenter
                 divisor = 1;
             }
             #endregion
-
+                    
             #region screens
             try
             {
-                //ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                ScreenTotalListPrice = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_Adjustment_Price); // use for new contract summary rdlc 
                 ScreenTotalListCount = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_Quantity_Revised); //change
 
                 foreach (var item in _mainPresenter.Lst_ScreenPartialAdjustment)//change
@@ -966,14 +978,17 @@ namespace PresentationLayer.Presenter
                     }
                     else
                     {
-                        Console.WriteLine("Zero Quantity Detected");
+                        Console.WriteLine("Zero Quantity Detected");    
                     }
+                    
+                    //ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount_Revised, 2); //change
 
-
-                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount_Revised, 2); //change
                 }
 
+                Console.WriteLine(_mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_Adjustment_Price)); // use for new rdlc contract summary 
+
                 ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;
+                
             }
             catch (Exception ex)
             {
@@ -1007,16 +1022,17 @@ namespace PresentationLayer.Presenter
             ContractSummaryLessDiscount = screen_Windoor_DiscountAverage;// bring discount Ave to RDLCCompiler
 
             //Console.WriteLine(archi + " " + outOfTownCharges.ToString());
-            Console.WriteLine(archi + " " + OutOfTownCharges.ToString());
-            Console.WriteLine("This is total DiscountedPrice w/o Vat " + Math.Round((total_DiscountedPrice_wo_VAT), 2));
-            Console.WriteLine("2 decimal places: " + Math.Truncate(total_DiscountedPrice_wo_VAT * 100) / 100);
+            //Console.WriteLine(archi + " " + OutOfTownCharges.ToString());
+            //Console.WriteLine("This is total DiscountedPrice w/o Vat " + Math.Round((total_DiscountedPrice_wo_VAT), 2));
+            //Console.WriteLine("2 decimal places: " + Math.Truncate(total_DiscountedPrice_wo_VAT * 100) / 100);
+
             //Console.WriteLine(" total windoor discount from forloop" + windoortotaldiscount);
-            //Console.WriteLine("Windoor DiscountTotal: " +  _quotationModel.Lst_Windoor.Sum(x => x.WD_discount));
+            //Console.WriteLine("Windoor DiscountTotal: " + _quotationModel.Lst_Windoor.Sum(x => x.WD_discount));
             //Console.WriteLine("Windoor Average Discount.: " + windoorDiscountAverage);
             //Console.WriteLine("Screen Average Discount.: " + ScreenDiscountAverage);
             //Console.WriteLine("Screen & Windoor Discount Average.: " + screen_Windoor_DiscountAverage);
             //Console.WriteLine("");
-            //Console.WriteLine("Windoor list count total of: " + windoorTotalListCount.T oString());
+            //Console.WriteLine("Windoor list count total of: " + windoorTotalListCount.ToString());
             //Console.WriteLine("Windoor total list price: " + windoorTotalListPrice.ToString());
             //Console.WriteLine("");
             //Console.WriteLine("screen total list count: " + ScreenTotalListCount.ToString());
@@ -1031,7 +1047,9 @@ namespace PresentationLayer.Presenter
                                                 screen_Windoor_DiscountAverage
                                                 );
 
-            _mainPresenter.printStatus = "ContractSummary";
+
+
+            _mainPresenter.printStatus = "PartialADJContractSummary";
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
 
@@ -1283,7 +1301,7 @@ namespace PresentationLayer.Presenter
             {
                 MessageBox.Show("Problem in QuoteItemList PartialAdjustment Print: " + ex.Message);
             }
-            #endregion
+            #endregion 
         }
 
         public void PrintScreenPartialAdjustmentRDLC()
@@ -1370,7 +1388,16 @@ namespace PresentationLayer.Presenter
                 //IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
                 IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
                 printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreenAdjustment.DefaultView;
-                printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+
+                if (RenderPDFAtBackGround != true)
+                {
+                    printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+                }
+                else
+                {
+                    printQuote.EventLoad();
+                    printQuote.PrintRDLCReport();
+                }
             }
             catch (Exception ex)
             {

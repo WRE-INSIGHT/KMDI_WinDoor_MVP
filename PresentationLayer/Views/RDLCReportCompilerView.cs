@@ -168,6 +168,11 @@ namespace PresentationLayer.Views
             return txt_Gurowlimit;
         }
 
+        public TextBox GetScreenRowLimitTxtBx()
+        {
+            return txtbox_rowlimit;
+        }
+
 
 
         public event EventHandler chkboxsubtotalCheckedChangedEventRaised;
