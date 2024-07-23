@@ -50,8 +50,40 @@ namespace PresentationLayer.Presenter.Costing_Head
             _assignAEView.AddProjectToolStripButtonClickEventRaised += _assignAEView_AddProjectToolStripButtonClickEventRaised;
             _assignAEView.DeleteAEICToolStripButtonClickEventRaised += _assignAEView_DeleteAEICToolStripButtonClickEventRaised;
             _assignAEView.EditProjectToolStripButtonClickEventRaised += _assignAEView_EditProjectToolStripButtonClickEventRaised;
+            _assignAEView.AssignAEViewMouseDownEventRaised += _assignAEView_AssignAEViewMouseDownEventRaised;
         }
+        private void _assignAEView_AssignAEViewMouseDownEventRaised(object sender, MouseEventArgs e)
+        {
 
+            if (e.Button == MouseButtons.Right)
+            {
+                //If Multiple Selected, Disable Edit 
+                if(_dgvClient.SelectedRows.Count > 1)
+                {
+                    _dgvClient.ContextMenuStrip.Items[0].Visible = false;
+                    _dgvClient.ContextMenuStrip.Items[1].Visible = false;
+                }
+                else
+                {
+                    _dgvClient.ContextMenuStrip.Items[0].Visible = false;
+                    _dgvClient.ContextMenuStrip.Items[1].Visible = true;
+                }
+                
+                //When Right Click on Column Header, Disable Edit & Delete
+                if (_dgvClient.HitTest(e.X, e.Y).Type == DataGridViewHitTestType.ColumnHeader)
+                {
+                    _dgvClient.ContextMenuStrip.Items[0].Visible = true;
+                    _dgvClient.ContextMenuStrip.Items[1].Visible = false;
+                    _dgvClient.ContextMenuStrip.Items[2].Visible = false;
+                }
+                else
+                {
+                    _dgvClient.ContextMenuStrip.Items[0].Visible = false;
+                    //_dgvClient.ContextMenuStrip.Items[1].Visible = true;
+                    _dgvClient.ContextMenuStrip.Items[2].Visible = true;
+                }
+            }
+        }
         private void _assignAEView_EditProjectToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             try

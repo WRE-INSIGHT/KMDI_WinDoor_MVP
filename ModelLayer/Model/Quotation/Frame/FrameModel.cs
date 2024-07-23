@@ -2752,7 +2752,7 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 additionalRailingsMechJoint = ((Frame_SlidingRailsQty - 2) * 4);
             }
-
+            Frame_MechanicalJointConnector_Artno = Frame_MechJointArticleNo._9C52;
             totalMechJointQty = Frame_MechanicalJointConnectorQty + additionalRailingsMechJoint + MechJointConnectorQty;
             tbl_explosion.Rows.Add("Mechanical Joint Connector " + Frame_MechanicalJointConnector_Artno.DisplayName,
                                                   totalMechJointQty, "pc(s)",
@@ -2763,6 +2763,7 @@ namespace ModelLayer.Model.Quotation.Frame
 
         public void Insert_SealingElement_MaterialList(DataTable tbl_explosion)
         {
+            Frame_SealingElement_ArticleNo = SealingElement_ArticleNo._9C97;
             tbl_explosion.Rows.Add("Sealing Element " + Frame_SealingElement_ArticleNo.DisplayName,
                                    totalMechJointQty, "pc(s)",
                                    "",
