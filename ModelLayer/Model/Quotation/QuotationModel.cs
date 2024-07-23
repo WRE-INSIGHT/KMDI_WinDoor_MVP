@@ -10602,9 +10602,272 @@ namespace ModelLayer.Model.Quotation
                         #endregion
                     }
 
+                    #region Price History
+
+                    if (wdm.WD_profile.Contains("Alutek"))
+                    {
+                        #region Price History alutek
+
+
+                        DateTime thisDay = DateTime.Now;
+
+
+                        wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
+
+                                 "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
+                                 "\n\nBase color " + wdm.WD_BaseColor.ToString() +
+                                 "\n\nPowderCoated type " + wdm.WD_PowderCoatType.ToString() +
+                                 "\nFramePrice, SashPrice, DivPrice, DMPrice, InversionClipPrice, GbPrice add " + AddiitionalColorPercentage + "% if powder coated" +
+
+                                 "\nCosting Points: " + CostingPoints +
+                                  "\nLabor Cost " + LaborCost + " = " + "Costing Points " + CostingPoints + "*" + "CostPerPoints " + CostPerPoints +
+                                  "\nInstallationCost " + InstallationCost + " = " + "InstallationPoints " + InstallationPoints + " * " + "CostPerPoints " + CostPerPoints +
+
+                                 "\n\n MaterialCost " + MaterialCost + " = FramePrice " + Math.Round(FramePrice, 2).ToString() + " + " +
+                                 "\n\t\t SashPrice " + Math.Round(SashPrice, 2).ToString() + " + " +
+                                 "\n\t\t DivPrice " + Math.Round(DivPrice, 2).ToString() + " + " +
+                                 // "\n\t\t CornerWindowPrice " + Math.Round(CornerWindowPrice, 2).ToString() + " + " +
+                                 "\n\t\t CheveronPrice " + Math.Round(CheveronPrice, 2).ToString() + " + " +
+                                 //"\n\t\t WaterDrainageWValvesPrice " + Math.Round(WaterDrainageWValvesPrice, 2).ToString() + " + " +
+                                 "\n\t\t HoleCapePrice " + Math.Round(HoleCapePrice, 2).ToString() + " + " +
+                                 "\n\t\t InversionClipPrice" + Math.Round(InversionClipPrice, 2).ToString() + " + " +
+                                 "\n\t\t GbPrice " + Math.Round(GbPrice, 2).ToString() + " + " +
+                                 "\n\t\t UniversalGasketAluPrice " + Math.Round(UniversalGasketAluPrice, 2).ToString() + " + " +
+                                 "\n\t\t CenterGasketAluPrice " + Math.Round(CenterGasketAluPrice, 2).ToString() + " + " +
+                                 "\n\t\t GlazingGasketAluPrice " + Math.Round(GlazingGasketAluPrice, 2).ToString() + " + " +
+                                 "\n\t\t TransmissionRodPrice " + Math.Round(TransmissionRodPrice, 2).ToString() + " + " +
+                                 "\n\t\t OpenableStrikerPrice " + Math.Round(OpenableStrikerPrice, 2).ToString() + " + " +
+                                 "\n\t\t CornerCleatPrice " + Math.Round(CornerCleatPrice, 2).ToString() + " + " +
+                                 "\n\t\t FrictionStayPrice " + Math.Round(FrictionStayPrice, 2).ToString() + " + " +
+                                 "\n\t\t RunUpblockPrice " + Math.Round(RunUpblockPrice, 2).ToString() + " + " +
+                                 "\n\t\t PackerRodPrice " + Math.Round(PackerRodPrice, 2).ToString() + " + " +
+                                 "\n\t\t LockingWedgesPrice " + Math.Round(LockingWedgesPrice, 2).ToString() + " + " +
+                                 "\n\t\t SSCheveronPrice " + Math.Round(SSCheveronPrice, 2).ToString() + " + " +
+                                 "\n\t\t PegstayPrice " + Math.Round(PegstayPrice, 2).ToString() + " + " +
+                                 "\n\t\t CremonHandlePrice " + Math.Round(CremonHandlePrice, 2).ToString() + " + " +
+                                 "\n\t\t Unica40Price " + Math.Round(Unica40Price, 2).ToString() + " + " +
+                                 "\n\t\t LockingConnectorDevicePrice " + Math.Round(LockingConnectorDevicePrice, 2).ToString() + " + " +
+                                 "\n\t\t FrictionStayPackerPrice " + Math.Round(FrictionStayPackerPrice, 2).ToString() + " + " +
+                                 "\n\t\t OneWayLockingConnectorPrice " + Math.Round(OneWayLockingConnectorPrice, 2).ToString() + " + " +
+                                 "\n\t\t TwoWayLockingConnectorPrice " + Math.Round(TwoWayLockingConnectorPrice, 2).ToString() + " + " +
+                                 "\n\t\t PolymideStripPrice " + Math.Round(PolymideStripPrice, 2).ToString() + " + " +
+                                 "\n\t\t ShootBoltPrice " + Math.Round(ShootBoltPrice, 2).ToString() + " + " +
+                                 "\n\t\t DMPrice " + Math.Round(DMPrice, 2).ToString() + " + " +
+                                 "\n\t\t EndCapPrice " + Math.Round(EndCapPrice, 2).ToString() + " + " +
 
 
 
+
+
+                        "\n\n GlassCost " + GlassCost + " = GlassPrice" + Math.Round(GlassPrice, 2).ToString() +
+
+                         "\n\n InstallationMaterialCost " + InstallationMaterialCost + " = SealantPrice " + Math.Round(SealantPrice, 2).ToString() + " + " +
+                                                       "\n\t\t PUFoamingPrice " + Math.Round(PUFoamingPrice, 2).ToString() + " + " +
+                                                       "\n\t\t ExpansionBoltPrice " + Math.Round(ExpansionBoltPrice, 2).ToString() +
+
+                        "\n\n SubTotatal " + SubTotatal + " = MaterialCost " + Math.Round((MaterialCost * 1.08m), 2).ToString() + " + " +
+                                     "\n\t\t GlassCost " + Math.Round((GlassCost * 1.1m), 2).ToString() + " + " +
+                                     "\n\t\t InstallationMaterialCost " + Math.Round(InstallationMaterialCost, 2).ToString() +
+
+                         "\n\n Wastage " + Wastage + " = " + SubTotatal * 0.2m +
+
+                        "\n ImportationCost " + ImportationCost + " =  ((" + MaterialCost + " * 1.08m) + " + InstallationMaterialCost + ") * 0.16m +" +
+                        "\n ProductionCost " + ProductionCost + " =  6000 * " + DesignFactor + " * 1.1m +" +
+                        "\n InstallationCost " + InstallationCost + " =  1000 * " + DesignFactor + " * 1.1m +" +
+                        "\n MobilizationCost " + MobilizationCost + " =  1500 * " + PricingFactor + " + " +
+                        "\n FoilingCost " + FoilingCost + " = (( " + TotalFramePerimeter + " / 1000) * 440) + " + TotalDividerPerimeter + " + " +
+                        "\n AdditionalCost " + AdditionalCost + " =  (" + TotalFramePerimeter + " * 200) / 1000" +
+
+                        "\n\n Contingency " + Contingency + " = (" + Math.Round(SubTotatal + Wastage, 2).ToString() + " + " +
+                                     "\n\t\t ImportationCost " + Math.Round(ImportationCost, 2).ToString() + " + " +
+                                     "\n\t\t ProductionCost " + Math.Round(ProductionCost, 2).ToString() + " + " +
+                                     "\n\t\t InstallationCost " + Math.Round(InstallationCost, 2).ToString() + " + " +
+                                     "\n\t\t MobilizationCost " + Math.Round(MobilizationCost, 2).ToString() + " + " +
+                                     "\n\t\t FoilingCost " + Math.Round(FoilingCost, 2).ToString() + " + " +
+                                     "\n\t\t AdditionalCost " + Math.Round(AdditionalCost, 2).ToString() + ") * 0.05m" +
+
+                        "\n\n TotaPrice " + TotaPrice + " = (" + Math.Round(SubTotatal + Wastage, 2).ToString() + " + " +
+                                   "\n\t\t ImportationCost " + Math.Round(ImportationCost, 2).ToString() + " + " +
+                                   "\n\t\t ProductionCost " + Math.Round(ProductionCost, 2).ToString() + " + " +
+                                   "\n\t\t InstallationCost " + Math.Round(InstallationCost, 2).ToString() + " + " +
+                                   "\n\t\t MobilizationCost " + Math.Round(MobilizationCost, 2).ToString() + " + " +
+                                   "\n\t\t FoilingCost " + Math.Round(FoilingCost, 2).ToString() + " + " +
+                                   "\n\t\t AdditionalCost " + Math.Round(AdditionalCost, 2).ToString() + " + " +
+                                   "\n\t\t Contingency " + Math.Round(Contingency, 2).ToString() + ") * " + PricingFactor +
+
+                         "\n\n BaseTotalPriceWithFactor " + BaseTotalPriceWithFactor + " = TotaPrice" + TotaPrice;
+
+                        #endregion
+                    }
+                    else
+                    {
+                        #region Price History C70 and premi
+
+
+                        DateTime thisDay = DateTime.Now;
+                        //wdm.TotalPriceHistoryStatus = "System Generated Price";
+                        wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
+
+                       "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
+
+                        "`````\n\nWD_CostingPoints: " + CostingPoints.ToString() + "\n" +
+                        "LaborCost: " + LaborCost.ToString() + " = CostingPoints " + CostingPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n" +
+                        "InstallationCost: " + InstallationCost.ToString() + " = InstallationPoints " + InstallationPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n\n" +
+
+
+                        "FittingAndSuppliesCost: " + FittingAndSuppliesCost.ToString() + " = \n" +
+
+                                                 "\t FSPrice: " + Math.Round(FSPrice, 2).ToString() + "+\n" +
+                                                 "\t RestrictorStayPrice: " + Math.Round(RestrictorStayPrice, 2).ToString() + "+\n" +
+                                                 "\t CornerDrivePrice: " + Math.Round(CornerDrivePrice, 2).ToString() + "+\n" +
+                                                 "\t SnapInKeepPrice: " + Math.Round(SnapInKeepPrice, 2).ToString() + "+\n" +
+                                                 "\t 35mmBacksetEspagWithCylinderPrice: " + Math.Round(_35mmBacksetEspagWithCylinderPrice, 2).ToString() + "+\n" +
+                                                 "\t MiddleCLoserPrice: " + Math.Round(MiddleCLoserPrice, 2).ToString() + "+\n" +
+                                                 "\t StayBearingPrice: " + Math.Round(StayBearingPrice, 2).ToString() + "+\n" +
+                                                 "\t StayBearingPinPrice: " + Math.Round(StayBearingPinPrice, 2).ToString() + "+\n" +
+                                                 "\t CoverStayBearingPrice: " + Math.Round(CoverStayBearingPrice, 2).ToString() + "+\n" +
+                                                 "\t CoverCornerHingePrice: " + Math.Round(CoverCornerHingePrice, 2).ToString() + "+\n" +
+                                                 "\t CornerPivotRestPrice: " + Math.Round(CornerPivotRestPrice, 2).ToString() + "+\n" +
+                                                 "\t TopCornerHingePrice: " + Math.Round(TopCornerHingePrice, 2).ToString() + "+\n" +
+                                                 "\t CorverCornerPivotRestPrice: " + Math.Round(CorverCornerPivotRestPrice, 2).ToString() + "+\n" +
+                                                 "\t CorverCornerPivotRestVerticalPrice: " + Math.Round(CorverCornerPivotRestVerticalPrice, 2).ToString() + "+\n" +
+                                                 "\t HandlePrice: " + Math.Round(HandlePrice, 2).ToString() + "+\n" +
+                                                 "\t EspagPrice: " + Math.Round(EspagPrice, 2).ToString() + "+\n" +
+                                                 "\t _2DHingePrice: " + Math.Round(_2DHingePrice, 2).ToString() + "+\n" +
+                                                 "\t _3DHingePrice: " + Math.Round(_3DHingePrice, 2).ToString() + "+\n" +
+                                                 "\t NTCenterHingePrice: " + Math.Round(NTCenterHingePrice, 2).ToString() + "+\n" +
+                                                 "\t ShootBoltStrikerPrice: " + Math.Round(ShootBoltStrikerPrice, 2).ToString() + "+\n" +
+                                                 "\t ShootBoltReversePrice: " + Math.Round(ShootBoltReversePrice, 2).ToString() + "+\n" +
+                                                 "\t ShootBoltNonReversePrice: " + Math.Round(ShootBoltNonReversePrice, 2).ToString() + "+\n" +
+                                                 "\t StrikerPrice: " + Math.Round(StrikerPrice, 2).ToString() + "+\n" +
+                                                 "\t LatchDeadboltStrikerPrice: " + Math.Round(LatchDeadboltStrikerPrice, 2).ToString() + "+\n" +
+                                                 "\t ExtensionPrice: " + Math.Round(ExtensionPrice, 2).ToString() + "+\n" +
+                                                 "\t RollerPrice: " + Math.Round(RollerPrice, 2).ToString() + "+\n" +
+                                                 "\t StrikerLRPrice: " + Math.Round(StrikerLRPrice, 2).ToString() + "+\n" +
+                                                 "\t BrushSealPrice: " + Math.Round(BrushSealPrice, 2).ToString() + "+\n" +
+                                                 "\t MotorizePrice: " + Math.Round(MotorizePrice, 2).ToString() + "+\n" +
+                                                 "\t MotorizeMechRemotePricePerPiece: " + Math.Round(MotorizeMechRemotePricePerPiece, 2).ToString() + "\n\n" +
+
+                        "AncillaryProfileCost: " + AncillaryProfileCost.ToString() + " = \n" +
+
+                                                 "\t ThresholdPrice:" + Math.Round(ThresholdPrice, 2).ToString() + "+\n" +
+                                                 "\t GbPrice:" + Math.Round(GbPrice, 2) + "+\n" +
+                                                 "\t GeorgianBarCost:" + Math.Round((GeorgianBarCost * provinceBaseMultiplier), 2) + "+\n" +
+                                                 "\t CoverProfileCost:" + Math.Round(CoverProfileCost, 2) + "+\n" +
+                                                 "\t GlazingGasketPrice:" + Math.Round(GlazingGasketPrice, 2) + "+\n" +
+                                                 "\t WeatherBarPrice:" + Math.Round(WeatherBarPrice, 2) + "+\n" +
+                                                 "\t WeatherBarFastenerPrice:" + Math.Round(WeatherBarFastenerPrice, 2) + "+\n" +
+                                                 "\t WaterSeepagePrice:" + Math.Round(WaterSeepagePrice, 2) + "+\n" +
+                                                 "\t GuideTrackPrice:" + Math.Round(GuideTrackPrice, 2) + "+\n" +
+                                                 "\t AlumTrackPrice:" + Math.Round(AlumTrackPrice, 2) + "+\n" +
+                                                 "\t InterlockPrice:" + Math.Round(InterlockPrice, 2) + "+\n" +
+                                                 "\t ExtensionForInterlockPrice:" + Math.Round(ExtensionForInterlockPrice, 2) + "+\n" +
+                                                 "\t AluminumPullHandlePrice:" + Math.Round(AluminumPullHandlePrice, 2) + "+\n" +
+                                                 "\t GlazingAdaptorPrice:" + Math.Round((GlazingAdaptorPrice * provinceBaseMultiplier), 2) + "\n\n" +
+
+
+                        "AccesorriesCost: " + AccesorriesCost.ToString() + " = \n" +
+                                                 "\t EndCapPrice:" + Math.Round(EndCapPrice, 2).ToString() + "+\n" +
+                                                 "\t MechJointPrice:" + Math.Round(MechJointPrice, 2).ToString() + "+\n" +
+                                                 "\t GBSpacerPrice:" + Math.Round(GBSpacerPrice, 2).ToString() + "+\n" +
+                                                 "\t PlasticWedgePrice:" + Math.Round(PlasticWedgePrice, 2).ToString() + "+\n" +
+                                                 "\t SealingBlockPrice:" + Math.Round(SealingBlockPrice, 2).ToString() + "\n\n" +
+
+
+
+                        "MaterialCost: " + MaterialCost.ToString() + " = \n" +
+
+                                                 "\t FramePrice:" + Math.Round(FramePrice, 2).ToString() + "+\n" +
+                                                 "\t FrameReinPrice:" + Math.Round(FrameReinPrice, 2).ToString() + "+\n" +
+                                                 "\t SashPrice:" + Math.Round(SashPrice, 2).ToString() + "+\n" +
+                                                 "\t SashReinPrice:" + Math.Round(SashReinPrice, 2).ToString() + "+\n" +
+                                                 "\t DivPrice:" + Math.Round(DivPrice, 2).ToString() + "+\n" +
+                                                 "\t DivReinPrice:" + Math.Round(DivReinPrice, 2).ToString() + "+\n" +
+                                                 "\t claddingPrice:" + Math.Round(claddingPrice, 2).ToString() + "+\n" +
+                                                 "\t DMPrice:" + Math.Round(DMPrice, 2).ToString() + "+\n" +
+                                                 "\t DMReinforcementPrice:" + Math.Round(DMReinforcementPrice, 2).ToString() + "+\n" +
+                                                 "\t ExtensionProfile15mmPrice:" + Math.Round(ExtensionProfile15mmPrice, 2).ToString() + "+\n" +
+                                                 "\t TubularPrice:" + Math.Round(TubularPrice, 2).ToString() + "+\n" +
+                                                 "\t SealantPrice:" + Math.Round(SealantPrice, 2).ToString() + "+\n" +
+                                                 "\t PUFoamingPrice:" + Math.Round(PUFoamingPrice, 2).ToString() + "+\n" +
+                                                 "\t FittingAndSuppliesCost:" + Math.Round(FittingAndSuppliesCost, 2).ToString() + "+\n" +
+                                                 "\t AncillaryProfileCost:" + Math.Round(AncillaryProfileCost, 2).ToString() + "+\n" +
+                                                 "\t AccesorriesCost:" + Math.Round(AccesorriesCost, 2).ToString() + "\n\n" +
+
+
+                        "MaterialCostBreakDownBase: " + MaterialCost.ToString() + " \n\n" +
+
+
+                        "LouverCost: " + LouverCost.ToString() + " = \n" +
+
+                                     "\t LouvreFrameWeatherStripHeadPrice:" + Math.Round(LouvreFrameWeatherStripHeadPrice, 2).ToString() + "+\n" +
+                                     "\t LouvreFrameBottomWeatherStripPrice:" + Math.Round(LouvreFrameBottomWeatherStripPrice, 2).ToString() + "+\n" +
+                                     "\t PlantonWeatherStripHeadPrice:" + Math.Round(PlantonWeatherStripHeadPrice, 2).ToString() + "+\n" +
+                                     "\t PlantonWeatherStripSillPrice:" + Math.Round(PlantonWeatherStripSillPrice, 2).ToString() + "+\n" +
+                                     "\t GalleryAdaptorPrice:" + Math.Round(GalleryAdaptorPrice, 2).ToString() + "+\n" +
+                                     "\t BubbleSealPrice:" + Math.Round(BubbleSealPrice, 2).ToString() + "+\n" +
+                                     "\t GlassBladePrice:" + Math.Round(GlassBladePrice, 2).ToString() + "+\n" +
+                                     "\t GalleryPrice:" + Math.Round(GalleryPrice, 2).ToString() + "+\n" +
+                                     "\t PowerKitIncludingWiresPrice:" + Math.Round(PowerKitIncludingWiresPrice, 2).ToString() + "+\n" +
+                                     "\t SecurityKitPrice:" + Math.Round(SecurityKitPrice, 2).ToString() + "+\n" +
+                                     "\t RingpullLeverHandlePrice:" + Math.Round(RingpullLeverHandlePrice, 2).ToString() + "\n\n" +
+
+                       "LouverPrice: " + LouverCost.ToString() + " \n\n" +
+
+                        "LouverCost: " + LouverCost.ToString() + " = LouverCost: " + LouverCost + " * PricingFactor: " + PricingFactor + " * 1.12m\n\n" +
+
+
+
+                        "MeshCost: " + MeshCost.ToString() + " = \n" +
+
+
+                                   "\t SecurityMeshPrice:" + Math.Round(SecurityMeshPrice, 2) + "+\n" +
+                                   "\t WireMeshPrice:" + Math.Round(WireMeshPrice, 2) + "+\n" +
+                                   "\t PetMeshPrice:" + Math.Round(PetMeshPrice, 2) + "+\n" +
+                                   "\t TuffMeshPrice:" + Math.Round(TuffMeshPrice, 2) + "+\n" +
+                                   "\t PhiferMeshPrice:" + Math.Round(PhiferMeshPrice, 2) + "+\n" +
+                                   "\t AluminumFramePrice:" + Math.Round(AluminumFramePrice, 2) + "\n\n" +
+
+
+                        "MeshPrice: " + MeshCost.ToString() + " \n\n" +
+
+
+                        "MeshCost = : MeshCost" + MeshCost.ToString() + " * " + PricingFactor.ToString() + " * 1.10m\n\n" +
+
+                            "MaterialCost: " + MaterialCost.ToString() + " = \n" +
+                                      "\t MaterialCost:" + MaterialCostBreakDownBase.ToString() + "+\n" +
+                                       "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.05m) +\n" +
+                                       "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.10m) +\n" +
+                                       "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.12m) +\n" +
+                                       "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.16m)  \n\n" +
+
+                       "TotaPrice: " + BaseTotalPrice.ToString() + " = \n" +
+
+
+                                   "\t LaborCost:" + Math.Round(LaborCost, 2).ToString() + "+\n" +
+                                   "\t InstallationCost:" + Math.Round(InstallationCost, 2).ToString() + "+\n" +
+                                   "\t MaterialCost " + Math.Round(MaterialCost, 2).ToString() + "+\n" +
+                                   "\t GlassPrice:" + Math.Round(GlassPrice, 2).ToString() + "+\n" +
+                                   "\t FilmPrice:" + Math.Round(FilmPrice, 2).ToString() + "+\n" +
+                                   "\t SecurityMeshPrice:" + Math.Round(SecurityMeshPrice, 2).ToString() + "\n\n" +
+
+
+                       "TotaPrice: " + BaseTotalPriceWithFactor.ToString() + " = (" + BaseTotalPrice.ToString() + " * " + PricingFactor.ToString() + ") + " + BaseTotalPrice.ToString() + ") \n\n" +
+
+                       "TotaPrice: " + TotaPrice.ToString() + " = " + BaseTotalPriceWithFactor.ToString() + " + " + LouverCost.ToString() + " + " + MeshCost.ToString() + "\n\n" +
+
+                       "outside color: " + wdm.WD_OutsideColor + "\n" +
+                      "inside color: " + wdm.WD_InsideColor + "\n" +
+
+                       "woodec additional % " + priceBeforeWoodec + " = " + priceBeforeWoodec + " + " + wdm.WD_WoodecAdditional + "%" + "\n\n\n" +
+
+                       "item Description" + "\n" + wdm.WD_description +
+
+                        "` END OF COMPUTATION FOR SAVING `\n\n\n";
+                        #endregion
+                    }
+
+                    #endregion
 
                     if (BOM_Status == true)
                     {
@@ -11010,98 +11273,6 @@ namespace ModelLayer.Model.Quotation
 
                             #endregion
 
-                            #region Price History
-
-
-                            DateTime thisDay = DateTime.Now;
-
-
-                            wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
-
-                                     "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
-                                     "\n\nBase color " + wdm.WD_BaseColor.ToString() +
-                                     "\n\nPowderCoated type " + wdm.WD_PowderCoatType.ToString() +
-                                     "\nFramePrice, SashPrice, DivPrice, DMPrice, InversionClipPrice, GbPrice add " + AddiitionalColorPercentage + "% if powder coated" +
-                                    
-                                     "\nCosting Points: " + CostingPoints +
-                                      "\nLabor Cost " + LaborCost + " = " + "Costing Points " + CostingPoints + "*" + "CostPerPoints " + CostPerPoints +
-                                      "\nInstallationCost " + InstallationCost + " = " + "InstallationPoints " + InstallationPoints + " * " + "CostPerPoints " + CostPerPoints +
-                                     
-                                     "\n\n MaterialCost " + MaterialCost + " = FramePrice " + Math.Round(FramePrice, 2).ToString() + " + " +
-                                     "\n\t\t SashPrice " + Math.Round(SashPrice, 2).ToString() + " + " +
-                                     "\n\t\t DivPrice " + Math.Round(DivPrice, 2).ToString() + " + " +
-                                     // "\n\t\t CornerWindowPrice " + Math.Round(CornerWindowPrice, 2).ToString() + " + " +
-                                     "\n\t\t CheveronPrice " + Math.Round(CheveronPrice, 2).ToString() + " + " +
-                                     //"\n\t\t WaterDrainageWValvesPrice " + Math.Round(WaterDrainageWValvesPrice, 2).ToString() + " + " +
-                                     "\n\t\t HoleCapePrice " + Math.Round(HoleCapePrice, 2).ToString() + " + " +
-                                     "\n\t\t InversionClipPrice" + Math.Round(InversionClipPrice, 2).ToString() + " + " +
-                                     "\n\t\t GbPrice " + Math.Round(GbPrice, 2).ToString() + " + " +
-                                     "\n\t\t UniversalGasketAluPrice " + Math.Round(UniversalGasketAluPrice, 2).ToString() + " + " +
-                                     "\n\t\t CenterGasketAluPrice " + Math.Round(CenterGasketAluPrice, 2).ToString() + " + " +
-                                     "\n\t\t GlazingGasketAluPrice " + Math.Round(GlazingGasketAluPrice, 2).ToString() + " + " +
-                                     "\n\t\t TransmissionRodPrice " + Math.Round(TransmissionRodPrice, 2).ToString() + " + " +
-                                     "\n\t\t OpenableStrikerPrice " + Math.Round(OpenableStrikerPrice, 2).ToString() + " + " +
-                                     "\n\t\t CornerCleatPrice " + Math.Round(CornerCleatPrice, 2).ToString() + " + " +
-                                     "\n\t\t FrictionStayPrice " + Math.Round(FrictionStayPrice, 2).ToString() + " + " +
-                                     "\n\t\t RunUpblockPrice " + Math.Round(RunUpblockPrice, 2).ToString() + " + " +
-                                     "\n\t\t PackerRodPrice " + Math.Round(PackerRodPrice, 2).ToString() + " + " +
-                                     "\n\t\t LockingWedgesPrice " + Math.Round(LockingWedgesPrice, 2).ToString() + " + " +
-                                     "\n\t\t SSCheveronPrice " + Math.Round(SSCheveronPrice, 2).ToString() + " + " +
-                                     "\n\t\t PegstayPrice " + Math.Round(PegstayPrice, 2).ToString() + " + " +
-                                     "\n\t\t CremonHandlePrice " + Math.Round(CremonHandlePrice, 2).ToString() + " + " +
-                                     "\n\t\t Unica40Price " + Math.Round(Unica40Price, 2).ToString() + " + " +
-                                     "\n\t\t LockingConnectorDevicePrice " + Math.Round(LockingConnectorDevicePrice, 2).ToString() + " + " +
-                                     "\n\t\t FrictionStayPackerPrice " + Math.Round(FrictionStayPackerPrice, 2).ToString() + " + " +
-                                     "\n\t\t OneWayLockingConnectorPrice " + Math.Round(OneWayLockingConnectorPrice, 2).ToString() + " + " +
-                                     "\n\t\t TwoWayLockingConnectorPrice " + Math.Round(TwoWayLockingConnectorPrice, 2).ToString() + " + " +
-                                     "\n\t\t PolymideStripPrice " + Math.Round(PolymideStripPrice, 2).ToString() + " + " +
-                                     "\n\t\t ShootBoltPrice " + Math.Round(ShootBoltPrice, 2).ToString() + " + " +
-                                     "\n\t\t DMPrice " + Math.Round(DMPrice, 2).ToString() + " + " +
-                                     "\n\t\t EndCapPrice " + Math.Round(EndCapPrice, 2).ToString() + " + " +
-
-
-
-
-
-                            "\n\n GlassCost " + GlassCost + " = GlassPrice" + Math.Round(GlassPrice, 2).ToString() +
-
-                             "\n\n InstallationMaterialCost " + InstallationMaterialCost + " = SealantPrice " + Math.Round(SealantPrice, 2).ToString() + " + " +
-                                                           "\n\t\t PUFoamingPrice " + Math.Round(PUFoamingPrice, 2).ToString() + " + " +
-                                                           "\n\t\t ExpansionBoltPrice " + Math.Round(ExpansionBoltPrice, 2).ToString() +
-
-                            "\n\n SubTotatal " + SubTotatal + " = MaterialCost " + Math.Round((MaterialCost * 1.08m), 2).ToString() + " + " +
-                                         "\n\t\t GlassCost " + Math.Round((GlassCost * 1.1m), 2).ToString() + " + " +
-                                         "\n\t\t InstallationMaterialCost " + Math.Round(InstallationMaterialCost, 2).ToString() +
-
-                             "\n\n Wastage " + Wastage + " = " + SubTotatal * 0.2m +
-
-                            "\n ImportationCost " + ImportationCost + " =  ((" + MaterialCost + " * 1.08m) + " + InstallationMaterialCost + ") * 0.16m +" +
-                            "\n ProductionCost " + ProductionCost + " =  6000 * " + DesignFactor + " * 1.1m +" +
-                            "\n InstallationCost " + InstallationCost + " =  1000 * " + DesignFactor + " * 1.1m +" +
-                            "\n MobilizationCost " + MobilizationCost + " =  1500 * " + PricingFactor + " + " +
-                            "\n FoilingCost " + FoilingCost + " = (( " + TotalFramePerimeter + " / 1000) * 440) + " + TotalDividerPerimeter + " + " +
-                            "\n AdditionalCost " + AdditionalCost + " =  (" + TotalFramePerimeter + " * 200) / 1000" +
-
-                            "\n\n Contingency " + Contingency + " = (" + Math.Round(SubTotatal + Wastage, 2).ToString() + " + " +
-                                         "\n\t\t ImportationCost " + Math.Round(ImportationCost, 2).ToString() + " + " +
-                                         "\n\t\t ProductionCost " + Math.Round(ProductionCost, 2).ToString() + " + " +
-                                         "\n\t\t InstallationCost " + Math.Round(InstallationCost, 2).ToString() + " + " +
-                                         "\n\t\t MobilizationCost " + Math.Round(MobilizationCost, 2).ToString() + " + " +
-                                         "\n\t\t FoilingCost " + Math.Round(FoilingCost, 2).ToString() + " + " +
-                                         "\n\t\t AdditionalCost " + Math.Round(AdditionalCost, 2).ToString() + ") * 0.05m" +
-
-                            "\n\n TotaPrice " + TotaPrice + " = (" + Math.Round(SubTotatal + Wastage, 2).ToString() + " + " +
-                                       "\n\t\t ImportationCost " + Math.Round(ImportationCost, 2).ToString() + " + " +
-                                       "\n\t\t ProductionCost " + Math.Round(ProductionCost, 2).ToString() + " + " +
-                                       "\n\t\t InstallationCost " + Math.Round(InstallationCost, 2).ToString() + " + " +
-                                       "\n\t\t MobilizationCost " + Math.Round(MobilizationCost, 2).ToString() + " + " +
-                                       "\n\t\t FoilingCost " + Math.Round(FoilingCost, 2).ToString() + " + " +
-                                       "\n\t\t AdditionalCost " + Math.Round(AdditionalCost, 2).ToString() + " + " +
-                                       "\n\t\t Contingency " + Math.Round(Contingency, 2).ToString() + ") * " + PricingFactor +
-
-                             "\n\n BaseTotalPriceWithFactor " + BaseTotalPriceWithFactor + " = TotaPrice" + TotaPrice;
-                                
-                            #endregion
                         }
                         else
                         {
@@ -11870,170 +12041,7 @@ namespace ModelLayer.Model.Quotation
 
                             #endregion
 
-                            #region Price History
-
-
-                            DateTime thisDay = DateTime.Now;
-                            //wdm.TotalPriceHistoryStatus = "System Generated Price";
-                            wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
-
-                           "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
-
-                            "`````\n\nWD_CostingPoints: " + CostingPoints.ToString() + "\n" +
-                            "LaborCost: " + LaborCost.ToString() + " = CostingPoints " + CostingPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n" +
-                            "InstallationCost: " + InstallationCost.ToString() + " = InstallationPoints " + InstallationPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n\n" +
-
-
-                            "FittingAndSuppliesCost: " + FittingAndSuppliesCost.ToString() + " = \n" +
-
-                                                     "\t FSPrice: " + Math.Round(FSPrice, 2).ToString() + "+\n" +
-                                                     "\t RestrictorStayPrice: " + Math.Round(RestrictorStayPrice, 2).ToString() + "+\n" +
-                                                     "\t CornerDrivePrice: " + Math.Round(CornerDrivePrice, 2).ToString() + "+\n" +
-                                                     "\t SnapInKeepPrice: " + Math.Round(SnapInKeepPrice, 2).ToString() + "+\n" +
-                                                     "\t 35mmBacksetEspagWithCylinderPrice: " + Math.Round(_35mmBacksetEspagWithCylinderPrice, 2).ToString() + "+\n" +
-                                                     "\t MiddleCLoserPrice: " + Math.Round(MiddleCLoserPrice, 2).ToString() + "+\n" +
-                                                     "\t StayBearingPrice: " + Math.Round(StayBearingPrice, 2).ToString() + "+\n" +
-                                                     "\t StayBearingPinPrice: " + Math.Round(StayBearingPinPrice, 2).ToString() + "+\n" +
-                                                     "\t CoverStayBearingPrice: " + Math.Round(CoverStayBearingPrice, 2).ToString() + "+\n" +
-                                                     "\t CoverCornerHingePrice: " + Math.Round(CoverCornerHingePrice, 2).ToString() + "+\n" +
-                                                     "\t CornerPivotRestPrice: " + Math.Round(CornerPivotRestPrice, 2).ToString() + "+\n" +
-                                                     "\t TopCornerHingePrice: " + Math.Round(TopCornerHingePrice, 2).ToString() + "+\n" +
-                                                     "\t CorverCornerPivotRestPrice: " + Math.Round(CorverCornerPivotRestPrice, 2).ToString() + "+\n" +
-                                                     "\t CorverCornerPivotRestVerticalPrice: " + Math.Round(CorverCornerPivotRestVerticalPrice, 2).ToString() + "+\n" +
-                                                     "\t HandlePrice: " + Math.Round(HandlePrice, 2).ToString() + "+\n" +
-                                                     "\t EspagPrice: " + Math.Round(EspagPrice, 2).ToString() + "+\n" +
-                                                     "\t _2DHingePrice: " + Math.Round(_2DHingePrice, 2).ToString() + "+\n" +
-                                                     "\t _3DHingePrice: " + Math.Round(_3DHingePrice, 2).ToString() + "+\n" +
-                                                     "\t NTCenterHingePrice: " + Math.Round(NTCenterHingePrice, 2).ToString() + "+\n" +
-                                                     "\t ShootBoltStrikerPrice: " + Math.Round(ShootBoltStrikerPrice, 2).ToString() + "+\n" +
-                                                     "\t ShootBoltReversePrice: " + Math.Round(ShootBoltReversePrice, 2).ToString() + "+\n" +
-                                                     "\t ShootBoltNonReversePrice: " + Math.Round(ShootBoltNonReversePrice, 2).ToString() + "+\n" +
-                                                     "\t StrikerPrice: " + Math.Round(StrikerPrice, 2).ToString() + "+\n" +
-                                                     "\t LatchDeadboltStrikerPrice: " + Math.Round(LatchDeadboltStrikerPrice, 2).ToString() + "+\n" +
-                                                     "\t ExtensionPrice: " + Math.Round(ExtensionPrice, 2).ToString() + "+\n" +
-                                                     "\t RollerPrice: " + Math.Round(RollerPrice, 2).ToString() + "+\n" +
-                                                     "\t StrikerLRPrice: " + Math.Round(StrikerLRPrice, 2).ToString() + "+\n" +
-                                                     "\t BrushSealPrice: " + Math.Round(BrushSealPrice, 2).ToString() + "+\n" +
-                                                     "\t MotorizePrice: " + Math.Round(MotorizePrice, 2).ToString() + "+\n" +
-                                                     "\t MotorizeMechRemotePricePerPiece: " + Math.Round(MotorizeMechRemotePricePerPiece, 2).ToString() + "\n\n" +
-
-                            "AncillaryProfileCost: " + AncillaryProfileCost.ToString() + " = \n" +
-
-                                                     "\t ThresholdPrice:" + Math.Round(ThresholdPrice, 2).ToString() + "+\n" +
-                                                     "\t GbPrice:" + Math.Round(GbPrice, 2) + "+\n" +
-                                                     "\t GeorgianBarCost:" + Math.Round((GeorgianBarCost * provinceBaseMultiplier), 2) + "+\n" +
-                                                     "\t CoverProfileCost:" + Math.Round(CoverProfileCost, 2) + "+\n" +
-                                                     "\t GlazingGasketPrice:" + Math.Round(GlazingGasketPrice, 2) + "+\n" +
-                                                     "\t WeatherBarPrice:" + Math.Round(WeatherBarPrice, 2) + "+\n" +
-                                                     "\t WeatherBarFastenerPrice:" + Math.Round(WeatherBarFastenerPrice, 2) + "+\n" +
-                                                     "\t WaterSeepagePrice:" + Math.Round(WaterSeepagePrice, 2) + "+\n" +
-                                                     "\t GuideTrackPrice:" + Math.Round(GuideTrackPrice, 2) + "+\n" +
-                                                     "\t AlumTrackPrice:" + Math.Round(AlumTrackPrice, 2) + "+\n" +
-                                                     "\t InterlockPrice:" + Math.Round(InterlockPrice, 2) + "+\n" +
-                                                     "\t ExtensionForInterlockPrice:" + Math.Round(ExtensionForInterlockPrice, 2) + "+\n" +
-                                                     "\t AluminumPullHandlePrice:" + Math.Round(AluminumPullHandlePrice, 2) + "+\n" +
-                                                     "\t GlazingAdaptorPrice:" + Math.Round((GlazingAdaptorPrice * provinceBaseMultiplier), 2) + "\n\n" +
-
-
-                            "AccesorriesCost: " + AccesorriesCost.ToString() + " = \n" +
-                                                     "\t EndCapPrice:" + Math.Round(EndCapPrice, 2).ToString() + "+\n" +
-                                                     "\t MechJointPrice:" + Math.Round(MechJointPrice, 2).ToString() + "+\n" +
-                                                     "\t GBSpacerPrice:" + Math.Round(GBSpacerPrice, 2).ToString() + "+\n" +
-                                                     "\t PlasticWedgePrice:" + Math.Round(PlasticWedgePrice, 2).ToString() + "+\n" +
-                                                     "\t SealingBlockPrice:" + Math.Round(SealingBlockPrice, 2).ToString() + "\n\n" +
-
-
-
-                            "MaterialCost: " + MaterialCost.ToString() + " = \n" +
-
-                                                     "\t FramePrice:" + Math.Round(FramePrice, 2).ToString() + "+\n" +
-                                                     "\t FrameReinPrice:" + Math.Round(FrameReinPrice, 2).ToString() + "+\n" +
-                                                     "\t SashPrice:" + Math.Round(SashPrice, 2).ToString() + "+\n" +
-                                                     "\t SashReinPrice:" + Math.Round(SashReinPrice, 2).ToString() + "+\n" +
-                                                     "\t DivPrice:" + Math.Round(DivPrice, 2).ToString() + "+\n" +
-                                                     "\t DivReinPrice:" + Math.Round(DivReinPrice, 2).ToString() + "+\n" +
-                                                     "\t claddingPrice:" + Math.Round(claddingPrice, 2).ToString() + "+\n" +
-                                                     "\t DMPrice:" + Math.Round(DMPrice, 2).ToString() + "+\n" +
-                                                     "\t DMReinforcementPrice:" + Math.Round(DMReinforcementPrice, 2).ToString() + "+\n" +
-                                                     "\t ExtensionProfile15mmPrice:" + Math.Round(ExtensionProfile15mmPrice, 2).ToString() + "+\n" +
-                                                     "\t TubularPrice:" + Math.Round(TubularPrice, 2).ToString() + "+\n" +
-                                                     "\t SealantPrice:" + Math.Round(SealantPrice, 2).ToString() + "+\n" +
-                                                     "\t PUFoamingPrice:" + Math.Round(PUFoamingPrice, 2).ToString() + "+\n" +
-                                                     "\t FittingAndSuppliesCost:" + Math.Round(FittingAndSuppliesCost, 2).ToString() + "+\n" +
-                                                     "\t AncillaryProfileCost:" + Math.Round(AncillaryProfileCost, 2).ToString() + "+\n" +
-                                                     "\t AccesorriesCost:" + Math.Round(AccesorriesCost, 2).ToString() + "\n\n" +
-
-
-                            "MaterialCostBreakDownBase: " + MaterialCost.ToString() + " \n\n" +
-
-
-                            "LouverCost: " + LouverCost.ToString() + " = \n" +
-
-                                         "\t LouvreFrameWeatherStripHeadPrice:" + Math.Round(LouvreFrameWeatherStripHeadPrice, 2).ToString() + "+\n" +
-                                         "\t LouvreFrameBottomWeatherStripPrice:" + Math.Round(LouvreFrameBottomWeatherStripPrice, 2).ToString() + "+\n" +
-                                         "\t PlantonWeatherStripHeadPrice:" + Math.Round(PlantonWeatherStripHeadPrice, 2).ToString() + "+\n" +
-                                         "\t PlantonWeatherStripSillPrice:" + Math.Round(PlantonWeatherStripSillPrice, 2).ToString() + "+\n" +
-                                         "\t GalleryAdaptorPrice:" + Math.Round(GalleryAdaptorPrice, 2).ToString() + "+\n" +
-                                         "\t BubbleSealPrice:" + Math.Round(BubbleSealPrice, 2).ToString() + "+\n" +
-                                         "\t GlassBladePrice:" + Math.Round(GlassBladePrice, 2).ToString() + "+\n" +
-                                         "\t GalleryPrice:" + Math.Round(GalleryPrice, 2).ToString() + "+\n" +
-                                         "\t PowerKitIncludingWiresPrice:" + Math.Round(PowerKitIncludingWiresPrice, 2).ToString() + "+\n" +
-                                         "\t SecurityKitPrice:" + Math.Round(SecurityKitPrice, 2).ToString() + "+\n" +
-                                         "\t RingpullLeverHandlePrice:" + Math.Round(RingpullLeverHandlePrice, 2).ToString() + "\n\n" +
-
-                           "LouverPrice: " + LouverCost.ToString() + " \n\n" +
-
-                            "LouverCost: " + LouverCost.ToString() + " = LouverCost: " + LouverCost + " * PricingFactor: " + PricingFactor + " * 1.12m\n\n" +
-
-
-
-                            "MeshCost: " + MeshCost.ToString() + " = \n" +
-
-
-                                       "\t SecurityMeshPrice:" + Math.Round(SecurityMeshPrice, 2) + "+\n" +
-                                       "\t WireMeshPrice:" + Math.Round(WireMeshPrice, 2) + "+\n" +
-                                       "\t PetMeshPrice:" + Math.Round(PetMeshPrice, 2) + "+\n" +
-                                       "\t TuffMeshPrice:" + Math.Round(TuffMeshPrice, 2) + "+\n" +
-                                       "\t PhiferMeshPrice:" + Math.Round(PhiferMeshPrice, 2) + "+\n" +
-                                       "\t AluminumFramePrice:" + Math.Round(AluminumFramePrice, 2) + "\n\n" +
-
-
-                            "MeshPrice: " + MeshCost.ToString() + " \n\n" +
-
-
-                            "MeshCost = : MeshCost" + MeshCost.ToString() + " * " + PricingFactor.ToString() + " * 1.10m\n\n" +
-
-                                "MaterialCost: " + MaterialCost.ToString() + " = \n" +
-                                          "\t MaterialCost:" + MaterialCostBreakDownBase.ToString() + "+\n" +
-                                           "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.05m) +\n" +
-                                           "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.10m) +\n" +
-                                           "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.12m) +\n" +
-                                           "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.16m)  \n\n" +
-
-                           "TotaPrice: " + BaseTotalPrice.ToString() + " = \n" +
-
-
-                                       "\t LaborCost:" + Math.Round(LaborCost, 2).ToString() + "+\n" +
-                                       "\t InstallationCost:" + Math.Round(InstallationCost, 2).ToString() + "+\n" +
-                                       "\t MaterialCost " + Math.Round(MaterialCost, 2).ToString() + "+\n" +
-                                       "\t GlassPrice:" + Math.Round(GlassPrice, 2).ToString() + "+\n" +
-                                       "\t FilmPrice:" + Math.Round(FilmPrice, 2).ToString() + "+\n" +
-                                       "\t SecurityMeshPrice:" + Math.Round(SecurityMeshPrice, 2).ToString() + "\n\n" +
-
-
-                           "TotaPrice: " + BaseTotalPriceWithFactor.ToString() + " = (" + BaseTotalPrice.ToString() + " * " + PricingFactor.ToString() + ") + " + BaseTotalPrice.ToString() + ") \n\n" +
-
-                           "TotaPrice: " + TotaPrice.ToString() + " = " + BaseTotalPriceWithFactor.ToString() + " + " + LouverCost.ToString() + " + " + MeshCost.ToString() + "\n\n" +
-
-                           "outside color: " + wdm.WD_OutsideColor + "\n" +
-                          "inside color: " + wdm.WD_InsideColor + "\n" +
-
-                           "woodec additional % " + priceBeforeWoodec + " = " + priceBeforeWoodec + " + " + wdm.WD_WoodecAdditional + "%" + "\n\n\n" +
-
-                           "item Description" + "\n" + wdm.WD_description +
-
-                            "` END OF COMPUTATION FOR SAVING `\n\n\n";
-                            #endregion
+                        
 
                         }
                         var query = from r in Price_List.AsEnumerable()
