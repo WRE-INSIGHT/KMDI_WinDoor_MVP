@@ -353,45 +353,46 @@ namespace PresentationLayer.Presenter
 
             foreach (DataRow row in _mainPresenter.GlassThicknessDT.Rows)
             {
-                if (!row[1].ToString().Contains("Georgian Bar"))
-                {
-                    if (GlassType == "")
-                    {
-                        dgvCmb.Items.Add(row[1]);
-                    }
-                    else if (GlassType == "Tempered Glass")
-                    {
-                        if (row[1].ToString().Contains("Tempered"))
-                        {
-                            dgvCmb.Items.Add(row[1]);                        
-                        }
-                    }
-                    else if (GlassType == "Insulated Glass Unit (IGU)")
-                    {
-                        if (row[2].ToString().Contains("Insulated"))
-                        {
-                            dgvCmb.Items.Add(row[1]);
-                        }
-                    }
-                    else if (GlassType == "Laminated Glass")
-                    {
-                        if (row[2].ToString().Contains("Laminated"))
-                        {
-                            dgvCmb.Items.Add(row[1]);
-                        }
-                    }
-                    else if (GlassType == "Tinted Glass")
-                    {
-                        if (row[1].ToString().Contains("Tinted"))
-                        {
-                            dgvCmb.Items.Add(row[1]);
-                        }
-                    }
-                    else if (GlassType == "Unglazed")
-                    {
+               if (!row[1].ToString().Contains("Georgian Bar"))
+               {
+                   if (GlassType == "")
+                   {
+                       dgvCmb.Items.Add(row[1]);
+                   }
+                   else if (GlassType == "Tempered Glass")
+                   {
+                       if (row[1].ToString().Contains("Tempered"))
+                       {
+                           dgvCmb.Items.Add(row[1]);
+                       }
+                   }
+                   else if (GlassType == "Insulated Glass Unit (IGU)")
+                   {
+                       if (row[2].ToString().Contains("Insulated"))
+                       {
+                           dgvCmb.Items.Add(row[1]);
+                       }
+                   }
+                   else if (GlassType == "Laminated Glass")
+                   {
+                       if (row[2].ToString().Contains("Laminated"))
+                       {
+                           dgvCmb.Items.Add(row[1]);
+                       }
+                   }
+                   else if (GlassType == "Tinted Glass")
+                   {
+                       if (row[1].ToString().Contains("Tinted"))
+                       {
+                           dgvCmb.Items.Add(row[1]);
+                       }
+                   }
+                   else if (GlassType == "Unglazed")
+                   {
 
-                    }
-                }
+                   }
+               }
+                
             }
                
                 _dgv_GlassUpgrade.Columns.Add(dgvCmb);
@@ -413,43 +414,46 @@ namespace PresentationLayer.Presenter
 
             foreach (DataRow row in _mainPresenter.GlassThicknessDT.Rows)
             {
-                if (!row[1].ToString().Contains("Georgian Bar"))
+                if (!_mainPresenter.Lst_GlassDescException.Contains(row[1].ToString()))
                 {
-                    if (GlassType == "")
+                    if (!row[1].ToString().Contains("Georgian Bar"))
                     {
-                        dgvcell.Items.Add(row[1]);
-                    }
-                    else if (GlassType == "Tempered Glass")
-                    {
-                        if (row[1].ToString().Contains("Tempered"))
+                        if (GlassType == "")
                         {
                             dgvcell.Items.Add(row[1]);
                         }
-                    }
-                    else if (GlassType == "Insulated Glass Unit (IGU)")
-                    {
-                        if (row[2].ToString().Contains("Insulated"))
+                        else if (GlassType == "Tempered Glass")
                         {
-                            dgvcell.Items.Add(row[1]);
+                            if (row[1].ToString().Contains("Tempered"))
+                            {
+                                dgvcell.Items.Add(row[1]);
+                            }
                         }
-                    }
-                    else if (GlassType == "Laminated Glass")
-                    {
-                        if (row[2].ToString().Contains("Laminated"))
+                        else if (GlassType == "Insulated Glass Unit (IGU)")
                         {
-                            dgvcell.Items.Add(row[1]);
+                            if (row[2].ToString().Contains("Insulated"))
+                            {
+                                dgvcell.Items.Add(row[1]);
+                            }
                         }
-                    }
-                    else if (GlassType == "Tinted Glass")
-                    {
-                        if (row[1].ToString().Contains("Tinted"))
+                        else if (GlassType == "Laminated Glass")
                         {
-                            dgvcell.Items.Add(row[1]);
+                            if (row[2].ToString().Contains("Laminated"))
+                            {
+                                dgvcell.Items.Add(row[1]);
+                            }
                         }
-                    }
-                    else if (GlassType == "Unglazed")
-                    {
+                        else if (GlassType == "Tinted Glass")
+                        {
+                            if (row[1].ToString().Contains("Tinted"))
+                            {
+                                dgvcell.Items.Add(row[1]);
+                            }
+                        }
+                        else if (GlassType == "Unglazed")
+                        {
 
+                        }
                     }
                 }
             }
@@ -1049,44 +1053,47 @@ namespace PresentationLayer.Presenter
         private void LoadNewItemsInMultipleGlassUpgrade(string GlassType)
         {
             foreach (DataRow row in _mainPresenter.GlassThicknessDT.Rows)
-            {
-                if (!row[1].ToString().Contains("Georgian Bar"))
+            {               
+                if (!_mainPresenter.Lst_GlassDescException.Contains(row[1].ToString()))
                 {
-                    if (GlassType == "")
+                    if (!row[1].ToString().Contains("Georgian Bar"))
                     {
-                        _cmbMultipleGlassUpgrade.Items.Add(row[1]);
-                        _autoCmpltSC.Add(row[1].ToString());
-                    }
-                    else if (GlassType == "Tempered Glass")
-                    {
-                        if (row[1].ToString().Contains("Tempered"))
-                        {
-                            _cmbMultipleGlassUpgrade.Items.Add(row[1]);
-                             _autoCmpltSC.Add(row[1].ToString());
-                        }
-                    }
-                    else if (GlassType == "Insulated Glass Unit (IGU)")
-                    {
-                        if (row[2].ToString().Contains("Insulated"))
+                        if (GlassType == "")
                         {
                             _cmbMultipleGlassUpgrade.Items.Add(row[1]);
                             _autoCmpltSC.Add(row[1].ToString());
                         }
-                    }
-                    else if (GlassType == "Laminated Glass")
-                    {
-                        if (row[2].ToString().Contains("Laminated"))
+                        else if (GlassType == "Tempered Glass")
                         {
-                            _cmbMultipleGlassUpgrade.Items.Add(row[1]);
-                            _autoCmpltSC.Add(row[1].ToString());
+                            if (row[1].ToString().Contains("Tempered"))
+                            {
+                                _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                                _autoCmpltSC.Add(row[1].ToString());
+                            }
                         }
-                    }
-                    else if (GlassType == "Tinted Glass")
-                    {
-                        if (row[1].ToString().Contains("Tinted"))
+                        else if (GlassType == "Insulated Glass Unit (IGU)")
                         {
-                            _cmbMultipleGlassUpgrade.Items.Add(row[1]);
-                            _autoCmpltSC.Add(row[1].ToString());
+                            if (row[2].ToString().Contains("Insulated"))
+                            {
+                                _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                                _autoCmpltSC.Add(row[1].ToString());
+                            }
+                        }
+                        else if (GlassType == "Laminated Glass")
+                        {
+                            if (row[2].ToString().Contains("Laminated"))
+                            {
+                                _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                                _autoCmpltSC.Add(row[1].ToString());
+                            }
+                        }
+                        else if (GlassType == "Tinted Glass")
+                        {
+                            if (row[1].ToString().Contains("Tinted"))
+                            {
+                                _cmbMultipleGlassUpgrade.Items.Add(row[1]);
+                                _autoCmpltSC.Add(row[1].ToString());
+                            }
                         }
                     }
                 }
