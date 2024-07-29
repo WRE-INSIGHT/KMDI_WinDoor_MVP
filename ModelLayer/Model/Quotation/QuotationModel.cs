@@ -10262,6 +10262,7 @@ namespace ModelLayer.Model.Quotation
                                                    GlazingGasketGbeadForAluPrice;
                         */
                         #endregion 
+
                         if (wdm.WD_BaseColor == Base_Color._PowderCoated)
                         {
                             AddiitionalColorPercentage = 1.08m;
@@ -10394,6 +10395,26 @@ namespace ModelLayer.Model.Quotation
                         //BaseTotalPrice = TotaPrice;
 
                         //TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
+
+                        if (wdm.WD_OutsideColor == wdm.WD_InsideColor)
+                        {
+                            if ((wdm.WD_OutsideColor == Foil_Color._Carbon ||
+                                 wdm.WD_OutsideColor == Foil_Color._GreyOak ||
+                                 wdm.WD_OutsideColor == Foil_Color._UmberOak ||
+                                 wdm.WD_OutsideColor == Foil_Color._ChestnutOak ||
+                                 wdm.WD_OutsideColor == Foil_Color._WashedOak)
+                                 &&
+                                (wdm.WD_InsideColor == Foil_Color._Carbon ||
+                                 wdm.WD_InsideColor == Foil_Color._GreyOak ||
+                                 wdm.WD_InsideColor == Foil_Color._UmberOak ||
+                                 wdm.WD_InsideColor == Foil_Color._ChestnutOak ||
+                                 wdm.WD_InsideColor == Foil_Color._WashedOak))
+                            {
+                                decimal Woodec = wdm.WD_WoodecAdditional;
+                                TotaPrice = TotaPrice + (TotaPrice * (Woodec / 100m));
+                            }
+                        }
+
 
                         BaseTotalPriceWithFactor = TotaPrice;
 
@@ -10698,7 +10719,14 @@ namespace ModelLayer.Model.Quotation
                                    "\n\t\t AdditionalCost " + Math.Round(AdditionalCost, 2).ToString() + " + " +
                                    "\n\t\t Contingency " + Math.Round(Contingency, 2).ToString() + ") * " + PricingFactor +
 
+                         "outside color: " + wdm.WD_OutsideColor + "\n" +
+                         "inside color: " + wdm.WD_InsideColor + "\n" +
+
                          "\n\n BaseTotalPriceWithFactor " + BaseTotalPriceWithFactor + " = TotaPrice" + TotaPrice;
+
+
+                      
+
 
                         #endregion
                     }
