@@ -725,10 +725,12 @@ namespace PresentationLayer.Views
                 if (e.Control == true && e.KeyCode == Keys.L || e.Control == true && e.KeyCode == Keys.P)
                 {
                     itemListToolStripMenuItem_Click(sender, e);
+                    CrtlPress = false;
                 }
                 else if (e.Control == true && e.KeyCode == Keys.S)
                 {
                     saveToolStripButton_Click(sender, e);
+                    CrtlPress = false;
                 }
                 else if (e.Alt == true && e.KeyCode == Keys.S)
                 {
@@ -753,23 +755,28 @@ namespace PresentationLayer.Views
                 else if (e.Control == true && e.KeyCode == Keys.B)
                 {
                     billOfMaterialToolStripMenuItem_Click(sender, e);
+                    CrtlPress = false;
                 }
                 else if (e.Control == true && e.KeyCode == Keys.M)
                 {
                     listOfMaterialsToolStripMenuItem_Click(sender, e);
+                    CrtlPress = false;
                 }
                 else if (e.Control == true && e.KeyCode == Keys.W)
                 {  
                     CreateNewFrame_Clicked("FromWindowShortCut", e);
+                    CrtlPress = false;
                 }
                 else if (e.Control == true && e.KeyCode == Keys.D)
                 { 
                     CreateNewFrame_Clicked("FromDoorShortCut", e);
+                    CrtlPress = false;
                 }
             }
             if (e.Control == true && e.KeyCode == Keys.O)
             {
                 openToolStripButton_Click(sender, e);
+                CrtlPress = false;
             }
         }
 
