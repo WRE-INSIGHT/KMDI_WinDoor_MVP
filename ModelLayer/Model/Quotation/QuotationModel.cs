@@ -1880,11 +1880,14 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                             }
 
-                                            if (pnl_curCtrl.Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None)
+                                            if (pnl_curCtrl.Panel_CenterProfileArtNo != null)
                                             {
-                                                pnl_curCtrl.Insert_CenterProfile_MaterialList(Material_List);
+                                                if (pnl_curCtrl.Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None &&
+                                                !item.WD_profile.Contains("Alutek"))
+                                                {
+                                                    pnl_curCtrl.Insert_CenterProfile_MaterialList(Material_List);
+                                                }
                                             }
-
                                         }
 
 
