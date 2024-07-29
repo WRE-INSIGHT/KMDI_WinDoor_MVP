@@ -12506,7 +12506,10 @@ namespace PresentationLayer.Presenter
                         }
                         else if (_windoorModel.WD_profile == "Alutek Profile")
                         {
-                            _windoorModel.WD_PowderCoatType = PowderCoatType_Color._Standard;
+                            if (_windoorModel.WD_PowderCoatType == null)
+                            {
+                                _windoorModel.WD_PowderCoatType = PowderCoatType_Color._Standard;
+                            }
                         }
 
                         if (FrameIteration == 0)
