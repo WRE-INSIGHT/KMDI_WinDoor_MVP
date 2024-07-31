@@ -34,6 +34,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_GuSubtotal = new System.Windows.Forms.Panel();
+            this.txtbox_SpecialDiscount = new System.Windows.Forms.TextBox();
+            this.chkbx_SpecialDiscount = new System.Windows.Forms.CheckBox();
+            this.txtbox_PATotalText = new System.Windows.Forms.TextBox();
+            this.txt_Gurowlimit = new System.Windows.Forms.TextBox();
+            this.chkbx_GuSubtotal = new System.Windows.Forms.CheckBox();
             this.chkbx_ScreenNetofDiscount = new System.Windows.Forms.CheckBox();
             this.txtbx_SummaryLessD = new System.Windows.Forms.TextBox();
             this.chkbx_SummaryLessD = new System.Windows.Forms.CheckBox();
@@ -61,8 +66,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.chkbx_GuSubtotal = new System.Windows.Forms.CheckBox();
-            this.txt_Gurowlimit = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.txt_GuSubtotal.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -78,7 +81,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1073, 44);
             this.panel1.TabIndex = 0;
@@ -132,6 +135,9 @@
             // txt_GuSubtotal
             // 
             this.txt_GuSubtotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_GuSubtotal.Controls.Add(this.txtbox_SpecialDiscount);
+            this.txt_GuSubtotal.Controls.Add(this.chkbx_SpecialDiscount);
+            this.txt_GuSubtotal.Controls.Add(this.txtbox_PATotalText);
             this.txt_GuSubtotal.Controls.Add(this.txt_Gurowlimit);
             this.txt_GuSubtotal.Controls.Add(this.chkbx_GuSubtotal);
             this.txt_GuSubtotal.Controls.Add(this.chkbx_ScreenNetofDiscount);
@@ -157,16 +163,62 @@
             this.txt_GuSubtotal.Controls.Add(this.panel3);
             this.txt_GuSubtotal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txt_GuSubtotal.Location = new System.Drawing.Point(0, 44);
-            this.txt_GuSubtotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_GuSubtotal.Margin = new System.Windows.Forms.Padding(4);
             this.txt_GuSubtotal.Name = "txt_GuSubtotal";
-            this.txt_GuSubtotal.Size = new System.Drawing.Size(1073, 200);
+            this.txt_GuSubtotal.Size = new System.Drawing.Size(1073, 300);
             this.txt_GuSubtotal.TabIndex = 1;
+            // 
+            // txtbox_SpecialDiscount
+            // 
+            this.txtbox_SpecialDiscount.Location = new System.Drawing.Point(395, 209);
+            this.txtbox_SpecialDiscount.Multiline = true;
+            this.txtbox_SpecialDiscount.Name = "txtbox_SpecialDiscount";
+            this.txtbox_SpecialDiscount.Size = new System.Drawing.Size(103, 29);
+            this.txtbox_SpecialDiscount.TabIndex = 22;
+            // 
+            // chkbx_SpecialDiscount
+            // 
+            this.chkbx_SpecialDiscount.AutoSize = true;
+            this.chkbx_SpecialDiscount.Location = new System.Drawing.Point(395, 188);
+            this.chkbx_SpecialDiscount.Name = "chkbx_SpecialDiscount";
+            this.chkbx_SpecialDiscount.Size = new System.Drawing.Size(135, 21);
+            this.chkbx_SpecialDiscount.TabIndex = 21;
+            this.chkbx_SpecialDiscount.Text = "Special Discount";
+            this.chkbx_SpecialDiscount.UseVisualStyleBackColor = true;
+            this.chkbx_SpecialDiscount.CheckedChanged += new System.EventHandler(this.chkbx_SpecialDiscount_CheckedChanged);
+            // 
+            // txtbox_PATotalText
+            // 
+            this.txtbox_PATotalText.Location = new System.Drawing.Point(393, 139);
+            this.txtbox_PATotalText.Multiline = true;
+            this.txtbox_PATotalText.Name = "txtbox_PATotalText";
+            this.txtbox_PATotalText.Size = new System.Drawing.Size(214, 44);
+            this.txtbox_PATotalText.TabIndex = 20;
+            // 
+            // txt_Gurowlimit
+            // 
+            this.txt_Gurowlimit.Location = new System.Drawing.Point(729, 169);
+            this.txt_Gurowlimit.Name = "txt_Gurowlimit";
+            this.txt_Gurowlimit.Size = new System.Drawing.Size(100, 22);
+            this.txt_Gurowlimit.TabIndex = 19;
+            this.txt_Gurowlimit.Visible = false;
+            // 
+            // chkbx_GuSubtotal
+            // 
+            this.chkbx_GuSubtotal.AutoSize = true;
+            this.chkbx_GuSubtotal.Location = new System.Drawing.Point(629, 169);
+            this.chkbx_GuSubtotal.Name = "chkbx_GuSubtotal";
+            this.chkbx_GuSubtotal.Size = new System.Drawing.Size(87, 21);
+            this.chkbx_GuSubtotal.TabIndex = 18;
+            this.chkbx_GuSubtotal.Text = "SubTotal";
+            this.chkbx_GuSubtotal.UseVisualStyleBackColor = true;
+            this.chkbx_GuSubtotal.CheckedChanged += new System.EventHandler(this.chkbx_GuSubtotal_CheckedChanged);
             // 
             // chkbx_ScreenNetofDiscount
             // 
             this.chkbx_ScreenNetofDiscount.AutoSize = true;
             this.chkbx_ScreenNetofDiscount.Location = new System.Drawing.Point(395, 114);
-            this.chkbx_ScreenNetofDiscount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkbx_ScreenNetofDiscount.Margin = new System.Windows.Forms.Padding(4);
             this.chkbx_ScreenNetofDiscount.Name = "chkbx_ScreenNetofDiscount";
             this.chkbx_ScreenNetofDiscount.Size = new System.Drawing.Size(127, 21);
             this.chkbx_ScreenNetofDiscount.TabIndex = 17;
@@ -177,7 +229,7 @@
             // txtbx_SummaryLessD
             // 
             this.txtbx_SummaryLessD.Location = new System.Drawing.Point(500, 81);
-            this.txtbx_SummaryLessD.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbx_SummaryLessD.Margin = new System.Windows.Forms.Padding(4);
             this.txtbx_SummaryLessD.Multiline = true;
             this.txtbx_SummaryLessD.Name = "txtbx_SummaryLessD";
             this.txtbx_SummaryLessD.Size = new System.Drawing.Size(103, 29);
@@ -188,7 +240,7 @@
             this.chkbx_SummaryLessD.AutoSize = true;
             this.chkbx_SummaryLessD.ForeColor = System.Drawing.Color.Red;
             this.chkbx_SummaryLessD.Location = new System.Drawing.Point(500, 60);
-            this.chkbx_SummaryLessD.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkbx_SummaryLessD.Margin = new System.Windows.Forms.Padding(4);
             this.chkbx_SummaryLessD.Name = "chkbx_SummaryLessD";
             this.chkbx_SummaryLessD.Size = new System.Drawing.Size(120, 21);
             this.chkbx_SummaryLessD.TabIndex = 15;
@@ -199,8 +251,8 @@
             // btnCompileReport
             // 
             this.btnCompileReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCompileReport.Location = new System.Drawing.Point(395, 145);
-            this.btnCompileReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCompileReport.Location = new System.Drawing.Point(395, 251);
+            this.btnCompileReport.Margin = new System.Windows.Forms.Padding(4);
             this.btnCompileReport.Name = "btnCompileReport";
             this.btnCompileReport.Size = new System.Drawing.Size(215, 46);
             this.btnCompileReport.TabIndex = 1;
@@ -211,7 +263,7 @@
             // txt_SummaryVat
             // 
             this.txt_SummaryVat.Location = new System.Drawing.Point(395, 81);
-            this.txt_SummaryVat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_SummaryVat.Margin = new System.Windows.Forms.Padding(4);
             this.txt_SummaryVat.Multiline = true;
             this.txt_SummaryVat.Name = "txt_SummaryVat";
             this.txt_SummaryVat.Size = new System.Drawing.Size(103, 29);
@@ -220,8 +272,8 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.Black;
-            this.panel5.Location = new System.Drawing.Point(395, 137);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel5.Location = new System.Drawing.Point(395, 244);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(215, 5);
             this.panel5.TabIndex = 8;
@@ -229,7 +281,7 @@
             // txt_oftexpenses
             // 
             this.txt_oftexpenses.Location = new System.Drawing.Point(395, 26);
-            this.txt_oftexpenses.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_oftexpenses.Margin = new System.Windows.Forms.Padding(4);
             this.txt_oftexpenses.Multiline = true;
             this.txt_oftexpenses.Name = "txt_oftexpenses";
             this.txt_oftexpenses.Size = new System.Drawing.Size(213, 27);
@@ -240,7 +292,7 @@
             this.chkbox_showVat.AutoSize = true;
             this.chkbox_showVat.ForeColor = System.Drawing.Color.Red;
             this.chkbox_showVat.Location = new System.Drawing.Point(395, 60);
-            this.chkbox_showVat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkbox_showVat.Margin = new System.Windows.Forms.Padding(4);
             this.chkbox_showVat.Name = "chkbox_showVat";
             this.chkbox_showVat.Size = new System.Drawing.Size(56, 21);
             this.chkbox_showVat.TabIndex = 7;
@@ -251,17 +303,17 @@
             // chklst_glassType
             // 
             this.chklst_glassType.FormattingEnabled = true;
-            this.chklst_glassType.Location = new System.Drawing.Point(844, 25);
-            this.chklst_glassType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chklst_glassType.Location = new System.Drawing.Point(844, 24);
+            this.chklst_glassType.Margin = new System.Windows.Forms.Padding(4);
             this.chklst_glassType.Name = "chklst_glassType";
             this.chklst_glassType.ScrollAlwaysVisible = true;
-            this.chklst_glassType.Size = new System.Drawing.Size(225, 157);
+            this.chklst_glassType.Size = new System.Drawing.Size(225, 293);
             this.chklst_glassType.TabIndex = 14;
             // 
             // txt_guVat
             // 
             this.txt_guVat.Location = new System.Drawing.Point(729, 146);
-            this.txt_guVat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_guVat.Margin = new System.Windows.Forms.Padding(4);
             this.txt_guVat.Name = "txt_guVat";
             this.txt_guVat.Size = new System.Drawing.Size(100, 22);
             this.txt_guVat.TabIndex = 13;
@@ -270,7 +322,7 @@
             // 
             this.chkbx_guShowVat.AutoSize = true;
             this.chkbx_guShowVat.Location = new System.Drawing.Point(629, 149);
-            this.chkbx_guShowVat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkbx_guShowVat.Margin = new System.Windows.Forms.Padding(4);
             this.chkbx_guShowVat.Name = "chkbx_guShowVat";
             this.chkbx_guShowVat.Size = new System.Drawing.Size(101, 21);
             this.chkbx_guShowVat.TabIndex = 12;
@@ -282,7 +334,7 @@
             // 
             this.cmb_guNotedBy.FormattingEnabled = true;
             this.cmb_guNotedBy.Location = new System.Drawing.Point(629, 112);
-            this.cmb_guNotedBy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_guNotedBy.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_guNotedBy.Name = "cmb_guNotedBy";
             this.cmb_guNotedBy.Size = new System.Drawing.Size(200, 24);
             this.cmb_guNotedBy.TabIndex = 11;
@@ -291,7 +343,7 @@
             // 
             this.chkbx_guShowNotedBy.AutoSize = true;
             this.chkbx_guShowNotedBy.Location = new System.Drawing.Point(629, 90);
-            this.chkbx_guShowNotedBy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkbx_guShowNotedBy.Margin = new System.Windows.Forms.Padding(4);
             this.chkbx_guShowNotedBy.Name = "chkbx_guShowNotedBy";
             this.chkbx_guShowNotedBy.Size = new System.Drawing.Size(126, 21);
             this.chkbx_guShowNotedBy.TabIndex = 10;
@@ -303,7 +355,7 @@
             // 
             this.cmb_guReviewedBy.FormattingEnabled = true;
             this.cmb_guReviewedBy.Location = new System.Drawing.Point(629, 57);
-            this.cmb_guReviewedBy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_guReviewedBy.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_guReviewedBy.Name = "cmb_guReviewedBy";
             this.cmb_guReviewedBy.Size = new System.Drawing.Size(200, 24);
             this.cmb_guReviewedBy.TabIndex = 9;
@@ -312,7 +364,7 @@
             // 
             this.chkbx_guShowReviewedBy.AutoSize = true;
             this.chkbx_guShowReviewedBy.Location = new System.Drawing.Point(629, 33);
-            this.chkbx_guShowReviewedBy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkbx_guShowReviewedBy.Margin = new System.Windows.Forms.Padding(4);
             this.chkbx_guShowReviewedBy.Name = "chkbx_guShowReviewedBy";
             this.chkbx_guShowReviewedBy.Size = new System.Drawing.Size(149, 21);
             this.chkbx_guShowReviewedBy.TabIndex = 8;
@@ -324,7 +376,7 @@
             // 
             this.cmb_GlassType.FormattingEnabled = true;
             this.cmb_GlassType.Location = new System.Drawing.Point(193, 150);
-            this.cmb_GlassType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_GlassType.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_GlassType.Name = "cmb_GlassType";
             this.cmb_GlassType.Size = new System.Drawing.Size(65, 24);
             this.cmb_GlassType.TabIndex = 6;
@@ -344,7 +396,7 @@
             // txtbox_rowlimit
             // 
             this.txtbox_rowlimit.Location = new System.Drawing.Point(193, 60);
-            this.txtbox_rowlimit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_rowlimit.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_rowlimit.Name = "txtbox_rowlimit";
             this.txtbox_rowlimit.Size = new System.Drawing.Size(91, 22);
             this.txtbox_rowlimit.TabIndex = 4;
@@ -353,7 +405,7 @@
             // 
             this.chkbox_subtotal.AutoSize = true;
             this.chkbox_subtotal.Location = new System.Drawing.Point(193, 32);
-            this.chkbox_subtotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkbox_subtotal.Margin = new System.Windows.Forms.Padding(4);
             this.chkbox_subtotal.Name = "chkbox_subtotal";
             this.chkbox_subtotal.Size = new System.Drawing.Size(87, 21);
             this.chkbox_subtotal.TabIndex = 3;
@@ -366,9 +418,9 @@
             this.panel4.Controls.Add(this.chk_showimagelist);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 24);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(185, 174);
+            this.panel4.Size = new System.Drawing.Size(185, 274);
             this.panel4.TabIndex = 1;
             // 
             // chk_showimagelist
@@ -378,10 +430,10 @@
             this.chk_showimagelist.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chk_showimagelist.FormattingEnabled = true;
             this.chk_showimagelist.Location = new System.Drawing.Point(0, 0);
-            this.chk_showimagelist.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chk_showimagelist.Margin = new System.Windows.Forms.Padding(4);
             this.chk_showimagelist.Name = "chk_showimagelist";
             this.chk_showimagelist.ScrollAlwaysVisible = true;
-            this.chk_showimagelist.Size = new System.Drawing.Size(185, 174);
+            this.chk_showimagelist.Size = new System.Drawing.Size(185, 274);
             this.chk_showimagelist.TabIndex = 0;
             // 
             // panel3
@@ -393,7 +445,7 @@
             this.panel3.Controls.Add(this.label4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1071, 24);
             this.panel3.TabIndex = 0;
@@ -402,7 +454,7 @@
             // 
             this.chk_selectall.AutoSize = true;
             this.chk_selectall.Location = new System.Drawing.Point(76, 1);
-            this.chk_selectall.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chk_selectall.Margin = new System.Windows.Forms.Padding(4);
             this.chk_selectall.Name = "chk_selectall";
             this.chk_selectall.Size = new System.Drawing.Size(88, 21);
             this.chk_selectall.TabIndex = 4;
@@ -449,34 +501,15 @@
             this.saveFileDialog.Filter = "Pdf Files|*.pdf";
             this.saveFileDialog.Title = "Save ";
             // 
-            // chkbx_GuSubtotal
-            // 
-            this.chkbx_GuSubtotal.AutoSize = true;
-            this.chkbx_GuSubtotal.Location = new System.Drawing.Point(629, 169);
-            this.chkbx_GuSubtotal.Name = "chkbx_GuSubtotal";
-            this.chkbx_GuSubtotal.Size = new System.Drawing.Size(87, 21);
-            this.chkbx_GuSubtotal.TabIndex = 18;
-            this.chkbx_GuSubtotal.Text = "SubTotal";
-            this.chkbx_GuSubtotal.UseVisualStyleBackColor = true;
-            this.chkbx_GuSubtotal.CheckedChanged += new System.EventHandler(this.chkbx_GuSubtotal_CheckedChanged);
-            // 
-            // txt_Gurowlimit
-            // 
-            this.txt_Gurowlimit.Location = new System.Drawing.Point(729, 169);
-            this.txt_Gurowlimit.Name = "txt_Gurowlimit";
-            this.txt_Gurowlimit.Size = new System.Drawing.Size(100, 22);
-            this.txt_Gurowlimit.TabIndex = 19;
-            this.txt_Gurowlimit.Visible = false;
-            // 
             // RDLCReportCompilerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1073, 244);
+            this.ClientSize = new System.Drawing.Size(1073, 344);
             this.Controls.Add(this.txt_GuSubtotal);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(863, 260);
             this.Name = "RDLCReportCompilerView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -529,5 +562,8 @@
         private System.Windows.Forms.CheckBox chkbx_ScreenNetofDiscount;
         private System.Windows.Forms.TextBox txt_Gurowlimit;
         private System.Windows.Forms.CheckBox chkbx_GuSubtotal;
+        private System.Windows.Forms.TextBox txtbox_PATotalText;
+        private System.Windows.Forms.TextBox txtbox_SpecialDiscount;
+        private System.Windows.Forms.CheckBox chkbx_SpecialDiscount;
     }
 }

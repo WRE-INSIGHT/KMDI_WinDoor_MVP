@@ -57,6 +57,9 @@ namespace PresentationLayer.Presenter
         bool ShowLessDiscountContractSummary { get; set; }
         bool RDLCGUShowSubTotal { get; set; }
         string RDLCGURowLimit { get; set; }
+        string RDLCReportCompilerContractSummaryTotalText { get; set; }
+        int RDLCReportCompilerContractSummarySpecialDiscount { get; set; }
+        bool RDLCPAShowSpecialDiscount { get; set; }
 
         //List<IQuoteItemListUCPresenter> _lstQuoteItemUC { get; set; }
     }

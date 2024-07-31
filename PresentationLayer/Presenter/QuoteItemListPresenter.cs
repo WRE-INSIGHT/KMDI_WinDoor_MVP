@@ -271,7 +271,7 @@ namespace PresentationLayer.Presenter
                 _guFileName = value;
             }
         }
-
+        public bool RDLCPAShowSpecialDiscount { get; set; }
         public bool RDLCGUShowSubTotal { get; set; }
         public string RDLCGURowLimit { get; set; }
 
@@ -315,6 +315,10 @@ namespace PresentationLayer.Presenter
                 _glassUpgradeDT = value;
             }
         }
+
+        public string RDLCReportCompilerContractSummaryTotalText { get; set; }
+        public int RDLCReportCompilerContractSummarySpecialDiscount { get; set; }
+
         private DataTable _glassUpgradeDT = new DataTable();
         decimal _totalNetPriceforPrint;
 
@@ -1066,6 +1070,10 @@ namespace PresentationLayer.Presenter
                     printQuote.GetPrintQuoteView().QuotationOuofTownExpenses = _rdlcReportCompilerOutofTownExpenses;
                     printQuote.GetPrintQuoteView().VatPercentage = _rdlcReportCompilerVatContractSummary;
                     printQuote.GetPrintQuoteView().LessDiscount = RDLCReportCompilerLessDiscountContractSummary.ToString();
+
+                    printQuote.GetPrintQuoteView().PartialAdjustmentTotalText = RDLCReportCompilerContractSummaryTotalText;
+                    printQuote.GetPrintQuoteView().PartialAdjustmentSpecialDiscount = RDLCReportCompilerContractSummarySpecialDiscount.ToString();
+
                     printQuote.PrintRDLCReport();
                 }
             }

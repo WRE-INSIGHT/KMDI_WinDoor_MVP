@@ -457,7 +457,6 @@ namespace PresentationLayer.Presenter
                 }
                 else if (_mainPresenter.printStatus == "PartialAdjustment")
                 {
-                    Console.WriteLine("partialAdjustment");
                     #region Salution, Body and Address for PartialAdjustment
                     _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
                                                      + "USING "
@@ -493,6 +492,32 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.LaborandMobilization = "0";
                     _printQuoteView.FreightCharge = "0";
                     _printQuoteView.LessDiscount = "30";
+                }
+                else if (_mainPresenter.printStatus == "PartialADJContractSummary")
+                {
+                    #region Partial Adjustment Contract Summary
+                    _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
+                                                              + "USING "
+                                                              + baseColor.ToUpper()
+                                                              + " PROFILES\n"
+                                                              + "USING "
+                                                              + GlassThickness.ToUpper()
+                                                              + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+                                                              + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION";
+                    _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
+                                                    + _mainPresenter.titleLastname
+                                                    + ",";
+                    _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
+
+                    _printQuoteView.PartialAdjustmentTotalText = "Total Special Discounted Adjustment Price without VaT";
+                    
+
+                    _printQuoteView.QuotationOuofTownExpenses = "0";
+                    _printQuoteView.VatPercentage = "12";
+                    _printQuoteView.LaborandMobilization = "0";
+                    _printQuoteView.FreightCharge = "0";
+                    _printQuoteView.LessDiscount = "30";
+                    #endregion
                 }
                 else
                 {
@@ -1333,13 +1358,15 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.position = " ";
                     }
                     #endregion
-                    ReportParameter[] RParam = new ReportParameter[10];
+                    ReportParameter[] RParam = new ReportParameter[13];
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
                     RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
                     RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + _printQuoteView.QuotationOuofTownExpenses));
                     RParam[6] = new ReportParameter("VatPercentage", _printQuoteView.VatPercentage);
                     RParam[7] = new ReportParameter("LessDiscountPercentage", _printQuoteView.LessDiscount);
+                    RParam[10] = new ReportParameter("DynamicTotalText",_printQuoteView.PartialAdjustmentTotalText);
+                    RParam[11] = new ReportParameter("SpecialDiscount",_printQuoteView.PartialAdjustmentSpecialDiscount);
 
                     if (_printQuoteView.GetShowPageNum().Checked)
                     {
@@ -1393,6 +1420,15 @@ namespace PresentationLayer.Presenter
                         {
                             RParam[9] = new ReportParameter("NetofDiscount", "True");
                         }
+                    }
+
+                    if(_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCPAShowSpecialDiscount == true)
+                    {
+                        RParam[12] = new ReportParameter("ShowSpecialDiscount", "True");
+                    }
+                    else
+                    {
+                        RParam[12] = new ReportParameter("ShowSpecialDiscount", "False");
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);

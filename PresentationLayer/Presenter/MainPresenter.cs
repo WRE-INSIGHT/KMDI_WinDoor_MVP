@@ -1521,6 +1521,10 @@ namespace PresentationLayer.Presenter
                 }
 
             }
+            else
+            {
+                Environment.Exit(0);
+            }
 
         }
 

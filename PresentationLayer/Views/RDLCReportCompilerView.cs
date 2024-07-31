@@ -70,6 +70,32 @@ namespace PresentationLayer.Views
             }
         }
 
+        public string PartialAdjContractSummaryTotalText
+        {
+            get
+            {
+                return txtbox_PATotalText.Text;
+            }
+            set
+            {
+                txtbox_PATotalText.Text = value;
+            }
+        }
+
+        public string PartialAdjSpecialDiscountText
+        {
+            get
+            {
+                return txtbox_SpecialDiscount.Text;
+            }
+            set
+            {
+                txtbox_SpecialDiscount.Text = value;
+            }
+        }
+
+
+
         public CheckBox GetScreenNetOfDiscountChkBox()
         {
             return chkbx_ScreenNetofDiscount;
@@ -173,7 +199,20 @@ namespace PresentationLayer.Views
             return txtbox_rowlimit;
         }
 
+        public TextBox GetPATotalTxtBx()
+        {
+            return txtbox_PATotalText;
+        }
 
+        public CheckBox GetSpecialDiscountChkBx()
+        {
+            return chkbx_SpecialDiscount;
+        }
+
+        public TextBox GetSpecialDiscountTxtBx()
+        {
+            return txtbox_SpecialDiscount;
+        }
 
         public event EventHandler chkboxsubtotalCheckedChangedEventRaised;
         public event EventHandler BtnCompileReportClickEventRaised;
@@ -186,6 +225,7 @@ namespace PresentationLayer.Views
         public event EventHandler chkbx_SummaryLessD_CheckedChangedEventRaised;
         public event EventHandler chkbx_ScreenNetofDiscount_CheckedChangedEventRaised;
         public event EventHandler chkbx_GuSubtotal_CheckedChangedEventRaised;
+        public event EventHandler chkbx_SpecialDiscount_CheckedChangedEventRaised;
 
         public RDLCReportCompilerView()
         {
@@ -245,6 +285,11 @@ namespace PresentationLayer.Views
         private void chkbx_GuSubtotal_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, chkbx_GuSubtotal_CheckedChangedEventRaised, e);
+        }
+
+        private void chkbx_SpecialDiscount_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbx_SpecialDiscount_CheckedChangedEventRaised, e);
         }
     }
 }
