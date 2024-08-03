@@ -2269,11 +2269,33 @@ namespace PresentationLayer.Presenter.UserControls
                                                                  (client_ht - (outer_line * 2)) + w + 1 - rectDeduct));
                         }
 
-                        //inner Line
-                        g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
+                        //inner Line                    
+                        if (panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
+                                                                      Ppoint.Y + (inner_line + 1),
+                                                                      (client_wd - (inner_line * 2)) - w,
+                                                                      (client_ht - (inner_line * 2) - 2) - w));
+
+                            g.DrawRectangle(new Pen(Color.White, 3), new Rectangle(Ppoint.X + (inner_line + 3),
+                                                                      Ppoint.Y + (inner_line + 1),
+                                                                      (client_wd - (inner_line * 2) - 6) - w,
+                                                                      (client_ht - (inner_line * 2) - 2) - w));
+
+                            g.DrawRectangle(new Pen(Color.Black, 1), new Rectangle(Ppoint.X + outer_line,
+                                                                      Ppoint.Y + inner_line,
+                                                                      (client_wd - (outer_line * 2)) - w,
+                                                                      (client_ht - (inner_line * 2)) - w));
+                        }
+                        else
+                        {
+                            g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
                                                                       Ppoint.Y + inner_line,
                                                                       (client_wd - (inner_line * 2)) - w,
                                                                       (client_ht - (inner_line * 2)) - w));
+
+                        }
+
                     }
 
                     //outer Line

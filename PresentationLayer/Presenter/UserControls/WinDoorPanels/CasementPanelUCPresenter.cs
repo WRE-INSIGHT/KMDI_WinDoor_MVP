@@ -1647,6 +1647,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                            outer_line,
                                                            (casement.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
                                                            (casement.ClientRectangle.Height - (outer_line * 2)) - w));
+
+                if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                          inner_line,
+                                                          (casement.ClientRectangle.Width - (inner_line * 2) + outer_line) - w + sashDeduction,
+                                                          (casement.ClientRectangle.Height - (inner_line * 2)) - w));
+                }
+
                 g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
                                                           inner_line,
                                                           (casement.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
@@ -1659,6 +1668,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           outer_line,
                                                           (casement.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
                                                           (casement.ClientRectangle.Height - (outer_line * 2)) - w));
+
+                if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(inner_line - sashDeduction,
+                                                          inner_line,
+                                                          (casement.ClientRectangle.Width - (outer_line)) - w,
+                                                          (casement.ClientRectangle.Height - (inner_line * 2)) - w));
+                }
+
                 g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
                                                           inner_line,
                                                           (casement.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
@@ -1677,14 +1695,48 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
             {
+                // g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                //                                          outer_line,
+                //                                          (casement.ClientRectangle.Width - (outer_line * 2)) - w,
+                //                                          (casement.ClientRectangle.Height - (outer_line * 2)) - w));
+                // g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                //                                           inner_line,
+                //                                           (casement.ClientRectangle.Width - (inner_line * 2)) - w,
+                //                                           (casement.ClientRectangle.Height - (inner_line * 2)) - w));
+
                 g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
-                                                         outer_line,
-                                                         (casement.ClientRectangle.Width - (outer_line * 2)) - w,
-                                                         (casement.ClientRectangle.Height - (outer_line * 2)) - w));
-                g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
-                                                          inner_line,
-                                                          (casement.ClientRectangle.Width - (inner_line * 2)) - w,
-                                                          (casement.ClientRectangle.Height - (inner_line * 2)) - w));
+                                                                outer_line,
+                                                                (casement.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                                (casement.ClientRectangle.Height - (outer_line * 2)) - w));
+
+                if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+
+
+                    g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                              inner_line + 1,
+                                                              (casement.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                              (casement.ClientRectangle.Height - (inner_line * 2) - 2) - w));
+
+                    g.DrawRectangle(new Pen(Color.DarkGray, 3), new Rectangle(inner_line + 3,
+                                                              inner_line + 1,
+                                                              (casement.ClientRectangle.Width - (inner_line * 2) - 6) - w,
+                                                              (casement.ClientRectangle.Height - (inner_line * 2) - 2) - w));
+
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                             inner_line,
+                                                             (casement.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                             (casement.ClientRectangle.Height - (inner_line * 2)) - w));
+
+
+                }
+                else
+                {
+                    g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                              inner_line,
+                                                              (casement.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                              (casement.ClientRectangle.Height - (inner_line * 2)) - w));
+                }
             }
             Point sashPoint = new Point(casement.ClientRectangle.X, casement.ClientRectangle.Y);
 

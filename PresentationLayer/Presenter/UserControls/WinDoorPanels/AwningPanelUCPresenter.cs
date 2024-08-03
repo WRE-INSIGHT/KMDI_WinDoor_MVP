@@ -805,15 +805,43 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                            awning.ClientRectangle.Height - w));
 
             Color col = Color.Black;
-            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
-                                                           outer_line,
-                                                           (awning.ClientRectangle.Width - (outer_line * 2)) - w,
-                                                           (awning.ClientRectangle.Height - (outer_line * 2)) - w));
+            
+            
 
-            g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
-                                                           inner_line,
-                                                           (awning.ClientRectangle.Width - (inner_line * 2)) - w,
-                                                           (awning.ClientRectangle.Height - (inner_line * 2)) - w));
+            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                                 outer_line,
+                                                                 (awning.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                                 (awning.ClientRectangle.Height - (outer_line * 2)) - w));
+
+            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+               
+
+                g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                          inner_line + 1,
+                                                          (awning.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                          (awning.ClientRectangle.Height - (inner_line * 2) - 2) - w));
+
+                g.DrawRectangle(new Pen(Color.DarkGray, 3), new Rectangle(inner_line + 3,
+                                                          inner_line + 1,
+                                                          (awning.ClientRectangle.Width - (inner_line * 2) - 6) - w,
+                                                          (awning.ClientRectangle.Height - (inner_line * 2) - 2) - w));
+
+                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                         inner_line,
+                                                         (awning.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                         (awning.ClientRectangle.Height - (inner_line * 2)) - w));
+
+
+            }
+            else
+            {
+                g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                          inner_line,
+                                                          (awning.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                          (awning.ClientRectangle.Height - (inner_line * 2)) - w));
+            }
+           
 
 
             Point sashPoint = new Point(awning.ClientRectangle.X, awning.ClientRectangle.Y);

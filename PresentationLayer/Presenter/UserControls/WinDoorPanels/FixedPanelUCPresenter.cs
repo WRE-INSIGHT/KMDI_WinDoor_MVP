@@ -1470,60 +1470,82 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 if (_panelModel.Panel_Orient == true)
                 {
-                    g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                    if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                          inner_line + 1,
+                                                          (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                          (fixedpnl.ClientRectangle.Height - (inner_line * 2) - 2) - w));
+
+                        g.DrawRectangle(new Pen(Color.DarkGray, 3), new Rectangle(inner_line + 3,
+                                                          inner_line + 1,
+                                                          (fixedpnl.ClientRectangle.Width - (inner_line * 2) - 6) - w,
+                                                          (fixedpnl.ClientRectangle.Height - (inner_line * 2) - 2) - w));
+
+                        g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                            inner_line,
+                                                            (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                            (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                    }
+                    else
+                    {
+                        g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
                                                           inner_line,
                                                           (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w,
                                                           (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                    }
 
+                    
+                   
 
 
 
                     #region OldAlgoForMesh 
-                    //int cond = ((fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w) + ((fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w);
+                        //int cond = ((fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w) + ((fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w);
 
-                    //int maxWidth = ((fixedpnl.ClientRectangle.Width - (inner_line * 2)) - 6),
-                    //    maxHeight = ((fixedpnl.ClientRectangle.Height - (inner_line * 2)) - 6);
-
-
-                    //int a = 0, b = 0, c = 0, d = 0;
-                    //for (int i = 10; i < cond; i += 10)
-                    //{
-                    //    int aa = ((i + inner_line - a) >= maxHeight + inner_line + 10) ? maxHeight + inner_line : (i + inner_line - a),
-                    //        bb = ((i + inner_line - b) >= maxWidth + inner_line + 10) ? maxWidth + inner_line : (i + inner_line - b);
-
-                    //    g.DrawLine(Pens.OrangeRed, new Point(inner_line + a, aa), new Point(bb, inner_line + b));
-
-                    //    if (i + inner_line >= maxWidth + inner_line)
-                    //    {
-                    //        b += 10;
-                    //    }
-
-                    //    if (i + inner_line >= maxHeight + inner_line)
-                    //    {
-                    //        a += 10;
-                    //    }
-                    //}
-
-                    //for (int i = 10; i < cond; i += 10)
-                    //{
+                        //int maxWidth = ((fixedpnl.ClientRectangle.Width - (inner_line * 2)) - 6),
+                        //    maxHeight = ((fixedpnl.ClientRectangle.Height - (inner_line * 2)) - 6);
 
 
-                    //    int cc = (i + inner_line >= maxWidth + inner_line) ? inner_line : (maxWidth + inner_line - i + c),
-                    //        dd = ((i + inner_line - d) >= maxWidth + inner_line + 10) ? inner_line : (i + inner_line - d);
+                        //int a = 0, b = 0, c = 0, d = 0;
+                        //for (int i = 10; i < cond; i += 10)
+                        //{
+                        //    int aa = ((i + inner_line - a) >= maxHeight + inner_line + 10) ? maxHeight + inner_line : (i + inner_line - a),
+                        //        bb = ((i + inner_line - b) >= maxWidth + inner_line + 10) ? maxWidth + inner_line : (i + inner_line - b);
 
-                    //    g.DrawLine(Pens.OrangeRed, new Point(cc, inner_line + c), new Point(fixedpnl.ClientRectangle.Width - inner_line - w - d, i + inner_line - d));
+                        //    g.DrawLine(Pens.OrangeRed, new Point(inner_line + a, aa), new Point(bb, inner_line + b));
 
-                    //    if (i + inner_line >= maxWidth + inner_line)
-                    //    {
-                    //        c += 10;
-                    //    }
+                        //    if (i + inner_line >= maxWidth + inner_line)
+                        //    {
+                        //        b += 10;
+                        //    }
 
-                    //    if (i + inner_line >= maxHeight + inner_line)
-                    //    {
-                    //        d += 10;
-                    //    }
-                    //}
-                    #endregion
+                        //    if (i + inner_line >= maxHeight + inner_line)
+                        //    {
+                        //        a += 10;
+                        //    }
+                        //}
+
+                        //for (int i = 10; i < cond; i += 10)
+                        //{
+
+
+                        //    int cc = (i + inner_line >= maxWidth + inner_line) ? inner_line : (maxWidth + inner_line - i + c),
+                        //        dd = ((i + inner_line - d) >= maxWidth + inner_line + 10) ? inner_line : (i + inner_line - d);
+
+                        //    g.DrawLine(Pens.OrangeRed, new Point(cc, inner_line + c), new Point(fixedpnl.ClientRectangle.Width - inner_line - w - d, i + inner_line - d));
+
+                        //    if (i + inner_line >= maxWidth + inner_line)
+                        //    {
+                        //        c += 10;
+                        //    }
+
+                        //    if (i + inner_line >= maxHeight + inner_line)
+                        //    {
+                        //        d += 10;
+                        //    }
+                        //}
+                        #endregion
                 }
             }
             if (_timer_count != 0 && _timer_count < 8) // INSIDE ARROW NA MAY TIMER
