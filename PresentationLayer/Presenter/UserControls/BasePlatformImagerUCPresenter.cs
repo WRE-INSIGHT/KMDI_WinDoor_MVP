@@ -2158,16 +2158,34 @@ namespace PresentationLayer.Presenter.UserControls
 
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
+
                         //inner Line  
-                        PointF innerLine1 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
-                        PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
-                        PointF innerLine3 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
-                        PointF innerLine4 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF innerLine5 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF innerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
-                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
-                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
+                        if (panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            PointF innerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + inner_line);
+                            PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
+                            PointF innerLine3 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
+                            PointF innerLine4 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            PointF innerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            PointF innerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine1, innerLine2);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine5, innerLine6);
+                        }
+                        else
+                        {
+                            PointF innerLine1 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
+                            PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
+                            PointF innerLine3 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
+                            PointF innerLine4 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            PointF innerLine5 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            PointF innerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
+                        }
+                        
+                      
                     }
                     sashOverlapValue += inner_line;
                 }
@@ -2203,18 +2221,37 @@ namespace PresentationLayer.Presenter.UserControls
 
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
+
                         //inner Line 
-                        //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
-                        PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + inner_line);
-                        PointF innerLine2 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
-                        PointF innerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
-                        PointF innerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        //PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF innerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF innerLine6 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
-                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
-                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
+                        if (panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
+                            PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + inner_line);
+                            PointF innerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + inner_line);
+                            PointF innerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
+                            PointF innerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            //PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            PointF innerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            PointF innerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine1, innerLine2);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine5, innerLine6);
+                        }
+                        else
+                        {
+                            //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
+                            PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + inner_line);
+                            PointF innerLine2 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
+                            PointF innerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
+                            PointF innerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            //PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            PointF innerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            PointF innerLine6 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
+                        }
+                        
                     }
                     arrowStartingX -= inner_line;
                     sashOverlapValue += inner_line;
@@ -2250,8 +2287,8 @@ namespace PresentationLayer.Presenter.UserControls
                         PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
                         PointF innerLine4 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         PointF innerLine5 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
-                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine4, innerLine5);
+                        e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine1, innerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine4, innerLine5);
                     }
                     arrowStartingX -= inner_line;
                     sashOverlapValue += inner_line + (inner_line / 2);
@@ -2272,6 +2309,7 @@ namespace PresentationLayer.Presenter.UserControls
                         //inner Line                    
                         if (panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                         {
+                            
                             g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
                                                                       Ppoint.Y + (inner_line + 1),
                                                                       (client_wd - (inner_line * 2)) - w,
@@ -2296,6 +2334,28 @@ namespace PresentationLayer.Presenter.UserControls
 
                         }
 
+                    }
+                    else if (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == false) //alutek
+                    {
+                        if (panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            //Glazizng Bead for Fix
+                            if (panelModel.Panel_ParentFrameModel.Lst_MultiPanel.Count > 0)
+                            {
+                                bool divider_enabled = panelModel.Panel_ParentMultiPanelModel.MPanel_DividerEnabled;
+
+                                if (divider_enabled)
+                                {
+                                    Point g_bead1 = new Point(Ppoint.X, Ppoint.Y),
+                                          g_bead2 = new Point(Ppoint.X, Ppoint.Y + client_ht - 1),
+                                          g_bead3 = new Point(Ppoint.X + client_wd - 3, Ppoint.Y),
+                                          g_bead4 = new Point(Ppoint.X + client_wd - 3, Ppoint.Y + client_ht - 1);
+
+                                    g.DrawLine(new Pen(Color.Black, 3), g_bead1, g_bead2);
+                                    g.DrawLine(new Pen(Color.Black, 3), g_bead3, g_bead4);
+                                }
+                            }
+                        }
                     }
 
                     //outer Line
