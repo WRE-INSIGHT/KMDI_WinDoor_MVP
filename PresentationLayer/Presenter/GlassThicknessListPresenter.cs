@@ -30,7 +30,6 @@ namespace PresentationLayer.Presenter
         CommonFunctions commonfunc = new CommonFunctions();
         DataTable dt, filtered;
 
-
         public GlassType Panel_GlassType
         {
             get
@@ -390,7 +389,12 @@ namespace PresentationLayer.Presenter
                         {
                             ndx = dt.Rows.IndexOf(laminated_row) + 1;
                         }
-                        dt.Rows.InsertAt(newrow, ndx);
+
+                        //dt.Rows.InsertAt(newrow, ndx);
+                        if (!IsGlassException(newrow["Description"].ToString()))
+                        {
+                            dt.Rows.InsertAt(newrow, ndx);
+                        }
                     }
                 }
             }
@@ -456,12 +460,38 @@ namespace PresentationLayer.Presenter
                         {
                             ndx = dt.Rows.IndexOf(laminated_row) + 1;
                         }
-                        dt.Rows.InsertAt(newrow, ndx);
+
+                        if (!IsGlassException(newrow["Description"].ToString()))
+                        {
+                            dt.Rows.InsertAt(newrow, ndx);
+                        }
                     }
                 }
             }
 
             return dt;
+        }
+
+        private bool IsGlassException(string glassDesc)
+        {
+            bool _toExempt = false;
+
+            //if (glassDesc.Contains("with Georgian Bar"))
+            //{
+            //    glassDesc = glassDesc.Replace("with Georgian Bar", "");
+            //}
+
+            if (_mainPresenter.Lst_GlassDescException.Contains(glassDesc))
+            {
+                _toExempt = true;
+            }
+            else
+            {
+                _toExempt = false;
+            }
+            
+            return _toExempt;
+
         }
 
         public IGlassThicknessListPresenter GetNewInstance(IUnityContainer unityC,

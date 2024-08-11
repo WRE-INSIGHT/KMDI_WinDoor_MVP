@@ -62,6 +62,7 @@ namespace PresentationLayer.Views.Costing_Head
         public event EventHandler AddProjectToolStripButtonClickEventRaised;
         public event EventHandler DeleteAEICToolStripButtonClickEventRaised;
         public event EventHandler EditProjectToolStripButtonClickEventRaised;
+        public event MouseEventHandler AssignAEViewMouseDownEventRaised;
 
         public void ShowThis()
         {
@@ -137,6 +138,11 @@ namespace PresentationLayer.Views.Costing_Head
         private void editProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, EditProjectToolStripButtonClickEventRaised, e);
+        }
+
+        private void dgv_Client_MouseDown(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(sender, AssignAEViewMouseDownEventRaised, e);
         }
     }
 }

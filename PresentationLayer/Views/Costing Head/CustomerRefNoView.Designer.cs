@@ -78,7 +78,7 @@
             this.txt_SearchProj.Location = new System.Drawing.Point(0, 0);
             this.txt_SearchProj.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_SearchProj.Name = "txt_SearchProj";
-            this.txt_SearchProj.Size = new System.Drawing.Size(255, 29);
+            this.txt_SearchProj.Size = new System.Drawing.Size(255, 34);
             this.txt_SearchProj.TabIndex = 2;
             // 
             // panel2
@@ -120,7 +120,7 @@
             this.lbl_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Status.Location = new System.Drawing.Point(40, 12);
             this.lbl_Status.Name = "lbl_Status";
-            this.lbl_Status.Size = new System.Drawing.Size(88, 15);
+            this.lbl_Status.Size = new System.Drawing.Size(107, 18);
             this.lbl_Status.TabIndex = 0;
             this.lbl_Status.Text = "Processing 2/3";
             // 
@@ -168,7 +168,7 @@
             // CustomerRefNoView
             // 
             this.AcceptButton = this.btn_Accept;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Close;
             this.ClientSize = new System.Drawing.Size(284, 261);

@@ -824,10 +824,16 @@ namespace ModelLayer.Model.Quotation.Divider
                 else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                 {
                     frame_deduction = 22;
+                }
+            }
+
+            if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+                if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                {
                     Div_DividerConnectorArtNo = MullionConnector_ArticleNo._H120;
                 }
             }
-           
 
             if (Div_ChkDM == true)
             {
@@ -903,6 +909,10 @@ namespace ModelLayer.Model.Quotation.Divider
                     }
 
                     #endregion
+                }
+                else if (Div_DMArtNo == DummyMullion_ArticleNo._84401)
+                {
+                    Div_EndcapDM = EndcapDM_ArticleNo._M649;
                 }
 
                 if (Div_DMPanel != null)
@@ -1581,7 +1591,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void Insert_DivProfile_DivReinf_Info_MaterialList(DataTable tbl_explosion)
         {
-            string div_side = "", explosion_length = "", explosion_length2 = "";
+            string div_side = "", explosion_length = "", explosion_length2 = "", cutAngle = @"[  ]";
             if (Div_Type == DividerType.Transom)
             {
                 div_side = "Width";
@@ -1595,12 +1605,16 @@ namespace ModelLayer.Model.Quotation.Divider
                 explosion_length2 = Div_ReinfHeight.ToString();
             }
 
+            if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+                cutAngle = @"|  |";
+            }
 
             tbl_explosion.Rows.Add(Div_Type.ToString() + " " + div_side + " " + Div_ArtNo.DisplayName,
                                    1, "pc(s)",
                                    explosion_length,
                                    Div_Bounded,
-                                   @"[  ]");
+                                   cutAngle);
 
             if (!Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
             {
@@ -1670,7 +1684,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void Insert_DummyMullion_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Dummy Mullion Height " + Div_DMArtNo.DisplayName,
+            tbl_explosion.Rows.Add("Dummy Mu]llion Height " + Div_DMArtNo.DisplayName,
                                    1, "pc(s)",
                                    Div_ExplosionHeight.ToString(),
                                    Div_Bounded,
@@ -1767,6 +1781,13 @@ namespace ModelLayer.Model.Quotation.Divider
                                "Sash");
         }
 
+        public void Insert_ShootboltForAlutek_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Shootbolt H110",
+                               1, "pc(s)",
+                               "",
+                               "Sash");
+        }
 
         public int Add_ExplosionLength_screws4fab()
         {

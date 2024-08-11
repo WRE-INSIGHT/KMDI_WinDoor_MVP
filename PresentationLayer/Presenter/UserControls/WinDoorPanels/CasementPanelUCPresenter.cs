@@ -834,7 +834,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
                     _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                 {
+                    _mainPresenter.PrevPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
+                    if (_mainPresenter.NxtPnlModel_forDMSelection != null)
+                    {
+                        _mainPresenter.NxtPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
+                    }
 
+                    _mainPresenter.WrongSelectionOfDummyMullion();
+                    MessageBox.Show("Please use a C70 profile for Dummy Mullion ");
                 }
                 else
                 {  
@@ -1487,57 +1494,60 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
 
             #region Mesh
-            if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
-            {
-                int cond = casement.ClientRectangle.Width + casement.ClientRectangle.Height;
-
-                int maxWidth = casement.ClientRectangle.Width;
-
-                for (int i = 10; i < cond; i += 10)
+            if (_panelModel.Panel_GlassThicknessDesc != null)
+            { 
+                if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
                 {
-                    g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+                    int cond = casement.ClientRectangle.Width + casement.ClientRectangle.Height;
+
+                    int maxWidth = casement.ClientRectangle.Width;
+
+                    for (int i = 10; i < cond; i += 10)
+                    {
+                        g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+
+                    }
+
+                    for (int i = 10; i < cond; i += 10)
+                    {
+                        g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(casement.ClientRectangle.Width, i));
+
+                    }
+
+
+
+                    if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
+                                                                               8 / rectThickness,
+                                                                               casement.ClientRectangle.Width - 17 / rectThickness,
+                                                                               casement.ClientRectangle.Height - 17 / rectThickness));
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                            8 / rectThickness,
+                                                                            casement.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                            casement.ClientRectangle.Height - (17 / rectThickness)));
+
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                    {
+
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
+                                                                               8 / rectThickness,
+                                                                               casement.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                               casement.ClientRectangle.Height - (17 / rectThickness)));
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                          8 / rectThickness,
+                                                                          casement.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
+                                                                          casement.ClientRectangle.Height - (17 / rectThickness)));
+                    }
 
                 }
-
-                for (int i = 10; i < cond; i += 10)
-                {
-                    g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(casement.ClientRectangle.Width, i));
-
-                }
-
-
-
-                if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
-                {
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
-                                                                           8 / rectThickness,
-                                                                           casement.ClientRectangle.Width - 17 / rectThickness,
-                                                                           casement.ClientRectangle.Height - 17 / rectThickness));
-                }
-                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
-                {
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                        8 / rectThickness,
-                                                                        casement.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                        casement.ClientRectangle.Height - (17 / rectThickness)));
-
-                }
-                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
-                {
-
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
-                                                                           8 / rectThickness,
-                                                                           casement.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                           casement.ClientRectangle.Height - (17 / rectThickness)));
-                }
-                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
-                {
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                      8 / rectThickness,
-                                                                      casement.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
-                                                                      casement.ClientRectangle.Height - (17 / rectThickness)));
-                }
-
             }
             #endregion
 

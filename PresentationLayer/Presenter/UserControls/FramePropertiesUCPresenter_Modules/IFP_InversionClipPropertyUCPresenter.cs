@@ -10,7 +10,8 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
         IFP_InversionClipPropertyUC GetInversionClipPropertyUC();
 
         IFP_InversionClipPropertyUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                            IFrameModel frameModel);
+                                                            IFrameModel frameModel,
+                                                            IMainPresenter mainPresenter);
 
     }
 }

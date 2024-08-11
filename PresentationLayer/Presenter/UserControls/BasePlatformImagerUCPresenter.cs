@@ -1053,7 +1053,7 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                         else if (panelModel.Panel_Placement != "First")
                         {
-                        }
+                        }                    
 
                         Draw_Panel(e, panelModel, new Point(objLocX + 1, objLocY));
 
@@ -1160,6 +1160,12 @@ namespace PresentationLayer.Presenter.UserControls
                         {
 
                         }
+                       if (panelModel.PanelImageRenderer_Zoom == panelModel.Panel_Zoom)
+                       {
+                           panelModel.PanelImageRenderer_Height = panelModel.Panel_HeightToBind;
+                       }
+                       // Console.WriteLine("1 Panel Imager Height Bind:" + panelModel.Panel_HeightToBind);
+                       // Console.WriteLine("2 Panel Imager Height:" + panelModel.PanelImageRenderer_Height);
                         Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
 
                         int lastLevelDivisor = 0, botPadDeduction = 0;
@@ -2047,63 +2053,68 @@ namespace PresentationLayer.Presenter.UserControls
                 excessWidthInPlusTen_slash = 0,
                 excessWidthInPlusTen_backSlash = 0,
                 excessHeightInPlusTen_backSlash = 0;
-            if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
-            {
-                for (int i = 10; i < cond; i += 10)
-                {
-                    if (i + inner_line >= maxHeight + inner_line)
-                    {
-                        excessHeightInPlusTen_slash = (i + Ppoint.Y - exceedMaxHeight_slash) - (maxHeight + Ppoint.Y) + 2;
-                    }
 
-                    if (i + inner_line >= maxWidth + inner_line)
-                    {
-                        excessWidthInPlusTen_slash = (i + Ppoint.X - exceedMaxWidth_slash) - (maxWidth + Ppoint.X) - 2;
-                    }
 
-                    g.DrawLine(Pens.Black,
-                               new Point(Ppoint.X + exceedMaxHeight_slash + Math.Abs(excessHeightInPlusTen_slash + 1), (i + Ppoint.Y - exceedMaxHeight_slash) - Math.Abs(excessHeightInPlusTen_slash) + 1),
-                               new Point((i + Ppoint.X - exceedMaxWidth_slash) - Math.Abs(excessWidthInPlusTen_slash + 1), Ppoint.Y + exceedMaxWidth_slash + Math.Abs(excessWidthInPlusTen_slash) + 1));
-
-                    if (i + inner_line >= maxHeight + inner_line)
-                    {
-                        exceedMaxHeight_slash += 10;
-                    }
-
-                    if (i + inner_line >= maxWidth + inner_line)
-                    {
-                        exceedMaxWidth_slash += 10;
-                    }
-
-                }
-
-                for (int i = 10; i < cond; i += 10)
-                {
-
-                    if (i + inner_line >= maxWidth + inner_line)
-                    {
-                        excessWidthInPlusTen_backSlash = (maxWidth + Ppoint.X - i + exceedMaxWidth_backSlash) - Ppoint.X + 1;
-                    }
-
-                    if (i + inner_line >= maxHeight + inner_line)
-                    {
-                        excessHeightInPlusTen_backSlash = (maxHeight + Ppoint.Y - i + exceedMaxHeight_backSlash) - Ppoint.Y - 1;
-                    }
-
-                    g.DrawLine(Pens.Black,
-                               new Point((maxWidth - i + exceedMaxWidth_backSlash + Ppoint.X) + Math.Abs(excessWidthInPlusTen_backSlash) + 1, exceedMaxWidth_backSlash + Ppoint.Y + Math.Abs(excessWidthInPlusTen_backSlash) + 1),
-                               new Point(maxWidth - exceedMaxHeight_backSlash + Ppoint.X - Math.Abs(excessHeightInPlusTen_backSlash) - 1, i - exceedMaxHeight_backSlash + Ppoint.Y - Math.Abs(excessHeightInPlusTen_backSlash) - 1));
-
-                    if (i + inner_line >= maxWidth + inner_line)
-                    {
-                        exceedMaxWidth_backSlash += 10;
-                    }
-
-                    if (i + inner_line >= maxHeight + inner_line)
-                    {
-                        exceedMaxHeight_backSlash += 10;
-                    }
-                }
+            if (panelModel.Panel_GlassThicknessDesc != null)
+            { 
+               if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+               {
+                   for (int i = 10; i < cond; i += 10)
+                   {
+                       if (i + inner_line >= maxHeight + inner_line)
+                       {
+                           excessHeightInPlusTen_slash = (i + Ppoint.Y - exceedMaxHeight_slash) - (maxHeight + Ppoint.Y) + 2;
+                       }
+              
+                       if (i + inner_line >= maxWidth + inner_line)
+                       {
+                           excessWidthInPlusTen_slash = (i + Ppoint.X - exceedMaxWidth_slash) - (maxWidth + Ppoint.X) - 2;
+                       }
+              
+                       g.DrawLine(Pens.Black,
+                                  new Point(Ppoint.X + exceedMaxHeight_slash + Math.Abs(excessHeightInPlusTen_slash + 1), (i + Ppoint.Y - exceedMaxHeight_slash) - Math.Abs(excessHeightInPlusTen_slash) + 1),
+                                  new Point((i + Ppoint.X - exceedMaxWidth_slash) - Math.Abs(excessWidthInPlusTen_slash + 1), Ppoint.Y + exceedMaxWidth_slash + Math.Abs(excessWidthInPlusTen_slash) + 1));
+              
+                       if (i + inner_line >= maxHeight + inner_line)
+                       {
+                           exceedMaxHeight_slash += 10;
+                       }
+              
+                       if (i + inner_line >= maxWidth + inner_line)
+                       {
+                           exceedMaxWidth_slash += 10;
+                       }
+              
+                   }
+              
+                   for (int i = 10; i < cond; i += 10)
+                   {
+              
+                       if (i + inner_line >= maxWidth + inner_line)
+                       {
+                           excessWidthInPlusTen_backSlash = (maxWidth + Ppoint.X - i + exceedMaxWidth_backSlash) - Ppoint.X + 1;
+                       }
+              
+                       if (i + inner_line >= maxHeight + inner_line)
+                       {
+                           excessHeightInPlusTen_backSlash = (maxHeight + Ppoint.Y - i + exceedMaxHeight_backSlash) - Ppoint.Y - 1;
+                       }
+              
+                       g.DrawLine(Pens.Black,
+                                  new Point((maxWidth - i + exceedMaxWidth_backSlash + Ppoint.X) + Math.Abs(excessWidthInPlusTen_backSlash) + 1, exceedMaxWidth_backSlash + Ppoint.Y + Math.Abs(excessWidthInPlusTen_backSlash) + 1),
+                                  new Point(maxWidth - exceedMaxHeight_backSlash + Ppoint.X - Math.Abs(excessHeightInPlusTen_backSlash) - 1, i - exceedMaxHeight_backSlash + Ppoint.Y - Math.Abs(excessHeightInPlusTen_backSlash) - 1));
+              
+                       if (i + inner_line >= maxWidth + inner_line)
+                       {
+                           exceedMaxWidth_backSlash += 10;
+                       }
+              
+                       if (i + inner_line >= maxHeight + inner_line)
+                       {
+                           exceedMaxHeight_backSlash += 10;
+                       }
+                   }
+               } 
             }
             #endregion
 

@@ -10,7 +10,7 @@ using ModelLayer.Model.Quotation.Screen;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using ModelLayer.Variables;
-using PresentationLayer.CommonMethods;
+using PresentationLayer.CommonMethods;  
 using PresentationLayer.Presenter.Costing_Head;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -215,6 +215,19 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        private PowderCoatType_Color _powderCoatType;
+        public PowderCoatType_Color PowderCoatType
+        {
+            get
+            {
+                return _powderCoatType;
+            }
+            set
+            {
+                _powderCoatType = value;
+            }
+        }
+
         public Control ControlRaised_forCenterProfileSelection
         {
             get
@@ -261,6 +274,7 @@ namespace PresentationLayer.Presenter
         private List<DataRow> _unglazed = new List<DataRow>();
         private Dictionary<long, decimal> _dic_PaScreenID = new Dictionary<long, decimal>();
         private List<IScreenPartialAdjustmentProperties> _lst_ScreenPartialAdjustment = new List<IScreenPartialAdjustmentProperties>();
+        private List<string> _lst_GlassDescException = new List<string>();
 
         public Dictionary<string, string[]> Pbl_WindoorModel_FileLines_Dictionary
         {
@@ -290,6 +304,7 @@ namespace PresentationLayer.Presenter
 
         public Dictionary<long, decimal> Dic_PaScreenID { get { return _dic_PaScreenID; } set { _dic_PaScreenID = value; } }
         public List<IScreenPartialAdjustmentProperties> Lst_ScreenPartialAdjustment { get { return _lst_ScreenPartialAdjustment; } set { _lst_ScreenPartialAdjustment = value; } }
+        public List<string> Lst_GlassDescException { get { return _lst_GlassDescException; } set { _lst_GlassDescException = value; } }
 
         #endregion
 
@@ -1059,6 +1074,17 @@ namespace PresentationLayer.Presenter
                 //_divPropUCP_forDMSelection.GetLeverEspagUCP().BindSashProfileArtNo();
                 _divPropUCP_forDMSelection.GetLeverEspagUCP(_unityC, _divModel_forDMSelection).BindSashProfileArtNo();
             }
+        }
+
+        public void WrongSelectionOfDummyMullion()
+        {
+            _windoorModel.WD_CmenuDeleteVisibility = true;
+
+            _tsLblStatus.Text = "";
+            _pnlControlSub.Enabled = true;
+            _msMainMenu.Enabled = true;
+            _pnlPropertiesBody.Enabled = true;
+            _tsMain.Enabled = true;
         }
 
         public void SetLblStatusForCenterProfile (string status,
@@ -2001,10 +2027,9 @@ namespace PresentationLayer.Presenter
             Run_GetListOfMaterials_SpecificItem();
             _quotationModel.BOMandItemlistStatus = "BOM";
             IPricingPresenter PricingPresenter = _pricingPresenter.CreateNewInstance(_unityC, this, _quotationModel);
+            PricingPresenter.GetPricingView().ProfileType_FromMainPresenter = _windoorModel.WD_profile;
             PricingPresenter.GetPricingView().ShowPricingList();
             _quotationModel.Select_Current_Windoor(_windoorModel);
-
-
         }
 
         private void OnDuplicateToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -3417,15 +3442,27 @@ namespace PresentationLayer.Presenter
 
         private void OnNewFrameButtonClickEventRaised(object sender, EventArgs e)
         {
-            ToolStripButton tsb = (ToolStripButton)sender;
-            if (tsb.Name == "tsBtnNwin")
+            if (sender.ToString() == "FromWindowShortCut")
             {
                 frameType = FrameModel.Frame_Padding.Window;
             }
-            else if (tsb.Name == "tsBtnNdoor")
+            else if (sender.ToString() == "FromDoorShortCut")
             {
                 frameType = FrameModel.Frame_Padding.Door;
             }
+            else
+            {
+                ToolStripButton tsb = (ToolStripButton)sender;
+                if (tsb.Name == "tsBtnNwin")
+                {
+                    frameType = FrameModel.Frame_Padding.Window;
+                }
+                else if (tsb.Name == "tsBtnNdoor")
+                {
+                    frameType = FrameModel.Frame_Padding.Door;
+                }
+            }
+           
             Scenario_Quotation(false, false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
         }
         string[] file_lines;
@@ -3482,6 +3519,18 @@ namespace PresentationLayer.Presenter
 
             file_lines = File.ReadAllLines(outFile);
             f.MoveTo(Path.ChangeExtension(outFile, ".wndr"));
+
+            if (file_lines.Contains("WD_profile: Alutek Profile"))
+            {
+                _mainView.SettingsForC70PremiG85ToolstripEnable = false;
+                _mainView.AlutekToolStripEnable = true;
+            }
+            else
+            {
+                _mainView.SettingsForC70PremiG85ToolstripEnable = true;
+                _mainView.AlutekToolStripEnable = false;
+            }
+
             onload = true;
             _factorFromAddExisting = 0;//reset when opening new file
             _factorHolderOnLoad = 0;// reset when opening new file
@@ -3600,8 +3649,8 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Columns.Add(CreateColumn("Insulated", "Insulated", "System.Boolean"));
             _glassThicknessDT.Columns.Add(CreateColumn("Laminated", "Laminated", "System.Boolean"));
 
-
-            ClearAndAddGlassInList();
+            AddGlassDesctoException();
+            ClearAndAddGlassInList(false);
 
 
             _glassTypeDT.Columns.Add(CreateColumn("GlassType", "GlassType", "System.String"));
@@ -3657,7 +3706,43 @@ namespace PresentationLayer.Presenter
 
         }
 
-        private void ClearAndAddGlassInList()
+        private void AddGlassDesctoException()
+        {
+            try
+            {
+                #region Add Glass to Except
+                _lst_GlassDescException.Add("6 mm Tempered Double Silver Low-e + 12 + 5 mm White Tempered");
+                _lst_GlassDescException.Add("10 mm Tempered Double Silver Low-e + 12 + 10 mm White Tempered");
+                _lst_GlassDescException.Add("6 mm Double Silver Low-e + 12 + 5 White Tempered");
+                _lst_GlassDescException.Add("10 mm Low-e + 12 + 10 mm Tempered");
+
+                _lst_GlassDescException.Add("6 mm Tempered Double Silver Low-e + 12 + 6 mm White Tempered");
+                _lst_GlassDescException.Add("8 mm Tempered Double Silver Low-e + 12 + 8 mm White Tempered");
+                _lst_GlassDescException.Add("6 mm Tempered Double Silver Low-e + 12 Argon + 5 mm White Tempered");
+                _lst_GlassDescException.Add("10 mm Tempered Double Silver Low-e + 12 Argon + 10 mm White Tempered");
+                _lst_GlassDescException.Add("6 mm Tempered Double Silver Low-e + 12 Argon + 6 mm White Tempered");
+                _lst_GlassDescException.Add("8 mm Tempered Double Silver Low-e + 12 Argon + 8 mm White Tempered");
+
+                _lst_GlassDescException.Add("6 mm Tempered Double Silver Low-e + 12 + 5 mm White Tempered with Georgian Bar");
+                _lst_GlassDescException.Add("10 mm Tempered Double Silver Low-e + 12 + 10 mm White Tempered with Georgian Bar");
+                _lst_GlassDescException.Add("6 mm Double Silver Low-e + 12 + 5 White Tempered with Georgian Bar");
+                _lst_GlassDescException.Add("10 mm Low-e + 12 + 10 mm Tempered with Georgian Bar");
+
+                _lst_GlassDescException.Add("6 mm Tempered Double Silver Low-e + 12 + 6 mm White Tempered with Georgian Bar");
+                _lst_GlassDescException.Add("8 mm Tempered Double Silver Low-e + 12 + 8 mm White Tempered with Georgian Bar");
+                _lst_GlassDescException.Add("6 mm Tempered Double Silver Low-e + 12 Argon + 5 mm White Tempered with Georgian Bar");
+                _lst_GlassDescException.Add("10 mm Tempered Double Silver Low-e + 12 Argon + 10 mm White Tempered with Georgian Bar");
+                _lst_GlassDescException.Add("6 mm Tempered Double Silver Low-e + 12 Argon + 6 mm White Tempered with Georgian Bar");
+                _lst_GlassDescException.Add("8 mm Tempered Double Silver Low-e + 12 Argon + 8 mm White Tempered with Georgian Bar");
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(this + "Error adding glass desc to exception list " + ex.Message);
+            }
+        }
+
+        public void ClearAndAddGlassInList(bool _callfrmGlassUpgrade)
         {
             try
             {
@@ -3966,6 +4051,8 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tempered Tinted", "Double Insulated", 5550.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted", "Double Insulated", 6110.00m, false, true, false, true, false);
 
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm White Tempered + 1.52 PVB + 6 mm White Tempered", "Double Insulated", 5100.00m, false, true, false, true, false); //6/28/24
+                
                 //Tempered w/ Georgian Bar 
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Clear with Georgian Bar", "Double Insulated", 3100.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with Georgian Bar", "Double Insulated", 4200.00m, false, true, false, true, false);
@@ -3973,6 +4060,9 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Tinted with Georgian Bar", "Double Insulated", 4500.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tempered Tinted with Georgian Bar", "Double Insulated", 5550.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted with Georgian Bar", "Double Insulated", 6110.00m, false, true, false, true, false);
+
+                _glassThicknessDT.Rows.Add(13.52f, "6 mm White Tempered + 1.52 PVB + 6 mm White Tempered with Georgian Bar", "Double Insulated", 5100.00m, false, true, false, true, false); //6/28/24
+
 
                 //Annealed with Low-e
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear Low-e", "Double Insulated", 3400.00m, false, true, false, true, false);
@@ -3999,8 +4089,30 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e", "Double Insulated", 5500.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e", "Double Insulated", 6600.00m, false, true, false, true, false);
 
+                #region glass with conflict desc
+
+                _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 + 5 mm White Tempered", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 + 10 mm White Tempered", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
                 _glassThicknessDT.Rows.Add(23.0f, "6 mm Double Silver Low-e + 12 + 5 White Tempered", "Double Insulated", 4250.00m, false, true, false, true, false);//
                 _glassThicknessDT.Rows.Add(32.0f, "10 mm Low-e + 12 + 10 mm Tempered", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Double Silver Low-e + 12 + 6 mm White Tempered", "Double Insulated", 4500.00m, false, true, false, true, false);//new glass 6/28/24
+
+                _glassThicknessDT.Rows.Add(28.0f, "8 mm Tempered Double Silver Low-e + 12 + 8 mm White Tempered", "Double Insulated", 7280.00m, false, true, false, true, false);//new glass 6/28/24
+
+                //same glass diff description
+                _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 Argon + 5 mm White Tempered", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 Argon + 10 mm White Tempered", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Double Silver Low-e + 12 Argon + 6 mm White Tempered", "Double Insulated", 4500.00m, false, true, false, true, false);//new glass 6/28/24
+                _glassThicknessDT.Rows.Add(28.0f, "8 mm Tempered Double Silver Low-e + 12 Argon + 8 mm White Tempered", "Double Insulated", 7280.00m, false, true, false, true, false);//new glass 6/28/24
+
+                //Latest glass description 
+                _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 Argon + 5 mm Tempered Clear", "Double Insulated", 4250.00m, false, true, false, true, false);//new glass 7/17/2024
+                _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 Argon + 10 mm Tempered Clear", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass 7/17/2024
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Double Silver Low-e + 12 Argon + 6 mm Tempered Clear", "Double Insulated", 4500.00m, false, true, false, true, false);//new glass 7/17/2024
+                _glassThicknessDT.Rows.Add(28.0f, "8 mm Tempered Double Silver Low-e + 12 Argon + 8 mm Tempered Clear", "Double Insulated", 7280.00m, false, true, false, true, false);//new glass 7/17/2024
+                _glassThicknessDT.Rows.Add(33.0f, "8 mm Tempered Double Silver Low-e + 15 Argon + 10 mm Tempered Clear", "Double Insulated", 10500.00m, false, true, false, true, false);//new glass 7/17/2024
+                #endregion
 
                 //Tempered Low-e w/ Georgian Bar 
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 4000.00m, false, true, false, true, false);
@@ -4011,9 +4123,34 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5900.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o) with Georgian Bar", "Double Insulated", 7050.00m, false, true, false, true, false);
 
-
                 _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 5500.00m, false, true, false, true, false);
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Insulated", 6600.00m, false, true, false, true, false);
+
+                #region Glass with Conflict desc
+
+                _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 + 5 mm White Tempered with Georgian Bar", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 + 10 mm White Tempered with Georgian Bar", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+                _glassThicknessDT.Rows.Add(23.0f, "6 mm Double Silver Low-e + 12 + 5 White Tempered with Georgian Bar", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                _glassThicknessDT.Rows.Add(32.0f, "10 mm Low-e + 12 + 10 mm Tempered with Georgian Bar", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Double Silver Low-e + 12 + 6 mm White Tempered with Georgian Bar", "Double Insulated", 4500.00m, false, true, false, true, false);//new glass 6/28/24
+
+                _glassThicknessDT.Rows.Add(28.0f, "8 mm Tempered Double Silver Low-e + 12 + 8 mm White Tempered with Georgian Bar", "Double Insulated", 7280.00m, false, true, false, true, false);//new glass 6/28/24
+                //same glass different description 
+                _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 Argon + 5 mm White Tempered with Georgian Bar", "Double Insulated", 4250.00m, false, true, false, true, false);//
+                _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 Argon + 10 mm White Tempered with Georgian Bar", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Double Silver Low-e + 12 Argon + 6 mm White Tempered with Georgian Bar", "Double Insulated", 4500.00m, false, true, false, true, false);//new glass 6/28/24
+                _glassThicknessDT.Rows.Add(28.0f, "8 mm Tempered Double Silver Low-e + 12 Argon + 8 mm White Tempered with Georgian Bar", "Double Insulated", 7280.00m, false, true, false, true, false);//new glass 6/28/24
+                //Latest glass description
+                _glassThicknessDT.Rows.Add(23.0f, "6 mm Tempered Double Silver Low-e + 12 Argon + 5 mm Tempered Clear with Georgian Bar", "Double Insulated", 4250.00m, false, true, false, true, false);//new glass 7/17/2024
+                _glassThicknessDT.Rows.Add(32.0f, "10 mm Tempered Double Silver Low-e + 12 Argon + 10 mm Tempered Clear with Georgian Bar", "Double Insulated", 10600.00m, false, true, false, true, false);//new glass 7/17/2024
+                _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Double Silver Low-e + 12 Argon + 6 mm Tempered Clear with Georgian Bar", "Double Insulated", 4500.00m, false, true, false, true, false);//new glass 7/17/2024
+                _glassThicknessDT.Rows.Add(28.0f, "8 mm Tempered Double Silver Low-e + 12 Argon + 8 mm Tempered Clear with Georgian Bar", "Double Insulated", 7280.00m, false, true, false, true, false);//new glass 7/17/2024
+                _glassThicknessDT.Rows.Add(28.0f, "15 mm Tempered Double Silver Low-e + 15 Argon + 10 mm Tempered Clear with Georgian Bar", "Double Insulated", 10500.00m, false, true, false, true, false);//new glass 7/17/2024
+                _glassThicknessDT.Rows.Add(33.0f, "8 mm Tempered Double Silver Low-e + 15 Argon + 10 mm Tempered Clear with Georgian Bar", "Double Insulated", 10500.00m, false, true, false, true, false);//new glass 7/17/2024
+
+                #endregion
+
                 //Tempered Heat-Soaked with Low-e
                 _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear Low-e", "Double Insulated", 7500.00m, false, true, false, true, false);
 
@@ -4219,28 +4356,32 @@ namespace PresentationLayer.Presenter
                     Windoor_Save_PropertiesUC();
                     file_lines = File.ReadAllLines(outFile);
                     f.MoveTo(Path.ChangeExtension(addExistingwndrfile, ".wndr"));
-                    onload = true;
-                    _isFromAddExisting = true; // selecting new factor 
-                    Windoor_Save_UserControl();
-                    Windoor_Save_PropertiesUC();
 
-                    ////foreach(string strline in file_lines) 
-                    ////{
-                    ////    if(strline.Contains("WD_name:"))
-                    ////    {
-                    ////        MessageBox.Show(strline);
-                    ////    }
-                    ////}
+                    if (AllowAddExistingQt())
+                    {
+                        onload = true;
+                        _isFromAddExisting = true; // selecting new factor 
+                        Windoor_Save_UserControl();
+                        Windoor_Save_PropertiesUC();
 
-                    _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
-                    _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                    StartWorker("Add_Existing_Items");
-                    SetMainViewTitle(input_qrefno,
-                                 _projectName,
-                                 _custRefNo,
-                                 _windoorModel.WD_name,
-                                 _windoorModel.WD_profile,
-                                 false);
+                        ////foreach(string strline in file_lines) 
+                        ////{
+                        ////    if(strline.Contains("WD_name:"))
+                        ////    {
+                        ////        MessageBox.Show(strline);
+                        ////    }
+                        ////}
+
+                        _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
+                        _basePlatformImagerUCPresenter.SendToBack_baseImager();
+                        StartWorker("Add_Existing_Items");
+                        SetMainViewTitle(input_qrefno,
+                                     _projectName,
+                                     _custRefNo,
+                                     _windoorModel.WD_name,
+                                     _windoorModel.WD_profile,
+                                     false);
+                    }
                 }
             }
             catch (Exception ex)
@@ -4248,6 +4389,43 @@ namespace PresentationLayer.Presenter
                 csfunc.LogToFile(ex.Message, ex.StackTrace);
                 MessageBox.Show("Corrupted file", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private bool AllowAddExistingQt()
+        {
+            bool _profileAlu = false,
+                 _allowAddExisting = true;
+
+
+           foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+           {
+               if (wdm.WD_profile == "Alutek Profile")
+               {
+                   _profileAlu = true;
+                   break;
+               }
+           }
+
+           if (!_profileAlu)
+           {
+               if (file_lines.Contains("WD_profile: Alutek Profile"))
+               {
+                   _allowAddExisting = false;
+                    MessageBox.Show("Unable to Add Existing Project\nSelected File Contains: Alutek Profile/s", "File", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+               }
+           }
+           else
+           {
+               if (file_lines.Contains("WD_profile: C70 Profile") || file_lines.Contains("WD_profile: PremiLine Profile") || file_lines.Contains("WD_profile: G58 Profile"))
+               {
+                   _allowAddExisting = false;
+                    MessageBox.Show("Unable to Add Existing Project\nSelected File Contains: C70/Premi/G58 Profile/s", "File", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+            }
+
+           return _allowAddExisting;
+            
         }
 
         private void OnSortItemButtonClickEventRaised(object sender, EventArgs e)
@@ -5332,6 +5510,17 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("Date_Assigned"))
                         {
                             _windoorModel.Date_Assigned = DateTime.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("WD_PowderCoatType:"))
+                        {
+                            foreach(PowderCoatType_Color pwdctyp in PowderCoatType_Color.GetAll())
+                            {
+                                if(pwdctyp.ToString() == extractedValue_str)
+                                {
+                                    _windoorModel.WD_PowderCoatType = pwdctyp;
+                                    break;
+                                }
+                            }
                         }
                         
                         #endregion
@@ -11661,7 +11850,7 @@ namespace PresentationLayer.Presenter
         public void Clearing_Operation()
         {
 
-            ClearAndAddGlassInList();
+            ClearAndAddGlassInList(false);
 
             _quotationModel = null;
             _frameModel = null;
@@ -11887,7 +12076,7 @@ namespace PresentationLayer.Presenter
                     _wndrFileName = string.Empty;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
-                              _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
+                        _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
                     {
                         baseColor = Base_Color._White;
                     }
@@ -11895,8 +12084,34 @@ namespace PresentationLayer.Presenter
                     {
                         baseColor = Base_Color._DarkBrown;
                     }
+                    else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._PowderCoated.ToString())
+                    {
+                        baseColor = Base_Color._PowderCoated;
+                    }
+                    else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Foiled.ToString())
+                    {
+                        baseColor = Base_Color._Foiled;
+                    }
 
+                    if (InsideColor == null)
+                    {
+                        InsideColor = Foil_Color._Walnut;
+                    }
+                    if (OutsideColor == null)
+                    {
+                        OutsideColor = Foil_Color._Walnut;
+                    } 
 
+                    if (frmDimension_profileType.Contains("Alutek"))
+                    {
+                        _mainView.AlutekToolStripEnable = true;
+                        _mainView.SettingsForC70PremiG85ToolstripEnable = false;
+                    }
+                    else
+                    {
+                        _mainView.AlutekToolStripEnable = false;
+                        _mainView.SettingsForC70PremiG85ToolstripEnable = true;
+                    }
 
                     if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
                     {
@@ -11924,7 +12139,10 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _mainView.Zoom = _windoorModel.WD_zoom;
 
-                       
+                        if (baseColor == Base_Color._PowderCoated)
+                        {
+                            _windoorModel.WD_PowderCoatType = PowderCoatType_Color._Standard;
+                        }
 
 
 
@@ -11972,6 +12190,14 @@ namespace PresentationLayer.Presenter
                         {
                             baseColor = Base_Color._DarkBrown;
                         }
+                        else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._PowderCoated.ToString())
+                        {
+                            baseColor = Base_Color._PowderCoated;
+                        }
+                        else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Foiled.ToString())
+                        {
+                            baseColor = Base_Color._Foiled;
+                        }
 
                         if (InsideColor == null)
                         {
@@ -11991,13 +12217,16 @@ namespace PresentationLayer.Presenter
                                                                          OutsideColor);
                         _windoorModel.WD_WoodecAdditional = WoodecAdditionalForNewItem;
                         AddWndrList_QuotationModel(_windoorModel);
- 
-
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
 
                         _windoorModel.Date_Assigned = dateAssigned;
                         _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
+                       
+                        if (baseColor == Base_Color._PowderCoated)
+                        {
+                            _windoorModel.WD_PowderCoatType = PowderCoatType;
+                        }
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -12211,6 +12440,11 @@ namespace PresentationLayer.Presenter
                         _windoorModel.Date_Assigned = dateAssigned;
                         _windoorModel.Date_Assigned_Mainpresenter = _quotationModel.Date_Assigned_Mainpresenter;
 
+                        if (baseColor == Base_Color._PowderCoated)
+                        {
+                            _windoorModel.WD_PowderCoatType = PowderCoatType;
+                        }
+
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                         _mainView.GetThis().Controls.Add(bpUC);
@@ -12276,6 +12510,13 @@ namespace PresentationLayer.Presenter
                             else if (frameType == Frame_Padding.Window)
                             {
                                 frameBotFrameType = BottomFrameTypes._6050;
+                            }
+                        }
+                        else if (_windoorModel.WD_profile == "Alutek Profile")
+                        {
+                            if (_windoorModel.WD_PowderCoatType == null)
+                            {
+                                _windoorModel.WD_PowderCoatType = PowderCoatType_Color._Standard;
                             }
                         }
 
@@ -13359,7 +13600,8 @@ namespace PresentationLayer.Presenter
                                 MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
-                        else if (espag_art == Espagnolette_ArticleNo._H102 || espag_art == Espagnolette_ArticleNo._H103)
+                        else if (espag_art == Espagnolette_ArticleNo._H102 || espag_art == Espagnolette_ArticleNo._H103 ||
+                                 espag_art == Espagnolette_ArticleNo._H172 || espag_art == Espagnolette_ArticleNo._84819)
                         {
                             if (frame_art != FrameProfile_ArticleNo._84100)
                             {
@@ -14458,7 +14700,8 @@ namespace PresentationLayer.Presenter
                GeorgianBarHorizontalDesc,
                GeorgianBarVerticalDesc,
                additionalZero,
-               GeorgianBarArtNoDesc;
+               GeorgianBarArtNoDesc,
+               AlutekFrameDesc;
         #endregion
         public void itemDescription()
         {
@@ -14480,6 +14723,11 @@ namespace PresentationLayer.Presenter
                             else if (fr.Frame_Type == Frame_Padding.Door)
                             {
                                 FrameTypeDesc = "Door";
+                            }
+
+                            if (fr.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                            {
+                                AlutekFrameDesc = "AluSys-46";
                             }
 
                             #region MultiPnl
@@ -14944,6 +15192,13 @@ namespace PresentationLayer.Presenter
                         wdm.WD_description += "Min. wall thickness is 225mm";
                     }
 
+                    if (wdm.WD_profile.Contains("Alutek"))
+                    {
+                        string AddAluFrame = wdm.WD_description.Replace("Alutek Profile", AlutekFrameDesc);
+
+                        wdm.WD_description = AddAluFrame;
+                    }
+
                     glassThick = string.Empty;
                     lst_glassThickness.Clear();
                     pnl_LouverChk = false;
@@ -15162,11 +15417,12 @@ namespace PresentationLayer.Presenter
             return isDimensionFit;
         }
 
-        public void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color)
+        public void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color, PowderCoatType_Color powderCoatType_Color)
         {
             baseColor = base_Color;
             InsideColor = inside_Color;
             OutsideColor = outside_Color;
+            PowderCoatType = powderCoatType_Color;
         }
 
         public void setWoodecAdditional(int woodecAddlPercentage)

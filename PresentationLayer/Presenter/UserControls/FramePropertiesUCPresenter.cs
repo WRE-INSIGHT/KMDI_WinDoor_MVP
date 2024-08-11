@@ -571,7 +571,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
             {
-                IFP_InversionClipPropertyUCPresenter InversionClip = _fp_InversionClipPropertyUCPresenter.GetNewInstance(_unityC, _frameModel);
+                IFP_InversionClipPropertyUCPresenter InversionClip = _fp_InversionClipPropertyUCPresenter.GetNewInstance(_unityC, _frameModel, _mainPresenter);
                 UserControl InversionClipUC = (UserControl)InversionClip.GetInversionClipPropertyUC();
                 _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(InversionClipUC);
                 InversionClipUC.Dock = DockStyle.Top;

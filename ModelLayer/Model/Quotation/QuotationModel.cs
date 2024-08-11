@@ -80,6 +80,9 @@ namespace ModelLayer.Model.Quotation
                 total_glassHeight = 0,
                 glazing_seal = 0,
                 glazing_spacer = 0,
+                total_CenterGasketLength = 0,
+                total_UniversalGasketLength = 0,
+                total_GlazingGasketLength = 0,
                 total_screws_fabrication = 0,
                 total_screws_installation = 0,
                 total_cladding_size = 0,
@@ -106,7 +109,9 @@ namespace ModelLayer.Model.Quotation
                 frame_height = 0,
                 MechJointConnectorQty = 0;
 
-            string screws_for_inst_where = "";
+            string screws_for_inst_where = "",
+                   total_GlazingGasketLengthDesc = "",
+                   total_UniversalGasketLengthDesc = "";
 
             bool perFrame = false,
                  SlidingMotorizePerFrame = false,
@@ -765,9 +770,13 @@ namespace ModelLayer.Model.Quotation
                                             if (div_nxtCtrl.Div_ChkDM == true && div_nxtCtrl.Div_DMPanel == pnl_curCtrl)
                                             {
                                                 div_nxtCtrl.Insert_DummyMullion_MaterialList(Material_List);
+                                                div_nxtCtrl.Insert_Endcap4DM_MaterialList(Material_List);
+
+                                                total_CenterGasketLength -= div_nxtCtrl.Div_DMPanel.Panel_DisplayHeight;
+                                                total_UniversalGasketLength -= div_nxtCtrl.Div_DMPanel.Panel_DisplayHeight;
+
                                                 if (!item.WD_profile.Contains("Alutek"))
                                                 {  
-                                                    div_nxtCtrl.Insert_Endcap4DM_MaterialList(Material_List);
 
                                                     int expHt_screws = div_nxtCtrl.Add_ExplosionLength_screws4fab();
                                                     total_screws_fabrication += expHt_screws;
@@ -808,6 +817,11 @@ namespace ModelLayer.Model.Quotation
                                                         }
                                                     }
                                                 }
+                                                else
+                                                {
+                                                    div_nxtCtrl.Insert_ShootboltForAlutek_MaterialList(Material_List);
+                                                }
+
                                                 if (div_nxtCtrl.Div_DMPanel != null &&
                                                    (div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
                                                      div_nxtCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
@@ -909,10 +923,13 @@ namespace ModelLayer.Model.Quotation
                                             if (div_prevCtrl.Div_ChkDM == true && div_prevCtrl.Div_DMPanel == pnl_curCtrl)
                                             {
                                                 div_prevCtrl.Insert_DummyMullion_MaterialList(Material_List);
+                                                div_prevCtrl.Insert_Endcap4DM_MaterialList(Material_List);
+
+                                                total_CenterGasketLength -= div_prevCtrl.Div_DMPanel.Panel_DisplayHeight;
+                                                total_UniversalGasketLength -= div_prevCtrl.Div_DMPanel.Panel_DisplayHeight;
 
                                                 if (!item.WD_profile.Contains("Alutek"))
                                                 { 
-                                                  div_prevCtrl.Insert_Endcap4DM_MaterialList(Material_List);
                                                   
                                                   int expLength_screws = div_prevCtrl.Add_ExplosionLength_screws4fab();
                                                   total_screws_fabrication += expLength_screws;
@@ -949,6 +966,11 @@ namespace ModelLayer.Model.Quotation
                                                       }
                                                   }
                                                 }
+                                                else
+                                                {
+                                                    div_prevCtrl.Insert_ShootboltForAlutek_MaterialList(Material_List);
+                                                }
+
                                                 if (div_prevCtrl.Div_DMPanel != null &&
                                                     (div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395 ||
                                                      div_prevCtrl.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374))
@@ -1037,7 +1059,13 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 pnl_curCtrl.Insert_FrictionStay_MaterialList(Material_List);
 
-                                                if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26)
+                                                if (item.WD_profile.Contains("Alutek"))
+                                                {
+                                                    pnl_curCtrl.Insert_FrictionStayPacker_MaterialList(Material_List);
+                                                }
+                                                  
+                                                if (pnl_curCtrl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26 && 
+                                                    !item.WD_profile.Contains("Alutek"))
                                                 {
                                                     pnl_curCtrl.Insert_SnapNKeep_MaterialList(Material_List);
 
@@ -1060,6 +1088,11 @@ namespace ModelLayer.Model.Quotation
                                                     if (pnl_curCtrl.Panel_HingeOptions == HingeOption._FrictionStay)
                                                     {
                                                         pnl_curCtrl.Insert_FrictionStay_MaterialList(Material_List);
+
+                                                        if (item.WD_profile.Contains("Alutek"))
+                                                        {
+                                                            pnl_curCtrl.Insert_FrictionStayPacker_MaterialList(Material_List);
+                                                        }
 
                                                         int FSCasement_screws = pnl_curCtrl.Add_FSCasement_screws4fab();
                                                         add_screws_fab_fs_or_rs += FSCasement_screws;
@@ -1167,6 +1200,11 @@ namespace ModelLayer.Model.Quotation
                                                         add_screws_fab_snapInKeep += FixedCamAndSnapInKeepQty * 2;
                                                         add_screws_fab_fxdcam += FixedCamAndSnapInKeepQty * 2;
                                                     }
+                                                }
+                                                else if (frame.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                                                { 
+                                                        pnl_curCtrl.Insert_FrictionStay_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_FrictionStayPacker_MaterialList(Material_List);
                                                 }
                                             }
 
@@ -1288,19 +1326,41 @@ namespace ModelLayer.Model.Quotation
 
                                             if (item.WD_profile.Contains("Alutek"))
                                             {
-                                                pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, true);
-                                                pnl_curCtrl.Insert_CenterGasket_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_OpenableStriker_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_Cheveron_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_CornerWindow_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_RunUpBlock_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_PackerRod_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_LockingWedge_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_SSCheveron_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_Pegstay_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_AlutekStriker_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_Unica40_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_LockingConnectorDevice_MaterialList(Material_List);
+                                                if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84200 ||
+                                                    pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                                                {
+                                                    total_GlazingGasketLength += pnl_curCtrl.Add_GasketLength_Alutek(true, pnl_curCtrl.Panel_GlassThickness);
+                                                    total_UniversalGasketLength += pnl_curCtrl.Add_UniversalGasketLength_Alutek(pnl_curCtrl.Panel_SashPropertyVisibility);
+                                                    total_GlazingGasketLengthDesc = pnl_curCtrl.Panel_GlazingGasketArtNo.ToString();
+                                                    total_UniversalGasketLengthDesc = pnl_curCtrl.Panel_GlazingGasketArtNo2.ToString();
+                                                    //pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, true);
+
+                                                    total_CenterGasketLength += pnl_curCtrl.Add_CenterGasket();
+                                                    //pnl_curCtrl.Insert_CenterGasket_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_Cheveron_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_CornerWindow_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_RunUpBlock_MaterialList(Material_List, pnl_curCtrl.Panel_Type);
+                                                    pnl_curCtrl.Insert_PackerRod_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_LockingWedge_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_SSCheveron_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_Pegstay_MaterialList(Material_List);
+                                                    //pnl_curCtrl.Insert_AlutekStriker_MaterialList(Material_List, pnl_curCtrl.Panel_Type);
+
+                                                    if (pnl_curCtrl.Panel_HandleType != Handle_Type._None)
+                                                    {
+                                                        pnl_curCtrl.Insert_Unica40_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_OpenableStriker_MaterialList(Material_List, pnl_curCtrl.Panel_Type);
+                                                        pnl_curCtrl.Insert_LockingConnectorDevice_MaterialList(Material_List);
+                                                    }
+
+                                                    if (pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172 ||
+                                                        pnl_curCtrl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
+                                                    {
+                                                        pnl_curCtrl.Insert_TwoWayLockingConnector_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_OneWayLockingConnector_MaterialList(Material_List);
+                                                    }
+
+                                                }
                                             }
                                         }
                                     }
@@ -1330,14 +1390,21 @@ namespace ModelLayer.Model.Quotation
                                     if (!pnl_curCtrl.Panel_Type.Contains("Louver"))
                                     {
                                         pnl_curCtrl.Insert_GlazingBead_MaterialList(Material_List, where);
+                                    }
 
-                                        if (item.WD_profile.Contains("Alutek"))
+                                    if (item.WD_profile.Contains("Alutek") && pnl_curCtrl.Panel_Type == "Fixed Panel")
+                                    {
+
+                                        total_UniversalGasketLength += pnl_curCtrl.Add_UniversalGasketLength_Alutek(pnl_curCtrl.Panel_SashPropertyVisibility);
+                                        pnl_curCtrl.checkGasketArtNo(pnl_curCtrl.Panel_GlassThickness);
+                                        total_GlazingGasketLengthDesc = pnl_curCtrl.Panel_GlazingGasketArtNo.ToString();
+                                        total_UniversalGasketLengthDesc = pnl_curCtrl.Panel_GlazingGasketArtNo2.ToString();
+
+
+                                        //pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, false);
+                                        if (frame.Frame_InversionClipOption == true)
                                         {
-                                            pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, false);
-                                            if (frame.Frame_InversionClipOption == true)
-                                            {
-                                                pnl_curCtrl.Insert_InversionClip_MaterialList(Material_List);
-                                            }
+                                            pnl_curCtrl.Insert_InversionClip_MaterialList(Material_List);
                                         }
                                     }
 
@@ -1813,11 +1880,14 @@ namespace ModelLayer.Model.Quotation
                                                 }
                                             }
 
-                                            if (pnl_curCtrl.Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None)
+                                            if (pnl_curCtrl.Panel_CenterProfileArtNo != null)
                                             {
-                                                pnl_curCtrl.Insert_CenterProfile_MaterialList(Material_List);
+                                                if (pnl_curCtrl.Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None &&
+                                                !item.WD_profile.Contains("Alutek"))
+                                                {
+                                                    pnl_curCtrl.Insert_CenterProfile_MaterialList(Material_List);
+                                                }
                                             }
-
                                         }
 
 
@@ -1960,7 +2030,12 @@ namespace ModelLayer.Model.Quotation
 
                                 if (item.WD_profile.Contains("Alutek"))
                                 {
-                                    pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, pnl_curCtrl.Panel_SashPropertyVisibility);
+                                    total_GlazingGasketLength += pnl_curCtrl.Add_GasketLength_Alutek(pnl_curCtrl.Panel_SashPropertyVisibility, pnl_curCtrl.Panel_GlassThickness);
+                                    total_UniversalGasketLength += pnl_curCtrl.Add_UniversalGasketLength_Alutek(pnl_curCtrl.Panel_SashPropertyVisibility);
+                                    total_GlazingGasketLengthDesc = pnl_curCtrl.Panel_GlazingGasketArtNo.ToString();
+                                    total_UniversalGasketLengthDesc = pnl_curCtrl.Panel_GlazingGasketArtNo2.ToString();
+
+                                    //pnl_curCtrl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl_curCtrl.Panel_GlassThickness, pnl_curCtrl.Panel_SashPropertyVisibility);
                                 }
 
                                 if (pnl_curCtrl.Panel_ChkGlazingAdaptor == true)
@@ -2046,6 +2121,11 @@ namespace ModelLayer.Model.Quotation
                             {
                                 pnl.Insert_FrictionStay_MaterialList(Material_List);
 
+                                if (item.WD_profile.Contains("Alutek"))
+                                {
+                                    pnl.Insert_FrictionStayPacker_MaterialList(Material_List);
+                                }
+
                                 if (pnl.Panel_FrictionStayArtNo == FrictionStay_ArticleNo._Storm26 &&
                                     !item.WD_profile.Contains("Alutek"))
                                 {
@@ -2065,48 +2145,34 @@ namespace ModelLayer.Model.Quotation
 
                                 if (item.WD_profile.Contains("Alutek"))
                                 {
-                                    if (pnl.Panel_CenterGasketArtNo != null)
+                                    if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84200 ||
+                                        pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
                                     {
-                                        pnl.Insert_CenterGasket_MaterialList(Material_List);
-                                    } 
-                                    if (pnl.Panel_OpenableStrikerArtNo != null)
-                                    {
-                                        pnl.Insert_OpenableStriker_MaterialList(Material_List);
-                                    } 
-                                    if (pnl.Panel_CheveronArtNo != null)
-                                    {
+                                        total_CenterGasketLength += pnl.Add_CenterGasket();
+                                        //pnl.Insert_CenterGasket_MaterialList(Material_List);
                                         pnl.Insert_Cheveron_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_CornerCleatArtNo != null)
-                                    {
                                         pnl.Insert_CornerWindow_MaterialList(Material_List);
+                                        pnl.Insert_RunUpBlock_MaterialList(Material_List, pnl.Panel_Type);
+                                        pnl.Insert_PackerRod_MaterialList(Material_List); 
+                                        pnl.Insert_LockingWedge_MaterialList(Material_List); 
+                                        pnl.Insert_SSCheveron_MaterialList(Material_List); 
+                                        pnl.Insert_Pegstay_MaterialList(Material_List);
+                                        //pnl.Insert_AlutekStriker_MaterialList(Material_List, pnl.Panel_Type); 
+                                        if (pnl.Panel_HandleType != Handle_Type._None)
+                                        {
+                                            pnl.Insert_Unica40_MaterialList(Material_List);
+                                            pnl.Insert_OpenableStriker_MaterialList(Material_List, pnl.Panel_Type);
+                                            pnl.Insert_LockingConnectorDevice_MaterialList(Material_List);
+                                        }
+
+                                        if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172 ||
+                                            pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
+                                        {
+                                            pnl.Insert_TwoWayLockingConnector_MaterialList(Material_List);
+                                            pnl.Insert_OneWayLockingConnector_MaterialList(Material_List);
+                                        }
+
                                     }
-                                    if (pnl.Panel_RunUpBlockArtNo != null)
-                                    {
-                                        pnl.Insert_RunUpBlock_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_PackerRodArtNo != null)
-                                    {
-                                        pnl.Insert_PackerRod_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_LockingWedgeArtNo != null)
-                                    {
-                                        pnl.Insert_LockingWedge_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_SSCheveronArtNo != null)
-                                    {
-                                        pnl.Insert_SSCheveron_MaterialList(Material_List);
-                                    }
-                                    pnl.Insert_Pegstay_MaterialList(Material_List);
-                                    pnl.Insert_AlutekStriker_MaterialList(Material_List);
-                                    if (pnl.Panel_Unica40ArtNo != null)
-                                    {
-                                        pnl.Insert_Unica40_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_LockingConnectorArtNo != null)
-                                    {
-                                        pnl.Insert_LockingConnectorDevice_MaterialList(Material_List);
-                                    } 
                                 }
 
                             }
@@ -2117,6 +2183,11 @@ namespace ModelLayer.Model.Quotation
                                     if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                     {
                                         pnl.Insert_FrictionStay_MaterialList(Material_List);
+
+                                        if (item.WD_profile.Contains("Alutek"))
+                                        {
+                                            pnl.Insert_FrictionStayPacker_MaterialList(Material_List);
+                                        }
 
                                         int fs_screws = pnl.Add_FSCasement_screws4fab();
                                         add_screws_fab_fs_or_rs += fs_screws;
@@ -2227,51 +2298,42 @@ namespace ModelLayer.Model.Quotation
                                         add_screws_fab_fxdcam += FixedCamAndSnapInKeepQty * 2;
                                     }
                                 }
-
+                                else if (frame.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                                { 
+                                        pnl.Insert_FrictionStay_MaterialList(Material_List);
+                                        pnl.Insert_FrictionStayPacker_MaterialList(Material_List); 
+                                }
+                                 
                                 if (item.WD_profile.Contains("Alutek"))
                                 {
-                                    if (pnl.Panel_CenterGasketArtNo != null)
+                                    if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84200 ||
+                                        pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
                                     {
-                                        pnl.Insert_CenterGasket_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_OpenableStrikerArtNo != null)
-                                    {
-                                        pnl.Insert_OpenableStriker_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_CheveronArtNo != null)
-                                    {
+                                        total_CenterGasketLength += pnl.Add_CenterGasket();
+                                        //pnl.Insert_CenterGasket_MaterialList(Material_List);
                                         pnl.Insert_Cheveron_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_CornerCleatArtNo != null)
-                                    {
                                         pnl.Insert_CornerWindow_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_RunUpBlockArtNo != null)
-                                    {
-                                        pnl.Insert_RunUpBlock_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_PackerRodArtNo != null)
-                                    {
+                                        pnl.Insert_RunUpBlock_MaterialList(Material_List, pnl.Panel_Type);
                                         pnl.Insert_PackerRod_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_LockingWedgeArtNo != null)
-                                    {
                                         pnl.Insert_LockingWedge_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_SSCheveronArtNo != null)
-                                    {
                                         pnl.Insert_SSCheveron_MaterialList(Material_List);
-                                    }
-                                    pnl.Insert_Pegstay_MaterialList(Material_List);
-                                    pnl.Insert_AlutekStriker_MaterialList(Material_List);
-                                    if (pnl.Panel_Unica40ArtNo != null)
-                                    {
-                                        pnl.Insert_Unica40_MaterialList(Material_List);
-                                    }
-                                    if (pnl.Panel_LockingConnectorArtNo != null)
-                                    {
-                                        pnl.Insert_LockingConnectorDevice_MaterialList(Material_List);
-                                    }
+                                        pnl.Insert_Pegstay_MaterialList(Material_List);
+                                        //pnl.Insert_AlutekStriker_MaterialList(Material_List, pnl.Panel_Type);
+
+                                        if (pnl.Panel_HandleType != Handle_Type._None)
+                                        {  
+                                            pnl.Insert_OpenableStriker_MaterialList(Material_List, pnl.Panel_Type);
+                                            pnl.Insert_Unica40_MaterialList(Material_List);
+                                            pnl.Insert_LockingConnectorDevice_MaterialList(Material_List); 
+                                        }
+
+                                        if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172 ||
+                                            pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
+                                        {
+                                            pnl.Insert_TwoWayLockingConnector_MaterialList(Material_List);
+                                            pnl.Insert_OneWayLockingConnector_MaterialList(Material_List);
+                                        }
+                                    } 
                                 }
                             }
                             else if (pnl.Panel_Type.Contains("Sliding"))
@@ -2493,7 +2555,7 @@ namespace ModelLayer.Model.Quotation
                         pnl.Insert_SealForHandle_MaterialList(Material_List);
                         pnl.Insert_LouvreGallerySet_MaterialList(Material_List);
                     }
-
+                     
                     if (!pnl.Panel_Type.Contains("Louver"))
                     {
                         pnl.Insert_GlazingBead_MaterialList(Material_List, where);
@@ -2501,7 +2563,12 @@ namespace ModelLayer.Model.Quotation
 
                     if (item.WD_profile.Contains("Alutek"))
                     {
-                        pnl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl.Panel_GlassThickness, pnl.Panel_SashPropertyVisibility);
+                        total_GlazingGasketLength += pnl.Add_GasketLength_Alutek(pnl.Panel_SashPropertyVisibility, pnl.Panel_GlassThickness);
+                        total_UniversalGasketLength += pnl.Add_UniversalGasketLength_Alutek(pnl.Panel_SashPropertyVisibility);
+                        total_GlazingGasketLengthDesc = pnl.Panel_GlazingGasketArtNo.ToString();
+                        total_UniversalGasketLengthDesc = pnl.Panel_GlazingGasketArtNo2.ToString();
+
+                        //pnl.Insert_GlazingGasket_Alutek_MaterialList(Material_List, pnl.Panel_GlassThickness, pnl.Panel_SashPropertyVisibility);
                     }
 
                     if ((pnl.Panel_Type.Contains("Awning") || pnl.Panel_Type.Contains("Casement")) &&
@@ -2610,7 +2677,7 @@ namespace ModelLayer.Model.Quotation
                                    "Frame"); // Frame or Sash
 
             Material_List.Rows.Add("Expansion Bolts FRA003",
-                                   Expansion_BoltQty_Total,
+                                   Expansion_BoltQty_Total + 1,
                                    "pc(s)",
                                    "",
                                    "Frame");
@@ -2669,11 +2736,40 @@ namespace ModelLayer.Model.Quotation
             }
             else
             {
-                //Material_List.Rows.Add("Hole Cap M671",
-                //               Expansion_BoltQty_Total,
-                //               "pc(s)",
-                //               "",
-                //               "Frame");
+                Material_List.Rows.Add("Hole Cap M671",
+                               Expansion_BoltQty_Total + 1,
+                               "pc(s)",
+                               "",
+                               "Frame");
+
+                if (total_GlazingGasketLength > 0)
+                {
+                  
+                    Material_List.Rows.Add("Glazing Gasket " + total_GlazingGasketLengthDesc,
+                                            1,
+                                           "pc(s)",
+                                           total_GlazingGasketLength.ToString(),
+                                           "Sash");
+                }
+
+                if (total_UniversalGasketLength > 0)
+                {
+
+                    Material_List.Rows.Add("Universal Gasket " + total_UniversalGasketLengthDesc,
+                                            1,
+                                           "pc(s)",
+                                           total_UniversalGasketLength.ToString(),
+                                           "Frame");
+                }
+
+                if (total_CenterGasketLength > 0)
+                {
+                    Material_List.Rows.Add("Center Gasket G222",
+                                           1,
+                                          "pc(s)",
+                                          total_CenterGasketLength.ToString(),
+                                          "Sash");
+                }
             }
             var query = from r in Material_List.AsEnumerable()
                         group r by new
@@ -2744,7 +2840,9 @@ namespace ModelLayer.Model.Quotation
 
         int CostPerPoints = 60,
              GeorgianBarVerticalQty = 0,
-            GeorgianBarHorizontalQty = 0;
+            GeorgianBarHorizontalQty = 0,
+            RunUpBlockQty = 0,
+            StrikerQty = 0;
 
         bool ChckDM = false,
              ChckPlasticWedge = false,
@@ -2870,6 +2968,7 @@ namespace ModelLayer.Model.Quotation
                 DMPrice,
                 DMReinforcementPrice,
                 DummyMullionPricePerLinearMeter,
+                EndCapPricePerPiece,
         #endregion
         #region GlassPrice
 
@@ -3171,7 +3270,7 @@ namespace ModelLayer.Model.Quotation
         #endregion
         #region Accessories
 
-        EndCapPricePerPiece = 282.96m,
+        EndCap_9C68_PricePerPiece = 282.96m,
                 MechanicalJoint_AV585PricePerPiece = 87.34m,
                 MechanicalJoint_9U18PricePerPiece = 138.45m,
                 GBSpacerPricePerPiece = 5.01m,
@@ -3382,11 +3481,12 @@ namespace ModelLayer.Model.Quotation
                 Divider_84300_PricePerSqrMeter = 347.53m,
                 Divider_84301_PricePerSqrMeter = 490.14m,
                 DividerDM_84401_PricePerSqrMeter = 341.12m,
-
+                EndCap_M649_PricePerPiece = 38.72m,
+                Shootbolt_H110_PricePerPiece = 178.72m,
         #endregion
         #region InstallationMats
 
-            ExpansionBoltPricePerPiece = 30.0m,
+        ExpansionBoltPricePerPiece = 30.0m,
 
             FramePackerPricePerPiece = 5.96m,
             CremonHandlePricePerPiece = 320.22m,
@@ -3400,7 +3500,7 @@ namespace ModelLayer.Model.Quotation
                 //CornerWindowPricePerPiece = 37.23m,
                 CheveronPricePerPiece = 4.47m,
                 //WaterDrainageWValvesPricePerPiece = 8.94m,
-                //HoleCapePricePerPiece = 2.98m,
+                HoleCapePricePerPiece = 2.98m,
                 UniversalGasketPricePerPiece = 22.60m,
                 //GasketPar3mmPricePerPiece = 14.07m, same lang ng gasket for gb
 
@@ -3411,7 +3511,12 @@ namespace ModelLayer.Model.Quotation
                 TransmissionRodPricePerPiece = 145.96m,
                 OpenableStrikerPricePerPiece = 35.74m,
                 CornerCleatPricePerPiece = 37.23m,
-                FrictionStayPricePerPiece = 320.22m,
+                //FrictionStayPricePerPiece = 320.22m,
+                FrictionStay_H091_PricePerPiece = 268.09m,
+                FrictionStay_H029_PricePerPiece = 282.0m,
+                FrictionStay_H231_PricePerPiece = 286.8m,
+                FrictionStay_H232_PricePerPiece = 337.8m,
+
                 RunUpblockPricePerPiece = 23.83m,
                 PackerRodPricePerPiece = 123.06m,
                 LockingWedgesPricePerPiece = 83.41m,
@@ -3423,16 +3528,25 @@ namespace ModelLayer.Model.Quotation
                 GlazingGasket_GlazingBead_PerPiece = 14.07m,
                 GlazingGasket_FrameSash_PerPiece = 11.22m,
 
+                UniversalGasketPricePerLinearMeter = 11.22m,
+                CenterGasketPerLinearMeter = 24.13m,
+                Gasket_G223_PerLinearMeter = 14.07m,
+                Gasket_G224_PerLinearMeter = 20.63m,
+                Gasket_G287_PerLinearMeter = 9.41m,
+
+
                 GlazingBead_84500PricePerLinearMeter = 117.97m,
 
                 //CW
                 FrictionStayPackerPricePerPiece = 123.06m,
-
+                PolymideStrip_H172_PerLinearMeter = 113.36m,
+                OneWayLockingConnectorPricePerPiece = 119.69m, //158.32INR
+                TwoWayLockingConnectorPricePerPiece = 126.73m, //167.63INR
         #endregion
 
 
-                //alu
-                InstallationMaterialCost,
+        //alu
+        InstallationMaterialCost,
                 SubTotatal,
                 ImportationCost,
                 MobilizationCost,
@@ -3448,7 +3562,7 @@ namespace ModelLayer.Model.Quotation
                 //fixed
                 //CornerWindowPrice, inalis dahil same sila ni corner cleat = corner window
                 //WaterDrainageWValvesPrice, inalis dahil di na ginagamit
-                //HoleCapePrice, inalis dahil di na ginagamit
+                HoleCapePrice, //inalis dahil di na ginagamit // pinabalik nanaman!!!! 6/21/24
                 UniversalGasketPrice,
                 //GasketPar3mmPrice, same lang sila ni gasket for glazing bead
                 ExpansionBoltPrice,
@@ -3461,6 +3575,7 @@ namespace ModelLayer.Model.Quotation
                 OpenableStrikerPrice,
                 CornerCleatPrice,
                 FrictionStayPrice,
+                FrictionStayPricePerPiece,
                 RunUpblockPrice,
                 PackerRodPrice,
                 LockingWedgesPrice,
@@ -3478,10 +3593,22 @@ namespace ModelLayer.Model.Quotation
                 GlazingGasketFrameForAluPrice,
                 GlazingGasketSashForAluPrice,
                 CenterGasketPrice,
+
+                UniversalGasketAluPrice,
+                CenterGasketAluPrice,
+                GlazingGasketAluPrice,
+                GasketPerLinearMeter,
+                UniversalGasketPerLinearMeter,
+
+
                 GlazingShimPrice,
 
                 //CW
                 FrictionStayPackerPrice,
+                PolymideStripPrice,
+                OneWayLockingConnectorPrice,
+                TwoWayLockingConnectorPrice,
+                ShootBoltPrice,
         #endregion
 
                 BrushSealPricePerLinearMeter = 15.80m,
@@ -3502,7 +3629,7 @@ namespace ModelLayer.Model.Quotation
                 LaborCost = 0,
                 InstallationCost = 0,
                 MaterialCost = 0,
-              GlassCost = 0,// for alu
+                GlassCost = 0,// for alu
                 FittingAndSuppliesCost,
                 AccesorriesCost,
                 AncillaryProfileCost,
@@ -3514,7 +3641,8 @@ namespace ModelLayer.Model.Quotation
                 VAT = 0,
                 DutiesAndTaxes = 0,
 
-                provinceBaseMultiplier;
+                provinceBaseMultiplier,
+                AddiitionalColorPercentage = 0;
         #endregion
 
         #region changePriceBasedOnDate
@@ -5004,8 +5132,9 @@ namespace ModelLayer.Model.Quotation
                         if (fr.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                         {
                             ExpansionBoltPrice += Expansion_BoltQty_Total * ExpansionBoltPricePerPiece;
-                            //GlazingGasketFrameForAluPrice += (((fr.Frame_Width * 2) + (fr.Frame_Height * 2)) / 1000) * UniversalGasketPricePerPiece;
-                            GlazingGasketFrameForAluPrice += ((((fr.Frame_Height + fr.Frame_Width) * 2) / 1000m) * GlazingGasket_FrameSash_PerPiece);
+                            HoleCapePrice += Expansion_BoltQty_Total * HoleCapePricePerPiece;
+                            //old algo
+                            //GlazingGasketFrameForAluPrice += ((((fr.Frame_Height + fr.Frame_Width) * 2) / 1000m) * GlazingGasket_FrameSash_PerPiece);
 
                         }
 
@@ -5084,11 +5213,10 @@ namespace ModelLayer.Model.Quotation
                                                 DividerReinPricePerSqrMeter = 0;
                                                 MechanicalJointPricePerPiece = 0;
 
-
                                                 MullionConnectorPrice += 2 * MullionConnectorPricePerPiece; // sa small lang meron dhil screw ang gamit sa big
                                             }
                                             else if (div.Div_ArtNo == Divider_ArticleNo._84301)
-                                            {
+                                            { 
                                                 DividerPricePerSqrMeter = Divider_84301_PricePerSqrMeter;
                                                 DividerReinPricePerSqrMeter = 0;
                                                 MechanicalJointPricePerPiece = 0;
@@ -5126,6 +5254,7 @@ namespace ModelLayer.Model.Quotation
                                                     {
                                                         DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_WoodGrain;
                                                     }
+                                                    EndCapPricePerPiece = EndCap_9C68_PricePerPiece;
                                                 }
                                                 else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
                                                 {
@@ -5140,13 +5269,17 @@ namespace ModelLayer.Model.Quotation
                                                     ShootBoltStrikerPrice += ShootBoltStrikerPricePerPiece;
                                                     ShootBoltReversePrice += ShootBoltReversePricePerPiece;
                                                     ShootBoltNonReversePrice += ShootBoltNonReversePricePerPiece * 3;
+                                                    EndCapPricePerPiece = EndCap_9C68_PricePerPiece;
+
                                                 }
                                                 else if (div.Div_DMArtNo == DummyMullion_ArticleNo._84401)
                                                 {
                                                         DummyMullionPricePerLinearMeter = DividerDM_84401_PricePerSqrMeter;
                                                         FrameReinPricePerLinearMeter_7502 = 0;
+                                                        EndCapPricePerPiece += EndCap_M649_PricePerPiece;
+                                                        ShootBoltPrice += Shootbolt_H110_PricePerPiece;
                                                 }
-                                                
+
 
                                                 DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter;
                                                 DMReinforcementPrice += (div.Div_Height / 1000m) * FrameReinPricePerLinearMeter_7502;
@@ -5199,6 +5332,8 @@ namespace ModelLayer.Model.Quotation
                                                     DividerPricePerSqrMeter = Divider_84300_PricePerSqrMeter;
                                                     DividerReinPricePerSqrMeter = 0;
                                                     MechanicalJointPricePerPiece = 0;
+
+                                                    MullionConnectorPrice += 2 * MullionConnectorPricePerPiece; // sa small lang meron dhil screw ang gamit sa big
                                                 }
                                                 else if (div.Div_ArtNo == Divider_ArticleNo._84301)
                                                 {
@@ -5243,10 +5378,13 @@ namespace ModelLayer.Model.Quotation
                                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                                 {
                                     if (pnl.Panel_SashPropertyVisibility == true)
-                                    {
+                                    { 
+                                        
                                         #region Casement 
                                         if (pnl.Panel_Type.Contains("Casement"))
                                         {
+                                            RunUpBlockQty = 1;
+                                            StrikerQty = 3;
                                             if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
                                             {
                                                 MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
@@ -5467,6 +5605,35 @@ namespace ModelLayer.Model.Quotation
                                                 CorverCornerPivotRestPrice += CorverCornerPivotRestPricePerPiece;
                                                 CorverCornerPivotRestVerticalPrice += CorverCornerPivotRestVerticalPricePerPiece;
                                             }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84200 ||
+                                                     pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                                            {
+                                                if (fr.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                                                {
+                                                    if (chckPerFrameGlazingGasket == true)
+                                                    {
+
+                                                        CornerCleatPrice += 4 * CornerCleatPricePerPiece;
+                                                        CheveronPrice += 4 * CheveronPricePerPiece;
+
+                                                        chckPerFrameGlazingGasket = false;
+                                                    }
+
+                                                    //if (chckFramePacker == false)
+                                                    //{
+                                                    //    decimal FramePackerQty = Math.Round((((decimal)(fr.Frame_Width * 2) + (decimal)(fr.Frame_Height * 2)) / 600), 2);
+                                                    //    FramePackerPrice += FramePackerQty * FramePackerPricePerPiece;
+                                                    //    chckFramePacker = true;
+                                                    //    addFramePacker = true;
+                                                    //}
+
+                                                    // GlazingShimPrice += 8 * GlazingShimPricePerPiece;
+                                                    CornerCleatPrice += 4 * CornerCleatPricePerPiece;
+                                                    PackerRodPrice += 2 * PackerRodPricePerPiece;
+                                                    PegstayPrice += PegstayPricePerPiece;
+                                                    LockingConnectorDevicePrice += LockingConnectorDevicePricePerPiece;
+                                                }
+                                            }
                                             else if (pnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
                                             {
                                                 SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
@@ -5501,7 +5668,8 @@ namespace ModelLayer.Model.Quotation
                                         #region Awning
                                         else if (pnl.Panel_Type.Contains("Awning"))
                                         {
-
+                                            RunUpBlockQty = 2;
+                                            StrikerQty = 2;
                                             if (pnl.Panel_HingeOptions == HingeOption._2DHinge || pnl.Panel_LouverMotorizeCheck == true)
                                             {
                                                 _2DHingePrice += _2DHingePricePerPiece * pnl.Panel_2DHingeQty_nonMotorized;
@@ -5657,13 +5825,13 @@ namespace ModelLayer.Model.Quotation
                                                 chckPerFrameGlazingGasket = false;
                                             }
 
-                                            if (chckFramePacker == false)
-                                            {
-                                                decimal FramePackerQty = Math.Round((((decimal)(fr.Frame_Width * 2) + (decimal)(fr.Frame_Height * 2)) / 600), 2);
-                                                FramePackerPrice += FramePackerQty * FramePackerPricePerPiece;
-                                                chckFramePacker = true;
-                                                addFramePacker = true;
-                                            }
+                                            //if (chckFramePacker == false)
+                                            //{
+                                            //    decimal FramePackerQty = Math.Round((((decimal)(fr.Frame_Width * 2) + (decimal)(fr.Frame_Height * 2)) / 600), 2);
+                                            //    FramePackerPrice += FramePackerQty * FramePackerPricePerPiece;
+                                            //    chckFramePacker = true;
+                                            //    addFramePacker = true;
+                                            //}
 
                                             // GlazingShimPrice += 8 * GlazingShimPricePerPiece;
                                             CornerCleatPrice += 4 * CornerCleatPricePerPiece;
@@ -5810,7 +5978,7 @@ namespace ModelLayer.Model.Quotation
                                                 else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                                                 {
                                                     CenterProfilePrice += ((pnl.Panel_SashHeight - 5) / 1000m) * CenterProfile_A000AluminumPricePerLinearMeter_Woodgrain;
-                                                    CenterProfilePricePerLinearMeter = CenterProfile_A000AluminumPricePerLinearMeter_White;
+                                                    CenterProfilePricePerLinearMeter = CenterProfile_A000AluminumPricePerLinearMeter_Woodgrain;
                                                 }
                                             }
 
@@ -6271,6 +6439,14 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 TransmissionRodPrice += TransmissionRodPricePerPiece;
                                             }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172 ||
+                                                     pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
+                                            {
+                                                PolymideStripPrice += (pnl.Panel_SashHeight / 1000m) * PolymideStrip_H172_PerLinearMeter; //mas mahal na yung ginamit yung plastic nalang
+
+                                                OneWayLockingConnectorPrice +=  OneWayLockingConnectorPricePerPiece * 2;
+                                                TwoWayLockingConnectorPrice +=  TwoWayLockingConnectorPricePerPiece;
+                                            } 
                                             else
                                             {
                                                 EspagPrice += Espag741012_PricePerPiece;
@@ -6602,22 +6778,82 @@ namespace ModelLayer.Model.Quotation
                                         if (wdm.WD_profile.Contains("Alutek"))
                                         {
                                             if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
-                                            { 
+                                            {
+                                                #region old algo
+                                                /*
                                                 GlazingGasketGbeadForAluPrice += ((((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
                                                 GlazingGasketSashForAluPrice += ((SashPerimeter / 1000m) * GlazingGasket_FrameSash_PerPiece);
                                                 CenterGasketPrice += ((((pnl.Panel_DisplayWidth * 2) + (pnl.Panel_DisplayHeight * 2)) / 1000m) * CenterGasketPerPiece);
+                                                */
+                                                #endregion
+
+                                                #region gaskets 
+                                                if (pnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G223)
+                                                {
+                                                    GasketPerLinearMeter = Gasket_G223_PerLinearMeter;
+                                                }
+                                                else if (pnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G224)
+                                                {
+                                                    GasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                                }
+                                                else if (pnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G287)
+                                                {
+                                                    GasketPerLinearMeter = Gasket_G287_PerLinearMeter;
+                                                }
+
+                                                if (pnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G221)
+                                                {
+                                                    UniversalGasketPerLinearMeter = UniversalGasketPricePerLinearMeter;
+                                                }
+                                                else if (pnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G224)
+                                                {
+                                                    UniversalGasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                                }
+
+                                                UniversalGasketAluPrice += ((((pnl.Panel_DisplayWidth + pnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPerLinearMeter) * 3;
+                                                GlazingGasketAluPrice += (((pnl.Panel_SashWidth * 2) + (pnl.Panel_SashHeight * 2)) / 1000m) * GasketPerLinearMeter; 
+                                                CenterGasketAluPrice += ((((pnl.Panel_DisplayWidth + pnl.Panel_DisplayHeight) * 2) / 1000m) * CenterGasketPerLinearMeter);
+                                                #endregion
                                             }
 
-                                            OpenableStrikerPrice += 2 * OpenableStrikerPricePerPiece;
+                                            if (pnl.Panel_FSAlutekArtNo != FrictionAlutek_ArticleNo._None)
+                                            {
+                                                if (pnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H091)
+                                                {
+                                                    FrictionStayPricePerPiece = FrictionStay_H091_PricePerPiece;
+                                                }
+                                                else if (pnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H029)
+                                                {
+                                                    FrictionStayPricePerPiece = FrictionStay_H029_PricePerPiece;
+                                                }
+                                                else if (pnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H231)
+                                                {
+                                                    FrictionStayPricePerPiece = FrictionStay_H231_PricePerPiece;
+                                                }
+                                                else if (pnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H232)
+                                                {
+                                                    FrictionStayPricePerPiece = FrictionStay_H232_PricePerPiece;
+                                                }
+
+                                                FrictionStayPrice += FrictionStayPricePerPiece;
+                                                FrictionStayPackerPrice += FrictionStayPackerPricePerPiece;
+                                            }
+
+
                                             CheveronPrice += 4 * CheveronPricePerPiece;
-                                            FrictionStayPrice += FrictionStayPricePerPiece;
-                                            RunUpblockPrice += RunUpblockPricePerPiece;
-                                            LockingWedgesPrice += 2 * LockingWedgesPricePerPiece;
+                                            RunUpblockPrice += RunUpBlockQty * RunUpblockPricePerPiece;
                                             SSCheveronPrice += 4 * SSCheveronPricePerPiece;
 
                                             //WaterDrainageWValvesPrice += 2 * WaterDrainageWValvesPricePerPiece;
-                                            CremonHandlePrice += CremonHandlePricePerPiece;
-                                            Unica40Price += Unica40PricePerPiece;
+                                           
+                                            if (pnl.Panel_HandleType != Handle_Type._None)
+                                            {
+                                                OpenableStrikerPrice += StrikerQty * OpenableStrikerPricePerPiece;
+                                                LockingWedgesPrice +=  LockingWedgesPricePerPiece;
+                                                CremonHandlePrice += CremonHandlePricePerPiece;
+                                                Unica40Price += Unica40PricePerPiece;
+                                             
+                                            }
                                              
                                             TotalGlassPerimeter += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m));
                                         }
@@ -6634,9 +6870,7 @@ namespace ModelLayer.Model.Quotation
                                         CostingPoints += ProfileColorPoints * 2;
                                         InstallationPoints += (ProfileColorPoints / 3) * 2;
 
-                                        #region Glass
-
-                                     
+                                        #region Glass 
 
                                         var GlassThcknessDesc_Holder = pnl.Panel_GlassThicknessDesc;
 
@@ -6816,28 +7050,64 @@ namespace ModelLayer.Model.Quotation
 
                                         #region alutekAcc
                                         if (wdm.WD_profile.Contains("Alutek"))
-                                        {  
-                                           CornerCleatPrice += 6 * CornerCleatPricePerPiece;
-                                           
-                                           //CornerWindowPrice += 4 * CornerWindowPricePerPiece;
-                                           //CheveronPrice += 4 * CheveronPricePerPiece;
-                                           //WaterDrainageWValvesPrice += 2 * WaterDrainageWValvesPricePerPiece;
+                                        {
+                                            if (chckPerFrameGlazingGasket == true)
+                                            {
+
+                                                CornerCleatPrice += 4 * CornerCleatPricePerPiece;
+                                                CheveronPrice += 4 * CheveronPricePerPiece;
+
+                                                chckPerFrameGlazingGasket = false;
+                                            }
+                                           // CornerCleatPrice += 4 * CornerCleatPricePerPiece;
                                            //HoleCapePrice += 10 * HoleCapePricePerPiece;
-                                           
-                                           if (fr.Frame_InversionClipOption == true)
+
+                                            #region Inalis na kaya wag mo na pabalikin
+                                            //CornerWindowPrice += 4 * CornerWindowPricePerPiece;
+                                            //CheveronPrice += 4 * CheveronPricePerPiece;
+                                            //WaterDrainageWValvesPrice += 2 * WaterDrainageWValvesPricePerPiece;
+                                            #endregion
+
+
+                                            if (fr.Frame_InversionClipOption == true)
                                            {
                                                InversionClipPrice += (((pnl.Panel_InversionClipWidth * 2) + (pnl.Panel_InversionClipHeight * 2)) / 1000m) * InversionClipPricePerPiece;
                                            }
-                                            
-                                           //UniversalGasketPrice += ((fr.Frame_Width * 2) + (fr.Frame_Height * 2)) * UniversalGasketPricePerPiece;
-                                           //GasketPar3mmPrice += ((pnl.Panel_GlazingBeadWidth*2) + (pnl.Panel_GlazingBeadHeight *2)) * GasketPar3mmPricePerPiece;
-                                           
-                                           //GlazingGasketForAluPrice += (((((pnl.Panel_DisplayWidth - 95.8m) * 2) + ((pnl.Panel_DisplayHeight - 125.2m) * 2)) * GlazingGasket_FrameSash_PerPiece) / 1000m);
-                                           GlazingGasketGbeadForAluPrice += ((((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
-                                           
-                                           //GlazingShimPrice += 8 * GlazingShimPricePerPiece; //inalis ang glazing shim
-                                           
-                                           TotalGlassPerimeter += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m));
+                                            #region no need pero may chance na bumalik pero wag mona patawarin
+                                            //UniversalGasketPrice += ((fr.Frame_Width * 2) + (fr.Frame_Height * 2)) * UniversalGasketPricePerPiece;
+                                            //GasketPar3mmPrice += ((pnl.Panel_GlazingBeadWidth*2) + (pnl.Panel_GlazingBeadHeight *2)) * GasketPar3mmPricePerPiece;
+                                            //GlazingGasketForAluPrice += (((((pnl.Panel_DisplayWidth - 95.8m) * 2) + ((pnl.Panel_DisplayHeight - 125.2m) * 2)) * GlazingGasket_FrameSash_PerPiece) / 1000m);
+                                            //GlazingShimPrice += 8 * GlazingShimPricePerPiece; //inalis ang glazing shim
+                                            #endregion
+
+                                            //old algo
+                                            //GlazingGasketGbeadForAluPrice += ((((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
+
+                                            if (pnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G223)
+                                            {
+                                                GasketPerLinearMeter = Gasket_G223_PerLinearMeter;
+                                            }
+                                            else if (pnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G224)
+                                            {
+                                                GasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                            }
+                                            else if (pnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G287)
+                                            {
+                                                GasketPerLinearMeter = Gasket_G287_PerLinearMeter;
+                                            }
+
+                                            if (pnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G221)
+                                            {
+                                                UniversalGasketPerLinearMeter = UniversalGasketPricePerLinearMeter;
+                                            }
+                                            else if (pnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G224)
+                                            {
+                                                UniversalGasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                            }
+
+                                            UniversalGasketAluPrice += ((((pnl.Panel_DisplayWidth + pnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPerLinearMeter);
+                                            GlazingGasketAluPrice += (((pnl.Panel_GlazingBeadWidth * 2) + (pnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GasketPerLinearMeter;
+                                            TotalGlassPerimeter += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m));
                                         }
                                         #endregion
                                     }
@@ -7647,6 +7917,8 @@ namespace ModelLayer.Model.Quotation
                                 #region Casement 
                                 if (Singlepnl.Panel_Type.Contains("Casement"))
                                 {
+                                    RunUpBlockQty = 1;
+                                    StrikerQty = 3;
                                     MiddleCLoserPrice += MiddleCLoserPricePerPiece * Singlepnl.Panel_MiddleCloserPairQty;
 
                                     if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
@@ -7867,6 +8139,37 @@ namespace ModelLayer.Model.Quotation
                                         CorverCornerPivotRestPrice += CorverCornerPivotRestPricePerPiece;
                                         CorverCornerPivotRestVerticalPrice += CorverCornerPivotRestVerticalPricePerPiece;
                                     }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84200 ||
+                                             Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
+                                    {
+                                        if (fr.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                                        {
+                                            if (chckPerFrameGlazingGasket == true)
+                                            {
+                                                //old algo
+                                                //GlazingGasketFrameForAluPrice += ((((fr.Frame_Height + fr.Frame_Width) * 2) / 1000m) * GlazingGasket_FrameSash_PerPiece);
+
+                                                CornerCleatPrice += 4 * CornerCleatPricePerPiece;
+                                                CheveronPrice += 4 * CheveronPricePerPiece;
+
+                                                chckPerFrameGlazingGasket = false;
+                                            }
+
+                                            //if (chckFramePacker == false)
+                                            //{
+                                            //    decimal FramePackerQty = Math.Round((((decimal)(fr.Frame_Width * 2) + (decimal)(fr.Frame_Height * 2)) / 600), 2);
+                                            //    FramePackerPrice += FramePackerQty * FramePackerPricePerPiece;
+                                            //    chckFramePacker = true;
+                                            //    addFramePacker = true;
+                                            //}
+
+                                            // GlazingShimPrice += 8 * GlazingShimPricePerPiece;
+                                            CornerCleatPrice += 4 * CornerCleatPricePerPiece;
+                                            PackerRodPrice += 2 * PackerRodPricePerPiece;
+                                            PegstayPrice += PegstayPricePerPiece;
+                                            LockingConnectorDevicePrice += LockingConnectorDevicePricePerPiece;
+                                        }
+                                    } 
                                     else if (Singlepnl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
                                     {
                                         SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
@@ -7884,6 +8187,8 @@ namespace ModelLayer.Model.Quotation
                                 #region Awning 
                                 else if (Singlepnl.Panel_Type.Contains("Awning"))
                                 {
+                                    RunUpBlockQty = 2;
+                                    StrikerQty = 2;
                                     if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge || Singlepnl.Panel_LouverMotorizeCheck == true)
                                     {
                                         _2DHingePrice += _2DHingePricePerPiece * Singlepnl.Panel_2DHingeQty_nonMotorized;
@@ -8098,7 +8403,8 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         if (chckPerFrameGlazingGasket == true)
                                         {
-                                            GlazingGasketFrameForAluPrice += ((((fr.Frame_Height + fr.Frame_Width) * 2) / 1000m) * GlazingGasket_FrameSash_PerPiece);
+                                            //old algo
+                                            //GlazingGasketFrameForAluPrice += ((((fr.Frame_Height + fr.Frame_Width) * 2) / 1000m) * GlazingGasket_FrameSash_PerPiece);
 
                                             CornerCleatPrice += 4 * CornerCleatPricePerPiece;
                                             CheveronPrice += 4 * CheveronPricePerPiece;
@@ -8106,13 +8412,13 @@ namespace ModelLayer.Model.Quotation
                                             chckPerFrameGlazingGasket = false;
                                         }
 
-                                        if (chckFramePacker == false)
-                                        {
-                                            decimal FramePackerQty = Math.Round((((decimal)(fr.Frame_Width * 2) + (decimal)(fr.Frame_Height * 2)) / 600), 2);
-                                            FramePackerPrice += FramePackerQty * FramePackerPricePerPiece;
-                                            chckFramePacker = true;
-                                            addFramePacker = true;
-                                        }
+                                        //if (chckFramePacker == false)
+                                        //{
+                                        //    decimal FramePackerQty = Math.Round((((decimal)(fr.Frame_Width * 2) + (decimal)(fr.Frame_Height * 2)) / 600), 2);
+                                        //    FramePackerPrice += FramePackerQty * FramePackerPricePerPiece;
+                                        //    chckFramePacker = true;
+                                        //    addFramePacker = true;
+                                        //}
 
                                         // GlazingShimPrice += 8 * GlazingShimPricePerPiece;
                                         CornerCleatPrice += 4 * CornerCleatPricePerPiece;
@@ -8344,11 +8650,11 @@ namespace ModelLayer.Model.Quotation
                                         SashReinPricePerLinearMeter = 0;
                                         GbPricePerLinearMeter = GlazingBead_84500PricePerLinearMeter;
 
-
+                                        /* old algo
                                         GlazingGasketGbeadForAluPrice += ((((Singlepnl.Panel_GlazingBeadWidth * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
                                         GlazingGasketSashForAluPrice += ((SashPerimeter / 1000m) * GlazingGasket_FrameSash_PerPiece);
                                         CenterGasketPrice += ((((Singlepnl.Panel_DisplayWidth * 2) + (Singlepnl.Panel_DisplayHeight * 2)) / 1000m) * CenterGasketPerPiece);
-
+                                        */
                                     }
 
 
@@ -8583,6 +8889,14 @@ namespace ModelLayer.Model.Quotation
                                            Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H103)
                                     {
                                         TransmissionRodPrice += TransmissionRodPricePerPiece;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172 ||
+                                             Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
+                                    {
+                                        PolymideStripPrice = (Singlepnl.Panel_SashHeight / 1000m) * PolymideStrip_H172_PerLinearMeter; //
+
+                                        OneWayLockingConnectorPrice += OneWayLockingConnectorPricePerPiece * 2;
+                                        TwoWayLockingConnectorPrice += TwoWayLockingConnectorPricePerPiece;
                                     }
                                     else
                                     {
@@ -8913,24 +9227,81 @@ namespace ModelLayer.Model.Quotation
                                 if (wdm.WD_profile.Contains("Alutek"))
                                 { 
                                   if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84207)
-                                  { 
-                                      GlazingGasketGbeadForAluPrice += ((((Singlepnl.Panel_GlazingBeadWidth * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
-                                      GlazingGasketSashForAluPrice += ((SashPerimeter / 1000m) * GlazingGasket_FrameSash_PerPiece);
-                                      CenterGasketPrice += ((((Singlepnl.Panel_DisplayWidth * 2) + (Singlepnl.Panel_DisplayHeight * 2)) / 1000m) * CenterGasketPerPiece);
+                                  {
+                                        #region old algo
+                                        /*
+                                        GlazingGasketGbeadForAluPrice += ((((Singlepnl.Panel_GlazingBeadWidth * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GlazingGasket_GlazingBead_PerPiece);
+                                        GlazingGasketSashForAluPrice += ((SashPerimeter / 1000m) * GlazingGasket_FrameSash_PerPiece);
+                                        CenterGasketPrice += ((((Singlepnl.Panel_DisplayWidth * 2) + (Singlepnl.Panel_DisplayHeight * 2)) / 1000m) * CenterGasketPerPiece);
+                                        */
+                                        #endregion
+
+                                        if (Singlepnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G223)
+                                        {
+                                            GasketPerLinearMeter = Gasket_G223_PerLinearMeter;
+                                        }
+                                        else if (Singlepnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G224)
+                                        {
+                                            GasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                        }
+                                        else if (Singlepnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G287)
+                                        {
+                                            GasketPerLinearMeter = Gasket_G287_PerLinearMeter;
+                                        }
+
+                                        if (Singlepnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G221)
+                                        {
+                                            UniversalGasketPerLinearMeter = UniversalGasketPricePerLinearMeter;
+                                        }
+                                        else if (Singlepnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G224)
+                                        {
+                                            UniversalGasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                        }
+                                        
+                                        UniversalGasketAluPrice += ((((Singlepnl.Panel_DisplayWidth + Singlepnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPerLinearMeter) * 3;
+                                        GlazingGasketAluPrice += (((Singlepnl.Panel_SashWidth * 2) + (Singlepnl.Panel_SashHeight * 2)) / 1000m) * GasketPerLinearMeter;
+                                        CenterGasketAluPrice += ((((Singlepnl.Panel_DisplayWidth + Singlepnl.Panel_DisplayHeight) * 2) / 1000m) * CenterGasketPerLinearMeter);
+
                                   }
-                                  
-                                  //TransmissionRodPrice += TransmissionRodPricePerPiece; nasa espag region
-                                  OpenableStrikerPrice += 2 * OpenableStrikerPricePerPiece;
-                                  CheveronPrice += 4 * CheveronPricePerPiece;
-                                  FrictionStayPrice += FrictionStayPricePerPiece;
-                                  RunUpblockPrice += RunUpblockPricePerPiece;
-                                  LockingWedgesPrice += 2 * LockingWedgesPricePerPiece;
-                                  SSCheveronPrice += 4 * SSCheveronPricePerPiece;
-                                  
-                                  //WaterDrainageWValvesPrice += 2 * WaterDrainageWValvesPricePerPiece;
-                                  CremonHandlePrice += CremonHandlePricePerPiece;
-                                  Unica40Price += Unica40PricePerPiece;
-                                  
+
+                                    //TransmissionRodPrice += TransmissionRodPricePerPiece; nasa espag region
+                                    //WaterDrainageWValvesPrice += 2 * WaterDrainageWValvesPricePerPiece;
+
+                                    CheveronPrice += 4 * CheveronPricePerPiece;
+                                    RunUpblockPrice += RunUpBlockQty * RunUpblockPricePerPiece;
+                                    SSCheveronPrice += 4 * SSCheveronPricePerPiece;
+
+                                    if (Singlepnl.Panel_FSAlutekArtNo != FrictionAlutek_ArticleNo._None)
+                                    {
+                                        if (Singlepnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H091)
+                                        {
+                                            FrictionStayPricePerPiece = FrictionStay_H091_PricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H029)
+                                        {
+                                            FrictionStayPricePerPiece = FrictionStay_H029_PricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H231)
+                                        {
+                                            FrictionStayPricePerPiece = FrictionStay_H231_PricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_FSAlutekArtNo == FrictionAlutek_ArticleNo._H232)
+                                        {
+                                            FrictionStayPricePerPiece = FrictionStay_H232_PricePerPiece;
+                                        }
+
+                                        FrictionStayPrice += FrictionStayPricePerPiece;
+                                        FrictionStayPackerPrice += FrictionStayPackerPricePerPiece;
+                                    }
+
+                                    if (Singlepnl.Panel_HandleType != Handle_Type._None)
+                                  {
+                                      OpenableStrikerPrice += StrikerQty * OpenableStrikerPricePerPiece;
+                                      LockingWedgesPrice += LockingWedgesPricePerPiece;
+                                      CremonHandlePrice += CremonHandlePricePerPiece;
+                                      Unica40Price += Unica40PricePerPiece;
+                                  }
+
                                   TotalGlassPerimeter += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m));
                                 }
 
@@ -9140,8 +9511,33 @@ namespace ModelLayer.Model.Quotation
                                   {
                                       InversionClipPrice += (((Singlepnl.Panel_InversionClipWidth * 2) + (Singlepnl.Panel_InversionClipHeight * 2)) / 1000m) * InversionClipPricePerPiece;
                                   }
-                                 
-                                  GlazingGasketGbeadForAluPrice += (((Singlepnl.Panel_GlazingBeadHeight * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000) * GlazingGasket_GlazingBead_PerPiece;
+                                    //old algo
+                                    //GlazingGasketGbeadForAluPrice += (((Singlepnl.Panel_GlazingBeadHeight * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000) * GlazingGasket_GlazingBead_PerPiece;
+
+                                    if (Singlepnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G223)
+                                    {
+                                        GasketPerLinearMeter = Gasket_G223_PerLinearMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G224)
+                                    {
+                                        GasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlazingGasketArtNo == GlazingGasket_ArticleNo._G287)
+                                    {
+                                        GasketPerLinearMeter = Gasket_G287_PerLinearMeter;
+                                    }
+
+                                    if (Singlepnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G221)
+                                    {
+                                        UniversalGasketPerLinearMeter = UniversalGasketPricePerLinearMeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlazingGasketArtNo2 == GlazingGasket_ArticleNo._G224)
+                                    {
+                                        UniversalGasketPerLinearMeter = Gasket_G224_PerLinearMeter;
+                                    } 
+
+                                    UniversalGasketAluPrice += ((((Singlepnl.Panel_DisplayWidth + Singlepnl.Panel_DisplayHeight) * 2) / 1000m) * UniversalGasketPerLinearMeter);
+                                    GlazingGasketAluPrice += (((Singlepnl.Panel_GlazingBeadWidth * 2) + (Singlepnl.Panel_GlazingBeadHeight * 2)) / 1000m) * GasketPerLinearMeter;
                                 }
                                 #endregion
 
@@ -9832,13 +10228,12 @@ namespace ModelLayer.Model.Quotation
                     {
                         #region AlutekComputation
 
+                        #region No need na
+                        /*
                         if (addFramePacker == false)
                         {
-                            FramePackerPrice = 0;
+                            //FramePackerPrice = 0;
                         }
-                        GlazingGasketForAluPrice = GlazingGasketFrameForAluPrice +
-                                                   GlazingGasketSashForAluPrice +
-                                                   GlazingGasketGbeadForAluPrice;
 
                         if (chckWithOperablepanel == false)
                         {
@@ -9862,14 +10257,33 @@ namespace ModelLayer.Model.Quotation
                             //GasketPar3mmPrice = 0;
                         }
 
+                         GlazingGasketForAluPrice = GlazingGasketFrameForAluPrice +
+                                                   GlazingGasketSashForAluPrice +
+                                                   GlazingGasketGbeadForAluPrice;
+                        */
+                        #endregion 
+
                         if (wdm.WD_BaseColor == Base_Color._PowderCoated)
                         {
-                            FramePrice = FramePrice * 1.8m;
-                            SashPrice = SashPrice * 1.8m;
-                            DivPrice = DivPrice * 1.8m;
-                            InversionClipPrice = InversionClipPrice * 1.8m;
-                            GbPrice = GbPrice * 1.8m;
+                            AddiitionalColorPercentage = 1.08m;
+                           
+                            if (wdm.WD_PowderCoatType == PowderCoatType_Color._Special)
+                            {
+                                AddiitionalColorPercentage = 1.3m;
+                            }
                         }
+                        else if (wdm.WD_BaseColor == Base_Color._Foiled)
+                        {
+                            AddiitionalColorPercentage = 1.08m;
+                        }
+
+                        FramePrice = FramePrice * AddiitionalColorPercentage;
+                        SashPrice = SashPrice * AddiitionalColorPercentage;
+                        DivPrice = DivPrice * AddiitionalColorPercentage;
+                        DMPrice = DMPrice * AddiitionalColorPercentage;
+                        InversionClipPrice = InversionClipPrice * AddiitionalColorPercentage;
+                        GbPrice = GbPrice * AddiitionalColorPercentage;
+
 
                         wdm.WD_CostingPoints = CostingPoints;
                         LaborCost = CostingPoints * CostPerPoints;
@@ -9882,15 +10296,18 @@ namespace ModelLayer.Model.Quotation
                                        //Math.Round(CornerWindowPrice, 2) +
                                        Math.Round(CheveronPrice, 2) +
                                        //Math.Round(WaterDrainageWValvesPrice, 2) +
-                                       //Math.Round(HoleCapePrice, 2) +
+                                       Math.Round(HoleCapePrice, 2) +
                                        //Math.Round(UniversalGasketPrice, 2) +
                                        // Math.Round(GasketPar3mmPrice, 2) +
                                        //aw
-                                       Math.Round(InversionClipPrice * powderCoatedMultiplier, 2) +
+                                       Math.Round(InversionClipPrice, 2) +
                                        Math.Round(GbPrice, 2) +
-                                       Math.Round(GlazingGasketForAluPrice, 2) +
-                                       Math.Round(CenterGasketPrice, 2) +
-                                       //Math.Round(GlazingShimPrice, 2) +
+                                       //Math.Round(GlazingGasketForAluPrice, 2) + old algo ng gasket
+                                       //Math.Round(CenterGasketPrice, 2) + old algo ng gasket
+                                       //Math.Round(GlazingShimPrice, 2) + 
+                                       Math.Round(UniversalGasketAluPrice, 2) +
+                                       Math.Round(CenterGasketAluPrice, 2) +
+                                       Math.Round(GlazingGasketAluPrice, 2) + 
                                        Math.Round(TransmissionRodPrice, 2) +
                                        Math.Round(OpenableStrikerPrice, 2) +
                                        Math.Round(CornerCleatPrice, 2) +
@@ -9901,12 +10318,18 @@ namespace ModelLayer.Model.Quotation
                                        Math.Round(SSCheveronPrice, 2) +
                                        Math.Round(MullionConnectorPrice, 2) +
                                        Math.Round(PegstayPrice, 2) +
-                                       Math.Round(FramePackerPrice, 2) +
+                                       //Math.Round(FramePackerPrice, 2) +
                                        Math.Round(CremonHandlePrice, 2) +
                                        Math.Round(Unica40Price, 2) +
                                        Math.Round(LockingConnectorDevicePrice, 2) +
                                        //CW
-                                       Math.Round(FrictionStayPackerPrice, 2)
+                                       Math.Round(FrictionStayPackerPrice, 2) +
+                                       Math.Round(OneWayLockingConnectorPrice, 2) +
+                                       Math.Round(TwoWayLockingConnectorPrice, 2) +
+                                       Math.Round(PolymideStripPrice, 2) +
+                                       Math.Round(ShootBoltPrice, 2) + 
+                                       Math.Round(DMPrice, 2) +
+                                       Math.Round(EndCapPrice, 2)
                                        ;
 
 
@@ -9941,10 +10364,17 @@ namespace ModelLayer.Model.Quotation
                         //MobilizationCost = 1500 * PricingFactor;
                         MobilizationCost = 0;
                         FoilingCost = (((TotalFramePerimeter + TotalDividerPerimeter + TotalSashPerimeter) / 1000) * 440);
+                       
+                        if (wdm.WD_BaseColor == Base_Color._PowderCoated)
+                        {
+                            FoilingCost = 0;
+                        }
+
                         ProductionCost = ProductionCost + FoilingCost;
                         InstallationCost = (ProductionCost / 3);
                         AdditionalCost = (TotalFramePerimeter * 200) / 1000;
 
+                       
                         Contingency = (Math.Round(SubTotatal + Wastage, 2) +
                                       Math.Round(ImportationCost, 2) +
                                       Math.Round(ProductionCost, 2) +
@@ -9965,6 +10395,26 @@ namespace ModelLayer.Model.Quotation
                         //BaseTotalPrice = TotaPrice;
 
                         //TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
+
+                        if (wdm.WD_OutsideColor == wdm.WD_InsideColor)
+                        {
+                            if ((wdm.WD_OutsideColor == Foil_Color._Carbon ||
+                                 wdm.WD_OutsideColor == Foil_Color._GreyOak ||
+                                 wdm.WD_OutsideColor == Foil_Color._UmberOak ||
+                                 wdm.WD_OutsideColor == Foil_Color._ChestnutOak ||
+                                 wdm.WD_OutsideColor == Foil_Color._WashedOak)
+                                 &&
+                                (wdm.WD_InsideColor == Foil_Color._Carbon ||
+                                 wdm.WD_InsideColor == Foil_Color._GreyOak ||
+                                 wdm.WD_InsideColor == Foil_Color._UmberOak ||
+                                 wdm.WD_InsideColor == Foil_Color._ChestnutOak ||
+                                 wdm.WD_InsideColor == Foil_Color._WashedOak))
+                            {
+                                decimal Woodec = wdm.WD_WoodecAdditional;
+                                TotaPrice = TotaPrice + (TotaPrice * (Woodec / 100m));
+                            }
+                        }
+
 
                         BaseTotalPriceWithFactor = TotaPrice;
 
@@ -10136,6 +10586,7 @@ namespace ModelLayer.Model.Quotation
 
                         BaseTotalPriceWithFactor = TotaPrice;
 
+
                         TotaPrice = TotaPrice + LouverCost + MeshCost;
 
 
@@ -10175,9 +10626,279 @@ namespace ModelLayer.Model.Quotation
                         #endregion
                     }
 
+                    #region Price History
+
+                    if (wdm.WD_profile.Contains("Alutek"))
+                    {
+                        #region Price History alutek
+
+
+                        DateTime thisDay = DateTime.Now;
+
+
+                        wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
+
+                                 "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
+                                 "\n\nBase color " + wdm.WD_BaseColor.ToString() +
+                                 "\n\nPowderCoated type " + wdm.WD_PowderCoatType.ToString() +
+                                 "\nFramePrice, SashPrice, DivPrice, DMPrice, InversionClipPrice, GbPrice add " + AddiitionalColorPercentage + "% if powder coated" +
+
+                                 "\nCosting Points: " + CostingPoints +
+                                  "\nLabor Cost " + LaborCost + " = " + "Costing Points " + CostingPoints + "*" + "CostPerPoints " + CostPerPoints +
+                                  "\nInstallationCost " + InstallationCost + " = " + "InstallationPoints " + InstallationPoints + " * " + "CostPerPoints " + CostPerPoints +
+
+                                 "\n\n MaterialCost " + MaterialCost + " = FramePrice " + Math.Round(FramePrice, 2).ToString() + " + " +
+                                 "\n\t\t SashPrice " + Math.Round(SashPrice, 2).ToString() + " + " +
+                                 "\n\t\t DivPrice " + Math.Round(DivPrice, 2).ToString() + " + " +
+                                 // "\n\t\t CornerWindowPrice " + Math.Round(CornerWindowPrice, 2).ToString() + " + " +
+                                 "\n\t\t CheveronPrice " + Math.Round(CheveronPrice, 2).ToString() + " + " +
+                                 //"\n\t\t WaterDrainageWValvesPrice " + Math.Round(WaterDrainageWValvesPrice, 2).ToString() + " + " +
+                                 "\n\t\t HoleCapePrice " + Math.Round(HoleCapePrice, 2).ToString() + " + " +
+                                 "\n\t\t InversionClipPrice" + Math.Round(InversionClipPrice, 2).ToString() + " + " +
+                                 "\n\t\t GbPrice " + Math.Round(GbPrice, 2).ToString() + " + " +
+                                 "\n\t\t UniversalGasketAluPrice " + Math.Round(UniversalGasketAluPrice, 2).ToString() + " + " +
+                                 "\n\t\t CenterGasketAluPrice " + Math.Round(CenterGasketAluPrice, 2).ToString() + " + " +
+                                 "\n\t\t GlazingGasketAluPrice " + Math.Round(GlazingGasketAluPrice, 2).ToString() + " + " +
+                                 "\n\t\t TransmissionRodPrice " + Math.Round(TransmissionRodPrice, 2).ToString() + " + " +
+                                 "\n\t\t OpenableStrikerPrice " + Math.Round(OpenableStrikerPrice, 2).ToString() + " + " +
+                                 "\n\t\t CornerCleatPrice " + Math.Round(CornerCleatPrice, 2).ToString() + " + " +
+                                 "\n\t\t FrictionStayPrice " + Math.Round(FrictionStayPrice, 2).ToString() + " + " +
+                                 "\n\t\t RunUpblockPrice " + Math.Round(RunUpblockPrice, 2).ToString() + " + " +
+                                 "\n\t\t PackerRodPrice " + Math.Round(PackerRodPrice, 2).ToString() + " + " +
+                                 "\n\t\t LockingWedgesPrice " + Math.Round(LockingWedgesPrice, 2).ToString() + " + " +
+                                 "\n\t\t SSCheveronPrice " + Math.Round(SSCheveronPrice, 2).ToString() + " + " +
+                                 "\n\t\t PegstayPrice " + Math.Round(PegstayPrice, 2).ToString() + " + " +
+                                 "\n\t\t CremonHandlePrice " + Math.Round(CremonHandlePrice, 2).ToString() + " + " +
+                                 "\n\t\t Unica40Price " + Math.Round(Unica40Price, 2).ToString() + " + " +
+                                 "\n\t\t LockingConnectorDevicePrice " + Math.Round(LockingConnectorDevicePrice, 2).ToString() + " + " +
+                                 "\n\t\t FrictionStayPackerPrice " + Math.Round(FrictionStayPackerPrice, 2).ToString() + " + " +
+                                 "\n\t\t OneWayLockingConnectorPrice " + Math.Round(OneWayLockingConnectorPrice, 2).ToString() + " + " +
+                                 "\n\t\t TwoWayLockingConnectorPrice " + Math.Round(TwoWayLockingConnectorPrice, 2).ToString() + " + " +
+                                 "\n\t\t PolymideStripPrice " + Math.Round(PolymideStripPrice, 2).ToString() + " + " +
+                                 "\n\t\t ShootBoltPrice " + Math.Round(ShootBoltPrice, 2).ToString() + " + " +
+                                 "\n\t\t DMPrice " + Math.Round(DMPrice, 2).ToString() + " + " +
+                                 "\n\t\t EndCapPrice " + Math.Round(EndCapPrice, 2).ToString() + " + " +
 
 
 
+
+
+                        "\n\n GlassCost " + GlassCost + " = GlassPrice" + Math.Round(GlassPrice, 2).ToString() +
+
+                         "\n\n InstallationMaterialCost " + InstallationMaterialCost + " = SealantPrice " + Math.Round(SealantPrice, 2).ToString() + " + " +
+                                                       "\n\t\t PUFoamingPrice " + Math.Round(PUFoamingPrice, 2).ToString() + " + " +
+                                                       "\n\t\t ExpansionBoltPrice " + Math.Round(ExpansionBoltPrice, 2).ToString() +
+
+                        "\n\n SubTotatal " + SubTotatal + " = MaterialCost " + Math.Round((MaterialCost * 1.08m), 2).ToString() + " + " +
+                                     "\n\t\t GlassCost " + Math.Round((GlassCost * 1.1m), 2).ToString() + " + " +
+                                     "\n\t\t InstallationMaterialCost " + Math.Round(InstallationMaterialCost, 2).ToString() +
+
+                         "\n\n Wastage " + Wastage + " = " + SubTotatal * 0.2m +
+
+                        "\n ImportationCost " + ImportationCost + " =  ((" + MaterialCost + " * 1.08m) + " + InstallationMaterialCost + ") * 0.16m +" +
+                        "\n ProductionCost " + ProductionCost + " =  6000 * " + DesignFactor + " * 1.1m +" +
+                        "\n InstallationCost " + InstallationCost + " =  1000 * " + DesignFactor + " * 1.1m +" +
+                        "\n MobilizationCost " + MobilizationCost + " =  1500 * " + PricingFactor + " + " +
+                        "\n FoilingCost " + FoilingCost + " = (( " + TotalFramePerimeter + " / 1000) * 440) + " + TotalDividerPerimeter + " + " +
+                        "\n AdditionalCost " + AdditionalCost + " =  (" + TotalFramePerimeter + " * 200) / 1000" +
+
+                        "\n\n Contingency " + Contingency + " = (" + Math.Round(SubTotatal + Wastage, 2).ToString() + " + " +
+                                     "\n\t\t ImportationCost " + Math.Round(ImportationCost, 2).ToString() + " + " +
+                                     "\n\t\t ProductionCost " + Math.Round(ProductionCost, 2).ToString() + " + " +
+                                     "\n\t\t InstallationCost " + Math.Round(InstallationCost, 2).ToString() + " + " +
+                                     "\n\t\t MobilizationCost " + Math.Round(MobilizationCost, 2).ToString() + " + " +
+                                     "\n\t\t FoilingCost " + Math.Round(FoilingCost, 2).ToString() + " + " +
+                                     "\n\t\t AdditionalCost " + Math.Round(AdditionalCost, 2).ToString() + ") * 0.05m" +
+
+                        "\n\n TotaPrice " + TotaPrice + " = (" + Math.Round(SubTotatal + Wastage, 2).ToString() + " + " +
+                                   "\n\t\t ImportationCost " + Math.Round(ImportationCost, 2).ToString() + " + " +
+                                   "\n\t\t ProductionCost " + Math.Round(ProductionCost, 2).ToString() + " + " +
+                                   "\n\t\t InstallationCost " + Math.Round(InstallationCost, 2).ToString() + " + " +
+                                   "\n\t\t MobilizationCost " + Math.Round(MobilizationCost, 2).ToString() + " + " +
+                                   "\n\t\t FoilingCost " + Math.Round(FoilingCost, 2).ToString() + " + " +
+                                   "\n\t\t AdditionalCost " + Math.Round(AdditionalCost, 2).ToString() + " + " +
+                                   "\n\t\t Contingency " + Math.Round(Contingency, 2).ToString() + ") * " + PricingFactor +
+
+                         "outside color: " + wdm.WD_OutsideColor + "\n" +
+                         "inside color: " + wdm.WD_InsideColor + "\n" +
+
+                         "\n\n BaseTotalPriceWithFactor " + BaseTotalPriceWithFactor + " = TotaPrice" + TotaPrice;
+
+
+                      
+
+
+                        #endregion
+                    }
+                    else
+                    {
+                        #region Price History C70 and premi
+
+
+                        DateTime thisDay = DateTime.Now;
+                        //wdm.TotalPriceHistoryStatus = "System Generated Price";
+                        wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
+
+                       "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
+
+                        "`````\n\nWD_CostingPoints: " + CostingPoints.ToString() + "\n" +
+                        "LaborCost: " + LaborCost.ToString() + " = CostingPoints " + CostingPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n" +
+                        "InstallationCost: " + InstallationCost.ToString() + " = InstallationPoints " + InstallationPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n\n" +
+
+
+                        "FittingAndSuppliesCost: " + FittingAndSuppliesCost.ToString() + " = \n" +
+
+                                                 "\t FSPrice: " + Math.Round(FSPrice, 2).ToString() + "+\n" +
+                                                 "\t RestrictorStayPrice: " + Math.Round(RestrictorStayPrice, 2).ToString() + "+\n" +
+                                                 "\t CornerDrivePrice: " + Math.Round(CornerDrivePrice, 2).ToString() + "+\n" +
+                                                 "\t SnapInKeepPrice: " + Math.Round(SnapInKeepPrice, 2).ToString() + "+\n" +
+                                                 "\t 35mmBacksetEspagWithCylinderPrice: " + Math.Round(_35mmBacksetEspagWithCylinderPrice, 2).ToString() + "+\n" +
+                                                 "\t MiddleCLoserPrice: " + Math.Round(MiddleCLoserPrice, 2).ToString() + "+\n" +
+                                                 "\t StayBearingPrice: " + Math.Round(StayBearingPrice, 2).ToString() + "+\n" +
+                                                 "\t StayBearingPinPrice: " + Math.Round(StayBearingPinPrice, 2).ToString() + "+\n" +
+                                                 "\t CoverStayBearingPrice: " + Math.Round(CoverStayBearingPrice, 2).ToString() + "+\n" +
+                                                 "\t CoverCornerHingePrice: " + Math.Round(CoverCornerHingePrice, 2).ToString() + "+\n" +
+                                                 "\t CornerPivotRestPrice: " + Math.Round(CornerPivotRestPrice, 2).ToString() + "+\n" +
+                                                 "\t TopCornerHingePrice: " + Math.Round(TopCornerHingePrice, 2).ToString() + "+\n" +
+                                                 "\t CorverCornerPivotRestPrice: " + Math.Round(CorverCornerPivotRestPrice, 2).ToString() + "+\n" +
+                                                 "\t CorverCornerPivotRestVerticalPrice: " + Math.Round(CorverCornerPivotRestVerticalPrice, 2).ToString() + "+\n" +
+                                                 "\t HandlePrice: " + Math.Round(HandlePrice, 2).ToString() + "+\n" +
+                                                 "\t EspagPrice: " + Math.Round(EspagPrice, 2).ToString() + "+\n" +
+                                                 "\t _2DHingePrice: " + Math.Round(_2DHingePrice, 2).ToString() + "+\n" +
+                                                 "\t _3DHingePrice: " + Math.Round(_3DHingePrice, 2).ToString() + "+\n" +
+                                                 "\t NTCenterHingePrice: " + Math.Round(NTCenterHingePrice, 2).ToString() + "+\n" +
+                                                 "\t ShootBoltStrikerPrice: " + Math.Round(ShootBoltStrikerPrice, 2).ToString() + "+\n" +
+                                                 "\t ShootBoltReversePrice: " + Math.Round(ShootBoltReversePrice, 2).ToString() + "+\n" +
+                                                 "\t ShootBoltNonReversePrice: " + Math.Round(ShootBoltNonReversePrice, 2).ToString() + "+\n" +
+                                                 "\t StrikerPrice: " + Math.Round(StrikerPrice, 2).ToString() + "+\n" +
+                                                 "\t LatchDeadboltStrikerPrice: " + Math.Round(LatchDeadboltStrikerPrice, 2).ToString() + "+\n" +
+                                                 "\t ExtensionPrice: " + Math.Round(ExtensionPrice, 2).ToString() + "+\n" +
+                                                 "\t RollerPrice: " + Math.Round(RollerPrice, 2).ToString() + "+\n" +
+                                                 "\t StrikerLRPrice: " + Math.Round(StrikerLRPrice, 2).ToString() + "+\n" +
+                                                 "\t BrushSealPrice: " + Math.Round(BrushSealPrice, 2).ToString() + "+\n" +
+                                                 "\t MotorizePrice: " + Math.Round(MotorizePrice, 2).ToString() + "+\n" +
+                                                 "\t MotorizeMechRemotePricePerPiece: " + Math.Round(MotorizeMechRemotePricePerPiece, 2).ToString() + "\n\n" +
+
+                        "AncillaryProfileCost: " + AncillaryProfileCost.ToString() + " = \n" +
+
+                                                 "\t ThresholdPrice:" + Math.Round(ThresholdPrice, 2).ToString() + "+\n" +
+                                                 "\t GbPrice:" + Math.Round(GbPrice, 2) + "+\n" +
+                                                 "\t GeorgianBarCost:" + Math.Round((GeorgianBarCost * provinceBaseMultiplier), 2) + "+\n" +
+                                                 "\t CoverProfileCost:" + Math.Round(CoverProfileCost, 2) + "+\n" +
+                                                 "\t GlazingGasketPrice:" + Math.Round(GlazingGasketPrice, 2) + "+\n" +
+                                                 "\t WeatherBarPrice:" + Math.Round(WeatherBarPrice, 2) + "+\n" +
+                                                 "\t WeatherBarFastenerPrice:" + Math.Round(WeatherBarFastenerPrice, 2) + "+\n" +
+                                                 "\t WaterSeepagePrice:" + Math.Round(WaterSeepagePrice, 2) + "+\n" +
+                                                 "\t GuideTrackPrice:" + Math.Round(GuideTrackPrice, 2) + "+\n" +
+                                                 "\t AlumTrackPrice:" + Math.Round(AlumTrackPrice, 2) + "+\n" +
+                                                 "\t InterlockPrice:" + Math.Round(InterlockPrice, 2) + "+\n" +
+                                                 "\t ExtensionForInterlockPrice:" + Math.Round(ExtensionForInterlockPrice, 2) + "+\n" +
+                                                 "\t AluminumPullHandlePrice:" + Math.Round(AluminumPullHandlePrice, 2) + "+\n" +
+                                                 "\t GlazingAdaptorPrice:" + Math.Round((GlazingAdaptorPrice * provinceBaseMultiplier), 2) + "\n\n" +
+
+
+                        "AccesorriesCost: " + AccesorriesCost.ToString() + " = \n" +
+                                                 "\t EndCapPrice:" + Math.Round(EndCapPrice, 2).ToString() + "+\n" +
+                                                 "\t MechJointPrice:" + Math.Round(MechJointPrice, 2).ToString() + "+\n" +
+                                                 "\t GBSpacerPrice:" + Math.Round(GBSpacerPrice, 2).ToString() + "+\n" +
+                                                 "\t PlasticWedgePrice:" + Math.Round(PlasticWedgePrice, 2).ToString() + "+\n" +
+                                                 "\t SealingBlockPrice:" + Math.Round(SealingBlockPrice, 2).ToString() + "\n\n" +
+
+
+
+                        "MaterialCost: " + MaterialCost.ToString() + " = \n" +
+
+                                                 "\t FramePrice:" + Math.Round(FramePrice, 2).ToString() + "+\n" +
+                                                 "\t FrameReinPrice:" + Math.Round(FrameReinPrice, 2).ToString() + "+\n" +
+                                                 "\t SashPrice:" + Math.Round(SashPrice, 2).ToString() + "+\n" +
+                                                 "\t SashReinPrice:" + Math.Round(SashReinPrice, 2).ToString() + "+\n" +
+                                                 "\t DivPrice:" + Math.Round(DivPrice, 2).ToString() + "+\n" +
+                                                 "\t DivReinPrice:" + Math.Round(DivReinPrice, 2).ToString() + "+\n" +
+                                                 "\t claddingPrice:" + Math.Round(claddingPrice, 2).ToString() + "+\n" +
+                                                 "\t DMPrice:" + Math.Round(DMPrice, 2).ToString() + "+\n" +
+                                                 "\t DMReinforcementPrice:" + Math.Round(DMReinforcementPrice, 2).ToString() + "+\n" +
+                                                 "\t ExtensionProfile15mmPrice:" + Math.Round(ExtensionProfile15mmPrice, 2).ToString() + "+\n" +
+                                                 "\t TubularPrice:" + Math.Round(TubularPrice, 2).ToString() + "+\n" +
+                                                 "\t SealantPrice:" + Math.Round(SealantPrice, 2).ToString() + "+\n" +
+                                                 "\t PUFoamingPrice:" + Math.Round(PUFoamingPrice, 2).ToString() + "+\n" +
+                                                 "\t FittingAndSuppliesCost:" + Math.Round(FittingAndSuppliesCost, 2).ToString() + "+\n" +
+                                                 "\t AncillaryProfileCost:" + Math.Round(AncillaryProfileCost, 2).ToString() + "+\n" +
+                                                 "\t AccesorriesCost:" + Math.Round(AccesorriesCost, 2).ToString() + "\n\n" +
+
+
+                        "MaterialCostBreakDownBase: " + MaterialCost.ToString() + " \n\n" +
+
+
+                        "LouverCost: " + LouverCost.ToString() + " = \n" +
+
+                                     "\t LouvreFrameWeatherStripHeadPrice:" + Math.Round(LouvreFrameWeatherStripHeadPrice, 2).ToString() + "+\n" +
+                                     "\t LouvreFrameBottomWeatherStripPrice:" + Math.Round(LouvreFrameBottomWeatherStripPrice, 2).ToString() + "+\n" +
+                                     "\t PlantonWeatherStripHeadPrice:" + Math.Round(PlantonWeatherStripHeadPrice, 2).ToString() + "+\n" +
+                                     "\t PlantonWeatherStripSillPrice:" + Math.Round(PlantonWeatherStripSillPrice, 2).ToString() + "+\n" +
+                                     "\t GalleryAdaptorPrice:" + Math.Round(GalleryAdaptorPrice, 2).ToString() + "+\n" +
+                                     "\t BubbleSealPrice:" + Math.Round(BubbleSealPrice, 2).ToString() + "+\n" +
+                                     "\t GlassBladePrice:" + Math.Round(GlassBladePrice, 2).ToString() + "+\n" +
+                                     "\t GalleryPrice:" + Math.Round(GalleryPrice, 2).ToString() + "+\n" +
+                                     "\t PowerKitIncludingWiresPrice:" + Math.Round(PowerKitIncludingWiresPrice, 2).ToString() + "+\n" +
+                                     "\t SecurityKitPrice:" + Math.Round(SecurityKitPrice, 2).ToString() + "+\n" +
+                                     "\t RingpullLeverHandlePrice:" + Math.Round(RingpullLeverHandlePrice, 2).ToString() + "\n\n" +
+
+                       "LouverPrice: " + LouverCost.ToString() + " \n\n" +
+
+                        "LouverCost: " + LouverCost.ToString() + " = LouverCost: " + LouverCost + " * PricingFactor: " + PricingFactor + " * 1.12m\n\n" +
+
+
+
+                        "MeshCost: " + MeshCost.ToString() + " = \n" +
+
+
+                                   "\t SecurityMeshPrice:" + Math.Round(SecurityMeshPrice, 2) + "+\n" +
+                                   "\t WireMeshPrice:" + Math.Round(WireMeshPrice, 2) + "+\n" +
+                                   "\t PetMeshPrice:" + Math.Round(PetMeshPrice, 2) + "+\n" +
+                                   "\t TuffMeshPrice:" + Math.Round(TuffMeshPrice, 2) + "+\n" +
+                                   "\t PhiferMeshPrice:" + Math.Round(PhiferMeshPrice, 2) + "+\n" +
+                                   "\t AluminumFramePrice:" + Math.Round(AluminumFramePrice, 2) + "\n\n" +
+
+
+                        "MeshPrice: " + MeshCost.ToString() + " \n\n" +
+
+
+                        "MeshCost = : MeshCost" + MeshCost.ToString() + " * " + PricingFactor.ToString() + " * 1.10m\n\n" +
+
+                            "MaterialCost: " + MaterialCost.ToString() + " = \n" +
+                                      "\t MaterialCost:" + MaterialCostBreakDownBase.ToString() + "+\n" +
+                                       "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.05m) +\n" +
+                                       "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.10m) +\n" +
+                                       "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.12m) +\n" +
+                                       "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.16m)  \n\n" +
+
+                       "TotaPrice: " + BaseTotalPrice.ToString() + " = \n" +
+
+
+                                   "\t LaborCost:" + Math.Round(LaborCost, 2).ToString() + "+\n" +
+                                   "\t InstallationCost:" + Math.Round(InstallationCost, 2).ToString() + "+\n" +
+                                   "\t MaterialCost " + Math.Round(MaterialCost, 2).ToString() + "+\n" +
+                                   "\t GlassPrice:" + Math.Round(GlassPrice, 2).ToString() + "+\n" +
+                                   "\t FilmPrice:" + Math.Round(FilmPrice, 2).ToString() + "+\n" +
+                                   "\t SecurityMeshPrice:" + Math.Round(SecurityMeshPrice, 2).ToString() + "\n\n" +
+
+
+                       "TotaPrice: " + BaseTotalPriceWithFactor.ToString() + " = (" + BaseTotalPrice.ToString() + " * " + PricingFactor.ToString() + ") + " + BaseTotalPrice.ToString() + ") \n\n" +
+
+                       "TotaPrice: " + TotaPrice.ToString() + " = " + BaseTotalPriceWithFactor.ToString() + " + " + LouverCost.ToString() + " + " + MeshCost.ToString() + "\n\n" +
+
+                       "outside color: " + wdm.WD_OutsideColor + "\n" +
+                      "inside color: " + wdm.WD_InsideColor + "\n" +
+
+                       "woodec additional % " + priceBeforeWoodec + " = " + priceBeforeWoodec + " + " + wdm.WD_WoodecAdditional + "%" + "\n\n\n" +
+
+                       "item Description" + "\n" + wdm.WD_description +
+
+                        "` END OF COMPUTATION FOR SAVING `\n\n\n";
+                        #endregion
+                    }
+
+                    #endregion
 
                     if (BOM_Status == true)
                     {
@@ -10329,6 +11050,29 @@ namespace ModelLayer.Model.Quotation
                                            "",
                                            "Material Cost");
 
+                            Price_List.Rows.Add("Universal Gasket Price",
+                                           UniversalGasketPerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(UniversalGasketAluPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+                            Price_List.Rows.Add("Center Gasket Price",
+                                           CenterGasketPerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(CenterGasketAluPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+
+                            Price_List.Rows.Add("Glazing Gasket Price",
+                                           GasketPerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(GlazingGasketAluPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+
                             Price_List.Rows.Add("Center Gasket Price",
                                            CenterGasketPerPiece.ToString("N", new CultureInfo("en-US")),
                                            Math.Round(CenterGasketPrice, 2).ToString("N", new CultureInfo("en-US")),
@@ -10349,6 +11093,13 @@ namespace ModelLayer.Model.Quotation
                                            "",
                                            "",
                                            "Material Cost");
+
+                            Price_List.Rows.Add("Polymide Strip Price",
+                                       PolymideStrip_H172_PerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(PolymideStripPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Material Cost");
 
                             Price_List.Rows.Add("Corner Cleat Price",
                                            CornerCleatPricePerPiece.ToString("N", new CultureInfo("en-US")),
@@ -10469,12 +11220,47 @@ namespace ModelLayer.Model.Quotation
                                            "",
                                            "Material Cost");
 
-                            //Price_List.Rows.Add("Hole Cape Price",
-                            //               HoleCapePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                            //               Math.Round(HoleCapePrice, 2).ToString("N", new CultureInfo("en-US")),
-                            //               "",
-                            //               "",
-                            //               "Material Cost");
+                            Price_List.Rows.Add("Hole Cape Price",
+                                           HoleCapePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(HoleCapePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+                            Price_List.Rows.Add("Shootbolt Price",
+                                           Shootbolt_H110_PricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(ShootBoltPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+                            Price_List.Rows.Add("One Way Locking Connector Price",
+                                           OneWayLockingConnectorPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(OneWayLockingConnectorPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+                            Price_List.Rows.Add("Two Way Locking Connector Price",
+                                           TwoWayLockingConnectorPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(TwoWayLockingConnectorPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+                            Price_List.Rows.Add("Dummy Mullion Price",
+                                            DummyMullionPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(DMPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Material Cost"); 
+
+                             Price_List.Rows.Add("End Cap Price",
+                                            EndCapPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(EndCapPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Material Cost");
 
                             Price_List.Rows.Add("Total",
                                         "",
@@ -10518,63 +11304,6 @@ namespace ModelLayer.Model.Quotation
 
                             #endregion
 
-                            #region Price History
-
-
-                            DateTime thisDay = DateTime.Now;
-
-                            wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
-
-                           "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
-
-
-                            "\n\n MaterialCost " + MaterialCost + " = FramePrice " + Math.Round(FramePrice, 2).ToString() + " + " +
-                                     "\n\t\t SashPrice " + Math.Round(SashPrice, 2).ToString() + " + " +
-                                     "\n\t\t DivPrice " + Math.Round(DivPrice, 2).ToString() + " + " +
-                                     // "\n\t\t CornerWindowPrice " + Math.Round(CornerWindowPrice, 2).ToString() + " + " +
-                                     "\n\t\t CheveronPrice " + Math.Round(CheveronPrice, 2).ToString() + " + " +
-                            //"\n\t\t WaterDrainageWValvesPrice " + Math.Round(WaterDrainageWValvesPrice, 2).ToString() + " + " +
-                            //"\n\t\t HoleCapePrice " + Math.Round(HoleCapePrice, 2).ToString() + " + " +
-
-                            "\n\n GlassCost " + GlassCost + " = GlassPrice" + Math.Round(GlassPrice, 2).ToString() +
-
-                             "\n\n InstallationMaterialCost " + InstallationMaterialCost + " = SealantPrice " + Math.Round(SealantPrice, 2).ToString() + " + " +
-                                                           "\n\t\t PUFoamingPrice " + Math.Round(PUFoamingPrice, 2).ToString() + " + " +
-                                                           "\n\t\t ExpansionBoltPrice " + Math.Round(ExpansionBoltPrice, 2).ToString() +
-
-                            "\n\n SubTotatal " + SubTotatal + " = MaterialCost " + Math.Round((MaterialCost * 1.08m), 2).ToString() + " + " +
-                                         "\n\t\t GlassCost " + Math.Round((GlassCost * 1.1m), 2).ToString() + " + " +
-                                         "\n\t\t InstallationMaterialCost " + Math.Round(InstallationMaterialCost, 2).ToString() +
-
-                             "\n\n Wastage " + Wastage + " = " + SubTotatal * 0.2m +
-
-                            "\n ImportationCost " + ImportationCost + " =  ((" + MaterialCost + " * 1.08m) + " + InstallationMaterialCost + ") * 0.16m +" +
-                            "\n ProductionCost " + ProductionCost + " =  6000 * " + DesignFactor + " * 1.1m +" +
-                            "\n InstallationCost " + InstallationCost + " =  1000 * " + DesignFactor + " * 1.1m +" +
-                            "\n MobilizationCost " + MobilizationCost + " =  1500 * " + PricingFactor + " + " +
-                            "\n FoilingCost " + FoilingCost + " = (( " + TotalFramePerimeter + " / 1000) * 440) + " + TotalDividerPerimeter + " + " +
-                            "\n AdditionalCost " + AdditionalCost + " =  (" + TotalFramePerimeter + " * 200) / 1000" +
-
-                            "\n\n Contingency " + Contingency + " = (" + Math.Round(SubTotatal + Wastage, 2).ToString() + " + " +
-                                         "\n\t\t ImportationCost " + Math.Round(ImportationCost, 2).ToString() + " + " +
-                                         "\n\t\t ProductionCost " + Math.Round(ProductionCost, 2).ToString() + " + " +
-                                         "\n\t\t InstallationCost " + Math.Round(InstallationCost, 2).ToString() + " + " +
-                                         "\n\t\t MobilizationCost " + Math.Round(MobilizationCost, 2).ToString() + " + " +
-                                         "\n\t\t FoilingCost " + Math.Round(FoilingCost, 2).ToString() + " + " +
-                                         "\n\t\t AdditionalCost " + Math.Round(AdditionalCost, 2).ToString() + ") * 0.05m" +
-
-                            "\n\n TotaPrice " + TotaPrice + " = (" + Math.Round(SubTotatal + Wastage, 2).ToString() + " + " +
-                                       "\n\t\t ImportationCost " + Math.Round(ImportationCost, 2).ToString() + " + " +
-                                       "\n\t\t ProductionCost " + Math.Round(ProductionCost, 2).ToString() + " + " +
-                                       "\n\t\t InstallationCost " + Math.Round(InstallationCost, 2).ToString() + " + " +
-                                       "\n\t\t MobilizationCost " + Math.Round(MobilizationCost, 2).ToString() + " + " +
-                                       "\n\t\t FoilingCost " + Math.Round(FoilingCost, 2).ToString() + " + " +
-                                       "\n\t\t AdditionalCost " + Math.Round(AdditionalCost, 2).ToString() + " + " +
-                                       "\n\t\t Contingency " + Math.Round(Contingency, 2).ToString() + ") * " + PricingFactor +
-
-                             "\n\n BaseTotalPriceWithFactor " + BaseTotalPriceWithFactor + " = TotaPrice" + TotaPrice;
-
-                            #endregion
                         }
                         else
                         {
@@ -11343,170 +12072,7 @@ namespace ModelLayer.Model.Quotation
 
                             #endregion
 
-                            #region Price History
-
-
-                            DateTime thisDay = DateTime.Now;
-                            //wdm.TotalPriceHistoryStatus = "System Generated Price";
-                            wdm.TotalPriceHistory = "` COMPUTATION FOR SAVING `\n\n" +
-
-                           "oras ng pag generate ng price: " + thisDay.ToString("g", CultureInfo.CreateSpecificCulture("en-US")) +
-
-                            "`````\n\nWD_CostingPoints: " + CostingPoints.ToString() + "\n" +
-                            "LaborCost: " + LaborCost.ToString() + " = CostingPoints " + CostingPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n" +
-                            "InstallationCost: " + InstallationCost.ToString() + " = InstallationPoints " + InstallationPoints.ToString() + " * CostPerPoints " + CostPerPoints.ToString() + "\n\n" +
-
-
-                            "FittingAndSuppliesCost: " + FittingAndSuppliesCost.ToString() + " = \n" +
-
-                                                     "\t FSPrice: " + Math.Round(FSPrice, 2).ToString() + "+\n" +
-                                                     "\t RestrictorStayPrice: " + Math.Round(RestrictorStayPrice, 2).ToString() + "+\n" +
-                                                     "\t CornerDrivePrice: " + Math.Round(CornerDrivePrice, 2).ToString() + "+\n" +
-                                                     "\t SnapInKeepPrice: " + Math.Round(SnapInKeepPrice, 2).ToString() + "+\n" +
-                                                     "\t 35mmBacksetEspagWithCylinderPrice: " + Math.Round(_35mmBacksetEspagWithCylinderPrice, 2).ToString() + "+\n" +
-                                                     "\t MiddleCLoserPrice: " + Math.Round(MiddleCLoserPrice, 2).ToString() + "+\n" +
-                                                     "\t StayBearingPrice: " + Math.Round(StayBearingPrice, 2).ToString() + "+\n" +
-                                                     "\t StayBearingPinPrice: " + Math.Round(StayBearingPinPrice, 2).ToString() + "+\n" +
-                                                     "\t CoverStayBearingPrice: " + Math.Round(CoverStayBearingPrice, 2).ToString() + "+\n" +
-                                                     "\t CoverCornerHingePrice: " + Math.Round(CoverCornerHingePrice, 2).ToString() + "+\n" +
-                                                     "\t CornerPivotRestPrice: " + Math.Round(CornerPivotRestPrice, 2).ToString() + "+\n" +
-                                                     "\t TopCornerHingePrice: " + Math.Round(TopCornerHingePrice, 2).ToString() + "+\n" +
-                                                     "\t CorverCornerPivotRestPrice: " + Math.Round(CorverCornerPivotRestPrice, 2).ToString() + "+\n" +
-                                                     "\t CorverCornerPivotRestVerticalPrice: " + Math.Round(CorverCornerPivotRestVerticalPrice, 2).ToString() + "+\n" +
-                                                     "\t HandlePrice: " + Math.Round(HandlePrice, 2).ToString() + "+\n" +
-                                                     "\t EspagPrice: " + Math.Round(EspagPrice, 2).ToString() + "+\n" +
-                                                     "\t _2DHingePrice: " + Math.Round(_2DHingePrice, 2).ToString() + "+\n" +
-                                                     "\t _3DHingePrice: " + Math.Round(_3DHingePrice, 2).ToString() + "+\n" +
-                                                     "\t NTCenterHingePrice: " + Math.Round(NTCenterHingePrice, 2).ToString() + "+\n" +
-                                                     "\t ShootBoltStrikerPrice: " + Math.Round(ShootBoltStrikerPrice, 2).ToString() + "+\n" +
-                                                     "\t ShootBoltReversePrice: " + Math.Round(ShootBoltReversePrice, 2).ToString() + "+\n" +
-                                                     "\t ShootBoltNonReversePrice: " + Math.Round(ShootBoltNonReversePrice, 2).ToString() + "+\n" +
-                                                     "\t StrikerPrice: " + Math.Round(StrikerPrice, 2).ToString() + "+\n" +
-                                                     "\t LatchDeadboltStrikerPrice: " + Math.Round(LatchDeadboltStrikerPrice, 2).ToString() + "+\n" +
-                                                     "\t ExtensionPrice: " + Math.Round(ExtensionPrice, 2).ToString() + "+\n" +
-                                                     "\t RollerPrice: " + Math.Round(RollerPrice, 2).ToString() + "+\n" +
-                                                     "\t StrikerLRPrice: " + Math.Round(StrikerLRPrice, 2).ToString() + "+\n" +
-                                                     "\t BrushSealPrice: " + Math.Round(BrushSealPrice, 2).ToString() + "+\n" +
-                                                     "\t MotorizePrice: " + Math.Round(MotorizePrice, 2).ToString() + "+\n" +
-                                                     "\t MotorizeMechRemotePricePerPiece: " + Math.Round(MotorizeMechRemotePricePerPiece, 2).ToString() + "\n\n" +
-
-                            "AncillaryProfileCost: " + AncillaryProfileCost.ToString() + " = \n" +
-
-                                                     "\t ThresholdPrice:" + Math.Round(ThresholdPrice, 2).ToString() + "+\n" +
-                                                     "\t GbPrice:" + Math.Round(GbPrice, 2) + "+\n" +
-                                                     "\t GeorgianBarCost:" + Math.Round((GeorgianBarCost * provinceBaseMultiplier), 2) + "+\n" +
-                                                     "\t CoverProfileCost:" + Math.Round(CoverProfileCost, 2) + "+\n" +
-                                                     "\t GlazingGasketPrice:" + Math.Round(GlazingGasketPrice, 2) + "+\n" +
-                                                     "\t WeatherBarPrice:" + Math.Round(WeatherBarPrice, 2) + "+\n" +
-                                                     "\t WeatherBarFastenerPrice:" + Math.Round(WeatherBarFastenerPrice, 2) + "+\n" +
-                                                     "\t WaterSeepagePrice:" + Math.Round(WaterSeepagePrice, 2) + "+\n" +
-                                                     "\t GuideTrackPrice:" + Math.Round(GuideTrackPrice, 2) + "+\n" +
-                                                     "\t AlumTrackPrice:" + Math.Round(AlumTrackPrice, 2) + "+\n" +
-                                                     "\t InterlockPrice:" + Math.Round(InterlockPrice, 2) + "+\n" +
-                                                     "\t ExtensionForInterlockPrice:" + Math.Round(ExtensionForInterlockPrice, 2) + "+\n" +
-                                                     "\t AluminumPullHandlePrice:" + Math.Round(AluminumPullHandlePrice, 2) + "+\n" +
-                                                     "\t GlazingAdaptorPrice:" + Math.Round((GlazingAdaptorPrice * provinceBaseMultiplier), 2) + "\n\n" +
-
-
-                            "AccesorriesCost: " + AccesorriesCost.ToString() + " = \n" +
-                                                     "\t EndCapPrice:" + Math.Round(EndCapPrice, 2).ToString() + "+\n" +
-                                                     "\t MechJointPrice:" + Math.Round(MechJointPrice, 2).ToString() + "+\n" +
-                                                     "\t GBSpacerPrice:" + Math.Round(GBSpacerPrice, 2).ToString() + "+\n" +
-                                                     "\t PlasticWedgePrice:" + Math.Round(PlasticWedgePrice, 2).ToString() + "+\n" +
-                                                     "\t SealingBlockPrice:" + Math.Round(SealingBlockPrice, 2).ToString() + "\n\n" +
-
-
-
-                            "MaterialCost: " + MaterialCost.ToString() + " = \n" +
-
-                                                     "\t FramePrice:" + Math.Round(FramePrice, 2).ToString() + "+\n" +
-                                                     "\t FrameReinPrice:" + Math.Round(FrameReinPrice, 2).ToString() + "+\n" +
-                                                     "\t SashPrice:" + Math.Round(SashPrice, 2).ToString() + "+\n" +
-                                                     "\t SashReinPrice:" + Math.Round(SashReinPrice, 2).ToString() + "+\n" +
-                                                     "\t DivPrice:" + Math.Round(DivPrice, 2).ToString() + "+\n" +
-                                                     "\t DivReinPrice:" + Math.Round(DivReinPrice, 2).ToString() + "+\n" +
-                                                     "\t claddingPrice:" + Math.Round(claddingPrice, 2).ToString() + "+\n" +
-                                                     "\t DMPrice:" + Math.Round(DMPrice, 2).ToString() + "+\n" +
-                                                     "\t DMReinforcementPrice:" + Math.Round(DMReinforcementPrice, 2).ToString() + "+\n" +
-                                                     "\t ExtensionProfile15mmPrice:" + Math.Round(ExtensionProfile15mmPrice, 2).ToString() + "+\n" +
-                                                     "\t TubularPrice:" + Math.Round(TubularPrice, 2).ToString() + "+\n" +
-                                                     "\t SealantPrice:" + Math.Round(SealantPrice, 2).ToString() + "+\n" +
-                                                     "\t PUFoamingPrice:" + Math.Round(PUFoamingPrice, 2).ToString() + "+\n" +
-                                                     "\t FittingAndSuppliesCost:" + Math.Round(FittingAndSuppliesCost, 2).ToString() + "+\n" +
-                                                     "\t AncillaryProfileCost:" + Math.Round(AncillaryProfileCost, 2).ToString() + "+\n" +
-                                                     "\t AccesorriesCost:" + Math.Round(AccesorriesCost, 2).ToString() + "\n\n" +
-
-
-                            "MaterialCostBreakDownBase: " + MaterialCost.ToString() + " \n\n" +
-
-
-                            "LouverCost: " + LouverCost.ToString() + " = \n" +
-
-                                         "\t LouvreFrameWeatherStripHeadPrice:" + Math.Round(LouvreFrameWeatherStripHeadPrice, 2).ToString() + "+\n" +
-                                         "\t LouvreFrameBottomWeatherStripPrice:" + Math.Round(LouvreFrameBottomWeatherStripPrice, 2).ToString() + "+\n" +
-                                         "\t PlantonWeatherStripHeadPrice:" + Math.Round(PlantonWeatherStripHeadPrice, 2).ToString() + "+\n" +
-                                         "\t PlantonWeatherStripSillPrice:" + Math.Round(PlantonWeatherStripSillPrice, 2).ToString() + "+\n" +
-                                         "\t GalleryAdaptorPrice:" + Math.Round(GalleryAdaptorPrice, 2).ToString() + "+\n" +
-                                         "\t BubbleSealPrice:" + Math.Round(BubbleSealPrice, 2).ToString() + "+\n" +
-                                         "\t GlassBladePrice:" + Math.Round(GlassBladePrice, 2).ToString() + "+\n" +
-                                         "\t GalleryPrice:" + Math.Round(GalleryPrice, 2).ToString() + "+\n" +
-                                         "\t PowerKitIncludingWiresPrice:" + Math.Round(PowerKitIncludingWiresPrice, 2).ToString() + "+\n" +
-                                         "\t SecurityKitPrice:" + Math.Round(SecurityKitPrice, 2).ToString() + "+\n" +
-                                         "\t RingpullLeverHandlePrice:" + Math.Round(RingpullLeverHandlePrice, 2).ToString() + "\n\n" +
-
-                           "LouverPrice: " + LouverCost.ToString() + " \n\n" +
-
-                            "LouverCost: " + LouverCost.ToString() + " = LouverCost: " + LouverCost + " * PricingFactor: " + PricingFactor + " * 1.12m\n\n" +
-
-
-
-                            "MeshCost: " + MeshCost.ToString() + " = \n" +
-
-
-                                       "\t SecurityMeshPrice:" + Math.Round(SecurityMeshPrice, 2) + "+\n" +
-                                       "\t WireMeshPrice:" + Math.Round(WireMeshPrice, 2) + "+\n" +
-                                       "\t PetMeshPrice:" + Math.Round(PetMeshPrice, 2) + "+\n" +
-                                       "\t TuffMeshPrice:" + Math.Round(TuffMeshPrice, 2) + "+\n" +
-                                       "\t PhiferMeshPrice:" + Math.Round(PhiferMeshPrice, 2) + "+\n" +
-                                       "\t AluminumFramePrice:" + Math.Round(AluminumFramePrice, 2) + "\n\n" +
-
-
-                            "MeshPrice: " + MeshCost.ToString() + " \n\n" +
-
-
-                            "MeshCost = : MeshCost" + MeshCost.ToString() + " * " + PricingFactor.ToString() + " * 1.10m\n\n" +
-
-                                "MaterialCost: " + MaterialCost.ToString() + " = \n" +
-                                          "\t MaterialCost:" + MaterialCostBreakDownBase.ToString() + "+\n" +
-                                           "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.05m) +\n" +
-                                           "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.10m) +\n" +
-                                           "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.12m) +\n" +
-                                           "\t (MaterialCost:" + MaterialCostBreakDownBase.ToString() + " * 0.16m)  \n\n" +
-
-                           "TotaPrice: " + BaseTotalPrice.ToString() + " = \n" +
-
-
-                                       "\t LaborCost:" + Math.Round(LaborCost, 2).ToString() + "+\n" +
-                                       "\t InstallationCost:" + Math.Round(InstallationCost, 2).ToString() + "+\n" +
-                                       "\t MaterialCost " + Math.Round(MaterialCost, 2).ToString() + "+\n" +
-                                       "\t GlassPrice:" + Math.Round(GlassPrice, 2).ToString() + "+\n" +
-                                       "\t FilmPrice:" + Math.Round(FilmPrice, 2).ToString() + "+\n" +
-                                       "\t SecurityMeshPrice:" + Math.Round(SecurityMeshPrice, 2).ToString() + "\n\n" +
-
-
-                           "TotaPrice: " + BaseTotalPriceWithFactor.ToString() + " = (" + BaseTotalPrice.ToString() + " * " + PricingFactor.ToString() + ") + " + BaseTotalPrice.ToString() + ") \n\n" +
-
-                           "TotaPrice: " + TotaPrice.ToString() + " = " + BaseTotalPriceWithFactor.ToString() + " + " + LouverCost.ToString() + " + " + MeshCost.ToString() + "\n\n" +
-
-                           "outside color: " + wdm.WD_OutsideColor + "\n" +
-                          "inside color: " + wdm.WD_InsideColor + "\n" +
-
-                           "woodec additional % " + priceBeforeWoodec + " = " + priceBeforeWoodec + " + " + wdm.WD_WoodecAdditional + "%" + "\n\n\n" +
-
-                           "item Description" + "\n" + wdm.WD_description +
-
-                            "` END OF COMPUTATION FOR SAVING `\n\n\n";
-                            #endregion
+                        
 
                         }
                         var query = from r in Price_List.AsEnumerable()
@@ -11676,7 +12242,8 @@ namespace ModelLayer.Model.Quotation
             //CornerWindowPrice = 0;
             CheveronPrice = 0;
             //WaterDrainageWValvesPrice = 0;
-            //HoleCapePrice = 0;
+            
+            HoleCapePrice = 0;
             UniversalGasketPrice = 0;
             //GasketPar3mmPrice = 0;
             ExpansionBoltPrice = 0;
@@ -11686,15 +12253,21 @@ namespace ModelLayer.Model.Quotation
             GlazingGasketFrameForAluPrice = 0;
             GlazingGasketSashForAluPrice = 0;
             GlazingGasketGbeadForAluPrice = 0;
+            UniversalGasketAluPrice = 0;
+            CenterGasketAluPrice = 0;
+            GlazingGasketAluPrice = 0;
+
 
             InversionClipPrice = 0;
             GlazingGasketForAluPrice = 0;
             CenterGasketPrice = 0;
             GlazingShimPrice = 0;
             TransmissionRodPrice = 0;
+            PolymideStripPrice = 0;
             OpenableStrikerPrice = 0;
             CornerCleatPrice = 0;
             FrictionStayPrice = 0;
+            FrictionStayPackerPrice = 0;
             RunUpblockPrice = 0;
             PackerRodPrice = 0;
             LockingWedgesPrice = 0;
@@ -11706,6 +12279,10 @@ namespace ModelLayer.Model.Quotation
             CremonHandlePrice = 0;
             Unica40Price = 0;
             LockingConnectorDevicePrice = 0;
+            OneWayLockingConnectorPrice = 0;
+            TwoWayLockingConnectorPrice = 0;
+            ShootBoltPrice = 0;
+
 
             GlassCost = 0;
             InstallationMaterialCost = 0;

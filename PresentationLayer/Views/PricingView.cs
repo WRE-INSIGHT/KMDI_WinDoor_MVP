@@ -13,6 +13,9 @@ namespace PresentationLayer.Views
             InitializeComponent();
         }
 
+        public string ProfileType_FromMainPresenter { get; set; }
+
+
         public event EventHandler PricingViewLoadEventRaised;
         public event DataGridViewRowPostPaintEventHandler dgvPriceListRowPostPaintEventRaised;
         public event EventHandler cmbFilterSelectedValueChangedEventRaised;
@@ -32,7 +35,23 @@ namespace PresentationLayer.Views
             List<BillOfMaterialsFilter> filter = new List<BillOfMaterialsFilter>();
             foreach (BillOfMaterialsFilter item in BillOfMaterialsFilter.GetAll())
             {
-                filter.Add(item);
+                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                {
+                    if (item == BillOfMaterialsFilter._PriceBreakDown ||
+                        item == BillOfMaterialsFilter._MaterialCost ||
+                        item == BillOfMaterialsFilter._InstallationCost)
+                    {
+                        filter.Add(item);
+                    }
+                }
+                else
+                {
+                    if (item != BillOfMaterialsFilter._InstallationCost)
+                    {
+                        filter.Add(item);
+                    }
+                }
+
             }
             cmb_Filter.DataSource = filter;
 

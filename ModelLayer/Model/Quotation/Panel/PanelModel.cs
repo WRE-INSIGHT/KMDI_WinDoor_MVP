@@ -1297,6 +1297,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public FrictionStayCasement_ArticleNo Panel_FSCasementArtNo { get; set; }
         public FrictionAlutek_ArticleNo Panel_FSAlutekArtNo { get; set; }
+        public FrictionAlutekPacker_ArticleNo Panel_FSPackerAlutekArtNo { get; set; }
 
         public SnapInKeep_ArticleNo Panel_SnapInKeepArtNo { get; set; }
         public FixedCam_ArticleNo Panel_FixedCamArtNo { get; set; }
@@ -3500,6 +3501,34 @@ namespace ModelLayer.Model.Quotation.Panel
             }
 
         }
+
+        public TwoWayLockingConnector_ArticleNo _panel_TwoWayLockingConnectorArtNo;
+        public TwoWayLockingConnector_ArticleNo Panel_TwoWayLockingConnectorArtNo
+        {
+            get
+            {
+                return _panel_TwoWayLockingConnectorArtNo;
+            }
+            set
+            {
+                _panel_TwoWayLockingConnectorArtNo = value;
+            } 
+        }
+
+
+        public OneWayLockingConnector_ArticleNo _panel_OneWayLockingConnectorArtNo;
+        public OneWayLockingConnector_ArticleNo Panel_OneWayLockingConnectorArtNo
+        {
+            get
+            {
+                return _panel_OneWayLockingConnectorArtNo;
+            }
+            set
+            {
+                _panel_OneWayLockingConnectorArtNo = value;
+            }
+        }
+
 
         #endregion
 
@@ -6223,8 +6252,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._84207 ||
-                    Panel_SashProfileArtNo == SashProfile_ArticleNo._84200)
+                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                 {
                     Panel_CenterGasketArtNo = GlazingGasket_ArticleNo._G222;
                     Panel_OpenableStrikerArtNo = OpenableStriker_ArticleNo._H117;
@@ -6652,32 +6680,28 @@ namespace ModelLayer.Model.Quotation.Panel
 
 
                     if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
-                    {
-                        float sash_weight = (((Panel_SashWidth / 1000f) + (Panel_SashHeight / 1000f)) * 2) * 0.95f,
-                              glass_weight = Panel_GlassThickness * ((Panel_GlassWidth / 1000f) * (Panel_GlassHeight / 1000f)) * 2.5f;
-                        int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
+                    { 
+                            float sash_weight = (((Panel_SashWidth / 1000f) + (Panel_SashHeight / 1000f)) * 2) * 0.95f,
+                                  glass_weight = Panel_GlassThickness * ((Panel_GlassWidth / 1000f) * (Panel_GlassHeight / 1000f)) * 2.5f;
+                            decimal total_weight = Math.Ceiling((decimal)(sash_weight + glass_weight));
 
-                        //float total_weightWithAllowance = 0;
-                        //total_weightWithAllowance = total_weight * 1.01f; hindi na need lagyan - ren  04/11/24
-
-
-
-                        if (total_weight <= 18)
-                        {
-                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H091;
-                        }
-                        else if (total_weight >= 19 && total_weight <= 24)
-                        {
-                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H029;
-                        }
-                        else if (total_weight >= 25 && total_weight <= 45)
-                        {
-                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H231;
-                        }
-                        else if (total_weight >= 46)// upto 60kg
-                        {
-                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H232;
-                        }
+                            if (total_weight <= 13)
+                            {
+                                Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H091;
+                            }
+                            else if (total_weight >= 13.1m && total_weight <= 18.5m)
+                            {
+                                Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H029;
+                            }
+                            else if (total_weight >= 18.6m && total_weight <= 39.5m)
+                            {
+                                Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H231;
+                            }
+                            else if (total_weight >= 39.6m)// upto 60kg
+                            {
+                                Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H232;
+                            }
+                        Panel_FSPackerAlutekArtNo = FrictionAlutekPacker_ArticleNo._H149;
                     }
 
 
@@ -6755,27 +6779,25 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         float sash_weight = (((Panel_SashWidth / 1000f) + (Panel_SashHeight / 1000f)) * 2) * 0.95f,
                               glass_weight = Panel_GlassThickness * ((Panel_GlassWidth / 1000f) * (Panel_GlassHeight / 1000f)) * 2.5f;
-                        int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
+                        decimal total_weight = Math.Ceiling((decimal)(sash_weight + glass_weight));
 
-                        float total_weightWithAllowance = 0;
-                        total_weightWithAllowance = total_weight * 1.01f;
-
-                        if (total_weight <= 18)
+                        if (total_weight <= 13)
                         {
                             Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H091;
                         }
-                        else if (total_weight >= 19 && total_weight <= 24)
+                        else if (total_weight >= 13.1m && total_weight <= 18.5m)
                         {
                             Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H029;
                         }
-                        else if (total_weight >= 25 && total_weight <= 45)
+                        else if (total_weight >= 18.6m && total_weight <= 39.5m)
                         {
                             Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H231;
                         }
-                        else if (total_weight >= 46)// upto 60kg
+                        else if (total_weight >= 39.6m)// upto 60kg
                         {
                             Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H232;
                         }
+                        Panel_FSPackerAlutekArtNo = FrictionAlutekPacker_ArticleNo._H149;
                     }
 
                     if (Panel_GlassThickness >= 12.0f)
@@ -10693,27 +10715,26 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         float sash_weight = (((Panel_SashWidth / 1000f) + (Panel_SashHeight / 1000f)) * 2) * 0.95f,
                               glass_weight = Panel_GlassThickness * ((Panel_GlassWidth / 1000f) * (Panel_GlassHeight / 1000f)) * 2.5f;
-                        int total_weight = Convert.ToInt32(Math.Ceiling((decimal)(sash_weight + glass_weight)));
+                        decimal total_weight = Math.Ceiling((decimal)(sash_weight + glass_weight)); 
 
-                        float total_weightWithAllowance = 0;
-                        total_weightWithAllowance = total_weight * 1.01f;
-
-                        if (total_weight <= 18)
+                        if (total_weight <= 13)
                         {
                             Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H091;
                         }
-                        else if (total_weight >= 19 && total_weight <= 24)
+                        else if (total_weight >= 13.1m && total_weight <= 18.5m)
                         {
                             Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H029;
                         }
-                        else if (total_weight >= 25 && total_weight <= 45)
+                        else if (total_weight >= 18.6m && total_weight <= 39.5m)
                         {
                             Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H231;
                         }
-                        else if (total_weight >= 46)// upto 60kg
+                        else if (total_weight >= 39.6m)// upto 60kg
                         {
                             Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H232;
                         }
+
+                        Panel_FSPackerAlutekArtNo = FrictionAlutekPacker_ArticleNo._H149; 
                     }
 
 
@@ -10813,6 +10834,32 @@ namespace ModelLayer.Model.Quotation.Panel
                         {
                             fs_weight_based = FrictionStayCasement_ArticleNo._20HD;
                         }
+                    }
+
+                    if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        float sash_weight = (((Panel_SashWidth / 1000f) + (Panel_SashHeight / 1000f)) * 2) * 0.95f,
+                              glass_weight = Panel_GlassThickness * ((Panel_GlassWidth / 1000f) * (Panel_GlassHeight / 1000f)) * 2.5f;
+                        decimal total_weight = Math.Ceiling((decimal)(sash_weight + glass_weight));
+
+                        if (total_weight <= 13)
+                        {
+                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H091;
+                        }
+                        else if (total_weight >= 13.1m && total_weight <= 18.5m)
+                        {
+                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H029;
+                        }
+                        else if (total_weight >= 18.6m && total_weight <= 39.5m)
+                        {
+                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H231;
+                        }
+                        else if (total_weight >= 39.6m)// upto 60kg
+                        {
+                            Panel_FSAlutekArtNo = FrictionAlutek_ArticleNo._H232;
+                        }
+
+                        Panel_FSPackerAlutekArtNo = FrictionAlutekPacker_ArticleNo._H149;
                     }
 
                     if (fs_weight_based != FrictionStayCasement_ArticleNo._None)
@@ -11588,6 +11635,17 @@ namespace ModelLayer.Model.Quotation.Panel
 
         }
 
+        public void Insert_FrictionStayPacker_MaterialList(DataTable tbl_explosion)
+        {
+            Panel_FSPackerAlutekArtNo = FrictionAlutekPacker_ArticleNo._H149;
+            tbl_explosion.Rows.Add("Friction Stay Packer" + Panel_FSPackerAlutekArtNo.DisplayName,
+                                        1, "pair(s)",
+                                        "",
+                                        "Sash & Frame",
+                                        @"");
+        }
+
+
         public void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion)
         {
             int SnapInKeepQty = (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
@@ -12077,9 +12135,15 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_Espagnolette_MaterialList(DataTable tbl_explosion)
         {
+            string Length = "";
+            if (Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._H172 ||
+                Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._84819)
+            {
+                Length = Panel_SashHeight.ToString();
+            }
             tbl_explosion.Rows.Add("Espagnolette " + Panel_EspagnoletteArtNo.ToString(),
                                    1, "pc (s)",
-                                   "",
+                                   Length,
                                    "Sash",
                                    @"");
         }
@@ -12814,6 +12878,96 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+
+        public int Add_GasketLength_Alutek(bool withSash, float GlassThickness)
+        {
+            if (GlassThickness == 4.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G224;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+            else if (GlassThickness == 6.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G223;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+            else if (GlassThickness == 8.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G287;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G224;
+            }
+            else if (GlassThickness == 10.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G223;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+            else
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G223;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+
+            int totalGlazingGasketLength = 0;
+
+
+            if (withSash == true)
+            {
+                totalGlazingGasketLength += (Panel_SashWidth + Panel_SashHeight) * 2;
+            }
+            else if (withSash == false)
+            {
+                totalGlazingGasketLength += (Panel_GlazingBeadWidth + Panel_GlazingBeadHeight) * 2;
+            } 
+             
+            return totalGlazingGasketLength;
+        }
+        public int Add_UniversalGasketLength_Alutek(bool withSash)
+        {
+            int TotalUniversalGlazingGasketLength = 0 , multiplier = 0;
+
+            if (withSash == true)
+            {
+                multiplier = 3;
+            }
+            else if (withSash == false)
+            {
+                multiplier = 1;
+            }
+
+            TotalUniversalGlazingGasketLength = ((Panel_DisplayWidth + Panel_DisplayHeight) * 2) * multiplier;
+
+            return TotalUniversalGlazingGasketLength;
+        }
+
+        public void checkGasketArtNo(float GlassThickness)
+        {
+            if (GlassThickness == 4.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G224;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+            else if (GlassThickness == 6.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G223;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+            else if (GlassThickness == 8.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G287;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G224;
+            }
+            else if (GlassThickness == 10.0f)
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G223;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+            else
+            {
+                Panel_GlazingGasketArtNo = GlazingGasket_ArticleNo._G223;
+                Panel_GlazingGasketArtNo2 = GlazingGasket_ArticleNo._G221;
+            }
+        }
+
         public void Insert_GlazingGasket_Alutek_MaterialList(DataTable tbl_explosion, float GlassThickness, bool withSash)
         {
             if (GlassThickness == 4.0f)
@@ -12885,20 +13039,22 @@ namespace ModelLayer.Model.Quotation.Panel
                                        "Glazing Bead",
                                        @"");
             }
+        } 
 
-
-
+        public int Add_CenterGasket()
+        {
+            return (Panel_DisplayWidth * 2) + (Panel_DisplayHeight * 2);
         }
 
         public void Insert_CenterGasket_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Center Gasket Width " + Panel_CenterGasketArtNo.DisplayName,
+            tbl_explosion.Rows.Add("Center Gasket (Frame) Width " + Panel_CenterGasketArtNo.DisplayName,
                          2, "pc(s)",
                          Panel_DisplayWidth.ToString(),
                          "Sash",
                          @"");
 
-
+            
             tbl_explosion.Rows.Add("Center Gasket (Frame) Height " + Panel_CenterGasketArtNo.DisplayName,
                                    2, "pc(s)",
                                    Panel_DisplayHeight.ToString(),
@@ -12906,10 +13062,20 @@ namespace ModelLayer.Model.Quotation.Panel
                                    @"");
         }
 
-        public void Insert_OpenableStriker_MaterialList(DataTable tbl_explosion)
+        public void Insert_OpenableStriker_MaterialList(DataTable tbl_explosion, string panelType)
         {
+            int strikerCount = 0;
+            if (panelType.Contains("Awning"))
+            {
+                strikerCount = 2;
+            }
+            else if (panelType.Contains("Casement"))
+            {
+                strikerCount = 3;
+            }
+
             tbl_explosion.Rows.Add("Openable Striker, 50mm " + Panel_OpenableStrikerArtNo.DisplayName,
-                                   2, "pc(s)",
+                                   strikerCount, "pc(s)",
                                    "",
                                    "Hardware & Accessories",
                                    @"");
@@ -12933,13 +13099,23 @@ namespace ModelLayer.Model.Quotation.Panel
                                 @"");
         }
 
-        public void Insert_RunUpBlock_MaterialList(DataTable tbl_explosion)
+        public void Insert_RunUpBlock_MaterialList(DataTable tbl_explosion, string panelType)
         {
+            int runUpCount = 0;
+            if (panelType.Contains("Awning"))
+            {
+                runUpCount = 2;
+            }
+            else if (panelType.Contains("Casement"))  
+            {
+                runUpCount = 1;
+            }
+
             tbl_explosion.Rows.Add("Run Up Block " + Panel_RunUpBlockArtNo.DisplayName,
-                                2, "pc(s)",
-                                "",
-                                "Hardware & Accessories",
-                                @"");
+                                   runUpCount, "pc(s)",
+                                   "",
+                                   "Hardware & Accessories",
+                                   @"");
         }
 
         public void Insert_PackerRod_MaterialList(DataTable tbl_explosion)
@@ -13005,10 +13181,20 @@ namespace ModelLayer.Model.Quotation.Panel
                                    @"");
         }
 
-        public void Insert_AlutekStriker_MaterialList(DataTable tbl_explosion)
+        public void Insert_AlutekStriker_MaterialList(DataTable tbl_explosion, string panelType)
         {
+            int strikerCount = 0;
+            if (panelType.Contains("Awning"))
+            {
+                strikerCount = 2;
+            }
+            else if (panelType.Contains("Casement"))
+            {
+                strikerCount = 3;
+            }
+
             tbl_explosion.Rows.Add("Striker H177",
-                                   2, "pc(s)",
+                                   strikerCount, "pc(s)",
                                    "",
                                    "Sash",
                                    @"");
@@ -13019,6 +13205,25 @@ namespace ModelLayer.Model.Quotation.Panel
             tbl_explosion.Rows.Add("Center Profile " + Panel_CenterProfileArtNo.DisplayName,
                                    1, "pc(s)",
                                    Panel_SashHeight - 5,
+                                   "Sash",
+                                   @"");
+        }
+
+
+        public void Insert_TwoWayLockingConnector_MaterialList(DataTable tbl_explosion)
+        {  
+            tbl_explosion.Rows.Add("Two Way Locking Connector H193  ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_OneWayLockingConnector_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("One Way Locking Connector H192  ",
+                                   2, "pc(s)",
+                                   "",
                                    "Sash",
                                    @"");
         }
