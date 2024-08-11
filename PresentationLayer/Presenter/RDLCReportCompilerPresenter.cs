@@ -112,6 +112,70 @@ namespace PresentationLayer.Presenter
             //bgw.ProgressChanged += Bgw_ProgressChanged; 
         }
 
+        //iif(Parameters!NetofDiscount.Value,"Total Net Price With VAT*","Total Discounted Price With VAT*"),
+        //iif(Parameters!NetofDiscount.Value,"Total Net Price Without VAT*","Total Discounted Price Without VAT*"))
+
+        private void PAContractSummaryTotalTextChanger()
+        {
+            #region Text Changer 
+            if (_rdlcReportCompilerView.GetShowVatCheckBox().Checked)
+            {
+                if (_screenNetOfDiscount.Checked)
+                {
+                    //Net Price with Vat*
+                    if (_specialDiscountChkbx.Checked)
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Special Discounted Adjustment Net Price with VAT";
+                    }
+                    else
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Net Price With VAT*";
+                    }
+                }
+                else
+                {
+                    //Price with Vat*
+                    if (_specialDiscountChkbx.Checked)
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Special Discounted Adjustment Price with VAT";
+                    }
+                    else
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Price With VAT*";
+                    }
+                }
+                
+            }
+            else
+            {
+                //Net Price without Vat*
+                if (_screenNetOfDiscount.Checked)
+                {
+                    if (_specialDiscountChkbx.Checked)
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Special Discounted Adjustment Net Price without VAT";
+                    }
+                    else
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Net Price Without VAT*";
+                    }
+                }
+                else
+                {
+                  //Price Without Vat*
+                    if (_specialDiscountChkbx.Checked)
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Special Discounted Adjustment Price without VAT";
+                    }
+                    else
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Price Without VAT*";
+                    }
+                }
+            }
+            #endregion
+        }
+
         private void Onchkbx_SpecialDiscount_CheckedChangedEventRaised(object sender, EventArgs e)
         {
             if (_specialDiscountChkbx.Checked)
@@ -124,6 +188,7 @@ namespace PresentationLayer.Presenter
                 _specialDiscountTxtBx.Enabled = false;
                 _quoteItemListPresenter.RDLCPAShowSpecialDiscount = false;
             }
+            PAContractSummaryTotalTextChanger();
         }
 
         private void Onchkbx_GuSubtotal_CheckedChangedEventRaised(object sender, EventArgs e)
@@ -157,7 +222,7 @@ namespace PresentationLayer.Presenter
         //}
 
         private void Onchkbx_ScreenNetofDiscount_CheckedChangedEventRaised(object sender, EventArgs e)
-        {
+        {           
             if (_screenNetOfDiscount.Checked)
             {
                 _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount = true;
@@ -166,6 +231,7 @@ namespace PresentationLayer.Presenter
             {
                 _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount = false;
             }
+            PAContractSummaryTotalTextChanger();
         }
 
         private void OnchkbxguShowReviewedByCheckedChangedEventRaised(object sender, EventArgs e)
@@ -244,6 +310,7 @@ namespace PresentationLayer.Presenter
                 _quoteItemListPresenter.ShowVatContactSummary = false;
                 _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;
             }
+            PAContractSummaryTotalTextChanger();
         }
 
         private void OnchkselectallCheckedChangedEventRaised(object sender, EventArgs e)
@@ -279,7 +346,7 @@ namespace PresentationLayer.Presenter
                 _quoteItemListPresenter.PrintContractSummaryRDLC();
                 _quoteItemListPresenter.CallFrmRDLCCompiler = false;
 
-                _rdlcReportCompilerView.GetPATotalTxtBx().Enabled = false;
+                _rdlcReportCompilerView.GetPATotalRtBx().Enabled = false;
                 _rdlcReportCompilerView.GetSpecialDiscountChkBx().Enabled = false;
                 _rdlcReportCompilerView.GetSpecialDiscountTxtBx().Enabled = false;
             }
@@ -299,14 +366,14 @@ namespace PresentationLayer.Presenter
                 _quoteItemListPresenter.CallFrmRDLCCompiler = false;
 
                 _rdlcReportCompilerView.GetRDLCReportCompilerForm().Text = "Report Compiler - Partial Adjustment";
-                _rdlcReportCompilerView.GetPATotalTxtBx().Text = "Total Special Discounted Adjustment Price without VaT";//default
+                _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Special Discounted Adjustment Price without VaT";//default
 
                 _rdlcReportCompilerView.GetChecklistBoxIndex().Enabled = false;
                 _rdlcReportCompilerView.GetSubTotalCheckBox().Enabled = false;
                 _rdlcReportCompilerView.CheckListSelectAll().Enabled = false;
                 _rdlcReportCompilerView.GetScreenRowLimitTxtBx().Enabled = false;
 
-                _rdlcReportCompilerView.GetPATotalTxtBx().Enabled = true;
+                _rdlcReportCompilerView.GetPATotalRtBx().Enabled = true;
                 _rdlcReportCompilerView.GetSpecialDiscountChkBx().Enabled = true;
                 _rdlcReportCompilerView.GetSpecialDiscountTxtBx().Enabled = false;
 
@@ -316,7 +383,16 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;
             _rdlcReportCompilerView.GetContractSummaryLessDiscountTxtBx().Visible = false;
             _rdlcReportCompilerView.GetContractSummaryLessDiscountTxtBx().Text = _quoteItemListPresenter.ContractSummaryLessDiscount.ToString();
-            _rdlcReportCompilerView.GetSpecialDiscountTxtBx().Text = _quoteItemListPresenter.ContractSummaryLessDiscount.ToString(); // temporarily
+
+            if(_quotationModel.QuotationModel_RDLCSpecialDiscount == 0)
+            {
+                _rdlcReportCompilerView.GetSpecialDiscountTxtBx().Text = _quoteItemListPresenter.ContractSummaryLessDiscount.ToString(); // temporarily
+            }
+            else
+            {
+                _rdlcReportCompilerView.GetSpecialDiscountTxtBx().Text = _quotationModel.QuotationModel_RDLCSpecialDiscount.ToString(); // temporarily
+            }
+
 
             _rdlcReportCompilerView.TxtBxContractSummaryVat = "12";
             _rdlcReportCompilerView.TxtBxRowlimit = "21";
@@ -456,9 +532,11 @@ namespace PresentationLayer.Presenter
                             int _wholeNum = Convert.ToInt32(_deci * 100m);
                             _quoteItemListPresenter.RDLCReportCompilerLessDiscountContractSummary = _wholeNum;
                             _quoteItemListPresenter.RDLCReportCompilerContractSummaryTotalText = _rdlcReportCompilerView.PartialAdjContractSummaryTotalText;
-                            _deci = Convert.ToDecimal(_rdlcReportCompilerView.PartialAdjSpecialDiscountText);
-                            _wholeNum = Convert.ToInt32(_deci * 100m);                  
-                            _quoteItemListPresenter.RDLCReportCompilerContractSummarySpecialDiscount = _wholeNum;
+
+                            decimal Special_dscntDec = Convert.ToDecimal(_rdlcReportCompilerView.PartialAdjSpecialDiscountText);//Convert to decimal frm txtbox
+                            CheckSpecialDiscountDiff(Special_dscntDec);//check for specialdiscount difference
+                            int Special_dscntInt = Convert.ToInt32(_quotationModel.QuotationModel_RDLCSpecialDiscount * 100m);                  
+                            _quoteItemListPresenter.RDLCReportCompilerContractSummarySpecialDiscount = Special_dscntInt;
 
                             //galing quotelist naka decimal gawing whole number 
                             _quoteItemListPresenter.PrintContractSummaryPartialAdjustmentRDLC();
@@ -595,6 +673,14 @@ namespace PresentationLayer.Presenter
                 _loadingThread.Abort();
             }
             
+        }
+
+        private void CheckSpecialDiscountDiff(decimal spcl_discount)
+        {
+            if(_quotationModel.QuotationModel_RDLCSpecialDiscount != spcl_discount)
+            {
+                _quotationModel.QuotationModel_RDLCSpecialDiscount = spcl_discount;
+            }
         }
 
         private static string[] GetFiles()

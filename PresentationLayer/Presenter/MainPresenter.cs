@@ -4919,11 +4919,15 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("BOM_Status:"))
                         {
                             _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
-                            inside_quotation = false;
+                            //inside_quotation = false;//08/07/2024
                         }
                         else if (row_str.Contains("WoodecAdditionalForNewItem"))
                         {
                             WoodecAdditionalForNewItem = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("QuotationModel_RDLCSpecialDiscount:"))
+                        {
+                            _quotationModel.QuotationModel_RDLCSpecialDiscount = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         else if (row_str.Contains("InsideColor:"))
                         {

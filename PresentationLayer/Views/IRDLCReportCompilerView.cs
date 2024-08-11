@@ -50,7 +50,7 @@ namespace PresentationLayer.Views
         CheckBox GetGlassUpgradeSubTotal();
         TextBox GetGlassUpgradeRowLimitTxtBx();
         TextBox GetScreenRowLimitTxtBx();
-        TextBox GetPATotalTxtBx();
+        RichTextBox GetPATotalRtBx();
         CheckBox GetSpecialDiscountChkBx();
         TextBox GetSpecialDiscountTxtBx();
 

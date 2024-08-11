@@ -17,7 +17,7 @@ namespace PresentationLayer.Views
         {
             get
             {
-                return txt_oftexpenses.Text;
+                return txt_oftexpenses.Text;        
             }
             set
             {
@@ -74,11 +74,11 @@ namespace PresentationLayer.Views
         {
             get
             {
-                return txtbox_PATotalText.Text;
+                return rtbox_PATotalText.Text;
             }
             set
             {
-                txtbox_PATotalText.Text = value;
+                rtbox_PATotalText.Text = value;
             }
         }
 
@@ -199,9 +199,9 @@ namespace PresentationLayer.Views
             return txtbox_rowlimit;
         }
 
-        public TextBox GetPATotalTxtBx()
+        public RichTextBox GetPATotalRtBx()
         {
-            return txtbox_PATotalText;
+            return rtbox_PATotalText;
         }
 
         public CheckBox GetSpecialDiscountChkBx()

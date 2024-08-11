@@ -2564,18 +2564,54 @@ Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountA
                                     <Paragraph>
                                       <TextRuns>
                                         <TextRun>
-                                          <Value>=(Convert.ToDecimal(Parameters!VatPercentage.Value) / 100) * 
-((Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) 
--
-iif(Parameters!UserDefineLessDiscount.Value= "True"
+                                          <Value>=iif(Parameters!ShowSpecialDiscount.Value = "True",
+
+        (Convert.ToDecimal(Parameters!VatPercentage.Value) / 100) 
+        *
+        (
+           (
+			    (Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+			    Math.Round((Fields!dtScreenListPrice.Value),2)) - 
+			    ((
+			    	(Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) 
+			    	*
+				    iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2)) 
+			    ))
+		    )
+
+		    -
+
+		    (	
+			    (
+				    (Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+				    Math.Round((Fields!dtScreenListPrice.Value),2)) - 
+				    ((
+					    (Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) 
+					    *
+					    iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2)) 
+				    ))
+			    ) 
+			    *
+			    Convert.ToDecimal(Parameters!SpecialDiscount.Value / 100)
+		    ) 
+        )
+
 ,
-(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
-Math.Round((Fields!dtScreenListPrice.Value),2)) * 
-Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2)))
-,
-(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
-Math.Round((Fields!dtScreenListPrice.Value),2)) * 
-Math.Round((Fields!dtDiscountAverage.Value),2))))
+
+    (Convert.ToDecimal(Parameters!VatPercentage.Value) / 100) * 
+    ((Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) 
+    -
+        iif(Parameters!UserDefineLessDiscount.Value= "True",
+
+            (((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+            Math.Round((Fields!dtScreenListPrice.Value),2)) * 
+            Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2)))
+        ,
+            (((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+            Math.Round((Fields!dtScreenListPrice.Value),2)) * 
+            Math.Round((Fields!dtDiscountAverage.Value),2))))
+    )
+
 )</Value>
                                           <Style>
                                             <FontFamily>Segoe UI</FontFamily>
@@ -2613,10 +2649,7 @@ Math.Round((Fields!dtDiscountAverage.Value),2))))
                                     <Paragraph>
                                       <TextRuns>
                                         <TextRun>
-                                          <Value>=iif(Parameters!ShowVat.Value = "True",
-
-iif(Parameters!NetofDiscount.Value,"Total Net Price With VAT*","Total Discounted Price With VAT*"),
-iif(Parameters!NetofDiscount.Value,"Total Net Price Without VAT*","Total Discounted Price Without VAT*"))</Value>
+                                          <Value>=Parameters!DynamicTotalText.Value</Value>
                                           <Style>
                                             <FontFamily>Segoe UI</FontFamily>
                                             <FontWeight>Bold</FontWeight>
@@ -2636,107 +2669,13 @@ iif(Parameters!NetofDiscount.Value,"Total Net Price Without VAT*","Total Discoun
                                     <VerticalAlign>Top</VerticalAlign>
                                   </Style>
                                 </Textbox>
-                                <ColSpan>2</ColSpan>
+                                <ColSpan>5</ColSpan>
                               </CellContents>
                             </TablixCell>
                             <TablixCell />
-                            <TablixCell>
-                              <CellContents>
-                                <Textbox Name="Textbox21">
-                                  <KeepTogether>true</KeepTogether>
-                                  <Paragraphs>
-                                    <Paragraph>
-                                      <TextRuns>
-                                        <TextRun>
-                                          <Value />
-                                          <Style />
-                                        </TextRun>
-                                      </TextRuns>
-                                      <Style />
-                                    </Paragraph>
-                                  </Paragraphs>
-                                  <rd:DefaultName>Textbox21</rd:DefaultName>
-                                  <Style>
-                                    <Border>
-                                      <Style>None</Style>
-                                    </Border>
-                                    <VerticalAlign>Top</VerticalAlign>
-                                    <PaddingLeft>2pt</PaddingLeft>
-                                    <PaddingRight>2pt</PaddingRight>
-                                    <PaddingTop>2pt</PaddingTop>
-                                    <PaddingBottom>2pt</PaddingBottom>
-                                  </Style>
-                                </Textbox>
-                              </CellContents>
-                            </TablixCell>
-                            <TablixCell>
-                              <CellContents>
-                                <Textbox Name="Textbox23">
-                                  <KeepTogether>true</KeepTogether>
-                                  <Paragraphs>
-                                    <Paragraph>
-                                      <TextRuns>
-                                        <TextRun>
-                                          <Value />
-                                          <Style>
-                                            <FontFamily>Segoe UI</FontFamily>
-                                            <TextDecoration>None</TextDecoration>
-                                          </Style>
-                                        </TextRun>
-                                      </TextRuns>
-                                      <Style>
-                                        <TextAlign>Center</TextAlign>
-                                      </Style>
-                                    </Paragraph>
-                                  </Paragraphs>
-                                  <rd:DefaultName>Textbox23</rd:DefaultName>
-                                  <Style>
-                                    <Border>
-                                      <Style>None</Style>
-                                    </Border>
-                                    <VerticalAlign>Top</VerticalAlign>
-                                    <PaddingLeft>2pt</PaddingLeft>
-                                    <PaddingRight>2pt</PaddingRight>
-                                    <PaddingTop>2pt</PaddingTop>
-                                    <PaddingBottom>2pt</PaddingBottom>
-                                  </Style>
-                                </Textbox>
-                              </CellContents>
-                            </TablixCell>
-                            <TablixCell>
-                              <CellContents>
-                                <Textbox Name="Textbox61">
-                                  <KeepTogether>true</KeepTogether>
-                                  <Paragraphs>
-                                    <Paragraph>
-                                      <TextRuns>
-                                        <TextRun>
-                                          <Value />
-                                          <Style>
-                                            <FontFamily>Segoe UI</FontFamily>
-                                            <TextDecoration>None</TextDecoration>
-                                          </Style>
-                                        </TextRun>
-                                      </TextRuns>
-                                      <Style>
-                                        <TextAlign>Center</TextAlign>
-                                      </Style>
-                                    </Paragraph>
-                                  </Paragraphs>
-                                  <rd:DefaultName>Textbox61</rd:DefaultName>
-                                  <Style>
-                                    <Border>
-                                      <Style>None</Style>
-                                    </Border>
-                                    <VerticalAlign>Top</VerticalAlign>
-                                    <PaddingLeft>2pt</PaddingLeft>
-                                    <PaddingRight>2pt</PaddingRight>
-                                    <PaddingTop>2pt</PaddingTop>
-                                    <PaddingBottom>2pt</PaddingBottom>
-                                  </Style>
-                                </Textbox>
-                              </CellContents>
-                            </TablixCell>
+                            <TablixCell />
+                            <TablixCell />
+                            <TablixCell />
                             <TablixCell>
                               <CellContents>
                                 <Textbox Name="Textbox69">
@@ -2745,32 +2684,129 @@ iif(Parameters!NetofDiscount.Value,"Total Net Price Without VAT*","Total Discoun
                                     <Paragraph>
                                       <TextRuns>
                                         <TextRun>
-                                          <Value>=iif(Parameters!ShowVat.Value = "True",
-(Math.Round((Fields!dtWindoorListPrice.Value),2) + 
-Math.Round((Fields!dtScreenListPrice.Value),2)) - 
-(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
-Math.Round((Fields!dtScreenListPrice.Value),2)) 
-*
-iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2)) 
-)) 
-+ 
-(Convert.ToDecimal(Parameters!VatPercentage.Value) / 100) * 
-((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
-Math.Round((Fields!dtScreenListPrice.Value),2)) - 
-(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
-Math.Round((Fields!dtScreenListPrice.Value),2)) 
-* 
-iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2))
-)))
+                                          <Value>=iif(Parameters!ShowSpecialDiscount.Value = "True",
+
+	iif(Parameters!ShowVat.Value = "True",
+		
+		(
+			(Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+			Math.Round((Fields!dtScreenListPrice.Value),2)) - 
+			((
+				(Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) 
+				*
+				iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2)) 
+			))
+		)
+
+		-
+
+		(	
+			(
+				(Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+				Math.Round((Fields!dtScreenListPrice.Value),2)) - 
+				((
+					(Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) 
+					*
+					iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2)) 
+				))
+			) 
+			*
+			Convert.ToDecimal(Parameters!SpecialDiscount.Value / 100)
+		)
+
+        +
+        
+        (Convert.ToDecimal(Parameters!VatPercentage.Value) / 100) 
+        *
+        (
+           (
+			    (Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+			    Math.Round((Fields!dtScreenListPrice.Value),2)) - 
+			    ((
+			    	(Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) 
+			    	*
+				    iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2)) 
+			    ))
+		    )
+
+		    -
+
+		    (	
+			    (
+				    (Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+				    Math.Round((Fields!dtScreenListPrice.Value),2)) - 
+				    ((
+					    (Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) 
+					    *
+					    iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2)) 
+				    ))
+			    ) 
+			    *
+			    Convert.ToDecimal(Parameters!SpecialDiscount.Value / 100)
+		    ) 
+        )
+
+	,
+
+		    (
+			(Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+			Math.Round((Fields!dtScreenListPrice.Value),2)) - 
+			((
+			    (Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) 
+			    *
+			    iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2)) 
+			))
+	    )
+
+		-
+
+		(	
+			(
+				(Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+				Math.Round((Fields!dtScreenListPrice.Value),2)) - 
+				((
+					(Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) 
+					*
+					iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2)) 
+				))
+			) 
+			*
+			Convert.ToDecimal(Parameters!SpecialDiscount.Value / 100)
+		)
+
+	)
 ,
-(Math.Round((Fields!dtWindoorListPrice.Value),2) + 
-Math.Round((Fields!dtScreenListPrice.Value),2)) 
-- 
-(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
-Math.Round((Fields!dtScreenListPrice.Value),2)) 
-*
- iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2))
- )) )</Value>
+
+	iif(Parameters!ShowVat.Value = "True",
+	
+			(Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+			Math.Round((Fields!dtScreenListPrice.Value),2)) - 
+			(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+			Math.Round((Fields!dtScreenListPrice.Value),2)) 
+				*
+				iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2)) 
+				)) 
+					+ 
+					(Convert.ToDecimal(Parameters!VatPercentage.Value) / 100) * 
+					((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+					Math.Round((Fields!dtScreenListPrice.Value),2)) - 
+					(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+					Math.Round((Fields!dtScreenListPrice.Value),2)) 
+						* 
+						iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2))
+						)))
+	,
+			(Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+			Math.Round((Fields!dtScreenListPrice.Value),2)) 
+				- 
+				(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+				Math.Round((Fields!dtScreenListPrice.Value),2)) 
+					*
+					iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2))
+					)) 
+	)
+
+)</Value>
                                           <Style>
                                             <FontFamily>Segoe UI</FontFamily>
                                             <FontWeight>Bold</FontWeight>

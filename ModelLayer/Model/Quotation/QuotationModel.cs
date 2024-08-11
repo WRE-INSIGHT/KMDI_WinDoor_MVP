@@ -52,8 +52,8 @@ namespace ModelLayer.Model.Quotation
         public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
         public bool FactorChange { get; set; }
         public bool BOM_AluProfileType { get; set; }
-
         public DataTable MainPresenter_GlassThicknessDT { get; set; }
+        public decimal QuotationModel_RDLCSpecialDiscount { get; set; }
 
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
