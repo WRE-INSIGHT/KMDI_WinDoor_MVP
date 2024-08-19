@@ -3703,7 +3703,139 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.Save();
             }
 
+            GetGlassThickness();
+        }
 
+        private void GetGlassThickness()
+        {
+            foreach(DataRow Glass in _glassThicknessDT.Rows)
+            {
+                List<int> plusPos = new List<int>();
+                List<string> glassDescSubs = new List<string>();
+                string glassDesc = Glass[1].ToString();
+                string frstGlassDescSub = "",scndGlassDescSub = "";
+                int glassTotalThickness = 0;
+
+                if (glassDesc.Contains('+'))
+                {
+
+                    #region algo 1 not finished
+                    //Console.WriteLine(glassDesc);
+                    //Console.WriteLine(glassDesc.Length);
+
+                    //var glassDescTrimmed = glassDesc.Where(x => !char.IsWhiteSpace(x)).ToArray();
+
+                    //Console.WriteLine(glassDescTrimmed);
+                    //Console.WriteLine(glassDescTrimmed.Length);
+
+                    //for (int i = 0; i < glassDescTrimmed.Length; i++)
+                    //{
+                    //    if (glassDescTrimmed[i] == '+')
+                    //    {
+                    //        Console.WriteLine(glassDescTrimmed[i]);
+                    //        Console.WriteLine(i.ToString());
+                    //        plusPos.Add(i);
+                    //    }
+                    //}
+                    #endregion
+
+                    if (glassDesc.Contains('(') && !glassDesc.Contains("(o)"))
+                    {
+                        bool firstPlusPos = true;
+                        for(int i = 0; i < glassDesc.Length; i++)
+                        {
+                            if (firstPlusPos)
+                            {
+                               if(glassDesc[i] == '+')
+                                {
+                                    plusPos.Add(i);
+                                    firstPlusPos = false;
+                                }
+                            }
+                            else
+                            {
+                                if (glassDesc[i] == '(')
+                                {
+                                    for(int j = i; j <= i; j--)
+                                    {
+                                        if (glassDesc[j] == '+')
+                                        {
+                                            plusPos.Add(j);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < glassDesc.Length; i++)
+                        {
+                            if (glassDesc[i] == '+')
+                            {
+                                plusPos.Add(i);
+                            }
+                        }
+                    }
+
+                    int[] plusPosArr = plusPos.ToArray();        
+                    glassDescSubs.Add( frstGlassDescSub = glassDesc.Substring(0, plusPosArr.First()-1));
+                    glassDescSubs.Add(scndGlassDescSub = glassDesc.Substring(plusPosArr.Last()+1));
+                    string[] glassDescSubsArr = glassDescSubs.ToArray();
+
+                    for(int i = 0; i < plusPosArr.Count(); i++)
+                    {
+                        if (glassDescSubsArr[i].Contains('(') && !glassDescSubsArr[i].Contains("(o)"))
+                        {
+                            #region Second Glass Desc ReSub
+
+                            List<int> scnGlassDescPlusPos = new List<int>();
+                            List<string> scnGlassDescPlusPosStr = new List<string>();
+                            string glassDescSub = glassDescSubsArr[i];
+                            string secondDescSub1 = "";
+                            string secondDescSub2 = "";
+
+                            for(int j = 0; j < glassDescSubsArr[i].Length; j++)
+                            {
+                                if (glassDescSub[j] == '+')
+                                {
+                                    scnGlassDescPlusPos.Add(j);
+                                }
+                            }
+
+                            int[] secondPlusPosArr = scnGlassDescPlusPos.ToArray();
+                            scnGlassDescPlusPosStr.Add(secondDescSub1 = glassDescSub.Substring(0, secondPlusPosArr.First() - 1));
+                            scnGlassDescPlusPosStr.Add(secondDescSub2 = glassDescSub.Substring(secondPlusPosArr.Last() + 1));
+                            string[] secondGlassDescSubsArr = scnGlassDescPlusPosStr.ToArray();
+
+                            for(int x = 0; x < secondPlusPosArr.Count(); x++)
+                            {
+                                Regex numFndr = new Regex(@"\d+");
+                                Match m = numFndr.Match(secondGlassDescSubsArr[i]);
+
+                                if (m.Success)
+                                {
+                                    glassTotalThickness += Convert.ToInt32(m.Value);
+                                }
+                            }
+
+                            #endregion
+                        }
+                        else
+                        {
+                            Regex numFndr = new Regex(@"\d+");
+                            Match m = numFndr.Match(glassDescSubsArr[i]);
+
+                            if (m.Success)
+                            {
+                                glassTotalThickness += Convert.ToInt32(m.Value);
+                            }
+                        }
+                    }
+
+                }
+            }
         }
 
         private void AddGlassDesctoException()
