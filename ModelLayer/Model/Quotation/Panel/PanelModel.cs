@@ -13001,8 +13001,7 @@ namespace ModelLayer.Model.Quotation.Panel
                               Panel_GlazingBeadWidth.ToString(),
                               "Glazing Bead",
                               @"");
-
-
+             
             tbl_explosion.Rows.Add("Glazing Gasket (P" + PanelGlass_ID + ") Height " + Panel_GlazingGasketArtNo.DisplayName,
                                    2, "pc(s)",
                                    Panel_GlazingBeadHeight.ToString(),
@@ -13227,6 +13226,59 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "Sash",
                                    @"");
         }
+
+        public void Insert_ButtProfile_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Butt Profile Female 4.5m",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+            tbl_explosion.Rows.Add("Butt Profile Male 4.5m",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+        
+        public void Insert_ButtProfileCover_MaterialList(DataTable tbl_explosion)
+        {
+
+            tbl_explosion.Rows.Add("Butt Profile Cover Male ",
+                         1, "pc(s)",
+                         "",
+                         "Sash",
+                         @"");
+
+        }
+
+        public void Insert_InterlockForAlu22_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Sash Interlock Profile " + Panel_InterlockArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+            tbl_explosion.Rows.Add("Flat Interlock " + Panel_InterlockArtNo.DisplayName,
+                              2, "pc(s)",
+                              "",
+                              "Sash",
+                              @"");
+
+        }
+
+        public void Insert_GroveCoverProfile_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Grove Cover Profile 84806 ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+
 
         public int Add_SashPerimeter_screws4fab()
         {

@@ -20,7 +20,14 @@ namespace EnumerationTypeLayer
             public static readonly FrameProfile_ArticleNo _2060 = new FrameProfile_ArticleNo(2, "2060"); //G58
             public static readonly FrameProfile_ArticleNo _6050 = new FrameProfile_ArticleNo(3, "6050");
             public static readonly FrameProfile_ArticleNo _6052 = new FrameProfile_ArticleNo(4, "6052");
-            public static readonly FrameProfile_ArticleNo _84100 = new FrameProfile_ArticleNo(5, "84100");//alu
+            public static readonly FrameProfile_ArticleNo _84100 = new FrameProfile_ArticleNo(5, "84100");//alu 46
+            public static readonly FrameProfile_ArticleNo _84116 = new FrameProfile_ArticleNo(6, "84116");//alu 22 
+            public static readonly FrameProfile_ArticleNo _84117 = new FrameProfile_ArticleNo(7, "84117");//alu 22
+            public static readonly FrameProfile_ArticleNo _84118 = new FrameProfile_ArticleNo(8, "84118");//alu 22
+            public static readonly FrameProfile_ArticleNo _84119 = new FrameProfile_ArticleNo(9, "84119");//alu 22
+
+
+
 
 
             private FrameProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
@@ -849,6 +856,8 @@ namespace EnumerationTypeLayer
         public class GlazingAdaptor_ArticleNo : Enumeration<GlazingAdaptor_ArticleNo, int>
         {
             public static readonly GlazingAdaptor_ArticleNo _6418 = new GlazingAdaptor_ArticleNo(0, "6418");
+            public static readonly GlazingAdaptor_ArticleNo _84508 = new GlazingAdaptor_ArticleNo(1, "84508");
+
 
             private GlazingAdaptor_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -910,6 +919,9 @@ namespace EnumerationTypeLayer
         public class Brush_ArticleNo : Enumeration<Brush_ArticleNo, int>
         {
             public static readonly Brush_ArticleNo _SP02 = new Brush_ArticleNo(0, "SP02");
+            public static readonly Brush_ArticleNo _G282 = new Brush_ArticleNo(1, "G282");
+            public static readonly Brush_ArticleNo _G332 = new Brush_ArticleNo(2, "G332");
+
 
             private Brush_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -970,6 +982,9 @@ namespace EnumerationTypeLayer
             public static readonly RollersTypes _TandemRoller = new RollersTypes(0, "615951");
             public static readonly RollersTypes _HDRoller = new RollersTypes(1, "609014");
             public static readonly RollersTypes _GURoller = new RollersTypes(2, "C901090008");
+            public static readonly RollersTypes _H176 = new RollersTypes(3, "H176");//alu22
+            public static readonly RollersTypes _H177 = new RollersTypes(4, "H177");
+            public static readonly RollersTypes _H178 = new RollersTypes(5, "H178");
 
             private RollersTypes(int value, string displayName) : base(value, displayName) { }
         }
@@ -1022,6 +1037,10 @@ namespace EnumerationTypeLayer
         {
             public static readonly Interlock_ArticleNo _6061_Milled = new Interlock_ArticleNo(0, "6061 - Milled");
             public static readonly Interlock_ArticleNo _6061 = new Interlock_ArticleNo(1, "6061");
+            public static readonly Interlock_ArticleNo _84813 = new Interlock_ArticleNo(2, "84813");//alu 22 3.5m
+            public static readonly Interlock_ArticleNo _84814 = new Interlock_ArticleNo(3, "84814");//alu 22 4m
+            public static readonly Interlock_ArticleNo _84816 = new Interlock_ArticleNo(4, "84816");//alu 22 flat
+
 
             private Interlock_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -1563,6 +1582,9 @@ namespace EnumerationTypeLayer
             public static readonly GlazingGasket_ArticleNo _G223 = new GlazingGasket_ArticleNo(2, "G223");
             public static readonly GlazingGasket_ArticleNo _G224 = new GlazingGasket_ArticleNo(3, "G224");
             public static readonly GlazingGasket_ArticleNo _G287 = new GlazingGasket_ArticleNo(4, "G287");
+            public static readonly GlazingGasket_ArticleNo _G328 = new GlazingGasket_ArticleNo(5, "G328");//alu22
+            public static readonly GlazingGasket_ArticleNo _G329 = new GlazingGasket_ArticleNo(6, "G329");//alu22
+
 
             private GlazingGasket_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -1660,11 +1682,172 @@ namespace EnumerationTypeLayer
             private Cremon_HandleArtNo(int value, string displayName) : base(value, displayName) { } 
         }
 
-        public class ShootboltForAlutek_HandleArtNo : Enumeration<ShootboltForAlutek_HandleArtNo, int>
+        public class ShootboltForAlutek_ArtNo : Enumeration<ShootboltForAlutek_ArtNo, int>
         {
-            public static readonly ShootboltForAlutek_HandleArtNo _H110 = new ShootboltForAlutek_HandleArtNo(0, "H110");
+            public static readonly ShootboltForAlutek_ArtNo _H110 = new ShootboltForAlutek_ArtNo(0, "H110");
 
-            private ShootboltForAlutek_HandleArtNo(int value, string displayName) : base(value, displayName) { }
+            private ShootboltForAlutek_ArtNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class BaseClip_ArticleNo : Enumeration<BaseClip_ArticleNo, int>
+        {
+            public static readonly BaseClip_ArticleNo _84811 = new BaseClip_ArticleNo(0, "84811");
+            public static readonly BaseClip_ArticleNo _84812 = new BaseClip_ArticleNo(1, "84812");
+
+
+            private BaseClip_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class RainCapCover_ArticleNo : Enumeration<RainCapCover_ArticleNo, int>
+        {
+            public static readonly RainCapCover_ArticleNo _84806 = new RainCapCover_ArticleNo(0, "84806");
+
+            private RainCapCover_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GroveCover_ArticleNo : Enumeration<GroveCover_ArticleNo, int>
+        {
+            public static readonly GroveCover_ArticleNo _84810 = new GroveCover_ArticleNo(0, "84810");
+
+            private GroveCover_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class EndCapForAluFrame_ArticleNo : Enumeration<EndCapForAluFrame_ArticleNo, int>
+        {
+            public static readonly EndCapForAluFrame_ArticleNo _M800 = new EndCapForAluFrame_ArticleNo(0, "M800");
+            public static readonly EndCapForAluFrame_ArticleNo _M801 = new EndCapForAluFrame_ArticleNo(1, "M801");
+
+            private EndCapForAluFrame_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SlimSealingPad_ArticleNo : Enumeration<SlimSealingPad_ArticleNo, int>
+        {
+            public static readonly SlimSealingPad_ArticleNo _G335 = new SlimSealingPad_ArticleNo(0, "G335");
+
+            private SlimSealingPad_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SSGuideRail_ArticleNo : Enumeration<SSGuideRail_ArticleNo, int>
+        {
+            public static readonly SSGuideRail_ArticleNo _A606 = new SSGuideRail_ArticleNo(0, "A606");
+
+            private SSGuideRail_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class AlumSupportTrack_ArticleNo : Enumeration<AlumSupportTrack_ArticleNo, int>
+        {
+            public static readonly AlumSupportTrack_ArticleNo _84915 = new AlumSupportTrack_ArticleNo(0, "84915");
+
+            private AlumSupportTrack_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SashInterlockProfileConnectingAdaptor_ArticleNo : Enumeration<SashInterlockProfileConnectingAdaptor_ArticleNo, int>
+        {
+            public static readonly SashInterlockProfileConnectingAdaptor_ArticleNo _M806 = new SashInterlockProfileConnectingAdaptor_ArticleNo(0, "M806");
+
+            private SashInterlockProfileConnectingAdaptor_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SashInterlockProfileConnectingCover_ArticleNo : Enumeration<SashInterlockProfileConnectingCover_ArticleNo, int>
+        {
+            public static readonly SashInterlockProfileConnectingCover_ArticleNo _M807 = new SashInterlockProfileConnectingCover_ArticleNo(0, "M807");
+
+            private SashInterlockProfileConnectingCover_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class InterlockEndCap_ArticleNo : Enumeration<InterlockEndCap_ArticleNo, int>
+        {
+            public static readonly InterlockEndCap_ArticleNo _M818 = new InterlockEndCap_ArticleNo(0, "M818"); // full
+            public static readonly InterlockEndCap_ArticleNo _M815 = new InterlockEndCap_ArticleNo(1, "M815"); // slotted
+
+            private InterlockEndCap_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SashLockingProfileConnectingAdaptor_ArticleNo : Enumeration<SashLockingProfileConnectingAdaptor_ArticleNo, int>
+        {
+            public static readonly SashLockingProfileConnectingAdaptor_ArticleNo _M805 = new SashLockingProfileConnectingAdaptor_ArticleNo(0, "M805");
+
+            private SashLockingProfileConnectingAdaptor_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MeetingInsert_ArticleNo : Enumeration<MeetingInsert_ArticleNo, int>
+        {
+            public static readonly MeetingInsert_ArticleNo _M814 = new MeetingInsert_ArticleNo(0, "M814"); //male
+            public static readonly MeetingInsert_ArticleNo _M811 = new MeetingInsert_ArticleNo(1, "M811"); // female
+
+            private MeetingInsert_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class InterlockEndCapForMatting_ArticleNo : Enumeration<InterlockEndCapForMatting_ArticleNo, int>
+        {
+            public static readonly InterlockEndCapForMatting_ArticleNo _M812 = new InterlockEndCapForMatting_ArticleNo(0, "M812"); //male
+
+            private InterlockEndCapForMatting_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class EndCapForAlu22_ArticleNo : Enumeration<EndCapForAlu22_ArticleNo, int>
+        {
+            public static readonly EndCapForAlu22_ArticleNo _M809 = new EndCapForAlu22_ArticleNo(0, "M809"); //Full
+            public static readonly EndCapForAlu22_ArticleNo _M810 = new EndCapForAlu22_ArticleNo(1, "M810"); //Slotted
+
+            private EndCapForAlu22_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class TwoWayLockingMushroom_ArticleNo : Enumeration<TwoWayLockingMushroom_ArticleNo, int>
+        {
+            public static readonly TwoWayLockingMushroom_ArticleNo _H185 = new TwoWayLockingMushroom_ArticleNo(0, "H185"); 
+
+            private TwoWayLockingMushroom_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class OneWayLockingMushroom_ArticleNo : Enumeration<OneWayLockingMushroom_ArticleNo, int>
+        {
+            public static readonly OneWayLockingMushroom_ArticleNo _H174 = new OneWayLockingMushroom_ArticleNo(0, "H174");
+
+            private OneWayLockingMushroom_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class RollerForAlu22_ArticleNo : Enumeration<RollerForAlu22_ArticleNo, int>
+        {
+            public static readonly RollerForAlu22_ArticleNo _H176 = new RollerForAlu22_ArticleNo(0, "H176");
+            public static readonly RollerForAlu22_ArticleNo _H177 = new RollerForAlu22_ArticleNo(1, "H177");
+            public static readonly RollerForAlu22_ArticleNo _H178 = new RollerForAlu22_ArticleNo(2, "H178");
+
+            private RollerForAlu22_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MultiLockingReceiver_ArticleNo : Enumeration<MultiLockingReceiver_ArticleNo, int>
+        {
+            public static readonly MultiLockingReceiver_ArticleNo _H173 = new MultiLockingReceiver_ArticleNo(0, "H173");
+
+            private MultiLockingReceiver_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class BumpStopperDoor_ArticleNo : Enumeration<BumpStopperDoor_ArticleNo, int>
+        {
+            public static readonly BumpStopperDoor_ArticleNo _H114 = new BumpStopperDoor_ArticleNo(0, "H114");
+
+            private BumpStopperDoor_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+        public class EuroGearbox_ArticleNo : Enumeration<EuroGearbox_ArticleNo, int>
+        {
+            public static readonly EuroGearbox_ArticleNo _H200 = new EuroGearbox_ArticleNo(0, "H200");
+
+            private EuroGearbox_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class DrainageCap_ArticleNo : Enumeration<DrainageCap_ArticleNo, int>
+        {
+            public static readonly DrainageCap_ArticleNo _M640 = new DrainageCap_ArticleNo(0, "M640");
+
+            private DrainageCap_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class DrainBallValve_ArticleNo : Enumeration<DrainBallValve_ArticleNo, int>
+        {
+            public static readonly DrainBallValve_ArticleNo _M813 = new DrainBallValve_ArticleNo(0, "M813");
+
+            private DrainBallValve_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
     }
 }

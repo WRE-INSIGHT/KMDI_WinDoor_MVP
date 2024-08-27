@@ -284,6 +284,21 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private BaseClip_ArticleNo _FrameBaseClip;
+        public BaseClip_ArticleNo Frame_BaseClip
+        {
+            get
+            {
+                return _FrameBaseClip;
+            }
+            set
+            {
+                _FrameBaseClip = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        
         #region Method
 
 
@@ -2436,8 +2451,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     FrameQtyWd = 1;
                 }
             }
-
-
+             
             if (Frame_ConnectionTypeVisibility == true)
             {
                 if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
@@ -2483,6 +2497,8 @@ namespace ModelLayer.Model.Quotation.Frame
                 FrameQtyWd = 4;
                 reinfQty = 4;
             }
+
+          
             tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNo.ToString() + widthArtNo,
                                                   FrameQtyWd, "pc(s)",
                                                   Frame_ExplosionWidth.ToString(),
@@ -2494,6 +2510,7 @@ namespace ModelLayer.Model.Quotation.Frame
                                    Frame_ExplosionHeight,
                                    "Frame",
                                    cutTypeHt);
+             
             if (!Frame_WindoorModel.WD_profile.Contains("Alutek"))
             {
 
@@ -2855,8 +2872,78 @@ namespace ModelLayer.Model.Quotation.Frame
                                 @"");
         }
 
+        public void Insert_BaseClipForBottomFrame_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Base Clip For Bottom Frame " + Frame_BaseClip.DisplayName,
+                                1, "pc(s)",
+                                "",
+                                "Frame",
+                                @"");
+        }
 
+        public void Insert_RainCapCover_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Rain Cap Cover 84806  ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
 
+        public void Insert_GroveCoverProfile_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Grove Cover Profile, 5.8m 84810  ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
+         
+        public void Insert_TrackScrewSupportBlock_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Track Screw Support Block M808  ",
+                                   2, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
+
+        public void Insert_EndCapForFrameAlu22_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("EndCap for Frame Width Art#",
+                                   2, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
+
+        public void Insert_SlimSealingPad_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Slim Sealing Pad G335  ",
+                                   2, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
+
+        public void Insert_SSGuideRail_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("SS Guide Rail A606  ",
+                                   2, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
+
+        public void Insert_AlumSupportTrack_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Alum Support Track 84915  ",
+                                   2, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
+        }
+         
         public int Add_framePerimeter_screws4fab()
         {
             return (Frame_Width * 2) + (Frame_Height * 2);

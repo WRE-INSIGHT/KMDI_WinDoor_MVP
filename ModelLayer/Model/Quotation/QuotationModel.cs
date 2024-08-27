@@ -2737,10 +2737,10 @@ namespace ModelLayer.Model.Quotation
             else
             {
                 Material_List.Rows.Add("Hole Cap M671",
-                               Expansion_BoltQty_Total + 1,
-                               "pc(s)",
-                               "",
-                               "Frame");
+                                       Expansion_BoltQty_Total + 1,
+                                       "pc(s)",
+                                       "",
+                                       "Frame");
 
                 if (total_GlazingGasketLength > 0)
                 {
@@ -3469,11 +3469,79 @@ namespace ModelLayer.Model.Quotation
 
 
         #region Alutek
-
+        #region Main Profile
+    
         #region FrameAndSash
-
+                // alu 46
                 FramePricePerLinearMeter_84100 = 272.08m,
+
                 SashPricePerLinearMeter_84207 = 425.91m,
+
+                // alu 22
+                FramePricePerLinearMeter_84118 = 1076.26m, //height
+                FramePricePerLinearMeter_841116 = 1559.22m, //height
+                FramePricePerLinearMeter_841119 = 1659.17m, // Width
+                FramePricePerLinearMeter_841117 = 2396.46m, // Width
+
+                SashPricePerLinearMeter_84214 = 923.36m, // Width
+                SashPricePerLinearMeter_84215 = 809.55m, // height
+             
+        #endregion
+        #region Base CLip
+
+                BaseClipPricePerLinearMeter_84812 = 597.26m,
+                BaseClipPricePerLinearMeter_84811 = 901.58m,
+
+        #endregion
+        #region Interlock
+
+                InterlockPricePerLinearMeter_84807 = 1446.39m,
+                InterlockPricePerLinearMeter_84813 = 2615.68m,
+                InterlockPricePerLinearMeter_84814 = 3333.20m,
+                InterlockPricePerLinearMeter_84816 = 597.85m, // flat
+
+        #endregion
+        #region Center Profile or butt profile
+
+                CenterProfilePricePerLinearMeter_84808 = 2618.66m,
+                CenterProfilePricePerLinearMeter_84809 = 2001.10m,
+
+        #endregion
+        #region Cover Profile 
+
+                RainCapCoverProfilePricePerLinearMeter = 181.61m,
+                GroveCoverProfilePricePerLinearMeter = 68.29m,
+                MaleButtProfileCoverPricePerLinearMeter = 2001.10m,
+                FemaleButtProfileCoverPricePerLinearMeter = 2618.66m,
+
+        #endregion
+
+        #endregion
+        #region Brush and Gaskets
+
+                //alu46
+
+                CenterGasketPerPiece = 24.13m,
+                GlazingGasket_GlazingBead_PerPiece = 14.07m,
+                GlazingGasket_FrameSash_PerPiece = 11.22m,
+
+                UniversalGasketPricePerLinearMeter = 11.22m,
+                CenterGasketPerLinearMeter = 24.13m,
+                Gasket_G223_PerLinearMeter = 14.07m,
+                Gasket_G224_PerLinearMeter = 20.63m,
+                Gasket_G287_PerLinearMeter = 9.41m,
+
+
+                GlazingBead_84500PricePerLinearMeter = 117.97m,
+
+               //alu22
+
+                BrushPricePerLinearMeter_G282 = 9.00m,
+                BrushPricePerLinearMeter_G332 = 10.64m,
+                BrushPricePerLinearMeter_G328 = 17.60m,
+                BrushPricePerLinearMeter_G329 = 20.54m,
+                BrushPricePerLinearMeter_84508 = 157.35m,
+
 
         #endregion
         #region Divider
@@ -3486,12 +3554,19 @@ namespace ModelLayer.Model.Quotation
         #endregion
         #region InstallationMats
 
-        ExpansionBoltPricePerPiece = 30.0m,
+            ExpansionBoltPricePerPiece = 30.0m,
 
             FramePackerPricePerPiece = 5.96m,
-            CremonHandlePricePerPiece = 320.22m,
             Unica40PricePerPiece = 92.35m,
             LockingConnectorDevicePricePerPiece = 124.94m,
+
+
+            CremonHandlePricePerPiece = 320.22m,
+            CremonLongHandlePricePerPiece = 0.0m,
+            D_Handle_ForSlidingPricePerPiece = 0.0m,
+            D_WithHalfCylinder_Handle_ForSlidingPricePerPiece = 0.0m,
+            D_WithStdCylinder_Handle_ForSlidingPricePerPiece = 0.0m,
+
 
         #endregion
         #region Alutek Accessories
@@ -3524,29 +3599,47 @@ namespace ModelLayer.Model.Quotation
                 MullionConnectorPricePerPiece = 28.30m,
                 PegstayPricePerPiece = 102.77m,
 
-                CenterGasketPerPiece = 24.13m,
-                GlazingGasket_GlazingBead_PerPiece = 14.07m,
-                GlazingGasket_FrameSash_PerPiece = 11.22m,
-
-                UniversalGasketPricePerLinearMeter = 11.22m,
-                CenterGasketPerLinearMeter = 24.13m,
-                Gasket_G223_PerLinearMeter = 14.07m,
-                Gasket_G224_PerLinearMeter = 20.63m,
-                Gasket_G287_PerLinearMeter = 9.41m,
-
-
-                GlazingBead_84500PricePerLinearMeter = 117.97m,
 
                 //CW
                 FrictionStayPackerPricePerPiece = 123.06m,
                 PolymideStrip_H172_PerLinearMeter = 113.36m,
                 OneWayLockingConnectorPricePerPiece = 119.69m, //158.32INR
                 TwoWayLockingConnectorPricePerPiece = 126.73m, //167.63INR
+
+
+                //sliding alu 22
+                TrackScrewSupportBlockPricePerPiece = 20.93m,
+                EndCapFor2RailFramePricePerPiece = 299.16m,
+                EndCapFor3RailFramePricePerPiece = 363.11m,
+                SlimSealingPadPricePerPiece = 51.94m,
+                SashInterlockProfileConnectingCoverPricePerPiece = 24.42m,
+                InterlockFullEndCapPricePerPiece = 20.81m,
+                InterlockSlottedEndCapPricePerPiece = 26.16m,
+                FullEndCapPricePerPiece = 20.81m,
+                SlottedEndCapPricePerPiece = 26.16m,
+                SashLockingProfileConnectingAdaptorPricePerPiece = 92.20m,
+                SashInterlockProfileConnectingAdaptorPricePerPiece = 58.95m,
+                MeetingMaleInsertPricePerPiece = 24.55m,
+                MeetingFemaleInsertPricePerPiece = 24.55m,
+                InterlockEndCapForMattingPricePerPiece = 26.93m,
+
+                Roller200kgPricePerPiece = 826.78m,
+                Roller300kgPricePerPiece = 1187.23m,
+                Roller400kgPricePerPiece = 1556.45m,
+                MultiLockingRecieverPricePerPiece = 90.22m,
+                OneWayLockingMushroomPricePerPiece = 102.98m, // H174 H174M
+                TwoWayLockingMushroomPricePerPiece = 113.32m,
+                BumpStopperDoorPricePerPiece = 0.0m,
+                GearBoxPricePerPiece = 0.0m,
+
+                                
+
+
         #endregion
 
 
         //alu
-        InstallationMaterialCost,
+                InstallationMaterialCost,
                 SubTotatal,
                 ImportationCost,
                 MobilizationCost,
@@ -7675,7 +7768,6 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmClr_PricePerSqrMeter;
                                                 pnl.Panel_GlassPricePerSqrMeter = Glass_10mmClr_PricePerSqrMeter;
-
                                             }
                                         }
                                         else if (pnl.Panel_GlassThickness >= 12.0f)
