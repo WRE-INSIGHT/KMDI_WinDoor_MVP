@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -32,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
+        private IUserModel _userModel;
         private IMultiPanelModel _multiPanelModel;
         private ConstantVariables constants = new ConstantVariables();
 
@@ -292,6 +294,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     else
                         _fixedPanelUC.cmenuFxdOverlapSashVisibility = false;
                     _fixedPanelUC.GetcmenuFxd().Show(new Point(Cursor.Position.X, Cursor.Position.Y));
+                }
+                else if (_panelModel.Panel_BackColor == SystemColors.Highlight)
+                {   
+                    if (_mainPresenter.PrevPanelModel_forCenterProfileSelection != null)
+                    {
+                        _mainPresenter.PrevPanelModel_forCenterProfileSelection.Panel_BackColor = Color.DarkGray;
+                    }
+                     
+                    if (_mainPresenter.NxtPnlModel_forCenterProfileSelection != null)
+                    {
+                        _mainPresenter.NxtPnlModel_forCenterProfileSelection.Panel_BackColor = Color.DarkGray;
+                    }
+                    _panelModel.Panel_CPPanel = _panelModel;
+                   _mainPresenter.SetLblStatusForCenterProfile("CPSelection", false, null, null, null, null,_panelModel);
+                   _mainPresenter.GetCurrentPrice();
                 }
                 else
                 {
@@ -1241,59 +1258,61 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
 
             #region Mesh
-            if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
-            {
-                int cond = fixedpnl.ClientRectangle.Width + fixedpnl.ClientRectangle.Height;
-
-                int maxWidth = fixedpnl.ClientRectangle.Width;
-
-                for (int i = 10; i < cond; i += 10)
-                {
-                    g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
-
-                }
-
-                for (int i = 10; i < cond; i += 10)
-                {
-                    g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(fixedpnl.ClientRectangle.Width, i));
-
-                }
-                if (_panelModel.Panel_Orient == true)
-                {
-                    if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
-                    {
-                        g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
-                                                                               8 / rectThickness,
-                                                                               fixedpnl.ClientRectangle.Width - 17 / rectThickness,
-                                                                               fixedpnl.ClientRectangle.Height - 17 / rectThickness));
-                    }
-                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
-                    {
-                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                            8 / rectThickness,
-                                                                            fixedpnl.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                            fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
-
-                    }
-                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
-                    {
-
-                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
+            if (_panelModel.Panel_GlassThicknessDesc != null)
+            { 
+               if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+               {
+                   int cond = fixedpnl.ClientRectangle.Width + fixedpnl.ClientRectangle.Height;
+             
+                   int maxWidth = fixedpnl.ClientRectangle.Width;
+             
+                   for (int i = 10; i < cond; i += 10)
+                   {
+                       g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+             
+                   }
+             
+                   for (int i = 10; i < cond; i += 10)
+                   {
+                       g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(fixedpnl.ClientRectangle.Width, i));
+             
+                   }
+                   if (_panelModel.Panel_Orient == true)
+                   {
+                       if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                       {
+                           g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
+                                                                                  8 / rectThickness,
+                                                                                  fixedpnl.ClientRectangle.Width - 17 / rectThickness,
+                                                                                  fixedpnl.ClientRectangle.Height - 17 / rectThickness));
+                       }
+                       else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                       {
+                           g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
                                                                                8 / rectThickness,
                                                                                fixedpnl.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
                                                                                fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
-                    }
-                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
-                    {
-                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                          8 / rectThickness,
-                                                                          fixedpnl.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
-                                                                          fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
-                    }
-                }
+             
+                       }
+                       else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                       {
+             
+                           g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
+                                                                                  8 / rectThickness,
+                                                                                  fixedpnl.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                                  fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
+                       }
+                       else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                       {
+                           g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                             8 / rectThickness,
+                                                                             fixedpnl.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
+                                                                             fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
+                       }
+                   }
+               }
+             
             }
-
-
 
 
             #endregion
@@ -1670,6 +1689,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _commonFunctions.Automatic_Div_Addition(_mainPresenter,
                                                         _frameModel,
+                                                        _userModel,
                                                         _divServices,
                                                         //_frameUCP,
                                                         _transomUCP,
@@ -1716,6 +1736,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IPanelModel panelModel,
                                                      IFrameModel frameModel,
+                                                     IUserModel userModel,
                                                      IMainPresenter mainPresenter,
                                                      IFrameUCPresenter frameUCP)
         {
@@ -1735,6 +1756,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IPanelModel panelModel,
                                                      IFrameModel frameModel,
+                                                     IUserModel userModel,
                                                      IMainPresenter mainPresenter,
                                                      IMultiPanelModel multiPanelModel,
                                                      IMultiPanelMullionUCPresenter multiPanelUCP,
@@ -1746,6 +1768,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
             fixedPanelUCP._panelModel = panelModel;
             fixedPanelUCP._frameModel = frameModel;
+            fixedPanelUCP._userModel = userModel;
             fixedPanelUCP._mainPresenter = mainPresenter;
             fixedPanelUCP._multiPanelModel = multiPanelModel;
             fixedPanelUCP._multiPanelMullionUCP = multiPanelUCP;
@@ -1758,6 +1781,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IPanelModel panelModel,
                                                      IFrameModel frameModel,
+                                                     IUserModel userModel,
                                                      IMainPresenter mainPresenter,
                                                      IMultiPanelModel multiPanelModel,
                                                      IMultiPanelTransomUCPresenter multiPanelTransomUCP,
@@ -1769,6 +1793,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             FixedPanelUCPresenter fixedPanelUCP = unityC.Resolve<FixedPanelUCPresenter>();
             fixedPanelUCP._panelModel = panelModel;
             fixedPanelUCP._frameModel = frameModel;
+            fixedPanelUCP._userModel = userModel;
             fixedPanelUCP._mainPresenter = mainPresenter;
             fixedPanelUCP._multiPanelModel = multiPanelModel;
             fixedPanelUCP._multiPanelTransomUCP = multiPanelTransomUCP;
@@ -1799,6 +1824,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Placement", new Binding("Panel_Placement", _panelModel, "Panel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelGlass_ID", new Binding("PanelGlass_ID", _panelModel, "PanelGlass_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_CmenuDeleteVisibility", new Binding("Panel_CmenuDeleteVisibility", _panelModel, "Panel_CmenuDeleteVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_BackColor", new Binding("BackColor", _panelModel, "Panel_BackColor", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return panelBinding;
         }

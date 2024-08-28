@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -32,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
+        private IUserModel _userModel;
         private IMultiPanelModel _multiPanelModel;
         private ConstantVariables constants = new ConstantVariables();
         private IMultiPanelMullionUCPresenter _multiPanelMullionUCP;
@@ -287,38 +289,55 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 //Console.WriteLine("Panel Renderer Width " + _panelModel.PanelImageRenderer_Width);
                 //Console.WriteLine("Panel Renderer Height " + _panelModel.PanelImageRenderer_Height);
-                Console.WriteLine("Sliding WidthToBind " + _panelModel.Panel_WidthToBind);
-                Console.WriteLine("Sliding HeightToBind " + _panelModel.Panel_HeightToBind);
-                Console.WriteLine("Sliding Width " + _panelModel.Panel_Width);
-                Console.WriteLine("Sliding Height " + _panelModel.Panel_Height);
-                //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
-                //Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
+
+                    //Console.WriteLine("Sliding WidthToBind " + _panelModel.Panel_WidthToBind);
+                    //Console.WriteLine("Sliding HeightToBind " + _panelModel.Panel_HeightToBind);
+                    //Console.WriteLine("Sliding Width " + _panelModel.Panel_Width);
+                    //Console.WriteLine("Sliding Height " + _panelModel.Panel_Height);
+
+                    //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
+                    //Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
 
 
 
 
-                //Console.WriteLine("Panel_Display_Width " + _panelModel.Panel_DisplayWidth);
-                //Console.WriteLine("Panel_Display_Height " + _panelModel.Panel_DisplayHeight);
-                //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
-                //Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
+                    //Console.WriteLine("Panel_Display_Width " + _panelModel.Panel_DisplayWidth);
+                    //Console.WriteLine("Panel_Display_Height " + _panelModel.Panel_DisplayHeight);
+                    //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
+                    //Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
 
-                slidingUC = (UserControl)sender;
-                Console.WriteLine(slidingUC.Width);
-                Console.WriteLine("Location: " + slidingUC.Location);
-                Console.WriteLine();
-
-                IWindoorModel wdm = _frameModel.Frame_WindoorModel;
-                int propertyHeight = 0;
-                int framePropertyHeight = 0;
-                int concretePropertyHeight = 0;
-                int mpnlPropertyHeight = 0;
-                int pnlPropertyHeight = 0;
-                int divPropertyHeight = 0;
-                foreach (Control wndrObject in wdm.lst_objects)
+                    slidingUC = (UserControl)sender;
+                    //Console.WriteLine(slidingUC.Width);
+                    //Console.WriteLine("Location: " + slidingUC.Location);
+                 if (_panelModel.Panel_BackColor == SystemColors.Highlight)
                 {
-                    if (wndrObject.Name.Contains("Frame"))
+                    if (_mainPresenter.PrevPanelModel_forCenterProfileSelection != null)
                     {
-                        #region FrameModel
+                        _mainPresenter.PrevPanelModel_forCenterProfileSelection.Panel_BackColor = Color.DarkGray;
+                    }
+
+                    if (_mainPresenter.NxtPnlModel_forCenterProfileSelection != null)
+                    {
+                        _mainPresenter.NxtPnlModel_forCenterProfileSelection.Panel_BackColor = Color.DarkGray;
+                    }
+                    _panelModel.Panel_CPPanel = _panelModel;
+                    _mainPresenter.SetLblStatusForCenterProfile("CPSelection", false, null, null, null, null, _panelModel);
+                    _mainPresenter.GetCurrentPrice();
+                }
+                else
+                { 
+                     IWindoorModel wdm = _frameModel.Frame_WindoorModel;
+                     int propertyHeight = 0;
+                     int framePropertyHeight = 0;
+                     int concretePropertyHeight = 0;
+                     int mpnlPropertyHeight = 0;
+                     int pnlPropertyHeight = 0;
+                     int divPropertyHeight = 0;
+                     foreach (Control wndrObject in wdm.lst_objects)
+                     {
+                         if (wndrObject.Name.Contains("Frame"))
+                         {
+                             #region FrameModel
                         foreach (FrameModel frm in wdm.lst_frame)
                         {
                             if (frm.Frame_Name == wndrObject.Name)
@@ -500,10 +519,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
 
                         #endregion
-                    }
-                    else
-                    {
-                        #region Concrete
+                         }
+                         else
+                         {
+                             #region Concrete
 
                         foreach (IConcreteModel crm in wdm.lst_concrete)
                         {
@@ -514,9 +533,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             }
                         }
                         #endregion
-                    }
-
-
+                         } 
+                     }
                 }
             }
             catch (Exception ex)
@@ -1223,6 +1241,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     _commonFunctions.Automatic_Div_Addition(_mainPresenter,
                                                         _frameModel,
+                                                        _userModel,
                                                         _divServices,
                                                         //_frameUCP,
                                                         _transomUCP,
@@ -1429,58 +1448,59 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
 
             #region Mesh
-            if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
-            {
-                int cond = sliding.ClientRectangle.Width + sliding.ClientRectangle.Height;
-
-                int maxWidth = sliding.ClientRectangle.Width;
-
-                for (int i = 10; i < cond; i += 10)
+            if (_panelModel.Panel_GlassThicknessDesc != null)
+            { 
+                if (_panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
                 {
-                    g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
+                    int cond = sliding.ClientRectangle.Width + sliding.ClientRectangle.Height;
 
-                }
+                    int maxWidth = sliding.ClientRectangle.Width;
 
-                for (int i = 10; i < cond; i += 10)
-                {
-                    g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(sliding.ClientRectangle.Width, i));
+                    for (int i = 10; i < cond; i += 10)
+                    {
+                        g.DrawLine(Pens.LightSlateGray, new Point(0, i), new Point(i, 0));
 
-                }
+                    }
 
-                if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
-                {
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
-                                                                           8 / rectThickness,
-                                                                           sliding.ClientRectangle.Width - 17 / rectThickness,
-                                                                           sliding.ClientRectangle.Height - 17 / rectThickness));
-                }
-                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
-                {
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                        8 / rectThickness,
-                                                                        sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                        sliding.ClientRectangle.Height - (17 / rectThickness)));
+                    for (int i = 10; i < cond; i += 10)
+                    {
+                        g.DrawLine(Pens.LightSlateGray, new Point(maxWidth - i, 0), new Point(sliding.ClientRectangle.Width, i));
 
-                }
-                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
-                {
+                    }
 
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
-                                                                           8 / rectThickness,
-                                                                           sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                           sliding.ClientRectangle.Height - (17 / rectThickness)));
-                }
-                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
-                {
-                    g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                      8 / rectThickness,
-                                                                      sliding.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
-                                                                      sliding.ClientRectangle.Height - (17 / rectThickness)));
-                }
+                    if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
+                                                                               8 / rectThickness,
+                                                                               sliding.ClientRectangle.Width - 17 / rectThickness,
+                                                                               sliding.ClientRectangle.Height - 17 / rectThickness));
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                            8 / rectThickness,
+                                                                            sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                            sliding.ClientRectangle.Height - (17 / rectThickness)));
 
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                    {
+
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
+                                                                               8 / rectThickness,
+                                                                               sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                               sliding.ClientRectangle.Height - (17 / rectThickness)));
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                    {
+                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                          8 / rectThickness,
+                                                                          sliding.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
+                                                                          sliding.ClientRectangle.Height - (17 / rectThickness)));
+                    }
+
+                } 
             }
-
-
 
 
             #endregion
@@ -1916,6 +1936,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                        IPanelModel panelModel,
                                                        IFrameModel frameModel,
+                                                       IUserModel userModel,
                                                        IMainPresenter mainPresenter,
                                                        IFrameUCPresenter frameUCP)
         {
@@ -1925,6 +1946,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             SlidingPanelUCPresenter slidingUCP = unityC.Resolve<SlidingPanelUCPresenter>();
             slidingUCP._panelModel = panelModel;
             slidingUCP._frameModel = frameModel;
+            slidingUCP._userModel = userModel;
             slidingUCP._mainPresenter = mainPresenter;
             slidingUCP._frameUCP = frameUCP;
             slidingUCP._unityC = unityC;
@@ -1935,6 +1957,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                        IPanelModel panelModel,
                                                        IFrameModel frameModel,
+                                                       IUserModel userModel,
                                                        IMainPresenter mainPresenter,
                                                        IMultiPanelModel multiPanelModel,
                                                        IMultiPanelMullionUCPresenter multiPanelUCP,
@@ -1946,6 +1969,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             SlidingPanelUCPresenter slidingUCP = unityC.Resolve<SlidingPanelUCPresenter>();
             slidingUCP._panelModel = panelModel;
             slidingUCP._frameModel = frameModel;
+            slidingUCP._userModel = userModel;
             slidingUCP._mainPresenter = mainPresenter;
             slidingUCP._multiPanelModel = multiPanelModel;
             slidingUCP._multiPanelMullionUCP = multiPanelUCP;
@@ -1958,6 +1982,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                        IPanelModel panelModel,
                                                        IFrameModel frameModel,
+                                                       IUserModel userModel,
                                                        IMainPresenter mainPresenter,
                                                        IMultiPanelModel multiPanelModel,
                                                        IMultiPanelTransomUCPresenter multiPanelTransomUCP,
@@ -1969,6 +1994,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             SlidingPanelUCPresenter slidingUCP = unityC.Resolve<SlidingPanelUCPresenter>();
             slidingUCP._panelModel = panelModel;
             slidingUCP._frameModel = frameModel;
+            slidingUCP._userModel = userModel; 
             slidingUCP._mainPresenter = mainPresenter;
             slidingUCP._multiPanelModel = multiPanelModel;
             slidingUCP._multiPanelTransomUCP = multiPanelTransomUCP;

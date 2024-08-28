@@ -67,6 +67,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_LouverBladesCount { get; set; }
         bool Panel_LouverBladesVisibility { get; set; }
         Color Panel_BackColor { get; set; }
+        int Panel_PartnerPanelGlassID { get; set; }
 
         #region Explosion
 
@@ -116,6 +117,7 @@ namespace ModelLayer.Model.Quotation.Panel
         CoverProfile_ArticleNo Panel_CoverProfileArtNo2 { get; set; }
         FrictionStay_ArticleNo Panel_FrictionStayArtNo { get; set; }
         FrictionStayCasement_ArticleNo Panel_FSCasementArtNo { get; set; }
+        FrictionAlutek_ArticleNo Panel_FSAlutekArtNo { get; set; }
         SnapInKeep_ArticleNo Panel_SnapInKeepArtNo { get; set; }
         FixedCam_ArticleNo Panel_FixedCamArtNo { get; set; }
         _30x25Cover_ArticleNo Panel_30x25CoverArtNo { get; set; }
@@ -332,6 +334,8 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_LouverRPLeverHandleCheck { get; set; }
         bool Panel_CenterProfileVisibility { get; set; }
         CenterProfile_ArticleNo Panel_CenterProfileArtNo { get; set; }
+        CenterProfile_ArticleNo Panel_PartnerWithCenterProfile { get; set; }
+        IPanelModel Panel_CPPanel { get; set; }
         PVCSettingPlate_ArticleNo Panel_PVCSettingPlateArtNo { get; set; }
         FinPlate_ArticleNo Panel_FinPlateArtNo { get; set; }
         SlidingAccessoriesRoller_ArticleNo Panel_SlidingAccessoriesRollerArtNo { get; set; }
@@ -353,6 +357,8 @@ namespace ModelLayer.Model.Quotation.Panel
         Unica40_ArticleNo Panel_Unica40ArtNo { get; set; }
         LockingConnectorDevice_ArticleNo Panel_LockingConnectorArtNo { get; set; }
         Cremon_HandleArtNo Panel_CremonArtNo { get; set; }
+        TwoWayLockingConnector_ArticleNo Panel_TwoWayLockingConnectorArtNo { get; set; } 
+        OneWayLockingConnector_ArticleNo Panel_OneWayLockingConnectorArtNo { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
@@ -396,6 +402,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_FillerProfileForNoBotFrameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion, int motorCount);
         void Insert_FrictionStay_MaterialList(DataTable tbl_explosion);
+        void Insert_FrictionStayPacker_MaterialList(DataTable tbl_explosion);
         void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion);
         void Insert_FixedCam_MaterialList(DataTable tbl_explosion);
         void Insert_PlasticWedge_MaterialList(DataTable tbl_explosion);
@@ -512,12 +519,16 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_SlidingSashBottomGuide_MaterialList(DataTable tbl_explosion, int overlap);
         void Insert_BrushForSliding_MaterialList(DataTable tbl_explosion, int FinPlatePerimeter);
         void Insert_InversionClip_MaterialList(DataTable tbl_explosion);
+        int Add_GasketLength_Alutek(bool withSash, float GlassThickness);
+        int Add_UniversalGasketLength_Alutek(bool withSash);
+        void checkGasketArtNo(float GlassThickness);
         void Insert_GlazingGasket_Alutek_MaterialList(DataTable tbl_explosion, float GlassThickness, bool withSash);
+        int Add_CenterGasket();
         void Insert_CenterGasket_MaterialList(DataTable tbl_explosion);
-        void Insert_OpenableStriker_MaterialList(DataTable tbl_explosion);
+        void Insert_OpenableStriker_MaterialList(DataTable tbl_explosion, string panelType);
         void Insert_Cheveron_MaterialList(DataTable tbl_explosion);
         void Insert_CornerWindow_MaterialList(DataTable tbl_explosion);
-        void Insert_RunUpBlock_MaterialList(DataTable tbl_explosion);
+        void Insert_RunUpBlock_MaterialList(DataTable tbl_explosion, string panelType);
         void Insert_PackerRod_MaterialList(DataTable tbl_explosion);
         void Insert_LockingWedge_MaterialList(DataTable tbl_explosion);
         void Insert_SSCheveron_MaterialList(DataTable tbl_explosion);
@@ -525,7 +536,11 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_LockingConnectorDevice_MaterialList(DataTable tbl_explosion);
         void Insert_CremonHandle_MaterialList(DataTable tbl_explosion);
         void Insert_Pegstay_MaterialList(DataTable tbl_explosion);
-        void Insert_AlutekStriker_MaterialList(DataTable tbl_explosion);
+        void Insert_AlutekStriker_MaterialList(DataTable tbl_explosion, string panelType);
+        void Insert_CenterProfile_MaterialList(DataTable tbl_explosion);
+        void Insert_TwoWayLockingConnector_MaterialList(DataTable tbl_explosion);
+        void Insert_OneWayLockingConnector_MaterialList(DataTable tbl_explosion);
+
 
         #endregion
 

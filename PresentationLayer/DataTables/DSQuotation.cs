@@ -2,6 +2,8 @@
 {
     partial class DSQuotation
     {
-
+        partial class dtScreenAdjustmentDataTable
+        {
+        }
     }
 }

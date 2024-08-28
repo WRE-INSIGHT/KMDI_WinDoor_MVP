@@ -42,7 +42,7 @@
             this.cmb_SashReinf.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_SashReinf.FormattingEnabled = true;
             this.cmb_SashReinf.Location = new System.Drawing.Point(101, 65);
-            this.cmb_SashReinf.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_SashReinf.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_SashReinf.Name = "cmb_SashReinf";
             this.cmb_SashReinf.Size = new System.Drawing.Size(95, 24);
             this.cmb_SashReinf.TabIndex = 16;
@@ -66,7 +66,7 @@
             this.cmb_SashProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_SashProfile.FormattingEnabled = true;
             this.cmb_SashProfile.Location = new System.Drawing.Point(101, 32);
-            this.cmb_SashProfile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmb_SashProfile.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_SashProfile.Name = "cmb_SashProfile";
             this.cmb_SashProfile.Size = new System.Drawing.Size(95, 24);
             this.cmb_SashProfile.TabIndex = 14;

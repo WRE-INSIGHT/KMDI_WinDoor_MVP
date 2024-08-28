@@ -80,9 +80,9 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-
-
-                if ((_ceicId == _userModel.EmployeeID && _userModel.AccountType != "User Level 1") || _userModel.AccountType == "User Level 1")
+                if ((_ceicId == _userModel.EmployeeID && _userModel.AccountType != "User Level 1") ||
+                    _userModel.AccountType == "User Level 1" ||
+                    (_userModel.Username == "Production" && _userModel.Password == "Production"))
                 {
                     if (e.RowIndex > -1 && e.ColumnIndex > -1 && e.Button == MouseButtons.Left)
                     {
@@ -331,7 +331,7 @@ namespace PresentationLayer.Presenter
             _dgvAssignedProj.Columns["File_Label"].Visible = false;
             _dgvAssignedProj.Columns["AEIC ID"].Visible = false;
             _dgvAssignedProj.Columns["Title Lastname"].Visible = false;
-            _dgvAssignedProj.Columns["Factor"].Visible = false;
+           // _dgvAssignedProj.Columns["Factor"].Visible = false; Factor here is not used
             _dgvAssignedProj.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
             foreach (DataGridViewColumn col in _dgvAssignedProj.Columns)
             {

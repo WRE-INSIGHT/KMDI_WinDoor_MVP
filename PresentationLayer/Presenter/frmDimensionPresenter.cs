@@ -186,6 +186,14 @@ namespace PresentationLayer.Presenter
             {
                 _baseColor = "Dark Brown";
             }
+            else if (_frmDimensionView.SelectedBaseColor == Base_Color._PowderCoated.ToString())
+            {
+                _baseColor = "Powder Coated";
+            }
+            else if (_frmDimensionView.SelectedBaseColor == Base_Color._Foiled.ToString())
+            {
+                _baseColor = "Foiled";
+            }
         }
 
         private void _frmDimensionView_cmbSystemOptionSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -207,6 +215,8 @@ namespace PresentationLayer.Presenter
                 else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._Alutek.ToString())
                 {
                     profile_type = "Alutek Profile";
+                    _baseColor = "Powder Coated";
+
                 }
             }
         }

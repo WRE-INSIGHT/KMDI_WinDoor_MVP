@@ -29,6 +29,7 @@ namespace PresentationLayer.Presenter
         List<DataRow> Unglazed { get; set; }
         Dictionary<long, decimal> Dic_PaScreenID { get; set; }
         List<IScreenPartialAdjustmentProperties> Lst_ScreenPartialAdjustment { get; set; }
+        List<string> Lst_GlassDescException { get; set; }
         Control ControlRaised_forDMSelection { get; }
         IDividerModel DivModel_forDMSelection { get; }
         IPanelModel PrevPnlModel_forDMSelection { get; }
@@ -88,6 +89,15 @@ namespace PresentationLayer.Presenter
                           IPanelModel prev_pnl = null,
                           IPanelModel nxt_pnl = null,
                           IDividerPropertiesUCPresenter divPropUCP = null);
+        void SetLblStatusForCenterProfile(string status,
+                                                  bool visibility,
+                                                  Control controlRaised = null,
+                                                  IPanelModel prev_pnl = null,
+                                                  IPanelModel curnt_pnl = null,
+                                                  IPanelModel nxt_pnl = null,
+                                                  IPanelModel selected_pnl = null);
+        void WrongSelectionOfDummyMullion();
+
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);
         void AddWndrList_QuotationModel(IWindoorModel wndr);
@@ -155,15 +165,21 @@ namespace PresentationLayer.Presenter
         void DisposeDrawingandProperties();
         void CopyObjectsPerWindoorModel();
         void MainPresenter_PartialAdjustment();
-        void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color);
+        void ClearAndAddGlassInList(bool _callfrmGlassUpgrade);
+        void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color, PowderCoatType_Color powderCoatType_Color);
         void setWoodecAdditional(int woodecAddlPercentage);
         void Get_TopViewSelectPanel();
         void Get_TopViewPanelViewer();
 
+        IPanelModel PrevPanelModel_forCenterProfileSelection { get; }
+        IPanelModel NxtPnlModel_forCenterProfileSelection { get; }
         Base_Color baseColor { get; set; }
         Foil_Color InsideColor { get; set; } 
         Foil_Color OutsideColor { get; set; }
         bool EditFromQuotationList { get; set; }
+        Control ControlRaised_forCenterProfileSelection { get; set; }
+        void OnLoadSearchCenterProfielArtNo(IPanelModel pnlModel);
+       
 
     }
 }

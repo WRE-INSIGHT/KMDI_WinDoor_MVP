@@ -245,22 +245,12 @@ namespace PresentationLayer.Views
             List<Base_Color> baseColor = new List<Base_Color>();
             foreach (Base_Color item in Base_Color.GetAll())
             {
-                if (ProfileType_MainPresenter.Contains(SystemProfile_Option._Alutek.ToString()))
-                {
-                    if (item == Base_Color._PowderCoated ||
-                        item == Base_Color._Foiled)
+                    if (item == Base_Color._White ||
+                        item == Base_Color._Ivory ||
+                        item == Base_Color._DarkBrown)
                     {
                         baseColor.Add(item);
-                    }
-                }
-                else
-                {
-                    if (item != Base_Color._PowderCoated &&
-                        item != Base_Color._Foiled)
-                    {
-                        baseColor.Add(item);
-                    }
-                }
+                    } 
             }
             cmb_baseColor.DataSource = baseColor;
 
@@ -476,6 +466,14 @@ namespace PresentationLayer.Views
             if(e.Control == true && e.KeyCode == Keys.P)
             {
                 EventHelpers.RaiseEvent(sender, tsBtnPrintScreenClickEventRaised, e);
+            }
+            else if(e.Control == true && e.KeyCode == Keys.Tab)
+            {
+                EventHelpers.RaiseEvent(sender, tsb_Switch_ClickEventRaised, e);
+            }
+            else if(e.Control == true && e.KeyCode == Keys.Oem3)
+            {
+                EventHelpers.RaiseEvent(sender, tsb_ScreenAdjustment_ClickEventRaised, e);
             }
         }
 

@@ -74,11 +74,7 @@ namespace PresentationLayer.Presenter
             {
                 foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                 {
-                    if (mpnl.MPanel_DividerEnabled == false)
-                    {
                         _windoorModel.pnlCount = mpnl.MPanelLst_Panel.Count;
-                    }
-
                 }
             }
             if (_windoorModel.pnlCount > (_windoorModel.pnlLeftCounter + _windoorModel.pnlRightCounter))
@@ -113,11 +109,7 @@ namespace PresentationLayer.Presenter
             {
                 foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                 {
-                    if (mpnl.MPanel_DividerEnabled == false)
-                    {
                         _windoorModel.pnlCount = mpnl.MPanelLst_Panel.Count;
-                    }
-
                 }
             }
 

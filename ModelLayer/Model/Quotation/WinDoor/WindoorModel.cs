@@ -829,6 +829,34 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public DateTime Date_Assigned { get; set; }
         public DateTime Date_Assigned_Mainpresenter { get; set; }
 
+        private bool _wd_powderCoatVisibility;
+        public bool WD_PowderCoatVisibility
+        {
+            get
+            {
+                return _wd_powderCoatVisibility;
+            }
+            set
+            {
+                _wd_powderCoatVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private PowderCoatType_Color _wd_powderCoatType;
+        public PowderCoatType_Color WD_PowderCoatType
+        {
+            get
+            {
+                return _wd_powderCoatType;
+            }
+            set
+            {
+                _wd_powderCoatType = value;
+            }
+        }
+
+
         #region Methods
 
         public void SetDimensions_basePlatform()

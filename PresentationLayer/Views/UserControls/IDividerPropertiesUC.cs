@@ -14,6 +14,8 @@ namespace PresentationLayer.Views.UserControls
         DividerModel.DividerType Divider_Type { get;  set; }
         SashProfile_ArticleNo Panel_SashProfileArtNo { get; set; }
 
+        string ProfileType_FromMainPresenter { get; set; }
+
         event EventHandler PanelPropertiesLoadEventRaised;
         event EventHandler CmbdivArtNoSelectedValueChangedEventRaised;
         event EventHandler cmbCladdingArtNoSelectedValueChangeEventRiased;

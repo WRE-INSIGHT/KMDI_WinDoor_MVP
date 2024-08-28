@@ -22,15 +22,17 @@ namespace PresentationLayer.Views
         public event EventHandler CmbOutsideColorSelectedValueChangedEventRaised;
         public event EventHandler nudWoodecAdditionalValueChangedEventRaised;
         public event EventHandler CmbColorAppliedToSelectedValueChangedEventRaised;
-
+        public event EventHandler  cmbPowderCoatTypeSelectedValueChangedEventRaised;
         private void ChangeItemColorView_Load(object sender, EventArgs e)
         {
             List<Base_Color> base_col = new List<Base_Color>();
             List<Foil_Color> inside_col = new List<Foil_Color>();
             List<Foil_Color> outside_col = new List<Foil_Color>();
             List<ColorAppliedTo> AppliedTo_col = new List<ColorAppliedTo>();
+            List<PowderCoatType_Color> PowderCoatType_col = new List<PowderCoatType_Color>();
 
-            
+
+
 
             foreach (Base_Color item in Base_Color.GetAll())
             {
@@ -72,6 +74,12 @@ namespace PresentationLayer.Views
             }
             cmb_ColorAppliedTo.DataSource = AppliedTo_col;
 
+            foreach (PowderCoatType_Color item in PowderCoatType_Color.GetAll())
+            {
+                PowderCoatType_col.Add(item);
+            }
+            cmb_PowderCoatType.DataSource = PowderCoatType_col;
+
             EventHelpers.RaiseEvent(this, ChangeItemColorViewLoadEventRaised, e);
         }
 
@@ -98,6 +106,17 @@ namespace PresentationLayer.Views
         {
             return cmb_ColorAppliedTo;
         }
+
+        public ComboBox GetCmbPowderCoatedType()
+        {
+            return cmb_PowderCoatType;
+        }
+
+        public Panel GetPnlPowderCoatdType()
+        {
+            return pnl_PowderCoatType;
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, BtnOkClickEventRaised, e);
@@ -140,6 +159,12 @@ namespace PresentationLayer.Views
         private void cmb_ColorAppliedTo_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CmbColorAppliedToSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_PowderCoatType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbPowderCoatTypeSelectedValueChangedEventRaised, e);
+
         }
     }
 }

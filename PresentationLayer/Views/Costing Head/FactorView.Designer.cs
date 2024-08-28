@@ -52,25 +52,28 @@
             this.dgv_Factor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Factor.ContextMenuStrip = this.cmenu_Factor;
             this.dgv_Factor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_Factor.Location = new System.Drawing.Point(0, 29);
+            this.dgv_Factor.Location = new System.Drawing.Point(0, 36);
+            this.dgv_Factor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgv_Factor.Name = "dgv_Factor";
             this.dgv_Factor.ReadOnly = true;
+            this.dgv_Factor.RowHeadersWidth = 51;
             this.dgv_Factor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Factor.Size = new System.Drawing.Size(290, 468);
+            this.dgv_Factor.Size = new System.Drawing.Size(387, 576);
             this.dgv_Factor.TabIndex = 105;
             this.dgv_Factor.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Factor_RowPostPaint);
             // 
             // cmenu_Factor
             // 
+            this.cmenu_Factor.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmenu_Factor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem});
             this.cmenu_Factor.Name = "cmenu_Factor";
-            this.cmenu_Factor.Size = new System.Drawing.Size(95, 26);
+            this.cmenu_Factor.Size = new System.Drawing.Size(105, 28);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
@@ -80,8 +83,9 @@
             this.panel1.Controls.Add(this.txt_SearchFactor);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(290, 29);
+            this.panel1.Size = new System.Drawing.Size(387, 36);
             this.panel1.TabIndex = 109;
             // 
             // btn_SearchFactor
@@ -92,9 +96,10 @@
             this.btn_SearchFactor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_SearchFactor.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_SearchFactor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_SearchFactor.Location = new System.Drawing.Point(250, 0);
+            this.btn_SearchFactor.Location = new System.Drawing.Point(332, 0);
+            this.btn_SearchFactor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_SearchFactor.Name = "btn_SearchFactor";
-            this.btn_SearchFactor.Size = new System.Drawing.Size(40, 29);
+            this.btn_SearchFactor.Size = new System.Drawing.Size(55, 36);
             this.btn_SearchFactor.TabIndex = 110;
             this.btn_SearchFactor.UseVisualStyleBackColor = false;
             this.btn_SearchFactor.Click += new System.EventHandler(this.btn_SearchFactor_Click);
@@ -104,19 +109,20 @@
             this.txt_SearchFactor.Dock = System.Windows.Forms.DockStyle.Left;
             this.txt_SearchFactor.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_SearchFactor.Location = new System.Drawing.Point(0, 0);
-            this.txt_SearchFactor.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txt_SearchFactor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_SearchFactor.Name = "txt_SearchFactor";
-            this.txt_SearchFactor.Size = new System.Drawing.Size(250, 29);
+            this.txt_SearchFactor.Size = new System.Drawing.Size(332, 34);
             this.txt_SearchFactor.TabIndex = 109;
             this.txt_SearchFactor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_SearchFactor_KeyDown);
             // 
             // FactorView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(290, 497);
+            this.ClientSize = new System.Drawing.Size(387, 612);
             this.Controls.Add(this.dgv_Factor);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FactorView";
             this.Load += new System.EventHandler(this.FactorView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Factor)).EndInit();

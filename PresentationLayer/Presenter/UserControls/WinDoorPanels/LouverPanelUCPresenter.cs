@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -31,6 +32,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
+        private IUserModel _userModel;
         private IMultiPanelModel _multiPanelModel;
 
         private IMultiPanelMullionUCPresenter _multiPanelMullionUCP;
@@ -678,6 +680,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         _commonFunctions.Automatic_Div_Addition(_mainPresenter,
                                                             _frameModel,
+                                                            _userModel,
                                                             _divServices,
                                                             //_frameUCP,
                                                             _transomUCP,
@@ -797,6 +800,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ILouverPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                       IPanelModel panelModel,
                                                       IFrameModel frameModel,
+                                                      IUserModel userModel,
                                                       IMainPresenter mainPresenter,
                                                       IFrameUCPresenter frameUCP)
         {
@@ -806,6 +810,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             LouverPanelUCPresenter louverUCP = unityC.Resolve<LouverPanelUCPresenter>();
             louverUCP._panelModel = panelModel;
             louverUCP._frameModel = frameModel;
+            louverUCP._userModel = userModel;
             louverUCP._mainPresenter = mainPresenter;
             louverUCP._frameUCP = frameUCP;
             louverUCP._unityC = unityC;
@@ -816,6 +821,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ILouverPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMultiPanelMullionUCPresenter multiPanelUCP)
@@ -826,6 +832,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             LouverPanelUCPresenter louverUCP = unityC.Resolve<LouverPanelUCPresenter>();
             louverUCP._panelModel = panelModel;
             louverUCP._frameModel = frameModel;
+            louverUCP._userModel = userModel;
             louverUCP._mainPresenter = mainPresenter;
             louverUCP._multiPanelModel = multiPanelModel;
             louverUCP._multiPanelMullionUCP = multiPanelUCP;
@@ -837,6 +844,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public ILouverPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IPanelModel panelModel,
                                                         IFrameModel frameModel,
+                                                        IUserModel userModel,
                                                         IMainPresenter mainPresenter,
                                                         IMultiPanelModel multiPanelModel,
                                                         IMultiPanelTransomUCPresenter multiPanelTransomUCP)
@@ -847,6 +855,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             LouverPanelUCPresenter louverUCP = unityC.Resolve<LouverPanelUCPresenter>();
             louverUCP._panelModel = panelModel;
             louverUCP._frameModel = frameModel;
+            louverUCP._userModel = userModel;
             louverUCP._mainPresenter = mainPresenter;
             louverUCP._multiPanelModel = multiPanelModel;
             louverUCP._multiPanelTransomUCP = multiPanelTransomUCP;

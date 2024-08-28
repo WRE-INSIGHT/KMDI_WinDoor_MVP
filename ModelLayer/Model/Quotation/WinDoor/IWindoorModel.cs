@@ -107,8 +107,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
         ColorAppliedTo WD_ColorAppliedTo { get; set; }
         decimal WD_PriceWithWoodecAdditional { get; set; }
         DateTime Date_Assigned { get; set; }
-
         DateTime Date_Assigned_Mainpresenter { get; set; }
+        bool WD_PowderCoatVisibility { get; set; }
+        PowderCoatType_Color WD_PowderCoatType { get; set; }
         void Fit_MyControls_ToBindDimensions();
         void SetfrmDimentionZoom();
         void Fit_MyControls_ImagersToBindDimensions();

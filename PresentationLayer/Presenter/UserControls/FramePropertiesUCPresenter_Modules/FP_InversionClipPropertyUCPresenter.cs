@@ -12,6 +12,7 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
         IFP_InversionClipPropertyUC _InversionClipPropertyUC;
 
         private IFrameModel _frameModel;
+        private IMainPresenter _mainPresenter;
         private IUnityContainer _unityC;
 
         public FP_InversionClipPropertyUCPresenter(IFP_InversionClipPropertyUC InversionClipPropertyUC)
@@ -42,11 +43,13 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
             {
                 chk.Text = "No";
                 _frameModel.Frame_InversionClipOption = false;
+                _mainPresenter.GetCurrentPrice();
             }
             else if (chk.Checked == true)
             {
                 chk.Text = "Yes";
                 _frameModel.Frame_InversionClipOption = true;
+                _mainPresenter.GetCurrentPrice();
             }
         }
 
@@ -67,7 +70,8 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
         }
 
         public IFP_InversionClipPropertyUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                                      IFrameModel frameModel)
+                                                                      IFrameModel frameModel,
+                                                                      IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IFP_InversionClipPropertyUCPresenter, FP_InversionClipPropertyUCPresenter>()
@@ -76,6 +80,8 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
             FP_InversionClipPropertyUCPresenter InversionClipPropertyUCP = unityC.Resolve<FP_InversionClipPropertyUCPresenter>();
             InversionClipPropertyUCP._unityC = unityC;
             InversionClipPropertyUCP._frameModel = frameModel;
+            InversionClipPropertyUCP._mainPresenter = mainPresenter;
+
 
             return InversionClipPropertyUCP;
         }

@@ -44,6 +44,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             }
         }
 
+        public string ProfileType_FromMainPresenter { get; set; }
+
         public event EventHandler PPEspagnolettePropertyLoadEventRaised;
         public event EventHandler cmbEspagnoletteSelectedValueEventRaised;
 
@@ -54,7 +56,26 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             List<Espagnolette_ArticleNo> espArtNo = new List<Espagnolette_ArticleNo>();
             foreach (Espagnolette_ArticleNo item in Espagnolette_ArticleNo.GetAll())
             {
-                espArtNo.Add(item);
+                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                {
+                    if (item == Espagnolette_ArticleNo._H102 ||
+                        item == Espagnolette_ArticleNo._H103 ||
+                        item == Espagnolette_ArticleNo._H172 ||
+                        item == Espagnolette_ArticleNo._84819 )
+                    {
+                        espArtNo.Add(item);
+                    }
+                }
+                else
+                {
+                    if (item != Espagnolette_ArticleNo._H102 &&
+                        item != Espagnolette_ArticleNo._H103 &&
+                        item != Espagnolette_ArticleNo._H172 &&
+                        item != Espagnolette_ArticleNo._84819)
+                    {
+                        espArtNo.Add(item);
+                    }
+                }
             }
             cmb_Espagnolette.DataSource = espArtNo;
 
@@ -118,7 +139,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                         MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
-                else if (espag == Espagnolette_ArticleNo._H102 || espag == Espagnolette_ArticleNo._H103 )
+                else if (espag == Espagnolette_ArticleNo._H102 || espag == Espagnolette_ArticleNo._H103 ||
+                         espag == Espagnolette_ArticleNo._H172 || espag == Espagnolette_ArticleNo._84819)
+
                 {
                     if (!(Frame_ArtNo == FrameProfile_ArticleNo._84100))
                     {
@@ -216,7 +239,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
                 }
             }
-            else if (espag == Espagnolette_ArticleNo._H102 || espag == Espagnolette_ArticleNo._H103)
+            else if (espag == Espagnolette_ArticleNo._H102 || espag == Espagnolette_ArticleNo._H103 ||
+                     espag == Espagnolette_ArticleNo._H172 || espag == Espagnolette_ArticleNo._84819)
             {
                 if (Frame_ArtNo == FrameProfile_ArticleNo._84100 )
                 {

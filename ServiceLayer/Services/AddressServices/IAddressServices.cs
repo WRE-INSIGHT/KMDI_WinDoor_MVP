@@ -10,7 +10,7 @@ namespace ServiceLayer.Services.AddressServices
 {
     public interface IAddressServices
     {
-        Task<DataTable> Get_Factor(string searchStr);
+        Task<DataTable> Get_Factor(string searchStr,DateTime cus_ref_date);
         Task UpdateFactor(string Id, decimal factor);
     }
 }
