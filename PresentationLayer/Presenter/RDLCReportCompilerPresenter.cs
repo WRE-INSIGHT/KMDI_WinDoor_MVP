@@ -129,7 +129,7 @@ namespace PresentationLayer.Presenter
                     }
                     else
                     {
-                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Net Price With VAT*";
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Net Price With VAT";
                     }
                 }
                 else
@@ -141,7 +141,7 @@ namespace PresentationLayer.Presenter
                     }
                     else
                     {
-                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Price With VAT*";
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Price With VAT";
                     }
                 }
                 
@@ -157,7 +157,7 @@ namespace PresentationLayer.Presenter
                     }
                     else
                     {
-                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Net Price Without VAT*";
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Net Price Without VAT";
                     }
                 }
                 else
@@ -169,7 +169,7 @@ namespace PresentationLayer.Presenter
                     }
                     else
                     {
-                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Price Without VAT*";
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Price Without VAT";
                     }
                 }
             }
