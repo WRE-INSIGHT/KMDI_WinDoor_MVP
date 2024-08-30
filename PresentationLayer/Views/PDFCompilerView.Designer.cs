@@ -51,7 +51,7 @@
             this.toolStripDropDownButton1});
             this.toolstrip_compiler.Location = new System.Drawing.Point(0, 0);
             this.toolstrip_compiler.Name = "toolstrip_compiler";
-            this.toolstrip_compiler.Size = new System.Drawing.Size(366, 27);
+            this.toolstrip_compiler.Size = new System.Drawing.Size(366, 31);
             this.toolstrip_compiler.TabIndex = 0;
             this.toolstrip_compiler.Text = "toolStrip1";
             // 
@@ -63,7 +63,7 @@
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(34, 24);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(34, 28);
             this.toolStripDropDownButton1.Text = "Settings";
             // 
             // changeSyncDirToolStripMenuItem
@@ -77,9 +77,9 @@
             // 
             this.panel2.Controls.Add(this.tableLayoutPanel1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 27);
+            this.panel2.Location = new System.Drawing.Point(0, 31);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(366, 81);
+            this.panel2.Size = new System.Drawing.Size(366, 77);
             this.panel2.TabIndex = 2;
             // 
             // tableLayoutPanel1
@@ -98,7 +98,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(366, 81);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(366, 77);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btn_CompileReports
@@ -106,7 +106,7 @@
             this.btn_CompileReports.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn_CompileReports.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btn_CompileReports.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_CompileReports.Location = new System.Drawing.Point(3, 36);
+            this.btn_CompileReports.Location = new System.Drawing.Point(3, 32);
             this.btn_CompileReports.Name = "btn_CompileReports";
             this.btn_CompileReports.Size = new System.Drawing.Size(224, 42);
             this.btn_CompileReports.TabIndex = 0;
@@ -120,7 +120,7 @@
             this.btn_CompilePDF.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn_CompilePDF.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btn_CompilePDF.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic);
-            this.btn_CompilePDF.Location = new System.Drawing.Point(241, 36);
+            this.btn_CompilePDF.Location = new System.Drawing.Point(241, 32);
             this.btn_CompilePDF.Name = "btn_CompilePDF";
             this.btn_CompilePDF.Size = new System.Drawing.Size(122, 42);
             this.btn_CompilePDF.TabIndex = 1;
@@ -144,6 +144,7 @@
             this.wthAnnex_chkbx.AutoSize = true;
             this.wthAnnex_chkbx.Checked = true;
             this.wthAnnex_chkbx.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.wthAnnex_chkbx.Enabled = false;
             this.wthAnnex_chkbx.Location = new System.Drawing.Point(241, 3);
             this.wthAnnex_chkbx.Name = "wthAnnex_chkbx";
             this.wthAnnex_chkbx.Size = new System.Drawing.Size(97, 21);

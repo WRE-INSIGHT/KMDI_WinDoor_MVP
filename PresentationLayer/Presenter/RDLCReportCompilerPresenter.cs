@@ -366,7 +366,7 @@ namespace PresentationLayer.Presenter
                 _quoteItemListPresenter.CallFrmRDLCCompiler = false;
 
                 _rdlcReportCompilerView.GetRDLCReportCompilerForm().Text = "Report Compiler - Partial Adjustment";
-                _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Special Discounted Adjustment Price without VaT";//default
+                _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Special Discounted Adjustment Price without VAT";//default
 
                 _rdlcReportCompilerView.GetChecklistBoxIndex().Enabled = false;
                 _rdlcReportCompilerView.GetSubTotalCheckBox().Enabled = false;

@@ -2226,8 +2226,7 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show(this + " " + ex.Message );
                 GetProjectFactorFromFile();
             }
-                     
-
+                                
         }
 
         private void GetProjectFactorFromFile()

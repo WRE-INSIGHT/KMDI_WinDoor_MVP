@@ -1155,7 +1155,7 @@ namespace PresentationLayer.Presenter
                 }
                 else if (_mainPresenter.printStatus == "ContractSummary")
                 {
-                    #region Contract Summary RDLC 
+                   #region Contract Summary RDLC 
 
                     #region  label & Rtextbox new location
                     _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(205, 3);

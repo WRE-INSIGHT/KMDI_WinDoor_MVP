@@ -32,6 +32,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GlassUpgradeView));
             this.panel_Header = new System.Windows.Forms.Panel();
+            this.lbl_ootPerSuggest = new System.Windows.Forms.Label();
+            this.num_Additional = new System.Windows.Forms.NumericUpDown();
+            this.chkbox_Additional = new System.Windows.Forms.CheckBox();
             this.cmb_multipleGlassUpgrade = new System.Windows.Forms.ComboBox();
             this.lbl_multipleGlassUpgrade = new System.Windows.Forms.Label();
             this.chkbx_Duplicate = new System.Windows.Forms.CheckBox();
@@ -67,10 +70,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.num_wdwsAndDoors = new System.Windows.Forms.NumericUpDown();
             this._lblWindoor = new System.Windows.Forms.Label();
-            this.chkbox_Additional = new System.Windows.Forms.CheckBox();
-            this.num_Additional = new System.Windows.Forms.NumericUpDown();
-            this.lbl_ootPerSuggest = new System.Windows.Forms.Label();
             this.panel_Header.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Additional)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_discount)).BeginInit();
             this.pnl_desc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_itemImage)).BeginInit();
@@ -80,7 +81,6 @@
             this.cmsGlassUpgrade.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_glassAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_wdwsAndDoors)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Additional)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Header
@@ -119,6 +119,36 @@
             this.panel_Header.Name = "panel_Header";
             this.panel_Header.Size = new System.Drawing.Size(1243, 236);
             this.panel_Header.TabIndex = 0;
+            // 
+            // lbl_ootPerSuggest
+            // 
+            this.lbl_ootPerSuggest.AutoSize = true;
+            this.lbl_ootPerSuggest.ForeColor = System.Drawing.Color.Red;
+            this.lbl_ootPerSuggest.Location = new System.Drawing.Point(396, 113);
+            this.lbl_ootPerSuggest.Name = "lbl_ootPerSuggest";
+            this.lbl_ootPerSuggest.Size = new System.Drawing.Size(125, 17);
+            this.lbl_ootPerSuggest.TabIndex = 25;
+            this.lbl_ootPerSuggest.Text = "Use of AddPerSug";
+            this.lbl_ootPerSuggest.Visible = false;
+            // 
+            // num_Additional
+            // 
+            this.num_Additional.Location = new System.Drawing.Point(537, 86);
+            this.num_Additional.Name = "num_Additional";
+            this.num_Additional.Size = new System.Drawing.Size(57, 22);
+            this.num_Additional.TabIndex = 24;
+            this.num_Additional.Visible = false;
+            // 
+            // chkbox_Additional
+            // 
+            this.chkbox_Additional.AutoSize = true;
+            this.chkbox_Additional.Location = new System.Drawing.Point(396, 86);
+            this.chkbox_Additional.Name = "chkbox_Additional";
+            this.chkbox_Additional.Size = new System.Drawing.Size(147, 21);
+            this.chkbox_Additional.TabIndex = 23;
+            this.chkbox_Additional.Text = "OOT Additional %:";
+            this.chkbox_Additional.UseVisualStyleBackColor = true;
+            this.chkbox_Additional.CheckedChanged += new System.EventHandler(this.chkbox_Additional_CheckedChanged);
             // 
             // cmb_multipleGlassUpgrade
             // 
@@ -273,7 +303,7 @@
             this._glassUpgToolStrip.Location = new System.Drawing.Point(0, 0);
             this._glassUpgToolStrip.Name = "_glassUpgToolStrip";
             this._glassUpgToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this._glassUpgToolStrip.Size = new System.Drawing.Size(1243, 31);
+            this._glassUpgToolStrip.Size = new System.Drawing.Size(1243, 27);
             this._glassUpgToolStrip.TabIndex = 12;
             this._glassUpgToolStrip.Text = "_glassUpgToolStrip";
             // 
@@ -283,8 +313,8 @@
             this._printBtn.Image = global::PresentationLayer.Properties.Resources.print;
             this._printBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._printBtn.Name = "_printBtn";
-            this._printBtn.Size = new System.Drawing.Size(29, 28);
-            this._printBtn.Text = "toolStripButton1";
+            this._printBtn.Size = new System.Drawing.Size(29, 24);
+            this._printBtn.Text = "Print";
             this._printBtn.Click += new System.EventHandler(this._printBtn_Click);
             // 
             // _date
@@ -543,36 +573,6 @@
             this._lblWindoor.TabIndex = 17;
             this._lblWindoor.Text = "Windows / Doors: ";
             // 
-            // chkbox_Additional
-            // 
-            this.chkbox_Additional.AutoSize = true;
-            this.chkbox_Additional.Location = new System.Drawing.Point(396, 86);
-            this.chkbox_Additional.Name = "chkbox_Additional";
-            this.chkbox_Additional.Size = new System.Drawing.Size(147, 21);
-            this.chkbox_Additional.TabIndex = 23;
-            this.chkbox_Additional.Text = "OOT Additional %:";
-            this.chkbox_Additional.UseVisualStyleBackColor = true;
-            this.chkbox_Additional.CheckedChanged += new System.EventHandler(this.chkbox_Additional_CheckedChanged);
-            // 
-            // num_Additional
-            // 
-            this.num_Additional.Location = new System.Drawing.Point(537, 86);
-            this.num_Additional.Name = "num_Additional";
-            this.num_Additional.Size = new System.Drawing.Size(57, 22);
-            this.num_Additional.TabIndex = 24;
-            this.num_Additional.Visible = false;
-            // 
-            // lbl_ootPerSuggest
-            // 
-            this.lbl_ootPerSuggest.AutoSize = true;
-            this.lbl_ootPerSuggest.ForeColor = System.Drawing.Color.Red;
-            this.lbl_ootPerSuggest.Location = new System.Drawing.Point(396, 113);
-            this.lbl_ootPerSuggest.Name = "lbl_ootPerSuggest";
-            this.lbl_ootPerSuggest.Size = new System.Drawing.Size(125, 17);
-            this.lbl_ootPerSuggest.TabIndex = 25;
-            this.lbl_ootPerSuggest.Text = "Use of AddPerSug";
-            this.lbl_ootPerSuggest.Visible = false;
-            // 
             // GlassUpgradeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -595,6 +595,7 @@
             this.SizeChanged += new System.EventHandler(this.GlassUpgradeView_SizeChanged);
             this.panel_Header.ResumeLayout(false);
             this.panel_Header.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Additional)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_discount)).EndInit();
             this.pnl_desc.ResumeLayout(false);
             this.pnl_desc.PerformLayout();
@@ -606,7 +607,6 @@
             this.cmsGlassUpgrade.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.num_glassAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_wdwsAndDoors)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Additional)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
