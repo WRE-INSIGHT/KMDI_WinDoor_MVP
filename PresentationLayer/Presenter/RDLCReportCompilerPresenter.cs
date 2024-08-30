@@ -395,8 +395,8 @@ namespace PresentationLayer.Presenter
 
 
             _rdlcReportCompilerView.TxtBxContractSummaryVat = "12";
-            _rdlcReportCompilerView.TxtBxRowlimit = "21";
-            _rdlcReportCompilerView.TxtGlassUpgradeRowLimit = "22";
+            _rdlcReportCompilerView.TxtBxRowlimit = "100";
+            _rdlcReportCompilerView.TxtGlassUpgradeRowLimit = "100";
 
             LoadSettingsForGlassUpgrade();
 

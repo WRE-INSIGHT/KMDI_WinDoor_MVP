@@ -546,7 +546,7 @@ namespace PresentationLayer.Presenter
             }
 
             _printQuoteView.GetDTPDate().Value = DateTime.Now;
-            _printQuoteView.RowLimit = "22";
+            _printQuoteView.RowLimit = "100";
         }
 
         private void AddItemsInReviewedAndNotedBy()
