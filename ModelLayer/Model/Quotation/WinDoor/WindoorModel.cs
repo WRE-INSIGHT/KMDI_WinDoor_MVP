@@ -29,6 +29,20 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 NotifyPropertyChanged();
             }
         }
+
+        private string _wdAlutekSystemType;
+        public string WD_AlutekSystemType
+        {
+            get
+            {
+                return _wdAlutekSystemType;
+            }
+            set
+            {
+                _wdAlutekSystemType = value;
+            }
+        }
+
         private int _wdHeight;
         [Required(ErrorMessage = "Window Height is Required")]
         [Range(400, int.MaxValue, ErrorMessage = "Please enter a value for Window Height bigger than or equal to {1}")]

@@ -124,7 +124,8 @@ namespace PresentationLayer.Presenter
                                 int frmDimension_numWd,
                                 int frmDimension_numHt,
                                 string frmDimension_profileType,
-                                string frmDimension_baseColor);
+                                string frmDimension_baseColor,
+                                string frmDimension_AluSysType);
         void Clearing_Operation();
         void frmDimensionResults(frmDimensionPresenter.Show_Purpose purpose,
                                  int frmDimension_numWd,

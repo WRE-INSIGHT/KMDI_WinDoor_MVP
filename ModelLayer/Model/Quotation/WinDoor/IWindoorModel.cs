@@ -10,7 +10,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
 {
     public interface IWindoorModel
     {
-        string WD_profile { get; set; }
+        string WD_profile { get; set; } 
+        string WD_AlutekSystemType { get; set; }
         int WD_height { get; set; }
         Base_Color WD_BaseColor { get; set; }
         int WD_width { get; set; }

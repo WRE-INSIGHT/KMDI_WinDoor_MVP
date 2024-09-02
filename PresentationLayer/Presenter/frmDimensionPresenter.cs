@@ -15,8 +15,9 @@ namespace PresentationLayer.Presenter
         private IMultiPanelMullionUCPresenter _multiMullionUCP;
         private IMultiPanelTransomUCPresenter _multiTransomUCP;
 
-        private string profile_type;
+        private string _profile_type;
         private string _baseColor;
+        private string _aluSysType;
         private bool _isFrmClosed;
         public enum Show_Purpose
         {
@@ -49,15 +50,30 @@ namespace PresentationLayer.Presenter
         {
             get
             {
-                return profile_type;
+                return _profile_type;
             }
 
             set
             {
-                profile_type = value;
+                _profile_type = value;
             }
         }
 
+        public string aluSysType_frmDimensionPresenter
+        {
+            get
+            {
+                return _aluSysType;
+            }
+
+            set
+            {
+                _aluSysType = value;
+            }
+        }
+
+
+        
         public string baseColor_frmDimensionPresenter
         {
             get
@@ -156,9 +172,14 @@ namespace PresentationLayer.Presenter
             _frmDimensionView.numWidthEnterEventRaised += new EventHandler(OnnumWidthEnterEventRaised);
             _frmDimensionView.numHeightEnterEventRaised += new EventHandler(OnnumHeightEnterEventRaised);
             _frmDimensionView.nudFrameQtyValueChangedEventRaised += _frmDimensionView_nudFrameQtyValueChangedEventRaised;
+            _frmDimensionView.cmbAlutekSystemTypeSelectedValueChangedEventRaised += _frmDimensionView_cmbAlutekSystemTypeSelectedValueChangedEventRaised;
         }
 
-
+        private void _frmDimensionView_cmbAlutekSystemTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            AlutekSystemProfile_Option aluSysType = (AlutekSystemProfile_Option)((ComboBox)sender).SelectedValue;
+            _aluSysType = aluSysType.ToString(); 
+        }
 
         private void _frmDimensionView_nudFrameQtyValueChangedEventRaised(object sender, EventArgs e)
         {
@@ -202,22 +223,26 @@ namespace PresentationLayer.Presenter
             {
                 if (_frmDimensionView.SelectedSystem == SystemProfile_Option._C70.ToString())
                 {
-                    profile_type = "C70 Profile";
+                    _profile_type = "C70 Profile";
+                    _frmDimensionView.GetPanelAlutekSystemType().Visible = false;
                 }
                 else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._Premiline.ToString())
                 {
-                    profile_type = "PremiLine Profile";
+                    _profile_type = "PremiLine Profile";
+                    _frmDimensionView.GetPanelAlutekSystemType().Visible = false;
                 }
                 else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._G58.ToString())
                 {
-                    profile_type = "G58 Profile";
+                    _profile_type = "G58 Profile";
+                    _frmDimensionView.GetPanelAlutekSystemType().Visible = false;
                 }
                 else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._Alutek.ToString())
                 {
-                    profile_type = "Alutek Profile";
+                    _profile_type = "Alutek Profile";
                     _baseColor = "Powder Coated";
-
+                    _frmDimensionView.GetPanelAlutekSystemType().Visible = true; 
                 }
+                SetHeight();
             }
         }
 
@@ -264,8 +289,9 @@ namespace PresentationLayer.Presenter
                                                       purpose,
                                                       _frmDimensionView.InumWidth,
                                                       _frmDimensionView.InumHeight,
-                                                      profile_type,
-                                                      _baseColor);
+                                                      _profile_type,
+                                                      _baseColor,
+                                                      _aluSysType);
                 }
             }
             catch (Exception ex)
@@ -281,11 +307,14 @@ namespace PresentationLayer.Presenter
             {
                 _baseColor = "White";
             }
-            if (profile_type == string.Empty)
+            if (_profile_type == string.Empty)
             {
-                profile_type = "C70 Profile";
+                _profile_type = "C70 Profile";
             }
-
+            if (_aluSysType == string.Empty)
+            {
+                _aluSysType = "46";
+            }
             //_frmDimensionView.dimension_height = 203;
             //kapag binalik mo to magagalaw yung sa line 99 ng MultiPanelMullionUCPresenter
             //_frmDimensionView.InumWidth = 400;
@@ -311,12 +340,17 @@ namespace PresentationLayer.Presenter
 
         public void SetProfileType(string profileType)
         {
-            profile_type = profileType;
+            _profile_type = profileType;
         }
 
         public void SetBaseColor(string baseColor)
         {
             _baseColor = baseColor;
+        }
+        
+        public void SetAluSysType(string aluSysType)
+        {
+            _aluSysType = aluSysType;
         }
 
         public void SetHeight()
@@ -325,14 +359,25 @@ namespace PresentationLayer.Presenter
             {
                 _frmDimensionView.thisHeight = 203;
                 _frmDimensionView.GetPanelFrameQty().Visible = false;
+                if (_profile_type == "Alutek Profile")
+                {
+                    _frmDimensionView.thisHeight = 235;
+                } 
+
             }
-            else if (purpose == Show_Purpose.CreateNew_Item ||
-                     purpose == Show_Purpose.CreateNew_Frame ||
+            else if (purpose == Show_Purpose.CreateNew_Item)
+            {
+                _frmDimensionView.thisHeight = 173; // 140 238
+                _frmDimensionView.GetPanelFrameQty().Visible = false;
+                _frmDimensionView.GetPanelAlutekSystemType().Visible = true;
+            }
+            else if (purpose == Show_Purpose.CreateNew_Frame ||
                      purpose == Show_Purpose.ChangeBasePlatformSize ||
                      purpose == Show_Purpose.AddPanelIntoMultiPanel)
             {
-                _frmDimensionView.thisHeight = 173; // 140 238
+                _frmDimensionView.thisHeight =   173; // 140 238
                 _frmDimensionView.GetPanelFrameQty().Visible = true;
+                _frmDimensionView.GetPanelAlutekSystemType().Visible = false; 
             }
         }
 

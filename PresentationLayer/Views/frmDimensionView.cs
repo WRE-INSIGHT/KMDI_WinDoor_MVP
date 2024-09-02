@@ -79,6 +79,19 @@ namespace PresentationLayer.Views
             }
         }
 
+        public string SelectedAlutekSystemType
+        {
+            get
+            {
+                return cmb_AlutekSystemType.Text;
+            }
+
+            set
+            {
+                cmb_AlutekSystemType.Text = value;
+            }
+        }
+
         public int thisHeight
         {
             set
@@ -104,6 +117,11 @@ namespace PresentationLayer.Views
         {
             return pnl_FrameQty;
         }
+        
+         public Panel GetPanelAlutekSystemType()
+        {
+            return pnl_AlutekSystemType;
+        }
 
         public NumericUpDown GetNumWidth()
         {
@@ -122,6 +140,7 @@ namespace PresentationLayer.Views
         public event EventHandler numWidthEnterEventRaised;
         public event EventHandler numHeightEnterEventRaised;
         public event EventHandler nudFrameQtyValueChangedEventRaised;
+        public event EventHandler cmbAlutekSystemTypeSelectedValueChangedEventRaised;
 
 
         public void ShowfrmDimension()
@@ -137,8 +156,14 @@ namespace PresentationLayer.Views
             }
             cmb_SystemOption.DataSource = systemType;
 
-       
 
+
+            List<AlutekSystemProfile_Option> lst_AlutekSystemProfile = new List<AlutekSystemProfile_Option>();
+            foreach (AlutekSystemProfile_Option item in AlutekSystemProfile_Option.GetAll())
+            {
+                lst_AlutekSystemProfile.Add(item);
+            }
+            cmb_AlutekSystemType.DataSource = lst_AlutekSystemProfile;
 
             EventHelpers.RaiseEvent(this, frmDimensionLoadEventRaised, e);
         }
@@ -215,6 +240,11 @@ namespace PresentationLayer.Views
         private void nud_FrameQty_ValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, nudFrameQtyValueChangedEventRaised, e);
+        }
+
+        private void cmb_AlutekSystemType_SelectedValueChanged(object sender, EventArgs e)
+        { 
+            EventHelpers.RaiseEvent(sender , cmbAlutekSystemTypeSelectedValueChangedEventRaised, e);
         }
     }
 }

@@ -43,12 +43,16 @@
             this.pnl_FrameQty = new System.Windows.Forms.Panel();
             this.lbl_FrameQty = new System.Windows.Forms.Label();
             this.nud_FrameQty = new System.Windows.Forms.NumericUpDown();
+            this.pnl_AlutekSystemType = new System.Windows.Forms.Panel();
+            this.lbl_AlutekSystemType = new System.Windows.Forms.Label();
+            this.cmb_AlutekSystemType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHeight)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnl_FrameQty.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_FrameQty)).BeginInit();
+            this.pnl_AlutekSystemType.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -140,7 +144,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.numHeight);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 99);
+            this.panel1.Location = new System.Drawing.Point(0, 124);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(172, 100);
             this.panel1.TabIndex = 8;
@@ -200,7 +204,7 @@
             this.pnl_FrameQty.Controls.Add(this.lbl_FrameQty);
             this.pnl_FrameQty.Controls.Add(this.nud_FrameQty);
             this.pnl_FrameQty.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnl_FrameQty.Location = new System.Drawing.Point(0, 67);
+            this.pnl_FrameQty.Location = new System.Drawing.Point(0, 92);
             this.pnl_FrameQty.Name = "pnl_FrameQty";
             this.pnl_FrameQty.Size = new System.Drawing.Size(172, 32);
             this.pnl_FrameQty.TabIndex = 10;
@@ -239,13 +243,43 @@
             0});
             this.nud_FrameQty.ValueChanged += new System.EventHandler(this.nud_FrameQty_ValueChanged);
             // 
+            // pnl_AlutekSystemType
+            // 
+            this.pnl_AlutekSystemType.Controls.Add(this.cmb_AlutekSystemType);
+            this.pnl_AlutekSystemType.Controls.Add(this.lbl_AlutekSystemType);
+            this.pnl_AlutekSystemType.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnl_AlutekSystemType.Location = new System.Drawing.Point(0, 60);
+            this.pnl_AlutekSystemType.Name = "pnl_AlutekSystemType";
+            this.pnl_AlutekSystemType.Size = new System.Drawing.Size(172, 32);
+            this.pnl_AlutekSystemType.TabIndex = 11;
+            // 
+            // lbl_AlutekSystemType
+            // 
+            this.lbl_AlutekSystemType.AutoSize = true;
+            this.lbl_AlutekSystemType.Location = new System.Drawing.Point(4, 5);
+            this.lbl_AlutekSystemType.Name = "lbl_AlutekSystemType";
+            this.lbl_AlutekSystemType.Size = new System.Drawing.Size(81, 19);
+            this.lbl_AlutekSystemType.TabIndex = 2;
+            this.lbl_AlutekSystemType.Text = "AluSys Type";
+            // 
+            // cmb_AlutekSystemType
+            // 
+            this.cmb_AlutekSystemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_AlutekSystemType.FormattingEnabled = true;
+            this.cmb_AlutekSystemType.Location = new System.Drawing.Point(87, 3);
+            this.cmb_AlutekSystemType.Name = "cmb_AlutekSystemType";
+            this.cmb_AlutekSystemType.Size = new System.Drawing.Size(80, 25);
+            this.cmb_AlutekSystemType.TabIndex = 4;
+            this.cmb_AlutekSystemType.SelectedValueChanged += new System.EventHandler(this.cmb_AlutekSystemType_SelectedValueChanged);
+            // 
             // frmDimensionView
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(172, 199);
+            this.ClientSize = new System.Drawing.Size(172, 224);
+            this.Controls.Add(this.pnl_AlutekSystemType);
             this.Controls.Add(this.pnl_FrameQty);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
@@ -268,6 +302,8 @@
             this.pnl_FrameQty.ResumeLayout(false);
             this.pnl_FrameQty.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_FrameQty)).EndInit();
+            this.pnl_AlutekSystemType.ResumeLayout(false);
+            this.pnl_AlutekSystemType.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -289,5 +325,8 @@
         private System.Windows.Forms.Panel pnl_FrameQty;
         private System.Windows.Forms.Label lbl_FrameQty;
         public System.Windows.Forms.NumericUpDown nud_FrameQty;
+        private System.Windows.Forms.Panel pnl_AlutekSystemType;
+        private System.Windows.Forms.ComboBox cmb_AlutekSystemType;
+        private System.Windows.Forms.Label lbl_AlutekSystemType;
     }
 }

@@ -74,14 +74,18 @@ namespace PresentationLayer.Views.UserControls
             {
                 if (ProfileType_FromMainPresenter.Contains("Alutek"))
                 {
-                    if (item == FrameProfile_ArticleNo._84100)
+                    if (item == FrameProfile_ArticleNo._84100 ||
+                        item == FrameProfile_ArticleNo._84116 ||
+                        item == FrameProfile_ArticleNo._84118 )
                     {
                         fArtNo.Add(item);
                     }
                 }
                 else
                 {
-                    if (item != FrameProfile_ArticleNo._84100)
+                    if (item != FrameProfile_ArticleNo._84100 ||
+                        item != FrameProfile_ArticleNo._84116 ||
+                        item != FrameProfile_ArticleNo._84118 )
                     {
                         fArtNo.Add(item);
                     }

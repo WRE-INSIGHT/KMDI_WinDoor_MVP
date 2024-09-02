@@ -9,6 +9,7 @@ namespace PresentationLayer.Presenter
         Show_Purpose purpose { get; set; }
         string profileType_frmDimensionPresenter { get; set; }
         string baseColor_frmDimensionPresenter { get; set; }
+        string aluSysType_frmDimensionPresenter { get; set; }
         bool mainPresenter_qoutationInputBox_ClickedOK { get; set; }
         bool mainPresenter_newItem_ClickedOK { get; set; }
         bool mainPresenter_AddedFrame_ClickedOK { get; set; }
@@ -20,6 +21,8 @@ namespace PresentationLayer.Presenter
         void SetPresenters(IMultiPanelTransomUCPresenter multiTransomUCP);
         void SetProfileType(string profileType);
         void SetBaseColor(string baseColor);
+        void SetAluSysType(string aluSysType);
+
         void SetHeight();
         void SetValues(int numWD, int numHT);
         bool GetfrmResult();

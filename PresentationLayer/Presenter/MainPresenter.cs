@@ -2042,8 +2042,10 @@ namespace PresentationLayer.Presenter
                                    _windoorModel.WD_width,
                                    _windoorModel.WD_height,
                                    _windoorModel.WD_profile,
-                                   _windoorModel.WD_BaseColor.Value.ToString());
-                _quotationModel.Select_Current_Windoor(_windoorModel);
+                                   _windoorModel.WD_BaseColor.Value.ToString(),
+                                   _windoorModel.WD_AlutekSystemType);
+
+                                   _quotationModel.Select_Current_Windoor(_windoorModel);
             }
             catch (Exception ex)
             {
@@ -2986,7 +2988,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                Scenario_Quotation(false, false, false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Concrete, 0, 0, "", "");
+                Scenario_Quotation(false, false, false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Concrete, 0, 0, "", "","");
             }
             catch (Exception ex)
             {
@@ -3385,19 +3387,19 @@ namespace PresentationLayer.Presenter
             ToolStripMenuItem tsmItem = (ToolStripMenuItem)sender;
             if (tsmItem.Name == "C70ToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter, _frmDimensionPresenter.aluSysType_frmDimensionPresenter);
             }
             else if (tsmItem.Name == "PremiLineToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter, _frmDimensionPresenter.aluSysType_frmDimensionPresenter);
             }
             else if (tsmItem.Name == "G58ToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter, _frmDimensionPresenter.aluSysType_frmDimensionPresenter);
             }
             else if (tsmItem.Name == "AlutekToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "Alutek Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "Alutek Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter, _frmDimensionPresenter.aluSysType_frmDimensionPresenter);
             }
 
         }
@@ -3418,7 +3420,7 @@ namespace PresentationLayer.Presenter
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     create_new = true;
-                    Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                    Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "","");
                 }
             }
             else
@@ -3431,7 +3433,7 @@ namespace PresentationLayer.Presenter
                 input_qrefno = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
                 if (input_qrefno != "" && input_qrefno != "0")
                 {
-                    Scenario_Quotation(true, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                    Scenario_Quotation(true, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter, _frmDimensionPresenter.aluSysType_frmDimensionPresenter);
                 }
             }
         }
@@ -3459,7 +3461,7 @@ namespace PresentationLayer.Presenter
                 }
             }
            
-            Scenario_Quotation(false, false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+            Scenario_Quotation(false, false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter, _frmDimensionPresenter.aluSysType_frmDimensionPresenter);
         }
         string[] file_lines;
         bool onload = false;
@@ -5026,7 +5028,7 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("Quotation_Date"))
                         {
                             inputted_quoteDate = Convert.ToDateTime(extractedValue_str);
-                            Scenario_Quotation(false, false, false, false, true, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                            Scenario_Quotation(false, false, false, false, true, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "","");
                             _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
                             _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                             _quotationModel.Date_Assigned = dateAssigned;
@@ -5174,7 +5176,9 @@ namespace PresentationLayer.Presenter
                                      frm_Width,
                                      frm_Height,
                                      frmDimension_profileType,
-                                     frmDimension_baseColor);
+                                     frmDimension_baseColor,
+                                     frmDimension_aluSysType);
+
                             _windoorModel.WD_fileLoad = true;
                         }
                         if (row_str.Contains("WD_name:"))
@@ -5928,7 +5932,8 @@ namespace PresentationLayer.Presenter
                                                frm_Width,
                                                frm_Height,
                                                frmDimension_profileType,
-                                               frmDimension_baseColor);
+                                               frmDimension_baseColor,
+                                               frmDimension_aluSysType);
 
                         }
                         if (row_str.Contains("Concrete_Id:"))
@@ -10283,7 +10288,8 @@ namespace PresentationLayer.Presenter
                                  frm_Width,
                                  frm_Height,
                                  frmDimension_profileType,
-                                 frmDimension_baseColor);
+                                 frmDimension_baseColor,
+                                 frmDimension_aluSysType);
             inside_frame = false;
 
         }
@@ -11164,7 +11170,8 @@ namespace PresentationLayer.Presenter
         #region Frame Properties
 
         string frmDimension_profileType = "",
-               frmDimension_baseColor = "";
+               frmDimension_baseColor = "",
+               frmDimension_aluSysType = "";
         int frm_Height,
               frm_Width,
               frm_BasicDeduction,
@@ -11977,7 +11984,8 @@ namespace PresentationLayer.Presenter
                                        int frmDimension_numWd,
                                        int frmDimension_numHt,
                                        string frmDimension_profileType,
-                                       string frmDimension_baseColor)
+                                       string frmDimension_baseColor,
+                                       string frmDimension_AluSysType)
         {
             if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
             {
@@ -11992,6 +12000,10 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
                     _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
+                    if (frmDimension_profileType == "Alutek Profile")
+                    {
+                    _frmDimensionPresenter.SetAluSysType(frmDimension_AluSysType);
+                    }
                     _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = true;
                     _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = true;
                     _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
@@ -12005,6 +12017,10 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.CreateNew_Item;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
                     _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
+                    if (frmDimension_profileType == "Alutek Profile")
+                    {
+                        _frmDimensionPresenter.SetAluSysType(frmDimension_AluSysType);
+                    }
                     _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
                     _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = true;
                     _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
@@ -12020,6 +12036,10 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.purpose = purpose;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
                     _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
+                    if (frmDimension_profileType == "Alutek Profile")
+                    {
+                        _frmDimensionPresenter.SetAluSysType(frmDimension_AluSysType);
+                    }
                     _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
                     _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = false;
                     _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = true;
@@ -12048,7 +12068,10 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.OpenWndrFile;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
                     _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
-
+                    if (frmDimension_profileType == "Alutek Profile")
+                    {
+                        _frmDimensionPresenter.SetAluSysType(frmDimension_AluSysType);
+                    }
                     //_frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
                     //_frmDimensionPresenter.mainPresenter_newItem_ClickedOK = false;
                     //_frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;    
@@ -12136,7 +12159,10 @@ namespace PresentationLayer.Presenter
                             _windoorModel.WD_PowderCoatType = PowderCoatType_Color._Standard;
                         }
 
-
+                        if (frmDimension_profileType == "Alutek Profile")
+                        {
+                            _windoorModel.WD_AlutekSystemType = frmDimension_AluSysType;
+                        }
 
                         //_mainView.PropertiesScroll = _windoorModel.WD_PropertiesScroll;
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
@@ -12218,6 +12244,11 @@ namespace PresentationLayer.Presenter
                         if (baseColor == Base_Color._PowderCoated)
                         {
                             _windoorModel.WD_PowderCoatType = PowderCoatType;
+                        }
+
+                        if (frmDimension_profileType == "Alutek Profile")
+                        {
+                            _windoorModel.WD_AlutekSystemType = frmDimension_AluSysType;
                         }
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
@@ -12437,6 +12468,12 @@ namespace PresentationLayer.Presenter
                             _windoorModel.WD_PowderCoatType = PowderCoatType;
                         }
 
+                        if (frmDimension_profileType == "Alutek Profile")
+                        {
+                            _windoorModel.WD_AlutekSystemType = frmDimension_AluSysType;
+                        }
+
+
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                         _mainView.GetThis().Controls.Add(bpUC);
@@ -12510,6 +12547,12 @@ namespace PresentationLayer.Presenter
                             {
                                 _windoorModel.WD_PowderCoatType = PowderCoatType_Color._Standard;
                             }
+
+                            if (_windoorModel.WD_AlutekSystemType == string.Empty)
+                            {
+                                _windoorModel.WD_AlutekSystemType = "46";
+                            }
+
                         }
 
                         if (FrameIteration == 0)

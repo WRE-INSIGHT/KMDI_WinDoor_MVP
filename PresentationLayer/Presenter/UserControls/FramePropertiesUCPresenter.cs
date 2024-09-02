@@ -213,6 +213,39 @@ namespace PresentationLayer.Presenter.UserControls
                         _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
                         _framePropertiesUC.AddHT_PanelBody(constants.frame_InversionClipOption);
                     }
+                     
+                    if (_frameModel.Frame_SlidingRailsQtyVisibility == true)
+                    {
+                        _frameModel.Frame_SlidingRailsQtyVisibility = false;
+                        _frameModel.FrameProp_Height -= constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                        _framePropertiesUC.AddHT_PanelBody(-constants.frame_SlidingRailsQtyproperty_PanelHeight);
+                    }
+                }
+                else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._84116 ||
+                         _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._84118)
+                {
+                    if (_frameModel.Frame_InversionClipVisibility == true)
+                    {
+                        _frameModel.Frame_InversionClipVisibility = false;
+                        _frameModel.FrameProp_Height -= constants.frame_InversionClipOption;
+                        _framePropertiesUC.AddHT_PanelBody(-constants.frame_InversionClipOption);
+                    }
+
+                    if (_frameModel.Frame_SlidingRailsQtyVisibility == false)
+                    {
+                        _frameModel.Frame_SlidingRailsQtyVisibility = true;
+                        _frameModel.FrameProp_Height += constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                        _framePropertiesUC.AddHT_PanelBody(constants.frame_SlidingRailsQtyproperty_PanelHeight);
+                    }
+
+                    if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._84116)
+                    {
+                        _frameModel.Frame_SlidingRailsQty = 3;
+                    }
+                    else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._84118)
+                    {
+                        _frameModel.Frame_SlidingRailsQty = 2;
+                    }
                 }
                 else if (!(_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
                            _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052))
@@ -385,8 +418,8 @@ namespace PresentationLayer.Presenter.UserControls
                     _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
                 }
                 else if (curr_rbtnText == "Door")
-                {
-                    _frameModel.Frame_InversionClipVisibility = false;
+                { 
+                    _frameModel.Frame_InversionClipVisibility = true;
                     _frameModel.FrameProp_Height -= constants.frame_InversionClipOption;
                     _framePropertiesUC.AddHT_PanelBody(-constants.frame_InversionClipOption);
                 }
@@ -394,16 +427,31 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     if (_frameModel.Frame_Type == Frame_Padding.Window)
                     {
-                        _frameModel.Frame_InversionClipVisibility = true;
-                        _frameModel.Frame_InversionClipOption = true;
-                        _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
-                        _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
+                        if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "46")
+                        {
+                            _frameModel.Frame_InversionClipVisibility = true;
+                            _frameModel.Frame_InversionClipOption = true;
+                            _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
+                            _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
+                        }
+                        else if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "22")
+                        {
+
+                        }  
                     }
                     else if (_frameModel.Frame_Type == Frame_Padding.Door)
                     {
-                        _frameModel.Frame_InversionClipVisibility = false;
-                        _frameModel.FrameProp_Height -= constants.frame_InversionClipOption;
-                        _framePropertiesUC.AddHT_PanelBody(-constants.frame_InversionClipOption);
+                        if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "46")
+                        {
+                            _frameModel.Frame_InversionClipVisibility = true;
+                            _frameModel.Frame_InversionClipOption = true;
+                            _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
+                            _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
+                        }
+                        else if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "22")
+                        {
+
+                        } 
                     }
 
                 }
@@ -488,17 +536,22 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                     else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                     {
-                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84100;
-                    }
-
+                        if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "46")
+                        {
+                            _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84100;
+                        }
+                        else if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "22")
+                        {
+                            _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84118;
+                        }
+                    } 
                 }
                 else if (_frameModel.Frame_Type == Frame_Padding.Door)
                 {
 
                     if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
                     {
-                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
-
+                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507; 
                     }
                     else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                     {
@@ -509,13 +562,21 @@ namespace PresentationLayer.Presenter.UserControls
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._2060;
                     }
                     else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
-                    {
-                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84100;
+                    { 
+                        if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "46")
+                        {
+                            _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84100;
+                        }
+                        else if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "22")
+                        {
+                            _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84118;
+                        }
                     }
                 }
             }
 
-            if (_frameModel.Frame_Type == Frame_Padding.Door)
+            if (_frameModel.Frame_Type == Frame_Padding.Door && 
+                !_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("Alutek Profile"))
             {
                 _frameModel.Frame_BotFrameVisible = true;
                 _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;

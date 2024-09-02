@@ -1121,7 +1121,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 NotifyPropertyChanged();
             }
         }
-
+        
         private bool _frame_SlidingRailsQtyVisibility;
         public bool Frame_SlidingRailsQtyVisibility
         {

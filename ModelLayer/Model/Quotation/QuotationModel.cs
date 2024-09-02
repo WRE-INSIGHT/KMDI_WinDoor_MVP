@@ -141,7 +141,14 @@ namespace ModelLayer.Model.Quotation
                 frame.Insert_frameInfo_MaterialList(Material_List);
                 if (frame.Frame_SlidingRailsQty == 3)
                 {
-                    frame.Insert_frameInfoForPremi_MaterialList(Material_List); // 2nd frame
+                    if (item.WD_profile.Contains("Alutek Profile"))
+                    {
+
+                    }
+                    else
+                    {
+                        frame.Insert_frameInfoForPremi_MaterialList(Material_List); // 2nd frame
+                    }
                 }
 
                 if (frame.Frame_ScreenOption == true)

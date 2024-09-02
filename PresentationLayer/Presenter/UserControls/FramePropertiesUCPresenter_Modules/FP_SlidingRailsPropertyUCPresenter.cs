@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Modules
 {
@@ -40,16 +41,27 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
             {
                 if (railQty > 5)
                 {
-                    ((NumericUpDown)sender).Value = 5;
+                    railQty = 5;
                 }
                 else if (railQty < 2)
                 {
-                    ((NumericUpDown)sender).Value = 2;
+                    railQty = 2;
                 }
                 MessageBox.Show("Rail must be 2 - 5 only");   
             }
 
-            
+            if (_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("Alutek Profile"))
+            {
+                if (railQty == 2)
+                {
+                    _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84118;
+
+                }
+                else if (railQty == 3)
+                {
+                    _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84116;
+                }
+            }
           
         }
 

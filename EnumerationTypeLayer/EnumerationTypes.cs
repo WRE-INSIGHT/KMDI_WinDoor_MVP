@@ -13,6 +13,17 @@ namespace EnumerationTypeLayer
 
             private SystemProfile_Option(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class AlutekSystemProfile_Option : Enumeration<AlutekSystemProfile_Option>
+        {
+            public static readonly AlutekSystemProfile_Option _46 = new AlutekSystemProfile_Option(0, "46");
+            public static readonly AlutekSystemProfile_Option _33 = new AlutekSystemProfile_Option(1, "33");
+            public static readonly AlutekSystemProfile_Option _22 = new AlutekSystemProfile_Option(2, "22");
+
+            private AlutekSystemProfile_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+
         public class FrameProfile_ArticleNo : Enumeration<FrameProfile_ArticleNo>
         {
             public static readonly FrameProfile_ArticleNo _7502 = new FrameProfile_ArticleNo(0, "7502");

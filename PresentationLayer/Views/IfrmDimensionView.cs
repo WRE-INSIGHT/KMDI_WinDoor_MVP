@@ -13,6 +13,7 @@ namespace PresentationLayer.Views
         event EventHandler numWidthEnterEventRaised;
         event EventHandler numHeightEnterEventRaised;
         event EventHandler nudFrameQtyValueChangedEventRaised;
+        event EventHandler cmbAlutekSystemTypeSelectedValueChangedEventRaised;
 
         int InumWidth { get; set; }
         int InumHeight { get; set; }
@@ -20,10 +21,12 @@ namespace PresentationLayer.Views
         int thisHeight { set; }
         string SelectedSystem { get; set; }
         string SelectedBaseColor { get; set; }
+        string SelectedAlutekSystemType { get; set; }
         bool ThisVisibility { get; set; }
         void ShowfrmDimension();
         void ClosefrmDimension();
         Panel GetPanelFrameQty();
+        Panel GetPanelAlutekSystemType();
         NumericUpDown GetNumWidth();
         NumericUpDown GetNumHeigth();
 
