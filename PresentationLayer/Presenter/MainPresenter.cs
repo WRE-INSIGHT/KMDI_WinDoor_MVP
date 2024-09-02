@@ -5163,6 +5163,10 @@ namespace PresentationLayer.Presenter
                         {
                             frmDimension_baseColor = extractedValue_str;
                         }
+                        if (row_str.Contains("WD_AlutekSystemType:"))
+                        {
+                            frmDimension_aluSysType = extractedValue_str;
+                        }
                         if (row_str.Contains("WD_width:"))
                         {
                             frm_Width = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
