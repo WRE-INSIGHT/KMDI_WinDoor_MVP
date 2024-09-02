@@ -172,7 +172,8 @@ namespace PresentationLayer.Presenter
         private DataTable _guHolderDT = new DataTable();
         private DataTable _spacerDT = new DataTable();
         private DataTable _colorDT = new DataTable();
-
+        private DataTable _glassComputedThickness = new DataTable();
+       
         private ToolStripLabel _tsLblStatus;
         private ToolStrip _tsMain;
         private MenuStrip _msMainMenu;
@@ -379,6 +380,18 @@ namespace PresentationLayer.Presenter
             set
             {
                 _colorDT = value;
+            }
+        }
+
+        public DataTable GlassComputedThickness
+        {
+            get
+            {
+                return _glassComputedThickness;
+            }
+            set
+            {
+                _glassComputedThickness = value;
             }
         }
 
@@ -3708,6 +3721,10 @@ namespace PresentationLayer.Presenter
 
         private void GetGlassThickness()
         {
+            _glassComputedThickness.Columns.Add(CreateColumn("TotalThickness", "TotalThickness", "System.Decimal"));
+            _glassComputedThickness.Columns.Add(CreateColumn("Description", "Description", "System.String"));
+
+
             foreach (DataRow Glass in _glassThicknessDT.Rows)
             {
 
@@ -3919,16 +3936,14 @@ namespace PresentationLayer.Presenter
                         {
                             glassTotalThickness = origTotalThickness;
                         }
-                        
-                        Console.WriteLine("Original Glass Description " + " " + glassDesc + " ");
-                        Console.WriteLine("Thickness Without Separator " + glassTotalThickness.ToString());
-                        Console.WriteLine("");          
-
+                        _glassComputedThickness.Rows.Add(glassTotalThickness, glassDesc);
                     }
                 }
 
             }
+
         }
+
 
         private void AddGlassDesctoException()
         {
