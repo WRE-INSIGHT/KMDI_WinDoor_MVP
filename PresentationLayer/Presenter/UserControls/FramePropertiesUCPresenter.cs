@@ -241,10 +241,12 @@ namespace PresentationLayer.Presenter.UserControls
                     if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._84116)
                     {
                         _frameModel.Frame_SlidingRailsQty = 3;
+                        _frameModel.Frame_ArtNoForAlutek = FrameProfile_ArticleNo._84117;
                     }
                     else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._84118)
                     {
                         _frameModel.Frame_SlidingRailsQty = 2;
+                        _frameModel.Frame_ArtNoForAlutek = FrameProfile_ArticleNo._84119;
                     }
                 }
                 else if (!(_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
@@ -427,31 +429,56 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     if (_frameModel.Frame_Type == Frame_Padding.Window)
                     {
-                        if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "46")
+                        if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                         {
-                            _frameModel.Frame_InversionClipVisibility = true;
-                            _frameModel.Frame_InversionClipOption = true;
-                            _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
-                            _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
+                          _frameModel.Frame_InversionClipVisibility = true; 
+                          _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
+                          _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption); 
                         }
-                        else if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "22")
+                        else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._84118)
                         {
 
-                        }  
+                        }
+
+                        //if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "46")
+                        //{
+                        //    _frameModel.Frame_InversionClipVisibility = true;
+                        //    _frameModel.Frame_InversionClipOption = true;
+                        //    _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
+                        //    _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
+                        //}
+                        //else if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "22")
+                        //{
+
+                        //}  
                     }
                     else if (_frameModel.Frame_Type == Frame_Padding.Door)
                     {
-                        if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "46")
+
+                        if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                         {
-                            _frameModel.Frame_InversionClipVisibility = true;
-                            _frameModel.Frame_InversionClipOption = true;
+                            _frameModel.Frame_InversionClipVisibility = true; 
                             _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
                             _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
                         }
-                        else if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "22")
+                        else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._84118)
                         {
 
-                        } 
+                        }
+
+
+
+                        //if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "46")
+                        //{
+                        //    _frameModel.Frame_InversionClipVisibility = true;
+                        //    _frameModel.Frame_InversionClipOption = true;
+                        //    _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
+                        //    _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
+                        //}
+                        //else if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "22")
+                        //{
+
+                        //} 
                     }
 
                 }
@@ -539,6 +566,10 @@ namespace PresentationLayer.Presenter.UserControls
                         if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "46")
                         {
                             _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84100;
+                            _frameModel.Frame_InversionClipVisibility = true;
+                            _frameModel.Frame_InversionClipOption = true;
+                            _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
+                            _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
                         }
                         else if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "22")
                         {
@@ -566,6 +597,10 @@ namespace PresentationLayer.Presenter.UserControls
                         if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "46")
                         {
                             _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84100;
+                            _frameModel.Frame_InversionClipVisibility = true;
+                            _frameModel.Frame_InversionClipOption = true;
+                            _frameModel.FrameProp_Height += constants.frame_InversionClipOption;
+                            _framePropertiesUC.AddHT_PanelBody(+constants.frame_InversionClipOption);
                         }
                         else if (_mainPresenter.windoorModel_MainPresenter.WD_AlutekSystemType == "22")
                         {

@@ -2260,14 +2260,18 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
-                        if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                        if (panelModel.Panel_GlassThicknessDesc != null)
                         {
+                            if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                            {
 
-                            g.DrawRectangle(new Pen(Color.White, pThickness), new Rectangle(Ppoint.X + thicknessDeduction,
-                                                                 Ppoint.Y + thicknessDeduction,
-                                                                 (client_wd - (outer_line * 2)) + w + 1 - rectDeduct,
-                                                                 (client_ht - (outer_line * 2)) + w + 1 - rectDeduct));
+                                g.DrawRectangle(new Pen(Color.White, pThickness), new Rectangle(Ppoint.X + thicknessDeduction,
+                                                                     Ppoint.Y + thicknessDeduction,
+                                                                     (client_wd - (outer_line * 2)) + w + 1 - rectDeduct,
+                                                                     (client_ht - (outer_line * 2)) + w + 1 - rectDeduct));
+                            }
                         }
+                        
 
                         //inner Line
                         g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,

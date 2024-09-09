@@ -262,7 +262,7 @@ namespace EnumerationTypeLayer
             public static readonly Base_Color _White = new Base_Color(0, "White");
             public static readonly Base_Color _Ivory = new Base_Color(1, "Ivory");
             public static readonly Base_Color _DarkBrown = new Base_Color(2, "Dark Brown");
-            public static readonly Base_Color _PowderCoated= new Base_Color(3, "Powder Coated");
+            public static readonly Base_Color _PowderCoated = new Base_Color(3, "Powder Coated");
             public static readonly Base_Color _Foiled = new Base_Color(4, "Foiled");
 
 
@@ -295,7 +295,7 @@ namespace EnumerationTypeLayer
         public class PowderCoatType_Color : Enumeration<PowderCoatType_Color, int>
         {
             public static readonly PowderCoatType_Color _Standard = new PowderCoatType_Color(0, "Standard");
-            public static readonly PowderCoatType_Color _Special = new PowderCoatType_Color(1, "Special"); 
+            public static readonly PowderCoatType_Color _Special = new PowderCoatType_Color(1, "Special");
 
             private PowderCoatType_Color(int value, string displayName) : base(value, displayName) { }
         }
@@ -346,11 +346,11 @@ namespace EnumerationTypeLayer
             private FrictionAlutek_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
-        
+
         public class FrictionAlutekPacker_ArticleNo : Enumeration<FrictionAlutekPacker_ArticleNo, int>
         {
-            public static FrictionAlutekPacker_ArticleNo _H149 = new FrictionAlutekPacker_ArticleNo(0, "H149"); 
-            
+            public static FrictionAlutekPacker_ArticleNo _H149 = new FrictionAlutekPacker_ArticleNo(0, "H149");
+
             private FrictionAlutekPacker_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
         public class Handle_Type : Enumeration<Handle_Type, int>
@@ -368,7 +368,7 @@ namespace EnumerationTypeLayer
             public static readonly Handle_Type _CremonHandle = new Handle_Type(10, "Cremon handle");
 
             public static readonly Handle_Type _None = new Handle_Type(11, "None");
-             
+
             private Handle_Type(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -520,7 +520,7 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _6_90137_10_0_1 = new Espagnolette_ArticleNo(22, "6-90137-10-0-1");
             //ALUTEK
             public static readonly Espagnolette_ArticleNo _H102 = new Espagnolette_ArticleNo(23, "H102");
-            public static readonly Espagnolette_ArticleNo _H103 = new Espagnolette_ArticleNo(24, "H103"); 
+            public static readonly Espagnolette_ArticleNo _H103 = new Espagnolette_ArticleNo(24, "H103");
             public static readonly Espagnolette_ArticleNo _H172 = new Espagnolette_ArticleNo(25, "H172");
             public static readonly Espagnolette_ArticleNo _84819 = new Espagnolette_ArticleNo(26, "84819");
 
@@ -1373,7 +1373,7 @@ namespace EnumerationTypeLayer
             public static readonly BillOfMaterialsFilter _InstallationCost = new BillOfMaterialsFilter(7, "Installation Cost");
 
 
-            
+
 
 
             private BillOfMaterialsFilter(int value, string displayName) : base(value, displayName) { }
@@ -1689,8 +1689,10 @@ namespace EnumerationTypeLayer
         public class Cremon_HandleArtNo : Enumeration<Cremon_HandleArtNo, int>
         {
             public static readonly Cremon_HandleArtNo _H087 = new Cremon_HandleArtNo(0, "H087");
+            public static readonly Cremon_HandleArtNo _H198F = new Cremon_HandleArtNo(1, "H198F"); // long
 
-            private Cremon_HandleArtNo(int value, string displayName) : base(value, displayName) { } 
+
+            private Cremon_HandleArtNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class ShootboltForAlutek_ArtNo : Enumeration<ShootboltForAlutek_ArtNo, int>
@@ -1806,7 +1808,7 @@ namespace EnumerationTypeLayer
 
         public class TwoWayLockingMushroom_ArticleNo : Enumeration<TwoWayLockingMushroom_ArticleNo, int>
         {
-            public static readonly TwoWayLockingMushroom_ArticleNo _H185 = new TwoWayLockingMushroom_ArticleNo(0, "H185"); 
+            public static readonly TwoWayLockingMushroom_ArticleNo _H185 = new TwoWayLockingMushroom_ArticleNo(0, "H185");
 
             private TwoWayLockingMushroom_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -1859,6 +1861,21 @@ namespace EnumerationTypeLayer
             public static readonly DrainBallValve_ArticleNo _M813 = new DrainBallValve_ArticleNo(0, "M813");
 
             private DrainBallValve_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class D_HandleForAlutek_ArticleNo : Enumeration<D_HandleForAlutek_ArticleNo, int>
+        {
+            public static readonly D_HandleForAlutek_ArticleNo _H186O = new D_HandleForAlutek_ArticleNo(0, "H186O");
+
+            private D_HandleForAlutek_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class DHandleCylinderForAlutek_ArticleNo : Enumeration<DHandleCylinderForAlutek_ArticleNo, int>
+        {
+            public static readonly DHandleCylinderForAlutek_ArticleNo _H215 = new DHandleCylinderForAlutek_ArticleNo(0, "H215"); // half
+            public static readonly DHandleCylinderForAlutek_ArticleNo _H216 = new DHandleCylinderForAlutek_ArticleNo(1, "H216"); // std
+
+            private DHandleCylinderForAlutek_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
     }
 }

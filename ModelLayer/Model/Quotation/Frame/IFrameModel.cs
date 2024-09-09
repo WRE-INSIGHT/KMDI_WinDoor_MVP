@@ -48,6 +48,7 @@ namespace ModelLayer.Model.Quotation.Frame
         #region Explosion
 
         FrameProfile_ArticleNo Frame_ArtNo { get; set; }
+        FrameProfile_ArticleNo Frame_ArtNoForAlutek { get; set; }
         int Frame_ExplosionWidth { get; set; }
         int Frame_ExplosionHeight { get; set; }
 

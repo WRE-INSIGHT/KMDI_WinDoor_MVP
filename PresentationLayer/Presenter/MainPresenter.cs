@@ -13642,7 +13642,9 @@ namespace PresentationLayer.Presenter
                         else if (espag_art == Espagnolette_ArticleNo._H102 || espag_art == Espagnolette_ArticleNo._H103 ||
                                  espag_art == Espagnolette_ArticleNo._H172 || espag_art == Espagnolette_ArticleNo._84819)
                         {
-                            if (frame_art != FrameProfile_ArticleNo._84100)
+                            if (frame_art != FrameProfile_ArticleNo._84100 ||
+                                frame_art != FrameProfile_ArticleNo._84118 ||
+                                frame_art != FrameProfile_ArticleNo._84116)
                             {
                                 MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
@@ -14767,6 +14769,11 @@ namespace PresentationLayer.Presenter
                             if (fr.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                             {
                                 AlutekFrameDesc = "AluSys-46";
+                            }
+                            else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._84116 ||
+                                     fr.Frame_ArtNo == FrameProfile_ArticleNo._84118)
+                            {
+                                AlutekFrameDesc = "AluSys-22";
                             }
 
                             #region MultiPnl

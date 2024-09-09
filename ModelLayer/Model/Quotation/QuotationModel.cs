@@ -386,7 +386,10 @@ namespace ModelLayer.Model.Quotation
 
                                         if (item.WD_profile.Contains("Alutek"))
                                         {
-                                            div_nxtCtrl.Insert_DividerConnector_MaterialList(Material_List);
+                                            if (frame.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                                            {
+                                                div_nxtCtrl.Insert_DividerConnector_MaterialList(Material_List);
+                                            }
                                         }
 
                                         #region CheckBoundedByBottomFrame
@@ -458,7 +461,10 @@ namespace ModelLayer.Model.Quotation
 
                                         if (item.WD_profile.Contains("Alutek"))
                                         {
-                                            div_nxtCtrl.Insert_DividerConnector_MaterialList(Material_List);
+                                            if (frame.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                                            {
+                                                div_nxtCtrl.Insert_DividerConnector_MaterialList(Material_List);
+                                            }
                                         }
                                         #region CheckBoundedByBottomFrame
                                         if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&

@@ -639,26 +639,40 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     _panelModel.Panel_SlidingTypeVisibility = true;
                     _panelModel.Panel_RollersTypesVisibility = true;
-                    _panelModel.Panel_AluminumTrackQtyVisibility = true;
 
                     _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
                     _panelModel.AdjustPropertyPanelHeight("addRollerType");
-                    _panelModel.AdjustPropertyPanelHeight("addAluminumTrackQty");
 
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRollerType");
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addAluminumTrackQty");
 
                     if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRollerType");
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addAluminumTrackQty");
                     }
 
                     IPP_RollerPropertyUCPresenter rollerTypePresenter = _pp_rollerPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     UserControl rollerTypeUCPresenter = (UserControl)rollerTypePresenter.GetRollerTypePropertyUC();
+                    rollerTypePresenter.GetRollerTypePropertyUC().ProfileType_FromMainPresenter = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile;
                     _pnlPanelSpecs.Controls.Add(rollerTypeUCPresenter);
                     rollerTypeUCPresenter.Dock = DockStyle.Top;
                     rollerTypeUCPresenter.BringToFront();
+
+
+                }
+                if (_panelModel.Panel_Type.Contains("Sliding") &&
+                   !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    _panelModel.Panel_AluminumTrackQtyVisibility = true;
+
+                    _panelModel.AdjustPropertyPanelHeight("addAluminumTrackQty");
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addAluminumTrackQty");
+
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addAluminumTrackQty");
+                    }
 
                     IPP_AliminumTrackPropertyUCPresenter alumTrackQtyPresenter = _pp_AliminumTrackPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     UserControl alumTrackQtyUCPresenter = (UserControl)alumTrackQtyPresenter.GetAliminumTrackPropertyUC();
@@ -668,8 +682,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                 }
 
-
-                if (_panelModel.Panel_Type.Contains("Casement") &&
+                    if (_panelModel.Panel_Type.Contains("Casement") &&
                     !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                 {
                     _panelModel.Panel_ExtensionOptionsVisibility = true;

@@ -779,6 +779,21 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private FrameProfile_ArticleNo _frameArtNoForAlutek;
+        public FrameProfile_ArticleNo Frame_ArtNoForAlutek //22
+        {
+            get
+            {
+                return _frameArtNoForAlutek;
+            }
+            set
+            {
+                _frameArtNoForAlutek = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         private FrameProfileForPremi_ArticleNo _frameArtNoForPremi;
         public FrameProfileForPremi_ArticleNo Frame_ArtNoForPremi
         {
@@ -836,6 +851,21 @@ namespace ModelLayer.Model.Quotation.Frame
         public int Frame_ReinfHeight { get; set; }
 
         public bool Frame_ReinfWidthMorethan5800 { get; set; }
+
+        private BaseClip_ArticleNo _frameBaseClipArtNo;
+        public BaseClip_ArticleNo Frame_BaseClipArtNo
+        {
+            get
+            {
+                return _frameBaseClipArtNo;
+            }
+
+            set
+            {
+                _frameBaseClipArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private bool _frameCmenuDeleteVisibility;
         public bool Frame_CmenuDeleteVisibility
@@ -1428,7 +1458,6 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
          
-
         public void SetExplosionValues_Frame()
         {
             if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel
@@ -1694,11 +1723,12 @@ namespace ModelLayer.Model.Quotation.Frame
             else if (Frame_ArtNo == FrameProfile_ArticleNo._84100)
             {
                 Frame_ExplosionHeight = _frameHeight;
-            }
-            else
+            } 
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._84116 ||
+                     Frame_ArtNo == FrameProfile_ArticleNo._84118)
             {
-                Frame_ExplosionHeight = _frameHeight + 5;
-            }
+                Frame_ExplosionHeight = _frameHeight - 2 - 3;
+            } 
 
             if (Frame_ReinfWidthMorethan5800 == true)
             {
@@ -1756,6 +1786,11 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 Frame_ExplosionWidth = _frameWidth;
 
+            }
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._84116 ||
+                     Frame_ArtNo == FrameProfile_ArticleNo._84118)
+            {
+                Frame_ExplosionWidth = _frameWidth - (30 * 2) - (2 * 2);
             }
             else
             {
@@ -2838,6 +2873,8 @@ namespace ModelLayer.Model.Quotation.Frame
 
         }
 
+        #region alutek material list
+         
         public void Insert_GlazingGasket_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("Glazing Gasket Width " + FrameGlazingGasket_ArtNo.DisplayName,
@@ -2876,7 +2913,7 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             tbl_explosion.Rows.Add("Base Clip For Bottom Frame " + Frame_BaseClip.DisplayName,
                                 1, "pc(s)",
-                                "",
+                                Frame_ExplosionWidth,
                                 "Frame",
                                 @"");
         }
@@ -2885,7 +2922,7 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             tbl_explosion.Rows.Add("Rain Cap Cover 84806  ",
                                    1, "pc(s)",
-                                   "",
+                                   Frame_Width - (30 * 2),
                                    "Frame",
                                    @"");
         }
@@ -2943,7 +2980,9 @@ namespace ModelLayer.Model.Quotation.Frame
                                    "Frame",
                                    @"");
         }
-         
+
+        #endregion
+
         public int Add_framePerimeter_screws4fab()
         {
             return (Frame_Width * 2) + (Frame_Height * 2);

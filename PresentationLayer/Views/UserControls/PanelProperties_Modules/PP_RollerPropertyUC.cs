@@ -12,6 +12,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             InitializeComponent();
         }
+        public string ProfileType_FromMainPresenter { get; set; }
 
         public event EventHandler PPRollerPropertyUCLoadEventRaised;
         public event EventHandler cmbRollerSelectedValueChangedEventRaised;
@@ -21,8 +22,25 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             List<RollersTypes> SlidingType = new List<RollersTypes>();
             foreach (RollersTypes item in RollersTypes.GetAll())
-            {
-                SlidingType.Add(item);
+             {
+                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                {
+                    if (item == RollersTypes._H176 ||
+                        item == RollersTypes._H177 ||
+                        item == RollersTypes._H178)
+                    {
+                        SlidingType.Add(item);
+                    }
+                }
+                else
+                {
+                    if (item != RollersTypes._H176 &&
+                        item != RollersTypes._H177 &&
+                        item != RollersTypes._H178)
+                    {
+                        SlidingType.Add(item);
+                    }
+                } 
             }
             cmb_Roller.DataSource = SlidingType;
 

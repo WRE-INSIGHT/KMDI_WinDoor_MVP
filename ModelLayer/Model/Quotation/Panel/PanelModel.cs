@@ -3291,7 +3291,7 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
 
-        public int _panel_InversionClipWidth;
+        private int _panel_InversionClipWidth;
         public int Panel_InversionClipWidth
         {
             get
@@ -3305,7 +3305,7 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
 
-        public int _panel_InversionClipHeight;
+        private int _panel_InversionClipHeight;
         public int Panel_InversionClipHeight
         {
             get
@@ -3318,7 +3318,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public GlazingGasket_ArticleNo _panel_GlazingGasketArtNo;
+        private GlazingGasket_ArticleNo _panel_GlazingGasketArtNo;
         public GlazingGasket_ArticleNo Panel_GlazingGasketArtNo
         {
             get
@@ -3331,7 +3331,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public GlazingGasket_ArticleNo _panel_GlazingGasketArtNo2;
+        private GlazingGasket_ArticleNo _panel_GlazingGasketArtNo2;
         public GlazingGasket_ArticleNo Panel_GlazingGasketArtNo2
         {
             get
@@ -3345,7 +3345,7 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
 
-        public GlazingGasket_ArticleNo _panel_CenterGasketArtNo;
+        private GlazingGasket_ArticleNo _panel_CenterGasketArtNo;
         public GlazingGasket_ArticleNo Panel_CenterGasketArtNo
         {
             get
@@ -3358,7 +3358,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public InversionClip_ArticleNo _panel_InversionClipArtNo;
+        private InversionClip_ArticleNo _panel_InversionClipArtNo;
         public InversionClip_ArticleNo Panel_InversionClipArtNo
         {
             get
@@ -3371,7 +3371,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public OpenableStriker_ArticleNo _panel_OpenableStrikerArtNo;
+        private OpenableStriker_ArticleNo _panel_OpenableStrikerArtNo;
         public OpenableStriker_ArticleNo Panel_OpenableStrikerArtNo
         {
             get
@@ -3384,7 +3384,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public CornerCleat_ArticleNo _panel_CornerCleatArtNo;
+        private CornerCleat_ArticleNo _panel_CornerCleatArtNo;
         public CornerCleat_ArticleNo Panel_CornerCleatArtNo
         {
             get
@@ -3397,7 +3397,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public Cheveron_ArticleNo _panel_CheveronArtNo;
+        private Cheveron_ArticleNo _panel_CheveronArtNo;
         public Cheveron_ArticleNo Panel_CheveronArtNo
         {
             get
@@ -3410,7 +3410,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public RunUpBlock_ArticleNo _panel_RunUpBlockArtNo;
+        private RunUpBlock_ArticleNo _panel_RunUpBlockArtNo;
         public RunUpBlock_ArticleNo Panel_RunUpBlockArtNo
         {
             get
@@ -3423,7 +3423,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public PackerRod_ArticleNo _panel_PackerRodArtNo;
+        private PackerRod_ArticleNo _panel_PackerRodArtNo;
         public PackerRod_ArticleNo Panel_PackerRodArtNo
         {
             get
@@ -3436,7 +3436,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public LockingWedge_ArticleNo _panel_LockingWedgeArtNo;
+        private LockingWedge_ArticleNo _panel_LockingWedgeArtNo;
         public LockingWedge_ArticleNo Panel_LockingWedgeArtNo
         {
             get
@@ -3449,7 +3449,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public SSCheveron_ArticleNo _panel_SSCheveronArtNo;
+        private SSCheveron_ArticleNo _panel_SSCheveronArtNo;
         public SSCheveron_ArticleNo Panel_SSCheveronArtNo
         {
             get
@@ -3462,7 +3462,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public Unica40_ArticleNo _panel_Unica40ArtNo;
+        private Unica40_ArticleNo _panel_Unica40ArtNo;
         public Unica40_ArticleNo Panel_Unica40ArtNo
         {
             get
@@ -3475,7 +3475,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public LockingConnectorDevice_ArticleNo _panel_LockingConnectorArtNo;
+        private LockingConnectorDevice_ArticleNo _panel_LockingConnectorArtNo;
         public LockingConnectorDevice_ArticleNo Panel_LockingConnectorArtNo
         {
             get
@@ -3488,7 +3488,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public Cremon_HandleArtNo _panel_CremonArtNo;
+        private Cremon_HandleArtNo _panel_CremonArtNo;
         public Cremon_HandleArtNo Panel_CremonArtNo
         {
             get
@@ -3502,7 +3502,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         }
 
-        public TwoWayLockingConnector_ArticleNo _panel_TwoWayLockingConnectorArtNo;
+        private TwoWayLockingConnector_ArticleNo _panel_TwoWayLockingConnectorArtNo;
         public TwoWayLockingConnector_ArticleNo Panel_TwoWayLockingConnectorArtNo
         {
             get
@@ -3516,7 +3516,7 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
 
-        public OneWayLockingConnector_ArticleNo _panel_OneWayLockingConnectorArtNo;
+        private OneWayLockingConnector_ArticleNo _panel_OneWayLockingConnectorArtNo;
         public OneWayLockingConnector_ArticleNo Panel_OneWayLockingConnectorArtNo
         {
             get
@@ -3529,6 +3529,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private DHandleCylinderForAlutek_ArticleNo _panelDHandleCylinderForAlutekArtNo;
+        public DHandleCylinderForAlutek_ArticleNo Panel_DHandleCylinderForAlutekArtNo
+        {
+            get
+            {
+                return _panelDHandleCylinderForAlutekArtNo;
+            }
+            set
+            {
+                _panelDHandleCylinderForAlutekArtNo = value;
+            }
+        }
+
+        
 
         #endregion
 
@@ -12860,6 +12874,9 @@ namespace ModelLayer.Model.Quotation.Panel
 
         }
 
+        #region alutek material list
+
+
         public void Insert_InversionClip_MaterialList(DataTable tbl_explosion)
         {
             if (Panel_InversionClipArtNo != null)
@@ -13271,14 +13288,141 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_GroveCoverProfile_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Grove Cover Profile 84806 ",
+            tbl_explosion.Rows.Add("Grove Cover Profile 84810 ",
                                    1, "pc(s)",
                                    "",
                                    "Sash",
                                    @"");
         }
 
+        public void Insert_SashInterlockProfileConnectingCover_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Sash Interlock Profile Connecting Cover M807 ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
 
+        public void Insert_SashLockingProfileConnectingAdaptor_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Sash Locking Profile Connecting Adaptor M805 ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_SashInterlockProfileConnectingAdaptor_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Sash Interlock Profile Connecting Adaptor M806 ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_MeetingInsert_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Meeting Male Insert M814 ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+            tbl_explosion.Rows.Add("Meeting Male Insert M811 ",
+                                  1, "pc(s)",
+                                  "",
+                                  "Sash",
+                                  @"");
+
+        }
+
+        public void Insert_InterlockEndCapForMatting_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Interlock End Cap for Matting M812 ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_EndCapForAlutek22_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Full End Cap M809 ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+            tbl_explosion.Rows.Add("Slotted End  Cap M810 ",
+                             1, "pc(s)",
+                             "",
+                             "Sash",
+                             @"");
+
+        }
+
+        public void Insert_MultilockingReceiver_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Multi locking Receiver H173 ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_BumpStopperDoor_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Bump Stopper Door H114 ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+        }
+
+        public void Insert_LockingConnectorDeviceForkStyle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Locking Connector Device,Fork Style H172 ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+        }
+
+        public void Insert_EuroGearBox_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Euro Gearbox H200 ",
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+        }
+
+        public void Insert_Cylinder_MaterialList(DataTable tbl_explosion)
+        {
+            string cylinderDesc = "";
+
+            if (Panel_DHandleCylinderForAlutekArtNo == DHandleCylinderForAlutek_ArticleNo._H215)
+            {
+                cylinderDesc = "Half";
+            }
+            else if (Panel_DHandleCylinderForAlutekArtNo == DHandleCylinderForAlutek_ArticleNo._H216)
+            {
+                cylinderDesc = "Standard";
+            }
+
+            tbl_explosion.Rows.Add(cylinderDesc + " Euro Gearbox " + Panel_DHandleCylinderForAlutekArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+
+        }
+        #endregion
 
         public int Add_SashPerimeter_screws4fab()
         {
