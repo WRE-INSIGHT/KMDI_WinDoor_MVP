@@ -11389,6 +11389,7 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
+
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi,
              inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory, inside_GlassUpgrade,
              inside_PartialAdjustment_Image, inside_PartialAdjustment_Description, inside_PartialAdjustment_Price,
