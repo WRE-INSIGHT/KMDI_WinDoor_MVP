@@ -45,7 +45,7 @@ namespace PresentationLayer.Presenter
                Less_Discount_key;
 
         string[] _officialsName = { "KENNETH G. LAO","GENALYN C. GARCIA","STEPHANIE DE LOS SANTOS","KEVIN CHARLES S. LAO"};
-        string[] _officialsPosition = {"President,KMDI","KMDI,VP-General Manager","VP-Marketing & Finance","Head, Sales & Operations" };
+        string[] _officialsPosition = {"President,KMDI", "Vice-President/General Manager, KMDI", "VP-Marketing & Finance","Head, Sales & Operations" };
 
         int count = 0,
             newlinecount = 0;
