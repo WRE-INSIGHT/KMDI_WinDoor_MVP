@@ -3731,6 +3731,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_CenterProfileOptionsheight;
                 }
+                else if (mode == "addCremonHandle")
+                {
+                    MPanelProp_Height += constants.panel_property_CremonHandleOptionsheight;
+                }
+                else if (mode == "minusCremonHandle")
+                {
+                    MPanelProp_Height -= constants.panel_property_CremonHandleOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {

@@ -3542,8 +3542,32 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        
+        //private Cremon_HandleArtNo _panelCremonHandleArtNo;
+        //public Cremon_HandleArtNo Panel_CremonHandleArtNo
+        //{
+        //    get
+        //    {
+        //        return _panelCremonHandleArtNo;
+        //    }
+        //    set
+        //    {
+        //        _panelCremonHandleArtNo = value;
+        //    }
+        //}
 
+        private bool _panelCremonHandleArtNoVisibility;
+        public bool Panel_CremonHandleArtNoVisibility
+        {
+            get
+            {
+                return _panelCremonHandleArtNoVisibility;
+            }
+            set
+            {
+                _panelCremonHandleArtNoVisibility = value;
+                NotifyPropertyChanged(); 
+            }
+        }
         #endregion
 
         #region Methods
@@ -5492,8 +5516,14 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_CenterProfileOptionsheight;
             }
-
-
+            else if (mode == "addCremonHandle")
+            {
+                Panel_PropertyHeight += constants.panel_property_CremonHandleOptionsheight;
+            }
+            else if (mode == "minusCremonHandle")
+            {
+                Panel_PropertyHeight -= constants.panel_property_CremonHandleOptionsheight;
+            }
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)
@@ -5622,7 +5652,14 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_HandleOptionsHeight -= constants.panel_property_RotoswingForSlidingOptionsheight;
             }
-
+            else if (mode == "addCremonHandle")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_CremonHandleOptionsheight;
+            }
+            else if (mode == "minusCremonHandle")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_CremonHandleOptionsheight;
+            }
         }
 
         public void AdjustRotoswingPropertyHeight(string mode)
@@ -7021,7 +7058,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_HandleType == Handle_Type._CremonHandle)
                 {
-                    Panel_CremonArtNo = Cremon_HandleArtNo._H087;
+                    //Panel_CremonArtNo = Cremon_HandleArtNo._H087;
                 }
             }
             else if (Panel_SashPropertyVisibility == false)
@@ -11171,7 +11208,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_HandleType == Handle_Type._CremonHandle)
                 {
-                    Panel_CremonArtNo = Cremon_HandleArtNo._H087;
+                    //Panel_CremonArtNo = Cremon_HandleArtNo._H087;
                 }
 
                 #region PopupAndRSS 
@@ -13181,7 +13218,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_CremonHandle_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Cremon handle " + Panel_CremonArtNo.DisplayName,
+            tbl_explosion.Rows.Add("Cremon handle " +  Panel_CremonArtNo.DisplayName,
                                    1, "pc(s)",
                                    "",
                                    "Sash",

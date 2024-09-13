@@ -361,13 +361,17 @@ namespace EnumerationTypeLayer
             public static readonly Handle_Type _Rotoline = new Handle_Type(3, "Rotoline Handle");
             public static readonly Handle_Type _MVD = new Handle_Type(4, "MVD Handle");
             public static readonly Handle_Type _D = new Handle_Type(5, "D Handle");
-            public static readonly Handle_Type _D_IO_Locking = new Handle_Type(6, "D Handle In & Out Locking");
-            public static readonly Handle_Type _DummyD = new Handle_Type(7, "Dummy D Handle");
-            public static readonly Handle_Type _PopUp = new Handle_Type(8, "Pop-up Handle");
-            public static readonly Handle_Type _RotoswingForSliding = new Handle_Type(9, "Rotoswing(Sliding) Handle");
-            public static readonly Handle_Type _CremonHandle = new Handle_Type(10, "Cremon handle");
+            public static readonly Handle_Type _D_HandleWithStdCylinder = new Handle_Type(6, "D Handle with Std Cylinder");
+            public static readonly Handle_Type _D_HandleWithHalfCylinder = new Handle_Type(7, "D Handle with Half Cylinder");
+            public static readonly Handle_Type _D_IO_Locking = new Handle_Type(8, "D Handle In & Out Locking");
+            public static readonly Handle_Type _DummyD = new Handle_Type(9, "Dummy D Handle");
+            public static readonly Handle_Type _PopUp = new Handle_Type(10, "Pop-up Handle");
+            public static readonly Handle_Type _RotoswingForSliding = new Handle_Type(11, "Rotoswing(Sliding) Handle");
+            public static readonly Handle_Type _CremonHandle = new Handle_Type(12, "Cremon handle");
+          
 
-            public static readonly Handle_Type _None = new Handle_Type(11, "None");
+
+            public static readonly Handle_Type _None = new Handle_Type(13, "None");
 
             private Handle_Type(int value, string displayName) : base(value, displayName) { }
         }

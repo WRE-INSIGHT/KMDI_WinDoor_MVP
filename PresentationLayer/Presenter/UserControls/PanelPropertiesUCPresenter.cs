@@ -90,7 +90,6 @@ namespace PresentationLayer.Presenter.UserControls
             _pp_CenterProfilePropertyUCPresenter = pp_CenterProfilePropertyUCPresenter;
             _pp_FramePropertiesUCPresenter = pp_FramePropertiesUCPresenter;
 
-
             SubscribeToEventsSetup();
         }
 
@@ -597,7 +596,7 @@ namespace PresentationLayer.Presenter.UserControls
                     handle.Dock = DockStyle.Top;
                     handle.BringToFront();
 
-
+       
 
 
                     if (!_panelModel.Panel_Type.Contains("Sliding") &&

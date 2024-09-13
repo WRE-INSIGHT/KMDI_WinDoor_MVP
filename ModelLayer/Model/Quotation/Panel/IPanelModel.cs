@@ -359,6 +359,10 @@ namespace ModelLayer.Model.Quotation.Panel
         Cremon_HandleArtNo Panel_CremonArtNo { get; set; }
         TwoWayLockingConnector_ArticleNo Panel_TwoWayLockingConnectorArtNo { get; set; } 
         OneWayLockingConnector_ArticleNo Panel_OneWayLockingConnectorArtNo { get; set; }
+        DHandleCylinderForAlutek_ArticleNo Panel_DHandleCylinderForAlutekArtNo { get; set; }
+        //Cremon_HandleArtNo Panel_CremonHandleArtNo { get; set; }
+        bool Panel_CremonHandleArtNoVisibility { get; set; }
+
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();

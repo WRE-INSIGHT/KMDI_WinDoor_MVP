@@ -13573,7 +13573,19 @@ namespace PresentationLayer.Presenter
                                 incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                             }
                         }
-                        else if (handletype == Handle_Type._D || handletype == Handle_Type._DummyD || handletype == Handle_Type._D_IO_Locking || handletype == Handle_Type._RotoswingForSliding)
+                        else if (handletype == Handle_Type._D ||
+                                 handletype == Handle_Type._D_HandleWithStdCylinder ||
+                                 handletype == Handle_Type._D_HandleWithHalfCylinder ||
+                                 handletype == Handle_Type._RotoswingForSliding )
+                        {
+                            if (!(frame_art == FrameProfile_ArticleNo._6052 && sash_art == SashProfile_ArticleNo._6041) &&
+                                  frame_art != FrameProfile_ArticleNo._84116 &&
+                                  frame_art != FrameProfile_ArticleNo._84118)
+                            {
+                                incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
+                            }
+                        }
+                        else if (handletype == Handle_Type._DummyD || handletype == Handle_Type._D_IO_Locking)
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._6052 &&
                                   sash_art == SashProfile_ArticleNo._6041))
@@ -13629,7 +13641,7 @@ namespace PresentationLayer.Presenter
                                 !(sash_art == SashProfile_ArticleNo._6040))
                             {
                                 MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
+                            } 
                         }
                         else if (espag_art == Espagnolette_ArticleNo._774286 || espag_art == Espagnolette_ArticleNo._774287 ||
                                  espag_art == Espagnolette_ArticleNo._731852 || espag_art == Espagnolette_ArticleNo._6_90137_10_0_1)
@@ -13642,8 +13654,8 @@ namespace PresentationLayer.Presenter
                         else if (espag_art == Espagnolette_ArticleNo._H102 || espag_art == Espagnolette_ArticleNo._H103 ||
                                  espag_art == Espagnolette_ArticleNo._H172 || espag_art == Espagnolette_ArticleNo._84819)
                         {
-                            if (frame_art != FrameProfile_ArticleNo._84100 ||
-                                frame_art != FrameProfile_ArticleNo._84118 ||
+                            if (frame_art != FrameProfile_ArticleNo._84100 &&
+                                frame_art != FrameProfile_ArticleNo._84118 &&
                                 frame_art != FrameProfile_ArticleNo._84116)
                             {
                                 MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);

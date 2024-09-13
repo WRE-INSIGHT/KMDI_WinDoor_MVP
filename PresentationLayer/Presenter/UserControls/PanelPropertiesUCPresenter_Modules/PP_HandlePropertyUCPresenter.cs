@@ -25,6 +25,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPP_DummyDHandlePropertyUCPresenter _pp_DummyDHandlePropertyUCPresenter;
         private IPP_PopUpHandlePropertyUCPresenter _pp_PopUpHandlePropertyUCPresenter;
         private IPP_RotoswingForSlidingPropertyUCPresenter _pp_RotoswingForSlidingPropertyUCPresenter;
+        private IPP_CremonHandleOptionPropertyUCPresenter _pp_CremonHandleOptionPropertyUCPresenter;
 
         private IPP_EspagnolettePropertyUCPresenter _pp_espagnolettePropertyUCPresenter;
 
@@ -46,7 +47,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                             IPP_DummyDHandlePropertyUCPresenter pp_DummyDHandlePropertyUCPresenter,
                                             IPP_PopUpHandlePropertyUCPresenter pp_PopUpHandlePropertyUCPresenter,
                                             IPP_RotoswingForSlidingPropertyUCPresenter pp_RotoswingForSlidingPropertyUCPresenter,
-                                            IPP_EspagnolettePropertyUCPresenter pp_espagnolettePropertyUCPresenter)
+                                            IPP_EspagnolettePropertyUCPresenter pp_espagnolettePropertyUCPresenter,
+                                            IPP_CremonHandleOptionPropertyUCPresenter pp_CremonHandleOptionPropertyUCPresenter)
         {
             _pp_handlePropertyUC = pp_handlePropertyUC;
             _pp_rotoswingPropertyUCPresenter = pp_rotoswingPropertyUCPresenter;
@@ -61,6 +63,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _pp_RotoswingForSlidingPropertyUCPresenter = pp_RotoswingForSlidingPropertyUCPresenter;
             _pp_espagnolettePropertyUCPresenter = pp_espagnolettePropertyUCPresenter;
             _pnlHandleType = _pp_handlePropertyUC.GetHandleTypePNL();
+            _pp_CremonHandleOptionPropertyUCPresenter = pp_CremonHandleOptionPropertyUCPresenter;
+
+
             SubscribeToEventsSetup();
         }
 
@@ -315,6 +320,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.AdjustPropertyPanelHeight("minusRotoswingForSliding");
                             _panelModel.AdjustHandlePropertyHeight("minusRotoswingForSliding");
                         }
+                        else if (curr_handleType == Handle_Type._CremonHandle)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            _panelModel.AdjustPropertyPanelHeight("minusCremonHandle");
+                            _panelModel.AdjustHandlePropertyHeight("minusCremonHandle");
+                        }
                         else if (curr_handleType == Handle_Type._None)
                         {
                             HandleType_None();
@@ -366,6 +377,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingForSliding");
                             }
+                            else if (curr_handleType == Handle_Type._CremonHandle)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            }
 
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
                         }
@@ -381,6 +396,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                         _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                         _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                        _panelModel.Panel_CremonHandleArtNoVisibility = false;
                         #endregion
                     }
                     else if (sel_handleType == Handle_Type._Rotary)
@@ -459,6 +475,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.AdjustPropertyPanelHeight("minusRotoswingForSliding");
                             _panelModel.AdjustHandlePropertyHeight("minusRotoswingForSliding");
                         }
+                        else if (curr_handleType == Handle_Type._CremonHandle)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            _panelModel.AdjustPropertyPanelHeight("minusCremonHandle");
+                            _panelModel.AdjustHandlePropertyHeight("minusCremonHandle");
+                        }
                         else if (curr_handleType == Handle_Type._None)
                         {
                             HandleType_None();
@@ -510,6 +532,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingForSliding");
                             }
+                            else if (curr_handleType == Handle_Type._CremonHandle)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            }
+
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotary");
                         }
 
@@ -524,6 +551,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                         _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                         _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                        _panelModel.Panel_CremonHandleArtNoVisibility = false;
+
                         #endregion
                     }
                     else if (sel_handleType == Handle_Type._Rio)
@@ -603,6 +632,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.AdjustPropertyPanelHeight("minusRotoswingForSliding");
                             _panelModel.AdjustHandlePropertyHeight("minusRotoswingForSliding");
                         }
+                        else if (curr_handleType == Handle_Type._CremonHandle)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            _panelModel.AdjustPropertyPanelHeight("minusCremonHandle");
+                            _panelModel.AdjustHandlePropertyHeight("minusCremonHandle");
+                        }
                         else if (curr_handleType == Handle_Type._None)
                         {
                             HandleType_None();
@@ -670,6 +705,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingForSliding");
                             }
+                            else if (curr_handleType == Handle_Type._CremonHandle)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            }
 
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRio");
 
@@ -690,6 +729,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                         _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                         _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                        _panelModel.Panel_CremonHandleArtNoVisibility = false;
+
                         #endregion
                     }
                     else if (sel_handleType == Handle_Type._Rotoline)
@@ -773,6 +814,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.AdjustPropertyPanelHeight("minusRotoswingForSliding");
                             _panelModel.AdjustHandlePropertyHeight("minusRotoswingForSliding");
                         }
+                        else if (curr_handleType == Handle_Type._CremonHandle)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            _panelModel.AdjustPropertyPanelHeight("minusCremonHandle");
+                            _panelModel.AdjustHandlePropertyHeight("minusCremonHandle");
+                        }
                         else if (curr_handleType == Handle_Type._None)
                         {
                             HandleType_None();
@@ -824,6 +871,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingForSliding");
                             }
+                            else if (curr_handleType == Handle_Type._CremonHandle)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            }
+
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoline");
                         }
 
@@ -838,6 +890,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                         _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                         _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                        _panelModel.Panel_CremonHandleArtNoVisibility = false;
+
                         #endregion
                     }
                     else if (sel_handleType == Handle_Type._MVD)
@@ -966,6 +1020,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingForSliding");
                             }
+                            else if (curr_handleType == Handle_Type._CremonHandle)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            }
+
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMVD");
                         }
 
@@ -980,6 +1039,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                         _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                         _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                        _panelModel.Panel_CremonHandleArtNoVisibility = false;
+
 
                         #endregion
                     }
@@ -1063,6 +1124,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.AdjustPropertyPanelHeight("minusRotoswingForSliding");
                             _panelModel.AdjustHandlePropertyHeight("minusRotoswingForSliding");
                         }
+                        else if (curr_handleType == Handle_Type._CremonHandle)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            _panelModel.AdjustPropertyPanelHeight("minusCremonHandle");
+                            _panelModel.AdjustHandlePropertyHeight("minusCremonHandle");
+                        }
+
 
                         if (_panelModel.Panel_ParentMultiPanelModel != null)
                         {
@@ -1111,6 +1179,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingForSliding");
                             }
+                            else if (curr_handleType == Handle_Type._CremonHandle)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            }
                         }
 
                         _panelModel.Panel_MVDOptionsVisibility = false;
@@ -1124,6 +1196,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                         _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                         _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                        _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
                         _panelModel.Panel_EspagnoletteOptionsVisibility = false;
                         _panelModel.Panel_ExtensionOptionsVisibility = false;
@@ -1280,6 +1353,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.AdjustPropertyPanelHeight("minusRotoswingForSliding");
                             _panelModel.AdjustHandlePropertyHeight("minusRotoswingForSliding");
                         }
+                        else if (curr_handleType == Handle_Type._CremonHandle)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            _panelModel.AdjustPropertyPanelHeight("minusCremonHandle");
+                            _panelModel.AdjustHandlePropertyHeight("minusCremonHandle");
+                        }
                         else if (curr_handleType == Handle_Type._None)
                         {
                             HandleType_None();
@@ -1331,6 +1410,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingForSliding");
                             }
+                            else if (curr_handleType == Handle_Type._CremonHandle)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            }
+
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addDHandle");
                         }
 
@@ -1345,6 +1429,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                         _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                         _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                        _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
 
 
@@ -1424,6 +1509,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.AdjustPropertyPanelHeight("minusRotoswingForSliding");
                             _panelModel.AdjustHandlePropertyHeight("minusRotoswingForSliding");
                         }
+                        else if (curr_handleType == Handle_Type._CremonHandle)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            _panelModel.AdjustPropertyPanelHeight("minusCremonHandle");
+                            _panelModel.AdjustHandlePropertyHeight("minusCremonHandle");
+                        }
                         else if (curr_handleType == Handle_Type._None)
                         {
                             HandleType_None();
@@ -1475,6 +1566,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingForSliding");
                             }
+                            else if (curr_handleType == Handle_Type._CremonHandle)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            }
+
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addDHandle");
                         }
 
@@ -1489,9 +1585,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_DummyDHandleOptionVisibilty = true;
                         _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                         _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
-
-
-
+                        _panelModel.Panel_CremonHandleArtNoVisibility = false;
+                         
                         #endregion
                     }
                     else if (sel_handleType == Handle_Type._D_IO_Locking)
@@ -1567,6 +1662,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.AdjustPropertyPanelHeight("minusRotoswingForSliding");
                             _panelModel.AdjustHandlePropertyHeight("minusRotoswingForSliding");
                         }
+                        else if (curr_handleType == Handle_Type._CremonHandle)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            _panelModel.AdjustPropertyPanelHeight("minusCremonHandle");
+                            _panelModel.AdjustHandlePropertyHeight("minusCremonHandle");
+                        }
                         else if (curr_handleType == Handle_Type._None)
                         {
                             HandleType_None();
@@ -1618,6 +1719,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingForSliding");
                             }
+                            else if (curr_handleType == Handle_Type._CremonHandle)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            }
+
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addDHandle");
                         }
 
@@ -1632,6 +1738,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                         _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                         _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                        _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
 
 
@@ -1711,6 +1818,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.AdjustPropertyPanelHeight("minusRotoswingForSliding");
                             _panelModel.AdjustHandlePropertyHeight("minusRotoswingForSliding");
                         }
+                        else if (curr_handleType == Handle_Type._CremonHandle)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            _panelModel.AdjustPropertyPanelHeight("minusCremonHandle");
+                            _panelModel.AdjustHandlePropertyHeight("minusCremonHandle");
+                        }
                         else if (curr_handleType == Handle_Type._None)
                         {
                             HandleType_None();
@@ -1762,6 +1875,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingForSliding");
                             }
+                            else if (curr_handleType == Handle_Type._CremonHandle)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            }
+
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addDHandle");
                         }
 
@@ -1776,6 +1894,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                         _panelModel.Panel_PopUpHandleOptionVisibilty = true;
                         _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                        _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
 
 
@@ -1855,6 +1974,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.AdjustPropertyPanelHeight("minusPopUpHandle");
                             _panelModel.AdjustHandlePropertyHeight("minusPopUpHandle");
                         }
+                        else if (curr_handleType == Handle_Type._CremonHandle)
+                        {
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            _panelModel.AdjustPropertyPanelHeight("minusCremonHandle");
+                            _panelModel.AdjustHandlePropertyHeight("minusCremonHandle");
+                        }
                         else if (curr_handleType == Handle_Type._None)
                         {
                             HandleType_None();
@@ -1906,6 +2031,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusPopUpHandle");
                             }
+                            else if (curr_handleType == Handle_Type._CremonHandle)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCremonHandle");
+                            }
 
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addDHandle");
                         }
@@ -1921,6 +2050,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                         _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                         _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = true;
+                        _panelModel.Panel_CremonHandleArtNoVisibility = false;
+
 
                         #endregion
                     }
@@ -1929,7 +2060,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         #region Property Height Adjustment - Cremon
                         if (!_mainPresenter.ItemLoad)
                         {
-                            _panelModel.Panel_CremonArtNo = Cremon_HandleArtNo._H087;
+                            //_panelModel.Panel_CremonArtNo = Cremon_HandleArtNo._H087;
                             if (_panelModel.Panel_Type.Contains("Awning"))
                             {
                                 _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._H103;
@@ -2017,7 +2148,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             HandleType_None();
                         }
 
-
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCremonHandle");
+                        _panelModel.AdjustPropertyPanelHeight("addCremonHandle");
+                        _panelModel.AdjustHandlePropertyHeight("addCremonHandle");
 
                         if (_panelModel.Panel_ParentMultiPanelModel != null)
                         {
@@ -2066,6 +2199,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingForSliding");
                             }
 
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCremonHandle");
                         }
 
                         _panelModel.Panel_RotoswingOptionsVisibility = false;
@@ -2079,6 +2213,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                         _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                         _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                        _panelModel.Panel_CremonHandleArtNoVisibility = true;
 
                         #endregion
                     }
@@ -2154,6 +2289,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             rotoswingForSlidingPropUC.Dock = DockStyle.Top;
             rotoswingForSlidingPropUC.BringToFront();
 
+            IPP_CremonHandleOptionPropertyUCPresenter CremonArtNoUCP = _pp_CremonHandleOptionPropertyUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _panelModel);
+            UserControl Cremon = (UserControl)CremonArtNoUCP.GetCremonHandleOptionPropertyUC();
+            _pnlHandleType.Controls.Add(Cremon);
+            Cremon.Dock = DockStyle.Top;
+            Cremon.BringToFront();
+
             IPP_EspagnolettePropertyUCPresenter espUCP = _pp_espagnolettePropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
             espUCP.GetPPEspagnolettePropertyUC().ProfileType_FromMainPresenter = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile;
             UserControl espPropUC = (UserControl)espUCP.GetPPEspagnolettePropertyUC();
@@ -2218,6 +2359,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
                     if (!_mainPresenter.ItemLoad)
                     {
@@ -2254,6 +2396,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
 
@@ -2292,6 +2435,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRio");
                     if (_panelModel.Panel_ParentMultiPanelModel != null)
@@ -2316,6 +2460,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoline");
 
@@ -2341,6 +2486,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMVD");
 
@@ -2366,6 +2512,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
                     if (!_mainPresenter.ItemLoad)
                     {
@@ -2441,6 +2588,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
                     if (inside_color == Foil_Color._None)
                     {
@@ -2501,6 +2649,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = true;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
                     if (inside_color == Foil_Color._None)
                     {
@@ -2573,6 +2722,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = true;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
                     if (base_color == Base_Color._White || base_color == Base_Color._Ivory)
                     {
@@ -2613,6 +2763,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = true;
+                    _panelModel.Panel_CremonHandleArtNoVisibility = false;
 
                     if (inside_color == Foil_Color._None)
                     {
@@ -2678,7 +2829,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                     _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_CremonHandleArtNoVisibility = true;
 
+
+                    _panelModel.Panel_CremonArtNo = Cremon_HandleArtNo._H087;
                     if (!_mainPresenter.ItemLoad)
                     {
                         if (_panelModel.Panel_Type.Contains("Awning"))
@@ -2691,6 +2845,18 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         } 
                     }
 
+
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCremonHandle");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCremonHandle");
+                    }
+
+                    _panelModel.AdjustPropertyPanelHeight("addCremonHandle");
+
+                    _panelModel.AdjustHandlePropertyHeight("addCremonHandle");
                 }
             }
             _initialLoad = false;

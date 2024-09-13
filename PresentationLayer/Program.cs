@@ -502,6 +502,9 @@ namespace PresentationLayer
 
                  .RegisterType<IScreenPartialAdjustmentProperties, ScreenPartialAdjustmentProperties>(new ContainerControlledLifetimeManager())
 
+                  .RegisterType<IPP_CremonHandleOptionPropertyUCPresenter, PP_CremonHandleOptionPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+                  .RegisterType<IPP_CremonHandleOptionPropertyUC, PP_CremonHandleOptionPropertyUC>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())
