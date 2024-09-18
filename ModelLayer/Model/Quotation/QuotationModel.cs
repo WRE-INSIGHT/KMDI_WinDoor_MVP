@@ -10275,7 +10275,7 @@ namespace ModelLayer.Model.Quotation
                         else if (wdm.WD_BaseColor == Base_Color._Foiled)
                         {
                             AddiitionalColorPercentage = 1.08m;
-                        }
+                        } 
 
                         FramePrice = FramePrice * AddiitionalColorPercentage;
                         SashPrice = SashPrice * AddiitionalColorPercentage;
@@ -10346,6 +10346,7 @@ namespace ModelLayer.Model.Quotation
 
                         SubTotatal = Math.Round((MaterialCost * 1.08m), 2) +
                                      Math.Round((GlassCost * 1.1m), 2) +
+                                     Math.Round((FilmPrice), 2) + 
                                      Math.Round(InstallationMaterialCost, 2);
 
                         //Wastage = SubTotatal * 1.2m;
@@ -10921,6 +10922,13 @@ namespace ModelLayer.Model.Quotation
                                                 "",
                                                 Math.Round((GlassCost * 1.1m), 2).ToString("N", new CultureInfo("en-US")),
                                                 "Price Break Down");
+                            
+                            Price_List.Rows.Add("Total Film Cost",
+                                              "",
+                                              "",
+                                              "",
+                                              Math.Round((FilmPrice), 2).ToString("N", new CultureInfo("en-US")),
+                                              "Price Break Down");
 
                             Price_List.Rows.Add("Total Installation Cost",
                                                 "",
