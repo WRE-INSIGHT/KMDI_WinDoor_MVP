@@ -167,7 +167,8 @@ namespace PresentationLayer.Presenter
             {
                 foreach (DataGridViewRow row in _dgv_Screen.SelectedRows)
                 {
-                    bool addNewScreenItem = false;
+                    bool addNewScreenItem = false,
+                         itemWholeNumAppr = true;
                     var itemNumber = row.Cells[0].Value;
                     var itemIndex = row.Cells[0].RowIndex;
                     decimal _deciItemNumber = Convert.ToDecimal(itemNumber);
@@ -209,6 +210,7 @@ namespace PresentationLayer.Presenter
                                             else
                                             {
                                                 _addNewItem = false;
+                                                item.Screen_ItemNumber = item.Screen_ItemNumber + .1m;
                                             }
                                             #endregion
 
@@ -222,13 +224,34 @@ namespace PresentationLayer.Presenter
 
                                                 if (_deciItemNumber % 1 == 0)
                                                 {
+                                                    itemWholeNumAppr = true;
                                                     _deciItemNumber = _deciItemNumber + .1m; // to avoid .1 in ItemNumber
+                                                }
+                                                else
+                                                {
+                                                    bool isExist = _mainPresenter.Screen_List.Any(x => x.Screen_ItemNumber == _deciItemNumber);
+                                                    if (!isExist)
+                                                    {
+                                                        itemWholeNumAppr = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        itemWholeNumAppr = false;
+                                                    }
                                                 }
 
                                                 do
                                                 {
-                                                    itemNumberBasedOnParentItem = _deciItemNumber + .1m;
-                                                    _deciItemNumber = itemNumberBasedOnParentItem;
+                                                    if (itemWholeNumAppr)
+                                                    {
+                                                        itemNumberBasedOnParentItem = _deciItemNumber + .1m;
+                                                        _deciItemNumber = itemNumberBasedOnParentItem;
+                                                    }
+                                                    else
+                                                    {
+                                                        itemNumberBasedOnParentItem = _deciItemNumber + .001m;
+                                                        _deciItemNumber = itemNumberBasedOnParentItem;
+                                                    }                                            
                                                 }
 
                                                 while (IsChildrenItemNumberExit(itemNumberBasedOnParentItem));
@@ -344,6 +367,7 @@ namespace PresentationLayer.Presenter
             }
             
         }
+
 
         private void PriceNQtyDeduction(IScreenPartialAdjustmentProperties SPAP,int childQtyCount, ref decimal childNetPrice,ref decimal childScreenTotalAmount)
         {
@@ -2564,6 +2588,8 @@ namespace PresentationLayer.Presenter
             DataRow newRow;
             newRow = _screenDT.NewRow();
             string _Screen_Type;
+            long screen_ID;
+            bool isExist = false;
 
             if (_screenModel.Screen_Set > 1)
             {
@@ -2617,9 +2643,23 @@ namespace PresentationLayer.Presenter
             newRow["PricingDimension"] = _Screen_PricingDimension;
             newRow["AddOnsSpecialFactor"] = _Screen_addOnsSpecialFactor;
 
-            _screenModel.Screen_id = PriKeyGen(_screenModel.Screen_Types, _screenModel.Screen_ItemNumber); // set priKey
+            screen_ID =  _screenModel.Screen_id = PriKeyGen(_screenModel.Screen_Types, _screenModel.Screen_ItemNumber); // set priKey
 
-            IScreenModel scr = _screenService.AddScreenModel(_screenModel.Screen_id,
+            do
+            {
+                if (_mainPresenter.Screen_List.Any(x => x.Screen_id == screen_ID))
+                {
+                    isExist = true;
+                    screen_ID = ScreenIDExtender(screen_ID);
+                }
+                else
+                {
+                    isExist = false;
+                }
+
+            } while (isExist);
+
+            IScreenModel scr = _screenService.AddScreenModel(screen_ID,
                                                              _screenModel.Screen_ItemNumber,
                                                              _screenModel.Screen_Width,
                                                              _screenModel.Screen_Height,
@@ -2639,6 +2679,27 @@ namespace PresentationLayer.Presenter
             _mainPresenter.Screen_List.Add(scr);
 
             return newRow;
+        }
+
+        private long ScreenIDExtender(long origScreenID)
+        {
+            long extendedScreenID;
+            string origIDtoStr = "",randomNumToStr = "";
+
+            Random rnd = new Random();
+            randomNumToStr = rnd.Next(1, 100).ToString();
+            origIDtoStr = origScreenID.ToString();
+
+            string idCombiStr = origIDtoStr + randomNumToStr;
+
+            Console.WriteLine("screen id orig " + origIDtoStr);
+            Console.WriteLine("random num " + randomNumToStr);
+
+            Console.WriteLine(idCombiStr);
+
+            extendedScreenID = Convert.ToInt64(idCombiStr);          
+            
+            return extendedScreenID;
         }
 
         private DataColumn CreateColumn(string columname, string caption, string type)
