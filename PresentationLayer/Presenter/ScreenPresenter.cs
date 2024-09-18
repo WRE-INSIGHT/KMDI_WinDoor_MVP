@@ -532,6 +532,7 @@ namespace PresentationLayer.Presenter
             //textBox.Text = value;
 
             numericupdown.Maximum = decimal.MaxValue;
+            numericupdown.Value = 1;
 
             buttonOk.Text = "OK";
             buttonCancel.Text = "Cancel";
