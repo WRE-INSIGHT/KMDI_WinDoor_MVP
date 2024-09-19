@@ -2386,7 +2386,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (mode == "minusCremonHandle")
                 {
                     FrameProp_Height -= constants.panel_property_CremonHandleOptionsheight;
-                }
+                } 
             }
             else if (objtype == "Div")
             {

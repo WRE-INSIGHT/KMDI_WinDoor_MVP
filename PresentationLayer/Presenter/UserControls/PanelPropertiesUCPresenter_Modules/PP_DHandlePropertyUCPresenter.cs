@@ -33,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             if (!_panelModel.PanelModelIsFromLoad)
             {
                 _panelModel.Panel_DHandleOutsideArtNo = (D_HandleArtNo)((ComboBox)sender).SelectedValue;
+                _panelModel.Panel_DHandleForAluArtNo = (D_HandleArtNo)((ComboBox)sender).SelectedValue;
             }
         }
 

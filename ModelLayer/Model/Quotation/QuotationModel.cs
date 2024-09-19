@@ -2000,7 +2000,7 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 pnl_curCtrl.Insert_PopUpHandle_MaterialList(Material_List);
 
-                                                pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                                //pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
                                             }
                                             else if (pnl_curCtrl.Panel_HandleType == Handle_Type._RotoswingForSliding)
                                             {
@@ -2504,10 +2504,23 @@ namespace ModelLayer.Model.Quotation
 
                             }
                             else if (pnl.Panel_HandleType == Handle_Type._D)
-                            {
-                                pnl.Insert_DHandle_MaterialList(Material_List);
+                            { 
+                                if (item.WD_profile.Contains("Alutek"))
+                                {
+                                    pnl.Insert_DHandleForAlutek_MaterialList(Material_List);
 
-                                pnl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                    if (pnl.Panel_DHandleForAluArtNo == D_HandleArtNo._H186O_std ||
+                                        pnl.Panel_DHandleForAluArtNo == D_HandleArtNo._H186O_half)
+                                    {
+                                        pnl.Insert_Cylinder_MaterialList(Material_List);
+                                    } 
+                                }
+                                else
+                                {
+                                    pnl.Insert_DHandle_MaterialList(Material_List);
+
+                                    pnl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                }
                             }
                             else if (pnl.Panel_HandleType == Handle_Type._D_IO_Locking)
                             {
@@ -2525,7 +2538,7 @@ namespace ModelLayer.Model.Quotation
                             {
                                 pnl.Insert_PopUpHandle_MaterialList(Material_List);
 
-                                pnl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                //pnl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
                             }
                             else if (pnl.Panel_HandleType == Handle_Type._RotoswingForSliding)
                             {
@@ -10476,7 +10489,7 @@ namespace ModelLayer.Model.Quotation
                         }
 
                         ProductionCost = ProductionCost + FoilingCost;
-                        InstallationCost = (ProductionCost / 3);
+                        InstallationCost = (ProductionCost / 3);  
                         AdditionalCost = (TotalFramePerimeter * 200) / 1000;
 
                        

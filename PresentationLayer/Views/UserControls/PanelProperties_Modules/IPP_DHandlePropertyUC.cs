@@ -7,5 +7,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
     {
         event EventHandler cmb_DArtNoSelectedValueChangedEventRaised;
         event EventHandler PPDHandlePropertyUCLoadEventRaised;
+        string ProfileType_FromMainPresenter { get; set; }
     }
 }

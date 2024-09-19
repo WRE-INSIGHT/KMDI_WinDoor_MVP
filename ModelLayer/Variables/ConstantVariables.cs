@@ -68,6 +68,10 @@
         public int panel_property_LouverGlassheightDeduction = 54;
         public int panel_property_CenterProfileOptionsheight = 30;
         public int panel_property_CremonHandleOptionsheight = 34;
+        public int panel_property_D_HandleWithHalfCylinderOptionsheight = 34;
+        public int panel_property_D_HandleWithStdCylinderOptionsheight = 34;
+
+
 
 
 

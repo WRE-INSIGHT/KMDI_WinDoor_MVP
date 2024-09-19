@@ -262,6 +262,7 @@ namespace ModelLayer.Model.Quotation.Panel
         SealingBlock_ArticleNo Panel_SealingBlockArtNo { get; set; }
         Interlock_ArticleNo Panel_InterlockArtNo { get; set; }
         ExtensionForInterlock_ArticleNo Panel_ExtensionForInterlockArtNo { get; set; }
+        D_HandleArtNo Panel_DHandleForAluArtNo { get; set; }
         D_HandleArtNo Panel_DHandleInsideArtNo { get; set; }
         D_HandleArtNo Panel_DHandleOutsideArtNo { get; set; }
 
@@ -476,6 +477,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_AntiLiftDevice_MaterialList(DataTable tbl_explosion);
         void Insert_StrikerForSliding_MaterialList(DataTable tbl_explosion);
         void Insert_SealingBlock_MaterialList(DataTable tbl_explosion);
+        void Insert_DHandleForAlutek_MaterialList(DataTable tbl_explosion);
         void Insert_DHandle_MaterialList(DataTable tbl_explosion);
         void Insert_DHandleIOLocking_MaterialList(DataTable tbl_explosion);
         void Insert_DummyDHandle_MaterialList(DataTable tbl_explosion);
@@ -544,7 +546,21 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_CenterProfile_MaterialList(DataTable tbl_explosion);
         void Insert_TwoWayLockingConnector_MaterialList(DataTable tbl_explosion);
         void Insert_OneWayLockingConnector_MaterialList(DataTable tbl_explosion);
-
+        void Insert_ButtProfile_MaterialList(DataTable tbl_explosion);
+        void Insert_ButtProfileCover_MaterialList(DataTable tbl_explosion);
+        void Insert_InterlockForAlu22_MaterialList(DataTable tbl_explosion);
+        void Insert_GroveCoverProfile_MaterialList(DataTable tbl_explosion);
+        void Insert_SashInterlockProfileConnectingCover_MaterialList(DataTable tbl_explosion);
+        void Insert_SashLockingProfileConnectingAdaptor_MaterialList(DataTable tbl_explosion);
+        void Insert_SashInterlockProfileConnectingAdaptor_MaterialList(DataTable tbl_explosion);
+        void Insert_MeetingInsert_MaterialList(DataTable tbl_explosion);
+        void Insert_InterlockEndCapForMatting_MaterialList(DataTable tbl_explosion);
+        void Insert_EndCapForAlutek22_MaterialList(DataTable tbl_explosion);
+        void Insert_MultilockingReceiver_MaterialList(DataTable tbl_explosion);
+        void Insert_BumpStopperDoor_MaterialList(DataTable tbl_explosion);
+        void Insert_LockingConnectorDeviceForkStyle_MaterialList(DataTable tbl_explosion);
+        void Insert_EuroGearBox_MaterialList(DataTable tbl_explosion);
+        void Insert_Cylinder_MaterialList(DataTable tbl_explosion);
 
         #endregion
 

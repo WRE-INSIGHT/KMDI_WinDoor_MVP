@@ -3738,7 +3738,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 else if (mode == "minusCremonHandle")
                 {
                     MPanelProp_Height -= constants.panel_property_CremonHandleOptionsheight;
-                }
+                } 
             }
             else if (objtype == "Div")
             {

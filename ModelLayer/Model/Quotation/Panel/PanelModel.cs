@@ -2475,7 +2475,29 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private D_HandleArtNo _panel_DHandleForAluArtNo;
+        public D_HandleArtNo Panel_DHandleForAluArtNo
+        {
+            get
+            {
+                return _panel_DHandleForAluArtNo;
+            }
 
+            set
+            {
+                _panel_DHandleForAluArtNo = value;
+
+                if (value == D_HandleArtNo._H186O_half)
+                {
+                    Panel_DHandleCylinderForAlutekArtNo = DHandleCylinderForAlutek_ArticleNo._H215;
+                }
+                else if (value == D_HandleArtNo._H186O_std)
+                {
+                    Panel_DHandleCylinderForAlutekArtNo = DHandleCylinderForAlutek_ArticleNo._H216;
+                }
+                NotifyPropertyChanged();
+            }
+        }
 
         private D_HandleArtNo _panel_DHandleInsideArtNo;
         public D_HandleArtNo Panel_DHandleInsideArtNo
@@ -2519,7 +2541,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 else if (value == D_HandleArtNo._DH605551)
                 {
                     Panel_DHandleInsideArtNo = D_HandleArtNo._DH613225;
-                }
+                } 
                 NotifyPropertyChanged();
             }
         }
@@ -5523,7 +5545,7 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "minusCremonHandle")
             {
                 Panel_PropertyHeight -= constants.panel_property_CremonHandleOptionsheight;
-            }
+            } 
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)
@@ -5659,7 +5681,7 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "minusCremonHandle")
             {
                 Panel_HandleOptionsHeight -= constants.panel_property_CremonHandleOptionsheight;
-            }
+            } 
         }
 
         public void AdjustRotoswingPropertyHeight(string mode)
@@ -12586,6 +12608,15 @@ namespace ModelLayer.Model.Quotation.Panel
                                   @"");
         }
 
+        public void Insert_DHandleForAlutek_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("D handle " + Panel_DHandleForAluArtNo.DisplayName,
+                                    1, "pc (s)",
+                                    "",
+                                    "Sash",
+                                    @"");
+        }
+         
         public void Insert_DHandleIOLocking_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("D handle In & Out Locking " + Panel_DHandleIOLockingOutsideArtNo.DisplayName,

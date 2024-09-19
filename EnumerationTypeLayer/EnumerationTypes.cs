@@ -360,18 +360,16 @@ namespace EnumerationTypeLayer
             public static readonly Handle_Type _Rio = new Handle_Type(2, "Rio Handle");
             public static readonly Handle_Type _Rotoline = new Handle_Type(3, "Rotoline Handle");
             public static readonly Handle_Type _MVD = new Handle_Type(4, "MVD Handle");
-            public static readonly Handle_Type _D = new Handle_Type(5, "D Handle");
-            public static readonly Handle_Type _D_HandleWithStdCylinder = new Handle_Type(6, "D Handle with Std Cylinder");
-            public static readonly Handle_Type _D_HandleWithHalfCylinder = new Handle_Type(7, "D Handle with Half Cylinder");
-            public static readonly Handle_Type _D_IO_Locking = new Handle_Type(8, "D Handle In & Out Locking");
-            public static readonly Handle_Type _DummyD = new Handle_Type(9, "Dummy D Handle");
-            public static readonly Handle_Type _PopUp = new Handle_Type(10, "Pop-up Handle");
-            public static readonly Handle_Type _RotoswingForSliding = new Handle_Type(11, "Rotoswing(Sliding) Handle");
-            public static readonly Handle_Type _CremonHandle = new Handle_Type(12, "Cremon handle");
+            public static readonly Handle_Type _D = new Handle_Type(5, "D Handle"); 
+            public static readonly Handle_Type _D_IO_Locking = new Handle_Type(6, "D Handle In & Out Locking");
+            public static readonly Handle_Type _DummyD = new Handle_Type(7, "Dummy D Handle");
+            public static readonly Handle_Type _PopUp = new Handle_Type(8, "Pop-up Handle");
+            public static readonly Handle_Type _RotoswingForSliding = new Handle_Type(9, "Rotoswing(Sliding) Handle");
+            public static readonly Handle_Type _CremonHandle = new Handle_Type(10, "Cremon handle");
           
 
 
-            public static readonly Handle_Type _None = new Handle_Type(13, "None");
+            public static readonly Handle_Type _None = new Handle_Type(11, "None");
 
             private Handle_Type(int value, string displayName) : base(value, displayName) { }
         }
@@ -455,6 +453,13 @@ namespace EnumerationTypeLayer
             public static readonly D_HandleArtNo _DH613225 = new D_HandleArtNo(5, "DH-613225(in) Black");
             public static readonly D_HandleArtNo _DH487261 = new D_HandleArtNo(6, "DH-487261(out) Mill Finish");
             public static readonly D_HandleArtNo _DH613228 = new D_HandleArtNo(7, "DH-613228(in) Mill Finish");
+            //alutek
+            public static readonly D_HandleArtNo _H186O = new D_HandleArtNo(8, "H186O");
+            public static readonly D_HandleArtNo _H186O_std = new D_HandleArtNo(9, "H186O with H215");
+            public static readonly D_HandleArtNo _H186O_half = new D_HandleArtNo(10, "H186O with H216");
+
+
+
 
             private D_HandleArtNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -523,10 +528,10 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _731852 = new Espagnolette_ArticleNo(21, "731852");
             public static readonly Espagnolette_ArticleNo _6_90137_10_0_1 = new Espagnolette_ArticleNo(22, "6-90137-10-0-1");
             //ALUTEK
-            public static readonly Espagnolette_ArticleNo _H102 = new Espagnolette_ArticleNo(23, "H102");
+            public static readonly Espagnolette_ArticleNo _H102 = new Espagnolette_ArticleNo(23, "H102"); // transmision rod
             public static readonly Espagnolette_ArticleNo _H103 = new Espagnolette_ArticleNo(24, "H103");
-            public static readonly Espagnolette_ArticleNo _H172 = new Espagnolette_ArticleNo(25, "H172");
-            public static readonly Espagnolette_ArticleNo _84819 = new Espagnolette_ArticleNo(26, "84819");
+            public static readonly Espagnolette_ArticleNo _H172 = new Espagnolette_ArticleNo(25, "H172"); // polymide plastic
+            public static readonly Espagnolette_ArticleNo _84819 = new Espagnolette_ArticleNo(26, "84819"); // polymide alum
 
             public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(27, "None");
 

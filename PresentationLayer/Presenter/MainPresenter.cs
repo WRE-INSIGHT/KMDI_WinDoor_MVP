@@ -13574,8 +13574,6 @@ namespace PresentationLayer.Presenter
                             }
                         }
                         else if (handletype == Handle_Type._D ||
-                                 handletype == Handle_Type._D_HandleWithStdCylinder ||
-                                 handletype == Handle_Type._D_HandleWithHalfCylinder ||
                                  handletype == Handle_Type._RotoswingForSliding )
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._6052 && sash_art == SashProfile_ArticleNo._6041) &&
@@ -13595,7 +13593,9 @@ namespace PresentationLayer.Presenter
                         }
                         else if (handletype == Handle_Type._CremonHandle)
                         {
-                            if (frame_art != FrameProfile_ArticleNo._84100)
+                            if (frame_art != FrameProfile_ArticleNo._84100 &&
+                                frame_art != FrameProfile_ArticleNo._84116 &&
+                                frame_art != FrameProfile_ArticleNo._84118)
                             {
                                 incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                             }

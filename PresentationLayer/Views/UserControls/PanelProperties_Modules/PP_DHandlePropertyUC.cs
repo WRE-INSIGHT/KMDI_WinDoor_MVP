@@ -15,15 +15,28 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public event EventHandler PPDHandlePropertyUCLoadEventRaised;
         public event EventHandler cmb_DArtNoSelectedValueChangedEventRaised;
 
+        public string ProfileType_FromMainPresenter { get; set; }
+
+
         private void PP_DHandlePropertyUC_Load(object sender, EventArgs e)
         {
             List<D_HandleArtNo> DHandle = new List<D_HandleArtNo>();
             foreach (D_HandleArtNo item in D_HandleArtNo.GetAll())
             {
-                if (item.DisplayName.Contains("out"))
+                if (ProfileType_FromMainPresenter.Contains("Alutek"))
                 {
-                    DHandle.Add(item);
+                    if (item.DisplayName.Contains("H186O"))
+                    {
+                        DHandle.Add(item);
+                    }
                 }
+                else
+                {
+                    if (item.DisplayName.Contains("out"))
+                    {
+                        DHandle.Add(item);
+                    }
+                } 
             }
             cmb_DArtNo.DataSource = DHandle;
 

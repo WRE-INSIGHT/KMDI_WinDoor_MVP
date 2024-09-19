@@ -58,11 +58,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             {
                 if (ProfileType_FromMainPresenter.Contains("Alutek"))
                 {
-                    if (item == Handle_Type._RotoswingForSliding ||
-                        item == Handle_Type._D ||
-                        item == Handle_Type._D_HandleWithStdCylinder ||
-                        item == Handle_Type._D_HandleWithHalfCylinder ||
-                        item == Handle_Type._CremonHandle ||
+                    if (item == Handle_Type._CremonHandle ||
+                        item == Handle_Type._D || 
+                        item == Handle_Type._PopUp ||
                         item == Handle_Type._None)
                     {
                         rio.Add(item);
@@ -70,9 +68,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 }
                 else
                 {
-                    if (item != Handle_Type._CremonHandle ||
-                        item != Handle_Type._D_HandleWithStdCylinder ||
-                        item != Handle_Type._D_HandleWithHalfCylinder)
+                    if (item != Handle_Type._CremonHandle)
                     {
                         rio.Add(item);
                     } 
@@ -133,17 +129,15 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 }
                 else if (sel_handleType == Handle_Type._PopUp)
                 {
-                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
-                        Panel_SashProfileArtNo == SashProfile_ArticleNo._6040))
+                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._6052 && Panel_SashProfileArtNo == SashProfile_ArticleNo._6040) &&
+                          Frame_ArtNo != FrameProfile_ArticleNo._84116 &&
+                          Frame_ArtNo != FrameProfile_ArticleNo._84118 )
                     {
                         MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     }
                 }
-                else if (sel_handleType == Handle_Type._D ||
-                         sel_handleType == Handle_Type._D_HandleWithStdCylinder ||
-                         sel_handleType == Handle_Type._D_HandleWithHalfCylinder ||
-                         sel_handleType == Handle_Type._RotoswingForSliding)
+                else if (sel_handleType == Handle_Type._D)
                 {
                     if (!(Frame_ArtNo == FrameProfile_ArticleNo._6052 && Panel_SashProfileArtNo == SashProfile_ArticleNo._6041) &&
                           Frame_ArtNo != FrameProfile_ArticleNo._84116 &&
@@ -153,7 +147,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                     }
                 }
                 else if (sel_handleType == Handle_Type._DummyD || 
-                         sel_handleType == Handle_Type._D_IO_Locking )
+                         sel_handleType == Handle_Type._D_IO_Locking ||
+                         sel_handleType == Handle_Type._RotoswingForSliding)
                 {
                     if (!(Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                         Panel_SashProfileArtNo == SashProfile_ArticleNo._6041))
@@ -163,8 +158,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 }
                 else if (sel_handleType == Handle_Type._CremonHandle)
                 {
-                    if (Frame_ArtNo != FrameProfile_ArticleNo._84100 ||
-                        Frame_ArtNo != FrameProfile_ArticleNo._84116 ||
+                    if (Frame_ArtNo != FrameProfile_ArticleNo._84100 &&
+                        Frame_ArtNo != FrameProfile_ArticleNo._84116 &&
                         Frame_ArtNo != FrameProfile_ArticleNo._84118)
                     {
                         MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -288,8 +283,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             }
             else if (text.Contains("Pop-up Handle"))
             {
-                if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
-                    Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                if ((Frame_ArtNo == FrameProfile_ArticleNo._6052 && Panel_SashProfileArtNo == SashProfile_ArticleNo._6040) ||
+                    Frame_ArtNo == FrameProfile_ArticleNo._84116 ||
+                    Frame_ArtNo == FrameProfile_ArticleNo._84118)
                 {
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
                 }
@@ -300,8 +296,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             }
             else if (text.Contains("D Handle") ||
                      text.Contains("D Handle with Std Cylinder") ||
-                     text.Contains("D Handle with Half Cylinder") ||
-                     text.Contains("Rotoswing(Sliding) Handle"))
+                     text.Contains("D Handle with Half Cylinder"))
             {
                 if ((Frame_ArtNo == FrameProfile_ArticleNo._6052 && Panel_SashProfileArtNo == SashProfile_ArticleNo._6041) ||
                     Frame_ArtNo == FrameProfile_ArticleNo._84116 ||
@@ -315,7 +310,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 }
             }
             else if (text.Contains("Dummy D Handle") ||
-                     text.Contains("D Handle In & Out Locking"))
+                     text.Contains("D Handle In & Out Locking") ||
+                     text.Contains("Rotoswing(Sliding) Handle"))
             {
                 if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                     Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
