@@ -42,6 +42,8 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -54,7 +56,6 @@ namespace PresentationLayer.Presenter
     public class MainPresenter : IMainPresenter
     {
         #region GlobalVar
-
         [DllImport("User32")]
         extern public static int GetGuiResources(IntPtr hProcess, int uiFlags); // check user objects
 
@@ -161,7 +162,7 @@ namespace PresentationLayer.Presenter
         private FrameModel.Frame_Padding frameType;
         private int _quoteId;
         private string input_qrefno, _projectName, _custRefNo;
-        private string _wndrFilePath, _wndrFileName;
+        private string _wndrFilePath, _wndrFileName,_failSafePath;
         private bool _provinceIntownOutofTown;
         private DateTime _quotationDate;
 
@@ -1253,10 +1254,182 @@ namespace PresentationLayer.Presenter
             _mainView.DateAssignedtoolStripButtonClickEventRaised += _mainView_DateAssignedtoolStripButtonClickEventRaised;
             _mainView.glassUpgradeToolStripButtonClickEventRaised += _mainView_glassUpgradeToolStripButtonClickEventRaised;
             _mainView.partialAdjusmentToolstripClickClickEventRaised += _mainView_partialAdjusmentToolstripClickClickEventRaised;
-
-
+            NetworkChange.NetworkAvailabilityChanged += new NetworkAvailabilityChangedEventHandler(NetworkChange_NetworkAvailabilityChanged);
         }
 
+        private async void NetworkChange_NetworkAvailabilityChanged(object sender, NetworkAvailabilityEventArgs e)
+        {
+
+            int cntr = 0;
+            string wndrExtension = "", fsPath_fsfileName = "";
+            if (!e.IsAvailable)
+            {
+                string fsFileName = _custRefNo + "(" + input_qrefno + ")";
+                 _failSafePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\FSFolder";
+               
+                if (!Directory.Exists(_failSafePath))
+                {
+                    DirectoryInfo dirInfo = Directory.CreateDirectory(_failSafePath);
+                    dirInfo.Attributes = FileAttributes.Directory | 
+                                         FileAttributes.Hidden;
+                }
+
+                  fsPath_fsfileName = _failSafePath + "\\" + fsFileName;
+                  wndrExtension = fsPath_fsfileName + ".wndr";
+         
+                FileInfo fileState = new FileInfo(wndrExtension);
+
+                if (fileState.Exists)
+                {
+                    do
+                    {
+
+                       cntr++;
+                       wndrExtension = "";
+                       wndrExtension = fsPath_fsfileName + "(" + cntr.ToString() + ")" + ".wndr";
+                       fileState = new FileInfo(wndrExtension); 
+                        
+                    } while (fileState.Exists);
+                    fsPath_fsfileName = fsPath_fsfileName + "(" + cntr.ToString() + ")";
+                }
+
+                wndr_content = new List<string>();
+                File.WriteAllLines(fsPath_fsfileName, await SaveFileLocally());
+                FileInfo f = new FileInfo(fsPath_fsfileName);
+                f.MoveTo(Path.ChangeExtension(fsPath_fsfileName, ".wndr"));
+
+            }
+        }
+
+        private async Task<List<string>> SaveFileLocally()
+        {
+            #region Save
+
+            wndr_content.Add("QuoteId: " + _quoteId);
+            wndr_content.Add("ProjectName: " + _projectName);
+            wndr_content.Add("ClientsName: " + inputted_projectName);
+            wndr_content.Add("ClientsTitleLastname: " + _titleLastname);
+            //wndr_content.Add("ProjectAddress: " + _projectAddress);
+            ProjectAddressModifier();
+            wndr_content.Add("CustomerRefNo: " + _custRefNo);
+            wndr_content.Add("DateAssigned: " + _dateAssigned);
+            wndr_content.Add("AEIC: " + _aeic);
+            wndr_content.Add("AEIC_POS: " + _position);
+            wndr_content.Add("ProvinceIntownOutofTown: " + _provinceIntownOutofTown);
+            wndr_content.Add("WoodecAdditionalForNewItem: " + WoodecAdditionalForNewItem);
+            wndr_content.Add("baseColor: " + baseColor);
+            wndr_content.Add("InsideColor: " + InsideColor);
+            wndr_content.Add("OutsideColor: " + OutsideColor);
+
+            #region quotation Model Get Prop
+            foreach (var prop in _quotationModel.GetType().GetProperties())
+            {
+                if (prop.Name != "TotalPriceHistory")
+                {
+                    wndr_content.Add(prop.Name + ": " + prop.GetValue(_quotationModel, null));
+                }
+            }
+            #endregion
+            await Task.Delay(1000);
+            #region Lst Windoor
+            foreach (WindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                SaveWindoorModel(wdm);
+            }
+            #endregion
+            await Task.Delay(1000);
+            #region Screen List
+            foreach (ScreenModel scm in Screen_List)
+            {
+                wndr_content.Add("~");
+
+                foreach (var prop in scm.GetType().GetProperties())
+                {
+                    wndr_content.Add(prop.Name + ": " + prop.GetValue(scm, null));
+                    //wndr_content.Add("_screenServices." + prop.Name + " = " + prop.Name.Substring(0,1).ToLower() + prop.Name.Substring(1) + ";");
+                }
+                wndr_content.Add("~");
+            }
+            foreach (var dic in _rdlcHeaders.OrderByDescending(e => e.Key))
+            {
+                wndr_content.Add(".");
+                wndr_content.Add(dic.Key + "^ " + dic.Value);
+                wndr_content.Add(".");
+            }
+            #endregion
+            await Task.Delay(1000);
+            #region glass unglazed
+            foreach (var item in _nonUnglazed)
+            {
+                wndr_content.Add("</NU>");
+                wndr_content.Add("Item No: " + item[0].ToString());
+                wndr_content.Add("Window/Door I.D.: " + item[1].ToString());
+                wndr_content.Add("Qty: " + item[2].ToString());
+                wndr_content.Add("Width: " + item[3].ToString());
+                wndr_content.Add("Height: " + item[4].ToString());
+                wndr_content.Add("Original Glass Used: " + item[5].ToString());
+                wndr_content.Add("GlassPrice: " + item[6].ToString());
+                wndr_content.Add("Upgraded To: " + item[7].ToString());
+                wndr_content.Add("Glass Upgrade Price: " + item[8].ToString());
+                wndr_content.Add("Upgrade Value: " + item[9].ToString());
+                wndr_content.Add("Amount Per Unit: " + item[10].ToString());
+                wndr_content.Add("Total Net Prices: " + item[11].ToString());
+                wndr_content.Add("GlassType: " + item[12].ToString());
+                wndr_content.Add("Primary Key: " + item[13].ToString());
+                wndr_content.Add("</NU>");
+            }
+            #endregion
+            #region load unglazed GU 
+            //foreach(var item in _unglazed)
+            //{
+            //    wndr_content.Add("<\\U>");
+            //    wndr_content.Add("Item No: " + item[0].ToString());
+            //    wndr_content.Add("Window/Door I.D.: " + item[1].ToString());
+            //    wndr_content.Add("Unit Price: " + item[2].ToString());
+            //    wndr_content.Add("Net Price: " + item[3].ToString());
+            //    wndr_content.Add("Qty: " + item[4].ToString());
+            //    wndr_content.Add("Width: " + item[5].ToString());
+            //    wndr_content.Add("Height: " + item[6].ToString());
+            //    wndr_content.Add("Original Glass Used: " + item[7].ToString());
+            //    wndr_content.Add("GlassPrice: " + item[8].ToString());
+            //    wndr_content.Add("New GlassPrice: " + item[9].ToString());
+            //    wndr_content.Add("Net Unit Price: " + item[10].ToString());
+            //    wndr_content.Add("List Unit Price: " + item[11].ToString());
+            //    wndr_content.Add("Total Amount(Glass): " + item[12].ToString());
+            //    wndr_content.Add("Total Amount(Unglazed-Window/Door): " + item[13].ToString());
+            //    wndr_content.Add("Primary Key: " + item[14].ToString());
+            //    wndr_content.Add("<//>");
+            //}
+            #endregion
+            await Task.Delay(3000);
+            #region Dic PaScreen ID
+            foreach (var dic in Dic_PaScreenID)
+            {
+                wndr_content.Add("○");
+                wndr_content.Add(dic.Key + "^ " + dic.Value);
+                wndr_content.Add("○");
+            }
+            #endregion
+            await Task.Delay(3000);
+            #region Lst ScreenPartialAdjustment
+            foreach (IScreenPartialAdjustmentProperties SPA in Lst_ScreenPartialAdjustment)
+            {
+                wndr_content.Add("●");
+                foreach (var prop in SPA.GetType().GetProperties())
+                {
+                    wndr_content.Add(prop.Name + ": " + prop.GetValue(SPA, null));
+                }
+                wndr_content.Add("●");
+            }
+            #endregion
+
+            wndr_content.Add("EndofFile");
+
+            #endregion
+
+            return wndr_content;
+        }
+      
         public int ForceRestartAndLoadFile()
         {
             int _userObjCount = GetGuiResources(Process.GetCurrentProcess().Handle, 1);
@@ -14810,7 +14983,7 @@ namespace PresentationLayer.Presenter
                             wdr.lst_TotalPriceHistory.Add(EditedPriceToSave);
                         }
                     }
-                }
+                }   
 
             }
             catch (Exception ex)
