@@ -44,5 +44,6 @@ namespace ModelLayer.Model.Quotation
         void changePriceBasedonDate();
         DataTable ItemCostingPriceAndPoints();
         DataTable MainPresenter_GlassThicknessDT { get; set; }
+        decimal QuotationModel_RDLCSpecialDiscount { get; set; }
     }
 }

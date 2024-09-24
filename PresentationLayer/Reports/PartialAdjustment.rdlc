@@ -118,7 +118,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
             <Top>0.05589in</Top>
-            <Left>0.2649in</Left>
+            <Left>0.0149in</Left>
             <Height>0.91319in</Height>
             <Width>7.62333in</Width>
             <Style>
@@ -154,7 +154,7 @@
               </Paragraph>
             </Paragraphs>
             <Top>0.09274in</Top>
-            <Left>5.9924in</Left>
+            <Left>5.7424in</Left>
             <Height>0.23107in</Height>
             <Width>1.89583in</Width>
             <ZIndex>1</ZIndex>
@@ -190,7 +190,7 @@
               </Paragraph>
             </Paragraphs>
             <Top>0.28172in</Top>
-            <Left>5.9924in</Left>
+            <Left>5.7424in</Left>
             <Height>0.23107in</Height>
             <Width>1.89583in</Width>
             <ZIndex>2</ZIndex>
@@ -226,7 +226,7 @@
               </Paragraph>
             </Paragraphs>
             <Top>0.45683in</Top>
-            <Left>5.9924in</Left>
+            <Left>5.7424in</Left>
             <Height>0.23107in</Height>
             <Width>1.89583in</Width>
             <ZIndex>3</ZIndex>
@@ -832,7 +832,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>1.10292in</Top>
-            <Left>0.2649in</Left>
+            <Left>0.0149in</Left>
             <Height>1.60417in</Height>
             <Width>7.63207in</Width>
             <ZIndex>4</ZIndex>
@@ -843,10 +843,10 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>12.04295in</Height>
+        <Height>6.65128in</Height>
         <Style />
       </Body>
-      <Width>7.97197in</Width>
+      <Width>7.79994in</Width>
       <Page>
         <PageHeader>
           <Height>1.1254in</Height>
@@ -872,7 +872,7 @@
                   <Source>Embedded</Source>
                   <Value>Details2</Value>
                   <Sizing>Fit</Sizing>
-                  <Left>4.56499in</Left>
+                  <Left>4.43999in</Left>
                   <Height>1in</Height>
                   <Width>3.35995in</Width>
                   <ZIndex>1</ZIndex>
@@ -885,7 +885,7 @@
               </ReportItems>
               <KeepTogether>true</KeepTogether>
               <Height>1.1in</Height>
-              <Width>7.96323in</Width>
+              <Width>7.79994in</Width>
               <Visibility>
                 <Hidden>=IIF(Globals!PageNumber = 1,FALSE,TRUE)</Hidden>
               </Visibility>
@@ -969,7 +969,7 @@
               </ReportItems>
               <KeepTogether>true</KeepTogether>
               <Top>0.45061in</Top>
-              <Left>5.9924in</Left>
+              <Left>5.8674in</Left>
               <Height>0.61924in</Height>
               <Width>1.90457in</Width>
               <ZIndex>1</ZIndex>
@@ -990,7 +990,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>0.75in</Height>
+          <Height>0.76667in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1014,7 +1014,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
               <Top>0.04167in</Top>
-              <Left>7.27542in</Left>
+              <Left>7.15042in</Left>
               <Height>0.25in</Height>
               <Width>0.61281in</Width>
               <Visibility>
@@ -1035,9 +1035,9 @@
               <Value>newfootercropped</Value>
               <Sizing>Fit</Sizing>
               <Top>0.3375in</Top>
-              <Left>0.07427in</Left>
+              <Left>0.125in</Left>
               <Height>0.38in</Height>
-              <Width>7.88896in</Width>
+              <Width>7.63823in</Width>
               <ZIndex>1</ZIndex>
               <Visibility>
                 <Hidden>=IIF(Globals!PageNumber = 1,FALSE,TRUE)</Hidden>

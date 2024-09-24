@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintQuoteView));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txt_PATotalText = new System.Windows.Forms.TextBox();
+            this.cmb_ReviewedBy = new System.Windows.Forms.ComboBox();
+            this.cmb_NotedBy = new System.Windows.Forms.ComboBox();
             this.txtbox_rowlimit = new System.Windows.Forms.TextBox();
             this.chkbox_subtotal = new System.Windows.Forms.CheckBox();
             this.chkbox_LessD = new System.Windows.Forms.CheckBox();
@@ -59,14 +62,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.BSQuotation = new System.Windows.Forms.BindingSource(this.components);
-            this.cmb_NotedBy = new System.Windows.Forms.ComboBox();
-            this.cmb_ReviewedBy = new System.Windows.Forms.ComboBox();
+            this.txt_PASpecialDiscount = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BSQuotation)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txt_PASpecialDiscount);
+            this.panel1.Controls.Add(this.txt_PATotalText);
             this.panel1.Controls.Add(this.cmb_ReviewedBy);
             this.panel1.Controls.Add(this.cmb_NotedBy);
             this.panel1.Controls.Add(this.txtbox_rowlimit);
@@ -102,11 +106,37 @@
             this.panel1.Size = new System.Drawing.Size(1008, 144);
             this.panel1.TabIndex = 2;
             // 
+            // txt_PATotalText
+            // 
+            this.txt_PATotalText.Location = new System.Drawing.Point(681, 2);
+            this.txt_PATotalText.Name = "txt_PATotalText";
+            this.txt_PATotalText.Size = new System.Drawing.Size(19, 30);
+            this.txt_PATotalText.TabIndex = 34;
+            this.txt_PATotalText.Visible = false;
+            // 
+            // cmb_ReviewedBy
+            // 
+            this.cmb_ReviewedBy.FormattingEnabled = true;
+            this.cmb_ReviewedBy.Location = new System.Drawing.Point(890, 1);
+            this.cmb_ReviewedBy.Name = "cmb_ReviewedBy";
+            this.cmb_ReviewedBy.Size = new System.Drawing.Size(46, 31);
+            this.cmb_ReviewedBy.TabIndex = 33;
+            this.cmb_ReviewedBy.Visible = false;
+            // 
+            // cmb_NotedBy
+            // 
+            this.cmb_NotedBy.FormattingEnabled = true;
+            this.cmb_NotedBy.Location = new System.Drawing.Point(838, 1);
+            this.cmb_NotedBy.Name = "cmb_NotedBy";
+            this.cmb_NotedBy.Size = new System.Drawing.Size(46, 31);
+            this.cmb_NotedBy.TabIndex = 32;
+            this.cmb_NotedBy.Visible = false;
+            // 
             // txtbox_rowlimit
             // 
             this.txtbox_rowlimit.Location = new System.Drawing.Point(503, 0);
             this.txtbox_rowlimit.Name = "txtbox_rowlimit";
-            this.txtbox_rowlimit.Size = new System.Drawing.Size(94, 25);
+            this.txtbox_rowlimit.Size = new System.Drawing.Size(94, 30);
             this.txtbox_rowlimit.TabIndex = 31;
             this.txtbox_rowlimit.Visible = false;
             // 
@@ -115,7 +145,7 @@
             this.chkbox_subtotal.AutoSize = true;
             this.chkbox_subtotal.Location = new System.Drawing.Point(278, 2);
             this.chkbox_subtotal.Name = "chkbox_subtotal";
-            this.chkbox_subtotal.Size = new System.Drawing.Size(121, 23);
+            this.chkbox_subtotal.Size = new System.Drawing.Size(148, 27);
             this.chkbox_subtotal.TabIndex = 4;
             this.chkbox_subtotal.Text = "Show Sub Total";
             this.chkbox_subtotal.UseVisualStyleBackColor = true;
@@ -127,7 +157,7 @@
             this.chkbox_LessD.AutoSize = true;
             this.chkbox_LessD.Location = new System.Drawing.Point(673, 118);
             this.chkbox_LessD.Name = "chkbox_LessD";
-            this.chkbox_LessD.Size = new System.Drawing.Size(112, 23);
+            this.chkbox_LessD.Size = new System.Drawing.Size(135, 27);
             this.chkbox_LessD.TabIndex = 30;
             this.chkbox_LessD.Text = "Less Discount";
             this.chkbox_LessD.UseVisualStyleBackColor = true;
@@ -138,7 +168,7 @@
             // 
             this.txtbox_LessD.Location = new System.Drawing.Point(802, 117);
             this.txtbox_LessD.Name = "txtbox_LessD";
-            this.txtbox_LessD.Size = new System.Drawing.Size(94, 25);
+            this.txtbox_LessD.Size = new System.Drawing.Size(94, 30);
             this.txtbox_LessD.TabIndex = 29;
             this.txtbox_LessD.Visible = false;
             // 
@@ -146,7 +176,7 @@
             // 
             this.txtbox_VAT.Location = new System.Drawing.Point(802, 90);
             this.txtbox_VAT.Name = "txtbox_VAT";
-            this.txtbox_VAT.Size = new System.Drawing.Size(94, 25);
+            this.txtbox_VAT.Size = new System.Drawing.Size(94, 30);
             this.txtbox_VAT.TabIndex = 27;
             this.txtbox_VAT.Visible = false;
             // 
@@ -154,7 +184,7 @@
             // 
             this.txtbox_FC.Location = new System.Drawing.Point(802, 59);
             this.txtbox_FC.Name = "txtbox_FC";
-            this.txtbox_FC.Size = new System.Drawing.Size(94, 25);
+            this.txtbox_FC.Size = new System.Drawing.Size(94, 30);
             this.txtbox_FC.TabIndex = 26;
             this.txtbox_FC.Visible = false;
             // 
@@ -162,7 +192,7 @@
             // 
             this.txtbox_LnM.Location = new System.Drawing.Point(802, 28);
             this.txtbox_LnM.Name = "txtbox_LnM";
-            this.txtbox_LnM.Size = new System.Drawing.Size(94, 25);
+            this.txtbox_LnM.Size = new System.Drawing.Size(94, 30);
             this.txtbox_LnM.TabIndex = 25;
             this.txtbox_LnM.Visible = false;
             // 
@@ -171,7 +201,7 @@
             this.chkbox_VAT.AutoSize = true;
             this.chkbox_VAT.Location = new System.Drawing.Point(673, 88);
             this.chkbox_VAT.Name = "chkbox_VAT";
-            this.chkbox_VAT.Size = new System.Drawing.Size(74, 23);
+            this.chkbox_VAT.Size = new System.Drawing.Size(90, 27);
             this.chkbox_VAT.TabIndex = 24;
             this.chkbox_VAT.Text = "VAT (%)";
             this.chkbox_VAT.UseVisualStyleBackColor = true;
@@ -183,7 +213,7 @@
             this.chkbox_FC.AutoSize = true;
             this.chkbox_FC.Location = new System.Drawing.Point(673, 59);
             this.chkbox_FC.Name = "chkbox_FC";
-            this.chkbox_FC.Size = new System.Drawing.Size(119, 23);
+            this.chkbox_FC.Size = new System.Drawing.Size(145, 27);
             this.chkbox_FC.TabIndex = 23;
             this.chkbox_FC.Text = "Freight Charge";
             this.chkbox_FC.UseVisualStyleBackColor = true;
@@ -195,7 +225,7 @@
             this.chkbox_LnM.AutoSize = true;
             this.chkbox_LnM.Location = new System.Drawing.Point(673, 28);
             this.chkbox_LnM.Name = "chkbox_LnM";
-            this.chkbox_LnM.Size = new System.Drawing.Size(123, 23);
+            this.chkbox_LnM.Size = new System.Drawing.Size(150, 27);
             this.chkbox_LnM.TabIndex = 22;
             this.chkbox_LnM.Text = "Labor && Mobi...";
             this.chkbox_LnM.UseVisualStyleBackColor = true;
@@ -207,7 +237,7 @@
             this.lbl_addinfo.AutoSize = true;
             this.lbl_addinfo.Location = new System.Drawing.Point(729, 5);
             this.lbl_addinfo.Name = "lbl_addinfo";
-            this.lbl_addinfo.Size = new System.Drawing.Size(103, 19);
+            this.lbl_addinfo.Size = new System.Drawing.Size(128, 23);
             this.lbl_addinfo.TabIndex = 21;
             this.lbl_addinfo.Text = "Additional  Info";
             this.lbl_addinfo.Visible = false;
@@ -217,7 +247,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(75, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 19);
+            this.label1.Size = new System.Drawing.Size(125, 23);
             this.label1.TabIndex = 20;
             this.label1.Text = "Show Page No.";
             // 
@@ -227,7 +257,7 @@
             this.chk_showpagenum.BackColor = System.Drawing.Color.Transparent;
             this.chk_showpagenum.Location = new System.Drawing.Point(38, 8);
             this.chk_showpagenum.Name = "chk_showpagenum";
-            this.chk_showpagenum.Size = new System.Drawing.Size(15, 14);
+            this.chk_showpagenum.Size = new System.Drawing.Size(18, 17);
             this.chk_showpagenum.TabIndex = 19;
             this.chk_showpagenum.UseVisualStyleBackColor = false;
             // 
@@ -247,7 +277,7 @@
             // 
             this.txt_oftexpenses.Location = new System.Drawing.Point(38, 106);
             this.txt_oftexpenses.Name = "txt_oftexpenses";
-            this.txt_oftexpenses.Size = new System.Drawing.Size(145, 25);
+            this.txt_oftexpenses.Size = new System.Drawing.Size(145, 30);
             this.txt_oftexpenses.TabIndex = 17;
             this.txt_oftexpenses.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_oftexpenses_KeyDown);
             // 
@@ -259,7 +289,7 @@
             this.chklstbox_itemnum.Location = new System.Drawing.Point(902, 22);
             this.chklstbox_itemnum.Name = "chklstbox_itemnum";
             this.chklstbox_itemnum.ScrollAlwaysVisible = true;
-            this.chklstbox_itemnum.Size = new System.Drawing.Size(103, 80);
+            this.chklstbox_itemnum.Size = new System.Drawing.Size(103, 75);
             this.chklstbox_itemnum.TabIndex = 18;
             this.chklstbox_itemnum.SelectedIndexChanged += new System.EventHandler(this.chklstbox_itemnum_SelectedIndexChanged);
             // 
@@ -268,7 +298,7 @@
             this.lbl_UniversalLabel.AutoSize = true;
             this.lbl_UniversalLabel.Location = new System.Drawing.Point(34, 59);
             this.lbl_UniversalLabel.Name = "lbl_UniversalLabel";
-            this.lbl_UniversalLabel.Size = new System.Drawing.Size(106, 19);
+            this.lbl_UniversalLabel.Size = new System.Drawing.Size(130, 23);
             this.lbl_UniversalLabel.TabIndex = 16;
             this.lbl_UniversalLabel.Text = "For Screen Only";
             // 
@@ -277,7 +307,7 @@
             this.chkbox_show.AutoSize = true;
             this.chkbox_show.Location = new System.Drawing.Point(38, 81);
             this.chkbox_show.Name = "chkbox_show";
-            this.chkbox_show.Size = new System.Drawing.Size(159, 23);
+            this.chkbox_show.Size = new System.Drawing.Size(196, 27);
             this.chkbox_show.TabIndex = 15;
             this.chkbox_show.Text = "Screen Contract Page";
             this.chkbox_show.TextAlign = System.Drawing.ContentAlignment.TopLeft;
@@ -288,7 +318,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(627, 3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(40, 19);
+            this.label7.Size = new System.Drawing.Size(48, 23);
             this.label7.TabIndex = 14;
             this.label7.Text = "Body";
             // 
@@ -308,7 +338,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(416, 3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 19);
+            this.label6.Size = new System.Drawing.Size(87, 23);
             this.label6.TabIndex = 12;
             this.label6.Text = "Salutation";
             // 
@@ -327,7 +357,7 @@
             this.lbl_address.AutoSize = true;
             this.lbl_address.Location = new System.Drawing.Point(205, 3);
             this.lbl_address.Name = "lbl_address";
-            this.lbl_address.Size = new System.Drawing.Size(58, 19);
+            this.lbl_address.Size = new System.Drawing.Size(70, 23);
             this.lbl_address.TabIndex = 10;
             this.lbl_address.Text = "Address";
             // 
@@ -348,7 +378,7 @@
             this.dtp_Date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtp_Date.Location = new System.Drawing.Point(78, 26);
             this.dtp_Date.Name = "dtp_Date";
-            this.dtp_Date.Size = new System.Drawing.Size(121, 25);
+            this.dtp_Date.Size = new System.Drawing.Size(121, 30);
             this.dtp_Date.TabIndex = 7;
             this.dtp_Date.Value = new System.DateTime(2022, 11, 22, 0, 0, 0, 0);
             this.dtp_Date.ValueChanged += new System.EventHandler(this.dtp_Date_ValueChanged);
@@ -358,7 +388,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(34, 29);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 19);
+            this.label4.Size = new System.Drawing.Size(46, 23);
             this.label4.TabIndex = 6;
             this.label4.Text = "Date";
             // 
@@ -367,6 +397,7 @@
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.reportViewer1.Location = new System.Drawing.Point(0, 144);
             this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(1008, 317);
             this.reportViewer1.TabIndex = 3;
             this.reportViewer1.ZoomPercent = 75;
@@ -375,27 +406,17 @@
             // 
             this.BSQuotation.CurrentChanged += new System.EventHandler(this.BSQuotation_CurrentChanged);
             // 
-            // cmb_NotedBy
+            // txt_PASpecialDiscount
             // 
-            this.cmb_NotedBy.FormattingEnabled = true;
-            this.cmb_NotedBy.Location = new System.Drawing.Point(838, 1);
-            this.cmb_NotedBy.Name = "cmb_NotedBy";
-            this.cmb_NotedBy.Size = new System.Drawing.Size(46, 25);
-            this.cmb_NotedBy.TabIndex = 32;
-            this.cmb_NotedBy.Visible = false;
-            // 
-            // cmb_ReviewedBy
-            // 
-            this.cmb_ReviewedBy.FormattingEnabled = true;
-            this.cmb_ReviewedBy.Location = new System.Drawing.Point(890, 1);
-            this.cmb_ReviewedBy.Name = "cmb_ReviewedBy";
-            this.cmb_ReviewedBy.Size = new System.Drawing.Size(46, 25);
-            this.cmb_ReviewedBy.TabIndex = 33;
-            this.cmb_ReviewedBy.Visible = false;
+            this.txt_PASpecialDiscount.Location = new System.Drawing.Point(706, 2);
+            this.txt_PASpecialDiscount.Name = "txt_PASpecialDiscount";
+            this.txt_PASpecialDiscount.Size = new System.Drawing.Size(16, 30);
+            this.txt_PASpecialDiscount.TabIndex = 35;
+            this.txt_PASpecialDiscount.Visible = false;
             // 
             // PrintQuoteView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 461);
             this.Controls.Add(this.reportViewer1);
@@ -449,5 +470,7 @@
         private System.Windows.Forms.TextBox txtbox_rowlimit;
         private System.Windows.Forms.ComboBox cmb_ReviewedBy;
         private System.Windows.Forms.ComboBox cmb_NotedBy;
+        private System.Windows.Forms.TextBox txt_PATotalText;
+        private System.Windows.Forms.TextBox txt_PASpecialDiscount;
     }
 }

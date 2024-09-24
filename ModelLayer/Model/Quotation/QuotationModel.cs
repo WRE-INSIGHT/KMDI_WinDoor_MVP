@@ -52,8 +52,8 @@ namespace ModelLayer.Model.Quotation
         public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
         public bool FactorChange { get; set; }
         public bool BOM_AluProfileType { get; set; }
-
         public DataTable MainPresenter_GlassThicknessDT { get; set; }
+        public decimal QuotationModel_RDLCSpecialDiscount { get; set; }
 
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
@@ -2947,6 +2947,10 @@ namespace ModelLayer.Model.Quotation
 
                 ExtensionProfile15mmPricePerLinearMeter_WoodGrain = 910.00m,
                 ExtensionProfile15mmPricePerLinearMeter_White = 790.00m,
+                
+                SubFramePricePerLinearMeter_3TracksPremi = 2500.00m,
+                SubFramePricePerLinearMeter_4TracksPremi = 3500.00m,
+                SubFramePricePerLinearMeter_4TracksLiftAndSlide = 5700.00m,
 
                 FramePerimeter,
                 FramePrice,
@@ -2966,6 +2970,8 @@ namespace ModelLayer.Model.Quotation
                 ExtensionProfile15mmPrice,
 
 
+                SubFramePrice,
+                SubFramePricePerLinearMeter,
 
         #endregion
         #region Mullion/TransomPrice
@@ -3728,6 +3734,9 @@ namespace ModelLayer.Model.Quotation
                 OneWayLockingConnectorPrice,
                 TwoWayLockingConnectorPrice,
                 ShootBoltPrice,
+
+
+
         #endregion
 
                 BrushSealPricePerLinearMeter = 15.80m,
@@ -3792,6 +3801,7 @@ namespace ModelLayer.Model.Quotation
             DateTime inc_price_date_8 = DateTime.Parse("08-30-2023"); // 6 mm Tempered Clear w/ HardCoated Low-E remove desc hardcoated 
             DateTime inc_price_date_9 = DateTime.Parse("02-20-2024"); // Glass 14 mm and 24 mm Clear
             DateTime inc_price_date_10 = DateTime.Parse("04-19-2024"); // new base price of georgian bar
+
 
 
             if (cus_ref_date >= inc_price_date && cus_ref_date <= _junedateoldago)
@@ -4621,12 +4631,13 @@ namespace ModelLayer.Model.Quotation
         DateTime changeCondition_030824 = DateTime.Parse("03-08-2024"); // FS price for casement 20hd
         DateTime changeCondition_050824 = DateTime.Parse("05-08-2024"); // georgian bar multiplier
         DateTime changeCondition_060424 = DateTime.Parse("06-04-2024"); // glass blades louver
+        DateTime changeCondition_092424 = DateTime.Parse("09-24-2024"); // subframe
 
 
 
 
 
-        DateTime testDate = DateTime.Parse("04-19-2024");
+        DateTime testDate = DateTime.Parse("09-24-2024");
 
         #endregion
 
@@ -4938,8 +4949,7 @@ namespace ModelLayer.Model.Quotation
                         InstallationPoints += (ProfileColorPoints / 3) * 4;
 
                         #endregion
-
-
+                         
                         #region FramePrice
                         FramePerimeter = (fr.Frame_Height + fr.Frame_Width) * 2;
                         TotalFramePerimeter += FramePerimeter;
@@ -5257,6 +5267,28 @@ namespace ModelLayer.Model.Quotation
 
                         }
 
+                        #endregion
+
+                        #region SubFrame
+                        if (cus_ref_date >= changeCondition_092424)
+                        { 
+                           if (fr.Frame_Width >= 5600)
+                           { 
+                              if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050 || fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                              {
+                                  if (fr.Frame_SlidingRailsQty == 3)
+                                  {
+                                      SubFramePrice += (fr.Frame_Width / 1000m) * SubFramePricePerLinearMeter_3TracksPremi;
+                                      SubFramePricePerLinearMeter = SubFramePricePerLinearMeter_3TracksPremi;
+                                  }
+                                    else if (fr.Frame_SlidingRailsQty == 4)
+                                  {
+                                      SubFramePrice += (fr.Frame_Width / 1000m) * SubFramePricePerLinearMeter_4TracksPremi;
+                                      SubFramePricePerLinearMeter = SubFramePricePerLinearMeter_4TracksPremi; 
+                                  }
+                                } 
+                           }
+                        }
                         #endregion
 
                         if (fr.Frame_ArtNo == FrameProfile_ArticleNo._7502)
@@ -10393,7 +10425,7 @@ namespace ModelLayer.Model.Quotation
                         else if (wdm.WD_BaseColor == Base_Color._Foiled)
                         {
                             AddiitionalColorPercentage = 1.08m;
-                        }
+                        } 
 
                         FramePrice = FramePrice * AddiitionalColorPercentage;
                         SashPrice = SashPrice * AddiitionalColorPercentage;
@@ -10464,6 +10496,7 @@ namespace ModelLayer.Model.Quotation
 
                         SubTotatal = Math.Round((MaterialCost * 1.08m), 2) +
                                      Math.Round((GlassCost * 1.1m), 2) +
+                                     Math.Round((FilmPrice), 2) + 
                                      Math.Round(InstallationMaterialCost, 2);
 
                         //Wastage = SubTotatal * 1.2m;
@@ -10645,6 +10678,7 @@ namespace ModelLayer.Model.Quotation
                                        Math.Round(DMReinforcementPrice, 2) +
                                        Math.Round(ExtensionProfile15mmPrice, 2) +
                                        Math.Round(TubularPrice, 2) +
+                                       Math.Round(SubFramePrice, 2) + 
                                        Math.Round(SealantPrice, 2) +
                                        Math.Round(PUFoamingPrice, 2) +
                                        Math.Round(FittingAndSuppliesCost, 2) +
@@ -11039,6 +11073,13 @@ namespace ModelLayer.Model.Quotation
                                                 "",
                                                 Math.Round((GlassCost * 1.1m), 2).ToString("N", new CultureInfo("en-US")),
                                                 "Price Break Down");
+                            
+                            Price_List.Rows.Add("Total Film Cost",
+                                              "",
+                                              "",
+                                              "",
+                                              Math.Round((FilmPrice), 2).ToString("N", new CultureInfo("en-US")),
+                                              "Price Break Down");
 
                             Price_List.Rows.Add("Total Installation Cost",
                                                 "",
@@ -11605,6 +11646,14 @@ namespace ModelLayer.Model.Quotation
                             Price_List.Rows.Add("Tubular Price",
                                                TubularPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
                                                Math.Round(TubularPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                               "",
+                                               "",
+                                               "Material Cost");
+
+
+                            Price_List.Rows.Add("Subframe Price",
+                                               SubFramePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                               Math.Round(SubFramePrice, 2).ToString("N", new CultureInfo("en-US")),
                                                "",
                                                "",
                                                "Material Cost");
@@ -12269,6 +12318,7 @@ namespace ModelLayer.Model.Quotation
             DMReinforcementPrice = 0;
             ExtensionProfile15mmPrice = 0;
             TubularPrice = 0;
+            SubFramePrice = 0; 
             GbPrice = 0;
             GlassPrice = 0;
             FilmPrice = 0;

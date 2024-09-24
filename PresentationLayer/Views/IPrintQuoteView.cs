@@ -16,6 +16,8 @@ namespace PresentationLayer.Views
         string FreightCharge { get; set; }
         string LessDiscount { get; set; }
         string RowLimit { get; set; }
+        string PartialAdjustmentTotalText { get; set; }
+        string PartialAdjustmentSpecialDiscount { get;set; }
         TextBox GetRowLimitTxtBox();
         TextBox GetLessDiscountTxtBox();
         CheckBox GetLessDiscountchkbox();
@@ -28,7 +30,7 @@ namespace PresentationLayer.Views
         CheckBox GetSubTotalCheckBox();
         ComboBox GetReviewedByCmb();
         ComboBox GetNotedByCmb();
-
+        TextBox GetPASpecialDiscountTxtBox();
         void ShowPrintQuoteView();
         
         event EventHandler btnRefreshClickEventRaised;
@@ -58,6 +60,7 @@ namespace PresentationLayer.Views
         TextBox GetLabor_N_MobiTxtBox();
         TextBox GetFreightChargeTxtBox();
         TextBox GetVatTxtbox();
+        TextBox GetPATotalTextTxtBox();
 
     }
 }

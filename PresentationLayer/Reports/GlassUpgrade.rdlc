@@ -85,19 +85,19 @@
                   <Width>1.04911in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.96577in</Width>
+                  <Width>1.61774in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.88344in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.81696in</Width>
+                  <Width>0.75863in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.27085in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.30952in</Width>
+                  <Width>0.78452in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -345,6 +345,7 @@
                                   <Value>Net Amount</Value>
                                   <Style>
                                     <FontFamily>segoe UI</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1434,6 +1435,7 @@
                                   <Style>
                                     <FontFamily>segoe UI</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1499,12 +1501,8 @@
                         <rd:DefaultName>Textbox21</rd:DefaultName>
                         <Style>
                           <Border>
-                            <Color>LightGrey</Color>
-                            <Style>Solid</Style>
-                          </Border>
-                          <BottomBorder>
                             <Style>None</Style>
-                          </BottomBorder>
+                          </Border>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
                           <PaddingTop>7pt</PaddingTop>
@@ -1627,7 +1625,7 @@
             <Top>2.605in</Top>
             <Left>0.18833in</Left>
             <Height>1.26041in</Height>
-            <Width>7.47917in</Width>
+            <Width>7.43125in</Width>
             <Style>
               <Border>
                 <Style>None</Style>

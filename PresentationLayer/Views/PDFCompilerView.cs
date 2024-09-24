@@ -19,12 +19,24 @@ namespace PresentationLayer.Views
         public event EventHandler btnCompileReportsClickEventRaised;
         public event EventHandler btnCompilePDFClickEventRaised;
         public event FormClosedEventHandler PDFCompilerViewFormClosedEventRaised;
+        public event EventHandler wthAnnex_chkbx_CheckedChangedEventRaised;
 
 
         public OpenFileDialog GetFileDialog()
         {
             return openFileDialog1;
         }
+
+        public CheckBox GetPartialAdjustmentCheckbox()
+        {
+            return partialAdjustment_chkbx;
+        }
+
+        public CheckBox GetAnnexCheckbox()
+        {
+            return wthAnnex_chkbx;
+        }
+
         public PDFCompilerView()
         {
             InitializeComponent();
@@ -59,6 +71,9 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseFormClosedEvent(sender, PDFCompilerViewFormClosedEventRaised,e);
         }
 
-     
+        private void wthAnnex_chkbx_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, wthAnnex_chkbx_CheckedChangedEventRaised,e);
+        }
     }
 }

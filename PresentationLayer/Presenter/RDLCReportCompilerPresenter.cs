@@ -46,18 +46,21 @@ namespace PresentationLayer.Presenter
         private ComboBox _gucmbGlassType,
                          _guCmbReviewedBy,
                          _guCmbNotedBy;
-        private TextBox _guTxtBxVat;
+        private TextBox _guTxtBxVat,
+                        _specialDiscountTxtBx;
         private CheckBox _guShowReviewedBy,
                          _guShowNotedBy,
                          _guShowVat,
-                         _screenNetOfDiscount;
+                         _screenNetOfDiscount,
+                         _specialDiscountChkbx;
         private CheckedListBox _guGlassListChkLst;
 
         string[] _officialsName = { "KENNETH G. LAO", "GENALYN C. GARCIA", "STEPHANIE DE LOS SANTOS", "KEVIN CHARLES S. LAO" };
         string[] _officialsPosition = { "President,KMDI", "VP-Sales & Operations", "VP-Marketing & Finance", "Head, Sales & Operations" };
         #endregion
 
-        bool _glassTypeExist = false;
+        bool _glassTypeExist = false,
+             _partialAdjustmentIsChecked;
         int _loopCounter = 1;
 
         public RDLCReportCompilerPresenter(IRDLCReportCompilerView rdlcReportCompilerView,
@@ -77,6 +80,9 @@ namespace PresentationLayer.Presenter
             _guShowNotedBy = _rdlcReportCompilerView.GUShowNotedBy();
             _guShowVat = _rdlcReportCompilerView.GUShowVat();
             _guGlassListChkLst = _rdlcReportCompilerView.GUGlassListChkLst();
+            _specialDiscountChkbx = _rdlcReportCompilerView.GetSpecialDiscountChkBx();
+            _specialDiscountTxtBx = rdlcReportCompilerView.GetSpecialDiscountTxtBx();
+
 
             SubScribeToEventSetup();
         }
@@ -97,11 +103,106 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.chkbxguShowVatCheckedChanged += new EventHandler(OnchkbxguShowVatCheckedChanged);
             _rdlcReportCompilerView.chkbx_SummaryLessD_CheckedChangedEventRaised += new EventHandler(Onchkbx_SummaryLessD_CheckedChangedEventRaised);
             _rdlcReportCompilerView.chkbx_ScreenNetofDiscount_CheckedChangedEventRaised += new EventHandler(Onchkbx_ScreenNetofDiscount_CheckedChangedEventRaised);
-            
+            _rdlcReportCompilerView.chkbx_GuSubtotal_CheckedChangedEventRaised += new EventHandler(Onchkbx_GuSubtotal_CheckedChangedEventRaised);
+            _rdlcReportCompilerView.chkbx_SpecialDiscount_CheckedChangedEventRaised += new EventHandler(Onchkbx_SpecialDiscount_CheckedChangedEventRaised);
+
             //bgw.WorkerReportsProgress = true;
             //bgw.WorkerSupportsCancellation = true;
             //bgw.DoWork += Bgw_DoWork;
             //bgw.ProgressChanged += Bgw_ProgressChanged; 
+        }
+
+        //iif(Parameters!NetofDiscount.Value,"Total Net Price With VAT*","Total Discounted Price With VAT*"),
+        //iif(Parameters!NetofDiscount.Value,"Total Net Price Without VAT*","Total Discounted Price Without VAT*"))
+
+        private void PAContractSummaryTotalTextChanger()
+        {
+            #region Text Changer 
+            if (_rdlcReportCompilerView.GetShowVatCheckBox().Checked)
+            {
+                if (_screenNetOfDiscount.Checked)
+                {
+                    //Net Price with Vat*
+                    if (_specialDiscountChkbx.Checked)
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Special Discounted Adjustment Net Price with VAT";
+                    }
+                    else
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Net Price With VAT";
+                    }
+                }
+                else
+                {
+                    //Price with Vat*
+                    if (_specialDiscountChkbx.Checked)
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Special Discounted Adjustment Price with VAT";
+                    }
+                    else
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Price With VAT";
+                    }
+                }
+                
+            }
+            else
+            {
+                //Net Price without Vat*
+                if (_screenNetOfDiscount.Checked)
+                {
+                    if (_specialDiscountChkbx.Checked)
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Special Discounted Adjustment Net Price without VAT";
+                    }
+                    else
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Net Price Without VAT";
+                    }
+                }
+                else
+                {
+                  //Price Without Vat*
+                    if (_specialDiscountChkbx.Checked)
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Special Discounted Adjustment Price without VAT";
+                    }
+                    else
+                    {
+                        _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Adjustment Price Without VAT";
+                    }
+                }
+            }
+            #endregion
+        }
+
+        private void Onchkbx_SpecialDiscount_CheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_specialDiscountChkbx.Checked)
+            {
+                _specialDiscountTxtBx.Enabled = true;
+                _quoteItemListPresenter.RDLCPAShowSpecialDiscount = true;
+            }
+            else
+            {
+                _specialDiscountTxtBx.Enabled = false;
+                _quoteItemListPresenter.RDLCPAShowSpecialDiscount = false;
+            }
+            PAContractSummaryTotalTextChanger();
+        }
+
+        private void Onchkbx_GuSubtotal_CheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_rdlcReportCompilerView.GetGlassUpgradeSubTotal().Checked)
+            {
+                _quoteItemListPresenter.RDLCGUShowSubTotal = true;
+                _rdlcReportCompilerView.GetGlassUpgradeRowLimitTxtBx().Visible = true;
+            }
+            else
+            {
+                _quoteItemListPresenter.RDLCGUShowSubTotal = false;
+                _rdlcReportCompilerView.GetGlassUpgradeRowLimitTxtBx().Visible = false;
+            }
         }
 
 
@@ -121,7 +222,7 @@ namespace PresentationLayer.Presenter
         //}
 
         private void Onchkbx_ScreenNetofDiscount_CheckedChangedEventRaised(object sender, EventArgs e)
-        {
+        {           
             if (_screenNetOfDiscount.Checked)
             {
                 _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount = true;
@@ -130,6 +231,7 @@ namespace PresentationLayer.Presenter
             {
                 _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount = false;
             }
+            PAContractSummaryTotalTextChanger();
         }
 
         private void OnchkbxguShowReviewedByCheckedChangedEventRaised(object sender, EventArgs e)
@@ -208,6 +310,7 @@ namespace PresentationLayer.Presenter
                 _quoteItemListPresenter.ShowVatContactSummary = false;
                 _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;
             }
+            PAContractSummaryTotalTextChanger();
         }
 
         private void OnchkselectallCheckedChangedEventRaised(object sender, EventArgs e)
@@ -230,19 +333,70 @@ namespace PresentationLayer.Presenter
 
         private void OnRDLCReportCompilerViewLoadEventRaised(object sender, EventArgs e)
         {
-            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            _partialAdjustmentIsChecked = _pdfCompilerPresenter.GetPDFCompilerView().GetPartialAdjustmentCheckbox().Checked;
+
+            if (!_partialAdjustmentIsChecked)
             {
-                _rdlcReportCompilerView.GetChecklistBoxIndex().Items.Add("Item: " + wdm.WD_id);
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                {
+                    _rdlcReportCompilerView.GetChecklistBoxIndex().Items.Add("Item: " + wdm.WD_id);
+                }
+
+                _quoteItemListPresenter.CallFrmRDLCCompiler = true;
+                _quoteItemListPresenter.PrintContractSummaryRDLC();
+                _quoteItemListPresenter.CallFrmRDLCCompiler = false;
+
+                _rdlcReportCompilerView.GetPATotalRtBx().Enabled = false;
+                _rdlcReportCompilerView.GetSpecialDiscountChkBx().Enabled = false;
+                _rdlcReportCompilerView.GetSpecialDiscountTxtBx().Enabled = false;
             }
-            _quoteItemListPresenter.CallFrmRDLCCompiler = true;
-            _quoteItemListPresenter.PrintContractSummaryRDLC();
-            _quoteItemListPresenter.CallFrmRDLCCompiler = false;
+            else
+            {
+                //partial adjustment
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                {
+                    if (wdm.WD_IsSelectedAtPartialAdjusment)
+                    {
+                        _rdlcReportCompilerView.GetChecklistBoxIndex().Items.Add("Item: " + wdm.WD_id);
+                    }
+                }
+
+                _quoteItemListPresenter.CallFrmRDLCCompiler = true;
+                _quoteItemListPresenter.PrintContractSummaryPartialAdjustmentRDLC();
+                _quoteItemListPresenter.CallFrmRDLCCompiler = false;
+
+                _rdlcReportCompilerView.GetRDLCReportCompilerForm().Text = "Report Compiler - Partial Adjustment";
+                _rdlcReportCompilerView.GetPATotalRtBx().Text = "Total Special Discounted Adjustment Price without VAT";//default
+
+                _rdlcReportCompilerView.GetChecklistBoxIndex().Enabled = false;
+                _rdlcReportCompilerView.GetSubTotalCheckBox().Enabled = false;
+                _rdlcReportCompilerView.CheckListSelectAll().Enabled = false;
+                _rdlcReportCompilerView.GetScreenRowLimitTxtBx().Enabled = false;
+
+                _rdlcReportCompilerView.GetPATotalRtBx().Enabled = true;
+                _rdlcReportCompilerView.GetSpecialDiscountChkBx().Enabled = true;
+                _rdlcReportCompilerView.GetSpecialDiscountTxtBx().Enabled = false;
+
+            }
+
             _rdlcReportCompilerView.GetOOTTextBox().Text = _quoteItemListPresenter.OutOfTownCharges.ToString("N2");
             _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;
             _rdlcReportCompilerView.GetContractSummaryLessDiscountTxtBx().Visible = false;
             _rdlcReportCompilerView.GetContractSummaryLessDiscountTxtBx().Text = _quoteItemListPresenter.ContractSummaryLessDiscount.ToString();
+
+            if(_quotationModel.QuotationModel_RDLCSpecialDiscount == 0)
+            {
+                _rdlcReportCompilerView.GetSpecialDiscountTxtBx().Text = _quoteItemListPresenter.ContractSummaryLessDiscount.ToString(); // temporarily
+            }
+            else
+            {
+                _rdlcReportCompilerView.GetSpecialDiscountTxtBx().Text = _quotationModel.QuotationModel_RDLCSpecialDiscount.ToString(); // temporarily
+            }
+
+
             _rdlcReportCompilerView.TxtBxContractSummaryVat = "12";
-            _rdlcReportCompilerView.TxtBxRowlimit = "21";
+            _rdlcReportCompilerView.TxtBxRowlimit = "100";
+            _rdlcReportCompilerView.TxtGlassUpgradeRowLimit = "100";
 
             LoadSettingsForGlassUpgrade();
 
@@ -338,31 +492,64 @@ namespace PresentationLayer.Presenter
                     if (CompileRDLC == true)
                     {
                       _loadingThread.Start();
-                       #region Windoor RDLC
-                        foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
-                                {
-                                    var selectedindex = Convert.ToInt32(item);
-                                    _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Add(selectedindex);
-                                }
-                                _quoteItemListPresenter.PrintWindoorRDLC();
-                                #endregion
-                       #region Summary Of Contract
-                                _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
-                                _quoteItemListPresenter.RDLCReportCompilerVatContractSummery = _rdlcReportCompilerView.TxtBxContractSummaryVat;
-                                decimal _deci = Convert.ToDecimal(_rdlcReportCompilerView.TxtContractSummaryLessDiscount);
-                                int _wholeNum = Convert.ToInt32(_deci * 100m);
-                               _quoteItemListPresenter.RDLCReportCompilerLessDiscountContractSummary = _wholeNum;
-                        //galing quotelist naka decimal gawing whole number 
-                        _quoteItemListPresenter.PrintContractSummaryRDLC();
-                                #endregion
-                       #region Screen
-                                if (_mainPresenter.Screen_List.Count != 0)
-                                {
-                                    _quoteItemListPresenter.RDLCReportCompilerRowLimit = _rdlcReportCompilerView.TxtBxRowlimit;
-                                    _quoteItemListPresenter.PrintScreenRDLC();
-                                }
-                        #endregion
-                       #region Glass Upgrade
+
+                        if (!_partialAdjustmentIsChecked)
+                        {
+                            #region Windoor RDLC
+                            foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
+                            {
+                                var selectedindex = Convert.ToInt32(item);
+                                _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Add(selectedindex);
+                            }
+                            _quoteItemListPresenter.PrintWindoorRDLC();
+                            #endregion
+                            #region Summary Of Contract
+                            _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
+                            _quoteItemListPresenter.RDLCReportCompilerVatContractSummery = _rdlcReportCompilerView.TxtBxContractSummaryVat;
+                            decimal _deci = Convert.ToDecimal(_rdlcReportCompilerView.TxtContractSummaryLessDiscount);
+                            int _wholeNum = Convert.ToInt32(_deci * 100m);
+                            _quoteItemListPresenter.RDLCReportCompilerLessDiscountContractSummary = _wholeNum;
+                            //galing quotelist naka decimal gawing whole number 
+                            _quoteItemListPresenter.PrintContractSummaryRDLC();
+                            #endregion
+                            #region Screen
+                            if (_mainPresenter.Screen_List.Count != 0)
+                            {
+                                _quoteItemListPresenter.RDLCReportCompilerRowLimit = _rdlcReportCompilerView.TxtBxRowlimit;
+                                _quoteItemListPresenter.PrintScreenRDLC();
+                            }
+                            #endregion
+                        }
+                        else
+                        {
+                            #region P.A. Windoor RDLC
+                            _quoteItemListPresenter.PrintWindoorPartialAdjustmentRDLC();
+                            #endregion
+                            #region P.A. Summary of Contract
+                            _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
+                            _quoteItemListPresenter.RDLCReportCompilerVatContractSummery = _rdlcReportCompilerView.TxtBxContractSummaryVat;
+                            decimal _deci = Convert.ToDecimal(_rdlcReportCompilerView.TxtContractSummaryLessDiscount);
+                            int _wholeNum = Convert.ToInt32(_deci * 100m);
+                            _quoteItemListPresenter.RDLCReportCompilerLessDiscountContractSummary = _wholeNum;
+                            _quoteItemListPresenter.RDLCReportCompilerContractSummaryTotalText = _rdlcReportCompilerView.PartialAdjContractSummaryTotalText;
+
+                            decimal Special_dscntDec = Convert.ToDecimal(_rdlcReportCompilerView.PartialAdjSpecialDiscountText);//Convert to decimal frm txtbox
+                            CheckSpecialDiscountDiff(Special_dscntDec);//check for specialdiscount difference
+                            int Special_dscntInt = Convert.ToInt32(_quotationModel.QuotationModel_RDLCSpecialDiscount * 100m);                  
+                            _quoteItemListPresenter.RDLCReportCompilerContractSummarySpecialDiscount = Special_dscntInt;
+
+                            //galing quotelist naka decimal gawing whole number 
+                            _quoteItemListPresenter.PrintContractSummaryPartialAdjustmentRDLC();
+                            #endregion
+                            #region P.A. Screen 
+                            if(_mainPresenter.Lst_ScreenPartialAdjustment.Count != 0)
+                            {
+                                _quoteItemListPresenter.PrintScreenPartialAdjustmentRDLC();
+                            }
+                            #endregion
+                        }
+
+                        #region Glass Upgrade
 
                         #region algo ver.1
                         //if (_gucmbGlassType.SelectedItem != null)
@@ -380,8 +567,8 @@ namespace PresentationLayer.Presenter
                         //        _quoteItemListPresenter.PrintGlassUpgrade();
                         //    }
                         //}
-                        #endregion 
-                        
+                        #endregion
+
                         #region algo ver.2       
                         foreach (var item in _guGlassListChkLst.CheckedItems)
                         {
@@ -393,7 +580,8 @@ namespace PresentationLayer.Presenter
                             _quoteItemListPresenter.RDLCGUNotedByOfficial = _guCmbNotedBy.SelectedItem.ToString();
                             int notedOfficialPosIndex = _guCmbNotedBy.SelectedIndex; // indx pos
                             _quoteItemListPresenter.RDLCGUNotedByOfficialPos = notedOfficialPosIndex;
-                            _quoteItemListPresenter.RDLCGUVatPercentage = _guTxtBxVat.Text;                          
+                            _quoteItemListPresenter.RDLCGUVatPercentage = _guTxtBxVat.Text;
+                            _quoteItemListPresenter.RDLCGURowLimit = _rdlcReportCompilerView.TxtGlassUpgradeRowLimit;
                             _quoteItemListPresenter.PrintGlassUpgrade();
 
                             _loopCounter++;
@@ -485,6 +673,14 @@ namespace PresentationLayer.Presenter
                 _loadingThread.Abort();
             }
             
+        }
+
+        private void CheckSpecialDiscountDiff(decimal spcl_discount)
+        {
+            if(_quotationModel.QuotationModel_RDLCSpecialDiscount != spcl_discount)
+            {
+                _quotationModel.QuotationModel_RDLCSpecialDiscount = spcl_discount;
+            }
         }
 
         private static string[] GetFiles()

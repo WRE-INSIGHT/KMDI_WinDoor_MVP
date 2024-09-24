@@ -1518,7 +1518,7 @@ Sum(CDec(Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtQuantity.Value )
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>DISCLAIMER: Retractable Insect Screens or not designed to withstand strong wind pressure especially during </Value>
+                                <Value>DISCLAIMER: Retractable Insect Screens are not designed to withstand strong wind pressure especially during </Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
                                   <FontSize>7pt</FontSize>

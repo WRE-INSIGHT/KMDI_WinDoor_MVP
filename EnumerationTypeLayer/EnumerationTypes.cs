@@ -1886,5 +1886,12 @@ namespace EnumerationTypeLayer
 
             private DHandleCylinderForAlutek_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class SubFrame_ArticleNo : Enumeration<SubFrame_ArticleNo, int>
+        {
+            public static readonly SubFrame_ArticleNo _KM04 = new SubFrame_ArticleNo(0, "KM04");
+
+            private SubFrame_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

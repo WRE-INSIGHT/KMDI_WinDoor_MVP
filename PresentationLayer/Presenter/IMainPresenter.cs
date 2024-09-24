@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenter
         DataTable GlassTypeDT { get; set; }
         DataTable GlassColorDT { get; set; }
         DataTable GlassSpacerDT { get; set; }
+        DataTable GlassComputedThickness { get; set; }
         int inputted_quoteId { get; set; }
         string inputted_quotationRefNo { get; set; }
         string inputted_projectName { get; set; }

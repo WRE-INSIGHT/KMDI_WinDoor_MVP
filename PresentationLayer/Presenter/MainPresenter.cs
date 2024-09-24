@@ -172,7 +172,8 @@ namespace PresentationLayer.Presenter
         private DataTable _guHolderDT = new DataTable();
         private DataTable _spacerDT = new DataTable();
         private DataTable _colorDT = new DataTable();
-
+        private DataTable _glassComputedThickness = new DataTable();
+       
         private ToolStripLabel _tsLblStatus;
         private ToolStrip _tsMain;
         private MenuStrip _msMainMenu;
@@ -379,6 +380,18 @@ namespace PresentationLayer.Presenter
             set
             {
                 _colorDT = value;
+            }
+        }
+
+        public DataTable GlassComputedThickness
+        {
+            get
+            {
+                return _glassComputedThickness;
+            }
+            set
+            {
+                _glassComputedThickness = value;
             }
         }
 
@@ -1546,6 +1559,10 @@ namespace PresentationLayer.Presenter
                     e.Cancel = false;
                 }
 
+            }
+            else
+            {
+                Environment.Exit(0);
             }
 
         }
@@ -3514,7 +3531,7 @@ namespace PresentationLayer.Presenter
             f.MoveTo(Path.ChangeExtension(_wndrFilePath, ".txt"));
             string outFile = _wndrFilePath.Substring(0, startFileName) +
                              _wndrFilePath.Substring(startFileName, _wndrFilePath.LastIndexOf(".") - startFileName) + ".txt";
-
+            
             file_lines = File.ReadAllLines(outFile);
             f.MoveTo(Path.ChangeExtension(outFile, ".wndr"));
 
@@ -3701,8 +3718,234 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.Save();
             }
 
+            GetGlassThickness();
+        }
+
+        private void GetGlassThickness()
+        {
+            _glassComputedThickness.Columns.Add(CreateColumn("TotalThickness", "TotalThickness", "System.Decimal"));
+            _glassComputedThickness.Columns.Add(CreateColumn("Description", "Description", "System.String"));
+
+
+            foreach (DataRow Glass in _glassThicknessDT.Rows)
+            {
+
+                #region Vrb
+                List<int> plusPos = new List<int>();
+                List<string> glassDescSubs = new List<string>();
+                string glassDesc = Glass[1].ToString();
+                string frstGlassDescSub = "",
+                       inBetweenGlassDescSub = "",
+                       lstGlassDescSub = "";
+                decimal glassTotalThickness = 0m;
+                decimal origTotalThickness = Convert.ToDecimal(Glass[0]);
+                #endregion
+
+                if (origTotalThickness != 0)
+                {
+                    if (!glassDesc.Contains("with Georgian Bar"))
+                    {
+                        if (glassDesc.Contains('+'))
+                        {
+                            #region Glass Desc Separator
+
+                            #region Test glass Desc Samples
+                            //6 mm Tempered Clear + 12 + 6 mm Tempered Clear Low-e (o)
+                            //6 mm  Bronze + 12 Argon + (3 mm Clear + 0.38 PVB + 3 Clear )
+                            //4 mm Tempered Clear with Low-e + 1.52 + 4 mm Tempered Clear
+                            //6 mm Tempered Clear + 0.89  SG InterLayer + 5 mm Tempered Clear
+
+                            //4 mm  Clear + 6 + 4 mm  Clear + 6 + 4 mm  Clear
+                            //6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear
+                            #endregion
+
+                            if (glassDesc.Contains('(') && !glassDesc.Contains("(o)"))
+                            {
+                                bool firstPlusPos = true;
+                                for (int i = 0; i < glassDesc.Length; i++)
+                                {
+                                    if (firstPlusPos)
+                                    {
+                                        if (glassDesc[i] == '+')
+                                        {
+                                            plusPos.Add(i);
+                                            firstPlusPos = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (glassDesc[i] == '(')
+                                        {
+                                            for (int j = i; j <= i; j--)
+                                            {
+                                                if (glassDesc[j] == '+')
+                                                {
+                                                    plusPos.Add(j);
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < glassDesc.Length; i++)
+                                {
+                                    if (glassDesc[i] == '+')
+                                    {
+                                        plusPos.Add(i);
+                                    }
+                                }
+                            }
+
+                            int[] plusPosArr = plusPos.ToArray();
+
+                            #region old algo for plus pos assign
+                            //glassDescSubs.Add(frstGlassDescSub = glassDesc.Substring(0, plusPosArr.First() - 1));
+                            //glassDescSubs.Add(midGlassDescSub = glassDesc.Substring(plusPosArr.First() + 1, (plusPosArr.Last() - plusPosArr.First()) - 1));
+                            //glassDescSubs.Add(lstGlassDescSub = glassDesc.Substring(plusPosArr.Last() + 1));
+
+                            //string trplGlazeDescSub1 = "",
+                            //       trplGlazeDescSub2 = "",
+                            //       trplGlazeDescSub3 = "",
+                            //       trplGlazeDescSub4 = "",
+                            //       trplGlazeDescSub5 = "";
+
+                            //trplGlazeDescSub1 = glassDesc.Substring(0, plusPosArr.First() - 1);
+                            //trplGlazeDescSub2 = glassDesc.Substring(plusPosArr.First() + 1, (plusPosArr[1] - plusPosArr[0]) - 1);
+                            //trplGlazeDescSub3 = glassDesc.Substring(plusPosArr[1] + 1, (plusPosArr[2] - plusPosArr[1]) - 1);
+                            //trplGlazeDescSub4 = glassDesc.Substring(plusPosArr[2] + 1, (plusPosArr[3] - plusPosArr[2]) - 1);
+                            //trplGlazeDescSub5 = glassDesc.Substring(plusPosArr.Last() + 1);
+                            #endregion
+
+                            for (int x = 0; x < plusPosArr.Count(); x++)
+                            {
+                                if (plusPosArr[x] == plusPosArr.First())
+                                {
+                                    glassDescSubs.Add(frstGlassDescSub = glassDesc.Substring(0, plusPosArr.First() - 1));
+                                }
+                                else if (plusPosArr[x] == plusPosArr.Last())
+                                {
+                                    inBetweenGlassDescSub = glassDesc.Substring(plusPosArr[x - 1] + 1, plusPosArr[x] - plusPosArr[x - 1] - 1);
+                                    glassDescSubs.Add(inBetweenGlassDescSub);
+                                    glassDescSubs.Add(lstGlassDescSub = glassDesc.Substring(plusPosArr.Last() + 1));
+                                }
+                                else
+                                {
+                                    inBetweenGlassDescSub = glassDesc.Substring(plusPosArr[x - 1] + 1, plusPosArr[x] - plusPosArr[x - 1] - 1);
+                                    glassDescSubs.Add(inBetweenGlassDescSub);   
+                                }
+                            }
+
+                            string[] glassDescSubsArr = glassDescSubs.ToArray();
+
+                            for (int i = 0; i < glassDescSubsArr.Count(); i++)
+                            {
+
+                                if (glassDescSubsArr[i].Contains('(') && !glassDescSubsArr[i].Contains("(o)"))
+                                {
+                                    #region Glass Desc Resub
+
+                                    List<int> scnGlassDescPlusPos = new List<int>();
+                                    List<string> scnGlassDescPlusPosStr = new List<string>();
+                                    string glassDescSub = glassDescSubsArr[i];
+                                    string secondDescFrstSub = "",
+                                           secondDescMdSub = "",
+                                           secondDescLstSub = "";
+
+                                    for (int j = 0; j < glassDescSubsArr[i].Length; j++)
+                                    {
+                                        if (glassDescSub[j] == '+')
+                                        {
+                                            scnGlassDescPlusPos.Add(j);
+                                        }
+                                    }
+
+                                    int[] secondPlusPosArr = scnGlassDescPlusPos.ToArray();
+
+                                    scnGlassDescPlusPosStr.Add(secondDescFrstSub = glassDescSub.Substring(0, secondPlusPosArr.First() - 1));
+                                    scnGlassDescPlusPosStr.Add(secondDescMdSub = glassDescSub.Substring(secondPlusPosArr.First() + 1, (secondPlusPosArr.Last() - secondPlusPosArr.First()) - 1));
+                                    scnGlassDescPlusPosStr.Add(secondDescLstSub = glassDescSub.Substring(secondPlusPosArr.Last() + 1));
+
+                                    string[] secondGlassDescSubsArr = scnGlassDescPlusPosStr.ToArray();
+
+                                    for (int x = 0; x < secondGlassDescSubsArr.Count(); x++)
+                                    {
+                                        if (secondGlassDescSubsArr[x].Contains("mm") || secondGlassDescSubsArr[x].ToLower().Contains("clear"))
+                                        {
+                                            Regex numFndr = new Regex(@"\d+");
+                                            Match m = numFndr.Match(secondGlassDescSubsArr[x]);
+
+                                            if (m.Success)
+                                            {
+                                                glassTotalThickness += Convert.ToDecimal(m.Value);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Regex numFndr = new Regex(@"\b\d+([\.,]\d+)?");
+                                            Match m = numFndr.Match(secondGlassDescSubsArr[x]);
+                                            if (m.Success)
+                                            {
+                                                decimal secondmidGlassThickness = Convert.ToDecimal(m.Value);
+                                                if (secondmidGlassThickness % 1 != 0)
+                                                {
+                                                    glassTotalThickness += secondmidGlassThickness;
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+                                    #endregion
+                                }
+                                else
+                                {
+                                    // \b\d+([\.,]\d+)?
+                                    // @"\d+"
+                                    if (glassDescSubsArr[i].Contains("mm") || glassDescSubsArr[i].ToLower().Contains("clear"))
+                                    {
+                                        Regex numFndr = new Regex(@"\d+");
+                                        Match m = numFndr.Match(glassDescSubsArr[i]);
+
+                                        if (m.Success)
+                                        {
+                                            glassTotalThickness += Convert.ToDecimal(m.Value);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Regex numFndr = new Regex(@"\b\d+([\.,]\d+)?");
+                                        Match m = numFndr.Match(glassDescSubsArr[i]);
+
+                                        if (m.Success)
+                                        {
+                                            decimal midGlassThickness = Convert.ToDecimal(m.Value);
+                                            if (midGlassThickness % 1 != 0)
+                                            {
+                                                glassTotalThickness += midGlassThickness;
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                            }
+                            #endregion
+                        }
+                        else
+                        {
+                            glassTotalThickness = origTotalThickness;
+                        }
+                        _glassComputedThickness.Rows.Add(glassTotalThickness, glassDesc);
+                    }
+                }
+
+            }
 
         }
+
 
         private void AddGlassDesctoException()
         {
@@ -4216,6 +4459,7 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear Low-e", "Double Laminated", 6600.00m, false, true, false, false, true);//Same above but diff price and pos
                 _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear", "Double Laminated", 5700.00m, false, true, false, false, true);
                 _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear", "Double Laminated", 6500.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(10.52f, "5 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear", "Double Laminated", 7250.00m, false, true, false, false, true);
                 _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear Low-e", "Double Laminated", 6800.00m, false, true, false, false, true);
                 _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e", "Double Laminated", 8000.00m, false, true, false, false, true);
 
@@ -4276,6 +4520,7 @@ namespace PresentationLayer.Presenter
                 _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear Low-e with Georgian Bar", "Double Laminated", 6600.00m, false, true, false, false, true);//Same above but diff price and pos
                 _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with Georgian Bar", "Double Laminated", 5700.00m, false, true, false, false, true);
                 _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with Georgian Bar", "Double Laminated", 6500.00m, false, true, false, false, true);
+                _glassThicknessDT.Rows.Add(10.52f, "5 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with Georgian Bar", "Double Laminated", 7250.00m, false, true, false, false, true);
                 _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear Low-e with Georgian Bar", "Double Laminated", 6800.00m, false, true, false, false, true);
                 _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e with Georgian Bar", "Double Laminated", 8000.00m, false, true, false, false, true);
 
@@ -5095,11 +5340,15 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("BOM_Status:"))
                         {
                             _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
-                            inside_quotation = false;
+                            //inside_quotation = false;//08/07/2024
                         }
                         else if (row_str.Contains("WoodecAdditionalForNewItem"))
                         {
                             WoodecAdditionalForNewItem = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("QuotationModel_RDLCSpecialDiscount:"))
+                        {
+                            _quotationModel.QuotationModel_RDLCSpecialDiscount = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         else if (row_str.Contains("InsideColor:"))
                         {
@@ -11152,6 +11401,7 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
+
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi,
              inside_divider, inside_screen, inside_rdlcDic, inside_quoteHistory, inside_GlassUpgrade,
              inside_PartialAdjustment_Image, inside_PartialAdjustment_Description, inside_PartialAdjustment_Price,
