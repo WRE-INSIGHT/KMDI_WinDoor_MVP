@@ -1518,48 +1518,9 @@ Sum(CDec(Convert.ToDecimal(Fields!dtUnitPrice.Value) * Fields!dtQuantity.Value )
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>DISCLAIMER: Retractable Insect Screens are not designed to withstand strong wind pressure especially during </Value>
-                                <Style>
-                                  <FontFamily>Segoe UI</FontFamily>
-                                  <FontSize>7pt</FontSize>
-                                </Style>
-                              </TextRun>
-                              <TextRun>
-                                <Value>typhoons </Value>
-                                <Style>
-                                  <FontStyle>Normal</FontStyle>
-                                  <FontFamily>Segoe UI</FontFamily>
-                                  <FontSize>7pt</FontSize>
-                                  <FontWeight>Normal</FontWeight>
-                                  <TextDecoration>None</TextDecoration>
-                                </Style>
-                              </TextRun>
-                              <TextRun>
-                                <Value>or when there`s storm and is therefore i recommended to disengage during which time.</Value>
-                                <Style>
-                                  <FontFamily>Segoe UI</FontFamily>
-                                  <FontSize>7pt</FontSize>
-                                </Style>
-                              </TextRun>
-                            </TextRuns>
-                            <Style />
-                          </Paragraph>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value />
-                                <Style>
-                                  <FontFamily>Segoe UI</FontFamily>
-                                  <FontSize>7pt</FontSize>
-                                </Style>
-                              </TextRun>
-                            </TextRuns>
-                            <Style />
-                          </Paragraph>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value>If ventilation is necessary, we advise to keep the door or window opening to a minimum.</Value>
+                                <Value>DISCLAIMER: Retractable Insect Screens are not designed to withstand strong wind pressure especially during typhoons or when there's a storm and is therefore recommended to disengage during which time.
+
+If ventilation is necessary, we advise to keep the door or window opening to a minimum</Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
                                   <FontSize>7pt</FontSize>
