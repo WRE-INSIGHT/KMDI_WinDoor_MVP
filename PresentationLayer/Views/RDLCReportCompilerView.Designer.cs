@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_GuSubtotal = new System.Windows.Forms.Panel();
+            this.rtbox_PATotalText = new System.Windows.Forms.RichTextBox();
             this.txtbox_SpecialDiscount = new System.Windows.Forms.TextBox();
             this.chkbx_SpecialDiscount = new System.Windows.Forms.CheckBox();
             this.txt_Gurowlimit = new System.Windows.Forms.TextBox();
@@ -65,7 +66,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.rtbox_PATotalText = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.txt_GuSubtotal.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -168,6 +168,14 @@
             this.txt_GuSubtotal.Size = new System.Drawing.Size(1073, 300);
             this.txt_GuSubtotal.TabIndex = 1;
             // 
+            // rtbox_PATotalText
+            // 
+            this.rtbox_PATotalText.Location = new System.Drawing.Point(395, 138);
+            this.rtbox_PATotalText.Name = "rtbox_PATotalText";
+            this.rtbox_PATotalText.Size = new System.Drawing.Size(208, 49);
+            this.rtbox_PATotalText.TabIndex = 23;
+            this.rtbox_PATotalText.Text = "";
+            // 
             // txtbox_SpecialDiscount
             // 
             this.txtbox_SpecialDiscount.Location = new System.Drawing.Point(395, 209);
@@ -179,11 +187,12 @@
             // chkbx_SpecialDiscount
             // 
             this.chkbx_SpecialDiscount.AutoSize = true;
+            this.chkbx_SpecialDiscount.Enabled = false;
             this.chkbx_SpecialDiscount.Location = new System.Drawing.Point(395, 188);
             this.chkbx_SpecialDiscount.Name = "chkbx_SpecialDiscount";
-            this.chkbx_SpecialDiscount.Size = new System.Drawing.Size(135, 21);
+            this.chkbx_SpecialDiscount.Size = new System.Drawing.Size(151, 21);
             this.chkbx_SpecialDiscount.TabIndex = 21;
-            this.chkbx_SpecialDiscount.Text = "Special Discount";
+            this.chkbx_SpecialDiscount.Text = "Additional Discount";
             this.chkbx_SpecialDiscount.UseVisualStyleBackColor = true;
             this.chkbx_SpecialDiscount.CheckedChanged += new System.EventHandler(this.chkbx_SpecialDiscount_CheckedChanged);
             // 
@@ -492,14 +501,6 @@
             // 
             this.saveFileDialog.Filter = "Pdf Files|*.pdf";
             this.saveFileDialog.Title = "Save ";
-            // 
-            // rtbox_PATotalText
-            // 
-            this.rtbox_PATotalText.Location = new System.Drawing.Point(395, 138);
-            this.rtbox_PATotalText.Name = "rtbox_PATotalText";
-            this.rtbox_PATotalText.Size = new System.Drawing.Size(208, 49);
-            this.rtbox_PATotalText.TabIndex = 23;
-            this.rtbox_PATotalText.Text = "";
             // 
             // RDLCReportCompilerView
             // 
