@@ -55,11 +55,12 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
                 if (railQty == 2)
                 {
                     _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84118;
-
+                    _frameModel.Frame_BaseClipArtNo = BaseClip_ArticleNo._84812;
                 }
                 else if (railQty == 3)
                 {
                     _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._84116;
+                    _frameModel.Frame_BaseClipArtNo = BaseClip_ArticleNo._84811;
                 }
             }
           

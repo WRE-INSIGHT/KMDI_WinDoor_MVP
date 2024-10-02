@@ -143,9 +143,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                          espag == Espagnolette_ArticleNo._H172 || espag == Espagnolette_ArticleNo._84819)
 
                 {
-                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._84100 &&
-                          Frame_ArtNo != FrameProfile_ArticleNo._84116 &&
-                          Frame_ArtNo != FrameProfile_ArticleNo._84118))
+                    if (Frame_ArtNo != FrameProfile_ArticleNo._84100 &&
+                        Frame_ArtNo != FrameProfile_ArticleNo._84116 &&
+                        Frame_ArtNo != FrameProfile_ArticleNo._84118)
                     {
                         MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }

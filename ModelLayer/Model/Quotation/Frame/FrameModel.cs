@@ -284,20 +284,6 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
-        private BaseClip_ArticleNo _FrameBaseClip;
-        public BaseClip_ArticleNo Frame_BaseClip
-        {
-            get
-            {
-                return _FrameBaseClip;
-            }
-            set
-            {
-                _FrameBaseClip = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         
         #region Method
 
@@ -774,6 +760,16 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._None;
                 }
+                else if (value == FrameProfile_ArticleNo._84116)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._None;
+                    Frame_BaseClipArtNo = BaseClip_ArticleNo._84811;
+                }
+                else if (value == FrameProfile_ArticleNo._84118)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._None;
+                    Frame_BaseClipArtNo = BaseClip_ArticleNo._84811;
+                }
 
                 NotifyPropertyChanged();
             }
@@ -865,7 +861,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 _frameBaseClipArtNo = value;
                 NotifyPropertyChanged();
             }
-        }
+        } 
 
         private bool _frameCmenuDeleteVisibility;
         public bool Frame_CmenuDeleteVisibility
@@ -2474,134 +2470,149 @@ namespace ModelLayer.Model.Quotation.Frame
         }
 
         public void Insert_frameInfo_MaterialList(DataTable tbl_explosion)
-        {
-            int FrameQtyWd = 2,
-                reinfQty = 1;
-
-            string cutTypeWd = "",
-                   cutTypeHt = "",
-                   widthArtNo = "";
-
-            if (Frame_BotFrameVisible == true)
-            {
-                if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
-                    Frame_BotFrameArtNo == BottomFrameTypes._6052)
-                {
-                    FrameQtyWd = 2;
-                }
-                else
-                {
-                    FrameQtyWd = 1;
-                }
-            }
-             
-            if (Frame_ConnectionTypeVisibility == true)
-            {
-                if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
-                {
-                    cutTypeWd = @"|  |";
-                    cutTypeHt = @"[  ]";
-                    if (Frame_If_InwardMotorizedSliding == true)
-                    {
-                        cutTypeHt = @"[  ]";
-                        widthArtNo = "-milled";
-                    }
-                }
-                else if (Frame_ConnectionType == FrameConnectionType._Weldable)
-                {
-                    cutTypeWd = @"\  /";
-                    cutTypeHt = @"\  /";
-                }
-                else if (Frame_ConnectionType == FrameConnectionType._None)
-                {
-                    if (Frame_If_SlidingTypeTopHung == true)
-                    {
-                        cutTypeHt = @"|  |";
-                        cutTypeWd = @"|  |";
-                        widthArtNo = "-milled";
-                    }
-                }
-            }
-            else
-            {
-                cutTypeWd = @"\  /";
-                cutTypeHt = @"\  /";
-            }
-
-            if (Frame_BotFrameArtNo == BottomFrameTypes._6050 &&
-                     Frame_BotFrameVisible == true)
-            {
-                cutTypeHt = @"\  |";
-            }
-
-            if (Frame_ReinfWidthMorethan5800 == true)
-            {
-                cutTypeWd = @"\  |";
-                FrameQtyWd = 4;
-                reinfQty = 4;
-            }
-
-          
-            tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNo.ToString() + widthArtNo,
-                                                  FrameQtyWd, "pc(s)",
-                                                  Frame_ExplosionWidth.ToString(),
-                                                  "Frame",
-                                                  cutTypeWd);
-
-            tbl_explosion.Rows.Add("Frame Height " + Frame_ArtNo.ToString(),
+        { 
+               int FrameQtyWd = 2,
+                   reinfQty = 1;
+              
+               string cutTypeWd = "",
+                      cutTypeHt = "",
+                      widthArtNo = "";
+              
+               if (Frame_BotFrameVisible == true)
+               {
+                   if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                       Frame_BotFrameArtNo == BottomFrameTypes._6052)
+                   {
+                       FrameQtyWd = 2;
+                   }
+                   else
+                   {
+                       FrameQtyWd = 1;
+                   }
+               }
+                
+               if (Frame_ConnectionTypeVisibility == true)
+               {
+                   if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                   {
+                       cutTypeWd = @"|  |";
+                       cutTypeHt = @"[  ]";
+                       if (Frame_If_InwardMotorizedSliding == true)
+                       {
+                           cutTypeHt = @"[  ]";
+                           widthArtNo = "-milled";
+                       }
+                   }
+                   else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+                   {
+                       cutTypeWd = @"\  /";
+                       cutTypeHt = @"\  /";
+                   }
+                   else if (Frame_ConnectionType == FrameConnectionType._None)
+                   {
+                       if (Frame_If_SlidingTypeTopHung == true)
+                       {
+                           cutTypeHt = @"|  |";
+                           cutTypeWd = @"|  |";
+                           widthArtNo = "-milled";
+                       }
+                   }
+               }
+               else
+               {
+                   cutTypeWd = @"\  /";
+                   cutTypeHt = @"\  /";
+               }
+              
+               if (Frame_BotFrameArtNo == BottomFrameTypes._6050 &&
+                        Frame_BotFrameVisible == true)
+               {
+                   cutTypeHt = @"\  |";
+               }
+              
+               if (Frame_ReinfWidthMorethan5800 == true)
+               {
+                   cutTypeWd = @"\  |";
+                   FrameQtyWd = 4;
+                   reinfQty = 4;
+               }
+                
+               if (Frame_ArtNo == FrameProfile_ArticleNo._84116 || Frame_ArtNo == FrameProfile_ArticleNo._84118)
+               {
+                cutTypeWd = @"|  |";
+                cutTypeHt = @"|  |";
+                tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNoForAlutek.ToString(),
+                                                   FrameQtyWd, "pc(s)",
+                                                   Frame_ExplosionWidth.ToString(),
+                                                   "Frame",
+                                                   cutTypeWd);
+               }
+               else
+               {
+                tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNo.ToString() + widthArtNo,
+                                                     FrameQtyWd, "pc(s)",
+                                                     Frame_ExplosionWidth.ToString(),
+                                                     "Frame",
+                                                     cutTypeWd);
+               } 
+              
+               tbl_explosion.Rows.Add("Frame Height " + Frame_ArtNo.ToString(),
                                    2, "pc(s)",
                                    Frame_ExplosionHeight,
                                    "Frame",
                                    cutTypeHt);
              
-            if (!Frame_WindoorModel.WD_profile.Contains("Alutek"))
-            {
+               if (!Frame_WindoorModel.WD_profile.Contains("Alutek"))
+               {
+              
+              
+                   if (Frame_If_InwardMotorizedSliding == true)
+                   {
+                       tbl_explosion.Rows.Add("Frame Reinf Width " + FrameReinf_ArticleNo._NA120.ToString(),
+                                         reinfQty, "pc(s)",
+                                         _frameWidth.ToString(),
+                                         "Frame",
+                                         @"|  |");
+                   }
+                   else if ((Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                            Frame_BotFrameArtNo == BottomFrameTypes._7502) &&
+                            Frame_BotFrameVisible == true)
+                   {
+                       reinfQty = 1;
+                   }
+                   else if (Frame_If_SlidingTypeTopHung == true)
+                   {
+                       reinfQty = 1;
+                   }
+                   else
+                   {
+                       reinfQty = 2;
+                   }
+              
+                   if (Frame_ReinfWidthMorethan5800 == true)
+                   {
+                       tbl_explosion.Rows.Add("Frame Reinf Width " + Frame_ReinfArtNo.ToString(),
+                                          2, "pc(s)",
+                                          "5800",
+                                          "Frame",
+                                          @"|  |");
+                   }
+              
+                   tbl_explosion.Rows.Add("Frame Reinf Width " + Frame_ReinfArtNo.ToString(),
+                                          reinfQty, "pc(s)",
+                                          Frame_ReinfWidth.ToString(),
+                                          "Frame",
+                                          @"|  |");
+              
+                   tbl_explosion.Rows.Add("Frame Reinf Height " + Frame_ReinfArtNo.ToString(),
+                                          2, "pc(s)",
+                                          Frame_ReinfHeight.ToString(),
+                                          "Frame",
+                                          @"|  |");
+               }
 
+             
 
-                if (Frame_If_InwardMotorizedSliding == true)
-                {
-                    tbl_explosion.Rows.Add("Frame Reinf Width " + FrameReinf_ArticleNo._NA120.ToString(),
-                                      reinfQty, "pc(s)",
-                                      _frameWidth.ToString(),
-                                      "Frame",
-                                      @"|  |");
-                }
-                else if ((Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
-                         Frame_BotFrameArtNo == BottomFrameTypes._7502) &&
-                         Frame_BotFrameVisible == true)
-                {
-                    reinfQty = 1;
-                }
-                else if (Frame_If_SlidingTypeTopHung == true)
-                {
-                    reinfQty = 1;
-                }
-                else
-                {
-                    reinfQty = 2;
-                }
-
-                if (Frame_ReinfWidthMorethan5800 == true)
-                {
-                    tbl_explosion.Rows.Add("Frame Reinf Width " + Frame_ReinfArtNo.ToString(),
-                                       2, "pc(s)",
-                                       "5800",
-                                       "Frame",
-                                       @"|  |");
-                }
-
-                tbl_explosion.Rows.Add("Frame Reinf Width " + Frame_ReinfArtNo.ToString(),
-                                       reinfQty, "pc(s)",
-                                       Frame_ReinfWidth.ToString(),
-                                       "Frame",
-                                       @"|  |");
-
-                tbl_explosion.Rows.Add("Frame Reinf Height " + Frame_ReinfArtNo.ToString(),
-                                       2, "pc(s)",
-                                       Frame_ReinfHeight.ToString(),
-                                       "Frame",
-                                       @"|  |");
-            }
         }
 
         int reinfDeduct;
@@ -2919,7 +2930,7 @@ namespace ModelLayer.Model.Quotation.Frame
 
         public void Insert_BaseClipForBottomFrame_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Base Clip For Bottom Frame " + Frame_BaseClip.DisplayName,
+            tbl_explosion.Rows.Add("Base Clip For Bottom Frame " + Frame_BaseClipArtNo.DisplayName,
                                 1, "pc(s)",
                                 Frame_ExplosionWidth,
                                 "Frame",
@@ -2946,8 +2957,18 @@ namespace ModelLayer.Model.Quotation.Frame
          
         public void Insert_TrackScrewSupportBlock_MaterialList(DataTable tbl_explosion)
         {
+            int qty = 0; ;
+            if (Frame_SlidingRailsQty == 3)
+            {
+                qty = 8;
+            }
+            else if (Frame_SlidingRailsQty == 2)
+            {
+                qty = 4; 
+            }
+
             tbl_explosion.Rows.Add("Track Screw Support Block M808  ",
-                                   2, "pc(s)",
+                                   qty, "pc(s)",
                                    "",
                                    "Frame",
                                    @"");
@@ -2955,26 +2976,19 @@ namespace ModelLayer.Model.Quotation.Frame
 
         public void Insert_EndCapForFrameAlu22_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("EndCap for Frame Width Art#",
-                                   2, "pc(s)",
+            tbl_explosion.Rows.Add("EndCap for Frame Width 84119",
+                                   1, "pc(s)",
                                    "",
                                    "Frame",
                                    @"");
         }
 
-        public void Insert_SlimSealingPad_MaterialList(DataTable tbl_explosion)
-        {
-            tbl_explosion.Rows.Add("Slim Sealing Pad G335  ",
-                                   2, "pc(s)",
-                                   "",
-                                   "Frame",
-                                   @"");
-        }
+       
 
         public void Insert_SSGuideRail_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("SS Guide Rail A606  ",
-                                   2, "pc(s)",
+                                   2 * Frame_SlidingRailsQty, "pc(s)",
                                    "",
                                    "Frame",
                                    @"");
@@ -2983,7 +2997,7 @@ namespace ModelLayer.Model.Quotation.Frame
         public void Insert_AlumSupportTrack_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("Alum Support Track 84915  ",
-                                   2, "pc(s)",
+                                   2 * Frame_SlidingRailsQty, "pc(s)",
                                    "",
                                    "Frame",
                                    @"");

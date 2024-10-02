@@ -747,9 +747,8 @@ namespace PresentationLayer.Presenter.UserControls
 
 
 
-                if ((_panelModel.Panel_Type.Contains("Fixed") ||
-                    _panelModel.Panel_Type.Contains("Sliding")) &&
-                    !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek") &&
+                if ((_panelModel.Panel_Type.Contains("Fixed") || _panelModel.Panel_Type.Contains("Sliding")) &&
+                    (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek") && (_panelModel.Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84116 || _panelModel.Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84118)) ||
                     _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                 {
                     _panelModel.Panel_CenterProfileVisibility = true;
@@ -765,6 +764,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                     IPP_CenterProfilePropertyUCPresenter centerProfile = _pp_CenterProfilePropertyUCPresenter.CreateNewInstance(_mainPresenter, _unityC, _panelModel, _pp_FramePropertiesUCPresenter);
                     UserControl centerProfileProp = (UserControl)centerProfile.GetCenterProfilePropertyUC();
+                    centerProfile.GetCenterProfilePropertyUC().ProfileType_FromMainPresenter = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile;
                     _mainPresenter.ControlRaised_forCenterProfileSelection = centerProfile.GetCenterProfilePropertyUC().GetBtnSelectCenterProfilePanel();
                     _mainPresenter.OnLoadSearchCenterProfielArtNo(_panelModel);
                     _pnlPanelSpecs.Controls.Add(centerProfileProp);

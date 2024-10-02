@@ -561,6 +561,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_LockingConnectorDeviceForkStyle_MaterialList(DataTable tbl_explosion);
         void Insert_EuroGearBox_MaterialList(DataTable tbl_explosion);
         void Insert_Cylinder_MaterialList(DataTable tbl_explosion);
+        void Insert_SlimSealingPad_MaterialList(DataTable tbl_explosion);
 
         #endregion
 

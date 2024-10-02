@@ -17,6 +17,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public event EventHandler CenterProfileArtNoSelectedValueChangedEventRaised;
         public event EventHandler btnSelectCPPanelClickEventRiased;
 
+        public string ProfileType_FromMainPresenter { get; set; }
+
         public void AddHT_FormBody(int addht)
         {
             this.Height += addht;
@@ -37,7 +39,21 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             List<CenterProfile_ArticleNo> CenterProfile = new List<CenterProfile_ArticleNo>();
             foreach (CenterProfile_ArticleNo item in CenterProfile_ArticleNo.GetAll())
             {
-                CenterProfile.Add(item);
+                if (ProfileType_FromMainPresenter.Contains("Alutek"))
+                {
+                    if (item == CenterProfile_ArticleNo._84809 ||
+                        item == CenterProfile_ArticleNo._None )
+                    {
+                        CenterProfile.Add(item);
+                    }
+                }
+                else  
+                {
+                    if (item != CenterProfile_ArticleNo._84809)
+                    {
+                        CenterProfile.Add(item);
+                    }
+                }
             }
             cmb_CenterProfileArtNo.DataSource = CenterProfile;
 

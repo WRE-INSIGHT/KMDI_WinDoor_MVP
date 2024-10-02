@@ -86,6 +86,7 @@ namespace ModelLayer.Model.Quotation
                 total_screws_fabrication = 0,
                 total_screws_installation = 0,
                 total_cladding_size = 0,
+                total_BrushLength =0,
                 add_screws_fab_espag = 0,
                 add_screws_fab_ext = 0,
                 add_screws_fab_corDrive = 0,
@@ -116,13 +117,18 @@ namespace ModelLayer.Model.Quotation
             bool perFrame = false,
                  SlidingMotorizePerFrame = false,
                  TopHungPerFrame = false,
-                 slidingChck = false;
+                 slidingChck = false,
+                 SlidingPerFrameAlu22 = false ;
+
+
             foreach (IFrameModel frame in item.lst_frame)
             {
                 perFrame = true;
                 SlidingMotorizePerFrame = true;
                 TopHungPerFrame = true;
                 slidingChck = false;
+                SlidingPerFrameAlu22 = false;
+
 
                 frame.SetExplosionValues_Frame();
 
@@ -139,6 +145,24 @@ namespace ModelLayer.Model.Quotation
                 }
 
                 frame.Insert_frameInfo_MaterialList(Material_List);
+
+                if (item.WD_profile.Contains("Alutek Profile") &&
+                    (frame.Frame_ArtNo == FrameProfile_ArticleNo._84116 || frame.Frame_ArtNo == FrameProfile_ArticleNo._84118))
+                {
+                  frame.Insert_BaseClipForBottomFrame_MaterialList(Material_List);
+                  frame.Insert_RainCapCover_MaterialList(Material_List);
+                  frame.Insert_SSGuideRail_MaterialList(Material_List);
+                  frame.Insert_AlumSupportTrack_MaterialList(Material_List);
+
+                  
+                     
+                    if (frame.Frame_ArtNo == FrameProfile_ArticleNo._84116)
+                    {
+                        frame.Insert_EndCapForFrameAlu22_MaterialList(Material_List); 
+                    }
+                }
+
+
                 if (frame.Frame_SlidingRailsQty == 3)
                 {
                     if (item.WD_profile.Contains("Alutek Profile"))
@@ -1765,18 +1789,23 @@ namespace ModelLayer.Model.Quotation
                                             }
                                         }
 
-                                        if (pnl_curCtrl.Panel_ChkText != "dSash")
+                                        if (pnl_curCtrl.Panel_ChkText != "dSash" &&
+                                            !item.WD_profile.Contains("Alutek"))
                                         {
                                             pnl_curCtrl.Insert_AntiLiftDevice_MaterialList(Material_List);
                                         }
 
                                         //if (pnl_curCtrl.Panel_Spacer != null) //|| pnl_curCtrl.Panel_ChkText == "dSash"
                                         //{
-                                        pnl_curCtrl.Panel_SpacerArtNo = Spacer_ArticleNo._M063;
-                                        pnl_curCtrl.Insert_Spacer_MaterialList(Material_List);
+                                        if (!item.WD_profile.Contains("Alutek"))
+                                        {
+                                            pnl_curCtrl.Panel_SpacerArtNo = Spacer_ArticleNo._M063;
+                                            pnl_curCtrl.Insert_Spacer_MaterialList(Material_List);
+                                        } 
                                         //}
 
-                                        if (pnl_curCtrl.Panel_GlazingRebateBlockArtNo != null)
+                                        if (pnl_curCtrl.Panel_GlazingRebateBlockArtNo != null &&
+                                            !item.WD_profile.Contains("Alutek"))
                                         {
                                             pnl_curCtrl.Insert_GlazingRebateBlock_MaterialList(Material_List);
                                         }
@@ -1892,13 +1921,37 @@ namespace ModelLayer.Model.Quotation
                                                     SlidingMotorizePerFrame = false;
                                                 }
                                             }
+                                            else if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._84215)
+                                            {
+                                                pnl_curCtrl.Insert_Rollers_MaterialList(Material_List);
+                                                
+                                                pnl_curCtrl.Insert_SashInterlockProfileConnectingCover_MaterialList(Material_List);
+
+                                                pnl_curCtrl.Insert_SlimSealingPad_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_SashLockingProfileConnectingAdaptor_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_SashInterlockProfileConnectingAdaptor_MaterialList(Material_List);
+
+                                                if (SlidingPerFrameAlu22 == false)
+                                                {
+                                                    pnl_curCtrl.Insert_GroveCoverProfile_MaterialList(Material_List);  
+                                                    SlidingPerFrameAlu22 = true;
+                                                }
+                                            }
 
                                             if (pnl_curCtrl.Panel_CenterProfileArtNo != null)
                                             {
-                                                if (pnl_curCtrl.Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None &&
-                                                !item.WD_profile.Contains("Alutek"))
+                                                if (pnl_curCtrl.Panel_CenterProfileArtNo != CenterProfile_ArticleNo._None)
                                                 {
                                                     pnl_curCtrl.Insert_CenterProfile_MaterialList(Material_List);
+                                                    
+                                                    if (pnl_curCtrl.Panel_CenterProfileArtNo == CenterProfile_ArticleNo._84809)
+                                                    {
+                                                        pnl_curCtrl.Insert_ButtProfile_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_ButtProfileCover_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_MeetingInsert_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_InterlockEndCapForMatting_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_EndCapForAlutek22_MaterialList(Material_List);
+                                                    }
                                                 }
                                             }
                                         }
@@ -2106,7 +2159,8 @@ namespace ModelLayer.Model.Quotation
                             pnl.Insert_SpacerFixedSash_MaterialList(Material_List);
                         }
 
-                        if (pnl.Panel_GlazingRebateBlockArtNo != null)
+                        if (pnl.Panel_GlazingRebateBlockArtNo != null &&
+                            !item.WD_profile.Contains("Alutek"))
                         {
                             pnl.Insert_GlazingRebateBlock_MaterialList(Material_List);
                         }
@@ -2389,10 +2443,10 @@ namespace ModelLayer.Model.Quotation
                                             pnl.Insert_ExternsionForInterlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
                                         }
                                     }
-                                    if (pnl.Panel_RollersTypes != null)
+                                    if (pnl.Panel_RollersTypes != null &&
+                                        !item.WD_profile.Contains("Alutek"))
                                     {
-                                        pnl.Insert_Rollers_MaterialList(Material_List);
-
+                                        pnl.Insert_Rollers_MaterialList(Material_List); 
                                     }
                                     pnl.Insert_AntiLiftDevice_MaterialList(Material_List);
 

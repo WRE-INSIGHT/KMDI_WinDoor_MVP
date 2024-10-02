@@ -11462,22 +11462,43 @@ namespace ModelLayer.Model.Quotation.Panel
         public void Insert_SashInfo_MaterialList(DataTable tbl_explosion)
         {
             string ReinCutAngle = @"|  |";
+
             if (Panel_Type.Contains("Awning") &&
                 Panel_ParentFrameModel.Frame_Height <= 1800)
             {
                 ReinCutAngle = @"\  /";
             }
-            tbl_explosion.Rows.Add("Sash Width " + Panel_SashProfileArtNo.DisplayName,
+
+            if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek") &&
+                (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84116 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84118))
+            {
+                tbl_explosion.Rows.Add("Horizontal Sash " + Panel_SashProfileArtNo.DisplayName,
+                                  2, "pc(s)",
+                                  Panel_SashWidth.ToString(),
+                                  "Sash",
+                                  @"[  ]");
+
+                tbl_explosion.Rows.Add("Handle Sash " + Panel_SashProfileArtNo.DisplayName,
+                                       2, "pc(s)",
+                                       Panel_SashHeight.ToString(),
+                                       "Sash",
+                                       @"|  |");
+            }
+            else
+            {
+                tbl_explosion.Rows.Add("Sash Width " + Panel_SashProfileArtNo.DisplayName,
                                    2, "pc(s)",
                                    Panel_SashWidth.ToString(),
                                    "Sash",
                                    @"\  /");
 
-            tbl_explosion.Rows.Add("Sash Height " + Panel_SashProfileArtNo.DisplayName,
-                                   2, "pc(s)",
-                                   Panel_SashHeight.ToString(),
-                                   "Sash",
-                                   @"\  /");
+                tbl_explosion.Rows.Add("Sash Height " + Panel_SashProfileArtNo.DisplayName,
+                                       2, "pc(s)",
+                                       Panel_SashHeight.ToString(),
+                                       "Sash",
+                                       @"\  /");
+            }
+              
             if (!Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
             {
                 tbl_explosion.Rows.Add("Sash Reinf Width " + Panel_SashReinfArtNo.DisplayName,
@@ -11492,6 +11513,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                        "Sash",
                                        ReinCutAngle);
             }
+
         }
 
         public void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion)
@@ -13277,7 +13299,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 strikerCount = 3;
             }
 
-            tbl_explosion.Rows.Add("Striker H177",
+            tbl_explosion.Rows.Add("Striker H117",
                                    strikerCount, "pc(s)",
                                    "",
                                    "Sash",
@@ -13356,9 +13378,19 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_GroveCoverProfile_MaterialList(DataTable tbl_explosion)
         {
+            int qty = 0; ;
+            if (Panel_ParentFrameModel.Frame_SlidingRailsQty == 3)
+            {
+                qty = 6;
+            }
+            else if (Panel_ParentFrameModel.Frame_SlidingRailsQty == 2)
+            {
+                qty = 4;
+            }
+
             tbl_explosion.Rows.Add("Grove Cover Profile 84810 ",
-                                   1, "pc(s)",
-                                   "",
+                                   qty, "pc(s)",
+                                   Panel_SashHeight.ToString(),
                                    "Sash",
                                    @"");
         }
@@ -13489,6 +13521,15 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "Sash",
                                    @"");
 
+        }
+
+        public void Insert_SlimSealingPad_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Slim Sealing Pad G335  ",
+                                   2, "pc(s)",
+                                   "",
+                                   "Frame",
+                                   @"");
         }
         #endregion
 

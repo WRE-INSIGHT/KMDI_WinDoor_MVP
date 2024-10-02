@@ -13,5 +13,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         event EventHandler CenterProfileArtNoSelectedValueChangedEventRaised;
         event EventHandler CenterProfilePropertyUCLoadEventRaised;
         event EventHandler btnSelectCPPanelClickEventRiased;
+
+        string ProfileType_FromMainPresenter { get; set; }
+
     }
 }

@@ -55,6 +55,7 @@ namespace ModelLayer.Model.Quotation.Frame
         FrameReinf_ArticleNo Frame_ReinfArtNo { get; set; }
         int Frame_ReinfWidth { get; set; }
         int Frame_ReinfHeight { get; set; }
+        BaseClip_ArticleNo Frame_BaseClipArtNo { get; set; }
         bool Frame_CmenuDeleteVisibility { get; set; }
 
         FrameProfileForPremi_ArticleNo Frame_ArtNoForPremi { get; set; }
@@ -124,6 +125,13 @@ namespace ModelLayer.Model.Quotation.Frame
         void Insert_Cheveron_MaterialList(DataTable tbl_explosion);
         void Insert_CornerWindow_MaterialList(DataTable tbl_explosion);
         void Insert_BaseClipForBottomFrame_MaterialList(DataTable tbl_explosion);
+        void Insert_RainCapCover_MaterialList(DataTable tbl_explosion);
+        void Insert_GroveCoverProfile_MaterialList(DataTable tbl_explosion);
+        void Insert_TrackScrewSupportBlock_MaterialList(DataTable tbl_explosion);
+        void Insert_EndCapForFrameAlu22_MaterialList(DataTable tbl_explosion);
+        void Insert_SSGuideRail_MaterialList(DataTable tbl_explosion);
+        void Insert_AlumSupportTrack_MaterialList(DataTable tbl_explosion);
+
         int Add_framePerimeter_screws4fab();
         int Add_MilledFrameWidth_screws4fab();
         void SetfrmDimensionZoom();

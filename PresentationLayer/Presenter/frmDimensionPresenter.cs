@@ -369,7 +369,16 @@ namespace PresentationLayer.Presenter
             {
                 _frmDimensionView.thisHeight = 173; // 140 238
                 _frmDimensionView.GetPanelFrameQty().Visible = false;
+               
+                if (_profile_type == "Alutek Profile")
+                {
                 _frmDimensionView.GetPanelAlutekSystemType().Visible = true;
+                }
+                else
+                {
+                    _frmDimensionView.thisHeight = 141;
+                    _frmDimensionView.GetPanelAlutekSystemType().Visible = false;
+                }
             }
             else if (purpose == Show_Purpose.CreateNew_Frame ||
                      purpose == Show_Purpose.ChangeBasePlatformSize ||

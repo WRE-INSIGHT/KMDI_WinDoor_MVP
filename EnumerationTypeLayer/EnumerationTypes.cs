@@ -238,6 +238,9 @@ namespace EnumerationTypeLayer
             public static readonly SashProfile_ArticleNo _6041 = new SashProfile_ArticleNo(7, "6041");
             public static readonly SashProfile_ArticleNo _84207 = new SashProfile_ArticleNo(8, "84207");//alutek
             public static readonly SashProfile_ArticleNo _84200 = new SashProfile_ArticleNo(9, "84200");
+            public static readonly SashProfile_ArticleNo _84215 = new SashProfile_ArticleNo(10, "84215");
+            public static readonly SashProfile_ArticleNo _84214 = new SashProfile_ArticleNo(11, "84214");
+
 
             private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -1086,7 +1089,9 @@ namespace EnumerationTypeLayer
             public static readonly CenterProfile_ArticleNo _None = new CenterProfile_ArticleNo(0, "None");
             public static readonly CenterProfile_ArticleNo _A000 = new CenterProfile_ArticleNo(1, "A000"); // aluminum
             public static readonly CenterProfile_ArticleNo _6067 = new CenterProfile_ArticleNo(2, "6067"); // pvc
+            public static readonly CenterProfile_ArticleNo _84809 = new CenterProfile_ArticleNo(3, "84809"); // alutek 22
 
+            
 
             private CenterProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
