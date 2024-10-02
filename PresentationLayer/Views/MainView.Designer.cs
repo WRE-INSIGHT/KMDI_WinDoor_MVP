@@ -151,7 +151,7 @@
             this.mnsMainMenu.Location = new System.Drawing.Point(0, 0);
             this.mnsMainMenu.Name = "mnsMainMenu";
             this.mnsMainMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.mnsMainMenu.Size = new System.Drawing.Size(1445, 30);
+            this.mnsMainMenu.Size = new System.Drawing.Size(1445, 28);
             this.mnsMainMenu.TabIndex = 0;
             this.mnsMainMenu.Text = "msMain";
             // 
@@ -557,7 +557,7 @@
             this.DateAssignedtoolStripButton,
             this.glassUpgradeToolStrip,
             this.partialAdjustmentToolstrip});
-            this.tsMain.Location = new System.Drawing.Point(0, 30);
+            this.tsMain.Location = new System.Drawing.Point(0, 28);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.tsMain.Size = new System.Drawing.Size(1445, 39);
@@ -833,10 +833,10 @@
             this.pnlRight.Controls.Add(this.pnlItems);
             this.pnlRight.Controls.Add(this.label6);
             this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlRight.Location = new System.Drawing.Point(1222, 69);
+            this.pnlRight.Location = new System.Drawing.Point(1222, 67);
             this.pnlRight.Margin = new System.Windows.Forms.Padding(4);
             this.pnlRight.Name = "pnlRight";
-            this.pnlRight.Size = new System.Drawing.Size(223, 611);
+            this.pnlRight.Size = new System.Drawing.Size(223, 613);
             this.pnlRight.TabIndex = 6;
             // 
             // toolStrip1
@@ -873,7 +873,7 @@
             this.pnlItems.Location = new System.Drawing.Point(0, 35);
             this.pnlItems.Margin = new System.Windows.Forms.Padding(4);
             this.pnlItems.Name = "pnlItems";
-            this.pnlItems.Size = new System.Drawing.Size(221, 574);
+            this.pnlItems.Size = new System.Drawing.Size(221, 576);
             this.pnlItems.TabIndex = 1;
             this.pnlItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlItems_Scroll);
             this.pnlItems.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlItems_DragDrop);
@@ -895,7 +895,7 @@
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 69);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 67);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -906,7 +906,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1222, 611);
+            this.splitContainer1.Size = new System.Drawing.Size(1222, 613);
             this.splitContainer1.SplitterDistance = 174;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 7;
@@ -919,7 +919,7 @@
             this.pnlControlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlControlMain.Margin = new System.Windows.Forms.Padding(4);
             this.pnlControlMain.Name = "pnlControlMain";
-            this.pnlControlMain.Size = new System.Drawing.Size(172, 609);
+            this.pnlControlMain.Size = new System.Drawing.Size(172, 611);
             this.pnlControlMain.TabIndex = 5;
             // 
             // pnlControlSub
@@ -928,7 +928,7 @@
             this.pnlControlSub.Location = new System.Drawing.Point(0, 35);
             this.pnlControlSub.Margin = new System.Windows.Forms.Padding(4);
             this.pnlControlSub.Name = "pnlControlSub";
-            this.pnlControlSub.Size = new System.Drawing.Size(172, 574);
+            this.pnlControlSub.Size = new System.Drawing.Size(172, 576);
             this.pnlControlSub.TabIndex = 1;
             // 
             // label1
@@ -957,7 +957,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.pnlMain);
-            this.splitContainer2.Size = new System.Drawing.Size(1041, 609);
+            this.splitContainer2.Size = new System.Drawing.Size(1041, 611);
             this.splitContainer2.SplitterDistance = 199;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 5;
@@ -972,7 +972,7 @@
             this.pnlProperties.Location = new System.Drawing.Point(0, 0);
             this.pnlProperties.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlProperties.Name = "pnlProperties";
-            this.pnlProperties.Size = new System.Drawing.Size(199, 609);
+            this.pnlProperties.Size = new System.Drawing.Size(199, 611);
             this.pnlProperties.TabIndex = 4;
             // 
             // pnlPropertiesBody
@@ -982,7 +982,7 @@
             this.pnlPropertiesBody.Location = new System.Drawing.Point(0, 35);
             this.pnlPropertiesBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlPropertiesBody.Name = "pnlPropertiesBody";
-            this.pnlPropertiesBody.Size = new System.Drawing.Size(197, 572);
+            this.pnlPropertiesBody.Size = new System.Drawing.Size(197, 574);
             this.pnlPropertiesBody.TabIndex = 1;
             this.pnlPropertiesBody.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlPropertiesBody_Scroll);
             // 
@@ -1007,7 +1007,7 @@
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Margin = new System.Windows.Forms.Padding(4);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(837, 609);
+            this.pnlMain.Size = new System.Drawing.Size(837, 611);
             this.pnlMain.TabIndex = 0;
             this.pnlMain.SizeChanged += new System.EventHandler(this.pnlMain_SizeChanged);
             // 

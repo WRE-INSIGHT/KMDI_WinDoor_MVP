@@ -163,7 +163,7 @@ namespace PresentationLayer.Presenter
         private int _quoteId;
         private string input_qrefno, _projectName, _custRefNo;
         private string _wndrFilePath, _wndrFileName,_failSafePath;
-        private bool _provinceIntownOutofTown;
+        private bool _provinceIntownOutofTown,_isSaveFromOpenToolStrip,_cancelLoadFromOpenToolStrp;
         private DateTime _quotationDate;
 
         private CommonFunctions _commonfunc = new CommonFunctions();
@@ -1259,45 +1259,49 @@ namespace PresentationLayer.Presenter
 
         private async void NetworkChange_NetworkAvailabilityChanged(object sender, NetworkAvailabilityEventArgs e)
         {
-
+            bool openFs = false;
             int cntr = 0;
-            string wndrExtension = "", fsPath_fsfileName = "";
-            if (!e.IsAvailable)
+
+            if (openFs)
             {
-                string fsFileName = _custRefNo + "(" + input_qrefno + ")";
-                 _failSafePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\FSFolder";
-               
-                if (!Directory.Exists(_failSafePath))
+                string wndrExtension = "", fsPath_fsfileName = "";
+                if (!e.IsAvailable)
                 {
-                    DirectoryInfo dirInfo = Directory.CreateDirectory(_failSafePath);
-                    dirInfo.Attributes = FileAttributes.Directory | 
-                                         FileAttributes.Hidden;
-                }
+                    string fsFileName = _custRefNo + "(" + input_qrefno + ")";
+                    _failSafePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\FSFolder";
 
-                  fsPath_fsfileName = _failSafePath + "\\" + fsFileName;
-                  wndrExtension = fsPath_fsfileName + ".wndr";
-         
-                FileInfo fileState = new FileInfo(wndrExtension);
-
-                if (fileState.Exists)
-                {
-                    do
+                    if (!Directory.Exists(_failSafePath))
                     {
+                        DirectoryInfo dirInfo = Directory.CreateDirectory(_failSafePath);
+                        dirInfo.Attributes = FileAttributes.Directory |
+                                             FileAttributes.Hidden;
+                    }
 
-                       cntr++;
-                       wndrExtension = "";
-                       wndrExtension = fsPath_fsfileName + "(" + cntr.ToString() + ")" + ".wndr";
-                       fileState = new FileInfo(wndrExtension); 
-                        
-                    } while (fileState.Exists);
-                    fsPath_fsfileName = fsPath_fsfileName + "(" + cntr.ToString() + ")";
+                    fsPath_fsfileName = _failSafePath + "\\" + fsFileName;  
+                    wndrExtension = fsPath_fsfileName + ".wndr";
+
+                    FileInfo fileState = new FileInfo(wndrExtension);
+
+                    if (fileState.Exists)
+                    {
+                        do
+                        {
+
+                            cntr++;
+                            wndrExtension = "";
+                            wndrExtension = fsPath_fsfileName + "(" + cntr.ToString() + ")" + ".wndr";
+                            fileState = new FileInfo(wndrExtension);
+
+                        } while (fileState.Exists);
+                        fsPath_fsfileName = fsPath_fsfileName + "(" + cntr.ToString() + ")";
+                    }
+
+                    wndr_content = new List<string>();
+                    File.WriteAllLines(fsPath_fsfileName, await SaveFileLocally());
+                    FileInfo f = new FileInfo(fsPath_fsfileName);
+                    f.MoveTo(Path.ChangeExtension(fsPath_fsfileName, ".wndr"));
+
                 }
-
-                wndr_content = new List<string>();
-                File.WriteAllLines(fsPath_fsfileName, await SaveFileLocally());
-                FileInfo f = new FileInfo(fsPath_fsfileName);
-                f.MoveTo(Path.ChangeExtension(fsPath_fsfileName, ".wndr"));
-
             }
         }
 
@@ -2302,6 +2306,7 @@ namespace PresentationLayer.Presenter
         private void OnSaveToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             wndr_content = new List<string>();
+            _isSaveFromOpenToolStrip = false;
             SaveChanges();
         }
 
@@ -3672,14 +3677,22 @@ namespace PresentationLayer.Presenter
                     if (dialogResult == DialogResult.Yes ||
                         dialogResult == DialogResult.No)
                     {
+                        _cancelLoadFromOpenToolStrp = false;
+
                         if (dialogResult == DialogResult.Yes)
                         {
                             wndr_content = new List<string>();
+                            _isSaveFromOpenToolStrip = true;
                             SaveChanges();
                         }
-                        Clearing_Operation();
 
-                        openFileMethod(_mainView.GetOpenFileDialog().FileName);
+                        if (!_cancelLoadFromOpenToolStrp)
+                        {
+                            Clearing_Operation();
+
+                            openFileMethod(_mainView.GetOpenFileDialog().FileName);
+                        }
+
                     }
 
                 }
@@ -14999,12 +15012,15 @@ namespace PresentationLayer.Presenter
             {
                 QuotationPriceHistory();//save price history
 
+                var (isFailSaveTrigger,errorMessage) = FailSafeInSaveChanges();
+
                 string txtfile = _wndrFilePath.Replace(".wndr", ".txt");
-                File.WriteAllLines(txtfile, Saving_dotwndr());
-                File.Delete(_wndrFilePath);
-                FileInfo f = new FileInfo(txtfile);
-                f.MoveTo(Path.ChangeExtension(txtfile, ".wndr"));
-                //File.SetAttributes(txtfile, FileAttributes.Hidden);
+                //File.WriteAllLines(txtfile, Saving_dotwndr());
+                //File.Delete(_wndrFilePath);
+                //FileInfo f = new FileInfo(txtfile);
+                //f.MoveTo(Path.ChangeExtension(txtfile, ".wndr"));
+
+                //File.SetAttributes(txtfile, FileAttributes.Hidden);   
                 //csfunc.EncryptFile(txtfile);
                 //File.Delete(txtfile);
 
@@ -15018,7 +15034,22 @@ namespace PresentationLayer.Presenter
                     _mainView.GetToolStripLabelSync().Image = Properties.Resources.cloud_sync_40px;
                     _mainView.GetToolStripLabelSync().Visible = true;
                 }
-                MessageBox.Show("File saved!", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (!isFailSaveTrigger)
+                {
+                    MessageBox.Show("File saved!", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    bool isNetConnected = NetworkInterface.GetIsNetworkAvailable();
+                    string netWorkMsg = "";
+                    if (!isNetConnected)
+                    {
+                        netWorkMsg = " ,Check Internet Connection.";
+                    }
+                    MessageBox.Show("Failed to Save File!" + netWorkMsg +"\n" + errorMessage , "FailSafe On", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
                 SetMainViewTitle(input_qrefno,
                                      _projectName,
                                      _custRefNo,
@@ -15040,6 +15071,70 @@ namespace PresentationLayer.Presenter
             //    }
 
             //}
+        }
+
+        private (bool,string) FailSafeInSaveChanges()
+        {
+            bool isFailSaveTrigger = false;
+            string erMessage = "";
+            string failSafeDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\WndrFailSafe";
+
+            if (!Directory.Exists(failSafeDir))
+            {
+                DirectoryInfo dirinf = Directory.CreateDirectory(failSafeDir);
+                dirinf.Attributes = FileAttributes.Directory |
+                                    FileAttributes.Hidden;
+            }
+
+            string wndrFileCheck = failSafeDir + "\\"+ _wndrFileName;
+            string fsFileName = _custRefNo + "(" + input_qrefno + ")";
+
+            IsFileExist(wndrFileCheck);
+
+            string fsFilePath = failSafeDir + "\\" + fsFileName;
+            File.WriteAllLines(fsFilePath, Saving_dotwndr());
+            FileInfo fsFile = new FileInfo(fsFilePath);
+            fsFile.MoveTo(Path.ChangeExtension(fsFilePath, ".wndr"));
+
+
+            try
+            {
+                isFailSaveTrigger = false;
+                IsFileExist(_wndrFilePath);
+                File.Move(wndrFileCheck, _wndrFilePath);
+            }
+            catch (Exception ex)
+            {
+                isFailSaveTrigger = true;
+                //MessageBox.Show("Error: Path not Found \n" + ex.Message," ", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                erMessage = ex.Message;
+            }
+
+            if (isFailSaveTrigger)
+            {
+                if (_isSaveFromOpenToolStrip)
+                {
+                    _cancelLoadFromOpenToolStrp = true;
+                }
+            }
+
+            return (isFailSaveTrigger,erMessage);
+
+        }
+
+        private bool IsFileExist(string Path)
+        {
+            bool isExist = false;
+
+            FileInfo isFile = new FileInfo(Path);
+
+            if (isFile.Exists)
+            {
+                isExist = true;
+                isFile.Delete();
+            }
+
+            return isExist;
         }
 
         public void DeleteConcrete_OnObjectList_WindoorModel(UserControl concreteUC)
