@@ -293,7 +293,7 @@ namespace PresentationLayer.Presenter
 
         private void EnableSpecialDiscountButton()
         {
-            if (_lessDiscountChkBx.Checked)
+            if (_lessDiscountChkBx.Checked && _partialAdjustmentIsChecked)
             {
                 _specialDiscountChkbx.Enabled = true;
             }
@@ -393,7 +393,7 @@ namespace PresentationLayer.Presenter
                 _rdlcReportCompilerView.GetScreenRowLimitTxtBx().Enabled = false;
 
                 _rdlcReportCompilerView.GetPATotalRtBx().Enabled = true;
-                _rdlcReportCompilerView.GetSpecialDiscountChkBx().Enabled = true;
+                _rdlcReportCompilerView.GetSpecialDiscountChkBx().Enabled = false;
                 _rdlcReportCompilerView.GetSpecialDiscountTxtBx().Enabled = false;
 
             }
