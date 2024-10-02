@@ -1576,7 +1576,7 @@
                       </TablixColumns>
                       <TablixRows>
                         <TablixRow>
-                          <Height>0.16799in</Height>
+                          <Height>0.18466in</Height>
                           <TablixCells>
                             <TablixCell>
                               <CellContents>
@@ -1931,6 +1931,7 @@ Math.Round((Fields!dtScreenListPrice.Value),2))</Value>
                                           <Value>Total List Adjusted Contract Price</Value>
                                           <Style>
                                             <FontFamily>Segoe UI</FontFamily>
+                                            <FontSize>9pt</FontSize>
                                           </Style>
                                         </TextRun>
                                       </TextRuns>
@@ -2097,6 +2098,7 @@ Math.Round((Fields!dtScreenListPrice.Value),2))</Value>
                                           <Value>Less Discount</Value>
                                           <Style>
                                             <FontFamily>Segoe UI</FontFamily>
+                                            <FontSize>9pt</FontSize>
                                           </Style>
                                         </TextRun>
                                       </TextRuns>
@@ -3056,7 +3058,7 @@ Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountA
                     <DataSetName>DataSet1</DataSetName>
                     <Top>0.13524in</Top>
                     <Left>1.80419in</Left>
-                    <Height>1.33327in</Height>
+                    <Height>1.34994in</Height>
                     <Width>6.02449in</Width>
                     <ZIndex>4</ZIndex>
                     <Style>
