@@ -169,7 +169,7 @@ namespace PresentationLayer.Presenter
         void ClearAndAddGlassInList(bool _callfrmGlassUpgrade);
         void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color, PowderCoatType_Color powderCoatType_Color);
         void setWoodecAdditional(int woodecAddlPercentage);
-
+        decimal GetComputedGlassThickness(string OrigGlassDesc);
         IPanelModel PrevPanelModel_forCenterProfileSelection { get; }
         IPanelModel NxtPnlModel_forCenterProfileSelection { get; }
         Base_Color baseColor { get; set; }
