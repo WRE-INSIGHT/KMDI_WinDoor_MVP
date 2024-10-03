@@ -37,7 +37,7 @@ namespace PresentationLayer.Presenter
 
         #region variables 
         BackgroundWorker bgw = new BackgroundWorker();
-        private bool CompileRDLC;
+        private bool CompileRDLC,isLessDiscountChecked;
         string fullname,
                projname,
                targetpath,
@@ -52,7 +52,8 @@ namespace PresentationLayer.Presenter
                          _guShowNotedBy,
                          _guShowVat,
                          _screenNetOfDiscount,
-                         _specialDiscountChkbx;
+                         _specialDiscountChkbx,
+                         _lessDiscountChkBx;
         private CheckedListBox _guGlassListChkLst;
 
         string[] _officialsName = { "KENNETH G. LAO", "GENALYN C. GARCIA", "STEPHANIE DE LOS SANTOS", "KEVIN CHARLES S. LAO" };
@@ -82,6 +83,7 @@ namespace PresentationLayer.Presenter
             _guGlassListChkLst = _rdlcReportCompilerView.GUGlassListChkLst();
             _specialDiscountChkbx = _rdlcReportCompilerView.GetSpecialDiscountChkBx();
             _specialDiscountTxtBx = rdlcReportCompilerView.GetSpecialDiscountTxtBx();
+            _lessDiscountChkBx = rdlcReportCompilerView.GetContractSummaryLessDiscountChkBx();
 
 
             SubScribeToEventSetup();
@@ -285,8 +287,25 @@ namespace PresentationLayer.Presenter
                 _quoteItemListPresenter.ShowLessDiscountContractSummary = false;
                 _rdlcReportCompilerView.GetContractSummaryLessDiscountTxtBx().Visible = false;
             }
+            EnableSpecialDiscountButton();
 
         }
+
+        private void EnableSpecialDiscountButton()
+        {
+            if (_lessDiscountChkBx.Checked && _partialAdjustmentIsChecked)
+            {
+                _specialDiscountChkbx.Enabled = true;
+            }
+            else
+            {
+                _specialDiscountChkbx.Enabled = false;
+                _specialDiscountChkbx.Checked = false;
+                _specialDiscountTxtBx.Enabled = false;
+                _quoteItemListPresenter.RDLCPAShowSpecialDiscount = false;
+            }
+        }
+
         private void OnchkboxsubtotalCheckedChangedEventRaised(object sender, EventArgs e)
         {
             if (_rdlcReportCompilerView.GetSubTotalCheckBox().Checked)
@@ -374,7 +393,7 @@ namespace PresentationLayer.Presenter
                 _rdlcReportCompilerView.GetScreenRowLimitTxtBx().Enabled = false;
 
                 _rdlcReportCompilerView.GetPATotalRtBx().Enabled = true;
-                _rdlcReportCompilerView.GetSpecialDiscountChkBx().Enabled = true;
+                _rdlcReportCompilerView.GetSpecialDiscountChkBx().Enabled = false;
                 _rdlcReportCompilerView.GetSpecialDiscountTxtBx().Enabled = false;
 
             }

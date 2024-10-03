@@ -3946,6 +3946,22 @@ namespace PresentationLayer.Presenter
 
         }
 
+        public decimal GetComputedGlassThickness(string OrigGlassDesc)
+        {
+            decimal computedGlassThk = 0m;
+
+            foreach (DataRow gct in _glassComputedThickness.Rows)
+            {
+                string ComputedGlassDesc = gct[1].ToString();
+
+                if (ComputedGlassDesc == OrigGlassDesc)
+                {
+                    computedGlassThk = Convert.ToDecimal(gct[0]);
+                }
+            }
+
+            return computedGlassThk;
+        }
 
         private void AddGlassDesctoException()
         {
