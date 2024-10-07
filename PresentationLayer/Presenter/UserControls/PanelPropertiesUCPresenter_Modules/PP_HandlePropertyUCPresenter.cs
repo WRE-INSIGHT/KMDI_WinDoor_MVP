@@ -2301,7 +2301,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             espPropUC.Dock = DockStyle.Top;
             espPropUC.BringToFront();
 
-            if (!_panelModel.Panel_fileLoad)
+            if (!_panelModel.PanelModelIsFromLoad)
             {
 
                 if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)

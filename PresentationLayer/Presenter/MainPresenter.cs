@@ -5925,6 +5925,16 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
+                        if (row_str.Contains("Frame_ArtNoForAlutek:"))
+                        {
+                            foreach(FrameProfile_ArticleNo artcNo in FrameProfile_ArticleNo.GetAll())
+                            {
+                                if(artcNo.ToString() == extractedValue_str)
+                                {
+                                    frm_ArtNoForAlutek = artcNo;
+                                }
+                            }
+                        }
                         if (row_str.Contains("Frame_ReinfArtNo:"))
                         {
                             foreach (FrameReinf_ArticleNo artcNo in FrameReinf_ArticleNo.GetAll())
@@ -6239,8 +6249,6 @@ namespace PresentationLayer.Presenter
                     else if (inside_panel)
                     {
                         #region Load for Panel
-
-
                         if (row_str.Contains("Panel_ChkText:"))
                         {
                             panel_ChkText = extractedValue_str;
@@ -6597,6 +6605,10 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("Panel_GlassThickness:"))
                         {
                             panel_GlassThickness = float.Parse(extractedValue_str);
+                        }
+                        else if(row_str.Contains("Panel_GlassThicknessNoAirSpace:"))
+                        {
+                            panel_GlassThicknessNoAirSpace = float.Parse(extractedValue_str);
                         }
                         else if (row_str.Contains("PanelGlazingBead_ArtNo:"))
                         {
@@ -8056,6 +8068,16 @@ namespace PresentationLayer.Presenter
                                 if (efian.ToString() == extractedValue_str)
                                 {
                                     panel_ExtensionForInterlockArtNo = efian;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_DHandleForAluArtNo:"))
+                        {
+                                foreach(D_HandleArtNo dhan in D_HandleArtNo.GetAll())
+                            {
+                                if(dhan.ToString() == extractedValue_str)
+                                {
+                                    panel_DHandleForAluArtNo = dhan;
                                 }
                             }
                         }
@@ -10630,6 +10652,7 @@ namespace PresentationLayer.Presenter
                                                                                panel_SlidingTypes
                                                                                );
             pnlModel.Panel_fileLoad = true;
+            pnlModel.PanelModelIsFromLoad = true;
             pnlModel.Panel_ChkText = panel_ChkText;
             pnlModel.Panel_ParentMultiPanelModel = panel_ParentMultiPanelModel;
             pnlModel.Panel_Type = panel_Type;
@@ -10666,6 +10689,7 @@ namespace PresentationLayer.Presenter
             pnlModel.PanelGlass_ID = panel_GlassID;
             pnlModel.Panel_GlassThicknessDesc = panel_GlassThicknessDesc;
             pnlModel.Panel_GlassThickness = panel_GlassThickness;
+            pnlModel.Panel_GlassThicknessNoAirSpace = panel_GlassThicknessNoAirSpace;
             pnlModel.PanelGlazingBead_ArtNo = panel_GlazingBeadArtNo;
             pnlModel.Panel_GlazingAdaptorArtNo = panel_GlazingAdaptorArtNo;
             pnlModel.Panel_GBSpacerArtNo = panel_GBSpacerArtNo;
@@ -10826,6 +10850,7 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_SealingBlockArtNo = panel_SealingBlockArtNo;
             pnlModel.Panel_InterlockArtNo = panel_InterlockArtNo;
             pnlModel.Panel_ExtensionForInterlockArtNo = panel_ExtensionForInterlockArtNo;
+            pnlModel.Panel_DHandleForAluArtNo = panel_DHandleForAluArtNo;
             pnlModel.Panel_DHandleInsideArtNo = panel_DHandleInsideArtNo;
             pnlModel.Panel_DHandleOutsideArtNo = panel_DHandleOutsideArtNo;
             pnlModel.Panel_DHandleIOLockingInsideArtNo = panel_DHandleIOLockingInsideArtNo;
@@ -11502,6 +11527,7 @@ namespace PresentationLayer.Presenter
         UserControl frm_UC,
                     frm_PropertiesUC;
         FrameProfile_ArticleNo frm_ArtNo;
+        FrameProfile_ArticleNo frm_ArtNoForAlutek;
         FrameProfileForPremi_ArticleNo frm_ArtNoForPremi;
         FrameReinf_ArticleNo frm_ReinfArtNo;
         FrameReinfForPremi_ArticleNo frm_ReinfForPremiArtNo;
@@ -11666,7 +11692,8 @@ namespace PresentationLayer.Presenter
         #region Explosion Properties 
         string panel_GlassThicknessDesc,
                panel_GlassType_Insu_Lami;
-        float panel_GlassThickness;
+        float panel_GlassThickness,
+              panel_GlassThicknessNoAirSpace;
         bool panel_ChkGlazingAdaptor,
              panel_SashPropertyVisibility,
              panel_EspagnoletteOptionsVisibility,
@@ -11839,6 +11866,7 @@ namespace PresentationLayer.Presenter
         SealingBlock_ArticleNo panel_SealingBlockArtNo;
         Interlock_ArticleNo panel_InterlockArtNo;
         ExtensionForInterlock_ArticleNo panel_ExtensionForInterlockArtNo;
+        D_HandleArtNo panel_DHandleForAluArtNo;
         D_HandleArtNo panel_DHandleInsideArtNo;
         D_HandleArtNo panel_DHandleOutsideArtNo;
         D_Handle_IO_LockingArtNo panel_DHandleIOLockingInsideArtNo;
@@ -12611,6 +12639,7 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_Padding_int = frm_Padding_int;
                         _frameModel.FrameImageRenderer_Padding_int = frmImageRenderer_Padding_int;
                         _frameModel.Frame_ConnectionType = frm_ConnectionType;
+                        _frameModel.Frame_ArtNoForAlutek = frm_ArtNoForAlutek;
                         _frameModel.Frame_ArtNoForPremi = frm_ArtNoForPremi;
                         _frameModel.Frame_ReinfArtNo = frm_ReinfArtNo;
                         _frameModel.Frame_ReinfForPremiArtNo = frm_ReinfForPremiArtNo;

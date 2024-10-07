@@ -2541,7 +2541,7 @@ namespace ModelLayer.Model.Quotation.Frame
                {
                 cutTypeWd = @"|  |";
                 cutTypeHt = @"|  |";
-                tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNoForAlutek.ToString(),
+                    tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNoForAlutek.ToString(),
                                                    FrameQtyWd, "pc(s)",
                                                    Frame_ExplosionWidth.ToString(),
                                                    "Frame",
