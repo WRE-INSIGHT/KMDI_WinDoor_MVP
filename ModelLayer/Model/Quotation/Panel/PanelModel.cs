@@ -12640,6 +12640,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                   "",
                                   "Sash",
                                   @"");
+       
         }
 
         public void Insert_DHandleForAlutek_MaterialList(DataTable tbl_explosion)

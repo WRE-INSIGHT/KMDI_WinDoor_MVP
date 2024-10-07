@@ -2033,9 +2033,22 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl_curCtrl.Panel_HandleType == Handle_Type._D)
                                             {
-                                                pnl_curCtrl.Insert_DHandle_MaterialList(Material_List);
+                                                if (item.WD_profile.Contains("Alutek"))
+                                                {
+                                                    pnl_curCtrl.Insert_DHandleForAlutek_MaterialList(Material_List);
 
-                                                pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                                    if (pnl_curCtrl.Panel_DHandleForAluArtNo == D_HandleArtNo._H186O_std ||
+                                                        pnl_curCtrl.Panel_DHandleForAluArtNo == D_HandleArtNo._H186O_half)
+                                                    {
+                                                        pnl_curCtrl.Insert_Cylinder_MaterialList(Material_List);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    pnl_curCtrl.Insert_DHandle_MaterialList(Material_List);
+
+                                                    pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                                } 
                                             }
                                             else if (pnl_curCtrl.Panel_HandleType == Handle_Type._D_IO_Locking)
                                             {
