@@ -1984,7 +1984,7 @@ namespace PresentationLayer.Presenter
             {
                 if (_windoorModel != null)
                 {
-                    if (_lblCurrentPrice.Value == _windoorModel.SystemSuggestedPrice &&
+                    if (Math.Floor(_lblCurrentPrice.Value) == Math.Floor(_windoorModel.SystemSuggestedPrice) &&
                         _windoorModel.SystemSuggestedPrice != 0)
                     {
 
@@ -3948,7 +3948,7 @@ namespace PresentationLayer.Presenter
 
         public decimal GetComputedGlassThickness(string OrigGlassDesc)
         {
-            decimal computedGlassThk = 0m;
+            decimal computedGlassThk = 0m;  
 
             foreach (DataRow gct in _glassComputedThickness.Rows)
             {

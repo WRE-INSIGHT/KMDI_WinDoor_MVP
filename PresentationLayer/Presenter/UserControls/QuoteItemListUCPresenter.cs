@@ -316,7 +316,7 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             if (!initialLoad)
                             {
-                                if (wdm.SystemSuggestedPrice != inputedPrice)
+                                if (Math.Floor(wdm.SystemSuggestedPrice) != Math.Floor(inputedPrice))
                                 {
                                     FromSystemSuggestedPrice = false;
                                 }

@@ -118,8 +118,7 @@ namespace PresentationLayer.Presenter
                             {
                                 #region multipanel
                                 foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
-                                {
-
+                                { 
                                     foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                                     {
                                         for (int i = 0; i < _panelIdList.Count; i++)
@@ -137,7 +136,8 @@ namespace PresentationLayer.Presenter
                                                 pnl.Panel_GlassType = _glassType;
                                                 pnl.Panel_GlassThickness = Convert.ToSingle(dgv.Rows[e.RowIndex].Cells["TotalThickness"].Value);
                                                 pnl.Panel_GlassThicknessDesc = dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString();
-                                                
+                                                pnl.Panel_GlassThicknessNoAirSpace = (float)_mainPresenter.GetComputedGlassThickness(dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString());
+
                                                 Console.WriteLine(pnl.Panel_GlassType_Insu_Lami);
 
                                                 if (pnl.Panel_GlassThicknessDesc.Contains("Georgian Bar"))
@@ -195,6 +195,7 @@ namespace PresentationLayer.Presenter
                                             SinglePanel.Panel_GlassType = _glassType;
                                             SinglePanel.Panel_GlassThickness = Convert.ToSingle(dgv.Rows[e.RowIndex].Cells["TotalThickness"].Value);
                                             SinglePanel.Panel_GlassThicknessDesc = dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString();
+                                            SinglePanel.Panel_GlassThicknessNoAirSpace = (float)_mainPresenter.GetComputedGlassThickness(dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString());
 
 
                                             if (SinglePanel.Panel_GlassThicknessDesc.Contains("Georgian Bar"))
@@ -252,6 +253,7 @@ namespace PresentationLayer.Presenter
                       
                         _panelModel.Panel_GlassThickness = Convert.ToSingle(dgv.Rows[e.RowIndex].Cells["TotalThickness"].Value);
                         _panelModel.Panel_GlassThicknessDesc = dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString();
+                        _panelModel.Panel_GlassThicknessNoAirSpace = (float)_mainPresenter.GetComputedGlassThickness(dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString());
 
 
                         if (_panelModel.Panel_GlassThicknessDesc.Contains("Georgian Bar"))
@@ -319,9 +321,11 @@ namespace PresentationLayer.Presenter
             {
                 _glassThicknessListView.Get_DgvGlassThicknessList().DataSource = ConstructFiltered_glassThicknessDT();
             }
-
+             
             DataGridViewDisplayFormat();
         }
+
+
 
         public void ShowGlassThicknessListView()
         {

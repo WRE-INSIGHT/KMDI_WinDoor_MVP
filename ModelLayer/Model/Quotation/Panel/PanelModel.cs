@@ -38,8 +38,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelID = value;
             }
-        }
-
+        } 
         private string _panelName;
         public string Panel_Name
         {
@@ -939,6 +938,19 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 _panelGlassThicknessDesc = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        private float _panelGlassThicknessNoAirSpace;
+        public float Panel_GlassThicknessNoAirSpace
+        {
+            get
+            { 
+                return _panelGlassThicknessNoAirSpace; 
+            }
+            set 
+            { 
+                _panelGlassThicknessNoAirSpace = value; 
             }
         }
 
@@ -14035,9 +14047,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GlassType_Insu_Lami = glasstype_insu_lumi;
             Panel_GlassPricePerSqrMeter = glasspricepersqrmeter;
             Panel_MotorizedMechRemoteArtNo = panelMotorizedMechRemoteArtNo;
-            Panel_MotorizedMechRemoteOption = panelMotorizedMechRemoteOption;
-
-
+            Panel_MotorizedMechRemoteOption = panelMotorizedMechRemoteOption; 
         }
     }
 }

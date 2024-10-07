@@ -783,6 +783,11 @@ namespace PresentationLayer.Presenter.UserControls
                 glassProp.Dock = DockStyle.Top;
                 glassProp.BringToFront();
 
+                if (_panelModel.Panel_GlassThicknessNoAirSpace == 0.0f)
+                { 
+                    _panelModel.Panel_GlassThicknessNoAirSpace = (float)_mainPresenter.GetComputedGlassThickness(_panelModel.Panel_GlassThicknessDesc);
+                }
+
                 if (_panelModel.Panel_Type.Contains("Louver") == true)
                 {
                     _panelModel.Panel_GlassPnlGlazingBeadVisibility = false;
