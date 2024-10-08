@@ -1590,6 +1590,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     wd_deduct = 20;
                     ht_deduct = 20;
+                    if (MPanel_FrameModelParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        wd_deduct = 16;
+                        ht_deduct = 16;
+                    }
                     if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||

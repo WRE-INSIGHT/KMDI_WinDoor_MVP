@@ -449,6 +449,10 @@ namespace ModelLayer.Model.Quotation.Frame
                 if (Frame_Type == Frame_Padding.Window)
                 {
                     Frame_Padding_int = new Padding(10);
+                    if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        Frame_Padding_int = new Padding(8);
+                    }
                 }
                 else if (Frame_Type == Frame_Padding.Door)
                 {
@@ -517,6 +521,10 @@ namespace ModelLayer.Model.Quotation.Frame
                     if (Frame_Type == Frame_Padding.Window)
                     {
                         FrameImageRenderer_Padding_int = new Padding(15);
+                       if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                       {
+                            FrameImageRenderer_Padding_int = new Padding(12);
+                       }
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
@@ -544,6 +552,10 @@ namespace ModelLayer.Model.Quotation.Frame
                     if (Frame_Type == Frame_Padding.Window)
                     {
                         FrameImageRenderer_Padding_int = new Padding(15);
+                        if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                           FrameImageRenderer_Padding_int = new Padding(12);
+                        }
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
@@ -613,6 +625,12 @@ namespace ModelLayer.Model.Quotation.Frame
                     if (Frame_Type == Frame_Padding.Window)
                     {
                         Frame_Padding_int = new Padding(15);
+                       
+                        if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            Frame_Padding_int = new Padding(12);
+                        }
+
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
@@ -640,6 +658,10 @@ namespace ModelLayer.Model.Quotation.Frame
                     if (Frame_Type == Frame_Padding.Window)
                     {
                         Frame_Padding_int = new Padding(15);
+                        if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            Frame_Padding_int = new Padding(12);
+                        }
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {

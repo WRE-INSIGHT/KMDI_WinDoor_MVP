@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Linq;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
 
@@ -1281,33 +1282,81 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                    {
                        if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
                        {
-                           g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
-                                                                                  8 / rectThickness,
-                                                                                  fixedpnl.ClientRectangle.Width - 17 / rectThickness,
-                                                                                  fixedpnl.ClientRectangle.Height - 17 / rectThickness));
+                            if(_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek") &&
+                                _multiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding Panel")))
+                            {
+                                g.DrawRectangle(new Pen(Color.DarkGray, 18 / rectThickness), new Rectangle(0,
+                                                                                 0,
+                                                                                 fixedpnl.ClientRectangle.Width ,
+                                                                                 fixedpnl.ClientRectangle.Height));
+                            }
+                            else
+                            {
+                                g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
+                                                                                 8 / rectThickness,
+                                                                                 fixedpnl.ClientRectangle.Width - 17 / rectThickness,
+                                                                                 fixedpnl.ClientRectangle.Height - 17 / rectThickness));
+                            }
+                          
                        }
                        else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
                        {
-                           g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                               8 / rectThickness,
-                                                                               fixedpnl.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                               fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek") &&
+                                _multiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding Panel")))
+                            {
+                                g.DrawRectangle(new Pen(Color.DarkGray, 19), new Rectangle((0) - sashDeduction,
+                                                                                0,
+                                                                                fixedpnl.ClientRectangle.Width + sashDeduction,
+                                                                                fixedpnl.ClientRectangle.Height));
+                            }
+                            else
+                            {
+                                g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                                8 / rectThickness,
+                                                                                fixedpnl.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                                fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
+                            }
+                          
              
                        }
                        else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
                        {
-             
-                           g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
-                                                                                  8 / rectThickness,
-                                                                                  fixedpnl.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                                  fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
+
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek") &&
+                                _multiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding Panel")))
+                            {
+                                g.DrawRectangle(new Pen(Color.DarkGray, 19), new Rectangle(0,
+                                                                                0,
+                                                                                fixedpnl.ClientRectangle.Width + sashDeduction,
+                                                                                fixedpnl.ClientRectangle.Height));
+                            }
+                            else
+                            {
+                                g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
+                                                                                   8 / rectThickness,
+                                                                                   fixedpnl.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                                   fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
+                            }
+                            
                        }
                        else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
                        {
-                           g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek") &&
+                                _multiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding Panel")))
+                            {
+                                g.DrawRectangle(new Pen(Color.DarkGray, 19), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                                0,
+                                                                               fixedpnl.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
+                                                                               fixedpnl.ClientRectangle.Height));
+                            }
+                            else
+                            {
+                                g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
                                                                              8 / rectThickness,
                                                                              fixedpnl.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
                                                                              fixedpnl.ClientRectangle.Height - (17 / rectThickness)));
+                            }
+                           
                        }
                    }
                }
@@ -1393,156 +1442,346 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                             fixedpnl.ClientRectangle.Width - w,
                                                             fixedpnl.ClientRectangle.Height - w));
             
-
+            
 
 
             Color col = Color.Black;
 
             //ALUTEK
-            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek") && _panelModel.Panel_Orient == false)
+            // ALUTEK FRAME POINTS
+            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
             {
-                if(_frameModel.Lst_MultiPanel.Count > 0)
-                {
-                    bool divider_enabled = _multiPanelModel.MPanel_DividerEnabled;
 
-                    if (divider_enabled)
+                Rectangle fixpnl = new Rectangle(0,
+                                                 0,
+                                                 fixedpnl.ClientRectangle.Width - w,
+                                                 fixedpnl.ClientRectangle.Height - w);
+                int fixX = fixpnl.Location.X,
+                    fixY = fixpnl.Location.Y,
+                    fixWd = fixpnl.Width,
+                    fixHt = fixpnl.Height;
+
+                Point[] corner_points = new[]
+                        {
+                                new Point(fixX, fixY ),
+                                new Point(outer_line, outer_line),
+                                new Point(fixWd, fixY),
+                                new Point(fixWd - outer_line, outer_line),
+                                new Point(fixX, fixHt),
+                                new Point(outer_line, fixHt - outer_line),
+                                new Point(fixWd, fixHt),
+                                new Point(fixWd - outer_line, fixHt- outer_line)
+                                };
+                if (_panelModel.Panel_Orient == false)
+                {
+                 
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(5,
+                                                             5,
+                                                             (fixedpnl.ClientRectangle.Width - (5 * 2)) - w,
+                                                             (fixedpnl.ClientRectangle.Height - (5 * 2)) - w));
+
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(0,
+                                                        5,
+                                                        (fixedpnl.ClientRectangle.Width - (0 * 2)) - w,
+                                                        (fixedpnl.ClientRectangle.Height - (5 * 2)) - w));
+                }
+                if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                {
+                    if (_panelModel.Panel_ChkText == "dSash")
                     {
-                        g.DrawRectangle(new Pen(col, 3), new Rectangle(w,
-                                                       -1,
-                                                       fixedpnl.ClientRectangle.Width - 3,
-                                                       fixedpnl.ClientRectangle.Height + w));
-                    }
-                }             
-            }
+                        if (_multiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding Panel")))
+                        {
+                           
+
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                              outer_line,
+                                                              (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                              (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                              0,
+                                                              (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                              (fixedpnl.ClientRectangle.Height) - w));
+                        }
+                        else
+                        {
+                            
+                            g.DrawLine(new Pen(color, w),fixX, fixY, outer_line, outer_line);
+                            g.DrawLine(new Pen(color, w), fixX, fixHt, outer_line, fixHt - outer_line);
 
 
-            if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
-            {
-
-                if (_panelModel.Panel_ChkText == "dSash")
-                {
-                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
                                                           outer_line,
                                                           (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
                                                           (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
-                }
-
-
-
-                if (_panelModel.Panel_Orient == true)
-                {
-                    g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
-                                                          inner_line,
-                                                          (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
-                                                          (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
-                }
-
-            }
-            else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
-            {
-                if (_panelModel.Panel_ChkText == "dSash")
-                {
-                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
-                                                         outer_line,
-                                                         (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
-                                                         (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
-                }
-
-                if (_panelModel.Panel_Orient == true)
-                {
-                    if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
-                    {
-                        g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
-                                                      inner_line + 1,
-                                                      (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
-                                                      (fixedpnl.ClientRectangle.Height - (inner_line * 2) - 2) - w));
-
-                     //  g.DrawRectangle(new Pen(Color.DarkGray, 3), new Rectangle(inner_line + 3,
-                     //                                    inner_line + 1,
-                     //                                    (fixedpnl.ClientRectangle.Width - (inner_line * 2) - 6) - w,
-                     //                                    (fixedpnl.ClientRectangle.Height - (inner_line * 2) - 2) - w));
-
-                        g.DrawRectangle(new Pen(col, w), new Rectangle(inner_line - sashDeduction,
-                                                            inner_line,
-                                                            (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w ,
-                                                            (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                        }
                     }
-                    else
+                    if (_panelModel.Panel_Orient == true)
                     {
-                        g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
+                        if (!_multiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding Panel")))
+                        {
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(inner_line,
                                                       inner_line,
                                                       (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
                                                       (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                        
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                                inner_line,
+                                                                (fixedpnl.ClientRectangle.Width - (inner_line * 2) + 5) - w + sashDeduction,
+                                                                (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                        }
                     }
-
-                 
                 }
-            }
-            else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
-            {
-                if (_panelModel.Panel_ChkText == "dSash")
+                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
                 {
-                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
-                                                         outer_line,
-                                                         (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + (sashDeduction * 2),
-                                                         (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
-                }
-
-                if (_panelModel.Panel_Orient == true)
-                {
-                    g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
-                                                          inner_line,
-                                                          (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w + (sashDeduction * 2),
-                                                          (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
-                }
-            }
-            else if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
-            {
-
-
-
-
-                if (_panelModel.Panel_ChkText == "dSash")
-                {
-                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
-                                                         outer_line,
-                                                         (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
-                                                         (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
-                }
-
-                if (_panelModel.Panel_Orient == true)
-                {
-                    if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    if (_panelModel.Panel_ChkText == "dSash")
                     {
-                        g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
-                                                          inner_line + 1,
-                                                          (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w,
-                                                          (fixedpnl.ClientRectangle.Height - (inner_line * 2) - 2) - w));
+                        if (_multiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding Panel")))
+                        {
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                          outer_line,
+                                                          (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                          (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                         0,
+                                                         (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                         (fixedpnl.ClientRectangle.Height) - w));
+                        }
+                        else
+                        {
+                            g.DrawLine(new Pen(color, w), fixWd, fixY, fixWd - outer_line, outer_line);
+                            g.DrawLine(new Pen(color, w), fixWd, fixHt, fixWd - outer_line, fixHt - outer_line);
 
-                        g.DrawRectangle(new Pen(Color.DarkGray, 3), new Rectangle(inner_line + 3,
-                                                          inner_line + 1,
-                                                          (fixedpnl.ClientRectangle.Width - (inner_line * 2) - 6) - w,
-                                                          (fixedpnl.ClientRectangle.Height - (inner_line * 2) - 2) - w));
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                     outer_line,
+                                                     (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                     (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                        }
+                    }
+                    if (_panelModel.Panel_Orient == true)
+                    {
+                        if (!_multiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding Panel")))
+                        {
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(inner_line - sashDeduction,
+                                                      inner_line,
+                                                      (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
+                                                      (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
 
-                        g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
-                                                            inner_line,
+                            g.DrawRectangle(new Pen(Color.DarkGray, 3), new Rectangle(inner_line - sashDeduction,
+                                                              inner_line + 1,
+                                                              (fixedpnl.ClientRectangle.Width - (inner_line * 2) - 3) - w + sashDeduction,
+                                                              (fixedpnl.ClientRectangle.Height - (inner_line * 2) - 2) - w));
+
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(inner_line - sashDeduction,
+                                                                inner_line,
+                                                                (fixedpnl.ClientRectangle.Width - (inner_line * 2) + 5) - w + sashDeduction,
+                                                                (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                        }
+                    }
+                }
+                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                {
+                    if (_panelModel.Panel_ChkText == "dSash")
+                    {
+                        if (_multiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding Panel")))
+                        {
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                            outer_line,
+                                                            (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + (sashDeduction * 2),
+                                                            (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                        }
+                        else
+                        {
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                        outer_line,
+                                                        (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + (sashDeduction * 2),
+                                                        (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                        }
+                    }
+                    if (_panelModel.Panel_Orient == true)
+                    {
+                        if (!_multiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding Panel")))
+                        {
+                            g.DrawRectangle(new Pen(col, 1), new Rectangle(inner_line - sashDeduction,
+                                                   inner_line,
+                                                   (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w + (sashDeduction * 2),
+                                                   (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                        }
+                    }
+                           
+                }
+                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                {
+                    if (_panelModel.Panel_ChkText == "dSash")
+                    {
+                        
+
+                        if (_frameModel.Lst_MultiPanel.Count > 0)
+                        {
+                            if (_multiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding Panel")))
+                            {
+                                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                                outer_line,
+                                                                (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                                (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                                0,
+                                                                (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                                (fixedpnl.ClientRectangle.Height) - w));
+                            }
+                            else
+                            {
+                                
+                                
+                                for (int i = 0; i < corner_points.Length - 1; i += 2)
+                                {
+                                    g.DrawLine(new Pen(color, w), corner_points[i], corner_points[i + 1]);
+                                }
+
+
+                                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                            outer_line,
                                                             (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
-                                                            (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                                                            (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < corner_points.Length - 1; i += 2)
+                            {
+                                g.DrawLine(new Pen(color, w), corner_points[i], corner_points[i + 1]);
+                            }
+
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                       outer_line,
+                                                       (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                       (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                        }
                     }
-                    else
+                    if (_panelModel.Panel_Orient == true)
+                    {
+                        if(_frameModel.Lst_MultiPanel.Count > 0)
+                        {
+                            if (!_multiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding Panel")))
+                            {
+                                g.DrawRectangle(new Pen(col, w), new Rectangle(inner_line,
+                                                              inner_line ,
+                                                              (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                              (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+
+                              //  g.DrawRectangle(new Pen(Color.DarkGray, 3), new Rectangle(inner_line + 3,
+                              //                                    inner_line + 1,
+                              //                                    (fixedpnl.ClientRectangle.Width - (inner_line * 2) - 6) - w,
+                              //                                    (fixedpnl.ClientRectangle.Height - (inner_line * 2) - 2) - w));
+                              //
+                                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                                    inner_line,
+                                                                    (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                                    (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                            }
+                        }
+                        else
+                        {
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(inner_line,
+                                                              inner_line ,
+                                                              (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                              (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                   
+                            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                                inner_line,
+                                                                (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                                (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                        }
+                    }
+                }
+                
+
+
+            }
+            else
+            {
+                if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                {
+
+                    if (_panelModel.Panel_ChkText == "dSash")
+                    {
+                        g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                              outer_line,
+                                                              (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                              (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                    }
+
+
+
+                    if (_panelModel.Panel_Orient == true)
                     {
                         g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
-                                                          inner_line,
-                                                          (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w,
-                                                          (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                                                              inner_line,
+                                                              (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
+                                                              (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                    }
+                }
+                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                {
+                    if (_panelModel.Panel_ChkText == "dSash")
+                    {
+                        g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                             outer_line,
+                                                             (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                             (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
                     }
 
-                    
-                   
+                    if (_panelModel.Panel_Orient == true)
+                    {
+                        g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
+                                                             inner_line,
+                                                             (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
+                                                             (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                    }
+                }
+                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                {
+                    if (_panelModel.Panel_ChkText == "dSash")
+                    {
+                        g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                             outer_line,
+                                                             (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + (sashDeduction * 2),
+                                                             (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                    }
+
+                    if (_panelModel.Panel_Orient == true)
+                    {
+                        g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
+                                                              inner_line,
+                                                              (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w + (sashDeduction * 2),
+                                                              (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+                    }
+                }
+                else if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                {
 
 
 
-                    #region OldAlgoForMesh 
+
+                    if (_panelModel.Panel_ChkText == "dSash")
+                    {
+                        g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                             outer_line,
+                                                             (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                             (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                    }
+
+                    if (_panelModel.Panel_Orient == true)
+                    {
+                        g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                              inner_line,
+                                                              (fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                              (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
+
+
+
+
+                        #region OldAlgoForMesh 
                         //int cond = ((fixedpnl.ClientRectangle.Width - (inner_line * 2)) - w) + ((fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w);
 
                         //int maxWidth = ((fixedpnl.ClientRectangle.Width - (inner_line * 2)) - 6),
@@ -1588,7 +1827,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         //    }
                         //}
                         #endregion
+                    }
                 }
+
+
+               
             }
             if (_timer_count != 0 && _timer_count < 8) // INSIDE ARROW NA MAY TIMER
             {

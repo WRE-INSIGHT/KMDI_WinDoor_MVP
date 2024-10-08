@@ -172,8 +172,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             try
             {
-                Console.WriteLine("Mpanel Width " + _multiPanelModel.MPanel_WidthToBind);
-                Console.WriteLine("Mpanel height " + _multiPanelModel.MPanel_HeightToBind);
+               // Console.WriteLine("Mpanel Width " + _multiPanelModel.MPanel_WidthToBind);
+               // Console.WriteLine("Mpanel height " + _multiPanelModel.MPanel_HeightToBind);
                 multiTransomUC = (FlowLayoutPanel)sender;
                 Console.WriteLine();
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
@@ -751,7 +751,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             suggest_HT = 0,
                             suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth,
                             suggest_DisplayWDDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal;
-
+                       // if((_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek")))
+                       // {
+                       //     suggest_Wd = _multiPanelModel.MPanel_Width - 15;
+                       // }
                         if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
                             if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
@@ -1463,6 +1466,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     pInnerY = 15;
                     pInnerWd = fpnl.ClientRectangle.Width - 30;
                     pInnerHt = fpnl.ClientRectangle.Height - 30;
+                  if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                  {
+               //      pInnerX = 8;
+               //      pInnerY = 8;
+               //      pInnerWd = fpnl.ClientRectangle.Width - 16;
+               //      pInnerHt = fpnl.ClientRectangle.Height - 16;
+                  }
                 }
                 else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {

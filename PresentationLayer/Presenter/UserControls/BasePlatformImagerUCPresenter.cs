@@ -704,6 +704,7 @@ namespace PresentationLayer.Presenter.UserControls
                                             {
                                                 Draw_MultiPanelParent(multiPanelModel, MPoint, zoom, e);
                                             }
+                                            
                                             mParentLoc_Y += multiPanelModel.MPanelImageRenderer_Height;
                                         }
                                     }
@@ -1053,8 +1054,12 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                         else if (panelModel.Panel_Placement != "First")
                         {
-                        }                    
 
+                        }                    
+                        if (panelModel.PanelImageRenderer_Zoom == panelModel.Panel_Zoom)
+                        {
+                            panelModel.PanelImageRenderer_Width = panelModel.Panel_WidthToBind;
+                        }
                         Draw_Panel(e, panelModel, new Point(objLocX + 1, objLocY));
 
                         objLocX += panelModel.PanelImageRenderer_Width;
@@ -1097,7 +1102,7 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             botPadDeduct = 0;
                         }
-
+                        
                         Draw_Divider(e, divModel, new Point(objLocX, objLocY - locY_deduct), botPadDeduct);
 
                         objLocX += divModel.DivImageRenderer_Width;
@@ -1162,10 +1167,8 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                        if (panelModel.PanelImageRenderer_Zoom == panelModel.Panel_Zoom)
                        {
-                           panelModel.PanelImageRenderer_Height = panelModel.Panel_HeightToBind;
+                          // panelModel.PanelImageRenderer_Height = panelModel.Panel_HeightToBind;
                        }
-                       // Console.WriteLine("1 Panel Imager Height Bind:" + panelModel.Panel_HeightToBind);
-                       // Console.WriteLine("2 Panel Imager Height:" + panelModel.PanelImageRenderer_Height);
                         Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
 
                         int lastLevelDivisor = 0, botPadDeduction = 0;
@@ -1202,7 +1205,14 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             locX_deduct = 5;
                         }
-
+                        Console.WriteLine("Divider Imager Width: " + divModel.DivImageRenderer_Width);
+                        Console.WriteLine("Divider Imager Width To Bind: " + divModel.Div_WidthToBind);
+                        Console.WriteLine("Divider Zoom Imager: " + divModel.DivImageRenderer_Zoom);
+                        Console.WriteLine("Divider Zoom: " + divModel.Div_Zoom);
+                        if (divModel.DivImageRenderer_Zoom == divModel.Div_Zoom)
+                        {
+                            //divModel.DivImageRenderer_Width = divModel.Div_WidthToBind;
+                        }
                         Draw_Divider(e, divModel, new Point(objLocX - locX_deduct, objLocY), 0);
 
                         objLocY += divModel.DivImageRenderer_Height;
@@ -2121,59 +2131,558 @@ namespace PresentationLayer.Presenter.UserControls
 
             if (panelModel.Panel_Type != "Louver Panel")
             {
-                //g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(Ppoint.X + outer_line,
-                //                                                   Ppoint.Y + outer_line,
-                //                                                   (client_wd - (outer_line * 2)) - w,
-                //                                                   (client_ht - (outer_line * 2)) - w));
-
-                if (panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                if (panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                 {
-                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
-                        panelModel.Panel_Type != "Fixed Panel" ||
-                        (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
-                    {
-                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
-                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + thicknessDeduction);
-                        PointF BGinnerLine3 = new PointF(Ppoint.X + thicknessDeduction, Ppoint.Y);
-                        PointF BGinnerLine4 = new PointF(Ppoint.X + thicknessDeduction, Ppoint.Y + (client_ht) - w);
-                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
-                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
-                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
-                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine3, BGinnerLine4);
-                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
-                    }
-
-
-                    tenPercentAdditional += 1;
-                    //outer Line
-                    PointF outerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
-                    PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
-                    PointF outerLine3 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
-                    PointF outerLine4 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    PointF outerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    PointF outerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
-                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
-                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
-
-                    if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
-                    {
-
-                        //inner Line  
-                        if (panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    Point[] corner_points = new[]
                         {
-                            PointF innerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + inner_line);
-                            PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
-                            PointF innerLine3 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
-                            PointF innerLine4 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                            PointF innerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                            PointF innerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                            e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine1, innerLine2);
-                            e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
-                            e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine5, innerLine6);
+                                new Point(Ppoint.X, Ppoint.Y ),
+                                new Point(Ppoint.X + outer_line, Ppoint.Y + outer_line),
+                                new Point(Ppoint.X + client_wd - w, Ppoint.Y),
+                                new Point((Ppoint.X + client_wd - w) - outer_line, Ppoint.Y + outer_line),
+                                new Point(Ppoint.X,  Ppoint.Y + client_ht - w),
+                                new Point(Ppoint.X + outer_line, (Ppoint.Y + client_ht - w) - outer_line),
+                                new Point(Ppoint.X + client_wd - w, Ppoint.Y + client_ht - w),
+                                new Point((Ppoint.X + client_wd - w) - outer_line, (Ppoint.Y + client_ht - w) - outer_line)
+                        };
+                    if(panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == false)
+                    {
+                        g.DrawRectangle(new Pen(Color.Black, 1), new Rectangle(Ppoint.X + 5,
+                                                                    Ppoint.Y + 5,
+                                                                    (client_wd - (5 * 2)),
+                                                                    (client_ht - (5 * 2)) - w));
+
+                        g.DrawRectangle(new Pen(Color.Black, 1), new Rectangle(Ppoint.X,
+                                                                  Ppoint.Y + 5,
+                                                                  (client_wd),
+                                                                  (client_ht - (5 * 2)) - w));
+
+                       //g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
+                       //                                     Ppoint.Y + outer_line,
+                       //                                     (client_wd - (outer_line * 2)) - w,
+                       //                                     (client_ht - (outer_line * 2)) - w));
+
+
+                    }
+                    if (panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                    {
+                        
+                        if (panelModel.Panel_Type != "Sliding Panel")
+                        {
+                            if (panelModel.Panel_ParentFrameModel.Lst_MultiPanel.Count > 0)
+                            {
+                                if (!panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding")))
+                                {
+                                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
+                                         panelModel.Panel_Type != "Fixed Panel" ||
+                                      (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                                    {
+                                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + thicknessDeduction);
+                                        PointF BGinnerLine3 = new PointF(Ppoint.X + thicknessDeduction, Ppoint.Y + w);
+                                        PointF BGinnerLine4 = new PointF(Ppoint.X + thicknessDeduction, Ppoint.Y + (client_ht) - w);
+                                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
+                                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine3, BGinnerLine4);
+                                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
+                                    }
+                                    tenPercentAdditional += 1;
+                                    //outer Line
+                                    PointF outerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
+                                    PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
+                                    PointF outerLine3 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
+                                    PointF outerLine4 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF outerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF outerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), corner_points[0], corner_points[1]);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), corner_points[4], corner_points[5]);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
+                                }
+                                else //If meron sliding sa multipanel
+                                {
+                                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                                    {
+                                        PointF BGinnerLine1 = new PointF(Ppoint.X , (Ppoint.Y + outer_line) - 5);
+                                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, (Ppoint.Y + outer_line) - 5);
+                                        PointF BGinnerLine3 = new PointF((Ppoint.X + outer_line) - 5, (Ppoint.Y + outer_line) - 5);
+                                        PointF BGinnerLine4 = new PointF((Ppoint.X + outer_line) - 5, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                        e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine1, BGinnerLine2);
+                                        e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine3, BGinnerLine4);
+                                        e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine5, BGinnerLine6);
+                                    }
+                                    //outer Line
+                                    PointF outerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
+                                    PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
+                                    PointF outerLine3 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
+                                    PointF outerLine4 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF outerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF outerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF outerLine7 = new PointF(Ppoint.X + outer_line, Ppoint.Y);
+                                    PointF outerLine8 = new PointF(Ppoint.X + outer_line, Ppoint.Y + (client_ht) - w);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine7, outerLine8);
+                                }
+                            }
+                        }
+                        else if (panelModel.Panel_Type == "Sliding Panel")
+                        {
+                            if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                            {
+                                PointF BGinnerLine1 = new PointF(Ppoint.X, (Ppoint.Y + outer_line) - 5);
+                                PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, (Ppoint.Y + outer_line) - 5);
+                                PointF BGinnerLine3 = new PointF((Ppoint.X + outer_line) - 5, (Ppoint.Y + outer_line) - 5);
+                                PointF BGinnerLine4 = new PointF((Ppoint.X + outer_line) - 5, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine1, BGinnerLine2);
+                                e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine3, BGinnerLine4);
+                                e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine5, BGinnerLine6);
+                            }
+                            //outer Line
+                            PointF outerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
+                            PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
+                            PointF outerLine3 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
+                            PointF outerLine4 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                            PointF outerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                            PointF outerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                            PointF outerLine7 = new PointF(Ppoint.X + outer_line, Ppoint.Y);
+                            PointF outerLine8 = new PointF(Ppoint.X + outer_line, Ppoint.Y + (client_ht) - w);
+                            e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                            e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                            e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
+                            e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine7, outerLine8);
+                        }
+                        if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                        {
+                            if (panelModel.Panel_Type != "Sliding Panel")
+                            {
+
+                                if (panelModel.Panel_ParentFrameModel.Lst_MultiPanel.Count > 0)
+                                {
+                                    if (!panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding")))
+                                    {
+                                        PointF innerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + inner_line);
+                                        PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
+                                        PointF innerLine3 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
+                                        PointF innerLine4 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                                        PointF innerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                                        PointF innerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                                        e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine1, innerLine2);
+                                        e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine3, innerLine4);
+                                        e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine5, innerLine6);
+                                    }
+                                }
+
+                            }
+                        }
+                        sashOverlapValue += inner_line;
+                    }
+                    else if (panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                    {
+                        
+                        if (panelModel.Panel_Type != "Sliding Panel")
+                        {
+                            if (panelModel.Panel_ParentFrameModel.Lst_MultiPanel.Count > 0)
+                            {
+                                if (!panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding")))
+                                {
+                                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
+                                        panelModel.Panel_Type != "Fixed Panel" ||
+                                        (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                                        {
+                                            PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                                            PointF BGinnerLine2 = new PointF(Ppoint.X - outerLineDeduction + (client_wd) - w + outerLineDeduction, Ppoint.Y + thicknessDeduction);
+                                            PointF BGinnerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + thicknessDeduction, Ppoint.Y + inner_line);
+                                            PointF BGinnerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + thicknessDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                                            PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                                            PointF BGinnerLine6 = new PointF(Ppoint.X + (inner_line * 2) - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                                            e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
+                                            e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine3, BGinnerLine4);
+                                            e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
+                                        }
+
+                                    //outer Line
+                                    //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
+                                    PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
+                                    PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
+                                    PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
+                                    PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    //PointF outerLine5 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF outerLine5 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF outerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), corner_points[2], corner_points[3]);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), corner_points[6], corner_points[7]);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
+                                }
+                                else
+                                {
+                                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                                    {
+                                        PointF BGinnerLine1 = new PointF(Ppoint.X, (Ppoint.Y + outer_line) - 5);
+                                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd, (Ppoint.Y + outer_line) - 5);
+                                        PointF BGinnerLine3 = new PointF((Ppoint.X + client_wd) - 6, (Ppoint.Y + outer_line) - 5);
+                                        PointF BGinnerLine4 = new PointF((Ppoint.X + client_wd) - 6, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                        e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine1, BGinnerLine2);
+                                        e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine3, BGinnerLine4);
+                                        e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine5, BGinnerLine6);
+                                    }
+                                    //outer Line
+                                    //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
+                                    PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
+                                    PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
+                                    PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
+                                    PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF outerLine5 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF outerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF outerLine7 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y);
+                                    PointF outerLine8 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + (client_ht) - w);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine7, outerLine8);
+                                }
+                            }
+                        }
+                        else if (panelModel.Panel_Type == "Sliding Panel")
+                        {
+                            if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                            {
+                                PointF BGinnerLine1 = new PointF(Ppoint.X, (Ppoint.Y + outer_line) - 5);
+                                PointF BGinnerLine2 = new PointF(Ppoint.X - outerLineDeduction + (client_wd) - w + outerLineDeduction + 1, (Ppoint.Y + outer_line) - 5);
+                                PointF BGinnerLine3 = new PointF((Ppoint.X + client_wd) - 6, (Ppoint.Y + outer_line) - 6);
+                                PointF BGinnerLine4 = new PointF((Ppoint.X + client_wd) - 6, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 5 + thicknessDeduction);
+                                PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                PointF BGinnerLine6 = new PointF(Ppoint.X - outerLineDeduction + (client_wd) - w + outerLineDeduction + 1, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine1, BGinnerLine2);
+                                e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine3, BGinnerLine4);
+                                e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine5, BGinnerLine6);
+                            }
+
+                            //outer Line
+                            //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
+                            PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
+                            PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
+                            PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
+                            PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                            //PointF outerLine5 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                            PointF outerLine5 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                            PointF outerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                            PointF outerLine7 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y);
+                            PointF outerLine8 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + (client_ht) - w);
+                            e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                            e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                            e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
+                            e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine7, outerLine8);
+                        }
+                        if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                        {
+                           
+                                if (panelModel.Panel_Type != "Sliding Panel")
+                                {
+                                    if (panelModel.Panel_ParentFrameModel.Lst_MultiPanel.Count > 0)
+                                    {
+                                        if (!panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding")))
+                                        {
+                                            //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
+                                            PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + inner_line);
+                                            PointF innerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + inner_line);
+                                            PointF innerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
+                                            PointF innerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                                            //PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                                            PointF innerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                                            PointF innerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                                            e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine1, innerLine2);
+                                            e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine3, innerLine4);
+                                            e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine5, innerLine6);
+                                        }
+                                    }
+
+
+                                }
+
+                            
+                        }
+                        arrowStartingX -= inner_line;
+                        sashOverlapValue += inner_line;
+                    }
+                    else if (panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                    {
+                       
+                        if (panelModel.Panel_Type == "Sliding Panel")
+                        {
+                            //outer Line
+                            //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
+                            PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
+                            PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
+                            PointF outerLine3 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                            PointF outerLine4 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                            e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                            e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
                         }
                         else
                         {
+                            if (panelModel.Panel_ParentFrameModel.Lst_MultiPanel.Count > 0)
+                            {
+                                if (!panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding")))
+                                {
+                                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
+                                       panelModel.Panel_Type != "Fixed Panel" ||
+                                       (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                                    {
+                                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + thicknessDeduction);
+                                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
+                                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
+                                    }
+                                    //outer Line
+                                    //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
+                                    PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
+                                    PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
+                                    PointF outerLine3 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF outerLine4 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                                }
+                                else
+                                {
+                                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                                    {
+                                        PointF BGinnerLine1 = new PointF(Ppoint.X, (Ppoint.Y + outer_line) - 5);
+                                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, (Ppoint.Y + outer_line) - 5);
+                                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                        e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine1, BGinnerLine2);
+                                        e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine5, BGinnerLine6);
+                                    }
+                                    //outer Line
+                                    //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
+                                    PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
+                                    PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
+                                    PointF outerLine3 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF outerLine4 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                                }
+                            }
+                            else
+                            {
+                                //outer Line
+                                //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
+                                PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
+                                PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
+                                PointF outerLine3 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                PointF outerLine4 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                                e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                            }
+
+                        }
+                        if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                        {
+                            if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                            {
+                                PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                                PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + thicknessDeduction);
+                                PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + 3 + thicknessDeduction);
+                                e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine1, BGinnerLine2);
+                                e.Graphics.DrawLine(new Pen(Color.White, 11), BGinnerLine5, BGinnerLine6);
+                            }
+
+                            if (!panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding")))
+                            {
+                                //inner Line
+                                //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
+                                PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + inner_line);
+                                PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
+                                PointF innerLine4 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                                PointF innerLine5 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                                e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine1, innerLine2);
+                                e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine4, innerLine5);
+                            }
+                            if (panelModel.Panel_Type != "Sliding Panel")
+                                {
+                                    //inner Line
+                                    //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
+                                    PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
+                                    PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
+                                    PointF innerLine4 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    PointF innerLine5 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                                    e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine1, innerLine2);
+                                    e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine4, innerLine5);
+                                }
+                            
+                           
+
+                        }
+                        arrowStartingX -= inner_line;
+                        sashOverlapValue += inner_line + (inner_line / 2);
+                    }
+                    else if (panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                    {
+                        if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                        {
+                            if (panelModel.Panel_Type != "Sliding Panel")
+                            {
+                                if (panelModel.Panel_ParentFrameModel.Lst_MultiPanel.Count > 0)
+                                {
+                                    if (!panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Any(pnl => pnl.Panel_Type.Contains("Sliding"))) // Sash without Sldiding
+                                    {
+
+                                        if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                                        {
+
+                                            g.DrawRectangle(new Pen(Color.White, pThickness), new Rectangle(Ppoint.X + thicknessDeduction,
+                                                                                 Ppoint.Y + thicknessDeduction,
+                                                                                 (client_wd - (outer_line * 2)) + w + 1 - rectDeduct,
+                                                                                 (client_ht - (outer_line * 2)) + w + 1 - rectDeduct));
+                                        }
+
+                                        for (int i = 0; i < corner_points.Length - 1; i += 2)
+                                        {
+                                            g.DrawLine(new Pen(Color.Black, 1), corner_points[i], corner_points[i + 1]);
+                                        }
+                                     
+
+                                        g.DrawRectangle(new Pen(Color.Black, 1), new Rectangle(Ppoint.X + inner_line,
+                                                                     Ppoint.Y + inner_line,
+                                                                     (client_wd - (inner_line * 2)) - w,
+                                                                     (client_ht - (inner_line * 2)) - w));
+
+                                        g.DrawRectangle(new Pen(Color.Black, 1), new Rectangle(Ppoint.X + outer_line,
+                                                                                  Ppoint.Y + inner_line,
+                                                                                  (client_wd - (outer_line * 2)) - w,
+                                                                                  (client_ht - (inner_line * 2)) - w));
+
+                                        g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
+                                                                             Ppoint.Y + outer_line,
+                                                                             (client_wd - (outer_line * 2)) - w,
+                                                                             (client_ht - (outer_line * 2)) - w));
+                                    }
+                                    else // With Sliding
+                                    {
+                                        if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                                        {
+
+                                            g.DrawRectangle(new Pen(Color.White, 11), new Rectangle((Ppoint.X + outer_line) - 5,
+                                                                                 (Ppoint.Y + outer_line) - 5,
+                                                                                 (client_wd - (outer_line * 2)) + w + 6 - rectDeduct,
+                                                                                 (client_ht - (outer_line * 2)) + w + 6 - rectDeduct));
+                                        }
+                                        //outer line
+                                        g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
+                                                                          Ppoint.Y + outer_line,
+                                                                          (client_wd - (outer_line * 2)) - w,
+                                                                          (client_ht - (outer_line * 2)) - w));
+
+                                        g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
+                                                                         Ppoint.Y,
+                                                                         (client_wd - (outer_line * 2)) - w,
+                                                                         client_ht));
+                                    }
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < corner_points.Length - 1; i += 2)
+                                    {
+                                        g.DrawLine(new Pen(Color.Black, 1), corner_points[i], corner_points[i + 1]);
+                                    }
+
+                                    g.DrawRectangle(new Pen(Color.Black, 1), new Rectangle(Ppoint.X + inner_line,
+                                                                     Ppoint.Y + (inner_line),
+                                                                     (client_wd - (inner_line * 2)) - w,
+                                                                     (client_ht - (inner_line * 2)) - w));
+
+
+                                    g.DrawRectangle(new Pen(Color.Black, 1), new Rectangle(Ppoint.X + outer_line,
+                                                                              Ppoint.Y + inner_line,
+                                                                              (client_wd - (outer_line * 2)) - w,
+                                                                              (client_ht - (inner_line * 2)) - w));
+
+                                    g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
+                                                                         Ppoint.Y + outer_line,
+                                                                         (client_wd - (outer_line * 2)) - w,
+                                                                         (client_ht - (outer_line * 2)) - w));
+                                }
+                            }
+                            else if (panelModel.Panel_Type == "Sliding Panel")
+                            {
+                                if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                                {
+
+                                    g.DrawRectangle(new Pen(Color.White, 11), new Rectangle((Ppoint.X + outer_line) - 5,
+                                                                         (Ppoint.Y + outer_line) - 5,
+                                                                         (client_wd - (outer_line * 2)) + w + 6 - rectDeduct,
+                                                                         (client_ht - (outer_line * 2)) + w + 6 - rectDeduct));
+                                }
+                                //outer Line
+                                g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
+                                                                                  Ppoint.Y + outer_line,
+                                                                                  (client_wd - (outer_line * 2)) - w,
+                                                                                  (client_ht - (outer_line * 2)) - w));
+                                g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
+                                                                         Ppoint.Y,
+                                                                         (client_wd - (outer_line * 2)) - w,
+                                                                         client_ht));
+                            }
+
+
+                        }
+
+                    }
+                }
+                else
+                {
+                    //g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(Ppoint.X + outer_line,
+                    //                                                   Ppoint.Y + outer_line,
+                    //                                                   (client_wd - (outer_line * 2)) - w,
+                    //                                                   (client_ht - (outer_line * 2)) - w));
+
+                    if (panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                    {
+                        if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
+                            panelModel.Panel_Type != "Fixed Panel" ||
+                            (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                        {
+                            PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                            PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + thicknessDeduction);
+                            PointF BGinnerLine3 = new PointF(Ppoint.X + thicknessDeduction, Ppoint.Y);
+                            PointF BGinnerLine4 = new PointF(Ppoint.X + thicknessDeduction, Ppoint.Y + (client_ht) - w);
+                            PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                            PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                            e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
+                            e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine3, BGinnerLine4);
+                            e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
+                        }
+
+
+                        tenPercentAdditional += 1;
+                        //outer Line
+                        PointF outerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
+                        PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
+                        PointF outerLine3 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
+                        PointF outerLine4 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                        PointF outerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                        PointF outerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                        e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                        e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                        e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
+
+                        if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                        {
+                            //inner Line  
                             PointF innerLine1 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
                             PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
                             PointF innerLine3 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
@@ -2184,61 +2693,41 @@ namespace PresentationLayer.Presenter.UserControls
                             e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
                             e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
                         }
-                        
-                      
+                        sashOverlapValue += inner_line;
                     }
-                    sashOverlapValue += inner_line;
-                }
 
-                else if (panelModel.Panel_Overlap_Sash == OverlapSash._Left)
-                {
-                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
-                        panelModel.Panel_Type != "Fixed Panel" ||
-                        (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    else if (panelModel.Panel_Overlap_Sash == OverlapSash._Left)
                     {
-                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
-                        PointF BGinnerLine2 = new PointF(Ppoint.X - outerLineDeduction + (client_wd) - w + outerLineDeduction, Ppoint.Y + thicknessDeduction);
-                        PointF BGinnerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + thicknessDeduction, Ppoint.Y + inner_line);
-                        PointF BGinnerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + thicknessDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
-                        PointF BGinnerLine6 = new PointF(Ppoint.X + (inner_line * 2) - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
-                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
-                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine3, BGinnerLine4);
-                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
-                    }
-                    //outer Line
-                    //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
-                    PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
-                    PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
-                    PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
-                    PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    //PointF outerLine5 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    PointF outerLine5 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    PointF outerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
-                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
-                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
-
-                    if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
-                    {
-
-                        //inner Line 
-                        if (panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
+                            panelModel.Panel_Type != "Fixed Panel" ||
+                            (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                         {
-                            //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
-                            PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + inner_line);
-                            PointF innerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + inner_line);
-                            PointF innerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
-                            PointF innerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                            //PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                            PointF innerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                            PointF innerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                            e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine1, innerLine2);
-                            e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
-                            e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine5, innerLine6);
+                            PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                            PointF BGinnerLine2 = new PointF(Ppoint.X - outerLineDeduction + (client_wd) - w + outerLineDeduction, Ppoint.Y + thicknessDeduction);
+                            PointF BGinnerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + thicknessDeduction, Ppoint.Y + inner_line);
+                            PointF BGinnerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction + thicknessDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                            PointF BGinnerLine6 = new PointF(Ppoint.X + (inner_line * 2) - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                            e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
+                            e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine3, BGinnerLine4);
+                            e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
                         }
-                        else
+                        //outer Line
+                        //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
+                        PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
+                        PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
+                        PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
+                        PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                        //PointF outerLine5 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                        PointF outerLine5 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                        PointF outerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                        e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                        e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                        e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
+
+                        if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                         {
+                            //inner Line 
                             //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
                             PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + inner_line);
                             PointF innerLine2 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
@@ -2251,121 +2740,76 @@ namespace PresentationLayer.Presenter.UserControls
                             e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
                             e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
                         }
-                        
+                        arrowStartingX -= inner_line;
+                        sashOverlapValue += inner_line;
                     }
-                    arrowStartingX -= inner_line;
-                    sashOverlapValue += inner_line;
-                }
-                else if (panelModel.Panel_Overlap_Sash == OverlapSash._Both)
-                {
-                    if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
-                    panelModel.Panel_Type != "Fixed Panel" ||
-                    (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    else if (panelModel.Panel_Overlap_Sash == OverlapSash._Both)
                     {
-                        PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
-                        PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + thicknessDeduction);
-                        PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
-                        PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
-                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
-                        e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
-                    }
-
-                    //outer Line
-                    //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
-                    PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
-                    PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
-                    PointF outerLine3 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    PointF outerLine4 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
-                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
-
-                    if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
-                    {
-                        //inner Line
-                        //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
-                        PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + inner_line);
-                        PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
-                        PointF innerLine4 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF innerLine5 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine1, innerLine2);
-                        e.Graphics.DrawLine(new Pen(Color.Black, 1), innerLine4, innerLine5);
-                    }
-                    arrowStartingX -= inner_line;
-                    sashOverlapValue += inner_line + (inner_line / 2);
-                }
-                else if (panelModel.Panel_Overlap_Sash == OverlapSash._None)
-                {
-                    if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
-                    {
-                        if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
+                        if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh") &&
+                        panelModel.Panel_Type != "Fixed Panel" ||
+                        (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                         {
-
-                            g.DrawRectangle(new Pen(Color.White, pThickness), new Rectangle(Ppoint.X + thicknessDeduction,
-                                                                 Ppoint.Y + thicknessDeduction,
-                                                                 (client_wd - (outer_line * 2)) + w + 1 - rectDeduct,
-                                                                 (client_ht - (outer_line * 2)) + w + 1 - rectDeduct));
+                            PointF BGinnerLine1 = new PointF(Ppoint.X, Ppoint.Y + thicknessDeduction);
+                            PointF BGinnerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + thicknessDeduction);
+                            PointF BGinnerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                            PointF BGinnerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w + thicknessDeduction);
+                            e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine1, BGinnerLine2);
+                            e.Graphics.DrawLine(new Pen(Color.White, pThickness), BGinnerLine5, BGinnerLine6);
                         }
 
-                        //inner Line                    
-                        if (panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        //outer Line
+                        //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
+                        PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
+                        PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
+                        PointF outerLine3 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                        PointF outerLine4 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                        e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                        e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+
+                        if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                         {
-                            
-                            g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
-                                                                      Ppoint.Y + (inner_line + 1),
-                                                                      (client_wd - (inner_line * 2)) - w,
-                                                                      (client_ht - (inner_line * 2) - 2) - w));
-
-                            g.DrawRectangle(new Pen(Color.White, 3), new Rectangle(Ppoint.X + (inner_line + 3),
-                                                                      Ppoint.Y + (inner_line + 1),
-                                                                      (client_wd - (inner_line * 2) - 6) - w,
-                                                                      (client_ht - (inner_line * 2) - 2) - w));
-
-                            g.DrawRectangle(new Pen(Color.Black, 1), new Rectangle(Ppoint.X + outer_line,
-                                                                      Ppoint.Y + inner_line,
-                                                                      (client_wd - (outer_line * 2)) - w,
-                                                                      (client_ht - (inner_line * 2)) - w));
+                            //inner Line
+                            //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
+                            PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + inner_line);
+                            PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
+                            PointF innerLine4 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            PointF innerLine5 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
+                            e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine4, innerLine5);
                         }
-                        else
-                        {
-                            g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
-                                                                      Ppoint.Y + inner_line,
-                                                                      (client_wd - (inner_line * 2)) - w,
-                                                                      (client_ht - (inner_line * 2)) - w));
-
-                        }
-
+                        arrowStartingX -= inner_line;
+                        sashOverlapValue += inner_line + (inner_line / 2);
                     }
-                    else if (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == false) //alutek
+                    else if (panelModel.Panel_Overlap_Sash == OverlapSash._None)
                     {
-                        if (panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                         {
-                            //Glazizng Bead for Fix
-                            if (panelModel.Panel_ParentFrameModel.Lst_MultiPanel.Count > 0)
+                            if (panelModel.Panel_GlassThicknessDesc.Contains("Mesh"))
                             {
-                                bool divider_enabled = panelModel.Panel_ParentMultiPanelModel.MPanel_DividerEnabled;
 
-                                if (divider_enabled)
-                                {
-                                    Point g_bead1 = new Point(Ppoint.X, Ppoint.Y),
-                                          g_bead2 = new Point(Ppoint.X, Ppoint.Y + client_ht - 1),
-                                          g_bead3 = new Point(Ppoint.X + client_wd - 3, Ppoint.Y),
-                                          g_bead4 = new Point(Ppoint.X + client_wd - 3, Ppoint.Y + client_ht - 1);
-
-                                    g.DrawLine(new Pen(Color.Black, 3), g_bead1, g_bead2);
-                                    g.DrawLine(new Pen(Color.Black, 3), g_bead3, g_bead4);
-                                }
+                                g.DrawRectangle(new Pen(Color.White, pThickness), new Rectangle(Ppoint.X + thicknessDeduction,
+                                                                     Ppoint.Y + thicknessDeduction,
+                                                                     (client_wd - (outer_line * 2)) + w + 1 - rectDeduct,
+                                                                     (client_ht - (outer_line * 2)) + w + 1 - rectDeduct));
                             }
+
+                            //inner Line
+                            g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
+                                                                          Ppoint.Y + inner_line,
+                                                                          (client_wd - (inner_line * 2)) - w,
+                                                                          (client_ht - (inner_line * 2)) - w));
                         }
+
+                        //outer Line
+                        g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
+                                                                          Ppoint.Y + outer_line,
+                                                                          (client_wd - (outer_line * 2)) - w,
+                                                                          (client_ht - (outer_line * 2)) - w));
+
+
                     }
-
-                    //outer Line
-                    g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
-                                                                      Ppoint.Y + outer_line,
-                                                                      (client_wd - (outer_line * 2)) - w,
-                                                                      (client_ht - (outer_line * 2)) - w));
-
-
                 }
+               
             }
 
 
@@ -2873,8 +3317,6 @@ namespace PresentationLayer.Presenter.UserControls
                             LocY = Ppoint.Y + (client_ht / 2) + (int)(client_ht * 0.1);// - 15;
                         }
                     }
-
-
 
 
                     Rectangle pnlBound = panel_bounds;
