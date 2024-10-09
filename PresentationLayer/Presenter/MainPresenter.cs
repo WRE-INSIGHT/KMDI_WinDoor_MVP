@@ -1168,6 +1168,33 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public void CenterProfileNoneSelection(IPanelModel curnt_pnl)
+        {
+            _controlRaised_forCenterProfileSelection.Text = "Select Panel";
+            _controlRaised_forCenterProfileSelection.BackColor = System.Drawing.SystemColors.Control;
+           
+            if (_windoorModel.WD_profile.Contains("Alutek"))
+            {
+                curnt_pnl.Panel_HandleType = Handle_Type._CremonHandle;
+            }
+            else
+            {
+                if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050)
+                {
+                    curnt_pnl.Panel_HandleType = Handle_Type._Rotoswing;
+                } 
+                else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                {
+                    curnt_pnl.Panel_HandleType = Handle_Type._Rotoline;
+                }
+                else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                {
+                    curnt_pnl.Panel_HandleType = Handle_Type._Rio;
+                }
+            }
+
+        }
+
         public void OnLoadSearchCenterProfielArtNo(IPanelModel pnlModel)
         {
             if (pnlModel.Panel_ParentMultiPanelModel != null)

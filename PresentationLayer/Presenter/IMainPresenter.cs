@@ -97,6 +97,7 @@ namespace PresentationLayer.Presenter
                                                   IPanelModel curnt_pnl = null,
                                                   IPanelModel nxt_pnl = null,
                                                   IPanelModel selected_pnl = null);
+        void CenterProfileNoneSelection(IPanelModel curnt_pnl);
         void WrongSelectionOfDummyMullion();
 
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);

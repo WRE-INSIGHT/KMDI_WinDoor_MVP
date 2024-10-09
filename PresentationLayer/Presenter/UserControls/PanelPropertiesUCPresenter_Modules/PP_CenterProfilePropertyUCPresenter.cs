@@ -90,10 +90,20 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 if (withCenterProfile == true)
                 {
                     _centerProfilePropertyUC.AddHT_FormBody(-constants.frame_WithCenterClosureSelectedPanel);
+
+
+                    _panelModel.AdjustPropertyPanelHeight("minusCenterProfile");
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCenterProfile");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCenterProfile");
+                    }
                     withCenterProfile = false;
                 }
-               
 
+                _mainPresenter.CenterProfileNoneSelection(_panelModel);
             }
             else  
             {
@@ -102,6 +112,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 if (withCenterProfile == false)
                 {
                     _centerProfilePropertyUC.AddHT_FormBody(constants.frame_WithCenterClosureSelectedPanel);
+                    _panelModel.AdjustPropertyPanelHeight("addCenterProfile");
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCenterProfile");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCenterProfile");
+                    }
+
                     withCenterProfile = true; 
                 } 
             }
