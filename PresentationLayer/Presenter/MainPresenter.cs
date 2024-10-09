@@ -3718,7 +3718,7 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.Save();
             }
 
-            GetGlassThickness();
+            GetGlassThickness();        
         }
 
         private void GetGlassThickness()
@@ -3757,6 +3757,8 @@ namespace PresentationLayer.Presenter
 
                             //4 mm  Clear + 6 + 4 mm  Clear + 6 + 4 mm  Clear
                             //6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear
+
+                            //"6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear Low-e"
                             #endregion
 
                             if (glassDesc.Contains('(') && !glassDesc.Contains("(o)"))
@@ -3950,11 +3952,16 @@ namespace PresentationLayer.Presenter
         {
             decimal computedGlassThk = 0m;  
 
+            if(OrigGlassDesc.Contains("with Georgian Bar"))
+            {
+                OrigGlassDesc = OrigGlassDesc.Replace("with Georgian Bar", "").Replace(" ", " ");
+            }
+
             foreach (DataRow gct in _glassComputedThickness.Rows)
             {
                 string ComputedGlassDesc = gct[1].ToString();
 
-                if (ComputedGlassDesc == OrigGlassDesc)
+                if (ComputedGlassDesc.Trim() == OrigGlassDesc.Trim())
                 {
                     computedGlassThk = Convert.ToDecimal(gct[0]);
                 }
