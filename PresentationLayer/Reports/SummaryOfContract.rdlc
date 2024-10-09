@@ -446,7 +446,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>                'This includes three (3) Technical visits: initial/final measurement, installation checkup, inspection prior to turn-over; and two (2) trips</Value>
+                                <Value>                       'This includes three (3) Technical visits: initial/final measurement, installation checkup, inspection prior to turn-over; and two (2) trips</Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
                                   <FontSize>8pt</FontSize>
@@ -463,7 +463,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>                 of Installation team: (1) Installation of windows/doors; (2) One-time Cleaning and Installation of handles &amp; insect screens</Value>
+                                <Value>                        of Installation team: (1) Installation of windows/doors; (2) One-time Cleaning and Installation of handles &amp; insect screens</Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
                                   <FontSize>8pt</FontSize>
@@ -1586,11 +1586,43 @@
                           </Border>
                         </Style>
                       </Line>
+                      <Textbox Name="Textbox17">
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>sign above printed name and on all pages</Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox17</rd:DefaultName>
+                        <Top>0.27867in</Top>
+                        <Left>0.04856in</Left>
+                        <Height>0.20361in</Height>
+                        <Width>2.13333in</Width>
+                        <ZIndex>3</ZIndex>
+                        <Style>
+                          <Border>
+                            <Style>None</Style>
+                          </Border>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
                     </ReportItems>
                     <KeepTogether>true</KeepTogether>
                     <Top>2.8909in</Top>
                     <Left>0.00504in</Left>
-                    <Height>0.45247in</Height>
+                    <Height>0.48228in</Height>
                     <Width>7.82702in</Width>
                     <ZIndex>3</ZIndex>
                     <Style>
@@ -3075,7 +3107,7 @@ Math.Round((Fields!dtScreenListPrice.Value),2))
                 <KeepTogether>true</KeepTogether>
                 <Top>0.03908in</Top>
                 <Left>0.05491in</Left>
-                <Height>3.3517in</Height>
+                <Height>3.37318in</Height>
                 <Width>7.83206in</Width>
                 <Style>
                   <Border>
@@ -3188,7 +3220,7 @@ Math.Round((Fields!dtScreenListPrice.Value),2))
             <KeepTogether>true</KeepTogether>
             <Top>0.0125in</Top>
             <Left>0.0125in</Left>
-            <Height>3.41781in</Height>
+            <Height>3.45115in</Height>
             <Width>7.93185in</Width>
             <Style>
               <Border>
@@ -3197,13 +3229,13 @@ Math.Round((Fields!dtScreenListPrice.Value),2))
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>3.48031in</Height>
+        <Height>3.48865in</Height>
         <Style />
       </Body>
       <Width>7.97267in</Width>
       <Page>
         <PageFooter>
-          <Height>0.32296in</Height>
+          <Height>0.34135in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
