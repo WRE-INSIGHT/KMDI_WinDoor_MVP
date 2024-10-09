@@ -79,6 +79,25 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
+                                <Value xml:space="preserve">      </Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>□   </Value>
+                                <Style>
+                                  <FontStyle>Normal</FontStyle>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                  <Color>#000000</Color>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
                                 <Value>50% of the total contract price; upon signing of this quotation/agreement</Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
@@ -87,14 +106,31 @@
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <ListStyle>Bulleted</ListStyle>
-                            <ListLevel>1</ListLevel>
                             <Style>
                               <LineHeight>1pt</LineHeight>
                             </Style>
                           </Paragraph>
                           <Paragraph>
                             <TextRuns>
+                              <TextRun>
+                                <Value xml:space="preserve">      </Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>□   </Value>
+                                <Style>
+                                  <FontStyle>Normal</FontStyle>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                  <Color>#000000</Color>
+                                </Style>
+                              </TextRun>
                               <TextRun>
                                 <Value>40% of the corresponding total amount of items delivered; before installation</Value>
                                 <Style>
@@ -104,14 +140,31 @@
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <ListStyle>Bulleted</ListStyle>
-                            <ListLevel>1</ListLevel>
                             <Style>
                               <LineHeight>1pt</LineHeight>
                             </Style>
                           </Paragraph>
                           <Paragraph>
                             <TextRuns>
+                              <TextRun>
+                                <Value xml:space="preserve">      </Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>□   </Value>
+                                <Style>
+                                  <FontStyle>Normal</FontStyle>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                  <Color>#000000</Color>
+                                </Style>
+                              </TextRun>
                               <TextRun>
                                 <Value>10% of the corresponding total amount of items installed and turned over,</Value>
                                 <Style>
@@ -121,8 +174,6 @@
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <ListStyle>Bulleted</ListStyle>
-                            <ListLevel>1</ListLevel>
                             <Style>
                               <LineHeight>1pt</LineHeight>
                             </Style>
@@ -189,6 +240,25 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
+                                <Value xml:space="preserve">      </Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>□   </Value>
+                                <Style>
+                                  <FontStyle>Normal</FontStyle>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                  <Color>#000000</Color>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
                                 <Value>Unpaid fees shall be charged </Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
@@ -215,8 +285,6 @@
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <ListStyle>Bulleted</ListStyle>
-                            <ListLevel>1</ListLevel>
                             <Style>
                               <LineHeight>1.5pt</LineHeight>
                             </Style>
@@ -527,7 +595,17 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Undefined Delivery and Installation lead times as a result of the transitioning from lockdown to the New  Normal until the pandemic abates and efficiency reaches its full potential.</Value>
+                                <Value>      □  </Value>
+                                <Style>
+                                  <FontStyle>Normal</FontStyle>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                  <Color>#000000</Color>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>Undefined Delivery and Installation lead times as a result of the transitioning from lockdown to the New  Normal until the                    pandemic abates and efficiency reaches its full potential.</Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
                                   <FontSize>9pt</FontSize>
@@ -536,8 +614,6 @@
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <ListStyle>Bulleted</ListStyle>
-                            <ListLevel>1</ListLevel>
                             <Style>
                               <TextAlign>Left</TextAlign>
                               <LineHeight>1.5pt</LineHeight>
@@ -1576,7 +1652,7 @@
                       </Line>
                       <Line Name="Line11">
                         <Top>0.26074in</Top>
-                        <Left>5.82387in</Left>
+                        <Left>5.73637in</Left>
                         <Height>0in</Height>
                         <Width>-2.18934in</Width>
                         <ZIndex>2</ZIndex>

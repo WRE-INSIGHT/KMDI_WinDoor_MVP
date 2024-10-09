@@ -15672,6 +15672,7 @@ namespace PresentationLayer.Presenter
             WoodecAdditionalForNewItem = woodecAddlPercentage;
         }
         #endregion
+
     }
 
 }
