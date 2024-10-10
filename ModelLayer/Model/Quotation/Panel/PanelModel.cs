@@ -3532,11 +3532,11 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panel_CremonArtNo = value;
+                NotifyPropertyChanged();
             }
-
         }
 
-        private TwoWayLockingConnector_ArticleNo _panel_TwoWayLockingConnectorArtNo;
+    private TwoWayLockingConnector_ArticleNo _panel_TwoWayLockingConnectorArtNo;
         public TwoWayLockingConnector_ArticleNo Panel_TwoWayLockingConnectorArtNo
         {
             get

@@ -2829,8 +2829,17 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
                     _panelModel.Panel_CremonHandleArtNoVisibility = true;
 
+                    if (_panelModel.Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                    {
+                        _panelModel.Panel_CremonArtNo = Cremon_HandleArtNo._H087;
+                    }
+                    else if (_panelModel.Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84116 ||
+                             _panelModel.Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._84118)
+                    {
+                        _panelModel.Panel_CremonArtNo = Cremon_HandleArtNo._H182 ;
+                    }
 
-                    _panelModel.Panel_CremonArtNo = Cremon_HandleArtNo._H087;
+
                     if (!_mainPresenter.ItemLoad)
                     {
                         if (_panelModel.Panel_Type.Contains("Awning"))

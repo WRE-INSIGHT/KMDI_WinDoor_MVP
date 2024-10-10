@@ -1703,7 +1703,8 @@ namespace EnumerationTypeLayer
         public class Cremon_HandleArtNo : Enumeration<Cremon_HandleArtNo, int>
         {
             public static readonly Cremon_HandleArtNo _H087 = new Cremon_HandleArtNo(0, "H087");
-            public static readonly Cremon_HandleArtNo _H198F = new Cremon_HandleArtNo(1, "H198F"); // long
+            public static readonly Cremon_HandleArtNo _H182 = new Cremon_HandleArtNo(1, "H182");
+            public static readonly Cremon_HandleArtNo _H198F = new Cremon_HandleArtNo(2, "H198F"); // long
 
 
             private Cremon_HandleArtNo(int value, string displayName) : base(value, displayName) { }

@@ -43,7 +43,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
             this.DataBindings.Add(ModelBinding["Panel_CremonHandleArtNoVisibility"]);
-            //cmb_CremonArtNo.DataBindings.Add(ModelBinding["Panel_CremonArtNo"]);
+            cmb_CremonArtNo.DataBindings.Add(ModelBinding["Panel_CremonArtNo"]);
 
         }
 

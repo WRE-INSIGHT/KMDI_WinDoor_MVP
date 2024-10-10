@@ -53,7 +53,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
             binding.Add("Panel_CremonHandleArtNoVisibility", new Binding("Visible", _panelModel, "Panel_CremonHandleArtNoVisibility", true,DataSourceUpdateMode.OnPropertyChanged));
-            //binding.Add("Panel_CremonArtNo", new Binding("Text",_panelModel, "Panel_CremonArtNo", true,DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_CremonArtNo", new Binding("Text",_panelModel, "Panel_CremonArtNo", true,DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }
