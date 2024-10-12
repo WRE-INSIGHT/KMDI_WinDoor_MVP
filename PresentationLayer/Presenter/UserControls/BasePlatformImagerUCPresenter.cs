@@ -1047,7 +1047,7 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         IPanelModel panelModel = mpnl.MPanelLst_Panel.Find(panel => panel.Panel_Name == ctrl.Name);
                         objLocY = mlocY;
-
+                        panelModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
                         if (panelModel.Panel_Placement == "First")
                         {
                             objLocX += mlocX; //addition of frame_pads and div wd   
@@ -1056,10 +1056,7 @@ namespace PresentationLayer.Presenter.UserControls
                         {
 
                         }                    
-                        if (panelModel.PanelImageRenderer_Zoom == panelModel.Panel_Zoom)
-                        {
-                            panelModel.PanelImageRenderer_Width = panelModel.Panel_WidthToBind;
-                        }
+                        
                         Draw_Panel(e, panelModel, new Point(objLocX + 1, objLocY));
 
                         objLocX += panelModel.PanelImageRenderer_Width;
@@ -1068,7 +1065,7 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         IDividerModel divModel = mpnl.MPanelLst_Divider.Find(div => div.Div_Name == ctrl.Name);
                         int locY_deduct = 0;
-
+                        divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
                         if (zoom == 1.0f)
                         {
                             locY_deduct = 10;
@@ -1112,7 +1109,7 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         IMultiPanelModel mpnlModel = mpnl.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == ctrl.Name);
                         objLocY = mlocY;
-
+                        mpnlModel.MPanelImageRenderer_Height = mpnl.MPanelImageRenderer_Height;
                         if (mpnlModel.MPanel_Placement == "First")
                         {
                             objLocX += mlocX; //addition of frame_pads and div wd
@@ -1150,13 +1147,15 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else if (mpnl.MPanel_Type == "Transom")
             {
+
                 foreach (Control ctrl in mpnl.MPanelLst_Objects)
                 {
+
                     if (ctrl.Name.Contains("PanelUC_"))
                     {
                         IPanelModel panelModel = mpnl.MPanelLst_Panel.Find(panel => panel.Panel_Name == ctrl.Name);
                         objLocX = mlocX;
-
+                        panelModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
                         if (panelModel.Panel_Placement == "First")
                         {
                             objLocY += mlocY; //addition of frame_pads and div wd
@@ -1165,10 +1164,7 @@ namespace PresentationLayer.Presenter.UserControls
                         {
 
                         }
-                       if (panelModel.PanelImageRenderer_Zoom == panelModel.Panel_Zoom)
-                       {
-                          // panelModel.PanelImageRenderer_Height = panelModel.Panel_HeightToBind;
-                       }
+
                         Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
 
                         int lastLevelDivisor = 0, botPadDeduction = 0;
@@ -1196,7 +1192,7 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         IDividerModel divModel = mpnl.MPanelLst_Divider.Find(div => div.Div_Name == ctrl.Name);
                         int locX_deduct = 0;
-
+                        divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
                         if (zoom == 1.0f)
                         {
                             locX_deduct = 10;
@@ -1205,14 +1201,7 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             locX_deduct = 5;
                         }
-                        Console.WriteLine("Divider Imager Width: " + divModel.DivImageRenderer_Width);
-                        Console.WriteLine("Divider Imager Width To Bind: " + divModel.Div_WidthToBind);
-                        Console.WriteLine("Divider Zoom Imager: " + divModel.DivImageRenderer_Zoom);
-                        Console.WriteLine("Divider Zoom: " + divModel.Div_Zoom);
-                        if (divModel.DivImageRenderer_Zoom == divModel.Div_Zoom)
-                        {
-                            //divModel.DivImageRenderer_Width = divModel.Div_WidthToBind;
-                        }
+
                         Draw_Divider(e, divModel, new Point(objLocX - locX_deduct, objLocY), 0);
 
                         objLocY += divModel.DivImageRenderer_Height;
@@ -1223,6 +1212,7 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         IMultiPanelModel mpnlModel = mpnl.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == ctrl.Name);
                         objLocX = mlocX;
+                        mpnlModel.MPanelImageRenderer_Width = mpnl.MPanelImageRenderer_Width;
 
                         if (mpnlModel.MPanel_Placement == "First")
                         {
@@ -3870,7 +3860,6 @@ namespace PresentationLayer.Presenter.UserControls
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             float zoom = mpanelModel.MPanelImageRenderer_Zoom;
-
             int client_wd = mpanelModel.MPanelImageRenderer_Width,
                 client_ht = mpanelModel.MPanelImageRenderer_Height - botPadHeightDeduct;
 
