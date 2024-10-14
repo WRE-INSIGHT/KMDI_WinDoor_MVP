@@ -79,6 +79,25 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
+                                <Value xml:space="preserve">      </Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>□   </Value>
+                                <Style>
+                                  <FontStyle>Normal</FontStyle>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                  <Color>#000000</Color>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
                                 <Value>50% of the total contract price; upon signing of this quotation/agreement</Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
@@ -87,14 +106,31 @@
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <ListStyle>Bulleted</ListStyle>
-                            <ListLevel>1</ListLevel>
                             <Style>
-                              <LineHeight>1.5pt</LineHeight>
+                              <LineHeight>1pt</LineHeight>
                             </Style>
                           </Paragraph>
                           <Paragraph>
                             <TextRuns>
+                              <TextRun>
+                                <Value xml:space="preserve">      </Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>□   </Value>
+                                <Style>
+                                  <FontStyle>Normal</FontStyle>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                  <Color>#000000</Color>
+                                </Style>
+                              </TextRun>
                               <TextRun>
                                 <Value>40% of the corresponding total amount of items delivered; before installation</Value>
                                 <Style>
@@ -104,14 +140,31 @@
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <ListStyle>Bulleted</ListStyle>
-                            <ListLevel>1</ListLevel>
                             <Style>
-                              <LineHeight>1.5pt</LineHeight>
+                              <LineHeight>1pt</LineHeight>
                             </Style>
                           </Paragraph>
                           <Paragraph>
                             <TextRuns>
+                              <TextRun>
+                                <Value xml:space="preserve">      </Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>□   </Value>
+                                <Style>
+                                  <FontStyle>Normal</FontStyle>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                  <Color>#000000</Color>
+                                </Style>
+                              </TextRun>
                               <TextRun>
                                 <Value>10% of the corresponding total amount of items installed and turned over,</Value>
                                 <Style>
@@ -121,10 +174,8 @@
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <ListStyle>Bulleted</ListStyle>
-                            <ListLevel>1</ListLevel>
                             <Style>
-                              <LineHeight>1.5pt</LineHeight>
+                              <LineHeight>1pt</LineHeight>
                             </Style>
                           </Paragraph>
                           <Paragraph>
@@ -140,7 +191,7 @@
                             </TextRuns>
                             <ListLevel>1</ListLevel>
                             <Style>
-                              <LineHeight>1.5pt</LineHeight>
+                              <LineHeight>1pt</LineHeight>
                             </Style>
                           </Paragraph>
                           <Paragraph>
@@ -189,6 +240,25 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
+                                <Value xml:space="preserve">      </Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>□   </Value>
+                                <Style>
+                                  <FontStyle>Normal</FontStyle>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                  <Color>#000000</Color>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
                                 <Value>Unpaid fees shall be charged </Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
@@ -215,8 +285,6 @@
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <ListStyle>Bulleted</ListStyle>
-                            <ListLevel>1</ListLevel>
                             <Style>
                               <LineHeight>1.5pt</LineHeight>
                             </Style>
@@ -229,14 +297,6 @@
                                   <FontFamily>Segoe UI</FontFamily>
                                   <FontSize>8pt</FontSize>
                                   <FontWeight>Normal</FontWeight>
-                                </Style>
-                              </TextRun>
-                              <TextRun>
-                                <Value xml:space="preserve"> </Value>
-                                <Style>
-                                  <FontFamily>Segoe UI</FontFamily>
-                                  <FontSize>8pt</FontSize>
-                                  <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
                               <TextRun>
@@ -277,7 +337,34 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>     A.   </Value>
+                                <Value xml:space="preserve">    </Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value xml:space="preserve">  </Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>□</Value>
+                                <Style>
+                                  <FontStyle>Normal</FontStyle>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                  <Color>#000000</Color>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value xml:space="preserve">  </Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
                                   <FontWeight>Normal</FontWeight>
@@ -301,15 +388,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value xml:space="preserve"> </Value>
-                                <Style>
-                                  <FontFamily>Segoe UI</FontFamily>
-                                  <FontWeight>Normal</FontWeight>
-                                  <TextDecoration>None</TextDecoration>
-                                </Style>
-                              </TextRun>
-                              <TextRun>
-                                <Value>and any delay caused by the client shall be billed accordingly.</Value>
+                                <Value>            and any delay caused by the client shall be billed accordingly.</Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
                                   <FontSize>8pt</FontSize>
@@ -318,7 +397,6 @@
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <ListLevel>1</ListLevel>
                             <Style>
                               <LineHeight>1.5pt</LineHeight>
                             </Style>
@@ -326,7 +404,75 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>     B.   </Value>
+                                <Value xml:space="preserve">       </Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>□</Value>
+                                <Style>
+                                  <FontStyle>Normal</FontStyle>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                  <Color>#000000</Color>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>   For  projects outside of Metro Manila, the following charges shall be accounted to the buyers:</Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style>
+                              <LineHeight>1.5pt</LineHeight>
+                            </Style>
+                          </Paragraph>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>                A.    Packing, Insurance and Freight Charges from Metro Manila to site</Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style>
+                              <LineHeight>1.5pt</LineHeight>
+                            </Style>
+                          </Paragraph>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value xml:space="preserve">             </Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>B</Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>.   </Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
                                   <FontWeight>Normal</FontWeight>
@@ -368,7 +514,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>          'This includes three (3) Technical visits: initial/final measurement, installation checkup, inspection prior to turn-over; and two (2) trips</Value>
+                                <Value>                       'This includes three (3) Technical visits: initial/final measurement, installation checkup, inspection prior to turn-over; and two (2) trips</Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
                                   <FontSize>8pt</FontSize>
@@ -385,7 +531,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>            of Installation team: (1) Installation of windows/doors; (2) One-time Cleaning and Installation of handles &amp; insect screens</Value>
+                                <Value>                        of Installation team: (1) Installation of windows/doors; (2) One-time Cleaning and Installation of handles &amp; insect screens</Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
                                   <FontSize>8pt</FontSize>
@@ -449,16 +595,25 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Undefined Delivery and Installation lead times as a result of the transitioning from lockdown to the New  Normal until the pandemic abates and efficiency reaches its full potential.</Value>
+                                <Value>      □  </Value>
+                                <Style>
+                                  <FontStyle>Normal</FontStyle>
+                                  <FontFamily>Calibri</FontFamily>
+                                  <FontWeight>Normal</FontWeight>
+                                  <TextDecoration>None</TextDecoration>
+                                  <Color>#000000</Color>
+                                </Style>
+                              </TextRun>
+                              <TextRun>
+                                <Value>Undefined Delivery and Installation lead times as a result of the transitioning from lockdown to the New  Normal until the                    pandemic abates and efficiency reaches its full potential.</Value>
                                 <Style>
                                   <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>9pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                   <TextDecoration>None</TextDecoration>
                                 </Style>
                               </TextRun>
                             </TextRuns>
-                            <ListStyle>Bulleted</ListStyle>
-                            <ListLevel>1</ListLevel>
                             <Style>
                               <TextAlign>Left</TextAlign>
                               <LineHeight>1.5pt</LineHeight>
@@ -467,20 +622,11 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>FINAL AGREED PRICE SHALL BE SUBJECTED TO REVISIONS AND/OR ADJUSTMENT BASED ON ACTUAL DESIGNS, MEASUREMENT AND QUANTITIES</Value>
+                                <Value>FINAL AGREED PRICE SHALL BE SUBJECTED TO REVISIONS AND/OR ADJUSTMENT BASED ON ACTUAL DESIGNS, MEASUREMENT AND QUANTITIES </Value>
                                 <Style>
                                   <FontStyle>Italic</FontStyle>
                                   <FontFamily>Segoe UI</FontFamily>
-                                  <FontWeight>Bold</FontWeight>
-                                  <TextDecoration>None</TextDecoration>
-                                </Style>
-                              </TextRun>
-                              <TextRun>
-                                <Value xml:space="preserve"> </Value>
-                                <Style>
-                                  <FontStyle>Italic</FontStyle>
-                                  <FontFamily>Segoe UI</FontFamily>
-                                  <FontSize>12pt</FontSize>
+                                  <FontSize>9pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                   <TextDecoration>None</TextDecoration>
                                 </Style>
@@ -1477,34 +1623,11 @@
                             </TextRuns>
                             <Style />
                           </Paragraph>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value xml:space="preserve">                     </Value>
-                                <Style>
-                                  <FontFamily>Segoe UI</FontFamily>
-                                </Style>
-                              </TextRun>
-                            </TextRuns>
-                            <Style />
-                          </Paragraph>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value>sign above printed name and on all pages</Value>
-                                <Style>
-                                  <FontFamily>Segoe UI</FontFamily>
-                                  <FontSize>8pt</FontSize>
-                                </Style>
-                              </TextRun>
-                            </TextRuns>
-                            <Style />
-                          </Paragraph>
                         </Paragraphs>
                         <rd:DefaultName>Textbox2</rd:DefaultName>
                         <Left>0.02232in</Left>
-                        <Height>0.57899in</Height>
-                        <Width>7.80638in</Width>
+                        <Height>0.26074in</Height>
+                        <Width>4.11471in</Width>
                         <Style>
                           <Border>
                             <Style>None</Style>
@@ -1529,7 +1652,7 @@
                       </Line>
                       <Line Name="Line11">
                         <Top>0.26074in</Top>
-                        <Left>5.82555in</Left>
+                        <Left>5.70055in</Left>
                         <Height>0in</Height>
                         <Width>-2.18934in</Width>
                         <ZIndex>2</ZIndex>
@@ -1539,11 +1662,44 @@
                           </Border>
                         </Style>
                       </Line>
+                      <Textbox Name="Textbox4">
+                        <CanShrink>true</CanShrink>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>sign above printed name and on all pages</Value>
+                                <Style>
+                                  <FontFamily>Segoe UI</FontFamily>
+                                  <FontSize>8pt</FontSize>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox4</rd:DefaultName>
+                        <Top>0.23783in</Top>
+                        <Left>0.05024in</Left>
+                        <Height>0.25in</Height>
+                        <Width>1.84167in</Width>
+                        <ZIndex>3</ZIndex>
+                        <Style>
+                          <Border>
+                            <Style>None</Style>
+                          </Border>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
                     </ReportItems>
                     <KeepTogether>true</KeepTogether>
                     <Top>2.8909in</Top>
                     <Left>0.00336in</Left>
-                    <Height>0.6108in</Height>
+                    <Height>0.48783in</Height>
                     <Width>7.8287in</Width>
                     <ZIndex>3</ZIndex>
                     <Style>
@@ -3071,7 +3227,7 @@ Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountA
                 <KeepTogether>true</KeepTogether>
                 <Top>0.03908in</Top>
                 <Left>0.05491in</Left>
-                <Height>3.5017in</Height>
+                <Height>3.37873in</Height>
                 <Width>7.83206in</Width>
                 <Style>
                   <Border>
@@ -3184,7 +3340,7 @@ Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountA
             <KeepTogether>true</KeepTogether>
             <Top>0.0125in</Top>
             <Left>0.0125in</Left>
-            <Height>3.60948in</Height>
+            <Height>3.45948in</Height>
             <Width>7.93185in</Width>
             <Style>
               <Border>
@@ -3193,7 +3349,7 @@ Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountA
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>3.62198in</Height>
+        <Height>3.49698in</Height>
         <Style />
       </Body>
       <Width>7.97267in</Width>

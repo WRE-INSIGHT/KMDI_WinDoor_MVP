@@ -167,6 +167,7 @@ namespace PresentationLayer.Presenter
 
         private CommonFunctions _commonfunc = new CommonFunctions();
 
+        private DataTable _initialGlassPriceDT = new DataTable();
         private DataTable _glassThicknessDT = new DataTable();
         private DataTable _glassTypeDT = new DataTable();
         private DataTable _guHolderDT = new DataTable();
@@ -333,6 +334,17 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public DataTable InitialGlassPriceDT
+        {
+            get
+            {
+                return _initialGlassPriceDT;
+            }
+            set
+            {
+                _initialGlassPriceDT = value;
+            }
+        }
         public DataTable GlassTypeDT
         {
             get
@@ -3717,13 +3729,21 @@ namespace PresentationLayer.Presenter
             }
 
             GetGlassThickness();
+            CreateInitialGlassPriceDT();
+        }
+
+
+        private void CreateInitialGlassPriceDT()
+        {
+            _initialGlassPriceDT.Columns.Add(CreateColumn("TotalThickness", "TotalThickness", "System.Decimal"));
+            _initialGlassPriceDT.Columns.Add(CreateColumn("Description", "Description", "System.String"));
         }
 
         private void GetGlassThickness()
         {
+
             _glassComputedThickness.Columns.Add(CreateColumn("TotalThickness", "TotalThickness", "System.Decimal"));
             _glassComputedThickness.Columns.Add(CreateColumn("Description", "Description", "System.String"));
-
 
             foreach (DataRow Glass in _glassThicknessDT.Rows)
             {
@@ -12111,7 +12131,7 @@ namespace PresentationLayer.Presenter
             mpnllvl = string.Empty;
             _screenList = new List<IScreenModel>();
             _nonUnglazed = new List<DataRow>();
-            _dic_PaScreenID = new Dictionary<long, decimal>();
+            _dic_PaScreenID = new Dictionary<long, decimal>();              
             _lst_ScreenPartialAdjustment = new List<IScreenPartialAdjustmentProperties>();
             _guHolderDT.Clear();
             _pnlItems.Controls.Clear();
