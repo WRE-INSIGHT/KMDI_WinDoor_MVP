@@ -432,8 +432,18 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
 
-                if (_panelModel.Panel_Type.Contains("Sliding"))
+                if (_panelModel.Panel_Type.Contains("Sliding") &&
+                    !_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
                 {
+                    _panelModel.AdjustPropertyPanelHeight("addSlidingType");
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
+                    }
+
                     IPP_SlidingTypePropertyUCPresenter slidingTypePresenter = _pp_slidingTypePropertyUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     UserControl slidingTypeUCPresenter = (UserControl)slidingTypePresenter.GetSlidingTypePropertyUC();
                     _pnlPanelSpecs.Controls.Add(slidingTypeUCPresenter);
@@ -623,7 +633,7 @@ namespace PresentationLayer.Presenter.UserControls
                     }
 
                 }
-
+        
 
                 if (_panelModel.Panel_Type.Contains("Sliding"))
                 {
@@ -633,16 +643,13 @@ namespace PresentationLayer.Presenter.UserControls
 
                     _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
                     _panelModel.AdjustPropertyPanelHeight("addRollerType");
-                    _panelModel.AdjustPropertyPanelHeight("addSlidingType");
                     _panelModel.AdjustPropertyPanelHeight("addAluminumTrackQty");
 
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRollerType");
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addAluminumTrackQty");
 
                     if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRollerType");
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addAluminumTrackQty");
                     }

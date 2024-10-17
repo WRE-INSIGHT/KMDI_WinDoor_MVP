@@ -86,7 +86,7 @@ namespace PresentationLayer.Presenter
                                 }
                                 else
                                 {
-                                    desc = " (Sets of " + ScrLst.Screen_Set.ToString() + ")";
+                                    desc = " (Sets of " + ScrLst.Screen_Set.ToString() + ")"; 
                                 }
                             }
                             else

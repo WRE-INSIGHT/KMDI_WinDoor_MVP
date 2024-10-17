@@ -17,7 +17,7 @@ namespace PresentationLayer.Views
         {
             get
             {
-                return txt_oftexpenses.Text;
+                return txt_oftexpenses.Text;        
             }
             set
             {
@@ -57,6 +57,44 @@ namespace PresentationLayer.Views
                 txtbx_SummaryLessD.Text = value;
             }
         }
+
+        public string TxtGlassUpgradeRowLimit
+        {
+            get
+            {
+                return txt_Gurowlimit.Text;
+            }
+            set
+            {
+                txt_Gurowlimit.Text = value;
+            }
+        }
+
+        public string PartialAdjContractSummaryTotalText
+        {
+            get
+            {
+                return rtbox_PATotalText.Text;
+            }
+            set
+            {
+                rtbox_PATotalText.Text = value;
+            }
+        }
+
+        public string PartialAdjSpecialDiscountText
+        {
+            get
+            {
+                return txtbox_SpecialDiscount.Text;
+            }
+            set
+            {
+                txtbox_SpecialDiscount.Text = value;
+            }
+        }
+
+
 
         public CheckBox GetScreenNetOfDiscountChkBox()
         {
@@ -147,6 +185,35 @@ namespace PresentationLayer.Views
             return txtbx_SummaryLessD;
         }
 
+        public CheckBox GetGlassUpgradeSubTotal()
+        {
+            return chkbx_GuSubtotal;
+        }
+        public TextBox GetGlassUpgradeRowLimitTxtBx()
+        {
+            return txt_Gurowlimit;
+        }
+
+        public TextBox GetScreenRowLimitTxtBx()
+        {
+            return txtbox_rowlimit;
+        }
+
+        public RichTextBox GetPATotalRtBx()
+        {
+            return rtbox_PATotalText;
+        }
+
+        public CheckBox GetSpecialDiscountChkBx()
+        {
+            return chkbx_SpecialDiscount;
+        }
+
+        public TextBox GetSpecialDiscountTxtBx()
+        {
+            return txtbox_SpecialDiscount;
+        }
+
         public event EventHandler chkboxsubtotalCheckedChangedEventRaised;
         public event EventHandler BtnCompileReportClickEventRaised;
         public event EventHandler RDLCReportCompilerViewLoadEventRaised;
@@ -157,6 +224,8 @@ namespace PresentationLayer.Views
         public event EventHandler chkbxguShowVatCheckedChanged;
         public event EventHandler chkbx_SummaryLessD_CheckedChangedEventRaised;
         public event EventHandler chkbx_ScreenNetofDiscount_CheckedChangedEventRaised;
+        public event EventHandler chkbx_GuSubtotal_CheckedChangedEventRaised;
+        public event EventHandler chkbx_SpecialDiscount_CheckedChangedEventRaised;
 
         public RDLCReportCompilerView()
         {
@@ -211,6 +280,16 @@ namespace PresentationLayer.Views
         private void chkbx_ScreenNetofDiscount_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, chkbx_ScreenNetofDiscount_CheckedChangedEventRaised, e);
+        }
+
+        private void chkbx_GuSubtotal_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbx_GuSubtotal_CheckedChangedEventRaised, e);
+        }
+
+        private void chkbx_SpecialDiscount_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkbx_SpecialDiscount_CheckedChangedEventRaised, e);
         }
     }
 }

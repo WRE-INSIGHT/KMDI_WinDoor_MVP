@@ -29,6 +29,7 @@ namespace PresentationLayer.Presenter
         List<DataRow> Unglazed { get; set; }
         Dictionary<long, decimal> Dic_PaScreenID { get; set; }
         List<IScreenPartialAdjustmentProperties> Lst_ScreenPartialAdjustment { get; set; }
+        List<string> Lst_GlassDescException { get; set; }
         Control ControlRaised_forDMSelection { get; }
         IDividerModel DivModel_forDMSelection { get; }
         IPanelModel PrevPnlModel_forDMSelection { get; }
@@ -38,6 +39,8 @@ namespace PresentationLayer.Presenter
         DataTable GlassTypeDT { get; set; }
         DataTable GlassColorDT { get; set; }
         DataTable GlassSpacerDT { get; set; }
+        DataTable GlassComputedThickness { get; set; }
+        DataTable InitialGlassPriceDT { get; set; }
         int inputted_quoteId { get; set; }
         string inputted_quotationRefNo { get; set; }
         string inputted_projectName { get; set; }
@@ -95,6 +98,7 @@ namespace PresentationLayer.Presenter
                                                   IPanelModel curnt_pnl = null,
                                                   IPanelModel nxt_pnl = null,
                                                   IPanelModel selected_pnl = null);
+        void WrongSelectionOfDummyMullion();
 
         void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
         void AddBasePlatform(IBasePlatformUC basePlatform);
@@ -163,7 +167,8 @@ namespace PresentationLayer.Presenter
         void DisposeDrawingandProperties();
         void CopyObjectsPerWindoorModel();
         void MainPresenter_PartialAdjustment();
-        void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color);
+        void ClearAndAddGlassInList(bool _callfrmGlassUpgrade);
+        void setColors(Base_Color base_Color, Foil_Color inside_Color, Foil_Color outside_Color, PowderCoatType_Color powderCoatType_Color);
         void setWoodecAdditional(int woodecAddlPercentage);
 
         IPanelModel PrevPanelModel_forCenterProfileSelection { get; }
@@ -174,6 +179,7 @@ namespace PresentationLayer.Presenter
         bool EditFromQuotationList { get; set; }
         Control ControlRaised_forCenterProfileSelection { get; set; }
         void OnLoadSearchCenterProfielArtNo(IPanelModel pnlModel);
+       
 
     }
 }

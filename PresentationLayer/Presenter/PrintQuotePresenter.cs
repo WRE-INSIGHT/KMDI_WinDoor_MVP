@@ -45,7 +45,7 @@ namespace PresentationLayer.Presenter
                Less_Discount_key;
 
         string[] _officialsName = { "KENNETH G. LAO","GENALYN C. GARCIA","STEPHANIE DE LOS SANTOS","KEVIN CHARLES S. LAO"};
-        string[] _officialsPosition = {"President,KMDI","VP-Sales & Operations","VP-Marketing & Finance","Head, Sales & Operations" };
+        string[] _officialsPosition = {"President,KMDI", "Vice-President/General Manager, KMDI", "VP-Marketing & Finance","Head, Sales & Operations" };
 
         int count = 0,
             newlinecount = 0;
@@ -457,7 +457,6 @@ namespace PresentationLayer.Presenter
                 }
                 else if (_mainPresenter.printStatus == "PartialAdjustment")
                 {
-                    Console.WriteLine("partialAdjustment");
                     #region Salution, Body and Address for PartialAdjustment
                     _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
                                                      + "USING "
@@ -494,6 +493,32 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.FreightCharge = "0";
                     _printQuoteView.LessDiscount = "30";
                 }
+                else if (_mainPresenter.printStatus == "PartialADJContractSummary")
+                {
+                    #region Partial Adjustment Contract Summary
+                    _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
+                                                              + "USING "
+                                                              + baseColor.ToUpper()
+                                                              + " PROFILES\n"
+                                                              + "USING "
+                                                              + GlassThickness.ToUpper()
+                                                              + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+                                                              + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION";
+                    _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
+                                                    + _mainPresenter.titleLastname
+                                                    + ",";
+                    _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
+
+                    _printQuoteView.PartialAdjustmentTotalText = "Total Special Discounted Adjustment Price without VaT";
+                    
+
+                    _printQuoteView.QuotationOuofTownExpenses = "0";
+                    _printQuoteView.VatPercentage = "12";
+                    _printQuoteView.LaborandMobilization = "0";
+                    _printQuoteView.FreightCharge = "0";
+                    _printQuoteView.LessDiscount = "30";
+                    #endregion
+                }
                 else
                 {
                     _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
@@ -521,7 +546,7 @@ namespace PresentationLayer.Presenter
             }
 
             _printQuoteView.GetDTPDate().Value = DateTime.Now;
-            _printQuoteView.RowLimit = "22";
+            _printQuoteView.RowLimit = "100";
         }
 
         private void AddItemsInReviewedAndNotedBy()
@@ -757,7 +782,10 @@ namespace PresentationLayer.Presenter
                 else if (_mainPresenter.printStatus == "ContractSummary")
                 {
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.SummaryOfContract.rdlc";
-                    //_printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Annex.rdlc";
+                }
+                else if (_mainPresenter.printStatus == "PartialADJContractSummary")
+                {
+                    _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.PartialADJSummaryOfContract.rdlc";
                 }
                 else if(_mainPresenter.printStatus == "GlassUpgrade")
                 {
@@ -1127,7 +1155,7 @@ namespace PresentationLayer.Presenter
                 }
                 else if (_mainPresenter.printStatus == "ContractSummary")
                 {
-                    #region Contract Summary RDLC 
+                   #region Contract Summary RDLC 
 
                     #region  label & Rtextbox new location
                     _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(205, 3);
@@ -1240,6 +1268,167 @@ namespace PresentationLayer.Presenter
                         {
                             RParam[9] = new ReportParameter("NetofDiscount", "True");
                         }
+                    }
+
+                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+                    //_printQuoteView.QuotationOuofTownExpenses = oftexpenses.ToString("n");
+
+                    #region RenderPDFAtBackground
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    {
+                        Warning[] warnings;
+                        string[] streamIds;
+                        string mimeType = string.Empty;
+                        string encoding = string.Empty;
+                        string extension = string.Empty;
+
+                        byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                           ("PDF",
+                           null,
+                           out mimeType,
+                           out encoding,
+                           out extension,
+                           out streamIds,
+                           out warnings
+                           );
+
+                        string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\SummaryOfContract.PDF";
+                        using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                        {
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+                        printAnnexRDLC();
+                    }
+                    #endregion
+
+                    #endregion
+                }
+                else if (_mainPresenter.printStatus == "PartialADJContractSummary")
+                {
+                    #region PartialAdjusmentContractSummary RDLC 
+
+                    #region  label & Rtextbox new location
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(205, 3);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(416, 3);
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(627, 3);
+
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(627, 26);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
+
+                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(350, 118);//from 500 118
+
+                    #endregion
+                    #region Visibility Additional Info
+
+                    _printQuoteView.GetAdditionalInfoLabel().Visible = true;
+                    _printQuoteView.GetLabor_N_MobiChkbox().Visible = true;
+                    _printQuoteView.GetFreightChargesChkbox().Visible = true;
+                    _printQuoteView.GetVatChkbox().Visible = true;
+                    _printQuoteView.GetLessDiscountchkbox().Visible = true;
+
+                    _printQuoteView.GetAdditionalInfoLabel().Location = new System.Drawing.Point(1200, 5);
+                    _printQuoteView.GetAdditionalInfoLabel().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    _printQuoteView.GetLabor_N_MobiChkbox().Location = new System.Drawing.Point(1130, 28);
+                    _printQuoteView.GetLabor_N_MobiChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    _printQuoteView.GetFreightChargesChkbox().Location = new System.Drawing.Point(1130, 59);
+                    _printQuoteView.GetFreightChargesChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    _printQuoteView.GetVatChkbox().Location = new System.Drawing.Point(1130, 88);
+                    _printQuoteView.GetVatChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    _printQuoteView.GetLessDiscountchkbox().Location = new System.Drawing.Point(1130, 118);
+                    _printQuoteView.GetLessDiscountchkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    #endregion
+
+                    _printQuoteView.GetChkLstBox().Visible = false;
+                    _printQuoteView.ShowLastPage().Visible = true; // screen Contract Page
+                    _printQuoteView.ShowLastPage().Text = "Net of Discount";
+                    _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
+                    _printQuoteView.GetUniversalLabel().Location = new System.Drawing.Point(977, 26);
+                    _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(977, 50);// from 38,81
+                    _printQuoteView.ShowLastPage().Location = new System.Drawing.Point(977, 88);
+                    _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+                    _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
+
+                    //string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
+                    //int oftexpenses = Convert.ToInt32(trimmedamount);
+
+                    #region save files without pos in AEIC
+                    if (_mainPresenter.position == null || _mainPresenter.position == " " || _mainPresenter.position == "")
+                    {
+                        _mainPresenter.position = " ";
+                    }
+                    #endregion
+                    ReportParameter[] RParam = new ReportParameter[13];
+                    RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+                    RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
+                    RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
+                    RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + _printQuoteView.QuotationOuofTownExpenses));
+                    RParam[6] = new ReportParameter("VatPercentage", _printQuoteView.VatPercentage);
+                    RParam[7] = new ReportParameter("LessDiscountPercentage", _printQuoteView.LessDiscount);
+                    RParam[10] = new ReportParameter("DynamicTotalText",_printQuoteView.PartialAdjustmentTotalText);
+                    RParam[11] = new ReportParameter("SpecialDiscount",_printQuoteView.PartialAdjustmentSpecialDiscount);
+
+                    if (_printQuoteView.GetShowPageNum().Checked)
+                    {
+                        RParam[4] = new ReportParameter("ShowPageNum", "True");
+                    }
+                    else
+                    {
+                        RParam[4] = new ReportParameter("ShowPageNum", "False");
+                    }
+
+                    if (_printQuoteView.GetVatChkbox().Checked)
+                    {
+                        RParam[5] = new ReportParameter("ShowVat", "True");
+                    }
+                    else
+                    {
+                        RParam[5] = new ReportParameter("ShowVat", "False");
+                    }
+
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.ShowVatContactSummary == true)
+                    {
+                        RParam[5] = new ReportParameter("ShowVat", "True");
+                    }
+
+                    if (_printQuoteView.GetLessDiscountchkbox().Checked)
+                    {
+                        RParam[8] = new ReportParameter("UserDefineLessDiscount", "True");
+                    }
+                    else
+                    {
+                        RParam[8] = new ReportParameter("UserDefineLessDiscount", "False");
+                    }
+
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.ShowLessDiscountContractSummary == true)
+                    {
+                        RParam[8] = new ReportParameter("UserDefineLessDiscount", "True");
+                    }
+
+                    if (_printQuoteView.ShowLastPage().Checked)
+                    {
+                        RParam[9] = new ReportParameter("NetofDiscount", "True");
+                    }
+                    else
+                    {
+                        RParam[9] = new ReportParameter("NetofDiscount", "False");
+                    }
+
+                    if (_quoteItemListPresenter != null)
+                    {
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerNetOfDiscount == true)
+                        {
+                            RParam[9] = new ReportParameter("NetofDiscount", "True");
+                        }
+                    }
+
+                    if(_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCPAShowSpecialDiscount == true)
+                    {
+                        RParam[12] = new ReportParameter("ShowSpecialDiscount", "True");
+                    }
+                    else
+                    {
+                        RParam[12] = new ReportParameter("ShowSpecialDiscount", "False");
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
@@ -1404,6 +1593,15 @@ namespace PresentationLayer.Presenter
                             RParam[10] = new ReportParameter("showNotedBy", "False");
                         }
 
+                        if (_quoteItemListPresenter.RDLCGUShowSubTotal)
+                        {
+                            RParam[16] = new ReportParameter("ShowSubTotal", "True");
+                        }
+                        else
+                        {
+                            RParam[16] = new ReportParameter("ShowSubTotal", "False");
+                        }
+
                         RParam[11] = new ReportParameter("reviewedByOfficial",_quoteItemListPresenter.RDLCGUReviewedByOfficial);
                         int _indxOfReviewedOfficial = _quoteItemListPresenter.RDLCGUReviewedByOfficialPos;
                         RParam[12] = new ReportParameter("reviewedOfficialPos", _officialsPosition[_indxOfReviewedOfficial]);
@@ -1494,6 +1692,34 @@ namespace PresentationLayer.Presenter
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+                    
+                    #region RenderPDFAtBackground
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    {
+                        Warning[] warnings;
+                        string[] streamIds;
+                        string mimeType = string.Empty;
+                        string encoding = string.Empty;
+                        string extension = string.Empty;
+
+                        byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                           ("PDF",
+                           null,
+                           out mimeType,
+                           out encoding,
+                           out extension,
+                           out streamIds,
+                           out warnings
+                           );
+
+                        string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\Quotation.PDF";
+                        using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                        {
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+                    }
+                    #endregion
+
                     #endregion
                 }
                 else if (_mainPresenter.printStatus == "ScreenPartialAdjustment")
@@ -1525,6 +1751,41 @@ namespace PresentationLayer.Presenter
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+
+                    try
+                    {
+                        #region RenderPDFAtBackground
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                        {
+                            Warning[] warnings;
+                            string[] streamIds;
+                            string mimeType = string.Empty;
+                            string encoding = string.Empty;
+                            string extension = string.Empty;
+
+                            byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                               ("PDF",
+                               null,
+                               out mimeType,
+                               out encoding,
+                               out extension,
+                               out streamIds,
+                               out warnings
+                               );
+
+                            string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\Screen.PDF";
+                            using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                            {
+                                fs.Write(bytes, 0, bytes.Length);
+                            }
+                        }
+                        #endregion
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("quoteitemlistpresenter is not used" + ex);
+                    }
+
                     #endregion
                 }
             }

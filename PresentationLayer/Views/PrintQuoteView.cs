@@ -130,6 +130,30 @@ namespace PresentationLayer.Views
             }
         }
 
+        public string PartialAdjustmentTotalText
+        {
+            get
+            {
+                return txt_PATotalText.Text;
+            }
+            set
+            {
+                txt_PATotalText.Text = value;
+            }
+        }
+
+        public string PartialAdjustmentSpecialDiscount
+        {
+            get
+            {
+                return txt_PASpecialDiscount.Text;
+            }
+            set
+            {
+                txt_PASpecialDiscount.Text = value;
+            }
+        }           
+
         public TextBox GetRowLimitTxtBox()
         {
             return txtbox_rowlimit;
@@ -246,6 +270,16 @@ namespace PresentationLayer.Views
         public ComboBox GetNotedByCmb()
         {
             return cmb_NotedBy;
+        }
+
+        public TextBox GetPATotalTextTxtBox()
+        {
+            return txt_PATotalText;
+        }
+
+        public TextBox GetPASpecialDiscountTxtBox()
+        {
+            return txt_PASpecialDiscount;
         }
 
         public event EventHandler btnRefreshClickEventRaised;

@@ -33,7 +33,8 @@ namespace PresentationLayer.Presenter
                MergePathFullname,
                PDfFileName,
                filename;
-        bool CompilePdf = false;
+        bool CompilePdf = false,
+             addAnnexRdlc = true;
         StringBuilder sb = new StringBuilder();
         Regex regex = new Regex(@"[\\/:""*?<>|]+");
         #endregion
@@ -57,7 +58,20 @@ namespace PresentationLayer.Presenter
             _pdfCompilerView.btnCompileReportsClickEventRaised += new EventHandler(OnbtnCompileReportsClickEventRaised);
             _pdfCompilerView.btnCompilePDFClickEventRaised += new EventHandler(OnbtnCompilePDFClickEventRaised);
             _pdfCompilerView.PDFCompilerViewFormClosedEventRaised += new FormClosedEventHandler(OnPDFCompilerViewFormClosedEventRaised);
+            _pdfCompilerView.wthAnnex_chkbx_CheckedChangedEventRaised += new EventHandler(OnwthAnnex_chkbx_CheckedChangedEventRaised);
        
+        }
+
+        private void OnwthAnnex_chkbx_CheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_pdfCompilerView.GetAnnexCheckbox().Checked)
+            {
+                addAnnexRdlc = true;
+            }
+            else
+            {
+                addAnnexRdlc = false;
+            }
         }
 
         private void OnPDFCompilerViewLoadEventRaised(object sender, EventArgs e)
@@ -75,7 +89,10 @@ namespace PresentationLayer.Presenter
                 DirectoryInfo dirInfo = Directory.CreateDirectory(MergePath);
                 dirInfo.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
 
-                _quoteItemListPresenter.QuoteItemList_PrintAnnexRDLC();//add annex rdlc
+                if (addAnnexRdlc)
+                {
+                    _quoteItemListPresenter.QuoteItemList_PrintAnnexRDLC();//add annex rdlc
+                }
 
                 foreach (string file in _pdfCompilerView.GetFileDialog().FileNames)
                 {

@@ -2,6 +2,7 @@
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.Screen;
 using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.DataTables;
 using PresentationLayer.Presenter.UserControls;
@@ -270,6 +271,9 @@ namespace PresentationLayer.Presenter
                 _guFileName = value;
             }
         }
+        public bool RDLCPAShowSpecialDiscount { get; set; }
+        public bool RDLCGUShowSubTotal { get; set; }
+        public string RDLCGURowLimit { get; set; }
 
         public List<IQuoteItemListUCPresenter> LstQuoteItemUC
         {
@@ -311,6 +315,10 @@ namespace PresentationLayer.Presenter
                 _glassUpgradeDT = value;
             }
         }
+
+        public string RDLCReportCompilerContractSummaryTotalText { get; set; }
+        public int RDLCReportCompilerContractSummarySpecialDiscount { get; set; }
+
         private DataTable _glassUpgradeDT = new DataTable();
         decimal _totalNetPriceforPrint;
 
@@ -397,12 +405,11 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.TsbtnContractSummaryClickEventRaised += new EventHandler(OnTsbtnContractSummaryClickEventRaised);
             _quoteItemListView.chkboxSelectallCheckedChangeEventRaised += new EventHandler(OnchkboxSelectallCheckedChangeEventRaised);
             _quoteItemListView.TSbtnPDFCompilerClickEventRaised += new EventHandler(OnTSbtnPDFCompilerClickEventRaised);
-          
-
         }
 
         public void PrintScreenRDLC()
         {
+            #region PrintScreen
             DSQuotation _dsq = new DSQuotation();
             try
             {
@@ -513,11 +520,11 @@ namespace PresentationLayer.Presenter
             printQuote.EventLoad();
             printQuote.GetPrintQuoteView().RowLimit = _rdlcReportCompilerRowLimit;
             printQuote.PrintRDLCReport();
-
+            #endregion
         }
         public void PrintWindoorRDLC()
         {
-
+            #region PrintWindoor
             DSQuotation _dsq = new DSQuotation();
             /*
           ID
@@ -754,11 +761,11 @@ namespace PresentationLayer.Presenter
                 printQuote.EventLoad();
                 printQuote.PrintRDLCReport();
             }
-
+            #endregion
         }
         public void PrintContractSummaryRDLC()
         {
-
+            #region PrintContractSummary
             DSQuotation _dtqoute = new DSQuotation();
             try
             {
@@ -895,13 +902,525 @@ namespace PresentationLayer.Presenter
                 }
             }
             clearingOperation();
+            #endregion
         }
+         
+        public void PrintContractSummaryPartialAdjustmentRDLC()
+        {
+            #region PrintContractSummary P.A.
+            
+            #region windoor
+            DSQuotation _dtqoute = new DSQuotation();
+            List<decimal> adjusmentPriceList = new List<decimal>();
+            try
+            {
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                {
+                    if (wdm.WD_IsSelectedAtPartialAdjusment)
+                    {
+
+                        for(int i = 0; i < wdm.WD_PALst_Price.Count; i++)
+                        {
+                            var PA_price_qty = wdm.WD_PALst_Price[i] * wdm.WD_PALst_Qty[i]; //list price P.A. windoor
+                            var adjustment_price = PA_price_qty - wdm.WD_PAPreviousPrice;
+                            adjusmentPriceList.Add(adjustment_price); // use for new contract summary rdlc 
+                        }
+
+                        var price_x_quantity = wdm.WD_price * wdm.WD_quantity;
+
+                        //windoorTotalListPrice = windoorTotalListPrice + price_x_quantity;
+
+                        windoorTotalListPrice = adjusmentPriceList.Sum();// use for new contract summary rdlc 
+
+                        if (wdm.WD_quantity > 1)
+                        {
+                            for (int i = 1; i <= wdm.WD_quantity; i++)
+                            {
+                                windoortotaldiscount = windoortotaldiscount + wdm.WD_discount;
+                            }
+                        }
+                        else
+                        {
+                            windoortotaldiscount = windoortotaldiscount + wdm.WD_discount;
+                        }
+                    }
+
+                }
+                //windoorTotalListCount = _quotationModel.Lst_Windoor.Sum(m => m.WD_quantity);//change
+                //windoorDiscountAverage = windoortotaldiscount / _quotationModel.Lst_Windoor.Sum(y => y.WD_quantity) / 100;//change
+                windoorTotalListCount = _quotationModel.Lst_Windoor.Where(m => m.WD_IsSelectedAtPartialAdjusment == true).Sum(m => m.WD_quantity);
+                windoorDiscountAverage = windoortotaldiscount / _quotationModel.Lst_Windoor.Where(m => m.WD_IsSelectedAtPartialAdjusment == true).Sum(m => m.WD_quantity) / 100;
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in windoormodel lst_windoor " + this + " " + ex.Message);
+                divisor = 1;
+            }
+            #endregion
+                    
+            #region screens
+            try
+            {
+                ScreenTotalListPrice = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_Adjustment_Price); // use for new contract summary rdlc 
+                ScreenTotalListCount = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_Quantity_Revised); //change
+
+                foreach (var item in _mainPresenter.Lst_ScreenPartialAdjustment)//change
+                {
+                    //screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
+                    //ScreenTotalListPrice = ScreenTotalListPrice + screen_priceXquantiy;
+                    if (item.Screen_Quantity_Revised > 1)
+                    {
+                        for (int i = 1; i <= item.Screen_Quantity; i++)//change
+                        {
+                            screentotaldiscount = screentotaldiscount + item.Screen_Discount_Revised;//change
+                        }
+                    }
+                    else if (item.Screen_Quantity_Revised == 1)//change
+                    {
+                        screentotaldiscount = screentotaldiscount + item.Screen_Discount_Revised;//change
+                    }
+                    else
+                    {
+                        Console.WriteLine("Zero Quantity Detected");    
+                    }
+                    
+                    //ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount_Revised, 2); //change
+
+                }
+
+                Console.WriteLine(_mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_Adjustment_Price)); // use for new rdlc contract summary 
+
+                ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in screenmodel " + this + " " + ex.Message);
+                divisor = 1;
+            }
+
+            #endregion
+
+            screen_Windoor_DiscountAverage = (windoorDiscountAverage + ScreenDiscountAverage) / divisor;
+            province = _mainPresenter.projectAddress.Split(',');
+            archi = province[province.Length - 1].Trim();
+
+            if (archi == "Luzon")
+            {
+                outOfTownChargesMultiplier = 0.025m;
+            }
+            else if (archi == "Visayas")
+            {
+                outOfTownChargesMultiplier = 0.04m;
+            }
+            else if (archi == "Mindanao")
+            {
+                outOfTownChargesMultiplier = 0.05m;
+            }
+
+            outOfTownCharges = Math.Round(((windoorTotalListPrice + ScreenTotalListPrice) * outOfTownChargesMultiplier), 2);
+            if (outOfTownCharges <= 50000) { outOfTownCharges = 50000; }
+            total_DiscountedPrice_wo_VAT = Math.Round((windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage), 2);
+
+            ContractSummaryLessDiscount = screen_Windoor_DiscountAverage;// bring discount Ave to RDLCCompiler
+
+            //Console.WriteLine(archi + " " + outOfTownCharges.ToString());
+            //Console.WriteLine(archi + " " + OutOfTownCharges.ToString());
+            //Console.WriteLine("This is total DiscountedPrice w/o Vat " + Math.Round((total_DiscountedPrice_wo_VAT), 2));
+            //Console.WriteLine("2 decimal places: " + Math.Truncate(total_DiscountedPrice_wo_VAT * 100) / 100);
+
+            //Console.WriteLine(" total windoor discount from forloop" + windoortotaldiscount);
+            //Console.WriteLine("Windoor DiscountTotal: " + _quotationModel.Lst_Windoor.Sum(x => x.WD_discount));
+            //Console.WriteLine("Windoor Average Discount.: " + windoorDiscountAverage);
+            //Console.WriteLine("Screen Average Discount.: " + ScreenDiscountAverage);
+            //Console.WriteLine("Screen & Windoor Discount Average.: " + screen_Windoor_DiscountAverage);
+            //Console.WriteLine("");
+            //Console.WriteLine("Windoor list count total of: " + windoorTotalListCount.ToString());
+            //Console.WriteLine("Windoor total list price: " + windoorTotalListPrice.ToString());
+            //Console.WriteLine("");
+            //Console.WriteLine("screen total list count: " + ScreenTotalListCount.ToString());
+            //Console.WriteLine("screen total list price: " + ScreenTotalListPrice.ToString());
+            //Console.WriteLine("");
+
+            _dtqoute.dtContractSummary.Rows.Add(
+                                                windoorTotalListCount,
+                                                windoorTotalListPrice,
+                                                ScreenTotalListCount,
+                                                ScreenTotalListPrice,
+                                                screen_Windoor_DiscountAverage
+                                                );
+
+
+
+            _mainPresenter.printStatus = "PartialADJContractSummary";
+            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
+            printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
+
+            if (CallFrmRDLCCompiler != true)
+            {
+                if (RenderPDFAtBackGround != true)
+                {
+                    printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+                    printQuote.GetPrintQuoteView().QuotationOuofTownExpenses = OutOfTownCharges.ToString("N2");
+                }
+                else
+                {
+                    printQuote.EventLoad();
+                    printQuote.GetPrintQuoteView().QuotationOuofTownExpenses = _rdlcReportCompilerOutofTownExpenses;
+                    printQuote.GetPrintQuoteView().VatPercentage = _rdlcReportCompilerVatContractSummary;
+                    printQuote.GetPrintQuoteView().LessDiscount = RDLCReportCompilerLessDiscountContractSummary.ToString();
+
+                    printQuote.GetPrintQuoteView().PartialAdjustmentTotalText = RDLCReportCompilerContractSummaryTotalText;
+                    printQuote.GetPrintQuoteView().PartialAdjustmentSpecialDiscount = RDLCReportCompilerContractSummarySpecialDiscount.ToString();
+
+                    printQuote.PrintRDLCReport();
+                }
+            }
+            clearingOperation();
+
+            #endregion
+        }
+
+        public void PrintWindoorPartialAdjustmentRDLC()
+        {
+            #region PrintWindoor P.A.
+            DSQuotation _dsq = new DSQuotation();
+            string[] AlPHA = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+
+            try
+            {
+                for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+                {
+                    IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
+
+                    if (wdm.WD_IsSelectedAtPartialAdjusment)
+                    {
+
+                        bool _isWDMLstIsZero = true;
+                        decimal _price_x_Qty = 0;
+
+                        MemoryStream mstream = new MemoryStream();
+                        Image ItemImage;
+                        //ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                        byte[] ArrForImage;
+                        string ImageByteToString;
+
+                        _price_x_Qty = wdm.WD_price * wdm.WD_quantity;
+
+                        if (wdm.WD_PALst_Designs != null)
+                        {
+                            if (wdm.WD_PALst_Designs.Count != 0)
+                            {
+                                _isWDMLstIsZero = false;
+                            }
+                        }
+
+
+                        if (!_isWDMLstIsZero)
+                        {
+                            bool _isWDMPreviousDesignExist = false;
+
+                            foreach (var item in wdm.WD_PALst_Designs)
+                            {
+                                if (item != null)
+                                {
+                                    _isWDMPreviousDesignExist = true;  // check for previous design exist
+                                    break;
+                                }
+                            }
+
+                            if (_isWDMPreviousDesignExist)
+                            {
+                                #region Adjustable to item below with Previous Design 
+
+                                mstream = new MemoryStream();
+                                ItemImage = wdm.WD_PAPreviousImage;
+
+                                ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                                ArrForImage = mstream.ToArray();
+                                ImageByteToString = Convert.ToBase64String(ArrForImage);
+
+                                _price_x_Qty = wdm.WD_PAPreviousPrice * wdm.WD_quantity; // multiple price to qty
+
+
+                                _dsq.dtPartialAdjustment.Rows.Add(wdm.WD_id,
+                                                                  wdm.WD_itemName,
+                                                                  ImageByteToString,
+                                                                  wdm.WD_PAPreviousDescription + "\n ADJUSTED TO ITEM BELOW",
+                                                                  wdm.WD_quantity,
+                                                                 _price_x_Qty.ToString("N", new CultureInfo("en-US")),
+                                                                  ""
+                                                     );
+
+                                #endregion 
+                            }
+                            else
+                            {
+                                #region Adjustable to item below W/O Previous Design 
+
+
+                                mstream = new MemoryStream();
+                                ItemImage = wdm.WD_image;
+                                ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                                ArrForImage = mstream.ToArray();
+                                ImageByteToString = Convert.ToBase64String(ArrForImage);
+
+                                _price_x_Qty = wdm.WD_price * wdm.WD_quantity; // multiple price to qty
+
+
+                                _dsq.dtPartialAdjustment.Rows.Add(wdm.WD_id,
+                                                                  wdm.WD_itemName,
+                                                                  ImageByteToString,
+                                                                  wdm.WD_description + "\n ADJUSTED TO ITEM BELOW",
+                                                                  wdm.WD_quantity,
+                                                                 _price_x_Qty.ToString("N", new CultureInfo("en-US")),
+                                                                  ""
+                                                     );
+
+                                #endregion
+                            }
+
+
+
+                            for (int j = 0; j < wdm.WD_PALst_Designs.Count; j++)
+                            {
+                                if (wdm.WD_PALst_Designs[j] == null)
+                                {
+                                    if (_isWDMPreviousDesignExist)
+                                    {
+                                        #region PartialAdjustment With New Design in another index
+                                        mstream = new MemoryStream();
+                                        ItemImage = wdm.WD_PAPreviousImage;
+                                        ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                                        ArrForImage = mstream.ToArray();
+                                        ImageByteToString = Convert.ToBase64String(ArrForImage);
+
+                                        _dsq.dtPartialAdjustment.Rows.Add(AlPHA[j],
+                                                                          wdm.WD_itemName,
+                                                                          ImageByteToString,
+                                                                          wdm.WD_PAPreviousDescription + "\n NO SIGNIFICANT CHANGE",
+                                                                          wdm.WD_PALst_Qty[j],//itemQty
+                                                                          wdm.WD_PAPreviousPrice.ToString("N", new CultureInfo("en-US")),
+                                                                          "0.00"
+                                                                          );
+                                        #endregion
+                                    }
+                                    else
+                                    {
+                                        #region PartialAdjustment Without New Design on any index
+                                        mstream = new MemoryStream();
+                                        ItemImage = wdm.WD_image;
+                                        ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                                        ArrForImage = mstream.ToArray();
+                                        ImageByteToString = Convert.ToBase64String(ArrForImage);
+
+                                        _dsq.dtPartialAdjustment.Rows.Add(AlPHA[j],
+                                                                          wdm.WD_itemName,
+                                                                          ImageByteToString,
+                                                                          wdm.WD_description + "\n NO SIGNIFICANT CHANGE",
+                                                                          wdm.WD_PALst_Qty[j],//itemqty
+                                                                          wdm.WD_price.ToString("N", new CultureInfo("en-US")),
+                                                                          "0.00"
+                                                                          );
+                                        #endregion
+                                    }
+
+                                }
+                                else
+                                {
+
+                                    mstream = new MemoryStream();
+                                    ItemImage = wdm.WD_PALst_Designs[j];
+                                    ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                                    ArrForImage = mstream.ToArray();
+                                    ImageByteToString = Convert.ToBase64String(ArrForImage);
+
+                                    decimal AdjustmentPrice = wdm.WD_PALst_Price[j] - wdm.WD_PAPreviousPrice;
+                                    AdjustmentPrice = AdjustmentPrice * wdm.WD_PALst_Qty[j];
+
+                                    decimal Price = wdm.WD_PALst_Price[j] * wdm.WD_PALst_Qty[j];
+
+                                    string AdjustmentPriceTostring;
+                                    if (AdjustmentPrice < 0)
+                                    {
+                                        AdjustmentPriceTostring = "( " + AdjustmentPrice.ToString("N", new CultureInfo("en-US")).Replace("-", "") + " )";
+                                    }
+                                    else
+                                    {
+                                        AdjustmentPriceTostring = AdjustmentPrice.ToString("N", new CultureInfo("en-US"));
+                                    }
+
+
+                                    _dsq.dtPartialAdjustment.Rows.Add(AlPHA[j],
+                                                                      wdm.WD_itemName,
+                                                                      ImageByteToString,
+                                                                      wdm.WD_PALst_Description[j],
+                                                                      wdm.WD_PALst_Qty[j],//itemQty
+                                                                      Price.ToString("N", new CultureInfo("en-US")),
+                                                                      AdjustmentPriceTostring
+                                                                      );
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            mstream = new MemoryStream();
+                            ItemImage = wdm.WD_image;
+                            ItemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                            ArrForImage = mstream.ToArray();
+                            ImageByteToString = Convert.ToBase64String(ArrForImage);
+
+                            _dsq.dtPartialAdjustment.Rows.Add(wdm.WD_id,
+                                                              wdm.WD_itemName,
+                                                              ImageByteToString,
+                                                              wdm.WD_description,
+                                                              wdm.WD_quantity,
+                                                             _price_x_Qty.ToString("N", new CultureInfo("en-US")),
+                                                              ""
+                                                              );
+                        }
+
+                    }
+
+                }
+
+
+                _mainPresenter.printStatus = "PartialAdjustment";
+               
+               // IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
+                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
+                printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtPartialAdjustment.DefaultView;
+ 
+
+                if (RenderPDFAtBackGround != true)
+                {
+                    printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+                }
+                else
+                {
+                    printQuote.EventLoad();
+                    printQuote.PrintRDLCReport();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problem in QuoteItemList PartialAdjustment Print: " + ex.Message);
+            }
+            #endregion 
+        }
+
+        public void PrintScreenPartialAdjustmentRDLC()
+        {
+            #region Screen Partial Adjustment List
+
+            try
+            {
+                DSQuotation _dsq = new DSQuotation();
+
+                foreach (IScreenPartialAdjustmentProperties spap in _mainPresenter.Lst_ScreenPartialAdjustment)
+                {
+                    string _itemNumber = "";
+                    decimal _unitPrice = 0m, _unitPrice_rev = 0m,
+                            _totalAmount = 0m, _totalAmount_rev = 0m,
+                            _adjustment = 0m,
+                            _totalCloseContract = 0m,
+                            _totalRevisedContract = 0m,
+                            _totalAdjustment = 0m;
+                    int _qty = 0, _qty_rev = 0;
+                    string _desc = "", _desc_rev = "", _windoorId;
+
+
+                    if (!spap.Screen_IsChild)
+                    {
+                        _itemNumber = spap.Screen_ItemNumber.ToString();
+                    }
+                    else
+                    {
+                        _itemNumber = "";
+                    }
+
+                    if (spap.Screen_Description_Revised == "")
+                    {
+                        _desc_rev = "";
+                    }
+                    else
+                    {
+                        _desc_rev = spap.Screen_Description_Revised;
+                    }
+
+                    _windoorId = spap.Screen_WindoorID;
+
+                    _desc = spap.Screen_Description;
+
+                    _unitPrice = spap.Screen_UnitPrice;
+                    _unitPrice_rev = spap.Screen_UnitPrice_Revised;
+
+                    _qty = spap.Screen_Quantity;
+                    _qty_rev = spap.Screen_Quantity_Revised;
+
+                    _totalAmount = spap.Screen_TotalAmount;
+                    _totalAmount_rev = spap.Screen_TotalAmount_Revised;
+
+                    _adjustment = spap.Screen_Adjustment_Price;
+
+                    _totalCloseContract = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_TotalAmount);
+                    _totalRevisedContract = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_TotalAmount_Revised);
+                    _totalAdjustment = _mainPresenter.Lst_ScreenPartialAdjustment.Sum(x => x.Screen_Adjustment_Price);
+
+                    Console.WriteLine(Math.Round(_totalCloseContract, 2));
+                    Console.WriteLine(Math.Round(_totalRevisedContract, 2));
+                    Console.WriteLine(Math.Round(_totalAdjustment, 2));
+
+                    _dsq.dtScreenAdjustment.Rows.Add(_itemNumber,
+                                                      _windoorId,
+                                                      _desc,
+                                                      Math.Round(_unitPrice, 2),
+                                                      _qty,
+                                                      Math.Round(_totalAmount, 2),
+                                                      _desc_rev,
+                                                      Math.Round(_unitPrice_rev, 2),
+                                                      _qty_rev,
+                                                      Math.Round(_totalAmount_rev, 2),
+                                                      Math.Round(_adjustment, 2),
+                                                      Math.Round(_totalCloseContract, 2),
+                                                      Math.Round(_totalRevisedContract, 2),
+                                                      Math.Round(_totalAdjustment, 2));
+
+                }
+
+                _mainPresenter.printStatus = "ScreenPartialAdjustment";
+
+                //IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
+                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
+                printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreenAdjustment.DefaultView;
+
+                if (RenderPDFAtBackGround != true)
+                {
+                    printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+                }
+                else
+                {
+                    printQuote.EventLoad();
+                    printQuote.PrintRDLCReport();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Screen Partial Adjustment RDLC \n" + ex.Message);
+            }
+            #endregion
+        }
+
         public void QuoteItemList_PrintAnnexRDLC()
         {
             _printQuotePresenter.printAnnexRDLC();
         }
         public void ContractSummaryComputation()
         {
+            #region Contract Summary Computation
             DSQuotation _dtqoute = new DSQuotation();
             try
             {
@@ -984,6 +1503,7 @@ namespace PresentationLayer.Presenter
             total_DiscountedPrice_wo_VAT = Math.Round((windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage), 2);
 
             clearingOperation();
+            #endregion
         }
         private void clearingOperation()
         {
@@ -1577,6 +2097,7 @@ namespace PresentationLayer.Presenter
         }
         public void PrintGlassUpgrade()
         {
+
             DSQuotation _dsq = new DSQuotation();
             string _itemNumHolder,
                    _dimension;
@@ -1629,13 +2150,14 @@ namespace PresentationLayer.Presenter
 
                     }
                 }
-                //change this to render backgroundS
+                //change this to render background
                 _mainPresenter.printStatus = "GlassUpgrade";
                 IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
                 printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtGlassUpgrade.DefaultView;
                 printQuote.GetPrintQuoteView().GlassType = _guGlassType;
                 printQuote.EventLoad();
                 printQuote.GetPrintQuoteView().VatPercentage = _guVatPercentage;
+                printQuote.GetPrintQuoteView().RowLimit = RDLCGURowLimit;
                 printQuote.PrintRDLCReport();
 
                 //reset print variables 

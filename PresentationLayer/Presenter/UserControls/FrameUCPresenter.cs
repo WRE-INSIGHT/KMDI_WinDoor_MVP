@@ -946,7 +946,6 @@ namespace PresentationLayer.Presenter.UserControls
             if (_mainPresenter.windoorModel_MainPresenter.lst_frame.Count == 0)
             {
                 _mainPresenter.windoorModel_MainPresenter.frameIDCounter = 0;
-
             }
 
         }

@@ -9,6 +9,10 @@ namespace PresentationLayer.Views
         string TxtBxContractSummaryVat { get; set; }
         string TxtBxRowlimit { get; set; }
         string TxtContractSummaryLessDiscount { get; set; }
+        string TxtGlassUpgradeRowLimit { get; set;}
+        string PartialAdjContractSummaryTotalText { get; set; }
+        string PartialAdjSpecialDiscountText { get; set; }
+
         CheckBox GetSubTotalCheckBox();
 
         event EventHandler chkboxsubtotalCheckedChangedEventRaised;
@@ -21,6 +25,8 @@ namespace PresentationLayer.Views
         event EventHandler chkbxguShowVatCheckedChanged;
         event EventHandler chkbx_SummaryLessD_CheckedChangedEventRaised;
         event EventHandler chkbx_ScreenNetofDiscount_CheckedChangedEventRaised;
+        event EventHandler chkbx_GuSubtotal_CheckedChangedEventRaised;
+        event EventHandler chkbx_SpecialDiscount_CheckedChangedEventRaised;
         CheckBox GetScreenNetOfDiscountChkBox();
         CheckedListBox GetChecklistBoxIndex();
         void ShowRDLCReportCompilerView();
@@ -41,6 +47,12 @@ namespace PresentationLayer.Views
         CheckedListBox GUGlassListChkLst();
         CheckBox GetContractSummaryLessDiscountChkBx();
         TextBox GetContractSummaryLessDiscountTxtBx();
+        CheckBox GetGlassUpgradeSubTotal();
+        TextBox GetGlassUpgradeRowLimitTxtBx();
+        TextBox GetScreenRowLimitTxtBx();
+        RichTextBox GetPATotalRtBx();
+        CheckBox GetSpecialDiscountChkBx();
+        TextBox GetSpecialDiscountTxtBx();
 
 
 

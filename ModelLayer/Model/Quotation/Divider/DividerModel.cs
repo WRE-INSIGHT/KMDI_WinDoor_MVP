@@ -824,10 +824,16 @@ namespace ModelLayer.Model.Quotation.Divider
                 else if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._84100)
                 {
                     frame_deduction = 22;
+                }
+            }
+
+            if (Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+            {
+                if (Div_FrameParent.Frame_ArtNo == FrameProfile_ArticleNo._84100)
+                {
                     Div_DividerConnectorArtNo = MullionConnector_ArticleNo._H120;
                 }
             }
-           
 
             if (Div_ChkDM == true)
             {
@@ -903,6 +909,10 @@ namespace ModelLayer.Model.Quotation.Divider
                     }
 
                     #endregion
+                }
+                else if (Div_DMArtNo == DummyMullion_ArticleNo._84401)
+                {
+                    Div_EndcapDM = EndcapDM_ArticleNo._M649;
                 }
 
                 if (Div_DMPanel != null)
@@ -1674,7 +1684,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void Insert_DummyMullion_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Dummy Mullion Height " + Div_DMArtNo.DisplayName,
+            tbl_explosion.Rows.Add("Dummy Mu]llion Height " + Div_DMArtNo.DisplayName,
                                    1, "pc(s)",
                                    Div_ExplosionHeight.ToString(),
                                    Div_Bounded,
@@ -1771,6 +1781,13 @@ namespace ModelLayer.Model.Quotation.Divider
                                "Sash");
         }
 
+        public void Insert_ShootboltForAlutek_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Shootbolt H110",
+                               1, "pc(s)",
+                               "",
+                               "Sash");
+        }
 
         public int Add_ExplosionLength_screws4fab()
         {

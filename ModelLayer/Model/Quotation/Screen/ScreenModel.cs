@@ -1830,7 +1830,7 @@ namespace ModelLayer.Model.Quotation.Screen
             var _strippedItemNum = (int)Decimal.Truncate(Screen_ItemNumber);
             Screen_NextItemNumber = _strippedItemNum + 1;
 
-            //try catch for flow??
+            //try catch for flow??Na-ah
             try
             {
                 decimal result = ItemList.First(j => j == Screen_ItemNumber);
@@ -1863,7 +1863,6 @@ namespace ModelLayer.Model.Quotation.Screen
                     Screen_UnitPrice = TotalUnitPrice;
                 }
             }
-
         }
 
         public void BuiltInPrice_and_PriceInterpolation()

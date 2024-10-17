@@ -27,12 +27,12 @@
     <ProductName>KMDI Systems WinDoorMaker</ProductName>
     <PublisherName>KMDI Programming Team</PublisherName>
     <SuiteName>KMDI Systems WinDoorMaker</SuiteName>
-    <MinimumRequiredVersion>1.0.0.130</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.146</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>131</ApplicationRevision>
+    <ApplicationRevision>147</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -1410,6 +1410,7 @@
     <EmbeddedResource Include="Reports\Quotation.rdlc" />
     <EmbeddedResource Include="Reports\Screen.rdlc" />
     <EmbeddedResource Include="Reports\ScreenPartialAdjustment.rdlc" />
+    <EmbeddedResource Include="Reports\PartialADJSummaryOfContract.rdlc" />
     <EmbeddedResource Include="Reports\SummaryOfContract.rdlc" />
     <EmbeddedResource Include="Views\ChangeItemColorView.resx">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>

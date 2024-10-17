@@ -135,6 +135,7 @@ namespace PresentationLayer.CommonMethods
                 else if (divType == DividerModel.DividerType.Transom)
                 {
                     IDividerPropertiesUCPresenter divPropUCP = mainPresenter.divPropertiesUCP.GetNewInstance(_unityC, divModel, mainPresenter);
+                    divPropUCP.GetDivProperties().ProfileType_FromMainPresenter = frameModel.Frame_WindoorModel.WD_profile;
                     UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
                     divPropUC.Dock = DockStyle.Top;
                     multiTransomUCP.multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);

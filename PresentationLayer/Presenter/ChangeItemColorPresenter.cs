@@ -16,7 +16,14 @@ namespace PresentationLayer.Presenter
         private IMainPresenter _mainPresenter;
         private IWindoorModel _windoorModel;
 
-        Panel pnlWoodec,pnlInOutColor;
+        Panel pnlWoodec,
+              pnlInOutColor,
+              pnlPowderCoatedType;
+
+        private Base_Color base_color;
+        private Foil_Color inside_color;
+        private Foil_Color outside_color;
+        private PowderCoatType_Color powderCoatType_color;
 
         public ChangeItemColorPresenter(IChangeItemColorView changeItemColorView)
         {
@@ -24,6 +31,7 @@ namespace PresentationLayer.Presenter
 
             pnlWoodec = _changeItemColorView.GetPanelWoodec();
             pnlInOutColor = _changeItemColorView.GetPanelInOutColor();
+            pnlPowderCoatedType = _changeItemColorView.GetPnlPowderCoatdType();
             SubscribeToEventsSetup();
         }
 
@@ -36,6 +44,15 @@ namespace PresentationLayer.Presenter
             _changeItemColorView.BtnOkClickEventRaised += _changeItemColorView_BtnOkClickEventRaised;
             _changeItemColorView.nudWoodecAdditionalValueChangedEventRaised += _changeItemColorView_nudWoodecAdditionalValueChangedEventRaised;
             _changeItemColorView.CmbColorAppliedToSelectedValueChangedEventRaised += _changeItemColorView_CmbColorAppliedToSelectedValueChangedEventRaised;
+            _changeItemColorView.cmbPowderCoatTypeSelectedValueChangedEventRaised += _changeItemColorView_cmbPowderCoatTypeSelectedValueChangedEventRaised;
+
+
+        }
+
+        private void _changeItemColorView_cmbPowderCoatTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _windoorModel.WD_PowderCoatType = (PowderCoatType_Color)((ComboBox)sender).SelectedValue;
+            powderCoatType_color = _windoorModel.WD_PowderCoatType;
         }
 
         public IChangeItemColorView GetChangeItemColorView()
@@ -59,6 +76,10 @@ namespace PresentationLayer.Presenter
                 _windoorModel.WD_BaseColor = base_color;
                 _windoorModel.WD_InsideColor = inside_color;
                 _windoorModel.WD_OutsideColor = outside_color;
+                if (base_color == Base_Color._PowderCoated)
+                {
+                    _windoorModel.WD_PowderCoatType = powderCoatType_color;
+                }
                 _windoorModel.SetMiddleCloser_onPanel();
                 _changeItemColorView.CloseView();
                 _mainPresenter.GetCurrentPrice();
@@ -71,6 +92,10 @@ namespace PresentationLayer.Presenter
                     wdm.WD_BaseColor = base_color;
                     wdm.WD_InsideColor = inside_color;
                     wdm.WD_OutsideColor = outside_color;
+                    if (base_color == Base_Color._PowderCoated)
+                    {
+                        wdm.WD_PowderCoatType = powderCoatType_color;
+                    }
                     _windoorModel.SetMiddleCloser_onPanel();
                     wdm.WD_WoodecAdditional = _changeItemColorView.GetNudWoodec().Value;
 
@@ -85,18 +110,15 @@ namespace PresentationLayer.Presenter
                 _mainPresenter.GetCurrentPrice();
 
                 //set to new items
-                _mainPresenter.setColors(base_color, inside_color, outside_color);
+                _mainPresenter.setColors(base_color, inside_color, outside_color, powderCoatType_color);
                 _mainPresenter.setWoodecAdditional((int)_changeItemColorView.GetNudWoodec().Value);
                 _changeItemColorView.CloseView();
-
             }
 
 
         }
 
-        private Base_Color base_color;
-        private Foil_Color inside_color;
-        private Foil_Color outside_color;
+    
 
         private void _changeItemColorView_CmbOutsideColorSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
@@ -165,18 +187,26 @@ namespace PresentationLayer.Presenter
             {
                 pnlInOutColor.Visible = false;
                 pnlWoodec.Visible = false;
+                pnlPowderCoatedType.Visible = true;
+                _windoorModel.WD_PowderCoatVisibility = true;
             }
             else
             {
                 pnlInOutColor.Visible =true;
                 pnlWoodec.Visible = false;
+                pnlPowderCoatedType.Visible = false;
+                _windoorModel.WD_PowderCoatVisibility = false;
 
-            } 
+            }
         }
 
         private void _changeItemColorView_ChangeItemColorViewLoadEventRaised(object sender, EventArgs e)
         {
             _windoorModel.WD_ColorAppliedTo = ColorAppliedTo._ThisItemonly;
+            if (_windoorModel.WD_PowderCoatType == null)
+            {
+                _windoorModel.WD_PowderCoatType = PowderCoatType_Color._Standard;
+            }
             _changeItemColorView.ThisBinding(CreateBindingDictionary());
         }
 

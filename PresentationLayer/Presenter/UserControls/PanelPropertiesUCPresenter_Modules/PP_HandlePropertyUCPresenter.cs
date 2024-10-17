@@ -1930,7 +1930,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         if (!_mainPresenter.ItemLoad)
                         {
                             _panelModel.Panel_CremonArtNo = Cremon_HandleArtNo._H087;
-                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._H103;
+                            if (_panelModel.Panel_Type.Contains("Awning"))
+                            {
+                                _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._H103;
+                            }
+                            else if (_panelModel.Panel_Type.Contains("Casement"))
+                            {
+                                _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._84819;
+                            }
                         }
 
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
@@ -2674,7 +2681,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                     if (!_mainPresenter.ItemLoad)
                     {
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._H103;
+                        if (_panelModel.Panel_Type.Contains("Awning"))
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._H103;
+                        }
+                        else if (_panelModel.Panel_Type.Contains("Casement"))
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._84819;
+                        } 
                     }
 
                 }
