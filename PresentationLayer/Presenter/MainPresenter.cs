@@ -13734,10 +13734,17 @@ namespace PresentationLayer.Presenter
 
         public void Set_pnlPropertiesBody_ScrollView(int scroll_value)
         {
-            _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
-            _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
-            _pnlPropertiesBody.VerticalScroll.Value += scroll_value;
-            _pnlPropertiesBody.PerformLayout();
+            try
+            {
+                _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
+                _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
+                _pnlPropertiesBody.VerticalScroll.Value += scroll_value;
+                _pnlPropertiesBody.PerformLayout();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(this + " error" + ex.Message);
+            }
         }
         private string Check_Incompatibility()
         {
