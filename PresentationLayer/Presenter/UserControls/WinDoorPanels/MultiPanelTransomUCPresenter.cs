@@ -172,8 +172,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             try
             {
-               // Console.WriteLine("Mpanel Width " + _multiPanelModel.MPanel_WidthToBind);
-               // Console.WriteLine("Mpanel height " + _multiPanelModel.MPanel_HeightToBind);
                 multiTransomUC = (FlowLayoutPanel)sender;
                 Console.WriteLine();
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
@@ -751,10 +749,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             suggest_HT = 0,
                             suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth,
                             suggest_DisplayWDDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal;
-                       // if((_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek")))
-                       // {
-                       //     suggest_Wd = _multiPanelModel.MPanel_Width - 15;
-                       // }
+
                         if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
                             if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
@@ -1466,13 +1461,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     pInnerY = 15;
                     pInnerWd = fpnl.ClientRectangle.Width - 30;
                     pInnerHt = fpnl.ClientRectangle.Height - 30;
-                  if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
-                  {
-               //      pInnerX = 8;
-               //      pInnerY = 8;
-               //      pInnerWd = fpnl.ClientRectangle.Width - 16;
-               //      pInnerHt = fpnl.ClientRectangle.Height - 16;
-                  }
                 }
                 else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
@@ -1644,6 +1632,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         bounds = new Rectangle(new Point(10, 10),
                                                new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - botFrameDeduct));
+                       if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                       {
+                           bounds = new Rectangle(new Point(5, 5),
+                                             new Size(fpnl.ClientRectangle.Width - 10, fpnl.ClientRectangle.Height - 10));
+                       }
                     }
                 }
                 else
@@ -2168,6 +2161,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 ht_deduction = bSizeDeduction - 9;
                             }
+                        }
+                        if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            bounds_PointY = 5;
+                            bounds_PointX = 5;
+                            wd_deduction = 10;
+                            ht_deduction = 10;
                         }
                     }
                 }
@@ -3300,6 +3300,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "First")
                 #region First Multi-Panel in a MAIN PLATFORM (MultiMullion)
                 {
+
                     int loc_X = 0,
                         loc_Y = fpnl.ClientRectangle.Height,
                         loc2_Y = pInnerY + pInnerHt;
