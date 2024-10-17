@@ -802,6 +802,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 if (_multiPanelModel.MPanel_Placement == "Last")
                                 {
                                     suggest_HT = _multiPanelModel.MPanel_Height - 15;
+                                    if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                                    {
+                                        suggest_HT = _multiPanelModel.MPanel_Height;
+                                    }
                                 }
                             }
                             else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
@@ -1637,6 +1641,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         bounds = new Rectangle(new Point(10, 10),
                                                new Size(fpnl.ClientRectangle.Width - 20, fpnl.ClientRectangle.Height - botFrameDeduct));
+                        if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            bounds = new Rectangle(new Point(5, 5),
+                                              new Size(fpnl.ClientRectangle.Width - 10, fpnl.ClientRectangle.Height - 10));
+                        }
                     }
                 }
                 else
@@ -1899,6 +1908,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 if (zoom <= 0.26f)
                                 {
                                     wd_deduction = 20;
+                                    if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                                    {
+                                        bounds_PointY = 5;
+                                        bounds_PointX = 5;
+                                        wd_deduction = 10;
+                                        ht_deduction = 11;
+                                    }
                                 }
                             }
                         }
