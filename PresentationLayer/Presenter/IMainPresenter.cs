@@ -23,6 +23,7 @@ namespace PresentationLayer.Presenter
 {
     public interface IMainPresenter
     {
+        Dictionary<string, string> MainPresenter_DicPrevProjDetails { get; set; }
         IDictionary<string, string> RDLCHeader { get; set; }
         List<IScreenModel> Screen_List { get; set; }
         List<DataRow> NonUnglazed { get; set; }
@@ -161,6 +162,7 @@ namespace PresentationLayer.Presenter
         int PropertiesScroll { get; set; }
         int ItemScroll { get; set; }
         int FrameIteration { get; set; }
+        bool UsePreviousProjectDetails { get; set; }
         bool ItemLoad { get; set; }
         void AddSlidingScreentoScreenList();
         int ForceRestartAndLoadFile();

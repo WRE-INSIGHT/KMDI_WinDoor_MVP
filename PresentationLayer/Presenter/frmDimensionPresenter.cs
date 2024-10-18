@@ -267,11 +267,20 @@ namespace PresentationLayer.Presenter
                                                       profile_type,
                                                       _baseColor);
                 }
+                SetPreviousProjectDetails();
             }
             catch (Exception ex)
             {
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SetPreviousProjectDetails()
+        {
+            if (_mainPresenter_qoutationInputBox_ClickedOK)
+            {
+                _mainPresenter.UsePreviousProjectDetails = false;
             }
         }
 

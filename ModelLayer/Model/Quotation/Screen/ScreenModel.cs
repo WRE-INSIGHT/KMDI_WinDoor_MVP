@@ -1830,7 +1830,6 @@ namespace ModelLayer.Model.Quotation.Screen
             var _strippedItemNum = (int)Decimal.Truncate(Screen_ItemNumber);
             Screen_NextItemNumber = _strippedItemNum + 1;
 
-            //try catch for flow??Na-ah
             try
             {
                 decimal result = ItemList.First(j => j == Screen_ItemNumber);

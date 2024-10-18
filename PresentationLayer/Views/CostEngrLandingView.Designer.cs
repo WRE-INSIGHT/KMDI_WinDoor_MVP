@@ -297,6 +297,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Select Projects";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CostEngrLandingView_FormClosing);
             this.Load += new System.EventHandler(this.CostEngrLandingView_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

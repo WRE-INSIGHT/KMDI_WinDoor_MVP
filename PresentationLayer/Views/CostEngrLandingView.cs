@@ -63,6 +63,7 @@ namespace PresentationLayer.Views
         public event EventHandler btnAddNewQuoteClickEventRaised;
         public event DataGridViewCellMouseEventHandler dgvQuoteNoCellMouseDoubleClickEventRaised;
         public event EventHandler btnSearchProjClickClickEventRaised;
+        public event EventHandler CostEngrLandingView_FormClosingEventRaised;
 
         public void ShowThis()
         {
@@ -206,6 +207,9 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, btnSearchProjClickClickEventRaised, e);
         }
 
-        
+        private void CostEngrLandingView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CostEngrLandingView_FormClosingEventRaised, e);
+        }
     }
 }

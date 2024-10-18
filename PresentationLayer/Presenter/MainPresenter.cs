@@ -270,6 +270,7 @@ namespace PresentationLayer.Presenter
         #region List 
 
         private Dictionary<string, string[]> WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
+        Dictionary<string, string> _dicDetails = new Dictionary<string, string>();
         private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
         private List<IScreenModel> _screenList = new List<IScreenModel>();
         private List<DataRow> _nonUnglazed = new List<DataRow>();
@@ -278,6 +279,11 @@ namespace PresentationLayer.Presenter
         private List<IScreenPartialAdjustmentProperties> _lst_ScreenPartialAdjustment = new List<IScreenPartialAdjustmentProperties>();
         private List<string> _lst_GlassDescException = new List<string>();
 
+        public Dictionary<string,string> MainPresenter_DicPrevProjDetails
+        {
+            get { return _dicDetails; }
+            set { _dicDetails = value; }
+        }
         public Dictionary<string, string[]> Pbl_WindoorModel_FileLines_Dictionary
         {
             get { return WindoorModel_FileLines_Dictionary; }
@@ -887,6 +893,9 @@ namespace PresentationLayer.Presenter
                 _frameIteration = value;
             }
         }
+
+        public bool UsePreviousProjectDetails { get; set; }
+
         public DateTime Date_Assigned_Mainpresenter_forNewItem { get; set; }
 
         public bool MainPresenter_IsFromDeleteFunction { get; set; }
@@ -3729,15 +3738,33 @@ namespace PresentationLayer.Presenter
             }
 
             GetGlassThickness();
-            CreateInitialGlassPriceDT();
-        }
-
-
-        private void CreateInitialGlassPriceDT()
-        {
+            #region Create Initial Glass Price DT
             _initialGlassPriceDT.Columns.Add(CreateColumn("TotalThickness", "TotalThickness", "System.Decimal"));
             _initialGlassPriceDT.Columns.Add(CreateColumn("Description", "Description", "System.String"));
+            #endregion
         }
+
+
+        private void InitialGlassPrice(string desc,decimal price,string function)
+        {
+            if(function == "SetInitialPrice")
+            {
+
+            }
+            else if (function == "AddInitialPrice")
+            {
+                if (_initialGlassPriceDT.Rows.Count == 0)
+                {
+                    _initialGlassPriceDT.Rows.Add(price, desc);
+                }
+                else
+                {
+                    
+                }
+            }
+        }
+
+
 
         private void GetGlassThickness()
         {
