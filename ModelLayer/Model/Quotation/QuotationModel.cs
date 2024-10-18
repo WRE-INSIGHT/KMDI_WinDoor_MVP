@@ -6451,7 +6451,7 @@ namespace ModelLayer.Model.Quotation
 
                                         #region EspagPrice
 
-                                        if (pnl.Panel_EspagnoletteOptionsVisibility == true)
+                                        if (pnl.Panel_EspagnoletteOptionsVisibility == true) 
                                         {
                                             if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._None &&
                                                  cus_ref_date >= changeCondition_080323)
@@ -8902,7 +8902,9 @@ namespace ModelLayer.Model.Quotation
 
                                 #region EspagPrice
 
-                                if (Singlepnl.Panel_EspagnoletteOptionsVisibility == true && Singlepnl.Panel_ChkText != "dSash")
+
+                                if (Singlepnl.Panel_EspagnoletteOptionsVisibility == true &&
+                                    Singlepnl.Panel_ChkText != "dSash")
                                 {
                                     if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._None &&
                                         cus_ref_date >= changeCondition_080323)

@@ -1470,33 +1470,76 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
                     {
-                        g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
+                        if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            g.DrawRectangle(new Pen(Color.DarkGray, 18 / rectThickness), new Rectangle(0,
+                                                                             0,
+                                                                             sliding.ClientRectangle.Width,
+                                                                             sliding.ClientRectangle.Height));
+                        }
+                        else
+                        {
+                            g.DrawRectangle(new Pen(Color.DarkGray, 15 / rectThickness), new Rectangle(8 / rectThickness,
                                                                                8 / rectThickness,
                                                                                sliding.ClientRectangle.Width - 17 / rectThickness,
                                                                                sliding.ClientRectangle.Height - 17 / rectThickness));
+                        }
+                       
                     }
                     else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
                     {
-                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
-                                                                            8 / rectThickness,
-                                                                            sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
-                                                                            sliding.ClientRectangle.Height - (17 / rectThickness)));
+                        if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            g.DrawRectangle(new Pen(Color.DarkGray, 19 / rectThickness), new Rectangle((0) - sashDeduction,
+                                                                             0,
+                                                                             sliding.ClientRectangle.Width + sashDeduction,
+                                                                             sliding.ClientRectangle.Height));
+                        }
+                        else
+                        {
+                            g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                        8 / rectThickness,
+                                                                        sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
+                                                                        sliding.ClientRectangle.Height - (17 / rectThickness)));
+                        }
+                   
 
                     }
                     else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
                     {
-
-                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
+                        if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            g.DrawRectangle(new Pen(Color.DarkGray, 19 / rectThickness), new Rectangle(0,
+                                                                             0,
+                                                                             sliding.ClientRectangle.Width + sashDeduction,
+                                                                             sliding.ClientRectangle.Height));
+                        }
+                        else
+                        {
+                            g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle(8 / rectThickness,
                                                                                8 / rectThickness,
                                                                                sliding.ClientRectangle.Width - (17 / rectThickness) + sashDeduction,
                                                                                sliding.ClientRectangle.Height - (17 / rectThickness)));
+                        }
+                       
                     }
                     else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
                     {
-                        g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
+                        if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            g.DrawRectangle(new Pen(Color.DarkGray, 19 / rectThickness), new Rectangle((8 / rectThickness) - sashDeduction,
+                                                                             0,
+                                                                             sliding.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
+                                                                             sliding.ClientRectangle.Height));
+                        }
+                        else
+                        {
+                            g.DrawRectangle(new Pen(Color.DarkGray, 15), new Rectangle((8 / rectThickness) - sashDeduction,
                                                                           8 / rectThickness,
                                                                           sliding.ClientRectangle.Width - (17 / rectThickness) + (sashDeduction * 2),
                                                                           sliding.ClientRectangle.Height - (17 / rectThickness)));
+                        }
+                        
                     }
 
                 } 
@@ -1513,54 +1556,118 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             Color col = Color.Black;
             if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
             {
-                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
-                                                               outer_line,
-                                                               (sliding.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
-                                                               (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
-                g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
-                                                               inner_line,
-                                                               (sliding.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
-                                                               (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+                if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                             outer_line,
+                                                             (sliding.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                             (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                             0,
+                                                             (sliding.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                             (sliding.ClientRectangle.Height) - w));
+
+                }
+                else
+                {
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                             outer_line,
+                                                             (sliding.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                             (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
+                    g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                                   inner_line,
+                                                                   (sliding.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
+                                                                   (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+
+                }
+
 
                 sashOverlapValue += inner_line;
             }
 
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
             {
-                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
-                                                          outer_line,
-                                                          (sliding.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
-                                                          (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
-                g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
-                                                          inner_line,
-                                                          (sliding.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
-                                                          (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+                if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                         outer_line,
+                                                         (sliding.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                         (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
+
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                         0,
+                                                         (sliding.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                         (sliding.ClientRectangle.Height) - w));
+                }
+                else
+                {
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                         outer_line,
+                                                         (sliding.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                         (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
+                    g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
+                                                              inner_line,
+                                                              (sliding.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
+                                                              (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+                }
+               
                 arrowStartingX -= inner_line;
                 sashOverlapValue += inner_line;
             }
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
             {
-                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
                                                          outer_line,
                                                          (sliding.ClientRectangle.Width - (outer_line * 2)) - w + (sashDeduction * 2),
                                                          (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
-                g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
-                                                          inner_line,
-                                                          (sliding.ClientRectangle.Width - (inner_line * 2)) - w + (sashDeduction * 2),
-                                                          (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+                }
+                else
+                {
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                         outer_line,
+                                                         (sliding.ClientRectangle.Width - (outer_line * 2)) - w + (sashDeduction * 2),
+                                                         (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
+                    g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
+                                                              inner_line,
+                                                              (sliding.ClientRectangle.Width - (inner_line * 2)) - w + (sashDeduction * 2),
+                                                              (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+                }
+                
                 arrowStartingX -= inner_line;
                 sashOverlapValue += inner_line * 2;
             }
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
             {
-                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
-                                                         outer_line,
-                                                         (sliding.ClientRectangle.Width - (outer_line * 2)) - w,
-                                                         (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
-                g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+               
+
+                if (_frameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                          outer_line,
+                                                          (sliding.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                          (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                          0,
+                                                          (sliding.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                          (sliding.ClientRectangle.Height) - w));
+                }
+                else
+                {
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                        outer_line,
+                                                        (sliding.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                        (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
+
+                    g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
                                                           inner_line,
                                                           (sliding.ClientRectangle.Width - (inner_line * 2)) - w,
                                                           (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+                }
+
+                
 
             }
             Point sashPoint = new Point(sliding.ClientRectangle.X + 25, sliding.ClientRectangle.Y);

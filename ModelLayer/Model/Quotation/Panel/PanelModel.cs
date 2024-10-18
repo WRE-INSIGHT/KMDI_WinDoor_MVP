@@ -3878,6 +3878,13 @@ namespace ModelLayer.Model.Quotation.Panel
                             }
                         }
                     }
+                    if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        right = (Panel_Margin.Right != 0) ? 5 : 0;
+                        left = (Panel_Margin.Left != 0) ? 5 : 0;
+                        top = (Panel_Margin.Top != 0) ? 5 : 0;
+                        bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
+                    }
                 }
                 Panel_MarginToBind = new Padding(left, top, right, bot);
             }
@@ -3932,7 +3939,24 @@ namespace ModelLayer.Model.Quotation.Panel
             //{
             if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
             {
+                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                {
+                    if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        int mpnl_deduct = 9;
 
+                        if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                        {
+                            Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - mpnl_deduct);
+                            //Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
+                        }
+                        else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
+                        {
+                            Panel_WidthToBind = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - mpnl_deduct);
+                            //Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
+                        }
+                    }
+                }
 
             }
             else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
@@ -3969,6 +3993,11 @@ namespace ModelLayer.Model.Quotation.Panel
                                 mpnl_deduct = 15;
                             else
                                 mpnl_deduct = 15;
+                        }
+                        if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+
+                            mpnl_deduct = 9;
                         }
                     }
                 }
@@ -4066,6 +4095,8 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
 
             }
+            
+                    
             //}
         }
         int first = 0;
@@ -4113,6 +4144,11 @@ namespace ModelLayer.Model.Quotation.Panel
                             {
                                 mpnlWd_deduct = 20;
                                 mpnlHt_deduct = 20;
+                                if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                                {
+                                    mpnlWd_deduct = 10;
+                                    mpnlHt_deduct = 10;
+                                }
                             }
                             else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
@@ -4158,6 +4194,11 @@ namespace ModelLayer.Model.Quotation.Panel
                                     }
                                     else if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
                                     {
+                                        mpnlHt_deduct = 10;
+                                    }
+                                    if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                                    {
+
                                         mpnlHt_deduct = 10;
                                     }
                                 }
@@ -4858,6 +4899,10 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     mpnlWd_deduct = 20;
                     mpnlHt_deduct = 20;
+                    if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        mpnlHt_deduct = 10;
+                    }
                     if (Panel_ParentMultiPanelModel.MPanel_ParentModel != null)
                     {
                         if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Type == "Transom" &&
