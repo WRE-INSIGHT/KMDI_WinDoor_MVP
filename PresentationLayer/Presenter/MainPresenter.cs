@@ -12191,6 +12191,7 @@ namespace PresentationLayer.Presenter
             InsideColor = Foil_Color._Walnut;
             OutsideColor = Foil_Color._Walnut;
             WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
+            MainPresenter_DicPrevProjDetails = new Dictionary<string, string>();
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
 
 
