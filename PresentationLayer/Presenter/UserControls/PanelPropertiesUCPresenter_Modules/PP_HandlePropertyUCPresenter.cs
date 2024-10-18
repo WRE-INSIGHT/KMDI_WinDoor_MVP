@@ -2324,7 +2324,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             Handle_Type handle = _panelModel.Panel_HandleType;
 
-            if ((handle != Handle_Type._Rotary && handle != Handle_Type._None) && _panelModel.Panel_Type != "Fixed Panel")
+            if ((handle != Handle_Type._Rotary && handle != Handle_Type._None) &&
+                 _panelModel.Panel_Type != "Fixed Panel" &&
+                 _panelModel.Panel_MotorizedOptionVisibility == false)
             {
                 _panelModel.Panel_EspagnoletteOptionsVisibility = true;
 

@@ -973,6 +973,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         {
                             mpnlHt_deduct = 16;
                         }
+                        if (MPanel_FrameModelParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            mpnlWd_deduct = 10;
+                            mpnlHt_deduct = 10;
+                        }
                     }
                     else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
                              MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._6050)
@@ -1590,8 +1595,18 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     wd_deduct = 20;
                     ht_deduct = 20;
+                    if (MPanel_FrameModelParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        wd_deduct = 16;
+                        ht_deduct = 16;
+                    }
                     if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
+                        if (MPanel_FrameModelParent.Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            wd_deduct = 20;
+                            ht_deduct = 20;
+                        }
                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||

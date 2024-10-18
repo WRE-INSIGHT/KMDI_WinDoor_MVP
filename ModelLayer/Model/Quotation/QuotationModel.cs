@@ -3868,6 +3868,7 @@ namespace ModelLayer.Model.Quotation
             DateTime inc_price_date_8 = DateTime.Parse("08-30-2023"); // 6 mm Tempered Clear w/ HardCoated Low-E remove desc hardcoated 
             DateTime inc_price_date_9 = DateTime.Parse("02-20-2024"); // Glass 14 mm and 24 mm Clear
             DateTime inc_price_date_10 = DateTime.Parse("04-19-2024"); // new base price of georgian bar
+            DateTime inc_price_date_11 = DateTime.Parse("10-09-2024");// Glass 15 mm Tempered 
 
 
 
@@ -4634,7 +4635,7 @@ namespace ModelLayer.Model.Quotation
                     SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
                     SetNewPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m); // Glass_6mmTempClr_HrdCtd_LowE
                 }
-                else if (cus_ref_date >= inc_price_date_10)
+                else if (cus_ref_date >= inc_price_date_10 && cus_ref_date < inc_price_date_11)
                 {
                     FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
                     FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
@@ -4662,9 +4663,40 @@ namespace ModelLayer.Model.Quotation
                     GeorgianBar_0726Price_White = 307.75m; //403.05m;
                     GeorgianBar_0726Price_Woodgrain = 307.75m; // 467.22m;
                 }
+                else if (cus_ref_date >= inc_price_date_11)
+                {
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    FramePricePerLinearMeter_6052_White_1sideFoil = 634.04m;    
+                    FramePricePerLinearMeter_6052Milled_WoodGrain = 725.02m;
+                    FramePricePerLinearMeter_6052Milled_White = 567.15m;
+                    FramePricePerLinearMeter_6052Milled_White_1sideFoil = 634.04m;
+                    WaterSeepagePricePerLinearMeter = 378.47m;
+                    Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;//5900
+                    FramePricePerLinearMeter_6052_WoodGrain = 725.02m;//704.60m, 2/22/23
+                    FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
+                    DividerRein_7536_PricePerSqrMeter = 406.86m;
+
+                    MotorizeMechRemotePricePerPiece = 4500.00m;// 19445.50m 
+                    Glass_6mmTempClr_HrdCtd_LowE = 2600.00m;//2550.00m
+
+                    Glass_14mmClr_PricePerSqrMeter = 2100.00m; // 0m
+                    Glass_24mmClr_PricePerSqrMeter = 3882.00m; // 0m
+
+                    SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                    SetNewPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m); // Glass_6mmTempClr_HrdCtd_LowE
+
+                    GeorgianBar_0724Price_White = 154.93m; //264.89m;
+                    GeorgianBar_0724Price_Woodgrain = 154.93m; // 312.36m;
+                    GeorgianBar_0726Price_White = 307.75m; //403.05m;
+                    GeorgianBar_0726Price_Woodgrain = 307.75m; // 467.22m;
+
+                    SetNewPriceForGlass("15 mm Tempered Clear", 13200.00m); // Glass 15 mm Tempered 
+
+                }
 
 
-             }
+            }
 
             #region motorized 1 day diff
             if (cus_ref_date < DateTime.Parse("08-02-2023"))
@@ -6605,7 +6637,7 @@ namespace ModelLayer.Model.Quotation
 
                                         #region EspagPrice
 
-                                        if (pnl.Panel_EspagnoletteOptionsVisibility == true)
+                                        if (pnl.Panel_EspagnoletteOptionsVisibility == true) 
                                         {
                                             if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._None &&
                                                  cus_ref_date >= changeCondition_080323)
@@ -9055,7 +9087,9 @@ namespace ModelLayer.Model.Quotation
 
                                 #region EspagPrice
 
-                                if (Singlepnl.Panel_EspagnoletteOptionsVisibility == true && Singlepnl.Panel_ChkText != "dSash")
+
+                                if (Singlepnl.Panel_EspagnoletteOptionsVisibility == true &&
+                                    Singlepnl.Panel_ChkText != "dSash")
                                 {
                                     if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._None &&
                                         cus_ref_date >= changeCondition_080323)

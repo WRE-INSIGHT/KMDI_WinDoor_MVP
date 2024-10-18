@@ -450,9 +450,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 if (Frame_Type == Frame_Padding.Window)
                 {
                     Frame_Padding_int = new Padding(10);
+                    if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                    {
+                        Frame_Padding_int = new Padding(8);
+                    }
                 }
                 else if (Frame_Type == Frame_Padding.Door)
                 {
+                    
                     if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
                         Frame_BotFrameArtNo == BottomFrameTypes._6052)
                     {
@@ -518,13 +523,22 @@ namespace ModelLayer.Model.Quotation.Frame
                     if (Frame_Type == Frame_Padding.Window)
                     {
                         FrameImageRenderer_Padding_int = new Padding(15);
+                       if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                       {
+                            FrameImageRenderer_Padding_int = new Padding(12);
+                       }
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
+                        
                         if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
                             Frame_BotFrameArtNo == BottomFrameTypes._6052)
                         {
                             FrameImageRenderer_Padding_int = new Padding(20);
+                            if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                FrameImageRenderer_Padding_int = new Padding(15);
+                            }
                         }
                         else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._6050)
@@ -545,13 +559,22 @@ namespace ModelLayer.Model.Quotation.Frame
                     if (Frame_Type == Frame_Padding.Window)
                     {
                         FrameImageRenderer_Padding_int = new Padding(15);
+                        if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                           FrameImageRenderer_Padding_int = new Padding(12);
+                        }
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
+                       
                         if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
                             Frame_BotFrameArtNo == BottomFrameTypes._6052)
                         {
                             FrameImageRenderer_Padding_int = new Padding(20);
+                            if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                FrameImageRenderer_Padding_int = new Padding(15);
+                            }
                         }
                         else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._6050)
@@ -614,13 +637,24 @@ namespace ModelLayer.Model.Quotation.Frame
                     if (Frame_Type == Frame_Padding.Window)
                     {
                         Frame_Padding_int = new Padding(15);
+                       
+                        if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            Frame_Padding_int = new Padding(12);
+                        }
+
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
+                       
                         if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
                             Frame_BotFrameArtNo == BottomFrameTypes._6052)
                         {
                             Frame_Padding_int = new Padding(20);
+                            if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                Frame_Padding_int = new Padding(15);
+                            }
                         }
                         else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._6050)
@@ -641,13 +675,22 @@ namespace ModelLayer.Model.Quotation.Frame
                     if (Frame_Type == Frame_Padding.Window)
                     {
                         Frame_Padding_int = new Padding(15);
+                        if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                        {
+                            Frame_Padding_int = new Padding(12);
+                        }
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
+                       
                         if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
                             Frame_BotFrameArtNo == BottomFrameTypes._6052)
                         {
                             Frame_Padding_int = new Padding(20);
+                            if (Frame_WindoorModel.WD_profile.Contains("Alutek"))
+                            {
+                                Frame_Padding_int = new Padding(15);
+                            }
                         }
                         else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._6050)
