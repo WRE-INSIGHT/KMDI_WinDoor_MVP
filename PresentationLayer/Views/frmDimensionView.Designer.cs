@@ -35,7 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.numHeight = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnl_BaseColor = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cmb_BaseColorOption = new System.Windows.Forms.ComboBox();
@@ -44,12 +44,12 @@
             this.lbl_FrameQty = new System.Windows.Forms.Label();
             this.nud_FrameQty = new System.Windows.Forms.NumericUpDown();
             this.pnl_AlutekSystemType = new System.Windows.Forms.Panel();
-            this.lbl_AlutekSystemType = new System.Windows.Forms.Label();
             this.cmb_AlutekSystemType = new System.Windows.Forms.ComboBox();
+            this.lbl_AlutekSystemType = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHeight)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.pnl_BaseColor.SuspendLayout();
             this.pnl_FrameQty.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_FrameQty)).BeginInit();
             this.pnl_AlutekSystemType.SuspendLayout();
@@ -60,7 +60,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(5, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 19);
+            this.label1.Size = new System.Drawing.Size(101, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "Width (mm)";
             // 
@@ -85,7 +85,7 @@
             0,
             0});
             this.numWidth.Name = "numWidth";
-            this.numWidth.Size = new System.Drawing.Size(81, 25);
+            this.numWidth.Size = new System.Drawing.Size(81, 30);
             this.numWidth.TabIndex = 1;
             this.numWidth.ThousandsSeparator = true;
             this.numWidth.Value = new decimal(new int[] {
@@ -111,7 +111,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(1, 38);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 19);
+            this.label2.Size = new System.Drawing.Size(106, 23);
             this.label2.TabIndex = 2;
             this.label2.Text = "Height (mm)";
             // 
@@ -125,7 +125,7 @@
             0,
             0});
             this.numHeight.Name = "numHeight";
-            this.numHeight.Size = new System.Drawing.Size(81, 25);
+            this.numHeight.Size = new System.Drawing.Size(81, 30);
             this.numHeight.TabIndex = 3;
             this.numHeight.ThousandsSeparator = true;
             this.numHeight.Value = new decimal(new int[] {
@@ -149,24 +149,24 @@
             this.panel1.Size = new System.Drawing.Size(172, 100);
             this.panel1.TabIndex = 8;
             // 
-            // panel2
+            // pnl_BaseColor
             // 
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.cmb_BaseColorOption);
-            this.panel2.Controls.Add(this.cmb_SystemOption);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(172, 65);
-            this.panel2.TabIndex = 9;
+            this.pnl_BaseColor.Controls.Add(this.label4);
+            this.pnl_BaseColor.Controls.Add(this.label3);
+            this.pnl_BaseColor.Controls.Add(this.cmb_BaseColorOption);
+            this.pnl_BaseColor.Controls.Add(this.cmb_SystemOption);
+            this.pnl_BaseColor.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_BaseColor.Location = new System.Drawing.Point(0, 0);
+            this.pnl_BaseColor.Name = "pnl_BaseColor";
+            this.pnl_BaseColor.Size = new System.Drawing.Size(172, 65);
+            this.pnl_BaseColor.TabIndex = 9;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(3, 38);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 19);
+            this.label4.Size = new System.Drawing.Size(91, 23);
             this.label4.TabIndex = 5;
             this.label4.Text = "Base Color";
             // 
@@ -175,7 +175,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(3, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 19);
+            this.label3.Size = new System.Drawing.Size(104, 23);
             this.label3.TabIndex = 4;
             this.label3.Text = "System Type";
             // 
@@ -185,7 +185,7 @@
             this.cmb_BaseColorOption.FormattingEnabled = true;
             this.cmb_BaseColorOption.Location = new System.Drawing.Point(87, 34);
             this.cmb_BaseColorOption.Name = "cmb_BaseColorOption";
-            this.cmb_BaseColorOption.Size = new System.Drawing.Size(80, 25);
+            this.cmb_BaseColorOption.Size = new System.Drawing.Size(80, 31);
             this.cmb_BaseColorOption.TabIndex = 3;
             this.cmb_BaseColorOption.SelectedValueChanged += new System.EventHandler(this.cmb_BaseColorOption_SelectedValueChanged);
             // 
@@ -195,7 +195,7 @@
             this.cmb_SystemOption.FormattingEnabled = true;
             this.cmb_SystemOption.Location = new System.Drawing.Point(88, 3);
             this.cmb_SystemOption.Name = "cmb_SystemOption";
-            this.cmb_SystemOption.Size = new System.Drawing.Size(80, 25);
+            this.cmb_SystemOption.Size = new System.Drawing.Size(80, 31);
             this.cmb_SystemOption.TabIndex = 2;
             this.cmb_SystemOption.SelectedValueChanged += new System.EventHandler(this.cmb_SystemOption_SelectedValueChanged);
             // 
@@ -214,7 +214,7 @@
             this.lbl_FrameQty.AutoSize = true;
             this.lbl_FrameQty.Location = new System.Drawing.Point(4, 5);
             this.lbl_FrameQty.Name = "lbl_FrameQty";
-            this.lbl_FrameQty.Size = new System.Drawing.Size(77, 19);
+            this.lbl_FrameQty.Size = new System.Drawing.Size(93, 23);
             this.lbl_FrameQty.TabIndex = 2;
             this.lbl_FrameQty.Text = "Frame Qty:";
             // 
@@ -233,7 +233,7 @@
             0,
             0});
             this.nud_FrameQty.Name = "nud_FrameQty";
-            this.nud_FrameQty.Size = new System.Drawing.Size(81, 25);
+            this.nud_FrameQty.Size = new System.Drawing.Size(81, 30);
             this.nud_FrameQty.TabIndex = 3;
             this.nud_FrameQty.ThousandsSeparator = true;
             this.nud_FrameQty.Value = new decimal(new int[] {
@@ -253,36 +253,36 @@
             this.pnl_AlutekSystemType.Size = new System.Drawing.Size(172, 32);
             this.pnl_AlutekSystemType.TabIndex = 11;
             // 
-            // lbl_AlutekSystemType
-            // 
-            this.lbl_AlutekSystemType.AutoSize = true;
-            this.lbl_AlutekSystemType.Location = new System.Drawing.Point(4, 5);
-            this.lbl_AlutekSystemType.Name = "lbl_AlutekSystemType";
-            this.lbl_AlutekSystemType.Size = new System.Drawing.Size(81, 19);
-            this.lbl_AlutekSystemType.TabIndex = 2;
-            this.lbl_AlutekSystemType.Text = "AluSys Type";
-            // 
             // cmb_AlutekSystemType
             // 
             this.cmb_AlutekSystemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_AlutekSystemType.FormattingEnabled = true;
             this.cmb_AlutekSystemType.Location = new System.Drawing.Point(87, 3);
             this.cmb_AlutekSystemType.Name = "cmb_AlutekSystemType";
-            this.cmb_AlutekSystemType.Size = new System.Drawing.Size(80, 25);
+            this.cmb_AlutekSystemType.Size = new System.Drawing.Size(80, 31);
             this.cmb_AlutekSystemType.TabIndex = 4;
             this.cmb_AlutekSystemType.SelectedValueChanged += new System.EventHandler(this.cmb_AlutekSystemType_SelectedValueChanged);
+            // 
+            // lbl_AlutekSystemType
+            // 
+            this.lbl_AlutekSystemType.AutoSize = true;
+            this.lbl_AlutekSystemType.Location = new System.Drawing.Point(4, 5);
+            this.lbl_AlutekSystemType.Name = "lbl_AlutekSystemType";
+            this.lbl_AlutekSystemType.Size = new System.Drawing.Size(99, 23);
+            this.lbl_AlutekSystemType.TabIndex = 2;
+            this.lbl_AlutekSystemType.Text = "AluSys Type";
             // 
             // frmDimensionView
             // 
             this.AcceptButton = this.btnOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(172, 224);
             this.Controls.Add(this.pnl_AlutekSystemType);
             this.Controls.Add(this.pnl_FrameQty);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.pnl_BaseColor);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -297,8 +297,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numHeight)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.pnl_BaseColor.ResumeLayout(false);
+            this.pnl_BaseColor.PerformLayout();
             this.pnl_FrameQty.ResumeLayout(false);
             this.pnl_FrameQty.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_FrameQty)).EndInit();
@@ -317,7 +317,7 @@
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.NumericUpDown numHeight;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnl_BaseColor;
         private System.Windows.Forms.ComboBox cmb_SystemOption;
         private System.Windows.Forms.ComboBox cmb_BaseColorOption;
         private System.Windows.Forms.Label label4;

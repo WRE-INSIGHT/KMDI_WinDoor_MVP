@@ -1453,7 +1453,21 @@ namespace ModelLayer.Model.Quotation.Frame
                 _frameCornerCleat_ArtNo = value;
             }
         }
-         
+
+        private string _frameAlutekSystemType;
+        public string Frame_AlutekSystemType
+        {
+            get 
+            { 
+                return _frameAlutekSystemType;
+            }
+            set 
+            { 
+                _frameAlutekSystemType = value;
+            }
+        }
+
+
         public void SetExplosionValues_Frame()
         {
             if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel

@@ -3505,7 +3505,18 @@ namespace PresentationLayer.Presenter
                 }
             }
            
-            Scenario_Quotation(false, false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter, _frmDimensionPresenter.aluSysType_frmDimensionPresenter);
+            Scenario_Quotation(false,
+                false,
+                true,
+                false, 
+                false, 
+                false, 
+                frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
+                0,
+                0,
+                _windoorModel.WD_profile,
+                _frmDimensionPresenter.baseColor_frmDimensionPresenter,
+                _frmDimensionPresenter.aluSysType_frmDimensionPresenter);
         }
         string[] file_lines;
         bool onload = false;
@@ -12708,6 +12719,15 @@ namespace PresentationLayer.Presenter
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
 
+                        if (frmDimension_AluSysType == "46")
+                        {
+                            MessageBox.Show("46");
+                        }
+                        else if (frmDimension_AluSysType == "22")
+                        {
+                            MessageBox.Show("22");
+                        }
+
                         _framePropertiesUCPresenter = _framePropertiesUCPresenter.GetNewInstance(_frameModel, _unityC, this);
                         AddFrameUC(_frameModel, _framePropertiesUCPresenter);
 
@@ -12915,6 +12935,8 @@ namespace PresentationLayer.Presenter
                                                                            null,
                                                                            (UserControl)_frameUC,
                                                                            (UserControl)_framePropertiesUC);
+                                _frameModel.Frame_AlutekSystemType = frmDimension_AluSysType;
+
                                 _frameModel.Set_DimensionsToBind_using_FrameZoom();
                                 _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                                 _frameModel.Set_FramePadding();

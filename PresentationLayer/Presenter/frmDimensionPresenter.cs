@@ -359,35 +359,61 @@ namespace PresentationLayer.Presenter
             {
                 _frmDimensionView.thisHeight = 203;
                 _frmDimensionView.GetPanelFrameQty().Visible = false;
+                _frmDimensionView.getPanelBaseColorWithSystemType().Visible = true;
+                _frmDimensionView.GetPanelAlutekSystemType().Visible = false;
+
                 if (_profile_type == "Alutek Profile")
                 {
+                    _frmDimensionView.GetPanelAlutekSystemType().Visible = true;
                     _frmDimensionView.thisHeight = 235;
                 } 
-
             }
-            else if (purpose == Show_Purpose.CreateNew_Item)
+            else if (purpose == Show_Purpose.CreateNew_Item ||
+                     purpose == Show_Purpose.CreateNew_Frame )
             {
                 _frmDimensionView.thisHeight = 173; // 140 238
                 _frmDimensionView.GetPanelFrameQty().Visible = false;
-               
+                _frmDimensionView.GetPanelAlutekSystemType().Visible = false;
+
                 if (_profile_type == "Alutek Profile")
                 {
-                _frmDimensionView.GetPanelAlutekSystemType().Visible = true;
+                    _frmDimensionView.thisHeight = 205;
+                    _frmDimensionView.GetPanelAlutekSystemType().Visible = true;
+                    _frmDimensionView.getPanelBaseColorWithSystemType().Visible = false;
+                    
+                    if (purpose == Show_Purpose.CreateNew_Frame)
+                    {
+                        _frmDimensionView.GetPanelFrameQty().Visible = true;
+                    }
+                    else if (purpose == Show_Purpose.CreateNew_Item)
+                    {
+                        _frmDimensionView.thisHeight = 205;
+                    }
+
                 }
-                else
+
+                if (purpose == Show_Purpose.CreateNew_Frame)
                 {
-                    _frmDimensionView.thisHeight = 141;
-                    _frmDimensionView.GetPanelAlutekSystemType().Visible = false;
+                    _frmDimensionView.GetPanelFrameQty().Visible = true;
+                    _frmDimensionView.getPanelBaseColorWithSystemType().Visible = false;
+                }
+                if (purpose == Show_Purpose.CreateNew_Item && _profile_type != "Alutek Profile")
+                {
+                    _frmDimensionView.thisHeight = 140;
                 }
             }
-            else if (purpose == Show_Purpose.CreateNew_Frame ||
-                     purpose == Show_Purpose.ChangeBasePlatformSize ||
+            else if (purpose == Show_Purpose.ChangeBasePlatformSize ||
                      purpose == Show_Purpose.AddPanelIntoMultiPanel)
             {
                 _frmDimensionView.thisHeight =   173; // 140 238
                 _frmDimensionView.GetPanelFrameQty().Visible = true;
-                _frmDimensionView.GetPanelAlutekSystemType().Visible = false; 
-            }
+                _frmDimensionView.GetPanelAlutekSystemType().Visible = false;
+                if (purpose == Show_Purpose.ChangeBasePlatformSize)
+                {
+                    _frmDimensionView.thisHeight = 140;
+                    _frmDimensionView.GetPanelFrameQty().Visible = false;
+                }
+            } 
         }
 
         public void SetValues(int numWD, int numHT)

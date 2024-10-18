@@ -107,6 +107,7 @@ namespace ModelLayer.Model.Quotation.Frame
         GlazingGasket_ArticleNo FrameGlazingGasket_ArtNo { get; set; }
         Cheveron_ArticleNo FrameCheveron_ArtNo { get; set; }
         CornerCleat_ArticleNo FrameCornerCleat_ArtNo { get; set; }
+        string Frame_AlutekSystemType { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);

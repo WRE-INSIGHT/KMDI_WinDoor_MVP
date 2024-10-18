@@ -123,6 +123,11 @@ namespace PresentationLayer.Views
             return pnl_AlutekSystemType;
         }
 
+        public Panel getPanelBaseColorWithSystemType()
+        {
+            return pnl_BaseColor;
+        }
+
         public NumericUpDown GetNumWidth()
         {
             return numWidth;

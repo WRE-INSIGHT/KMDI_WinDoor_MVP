@@ -27,6 +27,7 @@ namespace PresentationLayer.Views
         void ClosefrmDimension();
         Panel GetPanelFrameQty();
         Panel GetPanelAlutekSystemType();
+        Panel getPanelBaseColorWithSystemType();
         NumericUpDown GetNumWidth();
         NumericUpDown GetNumHeigth();
 
