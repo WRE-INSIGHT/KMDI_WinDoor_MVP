@@ -387,7 +387,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (purpose == Show_Purpose.CreateNew_Item)
                     {
-                        _frmDimensionView.thisHeight = 205;
+                        _frmDimensionView.thisHeight = 173;
                     }
 
                 }

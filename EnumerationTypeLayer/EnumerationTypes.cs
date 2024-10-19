@@ -16,9 +16,8 @@ namespace EnumerationTypeLayer
 
         public class AlutekSystemProfile_Option : Enumeration<AlutekSystemProfile_Option>
         {
-            public static readonly AlutekSystemProfile_Option _46 = new AlutekSystemProfile_Option(0, "46");
-            public static readonly AlutekSystemProfile_Option _33 = new AlutekSystemProfile_Option(1, "33");
-            public static readonly AlutekSystemProfile_Option _22 = new AlutekSystemProfile_Option(2, "22");
+            public static readonly AlutekSystemProfile_Option _46 = new AlutekSystemProfile_Option(0, "46"); 
+            public static readonly AlutekSystemProfile_Option _22 = new AlutekSystemProfile_Option(1, "22");
 
             private AlutekSystemProfile_Option(int value, string displayName) : base(value, displayName) { }
         }
