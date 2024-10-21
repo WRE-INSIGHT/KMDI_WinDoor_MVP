@@ -426,6 +426,41 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                         _panelModel.Panel_ParentFrameModel.Frame_TrackProfileArtNo = TrackProfile_ArticleNo._L15056140;    
                 }
+
+
+                if (_panelModel.Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
+                {
+                    DateTime cus_ref_date = _mainPresenter.dateAssigned,
+                             inputted_date = _mainPresenter.windoorModel_MainPresenter.Date_Assigned_Mainpresenter;
+                     
+
+                    if (inputted_date == DateTime.Parse("01-01-0001"))
+                    {
+                        inputted_date = _mainPresenter.dateAssigned;
+                    }
+
+                    if (_mainPresenter.dateAssigned != inputted_date)
+                    {
+                        cus_ref_date = inputted_date;
+                    }
+
+                    #region ChangeCondition
+
+                    DateTime ChangeCondition_102124 = DateTime.Parse("10-21-2024");
+
+                    #endregion
+
+
+                    if (cus_ref_date >= ChangeCondition_102124)
+                    {
+                        _panelModel.Panel_GlassFilm = GlassFilm_Types._None;
+                        _panelModel.Panel_GlassThickness = 6;
+                        _panelModel.Panel_GlassThicknessDesc = "6 mm Tempered Clear";
+                        _panelModel.Panel_GlassType_Insu_Lami = "NA";
+                    }
+                   
+                } 
+
             }
             else if (chk.Checked == false)
             {
