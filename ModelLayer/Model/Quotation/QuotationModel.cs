@@ -3899,6 +3899,10 @@ namespace ModelLayer.Model.Quotation
 
                 #endregion
 
+                #region SetGlassPrice
+                SetPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 5900.00m, "SetInitialPrice"); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                #endregion
+
 
                 _4millFilmPrice_PricePerSqrMeter = 2600m;
                 #endregion
@@ -4018,7 +4022,8 @@ namespace ModelLayer.Model.Quotation
                     WaterSeepagePricePerLinearMeter = 378.47m;
                     Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;
 
-                    SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                    SetPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m, "SetNewPrice"); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                    
                 }
             }
             else
@@ -4237,6 +4242,12 @@ namespace ModelLayer.Model.Quotation
 
                 #endregion
 
+                #region SetGlassPrice
+                SetPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 5900.00m, "SetInitialPrice"); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                SetPriceForGlass("6 mm Tempered Clear Low-E", 2550.00m, "SetInitialPrice"); // Glass_6mmTempClr_HrdCtd_LowE
+                SetPriceForGlass("15 mm Tempered Clear", 12000.00m, "SetInitialPrice"); // Glass 15 mm Tempered 
+                #endregion
+
 
                 _4millFilmPrice_PricePerSqrMeter = 2600m;
                 #endregion
@@ -4356,7 +4367,7 @@ namespace ModelLayer.Model.Quotation
                     WaterSeepagePricePerLinearMeter = 378.47m;
                     Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe = 6300.00m;
 
-                    SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                    SetPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m, "SetNewPrice"); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
                 }
                 else if (cus_ref_date >= inc_price_date_5 && cus_ref_date < inc_price_date_6)
                 {
@@ -4367,7 +4378,8 @@ namespace ModelLayer.Model.Quotation
                     FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
                     DividerRein_7536_PricePerSqrMeter = 406.86m;
 
-                    SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                    
+                    SetPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m, "SetNewPrice"); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
 
                 }
                 else if (cus_ref_date >= inc_price_date_6 && cus_ref_date < inc_price_date_7)
@@ -4384,7 +4396,7 @@ namespace ModelLayer.Model.Quotation
                     FramePricePerLinearMeter_6052_White = 567.15m;//563.48m, 2/22/23
                     DividerRein_7536_PricePerSqrMeter = 406.86m;
 
-                    SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                    SetPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m, "SetNewPrice"); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
 
                 }
                 else if (cus_ref_date >= inc_price_date_7 && cus_ref_date < inc_price_date_8)
@@ -4403,7 +4415,7 @@ namespace ModelLayer.Model.Quotation
 
                     MotorizeMechRemotePricePerPiece = 4500.00m;// 19445.50m    
 
-                    SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                    SetPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m, "SetNewPrice"); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
 
                 }
                 else if (cus_ref_date >= inc_price_date_8 && cus_ref_date < inc_price_date_9)
@@ -4423,8 +4435,10 @@ namespace ModelLayer.Model.Quotation
                     MotorizeMechRemotePricePerPiece = 4500.00m;// 19445.50m 
                     Glass_6mmTempClr_HrdCtd_LowE = 2600.00m;//2550.00m
 
-                    SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
-                    SetNewPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m); // Glass_6mmTempClr_HrdCtd_LowE
+                    SetPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m, "SetNewPrice"); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                    SetPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m, "SetNewPrice"); // Glass_6mmTempClr_HrdCtd_LowE
+
+
                 }
                 else if (cus_ref_date >= inc_price_date_9 && cus_ref_date < inc_price_date_10)
                 {
@@ -4446,8 +4460,8 @@ namespace ModelLayer.Model.Quotation
                     Glass_14mmClr_PricePerSqrMeter = 2100.00m; // 0m
                     Glass_24mmClr_PricePerSqrMeter = 3882.00m; // 0m
 
-                    SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
-                    SetNewPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m); // Glass_6mmTempClr_HrdCtd_LowE
+                    SetPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m, "SetNewPrice"); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                    SetPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m, "SetNewPrice"); // Glass_6mmTempClr_HrdCtd_LowE
                 }
                 else if (cus_ref_date >= inc_price_date_10 && cus_ref_date < inc_price_date_11)
                 {
@@ -4469,8 +4483,8 @@ namespace ModelLayer.Model.Quotation
                     Glass_14mmClr_PricePerSqrMeter = 2100.00m; // 0m
                     Glass_24mmClr_PricePerSqrMeter = 3882.00m; // 0m
 
-                    SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
-                    SetNewPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m); // Glass_6mmTempClr_HrdCtd_LowE
+                    SetPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m, "SetNewPrice"); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                    SetPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m, "SetNewPrice"); // Glass_6mmTempClr_HrdCtd_LowE
 
                     GeorgianBar_0724Price_White = 154.93m; //264.89m;
                     GeorgianBar_0724Price_Woodgrain = 154.93m; // 312.36m;
@@ -4497,15 +4511,15 @@ namespace ModelLayer.Model.Quotation
                     Glass_14mmClr_PricePerSqrMeter = 2100.00m; // 0m
                     Glass_24mmClr_PricePerSqrMeter = 3882.00m; // 0m
 
-                    SetNewPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
-                    SetNewPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m); // Glass_6mmTempClr_HrdCtd_LowE
+                    SetPriceForGlass("6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear Low-e", 6300.00m, "SetNewPrice"); // Glass_Double_24mmTempClr_Argon_TempClrHrdCtdLowe
+                    SetPriceForGlass("6 mm Tempered Clear Low-E", 2600.00m, "SetNewPrice"); // Glass_6mmTempClr_HrdCtd_LowE
 
                     GeorgianBar_0724Price_White = 154.93m; //264.89m;
                     GeorgianBar_0724Price_Woodgrain = 154.93m; // 312.36m;
                     GeorgianBar_0726Price_White = 307.75m; //403.05m;
                     GeorgianBar_0726Price_Woodgrain = 307.75m; // 467.22m;
 
-                    SetNewPriceForGlass("15 mm Tempered Clear", 13200.00m); // Glass 15 mm Tempered 
+                    SetPriceForGlass("15 mm Tempered Clear", 13200.00m, "SetNewPrice"); // Glass 15 mm Tempered 
 
                 }
 
@@ -4591,25 +4605,50 @@ namespace ModelLayer.Model.Quotation
             return holder;
         }
 
-        private void SetNewPriceForGlass(string glassDesc, decimal price)
+
+        private void SetPriceForGlass(string glassDesc,decimal price,string function)
         {
-            foreach (DataRow dtrow in MainPresenter_GlassThicknessDT.Rows)
+            if(function == "SetInitialPrice")
             {
-                string glassDescMainPresenter = dtrow[1].ToString();
-                if (glassDesc.Trim() == glassDescMainPresenter.Trim())
+                foreach (DataRow dtrow in MainPresenter_GlassThicknessDT.Rows)
                 {
-                    string glassdescfromlist = dtrow[1].ToString(); // glass desc before
-                    string glasspricefromlist = dtrow[3].ToString(); // glass price before
+                    string glassDescMainPresenter = dtrow[1].ToString();
+                    if (glassDesc.Trim() == glassDescMainPresenter.Trim())
+                    {
+                        string glassdescfromlist = dtrow[1].ToString(); // glass desc before
+                        string glasspricefromlist = dtrow[3].ToString(); // glass price before 
 
-                    dtrow[3] = price; // set new price based on date
+                        dtrow[3] = price; // set new price based on date
 
-                    glassdescfromlist = dtrow[1].ToString(); // glass desc
-                    glasspricefromlist = dtrow[3].ToString(); // glass new price
+                        glassdescfromlist = dtrow[1].ToString(); // glass desc
+                        glasspricefromlist = dtrow[3].ToString(); // glass new price
 
-                    break;
+                        break;
+                    }
+                }
+            }
+            else if(function == "SetNewPrice")
+            {
+                foreach (DataRow dtrow in MainPresenter_GlassThicknessDT.Rows)
+                {
+                    string glassDescMainPresenter = dtrow[1].ToString();
+                    if (glassDesc.Trim() == glassDescMainPresenter.Trim())
+                    {
+                        string glassdescfromlist = dtrow[1].ToString(); // glass desc before
+                        string glasspricefromlist = dtrow[3].ToString(); // glass price before 
+
+                        dtrow[3] = price; // set new price based on date
+
+                        glassdescfromlist = dtrow[1].ToString(); // glass desc
+                        glasspricefromlist = dtrow[3].ToString(); // glass new price
+
+                        break;
+                    }
                 }
             }
         }
+
+
 
         public DataTable ItemCostingPriceAndPoints()
         {

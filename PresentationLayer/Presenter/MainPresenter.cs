@@ -167,7 +167,6 @@ namespace PresentationLayer.Presenter
 
         private CommonFunctions _commonfunc = new CommonFunctions();
 
-        private DataTable _initialGlassPriceDT = new DataTable();
         private DataTable _glassThicknessDT = new DataTable();
         private DataTable _glassTypeDT = new DataTable();
         private DataTable _guHolderDT = new DataTable();
@@ -340,17 +339,6 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        public DataTable InitialGlassPriceDT
-        {
-            get
-            {
-                return _initialGlassPriceDT;
-            }
-            set
-            {
-                _initialGlassPriceDT = value;
-            }
-        }
         public DataTable GlassTypeDT
         {
             get
@@ -3738,33 +3726,7 @@ namespace PresentationLayer.Presenter
             }
 
             GetGlassThickness();
-            #region Create Initial Glass Price DT
-            _initialGlassPriceDT.Columns.Add(CreateColumn("TotalThickness", "TotalThickness", "System.Decimal"));
-            _initialGlassPriceDT.Columns.Add(CreateColumn("Description", "Description", "System.String"));
-            #endregion
         }
-
-
-        private void InitialGlassPrice(string desc,decimal price,string function)
-        {
-            if(function == "SetInitialPrice")
-            {
-
-            }
-            else if (function == "AddInitialPrice")
-            {
-                if (_initialGlassPriceDT.Rows.Count == 0)
-                {
-                    _initialGlassPriceDT.Rows.Add(price, desc);
-                }
-                else
-                {
-                    
-                }
-            }
-        }
-
-
 
         private void GetGlassThickness()
         {
@@ -5322,7 +5284,7 @@ namespace PresentationLayer.Presenter
                             _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
                             _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                             _quotationModel.Date_Assigned = dateAssigned;
-                            _quotationModel.MainPresenter_GlassThicknessDT = GlassThicknessDT; // try to get glass into quotation model
+                            _quotationModel.MainPresenter_GlassThicknessDT = GlassThicknessDT;
                             //_quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
                         }
                         else if (row_str.Contains("Frame_PUFoamingQty_Total"))
@@ -13762,10 +13724,18 @@ namespace PresentationLayer.Presenter
 
         public void Set_pnlPropertiesBody_ScrollView(int scroll_value)
         {
-            _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
-            _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
-            _pnlPropertiesBody.VerticalScroll.Value += scroll_value;
-            _pnlPropertiesBody.PerformLayout();
+            try
+            {
+                _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
+                _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
+                _pnlPropertiesBody.VerticalScroll.Value += scroll_value;
+                _pnlPropertiesBody.PerformLayout();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(this + " Error:" + ex.Message);
+            }
+           
         }
         private string Check_Incompatibility()
         {
