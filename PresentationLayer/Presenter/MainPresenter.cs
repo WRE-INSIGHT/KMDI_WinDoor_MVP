@@ -167,7 +167,6 @@ namespace PresentationLayer.Presenter
 
         private CommonFunctions _commonfunc = new CommonFunctions();
 
-        private DataTable _initialGlassPriceDT = new DataTable();
         private DataTable _glassThicknessDT = new DataTable();
         private DataTable _glassTypeDT = new DataTable();
         private DataTable _guHolderDT = new DataTable();
@@ -270,6 +269,7 @@ namespace PresentationLayer.Presenter
         #region List 
 
         private Dictionary<string, string[]> WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
+        Dictionary<string, string> _dicDetails = new Dictionary<string, string>();
         private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
         private List<IScreenModel> _screenList = new List<IScreenModel>();
         private List<DataRow> _nonUnglazed = new List<DataRow>();
@@ -278,6 +278,11 @@ namespace PresentationLayer.Presenter
         private List<IScreenPartialAdjustmentProperties> _lst_ScreenPartialAdjustment = new List<IScreenPartialAdjustmentProperties>();
         private List<string> _lst_GlassDescException = new List<string>();
 
+        public Dictionary<string,string> MainPresenter_DicPrevProjDetails
+        {
+            get { return _dicDetails; }
+            set { _dicDetails = value; }
+        }
         public Dictionary<string, string[]> Pbl_WindoorModel_FileLines_Dictionary
         {
             get { return WindoorModel_FileLines_Dictionary; }
@@ -334,17 +339,6 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        public DataTable InitialGlassPriceDT
-        {
-            get
-            {
-                return _initialGlassPriceDT;
-            }
-            set
-            {
-                _initialGlassPriceDT = value;
-            }
-        }
         public DataTable GlassTypeDT
         {
             get
@@ -887,6 +881,9 @@ namespace PresentationLayer.Presenter
                 _frameIteration = value;
             }
         }
+
+        public bool UsePreviousProjectDetails { get; set; }
+
         public DateTime Date_Assigned_Mainpresenter_forNewItem { get; set; }
 
         public bool MainPresenter_IsFromDeleteFunction { get; set; }
@@ -3769,14 +3766,6 @@ namespace PresentationLayer.Presenter
             }
 
             GetGlassThickness();
-            CreateInitialGlassPriceDT();
-        }
-
-
-        private void CreateInitialGlassPriceDT()
-        {
-            _initialGlassPriceDT.Columns.Add(CreateColumn("TotalThickness", "TotalThickness", "System.Decimal"));
-            _initialGlassPriceDT.Columns.Add(CreateColumn("Description", "Description", "System.String"));
         }
 
         private void GetGlassThickness()
@@ -5358,7 +5347,7 @@ namespace PresentationLayer.Presenter
                             _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
                             _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                             _quotationModel.Date_Assigned = dateAssigned;
-                            _quotationModel.MainPresenter_GlassThicknessDT = GlassThicknessDT; // try to get glass into quotation model
+                            _quotationModel.MainPresenter_GlassThicknessDT = GlassThicknessDT;
                             //_quotationModel.Date_Assigned_Mainpresenter = dateAssigned;
                         }
                         else if (row_str.Contains("Frame_PUFoamingQty_Total"))
@@ -12264,6 +12253,7 @@ namespace PresentationLayer.Presenter
             InsideColor = Foil_Color._Walnut;
             OutsideColor = Foil_Color._Walnut;
             WindoorModel_FileLines_Dictionary = new Dictionary<string, string[]>();
+            MainPresenter_DicPrevProjDetails = new Dictionary<string, string>();
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
 
 
@@ -13882,10 +13872,18 @@ namespace PresentationLayer.Presenter
 
         public void Set_pnlPropertiesBody_ScrollView(int scroll_value)
         {
-            _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
-            _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
-            _pnlPropertiesBody.VerticalScroll.Value += scroll_value;
-            _pnlPropertiesBody.PerformLayout();
+            try
+            {
+                _pnlPropertiesBody.VerticalScroll.Maximum = int.MaxValue;
+                _pnlPropertiesBody.VerticalScroll.Minimum = int.MinValue;
+                _pnlPropertiesBody.VerticalScroll.Value += scroll_value;
+                _pnlPropertiesBody.PerformLayout();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(this + " Error:" + ex.Message);
+            }
+           
         }
         private string Check_Incompatibility()
         {

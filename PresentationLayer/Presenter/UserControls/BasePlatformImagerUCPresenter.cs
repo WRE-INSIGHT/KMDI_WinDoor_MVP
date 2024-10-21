@@ -1047,7 +1047,6 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         IPanelModel panelModel = mpnl.MPanelLst_Panel.Find(panel => panel.Panel_Name == ctrl.Name);
                         objLocY = mlocY;
-                        panelModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
                         if (panelModel.Panel_Placement == "First")
                         {
                             objLocX += mlocX; //addition of frame_pads and div wd   
@@ -1055,8 +1054,11 @@ namespace PresentationLayer.Presenter.UserControls
                         else if (panelModel.Panel_Placement != "First")
                         {
 
-                        }                    
-                        
+                        }
+                        if (panelModel.PanelImageRenderer_Zoom == panelModel.Panel_Zoom)
+                        {
+                  //          panelModel.PanelImageRenderer_Width = panelModel.Panel_WidthToBind;
+                        }
                         Draw_Panel(e, panelModel, new Point(objLocX + 1, objLocY));
 
                         objLocX += panelModel.PanelImageRenderer_Width;
@@ -1065,7 +1067,7 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         IDividerModel divModel = mpnl.MPanelLst_Divider.Find(div => div.Div_Name == ctrl.Name);
                         int locY_deduct = 0;
-                        divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
+                       // divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
                         if (zoom == 1.0f)
                         {
                             locY_deduct = 10;
@@ -1155,10 +1157,14 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         IPanelModel panelModel = mpnl.MPanelLst_Panel.Find(panel => panel.Panel_Name == ctrl.Name);
                         objLocX = mlocX;
-                        panelModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                       // panelModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
                         if (panelModel.Panel_Placement == "First")
                         {
                             objLocY += mlocY; //addition of frame_pads and div wd
+                        }
+                        if (panelModel.PanelImageRenderer_Zoom == panelModel.Panel_Zoom)
+                        {
+                            panelModel.PanelImageRenderer_Height = panelModel.Panel_HeightToBind;
                         }
                         else if (panelModel.Panel_Placement != "First")
                         {
@@ -1212,7 +1218,9 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         IMultiPanelModel mpnlModel = mpnl.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == ctrl.Name);
                         objLocX = mlocX;
+
                         mpnlModel.MPanelImageRenderer_Width = mpnl.MPanelImageRenderer_Width;
+
 
                         if (mpnlModel.MPanel_Placement == "First")
                         {

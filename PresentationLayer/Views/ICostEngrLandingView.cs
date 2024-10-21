@@ -17,6 +17,7 @@ namespace PresentationLayer.Views
         event EventHandler btnforwardNavClick;
         event EventHandler btnAddNewQuoteClickEventRaised;
         event EventHandler btnSearchProjClickClickEventRaised;
+        event EventHandler CostEngrLandingView_FormClosingEventRaised;
         bool SetSelectedIndex_TabpageNav(int index);
 
         void ShowThis();

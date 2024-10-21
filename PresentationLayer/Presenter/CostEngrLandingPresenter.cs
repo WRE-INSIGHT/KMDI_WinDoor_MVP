@@ -8,6 +8,7 @@ using PresentationLayer.Views;
 using ServiceLayer.Services.ProjectQuoteServices;
 using ServiceLayer.Services.QuotationServices;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Threading.Tasks;
@@ -61,6 +62,42 @@ namespace PresentationLayer.Presenter
             _CELandingView.btnAddNewQuoteClickEventRaised += _CELandingView_btnAddNewQuoteClickEventRaised;
             _CELandingView.dgvQuoteNoCellMouseDoubleClickEventRaised += _CELandingView_dgvQuoteNoCellMouseDoubleClickEventRaised;
             _CELandingView.btnSearchProjClickClickEventRaised += _CELandingView_btnSearchProjClickClickEventRaised;
+            _CELandingView.CostEngrLandingView_FormClosingEventRaised += _CELandingView_CostEngrLandingView_FormClosingEventRaised;
+        }
+
+        private void _CELandingView_CostEngrLandingView_FormClosingEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_mainPresenter.UsePreviousProjectDetails)
+                {
+                    if (_mainPresenter.MainPresenter_DicPrevProjDetails != null || _mainPresenter.MainPresenter_DicPrevProjDetails.Count != 0)
+                    {
+                        foreach (var item in _mainPresenter.MainPresenter_DicPrevProjDetails)
+                        {
+                            switch (item.Key)
+                            {
+                                case "AEIC":
+                                    _mainPresenter.aeic = item.Value;
+                                    break;
+                                case "Position":
+                                    _mainPresenter.position = item.Value;
+                                    break;
+                                case "Address":
+                                    _mainPresenter.projectAddress = item.Value;
+                                    break;
+                                case "Title Lastname":
+                                    _mainPresenter.titleLastname = item.Value;
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error in Select Project, Close Form" + ex.Message);
+            }
         }
 
         private async void _CELandingView_btnSearchProjClickClickEventRaised(object sender, EventArgs e)
@@ -289,6 +326,8 @@ namespace PresentationLayer.Presenter
             {
                 if (e.RowIndex > -1 && e.ColumnIndex > -1 && e.Button == MouseButtons.Left)
                 {
+                    GetPreviousProjectsDetails();
+
                     _projId = Convert.ToInt32(_dgvAssignedProj.Rows[e.RowIndex].Cells["Project_Id"].Value);
                     _projName = _dgvAssignedProj.Rows[e.RowIndex].Cells["File_Label"].Value.ToString() == "Proj/Client`s Name" ? _dgvAssignedProj.Rows[e.RowIndex].Cells["Client Name"].Value.ToString() : _dgvAssignedProj.Rows[e.RowIndex].Cells["Company Name"].Value.ToString();
                     _mainPresenter.aeic = _dgvAssignedProj.Rows[e.RowIndex].Cells["AEIC"].Value.ToString();
@@ -310,10 +349,66 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        private void GetPreviousProjectsDetails()
+        {
+            bool isProjectMatch = false;
+
+            var currSelectedProj = _mainPresenter.GetMainView().mainview_title;
+            if (currSelectedProj != "" && currSelectedProj.Contains(_mainPresenter.inputted_projectName))
+            {  
+
+                if(_mainPresenter.MainPresenter_DicPrevProjDetails.Count != 0)
+                {
+                    foreach(var item in _mainPresenter.MainPresenter_DicPrevProjDetails)
+                    {
+                        if(item.Key == "Project Name")
+                        {
+                            if (item.Value == _mainPresenter.inputted_projectName)
+                            {
+                                isProjectMatch = true;
+                            }
+                            else
+                            {
+                                isProjectMatch = false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    isProjectMatch = false;
+                }
+
+                if (!isProjectMatch)
+                {
+                    _mainPresenter.UsePreviousProjectDetails = true;
+                    _mainPresenter.MainPresenter_DicPrevProjDetails = new Dictionary<string, string>();
+
+                    _mainPresenter.MainPresenter_DicPrevProjDetails.Add("Project Name", _mainPresenter.inputted_projectName);
+                    _mainPresenter.MainPresenter_DicPrevProjDetails.Add("AEIC", _mainPresenter.aeic);
+                    _mainPresenter.MainPresenter_DicPrevProjDetails.Add("Position", _mainPresenter.position);
+                    _mainPresenter.MainPresenter_DicPrevProjDetails.Add("Address", _mainPresenter.projectAddress);
+                    _mainPresenter.MainPresenter_DicPrevProjDetails.Add("Title Lastname", _mainPresenter.titleLastname);
+
+                    //_dicDetails.Add("quoteNo",_mainPresenter.inputted_quotationRefNo);
+                    //_dicDetails.Add("quoteId",_mainPresenter.inputted_quoteId.ToString());
+                    //_dicDetails.Add("quoteDate",_mainPresenter.inputted_quoteDate.ToString());
+                    //_dicDetails.Add("projectName", _mainPresenter.inputted_projectName);
+                    //_dicDetails.Add("custRefNo", _mainPresenter.inputted_custRefNo);
+                    //_dicDetails.Add("dateAssigned", _mainPresenter.dateAssigned.ToString());
+                }
+            }
+
+
+
+        }
+
         private async void _CELandingView_CostEngrLandingViewLoadEventRaised(object sender, EventArgs e)
         {
             try
             {
+                _mainPresenter.UsePreviousProjectDetails = false;
+                _mainPresenter.MainPresenter_DicPrevProjDetails = new Dictionary<string, string>();
                 await Load_DGV_AssignedProjects("");
             }
             catch (Exception ex)

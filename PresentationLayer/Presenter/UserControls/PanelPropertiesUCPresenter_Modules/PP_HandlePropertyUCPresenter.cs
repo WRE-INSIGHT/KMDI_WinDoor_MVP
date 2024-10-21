@@ -2223,11 +2223,37 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _mainPresenter.PropertiesScroll = propertiesScroll;
         }
 
+
+        #region ChangeCondition
+        bool CostingAccount = false;
+        DateTime cus_ref_date, inputted_date;
+
+        DateTime ChangeCondition_101824 = DateTime.Parse("10-18-2024");
+
+        #endregion
         private void _pp_handlePropertyUC_PPHandlePropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_handlePropertyUC.ThisBinding(CreateBindingDictionary());
 
-            IPP_RotoswingPropertyUCPresenter rotoswingPropUCP = _pp_rotoswingPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            if (_panelModel.Panel_ParentUserModel.Department == "Sales & Operations (Costing)")
+            {
+                CostingAccount = true;
+                cus_ref_date = _mainPresenter.dateAssigned;
+                inputted_date = _mainPresenter.windoorModel_MainPresenter.Date_Assigned_Mainpresenter;
+
+
+                if (inputted_date == DateTime.Parse("01-01-0001"))
+                {
+                    inputted_date = _mainPresenter.dateAssigned;
+                }
+
+                if (_mainPresenter.dateAssigned != inputted_date)
+                {
+                    cus_ref_date = inputted_date;
+                }
+            }
+
+                IPP_RotoswingPropertyUCPresenter rotoswingPropUCP = _pp_rotoswingPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
             UserControl rotoswingPropUC = (UserControl)rotoswingPropUCP.GetPPRotoswingPropertyUC();
             _pnlHandleType.Controls.Add(rotoswingPropUC);
             rotoswingPropUC.Dock = DockStyle.Top;
@@ -2324,26 +2350,49 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             Handle_Type handle = _panelModel.Panel_HandleType;
 
-            if ((handle != Handle_Type._Rotary && handle != Handle_Type._None) &&
-                 _panelModel.Panel_Type != "Fixed Panel" &&
-                 _panelModel.Panel_MotorizedOptionVisibility == false)
+            if (cus_ref_date >= ChangeCondition_101824)
             {
-                _panelModel.Panel_EspagnoletteOptionsVisibility = true;
-
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
-
-                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                if ((handle != Handle_Type._Rotary && handle != Handle_Type._None) &&
+                     _panelModel.Panel_Type != "Fixed Panel" &&
+                     _panelModel.Panel_MotorizedOptionVisibility == false)
                 {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
-                }
+                    _panelModel.Panel_EspagnoletteOptionsVisibility = true;
 
-                _panelModel.AdjustPropertyPanelHeight("addEspagnolette");
-                _panelModel.AdjustHandlePropertyHeight("addEspagnolette");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
+                    }
+
+                    _panelModel.AdjustPropertyPanelHeight("addEspagnolette");
+                    _panelModel.AdjustHandlePropertyHeight("addEspagnolette");
+                }
+                else
+                {
+                    _panelModel.Panel_EspagnoletteOptionsVisibility = false;
+                }
             }
+            else if ((handle != Handle_Type._Rotary && handle != Handle_Type._None) &&
+                 _panelModel.Panel_Type != "Fixed Panel")
+            {  
+               _panelModel.Panel_EspagnoletteOptionsVisibility = true;
+              
+               _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
+              
+               if (_panelModel.Panel_ParentMultiPanelModel != null)
+               {
+                   _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addEspagnolette");
+               }
+              
+               _panelModel.AdjustPropertyPanelHeight("addEspagnolette");
+               _panelModel.AdjustHandlePropertyHeight("addEspagnolette"); 
+            } 
             else
             {
                 _panelModel.Panel_EspagnoletteOptionsVisibility = false;
             }
+
             if (_panelModel.Panel_Type != "Fixed Panel")
             {
                 if (handle == Handle_Type._Rotoswing)
